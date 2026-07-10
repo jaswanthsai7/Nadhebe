@@ -5,8 +5,13 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
-  output: 'static',
+  // Update this to your Cloudflare Pages domain once deployed
+  // e.g. https://nadhebe.pages.dev  or your custom domain
+  site: 'https://nadhebe.pages.dev',
+  output: 'static',         // Static site — no adapter needed for Cloudflare Pages
+  build: {
+    assets: '_assets',      // Cloudflare-safe asset directory name
+  },
   integrations: [
     mdx(),
     sitemap(),
