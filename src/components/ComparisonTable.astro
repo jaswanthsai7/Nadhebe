@@ -7,12 +7,12 @@ interface Props {
 const { headers, rows, caption } = Astro.props;
 ---
 
-<figure class="not-prose overflow-x-auto rounded-card border border-border dark:border-border-dark">
+<figure class="not-prose overflow-x-auto rounded-12 border border-border dark:border-border-dark">
   <table class="w-full min-w-[480px] border-collapse text-meta font-sans">
     <thead>
       <tr class="bg-surface2 dark:bg-surface2-dark">
         {headers.map((h) => (
-          <th class="whitespace-nowrap px-4 py-3 text-left font-medium text-ink dark:text-ink-dark">{h}</th>
+          <th class="whitespace-nowrap px-16 py-12 text-left font-medium text-ink dark:text-ink-dark">{h}</th>
         ))}
       </tr>
     </thead>
@@ -20,7 +20,7 @@ const { headers, rows, caption } = Astro.props;
       {rows.map((row) => (
         <tr class="border-t border-border dark:border-border-dark">
           {row.map((cell) => (
-            <td class="px-4 py-3 text-ink2 dark:text-ink2-dark">
+            <td class="px-16 py-12 text-ink2 dark:text-ink2-dark">
               {typeof cell === 'number' || (typeof cell === 'string' && /^[0-9$.%/-]+$/.test(cell.trim())) ? (
                 <span class="font-mono">{cell}</span>
               ) : (
@@ -33,7 +33,7 @@ const { headers, rows, caption } = Astro.props;
     </tbody>
   </table>
   {caption && (
-    <figcaption class="border-t border-border px-4 py-2.5 text-meta font-sans text-muted dark:border-border-dark dark:text-muted-dark">
+    <figcaption class="border-t border-border px-16 py-12 text-meta font-sans text-muted dark:border-border-dark dark:text-muted-dark">
       {caption}
     </figcaption>
   )}

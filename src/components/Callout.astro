@@ -15,8 +15,8 @@ const config = {
 const c = config[type];
 ---
 
-<div class={`callout rounded-r-control border-l-2 ${c.border} ${c.bg} px-5 py-4`} role="note">
-  <p class="mb-1.5 text-meta font-sans font-semibold text-ink dark:text-ink-dark">{c.label}</p>
+<div class={`callout rounded-12 border-l-4 ${c.border} ${c.bg} p-16`} role="note">
+  <p class="mb-8 text-meta font-sans font-bold text-ink dark:text-ink-dark">{c.label}</p>
   <div class="text-body leading-relaxed text-ink2 [&>p]:m-0 dark:text-ink2-dark">
     <slot />
   </div>

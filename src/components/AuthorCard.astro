@@ -28,11 +28,9 @@ const { name, role, avatar, bio, twitter, reviewedBy, updatedDate } = Astro.prop
     {bio && <p class="mt-8 text-body leading-relaxed text-ink2 dark:text-ink2-dark">{bio}</p>}
 
     <div class="mt-12 flex flex-wrap items-center gap-x-16 gap-y-4 text-meta text-muted dark:text-muted-dark font-sans">
-      {twitter && (
-        <a href={twitter} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ink-dark">
-          Follow on X
-        </a>
-      )}
+      <a href="https://www.youtube.com/@Nadhebe" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent/80 hover:underline font-semibold">
+        Subscribe to our YouTube channel for more info
+      </a>
       {reviewedBy && <span>Reviewed by {reviewedBy}</span>}
       {updatedDate && <span class="font-mono">Updated {updatedDate}</span>}
     </div>

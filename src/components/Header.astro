@@ -13,7 +13,7 @@ const nav = [
 
 <header class="sticky top-0 z-40 h-64 border-b border-border bg-bg/80 backdrop-blur-md dark:border-border-dark dark:bg-bg-dark/80">
   <div class="mx-auto flex h-64 max-w-6xl items-center justify-between px-24">
-    <a href="/" class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">
+    <a href="/" class="font-display text-h3 font-bold tracking-tight text-ink dark:text-ink-dark">
       {SITE.name}
     </a>
 
@@ -21,7 +21,7 @@ const nav = [
       {nav.map((item) => (
         <a
           href={item.href}
-          class="text-meta font-mono font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
+          class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
         >
           {item.label}
         </a>
@@ -32,7 +32,7 @@ const nav = [
       <a
         href="/search"
         aria-label="Search articles"
-        class="flex h-32 w-32 items-center justify-center rounded-control border border-border text-ink2 hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover transition-colors duration-150"
+        class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover transition-colors duration-150"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-16 w-16">
           <circle cx="11" cy="11" r="8"></circle>
@@ -44,7 +44,7 @@ const nav = [
         id="theme-toggle"
         type="button"
         aria-label="Toggle dark mode"
-        class="flex h-32 w-32 items-center justify-center rounded-control border border-border text-ink2 hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover transition-colors duration-200"
+        class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover transition-colors duration-200"
       >
         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="hidden h-16 w-16">
           <circle cx="12" cy="12" r="4"></circle>

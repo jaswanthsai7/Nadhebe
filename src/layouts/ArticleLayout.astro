@@ -140,30 +140,30 @@ const breadcrumbItems = [
     Left spacer mirrors sidebar so center stays truly centered on the page.
     On screens < xl the spacer + sidebar are hidden; content stays centered via mx-auto.
   -->
-  <div class="mx-auto mt-96 flex max-w-screen-xl items-start gap-10 px-6 pb-24">
+  <div class="mx-auto mt-96 flex max-w-screen-xl items-start gap-48 px-24">
 
     <!-- Invisible balance spacer (same width as sidebar, xl only) -->
-    <div class="hidden xl:block w-56 shrink-0"></div>
+    <div class="hidden xl:block w-sidebar shrink-0"></div>
 
     <!-- CENTER: article content -->
     <div class="flex-1 min-w-0">
       <div class="mx-auto max-w-3xl">
 
         <!-- ── Hero header ──────────────────────────────────────── -->
-        <header class="mb-10">
-          <span class="badge mb-5 inline-block">{post.data.category}</span>
+        <header class="mb-32">
+          <span class="badge mb-16 inline-block">{post.data.category}</span>
 
-          <div class="flex items-start gap-5">
+          <div class="flex items-start gap-16">
             {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
-              <div class="shrink-0 mt-1">
+              <div class="shrink-0 mt-4">
                 <VerdictGauge score={post.data.rating} size={72} />
               </div>
             )}
             <div>
-              <h1 class="font-display text-[2rem] leading-[1.2] font-bold text-ink dark:text-ink-dark sm:text-[2.5rem]">
+              <h1 class="font-display text-hero leading-tight font-bold text-ink dark:text-ink-dark sm:text-display">
                 {post.data.title}
               </h1>
-              <p class="mt-4 text-base leading-relaxed text-ink2 dark:text-ink2-dark">
+              <p class="mt-16 text-body-large leading-relaxed text-ink2 dark:text-ink2-dark">
                 {post.data.description}
               </p>
             </div>
@@ -187,7 +187,7 @@ const breadcrumbItems = [
 
         <!-- ── Hero image ───────────────────────────────────────── -->
         {post.data.heroImage && post.collection !== 'tool-reviews' && (
-          <div class="mt-14 mb-10 overflow-hidden rounded-lg border border-border dark:border-border-dark shadow-sm">
+          <div class="mt-48 mb-32 overflow-hidden rounded-12 border border-border dark:border-border-dark shadow-subtle hover:shadow-medium transition-shadow duration-200">
             <img
               src={post.data.heroImage}
               alt={post.data.title}
@@ -232,31 +232,31 @@ const breadcrumbItems = [
 
         <!-- ── Review verdict ────────────────────────────────────── -->
         {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
-          <div class="mb-8 rounded-lg border border-border bg-surface p-6 shadow-sm dark:border-border-dark dark:bg-surface-dark">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border dark:border-border-dark pb-4 mb-4">
-              <div class="flex items-center gap-4">
+          <div class="mb-32 rounded-12 border border-border bg-surface p-24 shadow-subtle dark:border-border-dark dark:bg-surface-dark">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16 border-b border-border dark:border-border-dark pb-16 mb-16">
+              <div class="flex items-center gap-16">
                 <VerdictGauge score={post.data.rating} size={56} />
                 <div>
                   <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Overall verdict</p>
-                  <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-1">{post.data.rating >= 9.0 ? 'Recommended' : 'Average'}</p>
+                  <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-4">{post.data.rating >= 9.0 ? 'Recommended' : 'Average'}</p>
                 </div>
               </div>
               <div>
                 <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Pricing</p>
-                <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-1 font-mono">{post.data.pricing || 'N/A'}</p>
+                <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-4 font-mono">{post.data.pricing || 'N/A'}</p>
               </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-success/5 border border-success/20 rounded-lg p-4">
-                <p class="text-xs font-semibold text-success uppercase tracking-wider mb-2">Pros</p>
-                <ul class="space-y-1.5 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
-                  {post.data.pros?.map(pro => <li class="flex items-start gap-2"><span>✅</span>{pro}</li>)}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-16">
+              <div class="bg-success/5 border border-success/20 rounded-12 p-16">
+                <p class="text-xs font-semibold text-success uppercase tracking-wider mb-8">Pros</p>
+                <ul class="space-y-8 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
+                  {post.data.pros?.map(pro => <li class="flex items-start gap-8"><span>✅</span>{pro}</li>)}
                 </ul>
               </div>
-              <div class="bg-danger/5 border border-danger/20 rounded-lg p-4">
-                <p class="text-xs font-semibold text-danger uppercase tracking-wider mb-2">Cons</p>
-                <ul class="space-y-1.5 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
-                  {post.data.cons?.map(con => <li class="flex items-start gap-2"><span>❌</span>{con}</li>)}
+              <div class="bg-danger/5 border border-danger/20 rounded-12 p-16">
+                <p class="text-xs font-semibold text-danger uppercase tracking-wider mb-8">Cons</p>
+                <ul class="space-y-8 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
+                  {post.data.cons?.map(con => <li class="flex items-start gap-8"><span>❌</span>{con}</li>)}
                 </ul>
               </div>
             </div>
@@ -265,10 +265,10 @@ const breadcrumbItems = [
 
         <!-- ── Comparison badge ──────────────────────────────────── -->
         {post.collection === 'comparisons' && post.data.itemsCompared && (
-          <div class="mb-6 flex items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+          <div class="mb-24 flex items-center justify-between gap-16 rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark">
             <div>
-              <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-2">Comparing</p>
-              <div class="flex flex-wrap gap-2">
+              <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-8">Comparing</p>
+              <div class="flex flex-wrap gap-8">
                 {post.data.itemsCompared.map(item => <span class="badge">{item}</span>)}
               </div>
             </div>
@@ -283,15 +283,15 @@ const breadcrumbItems = [
 
         <!-- ── Cluster supporting articles ──────────────────────── -->
         {post.data.isPillar && supportingArticles.length > 0 && (
-          <div class="mt-16 border-t border-border dark:border-border-dark pt-8">
-            <h2 class="text-2xl font-display font-semibold text-ink dark:text-ink-dark mb-2">Supporting guides</h2>
-            <p class="text-sm text-ink2 dark:text-ink2-dark mb-6">Deeper dives into specific aspects:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="mt-64 border-t border-border dark:border-border-dark pt-32">
+            <h2 class="text-h2 font-display font-semibold text-ink dark:text-ink-dark mb-8">Supporting guides</h2>
+            <p class="text-caption text-ink2 dark:text-ink2-dark mb-24">Deeper dives into specific aspects:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-24">
               {supportingArticles.map(art => (
-                <a href={getArticleUrl(art)} class="card p-4 block group shadow-sm dark:shadow-none">
-                  <span class="badge mb-2">{art.collection.replace('-articles', '')}</span>
-                  <h3 class="text-base font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition mt-2 mb-1">{art.data.title}</h3>
-                  <p class="text-xs text-muted dark:text-muted-dark line-clamp-2">{art.data.description}</p>
+                <a href={getArticleUrl(art)} class="card p-16 block group shadow-subtle hover:shadow-medium transition-all duration-200">
+                  <span class="badge mb-8">{art.collection.replace('-articles', '')}</span>
+                  <h3 class="text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition mt-8 mb-4">{art.data.title}</h3>
+                  <p class="text-caption text-muted dark:text-muted-dark line-clamp-2">{art.data.description}</p>
                 </a>
               ))}
             </div>
@@ -302,7 +302,7 @@ const breadcrumbItems = [
         <SourceList references={references} />
 
         <!-- ── Author + share ────────────────────────────────────── -->
-        <div class="not-prose mt-12 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6 border-t border-border pt-8 dark:border-border-dark">
+        <div class="not-prose mt-48 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-24 border-t border-border pt-24 dark:border-border-dark">
           {author && (
             <div class="flex-grow">
               <AuthorCard
@@ -320,22 +320,26 @@ const breadcrumbItems = [
             <ShareButtons url={pageUrl} title={post.data.title} />
           </div>
         </div>
-
-        <RelatedPosts posts={relatedArticles} />
-        <PreviousNext prev={prevProps} next={nextProps} />
-
-        <!-- Newsletter at the bottom -->
-        <div class="mt-12">
-          <Newsletter />
-        </div>
-
       </div>
     </div>
 
     <!-- RIGHT: TOC-only sticky sidebar -->
-    <aside class="hidden xl:block w-56 shrink-0 sticky top-96 self-start">
+    <aside class="hidden xl:block w-sidebar shrink-0 sticky top-96 self-start">
       <TableOfContents headings={headings} />
     </aside>
+
+  </div>
+
+  <!-- Bottom Section: Related reading, PreviousNext, Newsletter -->
+  <div class="mx-auto max-w-6xl px-24 pb-96 mt-64 border-t border-border dark:border-border-dark pt-48">
+    <RelatedPosts posts={relatedArticles} />
+    <div class="mt-32">
+      <PreviousNext prev={prevProps} next={nextProps} />
+    </div>
+    <div class="mt-48">
+      <Newsletter />
+    </div>
+  </div>
 
   <script>
     function addCopyButtons() {

@@ -7,32 +7,22 @@ export default {
   theme: {
     spacing: {
       0: '0px',
-      0.5: '2px',
-      1: '4px',
-      1.5: '6px',
-      2: '2px',
-      3: '12px',
       4: '4px',
-      5: '20px',
-      6: '24px',
-      7: '28px',
       8: '8px',
-      10: '40px',
       12: '12px',
-      14: '56px',
       16: '16px',
-      20: '80px',
       24: '24px',
       32: '32px',
       48: '48px',
-      56: '224px',
       64: '64px',
       96: '96px',
-      128: '128px',
     },
     extend: {
       maxWidth: {
-        article: '780px',
+        article: '720px',
+      },
+      width: {
+        sidebar: '224px',
       },
       colors: {
         bg: {
@@ -68,8 +58,8 @@ export default {
           dark: '#6E6E73',
         },
         accent: {
-          DEFAULT: '#3355FF',
-          dark: '#5C7CFF',
+          DEFAULT: '#5E6AD2', // Premium Indigo
+          dark: '#818CF8',    // Smooth Indigo for dark mode
         },
         'rating-gold': {
           DEFAULT: '#B7862C',
@@ -94,20 +84,37 @@ export default {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {
-        display: ['56px', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        h1: ['40px', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        h2: ['28px', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
-        h3: ['20px', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
-        body: ['17px', { lineHeight: '1.6' }],
+        display: ['56px', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '700' }],
+        hero: ['40px', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
+        h1: ['32px', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '700' }],
+        h2: ['24px', { lineHeight: '1.25', letterSpacing: '-0.01em', fontWeight: '600' }],
+        h3: ['20px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '600' }],
+        h4: ['16px', { lineHeight: '1.4', fontWeight: '600' }],
+        'body-large': ['18px', { lineHeight: '1.5' }],
+        body: ['15px', { lineHeight: '1.6' }],
+        caption: ['13px', { lineHeight: '1.4' }],
         meta: ['13px', { lineHeight: '1.4', fontFamily: '"JetBrains Mono", ui-monospace, monospace' }],
       },
       borderRadius: {
-        card: '4px',
+        8: '8px',
+        12: '12px',
+        16: '16px',
+        20: '20px',
+        24: '24px',
+        card: '12px',
         control: '8px',
         pill: '999px',
       },
       boxShadow: {
+        subtle: '0 1px 2px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.08)',
+        medium: '0 4px 12px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04)',
+        large: '0 12px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
         card: '0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04)',
+      },
+      transitionDuration: {
+        150: '150ms',
+        200: '200ms',
+        250: '250ms',
       },
     },
   },

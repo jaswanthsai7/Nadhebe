@@ -44,7 +44,7 @@ html.dark {
 
   /* Skip link */
   .skip-link {
-    @apply absolute -top-full left-4 z-[100] rounded-control bg-ink px-4 py-2 text-meta font-medium text-white;
+    @apply absolute -top-full left-8 z-[100] rounded-8 bg-ink px-16 py-8 text-meta font-medium text-white;
   }
   .skip-link:focus {
     @apply top-4;
@@ -116,7 +116,7 @@ html.dark {
   }
 
   .prose-article code {
-    @apply rounded-[4px] bg-code px-8 py-2 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
+    @apply rounded-8 bg-code px-8 py-4 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
   }
 
   .prose-article pre {
@@ -148,7 +148,7 @@ html.dark {
   }
 
   .card {
-    @apply rounded-card border border-border bg-surface p-24 shadow-card dark:border-border-dark dark:bg-surface-dark dark:shadow-none;
+    @apply rounded-card border border-border bg-surface p-24 shadow-subtle hover:shadow-medium dark:border-border-dark dark:bg-surface-dark transition-all duration-200;
   }
 
   .badge {
@@ -156,16 +156,16 @@ html.dark {
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-8 px-24 py-12 text-body font-medium;
+    @apply inline-flex items-center justify-center gap-8 px-24 py-12 text-body font-medium transition-all duration-150 active:scale-[0.98] focus:outline-none;
   }
   .btn-primary {
-    @apply btn rounded-pill bg-accent text-white hover:bg-accent/90 dark:bg-accent-dark dark:text-white dark:hover:bg-accent-dark/90;
+    @apply btn rounded-control bg-ink text-white hover:opacity-90 dark:bg-ink-dark dark:text-ink;
   }
   .btn-secondary {
-    @apply btn rounded-control border border-ink2 bg-transparent text-ink hover:bg-hover dark:border-ink2-dark dark:text-ink-dark dark:hover:bg-hover-dark;
+    @apply btn rounded-control border border-border bg-surface text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:bg-hover dark:hover:text-ink-dark;
   }
 
   .input {
-    @apply w-full rounded-control border border-border bg-surface px-16 py-12 text-body text-ink placeholder:text-muted transition-colors focus:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark focus:outline-none;
+    @apply w-full rounded-control border border-border bg-surface px-16 py-12 text-body text-ink placeholder:text-muted transition-all duration-150 focus:border-ink2 dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark focus:outline-none;
   }
 }
