@@ -12,9 +12,8 @@ import FAQSchema from '../components/seo/FAQSchema.astro';
 import VideoSchema from '../components/seo/VideoSchema.astro';
 import ReadingProgress from '@/components/ReadingProgress.astro';
 import ScrollToTop from '@/components/ScrollToTop.astro';
-import ArticleHero from '@/components/ArticleHero.astro';
 import MobileToc from '@/components/MobileToc.astro';
-import StickySidebar from '@/components/StickySidebar.astro';
+import Newsletter from '@/components/Newsletter.astro';
 import AuthorCard from '@/components/AuthorCard.astro';
 import RelatedPosts from '@/components/RelatedPosts.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
@@ -28,41 +27,33 @@ import { getAllArticles, getArticleUrl } from '../utils/content';
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
 
-// Resolve Author
 const authorEntry = await getEntry(post.data.author);
 const author = authorEntry?.data;
 
-// Calculations
 const slug = getArticleUrl(post);
 const readingTime = getReadingTime(post.body);
 const pageUrl = new URL(slug, Astro.site || Astro.url.origin).toString();
 
-// Load all articles for cluster & related post calculations
 const allArticles = await getAllArticles();
 
-// 1. Topic Cluster relationships
 const currentTopic = post.data.topic;
 let parentPillarArticle = null;
 let supportingArticles = [];
 
 if (currentTopic) {
   if (post.data.isPillar) {
-    // If this is the pillar article, find all supporting posts
     supportingArticles = allArticles.filter(
       a => a.data.topic?.toLowerCase() === currentTopic.toLowerCase() && !a.data.isPillar
     );
   } else if (post.data.parentPillar) {
-    // If it's a supporting article, find the parent pillar
     parentPillarArticle = allArticles.find(
       a => a.slug === post.data.parentPillar && a.data.isPillar
     );
   }
 }
 
-// 2. Related Articles recommendations
 const relatedArticles = getRelatedArticles(post, allArticles, 3);
 
-// 3. Prev/Next navigation within same collection/topic
 const siblingArticles = allArticles.filter(a => a.collection === post.collection);
 const currentIndex = siblingArticles.findIndex(a => a.slug === post.slug);
 const prevArticle = currentIndex < siblingArticles.length - 1 ? siblingArticles[currentIndex + 1] : null;
@@ -71,46 +62,23 @@ const nextArticle = currentIndex > 0 ? siblingArticles[currentIndex - 1] : null;
 const prevProps = prevArticle ? { title: prevArticle.data.title, url: getArticleUrl(prevArticle) } : undefined;
 const nextProps = nextArticle ? { title: nextArticle.data.title, url: getArticleUrl(nextArticle) } : undefined;
 
-// Format dates
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-// Map sources to references
 const references = post.data.sources?.map((s) => ({
   title: s.label,
   url: s.url,
 })) || [];
 
-// Breadcrumb items
 let collectionLabel = '';
 let collectionHref = '';
 switch (post.collection) {
-  case 'news':
-    collectionLabel = 'News';
-    collectionHref = '/news';
-    break;
-  case 'tutorials':
-    collectionLabel = 'Tutorials';
-    collectionHref = '/tutorials';
-    break;
-  case 'youtube-articles':
-    collectionLabel = 'Videos';
-    collectionHref = '/youtube';
-    break;
-  case 'tool-reviews':
-    collectionLabel = 'Reviews';
-    collectionHref = '/reviews';
-    break;
-  case 'prompts':
-    collectionLabel = 'Prompts';
-    collectionHref = '/prompts';
-    break;
-  case 'comparisons':
-    collectionLabel = 'Comparisons';
-    collectionHref = '/comparisons';
-    break;
-  default:
-    collectionLabel = 'Articles';
-    collectionHref = '/blog';
+  case 'news':         collectionLabel = 'News';        collectionHref = '/news';        break;
+  case 'tutorials':    collectionLabel = 'Tutorials';   collectionHref = '/tutorials';   break;
+  case 'youtube-articles': collectionLabel = 'Videos';  collectionHref = '/youtube';     break;
+  case 'tool-reviews': collectionLabel = 'Reviews';     collectionHref = '/reviews';     break;
+  case 'prompts':      collectionLabel = 'Prompts';     collectionHref = '/prompts';     break;
+  case 'comparisons':  collectionLabel = 'Comparisons'; collectionHref = '/comparisons'; break;
+  default:             collectionLabel = 'Articles';    collectionHref = '/blog';
 }
 
 const breadcrumbItems = [
@@ -126,7 +94,6 @@ const breadcrumbItems = [
   heroImage={post.data.heroImage}
   canonicalUrl={post.data.canonicalUrl}
 >
-  <!-- SEO JSON-LD Schemas -->
   <ArticleSchema
     title={post.data.title}
     description={post.data.description}
@@ -152,180 +119,223 @@ const breadcrumbItems = [
   <ReadingProgress />
   <ScrollToTop />
 
-  <ArticleHero
-    category={post.data.category}
-    title={post.data.title}
-    description={post.data.description}
-    readingTime={readingTime}
-    publishedDate={fmt(post.data.pubDate)}
-    updatedDate={post.data.updatedDate ? fmt(post.data.updatedDate) : undefined}
-    authorName={author?.name || 'Anonymous'}
-    authorAvatar={author?.avatar}
-    featuredImage={post.data.heroImage}
-    featuredImageAlt={post.data.title}
-    rating={post.collection === 'tool-reviews' ? post.data.rating : undefined}
-  />
+  <!--
+    ┌────────────────────────────────────────────────────────────────┐
+    │  max-w-6xl  mx-auto  px-6                                      │
+    │  ┌──────────────────────────────────┐  ┌──────────────────┐   │
+    │  │  LEFT: article (flex-1)          │  │  RIGHT: sidebar  │   │
+    │  │  ┌────────────────────────────┐  │  │  sticky top-24   │   │
+    │  │  │  max-w-2xl  mx-auto        │  │  │  w-64            │   │
+    │  │  │  category · title · desc   │  │  │                  │   │
+    │  │  │  author · date · readtime  │  │  │  TOC             │   │
+    │  │  │  hero image                │  │  │  Category        │   │
+    │  │  │  article body              │  │  │  Newsletter      │   │
+    │  │  └────────────────────────────┘  │  │                  │   │
+    │  └──────────────────────────────────┘  └──────────────────┘   │
+    └────────────────────────────────────────────────────────────────┘
+  -->
+  <!--
+    3-column flex:
+    [left spacer = sidebar width]  [center content]  [right TOC sidebar]
+    Left spacer mirrors sidebar so center stays truly centered on the page.
+    On screens < xl the spacer + sidebar are hidden; content stays centered via mx-auto.
+  -->
+  <div class="mx-auto mt-20 flex max-w-screen-xl items-start gap-10 px-6 pb-24">
 
-  <div class="mx-auto mt-96 grid max-w-6xl grid-cols-1 gap-48 px-24 lg:grid-cols-[220px_1fr_240px] lg:gap-32">
-    <!-- Left rail reserved for balance on ultrawide; sidebar lives on the right -->
-    <div class="hidden lg:block"></div>
+    <!-- Invisible balance spacer (same width as sidebar, xl only) -->
+    <div class="hidden xl:block w-56 shrink-0"></div>
 
-    <div class="min-w-0">
-      <Breadcrumb items={breadcrumbItems} />
+    <!-- CENTER: article content -->
+    <div class="flex-1 min-w-0">
+      <div class="mx-auto max-w-3xl">
 
-      <!-- Pillar / Supporting Article Top Alert -->
-      {parentPillarArticle && (
-        <div class="mb-32 p-16 rounded-card border border-accent/20 bg-accent/5 text-ink2 dark:text-ink2-dark flex flex-col sm:flex-row sm:items-center justify-between gap-16">
-          <div class="flex items-center gap-12">
-            <span class="text-xl">🗂️</span>
+        <!-- ── Hero header ──────────────────────────────────────── -->
+        <header class="mb-10">
+          <span class="badge mb-5 inline-block">{post.data.category}</span>
+
+          <div class="flex items-start gap-5">
+            {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
+              <div class="shrink-0 mt-1">
+                <VerdictGauge score={post.data.rating} size={72} />
+              </div>
+            )}
             <div>
-              <p class="text-meta font-sans text-accent font-semibold tracking-wider uppercase">Topic Cluster Guide</p>
-              <p class="text-body font-medium text-ink dark:text-ink-dark mt-2">
-                Part of our cluster on <strong class="font-semibold">{currentTopic}</strong>.
+              <h1 class="font-display text-[2rem] leading-[1.2] font-bold text-ink dark:text-ink-dark sm:text-[2.5rem]">
+                {post.data.title}
+              </h1>
+              <p class="mt-4 text-base leading-relaxed text-ink2 dark:text-ink2-dark">
+                {post.data.description}
               </p>
             </div>
           </div>
-          <a
-            href={getArticleUrl(parentPillarArticle)}
-            class="btn-primary py-4 px-12 text-meta font-sans font-semibold shrink-0"
-          >
-            Read pillar guide
-          </a>
-        </div>
-      )}
 
-      <MobileToc headings={headings} />
-
-      <!-- Video Player Facade -->
-      {(post.data.youtubeVideoId || post.data.videoId) && (
-        <div class="mb-32">
-          <h2 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark mb-16 flex items-center gap-8">
-            <svg class="h-16 w-16 text-danger fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 4-8 4z"/></svg>
-            Featured video guide
-          </h2>
-          <YouTubeEmbed
-            videoId={post.data.youtubeVideoId || post.data.videoId}
-            title={post.data.title}
-          />
-        </div>
-      )}
-
-      <!-- Review Rating Block -->
-      {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
-        <div class="mb-32 p-24 rounded-card border border-border bg-surface dark:border-border-dark dark:bg-surface-dark shadow-card dark:shadow-none">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-24 border-b border-border dark:border-border-dark pb-16 mb-16">
-            <div class="flex items-center gap-16">
-              <VerdictGauge score={post.data.rating} size={64} />
-              <div>
-                <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Overall verdict</p>
-                <p class="text-body font-semibold text-ink2 dark:text-ink2-dark mt-2">{post.data.rating >= 9.0 ? 'Recommended tool' : 'Average tool'}</p>
-              </div>
+          <!-- Author meta row with clear separator -->
+          <div class="mt-8 pt-5 border-t border-border dark:border-border-dark flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted dark:text-muted-dark font-sans">
+            <div class="flex items-center gap-2 font-medium text-ink2 dark:text-ink2-dark">
+              {author?.avatar && (
+                <img src={author.avatar} alt={author?.name} width="28" height="28"
+                  class="h-7 w-7 rounded-full object-cover ring-2 ring-border dark:ring-border-dark" />
+              )}
+              <span>{author?.name || 'Anonymous'}</span>
             </div>
-            <div>
-              <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Pricing model</p>
-              <p class="text-body font-semibold text-ink2 dark:text-ink2-dark mt-2 font-mono">{post.data.pricing || 'N/A'}</p>
-            </div>
+            <span class="text-border dark:text-border-dark">·</span>
+            <time datetime={post.data.pubDate.toISOString()} class="font-mono">{fmt(post.data.pubDate)}</time>
+            <span class="text-border dark:text-border-dark">·</span>
+            <span class="font-mono">{readingTime}</span>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-24 mt-16">
-            <div class="bg-success/5 border border-success/20 rounded-card p-16">
-              <p class="text-meta font-sans font-semibold text-success uppercase tracking-wider mb-8">Pros</p>
-              <ul class="space-y-8 text-body text-ink2 dark:text-ink2-dark pl-0 list-none">
-                {post.data.pros?.map(pro => <li class="flex items-start gap-8"><span>✅</span> {pro}</li>)}
-              </ul>
-            </div>
-            <div class="bg-danger/5 border border-danger/20 rounded-card p-16">
-              <p class="text-meta font-sans font-semibold text-danger uppercase tracking-wider mb-8">Cons</p>
-              <ul class="space-y-8 text-body text-ink2 dark:text-ink2-dark pl-0 list-none">
-                {post.data.cons?.map(con => <li class="flex items-start gap-8"><span>❌</span> {con}</li>)}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+        </header>
 
-      <!-- Comparison Badge Block -->
-      {post.collection === 'comparisons' && post.data.itemsCompared && (
-        <div class="mb-32 p-16 rounded-card border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between gap-16 shadow-card dark:shadow-none">
-          <div>
-            <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Items compared</p>
-            <div class="flex flex-wrap gap-8 mt-8">
-              {post.data.itemsCompared.map(item => (
-                <span class="badge">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-          <span class="text-3xl shrink-0">⚔️</span>
-        </div>
-      )}
-
-      <!-- Rendered Post Markdown -->
-      <article class="prose-article" data-article-body>
-        <Content />
-      </article>
-
-      <!-- Pillar Supporting Articles Grid -->
-      {post.data.isPillar && supportingArticles.length > 0 && (
-        <div class="mt-96 border-t border-border dark:border-border-dark pt-24">
-          <h2 class="text-h2 font-display font-semibold text-ink dark:text-ink-dark mb-12">Supporting cluster guides</h2>
-          <p class="text-body text-ink2 dark:text-ink2-dark mb-24">
-            Explore our deeper, focused guides on specific aspects of this topic:
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16">
-            {supportingArticles.map(art => (
-              <a
-                href={getArticleUrl(art)}
-                class="card p-16 block group shadow-card dark:shadow-none"
-              >
-                <span class="badge mb-8">
-                  {art.collection.replace('-articles', '')}
-                </span>
-                <h3 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition mt-8 mb-4">
-                  {art.data.title}
-                </h3>
-                <p class="text-meta font-sans text-muted dark:text-muted-dark line-clamp-2 mt-4 leading-relaxed">{art.data.description}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <FAQSection items={post.data.faq || []} />
-      <SourceList references={references} />
-
-      <div class="not-prose mt-96 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-24 border-t border-border pt-24 dark:border-border-dark">
-        {author && (
-          <div class="flex-grow">
-            <AuthorCard
-              name={author.name}
-              role={author.role}
-              avatar={author.avatar}
-              bio={author.bio}
-              twitter={author.twitter}
-              reviewedBy={post.data.reviewedBy}
-              updatedDate={post.data.updatedDate ? fmt(post.data.updatedDate) : undefined}
+        <!-- ── Hero image ───────────────────────────────────────── -->
+        {post.data.heroImage && post.collection !== 'tool-reviews' && (
+          <div class="mt-10 mb-10 overflow-hidden rounded-lg border border-border dark:border-border-dark shadow-sm">
+            <img
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width="800"
+              height="450"
+              class="w-full object-cover"
+              style="max-height:380px; object-position:center top;"
+              fetchpriority="high"
             />
           </div>
         )}
-        <div class="flex items-center justify-end">
-          <ShareButtons url={pageUrl} title={post.data.title} />
-        </div>
-      </div>
 
-      <RelatedPosts posts={relatedArticles} />
-      <PreviousNext prev={prevProps} next={nextProps} />
+        <!-- ── Breadcrumb ────────────────────────────────────────── -->
+        <Breadcrumb items={breadcrumbItems} />
+
+        <!-- ── Pillar alert ──────────────────────────────────────── -->
+        {parentPillarArticle && (
+          <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-lg border border-accent/20 bg-accent/5 p-4 text-ink2 dark:text-ink2-dark">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🗂️</span>
+              <div>
+                <p class="text-xs font-semibold text-accent uppercase tracking-wider">Topic Cluster</p>
+                <p class="text-sm font-medium text-ink dark:text-ink-dark mt-0.5">
+                  Part of: <strong>{currentTopic}</strong>
+                </p>
+              </div>
+            </div>
+            <a href={getArticleUrl(parentPillarArticle)} class="btn-primary py-1.5 px-4 text-sm font-semibold shrink-0">
+              Read pillar guide →
+            </a>
+          </div>
+        )}
+
+        <MobileToc headings={headings} />
+
+        <!-- ── YouTube embed ─────────────────────────────────────── -->
+        {(post.data.youtubeVideoId || post.data.videoId) && (
+          <div class="mb-8">
+            <YouTubeEmbed videoId={post.data.youtubeVideoId || post.data.videoId} title={post.data.title} />
+          </div>
+        )}
+
+        <!-- ── Review verdict ────────────────────────────────────── -->
+        {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
+          <div class="mb-8 rounded-lg border border-border bg-surface p-6 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border dark:border-border-dark pb-4 mb-4">
+              <div class="flex items-center gap-4">
+                <VerdictGauge score={post.data.rating} size={56} />
+                <div>
+                  <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Overall verdict</p>
+                  <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-1">{post.data.rating >= 9.0 ? 'Recommended' : 'Average'}</p>
+                </div>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Pricing</p>
+                <p class="text-sm font-semibold text-ink2 dark:text-ink2-dark mt-1 font-mono">{post.data.pricing || 'N/A'}</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-success/5 border border-success/20 rounded-lg p-4">
+                <p class="text-xs font-semibold text-success uppercase tracking-wider mb-2">Pros</p>
+                <ul class="space-y-1.5 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
+                  {post.data.pros?.map(pro => <li class="flex items-start gap-2"><span>✅</span>{pro}</li>)}
+                </ul>
+              </div>
+              <div class="bg-danger/5 border border-danger/20 rounded-lg p-4">
+                <p class="text-xs font-semibold text-danger uppercase tracking-wider mb-2">Cons</p>
+                <ul class="space-y-1.5 text-sm text-ink2 dark:text-ink2-dark list-none pl-0">
+                  {post.data.cons?.map(con => <li class="flex items-start gap-2"><span>❌</span>{con}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- ── Comparison badge ──────────────────────────────────── -->
+        {post.collection === 'comparisons' && post.data.itemsCompared && (
+          <div class="mb-6 flex items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+            <div>
+              <p class="text-xs font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-2">Comparing</p>
+              <div class="flex flex-wrap gap-2">
+                {post.data.itemsCompared.map(item => <span class="badge">{item}</span>)}
+              </div>
+            </div>
+            <span class="text-3xl shrink-0">⚔️</span>
+          </div>
+        )}
+
+        <!-- ── Article body ──────────────────────────────────────── -->
+        <article class="prose-article" data-article-body>
+          <Content />
+        </article>
+
+        <!-- ── Cluster supporting articles ──────────────────────── -->
+        {post.data.isPillar && supportingArticles.length > 0 && (
+          <div class="mt-16 border-t border-border dark:border-border-dark pt-8">
+            <h2 class="text-2xl font-display font-semibold text-ink dark:text-ink-dark mb-2">Supporting guides</h2>
+            <p class="text-sm text-ink2 dark:text-ink2-dark mb-6">Deeper dives into specific aspects:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {supportingArticles.map(art => (
+                <a href={getArticleUrl(art)} class="card p-4 block group shadow-sm dark:shadow-none">
+                  <span class="badge mb-2">{art.collection.replace('-articles', '')}</span>
+                  <h3 class="text-base font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition mt-2 mb-1">{art.data.title}</h3>
+                  <p class="text-xs text-muted dark:text-muted-dark line-clamp-2">{art.data.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <FAQSection items={post.data.faq || []} />
+        <SourceList references={references} />
+
+        <!-- ── Author + share ────────────────────────────────────── -->
+        <div class="not-prose mt-12 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-6 border-t border-border pt-8 dark:border-border-dark">
+          {author && (
+            <div class="flex-grow">
+              <AuthorCard
+                name={author.name}
+                role={author.role}
+                avatar={author.avatar}
+                bio={author.bio}
+                twitter={author.twitter}
+                reviewedBy={post.data.reviewedBy}
+                updatedDate={post.data.updatedDate ? fmt(post.data.updatedDate) : undefined}
+              />
+            </div>
+          )}
+          <div class="flex items-center justify-end">
+            <ShareButtons url={pageUrl} title={post.data.title} />
+          </div>
+        </div>
+
+        <RelatedPosts posts={relatedArticles} />
+        <PreviousNext prev={prevProps} next={nextProps} />
+
+        <!-- Newsletter at the bottom -->
+        <div class="mt-12">
+          <Newsletter />
+        </div>
+
+      </div>
     </div>
 
-    <!-- Right Rail Sidebar -->
-    <StickySidebar
-      headings={headings}
-      category={post.data.category}
-      categoryHref={`/category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`}
-      topic={post.data.topic}
-      searchIntent={post.data.searchIntent}
-      lastReviewed={post.data.lastReviewed}
-      relatedTopics={post.data.relatedTopics}
-    />
+    <!-- RIGHT: TOC-only sticky sidebar -->
+    <aside class="hidden xl:block w-56 shrink-0 sticky top-24 self-start">
+      <TableOfContents headings={headings} />
+    </aside>
+
   </div>
 </BaseLayout>
