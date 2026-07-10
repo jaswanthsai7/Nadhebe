@@ -43,6 +43,57 @@ const popularCategories = Object.entries(categoryCounts)
   .slice(0, 4)
   .map(entry => entry[0]);
 
+const categoryMeta = {
+  'News': {
+    description: 'Stay updated with the latest releases, announcements, and product roadmaps.',
+    iconPath: 'M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2M19 14h-4'
+  },
+  'Tutorials': {
+    description: 'Learn AI engineering and web development through step-by-step technical guides.',
+    iconPath: 'M12 6.03a4.3 4.3 0 0 0-3 1.24 4.3 4.3 0 0 0-3-1.24A4.3 4.3 0 0 0 3 10.3v7.7a4.3 4.3 0 0 0 3-1.24 4.3 4.3 0 0 0 3 1.24 4.3 4.3 0 0 0 3-1.24 4.3 4.3 0 0 0 3 1.24 4.3 4.3 0 0 0 3-1.24 4.3 4.3 0 0 0 3-1.24v-7.7a4.3 4.3 0 0 0-3-4.27 4.3 4.3 0 0 0-3 1.24 4.3 4.3 0 0 0-3-1.24ZM12 6.03v11.97'
+  },
+  'YouTube Articles': {
+    description: 'Watch video reviews, setup walkthroughs, and console layout demos.',
+    iconPath: 'm10 15 5-3-5-3v6Zm11.96-5.88A2.5 2.5 0 0 0 20 6.6c-2.4-.6-8-.6-8-.6s-5.6 0-8 .6A2.5 2.5 0 0 0 2 9.12C1.4 11.5 1.4 14 1.4 14s0 2.5.6 4.88a2.5 2.5 0 0 0 2 2.52c2.4.6 8.02.6 8.02.6s5.62 0 8.02-.6a2.5 2.5 0 0 0 2-2.52C22.6 16.5 22.6 14 22.6 14s0-2.5-.64-4.88Z'
+  },
+  'Tool Reviews': {
+    description: 'Unbiased performance reviews and cost evaluations of production CMS tools.',
+    iconPath: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'
+  },
+  'Prompts': {
+    description: 'Optimized system prompt templates and workflows for AI-assisted canvas coding.',
+    iconPath: 'M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83'
+  },
+  'Comparisons': {
+    description: 'Head-to-head performance benchmarks against Webflow, Framer, and other engines.',
+    iconPath: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm.5-18v16M4.5 12h15'
+  },
+  'Best Practices': {
+    description: 'Standards for design token nomenclature, repository scoping, and structure scaling.',
+    iconPath: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm-2-6 4-4-4-4'
+  },
+  'Use Cases': {
+    description: 'Client hand-off plans, agency operations, and visual sandbox layouts setups.',
+    iconPath: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z'
+  },
+  'Tools': {
+    description: 'HTML site importers, script compilers, sitemap utilities, and command helpers.',
+    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z'
+  },
+  'Guides': {
+    description: 'Ultimate structural breakdowns, architectural maps, and deployment charts.',
+    iconPath: 'M9 18H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2M21 22v-6a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v6'
+  },
+  'Frameworks': {
+    description: 'Integrating Astro component islands and hydrating frontend framework nodes.',
+    iconPath: 'M12 2L2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5'
+  },
+  'Case Studies': {
+    description: 'Real migrations detailing 90% hosting savings and lighthouse improvements.',
+    iconPath: 'M2 3h20v14H2zm8 18h4'
+  }
+};
+
 // Hero Post
 const heroPost = latestPillars[0] || allArticles[0];
 ---
@@ -104,34 +155,21 @@ const heroPost = latestPillars[0] || allArticles[0];
 
   <div class="mx-auto max-w-6xl px-24 pb-96 space-y-96">
     
-    <!-- Trending Topics & Categories Grid -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start border-b border-border dark:border-border-dark pb-64">
-      <div class="lg:col-span-8">
-        <h2 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16">Trending Topics</h2>
-        <div class="flex flex-wrap gap-8">
-          {trendingTopics.map(topic => (
-            <a
-              href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
-              class="badge hover:bg-hover dark:hover:bg-hover transition-colors normal-case"
-            >
-              <span>📁</span>
-              <span class="ml-4">{topic}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-      <div class="lg:col-span-4">
-        <h2 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16">Popular Hubs</h2>
-        <div class="flex flex-wrap gap-8">
-          {popularCategories.map(cat => (
-            <a
-              href={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
-              class="badge text-accent dark:text-accent-dark border-accent/20 bg-accent/5 hover:bg-accent/10 transition-colors normal-case"
-            >
-              {cat}
-            </a>
-          ))}
-        </div>
+    <!-- Trending Topics Grid -->
+    <section class="border-b border-border dark:border-border-dark pb-64">
+      <h2 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16">Trending Topics</h2>
+      <div class="flex flex-wrap gap-8">
+        {trendingTopics.map(topic => (
+          <a
+            href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
+            class="badge hover:bg-hover dark:hover:bg-hover transition-colors normal-case flex items-center gap-6"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 text-muted dark:text-muted-dark">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+            <span>{topic}</span>
+          </a>
+        ))}
       </div>
     </section>
 
@@ -242,79 +280,80 @@ const heroPost = latestPillars[0] || allArticles[0];
       </section>
     )}
 
-    <!-- Split lists for Tutorials, Comparisons, and Prompts -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-32">
-      
-      <!-- Latest Tutorials -->
+    <!-- Explore by Category Section -->
+    <section class="space-y-32 border-t border-border dark:border-border-dark pt-64">
       <div>
-        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
-          <span class="flex items-center gap-8">📘 Tutorials</span>
-          <a href="/tutorials" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
-        </h3>
-        <div class="space-y-16">
-          {latestTutorials.map(post => (
-            <a
-              href={getArticleUrl(post)}
-              class="card p-16 block group"
-            >
-              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
-                {post.data.title}
-              </h4>
-              <p class="text-meta font-mono text-muted dark:text-muted-dark">
-                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </p>
-            </a>
-          ))}
-        </div>
+        <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark">
+          Explore by Category
+        </h2>
+        <p class="mt-8 text-body-large text-ink2 dark:text-ink2-dark">
+          Access specialized AI developer knowledge bases, technical benchmarks, and prompt libraries.
+        </p>
       </div>
 
-      <!-- Latest Comparisons -->
-      <div>
-        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
-          <span class="flex items-center gap-8">⚔️ Comparisons</span>
-          <a href="/comparisons" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
-        </h3>
-        <div class="space-y-16">
-          {latestComparisons.map(post => (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24">
+        {Object.entries(categoryMeta).map(([catName, meta]) => {
+          const count = categoryCounts[catName] || 0;
+          const href = `/category/${catName.toLowerCase().replace(/\s+/g, '-')}`;
+          return (
             <a
-              href={getArticleUrl(post)}
-              class="card p-16 block group"
+              href={href}
+              class="card group relative flex flex-col justify-between p-24 rounded-16 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark hover:bg-hover/10 dark:hover:bg-hover-dark/10 hover:border-border-dark dark:hover:border-border-hover shadow-subtle hover:shadow-medium transition-all duration-200"
             >
-              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
-                {post.data.title}
-              </h4>
-              <p class="text-meta font-mono text-muted dark:text-muted-dark">
-                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </p>
-            </a>
-          ))}
-        </div>
-      </div>
+              <div class="space-y-16">
+                <!-- Icon and Count -->
+                <div class="flex items-center justify-between">
+                  <div class="flex h-48 w-48 items-center justify-center rounded-12 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-20 w-20"
+                    >
+                      <path d={meta.iconPath} />
+                    </svg>
+                  </div>
+                  <span class="text-meta font-mono font-medium text-muted dark:text-muted-dark">
+                    {count} {count === 1 ? 'article' : 'articles'}
+                  </span>
+                </div>
 
-      <!-- Latest Prompts -->
-      <div>
-        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
-          <span class="flex items-center gap-8">💡 System Prompts</span>
-          <a href="/prompts" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
-        </h3>
-        <div class="space-y-16">
-          {latestPrompts.map(post => (
-            <a
-              href={getArticleUrl(post)}
-              class="card p-16 block group"
-            >
-              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
-                {post.data.title}
-              </h4>
-              <p class="text-meta font-mono text-muted dark:text-muted-dark">
-                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </p>
+                <!-- Text content -->
+                <div>
+                  <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
+                    {catName}
+                  </h3>
+                  <p class="mt-8 text-meta leading-relaxed text-ink2 dark:text-ink2-dark">
+                    {meta.description}
+                  </p>
+                </div>
+              </div>
+
+              <!-- CTA link -->
+              <div class="mt-24 pt-16 border-t border-border/40 dark:border-border-dark/40 flex items-center justify-between text-meta font-sans font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                <span>Explore Hub</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-16 w-16 transform transition-transform duration-200 group-hover:translate-x-4"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
             </a>
-          ))}
-        </div>
+          );
+        })}
       </div>
-      
-    </div>
+    </section>
 
   </div>
 </BaseLayout>
