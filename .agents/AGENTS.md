@@ -108,7 +108,7 @@ Articles without images are INCOMPLETE.
 For EACH image generate:
 - Prompt, Filename, Alt text, Caption, Placement, Purpose, Aspect ratio.
 
-Images should resemble premium editorial illustrations similar in quality to modern developer documentation. Never use generic AI art or watermarks.
+Images should resemble premium editorial illustrations similar in quality to modern developer documentation with good o. Never use generic AI art or watermarks.
 
 ---
 
