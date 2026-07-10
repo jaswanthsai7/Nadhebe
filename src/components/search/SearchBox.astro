@@ -1,0 +1,100 @@
+---
+---
+<div class="search-box-wrapper w-full max-w-2xl mx-auto my-32">
+  <div class="relative rounded-control border border-border bg-surface px-12 py-4 flex items-center shadow-card dark:shadow-none focus-within:border-accent dark:border-border-dark dark:bg-surface-dark dark:focus-within:border-accent-dark transition-colors duration-150">
+    <svg class="h-16 w-16 text-muted dark:text-muted-dark ml-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search articles, reviews, tutorials, videos..."
+      class="w-full bg-transparent border-0 outline-none text-ink placeholder-muted text-body py-12 px-16 focus:ring-0 focus:outline-none dark:text-ink-dark dark:placeholder-muted-dark"
+    />
+    <div id="search-spinner" class="hidden animate-spin rounded-full h-16 w-16 border-2 border-accent border-t-transparent mr-8 dark:border-accent-dark"></div>
+  </div>
+
+  <div id="search-dev-warning" class="hidden mt-16 p-16 rounded-control border border-amber-500/20 bg-amber-500/5 text-amber-600 dark:text-amber-500 text-meta font-sans leading-relaxed">
+    <strong>Development Tip:</strong> Search indexing runs in the post-build step. Run <code class="bg-amber-500/10 px-8 py-2 rounded font-mono text-amber-700 dark:text-amber-400 text-meta">npm run build</code>, and test search functionality on the built output or via <code class="bg-amber-500/10 px-8 py-2 rounded font-mono text-amber-700 dark:text-amber-400 text-meta">npm run preview</code>.
+  </div>
+
+  <div id="search-results" class="mt-32 space-y-16"></div>
+</div>
+
+<script>
+  let pagefind = null;
+
+  async function initPagefind() {
+    const input = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('search-results');
+    const warning = document.getElementById('search-dev-warning');
+    const spinner = document.getElementById('search-spinner');
+
+    if (!input || !resultsContainer) return;
+
+    try {
+      // Dynamically load pagefind
+      // @ts-ignore
+      pagefind = await new Function("return import('/pagefind/pagefind.js')")();
+      await pagefind.init();
+    } catch (e) {
+      console.warn("Pagefind search index not found. This is normal in dev mode if you haven't run a build yet.");
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        warning?.classList.remove('hidden');
+      }
+      return;
+    }
+
+    input.addEventListener('input', async (event) => {
+      const query = event.target.value.trim();
+      resultsContainer.innerHTML = '';
+      
+      if (!query) {
+        spinner?.classList.add('hidden');
+        return;
+      }
+
+      spinner?.classList.remove('hidden');
+
+      try {
+        const search = await pagefind.search(query);
+        resultsContainer.innerHTML = '';
+
+        if (search.results.length === 0) {
+          resultsContainer.innerHTML = `<div class="text-center py-32"><p class="text-muted dark:text-muted-dark text-body">No results found for "${query}".</p><p class="text-meta text-muted dark:text-muted-dark mt-8 font-sans">Try searching for other terms like 'Claude', 'Pinecone', or 'LangChain'.</p></div>`;
+          spinner?.classList.add('hidden');
+          return;
+        }
+
+        // Display top results (up to 10)
+        const topResults = search.results.slice(0, 10);
+        
+        for (const rawResult of topResults) {
+          const data = await rawResult.data();
+          
+          const resultEl = document.createElement('a');
+          resultEl.href = data.url;
+          resultEl.className = 'card block p-24 shadow-card dark:shadow-none group';
+          
+          resultEl.innerHTML = `
+            <div class="flex flex-col gap-8">
+              <div class="flex items-center gap-12">
+                <h3 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">${data.meta.title || 'Untitled'}</h3>
+              </div>
+              <p class="text-body text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-4">${data.excerpt}</p>
+            </div>
+          `;
+          resultsContainer.appendChild(resultEl);
+        }
+      } catch (err) {
+        console.error('Error during search: ', err);
+      } finally {
+        spinner?.classList.add('hidden');
+      }
+    });
+  }
+
+  // Initialize
+  initPagefind();
+  document.addEventListener('astro:page-load', initPagefind);
+</script>

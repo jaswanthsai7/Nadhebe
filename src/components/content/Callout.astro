@@ -1,0 +1,43 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'info';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const styles = {
+  note: {
+    bg: 'bg-surface2/50 border-border text-ink2 dark:bg-surface2-dark/50 dark:border-border-dark dark:text-ink2-dark',
+    title: 'text-ink dark:text-ink-dark',
+    icon: 'ℹ️'
+  },
+  info: {
+    bg: 'bg-accent/5 border-accent/20 text-ink2 dark:text-ink2-dark',
+    title: 'text-accent dark:text-accent-dark',
+    icon: '📘'
+  },
+  tip: {
+    bg: 'bg-success/5 border-success/20 text-ink2 dark:text-ink2-dark',
+    title: 'text-success dark:text-success-dark',
+    icon: '💡'
+  },
+  warning: {
+    bg: 'bg-danger/5 border-danger/20 text-ink2 dark:text-ink2-dark',
+    title: 'text-danger dark:text-danger-dark',
+    icon: '⚠️'
+  }
+};
+
+const current = styles[type] || styles.note;
+---
+
+<div class={`my-24 p-16 rounded-card border ${current.bg} shadow-card dark:shadow-none`}>
+  <div class="flex items-start gap-12">
+    <span class="text-h3 leading-none select-none mt-2">{current.icon}</span>
+    <div class="flex-1 min-w-0">
+      {title && <p class={`font-semibold mb-4 text-body ${current.title}`}>{title}</p>}
+      <div class="text-body leading-relaxed"><slot /></div>
+    </div>
+  </div>
+</div>

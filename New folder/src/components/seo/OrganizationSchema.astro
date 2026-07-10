@@ -1,0 +1,19 @@
+---
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": new URL('#organization', Astro.site || 'https://example.com').toString(),
+  "name": "Static AI Content Site",
+  "url": Astro.site || 'https://example.com',
+  "logo": {
+    "@type": "ImageObject",
+    "url": new URL('/favicon.svg', Astro.site || 'https://example.com').toString()
+  },
+  "sameAs": [
+    "https://twitter.com/example",
+    "https://github.com/example"
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

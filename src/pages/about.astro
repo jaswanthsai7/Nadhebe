@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Nadhebe"
+  description="Learn about our technical vision, Static architecture, and editorial process."
+>
+  <div class="mx-auto max-w-3xl px-6 py-16">
+    <article class="prose-article">
+      <h1>About Our Platform</h1>
+      <p>
+        Nadhebe is a highly optimized, fully static technical resource designed for developers, prompt engineers, and AI builders.
+      </p>
+      
+      <h2>Our Technology Stack</h2>
+      <p>
+        This site is constructed on the modern <strong>Astro framework</strong> using <strong>Islands Architecture</strong>. We ship zero Client-side JavaScript by default, only hydrating interactive tools like search when needed. Every page maintains a perfect Lighthouse performance rating.
+      </p>
+
+      <h2>Editorial Philosophy</h2>
+      <p>
+        We write in-depth tutorials, comparison reviews, and system prompt optimizations directly from developer testing. We reject thin, AI-generated spam content; every article answers specific search intents and undergoes thorough review.
+      </p>
+    </article>
+  </div>
+</BaseLayout>

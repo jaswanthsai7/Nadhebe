@@ -1,0 +1,28 @@
+---
+interface LinkInfo {
+  title: string;
+  url: string;
+}
+interface Props {
+  prev?: LinkInfo | null;
+  next?: LinkInfo | null;
+}
+const { prev, next } = Astro.props;
+---
+
+{(prev || next) && (
+  <nav aria-label="Article navigation" class="not-prose mt-96 grid gap-16 border-t border-border pt-24 dark:border-border-dark sm:grid-cols-2">
+    {prev ? (
+      <a href={prev.url} class="card p-16 flex flex-col justify-between">
+        <p class="mb-4 text-meta font-sans font-medium uppercase tracking-wider text-muted dark:text-muted-dark">← Previous</p>
+        <p class="text-h3 font-display font-semibold text-ink dark:text-ink-dark">{prev.title}</p>
+      </a>
+    ) : <div />}
+    {next && (
+      <a href={next.url} class="card p-16 sm:text-right flex flex-col justify-between">
+        <p class="mb-4 text-meta font-sans font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Next →</p>
+        <p class="text-h3 font-display font-semibold text-ink dark:text-ink-dark">{next.title}</p>
+      </a>
+    )}
+  </nav>
+)}

@@ -1,0 +1,60 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+---
+
+<div class="youtube-facade my-32 overflow-hidden rounded-card border border-border bg-surface aspect-video shadow-card dark:border-border-dark dark:bg-surface-dark dark:shadow-none relative group">
+  <div
+    class="youtube-facade-trigger absolute inset-0 cursor-pointer flex items-center justify-center bg-cover bg-center"
+    style={`background-image: url('${thumbnailUrl}')`}
+    data-video-id={videoId}
+    data-title={title}
+  >
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-150"></div>
+    
+    <!-- Play Button -->
+    <div class="relative z-10 w-64 h-64 flex items-center justify-center rounded-pill bg-danger text-white shadow-card transition-colors duration-150">
+      <svg class="h-32 w-32 fill-current translate-x-2" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupYoutubeFacades() {
+    const facades = document.querySelectorAll('.youtube-facade-trigger');
+    facades.forEach(facade => {
+      facade.addEventListener('click', () => {
+        const videoId = facade.getAttribute('data-video-id');
+        const title = facade.getAttribute('data-title') || 'YouTube Video';
+        const parent = facade.parentElement;
+        
+        if (videoId && parent) {
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+          iframe.setAttribute('title', title);
+          iframe.setAttribute('frameborder', '0');
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+          iframe.setAttribute('allowfullscreen', 'true');
+          iframe.className = 'w-full h-full border-0 absolute inset-0';
+          
+          parent.innerHTML = '';
+          parent.appendChild(iframe);
+        }
+      });
+    });
+  }
+
+  // Set up on initial load
+  setupYoutubeFacades();
+
+  // Set up on view transitions
+  document.addEventListener('astro:page-load', setupYoutubeFacades);
+</script>

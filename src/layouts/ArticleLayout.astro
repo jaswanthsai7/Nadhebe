@@ -1,0 +1,331 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import ShareButtons from '@/components/ShareButtons.astro';
+import PreviousNext from '@/components/PreviousNext.astro';
+import FAQSection from '@/components/FAQSection.astro';
+import SourceList from '@/components/SourceList.astro';
+import YouTubeEmbed from '../components/content/YouTubeEmbed.astro';
+import ArticleSchema from '../components/seo/ArticleSchema.astro';
+import FAQSchema from '../components/seo/FAQSchema.astro';
+import VideoSchema from '../components/seo/VideoSchema.astro';
+import ReadingProgress from '@/components/ReadingProgress.astro';
+import ScrollToTop from '@/components/ScrollToTop.astro';
+import ArticleHero from '@/components/ArticleHero.astro';
+import MobileToc from '@/components/MobileToc.astro';
+import StickySidebar from '@/components/StickySidebar.astro';
+import AuthorCard from '@/components/AuthorCard.astro';
+import RelatedPosts from '@/components/RelatedPosts.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import VerdictGauge from '@/components/VerdictGauge.astro';
+
+import { getReadingTime } from '../utils/readingTime';
+import { getRelatedArticles } from '../utils/relatedArticles';
+import { getBreadcrumbs } from '../utils/breadcrumbs';
+import { getAllArticles, getArticleUrl } from '../utils/content';
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+
+// Resolve Author
+const authorEntry = await getEntry(post.data.author);
+const author = authorEntry?.data;
+
+// Calculations
+const slug = getArticleUrl(post);
+const readingTime = getReadingTime(post.body);
+const pageUrl = new URL(slug, Astro.site || Astro.url.origin).toString();
+
+// Load all articles for cluster & related post calculations
+const allArticles = await getAllArticles();
+
+// 1. Topic Cluster relationships
+const currentTopic = post.data.topic;
+let parentPillarArticle = null;
+let supportingArticles = [];
+
+if (currentTopic) {
+  if (post.data.isPillar) {
+    // If this is the pillar article, find all supporting posts
+    supportingArticles = allArticles.filter(
+      a => a.data.topic?.toLowerCase() === currentTopic.toLowerCase() && !a.data.isPillar
+    );
+  } else if (post.data.parentPillar) {
+    // If it's a supporting article, find the parent pillar
+    parentPillarArticle = allArticles.find(
+      a => a.slug === post.data.parentPillar && a.data.isPillar
+    );
+  }
+}
+
+// 2. Related Articles recommendations
+const relatedArticles = getRelatedArticles(post, allArticles, 3);
+
+// 3. Prev/Next navigation within same collection/topic
+const siblingArticles = allArticles.filter(a => a.collection === post.collection);
+const currentIndex = siblingArticles.findIndex(a => a.slug === post.slug);
+const prevArticle = currentIndex < siblingArticles.length - 1 ? siblingArticles[currentIndex + 1] : null;
+const nextArticle = currentIndex > 0 ? siblingArticles[currentIndex - 1] : null;
+
+const prevProps = prevArticle ? { title: prevArticle.data.title, url: getArticleUrl(prevArticle) } : undefined;
+const nextProps = nextArticle ? { title: nextArticle.data.title, url: getArticleUrl(nextArticle) } : undefined;
+
+// Format dates
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Map sources to references
+const references = post.data.sources?.map((s) => ({
+  title: s.label,
+  url: s.url,
+})) || [];
+
+// Breadcrumb items
+let collectionLabel = '';
+let collectionHref = '';
+switch (post.collection) {
+  case 'news':
+    collectionLabel = 'News';
+    collectionHref = '/news';
+    break;
+  case 'tutorials':
+    collectionLabel = 'Tutorials';
+    collectionHref = '/tutorials';
+    break;
+  case 'youtube-articles':
+    collectionLabel = 'Videos';
+    collectionHref = '/youtube';
+    break;
+  case 'tool-reviews':
+    collectionLabel = 'Reviews';
+    collectionHref = '/reviews';
+    break;
+  case 'prompts':
+    collectionLabel = 'Prompts';
+    collectionHref = '/prompts';
+    break;
+  case 'comparisons':
+    collectionLabel = 'Comparisons';
+    collectionHref = '/comparisons';
+    break;
+  default:
+    collectionLabel = 'Articles';
+    collectionHref = '/blog';
+}
+
+const breadcrumbItems = [
+  { name: 'Home', href: '/' },
+  { name: collectionLabel, href: collectionHref },
+  { name: post.data.title, href: slug },
+];
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  heroImage={post.data.heroImage}
+  canonicalUrl={post.data.canonicalUrl}
+>
+  <!-- SEO JSON-LD Schemas -->
+  <ArticleSchema
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    updatedDate={post.data.updatedDate}
+    authorName={author?.name || 'Anonymous'}
+    authorBio={author?.bio}
+    authorAvatar={author?.avatar}
+    heroImage={post.data.heroImage}
+    canonicalUrl={pageUrl}
+  />
+  {post.data.faq && <FAQSchema faq={post.data.faq} />}
+  {(post.data.youtubeVideoId || post.data.videoId) && (
+    <VideoSchema
+      title={post.data.title}
+      description={post.data.description}
+      videoId={post.data.youtubeVideoId || post.data.videoId}
+      videoDuration={post.data.videoDuration || 'PT10M00S'}
+      videoUploadDate={post.data.videoUploadDate || post.data.pubDate}
+    />
+  )}
+
+  <ReadingProgress />
+  <ScrollToTop />
+
+  <ArticleHero
+    category={post.data.category}
+    title={post.data.title}
+    description={post.data.description}
+    readingTime={readingTime}
+    publishedDate={fmt(post.data.pubDate)}
+    updatedDate={post.data.updatedDate ? fmt(post.data.updatedDate) : undefined}
+    authorName={author?.name || 'Anonymous'}
+    authorAvatar={author?.avatar}
+    featuredImage={post.data.heroImage}
+    featuredImageAlt={post.data.title}
+    rating={post.collection === 'tool-reviews' ? post.data.rating : undefined}
+  />
+
+  <div class="mx-auto mt-96 grid max-w-6xl grid-cols-1 gap-48 px-24 lg:grid-cols-[220px_1fr_240px] lg:gap-32">
+    <!-- Left rail reserved for balance on ultrawide; sidebar lives on the right -->
+    <div class="hidden lg:block"></div>
+
+    <div class="min-w-0">
+      <Breadcrumb items={breadcrumbItems} />
+
+      <!-- Pillar / Supporting Article Top Alert -->
+      {parentPillarArticle && (
+        <div class="mb-32 p-16 rounded-card border border-accent/20 bg-accent/5 text-ink2 dark:text-ink2-dark flex flex-col sm:flex-row sm:items-center justify-between gap-16">
+          <div class="flex items-center gap-12">
+            <span class="text-xl">🗂️</span>
+            <div>
+              <p class="text-meta font-sans text-accent font-semibold tracking-wider uppercase">Topic Cluster Guide</p>
+              <p class="text-body font-medium text-ink dark:text-ink-dark mt-2">
+                Part of our cluster on <strong class="font-semibold">{currentTopic}</strong>.
+              </p>
+            </div>
+          </div>
+          <a
+            href={getArticleUrl(parentPillarArticle)}
+            class="btn-primary py-4 px-12 text-meta font-sans font-semibold shrink-0"
+          >
+            Read pillar guide
+          </a>
+        </div>
+      )}
+
+      <MobileToc headings={headings} />
+
+      <!-- Video Player Facade -->
+      {(post.data.youtubeVideoId || post.data.videoId) && (
+        <div class="mb-32">
+          <h2 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark mb-16 flex items-center gap-8">
+            <svg class="h-16 w-16 text-danger fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 4-8 4z"/></svg>
+            Featured video guide
+          </h2>
+          <YouTubeEmbed
+            videoId={post.data.youtubeVideoId || post.data.videoId}
+            title={post.data.title}
+          />
+        </div>
+      )}
+
+      <!-- Review Rating Block -->
+      {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
+        <div class="mb-32 p-24 rounded-card border border-border bg-surface dark:border-border-dark dark:bg-surface-dark shadow-card dark:shadow-none">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-24 border-b border-border dark:border-border-dark pb-16 mb-16">
+            <div class="flex items-center gap-16">
+              <VerdictGauge score={post.data.rating} size={64} />
+              <div>
+                <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Overall verdict</p>
+                <p class="text-body font-semibold text-ink2 dark:text-ink2-dark mt-2">{post.data.rating >= 9.0 ? 'Recommended tool' : 'Average tool'}</p>
+              </div>
+            </div>
+            <div>
+              <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Pricing model</p>
+              <p class="text-body font-semibold text-ink2 dark:text-ink2-dark mt-2 font-mono">{post.data.pricing || 'N/A'}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-24 mt-16">
+            <div class="bg-success/5 border border-success/20 rounded-card p-16">
+              <p class="text-meta font-sans font-semibold text-success uppercase tracking-wider mb-8">Pros</p>
+              <ul class="space-y-8 text-body text-ink2 dark:text-ink2-dark pl-0 list-none">
+                {post.data.pros?.map(pro => <li class="flex items-start gap-8"><span>✅</span> {pro}</li>)}
+              </ul>
+            </div>
+            <div class="bg-danger/5 border border-danger/20 rounded-card p-16">
+              <p class="text-meta font-sans font-semibold text-danger uppercase tracking-wider mb-8">Cons</p>
+              <ul class="space-y-8 text-body text-ink2 dark:text-ink2-dark pl-0 list-none">
+                {post.data.cons?.map(con => <li class="flex items-start gap-8"><span>❌</span> {con}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Comparison Badge Block -->
+      {post.collection === 'comparisons' && post.data.itemsCompared && (
+        <div class="mb-32 p-16 rounded-card border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between gap-16 shadow-card dark:shadow-none">
+          <div>
+            <p class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Items compared</p>
+            <div class="flex flex-wrap gap-8 mt-8">
+              {post.data.itemsCompared.map(item => (
+                <span class="badge">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <span class="text-3xl shrink-0">⚔️</span>
+        </div>
+      )}
+
+      <!-- Rendered Post Markdown -->
+      <article class="prose-article" data-article-body>
+        <Content />
+      </article>
+
+      <!-- Pillar Supporting Articles Grid -->
+      {post.data.isPillar && supportingArticles.length > 0 && (
+        <div class="mt-96 border-t border-border dark:border-border-dark pt-24">
+          <h2 class="text-h2 font-display font-semibold text-ink dark:text-ink-dark mb-12">Supporting cluster guides</h2>
+          <p class="text-body text-ink2 dark:text-ink2-dark mb-24">
+            Explore our deeper, focused guides on specific aspects of this topic:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16">
+            {supportingArticles.map(art => (
+              <a
+                href={getArticleUrl(art)}
+                class="card p-16 block group shadow-card dark:shadow-none"
+              >
+                <span class="badge mb-8">
+                  {art.collection.replace('-articles', '')}
+                </span>
+                <h3 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition mt-8 mb-4">
+                  {art.data.title}
+                </h3>
+                <p class="text-meta font-sans text-muted dark:text-muted-dark line-clamp-2 mt-4 leading-relaxed">{art.data.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <FAQSection items={post.data.faq || []} />
+      <SourceList references={references} />
+
+      <div class="not-prose mt-96 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-24 border-t border-border pt-24 dark:border-border-dark">
+        {author && (
+          <div class="flex-grow">
+            <AuthorCard
+              name={author.name}
+              role={author.role}
+              avatar={author.avatar}
+              bio={author.bio}
+              twitter={author.twitter}
+              reviewedBy={post.data.reviewedBy}
+              updatedDate={post.data.updatedDate ? fmt(post.data.updatedDate) : undefined}
+            />
+          </div>
+        )}
+        <div class="flex items-center justify-end">
+          <ShareButtons url={pageUrl} title={post.data.title} />
+        </div>
+      </div>
+
+      <RelatedPosts posts={relatedArticles} />
+      <PreviousNext prev={prevProps} next={nextProps} />
+    </div>
+
+    <!-- Right Rail Sidebar -->
+    <StickySidebar
+      headings={headings}
+      category={post.data.category}
+      categoryHref={`/category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`}
+      topic={post.data.topic}
+      searchIntent={post.data.searchIntent}
+      lastReviewed={post.data.lastReviewed}
+      relatedTopics={post.data.relatedTopics}
+    />
+  </div>
+</BaseLayout>

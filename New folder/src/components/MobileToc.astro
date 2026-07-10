@@ -1,0 +1,35 @@
+---
+import type { TocItem } from '@/types';
+
+interface Props {
+  headings: TocItem[];
+}
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{items.length > 0 && (
+  <details class="mobile-toc mb-8 rounded-card border border-border bg-surface dark:border-border-dark dark:bg-surface-dark lg:hidden">
+    <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-meta font-sans font-medium text-ink dark:text-ink-dark">
+      <span>On this page</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4 transition-transform">
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </summary>
+    <ul class="space-y-2.5 border-t border-border px-4 py-3 dark:border-border-dark">
+      {items.map((h) => (
+        <li class={h.depth === 3 ? 'pl-4' : ''}>
+          <a href={`#${h.slug}`} class="text-meta font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </details>
+)}
+
+<style>
+  .mobile-toc[open] summary svg {
+    transform: rotate(180deg);
+  }
+</style>

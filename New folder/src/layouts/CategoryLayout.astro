@@ -1,0 +1,220 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getArticleUrl } from '../utils/content';
+import VerdictGauge from '@/components/VerdictGauge.astro';
+
+interface Props {
+  categoryName: string;
+  posts: any[];
+  allPosts: any[];
+}
+
+const { categoryName, posts, allPosts } = Astro.props;
+
+// Split posts into Pillar and Supporting
+const pillarArticles = posts.filter(p => p.data.isPillar === true);
+const supportingArticles = posts.filter(p => !p.data.isPillar);
+
+// Find popular topics in this category
+const topicsCount: Record<string, number> = {};
+posts.forEach(p => {
+  if (p.data.topic) {
+    topicsCount[p.data.topic] = (topicsCount[p.data.topic] || 0) + 1;
+  }
+});
+const popularTopics = Object.entries(topicsCount)
+  .sort((a, b) => b[1] - a[1])
+  .map(entry => entry[0])
+  .slice(0, 5);
+
+// Find related categories
+const allCategories = [...new Set(allPosts.map(p => p.data.category))];
+const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== categoryName.toLowerCase());
+---
+
+<BaseLayout
+  title={`${categoryName} Articles & Guides`}
+  description={`Browse through our comprehensive resources, pillar guides, and tutorials under the ${categoryName} category.`}
+>
+  <div class="mx-auto max-w-6xl px-24 py-64 sm:py-96">
+    <!-- Header -->
+    <div class="border-b border-border dark:border-border-dark pb-24 mb-48">
+      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Hub</p>
+      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">{categoryName}</h1>
+      <p class="text-ink2 dark:text-ink2-dark text-body mt-16 max-w-2xl leading-relaxed">
+        Discover expert insights, in-depth comparison reviews, hands-on tutorials, and topic clusters structured to build your expertise.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+      <!-- Main Content (Column 1-9) -->
+      <div class="lg:col-span-9 space-y-96">
+        
+        <!-- Featured Pillar Articles -->
+        {pillarArticles.length > 0 && (
+          <div>
+            <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark mb-24 flex items-center gap-8">
+              ✨ Featured pillar guides
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+              {pillarArticles.map(post => (
+                <a
+                  href={getArticleUrl(post)}
+                  class="card group flex flex-col overflow-hidden p-0"
+                >
+                  <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      width="480"
+                      height="270"
+                      class="w-full h-full object-cover"
+                    />
+                    {post.data.rating !== undefined && (
+                      <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+                        <VerdictGauge score={post.data.rating} size={48} />
+                      </div>
+                    )}
+                  </div>
+                  <div class="p-24 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span class="badge mb-12">
+                        Pillar Guide
+                      </span>
+                      <h3 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                        {post.data.title}
+                      </h3>
+                      <p class="text-body text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
+                        {post.data.description}
+                      </p>
+                    </div>
+                    <div class="text-meta text-muted dark:text-muted-dark mt-24 flex items-center justify-between">
+                      <span class="font-mono font-semibold">
+                        {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </span>
+                      {post.data.difficulty && <span class="capitalize font-sans font-semibold">{post.data.difficulty}</span>}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Supporting Articles -->
+        {supportingArticles.length > 0 && (
+          <div>
+            <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark mb-24 flex items-center gap-8">
+              📚 All guides & supporting content
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-24">
+              {supportingArticles.map(post => (
+                <a
+                  href={getArticleUrl(post)}
+                  class="card group flex flex-col overflow-hidden p-0"
+                >
+                  <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      width="320"
+                      height="180"
+                      class="w-full h-full object-cover"
+                    />
+                    {post.data.rating !== undefined && (
+                      <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+                        <VerdictGauge score={post.data.rating} size={48} />
+                      </div>
+                    )}
+                  </div>
+                  <div class="p-16 flex-1 flex flex-col justify-between">
+                    <div>
+                      {post.data.topic && (
+                        <span class="badge mb-12">
+                          Topic: {post.data.topic}
+                        </span>
+                      )}
+                      <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                        {post.data.title}
+                      </h3>
+                      <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
+                        {post.data.description}
+                      </p>
+                    </div>
+                    <div class="text-meta text-muted dark:text-muted-dark mt-16 flex items-center justify-between">
+                      <span class="font-mono font-semibold">
+                        {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                        })}
+                      </span>
+                      {post.data.difficulty && <span class="capitalize font-sans font-semibold">{post.data.difficulty}</span>}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {posts.length === 0 && (
+          <div class="text-center py-64 border border-dashed border-border dark:border-border-dark rounded-card">
+            <span class="text-3xl">📭</span>
+            <p class="text-muted dark:text-muted-dark mt-16">No articles found in this category yet.</p>
+            <p class="text-meta font-sans text-muted dark:text-muted-dark mt-8">
+              <a href="/" class="text-accent dark:text-accent-dark hover:underline">Return to the homepage</a> to read our latest guides.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar (Column 10-12) -->
+      <aside class="lg:col-span-3 space-y-24 lg:sticky lg:top-96">
+        <!-- Popular Topics -->
+        {popularTopics.length > 0 && (
+          <div class="card p-24">
+            <h3 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16 border-b border-border dark:border-border-dark pb-8">
+              Popular topics
+            </h3>
+            <div class="flex flex-col gap-8">
+              {popularTopics.map(topic => (
+                <a
+                  href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
+                  class="flex items-center justify-between p-8 rounded-control hover:bg-hover dark:hover:bg-hover text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors"
+                >
+                  <span class="text-meta font-sans font-medium">{topic}</span>
+                  <span class="text-meta text-muted dark:text-muted-dark font-mono">
+                    {posts.filter(p => p.data.topic === topic).length}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Related Categories -->
+        {relatedCategories.length > 0 && (
+          <div class="card p-24">
+            <h3 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16 border-b border-border dark:border-border-dark pb-8">
+              Other categories
+            </h3>
+            <div class="flex flex-wrap gap-8">
+              {relatedCategories.map(cat => (
+                <a
+                  href={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                  class="badge hover:bg-hover dark:hover:bg-hover hover:text-ink dark:hover:text-ink-dark transition-colors"
+                >
+                  {cat}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

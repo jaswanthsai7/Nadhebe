@@ -1,0 +1,27 @@
+---
+import { getAllArticles } from '../../utils/content';
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
+
+export async function getStaticPaths() {
+  const allArticles = await getAllArticles();
+  const categoryMap = new Map<string, { name: string; posts: any[] }>();
+  
+  allArticles.forEach(post => {
+    const catName = post.data.category;
+    const slug = catName.toLowerCase().replace(/\s+/g, '-');
+    if (!categoryMap.has(slug)) {
+      categoryMap.set(slug, { name: catName, posts: [] });
+    }
+    categoryMap.get(slug)!.posts.push(post);
+  });
+  
+  return Array.from(categoryMap.entries()).map(([slug, { name, posts }]) => ({
+    params: { category: slug },
+    props: { name, posts, allArticles },
+  }));
+}
+
+const { name, posts, allArticles } = Astro.props;
+---
+
+<CategoryLayout categoryName={name} posts={posts} allPosts={allArticles} />

@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import AuthorLayout from '../../layouts/AuthorLayout.astro';
+import { getAllArticles } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const authorEntries = await getCollection('authors');
+  const allArticles = await getAllArticles();
+
+  return authorEntries.map(author => {
+    // Filter posts written by this author
+    const authorPosts = allArticles.filter(
+      post => post.data.author && post.data.author.id === author.id
+    );
+
+    return {
+      params: { author: author.id },
+      props: { author: author.data, posts: authorPosts },
+    };
+  });
+}
+
+const { author, posts } = Astro.props;
+---
+
+<AuthorLayout author={author} posts={posts} />

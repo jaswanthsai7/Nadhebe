@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getArticleUrl } from '../../utils/content';
+import VerdictGauge from '../../components/VerdictGauge.astro';
+
+const posts = await getCollection('youtube-articles');
+const sorted = posts
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Videos - Nadhebe"
+  description="Watch our video guides and screencasts covering the latest AI systems and tools."
+>
+  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
+    <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
+      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
+      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Video Guides</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+      {sorted.map((post) => (
+        <a
+          href={getArticleUrl({ ...post, collection: 'youtube-articles' })}
+          class="card group flex flex-col overflow-hidden p-0"
+        >
+          <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+            <img
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width="400"
+              height="225"
+              class="w-full h-full object-cover"
+            />
+            {post.data.videoDuration && (
+              <span class="absolute bottom-12 right-12 bg-black/75 px-8 py-4 rounded font-mono text-meta text-white">
+                {post.data.videoDuration.replace('PT', '').replace('M', 'm ').replace('S', 's')}
+              </span>
+            )}
+            {post.data.rating !== undefined && (
+              <div class="absolute bottom-12 left-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+                <VerdictGauge score={post.data.rating} size={48} />
+              </div>
+            )}
+          </div>
+          <div class="p-16 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="badge mb-12 text-danger border-danger/20 bg-danger/5">
+                {post.data.category}
+              </span>
+              <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                {post.data.title}
+              </h3>
+              <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
+                {post.data.description}
+              </p>
+            </div>
+            <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

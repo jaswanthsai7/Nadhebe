@@ -1,0 +1,33 @@
+---
+interface Props {
+  sources?: {
+    label: string;
+    url: string;
+  }[];
+}
+
+const { sources } = Astro.props;
+
+if (!sources || sources.length === 0) return null;
+---
+
+<div class="sources-list my-32 border-t border-border pt-24 dark:border-border-dark">
+  <h3 class="font-display text-h3 font-semibold mb-16 text-ink dark:text-ink-dark">Sources & references</h3>
+  <ul class="space-y-8 text-body">
+    {sources.map(source => (
+      <li>
+        <a
+          href={source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-8 text-ink2 hover:text-accent transition-colors underline decoration-border hover:decoration-accent underline-offset-2"
+        >
+          <span>{source.label}</span>
+          <svg class="h-16 w-16 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

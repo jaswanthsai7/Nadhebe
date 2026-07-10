@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  videoId: string;
+  videoDuration: string;
+  videoUploadDate: Date;
+}
+
+const { title, description, videoId, videoDuration, videoUploadDate } = Astro.props;
+
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+const contentUrl = `https://www.youtube.com/watch?v=${videoId}`;
+const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": title,
+  "description": description,
+  "thumbnailUrl": thumbnailUrl,
+  "uploadDate": videoUploadDate.toISOString(),
+  "duration": videoDuration,
+  "contentUrl": contentUrl,
+  "embedUrl": embedUrl,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Static AI Content Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL('/favicon.svg', Astro.site || 'https://example.com').toString()
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

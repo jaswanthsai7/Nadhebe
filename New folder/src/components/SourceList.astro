@@ -1,0 +1,27 @@
+---
+import type { ReferenceItem } from '@/types';
+
+interface Props {
+  references: ReferenceItem[];
+}
+const { references } = Astro.props;
+---
+
+{references.length > 0 && (
+  <section aria-labelledby="sources-heading" class="not-prose mt-64 border-t border-border pt-24 dark:border-border-dark">
+    <h2 id="sources-heading" class="mb-12 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">
+      Sources & references
+    </h2>
+    <ol class="space-y-8">
+      {references.map((ref, i) => (
+        <li class="flex gap-12 text-body text-ink2 dark:text-ink2-dark">
+          <span class="text-muted dark:text-muted-dark font-mono">[{i + 1}]</span>
+          <a href={ref.url} target="_blank" rel="noopener noreferrer nofollow" class="underline decoration-border hover:decoration-accent underline-offset-2 dark:hover:decoration-accent transition-colors">
+            {ref.title}
+          </a>
+          {ref.publisher && <span class="text-muted dark:text-muted-dark">— {ref.publisher}</span>}
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

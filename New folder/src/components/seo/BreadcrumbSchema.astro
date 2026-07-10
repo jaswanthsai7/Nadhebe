@@ -1,0 +1,25 @@
+---
+interface Props {
+  breadcrumbs: {
+    label: string;
+    url: string;
+  }[];
+}
+
+const { breadcrumbs } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs ? breadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    "item": new URL(item.url, Astro.site || 'https://example.com').toString()
+  })) : []
+};
+---
+
+{breadcrumbs && breadcrumbs.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

@@ -1,0 +1,23 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'danger';
+  title?: string;
+}
+const { type = 'note', title } = Astro.props;
+
+const config = {
+  note: { border: 'border-accent', bg: 'bg-accent/[0.06]', label: title ?? 'Note' },
+  tip: { border: 'border-success', bg: 'bg-success/[0.06]', label: title ?? 'Tip' },
+  warning: { border: 'border-warning', bg: 'bg-warning/[0.06]', label: title ?? 'Warning' },
+  danger: { border: 'border-danger', bg: 'bg-danger/[0.06]', label: title ?? 'Important' },
+} as const;
+
+const c = config[type];
+---
+
+<div class={`callout rounded-r-control border-l-2 ${c.border} ${c.bg} px-5 py-4`} role="note">
+  <p class="mb-1.5 text-meta font-sans font-semibold text-ink dark:text-ink-dark">{c.label}</p>
+  <div class="text-body leading-relaxed text-ink2 [&>p]:m-0 dark:text-ink2-dark">
+    <slot />
+  </div>
+</div>

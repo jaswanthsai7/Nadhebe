@@ -1,0 +1,70 @@
+---
+import type { TocItem } from '@/types';
+
+interface Props {
+  headings: TocItem[];
+}
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{items.length > 0 && (
+  <nav aria-label="Table of contents" class="toc">
+    <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">
+      On this page
+    </p>
+    <ul class="space-y-4 border-l border-border dark:border-border-dark">
+      {items.map((h) => (
+        <li>
+          <a
+            href={`#${h.slug}`}
+            data-toc-link={h.slug}
+            class={`toc-link block border-l-2 border-transparent py-4 text-meta font-sans leading-snug text-muted transition-colors hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark ${
+              h.depth === 3 ? 'pl-24' : 'pl-12'
+            }`}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+  const headingEls = links
+    .map((link) => document.getElementById(link.dataset.tocLink!))
+    .filter((el): el is HTMLElement => !!el);
+
+  function setActive(id: string | null) {
+    links.forEach((link) => {
+      const isActive = link.dataset.tocLink === id;
+      link.classList.toggle('text-ink', isActive);
+      link.classList.toggle('dark:text-ink-dark', isActive);
+      link.classList.toggle('border-accent', isActive);
+      link.classList.toggle('font-medium', isActive);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length > 0) setActive(visible[0].target.id);
+    },
+    { rootMargin: '-96px 0px -70% 0px', threshold: 0.1 }
+  );
+
+  headingEls.forEach((el) => observer.observe(el));
+
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById(link.dataset.tocLink!);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', `#${link.dataset.tocLink}`);
+    });
+  });
+</script>

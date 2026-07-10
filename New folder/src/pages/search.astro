@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchBox from '../components/search/SearchBox.astro';
+---
+
+<BaseLayout
+  title="Search Articles & Guides"
+  description="Search across our entire library of tutorials, reviews, comparisons, prompts, and videos."
+>
+  <div class="mx-auto max-w-3xl px-24 py-64">
+    <div class="text-center mb-48">
+      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Search Library</p>
+      <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark">Search Content Hub</h1>
+      <p class="text-body text-ink2 dark:text-ink2-dark mt-16 max-w-md mx-auto leading-relaxed">
+        Type keywords to query our technical articles, tool reviews, system prompts, and guides.
+      </p>
+    </div>
+    
+    <SearchBox />
+  </div>
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getArticleUrl } from '../../utils/content';
+import VerdictGauge from '../../components/VerdictGauge.astro';
+
+export async function getStaticPaths({ paginate }: any) {
+  const newsEntries = await getCollection('news');
+  const sorted = newsEntries.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  return paginate(sorted, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title={`Latest News - Page ${page.currentPage}`}
+  description="Stay updated with the latest artificial intelligence news, releases, and guides."
+>
+  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
+    <div class="border-b border-border dark:border-border-dark pb-16 mb-24 flex flex-col sm:flex-row sm:items-end justify-between gap-16">
+      <div>
+        <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
+        <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Latest AI News</h1>
+      </div>
+      <span class="text-meta font-mono font-semibold text-muted dark:text-muted-dark">Page {page.currentPage} of {page.lastPage}</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+      {page.data.map((post: any) => (
+        <a
+          href={getArticleUrl({ ...post, collection: 'news' })}
+          class="card group flex flex-col overflow-hidden p-0"
+        >
+          <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+            <img
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width="400"
+              height="225"
+              class="w-full h-full object-cover"
+            />
+            {post.data.rating !== undefined && (
+              <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+                <VerdictGauge score={post.data.rating} size={48} />
+              </div>
+            )}
+          </div>
+          <div class="p-16 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="badge mb-12">
+                {post.data.category}
+              </span>
+              <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                {post.data.title}
+              </h3>
+              <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
+                {post.data.description}
+              </p>
+            </div>
+            <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Pagination Controls -->
+    {(page.url.prev || page.url.next) && (
+      <div class="flex items-center justify-between border-t border-border dark:border-border-dark pt-24 mt-48 text-meta font-sans">
+        {page.url.prev ? (
+          <a href={page.url.prev} class="btn-secondary py-12 px-24 font-semibold">
+            ← Previous Page
+          </a>
+        ) : (
+          <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">← Previous Page</span>
+        )}
+        <span class="text-muted dark:text-muted-dark font-mono">Page {page.currentPage} of {page.lastPage}</span>
+        {page.url.next ? (
+          <a href={page.url.next} class="btn-secondary py-12 px-24 font-semibold">
+            Next Page →
+          </a>
+        ) : (
+          <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">Next Page →</span>
+        )}
+      </div>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+import type { FAQItem } from '@/types';
+
+interface Props {
+  items: FAQItem[];
+}
+const { items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section aria-labelledby="faq-heading" class="not-prose mt-64">
+    <h2 id="faq-heading" class="mb-24 font-display text-h2 font-semibold text-ink dark:text-ink-dark">
+      Frequently asked questions
+    </h2>
+    <div class="divide-y divide-border rounded-card border border-border dark:divide-border-dark dark:border-border-dark">
+      {items.map((item, i) => (
+        <details class="group px-16 py-16 bg-surface dark:bg-surface-dark" name={`faq-${i}`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-16 text-body font-semibold text-ink dark:text-ink-dark">
+            {item.question}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-16 w-16 shrink-0 text-muted group-open:rotate-45 dark:text-muted-dark">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+          </summary>
+          <p class="mt-12 text-body leading-relaxed text-ink2 dark:text-ink2-dark">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+)}

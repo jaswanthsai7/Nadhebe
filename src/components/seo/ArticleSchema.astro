@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  authorName: string;
+  authorBio?: string;
+  authorAvatar?: string;
+  heroImage: string;
+  canonicalUrl: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  authorName,
+  authorBio,
+  authorAvatar,
+  heroImage,
+  canonicalUrl,
+} = Astro.props;
+
+const imageUrl = heroImage.startsWith('http') 
+  ? heroImage 
+  : new URL(heroImage, Astro.site || 'https://example.com').toString();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "headline": title,
+  "description": description,
+  "image": imageUrl,
+  "datePublished": pubDate.toISOString(),
+  "dateModified": (updatedDate || pubDate).toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": authorName,
+    "description": authorBio,
+    "image": authorAvatar ? (authorAvatar.startsWith('http') ? authorAvatar : new URL(authorAvatar, Astro.site || 'https://example.com').toString()) : undefined
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Static AI Content Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL('/favicon.svg', Astro.site || 'https://example.com').toString()
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

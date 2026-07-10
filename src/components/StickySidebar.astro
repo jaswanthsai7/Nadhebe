@@ -1,0 +1,67 @@
+---
+import TableOfContents from '@/components/TableOfContents.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import type { TocItem } from '@/types';
+
+interface Props {
+  headings: TocItem[];
+  category: string;
+  categoryHref: string;
+  topic?: string;
+  searchIntent?: string;
+  lastReviewed?: Date;
+  relatedTopics?: string[];
+}
+const { headings, category, categoryHref, topic, searchIntent, lastReviewed, relatedTopics } = Astro.props;
+---
+
+<aside class="hidden lg:block">
+  <div class="sticky top-96 space-y-24">
+    <TableOfContents headings={headings} />
+
+    <div>
+      <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">Category</p>
+      <a href={categoryHref} class="badge">{category}</a>
+    </div>
+
+    {topic && (
+      <div>
+        <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">Focus Topic</p>
+        <span class="text-body font-semibold text-ink dark:text-ink-dark">{topic}</span>
+      </div>
+    )}
+
+    {searchIntent && (
+      <div>
+        <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">Search Intent</p>
+        <span class="badge">{searchIntent}</span>
+      </div>
+    )}
+
+    {lastReviewed && (
+      <div>
+        <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">Last Reviewed</p>
+        <span class="text-meta font-mono text-ink2 dark:text-ink2-dark">
+          {new Date(lastReviewed).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })}
+        </span>
+      </div>
+    )}
+
+    {relatedTopics && relatedTopics.length > 0 && (
+      <div>
+        <p class="mb-8 text-meta font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark">Related Keywords</p>
+        <div class="flex flex-wrap gap-8">
+          {relatedTopics.map(t => (
+            <span class="badge">{t}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <Newsletter compact />
+  </div>
+</aside>

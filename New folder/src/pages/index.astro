@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllArticles, getArticleUrl } from '../utils/content';
+import VerdictGauge from '@/components/VerdictGauge.astro';
+
+const allArticles = await getAllArticles();
+
+// 1. Featured / Latest Pillars
+const latestPillars = allArticles.filter(p => p.data.isPillar === true).slice(0, 3);
+
+// 2. Latest Videos
+const latestVideos = allArticles.filter(p => p.collection === 'youtube-articles').slice(0, 3);
+
+// 3. Latest Tutorials
+const latestTutorials = allArticles.filter(p => p.collection === 'tutorials').slice(0, 3);
+
+// 4. Latest Comparisons
+const latestComparisons = allArticles.filter(p => p.collection === 'comparisons').slice(0, 3);
+
+// 5. Latest Prompts
+const latestPrompts = allArticles.filter(p => p.collection === 'prompts').slice(0, 3);
+
+// 6. Topics & Categories calculation
+const topicCounts: Record<string, number> = {};
+const categoryCounts: Record<string, number> = {};
+
+allArticles.forEach(art => {
+  if (art.data.topic) {
+    topicCounts[art.data.topic] = (topicCounts[art.data.topic] || 0) + 1;
+  }
+  if (art.data.category) {
+    categoryCounts[art.data.category] = (categoryCounts[art.data.category] || 0) + 1;
+  }
+});
+
+const trendingTopics = Object.entries(topicCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 6)
+  .map(entry => entry[0]);
+
+const popularCategories = Object.entries(categoryCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 4)
+  .map(entry => entry[0]);
+
+// Hero Post
+const heroPost = latestPillars[0] || allArticles[0];
+---
+
+<BaseLayout
+  title="Nadhebe — Static, SEO-First AI Content Platform"
+  description="Expert tutorials, tools comparisons, system prompts, and AI tool reviews structured in SEO topic clusters."
+>
+  <!-- Hero Section -->
+  <section class="mx-auto max-w-3xl px-24 pb-64 pt-64 text-center sm:pt-96">
+    <p class="badge mx-auto w-fit">Expert AI Content Hub</p>
+    <h1 class="mt-24 font-display text-display font-bold leading-tight text-ink dark:text-ink-dark">
+      Nadhebe
+    </h1>
+    <p class="mx-auto mt-24 max-w-xl text-body leading-relaxed text-ink2 dark:text-ink2-dark">
+      Expert tutorials, tools comparisons, system prompts, and AI tool reviews structured in SEO topic clusters.
+    </p>
+  </section>
+
+  <!-- Featured Pillar Guide Section -->
+  {heroPost && (
+    <section class="mx-auto max-w-6xl px-24 pb-96">
+      <a href={getArticleUrl(heroPost)} class="card grid overflow-hidden lg:grid-cols-2 group p-0">
+        <div class="relative h-64 w-full overflow-hidden lg:h-full border-r border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+          <img
+            src={heroPost.data.heroImage}
+            alt={heroPost.data.title}
+            width="700"
+            height="500"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+          {heroPost.data.rating !== undefined && (
+            <div class="absolute bottom-24 right-24 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+              <VerdictGauge score={heroPost.data.rating} size={64} />
+            </div>
+          )}
+        </div>
+        <div class="flex flex-col justify-center p-24 sm:p-32 bg-surface dark:bg-surface-dark">
+          <span class="badge mb-16 self-start">👑 FEATURED PILLAR GUIDE</span>
+          <h2 class="text-h2 font-display font-semibold leading-tight text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+            {heroPost.data.title}
+          </h2>
+          <p class="mt-12 text-body leading-relaxed text-ink2 dark:text-ink2-dark">
+            {heroPost.data.description}
+          </p>
+          <div class="mt-24 flex items-center justify-between text-meta text-muted dark:text-muted-dark">
+            <span class="font-mono">
+              {heroPost.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            {heroPost.data.topic && (
+              <span class="uppercase tracking-wider font-sans font-semibold">Cluster: {heroPost.data.topic}</span>
+            )}
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <div class="mx-auto max-w-6xl px-24 pb-96 space-y-96">
+    
+    <!-- Trending Topics & Categories Grid -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start border-b border-border dark:border-border-dark pb-64">
+      <div class="lg:col-span-8">
+        <h2 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16">Trending Topics</h2>
+        <div class="flex flex-wrap gap-8">
+          {trendingTopics.map(topic => (
+            <a
+              href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
+              class="badge hover:bg-hover dark:hover:bg-hover transition-colors normal-case"
+            >
+              <span>📁</span>
+              <span class="ml-4">{topic}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="lg:col-span-4">
+        <h2 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16">Popular Hubs</h2>
+        <div class="flex flex-wrap gap-8">
+          {popularCategories.map(cat => (
+            <a
+              href={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+              class="badge text-accent dark:text-accent-dark border-accent/20 bg-accent/5 hover:bg-accent/10 transition-colors normal-case"
+            >
+              {cat}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Pillar Guides -->
+    {latestPillars.length > 0 && (
+      <section class="space-y-24">
+        <div class="flex justify-between items-center mb-24">
+          <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark flex items-center gap-8">
+            👑 Latest pillar guides
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+          {latestPillars.map(post => (
+            <a
+              href={getArticleUrl(post)}
+              class="card group flex flex-col overflow-hidden p-0"
+            >
+              <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+                <img
+                  src={post.data.heroImage}
+                  alt={post.data.title}
+                  width="400"
+                  height="225"
+                  class="w-full h-full object-cover"
+                />
+                {post.data.rating !== undefined && (
+                  <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
+                    <VerdictGauge score={post.data.rating} size={48} />
+                  </div>
+                )}
+              </div>
+              <div class="p-16 flex-1 flex flex-col justify-between">
+                <div>
+                  <span class="badge mb-12">
+                    Pillar Guide
+                  </span>
+                  <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-8">
+                    {post.data.description}
+                  </p>
+                </div>
+                <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Latest Videos Section -->
+    {latestVideos.length > 0 && (
+      <section class="space-y-24">
+        <div class="flex justify-between items-center mb-24">
+          <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark flex items-center gap-8">
+            🎥 Featured video guides
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+          {latestVideos.map(post => (
+            <a
+              href={getArticleUrl(post)}
+              class="card group flex flex-col overflow-hidden p-0"
+            >
+              <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+                <img
+                  src={post.data.heroImage}
+                  alt={post.data.title}
+                  width="400"
+                  height="225"
+                  class="w-full h-full object-cover"
+                />
+                {post.data.videoDuration && (
+                  <span class="absolute bottom-12 right-12 bg-black/75 px-8 py-4 rounded font-mono text-meta text-white">
+                    {post.data.videoDuration.replace('PT', '').replace('M', 'm ').replace('S', 's')}
+                  </span>
+                )}
+              </div>
+              <div class="p-16 flex-1 flex flex-col justify-between">
+                <div>
+                  <span class="badge mb-12 text-danger border-danger/20 bg-danger/5">
+                    Video Article
+                  </span>
+                  <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-8">
+                    {post.data.description}
+                  </p>
+                </div>
+                <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                  })}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Split lists for Tutorials, Comparisons, and Prompts -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-32">
+      
+      <!-- Latest Tutorials -->
+      <div>
+        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
+          <span class="flex items-center gap-8">📘 Tutorials</span>
+          <a href="/tutorials" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
+        </h3>
+        <div class="space-y-16">
+          {latestTutorials.map(post => (
+            <a
+              href={getArticleUrl(post)}
+              class="card p-16 block group"
+            >
+              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
+                {post.data.title}
+              </h4>
+              <p class="text-meta font-mono text-muted dark:text-muted-dark">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Latest Comparisons -->
+      <div>
+        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
+          <span class="flex items-center gap-8">⚔️ Comparisons</span>
+          <a href="/comparisons" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
+        </h3>
+        <div class="space-y-16">
+          {latestComparisons.map(post => (
+            <a
+              href={getArticleUrl(post)}
+              class="card p-16 block group"
+            >
+              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
+                {post.data.title}
+              </h4>
+              <p class="text-meta font-mono text-muted dark:text-muted-dark">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Latest Prompts -->
+      <div>
+        <h3 class="text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-16 border-b border-border dark:border-border-dark pb-8 flex items-center justify-between">
+          <span class="flex items-center gap-8">💡 System Prompts</span>
+          <a href="/prompts" class="text-meta text-accent hover:text-accent-dark transition-colors uppercase font-sans font-semibold tracking-wider">All</a>
+        </h3>
+        <div class="space-y-16">
+          {latestPrompts.map(post => (
+            <a
+              href={getArticleUrl(post)}
+              class="card p-16 block group"
+            >
+              <h4 class="text-body font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors line-clamp-2 mb-4">
+                {post.data.title}
+              </h4>
+              <p class="text-meta font-mono text-muted dark:text-muted-dark">
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</BaseLayout>

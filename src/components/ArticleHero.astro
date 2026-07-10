@@ -1,0 +1,87 @@
+---
+import VerdictGauge from './VerdictGauge.astro';
+
+interface Props {
+  category: string;
+  title: string;
+  description: string;
+  readingTime: string;
+  publishedDate: string;
+  updatedDate?: string;
+  authorName: string;
+  authorAvatar?: string;
+  featuredImage: string;
+  featuredImageAlt: string;
+  rating?: number;
+}
+
+const {
+  category,
+  title,
+  description,
+  readingTime,
+  publishedDate,
+  updatedDate,
+  authorName,
+  authorAvatar,
+  featuredImage,
+  featuredImageAlt,
+  rating,
+} = Astro.props;
+---
+
+<header class="mx-auto max-w-article px-24 pt-32 pb-16">
+  <p class="badge mb-16">{category}</p>
+
+  <div class="flex flex-col sm:flex-row sm:items-start gap-24">
+    {rating !== undefined && (
+      <VerdictGauge score={rating} size={96} />
+    )}
+    <div class="flex-1">
+      <h1 class="font-display text-h1 sm:text-display font-semibold text-ink dark:text-ink-dark leading-tight">
+        {title}
+      </h1>
+      <p class="mt-16 max-w-prose text-body leading-relaxed text-ink2 dark:text-ink2-dark">
+        {description}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-24 flex flex-wrap items-center gap-16 text-meta text-muted dark:text-muted-dark font-sans">
+    <div class="flex items-center gap-8 text-ink2 dark:text-ink2-dark text-body font-medium">
+      {authorAvatar && (
+        <img 
+          src={authorAvatar} 
+          alt={authorName} 
+          width="32" 
+          height="32" 
+          class="h-32 w-32 rounded-control object-cover" 
+        />
+      )}
+      <span>{authorName}</span>
+    </div>
+    <span aria-hidden="true" class="text-muted">•</span>
+    <time datetime={publishedDate} class="font-mono">{publishedDate}</time>
+    {updatedDate && (
+      <>
+        <span aria-hidden="true" class="text-muted">•</span>
+        <span>Updated <time datetime={updatedDate} class="font-mono">{updatedDate}</time></span>
+      </>
+    )}
+    <span aria-hidden="true" class="text-muted">•</span>
+    <span class="font-mono">{readingTime}</span>
+  </div>
+</header>
+
+{rating === undefined && featuredImage && (
+  <div class="mx-auto mt-48 max-w-6xl px-24">
+    <img
+      src={featuredImage}
+      alt={featuredImageAlt}
+      width="1200"
+      height="675"
+      class="aspect-[16/9] w-full rounded-card object-cover border border-border dark:border-border-dark"
+      fetchpriority="high"
+    />
+  </div>
+)}

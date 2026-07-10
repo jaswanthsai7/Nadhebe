@@ -1,0 +1,38 @@
+---
+interface Props {
+  pros: string[];
+  cons: string[];
+  prosLabel?: string;
+  consLabel?: string;
+}
+const { pros, cons, prosLabel = 'Strengths', consLabel = 'Trade-offs' } = Astro.props;
+---
+
+<div class="grid gap-4 sm:grid-cols-2">
+  <div class="rounded-card border border-border p-5 dark:border-border-dark">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-success">{prosLabel}</p>
+    <ul class="space-y-2.5">
+      {pros.map((item) => (
+        <li class="flex gap-2.5 text-[0.9rem] leading-relaxed text-ink2 dark:text-ink2-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 h-4 w-4 shrink-0 text-success">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="rounded-card border border-border p-5 dark:border-border-dark">
+    <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-danger">{consLabel}</p>
+    <ul class="space-y-2.5">
+      {cons.map((item) => (
+        <li class="flex gap-2.5 text-[0.9rem] leading-relaxed text-ink2 dark:text-ink2-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mt-0.5 h-4 w-4 shrink-0 text-danger">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+          </svg>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
