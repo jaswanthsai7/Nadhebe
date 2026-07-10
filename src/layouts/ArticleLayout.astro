@@ -140,7 +140,7 @@ const breadcrumbItems = [
     Left spacer mirrors sidebar so center stays truly centered on the page.
     On screens < xl the spacer + sidebar are hidden; content stays centered via mx-auto.
   -->
-  <div class="mx-auto mt-20 flex max-w-screen-xl items-start gap-10 px-6 pb-24">
+  <div class="mx-auto mt-32 flex max-w-screen-xl items-start gap-10 px-6 pb-24">
 
     <!-- Invisible balance spacer (same width as sidebar, xl only) -->
     <div class="hidden xl:block w-56 shrink-0"></div>
@@ -187,7 +187,7 @@ const breadcrumbItems = [
 
         <!-- ── Hero image ───────────────────────────────────────── -->
         {post.data.heroImage && post.collection !== 'tool-reviews' && (
-          <div class="mt-10 mb-10 overflow-hidden rounded-lg border border-border dark:border-border-dark shadow-sm">
+          <div class="mt-14 mb-10 overflow-hidden rounded-lg border border-border dark:border-border-dark shadow-sm">
             <img
               src={post.data.heroImage}
               alt={post.data.title}
