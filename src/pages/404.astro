@@ -6,39 +6,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="404 - Page Not Found"
   description="The page you requested could not be found."
 >
-  <div class="mx-auto flex min-h-[70vh] max-w-3xl items-center justify-center px-6 py-16">
+  <div class="mx-auto flex min-h-[70vh] max-w-3xl items-center justify-center px-6 py-64">
     <article class="text-center">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
+      <p class="text-meta font-semibold uppercase tracking-[0.3em] text-accent dark:text-accent-dark">
         Error 404
       </p>
 
-      <h1 class="mt-4 text-5xl font-bold tracking-tight sm:text-6xl">
+      <h1 class="mt-16 text-display font-bold tracking-tight text-ink dark:text-ink-dark">
         Page Not Found
       </h1>
 
-      <p class="mt-6 text-lg text-gray-600 dark:text-gray-400">
+      <p class="mt-24 text-body text-ink2 dark:text-ink2-dark">
         Sorry, the page you're looking for doesn't exist, has been moved,
         or the URL may be incorrect.
       </p>
 
-      <div class="mt-10 flex flex-wrap justify-center gap-4">
-        <a
-          href="/"
-          class="rounded-lg bg-black px-6 py-3 font-medium text-white transition hover:opacity-90 dark:bg-white dark:text-black"
-        >
+      <div class="mt-32 flex flex-wrap justify-center gap-16">
+        <a href="/" class="btn-primary">
           Home
         </a>
 
-        <a
-          href="/blog"
-          class="rounded-lg border border-gray-300 px-6 py-3 font-medium transition hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
-        >
-          Browse Blog
+        <a href="/tutorials" class="btn-secondary">
+          Browse Tutorials
         </a>
       </div>
 
-      <div class="mt-12 border-t border-gray-200 pt-8 dark:border-gray-800">
-        <p class="text-sm text-gray-500">
+      <div class="mt-48 border-t border-border pt-32 dark:border-border-dark">
+        <p class="text-meta text-muted dark:text-muted-dark">
           If you believe this is an error, try navigating from the homepage or
           searching for the topic you're looking for.
         </p>
