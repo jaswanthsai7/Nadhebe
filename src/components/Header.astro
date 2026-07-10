@@ -1,13 +1,22 @@
 ---
 import { SITE } from '@/config';
 
-const nav = [
+const mainNav = [
   { label: 'News', href: '/news' },
   { label: 'Tutorials', href: '/tutorials' },
   { label: 'Videos', href: '/youtube' },
   { label: 'Reviews', href: '/reviews' },
+];
+
+const dropdownNav = [
   { label: 'Prompts', href: '/prompts' },
   { label: 'Comparisons', href: '/comparisons' },
+  { label: 'Best Practices', href: '/best-practices' },
+  { label: 'Use Cases', href: '/use-cases' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Guides', href: '/guides' },
+  { label: 'Frameworks', href: '/frameworks' },
+  { label: 'Case Studies', href: '/case-studies' },
 ];
 ---
 
@@ -18,7 +27,7 @@ const nav = [
     </a>
 
     <nav aria-label="Primary" class="hidden items-center gap-24 md:flex">
-      {nav.map((item) => (
+      {mainNav.map((item) => (
         <a
           href={item.href}
           class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
@@ -26,6 +35,28 @@ const nav = [
           {item.label}
         </a>
       ))}
+
+      <!-- Dropdown -->
+      <div class="relative group">
+        <button class="flex items-center gap-4 text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 cursor-pointer">
+          More
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-16 w-16 text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark transition-colors duration-150">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <div class="absolute left-0 mt-8 w-[160px] origin-top-left rounded-12 border border-border bg-surface p-8 shadow-large opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-200 dark:border-border-dark dark:bg-surface-dark z-50">
+          <div class="flex flex-col gap-4">
+            {dropdownNav.map((item) => (
+              <a
+                href={item.href}
+                class="block rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-colors duration-150"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="flex items-center gap-12">

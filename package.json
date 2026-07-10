@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts",
+    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts && xcopy /E /I /Y dist\\pagefind public\\pagefind",
     "preview": "astro preview",
     "astro": "astro"
   },

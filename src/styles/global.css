@@ -120,13 +120,11 @@ html.dark {
   }
 
   .prose-article pre {
-    background-color: theme('colors.code.DEFAULT') !important;
-    color: theme('colors.ink.DEFAULT') !important;
-    @apply rounded-card border border-border p-24 text-meta leading-relaxed;
-  }
-  .dark .prose-article pre {
     background-color: theme('colors.code.dark') !important;
     color: theme('colors.ink.dark') !important;
+    @apply rounded-card border border-border-dark p-24 text-meta leading-relaxed;
+  }
+  .dark .prose-article pre {
     @apply border-border-dark;
   }
   .prose-article pre code {

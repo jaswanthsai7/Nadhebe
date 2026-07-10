@@ -89,6 +89,36 @@ const comparisons = defineCollection({
   }),
 });
 
+const bestPractices = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
+const useCases = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
+const tools = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
+const guides = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
+const frameworks = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
+const caseStudies = defineCollection({
+  type: 'content',
+  schema: sharedSchema,
+});
+
 export const collections = {
   authors,
   news,
@@ -97,4 +127,10 @@ export const collections = {
   'tool-reviews': toolReviews,
   prompts,
   comparisons,
+  'best-practices': bestPractices,
+  'use-cases': useCases,
+  tools,
+  guides,
+  frameworks,
+  'case-studies': caseStudies,
 };
