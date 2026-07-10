@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://example.com",
+      "service-doc": [
+        {
+          "href": "https://example.com/about",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://example.com/robots.txt",
+          "type": "text/plain"
+        }
+      ]
+    }
+  ]
+}

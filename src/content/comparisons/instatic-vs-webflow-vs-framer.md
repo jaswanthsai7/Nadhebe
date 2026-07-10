@@ -6,6 +6,7 @@ author: bob-smith
 category: "Comparisons"
 tags: [instatic, webflow, framer, comparison]
 heroImage: "/images/comparisons-hero.png"
+heroAlt: "Minimalist 3D editorial illustration representing comparison metrics and benchmarks"
 draft: false
 topic: "Instatic"
 isPillar: false

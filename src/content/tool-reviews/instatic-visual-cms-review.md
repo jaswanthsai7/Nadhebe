@@ -6,6 +6,7 @@ author: bob-smith
 category: "Tool Reviews"
 tags: [instatic, reviews, cms, visual-builder]
 heroImage: "/images/reviews-hero.png"
+heroAlt: "Minimalist 3D editorial illustration representing review ratings and verdict dashboards"
 draft: false
 topic: "Instatic"
 isPillar: false

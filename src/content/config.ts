@@ -20,6 +20,8 @@ const sharedSchema = z.object({
   category: z.string(),
   tags: z.array(z.string()),
   heroImage: z.string(),
+  heroAlt: z.string().optional(),
+  estimatedReadingTime: z.number().optional(),
   faq: z.array(
     z.object({
       question: z.string(),

@@ -6,6 +6,7 @@ author: bob-smith
 category: "Tutorials"
 tags: [instatic, docker, vps, deployment]
 heroImage: "/images/tutorials-hero.png"
+heroAlt: "Minimalist 3D editorial illustration representing Docker container VPS deployment configurations"
 draft: false
 topic: "Instatic"
 isPillar: false

@@ -10,6 +10,7 @@ import YouTubeEmbed from '../components/content/YouTubeEmbed.astro';
 import ArticleSchema from '../components/seo/ArticleSchema.astro';
 import FAQSchema from '../components/seo/FAQSchema.astro';
 import VideoSchema from '../components/seo/VideoSchema.astro';
+import ReviewSchema from '../components/seo/ReviewSchema.astro';
 import ReadingProgress from '@/components/ReadingProgress.astro';
 import ScrollToTop from '@/components/ScrollToTop.astro';
 import MobileToc from '@/components/MobileToc.astro';
@@ -78,7 +79,13 @@ switch (post.collection) {
   case 'tool-reviews': collectionLabel = 'Reviews';     collectionHref = '/reviews';     break;
   case 'prompts':      collectionLabel = 'Prompts';     collectionHref = '/prompts';     break;
   case 'comparisons':  collectionLabel = 'Comparisons'; collectionHref = '/comparisons'; break;
-  default:             collectionLabel = 'Articles';    collectionHref = '/blog';
+  case 'best-practices': collectionLabel = 'Best Practices'; collectionHref = '/best-practices'; break;
+  case 'use-cases':    collectionLabel = 'Use Cases';     collectionHref = '/use-cases';    break;
+  case 'tools':        collectionLabel = 'Tools';         collectionHref = '/tools';        break;
+  case 'guides':       collectionLabel = 'Guides';        collectionHref = '/guides';       break;
+  case 'frameworks':   collectionLabel = 'Frameworks';    collectionHref = '/frameworks';   break;
+  case 'case-studies': collectionLabel = 'Case Studies';  collectionHref = '/case-studies'; break;
+  default:             collectionLabel = 'Articles';    collectionHref = '/';
 }
 
 const breadcrumbItems = [
@@ -113,6 +120,18 @@ const breadcrumbItems = [
       videoId={post.data.youtubeVideoId || post.data.videoId}
       videoDuration={post.data.videoDuration || 'PT10M00S'}
       videoUploadDate={post.data.videoUploadDate || post.data.pubDate}
+    />
+  )}
+
+  {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
+    <ReviewSchema
+      productName={post.data.topic || post.data.title}
+      description={post.data.description}
+      heroImage={post.data.heroImage}
+      ratingValue={post.data.rating}
+      authorName={author?.name || 'Staff Writer'}
+      price={post.data.pricing}
+      canonicalUrl={pageUrl}
     />
   )}
 
@@ -190,7 +209,7 @@ const breadcrumbItems = [
           <div class="mt-48 mb-32 overflow-hidden rounded-12 border border-border dark:border-border-dark shadow-subtle hover:shadow-medium transition-shadow duration-200">
             <img
               src={post.data.heroImage}
-              alt={post.data.title}
+              alt={post.data.heroAlt || post.data.title}
               width="800"
               height="450"
               class="w-full object-cover"

@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 
+# AI Discovery & Content Signals (RFC Draft)
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
 Sitemap: https://example.com/sitemap-index.xml
 Sitemap: https://example.com/sitemap-image.xml
 Sitemap: https://example.com/sitemap-video.xml

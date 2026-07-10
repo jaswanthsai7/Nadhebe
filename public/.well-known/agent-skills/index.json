@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/skills.json",
+  "skills": [
+    {
+      "name": "search",
+      "type": "query",
+      "description": "Searches all articles, system prompts, comparisons, and tool reviews on the platform.",
+      "url": "https://example.com/search",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

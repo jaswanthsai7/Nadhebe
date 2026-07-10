@@ -1,0 +1,59 @@
+---
+interface Props {
+  productName: string;
+  description: string;
+  heroImage: string;
+  ratingValue: number;
+  bestRating?: number;
+  worstRating?: number;
+  authorName: string;
+  price?: string;
+  canonicalUrl: string;
+}
+
+const {
+  productName,
+  description,
+  heroImage,
+  ratingValue,
+  bestRating = 10,
+  worstRating = 0,
+  authorName,
+  price = "Free",
+  canonicalUrl,
+} = Astro.props;
+
+const imageUrl = heroImage.startsWith('http') 
+  ? heroImage 
+  : new URL(heroImage, Astro.site || 'https://example.com').toString();
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": productName,
+  "description": description,
+  "image": imageUrl,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": canonicalUrl
+  },
+  "review": {
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": authorName
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": ratingValue,
+      "bestRating": bestRating,
+      "worstRating": worstRating
+    }
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

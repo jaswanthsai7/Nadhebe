@@ -1,0 +1,22 @@
+{
+  "serverInfo": {
+    "name": "Nadhebe Content Server",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "sse",
+    "endpoint": "https://example.com/api/mcp"
+  },
+  "capabilities": {
+    "resources": {},
+    "prompts": {
+      "list": [
+        {
+          "name": "instatic-design-tokens",
+          "description": "Standard prompt guide to optimize CSS variables inside Instatic CMS"
+        }
+      ]
+    },
+    "tools": {}
+  }
+}

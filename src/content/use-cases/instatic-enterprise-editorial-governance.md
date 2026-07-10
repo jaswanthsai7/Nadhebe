@@ -6,6 +6,7 @@ author: bob-smith
 category: "Use Cases"
 tags: [instatic, enterprise, user-management, permissions]
 heroImage: "/images/use-cases-hero.png"
+heroAlt: "Minimalist 3D editorial illustration representing client permissions and user role keys"
 draft: false
 topic: "Instatic"
 isPillar: false

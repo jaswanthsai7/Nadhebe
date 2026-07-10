@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts && node -e \"require('fs').cpSync('dist/pagefind', 'public/pagefind', { recursive: true })\"",
+    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts && node -e \"require('fs').cpSync('dist/pagefind', 'public/pagefind', { recursive: true })\" && npx tsx scripts/verify-links.ts",
     "preview": "astro preview",
     "astro": "astro"
   },

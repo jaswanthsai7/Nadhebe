@@ -6,6 +6,7 @@ author: alice-chen
 category: "Tools"
 tags: [instatic, HTML-import, site-migration, tools]
 heroImage: "/images/tools-hero.png"
+heroAlt: "Minimalist 3D editorial illustration representing importer tools and code snippets"
 draft: false
 topic: "Instatic"
 isPillar: false
