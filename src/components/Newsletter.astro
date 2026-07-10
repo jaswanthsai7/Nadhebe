@@ -5,15 +5,15 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<div class={`card ${compact ? 'p-5' : 'p-6 sm:p-8'}`}>
-  <p class="text-body font-semibold text-ink dark:text-ink-dark">
+<div class={`card ${compact ? 'p-24' : 'p-32'}`}>
+  <p class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">
     Get the next issue
   </p>
-  <p class="mt-1.5 text-meta font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
-    One considered essay a week. No noise, unsubscribe anytime.
+  <p class="mt-8 text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
+    One focused essay a week. No noise, unsubscribe anytime.
   </p>
 
-  <form data-newsletter-form class="mt-4 flex flex-col gap-2.5 sm:flex-row">
+  <form data-newsletter-form class="mt-16 flex flex-col gap-12 sm:flex-row">
     <label for="newsletter-email" class="sr-only">Email address</label>
     <input
       id="newsletter-email"
@@ -25,7 +25,7 @@ const { compact = false } = Astro.props;
     />
     <button type="submit" class="btn-primary shrink-0">Subscribe</button>
   </form>
-  <p data-newsletter-status class="mt-2 text-meta font-sans text-muted dark:text-muted-dark" role="status"></p>
+  <p data-newsletter-status class="mt-8 text-xs font-sans text-muted dark:text-muted-dark" role="status"></p>
 </div>
 
 <script>
@@ -34,7 +34,6 @@ const { compact = false } = Astro.props;
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Wire this up to your ESP (ConvertKit, Buttondown, Resend, etc).
     if (status) status.textContent = 'Thanks — check your inbox to confirm.';
     form.reset();
   });

@@ -74,7 +74,7 @@ const supportingPosts = posts.filter(p => !p.data.isPillar);
       {pillarPosts.length > 0 && (
         <div>
           <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark mb-24 flex items-center gap-8">
-            👑 Pillar guides authored
+            Pillar Guides
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
             {pillarPosts.map(post => (
@@ -169,7 +169,7 @@ const supportingPosts = posts.filter(p => !p.data.isPillar);
 
       {posts.length === 0 && (
         <div class="text-center py-64 border border-dashed border-border dark:border-border-dark rounded-card">
-          <span class="text-3xl">📭</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-32 w-32 mx-auto text-muted dark:text-muted-dark"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><path d="M14 2v6h6" /></svg>
           <p class="text-muted dark:text-muted-dark mt-16">No articles written by this author yet.</p>
           <p class="text-meta font-sans text-muted dark:text-muted-dark mt-8">
             <a href="/" class="text-accent dark:text-accent-dark hover:underline">Return to the homepage</a> to read our latest guides.

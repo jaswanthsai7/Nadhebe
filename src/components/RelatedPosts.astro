@@ -10,31 +10,31 @@ const { posts, heading = 'Related reading' } = Astro.props;
 ---
 
 {posts.length > 0 && (
-  <section aria-labelledby="related-heading" class="not-prose mt-96">
-    <h2 id="related-heading" class="mb-24 font-display text-h2 font-semibold text-ink dark:text-ink-dark">
+  <section aria-labelledby="related-heading" class="not-prose">
+    <h2 id="related-heading" class="section-title mb-24">
       {heading}
     </h2>
-    <div class="grid gap-24 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
         <a href={getArticleUrl(post)} class="card group block overflow-hidden p-0">
-          <div class="relative aspect-[16/10] w-full overflow-hidden border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
+          <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
             <img
               src={post.data.heroImage}
-              alt={post.data.title}
+              alt={post.data.heroAlt || post.data.title}
               loading="lazy"
               width="400"
               height="250"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
             />
             {post.data.rating !== undefined && (
-              <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill shadow-card border border-border dark:border-border-dark">
-                <VerdictGauge score={post.data.rating} size={48} />
+              <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 shadow-medium border border-border dark:border-border-dark">
+                <VerdictGauge score={post.data.rating} size={40} />
               </div>
             )}
           </div>
-          <div class="p-16">
+          <div class="p-20">
             <span class="badge mb-8">{post.data.category}</span>
-            <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+            <h3 class="font-display text-h4 font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
               {post.data.title}
             </h3>
           </div>

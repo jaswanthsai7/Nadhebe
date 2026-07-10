@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
 
 @tailwind base;
 @tailwind components;
@@ -22,6 +23,7 @@ html.dark {
   html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
@@ -30,10 +32,9 @@ html.dark {
   }
 
   ::selection {
-    @apply bg-accent/15 text-ink dark:text-ink-dark;
+    @apply bg-accent/10 text-ink dark:text-ink-dark;
   }
 
-  /* Visible, elegant focus ring everywhere — never remove focus outlines */
   :focus-visible {
     outline: 2px solid theme('colors.accent.DEFAULT');
     outline-offset: 2px;
@@ -42,9 +43,8 @@ html.dark {
     outline-color: theme('colors.accent.dark');
   }
 
-  /* Skip link */
   .skip-link {
-    @apply absolute -top-full left-8 z-[100] rounded-8 bg-ink px-16 py-8 text-meta font-medium text-white;
+    @apply absolute -top-full left-8 z-[100] rounded-8 bg-ink px-16 py-8 text-caption font-medium text-white;
   }
   .skip-link:focus {
     @apply top-4;
@@ -63,29 +63,30 @@ html.dark {
 }
 
 @layer components {
-  /* Article typography — the reading experience is the product */
+
+  /* ─── Article typography ─── */
   .prose-article {
     @apply mx-auto max-w-article text-body leading-relaxed text-ink2 dark:text-ink2-dark;
   }
 
   .prose-article > * + * {
-    @apply mt-24; /* 24px vertical paragraph spacing */
+    @apply mt-24;
   }
 
   .prose-article h1 {
-    @apply font-display text-h1 font-bold text-ink dark:text-ink-dark mt-32 mb-16;
+    @apply font-display text-h1 font-bold text-ink dark:text-ink-dark mt-48 mb-16;
   }
 
   .prose-article h2 {
-    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark mt-32 mb-16 scroll-mt-24;
+    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark mt-48 mb-16 scroll-mt-24;
   }
 
   .prose-article h3 {
-    @apply font-display text-h3 font-semibold text-ink dark:text-ink-dark mt-24 mb-12 scroll-mt-24;
+    @apply font-display text-h3 font-semibold text-ink dark:text-ink-dark mt-32 mb-12 scroll-mt-24;
   }
 
   .prose-article h4 {
-    @apply font-display text-meta font-bold uppercase tracking-wider text-ink dark:text-ink-dark mt-16 mb-8;
+    @apply font-sans text-caption font-semibold uppercase tracking-wider text-ink dark:text-ink-dark mt-24 mb-8;
   }
 
   .prose-article p {
@@ -93,36 +94,36 @@ html.dark {
   }
 
   .prose-article a {
-    @apply font-medium text-ink underline decoration-accent/40 decoration-2 underline-offset-[3px] hover:decoration-accent dark:text-ink-dark;
+    @apply font-medium text-ink underline decoration-accent/30 decoration-1 underline-offset-[3px] hover:decoration-accent transition-colors duration-150 dark:text-ink-dark;
   }
 
   .prose-article ul,
   .prose-article ol {
-    @apply space-y-12 pl-8 text-ink2 dark:text-ink2-dark;
+    @apply space-y-8 pl-8 text-ink2 dark:text-ink2-dark;
   }
   .prose-article ul { @apply list-disc; }
   .prose-article ol { @apply list-decimal; }
 
   .prose-article blockquote {
-    @apply border-l-2 border-accent/50 pl-24 pr-8 italic text-ink2 dark:text-ink2-dark;
+    @apply border-l-2 border-border pl-24 pr-8 text-ink2 dark:text-ink2-dark dark:border-border-dark;
   }
 
   .prose-article img {
-    @apply rounded-card border border-border dark:border-border-dark shadow-card dark:shadow-none;
+    @apply rounded-12 border border-border dark:border-border-dark;
   }
 
   .prose-article hr {
-    @apply my-32 border-t border-border dark:border-border-dark;
+    @apply my-48 border-t border-border dark:border-border-dark;
   }
 
   .prose-article code {
-    @apply rounded-8 bg-code px-8 py-4 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
+    @apply rounded-6 bg-code px-6 py-2 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
   }
 
   .prose-article pre {
     background-color: theme('colors.code.dark') !important;
     color: theme('colors.ink.dark') !important;
-    @apply rounded-card border border-border-dark p-24 text-meta leading-relaxed;
+    @apply rounded-12 border border-border-dark p-24 text-caption leading-relaxed overflow-x-auto;
   }
   .dark .prose-article pre {
     @apply border-border-dark;
@@ -134,7 +135,7 @@ html.dark {
   }
 
   .prose-article table {
-    @apply w-full overflow-hidden rounded-card border border-border text-meta dark:border-border-dark;
+    @apply w-full overflow-hidden rounded-12 border border-border text-caption dark:border-border-dark;
     border-collapse: separate;
     border-spacing: 0;
   }
@@ -145,25 +146,55 @@ html.dark {
     @apply border-t border-border px-16 py-12 text-ink2 dark:border-border-dark dark:text-ink2-dark;
   }
 
+  /* ─── Card ─── */
   .card {
-    @apply rounded-card border border-border bg-surface p-24 shadow-subtle hover:shadow-medium dark:border-border-dark dark:bg-surface-dark transition-all duration-200;
+    @apply rounded-12 border border-border bg-surface p-24 transition-all duration-200
+           hover:shadow-medium hover:border-border
+           dark:border-border-dark dark:bg-surface-dark dark:hover:border-border-dark;
   }
 
+  /* ─── Badge ─── */
   .badge {
-    @apply inline-flex items-center gap-4 rounded-control bg-surface2 px-8 py-4 text-meta font-sans font-medium uppercase tracking-wider text-ink2 dark:bg-surface2-dark dark:text-ink2-dark;
+    @apply inline-flex items-center gap-4 rounded-6 bg-surface2 px-8 py-4
+           text-meta font-mono font-medium uppercase tracking-wider
+           text-muted dark:bg-surface2-dark dark:text-muted-dark;
   }
 
+  /* ─── Buttons ─── */
   .btn {
-    @apply inline-flex items-center justify-center gap-8 px-24 py-12 text-body font-medium transition-all duration-150 active:scale-[0.98] focus:outline-none;
+    @apply inline-flex items-center justify-center gap-8 px-20 py-12
+           text-caption font-sans font-medium rounded-8
+           transition-all duration-150 active:scale-[0.98]
+           focus-visible:outline-none;
   }
   .btn-primary {
-    @apply btn rounded-control bg-ink text-white hover:opacity-90 dark:bg-ink-dark dark:text-ink;
+    @apply btn bg-ink text-white hover:opacity-90
+           dark:bg-ink-dark dark:text-ink;
   }
   .btn-secondary {
-    @apply btn rounded-control border border-border bg-surface text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:bg-hover dark:hover:text-ink-dark;
+    @apply btn border border-border bg-surface text-ink2
+           hover:bg-hover hover:text-ink
+           dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark
+           dark:hover:bg-hover dark:hover:text-ink-dark;
   }
 
+  /* ─── Input ─── */
   .input {
-    @apply w-full rounded-control border border-border bg-surface px-16 py-12 text-body text-ink placeholder:text-muted transition-all duration-150 focus:border-ink2 dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark focus:outline-none;
+    @apply w-full rounded-8 border border-border bg-surface px-16 py-12
+           text-body text-ink placeholder:text-muted
+           transition-all duration-150 focus:border-ink2
+           dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark
+           dark:placeholder:text-muted-dark focus:outline-none;
+  }
+
+  /* ─── Section header ─── */
+  .section-label {
+    @apply text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark;
+  }
+  .section-title {
+    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark;
+  }
+  .section-desc {
+    @apply text-body text-ink2 dark:text-ink2-dark;
   }
 }

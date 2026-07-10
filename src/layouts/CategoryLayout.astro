@@ -11,11 +11,9 @@ interface Props {
 
 const { categoryName, posts, allPosts } = Astro.props;
 
-// Split posts into Pillar and Supporting
 const pillarArticles = posts.filter(p => p.data.isPillar === true);
 const supportingArticles = posts.filter(p => !p.data.isPillar);
 
-// Find popular topics in this category
 const topicsCount: Record<string, number> = {};
 posts.forEach(p => {
   if (p.data.topic) {
@@ -27,76 +25,63 @@ const popularTopics = Object.entries(topicsCount)
   .map(entry => entry[0])
   .slice(0, 5);
 
-// Find related categories
 const allCategories = [...new Set(allPosts.map(p => p.data.category))];
 const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== categoryName.toLowerCase());
 ---
 
 <BaseLayout
-  title={`${categoryName} Articles & Guides`}
-  description={`Browse through our comprehensive resources, pillar guides, and tutorials under the ${categoryName} category.`}
+  title={`${categoryName} — Nadhebe`}
+  description={`Browse our ${categoryName.toLowerCase()} collection: pillar guides, tutorials, and in-depth resources.`}
 >
-  <div class="mx-auto max-w-6xl px-24 py-64 sm:py-96">
+  <div class="mx-auto max-w-content px-24 py-64 sm:py-80">
+
     <!-- Header -->
-    <div class="border-b border-border dark:border-border-dark pb-24 mb-48">
-      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Hub</p>
+    <div class="pb-32 mb-48 border-b border-border dark:border-border-dark">
+      <p class="section-label mb-8">Category</p>
       <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">{categoryName}</h1>
-      <p class="text-ink2 dark:text-ink2-dark text-body mt-16 max-w-2xl leading-relaxed">
-        Discover expert insights, in-depth comparison reviews, hands-on tutorials, and topic clusters structured to build your expertise.
+      <p class="text-body text-ink2 dark:text-ink2-dark mt-12 max-w-2xl leading-relaxed">
+        Expert insights, in-depth reviews, hands-on tutorials, and topic clusters to build your expertise.
       </p>
+      <p class="mt-12 text-meta text-muted dark:text-muted-dark">{posts.length} {posts.length === 1 ? 'article' : 'articles'}</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
-      <!-- Main Content (Column 1-9) -->
-      <div class="lg:col-span-9 space-y-96">
-        
-        <!-- Featured Pillar Articles -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-32 items-start">
+      <!-- Main content -->
+      <div class="lg:col-span-9 space-y-64">
+
+        <!-- Pillar articles -->
         {pillarArticles.length > 0 && (
           <div>
-            <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark mb-24 flex items-center gap-8">
-              ✨ Featured pillar guides
+            <h2 class="section-title mb-24 flex items-center gap-8">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20 text-accent dark:text-accent-dark">
+                <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+              Pillar Guides
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
               {pillarArticles.map(post => (
-                <a
-                  href={getArticleUrl(post)}
-                  class="card group flex flex-col overflow-hidden p-0"
-                >
-                  <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
-                    <img
-                      src={post.data.heroImage}
-                      alt={post.data.title}
-                      width="480"
-                      height="270"
-                      class="w-full h-full object-cover"
-                    />
+                <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0">
+                  <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
+                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="480" height="300" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
                     {post.data.rating !== undefined && (
-                      <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
-                        <VerdictGauge score={post.data.rating} size={48} />
+                      <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
+                        <VerdictGauge score={post.data.rating} size={40} />
                       </div>
                     )}
                   </div>
-                  <div class="p-24 flex-1 flex flex-col justify-between">
+                  <div class="p-20 flex-1 flex flex-col justify-between">
                     <div>
-                      <span class="badge mb-12">
-                        Pillar Guide
-                      </span>
-                      <h3 class="text-h3 font-display font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                      <span class="badge mb-8">Pillar Guide</span>
+                      <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
                         {post.data.title}
                       </h3>
-                      <p class="text-body text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
-                        {post.data.description}
-                      </p>
+                      <p class="text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2 mt-8">{post.data.description}</p>
                     </div>
-                    <div class="text-meta text-muted dark:text-muted-dark mt-24 flex items-center justify-between">
-                      <span class="font-mono font-semibold">
-                        {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
-                      </span>
-                      {post.data.difficulty && <span class="capitalize font-sans font-semibold">{post.data.difficulty}</span>}
+                    <div class="mt-16 flex items-center justify-between text-meta text-muted dark:text-muted-dark">
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </time>
+                      {post.data.difficulty && <span class="capitalize font-sans text-xs font-medium">{post.data.difficulty}</span>}
                     </div>
                   </div>
                 </a>
@@ -105,54 +90,39 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
           </div>
         )}
 
-        <!-- Supporting Articles -->
+        <!-- Supporting articles -->
         {supportingArticles.length > 0 && (
           <div>
-            <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark mb-24 flex items-center gap-8">
-              📚 All guides & supporting content
+            <h2 class="section-title mb-24 flex items-center gap-8">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20 text-ink2 dark:text-ink2-dark">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><path d="M14 2v6h6" />
+              </svg>
+              All Guides
             </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-24">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16">
               {supportingArticles.map(post => (
-                <a
-                  href={getArticleUrl(post)}
-                  class="card group flex flex-col overflow-hidden p-0"
-                >
-                  <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
-                    <img
-                      src={post.data.heroImage}
-                      alt={post.data.title}
-                      width="320"
-                      height="180"
-                      class="w-full h-full object-cover"
-                    />
+                <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0">
+                  <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
+                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="320" height="200" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
                     {post.data.rating !== undefined && (
-                      <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
-                        <VerdictGauge score={post.data.rating} size={48} />
+                      <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
+                        <VerdictGauge score={post.data.rating} size={36} />
                       </div>
                     )}
                   </div>
                   <div class="p-16 flex-1 flex flex-col justify-between">
                     <div>
-                      {post.data.topic && (
-                        <span class="badge mb-12">
-                          Topic: {post.data.topic}
-                        </span>
-                      )}
-                      <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                      {post.data.topic && <span class="badge mb-8">{post.data.topic}</span>}
+                      <h3 class="font-display text-h4 font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
                         {post.data.title}
                       </h3>
-                      <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
-                        {post.data.description}
-                      </p>
+                      <p class="text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-2 mt-8">{post.data.description}</p>
                     </div>
-                    <div class="text-meta text-muted dark:text-muted-dark mt-16 flex items-center justify-between">
-                      <span class="font-mono font-semibold">
-                        {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                        })}
-                      </span>
-                      {post.data.difficulty && <span class="capitalize font-sans font-semibold">{post.data.difficulty}</span>}
+                    <div class="mt-12 flex items-center justify-between text-meta text-muted dark:text-muted-dark">
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                      </time>
+                      {post.data.difficulty && <span class="capitalize font-sans text-xs font-medium">{post.data.difficulty}</span>}
                     </div>
                   </div>
                 </a>
@@ -162,32 +132,31 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
         )}
 
         {posts.length === 0 && (
-          <div class="text-center py-64 border border-dashed border-border dark:border-border-dark rounded-card">
-            <span class="text-3xl">📭</span>
-            <p class="text-muted dark:text-muted-dark mt-16">No articles found in this category yet.</p>
-            <p class="text-meta font-sans text-muted dark:text-muted-dark mt-8">
+          <div class="text-center py-64 border border-dashed border-border dark:border-border-dark rounded-12">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-32 w-32 mx-auto text-muted dark:text-muted-dark">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><path d="M14 2v6h6" />
+            </svg>
+            <p class="text-ink2 dark:text-ink2-dark mt-16 font-sans">No articles found in this category yet.</p>
+            <p class="text-caption font-sans text-muted dark:text-muted-dark mt-8">
               <a href="/" class="text-accent dark:text-accent-dark hover:underline">Return to the homepage</a> to read our latest guides.
             </p>
           </div>
         )}
       </div>
 
-      <!-- Sidebar (Column 10-12) -->
-      <aside class="lg:col-span-3 space-y-24 lg:sticky lg:top-96">
-        <!-- Popular Topics -->
+      <!-- Sidebar -->
+      <aside class="lg:col-span-3 space-y-24 lg:sticky lg:top-80">
         {popularTopics.length > 0 && (
-          <div class="card p-24">
-            <h3 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16 border-b border-border dark:border-border-dark pb-8">
-              Popular topics
-            </h3>
-            <div class="flex flex-col gap-8">
+          <div class="card p-20">
+            <h3 class="section-label mb-16 pb-8 border-b border-border dark:border-border-dark">Topics</h3>
+            <div class="flex flex-col gap-4">
               {popularTopics.map(topic => (
                 <a
                   href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
-                  class="flex items-center justify-between p-8 rounded-control hover:bg-hover dark:hover:bg-hover text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors"
+                  class="flex items-center justify-between p-8 rounded-8 hover:bg-hover dark:hover:bg-hover text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
                 >
-                  <span class="text-meta font-sans font-medium">{topic}</span>
-                  <span class="text-meta text-muted dark:text-muted-dark font-mono">
+                  <span class="text-caption font-sans font-medium">{topic}</span>
+                  <span class="text-meta text-muted dark:text-muted-dark">
                     {posts.filter(p => p.data.topic === topic).length}
                   </span>
                 </a>
@@ -196,17 +165,14 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
           </div>
         )}
 
-        <!-- Related Categories -->
         {relatedCategories.length > 0 && (
-          <div class="card p-24">
-            <h3 class="text-meta font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-16 border-b border-border dark:border-border-dark pb-8">
-              Other categories
-            </h3>
-            <div class="flex flex-wrap gap-8">
+          <div class="card p-20">
+            <h3 class="section-label mb-16 pb-8 border-b border-border dark:border-border-dark">Other categories</h3>
+            <div class="flex flex-wrap gap-6">
               {relatedCategories.map(cat => (
                 <a
                   href={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
-                  class="badge hover:bg-hover dark:hover:bg-hover hover:text-ink dark:hover:text-ink-dark transition-colors"
+                  class="badge hover:bg-hover dark:hover:bg-hover hover:text-ink dark:hover:text-ink-dark transition-colors duration-150"
                 >
                   {cat}
                 </a>
