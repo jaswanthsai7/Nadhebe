@@ -159,6 +159,42 @@ const heroPost = latestPillars[0] || allArticles[0];
       </div>
     </section>
 
+     <!-- Category Explorer -->
+    <section>
+      <div class="mb-32">
+        <h2 class="section-title">Explore by Category</h2>
+        <p class="mt-8 section-desc">Specialized knowledge bases, benchmarks, and prompt libraries.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+        {Object.entries(categoryMeta).map(([catName, meta]) => {
+          const count = categoryCounts[catName] || 0;
+          const href = `/category/${catName.toLowerCase().replace(/\s+/g, '-')}`;
+          return (
+            <a
+              href={href}
+              class="group flex items-start gap-16 rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-20 hover:border-ink2/20 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
+            >
+              <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-8 bg-surface2 dark:bg-surface2-dark text-ink2 dark:text-ink2-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
+                  <path d={meta.iconPath} />
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-sans text-caption font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
+                    {catName}
+                  </h3>
+                  <span class="text-meta text-muted dark:text-muted-dark">{count}</span>
+                </div>
+                <p class="mt-4 text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-1">{meta.description}</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
     <!-- Pillar Guides -->
     {latestPillars.length > 0 && (
       <section>
@@ -258,42 +294,8 @@ const heroPost = latestPillars[0] || allArticles[0];
         ))}
       </div>
     </section>
-
-    <!-- Category Explorer -->
-    <section>
-      <div class="mb-32">
-        <h2 class="section-title">Explore by Category</h2>
-        <p class="mt-8 section-desc">Specialized knowledge bases, benchmarks, and prompt libraries.</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
-        {Object.entries(categoryMeta).map(([catName, meta]) => {
-          const count = categoryCounts[catName] || 0;
-          const href = `/category/${catName.toLowerCase().replace(/\s+/g, '-')}`;
-          return (
-            <a
-              href={href}
-              class="group flex items-start gap-16 rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-20 hover:border-ink2/20 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
-            >
-              <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-8 bg-surface2 dark:bg-surface2-dark text-ink2 dark:text-ink2-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
-                  <path d={meta.iconPath} />
-                </svg>
-              </div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <h3 class="font-sans text-caption font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
-                    {catName}
-                  </h3>
-                  <span class="text-meta text-muted dark:text-muted-dark">{count}</span>
-                </div>
-                <p class="mt-4 text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-1">{meta.description}</p>
-              </div>
-            </a>
-          );
-        })}
-      </div>
-    </section>
+    
+   
 
     <!-- Newsletter -->
     <section>
