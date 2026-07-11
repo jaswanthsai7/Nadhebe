@@ -23,16 +23,16 @@ const companyLinks = [
 ];
 ---
 
-<footer class="mt-128 border-t border-border dark:border-border-dark bg-bg dark:bg-bg-dark">
+<footer class="mt-64 sm:mt-128 border-t border-border dark:border-border-dark bg-bg dark:bg-bg-dark">
 
   <!-- Newsletter CTA -->
-  <div class="mx-auto max-w-content px-24 pt-64 pb-48">
-    <div class="rounded-16 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-32 sm:p-48 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-24">
+  <div class="mx-auto max-w-content px-16 sm:px-24 pt-48 sm:pt-64 pb-32 sm:pb-48">
+    <div class="rounded-16 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-24 sm:p-48 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-24">
       <div>
         <p class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">Stay in the loop</p>
         <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark max-w-sm">One focused essay per week on AI engineering, tools, and workflows. No noise.</p>
       </div>
-      <form data-footer-newsletter class="flex gap-8 w-full sm:w-auto">
+      <form data-footer-newsletter class="flex flex-col sm:flex-row gap-8 w-full sm:w-auto">
         <label for="footer-email" class="sr-only">Email address</label>
         <input
           id="footer-email"
@@ -48,7 +48,7 @@ const companyLinks = [
   </div>
 
   <!-- Footer Grid -->
-  <div class="mx-auto max-w-content px-24 pb-64">
+  <div class="mx-auto max-w-content px-16 sm:px-24 pb-48 sm:pb-64">
     <div class="grid grid-cols-2 gap-32 sm:grid-cols-4">
 
       <div class="col-span-2 sm:col-span-1">

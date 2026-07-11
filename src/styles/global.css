@@ -109,7 +109,9 @@ html.dark {
   }
 
   .prose-article img {
-    @apply rounded-12 border border-border dark:border-border-dark;
+    @apply rounded-12 border border-border dark:border-border-dark block w-full;
+    max-height: 320px;
+    object-fit: cover;
   }
 
   .prose-article hr {
@@ -152,6 +154,19 @@ html.dark {
            hover:shadow-medium hover:border-border
            dark:border-border-dark dark:bg-surface-dark dark:hover:border-border-dark;
   }
+
+  /* ─── Search Dialog ─── */
+  .search-overlay {
+    @apply fixed inset-0 z-50 flex items-start justify-center pt-[12vh] sm:pt-[16vh] bg-ink/40 dark:bg-ink-dark/30 backdrop-blur-sm;
+    animation: fadeIn 100ms ease-out;
+  }
+  .search-dialog {
+    @apply w-[calc(100%-32px)] max-w-[600px] max-h-[70vh] rounded-16 border border-border bg-surface shadow-large overflow-hidden flex flex-col
+           dark:border-border-dark dark:bg-surface-dark;
+    animation: slideUp 150ms ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ─── Badge ─── */
   .badge {

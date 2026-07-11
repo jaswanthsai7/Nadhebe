@@ -138,7 +138,7 @@ const breadcrumbItems = [
   <ReadingProgress />
   <ScrollToTop />
 
-  <div class="mx-auto mt-64 flex max-w-screen-xl items-start gap-48 px-24 sm:mt-80">
+  <div class="mx-auto mt-32 sm:mt-64 flex max-w-screen-xl items-start gap-48 px-16 sm:px-24">
 
     <!-- Balance spacer -->
     <div class="hidden xl:block w-sidebar shrink-0"></div>
@@ -154,14 +154,14 @@ const breadcrumbItems = [
         <header class="mt-24 mb-48">
           <span class="badge mb-16 inline-block">{post.data.category}</span>
 
-          <div class="flex items-start gap-20">
+          <div class="flex flex-col sm:flex-row items-start gap-16 sm:gap-20">
             {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
               <div class="shrink-0 mt-4">
                 <VerdictGauge score={post.data.rating} size={72} />
               </div>
             )}
             <div>
-              <h1 class="font-display text-hero leading-tight font-bold text-ink dark:text-ink-dark sm:text-display">
+              <h1 class="font-display text-h1 leading-tight font-bold text-ink dark:text-ink-dark sm:text-display">
                 {post.data.title}
               </h1>
               <p class="mt-16 text-body-large leading-relaxed text-ink2 dark:text-ink2-dark">
@@ -195,7 +195,7 @@ const breadcrumbItems = [
               width="800"
               height="450"
               class="w-full object-cover"
-              style="max-height:400px; object-position:center top;"
+              style="max-height:360px; object-position:center top;"
               fetchpriority="high"
             />
           </div>
@@ -317,7 +317,7 @@ const breadcrumbItems = [
         <SourceList references={references} />
 
         <!-- Author + share -->
-        <div class="not-prose mt-64 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-24 border-t border-border pt-32 dark:border-border-dark">
+        <div class="not-prose mt-48 sm:mt-64 flex flex-col gap-24 border-t border-border pt-24 sm:pt-32 dark:border-border-dark">
           {author && (
             <div class="flex-grow">
               <AuthorCard
@@ -346,7 +346,7 @@ const breadcrumbItems = [
   </div>
 
   <!-- Bottom section -->
-  <div class="mx-auto max-w-content px-24 pb-96 mt-64 border-t border-border dark:border-border-dark pt-48">
+  <div class="mx-auto max-w-content px-16 sm:px-24 pb-64 sm:pb-96 mt-48 sm:mt-64 border-t border-border dark:border-border-dark pt-32 sm:pt-48">
     <RelatedPosts posts={relatedArticles} />
     <div class="mt-32">
       <PreviousNext prev={prevProps} next={nextProps} />

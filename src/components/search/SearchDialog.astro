@@ -1,0 +1,229 @@
+---
+---
+<!-- Search Dialog (rendered in BaseLayout, triggered from header) -->
+<div id="search-dialog-wrapper" class="hidden">
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Search articles">
+      <!-- Search Input -->
+      <div class="flex items-center gap-12 border-b border-border dark:border-border-dark px-16 py-12">
+        <svg class="h-16 w-16 shrink-0 text-muted dark:text-muted-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          id="cmd-search-input"
+          placeholder="Search articles, reviews, tutorials..."
+          autocomplete="off"
+          class="flex-1 bg-transparent border-0 outline-none text-body text-ink placeholder:text-muted focus:ring-0 focus:outline-none dark:text-ink-dark dark:placeholder:text-muted-dark font-sans"
+        />
+        <kbd class="hidden sm:flex items-center gap-2 rounded-6 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-6 py-2 text-xs font-mono text-muted dark:text-muted-dark select-none">esc</kbd>
+        <div id="cmd-search-spinner" class="hidden animate-spin rounded-full h-16 w-16 border-2 border-accent border-t-transparent dark:border-accent-dark shrink-0"></div>
+      </div>
+
+      <!-- Results -->
+      <div id="cmd-search-results" class="flex-1 overflow-y-auto px-8 py-8">
+        <div id="cmd-search-empty" class="flex flex-col items-center justify-center py-48 px-16 text-center">
+          <svg class="h-32 w-32 text-muted dark:text-muted-dark mb-16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+          </svg>
+          <p class="text-caption font-sans text-muted dark:text-muted-dark">Start typing to search articles</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex items-center justify-between border-t border-border dark:border-border-dark px-16 py-8 text-xs font-sans text-muted dark:text-muted-dark">
+        <div class="flex items-center gap-12">
+          <span class="flex items-center gap-4"><kbd class="rounded-4 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-4 py-1 font-mono">↑</kbd><kbd class="rounded-4 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-4 py-1 font-mono">↓</kbd> navigate</span>
+          <span class="flex items-center gap-4"><kbd class="rounded-4 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-4 py-1 font-mono">↵</kbd> open</span>
+        </div>
+        <a href="/search" class="text-accent hover:text-accent-dark dark:text-accent-dark transition-colors">Full search page</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let pagefindInstance: any = null;
+  let debounceTimer: ReturnType<typeof setTimeout>;
+  let selectedIndex = -1;
+
+  async function loadPagefind() {
+    if (pagefindInstance) return pagefindInstance;
+    try {
+      // @ts-ignore
+      pagefindInstance = await new Function("return import('/pagefind/pagefind.js')")();
+      await pagefindInstance.init();
+      return pagefindInstance;
+    } catch {
+      return null;
+    }
+  }
+
+  function openSearchDialog() {
+    const wrapper = document.getElementById('search-dialog-wrapper');
+    if (!wrapper) return;
+    wrapper.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    input?.focus();
+    selectedIndex = -1;
+  }
+
+  function closeSearchDialog() {
+    const wrapper = document.getElementById('search-dialog-wrapper');
+    if (!wrapper) return;
+    wrapper.classList.add('hidden');
+    document.body.style.overflow = '';
+    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    if (input) input.value = '';
+    const results = document.getElementById('cmd-search-results');
+    const empty = document.getElementById('cmd-search-empty');
+    if (results && empty) {
+      results.innerHTML = '';
+      results.appendChild(empty);
+      empty.classList.remove('hidden');
+    }
+    selectedIndex = -1;
+  }
+
+  function highlightResult(index: number) {
+    const items = document.querySelectorAll('#cmd-search-results a[data-search-result]');
+    items.forEach((item, i) => {
+      if (i === index) {
+        item.classList.add('bg-hover', 'dark:bg-hover');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('bg-hover', 'dark:bg-hover');
+      }
+    });
+  }
+
+  function setupSearchDialog() {
+    const overlay = document.getElementById('search-overlay');
+    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    const resultsContainer = document.getElementById('cmd-search-results');
+    const emptyState = document.getElementById('cmd-search-empty');
+    const spinner = document.getElementById('cmd-search-spinner');
+
+    // Close on overlay click
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) closeSearchDialog();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      const wrapper = document.getElementById('search-dialog-wrapper');
+      if (!wrapper || wrapper.classList.contains('hidden')) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeSearchDialog();
+      }
+
+      const items = document.querySelectorAll('#cmd-search-results a[data-search-result]');
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+        highlightResult(selectedIndex);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        highlightResult(selectedIndex);
+      } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        e.preventDefault();
+        (items[selectedIndex] as HTMLAnchorElement).click();
+      }
+    });
+
+    // ⌘K / Ctrl+K to open
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const wrapper = document.getElementById('search-dialog-wrapper');
+        if (wrapper?.classList.contains('hidden')) {
+          openSearchDialog();
+        } else {
+          closeSearchDialog();
+        }
+      }
+    });
+
+    // Search on input
+    input?.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const query = input.value.trim();
+
+      if (!query) {
+        if (resultsContainer && emptyState) {
+          resultsContainer.innerHTML = '';
+          resultsContainer.appendChild(emptyState);
+          emptyState.classList.remove('hidden');
+        }
+        spinner?.classList.add('hidden');
+        selectedIndex = -1;
+        return;
+      }
+
+      debounceTimer = setTimeout(async () => {
+        spinner?.classList.remove('hidden');
+        const pf = await loadPagefind();
+        if (!pf) {
+          if (resultsContainer) {
+            resultsContainer.innerHTML = `<div class="py-32 text-center"><p class="text-caption font-sans text-muted dark:text-muted-dark">Search index not available in dev mode.<br>Run <code class="bg-surface2 dark:bg-surface2-dark px-6 py-2 rounded-6 font-mono text-meta">npm run build</code> first.</p></div>`;
+          }
+          spinner?.classList.add('hidden');
+          return;
+        }
+
+        try {
+          const search = await pf.search(query);
+          if (!resultsContainer) return;
+          resultsContainer.innerHTML = '';
+          selectedIndex = -1;
+
+          if (search.results.length === 0) {
+            resultsContainer.innerHTML = `<div class="py-32 text-center"><p class="text-caption font-sans text-ink2 dark:text-ink2-dark">No results for "${query}"</p><p class="text-xs font-sans text-muted dark:text-muted-dark mt-8">Try different keywords like "Claude", "Pinecone", or "LangChain"</p></div>`;
+          } else {
+            const topResults = search.results.slice(0, 8);
+            for (const rawResult of topResults) {
+              const data = await rawResult.data();
+              const el = document.createElement('a');
+              el.href = data.url;
+              el.setAttribute('data-search-result', '');
+              el.className = 'flex flex-col gap-4 px-12 py-12 rounded-8 transition-colors duration-100 hover:bg-hover dark:hover:bg-hover cursor-pointer block';
+              el.innerHTML = `
+                <span class="text-caption font-sans font-semibold text-ink dark:text-ink-dark line-clamp-1">${data.meta.title || 'Untitled'}</span>
+                <span class="text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-1">${data.excerpt || ''}</span>
+              `;
+              el.addEventListener('click', () => closeSearchDialog());
+              resultsContainer.appendChild(el);
+            }
+          }
+        } catch (err) {
+          console.error('Search error:', err);
+        } finally {
+          spinner?.classList.add('hidden');
+        }
+      }, 200);
+    });
+  }
+
+  // Wire up all search triggers
+  function wireSearchTriggers() {
+    document.querySelectorAll('[data-search-trigger]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openSearchDialog();
+      });
+    });
+  }
+
+  setupSearchDialog();
+  wireSearchTriggers();
+  document.addEventListener('astro:page-load', () => {
+    setupSearchDialog();
+    wireSearchTriggers();
+  });
+</script>

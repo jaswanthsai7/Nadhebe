@@ -1,6 +1,7 @@
 ---
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import SearchDialog from '@/components/search/SearchDialog.astro';
 import '@/styles/global.css';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
@@ -112,5 +113,6 @@ if (canonicalUrl) {
       <slot />
     </main>
     <Footer />
+    <SearchDialog />
   </body>
 </html>
