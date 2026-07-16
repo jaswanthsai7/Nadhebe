@@ -165,8 +165,46 @@ if (canonicalUrl) {
           'photo-1519046904884-53103b34b206', // clear water beach
           'photo-1470240731273-7821a6eeb6bd'  // lush green lake forest
         ];
-        const randomId = photos[Math.floor(Math.random() * photos.length)];
-        const src = 'https://images.unsplash.com/' + randomId + '?auto=format&fit=crop&w=1920&q=80';
+
+        // Fisher-Yates shuffle
+        function shuffle(arr) {
+          const a = arr.slice();
+          for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+          }
+          return a;
+        }
+
+        // Load or initialise the shuffled queue from sessionStorage
+        let queue;
+        let idx;
+        try {
+          const stored = sessionStorage.getItem('nb_bg_queue');
+          const storedIdx = parseInt(sessionStorage.getItem('nb_bg_idx') || '-1', 10);
+          queue = stored ? JSON.parse(stored) : null;
+          idx = storedIdx;
+        } catch (e) {
+          queue = null;
+          idx = -1;
+        }
+
+        // If queue is exhausted or missing, create a fresh shuffle
+        if (!queue || idx >= queue.length - 1) {
+          queue = shuffle(photos);
+          idx = 0;
+        } else {
+          idx = idx + 1;
+        }
+
+        // Persist state
+        try {
+          sessionStorage.setItem('nb_bg_queue', JSON.stringify(queue));
+          sessionStorage.setItem('nb_bg_idx', String(idx));
+        } catch (e) {}
+
+        const randomId = queue[idx];
+        const src = 'https://images.unsplash.com/' + randomId + '?auto=format&fit=crop&w=3840&q=100';
         const bg = document.getElementById('nature-bg');
         if (bg) {
           const img = new Image();
