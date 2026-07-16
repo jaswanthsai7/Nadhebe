@@ -50,75 +50,83 @@ const sharedSchema = z.object({
   lastReviewed: z.coerce.date().optional(),
 });
 
+const withYoutubeImage = (schema: any) => schema.transform((data: any) => {
+  const vid = data.videoId || data.youtubeVideoId;
+  if (vid) {
+    data.heroImage = `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`;
+  }
+  return data;
+});
+
 const news = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const tutorials = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const youtubeArticles = defineCollection({
   type: 'content',
-  schema: sharedSchema.extend({
+  schema: withYoutubeImage(sharedSchema.extend({
     videoId: z.string(),
     videoDuration: z.string(),
     videoUploadDate: z.coerce.date(),
-  }),
+  })),
 });
 
 const toolReviews = defineCollection({
   type: 'content',
-  schema: sharedSchema.extend({
+  schema: withYoutubeImage(sharedSchema.extend({
     rating: z.number().min(0).max(10),
     pricing: z.string(),
     pros: z.array(z.string()),
     cons: z.array(z.string()),
-  }),
+  })),
 });
 
 const prompts = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const comparisons = defineCollection({
   type: 'content',
-  schema: sharedSchema.extend({
+  schema: withYoutubeImage(sharedSchema.extend({
     itemsCompared: z.array(z.string()),
-  }),
+  })),
 });
 
 const bestPractices = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const useCases = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const tools = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const guides = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const frameworks = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 const caseStudies = defineCollection({
   type: 'content',
-  schema: sharedSchema,
+  schema: withYoutubeImage(sharedSchema),
 });
 
 export const collections = {
