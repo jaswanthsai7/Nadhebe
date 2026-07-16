@@ -81,6 +81,36 @@ if (canonicalUrl) {
       })();
     </script>
 
+    <!-- Frosted Nature Background Styles -->
+    <style>
+      #nature-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -20;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: opacity 0.8s ease;
+        opacity: 0;
+      }
+      #nature-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        background: rgba(250, 250, 250, 0.82);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        pointer-events: none;
+      }
+      .dark #nature-overlay {
+        background: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+
     <!-- WebMCP Agent Tools Registration -->
     <script is:inline>
       if (navigator.modelContext && typeof navigator.modelContext.provideContext === 'function') {
@@ -106,7 +136,11 @@ if (canonicalUrl) {
       }
     </script>
   </head>
-  <body class="flex min-h-screen flex-col bg-bg text-ink dark:bg-bg-dark dark:text-ink-dark">
+  <body class="flex min-h-screen flex-col text-ink dark:text-ink-dark" style="background: transparent;">
+    <!-- Full-screen Dynamic Nature Background -->
+    <div id="nature-bg" role="presentation" aria-hidden="true"></div>
+    <div id="nature-overlay" aria-hidden="true"></div>
+
     <a href="#main" class="skip-link">Skip to content</a>
     <Header />
     <main id="main" class="flex-grow">
@@ -114,5 +148,39 @@ if (canonicalUrl) {
     </main>
     <Footer />
     <SearchDialog />
+
+    <!-- Curated random nature image loader -->
+    <script is:inline>
+      (function () {
+        const photos = [
+          'photo-1507525428034-b723cf961d3e', // tropical beach
+          'photo-1441974231531-c6227db76b6e', // forest
+          'photo-1464822759023-fed622ff2c3b', // mountains
+          'photo-1505118380757-91f5f5632de0', // beach shore
+          'photo-1470071459604-3b5ec3a7fe05', // misty lake
+          'photo-1469474968028-56623f02e42e', // mountain valley
+          'photo-1506744038136-46273834b3fb', // waterfall canyon
+          'photo-1472214222541-d510753a8707', // green valley
+          'photo-1518495973542-4542c06a5843', // sun rays trees
+          'photo-1447752875215-b2761acb3c5d', // autumn forest
+          'photo-1475924156734-496f6cac6ec1', // sunrise beach
+          'photo-1501854140801-50d01698950b', // mountain peaks
+          'photo-1461896836934-ffe607ba8211', // desert dunes
+          'photo-1502082553048-f009c37129b9', // tree leaves
+          'photo-1500530855697-b586d89ba3ee'  // blue lake mountains
+        ];
+        const randomId = photos[Math.floor(Math.random() * photos.length)];
+        const src = 'https://images.unsplash.com/' + randomId + '?auto=format&fit=crop&w=1920&q=80';
+        const bg = document.getElementById('nature-bg');
+        if (bg) {
+          const img = new Image();
+          img.onload = function () {
+            bg.style.backgroundImage = "url('" + src + "')";
+            bg.style.opacity = '1';
+          };
+          img.src = src;
+        }
+      })();
+    </script>
   </body>
 </html>
