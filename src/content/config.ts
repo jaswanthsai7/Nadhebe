@@ -53,7 +53,7 @@ const sharedSchema = z.object({
 const withYoutubeImage = (schema: any) => schema.transform((data: any) => {
   const vid = data.videoId || data.youtubeVideoId;
   if (vid) {
-    data.heroImage = `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`;
+    data.heroImage = `https://i.ytimg.com/vi/${vid}/maxresdefault.jpg`;
   }
   return data;
 });
