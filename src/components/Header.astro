@@ -145,8 +145,7 @@ const moreNav = [
   }
 
   const stored = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  applyTheme(stored ? stored === 'dark' : prefersDark);
+  applyTheme(stored ? stored === 'dark' : true);
 
   toggle?.addEventListener('click', () => {
     const isDark = root.classList.contains('dark');
