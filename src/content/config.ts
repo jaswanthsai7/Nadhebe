@@ -50,8 +50,26 @@ const sharedSchema = z.object({
   lastReviewed: z.coerce.date().optional(),
 });
 
+const getYoutubeIdFromTopic = (topic?: string): string | undefined => {
+  if (!topic) return undefined;
+  const t = topic.toLowerCase();
+  if (t.includes('gpt-5.6') || t.includes('soul ultra') || t.includes('cost management')) {
+    return '7f3ZHPyKiwI';
+  }
+  if (t.includes('fable-5') || t.includes('fable 5') || t.includes('gpt-5.5')) {
+    return 'QmC9v-GEOiQ';
+  }
+  if (t.includes('google flow') || t.includes('storyboard')) {
+    return 'T1rf33ToVIE';
+  }
+  if (t.includes('youtube automation') || t.includes('sqlite agent') || t.includes('multi-agent state')) {
+    return 'EOHodDuJddc';
+  }
+  return undefined;
+};
+
 const withYoutubeImage = (schema: any) => schema.transform((data: any) => {
-  const vid = data.videoId || data.youtubeVideoId;
+  const vid = data.videoId || data.youtubeVideoId || getYoutubeIdFromTopic(data.topic);
   if (vid) {
     data.heroImage = `https://i.ytimg.com/vi/${vid}/maxresdefault.jpg`;
   }
