@@ -150,9 +150,15 @@ html.dark {
 
   /* ─── Card ─── */
   .card {
-    @apply rounded-12 border border-border bg-surface p-24 transition-all duration-200
-           hover:shadow-medium hover:border-border
-           dark:border-border-dark dark:bg-surface-dark dark:hover:border-border-dark;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    @apply rounded-12 border border-border p-24 transition-all duration-200
+           hover:shadow-medium hover:border-border;
+  }
+  .dark .card {
+    background: rgba(20, 20, 20, 0.75);
+    @apply border-border-dark hover:border-border-dark;
   }
 
   /* ─── Search Dialog ─── */
@@ -161,18 +167,29 @@ html.dark {
     animation: fadeIn 100ms ease-out;
   }
   .search-dialog {
-    @apply w-[calc(100%-32px)] max-w-[600px] max-h-[70vh] rounded-16 border border-border bg-surface shadow-large overflow-hidden flex flex-col
-           dark:border-border-dark dark:bg-surface-dark;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    @apply w-[calc(100%-32px)] max-w-[600px] max-h-[70vh] rounded-16 border border-border shadow-large overflow-hidden flex flex-col;
     animation: slideUp 150ms ease-out;
+  }
+  .dark .search-dialog {
+    background: rgba(20, 20, 20, 0.85);
+    @apply border-border-dark;
   }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ─── Badge ─── */
   .badge {
-    @apply inline-flex items-center gap-4 rounded-6 bg-surface2 px-8 py-4
+    background: rgba(245, 245, 245, 0.65);
+    @apply inline-flex items-center gap-4 rounded-6 px-8 py-4
            text-meta font-mono font-medium uppercase tracking-wider
-           text-muted dark:bg-surface2-dark dark:text-muted-dark;
+           text-muted;
+  }
+  .dark .badge {
+    background: rgba(30, 30, 30, 0.65);
+    @apply text-muted-dark;
   }
 
   /* ─── Buttons ─── */
@@ -187,19 +204,31 @@ html.dark {
            dark:bg-ink-dark dark:text-ink;
   }
   .btn-secondary {
-    @apply btn border border-border bg-surface text-ink2
-           hover:bg-hover hover:text-ink
-           dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    @apply btn border border-border text-ink2
+           hover:bg-hover hover:text-ink;
+  }
+  .dark .btn-secondary {
+    background: rgba(20, 20, 20, 0.75);
+    @apply border-border-dark text-ink2-dark
            dark:hover:bg-hover dark:hover:text-ink-dark;
   }
 
   /* ─── Input ─── */
   .input {
-    @apply w-full rounded-8 border border-border bg-surface px-16 py-12
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    @apply w-full rounded-8 border border-border px-16 py-12
            text-body text-ink placeholder:text-muted
-           transition-all duration-150 focus:border-ink2
-           dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark
-           dark:placeholder:text-muted-dark focus:outline-none;
+           transition-all duration-150 focus:border-ink2 focus:outline-none;
+  }
+  .dark .input {
+    background: rgba(20, 20, 20, 0.75);
+    @apply border-border-dark text-ink-dark
+           placeholder:text-muted-dark;
   }
 
   /* ─── Section header ─── */
@@ -211,5 +240,15 @@ html.dark {
   }
   .section-desc {
     @apply text-body text-ink2 dark:text-ink2-dark;
+  }
+
+  /* ─── Glassmorphism utilities ─── */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+  .dark .glass-panel {
+    background: rgba(20, 20, 20, 0.75) !important;
   }
 }
