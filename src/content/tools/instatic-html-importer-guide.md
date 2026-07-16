@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Tools"
 tags: [instatic, site-migration, tools, troubleshoot]
-heroImage: "/images/importer-hero.png"
+heroImage: "https://img.youtube.com/vi/DwaLQmPlALI/maxresdefault.jpg"
 heroAlt: "Minimalist 3D illustration of document migration flows and folders"
 draft: false
 topic: "Instatic"

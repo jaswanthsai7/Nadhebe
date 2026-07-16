@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Tutorials"
 tags: [instatic, setup, local-development, bun]
-heroImage: "/images/install-hero.png"
+heroImage: "https://img.youtube.com/vi/DwaLQmPlALI/maxresdefault.jpg"
 heroAlt: "Sleek 3D illustration of terminal commands and database server setups"
 draft: false
 topic: "Instatic"

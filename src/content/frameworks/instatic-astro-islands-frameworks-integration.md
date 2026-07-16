@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Frameworks"
 tags: [instatic, astro, hydration, frontend-frameworks]
-heroImage: "/images/frameworks-hero.png"
+heroImage: "https://img.youtube.com/vi/O88lL2v3JkA/maxresdefault.jpg"
 heroAlt: "Minimalist 3D illustration of component islands and UI blocks"
 draft: false
 topic: "Instatic"

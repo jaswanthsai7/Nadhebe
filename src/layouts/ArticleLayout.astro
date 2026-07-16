@@ -23,9 +23,10 @@ import VerdictGauge from '@/components/VerdictGauge.astro';
 import { getReadingTime } from '../utils/readingTime';
 import { getRelatedArticles } from '../utils/relatedArticles';
 import { getBreadcrumbs } from '../utils/breadcrumbs';
-import { getAllArticles, getArticleUrl } from '../utils/content';
+import { getAllArticles, getArticleUrl, getHeroImage } from '../utils/content';
 
 const { post } = Astro.props;
+const heroImage = getHeroImage(post);
 const { Content, headings } = await post.render();
 
 const authorEntry = await getEntry(post.data.author);
@@ -98,7 +99,7 @@ const breadcrumbItems = [
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
-  heroImage={post.data.heroImage}
+  heroImage={heroImage}
   canonicalUrl={post.data.canonicalUrl}
 >
   <ArticleSchema
@@ -109,7 +110,7 @@ const breadcrumbItems = [
     authorName={author?.name || 'Anonymous'}
     authorBio={author?.bio}
     authorAvatar={author?.avatar}
-    heroImage={post.data.heroImage}
+    heroImage={heroImage}
     canonicalUrl={pageUrl}
   />
   {post.data.faq && <FAQSchema faq={post.data.faq} />}
@@ -127,7 +128,7 @@ const breadcrumbItems = [
     <ReviewSchema
       productName={post.data.topic || post.data.title}
       description={post.data.description}
-      heroImage={post.data.heroImage}
+      heroImage={heroImage}
       ratingValue={post.data.rating}
       authorName={author?.name || 'Staff Writer'}
       price={post.data.pricing}
@@ -187,10 +188,10 @@ const breadcrumbItems = [
         </header>
 
         <!-- Hero image -->
-        {post.data.heroImage && post.collection !== 'tool-reviews' && (
+        {heroImage && post.collection !== 'tool-reviews' && !(post.data.youtubeVideoId || post.data.videoId) && (
           <div class="mb-48 overflow-hidden rounded-16 border border-border dark:border-border-dark">
             <img
-              src={post.data.heroImage}
+              src={heroImage}
               alt={post.data.heroAlt || post.data.title}
               width="800"
               height="450"
@@ -227,7 +228,7 @@ const breadcrumbItems = [
         <MobileToc headings={headings} />
 
         <!-- YouTube embed -->
-        {(post.data.youtubeVideoId || post.data.videoId) && (
+        {post.collection === 'youtube-articles' && (post.data.youtubeVideoId || post.data.videoId) && (
           <div class="mb-32">
             <YouTubeEmbed videoId={post.data.youtubeVideoId || post.data.videoId} title={post.data.title} />
           </div>

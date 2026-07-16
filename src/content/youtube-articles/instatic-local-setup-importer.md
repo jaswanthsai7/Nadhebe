@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: bob-smith
 category: "YouTube Articles"
 tags: [instatic, youtube, setup, importer]
-heroImage: "/images/setup-video-hero.png"
+heroImage: "https://img.youtube.com/vi/DwaLQmPlALI/maxresdefault.jpg"
 heroAlt: "Sleek 3D illustration of browser layouts and video timeline panels"
 draft: false
 topic: "Instatic"

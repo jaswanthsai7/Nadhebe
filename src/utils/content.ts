@@ -79,7 +79,22 @@ export async function getAllArticles(): Promise<Article[]> {
   // Filter out drafts and sort by date descending
   return all
     .filter(p => !p.data.draft)
+    .map(p => ({
+      ...p,
+      data: {
+        ...p.data,
+        heroImage: getHeroImage(p)
+      }
+    }))
     .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()) as unknown as Article[];
+}
+
+export function getHeroImage(article: any): string {
+  const videoId = article.data?.youtubeVideoId || article.data?.videoId;
+  if (videoId) {
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  }
+  return article.data?.heroImage || '';
 }
 
 export function getArticleUrl(article: { collection: string; slug: string }): string {

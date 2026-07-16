@@ -99,7 +99,7 @@ const heroPost = latestPillars[0] || allArticles[0];
 
       {heroPost && (
         <a href={getArticleUrl(heroPost)} class="card group p-0 overflow-hidden block">
-          <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
+          <div class="relative aspect-video w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
             <img
               src={heroPost.data.heroImage}
               alt={heroPost.data.heroAlt || heroPost.data.title}
@@ -159,6 +159,44 @@ const heroPost = latestPillars[0] || allArticles[0];
       </div>
     </section>
 
+        <!-- Pillar Guides -->
+        {latestPillars.length > 0 && (
+          <section>
+            <div class="flex items-center justify-between mb-32">
+              <h2 class="section-title">Pillar Guides</h2>
+              <a href="/guides" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
+                View all
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
+              {latestPillars.map(post => (
+                <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0">
+                  <div class="relative aspect-video w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
+                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
+                    {post.data.rating !== undefined && (
+                      <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
+                        <VerdictGauge score={post.data.rating} size={40} />
+                      </div>
+                    )}
+                  </div>
+                  <div class="p-20 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span class="badge mb-8">Pillar Guide</span>
+                      <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
+                        {post.data.title}
+                      </h3>
+                      <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2">{post.data.description}</p>
+                    </div>
+                    <time class="mt-16 text-meta text-muted dark:text-muted-dark block" datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
      <!-- Category Explorer -->
     <section>
       <div class="mb-32">
@@ -195,44 +233,6 @@ const heroPost = latestPillars[0] || allArticles[0];
       </div>
     </section>
 
-    <!-- Pillar Guides -->
-    {latestPillars.length > 0 && (
-      <section>
-        <div class="flex items-center justify-between mb-32">
-          <h2 class="section-title">Pillar Guides</h2>
-          <a href="/guides" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
-            View all
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
-          {latestPillars.map(post => (
-            <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0">
-              <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
-                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
-                {post.data.rating !== undefined && (
-                  <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
-                    <VerdictGauge score={post.data.rating} size={40} />
-                  </div>
-                )}
-              </div>
-              <div class="p-20 flex-1 flex flex-col justify-between">
-                <div>
-                  <span class="badge mb-8">Pillar Guide</span>
-                  <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
-                    {post.data.title}
-                  </h3>
-                  <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2">{post.data.description}</p>
-                </div>
-                <time class="mt-16 text-meta text-muted dark:text-muted-dark block" datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </time>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
 
     <!-- Video Guides -->
     {latestVideos.length > 0 && (

@@ -5,13 +5,14 @@ interface Props {
 }
 
 const { videoId, title } = Astro.props;
-const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+const maxresUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+const hqdefaultUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
 <div class="youtube-facade my-32 overflow-hidden rounded-card border border-border bg-surface aspect-video shadow-card dark:border-border-dark dark:bg-surface-dark dark:shadow-none relative group">
   <div
     class="youtube-facade-trigger absolute inset-0 cursor-pointer flex items-center justify-center bg-cover bg-center"
-    style={`background-image: url('${thumbnailUrl}')`}
+    style={`background-image: url('${maxresUrl}'), url('${hqdefaultUrl}')`}
     data-video-id={videoId}
     data-title={title}
   >

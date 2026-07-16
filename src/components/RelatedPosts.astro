@@ -17,7 +17,7 @@ const { posts, heading = 'Related reading' } = Astro.props;
     <div class="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
         <a href={getArticleUrl(post)} class="card group block overflow-hidden p-0">
-          <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
+          <div class="relative aspect-video w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
             <img
               src={post.data.heroImage}
               alt={post.data.heroAlt || post.data.title}
