@@ -1,0 +1,194 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'ai')?.tools.find(t => t.slug === 'llm-pricing-calculator')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="AI Tools"
+  categoryUrl="/tools/ai"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="space-y-16">
+    <div>
+      <label for="calc-model" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Select AI Model</label>
+      <select id="calc-model" class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent">
+        <!-- GPT-5.6 Tiers -->
+        <option value="gpt-5.6-soul">OpenAI GPT-5.6 Soul Ultra ($5.00 / $30.00)</option>
+        <option value="gpt-5.6-terra">OpenAI GPT-5.6 Terra Mid-Tier ($2.50 / $10.00)</option>
+        <option value="gpt-5.6-luna">OpenAI GPT-5.6 Luna Low-Cost ($1.00 / $3.00)</option>
+        <!-- Claude -->
+        <option value="claude-sonnet">Claude 3.5 Sonnet ($3.00 / $15.00)</option>
+        <option value="claude-opus">Claude 3 Opus ($15.00 / $75.00)</option>
+        <!-- Gemini -->
+        <option value="gemini-pro">Gemini 1.5 Pro ($1.25 / $5.00)</option>
+        <option value="gemini-flash">Gemini 1.5 Flash ($0.075 / $0.30)</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="calc-input-tokens" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Input Tokens (Prompt)</label>
+      <input
+        type="number"
+        id="calc-input-tokens"
+        min="0"
+        value="10000"
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+    </div>
+
+    <div>
+      <label for="calc-output-tokens" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Output Tokens (Completion)</label>
+      <input
+        type="number"
+        id="calc-output-tokens"
+        min="0"
+        value="2000"
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+    </div>
+
+    <div>
+      <label for="calc-requests" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Number of API Requests</label>
+      <input
+        type="number"
+        id="calc-requests"
+        min="1"
+        value="1000"
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px] space-y-16">
+    <div class="space-y-12">
+      <!-- Calculated total -->
+      <div class="rounded-12 border border-border dark:border-border-dark p-16 bg-surface2 dark:bg-surface2-dark text-center">
+        <p class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider font-semibold">Total Estimated Cost</p>
+        <p id="total-cost" class="text-h2 sm:text-display font-display font-extrabold text-accent dark:text-accent-dark mt-4">$0.00</p>
+      </div>
+
+      <!-- Cost Breakdowns -->
+      <div class="space-y-8 text-caption text-ink2 dark:text-ink2-dark">
+        <div class="flex items-center justify-between border-b border-border dark:border-border-dark pb-8">
+          <span>Input Prompt Cost:</span>
+          <span id="input-cost" class="font-mono font-semibold">$0.00</span>
+        </div>
+        <div class="flex items-center justify-between border-b border-border dark:border-border-dark pb-8">
+          <span>Output Completion Cost:</span>
+          <span id="output-cost" class="font-mono font-semibold">$0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparative Table -->
+    <div class="space-y-8">
+      <p class="text-xs font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Tiers Comparison</p>
+      <div class="rounded-12 border border-border dark:border-border-dark overflow-hidden text-xs font-sans bg-surface2 dark:bg-surface2-dark max-h-[140px] overflow-y-auto">
+        <table class="w-full text-left">
+          <tbody id="compare-rows" class="text-ink2 dark:text-ink2-dark">
+            <!-- Filled dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">How do API model pricing scales work?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    AI providers bill API usage on a **per-million-tokens** basis (abbreviated as $ / M tokens). Input tokens (the prompt text you send, including any pre-compiled system templates) are cheaper because the model only needs to read them. Output tokens (the text the model generates) are 3x to 5x more expensive because generation requires active compute cycles for every single character.
+  </p>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24">
+    For instance, OpenAI's GPT-5.6 Soul Ultra costs **$5.00** per million input tokens and **$30.00** per million output tokens. If you execute a pipeline with 10,000 input tokens and 2,000 output tokens 1,000 times, the total price is calculated as:
+  </p>
+  <div class="bg-code dark:bg-code-dark border border-border dark:border-border-dark rounded-12 p-16 font-mono text-caption text-ink dark:text-ink-dark mb-24 max-w-lg space-y-4">
+    <div>Prompt Cost = (10,000 × 1,000 / 1,000,000) × $5.00 = $50.00</div>
+    <div>Completion Cost = (2,000 × 1,000 / 1,000,000) × $30.00 = $60.00</div>
+    <div class="font-bold border-t border-border dark:border-border-dark pt-4">Total Cost = $50.00 + $60.00 = $110.00</div>
+  </div>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupLlmCalculator() {
+      const selectModel = document.getElementById('calc-model') as HTMLSelectElement | null;
+      const inputTokens = document.getElementById('calc-input-tokens') as HTMLInputElement | null;
+      const outputTokens = document.getElementById('calc-output-tokens') as HTMLInputElement | null;
+      const requestsInput = document.getElementById('calc-requests') as HTMLInputElement | null;
+
+      const totalCostLabel = document.getElementById('total-cost');
+      const inputCostLabel = document.getElementById('input-cost');
+      const outputCostLabel = document.getElementById('output-cost');
+      const compareRows = document.getElementById('compare-rows');
+
+      if (!selectModel || !inputTokens || !outputTokens || !requestsInput || !totalCostLabel || !inputCostLabel || !outputCostLabel || !compareRows) return;
+
+      // Prices per 1 Million tokens: [inputPrice, outputPrice]
+      const modelPrices: Record<string, { name: string; prices: [number, number] }> = {
+        'gpt-5.6-soul': { name: 'GPT-5.6 Soul Ultra', prices: [5.00, 30.00] },
+        'gpt-5.6-terra': { name: 'GPT-5.6 Terra Mid', prices: [2.50, 10.00] },
+        'gpt-5.6-luna': { name: 'GPT-5.6 Luna Lite', prices: [1.00, 3.00] },
+        'claude-sonnet': { name: 'Claude 3.5 Sonnet', prices: [3.00, 15.00] },
+        'claude-opus': { name: 'Claude 3 Opus', prices: [15.00, 75.00] },
+        'gemini-pro': { name: 'Gemini 1.5 Pro', prices: [1.25, 5.00] },
+        'gemini-flash': { name: 'Gemini 1.5 Flash', prices: [0.075, 0.30] }
+      };
+
+      function calculateCosts() {
+        const activeModelKey = selectModel!.value;
+        const activeModel = modelPrices[activeModelKey];
+
+        const promptCount = Math.max(parseFloat(inputTokens!.value || '0'), 0);
+        const completionCount = Math.max(parseFloat(outputTokens!.value || '0'), 0);
+        const reqs = Math.max(parseFloat(requestsInput!.value || '1'), 1);
+
+        const activeInputCost = (promptCount * reqs / 1000000) * activeModel.prices[0];
+        const activeOutputCost = (completionCount * reqs / 1000000) * activeModel.prices[1];
+        const activeTotal = activeInputCost + activeOutputCost;
+
+        // Display results
+        inputCostLabel!.textContent = `$${activeInputCost.toFixed(2)}`;
+        outputCostLabel!.textContent = `$${activeOutputCost.toFixed(2)}`;
+        totalCostLabel!.textContent = `$${activeTotal.toFixed(2)}`;
+
+        // Build comparison table rows
+        let compareHtml = '';
+        Object.entries(modelPrices).forEach(([key, model]) => {
+          const compInputCost = (promptCount * reqs / 1000000) * model.prices[0];
+          const compOutputCost = (completionCount * reqs / 1000000) * model.prices[1];
+          const compTotal = compInputCost + compOutputCost;
+          const isSelected = key === activeModelKey;
+
+          compareHtml += `
+            <tr class="${isSelected ? 'font-semibold text-accent dark:text-accent-dark bg-accent/5' : ''} border-b border-border/10">
+              <td class="p-8">${model.name}</td>
+              <td class="p-8 text-right font-mono">$${compTotal.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+
+        compareRows!.innerHTML = compareHtml;
+      }
+
+      // Bind events
+      const inputs = [selectModel, inputTokens, outputTokens, requestsInput];
+      inputs.forEach(el => {
+        el?.addEventListener('input', calculateCosts);
+        el?.addEventListener('change', calculateCosts);
+      });
+
+      // Initial gen
+      calculateCosts();
+    }
+
+    // Set up
+    setupLlmCalculator();
+    document.addEventListener('astro:page-load', setupLlmCalculator);
+  </script>
+</ToolLayout>

@@ -1,0 +1,143 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'youtube')?.tools.find(t => t.slug === 'thumbnail-downloader')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="YouTube Tools"
+  categoryUrl="/tools/youtube"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="space-y-16">
+    <div>
+      <label for="yt-url-input" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">YouTube Video URL or ID</label>
+      <input
+        type="text"
+        id="yt-url-input"
+        placeholder="https://www.youtube.com/watch?v=..."
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+      <span class="text-xs text-muted mt-4 block">Supports full links, short links (youtu.be), or raw 11-char video IDs.</span>
+    </div>
+    
+    <button
+      id="extract-thumb-btn"
+      class="w-full mt-16 btn bg-accent hover:bg-accent/90 text-white font-sans font-semibold py-12 rounded-control transition-all"
+    >
+      Extract Thumbnail
+    </button>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px] space-y-16">
+    <!-- Visual Image Preview -->
+    <div id="thumb-preview-box" class="aspect-video w-full rounded-12 overflow-hidden border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark flex items-center justify-center relative group">
+      <div id="preview-placeholder" class="text-center p-16">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-32 h-32 text-muted mx-auto mb-8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        </svg>
+        <span class="text-xs text-muted">Thumbnail preview will load here...</span>
+      </div>
+      <img id="thumb-preview-img" src="" alt="YouTube Cover Preview" class="w-full h-full object-cover hidden" />
+    </div>
+
+    <!-- Download Links -->
+    <div id="download-links-container" class="space-y-12 hidden">
+      <p class="text-xs font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">Download Resolutions</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <a id="dl-max" target="_blank" rel="noopener noreferrer" class="btn border border-border dark:border-border-dark text-caption font-semibold py-8 px-12 rounded-8 text-center bg-surface hover:bg-hover dark:bg-surface-dark dark:hover:bg-hover-dark flex flex-col justify-center transition-colors">
+          <span>Max HD</span>
+          <span class="text-xs text-muted font-normal mt-2">1280x720</span>
+        </a>
+        <a id="dl-hq" target="_blank" rel="noopener noreferrer" class="btn border border-border dark:border-border-dark text-caption font-semibold py-8 px-12 rounded-8 text-center bg-surface hover:bg-hover dark:bg-surface-dark dark:hover:bg-hover-dark flex flex-col justify-center transition-colors">
+          <span>High Standard</span>
+          <span class="text-xs text-muted font-normal mt-2">640x480</span>
+        </a>
+        <a id="dl-mq" target="_blank" rel="noopener noreferrer" class="btn border border-border dark:border-border-dark text-caption font-semibold py-8 px-12 rounded-8 text-center bg-surface hover:bg-hover dark:bg-surface-dark dark:hover:bg-hover-dark flex flex-col justify-center transition-colors">
+          <span>Medium</span>
+          <span class="text-xs text-muted font-normal mt-2">320x180</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">How are YouTube CDN thumbnail links structured?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    YouTube hosts video thumbnails on its own high-speed media CDN (<code>img.youtube.com</code>). Every video has unique static routes for its thumbnail files, allowing you to access and display them directly once you extract the video's 11-character identifier:
+  </p>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24 space-y-8">
+    <li>**Maximum Quality (HD)**: <code>https://img.youtube.com/vi/[VIDEO_ID]/maxresdefault.jpg</code> (1280x720 pixels - guaranteed to exist for all uploaded HD 720p+ videos).</li>
+    <li>**High Quality**: <code>https://img.youtube.com/vi/[VIDEO_ID]/sddefault.jpg</code> (640x480 pixels).</li>
+    <li>**Medium Quality**: <code>https://img.youtube.com/vi/[VIDEO_ID]/mqdefault.jpg</code> (320x180 pixels).</li>
+  </ul>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupThumbnailDownloader() {
+      const urlInput = document.getElementById('yt-url-input') as HTMLInputElement | null;
+      const extractBtn = document.getElementById('extract-thumb-btn');
+      
+      const previewBox = document.getElementById('preview-placeholder');
+      const previewImg = document.getElementById('thumb-preview-img') as HTMLImageElement | null;
+      const dlContainer = document.getElementById('download-links-container');
+      
+      const dlMax = document.getElementById('dl-max') as HTMLAnchorElement | null;
+      const dlHq = document.getElementById('dl-hq') as HTMLAnchorElement | null;
+      const dlMq = document.getElementById('dl-mq') as HTMLAnchorElement | null;
+
+      if (!urlInput || !extractBtn || !previewBox || !previewImg || !dlContainer) return;
+
+      // Extract 11-char Video ID
+      function extractVideoId(url: string): string | null {
+        url = url.trim();
+        if (url.length === 11) return url;
+
+        // Regex for various YouTube URL schemes
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+
+        return (match && match[2].length === 11) ? match[2] : null;
+      }
+
+      function handleExtraction() {
+        const url = urlInput.value;
+        const videoId = extractVideoId(url);
+
+        if (!videoId) {
+          alert('Error: Please enter a valid YouTube Video URL or 11-character video ID.');
+          return;
+        }
+
+        const maxUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        const hqUrl = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+        const mqUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+        // Load preview img
+        previewImg!.src = maxUrl;
+        previewImg!.classList.remove('hidden');
+        previewBox!.classList.add('hidden');
+        
+        // Setup download buttons
+        if (dlMax) { dlMax.href = maxUrl; dlMax.download = `youtube-${videoId}-maxres.jpg`; }
+        if (dlHq) { dlHq.href = hqUrl; dlHq.download = `youtube-${videoId}-hq.jpg`; }
+        if (dlMq) { dlMq.href = mqUrl; dlMq.download = `youtube-${videoId}-medium.jpg`; }
+
+        dlContainer!.classList.remove('hidden');
+      }
+
+      extractBtn.addEventListener('click', handleExtraction);
+    }
+
+    // Set up
+    setupThumbnailDownloader();
+    document.addEventListener('astro:page-load', setupThumbnailDownloader);
+  </script>
+</ToolLayout>

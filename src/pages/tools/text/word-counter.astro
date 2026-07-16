@@ -1,0 +1,160 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'text')?.tools.find(t => t.slug === 'word-counter')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="Text Tools"
+  categoryUrl="/tools/text"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="relative flex-grow">
+      <textarea
+        id="word-input"
+        class="w-full h-[280px] rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark font-sans text-body p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        placeholder="Type or paste your content text here to inspect..."
+      ></textarea>
+    </div>
+    <div class="mt-16 flex gap-12">
+      <button
+        id="clear-word-btn"
+        class="w-full btn border border-danger/20 text-danger hover:bg-danger/5 py-12 rounded-control font-sans font-semibold transition-colors"
+      >
+        Clear Text
+      </button>
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px] space-y-16">
+    <div class="grid grid-cols-2 gap-12">
+      <!-- Words -->
+      <div class="rounded-12 border border-border dark:border-border-dark p-12 bg-surface2 dark:bg-surface2-dark text-center">
+        <p class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider font-semibold">Words</p>
+        <p id="cnt-words" class="text-h2 font-display font-extrabold text-ink dark:text-ink-dark mt-4">0</p>
+      </div>
+
+      <!-- Characters -->
+      <div class="rounded-12 border border-border dark:border-border-dark p-12 bg-surface2 dark:bg-surface2-dark text-center">
+        <p class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider font-semibold">Characters</p>
+        <p id="cnt-chars" class="text-h2 font-display font-extrabold text-ink dark:text-ink-dark mt-4">0</p>
+      </div>
+
+      <!-- Characters (No spaces) -->
+      <div class="rounded-12 border border-border dark:border-border-dark p-12 bg-surface2 dark:bg-surface2-dark text-center">
+        <p class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider font-semibold">Chars (No Spaces)</p>
+        <p id="cnt-chars-nospace" class="text-h2 font-display font-extrabold text-ink dark:text-ink-dark mt-4">0</p>
+      </div>
+
+      <!-- Sentences -->
+      <div class="rounded-12 border border-border dark:border-border-dark p-12 bg-surface2 dark:bg-surface2-dark text-center">
+        <p class="text-xs text-muted dark:text-muted-dark uppercase tracking-wider font-semibold">Sentences</p>
+        <p id="cnt-sentences" class="text-h2 font-display font-extrabold text-ink dark:text-ink-dark mt-4">0</p>
+      </div>
+    </div>
+
+    <!-- Reading/Speaking Times -->
+    <div class="rounded-12 border border-border dark:border-border-dark p-16 bg-surface2 dark:bg-surface2-dark space-y-12">
+      <div class="flex items-center justify-between text-caption font-sans">
+        <span class="text-ink2 dark:text-ink2-dark flex items-center gap-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-16 h-16 text-muted">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+          Est. Reading Time:
+        </span>
+        <span id="time-reading" class="font-semibold text-accent dark:text-accent-dark">0 min</span>
+      </div>
+
+      <div class="flex items-center justify-between text-caption font-sans border-t border-border dark:border-border-dark pt-12">
+        <span class="text-ink2 dark:text-ink2-dark flex items-center gap-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-16 h-16 text-muted">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+          </svg>
+          Est. Speaking Time:
+        </span>
+        <span id="time-speaking" class="font-semibold text-ink dark:text-ink-dark">0 min</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">Why do character and word counts matter?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    Whether you are drafting an article, a system prompt, or an SEO snippet, strict size boundaries exist across almost all digital channels:
+  </p>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24 space-y-8">
+    <li>**Google SERP Snippets**: Standard title tags truncate after 60 characters; meta descriptions truncate after 160 characters.</li>
+    <li>**Social Media Feeds**: Twitter/X caps standard posts at 280 characters. LinkedIn updates perform best under 140 words.</li>
+    <li>**AI Tokens**: LLM gateways bill by tokens. While 1 token is roughly 4 characters or 0.75 words, tracking raw word volume is a direct proxy for evaluating context window load limits.</li>
+  </ul>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupWordCounter() {
+      const input = document.getElementById('word-input') as HTMLTextAreaElement | null;
+      const clearBtn = document.getElementById('clear-word-btn');
+      
+      const valWords = document.getElementById('cnt-words');
+      const valChars = document.getElementById('cnt-chars');
+      const valNoSpace = document.getElementById('cnt-chars-nospace');
+      const valSentences = document.getElementById('cnt-sentences');
+      const timeReading = document.getElementById('time-reading');
+      const timeSpeaking = document.getElementById('time-speaking');
+
+      if (!input || !valWords || !valChars || !valNoSpace || !valSentences || !timeReading || !timeSpeaking) return;
+
+      function countMetrics() {
+        const text = input!.value;
+
+        // Word count (split by spaces/newlines and filter empty elements)
+        const wordsArr = text.trim().split(/\s+/).filter(w => w.length > 0);
+        const words = wordsArr.length;
+
+        // Character counts
+        const chars = text.length;
+        const charsNoSpace = text.replace(/\s/g, '').length;
+
+        // Sentence count (ends with ., ?, or !)
+        const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+
+        // Display results
+        valWords!.textContent = words.toLocaleString();
+        valChars!.textContent = chars.toLocaleString();
+        valNoSpace!.textContent = charsNoSpace.toLocaleString();
+        valSentences!.textContent = sentences.toLocaleString();
+
+        // Calculate times
+        // Standard reading speed is 220 words per minute (WPM)
+        const readMins = Math.ceil(words / 220);
+        timeReading!.textContent = words > 0 ? `${readMins} min` : '0 min';
+
+        // Standard speaking speed is 130 WPM
+        const speakMins = Math.ceil(words / 130);
+        timeSpeaking!.textContent = words > 0 ? `${speakMins} min` : '0 min';
+      }
+
+      input.addEventListener('input', countMetrics);
+      
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          countMetrics();
+        });
+      }
+
+      // Initial count
+      countMetrics();
+    }
+
+    // Set up
+    setupWordCounter();
+    document.addEventListener('astro:page-load', setupWordCounter);
+  </script>
+</ToolLayout>

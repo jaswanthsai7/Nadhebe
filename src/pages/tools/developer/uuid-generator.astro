@@ -1,0 +1,173 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'developer')?.tools.find(t => t.slug === 'uuid-generator')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="Developer Tools"
+  categoryUrl="/tools/developer"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="space-y-16">
+    <div>
+      <label for="uuid-count" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Quantity to Generate</label>
+      <input
+        type="number"
+        id="uuid-count"
+        min="1"
+        max="500"
+        value="10"
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+      <span class="text-xs text-muted mt-4 block">Generate up to 500 random UUIDs at once.</span>
+    </div>
+    
+    <div class="flex flex-col gap-12 pt-8 border-t border-border dark:border-border-dark">
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="uuid-uppercase" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Convert to UPPERCASE</span>
+      </label>
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="uuid-no-hyphens" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Remove Hyphens (e.g. raw 32-hex string)</span>
+      </label>
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="uuid-braces" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Wrap in Curly Braces (e.g. &#123;...&#125;)</span>
+      </label>
+    </div>
+    
+    <button
+      id="generate-uuid-btn"
+      class="w-full mt-16 btn bg-accent hover:bg-accent/90 text-white font-sans font-semibold py-12 rounded-control transition-all"
+    >
+      Generate UUIDs
+    </button>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="relative flex-grow">
+      <textarea
+        id="uuid-output"
+        readonly
+        class="w-full h-[250px] rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        placeholder="Generated UUIDs will appear here..."
+      ></textarea>
+    </div>
+    <div class="mt-16">
+      <button
+        id="copy-uuid-btn"
+        class="w-full btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold flex items-center justify-center gap-8 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+        <span id="copy-btn-text">Copy to Clipboard</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">How does a UUID Version 4 work?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    A **UUID (Universally Unique Identifier)** is a 128-bit value used to uniquely identify objects or records in distributed database systems. Version 4 UUIDs are completely randomized, using 122 bits of random data (while 6 bits are reserved to indicate version and variant details).
+  </p>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24">
+    The standard canonical format for a UUID contains 32 hexadecimal digits represented in five groups separated by hyphens (format: <code>8-4-4-4-12</code>), for a total of 36 characters. The math behind Version 4 is so powerful that generating 1 billion UUIDs per second for 85 years is required to have a 50% chance of a single collision.
+  </p>
+
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">Features of this Generator</h2>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-32 space-y-8">
+    <li>**Secure Randomness**: Uses the secure <code>window.crypto</code> API, which guarantees high-quality, non-predictable cryptographic entropy.</li>
+    <li>**Bulk Export**: Generates lists of up to 500 UUIDs instantly.</li>
+    <li>**Custom Formatting**: Uppercase options, stripped hyphens, and braces wrappers for C# or registry configurations.</li>
+    <li>**Zero Server Logs**: Completely executed in browser sandboxed script logic.</li>
+  </ul>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupUuidGenerator() {
+      const countInput = document.getElementById('uuid-count') as HTMLInputElement | null;
+      const isUpper = document.getElementById('uuid-uppercase') as HTMLInputElement | null;
+      const noHyphens = document.getElementById('uuid-no-hyphens') as HTMLInputElement | null;
+      const useBraces = document.getElementById('uuid-braces') as HTMLInputElement | null;
+      const generateBtn = document.getElementById('generate-uuid-btn');
+      const outputText = document.getElementById('uuid-output') as HTMLTextAreaElement | null;
+      const copyBtn = document.getElementById('copy-uuid-btn');
+      const copyText = document.getElementById('copy-btn-text');
+
+      if (!generateBtn || !outputText) return;
+
+      // RFC4122 Version 4 UUID Generator
+      function generateUUIDv4() {
+        // Use cryptographically secure values
+        const buffer = new Uint8Array(16);
+        window.crypto.getRandomValues(buffer);
+
+        // Adjust version (bits 12-15 to 0100)
+        buffer[6] = (buffer[6] & 0x0f) | 0x40;
+        // Adjust variant (bits 6-7 of clock_seq_hi_and_reserved to 10)
+        buffer[8] = (buffer[8] & 0x3f) | 0x80;
+
+        // Form hex values
+        const hex = Array.from(buffer).map(b => b.toString(16).padStart(2, '0'));
+
+        let uuid = `${hex[0]}${hex[1]}${hex[2]}${hex[3]}-${hex[4]}${hex[5]}-${hex[6]}${hex[7]}-${hex[8]}${hex[9]}-${hex[10]}${hex[11]}${hex[12]}${hex[13]}${hex[14]}${hex[15]}`;
+
+        if (noHyphens?.checked) {
+          uuid = uuid.replace(/-/g, '');
+        }
+        if (isUpper?.checked) {
+          uuid = uuid.toUpperCase();
+        }
+        if (useBraces?.checked) {
+          uuid = `{${uuid}}`;
+        }
+
+        return uuid;
+      }
+
+      function triggerGeneration() {
+        const count = Math.min(Math.max(parseInt(countInput?.value || '10'), 1), 500);
+        const list: string[] = [];
+        for (let i = 0; i < count; i++) {
+          list.push(generateUUIDv4());
+        }
+        outputText!.value = list.join('\n');
+      }
+
+      generateBtn.addEventListener('click', triggerGeneration);
+
+      // Trigger initial gen
+      triggerGeneration();
+
+      // Copy utility
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', () => {
+          const text = outputText.value;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(() => {
+            copyText.textContent = 'Copied!';
+            copyBtn.classList.add('bg-success/10', 'border-success/30', 'text-success');
+            setTimeout(() => {
+              copyText.textContent = 'Copy to Clipboard';
+              copyBtn.classList.remove('bg-success/10', 'border-success/30', 'text-success');
+            }, 2000);
+          });
+        });
+      }
+    }
+
+    // Load handlers
+    setupUuidGenerator();
+    document.addEventListener('astro:page-load', setupUuidGenerator);
+  </script>
+</ToolLayout>

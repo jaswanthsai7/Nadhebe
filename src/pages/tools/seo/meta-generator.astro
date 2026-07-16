@@ -1,0 +1,182 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'seo')?.tools.find(t => t.slug === 'meta-generator')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="SEO Tools"
+  categoryUrl="/tools/seo"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="space-y-16">
+    <div>
+      <div class="flex justify-between items-center mb-8">
+        <label for="meta-title-input" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark">SEO Page Title</label>
+        <span id="title-counter" class="text-xs text-muted">0 / 60 chars</span>
+      </div>
+      <input
+        type="text"
+        id="meta-title-input"
+        placeholder="Enter optimized page title here..."
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+      <div id="title-warning" class="text-xs text-danger mt-4 hidden">Warning: Title exceeds recommended 60 characters limit.</div>
+    </div>
+    
+    <div>
+      <div class="flex justify-between items-center mb-8">
+        <label for="meta-desc-input" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark">Meta Description</label>
+        <span id="desc-counter" class="text-xs text-muted">0 / 160 chars</span>
+      </div>
+      <textarea
+        id="meta-desc-input"
+        placeholder="Enter optimized meta description text here..."
+        class="w-full h-[100px] rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark p-12 text-caption text-ink dark:text-ink-dark focus:outline-none resize-none focus:ring-1 focus:ring-accent"
+      ></textarea>
+      <div id="desc-warning" class="text-xs text-danger mt-4 hidden">Warning: Description exceeds recommended 160 characters limit.</div>
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px] space-y-24">
+    <!-- Google SERP Visual Preview -->
+    <div>
+      <p class="text-xs font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-12">Google Search Preview (Desktop)</p>
+      <div class="rounded-12 border border-border dark:border-border-dark p-16 bg-surface dark:bg-surface-dark shadow-subtle max-w-lg font-sans">
+        <div class="flex items-center gap-6 text-xs text-ink2 dark:text-ink2-dark mb-4">
+          <span>https://nadhebe.com</span>
+          <span class="text-muted">› category › page</span>
+        </div>
+        <h3 id="serp-title" class="text-[20px] leading-tight text-[#1a0dab] dark:text-[#8ab4f8] hover:underline cursor-pointer font-medium line-clamp-1">
+          Page Title Preview
+        </h3>
+        <p id="serp-desc" class="text-[14px] leading-normal text-[#4d5156] dark:text-[#bdc1c6] mt-4 line-clamp-2">
+          Your page meta description will appear here as search snippets...
+        </p>
+      </div>
+    </div>
+
+    <!-- HTML Tags Output -->
+    <div class="space-y-12">
+      <p class="text-xs font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider">HTML Metadata Tags</p>
+      <div class="relative">
+        <textarea
+          id="html-tags-output"
+          readonly
+          class="w-full h-[120px] rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        ></textarea>
+      </div>
+      
+      <button
+        id="copy-tags-btn"
+        class="w-full btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold flex items-center justify-center gap-8 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+        <span id="copy-tags-text">Copy HTML Tags</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">Why do title tags and meta descriptions matter?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    Metadata elements are the first touchpoints users see on Google's search results page. Optimizing them has a direct impact on search ranks and click-through rates (CTR):
+  </p>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24 space-y-8">
+    <li>**SEO Title Tag**: It is the single most important on-page SEO ranking signal. Keywords placed closer to the beginning of the title carry higher ranking weights. Truncation happens at 600 pixels (typically ~60 characters).</li>
+    <li>**Meta Description**: Although not a direct ranking factor in Google's core algorithm, descriptions serve as your ad copy. Writing compelling benefits or call-to-actions increases user click-through rates. Truncation happens at 960 pixels (typically ~155-160 characters).</li>
+  </ul>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupMetaGenerator() {
+      const titleInput = document.getElementById('meta-title-input') as HTMLInputElement | null;
+      const descInput = document.getElementById('meta-desc-input') as HTMLTextAreaElement | null;
+      
+      const titleCounter = document.getElementById('title-counter');
+      const descCounter = document.getElementById('desc-counter');
+      const titleWarning = document.getElementById('title-warning');
+      const descWarning = document.getElementById('desc-warning');
+
+      const serpTitle = document.getElementById('serp-title');
+      const serpDesc = document.getElementById('serp-desc');
+      
+      const htmlOutput = document.getElementById('html-tags-output') as HTMLTextAreaElement | null;
+      const copyBtn = document.getElementById('copy-tags-btn');
+      const copyText = document.getElementById('copy-tags-text');
+
+      if (!titleInput || !descInput || !htmlOutput) return;
+
+      function updateMeta() {
+        const titleVal = titleInput!.value.trim();
+        const descVal = descInput!.value.trim();
+
+        const titleLen = titleVal.length;
+        const descLen = descVal.length;
+
+        // Counters update
+        if (titleCounter) titleCounter.textContent = `${titleLen} / 60 chars`;
+        if (descCounter) descCounter.textContent = `${descLen} / 160 chars`;
+
+        // Length Warning alerts
+        if (titleWarning) {
+          if (titleLen > 60) titleWarning.classList.remove('hidden');
+          else titleWarning.classList.add('hidden');
+        }
+        if (descWarning) {
+          if (descLen > 160) descWarning.classList.remove('hidden');
+          else descWarning.classList.add('hidden');
+        }
+
+        // Google SERP elements update
+        if (serpTitle) serpTitle.textContent = titleVal || 'Page Title Preview';
+        if (serpDesc) serpDesc.textContent = descVal || 'Your page meta description will appear here as search snippets...';
+
+        // Code Output update
+        const escapedTitle = titleVal.replace(/"/g, '&quot;');
+        const escapedDesc = descVal.replace(/"/g, '&quot;');
+        
+        let code = `<title>${escapedTitle || 'Page Title'}</title>\n`;
+        code += `<meta name="description" content="${escapedDesc || 'Meta description text'}" />`;
+        
+        htmlOutput!.value = code;
+      }
+
+      // Bind events
+      titleInput.addEventListener('input', updateMeta);
+      descInput.addEventListener('input', updateMeta);
+
+      // Initial gen
+      updateMeta();
+
+      // Copy callback
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', () => {
+          const text = htmlOutput.value;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(() => {
+            copyText.textContent = 'Copied!';
+            copyBtn.classList.add('bg-success/10', 'border-success/30', 'text-success');
+            setTimeout(() => {
+              copyText.textContent = 'Copy HTML Tags';
+              copyBtn.classList.remove('bg-success/10', 'border-success/30', 'text-success');
+            }, 2000);
+          });
+        });
+      }
+    }
+
+    // Set up
+    setupMetaGenerator();
+    document.addEventListener('astro:page-load', setupMetaGenerator);
+  </script>
+</ToolLayout>

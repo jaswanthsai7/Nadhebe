@@ -1,0 +1,195 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'seo')?.tools.find(t => t.slug === 'robots-generator')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="SEO Tools"
+  categoryUrl="/tools/seo"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="space-y-16">
+    <div>
+      <label class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">All Robots (Default Rule)</label>
+      <select id="robots-all" class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent">
+        <option value="allow">Allow All (Default)</option>
+        <option value="disallow">Disallow All</option>
+      </select>
+    </div>
+    
+    <div>
+      <label for="robots-sitemap" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Sitemap URL (Optional)</label>
+      <input
+        type="url"
+        id="robots-sitemap"
+        placeholder="https://nadhebe.com/sitemap-index.xml"
+        class="w-full rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-caption text-ink dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+      />
+    </div>
+
+    <div>
+      <label for="robots-disallowed" class="block text-meta font-sans font-semibold text-ink dark:text-ink-dark mb-8">Disallowed Paths (One per line)</label>
+      <textarea
+        id="robots-disallowed"
+        placeholder="/admin/&#10;/private/&#10;/tmp/"
+        class="w-full h-[80px] rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+      ></textarea>
+    </div>
+
+    <div class="flex flex-col gap-12 pt-8 border-t border-border dark:border-border-dark">
+      <p class="text-meta font-sans font-semibold text-ink dark:text-ink-dark">Bot-Specific Disallow Rules</p>
+      
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="bot-google" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Block Googlebot (Google Search)</span>
+      </label>
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="bot-bing" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Block Bingbot (Bing Search)</span>
+      </label>
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="bot-baidu" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Block Baiduspider (Baidu Search)</span>
+      </label>
+      <label class="flex items-center gap-8 cursor-pointer select-none">
+        <input type="checkbox" id="bot-yandex" class="rounded border-border text-accent focus:ring-accent w-16 h-16" />
+        <span class="text-caption text-ink dark:text-ink-dark">Block YandexBot (Yandex Search)</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="relative flex-grow">
+      <textarea
+        id="robots-output"
+        readonly
+        class="w-full h-[250px] rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        placeholder="Generated robots.txt will appear here..."
+      ></textarea>
+    </div>
+    <div class="mt-16">
+      <button
+        id="copy-robots-btn"
+        class="w-full btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold flex items-center justify-center gap-8 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+        <span id="copy-robots-text">Copy robots.txt</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">Robots.txt Directives Explained</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    A **robots.txt** file is a configuration file that guides how search engine robots (spiders) crawl your site. It is read by crawlers before indexing any page. The primary commands are:
+  </p>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24 space-y-8">
+    <li><code>User-agent</code>: Defines which search crawler the following instructions apply to (e.g. <code>*</code> for all bots, <code>Googlebot</code> specifically for Google).</li>
+    <li><code>Disallow</code>: Tells the specified user-agent not to access or crawl a particular directory path or URL (e.g. <code>Disallow: /admin/</code>).</li>
+    <li><code>Allow</code>: Tells search bots they are allowed to access a subdirectory within a disallowed parent directory.</li>
+    <li><code>Sitemap</code>: Specifies the absolute URL of the XML sitemap index to help crawlers locate and index all of your pages (e.g. <code>Sitemap: https://yoursite.com/sitemap.xml</code>).</li>
+  </ul>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupRobotsGenerator() {
+      const robotsAll = document.getElementById('robots-all') as HTMLSelectElement | null;
+      const robotsSitemap = document.getElementById('robots-sitemap') as HTMLInputElement | null;
+      const robotsDisallowed = document.getElementById('robots-disallowed') as HTMLTextAreaElement | null;
+      
+      const botGoogle = document.getElementById('bot-google') as HTMLInputElement | null;
+      const botBing = document.getElementById('bot-bing') as HTMLInputElement | null;
+      const botBaidu = document.getElementById('bot-baidu') as HTMLInputElement | null;
+      const botYandex = document.getElementById('bot-yandex') as HTMLInputElement | null;
+
+      const outputText = document.getElementById('robots-output') as HTMLTextAreaElement | null;
+      const copyBtn = document.getElementById('copy-robots-btn');
+      const copyText = document.getElementById('copy-robots-text');
+
+      if (!outputText) return;
+
+      function generateRobots() {
+        let text = '# Generated by Nadhebe Robots.txt Generator\n# Safe browser-based client-side utility\n\n';
+
+        // General Rules
+        text += 'User-agent: *\n';
+        if (robotsAll?.value === 'disallow') {
+          text += 'Disallow: /\n';
+        } else {
+          // Custom disallowed paths
+          const disallowedList = robotsDisallowed?.value.split('\n').map(p => p.trim()).filter(p => p.length > 0) || [];
+          if (disallowedList.length > 0) {
+            disallowedList.forEach(p => {
+              text += `Disallow: ${p}\n`;
+            });
+          } else {
+            text += 'Disallow:\n';
+          }
+        }
+        text += '\n';
+
+        // Specific Bots
+        const bots = [
+          { checkbox: botGoogle, name: 'Googlebot' },
+          { checkbox: botBing, name: 'Bingbot' },
+          { checkbox: botBaidu, name: 'Baiduspider' },
+          { checkbox: botYandex, name: 'YandexBot' }
+        ];
+
+        bots.forEach(b => {
+          if (b.checkbox?.checked) {
+            text += `User-agent: ${b.name}\nDisallow: /\n\n`;
+          }
+        });
+
+        // Sitemap
+        const sitemapVal = robotsSitemap?.value.trim();
+        if (sitemapVal) {
+          text += `Sitemap: ${sitemapVal}\n`;
+        }
+
+        outputText!.value = text.trim();
+      }
+
+      // Bind events
+      const inputs = [robotsAll, robotsSitemap, robotsDisallowed, botGoogle, botBing, botBaidu, botYandex];
+      inputs.forEach(el => {
+        el?.addEventListener('input', generateRobots);
+        el?.addEventListener('change', generateRobots);
+      });
+
+      // Initial gen
+      generateRobots();
+
+      // Copy callback
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', () => {
+          const text = outputText.value;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(() => {
+            copyText.textContent = 'Copied!';
+            copyBtn.classList.add('bg-success/10', 'border-success/30', 'text-success');
+            setTimeout(() => {
+              copyText.textContent = 'Copy robots.txt';
+              copyBtn.classList.remove('bg-success/10', 'border-success/30', 'text-success');
+            }, 2000);
+          });
+        });
+      }
+    }
+
+    // Set up
+    setupRobotsGenerator();
+    document.addEventListener('astro:page-load', setupRobotsGenerator);
+  </script>
+</ToolLayout>

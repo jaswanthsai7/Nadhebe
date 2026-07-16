@@ -1,0 +1,86 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+export async function getStaticPaths() {
+  return toolsData.map((cat) => ({
+    params: { category: cat.slug },
+    props: { categoryData: cat }
+  }));
+}
+
+const { categoryData } = Astro.props;
+const pageUrl = Astro.url.href;
+---
+
+<BaseLayout
+  title={`${categoryData.name} - Nadhebe Free Tools`}
+  description={categoryData.description}
+  canonicalUrl={pageUrl}
+>
+  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
+    <!-- Breadcrumbs -->
+    <nav class="mb-24 flex items-center gap-8 text-meta text-muted dark:text-muted-dark" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-accent dark:hover:text-accent-dark transition-colors">Home</a>
+      <span class="text-border dark:text-border-dark">/</span>
+      <a href="/tools" class="hover:text-accent dark:hover:text-accent-dark transition-colors">Tools</a>
+      <span class="text-border dark:text-border-dark">/</span>
+      <span class="text-ink dark:text-ink-dark font-medium">{categoryData.name}</span>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="border-b border-border dark:border-border-dark pb-24 mb-32">
+      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Hub</p>
+      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">{categoryData.name}</h1>
+      <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">{categoryData.description}</p>
+    </div>
+
+    <!-- Tools Listing Grid -->
+    {categoryData.tools.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24">
+        {categoryData.tools.map((tool) => (
+          <a
+            href={`/tools/${categoryData.slug}/${tool.slug}`}
+            class="card group flex flex-col justify-between overflow-hidden rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-24 hover:border-accent/30 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
+          >
+            <div>
+              <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
+                {tool.name}
+              </h3>
+              <p class="text-caption font-sans text-ink2 dark:text-ink2-dark leading-relaxed mt-12">
+                {tool.description}
+              </p>
+              <div class="flex flex-wrap gap-8 mt-16">
+                {tool.keywords.slice(0, 3).map((kw) => (
+                  <span class="text-xs font-mono px-8 py-4 rounded-4 bg-surface2 dark:bg-surface2-dark text-muted dark:text-muted-dark">
+                    #{kw.replace(/\s+/g, '-')}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div class="text-meta font-sans font-semibold text-accent dark:text-accent-dark mt-24 flex items-center gap-4">
+              Open utility
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-12 h-12 transition-transform group-hover:translate-x-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <!-- Empty / Coming Soon State -->
+      <div class="text-center py-64 rounded-16 border border-dashed border-border dark:border-border-dark bg-surface/50 dark:bg-surface-dark/50">
+        <div class="mx-auto flex h-48 w-48 items-center justify-center rounded-pill bg-surface2 dark:bg-surface2-dark text-muted">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-24 w-24">
+            <circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />
+          </svg>
+        </div>
+        <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark mt-16">Tools Coming Soon</h2>
+        <p class="mt-8 text-caption text-ink2 dark:text-ink2-dark max-w-sm mx-auto">
+          We are currently polishing these client-side utilities. They will be added automatically to this category in the coming weeks.
+        </p>
+        <a href="/tools" class="btn-secondary mt-24 inline-block">Back to all tools</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>

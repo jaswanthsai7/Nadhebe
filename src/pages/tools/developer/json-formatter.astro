@@ -1,0 +1,186 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'developer')?.tools.find(t => t.slug === 'json-formatter')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="Developer Tools"
+  categoryUrl="/tools/developer"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="relative flex-grow">
+      <textarea
+        id="json-input"
+        class="w-full h-[280px] rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        placeholder="Paste your raw JSON text here..."
+      ></textarea>
+    </div>
+    <div class="mt-16 flex gap-12">
+      <button
+        id="format-btn"
+        class="flex-1 btn bg-accent hover:bg-accent/90 text-white font-sans font-semibold py-12 rounded-control transition-all"
+      >
+        Beautify
+      </button>
+      <button
+        id="minify-btn"
+        class="flex-1 btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold transition-colors"
+      >
+        Minify
+      </button>
+      <button
+        id="clear-btn"
+        class="btn border border-danger/20 text-danger hover:bg-danger/5 py-12 px-16 rounded-control font-sans font-semibold transition-colors"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="space-y-12 flex-grow flex flex-col">
+      <!-- Validation Alert -->
+      <div id="validation-status" class="p-12 rounded-12 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark flex items-center gap-8 text-caption font-sans font-semibold text-muted">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" />
+        </svg>
+        <span id="status-text">Awaiting input...</span>
+      </div>
+
+      <div class="relative flex-grow">
+        <textarea
+          id="json-output"
+          readonly
+          class="w-full h-[220px] rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+          placeholder="Formatted JSON will appear here..."
+        ></textarea>
+      </div>
+    </div>
+    
+    <div class="mt-16">
+      <button
+        id="copy-json-btn"
+        class="w-full btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold flex items-center justify-center gap-8 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+        <span id="copy-json-text">Copy JSON</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">Common JSON Syntax Pitfalls</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    JSON (JavaScript Object Notation) is a strict data transmission standard. Unlike JavaScript objects, standard JSON does not tolerate format variations. The most common errors include:
+  </p>
+  <ul class="list-disc pl-24 text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24 space-y-8">
+    <li>**Trailing Commas**: Commas after the last key-value item in an object or array are invalid in standard JSON.</li>
+    <li>**Single Quotes**: Key names and string values MUST be wrapped in double quotes (<code>"</code>). Single quotes (<code>'</code>) are invalid.</li>
+    <li>**Unquoted Keys**: All keys in JSON objects must be double-quoted.</li>
+    <li>**Leading Zeroes**: Numbers cannot have leading zeros (e.g. <code>05</code> is invalid, use <code>5</code>).</li>
+  </ul>
+
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">How this Formatter Helps</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-32">
+    When your JSON has bugs, our browser-based validator catches the specific syntax issue. It reads the DOM exception and updates the status panel with a helpful warning message indicating the structural failure point, allowing developers to debug API payloads quickly.
+  </p>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupJsonFormatter() {
+      const jsonInput = document.getElementById('json-input') as HTMLTextAreaElement | null;
+      const jsonOutput = document.getElementById('json-output') as HTMLTextAreaElement | null;
+      const formatBtn = document.getElementById('format-btn');
+      const minifyBtn = document.getElementById('minify-btn');
+      const clearBtn = document.getElementById('clear-btn');
+      const statusDiv = document.getElementById('validation-status');
+      const statusText = document.getElementById('status-text');
+      const copyBtn = document.getElementById('copy-json-btn');
+      const copyText = document.getElementById('copy-json-text');
+
+      if (!jsonInput || !jsonOutput || !formatBtn || !minifyBtn || !statusDiv || !statusText) return;
+
+      function updateStatus(valid: boolean, message: string) {
+        statusText!.textContent = message;
+        if (valid) {
+          statusDiv!.className = 'p-12 rounded-12 border border-success/30 bg-success/5 flex items-center gap-8 text-caption font-sans font-semibold text-success';
+          statusDiv!.innerHTML = `
+            <svg class="h-16 w-16 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span>${message}</span>
+          `;
+        } else {
+          statusDiv!.className = 'p-12 rounded-12 border border-danger/30 bg-danger/5 flex items-center gap-8 text-caption font-sans font-semibold text-danger';
+          statusDiv!.innerHTML = `
+            <svg class="h-16 w-16 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <span>${message}</span>
+          `;
+        }
+      }
+
+      function processJSON(beautify: boolean) {
+        const val = jsonInput!.value.trim();
+        if (!val) {
+          jsonOutput!.value = '';
+          statusText!.textContent = 'Awaiting input...';
+          statusDiv!.className = 'p-12 rounded-12 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark flex items-center gap-8 text-caption font-sans font-semibold text-muted';
+          statusDiv!.innerHTML = `
+            <svg class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span id="status-text">Awaiting input...</span>
+          `;
+          return;
+        }
+
+        try {
+          const parsed = JSON.parse(val);
+          const formatted = beautify ? JSON.stringify(parsed, null, 2) : JSON.stringify(parsed);
+          jsonOutput!.value = formatted;
+          updateStatus(true, 'Valid JSON Structure!');
+        } catch (e: any) {
+          jsonOutput!.value = '';
+          updateStatus(false, `Syntax Error: ${e.message}`);
+        }
+      }
+
+      formatBtn.addEventListener('click', () => processJSON(true));
+      minifyBtn.addEventListener('click', () => processJSON(false));
+      
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          jsonInput.value = '';
+          processJSON(true);
+        });
+      }
+
+      // Copy callback
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', () => {
+          const text = jsonOutput.value;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(() => {
+            copyText.textContent = 'Copied!';
+            copyBtn.classList.add('bg-success/10', 'border-success/30', 'text-success');
+            setTimeout(() => {
+              copyText.textContent = 'Copy JSON';
+              copyBtn.classList.remove('bg-success/10', 'border-success/30', 'text-success');
+            }, 2000);
+          });
+        });
+      }
+    }
+
+    // Set up
+    setupJsonFormatter();
+    document.addEventListener('astro:page-load', setupJsonFormatter);
+  </script>
+</ToolLayout>

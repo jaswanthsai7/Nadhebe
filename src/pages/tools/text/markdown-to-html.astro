@@ -1,0 +1,226 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { toolsData } from '@/data/toolsList';
+
+const tool = toolsData.find(c => c.slug === 'text')?.tools.find(t => t.slug === 'markdown-to-html')!;
+---
+
+<ToolLayout
+  title={tool.name}
+  description={tool.description}
+  toolName={tool.name}
+  category="Text Tools"
+  categoryUrl="/tools/text"
+  faqs={tool.faqs}
+>
+  <!-- Inputs Left Column -->
+  <div slot="input" class="flex flex-col justify-between h-full min-h-[300px]">
+    <div class="relative flex-grow">
+      <textarea
+        id="md-input"
+        class="w-full h-[280px] rounded-control border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+        placeholder="Type raw Markdown here..."
+      ># Hello World
+
+This is a **bold** and *italic* description of a markdown parser.
+
+## Features
+- Fully client-side processing
+- Live visual preview
+- Clean HTML source code export
+
+Enjoy formatting!</textarea>
+    </div>
+    <div class="mt-16 flex gap-12">
+      <button
+        id="clear-md-btn"
+        class="w-full btn border border-danger/20 text-danger hover:bg-danger/5 py-12 rounded-control font-sans font-semibold transition-colors"
+      >
+        Clear Text
+      </button>
+    </div>
+  </div>
+
+  <!-- Outputs Right Column -->
+  <div slot="output" class="flex flex-col justify-between h-full min-h-[300px] space-y-16">
+    <div>
+      <!-- View Mode Toggles -->
+      <div class="flex rounded-8 bg-surface2 dark:bg-surface2-dark p-4 border border-border dark:border-border-dark mb-16">
+        <button
+          id="toggle-preview"
+          class="flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 bg-surface dark:bg-surface-dark text-accent dark:text-accent-dark shadow-subtle border border-border/10 transition-all"
+        >
+          Visual Preview
+        </button>
+        <button
+          id="toggle-source"
+          class="flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 text-muted hover:text-ink dark:hover:text-ink-dark transition-colors"
+        >
+          HTML Code
+        </button>
+      </div>
+
+      <!-- Preview Render Area -->
+      <div
+        id="md-preview"
+        class="w-full h-[200px] overflow-y-auto rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark p-16 prose dark:prose-invert text-caption text-ink dark:text-ink-dark focus:outline-none"
+      >
+      </div>
+
+      <!-- Raw Source Code Area -->
+      <div id="md-source-wrapper" class="hidden">
+        <textarea
+          id="md-source"
+          readonly
+          class="w-full h-[200px] rounded-control border border-border dark:border-border-dark bg-code dark:bg-code-dark font-mono text-meta p-12 text-ink dark:text-ink-dark focus:outline-none resize-none"
+          placeholder="HTML markup will appear here..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div>
+      <button
+        id="copy-html-btn"
+        class="w-full btn border border-border dark:border-border-dark text-ink dark:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark py-12 rounded-control font-sans font-semibold flex items-center justify-center gap-8 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        </svg>
+        <span id="copy-html-text">Copy HTML</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Educational Section -->
+  <h2 class="text-h2 font-display font-bold text-ink dark:text-ink-dark mb-16">What is Markdown?</h2>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-16">
+    **Markdown** is a lightweight markup language created by John Gruber in 2004. It allows authors to write formatted text using a simple, readable plain-text syntax that can be compiled directly into standard HTML.
+  </p>
+  <p class="text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-24">
+    By using standard formatting symbols like hash tags (<code>#</code>) for headings, asterisks (<code>*</code>) for emphasis, and dashes (<code>-</code>) for lists, writers can draft structured documents quickly without having to manually type verbose HTML tags like <code>&lt;h1&gt;</code>, <code>&lt;strong&gt;</code>, or <code>&lt;ul&gt;</code>.
+  </p>
+
+  <!-- Client-side Interactive Script -->
+  <script>
+    function setupMarkdownConverter() {
+      const input = document.getElementById('md-input') as HTMLTextAreaElement | null;
+      const preview = document.getElementById('md-preview');
+      const sourceWrapper = document.getElementById('md-source-wrapper');
+      const source = document.getElementById('md-source') as HTMLTextAreaElement | null;
+      const clearBtn = document.getElementById('clear-md-btn');
+
+      const tabPreview = document.getElementById('toggle-preview');
+      const tabSource = document.getElementById('toggle-source');
+
+      const copyBtn = document.getElementById('copy-html-btn');
+      const copyText = document.getElementById('copy-html-text');
+
+      if (!input || !preview || !source || !sourceWrapper || !tabPreview || !tabSource) return;
+
+      // Custom Markdown to HTML Compiler via Regex
+      function compileMarkdown(md: string): string {
+        let html = md
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+        // Headers
+        html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+        html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+        html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+
+        // Bold & Italic
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        // Inline Code
+        html = html.replace(/`(.*?)`/g, '<code>$1</code>');
+
+        // Blockquotes
+        html = html.replace(/^> (.*?)$/gm, '<blockquote>$1</blockquote>');
+
+        // Horizontal Rules
+        html = html.replace(/^---$/gm, '<hr />');
+
+        // Unordered Lists
+        // Matches - list item
+        html = html.replace(/^\- (.*?)$/gm, '<li>$1</li>');
+        // Wrap contiguous list items in <ul>
+        // We look for consecutive <li> blocks and wrap them
+        html = html.replace(/(<li>.*?<\/li>)+/gs, '<ul>$&</ul>');
+
+        // Paras: Split by double newlines and wrap in p (if not block level tags)
+        const blockTags = ['h1', 'h2', 'h3', 'ul', 'li', 'blockquote', 'hr'];
+        html = html.split(/\n\n+/).map(para => {
+          const trimmed = para.trim();
+          if (!trimmed) return '';
+          const matchesBlock = blockTags.some(tag => trimmed.startsWith(`<${tag}`) || trimmed.startsWith('<ul><li'));
+          if (matchesBlock) return trimmed;
+          return `<p>${trimmed.replace(/\n/g, '<br />')}</p>`;
+        }).join('\n');
+
+        return html;
+      }
+
+      function updateConversion() {
+        const text = input!.value;
+        const html = compileMarkdown(text);
+        preview!.innerHTML = html;
+        source!.value = html;
+      }
+
+      // Bind input events
+      input.addEventListener('input', updateConversion);
+      
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          updateConversion();
+        });
+      }
+
+      // Toggle Views
+      tabPreview.addEventListener('click', () => {
+        // Active Preview tab
+        tabPreview.className = 'flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 bg-surface dark:bg-surface-dark text-accent dark:text-accent-dark shadow-subtle border border-border/10 transition-all';
+        tabSource.className = 'flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 text-muted hover:text-ink dark:hover:text-ink-dark transition-colors';
+        
+        preview.classList.remove('hidden');
+        sourceWrapper.classList.add('hidden');
+      });
+
+      tabSource.addEventListener('click', () => {
+        // Active Source tab
+        tabSource.className = 'flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 bg-surface dark:bg-surface-dark text-accent dark:text-accent-dark shadow-subtle border border-border/10 transition-all';
+        tabPreview.className = 'flex-1 text-xs font-sans font-semibold py-8 px-12 rounded-6 text-muted hover:text-ink dark:hover:text-ink-dark transition-colors';
+        
+        preview.classList.add('hidden');
+        sourceWrapper.classList.remove('hidden');
+      });
+
+      // Initial compilation
+      updateConversion();
+
+      // Copy callback
+      if (copyBtn && copyText) {
+        copyBtn.addEventListener('click', () => {
+          const text = source.value;
+          if (!text) return;
+          navigator.clipboard.writeText(text).then(() => {
+            copyText.textContent = 'Copied!';
+            copyBtn.classList.add('bg-success/10', 'border-success/30', 'text-success');
+            setTimeout(() => {
+              copyText.textContent = 'Copy HTML';
+              copyBtn.classList.remove('bg-success/10', 'border-success/30', 'text-success');
+            }, 2000);
+          });
+        });
+      }
+    }
+
+    // Set up
+    setupMarkdownConverter();
+    document.addEventListener('astro:page-load', setupMarkdownConverter);
+  </script>
+</ToolLayout>

@@ -116,7 +116,7 @@ export function getArticleUrl(article: { collection: string; slug: string }): st
     case 'use-cases':
       return `/use-cases/${article.slug}`;
     case 'tools':
-      return `/tools/${article.slug}`;
+      return `/utilities/${article.slug}`;
     case 'guides':
       return `/guides/${article.slug}`;
     case 'frameworks':

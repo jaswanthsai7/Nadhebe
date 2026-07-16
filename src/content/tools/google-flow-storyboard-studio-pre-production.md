@@ -15,7 +15,7 @@ difficulty: "intermediate"
 estimatedReadingTime: 6
 youtubeVideoId: "T1rf33ToVIE"
 youtubeVideoUrl: "https://youtu.be/T1rf33ToVIE?si=VkXldyUE5ZpjLyBd"
-canonicalUrl: "https://nadhebe.com/tools/google-flow-storyboard-studio-pre-production"
+canonicalUrl: "https://nadhebe.com/utilities/google-flow-storyboard-studio-pre-production"
 faq:
   - question: "How does Storyboard Studio parse script dialogues and actions?"
     answer: "It uses an integrated language model parser that checks text formatting and automatically extracts dialogues, actions, speaker tags, and environment cues."

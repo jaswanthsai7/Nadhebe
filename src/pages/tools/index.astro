@@ -1,61 +1,176 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getArticleUrl } from '../../utils/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const posts = await getCollection('tools');
-const sorted = posts
-  .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const categories = [
+  {
+    name: 'AI Tools',
+    slug: 'ai',
+    description: 'Calculators, model cost analyzers, and advanced prompt engineering dashboards.',
+    icon: 'M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z',
+    toolsCount: 1
+  },
+  {
+    name: 'Developer Tools',
+    slug: 'developer',
+    description: 'Instant utilities for developers: UUID v4 generators, hash checkers, Base64 toolkits, and JSON formatters.',
+    icon: 'M16 18l6-6-6-6M8 6l-6 6 6 6M12 2l-4 20',
+    toolsCount: 4
+  },
+  {
+    name: 'Text Tools',
+    slug: 'text',
+    description: 'Markdown compilers, character counters, word density tools, and reading time calculators.',
+    icon: 'M4 7V4h16v3M9 20h6M12 4v16',
+    toolsCount: 2
+  },
+  {
+    name: 'SEO Tools',
+    slug: 'seo',
+    description: 'Robots.txt builders, SERP simulation checkers, schema validators, and metadata formatters.',
+    icon: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM9 12l2 2 4-4',
+    toolsCount: 2
+  },
+  {
+    name: 'YouTube Tools',
+    slug: 'youtube',
+    description: 'Widescreen thumbnail extractors, metadata generators, tag cleaners, and transcript scrapers.',
+    icon: 'M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25a29 29 0 0 0-.46-5.33zM10 15V9l5 3-5 3z',
+    toolsCount: 1
+  },
+  {
+    name: 'Image Tools',
+    slug: 'image',
+    description: 'Lossless compressors, format converters, and markup optimizers.',
+    icon: 'M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm11 9-4.5-6-3.5 4.5-2.5-3L3 19h16.5z',
+    toolsCount: 0
+  },
+  {
+    name: 'Video Tools',
+    slug: 'video',
+    description: 'High-speed compressors, frame extractors, and subtitle generators.',
+    icon: 'M23 7l-7 5 7 5V7zM1 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H1z',
+    toolsCount: 0
+  },
+  {
+    name: 'Prompt Tools',
+    slug: 'prompt',
+    description: 'System prompt compiler engines for Claude, ChatGPT, Gemini, and Cursor.',
+    icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+    toolsCount: 0
+  },
+  {
+    name: 'Utilities',
+    slug: 'utilities',
+    description: 'CSV-JSON converters, Cron generators, SQL formatters, and minifiers.',
+    icon: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+    toolsCount: 0
+  }
+];
+
+const pageUrl = Astro.url.href;
 ---
 
 <BaseLayout
-  title="Developer Tools - Nadhebe"
-  description="In-depth reviews and engineering showcases of modern builder utilities."
+  title="Nadhebe AI & Developer Tools Platform"
+  description="Explore our library of free, client-side tools for developers, creators, marketers, and AI prompt engineering."
+  canonicalUrl={pageUrl}
 >
-  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
-      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Tools</h1>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-bg dark:bg-bg-dark border-b border-border dark:border-border-dark py-48 sm:py-64">
+    <div class="mx-auto max-w-6xl px-24 text-center">
+      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-12">Nadhebe Platform</p>
+      <h1 class="font-display text-h1 sm:text-display font-extrabold text-ink dark:text-ink-dark leading-tight tracking-tight max-w-4xl mx-auto">
+        Free AI & Developer Tools
+      </h1>
+      <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark max-w-2xl mx-auto leading-relaxed">
+        Premium, high-performance web utilities running entirely in your browser sandbox. Your data never leaves your computer.
+      </p>
+
+      <!-- Quick Search Bar -->
+      <div class="mt-32 max-w-md mx-auto relative rounded-card shadow-subtle border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex items-center p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-20 h-20 text-muted ml-8 shrink-0">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+        <input 
+          type="text" 
+          id="tools-search-input" 
+          placeholder="Search for UUID, JSON, robots.txt..." 
+          class="w-full bg-transparent px-8 py-8 font-sans text-caption text-ink dark:text-ink-dark placeholder-muted focus:outline-none"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
+    <div class="mb-32">
+      <h2 class="section-title">Browse Utilities by Category</h2>
+      <p class="mt-8 section-desc">Find specialized client-side web tools tailored to your daily workflow.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
-      {sorted.map((post) => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16" id="categories-grid">
+      {categories.map((cat) => (
         <a
-          href={getArticleUrl({ ...post, collection: 'tools' })}
-          class="card group flex flex-col overflow-hidden p-0"
+          href={`/tools/${cat.slug}`}
+          class="category-card group flex flex-col justify-between rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-24 hover:border-accent/30 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
+          data-name={cat.name.toLowerCase()}
+          data-desc={cat.description.toLowerCase()}
         >
-          <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
-            <img
-              src={post.data.heroImage}
-              alt={post.data.title}
-              width="400"
-              height="225"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div class="p-16 flex-1 flex flex-col justify-between">
-            <div>
-              <span class="badge mb-12">
-                {post.data.category}
+          <div>
+            <div class="flex items-center justify-between mb-16">
+              <div class="flex h-40 w-40 items-center justify-center rounded-8 bg-surface2 dark:bg-surface2-dark text-ink2 dark:text-ink2-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
+                  <path d={cat.icon} />
+                </svg>
+              </div>
+              <span class="text-meta font-mono font-medium px-8 py-4 rounded-4 bg-surface2 dark:bg-surface2-dark text-muted dark:text-muted-dark">
+                {cat.toolsCount} {cat.toolsCount === 1 ? 'tool' : 'tools'}
               </span>
-              <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
-                {post.data.title}
-              </h3>
-              <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
-                {post.data.description}
-              </p>
             </div>
-            <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
-              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </div>
+            <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
+              {cat.name}
+            </h3>
+            <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark leading-relaxed">
+              {cat.description}
+            </p>
+          </div>
+          <div class="mt-20 flex items-center gap-4 text-meta text-accent dark:text-accent-dark font-semibold">
+            Explore category
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-12 h-12 transition-transform group-hover:translate-x-2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </div>
         </a>
       ))}
     </div>
-  </div>
+  </section>
+
+  <!-- Client-side filter script -->
+  <script>
+    function setupToolsSearch() {
+      const searchInput = document.getElementById('tools-search-input') as HTMLInputElement | null;
+      const cards = document.querySelectorAll('.category-card');
+      
+      if (searchInput && cards.length > 0) {
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.toLowerCase().trim();
+          cards.forEach(card => {
+            const name = card.getAttribute('data-name') || '';
+            const desc = card.getAttribute('data-desc') || '';
+            
+            // Basic fuzzy matching
+            if (name.includes(query) || desc.includes(query)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      }
+    }
+
+    // Initialize search
+    setupToolsSearch();
+    document.addEventListener('astro:page-load', setupToolsSearch);
+  </script>
 </BaseLayout>

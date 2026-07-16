@@ -15,7 +15,7 @@ difficulty: "advanced"
 estimatedReadingTime: 8
 youtubeVideoId: "7f3ZHPyKiwI"
 youtubeVideoUrl: "https://youtu.be/7f3ZHPyKiwI?si=WTjYgXhoYZcL3tcU"
-canonicalUrl: "https://nadhebe.com/tools/gpt-5-6-programmatic-tool-calling"
+canonicalUrl: "https://nadhebe.com/utilities/gpt-5-6-programmatic-tool-calling"
 faq:
   - question: "How does programmatic tool calling differ from traditional function calling?"
     answer: "Traditional function calling outputs a JSON payload for the client to execute. Programmatic tool calling allows the model to write and execute scripts directly inside a secure sandbox to coordinate and check its own tasks."
