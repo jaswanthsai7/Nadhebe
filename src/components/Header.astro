@@ -54,7 +54,7 @@ const moreNav = [
             {moreNav.map((item) => (
               <a
                 href={item.href}
-                class="block rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover dark:hover:text-ink-dark transition-colors duration-150"
+                class="block rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-colors duration-150"
               >
                 {item.label}
               </a>
@@ -119,13 +119,13 @@ const moreNav = [
       {[...mainNav, ...moreNav].map((item) => (
         <a
           href={item.href}
-          class="block rounded-8 px-12 py-12 text-body font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover dark:hover:text-ink-dark transition-colors duration-150"
+          class="block rounded-8 px-12 py-12 text-body font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-colors duration-150"
         >
           {item.label}
         </a>
       ))}
       <div class="pt-8 border-t border-border dark:border-border-dark">
-        <button type="button" data-search-trigger class="w-full text-left rounded-8 px-12 py-12 text-body font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover dark:hover:text-ink-dark transition-colors duration-150 cursor-pointer">
+        <button type="button" data-search-trigger class="w-full text-left rounded-8 px-12 py-12 text-body font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-colors duration-150 cursor-pointer">
           Search
         </button>
       </div>
