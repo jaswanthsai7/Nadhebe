@@ -1,0 +1,21 @@
+{
+  "issuer": "https://nadhebe.pages.dev",
+  "authorization_endpoint": "https://nadhebe.pages.dev/oauth/authorize",
+  "token_endpoint": "https://nadhebe.pages.dev/oauth/token",
+  "jwks_uri": "https://nadhebe.pages.dev/.well-known/jwks.json",
+  "response_types_supported": [
+    "code",
+    "token",
+    "id_token"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "client_credentials"
+  ],
+  "subject_types_supported": [
+    "public"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "RS256"
+  ]
+}

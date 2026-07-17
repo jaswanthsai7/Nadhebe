@@ -1,0 +1,74 @@
+# Nadhebe — AI Engineering Publication
+
+> Expert tutorials, in-depth reviews, system prompts, and technical comparisons for AI engineers and developers.
+
+## Content Directory
+
+### News
+
+- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.pages.dev/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
+- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.pages.dev/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
+
+### Tutorials
+
+- [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow): A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
+- [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
+- [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.pages.dev/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
+- [How to Install and Set Up Instatic CMS Locally](https://nadhebe.pages.dev/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
+
+### YouTube Articles
+
+- [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.pages.dev/youtube/fable-5-vs-gpt-5-5-comparison): Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.
+- [First Look: Google Flow's New Storyboard Studio Addition](https://nadhebe.pages.dev/youtube/google-flow-storyboard-studio-guide): A walk-through of Google Flow's Storyboard Studio, exploring how its AI script analysis, asset consistency maps, and camera presets optimize pre-production.
+- [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.pages.dev/youtube/gpt-5-6-autonomous-engine): Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.
+- [Inside the Multi-Agent YouTube Automation System](https://nadhebe.pages.dev/youtube/open-source-youtube-automation-agent): Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.
+- [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.pages.dev/youtube/instatic-local-setup-importer): Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.
+- [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.pages.dev/youtube/instatic-visual-cms-walkthrough): Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.
+
+### Tool Reviews
+
+- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.pages.dev/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.pages.dev/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
+
+### Comparisons
+
+- [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.pages.dev/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks): A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
+- [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
+- [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
+
+### Best Practices
+
+- [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management): Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
+- [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design): Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
+- [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling): Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
+
+### Tools
+
+- [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.pages.dev/tools/google-flow-storyboard-studio-overview): An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
+- [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
+- [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.pages.dev/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
+- [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.pages.dev/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
+
+### Guides
+
+- [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.pages.dev/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
+- [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.pages.dev/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
+- [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.pages.dev/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
+
+### Frameworks
+
+- [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.pages.dev/frameworks/sqlite-state-sharing-multi-agent-architecture): A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.
+- [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.pages.dev/frameworks/instatic-astro-islands-frameworks-integration): An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
+
+### Prompts
+
+- [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts): Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
+
+### Use Cases
+
+- [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.pages.dev/use-cases/instatic-enterprise-editorial-governance): How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
+
+### Case Studies
+
+- [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.pages.dev/case-studies/webflow-to-instatic-migration-savings): How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.
+

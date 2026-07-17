@@ -4,6 +4,8 @@ Allow: /
 # AI Discovery & Content Signals (RFC Draft)
 Content-Signal: ai-train=no, search=yes, ai-input=no
 
-Sitemap: https://example.com/sitemap-index.xml
-Sitemap: https://example.com/sitemap-image.xml
-Sitemap: https://example.com/sitemap-video.xml
+Sitemap: https://nadhebe.pages.dev/sitemap-index.xml
+Sitemap: https://nadhebe.pages.dev/sitemap-image.xml
+Sitemap: https://nadhebe.pages.dev/sitemap-video.xml
+Sitemap: https://nadhebe.pages.dev/llms.txt
+Sitemap: https://nadhebe.pages.dev/llms-full.txt

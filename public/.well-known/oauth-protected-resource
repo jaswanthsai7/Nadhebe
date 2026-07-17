@@ -1,0 +1,11 @@
+{
+  "resource": "https://nadhebe.pages.dev",
+  "authorization_servers": [
+    "https://github.com/login/oauth/authorize"
+  ],
+  "scopes_supported": [
+    "read",
+    "write",
+    "repo"
+  ]
+}
