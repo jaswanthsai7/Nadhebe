@@ -6,179 +6,215 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="AI Editorial OS — Contributor Workspace"
   description="Research, draft, edit, and submit technical AI articles directly into our editorial pipeline."
 >
-  <div class="mx-auto max-w-content px-24 py-40">
-    <!-- Header banner -->
-    <div class="flex items-center justify-between border-b border-border pb-20 mb-32 dark:border-border-dark">
-      <div>
-        <span class="badge mb-8 bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark">Week 1 Milestone</span>
-        <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark">AI Editorial OS</h1>
-        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4">Contributor Workspace — Production-grade Markdown generation and Git-backed reviews.</p>
-      </div>
-      <div class="flex items-center gap-12">
-        <a href="/" class="btn-secondary text-xs py-8 px-12">View Site</a>
-      </div>
-    </div>
+  <!-- Full-width translucent overlay to enhance text readability -->
+  <div class="absolute inset-0 bg-bg-dark/10 dark:bg-bg-dark/30 -z-10" aria-hidden="true"></div>
 
-    <!-- IDE Container Grid -->
-    <div class="grid grid-cols-1 xl:grid-cols-12 gap-24 items-start">
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-40">
+    <!-- Main Solid Glass-styled IDE Container (No blur) -->
+    <div class="bg-surface/80 dark:bg-surface-dark/90 border border-border/30 dark:border-border-dark/40 shadow-large rounded-20 p-24 sm:p-32">
       
-      <!-- LEFT PANEL: Scraper Config & Research Feed (col span 3) -->
-      <aside class="xl:col-span-3 space-y-20">
-        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
-          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Source Extraction</h2>
-          
-          <form id="generation-form" class="space-y-16">
-            <div>
-              <label for="source-url" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Paste Source URL</label>
-              <input
-                type="url"
-                id="source-url"
-                required
-                placeholder="https://youtube.com/watch?v=..."
-                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:focus:border-accent-dark"
-              />
-            </div>
+      <!-- Top Title and Status Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-border/20 dark:border-border-dark/25 pb-24 mb-32 gap-16">
+        <div>
+          <div class="flex items-center gap-12 mb-8">
+            <span class="inline-flex items-center gap-6 rounded-pill bg-accent/15 px-10 py-4 text-xs font-mono font-medium text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+              <span class="h-6 w-6 rounded-pill bg-accent animate-pulse dark:bg-accent-dark"></span>
+              Week 1 Milestone
+            </span>
+            <span class="text-meta text-muted dark:text-muted-dark uppercase tracking-widest text-xs">AI Editorial OS v1.0</span>
+          </div>
+          <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark tracking-tight">AI Contributor Studio</h1>
+          <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4">Draft, edit, and submit technical AI content directly to our Git-backed review queue.</p>
+        </div>
+        <div class="flex items-center gap-12">
+          <a href="/" class="inline-flex items-center gap-8 rounded-8 border border-border/30 bg-surface px-16 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark/35 dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-all duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 opacity-60"><path d="m12 19-7-7 7-7M5 12h14"/></svg>
+            Back to Site
+          </a>
+        </div>
+      </div>
 
-            <div>
-              <label for="source-type" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Source Type</label>
-              <select
-                id="source-type"
-                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+      <!-- Main IDE Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+        
+        <!-- LEFT SIDEBAR: Source & Progress (col span 3) -->
+        <aside class="lg:col-span-3 space-y-20">
+          
+          <!-- Source Card -->
+          <div class="rounded-16 border border-border/20 dark:border-border-dark/25 bg-surface2/30 dark:bg-surface-dark/40 p-20">
+            <div class="flex items-center gap-8 mb-16">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">Source Extraction</h2>
+            </div>
+            
+            <form id="generation-form" class="space-y-16">
+              <div>
+                <label for="source-url" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Paste Source URL</label>
+                <input
+                  type="url"
+                  id="source-url"
+                  required
+                  placeholder="https://youtube.com/watch?v=..."
+                  class="w-full rounded-8 border border-border/30 bg-surface2/20 dark:border-border-dark/30 dark:bg-surface-dark/30 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                />
+              </div>
+
+              <div>
+                <label for="source-type" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Source Type</label>
+                <select
+                  id="source-type"
+                  class="w-full rounded-8 border border-border/30 bg-surface2/20 dark:border-border-dark/30 dark:bg-surface-dark/30 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                >
+                  <option value="youtube">YouTube Video URL</option>
+                  <option value="github">GitHub Repository</option>
+                  <option value="website">Documentation / Blog</option>
+                  <option value="raw">Raw Text / Markdown</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                id="btn-generate"
+                class="w-full inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-accent to-indigo-600 hover:from-accent/90 hover:to-indigo-500 py-12 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-pointer"
               >
-                <option value="youtube">YouTube URL</option>
-                <option value="github">GitHub Repo</option>
-                <option value="website">Documentation / Blog</option>
-                <option value="raw">Raw Text Input</option>
-              </select>
-            </div>
-
-            <button
-              type="submit"
-              id="btn-generate"
-              class="w-full btn-primary py-10 text-caption font-semibold cursor-pointer justify-center"
-            >
-              Start Pipeline
-            </button>
-          </form>
-        </div>
-
-        <!-- Research Feed checklist -->
-        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
-          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">AI Research Feed</h2>
-          
-          <div class="space-y-12" id="research-feed">
-            <p class="text-caption font-sans text-muted dark:text-muted-dark italic">No job queued. Paste a URL above to begin.</p>
-          </div>
-        </div>
-      </aside>
-
-      <!-- MIDDLE PANEL: Split Workspace Editor (col span 6) -->
-      <main class="xl:col-span-6 space-y-20">
-        <div class="card p-0 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-medium overflow-hidden">
-          <!-- Editor Tabs -->
-          <div class="flex items-center justify-between border-b border-border dark:border-border-dark px-20 py-12 bg-surface2 dark:bg-surface2-dark">
-            <div class="flex items-center gap-6">
-              <button id="tab-editor" class="px-12 py-6 rounded-6 text-caption font-medium bg-surface dark:bg-surface-dark text-ink dark:text-ink-dark border border-border dark:border-border-dark cursor-pointer">Editor</button>
-              <button id="tab-split" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover dark:hover:bg-hover-dark cursor-pointer">Split View</button>
-              <button id="tab-preview" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover dark:hover:bg-hover-dark cursor-pointer">Live Preview</button>
-            </div>
-            <div class="flex items-center gap-8">
-              <span id="draft-status" class="text-meta text-muted dark:text-muted-dark uppercase tracking-wider">Empty Draft</span>
-            </div>
+                <span>Start Pipeline</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </form>
           </div>
 
-          <!-- Splittable Area -->
-          <div id="editor-workspace" class="grid grid-cols-1 gap-0 h-[600px] transition-all duration-150">
-            <!-- Left Pane: Editor -->
-            <div id="pane-editor" class="flex flex-col h-full">
-              <textarea
-                id="markdown-textarea"
-                placeholder="# Your AI generated article draft will load here..."
-                class="w-full flex-grow p-24 font-mono text-caption text-ink dark:text-ink-dark bg-transparent resize-none focus:outline-none overflow-y-auto leading-relaxed border-0"
-              ></textarea>
+          <!-- Research Feed -->
+          <div class="rounded-16 border border-border/20 dark:border-border-dark/25 bg-surface2/30 dark:bg-surface-dark/40 p-20">
+            <div class="flex items-center justify-between mb-16">
+              <div class="flex items-center gap-8">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 text-accent dark:text-accent-dark"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">Research Feed</h2>
+              </div>
+              <span id="draft-status" class="text-meta text-xs text-muted dark:text-muted-dark uppercase tracking-widest font-mono">Idle</span>
+            </div>
+            
+            <div class="space-y-16" id="research-feed">
+              <p class="text-caption font-sans text-muted dark:text-muted-dark italic">No job queued. Paste a URL above to begin.</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CENTER PANES: IDE Workspace Editor (col span 6) -->
+        <main class="lg:col-span-6 space-y-20">
+          <div class="rounded-16 border border-border/20 dark:border-border-dark/25 bg-surface dark:bg-surface-dark shadow-large overflow-hidden">
+            <!-- IDE Toolbar -->
+            <div class="flex items-center justify-between border-b border-border/20 dark:border-border-dark/20 px-20 py-12 bg-surface2/40 dark:bg-surface2-dark/30">
+              <div class="flex items-center gap-8">
+                <button id="tab-editor" class="px-12 py-6 rounded-6 text-caption font-medium bg-surface/80 dark:bg-surface-dark/80 text-ink dark:text-ink-dark border border-border/30 dark:border-border-dark/30 transition-all duration-150 cursor-pointer shadow-subtle">Editor</button>
+                <button id="tab-split" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover/40 hover:text-ink dark:hover:bg-hover-dark/40 dark:hover:text-ink-dark transition-all duration-150 cursor-pointer">Split View</button>
+                <button id="tab-preview" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover/40 hover:text-ink dark:hover:bg-hover-dark/40 dark:hover:text-ink-dark transition-all duration-150 cursor-pointer">Live Preview</button>
+              </div>
+              <div class="flex items-center gap-12">
+                <div class="flex gap-6">
+                  <span class="h-8 w-8 rounded-pill bg-danger-dark opacity-40"></span>
+                  <span class="h-8 w-8 rounded-pill bg-rating-gold opacity-40"></span>
+                  <span class="h-8 w-8 rounded-pill bg-success-dark opacity-40"></span>
+                </div>
+              </div>
             </div>
 
-            <!-- Right Pane: Rendered Preview -->
-            <div id="pane-preview" class="hidden border-l border-border dark:border-border-dark p-24 overflow-y-auto bg-surface dark:bg-surface-dark">
-              <div id="rendered-content" class="prose-article">
-                <p class="text-caption font-sans text-muted dark:text-muted-dark italic">Live HTML preview will display here.</p>
+            <!-- Workspace Textareas -->
+            <div id="editor-workspace" class="grid grid-cols-1 gap-0 h-[580px]">
+              <!-- Left Pane (Editor) -->
+              <div id="pane-editor" class="flex flex-col h-full bg-surface2/10 dark:bg-surface-dark/20">
+                <textarea
+                  id="markdown-textarea"
+                  placeholder="# Your generated markdown will load here..."
+                  class="w-full flex-grow p-24 font-mono text-caption text-ink dark:text-ink-dark bg-transparent resize-none focus:outline-none overflow-y-auto leading-relaxed border-0 focus:ring-0"
+                ></textarea>
+              </div>
+
+              <!-- Right Pane (HTML Live Preview) -->
+              <div id="pane-preview" class="hidden border-l border-border/20 dark:border-border-dark/25 p-24 overflow-y-auto bg-surface/90 dark:bg-surface-dark/95">
+                <div id="rendered-content" class="prose-article">
+                  <p class="text-caption font-sans text-muted dark:text-muted-dark italic">Your preview will be compiled and displayed here.</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <!-- RIGHT PANEL: Metadata, Metrics, & GitHub Submission (col span 3) -->
-      <aside class="xl:col-span-3 space-y-20">
-        <!-- Computed Metrics checklist -->
-        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
-          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Calculated Metrics</h2>
+        <!-- RIGHT SIDEBAR: Metrics & GitHub Submission (col span 3) -->
+        <aside class="lg:col-span-3 space-y-20">
           
-          <ul class="space-y-12">
-            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
-              <span>Word Count:</span>
-              <strong id="metric-wordcount" class="font-mono text-ink dark:text-ink-dark">0</strong>
-            </li>
-            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
-              <span>Reading Time:</span>
-              <strong id="metric-readingtime" class="font-mono text-ink dark:text-ink-dark">0 min</strong>
-            </li>
-            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
-              <span>Heading hierarchy:</span>
-              <span id="metric-heading-status" class="badge bg-danger/10 text-danger dark:bg-danger-dark/10 dark:text-danger-dark">No H1 Found</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Publishing Setup & Submission form -->
-        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
-          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Submission Details</h2>
-          
-          <form id="submission-form" class="space-y-16">
-            <div>
-              <label for="author-name" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Contributor Name</label>
-              <input
-                type="text"
-                id="author-name"
-                required
-                placeholder="Author Name"
-                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
-              />
+          <!-- Metrics Widgets -->
+          <div class="rounded-16 border border-border/20 dark:border-border-dark/25 bg-surface2/30 dark:bg-surface-dark/40 p-20">
+            <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Calculated Metrics</h2>
+            
+            <div class="grid grid-cols-2 gap-12 mb-16">
+              <div class="bg-surface/50 dark:bg-surface-dark/50 border border-border/10 p-12 rounded-12 text-center">
+                <p class="text-meta text-xs text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Word Count</p>
+                <p id="metric-wordcount" class="text-h2 font-display font-semibold text-ink dark:text-ink-dark">0</p>
+              </div>
+              <div class="bg-surface/50 dark:bg-surface-dark/50 border border-border/10 p-12 rounded-12 text-center">
+                <p class="text-meta text-xs text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Reading Time</p>
+                <p id="metric-readingtime" class="text-h2 font-display font-semibold text-ink dark:text-ink-dark">0<span class="text-caption font-sans font-medium text-ink2 ml-2">min</span></p>
+              </div>
             </div>
 
-            <div>
-              <label for="article-category" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Target Category</label>
-              <select
-                id="article-category"
-                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+            <div class="border-t border-border/10 pt-16 flex items-center justify-between">
+              <span class="text-caption font-sans text-ink2 dark:text-ink2-dark">Heading Hierarchy:</span>
+              <span id="metric-heading-status" class="inline-flex items-center gap-6 rounded-pill bg-danger/10 px-10 py-4 text-xs font-mono font-medium text-danger dark:bg-danger-dark/15 dark:text-danger-dark">
+                No H1 Found
+              </span>
+            </div>
+          </div>
+
+          <!-- Submission Card -->
+          <div class="rounded-16 border border-border/20 dark:border-border-dark/25 bg-surface2/30 dark:bg-surface-dark/40 p-20">
+            <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Submission Panel</h2>
+            
+            <form id="submission-form" class="space-y-16">
+              <div>
+                <label for="author-name" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Contributor Name</label>
+                <input
+                  type="text"
+                  id="author-name"
+                  required
+                  placeholder="e.g. Alice Chen"
+                  class="w-full rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                />
+              </div>
+
+              <div>
+                <label for="article-category" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Target Category</label>
+                <select
+                  id="article-category"
+                  class="w-full rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                >
+                  <option value="tutorials">Tutorials</option>
+                  <option value="news">AI News</option>
+                  <option value="youtube-articles">YouTube Articles</option>
+                  <option value="tool-reviews">Tool Reviews</option>
+                  <option value="prompts">Prompts</option>
+                  <option value="comparisons">Comparisons</option>
+                  <option value="best-practices">Best Practices</option>
+                  <option value="use-cases">Use Cases</option>
+                  <option value="tools">Tools</option>
+                  <option value="guides">Guides</option>
+                  <option value="frameworks">Frameworks</option>
+                  <option value="case-studies">Case Studies</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                id="btn-submit"
+                disabled
+                class="w-full inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 py-12 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-not-allowed opacity-50"
               >
-                <option value="tutorials">Tutorials</option>
-                <option value="news">AI News</option>
-                <option value="youtube-articles">YouTube Articles</option>
-                <option value="tool-reviews">Tool Reviews</option>
-                <option value="prompts">Prompts</option>
-                <option value="comparisons">Comparisons</option>
-                <option value="best-practices">Best Practices</option>
-                <option value="use-cases">Use Cases</option>
-                <option value="tools">Tools</option>
-                <option value="guides">Guides</option>
-                <option value="frameworks">Frameworks</option>
-                <option value="case-studies">Case Studies</option>
-              </select>
-            </div>
+                Submit for Review
+              </button>
+            </form>
+          </div>
+        </aside>
 
-            <button
-              type="submit"
-              id="btn-submit"
-              disabled
-              class="w-full btn-primary py-10 text-caption font-semibold cursor-pointer justify-center opacity-50 cursor-not-allowed"
-            >
-              Submit for Review
-            </button>
-          </form>
-        </div>
-      </main>
-
+      </div>
     </div>
   </div>
 
@@ -236,9 +272,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
           .replace(/^#### (.*?)$/gm, '<h4>$1</h4>')
           // Code Blocks
-          .replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>')
+          .replace(/```([\s\S]+?)```/g, '<pre class="bg-code px-16 py-12 rounded-8 overflow-x-auto"><code class="font-mono text-xs">$1</code></pre>')
           // Inline code
-          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/`([^`]+)`/g, '<code class="bg-code px-6 py-2 rounded-4 text-xs font-mono">$1</code>')
           // Bold
           .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
           // Lists
@@ -259,26 +295,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const readingTime = Math.max(1, Math.round(wordCount / 200));
         
         metricWord.textContent = String(wordCount);
-        metricTime.textContent = readingTime + ' min';
+        metricTime.textContent = readingTime;
 
         const hasH1 = /^#\s+.+$/m.test(md) || /^#\s+.+$/m.test(text);
         if (hasH1) {
           metricHeading.textContent = '✓ H1 Present';
-          metricHeading.className = 'badge bg-success/10 text-success dark:bg-success-dark/10 dark:text-success-dark';
+          metricHeading.className = 'inline-flex items-center gap-6 rounded-pill bg-success/15 px-10 py-4 text-xs font-mono font-medium text-success dark:bg-success-dark/20 dark:text-success-dark';
         } else {
           metricHeading.textContent = 'No H1 Found';
-          metricHeading.className = 'badge bg-danger/10 text-danger dark:bg-danger-dark/10 dark:text-danger-dark';
+          metricHeading.className = 'inline-flex items-center gap-6 rounded-pill bg-danger/10 px-10 py-4 text-xs font-mono font-medium text-danger dark:bg-danger-dark/15 dark:text-danger-dark';
         }
       }
 
       // ─── Workspace Tabs Configuration ───
       function setTabActive(tab) {
         [tabEditor, tabSplit, tabPreview].forEach(t => {
-          t.classList.remove('bg-surface', 'dark:bg-surface-dark', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border', 'dark:border-border-dark');
+          t.classList.remove('bg-surface/50', 'dark:bg-surface-dark/50', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border/30', 'dark:border-border-dark/30', 'shadow-subtle');
           t.classList.add('text-ink2', 'dark:text-ink2-dark');
         });
         tab.classList.remove('text-ink2', 'dark:text-ink2-dark');
-        tab.classList.add('bg-surface', 'dark:bg-surface-dark', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border', 'dark:border-border-dark');
+        tab.classList.add('bg-surface/50', 'dark:bg-surface-dark/50', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border/30', 'dark:border-border-dark/30', 'shadow-subtle');
       }
 
       tabEditor.addEventListener('click', () => {
@@ -335,11 +371,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               prefix = '●';
               style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
             }
-            return `<div class="flex items-start gap-8 text-caption ${style}">
-              <span class="font-mono">${prefix}</span>
+            return `<div class="flex items-start gap-12 text-caption ${style} border-b border-border/5 pb-10">
+              <span class="font-mono mt-2">${prefix}</span>
               <div class="flex-1 min-w-0">
-                <p class="truncate font-sans leading-normal">${log.message}</p>
-                <time class="text-xs opacity-50 block font-mono">${time}</time>
+                <p class="font-sans leading-normal text-xs">${log.message}</p>
+                <time class="text-xs opacity-50 block font-mono mt-2">${time}</time>
               </div>
             </div>`;
           }).join('');
