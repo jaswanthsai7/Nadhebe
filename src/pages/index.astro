@@ -80,7 +80,7 @@ const heroPost = latestPillars[0] || allArticles[0];
   <!-- Hero -->
   <section class="mx-auto max-w-content px-16 sm:px-24 pt-48 pb-48 sm:pt-64 sm:pb-80">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-48 items-center">
-      <div>
+      <div data-reveal="left">
         <p class="section-label mb-16">AI Engineering Publication</p>
         <h1 class="font-display text-display font-bold leading-tight text-ink dark:text-ink-dark">
           Deep dives into AI tools, agents, and engineering.
@@ -98,7 +98,7 @@ const heroPost = latestPillars[0] || allArticles[0];
       </div>
 
       {heroPost && (
-        <a href={getArticleUrl(heroPost)} class="card group p-0 overflow-hidden block">
+        <a href={getArticleUrl(heroPost)} class="card group p-0 overflow-hidden block" data-reveal="right">
           <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
             <img
               src={heroPost.data.heroImage}
@@ -142,7 +142,7 @@ const heroPost = latestPillars[0] || allArticles[0];
   <div class="mx-auto max-w-content px-16 sm:px-24 pb-64 sm:pb-96 space-y-48 sm:space-y-80">
 
     <!-- Topics -->
-    <section>
+    <section data-reveal>
       <p class="section-label mb-16">Topics</p>
       <div class="flex flex-wrap gap-8">
         {trendingTopics.map(topic => (
@@ -170,9 +170,9 @@ const heroPost = latestPillars[0] || allArticles[0];
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24" data-reveal-stagger>
           {latestPillars.map(post => (
-            <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0">
+            <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0" data-reveal>
               <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
                 <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
                 {post.data.rating !== undefined && (
@@ -200,13 +200,13 @@ const heroPost = latestPillars[0] || allArticles[0];
     )}
     
      <!-- Category Explorer -->
-    <section>
+    <section data-reveal>
       <div class="mb-32">
         <h2 class="section-title">Explore by Category</h2>
         <p class="mt-8 section-desc">Specialized knowledge bases, benchmarks, and prompt libraries.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16" data-reveal-stagger>
         {Object.entries(categoryMeta).map(([catName, meta]) => {
           const count = categoryCounts[catName] || 0;
           const href = `/category/${catName.toLowerCase().replace(/\s+/g, '-')}`;
@@ -214,6 +214,7 @@ const heroPost = latestPillars[0] || allArticles[0];
             <a
               href={href}
               class="group flex items-start gap-16 rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-20 hover:border-ink2/20 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
+              data-reveal
             >
               <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-8 bg-surface2 dark:bg-surface2-dark text-ink2 dark:text-ink2-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
@@ -247,9 +248,9 @@ const heroPost = latestPillars[0] || allArticles[0];
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-24" data-reveal-stagger>
           {latestVideos.map(post => (
-            <a href={getArticleUrl(post)} class="card group flex gap-16 p-16 items-start">
+            <a href={getArticleUrl(post)} class="card group flex gap-16 p-16 items-start" data-reveal>
               <div class="relative shrink-0 w-[160px] aspect-video rounded-8 overflow-hidden bg-surface2 dark:bg-surface2-dark">
                 <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="160" height="90" class="w-full h-full object-cover" />
                 {post.data.videoDuration && (
@@ -274,13 +275,13 @@ const heroPost = latestPillars[0] || allArticles[0];
     )}
 
     <!-- Latest Articles -->
-    <section>
+    <section data-reveal>
       <div class="flex items-center justify-between mb-32">
         <h2 class="section-title">Latest</h2>
       </div>
       <div class="divide-y divide-border dark:divide-border-dark">
         {latestArticles.map(post => (
-          <a href={getArticleUrl(post)} class="group flex items-start gap-16 py-20 first:pt-0 last:pb-0">
+          <a href={getArticleUrl(post)} class="group flex items-start gap-16 py-20 first:pt-0 last:pb-0" data-reveal>
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-8 mb-4">
                 <span class="badge">{post.data.category}</span>
@@ -301,7 +302,7 @@ const heroPost = latestPillars[0] || allArticles[0];
    
 
     <!-- Newsletter -->
-    <section>
+    <section data-reveal>
       <Newsletter />
     </section>
 
