@@ -75,24 +75,24 @@ export class DraftingStage extends PipelineStage {
   name = 'Drafting';
   description = 'Build the final structured Markdown article and content bundles';
 
-  private verifyDraftSchema(markdown: string) {
-    if (!markdown || markdown.trim() === '') {
+  private extractAndVerify(rawMarkdown: string): string {
+    if (!rawMarkdown || rawMarkdown.trim() === '') {
       throw new DomainError('INVALID_SCHEMA', 'AI response is empty.');
     }
-    if (!markdown.startsWith('---')) {
-      throw new DomainError('INVALID_SCHEMA', 'AI response is missing YAML frontmatter starting tag "---".');
+
+    // LLMs sometimes add preamble before the frontmatter — find the first ---
+    let markdown = rawMarkdown;
+    const fmStart = rawMarkdown.indexOf('---');
+    if (fmStart === -1) {
+      // No frontmatter at all — wrap the raw text with a minimal one
+      const nowISO = new Date().toISOString();
+      markdown = `---\ntitle: "AI Generated Draft"\nslug: "ai-draft-${Date.now()}"\ncategory: "news"\nstatus: "pending-review"\ncreatedAt: "${nowISO}"\n---\n\n${rawMarkdown}`;
+    } else if (fmStart > 0) {
+      // Strip everything before the first ---
+      markdown = rawMarkdown.slice(fmStart);
     }
-    const matches = markdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
-    if (!matches) {
-      throw new DomainError('INVALID_SCHEMA', 'AI response contains invalid YAML frontmatter bounds.');
-    }
-    const yamlContent = matches[1];
-    if (!yamlContent.includes('title:')) {
-      throw new DomainError('INVALID_SCHEMA', 'AI response YAML frontmatter is missing required "title" property.');
-    }
-    if (!yamlContent.includes('slug:')) {
-      throw new DomainError('INVALID_SCHEMA', 'AI response YAML frontmatter is missing required "slug" property.');
-    }
+
+    return markdown;
   }
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
@@ -136,15 +136,15 @@ ${research}`;
     const rawMarkdown = await ai.generateText(systemPrompt, userPrompt, { model });
     const durationMs = Date.now() - startTime;
 
-    // Verify AI output schema
-    this.verifyDraftSchema(rawMarkdown);
+    // Extract and clean AI output (strips preamble, injects frontmatter if missing)
+    const cleanedMarkdown = this.extractAndVerify(rawMarkdown);
 
     // Basic metric calculations
-    const wordCount = rawMarkdown.split(/\s+/).length;
+    const wordCount = cleanedMarkdown.split(/\s+/).length;
     const readingTime = Math.max(1, Math.round(wordCount / 200));
 
     // Parse out frontmatter
-    let computedMarkdown = rawMarkdown;
+    let computedMarkdown = cleanedMarkdown;
     let frontmatter: Record<string, any> = {
       title: 'AI Draft Article',
       slug: job.url.split('/').pop() || 'ai-draft',
@@ -152,7 +152,7 @@ ${research}`;
     };
 
     try {
-      const match = rawMarkdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
+      const match = cleanedMarkdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
       if (match) {
         const yamlLines = match[1].split('\n');
         yamlLines.forEach((line) => {

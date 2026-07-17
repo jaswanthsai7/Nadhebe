@@ -52,7 +52,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 id="source-url"
                 required
                 placeholder="https://youtube.com/watch?v=..."
-                class="w-full rounded-8 border border-border/30 bg-surface2/20 dark:border-border-dark/30 dark:bg-surface-dark/30 px-12 py-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                class="w-full h-48 rounded-8 border border-border/30 bg-surface2/20 dark:border-border-dark/30 dark:bg-surface-dark/30 px-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
               />
             </div>
 
@@ -71,7 +71,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="relative" id="custom-select-source-container">
                 <button
                   type="button"
-                  class="custom-select-trigger w-full flex items-center justify-between rounded-8 border border-border/35 bg-surface2/20 px-12 py-12 text-caption text-ink dark:text-ink-dark dark:border-border-dark/35 dark:bg-surface-dark/30 focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
+                  class="custom-select-trigger w-full h-48 flex items-center justify-between rounded-8 border border-border/35 bg-surface2/20 px-12 text-caption text-ink dark:text-ink-dark dark:border-border-dark/35 dark:bg-surface-dark/30 focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
                 >
                   <span class="trigger-label">YouTube Video URL</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60 transition-transform duration-200 chevron-icon"><path d="m6 9 6 6 6-6"/></svg>
@@ -90,7 +90,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <button
               type="submit"
               id="btn-generate"
-              class="w-full inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-accent to-indigo-600 hover:from-accent/90 hover:to-indigo-500 py-12 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-pointer"
+              class="w-full h-48 inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-accent to-indigo-600 hover:from-accent/90 hover:to-indigo-500 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-pointer"
             >
               <span>Start Pipeline</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -99,8 +99,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <!-- Research Feed -->
-        <div class="rounded-16 border border-border/30 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/95 p-20 shadow-medium">
-          <div class="flex items-center justify-between mb-16">
+        <div class="rounded-16 border border-border/30 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/95 p-20 shadow-medium h-[400px] flex flex-col">
+          <div class="flex items-center justify-between mb-16 shrink-0">
             <div class="flex items-center gap-8">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 text-accent dark:text-accent-dark"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
               <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">Research Feed</h2>
@@ -108,7 +108,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span id="draft-status" class="text-meta text-xs text-muted dark:text-muted-dark uppercase tracking-widest font-mono">Idle</span>
           </div>
           
-          <div class="space-y-16" id="research-feed">
+          <div class="space-y-16 flex-1 overflow-y-auto pr-4" id="research-feed">
             <p class="text-caption font-sans text-muted dark:text-muted-dark italic">No job queued. Paste a URL above to begin.</p>
           </div>
         </div>
@@ -192,7 +192,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 id="author-name"
                 required
                 placeholder="e.g. Alice Chen"
-                class="w-full rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
+                class="w-full h-48 rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
               />
             </div>
 
@@ -219,7 +219,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="relative" id="custom-select-category-container">
                 <button
                   type="button"
-                  class="custom-select-trigger w-full flex items-center justify-between rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
+                  class="custom-select-trigger w-full h-48 flex items-center justify-between rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
                 >
                   <span class="trigger-label">Tutorials</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60 transition-transform duration-200 chevron-icon"><path d="m6 9 6 6 6-6"/></svg>
@@ -247,7 +247,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               type="submit"
               id="btn-submit"
               disabled
-              class="w-full inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 py-12 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-not-allowed opacity-50"
+              class="w-full h-48 inline-flex items-center justify-center gap-8 rounded-8 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-caption font-semibold text-white shadow-medium hover:shadow-large transition-all duration-200 cursor-not-allowed opacity-50"
             >
               Submit for Review
             </button>
