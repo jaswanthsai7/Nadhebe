@@ -35,7 +35,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
       
       <!-- LEFT SIDEBAR: Source & Progress (col span 3) -->
-      <aside class="lg:col-span-3 space-y-20">
+      <aside class="lg:col-span-3 space-y-20 anim-card-reveal" style="animation-delay: 100ms">
         
         <!-- Source Card -->
         <div class="rounded-16 border border-border/30 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/95 p-20 shadow-medium">
@@ -115,7 +115,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </aside>
 
       <!-- CENTER PANES: IDE Workspace Editor (col span 6) -->
-      <main class="lg:col-span-6 space-y-20">
+      <main class="lg:col-span-6 space-y-20 anim-card-reveal" style="animation-delay: 200ms">
         <div class="rounded-16 border border-border/30 dark:border-border-dark/40 bg-surface/90 dark:bg-surface-dark/95 shadow-large overflow-hidden">
           <!-- IDE Toolbar -->
           <div class="flex items-center justify-between border-b border-border/20 dark:border-border-dark/20 px-20 py-12 bg-surface2/40 dark:bg-surface2-dark/30">
@@ -155,7 +155,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </main>
 
       <!-- RIGHT SIDEBAR: Metrics & GitHub Submission (col span 3) -->
-      <aside class="lg:col-span-3 space-y-20">
+      <aside class="lg:col-span-3 space-y-20 anim-card-reveal" style="animation-delay: 300ms">
         
         <!-- Metrics Widgets -->
         <div class="rounded-16 border border-border/30 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/95 p-20 shadow-medium">
@@ -412,12 +412,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         tab.classList.add('bg-surface/50', 'dark:bg-surface-dark/50', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border/30', 'dark:border-border-dark/30', 'shadow-subtle');
       }
 
+      function animatePane(el) {
+        el.classList.remove('anim-pane-enter');
+        void el.offsetWidth; // force reflow
+        el.classList.add('anim-pane-enter');
+      }
+
       tabEditor.addEventListener('click', () => {
         setTabActive(tabEditor);
         workspace.classList.remove('grid-cols-2');
         workspace.classList.add('grid-cols-1');
         paneEditor.classList.remove('hidden');
         panePreview.classList.add('hidden');
+        animatePane(paneEditor);
       });
 
       tabSplit.addEventListener('click', () => {
@@ -426,6 +433,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         workspace.classList.add('grid-cols-2');
         paneEditor.classList.remove('hidden');
         panePreview.classList.remove('hidden');
+        animatePane(paneEditor);
+        animatePane(panePreview);
       });
 
       tabPreview.addEventListener('click', () => {
@@ -434,6 +443,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         workspace.classList.add('grid-cols-1');
         paneEditor.classList.add('hidden');
         panePreview.classList.remove('hidden');
+        animatePane(panePreview);
       });
 
       // Synchronize editor inputs
@@ -445,7 +455,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // Helper to render logs
       function renderLogs(logs, finalStatus = '') {
-        researchFeed.innerHTML = logs.map(log => {
+        researchFeed.innerHTML = logs.map((log, i) => {
           const time = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
           let prefix = '○';
           let style = 'text-ink2 dark:text-ink2-dark';
@@ -469,7 +479,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 style = 'text-danger dark:text-danger-dark font-medium';
               } else if (parsed.status === 'running') {
                 prefix = '●';
-                style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
+                style = 'text-accent dark:text-accent-dark font-medium anim-status-blink';
               }
             } catch (e) {}
           } else {
@@ -481,11 +491,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               style = 'text-danger dark:text-danger-dark font-medium';
             } else if (log.status === finalStatus) {
               prefix = '●';
-              style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
+              style = 'text-accent dark:text-accent-dark font-medium anim-status-blink';
             }
           }
 
-          return `<div class="flex items-start gap-12 text-caption ${style} border-b border-border/5 pb-10">
+          const delay = i * 60; // stagger each entry by 60ms
+          return `<div class="flex items-start gap-12 text-caption ${style} border-b border-border/5 pb-10 anim-log-enter" style="animation-delay: ${delay}ms">
             <span class="font-mono mt-2">${prefix}</span>
             <div class="flex-1 min-w-0">
               <p class="font-sans leading-normal text-xs whitespace-pre-line">${messageStr}</p>
@@ -493,6 +504,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>`;
         }).join('');
+
+        // Auto-scroll feed to bottom
+        researchFeed.scrollTop = researchFeed.scrollHeight;
       }
 
       // Form submission
@@ -506,7 +520,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         isGenerating = true;
         btnGen.disabled = true;
         btnGen.textContent = 'Orchestrating...';
+        btnGen.classList.add('anim-pulse-glow');
         draftStatus.textContent = 'Queued';
+        draftStatus.classList.add('anim-status-blink');
+
+        // Show a progress bar + shimmer skeleton while waiting
+        researchFeed.innerHTML = `
+          <div class="space-y-12 anim-card-reveal">
+            <div class="w-full rounded-pill overflow-hidden bg-surface2/20 dark:bg-surface-dark/30">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <div class="space-y-8">
+              <div class="h-10 w-3/4 rounded-6 shimmer-loading bg-surface2/30 dark:bg-surface-dark/40"></div>
+              <div class="h-10 w-1/2 rounded-6 shimmer-loading bg-surface2/30 dark:bg-surface-dark/40" style="animation-delay: 200ms"></div>
+              <div class="h-10 w-2/3 rounded-6 shimmer-loading bg-surface2/30 dark:bg-surface-dark/40" style="animation-delay: 400ms"></div>
+            </div>
+          </div>
+        `;
 
         const clientLogs = [
           {
@@ -586,13 +616,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           isGenerating = false;
           btnGen.disabled = false;
           btnGen.textContent = 'Start Pipeline';
+          btnGen.classList.remove('anim-pulse-glow');
+          draftStatus.classList.remove('anim-status-blink');
 
         } catch (err) {
           console.error(err);
           isGenerating = false;
           btnGen.disabled = false;
           btnGen.textContent = 'Start Pipeline';
+          btnGen.classList.remove('anim-pulse-glow');
           draftStatus.textContent = 'Failed';
+          draftStatus.classList.remove('anim-status-blink');
 
           const errorLogs = [...clientLogs, {
             timestamp: new Date().toISOString(),
