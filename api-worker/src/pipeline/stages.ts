@@ -50,7 +50,7 @@ Ensure all fact points are clear and accurate.`;
     const userPrompt = `Compile a technical research report for:
 ${rawText.slice(0, 4000)}`;
 
-    const model = '@cf/meta/llama-3-8b-instruct';
+    const model = '@cf/meta/llama-3.2-3b-instruct';
     const research = await ai.generateText(systemPrompt, userPrompt, { model });
     const durationMs = Date.now() - startTime;
 
@@ -132,7 +132,7 @@ Markdown body goes here...`;
     const userPrompt = `Generate the markdown article bundle based on this research:
 ${research}`;
 
-    const model = '@cf/meta/llama-3-8b-instruct';
+    const model = '@cf/meta/llama-3.2-3b-instruct';
     const rawMarkdown = await ai.generateText(systemPrompt, userPrompt, { model });
     const durationMs = Date.now() - startTime;
 

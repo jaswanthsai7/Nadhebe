@@ -14,7 +14,7 @@ export class CloudflareAIProvider implements AIProvider {
   constructor(private env: any) {}
 
   async generateText(systemPrompt: string, userPrompt: string, options?: AIRequestOptions): Promise<string> {
-    const model = options?.model || '@cf/meta/llama-3-8b-instruct';
+    const model = options?.model || '@cf/meta/llama-3.2-3b-instruct';
 
     if (!this.env.AI || typeof this.env.AI.run !== 'function') {
       throw new DomainError('AI_BINDING_MISSING', 'Cloudflare Workers AI binding "AI" is not configured or missing from the environment.');
