@@ -10,21 +10,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="mx-auto max-w-[1600px] w-full px-16 sm:px-32 py-40">
     
-    <!-- Top Title and Status Header Card (Clean glass styling float, centered) -->
-    <div class="bg-surface/85 dark:bg-surface-dark/95 border border-border/30 dark:border-border-dark/40 shadow-medium rounded-16 p-32 mb-32 flex flex-col items-center justify-center text-center gap-20">
-      <div class="flex flex-col items-center text-center">
-        <div class="flex items-center gap-12 mb-8 justify-center">
+    <!-- Top Title and Status Header (Clean, no background wrapper) -->
+    <div class="border-b border-border/30 dark:border-border-dark/40 pb-20 mb-32 flex flex-col md:flex-row md:items-end justify-between gap-16">
+      <div>
+        <div class="flex items-center gap-12 mb-8">
           <span class="inline-flex items-center gap-6 rounded-pill bg-accent/15 px-10 py-4 text-xs font-mono font-medium text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
             <span class="h-6 w-6 rounded-pill bg-accent animate-pulse dark:bg-accent-dark"></span>
             Week 1 Milestone
           </span>
           <span class="text-meta text-muted dark:text-muted-dark uppercase tracking-widest text-xs font-mono">AI Editorial OS v1.0</span>
         </div>
-        <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark tracking-tight">AI Contributor Studio</h1>
-        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4 max-w-2xl">Draft, edit, and submit technical AI content directly to our Git-backed review queue.</p>
+        <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark tracking-tight leading-tight">AI Contributor Studio</h1>
+        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-8 max-w-2xl">Draft, edit, and submit technical AI content directly to our Git-backed review queue.</p>
       </div>
-      <div>
-        <a href="/" class="inline-flex items-center gap-8 rounded-8 border border-border/30 bg-surface px-16 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark/35 dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-all duration-150">
+      <div class="pb-4">
+        <a href="/" class="inline-flex items-center gap-8 rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-16 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark/35 dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-all duration-150">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60"><path d="m12 19-7-7 7-7M5 12h14"/></svg>
           Back to Site
         </a>
