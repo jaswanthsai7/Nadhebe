@@ -227,19 +227,8 @@ if (canonicalUrl) {
           }
         }
 
-        // Detect if this page load is a reload/refresh
-        const isReload = (performance.getEntriesByType("navigation")[0]?.type === "reload") ||
-                         (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
-
-        // Apply bg: cycle if refresh, otherwise reuse previous background
-        applyBg(isReload);
-
-        // Cycle bg on browser tab visibility change (moving to another tab and back)
-        document.addEventListener('visibilitychange', function () {
-          if (document.visibilityState === 'visible') {
-            applyBg(true);
-          }
-        });
+        // Apply bg unconditionally once per page load/refresh
+        applyBg(true);
       })();
     </script>
   </body>
