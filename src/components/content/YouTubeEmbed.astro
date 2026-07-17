@@ -8,44 +8,63 @@ const { videoId, title } = Astro.props;
 ---
 
 <div
-  class="youtube-autoplay my-32 overflow-hidden rounded-card border border-border aspect-video shadow-card dark:border-border-dark relative"
+  class="youtube-embed-container my-32 overflow-hidden rounded-card border border-border aspect-video shadow-card dark:border-border-dark relative group"
   data-video-id={videoId}
   data-title={title}
 >
-  <!-- Pulse placeholder shown for the split-second before iframe loads -->
-  <div class="absolute inset-0 bg-black flex items-center justify-center">
-    <svg class="h-48 w-48 text-white/30 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M8 5v14l11-7z" />
-    </svg>
+  <!-- Thumbnail & Play Button Overlay -->
+  <div class="absolute inset-0 flex items-center justify-center cursor-pointer play-overlay z-10">
+    <img
+      src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+      onerror="this.src = this.src.replace('maxresdefault', 'hqdefault');"
+      alt={title}
+      class="absolute inset-0 w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+    />
+    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-200"></div>
+    
+    <!-- Premium Play Button -->
+    <button
+      type="button"
+      aria-label="Play video"
+      class="relative z-10 flex h-64 w-64 items-center justify-center rounded-pill bg-white/95 text-black shadow-large group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-200 cursor-pointer border-0"
+    >
+      <svg class="h-28 w-28 translate-x-2" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </button>
   </div>
 </div>
 
 <script>
-  function setupYoutubeAutoplay() {
-    const containers = document.querySelectorAll<HTMLElement>('.youtube-autoplay');
+  function setupYoutubeEmbeds() {
+    const containers = document.querySelectorAll<HTMLElement>('.youtube-embed-container');
     containers.forEach(container => {
-      // Skip if iframe already injected
-      if (container.querySelector('iframe')) return;
+      const overlay = container.querySelector('.play-overlay');
+      if (!overlay) return;
 
-      const videoId = container.getAttribute('data-video-id');
-      const title   = container.getAttribute('data-title') || 'YouTube Video';
-      if (!videoId) return;
+      // Prevent attaching duplicate listeners
+      if (container.getAttribute('data-listener-setup') === 'true') return;
+      container.setAttribute('data-listener-setup', 'true');
 
-      const iframe = document.createElement('iframe');
-      // autoplay=1 starts playback; mute=1 is required by all browsers' autoplay policy
-      // rel=0 hides related videos from other channels; modestbranding=1 removes YT logo
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1&enablejsapi=1`;
-      iframe.title = title;
-      iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-      iframe.setAttribute('allowfullscreen', 'true');
-      iframe.className = 'absolute inset-0 w-full h-full border-0';
+      overlay.addEventListener('click', () => {
+        const videoId = container.getAttribute('data-video-id');
+        const title   = container.getAttribute('data-title') || 'YouTube Video';
+        if (!videoId) return;
 
-      container.appendChild(iframe);
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
+        iframe.title = title;
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', 'true');
+        iframe.className = 'absolute inset-0 w-full h-full border-0 z-20';
+
+        overlay.remove();
+        container.appendChild(iframe);
+      });
     });
   }
 
-  // Auto-load immediately when page is ready
-  setupYoutubeAutoplay();
-  document.addEventListener('astro:page-load', setupYoutubeAutoplay);
+  setupYoutubeEmbeds();
+  document.addEventListener('astro:page-load', setupYoutubeEmbeds);
 </script>
