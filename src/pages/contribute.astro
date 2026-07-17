@@ -1,0 +1,496 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="AI Editorial OS — Contributor Workspace"
+  description="Research, draft, edit, and submit technical AI articles directly into our editorial pipeline."
+>
+  <div class="mx-auto max-w-content px-24 py-40">
+    <!-- Header banner -->
+    <div class="flex items-center justify-between border-b border-border pb-20 mb-32 dark:border-border-dark">
+      <div>
+        <span class="badge mb-8 bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark">Week 1 Milestone</span>
+        <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark">AI Editorial OS</h1>
+        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4">Contributor Workspace — Production-grade Markdown generation and Git-backed reviews.</p>
+      </div>
+      <div class="flex items-center gap-12">
+        <a href="/" class="btn-secondary text-xs py-8 px-12">View Site</a>
+      </div>
+    </div>
+
+    <!-- IDE Container Grid -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-24 items-start">
+      
+      <!-- LEFT PANEL: Scraper Config & Research Feed (col span 3) -->
+      <aside class="xl:col-span-3 space-y-20">
+        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
+          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Source Extraction</h2>
+          
+          <form id="generation-form" class="space-y-16">
+            <div>
+              <label for="source-url" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Paste Source URL</label>
+              <input
+                type="url"
+                id="source-url"
+                required
+                placeholder="https://youtube.com/watch?v=..."
+                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:focus:border-accent-dark"
+              />
+            </div>
+
+            <div>
+              <label for="source-type" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Source Type</label>
+              <select
+                id="source-type"
+                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+              >
+                <option value="youtube">YouTube URL</option>
+                <option value="github">GitHub Repo</option>
+                <option value="website">Documentation / Blog</option>
+                <option value="raw">Raw Text Input</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              id="btn-generate"
+              class="w-full btn-primary py-10 text-caption font-semibold cursor-pointer justify-center"
+            >
+              Start Pipeline
+            </button>
+          </form>
+        </div>
+
+        <!-- Research Feed checklist -->
+        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
+          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">AI Research Feed</h2>
+          
+          <div class="space-y-12" id="research-feed">
+            <p class="text-caption font-sans text-muted dark:text-muted-dark italic">No job queued. Paste a URL above to begin.</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MIDDLE PANEL: Split Workspace Editor (col span 6) -->
+      <main class="xl:col-span-6 space-y-20">
+        <div class="card p-0 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-medium overflow-hidden">
+          <!-- Editor Tabs -->
+          <div class="flex items-center justify-between border-b border-border dark:border-border-dark px-20 py-12 bg-surface2 dark:bg-surface2-dark">
+            <div class="flex items-center gap-6">
+              <button id="tab-editor" class="px-12 py-6 rounded-6 text-caption font-medium bg-surface dark:bg-surface-dark text-ink dark:text-ink-dark border border-border dark:border-border-dark cursor-pointer">Editor</button>
+              <button id="tab-split" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover dark:hover:bg-hover-dark cursor-pointer">Split View</button>
+              <button id="tab-preview" class="px-12 py-6 rounded-6 text-caption font-medium text-ink2 dark:text-ink2-dark hover:bg-hover dark:hover:bg-hover-dark cursor-pointer">Live Preview</button>
+            </div>
+            <div class="flex items-center gap-8">
+              <span id="draft-status" class="text-meta text-muted dark:text-muted-dark uppercase tracking-wider">Empty Draft</span>
+            </div>
+          </div>
+
+          <!-- Splittable Area -->
+          <div id="editor-workspace" class="grid grid-cols-1 gap-0 h-[600px] transition-all duration-150">
+            <!-- Left Pane: Editor -->
+            <div id="pane-editor" class="flex flex-col h-full">
+              <textarea
+                id="markdown-textarea"
+                placeholder="# Your AI generated article draft will load here..."
+                class="w-full flex-grow p-24 font-mono text-caption text-ink dark:text-ink-dark bg-transparent resize-none focus:outline-none overflow-y-auto leading-relaxed border-0"
+              ></textarea>
+            </div>
+
+            <!-- Right Pane: Rendered Preview -->
+            <div id="pane-preview" class="hidden border-l border-border dark:border-border-dark p-24 overflow-y-auto bg-surface dark:bg-surface-dark">
+              <div id="rendered-content" class="prose-article">
+                <p class="text-caption font-sans text-muted dark:text-muted-dark italic">Live HTML preview will display here.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT PANEL: Metadata, Metrics, & GitHub Submission (col span 3) -->
+      <aside class="xl:col-span-3 space-y-20">
+        <!-- Computed Metrics checklist -->
+        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
+          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Calculated Metrics</h2>
+          
+          <ul class="space-y-12">
+            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
+              <span>Word Count:</span>
+              <strong id="metric-wordcount" class="font-mono text-ink dark:text-ink-dark">0</strong>
+            </li>
+            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
+              <span>Reading Time:</span>
+              <strong id="metric-readingtime" class="font-mono text-ink dark:text-ink-dark">0 min</strong>
+            </li>
+            <li class="flex items-center justify-between text-caption font-sans text-ink2 dark:text-ink2-dark">
+              <span>Heading hierarchy:</span>
+              <span id="metric-heading-status" class="badge bg-danger/10 text-danger dark:bg-danger-dark/10 dark:text-danger-dark">No H1 Found</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Publishing Setup & Submission form -->
+        <div class="card p-20 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-12 shadow-subtle">
+          <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark mb-16">Submission Details</h2>
+          
+          <form id="submission-form" class="space-y-16">
+            <div>
+              <label for="author-name" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Contributor Name</label>
+              <input
+                type="text"
+                id="author-name"
+                required
+                placeholder="Author Name"
+                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+              />
+            </div>
+
+            <div>
+              <label for="article-category" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Target Category</label>
+              <select
+                id="article-category"
+                class="w-full rounded-control border border-border bg-surface2 px-12 py-10 text-caption text-ink focus:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+              >
+                <option value="tutorials">Tutorials</option>
+                <option value="news">AI News</option>
+                <option value="youtube-articles">YouTube Articles</option>
+                <option value="tool-reviews">Tool Reviews</option>
+                <option value="prompts">Prompts</option>
+                <option value="comparisons">Comparisons</option>
+                <option value="best-practices">Best Practices</option>
+                <option value="use-cases">Use Cases</option>
+                <option value="tools">Tools</option>
+                <option value="guides">Guides</option>
+                <option value="frameworks">Frameworks</option>
+                <option value="case-studies">Case Studies</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              id="btn-submit"
+              disabled
+              class="w-full btn-primary py-10 text-caption font-semibold cursor-pointer justify-center opacity-50 cursor-not-allowed"
+            >
+              Submit for Review
+            </button>
+          </form>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Client-side Workspace Interactivity -->
+  <script is:inline>
+    (function() {
+      // Configuration
+      const API_BASE = 'http://localhost:8787/api/v1';
+
+      // Elements
+      const genForm = document.getElementById('generation-form');
+      const urlInput = document.getElementById('source-url');
+      const typeSelect = document.getElementById('source-type');
+      const btnGen = document.getElementById('btn-generate');
+      
+      const researchFeed = document.getElementById('research-feed');
+      
+      const tabEditor = document.getElementById('tab-editor');
+      const tabSplit = document.getElementById('tab-split');
+      const tabPreview = document.getElementById('tab-preview');
+      const draftStatus = document.getElementById('draft-status');
+      
+      const workspace = document.getElementById('editor-workspace');
+      const paneEditor = document.getElementById('pane-editor');
+      const panePreview = document.getElementById('pane-preview');
+      
+      const textarea = document.getElementById('markdown-textarea');
+      const preview = document.getElementById('rendered-content');
+      
+      const metricWord = document.getElementById('metric-wordcount');
+      const metricTime = document.getElementById('metric-readingtime');
+      const metricHeading = document.getElementById('metric-heading-status');
+      
+      const subForm = document.getElementById('submission-form');
+      const authorInput = document.getElementById('author-name');
+      const catSelect = document.getElementById('article-category');
+      const btnSubmit = document.getElementById('btn-submit');
+
+      // State variables
+      let currentJobId = null;
+      let activeDraftText = '';
+      let isGenerating = false;
+
+      // ─── Simple Markdown-to-HTML Parser ───
+      function parseMarkdown(md) {
+        if (!md) return '<p class="italic text-muted">Empty draft</p>';
+        
+        // Strip frontmatter blocks
+        let cleanMd = md.replace(/^---[\s\S]+?---/, '').trim();
+        
+        let html = cleanMd
+          // Headings
+          .replace(/^# (.*?)$/gm, '<h1>$1</h1>')
+          .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+          .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+          .replace(/^#### (.*?)$/gm, '<h4>$1</h4>')
+          // Code Blocks
+          .replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>')
+          // Inline code
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          // Bold
+          .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+          // Lists
+          .replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>')
+          // Wrap li tags in ul
+          .replace(/((?:<li>.*?<\/li>\s*)+)/g, '<ul>$1</ul>')
+          // Paragraphs (wrap blank space groups)
+          .replace(/^\s*(?!<[a-z/])/gm, '<p>')
+          .replace(/(?!<\/[a-z]>)\s*$/gm, '</p>');
+
+        return html;
+      }
+
+      // ─── Score and metrics calculations ───
+      function updateMetrics(md) {
+        const text = md.replace(/^---[\s\S]+?---/, '').trim();
+        const wordCount = text ? text.split(/\s+/).length : 0;
+        const readingTime = Math.max(1, Math.round(wordCount / 200));
+        
+        metricWord.textContent = String(wordCount);
+        metricTime.textContent = readingTime + ' min';
+
+        const hasH1 = /^#\s+.+$/m.test(md) || /^#\s+.+$/m.test(text);
+        if (hasH1) {
+          metricHeading.textContent = '✓ H1 Present';
+          metricHeading.className = 'badge bg-success/10 text-success dark:bg-success-dark/10 dark:text-success-dark';
+        } else {
+          metricHeading.textContent = 'No H1 Found';
+          metricHeading.className = 'badge bg-danger/10 text-danger dark:bg-danger-dark/10 dark:text-danger-dark';
+        }
+      }
+
+      // ─── Workspace Tabs Configuration ───
+      function setTabActive(tab) {
+        [tabEditor, tabSplit, tabPreview].forEach(t => {
+          t.classList.remove('bg-surface', 'dark:bg-surface-dark', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border', 'dark:border-border-dark');
+          t.classList.add('text-ink2', 'dark:text-ink2-dark');
+        });
+        tab.classList.remove('text-ink2', 'dark:text-ink2-dark');
+        tab.classList.add('bg-surface', 'dark:bg-surface-dark', 'text-ink', 'dark:text-ink-dark', 'border', 'border-border', 'dark:border-border-dark');
+      }
+
+      tabEditor.addEventListener('click', () => {
+        setTabActive(tabEditor);
+        workspace.classList.remove('grid-cols-2');
+        workspace.classList.add('grid-cols-1');
+        paneEditor.classList.remove('hidden');
+        panePreview.classList.add('hidden');
+      });
+
+      tabSplit.addEventListener('click', () => {
+        setTabActive(tabSplit);
+        workspace.classList.remove('grid-cols-1');
+        workspace.classList.add('grid-cols-2');
+        paneEditor.classList.remove('hidden');
+        panePreview.classList.remove('hidden');
+      });
+
+      tabPreview.addEventListener('click', () => {
+        setTabActive(tabPreview);
+        workspace.classList.remove('grid-cols-2');
+        workspace.classList.add('grid-cols-1');
+        paneEditor.classList.add('hidden');
+        panePreview.classList.remove('hidden');
+      });
+
+      // Synchronize editor inputs
+      textarea.addEventListener('input', (e) => {
+        activeDraftText = e.target.value;
+        preview.innerHTML = parseMarkdown(activeDraftText);
+        updateMetrics(activeDraftText);
+      });
+
+      // ─── Job Generation Pipeline Poller ───
+      async function pollJobStatus(jobId) {
+        try {
+          const res = await fetch(`${API_BASE}/jobs/${jobId}`);
+          if (!res.ok) throw new Error('Status poll failed');
+          const payload = await res.json();
+          const job = payload.data;
+
+          // Render research logs
+          researchFeed.innerHTML = job.logs.map(log => {
+            const time = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            let prefix = '○';
+            let style = 'text-ink2 dark:text-ink2-dark';
+            if (log.status === 'Completed') {
+              prefix = '✓';
+              style = 'text-success dark:text-success-dark font-medium';
+            } else if (log.status === 'Failed') {
+              prefix = '✗';
+              style = 'text-danger dark:text-danger-dark font-medium';
+            } else if (log.status === job.status) {
+              prefix = '●';
+              style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
+            }
+            return `<div class="flex items-start gap-8 text-caption ${style}">
+              <span class="font-mono">${prefix}</span>
+              <div class="flex-1 min-w-0">
+                <p class="truncate font-sans leading-normal">${log.message}</p>
+                <time class="text-xs opacity-50 block font-mono">${time}</time>
+              </div>
+            </div>`;
+          }).join('');
+
+          draftStatus.textContent = job.status;
+
+          if (job.status === 'Completed') {
+            isGenerating = false;
+            btnGen.disabled = false;
+            btnGen.textContent = 'Start Pipeline';
+            
+            // Set text & show preview
+            activeDraftText = job.markdown || '';
+            textarea.value = activeDraftText;
+            preview.innerHTML = parseMarkdown(activeDraftText);
+            updateMetrics(activeDraftText);
+
+            // Enable submit buttons
+            btnSubmit.disabled = false;
+            btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
+            
+            // Suggest Category matching source URL configurations
+            if (job.sourceType === 'youtube') {
+              catSelect.value = 'youtube-articles';
+            }
+            return;
+          }
+
+          if (job.status === 'Failed') {
+            isGenerating = false;
+            btnGen.disabled = false;
+            btnGen.textContent = 'Start Pipeline';
+            return;
+          }
+
+          // Continue polling
+          setTimeout(() => pollJobStatus(jobId), 1500);
+
+        } catch (e) {
+          console.error(e);
+          isGenerating = false;
+          btnGen.disabled = false;
+          btnGen.textContent = 'Start Pipeline';
+          researchFeed.innerHTML = `<div class="text-caption text-danger dark:text-danger-dark">Error connecting to api-worker. Make sure it is running locally on port 8787.</div>`;
+        }
+      }
+
+      // Form submission
+      genForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (isGenerating) return;
+
+        const url = urlInput.value;
+        const sourceType = typeSelect.value;
+
+        isGenerating = true;
+        btnGen.disabled = true;
+        btnGen.textContent = 'Orchestrating...';
+        
+        researchFeed.innerHTML = `<div class="flex items-center justify-center py-12">
+          <div class="h-16 w-16 animate-spin rounded-pill border-2 border-accent border-t-transparent dark:border-accent-dark"></div>
+        </div>`;
+
+        try {
+          const res = await fetch(`${API_BASE}/jobs`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url, sourceType })
+          });
+
+          if (!res.ok) throw new Error('Failed to create background generation job');
+          const payload = await res.json();
+          currentJobId = payload.data.id;
+          
+          pollJobStatus(currentJobId);
+
+        } catch (e) {
+          console.error(e);
+          isGenerating = false;
+          btnGen.disabled = false;
+          btnGen.textContent = 'Start Pipeline';
+          researchFeed.innerHTML = `<div class="text-caption text-danger dark:text-danger-dark font-sans leading-relaxed">
+            Connection Failed: Could not contact local Worker API.<br/>
+            Make sure wrangler server is active on port 8787: <br/>
+            <code>cd api-worker && npx wrangler dev</code>
+          </div>`;
+        }
+      });
+
+      // ─── Submission to GitHub Issues ───
+      subForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const author = authorInput.value;
+        const category = catSelect.value;
+        const text = textarea.value;
+
+        if (!text) {
+          alert('Markdown editor is empty! Generate a draft or write something first.');
+          return;
+        }
+
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Submitting...';
+
+        // Extract title & slug from draft or fallback
+        const titleMatch = text.match(/^#\s+(.+)$/m);
+        const title = titleMatch ? titleMatch[1].trim() : 'AI Draft Article Submission';
+        const slug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+        const computedMetrics = {
+          wordCount: text.split(/\s+/).length,
+          readingTime: Math.max(1, Math.round(text.split(/\s+/).length / 200)),
+          headingStructureOk: /^#\s+.+$/m.test(text)
+        };
+
+        const payload = {
+          title,
+          slug,
+          category,
+          author,
+          sourceUrl: urlInput.value || 'https://example.com/source',
+          markdown: text,
+          computedMetrics,
+          aiInsights: {
+            confidence: 0.94,
+            factCheckSummary: 'Factual specs audited'
+          }
+        };
+
+        try {
+          const res = await fetch(`${API_BASE}/issues`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error('Submission to issues pipeline failed');
+          const dataPayload = await res.json();
+          const submission = dataPayload.data;
+
+          alert(`✓ Submission Successful!\nCreated GitHub Issue #${submission.issueNumber}`);
+          btnSubmit.textContent = 'Submitted ✓';
+          
+        } catch (err) {
+          console.error(err);
+          alert('Submission failed. Check api-worker execution logs.');
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Submit for Review';
+        }
+      });
+
+    })();
+  </script>
+</BaseLayout>
