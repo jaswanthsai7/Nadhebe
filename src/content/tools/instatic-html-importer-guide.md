@@ -20,9 +20,12 @@ faq:
     answer: "This is usually caused by broken link paths in the uploaded stylesheets. Run site scripts via the administrator dashboard to recompile CSS variables."
   - question: "Can I import custom JavaScript files?"
     answer: "Yes, Instatic copies uploaded scripts into the public directory and registers them inside page templates."
+sources:
+  - label: "Instatic Importer Specs"
+    url: "https://github.com/CoreBunch/Instatic/blob/main/README.md"
 ---
 
-Migrating existing static sites into a visual page builder often requires manual copy-pasting of HTML blocks and CSS classes. **Instatic CMS** simplifies this with an HTML importer tool that parses folders and converts elements into editable nodes.
+Migrating existing static sites into a visual page builder often requires manual copy-pasting of HTML blocks and CSS classes. **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this with an HTML importer tool that parses folders and converts elements into editable nodes.
 
 In this guide, we analyze how the Instatic import engine parses templates and how to resolve common layout conflicts.
 
@@ -42,7 +45,7 @@ The engine reads raw HTML markup, identifies structure sections, and builds corr
 Referenced assets are moved to localized workspace directories, and link tags are updated to resolve relative paths.
 
 ### 3. Conflict Audits
-If matching templates already exist, the interface prompts you to confirm file overrides.
+If matching templates already exist, the interface prompts you to confirm file overrides. Instatic uses its local database (SQLite file by default, or configured PostgreSQL server) to track database relations and site configurations.
 
 ---
 
@@ -62,7 +65,8 @@ If you re-import a template to apply updates, choose the **Override All** option
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Directory Preservation**: The import tool maintains your original folder structures for pages, styles, and scripts.
 - **Troubleshooting Scripts**: Running site scripts from the dashboard resolves path linking issues.
 - **Asset Protection**: Sandbox controls prevent client overrides from breaking base layout settings.
+- **Alpha Status**: Instatic is currently in **early alpha status**, so always backup your SQLite database before running complex site imports.

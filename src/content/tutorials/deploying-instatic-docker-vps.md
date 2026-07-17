@@ -20,9 +20,12 @@ faq:
     answer: "Yes, Instatic officially supports both SQLite and PostgreSQL. You can specify PostgreSQL connection credentials inside your environment variables."
   - question: "Is Bun required on the host server to run Instatic via Docker?"
     answer: "No. The Docker image packages Bun internally, so your host server only needs Docker and Docker Compose installed."
+sources:
+  - label: "Instatic Docker Deployments"
+    url: "https://github.com/CoreBunch/Instatic#docker-deployment"
 ---
 
-Deploying content management systems should not involve complex server configurations or heavy database provisioning. **Instatic**, an open-source, self-hosted visual CMS built on Bun and TypeScript, offers a lightweight, high-performance editor that outputs clean static files.
+Deploying content management systems should not involve complex server configurations or heavy database provisioning. **Instatic**, an open-source, self-hosted visual CMS built on Bun and TypeScript, offers a lightweight, high-performance editor that outputs clean static files with **zero hydration bloat**.
 
 In this tutorial, you will learn how to configure and deploy Instatic CMS on a Virtual Private Server (VPS) using Docker and Docker Compose. We will set it up with SQLite for local, server-contained storage, which is ideal for small-to-medium marketing sites.
 
@@ -74,7 +77,7 @@ services:
 ```
 
 > [!IMPORTANT]
-> Make sure to replace `change-this-to-a-secure-random-string` with a long, randomly generated secret to secure user logins.
+> Make sure to replace `change-this-to-a-secure-random-string` with a long, randomly generated secret to secure user logins. If you choose to scale, you can configure PostgreSQL credentials here.
 
 ---
 
@@ -120,7 +123,8 @@ For a visual demonstration of the editor's responsive canvas, CSS variables toke
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Self-Hosted Control**: Instatic combines a visual builder with Bun/TypeScript execution in a single container.
 - **SQLite Storage**: Eliminates database overhead for solo projects or marketing sites.
 - **Clean Static Output**: Deploys server-contained visual styling rules as static HTML, CSS, and JS.
+- **Alpha Warnings**: Given the **early alpha/pre-1.0 status** of the project, make sure to set up regular backups of your SQLite volume database to prevent data loss.

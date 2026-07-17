@@ -20,11 +20,16 @@ faq:
     answer: "You can connect your own API keys for OpenAI, Anthropic, Llama, Open Router, or run local models on your host server."
   - question: "Can the AI write custom CSS styling rules?"
     answer: "Yes, the AI assistant can output style definitions, write code, refine spacing configurations, and build page layouts directly within the editor."
+sources:
+  - label: "Instatic AI Copilot Configuration"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
-Writing layouts, fixing alignment issues, and writing placeholder copy are some of the most time-consuming parts of web design. **Instatic CMS** simplifies this work by integrating an AI co-pilot directly into the editor canvas.
+Writing layouts, fixing alignment issues, and writing placeholder copy are some of the most time-consuming parts of web design. **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this work by integrating an AI co-pilot directly into the editor canvas.
 
-Rather than restricting you to a single provider, Instatic lets you connect your own API keys to utilize models from **OpenAI, Anthropic, Open Router**, or even run **local LLMs**. This guide shares system prompts and workflow techniques to help you get the most out of Instatic's AI assistant.
+Rather than restricting you to a single provider, Instatic's **Bun-powered server** lets you connect your own API keys to utilize models from **OpenAI, Anthropic, Open Router**, or even run **local LLMs**. The resulting layout parameters and copywriting choices are written directly to the database backend (SQLite/PostgreSQL) and compiled into raw static markup. 
+
+This guide shares system prompts and workflow techniques to help you get the most out of Instatic's AI assistant.
 
 ---
 
@@ -75,7 +80,8 @@ Watch the AI assistant execute layouts, write copy, and adjust spacing in real t
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Flexible AI Integration**: Connect to any model via custom API keys or run local LLMs.
 - **Context-Aware Styling**: Select a canvas element first to guide the AI's changes.
 - **Code Generation**: Instruct the assistant to write custom styles and components.
+- **Alpha Warnings**: Given the **early alpha status** of Instatic, AI-generated styles should be regularly audited in the Selector Manager to prune redundant utility classes.

@@ -24,13 +24,18 @@ sources:
 
 # Multi-Agent System Design: State Isolation and Coordination
 
-Designing multi-agent systems requires establishing clear patterns for communication and state management. This article examines best practices for implementing state isolation to build robust agent networks.
+Designing multi-agent systems requires establishing clear patterns for communication and state management. Rather than letting agents communicate directly via message passing, implementing **state isolation** using a centralized database (such as **SQLite**) builds robust, scale-tolerant agent networks.
 
-## Design Recommendations
+## Core Design Recommendations
 
-1. **Decouple Agent Dependencies**: Avoid direct inter-agent messaging; use a shared database or task broker to coordinate state.
-2. **Define Relational Constraints**: Implement task dependency rules to manage execution orders.
-3. **Build Error Isolation Layers**: Configure timeouts and fallback states for individual modules to prevent cascading failures.
+### 1. Decouple Agent Dependencies
+Avoid direct inter-agent calls. Direct coupling makes systems brittle because a single module failure breaks the entire chain. Instead, write agent task statuses (such as `pending`, `running`, `completed`) to a central SQLite state file.
+
+### 2. Handle Concurrent Writes with Transaction Locks
+When multiple worker agents query tasks concurrently, race conditions can lead to duplicate task execution. Enforce database transaction locks (using `BEGIN IMMEDIATE` or `BEGIN EXCLUSIVE` states) to ensure only one agent gets assigned to a task.
+
+### 3. Build Safe Fail-over and Retry Chains
+Configure agent run timeouts. If an agent process crashes or exceeds its allocated execution time, the supervisor marks the state as `failed` inside the SQLite database, allowing other agents to pause or trigger a clean retry attempt.
 
 Using these patterns helps build reliable, scale-tolerant agent networks suitable for enterprise deployments.
 

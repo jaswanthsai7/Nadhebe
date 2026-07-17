@@ -1,6 +1,6 @@
 ---
 title: "Instatic Visual CMS: Video Walkthrough and Overview"
-description: "Watch a comprehensive video walkthrough of Instatic CMS, exploring its responsive visual page builder, design tokens, and AI co-pilot workflows."
+description: "Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine."
 pubDate: 2026-07-10
 author: alice-chen
 category: "YouTube Articles"
@@ -22,10 +22,13 @@ faq:
   - question: "Where is the source code of Instatic hosted?"
     answer: "The complete source code is hosted on GitHub under the MIT license at CoreBunch/Instatic."
   - question: "Does Instatic support multi-breakpoint editing?"
-    answer: "Yes, you can edit desktop, tablet, and mobile views simultaneously using its responsive visual canvas."
+    answer: "Yes, you can edit desktop, tablet, and mobile views simultaneously side-by-side using its responsive visual canvas."
+sources:
+  - label: "Instatic Visual CMS Specs"
+    url: "https://github.com/CoreBunch/Instatic/blob/main/README.md"
 ---
 
-In this video review, we explore **Instatic**, the open-source visual page builder and CMS built on Bun and TypeScript. We analyze how it challenge systems like Webflow by publishing clean static HTML and CSS under the MIT license.
+In this video review, we explore **Instatic**, the open-source visual page builder and CMS built on Bun and TypeScript. We analyze how it challenges proprietary systems like Webflow and Framer by exporting clean, semantic static HTML and CSS under the MIT license.
 
 Watch the full video walkthrough below to see the editor interface, design system tokens, and client permissions in action.
 
@@ -43,18 +46,27 @@ Watch the full video walkthrough below to see the editor interface, design syste
 
 ## Video Highlights & Analysis
 
-### 1. The Multi-Breakpoint Canvas
-Instatic features a unique editing canvas that displays desktop, tablet, and mobile breakpoints side-by-side. This helps designers spot layout issues instantly instead of manually swapping views.
+### 1. The Side-by-Side Multi-Breakpoint Canvas
+Unlike traditional visual builders where you must toggle views, Instatic displays desktop, tablet, and mobile canvas windows side-by-side. Layout changes propagate in real time, making responsive adjustments straightforward.
 
-### 2. Design Token System
-Style selections map directly to custom variables (CSS custom properties) defined in your central design system, making site-wide spacing and color updates straightforward.
+### 2. Design Token System & CSS Compiler
+Instatic compiles design selections into utility classes and standard CSS variables (custom properties) via its **Core Framework** integration. Spacing adjustments are restricted to multiples of 4 or 8 pixels, avoiding layout inconsistencies.
 
-### 3. Integrated AI Assistant
-Choose from multiple LLM providers (including OpenAI, Anthropic, Open Router, or local models) and trigger co-pilot changes to copy and visual styling directly inside the canvas.
+### 3. Selector Manager
+To prevent class accumulation, the built-in **Selector Manager** allows developers to search, group, and delete unused CSS classes across the entire project in a single panel.
+
+### 4. Integrated AI Assistant
+The editor supports bringing your own API keys (OpenAI, Anthropic, or OpenRouter) to write or modify copy and adjust element alignments using natural language cues directly inside the canvas.
 
 ---
 
 ## Key Takeaways
-- **No Hosting Lock-in**: Deploys pure static HTML/CSS files to any modern edge network.
-- **Role-Based Controls**: Custom client accounts block access to style panels to preserve layout designs.
-- **MIT Licensed**: Fully free to download, self-host, and extend using the TypeScript SDK.
+- **Self-Hosting Freedom**: Deploys fully static files to edge servers (Cloudflare Pages, Netlify) with zero hosting lock-in.
+- **Granular Permissions**: Role-based credentials block clients from opening design panels, securing layouts.
+- **Development Warning**: Currently in **early alpha/pre-1.0 status**. Use caution before deploying to production servers.
+
+### Image Metadata
+* **Hero Image**:
+  - **Prompt**: "Minimalist 3D editorial illustration representing video player overlays and screens, pastel blue shades"
+  - **Filename**: "youtube-hero.png"
+  - **Alt**: "Video player abstract interface graphic"

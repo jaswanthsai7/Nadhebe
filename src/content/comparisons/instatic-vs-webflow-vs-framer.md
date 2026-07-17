@@ -18,12 +18,15 @@ youtubeVideoUrl: "https://youtu.be/O88lL2v3JkA?si=INNufrcW-ocyz698"
 itemsCompared: ["Instatic", "Webflow", "Framer"]
 faq:
   - question: "Which platform is best for SEO?"
-    answer: "Instatic and Framer both produce highly optimized static HTML, yielding fast loads. However, Instatic gives you full control of hosting and server configurations."
+    answer: "Instatic and Framer both produce highly optimized static HTML, yielding fast loads. However, Instatic gives you full control of hosting, custom server configurations, and outputs HTML with zero hydration bloat."
   - question: "Can clients edit content safely in Instatic?"
     answer: "Yes. Unlike Webflow which can expose layout changes, Instatic features strict user roles, allowing you to restrict client logins strictly to text and media editing."
+sources:
+  - label: "Visual Site Builders Comparison Space"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
-Visual page builders have revolutionized how agencies build websites. However, legacy tools often lock your team into proprietary infrastructure and billing cycles. 
+Visual page builders have revolutionized how agencies build websites. However, legacy tools often lock your team into proprietary infrastructure and billing cycles.
 
 In this comparison, we contrast the open-source challenger **Instatic** against **Webflow** and **Framer** to help you choose the right visual compiler for your engineering workflow.
 
@@ -38,6 +41,7 @@ In this comparison, we contrast the open-source challenger **Instatic** against 
 | **Output Format** | **Semantic Static HTML/CSS** | Dynamic Server / HTML export | React Single Page App |
 | **Extensibility** | **TypeScript SDK Plugins** | Integration APIs | Framer Components (React) |
 | **Database** | **SQLite / PostgreSQL** | Webflow CMS | Framer CMS |
+| **Bloat & Hydration** | **Zero framework JS runtime** | Moderate (some bloat) | High (ships React runtime) |
 
 ---
 
@@ -52,7 +56,7 @@ Webflow exports massive styling configurations and script components. While the 
 Framer compiles websites as React Single Page Applications (SPAs). While this enables rich animations, it increases the initial JavaScript payload, causing layout shifts (CLS) and slower load times on low-power mobile devices.
 
 ### Instatic
-Instatic outputs **clean static HTML and CSS**. It uses a class-based utility generator where styles map to a centralized token set, eliminating unused rules and avoiding heavy runtime libraries.
+Instatic outputs **clean static HTML and CSS**. Built on a **Bun and TypeScript** compiler stack, it uses a class-based utility generator where styles map to a centralized token set, eliminating unused rules and avoiding heavy runtime libraries entirely.
 
 ---
 
@@ -69,7 +73,7 @@ graph LR
 
 Webflow and Framer require you to host on their systems to preserve CMS features (like blogging and forms). If you export the code, you lose dynamic CMS endpoints.
 
-Instatic separates the editor server from the static output site. You run the editor on a VPS (costing ~$5/month for unlimited sites), and publish the resulting HTML directly to free CDNs like Cloudflare Pages or Netlify.
+Instatic separates the editor server from the static output site. You run the editor on a VPS (costing ~$5/month for unlimited sites), storing configurations inside SQLite or PostgreSQL, and publish the resulting HTML directly to free CDNs like Cloudflare Pages or Netlify.
 
 ---
 
@@ -96,8 +100,8 @@ Watch the editor workflow in action to compare interfaces:
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **True Portability**: Instatic does not restrict you to proprietary CDNs or hosting providers.
 - **Performance Excellence**: Semantic static output loads faster than React-hydrated Single Page Apps.
 - **SaaS-grade Permissions**: Built-in team permission audits allow agency control over client access.
----
+- **Alpha Warnings**: Keep in mind that Instatic is currently in **early alpha status**, meaning template extensions and third-party plugin options are still limited.

@@ -4,7 +4,7 @@ description: "Analyze how integrating tools like Google Flow Storyboard Studio c
 pubDate: 2026-07-17
 author: alice-chen
 category: Guides
-tags: ["pre-production", "guides", "workflows", "film-tech"]
+tags: ["pre-production", "guides", "workflows", "film-tech", "google-labs"]
 heroImage: "/images/pre-prod-guide.jpg"
 heroAlt: "Minimalist layout showing interlocking clean gears and folders, pastel blue and white style"
 estimatedReadingTime: 6
@@ -24,7 +24,7 @@ sources:
 
 # The Producer's Guide to AI-Assisted Pre-Production Workflows
 
-Integrating generative storyboarding tools like Google Flow into media production pipelines shifts the traditional timeline, allowing teams to prototype scripts in hours rather than days.
+Integrating generative storyboarding tools like Google Flow's **Storyboard Studio** (available as a shared tool in **Google Labs**) into media production pipelines shifts the traditional timeline, allowing teams to prototype scripts and render high-fidelity camera angles in hours rather than days.
 
 ## Optimizing Production Timelines
 
@@ -39,10 +39,17 @@ Using Storyboard Studio, the workflow becomes parallel:
 ```
                   ┌➔ [Storyboard Rendering (AI)] ➔ [Shot List Mapping]
 [Script Writing] ─┤
-                  └➔ [Asset & Location Tagging (AI)]
+                  └➔ [Asset & Location Tagging (AI)] ➔ [Veo Animation Pre-viz]
 ```
 
 This structural shift reduces feedback loops between writers, directors, and client partners.
+
+## Establishing Visual Continuity
+
+A major challenge for creative directors using generative tools is avoiding character and prop drift across different scenes. Storyboard Studio resolves this by:
+* **Asset Mapping**: Maintaining reference folders with visual descriptions of characters, costumes, and locations in the Assets tab.
+* **Manual Tagging of Character References**: When the AI drifts during high-action script segments, creators can highlight the character in the panel editor and manually tag them with the reference card to align facial details.
+* **Pre-visualization Animation**: Using Google's video compiler, **Veo**, to animate final storyboard frames to verify motion paths before hiring actors.
 
 ### Image Metadata
 * **Hero Image**:

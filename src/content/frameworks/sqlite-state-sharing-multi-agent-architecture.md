@@ -16,7 +16,7 @@ faq:
   - question: "Why use SQLite instead of Redis for agent state-sharing?"
     answer: "SQLite provides a lightweight, file-based database with relational schema support, making it simple to run locally without external container dependencies."
   - question: "How are race conditions handled in SQLite state sharing?"
-    answer: "By utilizing standard database transaction locks and task queues inside the SQLite wrapper library."
+    answer: "By utilizing standard database transaction locks (IMMEDIATE or EXCLUSIVE transaction modes) and task queues inside the SQLite wrapper library."
 sources:
   - label: "SQLite Database Architecture Guide"
     url: "https://www.sqlite.org/arch.html"
@@ -24,27 +24,34 @@ sources:
 
 # The SQLite State-Sharing Pattern for Multi-Agent Architectures
 
-When building multi-agent systems, managing communication and state sharing between modules is a key design consideration. While message-passing protocols are common, using a shared database like **SQLite** offers advantages in error isolation and process scheduling.
+When building multi-agent systems, managing communication and state sharing between modules is a key design consideration. While message-passing protocols or webhooks are common, using a shared database like **SQLite** offers major advantages in error isolation, transaction locking, and process scheduling.
 
 ## The Architecture Pattern
 
-Instead of direct message exchange, agents interact through a structured database:
+Instead of direct message exchange, agents interact through a structured database schema:
 
 ```
-[Agent 1 (Planner)] ──➔ [ Write Job to DB ]
-                              │
-                              ▼
-                       [(SQLite Database)]
-                              ▲
-                              │
-[Agent 2 (Worker)]  ──➔ [ Fetch & Update State ]
+[Agent 1 (Planner)] ──➔ [ Write Job to DB (State: 'pending') ]
+                                     │
+                                     ▼
+                              [(SQLite Database)]
+                                     ▲
+                                     │
+[Agent 2 (Worker)]  ──➔ [ Fetch & Update State (State: 'running') ]
 ```
 
-### Benefits of DB-Centric State Management
+## SQLite Coordination Mechanics
 
-1. **Error Isolation**: If an agent process crashes, task state remains recorded in the database, allowing for simple retries or recovery.
-2. **Relational Constraints**: Simplifies complex task dependencies (e.g., *Agent B* cannot run until *Agent A* updates its state column to 'completed').
-3. **Local Portability**: SQLite runs as a single local file, simplifying deployment compared to external database containers.
+This pattern resolves coordination challenges through three core database features:
+
+### 1. Database Transaction Locks
+To prevent race conditions where multiple worker agents attempt to fetch and lock the same task simultaneously, the SQLite coordinator uses standard **transaction locks** (utilizing `BEGIN IMMEDIATE` or `BEGIN EXCLUSIVE` commands). This serializes write operations, ensuring only one agent registers as the active worker for a given task ID.
+
+### 2. Relational Constraints & Task Queues
+SQLite's support for relational columns allows developers to enforce task queues based on foreign key mappings or status flags (e.g. *Agent B* cannot query a task unless the predecessor task has a status column of `completed`).
+
+### 3. Fail-Safe Error Isolation
+If a worker agent crashes or encounters a network API timeout, the orchestrator detects the lapse via task heartbeats or timeouts recorded in the database. Because the state is saved persistently on the filesystem, the system can mark the task as `failed` and trigger a retry without losing execution history.
 
 ### Image Metadata
 * **Hero Image**:

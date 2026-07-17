@@ -24,14 +24,15 @@ sources:
 
 # The YouTube Automation Agent: Feature Guide
 
-This guide examines the core features of the **YouTube Automation Agent** and how it manages video production from strategic planning to final metadata generation.
+This guide examines the core features of the **YouTube Automation Agent** and how its multi-agent system manages video production from strategic planning to final metadata generation, using a central **SQLite database** to coordinate tasks.
 
 ## Feature Overview
 
-* **Strategic Content Queries**: Automatically analyzes channel metrics and queries YouTube search trends.
-* **Retention-Optimized Scripting**: Uses prompt templates designed to structure scripts with hooks and calls to action.
-* **Metadata Packager**: Creates SEO-optimized titles, descriptions, and tags.
-* **A/B Thumbnail Variations**: Renders visual concept variations to optimize click-through rates.
+* **Strategic Content Queries**: Automatically analyzes channel metrics and queries YouTube search trends using the Content Strategy Agent.
+* **Retention-Optimized Scripting**: Uses prompt templates designed to structure scripts with hooks and calls to action, managed by the Scriptwriter Agent.
+* **Metadata Packager**: Creates SEO-optimized titles, descriptions, and tags via the SEO Optimizer Agent.
+* **A/B Thumbnail Variations**: Renders visual concept variations to optimize click-through rates using the Thumbnail Designer Agent.
+* **Shared State Coordination**: SQLite shared database coordinates execution states between the seven agents (Strategy, Script, Thumbnail, SEO, Quality Control, Voiceover, Publisher), preventing cascading errors when specific API modules encounter timeouts.
 
 ### Image Metadata
 * **Hero Image**:

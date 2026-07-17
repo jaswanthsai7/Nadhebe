@@ -1,10 +1,10 @@
 ---
 title: "LLM Autonomous Loops: Best Practices for Token and Cost Management"
-description: "Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul Ultra using rate limits, caching, and loop breakers."
+description: "Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers."
 pubDate: 2026-07-17
 author: alice-chen
 category: Best Practices
-tags: ["cost-management", "llm-ops", "best-practices", "agents"]
+tags: ["cost-management", "llm-ops", "best-practices", "agents", "models"]
 heroImage: "/images/llm-costs.jpg"
 heroAlt: "Minimalist editorial concept showing floating light-cyan blocks forming a balanced scale on a white background"
 estimatedReadingTime: 5
@@ -24,12 +24,12 @@ sources:
 
 # LLM Autonomous Loops: Best Practices for Token and Cost Management
 
-As models like GPT-5.6's Soul Ultra transition toward fully autonomous execution, managing token consumption becomes a primary engineering challenge. A parallel execution loop can consume a monthly API budget in a matter of minutes if left unchecked.
+As models like GPT-5.6's flagship **Soul** model transition toward fully autonomous execution, managing token consumption becomes a primary engineering challenge. A parallel execution loop processing multiple large files can consume a monthly API budget in a matter of minutes if left unchecked.
 
 ## Core Cost Mitigation Patterns
 
 ### 1. Max Iteration Guardrails (Loop Breakers)
-Every autonomous pipeline must have a hard boundary. Never write open-ended `while True` loops. Implement a supervisor that exits after `N` iterations:
+Every autonomous pipeline must have a hard boundary. Never write open-ended `while True` loops. Implement a supervisor that exits after `N` iterations (typically 5 attempts):
 
 ```python
 MAX_ITERATIONS = 5
@@ -40,10 +40,13 @@ for attempt in range(MAX_ITERATIONS):
 ```
 
 ### 2. Semantic Caching
-Use a vector database to cache prompt intents and responses. If the agent repeatedly queries for similar steps, serve the cached output directly, bypassing API generation fees.
+Use a vector database to cache prompt intents and generated outputs. If the agent repeatedly queries for similar refactoring steps, serve the cached output directly, bypassing API generation fees.
 
-### 3. Step-by-Step Budget Allocation
-Allocate tokens dynamically based on task priority. Simple tasks (like sorting metadata) should run on lighter models, while complex code generation runs on Soul Ultra.
+### 3. Step-by-Step Budget Allocation (Model Tier Selection)
+Allocate tokens dynamically by utilizing the appropriate model tier. Rather than running all agent processes on the premium **Soul** flagship tier ($10/$50), delegate tasks dynamically:
+* Run simple text transformations and tag mappings on **Luna** (very cheap).
+* Execute standard code generation tasks and database queries on **Terra** (GPT-5.5 capability at half cost).
+* Use **Soul** exclusively for high-level planning, validation checks, and safety audits.
 
 ### Image Metadata
 * **Hero Image**:

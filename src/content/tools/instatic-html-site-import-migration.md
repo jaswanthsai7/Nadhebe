@@ -20,11 +20,14 @@ faq:
     answer: "Yes, when running a full site import, Instatic fetches referenced styles and builds matching class selectors inside the editor."
   - question: "Can I import a single layout section?"
     answer: "Yes. The block importer lets you paste any raw HTML snippet, which the canvas editor instantly converts into editable components."
+sources:
+  - label: "Instatic Site Importer Specifications"
+    url: "https://github.com/CoreBunch/Instatic/blob/main/README.md"
 ---
 
-Migrating an existing website into a new content management system often requires rebuilding the layout from scratch. However, **Instatic CMS** simplifies this transition with its built-in website and HTML importing engines.
+Migrating an existing website into a new content management system often requires rebuilding the layout from scratch. However, **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this transition with its built-in website and HTML importing engines.
 
-Rather than just copying raw code into an iframe, Instatic converts incoming markup directly into editable canvas elements, class selectors, and design tokens. This guide explains the mechanics behind the importer and how to manage site migrations.
+Rather than just copying raw code into an iframe, Instatic converts incoming markup directly into editable canvas elements, class selectors, and design tokens, saving them directly to the database backend (SQLite by default, or PostgreSQL for teams). This guide explains the mechanics behind the importer and how to manage site migrations.
 
 ---
 
@@ -66,7 +69,8 @@ Watch the importer process and convert external layouts into clean, editable vis
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **No Rebuilding Required**: Convert raw HTML and CSS into editable canvas elements.
 - **Unified Style Rules**: Use the Selector Manager to map imported classes to your design system.
 - **Fast Block Imports**: Paste code snippets directly into the canvas to populate layouts instantly.
+- **Alpha Warnings**: Since Instatic is in **early alpha status**, verify all imported layouts on mobile breakpoints to ensure that no styling attributes are dropped.

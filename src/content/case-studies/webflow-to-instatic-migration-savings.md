@@ -20,6 +20,9 @@ faq:
     answer: "No. Because Instatic outputs semantic HTML matching the original markup, search engine indexed pages maintained their organic search positions."
   - question: "What were the hosting savings?"
     answer: "The agency reduced their hosting bill from $725/month to $65/month by hosting all 25 sites on a single VPS."
+sources:
+  - label: "CoreBunch Case Studies Archive"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
 Managing client websites on proprietary SaaS platforms can quickly become expensive. Agency teams often face rising subscription fees, paid add-on costs for simple features, and strict limits on database items.
@@ -32,14 +35,14 @@ In this case study, we look at how a digital marketing agency migrated **25 clie
 
 The agency had 25 marketing sites hosted on Webflow. Key challenges included:
 - **Rising Subscriptions**: Total hosting bills exceeded $700 per month.
-- **Limited Database Items**: Reach limits on dynamic content fields (CMS items) for content-heavy pages.
+- **Limited Database Items**: Reaching limits on dynamic content fields (CMS items) for content-heavy pages.
 - **Markup Bloat**: High CLS layout shifts and slow initial mobile load speeds.
 
 ---
 
 ## The Migration Architecture
 
-The agency deployed Instatic CMS inside Docker containers on a single Virtual Private Server (VPS), publishing static HTML files directly to Cloudflare Pages:
+The agency deployed Instatic CMS—an MIT licensed open-source visual page builder—inside Docker containers on a single VPS, using its lightweight SQLite database backend, and publishing static HTML files directly to Cloudflare Pages:
 
 ```mermaid
 graph TD
@@ -50,7 +53,7 @@ graph TD
     Cloudflare -->|Serve Users| ClientBrowser[Client Web Browser]
 ```
 
-This setup separates the editor interface (hosted securely on the VPS) from the public websites (hosted for free on Cloudflare's edge network).
+This setup separates the editor interface (hosted securely on the VPS, running efficiently on **Bun and TypeScript**) from the public websites (hosted for free on Cloudflare's edge network, yielding **zero framework runtime or hydration overhead**).
 
 ---
 
@@ -77,7 +80,8 @@ Watch the visual layout importer convert pages during the migration process:
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **90% Cost Reduction**: Self-hosting visual page builders on a single VPS cuts subscription fees.
 - **Performance Gains**: Serving static semantic HTML from edge networks increases mobile page speeds.
 - **Client Satisfaction**: Intuitive editorial dashboards let clients update text copy without layout risks.
+- **Alpha Warnings**: Instatic is currently in an **early alpha stage**. The agency verified each layout variation locally on a SQLite database instance before transferring files to active VPS container mounts.

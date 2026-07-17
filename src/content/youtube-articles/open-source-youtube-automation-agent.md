@@ -19,7 +19,7 @@ faq:
   - question: "Why does the YouTube Automation Agent use SQLite?"
     answer: "SQLite acts as a shared state database. Instead of direct messaging, agents log states in SQLite to prevent system crashes during API timeouts."
   - question: "How many agents are in the system?"
-    answer: "The architecture employs seven distinct AI experts, including strategy, scriptwriting, SEO, thumbnail, and publication agents."
+    answer: "The architecture employs seven distinct AI experts, including strategy, scriptwriting, SEO, thumbnail, quality control, voiceover, and publication agents."
 sources:
   - label: "GitHub YouTube Automation Agent Repository"
     url: "https://github.com/developer/youtube-automation-agent"
@@ -33,13 +33,13 @@ The **YouTube Automation Agent** is an open-source project featuring a loosely c
 
 The system divides responsibilities among seven specialized agents:
 
-1. **Content Strategy Agent**: Queries APIs to isolate high-performing topics.
-2. **Scriptwriter Agent**: Generates drafts using structured prompt templates.
-3. **Thumbnail Designer Agent**: Renders visual concept variations.
-4. **SEO Optimizer Agent**: Generates titles, descriptions, and tags.
-5. **Quality Controller**: Validates the output script for factual accuracy.
-6. **Voiceover Coordinator**: Interface with speech-generation APIs.
-7. **Publisher Agent**: Manages final exports and scheduling parameters.
+1. **Content Strategy Agent**: Queries APIs to isolate high-performing topics and search trends.
+2. **Scriptwriter Agent**: Generates video scripts using structured prompt templates.
+3. **Thumbnail Designer Agent**: Renders visual concept variations to optimize click-through rates.
+4. **SEO Optimizer Agent**: Generates metadata packs, including titles, descriptions, and tags.
+5. **Quality Controller**: Validates the output script for factual accuracy and tone alignment.
+6. **Voiceover Coordinator**: Interfaces with speech-generation APIs.
+7. **Publisher Agent**: Manages final exports and scheduling parameters using the YouTube API.
 
 ```mermaid
 flowchart LR
@@ -50,9 +50,12 @@ flowchart LR
     DB -->|Trigger Export| E[Publisher Agent]
 ```
 
-## Shared State Isolation
+## Shared State Isolation via SQLite
 
-Unlike message-passing multi-agent architectures that can break during individual module failures, this system uses the SQLite database as a shared state manager. If one agent encounters a network timeout, other modules pause or fall back to safe default states, improving overall system stability.
+Unlike message-passing multi-agent architectures that can break during individual module failures, this system uses the SQLite database as a shared state manager:
+* **Error Isolation**: If an agent process crashes due to an API timeout, the task state remains recorded in the database, allowing for simple retries or recovery when the process restarts.
+* **Relational Constraints**: SQLite's table relationships manage dependencies, ensuring that *Agent B* (Scriptwriter) does not run until *Agent A* (Strategy) marks its database column status as 'completed'.
+* **Database Transaction Locks**: Standard database transaction locks and task queues inside the SQLite wrapper library prevent race conditions when multiple agents attempt concurrent writes.
 
 ### Image Metadata
 * **Hero Image**:

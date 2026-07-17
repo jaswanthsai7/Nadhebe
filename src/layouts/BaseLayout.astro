@@ -78,16 +78,7 @@ if (canonicalUrl) {
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
 
-    <!-- Prevent theme flash -->
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored ? stored === 'dark' : prefersDark) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
+
 
     <!-- Frosted Nature Background Styles -->
     <style>
@@ -161,7 +152,7 @@ if (canonicalUrl) {
     <Footer />
     <SearchDialog />
 
-    <!-- Curated random nature image loader -->
+    <!-- Curated random nature image loader (Only cycles on refresh or tab switch) -->
     <script is:inline>
       (function () {
         const photos = [
@@ -192,44 +183,63 @@ if (canonicalUrl) {
           return a;
         }
 
-        // Load or initialise the shuffled queue from sessionStorage
-        let queue;
-        let idx;
-        try {
-          const stored = sessionStorage.getItem('nb_bg_queue');
-          const storedIdx = parseInt(sessionStorage.getItem('nb_bg_idx') || '-1', 10);
-          queue = stored ? JSON.parse(stored) : null;
-          idx = storedIdx;
-        } catch (e) {
-          queue = null;
-          idx = -1;
+        function applyBg(cycle) {
+          let queue;
+          let idx;
+          try {
+            const stored = sessionStorage.getItem('nb_bg_queue');
+            const storedIdx = parseInt(sessionStorage.getItem('nb_bg_idx') || '-1', 10);
+            queue = stored ? JSON.parse(stored) : null;
+            idx = storedIdx;
+          } catch (e) {
+            queue = null;
+            idx = -1;
+          }
+
+          let currentBgId = sessionStorage.getItem('nb_current_bg');
+
+          // Cycle if forced, or if we don't have a background set yet
+          if (cycle || !currentBgId) {
+            if (!queue || idx >= queue.length - 1) {
+              queue = shuffle(photos);
+              idx = 0;
+            } else {
+              idx = idx + 1;
+            }
+            currentBgId = queue[idx];
+
+            try {
+              sessionStorage.setItem('nb_bg_queue', JSON.stringify(queue));
+              sessionStorage.setItem('nb_bg_idx', String(idx));
+              sessionStorage.setItem('nb_current_bg', currentBgId);
+            } catch (e) {}
+          }
+
+          const src = 'https://images.unsplash.com/' + currentBgId + '?auto=format&fit=crop&w=3840&q=100';
+          const bg = document.getElementById('nature-bg');
+          if (bg) {
+            const img = new Image();
+            img.onload = function () {
+              bg.style.backgroundImage = "url('" + src + "')";
+              bg.style.opacity = '1';
+            };
+            img.src = src;
+          }
         }
 
-        // If queue is exhausted or missing, create a fresh shuffle
-        if (!queue || idx >= queue.length - 1) {
-          queue = shuffle(photos);
-          idx = 0;
-        } else {
-          idx = idx + 1;
-        }
+        // Detect if this page load is a reload/refresh
+        const isReload = (performance.getEntriesByType("navigation")[0]?.type === "reload") ||
+                         (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
 
-        // Persist state
-        try {
-          sessionStorage.setItem('nb_bg_queue', JSON.stringify(queue));
-          sessionStorage.setItem('nb_bg_idx', String(idx));
-        } catch (e) {}
+        // Apply bg: cycle if refresh, otherwise reuse previous background
+        applyBg(isReload);
 
-        const randomId = queue[idx];
-        const src = 'https://images.unsplash.com/' + randomId + '?auto=format&fit=crop&w=3840&q=100';
-        const bg = document.getElementById('nature-bg');
-        if (bg) {
-          const img = new Image();
-          img.onload = function () {
-            bg.style.backgroundImage = "url('" + src + "')";
-            bg.style.opacity = '1';
-          };
-          img.src = src;
-        }
+        // Cycle bg on browser tab visibility change (moving to another tab and back)
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'visible') {
+            applyBg(true);
+          }
+        });
       })();
     </script>
   </body>

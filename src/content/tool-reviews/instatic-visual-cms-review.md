@@ -23,27 +23,33 @@ pros:
   - "Simultaneous multi-breakpoint canvas design simplifies responsive adjustments"
   - "Clean, pure semantic HTML and CSS output without runtime bundle dependencies"
 cons:
-  - "Currently in early-stage development, leading to potential updates churn"
+  - "Currently in early-stage alpha development, leading to potential updates churn"
   - "Lacks a mature marketplace for third-party templates and plugins"
 faq:
   - question: "How does Instatic's visual builder compare to WordPress?"
     answer: "Instatic is focused on responsive styling and static compilation, whereas WordPress is dynamic and server-rendered out of the box."
   - question: "Can I host Instatic on a basic VPS?"
     answer: "Yes, its SQLite configuration runs efficiently on a standard 1GB RAM virtual server."
+sources:
+  - label: "Instatic GitHub Project Specs"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
 Delivering marketing pages at speed often forces engineering teams to adopt heavy visual builder platforms. While these systems make visual edits simple, they restrict self-hosting freedom and accumulate styling overrides that slow down load times.
 
-**Instatic** enters the visual web design space as a self-hosted visual CMS built on **Bun** and **TypeScript**. In this review, we analyze its design panel, client collaboration options, and static site export capabilities.
+**Instatic** enters the visual web design space as a self-hosted visual CMS built on **Bun** and **TypeScript**. In this review, we analyze its design panel, database configurations (SQLite/PostgreSQL), client collaboration options, and static site export capabilities.
 
 ---
 
 ## Editor Review and Highlights
 
-### 1. Unified Design Tokens
+### 1. Side-by-Side Multi-Breakpoint Canvas
+Unlike traditional visual builders where you must toggle views, Instatic displays desktop, tablet, and mobile canvas windows side-by-side. Layout changes propagate in real time, making responsive adjustments straightforward.
+
+### 2. Unified Design Tokens
 Instatic keeps visual styling values organized by linking element choices to custom styling variables. Adjusting your global design token settings (such as colors or font families) updates styles throughout the project, ensuring design consistency.
 
-### 2. Sandbox Client Governance
+### 3. Sandbox Client Governance
 Unlike Webflow, which can expose structural layouts to clients, Instatic features a built-in user role system. This lets developers restrict client credentials to text and image fields, keeping layout bounds secure.
 
 ---
@@ -51,7 +57,7 @@ Unlike Webflow, which can expose structural layouts to clients, Instatic feature
 ## Technical Rating Details
 
 - **Developer Experience (DX)**: `9.0 / 10`
-- **Output Code Quality**: `9.5 / 10`
+- **Output Code Quality**: `9.5 / 10` (Zero builder bloat or hydration overhead)
 - **Feature Completeness**: `8.0 / 10`
 - **Value for Money**: `10 / 10` (Free MIT Open-Source)
 
@@ -69,7 +75,8 @@ Watch the complete design canvas interface review and feature walkthrough below:
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Clean Static Code**: Generates lightweight HTML/CSS layouts that improve initial page speeds.
 - **Self-Hosted Value**: Run unlimited projects on a single cloud VPS instance.
 - **Client Security**: Lock page structures to prevent editors from accidentally breaking layouts.
+- **Alpha Warnings**: Since Instatic is currently in **early alpha status**, it should be evaluated in staging environments before transitioning mission-critical websites.

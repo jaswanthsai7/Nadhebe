@@ -1,10 +1,10 @@
 ---
 title: "The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration"
-description: "Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul Ultra autonomous capabilities and tool-calling sandboxes."
+description: "Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes."
 pubDate: 2026-07-17
 author: alice-chen
 category: Programming
-tags: ["gpt-5.6", "agentic-ai", "guides", "orchestration"]
+tags: ["gpt-5.6", "agentic-ai", "guides", "orchestration", "models"]
 heroImage: "/images/gpt-5-6-guide.jpg"
 heroAlt: "Minimalist rendering of interlocking frosted glass shapes floating above a clean light grey workspace"
 estimatedReadingTime: 8
@@ -24,37 +24,45 @@ sources:
 
 # The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration
 
-GPT-5.6's **Soul Ultra** model introduces native code sandboxing and parallel scheduling, making it a powerful platform for building autonomous agents. This guide outlines how developers can leverage these capabilities to construct robust agentic pipelines.
+GPT-5.6's flagship **Soul** model introduces native code sandboxing, parallel scheduling, and a massive **1 million token context window**, making it a powerful platform for building autonomous agents. This guide outlines how developers can leverage the three GPT-5.6 model tiers (Soul, Terra, Luna) to construct robust agentic pipelines.
+
+## Selecting the Right Model Tier
+
+When designing a multi-stage agentic workflow, matching the correct model tier to each step is crucial for balancing API costs and speed:
+
+* **Luna**: Best for simple classification, routing, or text styling tasks. Luna operates at high speeds and low costs.
+* **Terra**: Ideal for routine coding tasks or standard database queries. Terra offers GPT-5.5 capability levels at half the price.
+* **Soul**: Reserved for orchestration supervision, complex codebase refactoring, and multi-step tool-use validation where its 88.8% Terminal Bench 2.1 rating is needed.
 
 ## Orchestration Patterns
 
-To avoid compute consumption loops, developers should implement a structural supervisor pattern:
-
-1. **Planner**: Breaks goals into task descriptions.
-2. **Workers**: Executed in parallel with specific tools.
-3. **Supervisor**: Validates task completion.
+To avoid infinite loops and compute drain, developers should implement a structured supervisor pattern that orchestrates tasks across these tiers:
 
 ```python
-# Conceptual loop using GPT-5.6 agentic API
+# Conceptual loop using GPT-5.6 agentic API and tiers
 class AgentSupervisor:
-    def __init__(self, model="soul-ultra"):
-        self.model = model
+    def __init__(self, primary_model="soul", worker_model="terra"):
+        self.primary_model = primary_model
+        self.worker_model = worker_model
         
     def execute_workflow(self, task_description):
-        tasks = self.plan(task_description)
+        # 1. Plan using flagship Soul model
+        tasks = self.plan_with_soul(task_description)
         results = []
+        # 2. Execute parallel workers using Terra model
         for task in tasks:
-            res = self.worker_run(task)
+            res = self.worker_run_with_terra(task)
             results.append(res)
-        return self.synthesize(results)
+        # 3. Validate using Soul model + Salt safety controls
+        return self.synthesize_and_verify(results)
 ```
 
-## Guardrails and Budget Controls
+## Guardrails and Salt Safety Integration
 
-Because Soul Ultra can execute tasks rapidly in parallel, implementing budget limits is critical. Always define:
-* **Max Loop Iterations**: Prevent infinite loops.
-* **Token Thresholds**: Terminate runs exceeding a specific budget.
-* **State Verification**: Require human-in-the-loop approvals for destructive operations (e.g., file deletes).
+Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and budget controls is critical:
+* **Max Loop Iterations**: Always set a hard boundary (e.g. max 5 iterations) to prevent infinite loops.
+* **Salt Audits**: Ensure that any local command execution is audited by OpenAI's Salt safety framework to avoid running unauthorized terminal calls.
+* **State Verification**: Require human-in-the-loop approvals for destructive operations (e.g. file deletes, database drops).
 
 ### Image Metadata
 * **Hero Image**:

@@ -25,13 +25,13 @@ sources:
 
 # Tutorial: Setting Up the YouTube Automation Agent
 
-This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine.
+This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine. The system uses a loosely coupled multi-agent workflow coordinated by a central SQLite database.
 
 ## Setup Requirements
 
 * Python 3.10 or higher.
 * SQLite3 database package.
-* API keys for OpenAI and YouTube Data API v3.
+* API keys for OpenAI (for scriptwriting and SEO tasks) and YouTube Data API v3.
 
 ## Installation Steps
 
@@ -50,13 +50,19 @@ YOUTUBE_API_KEY=your_youtube_key
 DB_PATH=data/state.db
 ```
 
-### Step 3: Initialize Database and Run Pipeline
+### Step 3: Initialize SQLite Database
+Running the initialization script creates the SQLite database tables needed to coordinate the **seven specialized agents** (Content Strategy, Scriptwriter, Thumbnail Designer, SEO Optimizer, Quality Controller, Voiceover Coordinator, Publisher Agent):
 ```bash
 python scripts/init_db.py
+```
+This builds the `state.db` file locally, including task tables with status fields to enforce dependency constraints.
+
+### Step 4: Run the Multi-Agent Pipeline
+To start the content strategy query and launch the agentic task loop, run:
+```bash
 python main.py --run-strategy
 ```
-
-The system will initialize `state.db` and start the multi-agent pipeline.
+The strategy agent will write a content job to SQLite, which triggers the subsequent agents in the pipeline. SQLite's transaction locks prevent race conditions during parallel execution.
 
 ### Image Metadata
 * **Hero Image**:

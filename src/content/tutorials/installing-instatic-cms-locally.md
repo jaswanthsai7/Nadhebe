@@ -20,9 +20,12 @@ faq:
     answer: "Bun acts as an incredibly fast native TypeScript compiler and package manager, reducing local install times and launching the dev server in milliseconds."
   - question: "How do I fix installation errors on Windows PowerShell?"
     answer: "Ensure your execution policy allows script runs by executing `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` before running the Bun installer."
+sources:
+  - label: "Instatic Installation Guide"
+    url: "https://github.com/CoreBunch/Instatic#installation"
 ---
 
-Deploying a local visual CMS makes template customization faster and keeps database files secure on your host machine. In this tutorial, we will walk you through the complete setup of **Instatic CMS** on your local machine using the **Bun** runtime.
+Deploying a local visual CMS makes template customization faster and keeps database files secure on your host machine. In this tutorial, we will walk you through the complete setup of **Instatic CMS**—the MIT licensed open-source visual page builder—on your local machine using the **Bun** runtime.
 
 ---
 
@@ -32,6 +35,8 @@ Before starting the installation, it helps to understand the local runtime stack
 
 ![Instatic Local Runtime Architecture](/images/install-step1.png)
 *Figure 1: Core interaction model between Bun, VS Code terminal, and the SQLite local database file.*
+
+Instatic uses Bun to compile scripts and save site configurations to a database backend. By default, local installations run on **SQLite**, compiling site configuration matrices into a single local file.
 
 ---
 
@@ -45,7 +50,7 @@ git clone https://github.com/CoreBunch/Instatic.git
 ```
 
 ### 2. Install the Bun Runtime
-Instatic is designed around Bun's high-speed bundler. Depending on your operating system, execute the following command:
+Instatic is designed around Bun's high-speed bundler and TypeScript runtime. Depending on your operating system, execute the following command:
 
 #### macOS & Linux
 ```bash
@@ -83,11 +88,11 @@ bun run dev
 ![Running Local Server Console](/images/install-step2.png)
 *Figure 2: Console output upon successfully booting the local server.*
 
-Open your web browser and navigate to the address shown in the terminal (usually `http://localhost:3000`). Follow the setup wizard to configure your site name, administrator email, and master password.
+Open your web browser and navigate to the address shown in the terminal (usually `http://localhost:3000`). Follow the setup wizard to configure your site name, database driver (choose **SQLite** for local development, or configure **PostgreSQL** parameters), administrator email, and master password.
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Ultra-fast setup**: Bun dependency resolving takes seconds compared to standard npm configurations.
 - **SQLite Defaults**: Database tables compile automatically inside a local DB file upon initialization.
-- **Cross-platform**: Native script installers support Windows PowerShell alongside standard UNIX environments.
+- **Alpha Warning**: Since the project is in **early alpha status**, verify visual canvas imports locally and back up SQLite files regularly before considering staging deployments.

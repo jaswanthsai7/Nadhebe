@@ -20,11 +20,16 @@ faq:
     answer: "Instatic contains a Selector Manager interface that indexes all registered classes. You can search, rename, and clean up classes across the project safely."
   - question: "Should I write custom CSS or use tokens?"
     answer: "You should map tokens to CSS custom properties (variables). This ensures that when you edit spacing or color variables, the changes automatically propagate."
+sources:
+  - label: "Instatic Styling Architecture"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
-Maintaining visual consistency across dozens of marketing pages is a common challenge for web development teams. Visual page builders often generate irregular styling values because designers apply custom offsets directly to elements.
+Maintaining visual consistency across dozens of marketing pages is a common challenge for web development teams. Closed visual builders often generate irregular styling values because designers apply custom offsets directly to elements.
 
-**Instatic CMS** resolves this by enforcing a strict **class-based style system** backed by design tokens. In this guide, we outline best practices for structuring spacing, typography, and color tokens inside Instatic.
+**Instatic CMS**—the MIT licensed open-source visual page builder—resolves this by enforcing a strict **class-based style system** backed by design tokens. Under the hood, the Bun-powered compiler writes style configurations directly to the database backend (SQLite/PostgreSQL) and outputs static assets with zero framework runtime bloat.
+
+In this guide, we outline best practices for structuring spacing, typography, and color tokens inside Instatic.
 
 ---
 
@@ -58,7 +63,7 @@ When designing in Instatic, follow these rules:
 Before publishing changes, use this class hygiene checklist inside the **Selector Manager**:
 
 - [ ] Ensure all custom classes are prefixed or grouped by category (e.g., `btn-`, `card-`, `nav-`).
-- [ ] Delete orphaned selectors containing no properties.
+- [ ] Delete orphaned selectors containing no properties using the Selector Manager.
 - [ ] Audit responsive styles at desktop, tablet, and mobile breakpoints simultaneously using Instatic's **multi-breakpoint canvas**.
 - [ ] Confirm all color selectors reference CSS variables (`var(--...)`) instead of static hex values.
 
@@ -74,7 +79,8 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Class-Based Consistency**: Shared stylesheets prevent page-specific visual regressions.
 - **Tokens Over Static Styling**: Defining custom variables simplifies scaling site updates.
 - **Selector Cleanliness**: Use the Selector Manager regularly to delete unused classes.
+- **Alpha Warnings**: Instatic is currently in **early alpha status**, so always run layout updates on a local SQLite instance before deploying changes to active production sites.

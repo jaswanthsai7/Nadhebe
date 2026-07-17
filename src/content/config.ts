@@ -45,7 +45,6 @@ const sharedSchema = z.object({
   youtubeVideoId: z.string().optional(),
   youtubeVideoUrl: z.string().url().optional(),
   difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
-  estimatedReadingTime: z.number().optional(),
   relatedTopics: z.array(z.string()).optional(),
   lastReviewed: z.coerce.date().optional(),
 });

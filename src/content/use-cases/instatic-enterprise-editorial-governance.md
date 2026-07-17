@@ -20,11 +20,16 @@ faq:
     answer: "Yes, you can configure roles to limit editing privileges to specific folders, pages, or content categories."
   - question: "Does Instatic maintain change logs?"
     answer: "Yes. Instatic features an audit log that records user logins, page updates, asset uploads, and code changes."
+sources:
+  - label: "Instatic User Management Specs"
+    url: "https://github.com/CoreBunch/Instatic"
 ---
 
 Delivering a visual website design to a client is often a nerve-wracking process. Without strict boundaries, content editors can accidentally modify layout alignments, break typography consistency, or delete page components.
 
-**Instatic CMS** addresses this issue with a built-in **user and role management system**. This guide explains how agencies use Instatic to lock down page layouts while allowing clients to easily publish content.
+**Instatic CMS**—the MIT licensed open-source visual page builder—addresses this issue with a built-in **user and role management system**. Running on a high-performance **Bun and TypeScript** backend, Instatic saves these security rules to the local database (SQLite by default, or PostgreSQL for teams) and compiles pages into static HTML with **zero builder or hydration bloat**.
+
+This guide explains how agencies use Instatic to lock down page layouts while allowing clients to easily publish content.
 
 ---
 
@@ -61,7 +66,8 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 
 ---
 
-## Key Takeaways
+## Key Takeaways & Alpha Warnings
 - **Safe Hand-offs**: Protect website designs by blocking editor access to style attributes.
 - **Traceable Changes**: Use audit logging to see who modified content and when.
 - **Independent Roles**: Set custom permissions for external contributors, review teams, and developers.
+- **Alpha Warnings**: Given the project's **early alpha status**, test user authentication credentials on a local SQLite instance before deploying container nodes for active client edits.
