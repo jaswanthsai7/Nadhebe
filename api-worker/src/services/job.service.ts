@@ -6,12 +6,13 @@ import { DomainError } from '../domain/errors';
 export class JobService {
   private static jobsMap = new Map<string, Job>();
 
-  static createJob(input: CreateJobInput, env: any): Job {
+  static async createJob(input: CreateJobInput, env: any, requestId?: string): Promise<Job> {
     const id = crypto.randomUUID();
     const now = new Date().toISOString();
 
     const job: Job = {
       id,
+      requestId,
       url: input.url,
       sourceType: input.sourceType,
       status: 'Queued',
@@ -19,7 +20,13 @@ export class JobService {
         {
           timestamp: now,
           status: 'Queued',
-          message: 'Job successfully placed in queue'
+          message: JSON.stringify({
+            stage: 'worker',
+            status: 'queued',
+            requestId,
+            timestamp: now,
+            message: 'Job successfully placed in queue'
+          })
         }
       ],
       createdAt: now,
@@ -28,20 +35,21 @@ export class JobService {
 
     this.jobsMap.set(id, job);
 
-    // Run the pipeline asynchronously to prevent blocking the HTTP response
     const executor = new PipelineExecutor([
       new SourceExtractionStage(),
       new ResearchStage(),
       new DraftingStage()
     ]);
 
-    executor.executeJob(job, env, (updatedJob) => {
-      this.jobsMap.set(id, updatedJob);
-    }).catch((err) => {
+    try {
+      const completedJob = await executor.executeJob(job, env, (updatedJob) => {
+        this.jobsMap.set(id, updatedJob);
+      });
+      return completedJob;
+    } catch (err) {
       console.error(`Job ${id} pipeline failed:`, err);
-    });
-
-    return job;
+      return this.jobsMap.get(id) || job;
+    }
   }
 
   static getJob(id: string): Job {

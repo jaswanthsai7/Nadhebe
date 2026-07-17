@@ -9,6 +9,7 @@ export class SourceExtractionStage extends PipelineStage {
   description = 'Scrape source URLs and extract readable text';
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
+    const startTime = Date.now();
     const adapters = [new YouTubeAdapter(), new WebPageAdapter(), new RawTextAdapter()];
     const adapter = adapters.find((a) => a.canHandle(job.url, job.sourceType));
 
@@ -17,12 +18,17 @@ export class SourceExtractionStage extends PipelineStage {
     }
 
     const text = await adapter.extract(job.url);
+    const durationMs = Date.now() - startTime;
 
     return {
       success: true,
       message: 'Source content successfully extracted',
+      diagnostics: {
+        durationMs,
+        warnings: []
+      },
       updatedJobFields: {
-        markdown: text // Hold raw text temporarily in markdown slot before replacement
+        markdown: text
       }
     };
   }
@@ -33,6 +39,7 @@ export class ResearchStage extends PipelineStage {
   description = 'Query AI models to synthesize latest research facts';
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
+    const startTime = Date.now();
     const ai = new CloudflareAIProvider(env);
     const rawText = job.markdown || '';
 
@@ -43,11 +50,17 @@ Ensure all fact points are clear and accurate.`;
     const userPrompt = `Compile a technical research report for:
 ${rawText.slice(0, 4000)}`;
 
-    const research = await ai.generateText(systemPrompt, userPrompt);
+    const model = '@cf/meta/llama-3.1-8b-instruct';
+    const research = await ai.generateText(systemPrompt, userPrompt, { model });
+    const durationMs = Date.now() - startTime;
 
     return {
       success: true,
-      message: 'Research details synthesized',
+      message: `Research details synthesized. Model: ${model}`,
+      diagnostics: {
+        durationMs,
+        warnings: []
+      },
       updatedJobFields: {
         aiInsights: {
           confidence: 0.94,
@@ -62,7 +75,28 @@ export class DraftingStage extends PipelineStage {
   name = 'Drafting';
   description = 'Build the final structured Markdown article and content bundles';
 
+  private verifyDraftSchema(markdown: string) {
+    if (!markdown || markdown.trim() === '') {
+      throw new DomainError('INVALID_SCHEMA', 'AI response is empty.');
+    }
+    if (!markdown.startsWith('---')) {
+      throw new DomainError('INVALID_SCHEMA', 'AI response is missing YAML frontmatter starting tag "---".');
+    }
+    const matches = markdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
+    if (!matches) {
+      throw new DomainError('INVALID_SCHEMA', 'AI response contains invalid YAML frontmatter bounds.');
+    }
+    const yamlContent = matches[1];
+    if (!yamlContent.includes('title:')) {
+      throw new DomainError('INVALID_SCHEMA', 'AI response YAML frontmatter is missing required "title" property.');
+    }
+    if (!yamlContent.includes('slug:')) {
+      throw new DomainError('INVALID_SCHEMA', 'AI response YAML frontmatter is missing required "slug" property.');
+    }
+  }
+
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
+    const startTime = Date.now();
     const ai = new CloudflareAIProvider(env);
     const research = job.aiInsights?.factCheckSummary || '';
 
@@ -98,13 +132,18 @@ Markdown body goes here...`;
     const userPrompt = `Generate the markdown article bundle based on this research:
 ${research}`;
 
-    const rawMarkdown = await ai.generateText(systemPrompt, userPrompt);
+    const model = '@cf/meta/llama-3.1-8b-instruct';
+    const rawMarkdown = await ai.generateText(systemPrompt, userPrompt, { model });
+    const durationMs = Date.now() - startTime;
 
-    // Basic regex-based metric calculations for metrics field filling
+    // Verify AI output schema
+    this.verifyDraftSchema(rawMarkdown);
+
+    // Basic metric calculations
     const wordCount = rawMarkdown.split(/\s+/).length;
     const readingTime = Math.max(1, Math.round(wordCount / 200));
 
-    // Parse out frontmatter if possible, otherwise use a placeholder frontmatter
+    // Parse out frontmatter
     let computedMarkdown = rawMarkdown;
     let frontmatter: Record<string, any> = {
       title: 'AI Draft Article',
@@ -129,7 +168,11 @@ ${research}`;
 
     return {
       success: true,
-      message: 'Article draft successfully generated',
+      message: `Article draft successfully generated. Model: ${model}`,
+      diagnostics: {
+        durationMs,
+        warnings: []
+      },
       updatedJobFields: {
         markdown: computedMarkdown,
         frontmatter,

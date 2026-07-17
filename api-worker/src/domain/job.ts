@@ -21,6 +21,7 @@ export interface JobLog {
 
 export interface Job {
   id: string;
+  requestId?: string;
   url: string;
   sourceType: 'youtube' | 'github' | 'website' | 'raw';
   status: JobStatus;

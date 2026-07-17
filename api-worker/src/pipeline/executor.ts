@@ -2,6 +2,23 @@ import { Job, JobStatus } from '../domain/job';
 import { PipelineStage } from '../domain/pipeline-stage';
 import { DomainError } from '../domain/errors';
 
+function formatStructuredLog(
+  stage: string,
+  status: 'queued' | 'running' | 'success' | 'failed',
+  requestId: string | undefined,
+  message: string,
+  extra: Record<string, any> = {}
+): string {
+  return JSON.stringify({
+    stage,
+    status,
+    requestId: requestId || 'unknown',
+    timestamp: new Date().toISOString(),
+    message,
+    ...extra
+  });
+}
+
 export class PipelineExecutor {
   constructor(private stages: PipelineStage[]) {}
 
@@ -9,12 +26,19 @@ export class PipelineExecutor {
     let currentJob = { ...job };
 
     for (const stage of this.stages) {
+      const stageKey = stage.name.toLowerCase();
+
       // Update job state before running stage
       currentJob.status = stage.name as JobStatus;
       currentJob.logs.push({
         timestamp: new Date().toISOString(),
         status: currentJob.status,
-        message: `Starting stage: ${stage.description}`
+        message: formatStructuredLog(
+          stageKey,
+          'running',
+          currentJob.requestId,
+          `Starting stage: ${stage.description}`
+        )
       });
       currentJob.updatedAt = new Date().toISOString();
       onUpdate(currentJob);
@@ -42,7 +66,13 @@ export class PipelineExecutor {
                 {
                   timestamp: new Date().toISOString(),
                   status: currentJob.status,
-                  message: result.message
+                  message: formatStructuredLog(
+                    stageKey,
+                    'success',
+                    currentJob.requestId,
+                    result.message,
+                    result.diagnostics ? { diagnostics: result.diagnostics } : {}
+                  )
                 }
               ]
             };
@@ -62,7 +92,12 @@ export class PipelineExecutor {
         currentJob.logs.push({
           timestamp: new Date().toISOString(),
           status: 'Failed',
-          message: `Stage ${stage.name} failed after ${stage.maxRetries} attempts. Error: ${lastError?.message || 'Unknown'}`
+          message: formatStructuredLog(
+            stageKey,
+            'failed',
+            currentJob.requestId,
+            `Stage ${stage.name} failed after ${stage.maxRetries} attempts. Error: ${lastError?.message || 'Unknown'}`
+          )
         });
         currentJob.updatedAt = new Date().toISOString();
         onUpdate(currentJob);
@@ -74,7 +109,12 @@ export class PipelineExecutor {
     currentJob.logs.push({
       timestamp: new Date().toISOString(),
       status: 'Completed',
-      message: 'AI Article Generation successfully completed'
+      message: formatStructuredLog(
+        'completed',
+        'success',
+        currentJob.requestId,
+        'AI Article Generation successfully completed'
+      )
     });
     currentJob.updatedAt = new Date().toISOString();
     onUpdate(currentJob);

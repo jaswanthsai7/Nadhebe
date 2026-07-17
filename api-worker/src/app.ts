@@ -59,8 +59,22 @@ app.post('/api/v1/jobs', async (c) => {
     throw new DomainError('VALIDATION_FAILED', 'Invalid input parameters for creating a job', result.error.format());
   }
 
-  const job = JobService.createJob(result.data, c.env);
-  return envelope(c, true, job, null, 202);
+  const requestId = c.get('requestId');
+  const job = await JobService.createJob(result.data, c.env, requestId);
+  
+  if (job.status === 'Failed') {
+    const lastErrorLog = job.logs[job.logs.length - 1];
+    let errorMessage = lastErrorLog?.message || 'Unknown pipeline failure';
+    try {
+      if (errorMessage.startsWith('{')) {
+        const parsed = JSON.parse(errorMessage);
+        errorMessage = parsed.message || errorMessage;
+      }
+    } catch (e) {}
+    throw new DomainError('PIPELINE_FAILED', `Generation pipeline failed: ${errorMessage}`);
+  }
+
+  return envelope(c, true, job, null, 200);
 });
 
 // GET /api/v1/jobs/:id — Check job status & output

@@ -443,79 +443,56 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         updateMetrics(activeDraftText);
       });
 
-      // ─── Job Generation Pipeline Poller ───
-      async function pollJobStatus(jobId) {
-        try {
-          const res = await fetch(`${API_BASE}/jobs/${jobId}`);
-          if (!res.ok) throw new Error('Status poll failed');
-          const payload = await res.json();
-          const job = payload.data;
+      // Helper to render logs
+      function renderLogs(logs, finalStatus = '') {
+        researchFeed.innerHTML = logs.map(log => {
+          const time = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          let prefix = '○';
+          let style = 'text-ink2 dark:text-ink2-dark';
+          let messageStr = log.message;
 
-          // Render research logs
-          researchFeed.innerHTML = job.logs.map(log => {
-            const time = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            let prefix = '○';
-            let style = 'text-ink2 dark:text-ink2-dark';
-            if (log.status === 'Completed') {
+          // Attempt to parse structured JSON logs
+          if (log.message.startsWith('{')) {
+            try {
+              const parsed = JSON.parse(log.message);
+              messageStr = parsed.message;
+
+              if (parsed.diagnostics && parsed.diagnostics.durationMs) {
+                messageStr += `\n[Duration: ${(parsed.diagnostics.durationMs / 1000).toFixed(1)}s]`;
+              }
+
+              if (parsed.status === 'success') {
+                prefix = '✓';
+                style = 'text-success dark:text-success-dark font-medium';
+              } else if (parsed.status === 'failed') {
+                prefix = '✗';
+                style = 'text-danger dark:text-danger-dark font-medium';
+              } else if (parsed.status === 'running') {
+                prefix = '●';
+                style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
+              }
+            } catch (e) {}
+          } else {
+            if (log.status === 'Completed' || log.status === 'CompletedSuccess') {
               prefix = '✓';
               style = 'text-success dark:text-success-dark font-medium';
             } else if (log.status === 'Failed') {
               prefix = '✗';
               style = 'text-danger dark:text-danger-dark font-medium';
-            } else if (log.status === job.status) {
+            } else if (log.status === finalStatus) {
               prefix = '●';
               style = 'text-accent dark:text-accent-dark font-medium animate-pulse';
             }
-            return `<div class="flex items-start gap-12 text-caption ${style} border-b border-border/5 pb-10">
-              <span class="font-mono mt-2">${prefix}</span>
-              <div class="flex-1 min-w-0">
-                <p class="font-sans leading-normal text-xs">${log.message}</p>
-                <time class="text-xs opacity-50 block font-mono mt-2">${time}</time>
-              </div>
-            </div>`;
-          }).join('');
-
-          draftStatus.textContent = job.status;
-
-          if (job.status === 'Completed') {
-            isGenerating = false;
-            btnGen.disabled = false;
-            btnGen.textContent = 'Start Pipeline';
-            
-            // Set text & show preview
-            activeDraftText = job.markdown || '';
-            textarea.value = activeDraftText;
-            preview.innerHTML = parseMarkdown(activeDraftText);
-            updateMetrics(activeDraftText);
-
-            // Enable submit buttons
-            btnSubmit.disabled = false;
-            btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
-            
-            // Suggest Category matching source URL configurations
-            if (job.sourceType === 'youtube') {
-              catSelect.value = 'youtube-articles';
-            }
-            return;
           }
 
-          if (job.status === 'Failed') {
-            isGenerating = false;
-            btnGen.disabled = false;
-            btnGen.textContent = 'Start Pipeline';
-            return;
-          }
-
-          // Continue polling
-          setTimeout(() => pollJobStatus(jobId), 1500);
-
-        } catch (e) {
-          console.error(e);
-          isGenerating = false;
-          btnGen.disabled = false;
-          btnGen.textContent = 'Start Pipeline';
-          researchFeed.innerHTML = `<div class="text-caption text-danger dark:text-danger-dark">Error connecting to api-worker. Make sure it is running locally on port 8787.</div>`;
-        }
+          return `<div class="flex items-start gap-12 text-caption ${style} border-b border-border/5 pb-10">
+            <span class="font-mono mt-2">${prefix}</span>
+            <div class="flex-1 min-w-0">
+              <p class="font-sans leading-normal text-xs whitespace-pre-line">${messageStr}</p>
+              <time class="text-xs opacity-50 block font-mono mt-2">${time}</time>
+            </div>
+          </div>`;
+        }).join('');
       }
 
       // Form submission
@@ -529,10 +506,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         isGenerating = true;
         btnGen.disabled = true;
         btnGen.textContent = 'Orchestrating...';
-        
-        researchFeed.innerHTML = `<div class="flex items-center justify-center py-12">
-          <div class="h-16 w-16 animate-spin rounded-pill border-2 border-accent border-t-transparent dark:border-accent-dark"></div>
-        </div>`;
+        draftStatus.textContent = 'Queued';
+
+        const clientLogs = [
+          {
+            timestamp: new Date().toISOString(),
+            status: 'Queued',
+            message: JSON.stringify({
+              stage: 'frontend',
+              status: 'success',
+              timestamp: new Date().toISOString(),
+              message: '[Frontend] Initiating generation workflow'
+            })
+          },
+          {
+            timestamp: new Date().toISOString(),
+            status: 'Queued',
+            message: JSON.stringify({
+              stage: 'api-request',
+              status: 'success',
+              timestamp: new Date().toISOString(),
+              message: '[API Request] Sending POST request to local Worker API'
+            })
+          }
+        ];
+
+        renderLogs(clientLogs, 'Queued');
 
         try {
           const res = await fetch(`${API_BASE}/jobs`, {
@@ -541,22 +540,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             body: JSON.stringify({ url, sourceType })
           });
 
-          if (!res.ok) throw new Error('Failed to create background generation job');
           const payload = await res.json();
-          currentJobId = payload.data.id;
-          
-          pollJobStatus(currentJobId);
 
-        } catch (e) {
-          console.error(e);
+          if (!res.ok) {
+            const err = payload.error || {};
+            throw new Error(err.message || 'Failed to generate article from pipeline');
+          }
+
+          const job = payload.data;
+          currentJobId = job.id;
+          draftStatus.textContent = job.status;
+
+          // Merge client and worker logs
+          const allLogs = [...clientLogs, ...job.logs];
+          
+          if (job.status === 'Completed') {
+            allLogs.push({
+              timestamp: new Date().toISOString(),
+              status: 'Completed',
+              message: JSON.stringify({
+                stage: 'editorial-studio',
+                status: 'success',
+                timestamp: new Date().toISOString(),
+                message: '[Editorial Studio] Loading generated markdown document into workspace'
+              })
+            });
+
+            activeDraftText = job.markdown || '';
+            textarea.value = activeDraftText;
+            preview.innerHTML = parseMarkdown(activeDraftText);
+            updateMetrics(activeDraftText);
+
+            // Enable submit buttons
+            btnSubmit.disabled = false;
+            btnSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            if (job.sourceType === 'youtube') {
+              catSelect.value = 'youtube-articles';
+              catSelect.dispatchEvent(new Event('change'));
+            }
+          }
+
+          renderLogs(allLogs, job.status);
+
           isGenerating = false;
           btnGen.disabled = false;
           btnGen.textContent = 'Start Pipeline';
-          researchFeed.innerHTML = `<div class="text-caption text-danger dark:text-danger-dark font-sans leading-relaxed">
-            Connection Failed: Could not contact local Worker API.<br/>
-            Make sure wrangler server is active on port 8787: <br/>
-            <code>cd api-worker && npx wrangler dev</code>
-          </div>`;
+
+        } catch (err) {
+          console.error(err);
+          isGenerating = false;
+          btnGen.disabled = false;
+          btnGen.textContent = 'Start Pipeline';
+          draftStatus.textContent = 'Failed';
+
+          const errorLogs = [...clientLogs, {
+            timestamp: new Date().toISOString(),
+            status: 'Failed',
+            message: JSON.stringify({
+              stage: 'worker',
+              status: 'failed',
+              timestamp: new Date().toISOString(),
+              message: `[Worker] Connection or execution error: ${err.message}`
+            })
+          }];
+
+          renderLogs(errorLogs, 'Failed');
         }
       });
 
