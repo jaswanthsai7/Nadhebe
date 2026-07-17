@@ -10,10 +10,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="mx-auto max-w-[1600px] w-full px-16 sm:px-32 py-40">
     
-    <!-- Top Title and Status Header Card (Clean glass styling float) -->
-    <div class="bg-surface/85 dark:bg-surface-dark/95 border border-border/30 dark:border-border-dark/40 shadow-medium rounded-16 p-24 mb-32 flex flex-col md:flex-row md:items-center justify-between gap-16">
-      <div>
-        <div class="flex items-center gap-12 mb-8">
+    <!-- Top Title and Status Header Card (Clean glass styling float, centered) -->
+    <div class="bg-surface/85 dark:bg-surface-dark/95 border border-border/30 dark:border-border-dark/40 shadow-medium rounded-16 p-32 mb-32 flex flex-col items-center justify-center text-center gap-20">
+      <div class="flex flex-col items-center text-center">
+        <div class="flex items-center gap-12 mb-8 justify-center">
           <span class="inline-flex items-center gap-6 rounded-pill bg-accent/15 px-10 py-4 text-xs font-mono font-medium text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
             <span class="h-6 w-6 rounded-pill bg-accent animate-pulse dark:bg-accent-dark"></span>
             Week 1 Milestone
@@ -21,9 +21,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="text-meta text-muted dark:text-muted-dark uppercase tracking-widest text-xs font-mono">AI Editorial OS v1.0</span>
         </div>
         <h1 class="font-display text-h1 font-bold text-ink dark:text-ink-dark tracking-tight">AI Contributor Studio</h1>
-        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4">Draft, edit, and submit technical AI content directly to our Git-backed review queue.</p>
+        <p class="text-caption font-sans text-ink2 dark:text-ink2-dark mt-4 max-w-2xl">Draft, edit, and submit technical AI content directly to our Git-backed review queue.</p>
       </div>
-      <div class="flex items-center gap-12">
+      <div>
         <a href="/" class="inline-flex items-center gap-8 rounded-8 border border-border/30 bg-surface px-16 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:border-border-dark dark:bg-surface-dark/35 dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-all duration-150">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60"><path d="m12 19-7-7 7-7M5 12h14"/></svg>
           Back to Site
@@ -57,16 +57,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <div>
-              <label for="source-type" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Source Type</label>
-              <select
-                id="source-type"
-                class="w-full rounded-8 border border-border/30 bg-surface2/20 dark:border-border-dark/30 dark:bg-surface-dark/30 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
-              >
-                <option value="youtube">YouTube Video URL</option>
+              <label class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Source Type</label>
+              
+              <!-- Hidden select for form bindings -->
+              <select id="source-type" class="hidden">
+                <option value="youtube" selected>YouTube Video URL</option>
                 <option value="github">GitHub Repository</option>
                 <option value="website">Documentation / Blog</option>
                 <option value="raw">Raw Text / Markdown</option>
               </select>
+
+              <!-- Custom Dropdown -->
+              <div class="relative" id="custom-select-source-container">
+                <button
+                  type="button"
+                  class="custom-select-trigger w-full flex items-center justify-between rounded-8 border border-border/35 bg-surface2/20 px-12 py-10 text-caption text-ink dark:text-ink-dark dark:border-border-dark/35 dark:bg-surface-dark/30 focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
+                >
+                  <span class="trigger-label">YouTube Video URL</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60 transition-transform duration-200 chevron-icon"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div
+                  class="custom-select-options hidden absolute left-0 right-0 mt-6 bg-surface dark:bg-surface-dark border border-border/30 dark:border-border-dark/40 shadow-large rounded-12 p-8 z-50 space-y-4"
+                >
+                  <div data-value="youtube" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150 bg-accent/10 text-accent dark:text-accent-dark">YouTube Video URL</div>
+                  <div data-value="github" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">GitHub Repository</div>
+                  <div data-value="website" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Documentation / Blog</div>
+                  <div data-value="raw" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Raw Text / Markdown</div>
+                </div>
+              </div>
             </div>
 
             <button
@@ -179,12 +197,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <div>
-              <label for="article-category" class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Target Category</label>
-              <select
-                id="article-category"
-                class="w-full rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150"
-              >
-                <option value="tutorials">Tutorials</option>
+              <label class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-8">Target Category</label>
+              
+              <!-- Hidden select for form bindings -->
+              <select id="article-category" class="hidden">
+                <option value="tutorials" selected>Tutorials</option>
                 <option value="news">AI News</option>
                 <option value="youtube-articles">YouTube Articles</option>
                 <option value="tool-reviews">Tool Reviews</option>
@@ -197,6 +214,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <option value="frameworks">Frameworks</option>
                 <option value="case-studies">Case Studies</option>
               </select>
+
+              <!-- Custom Dropdown -->
+              <div class="relative" id="custom-select-category-container">
+                <button
+                  type="button"
+                  class="custom-select-trigger w-full flex items-center justify-between rounded-8 border border-border/30 bg-surface/50 dark:bg-surface-dark/50 px-12 py-10 text-caption text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:ring-1 focus:ring-accent dark:focus:ring-accent-dark transition-all duration-150 cursor-pointer"
+                >
+                  <span class="trigger-label">Tutorials</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 opacity-60 transition-transform duration-200 chevron-icon"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div
+                  class="custom-select-options hidden absolute left-0 right-0 mt-6 bg-surface dark:bg-surface-dark border border-border/30 dark:border-border-dark/40 shadow-large rounded-12 p-8 z-50 space-y-4 max-h-[220px] overflow-y-auto"
+                >
+                  <div data-value="tutorials" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150 bg-accent/10 text-accent dark:text-accent-dark">Tutorials</div>
+                  <div data-value="news" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">AI News</div>
+                  <div data-value="youtube-articles" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">YouTube Articles</div>
+                  <div data-value="tool-reviews" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Tool Reviews</div>
+                  <div data-value="prompts" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Prompts</div>
+                  <div data-value="comparisons" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Comparisons</div>
+                  <div data-value="best-practices" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Best Practices</div>
+                  <div data-value="use-cases" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Use Cases</div>
+                  <div data-value="tools" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Tools</div>
+                  <div data-value="guides" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Guides</div>
+                  <div data-value="frameworks" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Frameworks</div>
+                  <div data-value="case-studies" class="option-item px-12 py-8 rounded-6 text-caption text-ink2 hover:text-ink hover:bg-hover/20 dark:hover:bg-hover-dark/40 cursor-pointer transition-all duration-150">Case Studies</div>
+                </div>
+              </div>
             </div>
 
             <button
@@ -219,6 +263,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     (function() {
       // Configuration
       const API_BASE = 'http://localhost:8787/api/v1';
+
+      // Helper for Custom Dropdown Selection
+      function initCustomSelect(containerId, hiddenSelectId) {
+        const container = document.getElementById(containerId);
+        const hiddenSelect = document.getElementById(hiddenSelectId);
+        const trigger = container.querySelector('.custom-select-trigger');
+        const label = container.querySelector('.trigger-label');
+        const optionsList = container.querySelector('.custom-select-options');
+        const items = container.querySelectorAll('.option-item');
+        const chevron = container.querySelector('.chevron-icon');
+
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.custom-select-options').forEach(el => {
+            if (el !== optionsList) el.classList.add('hidden');
+          });
+          document.querySelectorAll('.chevron-icon').forEach(ch => {
+            if (ch !== chevron) ch.classList.remove('rotate-180');
+          });
+          optionsList.classList.toggle('hidden');
+          chevron.classList.toggle('rotate-180');
+        });
+
+        items.forEach(item => {
+          item.addEventListener('click', () => {
+            const val = item.getAttribute('data-value');
+            hiddenSelect.value = val;
+            label.textContent = item.textContent;
+
+            items.forEach(i => i.classList.remove('bg-accent/10', 'text-accent', 'dark:text-accent-dark'));
+            item.classList.add('bg-accent/10', 'text-accent', 'dark:text-accent-dark');
+
+            optionsList.classList.add('hidden');
+            chevron.classList.remove('rotate-180');
+
+            hiddenSelect.dispatchEvent(new Event('change'));
+          });
+        });
+
+        hiddenSelect.addEventListener('change', () => {
+          const val = hiddenSelect.value;
+          items.forEach(item => {
+            if (item.getAttribute('data-value') === val) {
+              label.textContent = item.textContent;
+              items.forEach(i => i.classList.remove('bg-accent/10', 'text-accent', 'dark:text-accent-dark'));
+              item.classList.add('bg-accent/10', 'text-accent', 'dark:text-accent-dark');
+            }
+          });
+        });
+
+        document.addEventListener('click', () => {
+          optionsList.classList.add('hidden');
+          chevron.classList.remove('rotate-180');
+        });
+      }
 
       // Elements
       const genForm = document.getElementById('generation-form');
@@ -522,6 +621,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           btnSubmit.textContent = 'Submit for Review';
         }
       });
+
+      // Initialize Custom Selects
+      initCustomSelect('custom-select-source-container', 'source-type');
+      initCustomSelect('custom-select-category-container', 'article-category');
 
     })();
   </script>
