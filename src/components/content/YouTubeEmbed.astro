@@ -13,7 +13,7 @@ const { videoId, title } = Astro.props;
   data-title={title}
 >
   <!-- Thumbnail & Play Button Overlay -->
-  <div class="absolute inset-0 flex items-center justify-center cursor-pointer play-overlay z-10">
+  <div class="absolute inset-0 cursor-pointer play-overlay z-10">
     <img
       src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
       onerror="this.src = this.src.replace('maxresdefault', 'hqdefault');"
@@ -22,13 +22,13 @@ const { videoId, title } = Astro.props;
     />
     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-200"></div>
     
-    <!-- Premium Play Button -->
+    <!-- Premium Play Button (Placed in the bottom-left corner) -->
     <button
       type="button"
       aria-label="Play video"
-      class="relative z-10 flex h-64 w-64 items-center justify-center rounded-pill bg-white/95 text-black shadow-large group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-200 cursor-pointer border-0"
+      class="absolute bottom-16 left-16 md:bottom-24 md:left-24 z-10 flex h-48 w-48 items-center justify-center rounded-pill bg-white/95 text-black shadow-large group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-200 cursor-pointer border-0"
     >
-      <svg class="h-28 w-28 translate-x-2" viewBox="0 0 24 24" fill="currentColor">
+      <svg class="h-20 w-20 translate-x-1" viewBox="0 0 24 24" fill="currentColor">
         <path d="M8 5v14l11-7z" />
       </svg>
     </button>
