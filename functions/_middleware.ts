@@ -4,6 +4,7 @@ interface PagesContext {
 }
 
 export const onRequest = async (context: PagesContext) => {
+  let response: Response | null = null;
   try {
     const request = context.request;
     const url = new URL(request.url);
@@ -58,54 +59,48 @@ export const onRequest = async (context: PagesContext) => {
       });
     }
 
-    const accept = request.headers.get('Accept') || '';
+    // Call context.next() exactly once
+    response = await context.next();
 
-    if (accept.includes('text/markdown')) {
-      const response = await context.next();
-      const contentType = response.headers.get('Content-Type') || '';
+    const accept = request.headers.get('Accept') || request.headers.get('accept') || '';
+    const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
+    const isHtml = contentType.includes('text/html');
 
-      if (contentType.includes('text/html') && response.status === 200) {
-        const html = await response.text();
-        const markdown = convertHtmlToMarkdown(html);
+    if (accept.includes('text/markdown') && isHtml && response.status === 200) {
+      const html = await response.clone().text();
+      const markdown = convertHtmlToMarkdown(html);
 
-        const tokenCount = Math.round(markdown.length / 4);
-        const originalTokenCount = Math.round(html.length / 4);
+      const tokenCount = Math.round(markdown.length / 4);
+      const originalTokenCount = Math.round(html.length / 4);
 
-        return new Response(markdown, {
-          headers: {
-            'Content-Type': 'text/markdown; charset=utf-8',
-            'x-markdown-tokens': String(tokenCount),
-            'x-original-tokens': String(originalTokenCount),
-            'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
-            'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
-          },
-        });
-      }
+      return new Response(markdown, {
+        headers: {
+          'Content-Type': 'text/markdown; charset=utf-8',
+          'x-markdown-tokens': String(tokenCount),
+          'x-original-tokens': String(originalTokenCount),
+          'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
+          'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
+        },
+      });
     }
 
-    const response = await context.next();
-    if (response.status === 200) {
-      const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
-      const isHtml = contentType.includes('text/html') || 
-                     url.pathname === '/' || 
-                     url.pathname.endsWith('.html') || 
-                     (!url.pathname.includes('.') && !url.pathname.startsWith('/_'));
-
-      if (isHtml) {
-        const newHeaders = new Headers(response.headers);
-        newHeaders.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
-        
-        return new Response(response.body, {
-          status: response.status,
-          statusText: response.statusText,
-          headers: newHeaders
-        });
-      }
+    if (isHtml && response.status === 200) {
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
+      
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders
+      });
     }
 
     return response;
   } catch (err) {
     console.error('Pages Functions Middleware Error:', err);
+    if (response) {
+      return response;
+    }
     return context.next();
   }
 };
