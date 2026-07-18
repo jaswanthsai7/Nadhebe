@@ -93,15 +93,16 @@ const handleGetJob = async (c: any) => {
 app.get('/api/v1/jobs/:id', handleGetJob);
 app.get('/jobs/:id', handleGetJob);
 
-// POST /api/v1/issues & /issues — Submit article to GitHub Issues
+// POST /api/v1/issues & /issues — Submit article to GitHub Pull Request
 const handleSubmitIssue = async (c: any) => {
   const body = await c.req.json();
   const result = SubmitReviewSchema.safeParse(body);
   if (!result.success) {
-    throw new DomainError('VALIDATION_FAILED', 'Invalid input parameters for submitting issue', result.error.format());
+    throw new DomainError('VALIDATION_FAILED', 'Invalid input parameters for submitting pull request', result.error.format());
   }
 
-  const submission = await IssueService.createIssue(result.data, c.env);
+  const requestId = c.get('requestId');
+  const submission = await IssueService.createPullRequest(result.data, c.env, requestId);
   return envelope(c, true, submission, null, 201);
 };
 

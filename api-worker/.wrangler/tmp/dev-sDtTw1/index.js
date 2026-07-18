@@ -6901,43 +6901,83 @@ __publicField(JobService, "jobsMap", /* @__PURE__ */ new Map());
 
 // src/services/issue.service.ts
 var IssueService = class {
-  static async createIssue(input, env) {
+  static async createPullRequest(input, env, requestId) {
     const owner = env.GITHUB_OWNER || "jaswanthsai7";
     const repo = env.GITHUB_REPO || "Nadhebe";
     const token = env.GITHUB_TOKEN;
+    const baseBranch = env.GITHUB_BRANCH || "master";
+    const reqId = requestId || "unknown";
+    const sanitizedSlug = input.slug.toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/-+/g, "-").replace(/^-|-$/g, "");
+    const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/[-:T]/g, "").slice(0, 12);
+    const branchName = `content/${sanitizedSlug}-${timestamp}`;
+    const allowedCategories = [
+      "news",
+      "tutorials",
+      "youtube-articles",
+      "tool-reviews",
+      "prompts",
+      "comparisons",
+      "best-practices",
+      "use-cases",
+      "tools",
+      "guides",
+      "frameworks",
+      "case-studies"
+    ];
+    const category = input.category.toLowerCase().trim();
+    if (!allowedCategories.includes(category)) {
+      throw new DomainError("INVALID_CATEGORY", `The category "${category}" is not in the allowed list`);
+    }
+    let filePath = `src/content/${category}/${sanitizedSlug}.md`;
     if (!token) {
-      console.warn("GITHUB_TOKEN environment variable is missing. Simulating mock GitHub issue creation.");
+      console.warn("GITHUB_TOKEN environment variable is missing. Simulating mock GitHub PR creation.");
       return {
-        issueNumber: Math.floor(Math.random() * 1e3) + 1,
-        url: `https://github.com/${owner}/${repo}/issues/mock`
+        prNumber: Math.floor(Math.random() * 1e3) + 1,
+        url: `https://github.com/${owner}/${repo}/pull/mock`,
+        branchName,
+        commitSha: "mock_commit_sha_abcdef1234567890",
+        requestId: reqId
       };
     }
-    const yamlFrontmatter = `---
-version: 1
-bundleVersion: 1
-title: ${JSON.stringify(input.title)}
-slug: ${JSON.stringify(input.slug)}
-category: ${JSON.stringify(input.category)}
-status: "pending-review"
-sourceUrl: ${JSON.stringify(input.sourceUrl)}
-author: ${JSON.stringify(input.author)}
-createdAt: "${(/* @__PURE__ */ new Date()).toISOString()}"
-computedMetrics:
-  wordCount: ${input.computedMetrics.wordCount}
-  readingTime: ${input.computedMetrics.readingTime}
-  headingStructureOk: ${input.computedMetrics.headingStructureOk}
-aiInsights:
-  confidence: ${input.aiInsights.confidence}
-  factCheckSummary: ${JSON.stringify(input.aiInsights.factCheckSummary)}
-bundle:
-  newsletter: ${JSON.stringify(input.bundle?.newsletter || "")}
-  twitterThread: ${JSON.stringify(input.bundle?.twitterThread || [])}
-  linkedInPost: ${JSON.stringify(input.bundle?.linkedInPost || "")}
----
-
-${input.markdown}`;
     try {
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
+      console.log(`[${reqId}] Starting GitHub PR submission pipeline...`);
+      let finalFilePath = filePath;
+      let finalSlug = sanitizedSlug;
+      let exists = true;
+      let suffix = 0;
+      while (exists && suffix < 10) {
+        const checkPath = suffix === 0 ? filePath : `src/content/${category}/${sanitizedSlug}-${suffix}.md`;
+        const checkRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${checkPath}?ref=${baseBranch}`, {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "User-Agent": "AI-Editorial-OS/1.0"
+          }
+        });
+        if (checkRes.status === 404) {
+          finalFilePath = checkPath;
+          finalSlug = suffix === 0 ? sanitizedSlug : `${sanitizedSlug}-${suffix}`;
+          exists = false;
+        } else {
+          suffix++;
+        }
+      }
+      console.log(`[${reqId}] Fetching master branch reference...`);
+      const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/ref/heads/${baseBranch}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github.v3+json",
+          "User-Agent": "AI-Editorial-OS/1.0"
+        }
+      });
+      if (!refRes.ok) {
+        const errText = await refRes.text();
+        throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to fetch base branch ref: ${errText}`);
+      }
+      const refData = await refRes.json();
+      const baseSha = refData.object.sha;
+      console.log(`[${reqId}] Creating new branch "${branchName}"...`);
+      const branchRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -6946,22 +6986,98 @@ ${input.markdown}`;
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          title: `Submission: ${input.title}`,
-          body: yamlFrontmatter,
-          labels: ["pending-review", input.category]
+          ref: `refs/heads/${branchName}`,
+          sha: baseSha
         })
       });
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`GitHub API returned status ${response.status}: ${errorText}`);
+      if (!branchRes.ok) {
+        const errText = await branchRes.text();
+        throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to create branch "${branchName}": ${errText}`);
       }
-      const data = await response.json();
+      console.log(`[${reqId}] Committing file to path "${finalFilePath}"...`);
+      const contentBase64 = btoa(unescape(encodeURIComponent(input.markdown)));
+      const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${finalFilePath}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github.v3+json",
+          "User-Agent": "AI-Editorial-OS/1.0",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: `content: add generated draft for ${input.title}`,
+          content: contentBase64,
+          branch: branchName
+        })
+      });
+      if (!commitRes.ok) {
+        const errText = await commitRes.text();
+        throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to commit markdown file: ${errText}`);
+      }
+      const commitData = await commitRes.json();
+      const commitSha = commitData.commit.sha;
+      console.log(`[${reqId}] Successfully committed file. SHA: ${commitSha}`);
+      console.log(`[${reqId}] Creating Draft Pull Request...`);
+      const prBody = `## \u{1F4D6} Contributed Article: [${input.title}](${input.sourceUrl})
+
+An AI-generated draft has been successfully submitted and committed to this branch.
+
+### \u{1F6E0}\uFE0F Execution Details
+*   **Request ID**: \`${reqId}\`
+*   **Source URL**: [View original source](${input.sourceUrl})
+*   **Contributor**: **${input.author}**
+*   **Generation Time**: \`${(/* @__PURE__ */ new Date()).toLocaleString()}\`
+*   **AI Model**: \`@cf/meta/llama-3.2-3b-instruct\`
+
+### \u{1F4C2} Generated Files
+*   \`${finalFilePath}\`
+
+### \u{1F4CA} Validation Results
+*   **Word Count**: \`${input.computedMetrics.wordCount}\` words
+*   **Reading Time**: \`${input.computedMetrics.readingTime}\` mins
+*   **Heading Structure**: \`${input.computedMetrics.headingStructureOk ? "Valid H1 Present \u2713" : "Invalid \u2717"}\`
+
+### \u{1F4DD} Review Checklist
+- [ ] Editorial review
+- [ ] SEO review
+- [ ] Fact check
+- [ ] Images verified
+- [ ] Ready to merge`;
+      const prRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/pulls`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github.v3+json",
+          "User-Agent": "AI-Editorial-OS/1.0",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: `[Content] ${input.title}`,
+          body: prBody,
+          head: branchName,
+          base: baseBranch,
+          draft: true
+        })
+      });
+      if (!prRes.ok) {
+        const errText = await prRes.text();
+        throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to create draft Pull Request: ${errText}`);
+      }
+      const prData = await prRes.json();
+      const prNumber = prData.number;
+      const url = prData.html_url;
+      console.log(`[${reqId}] Successfully created Draft Pull Request #${prNumber}. URL: ${url}`);
       return {
-        issueNumber: data.number,
-        url: data.html_url
+        prNumber,
+        url,
+        branchName,
+        commitSha,
+        requestId: reqId
       };
     } catch (err) {
-      throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to create issue on GitHub: ${err.message}`, err);
+      if (err instanceof DomainError)
+        throw err;
+      throw new DomainError("GITHUB_SUBMISSION_FAILED", `Failed to complete GitHub operations: ${err.message}`, err);
     }
   }
 };
@@ -7042,9 +7158,10 @@ var handleSubmitIssue = /* @__PURE__ */ __name(async (c) => {
   const body = await c.req.json();
   const result = SubmitReviewSchema.safeParse(body);
   if (!result.success) {
-    throw new DomainError("VALIDATION_FAILED", "Invalid input parameters for submitting issue", result.error.format());
+    throw new DomainError("VALIDATION_FAILED", "Invalid input parameters for submitting pull request", result.error.format());
   }
-  const submission = await IssueService.createIssue(result.data, c.env);
+  const requestId = c.get("requestId");
+  const submission = await IssueService.createPullRequest(result.data, c.env, requestId);
   return envelope(c, true, submission, null, 201);
 }, "handleSubmitIssue");
 app.post("/api/v1/issues", handleSubmitIssue);
