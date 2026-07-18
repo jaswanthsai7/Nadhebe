@@ -174,7 +174,7 @@ const heroPost = latestPillars[0] || allArticles[0];
           {latestPillars.map(post => (
             <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0" data-reveal>
               <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
-                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" />
+                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" />
                 {post.data.rating !== undefined && (
                   <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
                     <VerdictGauge score={post.data.rating} size={40} />
@@ -252,7 +252,7 @@ const heroPost = latestPillars[0] || allArticles[0];
           {latestVideos.map(post => (
             <a href={getArticleUrl(post)} class="card group flex gap-16 p-16 items-start" data-reveal>
               <div class="relative shrink-0 w-[160px] aspect-video rounded-8 overflow-hidden bg-surface2 dark:bg-surface2-dark">
-                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="160" height="90" class="w-full h-full object-cover" />
+                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="160" height="90" class="w-full h-full object-cover" loading="lazy" />
                 {post.data.videoDuration && (
                   <span class="absolute bottom-4 right-4 bg-ink/80 px-6 py-2 rounded-4 font-mono text-xs text-white">
                     {post.data.videoDuration.replace('PT', '').replace('M', ':').replace('S', '')}
