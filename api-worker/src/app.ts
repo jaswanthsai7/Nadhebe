@@ -54,8 +54,8 @@ app.onError((err, c) => {
   }, 500);
 });
 
-// POST /api/v1/jobs — Create a generation job
-app.post('/api/v1/jobs', async (c) => {
+// POST /api/v1/jobs & /jobs — Create a generation job
+const handleCreateJob = async (c: any) => {
   const body = await c.req.json();
   const result = CreateJobSchema.safeParse(body);
   if (!result.success) {
@@ -78,17 +78,23 @@ app.post('/api/v1/jobs', async (c) => {
   }
 
   return envelope(c, true, job, null, 200);
-});
+};
 
-// GET /api/v1/jobs/:id — Check job status & output
-app.get('/api/v1/jobs/:id', async (c) => {
+app.post('/api/v1/jobs', handleCreateJob);
+app.post('/jobs', handleCreateJob);
+
+// GET /api/v1/jobs/:id & /jobs/:id — Check job status & output
+const handleGetJob = async (c: any) => {
   const id = c.req.param('id');
   const job = JobService.getJob(id);
   return envelope(c, true, job);
-});
+};
 
-// POST /api/v1/issues — Submit article to GitHub Issues
-app.post('/api/v1/issues', async (c) => {
+app.get('/api/v1/jobs/:id', handleGetJob);
+app.get('/jobs/:id', handleGetJob);
+
+// POST /api/v1/issues & /issues — Submit article to GitHub Issues
+const handleSubmitIssue = async (c: any) => {
   const body = await c.req.json();
   const result = SubmitReviewSchema.safeParse(body);
   if (!result.success) {
@@ -97,7 +103,10 @@ app.post('/api/v1/issues', async (c) => {
 
   const submission = await IssueService.createIssue(result.data, c.env);
   return envelope(c, true, submission, null, 201);
-});
+};
+
+app.post('/api/v1/issues', handleSubmitIssue);
+app.post('/issues', handleSubmitIssue);
 
 // POST /api/v1/subscribe & /subscribe — Subscribe email to Beehiiv
 const handleSubscribe = async (c: any) => {

@@ -7007,7 +7007,7 @@ app.onError((err, c) => {
     message: err.message || "An unexpected server error occurred"
   }, 500);
 });
-app.post("/api/v1/jobs", async (c) => {
+var handleCreateJob = /* @__PURE__ */ __name(async (c) => {
   const body = await c.req.json();
   const result = CreateJobSchema.safeParse(body);
   if (!result.success) {
@@ -7028,13 +7028,17 @@ app.post("/api/v1/jobs", async (c) => {
     throw new DomainError("PIPELINE_FAILED", `Generation pipeline failed: ${errorMessage}`);
   }
   return envelope(c, true, job, null, 200);
-});
-app.get("/api/v1/jobs/:id", async (c) => {
+}, "handleCreateJob");
+app.post("/api/v1/jobs", handleCreateJob);
+app.post("/jobs", handleCreateJob);
+var handleGetJob = /* @__PURE__ */ __name(async (c) => {
   const id = c.req.param("id");
   const job = JobService.getJob(id);
   return envelope(c, true, job);
-});
-app.post("/api/v1/issues", async (c) => {
+}, "handleGetJob");
+app.get("/api/v1/jobs/:id", handleGetJob);
+app.get("/jobs/:id", handleGetJob);
+var handleSubmitIssue = /* @__PURE__ */ __name(async (c) => {
   const body = await c.req.json();
   const result = SubmitReviewSchema.safeParse(body);
   if (!result.success) {
@@ -7042,7 +7046,9 @@ app.post("/api/v1/issues", async (c) => {
   }
   const submission = await IssueService.createIssue(result.data, c.env);
   return envelope(c, true, submission, null, 201);
-});
+}, "handleSubmitIssue");
+app.post("/api/v1/issues", handleSubmitIssue);
+app.post("/issues", handleSubmitIssue);
 var handleSubscribe = /* @__PURE__ */ __name(async (c) => {
   const body = await c.req.json();
   const { email } = body;
