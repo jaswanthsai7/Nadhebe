@@ -66,12 +66,21 @@ export const onRequest = async (context: PagesContext) => {
           'x-markdown-tokens': String(tokenCount),
           'x-original-tokens': String(originalTokenCount),
           'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
+          'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
         },
       });
     }
   }
 
-  return context.next();
+  const response = await context.next();
+  const contentType = response.headers.get('Content-Type') || '';
+  if (contentType.includes('text/html')) {
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
+    return newResponse;
+  }
+
+  return response;
 };
 
 function convertHtmlToMarkdown(html: string): string {
