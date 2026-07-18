@@ -32,18 +32,21 @@ const companyLinks = [
         <p class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">Stay in the loop</p>
         <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark max-w-sm">One focused essay per week on AI engineering, tools, and workflows. No noise.</p>
       </div>
-      <form data-footer-newsletter class="flex flex-col sm:flex-row gap-8 w-full sm:w-auto">
-        <label for="footer-email" class="sr-only">Email address</label>
-        <input
-          id="footer-email"
-          name="email"
-          type="email"
-          required
-          placeholder="you@example.com"
-          class="input max-w-[280px]"
-        />
-        <button type="submit" class="btn-primary shrink-0">Subscribe</button>
-      </form>
+      <div class="flex flex-col gap-8 w-full sm:w-auto">
+        <form data-footer-newsletter class="flex flex-col sm:flex-row gap-8 w-full sm:w-auto">
+          <label for="footer-email" class="sr-only">Email address</label>
+          <input
+            id="footer-email"
+            name="email"
+            type="email"
+            required
+            placeholder="you@example.com"
+            class="input max-w-[280px]"
+          />
+          <button type="submit" class="btn-primary shrink-0">Subscribe</button>
+        </form>
+        <p data-footer-status class="text-xs font-sans text-muted dark:text-muted-dark" role="status"></p>
+      </div>
     </div>
   </div>
 
@@ -110,13 +113,58 @@ const companyLinks = [
 
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-footer-newsletter]');
-  form?.addEventListener('submit', (e) => {
+  const status = document.querySelector('[data-footer-status]');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = form.querySelector('button');
-    if (btn) {
-      btn.textContent = 'Subscribed!';
-      btn.disabled = true;
+    if (!form || !status || !button) return;
+
+    const formData = new FormData(form);
+    const email = formData.get('email')?.toString().trim();
+
+    if (!email) {
+      status.textContent = 'Please enter a valid email address.';
+      status.className = 'text-xs font-sans text-danger dark:text-danger-dark';
+      return;
     }
-    form.reset();
+
+    // Set loading state
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = 'Subscribing...';
+    status.textContent = '';
+    status.className = 'text-xs font-sans text-muted dark:text-muted-dark';
+
+    try {
+      const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8787/api/v1';
+      const res = await fetch(`${apiBase}/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const payload = await res.json();
+
+      if (!res.ok) {
+        throw new Error(payload.error?.message || 'Subscription failed. Please try again.');
+      }
+
+      // Success state
+      status.textContent = 'Thanks! Check your inbox to confirm.';
+      status.className = 'text-xs font-sans text-success dark:text-success-dark';
+      form.reset();
+      button.disabled = false;
+      button.textContent = originalText;
+    } catch (err: any) {
+      // Error state
+      status.textContent = err.message || 'Error. Try again later.';
+      status.className = 'text-xs font-sans text-danger dark:text-danger-dark';
+      button.disabled = false;
+      button.textContent = originalText;
+    }
   });
 </script>
+

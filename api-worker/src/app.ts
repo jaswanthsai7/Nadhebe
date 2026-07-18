@@ -6,7 +6,7 @@ import { JobService } from './services/job.service';
 import { IssueService } from './services/issue.service';
 import { DomainError } from './domain/errors';
 
-export const app = new Hono();
+export const app = new Hono<{ Bindings: any; Variables: any }>();
 
 // Enable CORS to allow the frontend Astro static pages to communicate
 app.use('*', cors({
@@ -95,3 +95,41 @@ app.post('/api/v1/issues', async (c) => {
   const submission = await IssueService.createIssue(result.data, c.env);
   return envelope(c, true, submission, null, 201);
 });
+
+// POST /api/v1/subscribe — Subscribe email to Beehiiv
+app.post('/api/v1/subscribe', async (c) => {
+  const body = await c.req.json();
+  const { email } = body;
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    throw new DomainError('VALIDATION_FAILED', 'Invalid email address format');
+  }
+
+  const pubId = c.env.PUBLIC_BEEHIIV_PUBLICATION_ID;
+  const apiKey = c.env.BEEHIIV_API_KEY;
+
+  if (!pubId || !apiKey) {
+    throw new DomainError('CONFIG_MISSING', 'Beehiiv configuration is missing in the environment');
+  }
+
+  try {
+    const res = await fetch(`https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, reactivate_existing: true })
+    });
+
+    const data: any = await res.json();
+    if (!res.ok) {
+      const errMsg = data.errors?.[0]?.message || `Beehiiv API returned status ${res.status}`;
+      throw new Error(errMsg);
+    }
+
+    return envelope(c, true, { subscription: data.data }, null, 201);
+  } catch (err: any) {
+    throw new DomainError('SUBSCRIBE_FAILED', `Failed to subscribe: ${err.message}`, err);
+  }
+});
+

@@ -9,6 +9,8 @@ dist/
 .env
 .env.local
 .env.production
+.dev.vars
+.dev.vars.local
 
 # OS files
 .DS_Store

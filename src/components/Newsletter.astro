@@ -31,10 +31,57 @@ const { compact = false } = Astro.props;
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
   const status = document.querySelector('[data-newsletter-status]');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (status) status.textContent = 'Thanks — check your inbox to confirm.';
-    form.reset();
+    if (!form || !status || !button) return;
+
+    const formData = new FormData(form);
+    const email = formData.get('email')?.toString().trim();
+
+    if (!email) {
+      status.textContent = 'Please enter a valid email address.';
+      status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
+      return;
+    }
+
+    // Set loading state
+    button.disabled = true;
+    const originalText = button.textContent;
+    button.textContent = 'Subscribing...';
+    status.textContent = '';
+    status.className = 'mt-8 text-xs font-sans text-muted dark:text-muted-dark';
+
+    try {
+      const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8787/api/v1';
+      const res = await fetch(`${apiBase}/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const payload = await res.json();
+
+      if (!res.ok) {
+        throw new Error(payload.error?.message || 'Subscription failed. Please try again.');
+      }
+
+      // Success state
+      status.textContent = 'Thanks! Check your inbox to confirm your subscription.';
+      status.className = 'mt-8 text-xs font-sans text-success dark:text-success-dark';
+      form.reset();
+      button.disabled = false;
+      button.textContent = originalText;
+    } catch (err: any) {
+      // Error state
+      status.textContent = err.message || 'Network error. Please try again later.';
+      status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
+      button.disabled = false;
+      button.textContent = originalText;
+    }
   });
 </script>
+
