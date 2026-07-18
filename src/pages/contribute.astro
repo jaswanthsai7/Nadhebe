@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8787/api/v1';
 ---
 
 <BaseLayout
@@ -259,10 +260,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <!-- Client-side Workspace Interactivity -->
-  <script is:inline>
+  <script is:inline define:vars={{ apiBase }}>
     (function() {
       // Configuration
-      const API_BASE = 'http://localhost:8787/api/v1';
+      const API_BASE = apiBase;
 
       // Helper for Custom Dropdown Selection
       function initCustomSelect(containerId, hiddenSelectId) {
