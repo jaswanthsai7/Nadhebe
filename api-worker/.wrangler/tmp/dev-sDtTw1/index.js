@@ -7043,7 +7043,7 @@ app.post("/api/v1/issues", async (c) => {
   const submission = await IssueService.createIssue(result.data, c.env);
   return envelope(c, true, submission, null, 201);
 });
-app.post("/api/v1/subscribe", async (c) => {
+var handleSubscribe = /* @__PURE__ */ __name(async (c) => {
   const body = await c.req.json();
   const { email } = body;
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -7072,7 +7072,9 @@ app.post("/api/v1/subscribe", async (c) => {
   } catch (err) {
     throw new DomainError("SUBSCRIBE_FAILED", `Failed to subscribe: ${err.message}`, err);
   }
-});
+}, "handleSubscribe");
+app.post("/api/v1/subscribe", handleSubscribe);
+app.post("/subscribe", handleSubscribe);
 
 // src/index.ts
 var src_default = app;

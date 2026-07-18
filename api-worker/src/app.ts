@@ -99,8 +99,8 @@ app.post('/api/v1/issues', async (c) => {
   return envelope(c, true, submission, null, 201);
 });
 
-// POST /api/v1/subscribe — Subscribe email to Beehiiv
-app.post('/api/v1/subscribe', async (c) => {
+// POST /api/v1/subscribe & /subscribe — Subscribe email to Beehiiv
+const handleSubscribe = async (c: any) => {
   const body = await c.req.json();
   const { email } = body;
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -134,5 +134,8 @@ app.post('/api/v1/subscribe', async (c) => {
   } catch (err: any) {
     throw new DomainError('SUBSCRIBE_FAILED', `Failed to subscribe: ${err.message}`, err);
   }
-});
+};
+
+app.post('/api/v1/subscribe', handleSubscribe);
+app.post('/subscribe', handleSubscribe);
 
