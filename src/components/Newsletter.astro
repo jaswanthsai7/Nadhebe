@@ -77,8 +77,17 @@ const { compact = false } = Astro.props;
       button.textContent = originalText;
     } catch (err: any) {
       // Error state
-      status.textContent = err.message || 'Network error. Please try again later.';
-      status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
+      const errMsg = err.message || '';
+      if (errMsg.toLowerCase().includes('already') || errMsg.toLowerCase().includes('exists')) {
+        status.textContent = 'You are already subscribed to our newsletter!';
+        status.className = 'mt-8 text-xs font-sans text-success dark:text-success-dark';
+      } else if (errMsg.toLowerCase().includes('invalid') || errMsg.toLowerCase().includes('email')) {
+        status.textContent = 'Please enter a valid email address.';
+        status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
+      } else {
+        status.textContent = errMsg || 'Network error. Please try again later.';
+        status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
+      }
       button.disabled = false;
       button.textContent = originalText;
     }

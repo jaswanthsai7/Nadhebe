@@ -160,8 +160,17 @@ const companyLinks = [
       button.textContent = originalText;
     } catch (err: any) {
       // Error state
-      status.textContent = err.message || 'Error. Try again later.';
-      status.className = 'text-xs font-sans text-danger dark:text-danger-dark';
+      const errMsg = err.message || '';
+      if (errMsg.toLowerCase().includes('already') || errMsg.toLowerCase().includes('exists')) {
+        status.textContent = 'Already subscribed!';
+        status.className = 'text-xs font-sans text-success dark:text-success-dark';
+      } else if (errMsg.toLowerCase().includes('invalid') || errMsg.toLowerCase().includes('email')) {
+        status.textContent = 'Invalid email address.';
+        status.className = 'text-xs font-sans text-danger dark:text-danger-dark';
+      } else {
+        status.textContent = errMsg || 'Error. Try again later.';
+        status.className = 'text-xs font-sans text-danger dark:text-danger-dark';
+      }
       button.disabled = false;
       button.textContent = originalText;
     }

@@ -6992,6 +6992,9 @@ var envelope = /* @__PURE__ */ __name((c, success, data, error = null, status = 
 }, "envelope");
 app.onError((err, c) => {
   console.error("API Worker Error:", err);
+  c.header("Access-Control-Allow-Origin", "*");
+  c.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  c.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   if (err instanceof DomainError) {
     return envelope(c, false, null, {
       code: err.code,
