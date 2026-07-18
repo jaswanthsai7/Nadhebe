@@ -12,9 +12,10 @@ export const onRequest = async (context: PagesContext) => {
     const resourceMetadata = {
       resource: `${url.protocol}//${url.host}`,
       authorization_servers: [
-        'https://github.com/login/oauth/authorize'
+        `${url.protocol}//${url.host}`
       ],
-      scopes_supported: ['read', 'write', 'repo']
+      scopes_supported: ['read', 'write', 'repo'],
+      bearer_methods_supported: ['header']
     };
     return new Response(JSON.stringify(resourceMetadata, null, 2), {
       headers: {
@@ -36,7 +37,16 @@ export const onRequest = async (context: PagesContext) => {
       response_types_supported: ['code', 'token', 'id_token'],
       grant_types_supported: ['authorization_code', 'client_credentials'],
       subject_types_supported: ['public'],
-      id_token_signing_alg_values_supported: ['RS256']
+      id_token_signing_alg_values_supported: ['RS256'],
+      agent_auth: {
+        skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+        register_uri: `${url.protocol}//${url.host}/auth.md`,
+        identity_types_supported: ["anonymous"],
+        anonymous: {
+          credential_types_supported: ["none"]
+        },
+        claim_uri: `${url.protocol}//${url.host}/auth.md`
+      }
     };
     return new Response(JSON.stringify(oidcDiscovery, null, 2), {
       headers: {
