@@ -4,93 +4,110 @@ interface PagesContext {
 }
 
 export const onRequest = async (context: PagesContext) => {
-  const request = context.request;
-  const url = new URL(request.url);
+  try {
+    const request = context.request;
+    const url = new URL(request.url);
 
-  // Serve OAuth Protected Resource Metadata
-  if (url.pathname.replace(/\/$/, '') === '/.well-known/oauth-protected-resource') {
-    const resourceMetadata = {
-      resource: `${url.protocol}//${url.host}`,
-      authorization_servers: [
-        `${url.protocol}//${url.host}`
-      ],
-      scopes_supported: ['read', 'write', 'repo'],
-      bearer_methods_supported: ['header']
-    };
-    return new Response(JSON.stringify(resourceMetadata, null, 2), {
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'public, max-age=86400, must-revalidate',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-  }
-
-  // Serve OAuth/OIDC Discovery Metadata
-  if (url.pathname.replace(/\/$/, '') === '/.well-known/openid-configuration' || 
-      url.pathname.replace(/\/$/, '') === '/.well-known/oauth-authorization-server') {
-    const oidcDiscovery = {
-      issuer: `${url.protocol}//${url.host}`,
-      authorization_endpoint: `${url.protocol}//${url.host}/oauth/authorize`,
-      token_endpoint: `${url.protocol}//${url.host}/oauth/token`,
-      jwks_uri: `${url.protocol}//${url.host}/.well-known/jwks.json`,
-      response_types_supported: ['code', 'token', 'id_token'],
-      grant_types_supported: ['authorization_code', 'client_credentials'],
-      subject_types_supported: ['public'],
-      id_token_signing_alg_values_supported: ['RS256'],
-      agent_auth: {
-        skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
-        register_uri: `${url.protocol}//${url.host}/auth.md`,
-        identity_types_supported: ["anonymous"],
-        anonymous: {
-          credential_types_supported: ["none"]
-        },
-        claim_uri: `${url.protocol}//${url.host}/auth.md`
-      }
-    };
-    return new Response(JSON.stringify(oidcDiscovery, null, 2), {
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'public, max-age=86400, must-revalidate',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-  }
-
-  const accept = request.headers.get('Accept') || '';
-
-  if (accept.includes('text/markdown')) {
-    const response = await context.next();
-    const contentType = response.headers.get('Content-Type') || '';
-
-    if (contentType.includes('text/html')) {
-      const html = await response.text();
-      const markdown = convertHtmlToMarkdown(html);
-
-      const tokenCount = Math.round(markdown.length / 4);
-      const originalTokenCount = Math.round(html.length / 4);
-
-      return new Response(markdown, {
+    // Serve OAuth Protected Resource Metadata
+    if (url.pathname.replace(/\/$/, '') === '/.well-known/oauth-protected-resource') {
+      const resourceMetadata = {
+        resource: `${url.protocol}//${url.host}`,
+        authorization_servers: [
+          `${url.protocol}//${url.host}`
+        ],
+        scopes_supported: ['read', 'write', 'repo'],
+        bearer_methods_supported: ['header']
+      };
+      return new Response(JSON.stringify(resourceMetadata, null, 2), {
         headers: {
-          'Content-Type': 'text/markdown; charset=utf-8',
-          'x-markdown-tokens': String(tokenCount),
-          'x-original-tokens': String(originalTokenCount),
-          'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
-          'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
-        },
+          'Content-Type': 'application/json; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400, must-revalidate',
+          'Access-Control-Allow-Origin': '*'
+        }
       });
     }
-  }
 
-  const response = await context.next();
-  const contentType = response.headers.get('Content-Type') || '';
-  if (contentType.includes('text/html')) {
-    const newResponse = new Response(response.body, response);
-    newResponse.headers.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
-    return newResponse;
-  }
+    // Serve OAuth/OIDC Discovery Metadata
+    if (url.pathname.replace(/\/$/, '') === '/.well-known/openid-configuration' || 
+        url.pathname.replace(/\/$/, '') === '/.well-known/oauth-authorization-server') {
+      const oidcDiscovery = {
+        issuer: `${url.protocol}//${url.host}`,
+        authorization_endpoint: `${url.protocol}//${url.host}/oauth/authorize`,
+        token_endpoint: `${url.protocol}//${url.host}/oauth/token`,
+        jwks_uri: `${url.protocol}//${url.host}/.well-known/jwks.json`,
+        response_types_supported: ['code', 'token', 'id_token'],
+        grant_types_supported: ['authorization_code', 'client_credentials'],
+        subject_types_supported: ['public'],
+        id_token_signing_alg_values_supported: ['RS256'],
+        agent_auth: {
+          skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+          register_uri: `${url.protocol}//${url.host}/auth.md`,
+          identity_types_supported: ["anonymous"],
+          anonymous: {
+            credential_types_supported: ["none"]
+          },
+          claim_uri: `${url.protocol}//${url.host}/auth.md`
+        }
+      };
+      return new Response(JSON.stringify(oidcDiscovery, null, 2), {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400, must-revalidate',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
 
-  return response;
+    const accept = request.headers.get('Accept') || '';
+
+    if (accept.includes('text/markdown')) {
+      const response = await context.next();
+      const contentType = response.headers.get('Content-Type') || '';
+
+      if (contentType.includes('text/html') && response.status === 200) {
+        const html = await response.text();
+        const markdown = convertHtmlToMarkdown(html);
+
+        const tokenCount = Math.round(markdown.length / 4);
+        const originalTokenCount = Math.round(html.length / 4);
+
+        return new Response(markdown, {
+          headers: {
+            'Content-Type': 'text/markdown; charset=utf-8',
+            'x-markdown-tokens': String(tokenCount),
+            'x-original-tokens': String(originalTokenCount),
+            'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
+            'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
+          },
+        });
+      }
+    }
+
+    const response = await context.next();
+    if (response.status === 200) {
+      const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
+      const isHtml = contentType.includes('text/html') || 
+                     url.pathname === '/' || 
+                     url.pathname.endsWith('.html') || 
+                     (!url.pathname.includes('.') && !url.pathname.startsWith('/_'));
+
+      if (isHtml) {
+        const newHeaders = new Headers(response.headers);
+        newHeaders.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
+        
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: newHeaders
+        });
+      }
+    }
+
+    return response;
+  } catch (err) {
+    console.error('Pages Functions Middleware Error:', err);
+    return context.next();
+  }
 };
 
 function convertHtmlToMarkdown(html: string): string {
