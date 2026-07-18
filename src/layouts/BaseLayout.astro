@@ -235,17 +235,22 @@ if (canonicalUrl) {
     <!-- Scroll-reveal animations -->
     <script is:inline>
       (function() {
-        var els = document.querySelectorAll('[data-reveal]');
-        if (!els.length) return;
-        var io = new IntersectionObserver(function(entries) {
-          entries.forEach(function(e) {
-            if (e.isIntersecting) {
-              e.target.classList.add('revealed');
-              io.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-        els.forEach(function(el) { io.observe(el); });
+        function initReveal() {
+          var els = document.querySelectorAll('[data-reveal]');
+          if (!els.length) return;
+          var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('revealed');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+          els.forEach(function(el) { io.observe(el); });
+        }
+
+        initReveal();
+        document.addEventListener('astro:page-load', initReveal);
       })();
     </script>
   </body>
