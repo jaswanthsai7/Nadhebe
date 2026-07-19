@@ -6844,6 +6844,7 @@ __name(SourceExtractionStage, "SourceExtractionStage");
 var ResearchStage = class extends PipelineStage {
   name = "Researching";
   description = "Query AI models to synthesize latest research facts";
+  timeoutMs = 9e4;
   async execute(job, env) {
     const startTime = Date.now();
     const ai = new CloudflareAIProvider(env);
@@ -6982,6 +6983,7 @@ __name(DraftingStage, "DraftingStage");
 var PlanningStage = class extends PipelineStage {
   name = "Planning";
   description = "Determine content cluster articles, keywords, intents, and taxonomy folders based on facts";
+  timeoutMs = 9e4;
   async execute(job, env) {
     const startTime = Date.now();
     const ai = new CloudflareAIProvider(env);
@@ -7061,6 +7063,7 @@ __name(PlanningStage, "PlanningStage");
 var ParallelDraftingStage = class extends PipelineStage {
   name = "Drafting";
   description = "Generate full MDX files in parallel using planned article specifications";
+  timeoutMs = 9e4;
   async execute(job, env) {
     const startTime = Date.now();
     const ai = new CloudflareAIProvider(env);

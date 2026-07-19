@@ -38,6 +38,7 @@ export class SourceExtractionStage extends PipelineStage {
 export class ResearchStage extends PipelineStage {
   name = 'Researching';
   description = 'Query AI models to synthesize latest research facts';
+  timeoutMs = 90000;
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
     const startTime = Date.now();
@@ -190,6 +191,7 @@ ${research}`;
 export class PlanningStage extends PipelineStage {
   name = 'Planning';
   description = 'Determine content cluster articles, keywords, intents, and taxonomy folders based on facts';
+  timeoutMs = 90000;
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
     const startTime = Date.now();
@@ -276,6 +278,7 @@ Design exactly 2 to 4 articles that naturally fit the material, target different
 export class ParallelDraftingStage extends PipelineStage {
   name = 'Drafting';
   description = 'Generate full MDX files in parallel using planned article specifications';
+  timeoutMs = 90000;
 
   async execute(job: Job, env: any): Promise<PipelineStageResult> {
     const startTime = Date.now();
