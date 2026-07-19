@@ -6,15 +6,41 @@
 
 ### News
 
+- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.pages.dev/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
 - [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.pages.dev/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
 - [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.pages.dev/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
 ### Tutorials
 
+- [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial): A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
 - [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow): A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
 - [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
 - [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.pages.dev/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
 - [How to Install and Set Up Instatic CMS Locally](https://nadhebe.pages.dev/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
+
+### Prompts
+
+- [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.pages.dev/prompts/kimi-k3-structured-prompt-engineering-framework): Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
+- [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts): Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
+
+### Comparisons
+
+- [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul): An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.
+- [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.pages.dev/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks): A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
+- [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
+- [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
+
+### Best Practices
+
+- [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.pages.dev/best-practices/kimi-k3-context-window-best-practices): Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.
+- [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management): Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
+- [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design): Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
+- [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling): Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
+
+### Use Cases
+
+- [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.pages.dev/use-cases/kimi-k3-game-development-use-cases): Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.
+- [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.pages.dev/use-cases/instatic-enterprise-editorial-governance): How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 
 ### YouTube Articles
 
@@ -29,18 +55,6 @@
 
 - [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.pages.dev/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
 - [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.pages.dev/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
-
-### Comparisons
-
-- [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.pages.dev/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks): A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
-- [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
-- [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
-
-### Best Practices
-
-- [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management): Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
-- [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design): Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
-- [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling): Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
 
 ### Tools
 
@@ -59,14 +73,6 @@
 
 - [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.pages.dev/frameworks/sqlite-state-sharing-multi-agent-architecture): A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.
 - [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.pages.dev/frameworks/instatic-astro-islands-frameworks-integration): An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
-
-### Prompts
-
-- [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts): Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
-
-### Use Cases
-
-- [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.pages.dev/use-cases/instatic-enterprise-editorial-governance): How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 
 ### Case Studies
 

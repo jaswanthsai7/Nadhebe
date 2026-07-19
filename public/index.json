@@ -1,5 +1,65 @@
 [
   {
+    "title": "Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer",
+    "description": "Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.",
+    "url": "https://nadhebe.pages.dev/news/kimi-k3-moonshot-ai-release",
+    "category": "News",
+    "tags": [
+      "[\"kimi-k3\", \"moonshot-ai\", \"open-weight\", \"moe-models\", \"release\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "Step-by-Step: Generating Support-Free 3D Models with Kimi K3",
+    "description": "A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.",
+    "url": "https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial",
+    "category": "Tutorials",
+    "tags": [
+      "[\"kimi-k3\", \"3d-modeling\", \"3d-printing\", \"openscad\", \"tutorials\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development",
+    "description": "Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.",
+    "url": "https://nadhebe.pages.dev/prompts/kimi-k3-structured-prompt-engineering-framework",
+    "category": "Prompts",
+    "tags": [
+      "[\"kimi-k3\", \"prompt-engineering\", \"app-development\", \"game-dev\", \"structured-prompts\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle",
+    "description": "An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.",
+    "url": "https://nadhebe.pages.dev/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul",
+    "category": "Comparisons",
+    "tags": [
+      "[\"kimi-k3\", \"claude-fable-5\", \"gpt-5.6\", \"llm-comparison\", \"benchmarks\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "Maximizing Kimi K3: Best Practices for 1M Token Context Windows",
+    "description": "Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.",
+    "url": "https://nadhebe.pages.dev/best-practices/kimi-k3-context-window-best-practices",
+    "category": "Best Practices",
+    "tags": [
+      "[\"kimi-k3\", \"context-window\", \"developer-practices\", \"codebase-management\", \"optimization\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design",
+    "description": "Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.",
+    "url": "https://nadhebe.pages.dev/use-cases/kimi-k3-game-development-use-cases",
+    "category": "Use Cases",
+    "tags": [
+      "[\"kimi-k3\", \"use-cases\", \"game-dev\", \"procedural-generation\", \"rapid-prototyping\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
     "title": "OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI",
     "description": "OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.",
     "url": "https://nadhebe.pages.dev/news/openai-gpt-5-6-release-soul-ultra",
