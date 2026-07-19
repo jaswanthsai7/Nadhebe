@@ -216,35 +216,47 @@ Design exactly 2 to 4 articles that naturally fit the material, target different
 
     const userPrompt = `Compile a content cluster plan for these facts:\n${facts}`;
     const model = '@cf/meta/llama-3.2-3b-instruct';
-    const rawResult = await ai.generateText(systemPrompt, userPrompt, { model });
-    const durationMs = Date.now() - startTime;
-
-    // Clean JSON output (remove markdown blocks if model added them)
-    let jsonText = rawResult.trim();
-    if (jsonText.includes('```')) {
-      const start = jsonText.indexOf('{');
-      const end = jsonText.lastIndexOf('}');
-      if (start !== -1 && end !== -1) {
-        jsonText = jsonText.substring(start, end + 1);
-      }
-    }
-
+    
+    let rawResult = '';
     let clusterPlan: any = null;
+    let warnings: string[] = [];
+
     try {
+      rawResult = await ai.generateText(systemPrompt, userPrompt, { model });
+      
+      let jsonText = rawResult.trim();
+      if (jsonText.includes('```')) {
+        const start = jsonText.indexOf('{');
+        const end = jsonText.lastIndexOf('}');
+        if (start !== -1 && end !== -1) {
+          jsonText = jsonText.substring(start, end + 1);
+        }
+      }
       clusterPlan = JSON.parse(jsonText);
-    } catch (e: any) {
-      console.warn('Failed to parse PlanningStage JSON output. Falling back to default plan.', e.message);
-      // Fallback default structure
+    } catch (err: any) {
+      console.warn('PlanningStage model call or parse failed. Executing fallback plan. Error:', err.message);
+      warnings.push(`PlanningStage failed: ${err.message}. Using fallback.`);
+      
+      const slugTimestamp = Date.now();
       clusterPlan = {
         cluster: [
           {
-            title: `Deep Dive into Resource details`,
-            description: `A comprehensive evaluation based on resource facts.`,
+            title: `Deep Dive: Factual Analysis & Specifications`,
+            description: `A comprehensive evaluation and structured review of specifications based on official facts.`,
             folder: 'news',
-            slug: `deep-dive-${Date.now()}`,
-            tags: ['ai', 'news'],
+            slug: `technical-deep-dive-${slugTimestamp}`,
+            tags: ['ai', 'news', 'specs'],
             difficulty: 'intermediate',
-            searchIntent: 'Detailed technical overview of parameters and specifications'
+            searchIntent: 'Detailed technical overview of parameters and configurations'
+          },
+          {
+            title: `Step-by-Step Setup Guide & Implementation Workflow`,
+            description: `Practical step-by-step instructions and code sequences to configure and deploy the systems.`,
+            folder: 'tutorials',
+            slug: `setup-implementation-guide-${slugTimestamp}`,
+            tags: ['ai', 'tutorials', 'workflow'],
+            difficulty: 'intermediate',
+            searchIntent: 'Step-by-step tutorial for setup and local deployment'
           }
         ]
       };
