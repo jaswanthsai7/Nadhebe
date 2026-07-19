@@ -223,4 +223,166 @@ An AI-generated draft has been successfully submitted and committed to this bran
       throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to complete GitHub operations: ${err.message}`, err);
     }
   }
+
+  static async createMultiPullRequest(
+    articles: { path: string; slug: string; title: string; category: string; content: string; wordCount: number; readingTime: number }[],
+    sourceUrl: string,
+    env: any,
+    requestId?: string
+  ): Promise<{ prNumber: number; url: string; branchName: string; requestId: string }> {
+    const owner = env.GITHUB_OWNER || 'jaswanthsai7';
+    const repo = env.GITHUB_REPO || 'Nadhebe';
+    const token = env.GITHUB_TOKEN;
+    const baseBranch = env.GITHUB_BRANCH || 'master';
+    const reqId = requestId || 'unknown';
+
+    const timestamp = new Date().toISOString()
+      .replace(/[-:T]/g, '')
+      .slice(0, 12);
+    
+    const clusterSlug = articles[0]?.slug || 'ai-cluster';
+    const branchName = `content/cluster-${clusterSlug}-${timestamp}`;
+
+    if (!token) {
+      console.warn('GITHUB_TOKEN environment variable is missing. Simulating mock GitHub multi-PR creation.');
+      return {
+        prNumber: Math.floor(Math.random() * 1000) + 1,
+        url: `https://github.com/${owner}/${repo}/pull/mock`,
+        branchName,
+        requestId: reqId
+      };
+    }
+
+    try {
+      console.log(`[${reqId}] Starting GitHub multi-PR submission pipeline...`);
+
+      console.log(`[${reqId}] Fetching master branch reference...`);
+      const refRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/ref/heads/${baseBranch}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'AI-Editorial-OS/1.0'
+        }
+      });
+
+      if (!refRes.ok) {
+        const errText = await refRes.text();
+        throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to fetch base branch ref: ${errText}`);
+      }
+
+      const refData: any = await refRes.json();
+      const baseSha = refData.object.sha;
+
+      console.log(`[${reqId}] Creating new branch "${branchName}"...`);
+      const branchRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/refs`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'AI-Editorial-OS/1.0',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ref: `refs/heads/${branchName}`,
+          sha: baseSha
+        })
+      });
+
+      if (!branchRes.ok) {
+        const errText = await branchRes.text();
+        throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to create branch "${branchName}": ${errText}`);
+      }
+
+      for (const article of articles) {
+        console.log(`[${reqId}] Committing file to path "${article.path}"...`);
+        const contentBase64 = btoa(unescape(encodeURIComponent(article.content)));
+
+        const commitRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${article.path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'AI-Editorial-OS/1.0',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `content: add generated draft for ${article.title}`,
+            content: contentBase64,
+            branch: branchName
+          })
+        });
+
+        if (!commitRes.ok) {
+          const errText = await commitRes.text();
+          throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to commit markdown file "${article.path}": ${errText}`);
+        }
+        console.log(`[${reqId}] Successfully committed file "${article.path}"`);
+      }
+
+      console.log(`[${reqId}] Creating Single Draft Pull Request...`);
+      const foldersAffected = [...new Set(articles.map(a => `\`src/content/${a.category}\``))].join(', ');
+      
+      let prBody = `## 📖 Multi-Blog Content Cluster: [YouTube Reference](${sourceUrl})\n\n`;
+      prBody += `An automated AI content cluster has been generated and committed to this branch.\n\n`;
+      prBody += `### 🛠️ Pipeline Details\n`;
+      prBody += `*   **Request ID**: \`${reqId}\`\n`;
+      prBody += `*   **Source URL**: [View original video](${sourceUrl})\n`;
+      prBody += `*   **Contributor**: **AI Automation Engine**\n`;
+      prBody += `*   **Generation Time**: \`${new Date().toLocaleString()}\`\n`;
+      prBody += `*   **Model**: \`@cf/meta/llama-3.2-3b-instruct\`\n\n`;
+      
+      prBody += `### 📂 Affected Folders\n`;
+      prBody += `*   ${foldersAffected}\n\n`;
+      
+      prBody += `### 📊 Generated Articles\n`;
+      articles.forEach((art, index) => {
+        prBody += `${index + 1}.  **${art.title}** (\`${art.path}\`)\n`;
+        prBody += `    *   Word Count: \`${art.wordCount}\` words\n`;
+        prBody += `    *   Reading Time: \`${art.readingTime}\` mins\n`;
+      });
+      
+      prBody += `\n### 📝 Review Checklist\n`;
+      prBody += `- [ ] Editorial cluster verification (no duplication check)\n`;
+      prBody += `- [ ] Semantic keywords & link structures check\n`;
+      prBody += `- [ ] Dynamic image layouts confirmed\n`;
+      prBody += `- [ ] Ready to merge to master`;
+
+      const prRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/pulls`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'AI-Editorial-OS/1.0',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: `[Content Cluster] Multi-Blog Generation for YouTube: ${articles[0]?.title || 'New Video'}`,
+          body: prBody,
+          head: branchName,
+          base: baseBranch,
+          draft: true
+        })
+      });
+
+      if (!prRes.ok) {
+        const errText = await prRes.text();
+        throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to create draft Pull Request: ${errText}`);
+      }
+
+      const prData: any = await prRes.json();
+      const prNumber = prData.number;
+      const url = prData.html_url;
+      console.log(`[${reqId}] Successfully created Draft Pull Request #${prNumber}. URL: ${url}`);
+
+      return {
+        prNumber,
+        url,
+        branchName,
+        requestId: reqId
+      };
+    } catch (err: any) {
+      if (err instanceof DomainError) throw err;
+      throw new DomainError('GITHUB_SUBMISSION_FAILED', `Failed to complete GitHub multi-PR operations: ${err.message}`, err);
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { Job } from '../domain/job';
 import { YouTubeAdapter, WebPageAdapter, RawTextAdapter } from '../adapters/sources';
 import { CloudflareAIProvider } from '../providers/ai';
 import { DomainError } from '../domain/errors';
+import { MdxBuilder } from '../utils/mdx-builder';
 
 export class SourceExtractionStage extends PipelineStage {
   name = 'Extracting';
@@ -181,6 +182,176 @@ ${research}`;
           readingTime,
           headingStructureOk: true
         }
+      }
+    };
+  }
+}
+
+export class PlanningStage extends PipelineStage {
+  name = 'Planning';
+  description = 'Determine content cluster articles, keywords, intents, and taxonomy folders based on facts';
+
+  async execute(job: Job, env: any): Promise<PipelineStageResult> {
+    const startTime = Date.now();
+    const ai = new CloudflareAIProvider(env);
+    const facts = job.aiInsights?.factCheckSummary || '';
+
+    const systemPrompt = `You are a Principal SEO Architect and Content Planner.
+Analyze the provided factsheet and outline a planned article cluster.
+You MUST output ONLY a valid JSON object matching the following structure:
+{
+  "cluster": [
+    {
+      "title": "Title targeting keyword",
+      "description": "Meta description under 160 characters",
+      "folder": "news | tutorials | comparisons | prompts | best-practices | use-cases",
+      "slug": "hyphenated-lowercase-slug",
+      "tags": ["tag1", "tag2"],
+      "difficulty": "beginner | intermediate | advanced",
+      "searchIntent": "Search intent description"
+    }
+  ]
+}
+Design exactly 2 to 4 articles that naturally fit the material, target different intents, and have zero duplication. Do not output any markup prefix, markdown, backticks, or trailing explanations. Only return the JSON.`;
+
+    const userPrompt = `Compile a content cluster plan for these facts:\n${facts}`;
+    const model = '@cf/meta/llama-3.2-3b-instruct';
+    const rawResult = await ai.generateText(systemPrompt, userPrompt, { model });
+    const durationMs = Date.now() - startTime;
+
+    // Clean JSON output (remove markdown blocks if model added them)
+    let jsonText = rawResult.trim();
+    if (jsonText.includes('```')) {
+      const start = jsonText.indexOf('{');
+      const end = jsonText.lastIndexOf('}');
+      if (start !== -1 && end !== -1) {
+        jsonText = jsonText.substring(start, end + 1);
+      }
+    }
+
+    let clusterPlan: any = null;
+    try {
+      clusterPlan = JSON.parse(jsonText);
+    } catch (e: any) {
+      console.warn('Failed to parse PlanningStage JSON output. Falling back to default plan.', e.message);
+      // Fallback default structure
+      clusterPlan = {
+        cluster: [
+          {
+            title: `Deep Dive into Resource details`,
+            description: `A comprehensive evaluation based on resource facts.`,
+            folder: 'news',
+            slug: `deep-dive-${Date.now()}`,
+            tags: ['ai', 'news'],
+            difficulty: 'intermediate',
+            searchIntent: 'Detailed technical overview of parameters and specifications'
+          }
+        ]
+      };
+    }
+
+    return {
+      success: true,
+      message: `Content cluster planned. Planned ${clusterPlan.cluster?.length || 0} articles.`,
+      diagnostics: { durationMs, warnings: [] },
+      updatedJobFields: {
+        clusterPlan
+      }
+    };
+  }
+}
+
+export class ParallelDraftingStage extends PipelineStage {
+  name = 'Drafting';
+  description = 'Generate full MDX files in parallel using planned article specifications';
+
+  async execute(job: Job, env: any): Promise<PipelineStageResult> {
+    const startTime = Date.now();
+    const ai = new CloudflareAIProvider(env);
+    const facts = job.aiInsights?.factCheckSummary || '';
+    const plan = job.clusterPlan || { cluster: [] };
+    const articlesSpec = plan.cluster || [];
+
+    if (articlesSpec.length === 0) {
+      throw new DomainError('NO_ARTICLES_PLANNED', 'No articles were defined in the PlanningStage');
+    }
+
+    // Extract video details for MDX Builder
+    let videoId = 'unknown';
+    try {
+      const urlMatch = job.url.match(/(?:v=|\/)([^"&?\/\s]{11})/);
+      if (urlMatch) videoId = urlMatch[1];
+    } catch (e) {}
+
+    // Run parallel generations
+    const draftingPromises = articlesSpec.map(async (spec: any) => {
+      const systemPrompt = `You are a Staff Technical Writer and Developer.
+Write a comprehensive, publication-ready article body for: "${spec.title}".
+Search Intent: ${spec.searchIntent}
+Target Folder: ${spec.folder}
+Factsheet reference:
+${facts}
+
+Do NOT output any markdown YAML frontmatter headers (e.g. title, description, tags, slug).
+Only write the markdown body content. Ensure the content begins directly with H1 '# ${spec.title}'.
+Write in a professional, technical, helpful, and natural style. Include structured sections, code examples, lists, or comparison charts.`;
+
+      const userPrompt = `Draft the markdown body for "${spec.title}" targeting intent: "${spec.searchIntent}"`;
+      const model = '@cf/meta/llama-3.2-3b-instruct';
+
+      let contentBody = '';
+      try {
+        contentBody = await ai.generateText(systemPrompt, userPrompt, { model });
+      } catch (err: any) {
+        console.error(`Failed drafting for ${spec.title}:`, err.message);
+        contentBody = `# ${spec.title}\n\nThis article reviews the specifications of the source material. Refer to the reference video at ${job.url}.`;
+      }
+
+      // Clean LLM formatting artifacts
+      let cleanedBody = contentBody.trim();
+      if (cleanedBody.startsWith('```markdown')) {
+        cleanedBody = cleanedBody.slice(11, -3).trim();
+      } else if (cleanedBody.startsWith('```')) {
+        cleanedBody = cleanedBody.slice(3, -3).trim();
+      }
+
+      // Compile complete MDX file with YAML frontmatter via deterministic builder
+      const articleBuilderInput = {
+        title: spec.title,
+        description: spec.description,
+        folder: spec.folder,
+        slug: spec.slug,
+        content: cleanedBody,
+        tags: spec.tags,
+        difficulty: spec.difficulty,
+        searchIntent: spec.searchIntent,
+        topic: spec.topic || plan.topic
+      };
+
+      const finalMdx = MdxBuilder.build(articleBuilderInput, videoId, job.url);
+      const wordCount = cleanedBody.split(/\s+/).length;
+      const readingTime = Math.max(1, Math.round(wordCount / 200));
+
+      return {
+        path: `src/content/${spec.folder}/${spec.slug}.md`,
+        slug: spec.slug,
+        title: spec.title,
+        category: spec.folder,
+        content: finalMdx,
+        wordCount,
+        readingTime
+      };
+    });
+
+    const generatedArticles = await Promise.all(draftingPromises);
+    const durationMs = Date.now() - startTime;
+
+    return {
+      success: true,
+      message: `Successfully drafted ${generatedArticles.length} articles in parallel.`,
+      diagnostics: { durationMs, warnings: [] },
+      updatedJobFields: {
+        generatedArticles
       }
     };
   }

@@ -42,13 +42,24 @@ export interface Job {
     twitterThread: string[];
     linkedInPost: string;
   };
+  clusterPlan?: any;
+  generatedArticles?: {
+    path: string;
+    slug: string;
+    title: string;
+    category: string;
+    content: string;
+    wordCount: number;
+    readingTime: number;
+  }[];
   createdAt: string;
   updatedAt: string;
 }
 
 export const CreateJobSchema = z.object({
   url: z.string().url(),
-  sourceType: z.enum(['youtube', 'github', 'website', 'raw'])
+  sourceType: z.enum(['youtube', 'github', 'website', 'raw']),
+  multi: z.boolean().optional()
 });
 
 export type CreateJobInput = z.infer<typeof CreateJobSchema>;

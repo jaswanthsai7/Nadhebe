@@ -63,6 +63,14 @@ const handleCreateJob = async (c: any) => {
   }
 
   const requestId = c.get('requestId');
+
+  // If multi parameter is true, trigger multi-article content cluster pipeline
+  if (result.data.multi === true) {
+    const responseData = await JobService.runAutoPipeline(result.data, c.env, requestId);
+    return envelope(c, true, responseData, null, 200);
+  }
+
+  // Otherwise, trigger standard single-article pipeline
   const job = await JobService.createJob(result.data, c.env, requestId);
   
   if (job.status === 'Failed') {
@@ -92,6 +100,22 @@ const handleGetJob = async (c: any) => {
 
 app.get('/api/v1/jobs/:id', handleGetJob);
 app.get('/jobs/:id', handleGetJob);
+
+// POST /api/v1/auto-pipeline & /auto-pipeline — Trigger auto content cluster pipeline
+const handleAutoPipeline = async (c: any) => {
+  const body = await c.req.json();
+  const result = CreateJobSchema.safeParse(body);
+  if (!result.success) {
+    throw new DomainError('VALIDATION_FAILED', 'Invalid input parameters for triggering pipeline', result.error.format());
+  }
+
+  const requestId = c.get('requestId');
+  const responseData = await JobService.runAutoPipeline(result.data, c.env, requestId);
+  return envelope(c, true, responseData, null, 200);
+};
+
+app.post('/api/v1/auto-pipeline', handleAutoPipeline);
+app.post('/auto-pipeline', handleAutoPipeline);
 
 // POST /api/v1/issues & /issues — Submit article to GitHub Pull Request
 const handleSubmitIssue = async (c: any) => {

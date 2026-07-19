@@ -1,4 +1,5 @@
 import { DomainError } from '../domain/errors';
+import { FallbackTranscriptProvider, ScraperTranscriptProvider } from '../providers/transcript';
 
 export interface SourceAdapter {
   canHandle(url: string, type: string): boolean;
@@ -79,6 +80,17 @@ export class YouTubeAdapter implements SourceAdapter {
 [4:30] Let's open the canvas. The selector manager allows editing CSS classes and design token variables.
 [6:00] Unlike webflow or framer, Instatic outputs layouts with zero runtime framework script dependencies or hydration bloat.
 [8:00] Keep in mind, Instatic is in early alpha pre-1.0 status, so set up regular database backups.`;
+    }
+
+    // Try live transcript extraction
+    try {
+      const provider = new FallbackTranscriptProvider([new ScraperTranscriptProvider()]);
+      const transcript = await provider.getTranscript(videoId);
+      if (transcript && transcript.trim().length > 0) {
+        return transcript;
+      }
+    } catch (err: any) {
+      console.warn(`Live transcript retrieval failed for video ${videoId}. Falling back to default mock text. Error: ${err.message}`);
     }
 
     // Default generic video transcript return
