@@ -9,7 +9,7 @@ interface Props {
 const { title, description, heroImage = '/og-default.png', canonicalUrl: propCanonicalUrl } = Astro.props;
 
 const canonicalUrl = propCanonicalUrl || Astro.url.href;
-const imageUrl = heroImage.startsWith('http') ? heroImage : new URL(heroImage, Astro.site || 'https://example.com').toString();
+const imageUrl = heroImage.startsWith('http') ? heroImage : new URL(heroImage, Astro.site || 'https://nadhebe.pages.dev').toString();
 ---
 
 <meta charset="utf-8" />

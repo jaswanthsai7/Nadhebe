@@ -129,11 +129,14 @@ function run() {
     const currentArticle = articles.find(a => a.url === relativeUrl);
 
     // Build list of target articles for linking
-    // Only link to articles in the same topic/cluster, excluding the current article itself
     let targets = articles.filter(a => a.url !== relativeUrl);
     if (currentArticle && currentArticle.topic) {
-      // Prioritize same topic articles
-      targets = targets.filter(a => a.topic?.toLowerCase() === currentArticle.topic?.toLowerCase());
+      // Prioritize same topic OR topics sharing Kimi cluster keyword
+      targets = targets.filter(a => {
+        const t1 = a.topic?.toLowerCase() || '';
+        const t2 = currentArticle.topic?.toLowerCase() || '';
+        return t1 === t2 || (t1.includes('kimi') && t2.includes('kimi'));
+      });
     } else {
       // If not in a topic, don't auto-link to restrict keyword cannibalization
       return;
@@ -141,8 +144,30 @@ function run() {
 
     if (targets.length === 0) return;
 
-    // Run auto-linking on article body content
-    const linkTargets = targets.map(t => ({ title: t.title, url: t.url }));
+    // Build rich list of anchor terms for targets to link effectively
+    const linkTargets: { title: string; url: string }[] = [];
+    targets.forEach(t => {
+      // Add full title
+      linkTargets.push({ title: t.title, url: t.url });
+      
+      // Add short trigger phrases based on slug/topic
+      if (t.slug.includes('kimi-k3-moonshot-ai-release')) {
+        linkTargets.push({ title: 'Kimi K3', url: t.url });
+        linkTargets.push({ title: 'Kimi K3 release', url: t.url });
+      } else if (t.slug.includes('structured-prompt')) {
+        linkTargets.push({ title: '4-Pillar Prompt', url: t.url });
+        linkTargets.push({ title: 'structured prompting', url: t.url });
+      } else if (t.slug.includes('context-window')) {
+        linkTargets.push({ title: '1 million token context', url: t.url });
+        linkTargets.push({ title: 'context window', url: t.url });
+      } else if (t.slug.includes('3d-modeling')) {
+        linkTargets.push({ title: '3D printable', url: t.url });
+        linkTargets.push({ title: 'OpenSCAD', url: t.url });
+      } else if (t.slug.includes('game-development')) {
+        linkTargets.push({ title: 'procedural prototyping', url: t.url });
+      }
+    });
+
     const linkedContent = autoLinkArticles(originalContent, linkTargets);
 
     if (linkedContent !== originalContent) {

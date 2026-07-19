@@ -1,4 +1,4 @@
-z---
+---
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SearchDialog from '@/components/search/SearchDialog.astro';
@@ -78,6 +78,38 @@ if (canonicalUrl) {
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
 
+    <!-- Analytics & SEO Verification Verification -->
+    {import.meta.env.PUBLIC_GSC_VERIFICATION && (
+      <meta name="google-site-verification" content={import.meta.env.PUBLIC_GSC_VERIFICATION} />
+    )}
+    {import.meta.env.PUBLIC_BING_VERIFICATION && (
+      <meta name="msvalidate.01" content={import.meta.env.PUBLIC_BING_VERIFICATION} />
+    )}
+
+    <!-- Google Analytics 4 -->
+    {import.meta.env.PUBLIC_GA_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
+        <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+
+    <!-- Microsoft Clarity -->
+    {import.meta.env.PUBLIC_CLARITY_ID && (
+      <script is:inline define:vars={{ clarityId: import.meta.env.PUBLIC_CLARITY_ID }}>
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+clarityId;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,"clarity","script");
+      </script>
+    )}
+
 
 
     <!-- Frosted Nature Background Styles -->
@@ -93,6 +125,10 @@ if (canonicalUrl) {
         background-repeat: no-repeat;
         transition: opacity 0.8s ease;
         opacity: 0;
+        background-color: #f8fafc;
+      }
+      .dark #nature-bg {
+        background-color: #090d16;
       }
       #nature-overlay {
         position: fixed;
