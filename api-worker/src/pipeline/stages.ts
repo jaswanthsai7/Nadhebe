@@ -270,7 +270,7 @@ Design exactly 2 to 4 articles that naturally fit the material, target different
     return {
       success: true,
       message: `Content cluster planned. Planned ${clusterPlan.cluster?.length || 0} articles.`,
-      diagnostics: { durationMs, warnings: [] },
+      diagnostics: { durationMs: Date.now() - startTime, warnings },
       updatedJobFields: {
         clusterPlan
       }
