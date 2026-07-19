@@ -235,6 +235,9 @@ Design exactly 2 to 4 articles that naturally fit the material, target different
         }
       }
       clusterPlan = JSON.parse(jsonText);
+      if (!clusterPlan || !Array.isArray(clusterPlan.cluster) || clusterPlan.cluster.length === 0) {
+        throw new Error('Parsed plan is empty or does not contain a valid cluster array');
+      }
     } catch (err: any) {
       console.warn('PlanningStage model call or parse failed. Executing fallback plan. Error:', err.message);
       warnings.push(`PlanningStage failed: ${err.message}. Using fallback.`);
