@@ -8,16 +8,16 @@ export const onRequest = async (context: PagesContext) => {
   try {
     const request = context.request;
     const url = new URL(request.url);
+    const origin = `${url.protocol}//${url.host}`;
 
-    // Serve OAuth Protected Resource Metadata
+    // Serve OAuth Protected Resource Metadata (RFC 9728)
     if (url.pathname.replace(/\/$/, '') === '/.well-known/oauth-protected-resource') {
       const resourceMetadata = {
-        resource: `${url.protocol}//${url.host}`,
-        authorization_servers: [
-          `${url.protocol}//${url.host}`
-        ],
-        scopes_supported: ['read', 'write', 'repo'],
-        bearer_methods_supported: ['header']
+        resource: origin,
+        authorization_servers: [origin],
+        scopes_supported: ['read:public', 'read:articles', 'read:tools', 'write:jobs'],
+        bearer_methods_supported: ['header'],
+        resource_documentation: `${origin}/auth.md`
       };
       return new Response(JSON.stringify(resourceMetadata, null, 2), {
         headers: {
@@ -28,26 +28,25 @@ export const onRequest = async (context: PagesContext) => {
       });
     }
 
-    // Serve OAuth/OIDC Discovery Metadata
+    // Serve OAuth/OIDC Discovery Metadata with Agent Auth block
     if (url.pathname.replace(/\/$/, '') === '/.well-known/openid-configuration' || 
         url.pathname.replace(/\/$/, '') === '/.well-known/oauth-authorization-server') {
       const oidcDiscovery = {
-        issuer: `${url.protocol}//${url.host}`,
-        authorization_endpoint: `${url.protocol}//${url.host}/oauth/authorize`,
-        token_endpoint: `${url.protocol}//${url.host}/oauth/token`,
-        jwks_uri: `${url.protocol}//${url.host}/.well-known/jwks.json`,
+        issuer: origin,
+        authorization_endpoint: `${origin}/oauth/authorize`,
+        token_endpoint: `${origin}/oauth/token`,
+        jwks_uri: `${origin}/.well-known/jwks.json`,
         response_types_supported: ['code', 'token', 'id_token'],
         grant_types_supported: ['authorization_code', 'client_credentials'],
         subject_types_supported: ['public'],
         id_token_signing_alg_values_supported: ['RS256'],
         agent_auth: {
           skill: "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
-          register_uri: `${url.protocol}//${url.host}/auth.md`,
-          identity_types_supported: ["anonymous"],
-          anonymous: {
-            credential_types_supported: ["none"]
-          },
-          claim_uri: `${url.protocol}//${url.host}/auth.md`
+          register_uri: `${origin}/auth.md`,
+          supported_identity_types: ["developer", "agent", "anonymous"],
+          supported_credential_types: ["bearer_token", "oauth2", "none"],
+          claim_uri: `${origin}/auth.md`,
+          revocation_endpoint: `${origin}/oauth/revoke`
         }
       };
       return new Response(JSON.stringify(oidcDiscovery, null, 2), {
@@ -59,14 +58,15 @@ export const onRequest = async (context: PagesContext) => {
       });
     }
 
-    // Call context.next() exactly once
+    // Call context.next() to fetch response
     response = await context.next();
 
-    const accept = request.headers.get('Accept') || request.headers.get('accept') || '';
+    const accept = (request.headers.get('Accept') || request.headers.get('accept') || '').toLowerCase();
     const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
     const isHtml = contentType.includes('text/html');
 
-    if (accept.includes('text/markdown') && isHtml && response.status === 200) {
+    // Handle Markdown Content Negotiation for Agents (Accept: text/markdown or text/x-markdown)
+    if ((accept.includes('text/markdown') || accept.includes('text/x-markdown')) && isHtml && response.status === 200) {
       const html = await response.clone().text();
       const markdown = convertHtmlToMarkdown(html);
 
@@ -74,19 +74,23 @@ export const onRequest = async (context: PagesContext) => {
       const originalTokenCount = Math.round(html.length / 4);
 
       return new Response(markdown, {
+        status: 200,
         headers: {
           'Content-Type': 'text/markdown; charset=utf-8',
           'x-markdown-tokens': String(tokenCount),
           'x-original-tokens': String(originalTokenCount),
+          'Vary': 'Accept',
           'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
-          'Link': '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"'
+          'Link': '</llms.txt>; rel="describedby"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"'
         },
       });
     }
 
+    // Standard HTML responses: attach Link header & Vary
     if (isHtml && response.status === 200) {
       const newHeaders = new Headers(response.headers);
-      newHeaders.set('Link', '</index.json>; rel="api-catalog", </llms.txt>; rel="service-doc", </llms-full.txt>; rel="describedby"');
+      newHeaders.set('Link', '</llms.txt>; rel="describedby"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"');
+      newHeaders.set('Vary', 'Accept');
       
       return new Response(response.body, {
         status: response.status,
@@ -136,7 +140,7 @@ function convertHtmlToMarkdown(html: string): string {
   const mainMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i) || html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   let content = mainMatch ? mainMatch[1] : html;
 
-  // Clean elements
+  // Clean layout elements
   content = content
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/<style[\s\S]*?<\/style>/gi, '')
@@ -144,7 +148,7 @@ function convertHtmlToMarkdown(html: string): string {
     .replace(/<footer[\s\S]*?<\/footer>/gi, '')
     .replace(/<nav[\s\S]*?<\/nav>/gi, '');
 
-  // Convert layout tags to Markdown
+  // Convert HTML elements to Markdown
   let bodyMarkdown = content
     .replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, '# $1\n\n')
     .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, '## $1\n\n')

@@ -1,16 +1,22 @@
 {
   "linkset": [
     {
-      "anchor": "https://example.com",
+      "anchor": "https://nadhebe.com",
       "service-doc": [
         {
-          "href": "https://example.com/about",
-          "type": "text/html"
+          "href": "https://nadhebe.com/auth.md",
+          "type": "text/markdown"
         }
       ],
       "status": [
         {
-          "href": "https://example.com/robots.txt",
+          "href": "https://nadhebe.com/robots.txt",
+          "type": "text/plain"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://nadhebe.com/llms.txt",
           "type": "text/plain"
         }
       ]
