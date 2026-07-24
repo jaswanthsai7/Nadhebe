@@ -20,7 +20,6 @@ Object.entries(map).forEach(([key, target]) => {
     console.log('COPIED:', match, '->', target);
   }
 });
-
 // Article 1
 const art1 = `---
 title: "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)"
