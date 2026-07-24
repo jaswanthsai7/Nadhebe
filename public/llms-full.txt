@@ -4,6 +4,242 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-deepseek-r1-comparison)
+
+> A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
+
+Category: Comparisons | Tags: [kimi-k3, deepseek-r1, open-weight, moe-models, llm-benchmarks]
+
+Choosing between **Kimi K3** and **DeepSeek R1** depends on whether your workload requires **massive multi-modal 1M context engineering** or **cost-optimized chain-of-thought math and logic reasoning**. Moonshot AI's **Kimi K3** (2.8 trillion total parameters) uses a sparse 896-expert Mixture of Experts (MoE) architecture with native vision capabilities and Kimi Delta Attention (KDA) to manage 1,000,000 token inputs. **DeepSeek R1** (671 billion total parameters, 37 billion active) relies on Multi-Head Latent Attention (MLA) and reinforcement learning (RL) to produce explicit `<think>` reasoning chains for complex logic, offering lower token costs and lightweight distilled model variants.
+
+This guide compares both flagship open-weight models across verifiable specs, attention mechanisms, context limits, and self-hosting constraints.
+
+---
+
+## Verifiable Specification Matrix
+
+| Parameter / Feature | Kimi K3 (Moonshot AI) | DeepSeek R1 (DeepSeek) |
+| :--- | :--- | :--- |
+| **Release Date** | July 2026 | January 2025 |
+| **Total Parameters** | 2.8 Trillion (Sparse MoE) | 671 Billion (Sparse MoE) |
+| **Active Parameters / Token** | 16 Active Experts (out of 896) | 37 Billion Active (out of 256 experts) |
+| **Attention Architecture** | Kimi Delta Attention (KDA Linear Hybrid) | Multi-Head Latent Attention (MLA) |
+| **Native Context Window** | **1,000,000 Tokens (1M)** | **128,000 Tokens (128k)** |
+| **Native Vision Support** | Yes (Integrated multimodal vision input) | No (Text-only base; vision via separate Qwen-VL) |
+| **Reasoning Mechanism** | Native multi-step agentic execution & planning | Explicit Chain-of-Thought (`<think>` blocks) |
+| **Distilled Model Variants** | None (Full 2.8T MoE weight package) | 6 Distilled models (Llama 8B/70B, Qwen 1.5B–32B) |
+| **Open-Weight License** | Open-weight weights & hosted API access | MIT License (Fully open weights & code) |
+| **Official Hosted API Price** | $3.00 / 1M Input · $15.00 / 1M Output | $0.55 / 1M Input · $2.19 / 1M Output |
+
+---
+
+## 1. Architectural & Attention Mechanism Trade-offs
+
+```mermaid
+graph TD
+    subgraph Kimi_K3_Architecture
+        K1[Input Query & Images] --> K2[Kimi Delta Attention KDA]
+        K2 --> K3[MoE Router: 896 Experts]
+        K3 --> K4[16 Active Experts Selected]
+        K4 --> K5[1M Context Token Output]
+    end
+    subgraph DeepSeek_R1_Architecture
+        D1[Input Prompt] --> D2[Multi-Head Latent Attention MLA]
+        D2 --> D3[DeepSeekMoE: 256 Experts]
+        D3 --> D4[37B Active Parameters]
+        D4 --> D5[Explicit Think Tokens & Answer]
+    end
+```
+
+### Kimi K3: Kimi Delta Attention (KDA) for 1M Context Scaling
+Processing 1 million tokens in standard Transformer self-attention requires quadratic $O(N^2)$ memory and computation. **Kimi K3** addresses this with **Kimi Delta Attention (KDA)**—a hybrid linear attention layer that compresses intermediate key-value states while maintaining long-range token retrieval accuracy.
+
+* **Linear Memory Scaling**: KDA reduces KV cache memory consumption during long-context inference, enabling full codebase context loading on single node clusters.
+* **Native Multimodality**: Image pixels are tokenized directly within the KDA pipeline, allowing developers to pass full UI design wireframes alongside 500k lines of frontend code. For best practices on structuring long prompts, see [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+
+### DeepSeek R1: Multi-Head Latent Attention (MLA) & CoT Reasoning
+**DeepSeek R1** compresses the KV cache using **Multi-Head Latent Attention (MLA)**, which projects Key and Value vectors into a low-rank latent space.
+
+* **VRAM Efficiency**: MLA reduces GPU memory requirements by up to 90% compared to standard MHA during prefill.
+* **RL-Trained Chain-of-Thought**: DeepSeek R1 was trained using large-scale Reinforcement Learning without initial supervised fine-tuning (SFT). The model automatically emits structured `<think>` reasoning traces before generating final responses, making logic debugging transparent.
+
+---
+
+## 2. Target Use Cases & Capability Profiles
+
+```mermaid
+graph LR
+    Need[Developer Requirement] --> Intent{Primary Task Focus}
+    Intent -->|1M Codebase Context & Vision| UseKimi[Use Kimi K3]
+    Intent -->|Math Logic & Cheap Distilled API| UseDeepSeek[Use DeepSeek R1]
+```
+
+### Choose Kimi K3 for:
+1. **Large Repository Ingestion**: Ingesting entire static sites, frameworks, or database schemas in a single prompt. Read our release overview in [Moonshot AI Releases Kimi K3](/news/kimi-k3-moonshot-ai-release).
+2. **Frontend & Visual Web Engineering**: Converting visual screenshots or wireframes into working HTML/CSS/JS components.
+3. **Multi-Agent Swarm Orchestration**: Running complex multi-step workflows across wide context windows. Compare model tiers in [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+
+### Choose DeepSeek R1 for:
+1. **Cost-Sensitive High-Volume Reasoning**: Serving automated reasoning pipelines where $0.55/1M input tokens provides maximum ROI.
+2. **Mathematical & Algorithmic Verification**: Problems requiring strict multi-step logical proofs where inspecting `<think>` output is mandatory.
+3. **Local & Edge Deployment**: Deploying lightweight 1.5B, 8B, or 14B distilled R1 models locally on consumer GPUs via engines like vLLM or Ollama. For engine choices, review [vLLM vs Ollama Architectural Comparison](/comparisons/vllm-vs-ollama-architectural-comparison).
+
+---
+
+## References & Primary Sources
+
+* [Moonshot AI Kimi K3 Technical Announcement](https://www.kimi.ai)
+* [DeepSeek R1 Official Repository & Paper](https://github.com/deepseek-ai/DeepSeek-R1)
+
+---
+
+## Related Kimi K3 & Open-Weight Resources
+
+* Read the full release announcement in [Moonshot AI Releases Kimi K3: The 2.8T Parameter Open-Weight Pioneer](/news/kimi-k3-moonshot-ai-release).
+* Learn context optimization techniques in [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+* Compare frontier models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+* Evaluate local hosting engines in [vLLM vs Ollama Architectural Comparison](/comparisons/vllm-vs-ollama-architectural-comparison).
+
+---
+
+# [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.pages.dev/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison)
+
+> An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.
+
+Category: Comparisons | Tags: [vllm, sglang, tgi, llmops, inference, architecture]
+
+Choosing the right open-source LLM inference engine depends on your workload's memory access patterns and concurrency model. **vLLM** is the industry standard for high-throughput, multi-user request serving using PagedAttention. **SGLang** excels in agentic, multi-turn, and structured output workflows due to its automatic RadixAttention radix-tree prefix caching and fast constrained decoding. **Hugging Face TGI (Text Generation Inference)** provides an enterprise-ready, Rust-powered web server with native Hugging Face Hub integration and built-in telemetry.
+
+This engineering comparison evaluates all three engines across memory management, request scheduling, distributed scaling, and deployment overhead.
+
+---
+
+## At-a-Glance Architectural Decision Matrix
+
+| Dimension | vLLM (UC Berkeley) | SGLang (LMSYS) | Hugging Face TGI |
+| :--- | :--- | :--- | :--- |
+| **Core Innovation** | PagedAttention (block memory allocation) | RadixAttention (Radix tree prefix reuse) | Rust Web Router + Native HF integration |
+| **Primary Use Case** | General high-concurrency production APIs | Multi-turn agent loops & structured JSON | Enterprise HF model serving & telemetry |
+| **KV Cache Strategy** | Block-based dynamic virtual memory allocation | Tree-based radix cache for automatic prefix sharing | PagedAttention & FlashAttention integration |
+| **Constrained Decoding** | Outlines / xGrammar integration | Compressed Finite State Machine (native) | Guided decoding via Outlines / JSON Schema |
+| **Router Architecture** | Python (AsyncIO) + C++/CUDA extensions | Python (AsyncIO) + CUDA C++ kernels | Rust (gRPC + Axum) + Python worker backend |
+| **Multi-GPU Scaling** | Tensor Parallelism, Pipeline Parallelism, Ray | Tensor Parallelism, Pipeline Parallelism, DeepSpeed | Tensor Parallelism, Sharded safetensors |
+| **Observability** | Prometheus metrics endpoint | Prometheus metrics endpoint | Native OpenTelemetry (OTEL) & Prometheus |
+
+---
+
+## 1. Core Architectural Differences & Memory Management
+
+### vLLM: Dynamic Virtual Memory Allocation via PagedAttention
+Traditional LLM serving allocates continuous physical GPU memory for the Key-Value (KV) cache based on maximum potential context length, causing up to 60–80% VRAM fragmentation. **vLLM** resolves this by adapting operating system virtual memory principles to GPU memory via **PagedAttention**.
+
+```mermaid
+graph TD
+    VirtualMem[Virtual Memory Request] --> PageTable[vLLM Page Table]
+    PageTable --> Block1[Physical GPU Block 1: 16 Tokens]
+    PageTable --> Block2[Physical GPU Block 2: 16 Tokens]
+    PageTable --> Block3[Physical GPU Block 3: 16 Tokens]
+```
+
+* **Fixed Block Size**: vLLM divides the KV cache into fixed-size blocks (typically 16 or 32 tokens).
+* **Non-Contiguous Allocation**: Blocks are allocated non-contiguously in physical VRAM as generation proceeds, eliminating internal fragmentation.
+* **Impact**: Increases maximum batch size per GPU, allowing significantly higher concurrent token throughput. To learn how to tune these parameters when encountering VRAM limits, read our guide on [Fixing vLLM CUDA Out Of Memory Errors](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide).
+
+---
+
+### SGLang: Automatic Radix-Tree Cache Sharing via RadixAttention
+While PagedAttention manages static memory blocks, **SGLang** optimizes memory reuse across separate API requests using **RadixAttention**. SGLang maintains a radix tree data structure in CPU/GPU memory that indexes all active and historical KV cache tokens.
+
+```mermaid
+graph LR
+    SystemPrompt["System Prompt: 'You are an agent...'"] --> SharedNode(Radix Tree Root Node)
+    SharedNode --> BranchA["User Request A: 'Write Python script'"]
+    SharedNode --> BranchB["User Request B: 'Analyze SQL schema'"]
+```
+
+* **Automatic Prefix Matching**: When multiple requests share common system prompts, multi-turn chat history, or few-shot examples, SGLang reuses existing KV cache blocks instantly without re-computation.
+* **LRU Eviction**: Unused branches of the radix tree are evicted using a Least Recently Used (LRU) policy when GPU memory limit is reached.
+* **Structured Decoding Efficiency**: SGLang integrates compressed finite state machine (FSM) decoding natively, making JSON schema enforcement and tool call parsing significantly faster than standard regex masking.
+
+---
+
+### Hugging Face TGI: Rust Engine with Native Hub Pipeline
+**TGI** prioritizes production reliability, security, and enterprise integration. Its frontend server is implemented entirely in **Rust** to eliminate Python GIL overhead during HTTP request parsing and batch queueing.
+
+* **Hybrid Stack**: High-performance Rust HTTP router communicates with Python/CUDA worker processes via gRPC.
+* **Hub First**: Native support for Hugging Face Hub model IDs, safetensors, private repositories, and custom model architectures out of the box.
+* **Enterprise Telemetry**: Includes native OpenTelemetry tracing, Prometheus metrics, and granular health probes for Kubernetes clusters.
+
+---
+
+## 2. Request Scheduling & Batching Capabilities
+
+### Continuous Batching vs Radix Batching
+
+All three engines support **Continuous Batching** (iteration-level scheduling), where finished sequences are evicted immediately at each generation step and new incoming requests are inserted into the running batch without waiting for the full batch to complete.
+
+* **vLLM**: Uses continuous batching combined with chunked prefill (`--enable-chunked-prefill`) to prevent long input prompts from starving active token generation queues.
+* **SGLang**: Combines continuous batching with RadixAttention prefix matching. If incoming prefill prompts match an existing radix branch, prefill latency approaches near-zero.
+* **TGI**: Implements dynamic batching in Rust, allowing fine-grained control over max waiting tokens, batch size limits, and sequence truncation.
+
+---
+
+## 3. Distributed & Multi-GPU Serving
+
+| Engine | Tensor Parallelism (TP) | Pipeline Parallelism (PP) | Multi-Node Scaling |
+| :--- | :--- | :--- | :--- |
+| **vLLM** | Native PyTorch distributed / Megatron-LM | Supported via Ray or native worker pipelines | High (Ray cluster or multi-node CLI) |
+| **SGLang** | Native PyTorch distributed | Supported via DeepSpeed / PyTorch | High (Multi-node SGLang launcher) |
+| **TGI** | Native Custom CUDA / PyTorch distributed | Limited | Medium (Designed primarily for single-node multi-GPU) |
+
+* For detailed deployment comparisons against lightweight local engines, see our evaluation of [vLLM vs Ollama Architectural Comparison](/comparisons/vllm-vs-ollama-architectural-comparison).
+
+---
+
+## 4. Production Decision Guide: When to Use Each
+
+```mermaid
+graph TD
+    Start[Select LLM Inference Engine] --> Q1{Is it an Enterprise HF Pipeline with Rust requirement?}
+    Q1 -->|Yes| TGI[Deploy Hugging Face TGI]
+    Q1 -->|No| Q2{Heavy Multi-Turn Chat / Agentic / JSON Structured Output?}
+    Q2 -->|Yes| SGL[Deploy SGLang]
+    Q2 -->|No| VLLM[Deploy vLLM]
+```
+
+### Choose vLLM if:
+1. You need a general-purpose, high-throughput production API serving diverse user prompts.
+2. You require maximum model architecture support (Llama, Qwen, Mistral, Mixtral, DeepSeek) with AWQ, GPTQ, or FP8 quantization.
+3. You need seamless Ray cluster integration for distributed multi-GPU environments.
+
+### Choose SGLang if:
+1. Your application runs multi-turn autonomous agent loops where system prompts and chat history repeat frequently across requests.
+2. You require fast, strict JSON schema output or constrained regex generation.
+3. Controlling token consumption in long context loops is critical for financial sustainability. For optimization patterns, see [LLM Autonomous Loops: Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
+
+### Choose TGI if:
+1. You deploy models directly from private Hugging Face Hub enterprise accounts.
+2. Your platform requires a Rust web router with native OpenTelemetry tracing and strict enterprise compliance.
+3. You prefer out-of-the-box Docker images configured for AWS SageMaker or Azure ML deployments.
+
+---
+
+## References & Official Sources
+
+* [vLLM GitHub Repository & PagedAttention Paper](https://github.com/vllm-project/vllm)
+* [SGLang Project Repository & RadixAttention Specification](https://github.com/sgl-project/sgl-project)
+* [Hugging Face Text Generation Inference (TGI) Documentation](https://huggingface.co/docs/text-generation-inference)
+
+---
+
+## Related Guides & Infrastructure Resources
+
+* Explore lightweight local serving options in our guide on [vLLM vs Ollama Architectural Comparison](/comparisons/vllm-vs-ollama-architectural-comparison).
+* Resolve CUDA VRAM bottlenecks using [Fixing vLLM CUDA Out Of Memory Errors](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide).
+* Control autonomous agent execution overhead with [LLM Autonomous Loops: Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
+
+---
+
 # [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
 
 > A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
@@ -220,6 +456,7 @@ flowchart TD
 * **Select Ollama if:** You require zero-config local execution, macOS Apple Silicon optimization, or lightweight GGUF quantization for single-user workflows.
 * **Select vLLM if:** You are building cloud APIs handling concurrent requests, utilizing multi-GPU tensor parallelism, or optimizing VRAM utilization via PagedAttention.
 
+For high-concurrency production deployments requiring advanced prefix caching or Rust web routers, explore our comparison of [vLLM vs SGLang vs TGI Inference Engines](/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison).
 For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
 
 ---
@@ -302,7 +539,8 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
 ## Related Reading & Workflows
 
 * For long-context engineering guidelines, read our guide on [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
-* For a head-to-head performance breakdown against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+* For a head-to-head performance breakdown against open-weight models, see [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](/comparisons/kimi-k3-vs-deepseek-r1-comparison).
+* For comparison against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
 
 ---
 

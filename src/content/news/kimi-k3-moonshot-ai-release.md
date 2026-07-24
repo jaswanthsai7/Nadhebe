@@ -98,4 +98,5 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
 ## Related Reading & Workflows
 
 * For long-context engineering guidelines, read our guide on [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
-* For a head-to-head performance breakdown against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+* For a head-to-head performance breakdown against open-weight models, see [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](/comparisons/kimi-k3-vs-deepseek-r1-comparison).
+* For comparison against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).

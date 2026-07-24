@@ -1,5 +1,25 @@
 [
   {
+    "title": "Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared",
+    "description": "A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.",
+    "url": "https://nadhebe.pages.dev/comparisons/kimi-k3-vs-deepseek-r1-comparison",
+    "category": "Comparisons",
+    "tags": [
+      "[kimi-k3, deepseek-r1, open-weight, moe-models, llm-benchmarks]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?",
+    "description": "An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.",
+    "url": "https://nadhebe.pages.dev/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison",
+    "category": "Comparisons",
+    "tags": [
+      "[vllm, sglang, tgi, llmops, inference, architecture]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning",
     "description": "A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.",
     "url": "https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide",

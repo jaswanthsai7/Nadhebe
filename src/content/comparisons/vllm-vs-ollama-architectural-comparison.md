@@ -134,4 +134,5 @@ flowchart TD
 * **Select Ollama if:** You require zero-config local execution, macOS Apple Silicon optimization, or lightweight GGUF quantization for single-user workflows.
 * **Select vLLM if:** You are building cloud APIs handling concurrent requests, utilizing multi-GPU tensor parallelism, or optimizing VRAM utilization via PagedAttention.
 
+For high-concurrency production deployments requiring advanced prefix caching or Rust web routers, explore our comparison of [vLLM vs SGLang vs TGI Inference Engines](/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison).
 For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
