@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const SITE_URL = 'https://example.com'; // Fallback site URL
+const rawSiteUrl = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
+const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
 
 function walkDir(dir: string, callback: (filePath: string) => void) {
   if (!fs.existsSync(dir)) return;

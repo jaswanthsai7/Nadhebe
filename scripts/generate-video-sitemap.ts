@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const SITE_URL = 'https://example.com';
+const rawSiteUrl = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
+const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
 
 // Simple YAML frontmatter parser
 function parseFrontmatter(filePath: string): any {
