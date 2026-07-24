@@ -67,7 +67,9 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
   - **Alt**: "Drawing workstation mockup"
 
 
-## Frontier LLM Benchmark Comparisons
+## Frontier LLM Benchmark & Developer Guides
 
+* Explore Anthropic's autonomous terminal execution loop in [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
+* For official Anthropic credentials and Pearson VUE exams, read [Anthropic Claude Certification Guide: Exams & Credentials](/guides/anthropic-claude-certification-developer-guide).
 * Compare Claude Fable 5 against OpenAI flagships in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
 * Compare open weights vs proprietary models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).

@@ -4,6 +4,17 @@
 
 ## Content Directory
 
+### Tutorials
+
+- [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli): The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and Windows.
+- [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.pages.dev/tutorials/installing-claude-code-cli-windows): A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool on Windows using PowerShell and WSL2.
+- [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide): A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
+- [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial): A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
+- [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow): A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
+- [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
+- [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.pages.dev/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
+- [How to Install and Set Up Instatic CMS Locally](https://nadhebe.pages.dev/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
+
 ### Comparisons
 
 - [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-deepseek-r1-comparison): A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
@@ -14,14 +25,14 @@
 - [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 - [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
 
-### Tutorials
+### Guides
 
-- [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide): A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
-- [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial): A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
-- [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow): A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
-- [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
-- [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.pages.dev/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
-- [How to Install and Set Up Instatic CMS Locally](https://nadhebe.pages.dev/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
+- [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide): A comprehensive guide to Anthropic's official Claude Certification Program, covering exam tracks, Pearson VUE proctoring, and Credly digital badges.
+- [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.pages.dev/guides/claude-code-agent-loop-architecture): An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, and security prompts.
+- [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.pages.dev/guides/google-ai-certification-cost-free-vs-paid): A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
+- [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.pages.dev/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
+- [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.pages.dev/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
+- [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.pages.dev/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
 ### News
 
@@ -66,12 +77,6 @@
 - [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
 - [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.pages.dev/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
 - [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.pages.dev/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
-
-### Guides
-
-- [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.pages.dev/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
-- [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.pages.dev/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
-- [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.pages.dev/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
 ### Frameworks
 

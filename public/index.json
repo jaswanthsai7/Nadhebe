@@ -1,5 +1,25 @@
 [
   {
+    "title": "How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)",
+    "description": "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and Windows.",
+    "url": "https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli",
+    "category": "Tutorials",
+    "tags": [
+      "[\"claude\", \"cli\", \"installation\", \"npm\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)",
+    "description": "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool on Windows using PowerShell and WSL2.",
+    "url": "https://nadhebe.pages.dev/tutorials/installing-claude-code-cli-windows",
+    "category": "Tutorials",
+    "tags": [
+      "[\"claude\", \"cli\", \"windows\", \"wsl2\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared",
     "description": "A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.",
     "url": "https://nadhebe.pages.dev/comparisons/kimi-k3-vs-deepseek-r1-comparison",
@@ -16,6 +36,36 @@
     "category": "Comparisons",
     "tags": [
       "[vllm, sglang, tgi, llmops, inference, architecture]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements",
+    "description": "A comprehensive guide to Anthropic's official Claude Certification Program, covering exam tracks, Pearson VUE proctoring, and Credly digital badges.",
+    "url": "https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"anthropic\", \"claude\", \"certification\", \"pearson-vue\", \"credly\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls",
+    "description": "An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, and security prompts.",
+    "url": "https://nadhebe.pages.dev/guides/claude-code-agent-loop-architecture",
+    "category": "Guides",
+    "tags": [
+      "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained",
+    "description": "A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.",
+    "url": "https://nadhebe.pages.dev/guides/google-ai-certification-cost-free-vs-paid",
+    "category": "Guides",
+    "tags": [
+      "[\"google\", \"ai-certification\", \"google-cloud\", \"skills-boost\", \"machine-learning\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
