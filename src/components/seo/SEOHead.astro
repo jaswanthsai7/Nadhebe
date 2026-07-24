@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@/config';
+
 interface Props {
   title: string;
   description: string;
@@ -8,8 +10,9 @@ interface Props {
 
 const { title, description, heroImage = '/og-default.png', canonicalUrl: propCanonicalUrl } = Astro.props;
 
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
 const canonicalUrl = propCanonicalUrl || Astro.url.href;
-const imageUrl = heroImage.startsWith('http') ? heroImage : new URL(heroImage, Astro.site || 'https://nadhebe.pages.dev').toString();
+const imageUrl = heroImage.startsWith('http') ? heroImage : new URL(heroImage.replace(/^\//, ''), baseUrl).toString();
 ---
 
 <meta charset="utf-8" />

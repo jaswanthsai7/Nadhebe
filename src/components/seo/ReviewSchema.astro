@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@/config';
+
 interface Props {
   productName: string;
   description: string;
@@ -23,9 +25,11 @@ const {
   canonicalUrl,
 } = Astro.props;
 
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
+
 const imageUrl = heroImage.startsWith('http') 
   ? heroImage 
-  : new URL(heroImage, Astro.site || 'https://nadhebe.pages.dev').toString();
+  : new URL(heroImage.replace(/^\//, ''), baseUrl).toString();
 
 const schema = {
   "@context": "https://schema.org",

@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@/config';
+
 interface Props {
   breadcrumbs: {
     label: string;
@@ -7,6 +9,7 @@ interface Props {
 }
 
 const { breadcrumbs } = Astro.props;
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
 
 const schema = {
   "@context": "https://schema.org",
@@ -15,7 +18,7 @@ const schema = {
     "@type": "ListItem",
     "position": index + 1,
     "name": item.label,
-    "item": new URL(item.url, Astro.site || 'https://nadhebe.pages.dev').toString()
+    "item": item.url.startsWith('http') ? item.url : new URL(item.url.replace(/^\//, ''), baseUrl).toString()
   })) : []
 };
 ---

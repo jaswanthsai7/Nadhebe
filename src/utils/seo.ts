@@ -38,10 +38,13 @@ export interface SeoMeta {
 
 /** Builds a complete, deduplicated set of SEO tags from frontmatter + site config. */
 export function buildSeo(input: SeoInput): SeoMeta {
-  const url = new URL(input.slug.replace(/^\//, ''), input.siteUrl).toString();
+  const cleanSiteUrl = input.siteUrl.trim();
+  const baseUrl = cleanSiteUrl.endsWith('/') ? cleanSiteUrl : `${cleanSiteUrl}/`;
+  const cleanPath = input.slug.replace(/^\//, '');
+  const url = new URL(cleanPath, baseUrl).toString();
   const image = input.image
-    ? new URL(input.image, input.siteUrl).toString()
-    : new URL('/og-default.png', input.siteUrl).toString(); // Using og-default.png to match workspace
+    ? (input.image.startsWith('http') ? input.image : new URL(input.image.replace(/^\//, ''), baseUrl).toString())
+    : new URL('og-default.png', baseUrl).toString();
 
   const title = input.title.length > 60 ? `${input.title.slice(0, 57)}...` : input.title;
   const description =

@@ -1,13 +1,17 @@
 ---
+import { SITE } from '@/config';
+
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
+
 const schema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": new URL('#organization', Astro.site || 'https://nadhebe.pages.dev').toString(),
+  "@id": `${SITE.url}#organization`,
   "name": "Nadhebe",
-  "url": Astro.site || 'https://nadhebe.pages.dev',
+  "url": SITE.url,
   "logo": {
     "@type": "ImageObject",
-    "url": new URL('/favicon.png', Astro.site || 'https://nadhebe.pages.dev').toString()
+    "url": new URL('favicon.png', baseUrl).toString()
   },
   "sameAs": [
     "https://twitter.com/nadhebe",

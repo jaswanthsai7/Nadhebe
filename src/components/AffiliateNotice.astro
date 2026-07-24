@@ -1,0 +1,14 @@
+---
+interface Props {
+  programName?: string;
+}
+
+const { programName } = Astro.props;
+---
+
+<aside class="my-6 rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-4 text-sm text-gray-700 dark:border-indigo-400/20 dark:bg-indigo-400/5 dark:text-gray-300">
+  <p class="flex items-center gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span><strong>Affiliate Disclosure:</strong> Nadhebe is reader-supported. {programName ? `Links to ${programName} on this page may earn us an affiliate commission at no extra cost to you.` : 'Some links on this page may be affiliate links. If you make a purchase through them, we may earn a commission.'}</span>
+  </p>
+</aside>

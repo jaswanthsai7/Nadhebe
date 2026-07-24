@@ -1,4 +1,6 @@
 ---
+import { SITE } from '@/config';
+
 interface Props {
   title: string;
   description: string;
@@ -23,9 +25,11 @@ const {
   canonicalUrl,
 } = Astro.props;
 
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
+
 const imageUrl = heroImage.startsWith('http') 
   ? heroImage 
-  : new URL(heroImage, Astro.site || 'https://nadhebe.pages.dev').toString();
+  : new URL(heroImage.replace(/^\//, ''), baseUrl).toString();
 
 const schema = {
   "@context": "https://schema.org",
@@ -43,14 +47,14 @@ const schema = {
     "@type": "Person",
     "name": authorName,
     "description": authorBio,
-    "image": authorAvatar ? (authorAvatar.startsWith('http') ? authorAvatar : new URL(authorAvatar, Astro.site || 'https://example.com').toString()) : undefined
+    "image": authorAvatar ? (authorAvatar.startsWith('http') ? authorAvatar : new URL(authorAvatar.replace(/^\//, ''), baseUrl).toString()) : undefined
   },
   "publisher": {
     "@type": "Organization",
     "name": "Nadhebe",
     "logo": {
       "@type": "ImageObject",
-      "url": new URL('/favicon.png', Astro.site || 'https://nadhebe.pages.dev').toString()
+      "url": new URL('favicon.png', baseUrl).toString()
     }
   }
 };
