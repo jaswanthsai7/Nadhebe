@@ -1,0 +1,50 @@
+---
+/**
+ * AdSlot.astro
+ * Environment-variable-gated AdSense unit.
+ *
+ * Renders nothing when PUBLIC_ADSENSE_CLIENT_ID is not set.
+ * Safe to place in any layout — fully inert until AdSense is approved.
+ *
+ * Props:
+ *   slotId      — AdSense ad unit slot ID (from AdSense dashboard)
+ *   format      — 'auto' (default) | 'rectangle' | 'horizontal'
+ *   label       — Screen-reader label for the ad region
+ */
+interface Props {
+  slotId?: string;
+  format?: 'auto' | 'rectangle' | 'horizontal';
+  label?: string;
+}
+
+const {
+  slotId = '',
+  format = 'auto',
+  label = 'Advertisement',
+} = Astro.props;
+
+const clientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+
+// Only render when env var is present AND a slotId is supplied
+const shouldRender = !!clientId && !!slotId;
+---
+
+{shouldRender && (
+  <aside
+    class="not-prose my-32"
+    aria-label={label}
+    data-ad-slot
+  >
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={clientId}
+      data-ad-slot={slotId}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    />
+    <script is:inline>
+      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}
+    </script>
+  </aside>
+)}

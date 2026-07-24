@@ -1,0 +1,100 @@
+---
+/**
+ * AffiliateCTA.astro
+ * Drop into any article via MDX or directly in an Astro page.
+ *
+ * Props:
+ *   toolName    — Display name of the tool (e.g. "Webflow")
+ *   affiliateUrl — Base URL (UTM params auto-appended)
+ *   pitch       — Short value-prop sentence (1 line)
+ *   buttonLabel — CTA button text (default: "Try <toolName>")
+ *   articleSlug — Used for utm_campaign; defaults to Astro.url.pathname
+ */
+interface Props {
+  toolName: string;
+  affiliateUrl: string;
+  pitch?: string;
+  buttonLabel?: string;
+  articleSlug?: string;
+}
+
+const {
+  toolName,
+  affiliateUrl,
+  pitch,
+  buttonLabel = `Try ${toolName}`,
+  articleSlug,
+} = Astro.props;
+
+// Build UTM-tagged URL. articleSlug falls back to current pathname.
+const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
+const utmUrl = (() => {
+  try {
+    const u = new URL(affiliateUrl);
+    u.searchParams.set('utm_source', 'nadhebe');
+    u.searchParams.set('utm_medium', 'affiliate');
+    u.searchParams.set('utm_campaign', slug);
+    return u.toString();
+  } catch {
+    // Fallback: simple string append when URL is malformed
+    const sep = affiliateUrl.includes('?') ? '&' : '?';
+    return `${affiliateUrl}${sep}utm_source=nadhebe&utm_medium=affiliate&utm_campaign=${encodeURIComponent(slug)}`;
+  }
+})();
+---
+
+<aside
+  class="not-prose my-32 rounded-12 border border-border bg-surface p-20 dark:border-border-dark dark:bg-surface-dark"
+  data-affiliate-cta
+  data-tool={toolName}
+  data-slug={slug}
+>
+  {pitch && (
+    <p class="mb-16 text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
+      {pitch}
+    </p>
+  )}
+
+  <div class="flex flex-col gap-12 sm:flex-row sm:items-center">
+    <a
+      href={utmUrl}
+      target="_blank"
+      rel="noopener noreferrer nofollow sponsored"
+      class="btn-primary"
+      id={`affiliate-cta-${slug}-${toolName.toLowerCase().replace(/\s+/g, '-')}`}
+      data-affiliate-link
+      data-tool={toolName}
+      data-slug={slug}
+    >
+      {buttonLabel}
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 shrink-0">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    </a>
+
+    {/* FTC-compliant disclosure inline with the button */}
+    <p class="text-xs font-sans text-muted dark:text-muted-dark">
+      ✦ <em>Affiliate link — Nadhebe may earn a commission at no extra cost to you.</em>
+    </p>
+  </div>
+</aside>
+
+{/* GA4 affiliate_click event — fires only if gtag is loaded by BaseLayout */}
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-affiliate-link]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var tool = el.getAttribute('data-tool');
+        var slug = el.getAttribute('data-slug');
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'affiliate_click', {
+            tool_name: tool,
+            article_slug: slug,
+          });
+        }
+      });
+    });
+  })();
+</script>

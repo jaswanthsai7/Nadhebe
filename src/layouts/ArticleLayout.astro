@@ -19,6 +19,7 @@ import AuthorCard from '@/components/AuthorCard.astro';
 import RelatedPosts from '@/components/RelatedPosts.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
 import VerdictGauge from '@/components/VerdictGauge.astro';
+import AdSlot from '@/components/AdSlot.astro';
 
 import { getReadingTime } from '../utils/readingTime';
 import { getRelatedArticles } from '../utils/relatedArticles';
@@ -298,6 +299,9 @@ const breadcrumbItems = [
           </article>
         </div>
 
+        <!-- Ad slot (inert unless PUBLIC_ADSENSE_CLIENT_ID is set) -->
+        <AdSlot slotId={import.meta.env.PUBLIC_ADSENSE_SLOT_ARTICLE || ''} format="auto" label="Article advertisement" />
+
         <!-- Supporting articles -->
         {post.data.isPillar && supportingArticles.length > 0 && (
           <div class="mt-64 border-t border-border dark:border-border-dark pt-32">
@@ -343,6 +347,10 @@ const breadcrumbItems = [
     <!-- Right sidebar -->
     <aside class="hidden xl:block w-sidebar shrink-0 sticky top-80 self-start">
       <TableOfContents headings={headings} />
+      <!-- Sidebar ad slot (inert unless PUBLIC_ADSENSE_CLIENT_ID is set) -->
+      <div class="mt-24">
+        <AdSlot slotId={import.meta.env.PUBLIC_ADSENSE_SLOT_SIDEBAR || ''} format="rectangle" label="Sidebar advertisement" />
+      </div>
     </aside>
 
   </div>
