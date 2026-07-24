@@ -48,6 +48,9 @@ Allocate tokens dynamically by utilizing the appropriate model tier. Rather than
 * Execute standard code generation tasks and database queries on **Terra** (GPT-5.5 capability at half cost).
 * Use **Soul** exclusively for high-level planning, validation checks, and safety audits.
 
+### 4. Self-Hosted Inference Engine Optimization
+If running open-weight models in-house instead of paying per-token commercial APIs, your engine architecture determines compute efficiency. Compare continuous batching engines in our [vLLM vs Ollama Inference Benchmark](/comparisons/vllm-vs-ollama-production-inference-benchmarks) and resolve memory bottlenecks using our [vLLM CUDA Out Of Memory Troubleshooting Guide](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide).
+
 ### Image Metadata
 * **Hero Image**:
   - **Prompt**: "High-end editorial visual featuring abstract light-cyan and white blocks balancing perfectly, soft lighting, minimal daylight"

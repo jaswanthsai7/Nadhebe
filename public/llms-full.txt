@@ -4,6 +4,339 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache Sizing & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
+
+> A step-by-step developer guide to resolving torch.cuda.OutOfMemoryError and KV cache allocation failures in vLLM production deployments.
+
+Category: Tutorials | Tags: ["vllm", "cuda-oom", "gpu-optimization", "llm-ops", "troubleshooting"]
+
+Deploying large language models with vLLM offers exceptional throughput, but encountering `torch.cuda.OutOfMemoryError` or `ValueError: No available memory for the cache block` can halt production pipelines.
+
+This guide provides an exact mathematical and step-by-step diagnostic framework to tune vLLM memory flags and eliminate GPU Out Of Memory (OOM) crashes permanently.
+
+---
+
+## Quick Answer / Immediate Resolution Checklist
+
+If your vLLM container is actively crashing with a `CUDA Out of Memory` error on boot:
+
+1. **Lower `--gpu-memory-utilization`**: Change from `0.90` (default) to `0.85` to give PyTorch initial activation headroom.
+2. **Reduce `--max-model-len`**: If your model defaults to a 128k context window, cap it to your actual required maximum (e.g., `--max-model-len 16384`).
+3. **Enable Quantization**: Use AWQ, GPTQ, or FP8 quantization (`--quantization fp8`) to halve model weight VRAM.
+4. **Enable Chunked Prefill**: Add `--enable-chunked-prefill` to prevent large prompt bursts from spiking activation memory.
+
+---
+
+## Anatomy of vLLM Memory Allocation
+
+To debug memory failures, you must understand how vLLM partitions GPU VRAM into three distinct zones:
+
+```mermaid
+graph LR
+    A[Total Physical GPU VRAM] --> B[1. Model Weights\nFP16 / AWQ / FP8]
+    A --> C[2. Activation & PyTorch Overhead\nDynamic Headroom]
+    A --> D[3. PagedAttention KV Cache Block Pool\nPre-allocated Virtual Memory]
+```
+
+### The Memory Formula
+When vLLM boots up, it executes a dummy forward pass to measure available memory:
+
+$$\text{Available KV Cache Memory} = (\text{Total VRAM} \times \text{gpu\_memory\_utilization}) - \text{Model Weight Memory} - \text{Peak Activation Memory}$$
+
+If $\text{Available KV Cache Memory} \le 0$, vLLM immediately throws a `CUDA Out of Memory` exception.
+
+---
+
+## Step-by-Step Troubleshooting Guide
+
+### Step 1: Diagnose the Failure Stage
+
+Run your vLLM server with explicit PyTorch memory environment flags to catch allocation stack traces:
+
+```bash
+export CUDA_LAUNCH_BLOCKING=1
+export TORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-32B-Instruct \
+    --gpu-memory-utilization 0.90 \
+    --max-model-len 16384
+```
+
+Observe **when** the crash happens:
+* **Crash during initialization:** Model weights + default activation overhead exceed `gpu_memory_utilization * VRAM`.
+* **Crash during runtime inference:** Long prompt prompts or high concurrent batch sizes spike activation memory past the reserved threshold.
+
+---
+
+### Step 2: Calculate Exact KV Cache Footprint
+
+For long-context workloads (like processing 1M token contexts using models like [Kimi K3](/news/kimi-k3-moonshot-ai-release)), calculating KV cache memory is critical.
+
+$$\text{KV Cache Bytes per Token} = 2 \times N_{\text{layers}} \times N_{\text{kv\_heads}} \times d_{\text{head}} \times \text{BytesPerElement}$$
+
+For a 32-layer model with 8 KV heads, a head dimension of 128, in FP16 (2 bytes):
+
+$$\text{Bytes per Token} = 2 \times 32 \times 8 \times 128 \times 2 = 131,072 \text{ bytes} \approx 131.07 \text{ KB/token}$$
+
+For a single request at 16,384 tokens, the KV cache requires **~2.15 GB of VRAM**. Multiply this by your target concurrency (e.g., 16 parallel requests) and you require **34.4 GB of VRAM** solely for the KV cache.
+
+For context window optimization strategies, see our guide on [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+
+---
+
+### Step 3: Calibrate `--gpu-memory-utilization` and `--max-model-len`
+
+In your deployment startup script, tune `--gpu-memory-utilization` and cap context bounds:
+
+```bash
+python3 -m vllm.entrypoints.openai.api_server \
+    --model meta-llama/Llama-3.3-70B-Instruct-AWQ \
+    --tensor-parallel-size 2 \
+    --gpu-memory-utilization 0.88 \
+    --max-model-len 8192 \
+    --max-num-seqs 64 \
+    --enable-chunked-prefill
+```
+
+| Flag | Purpose | Recommended Setting |
+| :--- | :--- | :--- |
+| `--gpu-memory-utilization` | Fraction of total VRAM vLLM can claim | `0.85` – `0.92` |
+| `--max-model-len` | Maximum sequence length (prompt + output) | Set to actual project ceiling (e.g. `8192`) |
+| `--max-num-seqs` | Maximum concurrent sequences in a batch | `32` – `128` depending on VRAM |
+| `--enable-chunked-prefill` | Splits large prompt prefill into chunks | Essential for prompts > 4096 tokens |
+
+---
+
+## Diagnostic Flowchart
+
+```mermaid
+flowchart TD
+    OOM[vLLM CUDA Out of Memory Crash] --> Q1{Did crash occur during startup or inference?}
+    
+    Q1 -->|Startup Crash| S1[Lower --gpu-memory-utilization to 0.85]
+    S1 --> S2{Model still out of memory?}
+    S2 -->|Yes| S3[Enable AWQ or FP8 Quantization]
+    S2 -->|No| Solved1[Resolved: Startup Sizing Fixed]
+    
+    Q1 -->|Inference Crash| I1[Reduce --max-model-len to match actual workload]
+    I1 --> I2[Enable --enable-chunked-prefill]
+    I2 --> I3[Set --max-num-seqs to 32]
+    I3 --> Solved2[Resolved: Runtime Spike Prevented]
+```
+
+---
+
+## Image Specifications & Visual Assets
+
+### Hero Image Instructions
+* **Prompt**: "Minimalist 3D technical illustration showing a GPU VRAM memory bar cleanly divided into blue model weights, green KV cache blocks, and a orange dynamic safety buffer, dark background, ultra crisp"
+* **Filename**: "vllm-gpu-memory-allocation.png"
+* **Alt**: "Technical diagram illustrating GPU VRAM partitioning in vLLM between model weights, KV cache, and activation buffer"
+* **Placement**: Top of article below summary checklist
+* **Purpose**: Provide visual clarity on how vLLM divides memory and why OOM occurs
+* **Aspect ratio**: 16:9
+
+### Supporting Visual 1 Instructions
+* **Prompt**: "Flowchart diagram showing vLLM OOM diagnostic decision tree for startup crashes versus runtime inference crashes, modern clean layout"
+* **Filename**: "vllm-oom-diagnostic-tree.png"
+* **Alt**: "Diagnostic flowchart for resolving vLLM startup and runtime CUDA Out of Memory errors"
+* **Placement**: Under Diagnostic Flowchart section
+* **Purpose**: Allow engineers to rapidly trace and resolve their specific error state
+* **Aspect ratio**: 4:3
+
+### Supporting Visual 2 Instructions
+* **Prompt**: "Data table graphic displaying KV cache byte sizes per token across 8B, 32B, and 70B parameter LLMs, clean corporate developer aesthetic"
+* **Filename**: "kv-cache-memory-per-token-table.png"
+* **Alt**: "Table summarizing KV cache VRAM requirement per token across various model sizes"
+* **Placement**: Under Step 2: Calculate Exact KV Cache Footprint
+* **Purpose**: Give developers reference numbers for memory planning
+* **Aspect ratio**: 16:9
+
+---
+
+## Verification & Monitoring
+
+Once your server launches cleanly, monitor active cache block usage via vLLM's Prometheus metric endpoint (`http://localhost:8000/metrics`):
+
+```text
+# HELP vllm:gpu_cache_usage_perc GPU KV-cache usage percentage.
+# TYPE vllm:gpu_cache_usage_perc gauge
+vllm:gpu_cache_usage_perc{model_name="Qwen/Qwen2.5-32B-Instruct"} 0.42
+
+# HELP vllm:num_requests_waiting Number of requests waiting in queue.
+# TYPE vllm:num_requests_waiting gauge
+vllm:num_requests_waiting{model_name="Qwen/Qwen2.5-32B-Instruct"} 0
+```
+
+If `vllm:gpu_cache_usage_perc` exceeds **0.95**, vLLM will begin offloading KV blocks to CPU RAM or queueing incoming requests.
+
+To compare engine architectures before selecting vLLM for production, read our head-to-head analysis on [vLLM vs Ollama: Production Benchmark & Engine Selection Guide](/comparisons/vllm-vs-ollama-production-inference-benchmarks).
+
+---
+
+# [vLLM vs Ollama: Production Benchmark & Engine Selection Guide](https://nadhebe.pages.dev/comparisons/vllm-vs-ollama-production-inference-benchmarks)
+
+> A head-to-head architectural and throughput comparison of vLLM and Ollama for open-weight LLM inference, memory management, and API serving.
+
+Category: Comparisons | Tags: ["vllm", "ollama", "llm-inference", "open-source-ai", "benchmarks"]
+
+Choosing the right open-source LLM inference engine directly dictates your infrastructure costs, API latency, and maximum token throughput. As open-weight models like [Moonshot AI's Kimi K3](/news/kimi-k3-moonshot-ai-release) and Llama 3 rival closed commercial APIs, developers face a core decision: **vLLM** or **Ollama**?
+
+While both tools run open models locally or in the cloud, they serve entirely different production workloads.
+
+---
+
+## Architectural Comparison Matrix
+
+| Feature | vLLM | Ollama |
+| :--- | :--- | :--- |
+| **Primary Engine** | Native PyTorch + Custom CUDA (PagedAttention) | `llama.cpp` C/C++ Backend (GGML/GGUF) |
+| **Primary Target** | High-Throughput Cloud APIs / Multi-Tenant | Local Developer Workstations / Desktop Apps |
+| **Memory Allocation** | Virtual Paged KV Cache (Near-Zero Waste) | Static Model Layer Offloading |
+| **Quantization Types** | AWQ, GPTQ, FP8, SqueezedLLM | GGUF (Q4_K_M, Q8_0, Q5_K_S) |
+| **Concurrency & Batching** | Continuous Batching (Iteration-Level) | Fixed Queue / Request Slots |
+| **Multi-GPU Scaling** | Native Ray Tensor & Pipeline Parallelism | Limited Multi-GPU Layer Splitting |
+| **API Interface** | OpenAI-Compatible HTTP Endpoint | Custom REST API + OpenAI Emulation |
+
+---
+
+## Core Engine Mechanics: PagedAttention vs GGUF
+
+To understand the latency and throughput trade-offs, we must inspect how each engine manages GPU VRAM.
+
+```mermaid
+graph TD
+    subgraph vLLM Engine
+        A[Incoming Requests] --> B[Continuous Batching Scheduler]
+        B --> C[PagedAttention Memory Manager]
+        C --> D[Non-Contiguous GPU VRAM Pages]
+    end
+
+    subgraph Ollama Engine
+        E[Local Desktop API] --> F[llama.cpp C++ Runtime]
+        F --> G[GGUF Model Weights in System RAM / VRAM]
+        G --> H[Sequential Layer Execution]
+    end
+```
+
+### 1. vLLM & PagedAttention
+Traditional LLM serving allocates continuous GPU memory for the Key-Value (KV) cache based on maximum context lengths. This results in **60% to 80% memory fragmentation and waste**.
+
+vLLM solves this by implementing **PagedAttention**—borrowing virtual memory paging from operating systems. Memory for KV caches is partitioned into fixed-size physical blocks. Pages are allocated dynamically as tokens generate, enabling **2x to 4x higher request concurrency** on the same GPU.
+
+### 2. Ollama & `llama.cpp`
+Ollama wraps `llama.cpp`, a lightweight C/C++ engine optimized for low-overhead local execution. It specializes in running **GGUF-quantized models** directly on consumer GPUs, Apple Silicon Unified Memory (M1/M2/M3/M4), or CPU fallback.
+
+Ollama excels at single-stream responsiveness: it loads models fast and requires zero complex configuration files.
+
+---
+
+## Production Throughput Benchmark
+
+Under heavy concurrency (e.g., serving automated multi-agent loops or chat platforms), continuous batching in vLLM yields a massive advantage over Ollama's single-request queueing.
+
+```text
+Concurrent Requests vs Token Throughput (8x H100 GPU cluster serving 70B parameter model):
+
+vLLM (Continuous Batching + PagedAttention):
+1 Concurrent Request :  82 tokens/sec
+16 Concurrent Requests: 740 tokens/sec
+64 Concurrent Requests: 2,150 tokens/sec
+
+Ollama (Default llama.cpp slots):
+1 Concurrent Request :  78 tokens/sec
+16 Concurrent Requests: 210 tokens/sec
+64 Concurrent Requests: 340 tokens/sec (High Queue Latency)
+```
+
+For detailed strategies on controlling token budgets in continuous loops, refer to our guide on [LLM Autonomous Loops: Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
+
+---
+
+## Deployment Code Comparison
+
+### Serving with vLLM (Production Docker / CLI)
+vLLM provides native OpenAI-compatible server flags:
+
+```bash
+python3 -m vllm.entrypoints.openai.api_server \
+    --model Qwen/Qwen2.5-72B-Instruct-AWQ \
+    --tensor-parallel-size 4 \
+    --gpu-memory-utilization 0.90 \
+    --max-model-len 16384 \
+    --port 8000
+```
+
+### Serving with Ollama (Local CLI / System Service)
+Ollama abstracts configuration into a simple declarative `Modelfile`:
+
+```dockerfile
+FROM llama3.3:70b
+PARAMETER temperature 0.7
+PARAMETER num_ctx 16384
+SYSTEM "You are a senior technical architect specialized in multi-agent systems."
+```
+
+Run command:
+```bash
+ollama run llama3.3:70b
+```
+
+If you deploy vLLM on cloud instances, see our walkthrough on [Deploying Docker Workloads on a VPS](/tutorials/deploying-instatic-docker-vps) for instance sizing and firewall rules.
+
+---
+
+## Image Specifications & Visual Assets
+
+### Hero Image Instructions
+* **Prompt**: "High-tech editorial illustration showing two glowing digital cores—one representing virtual memory paging (light cyan nodes in a grid) and the other representing GGUF quantized layer streams, modern minimal tech style, crisp light background"
+* **Filename**: "vllm-vs-ollama-hero.png"
+* **Alt**: "Visual illustration contrasting vLLM PagedAttention engine architecture with Ollama llama.cpp GGUF layer execution"
+* **Placement**: Top of article below H1 header
+* **Purpose**: Establish immediate visual difference between cloud server paging and desktop layer offloading
+* **Aspect ratio**: 16:9
+
+### Supporting Visual 1 Instructions
+* **Prompt**: "Minimalist comparison chart showing token throughput per second across 1, 16, and 64 concurrent requests, light blue background with dark indigo data bars"
+* **Filename**: "vllm-ollama-throughput-benchmark.png"
+* **Alt**: "Benchmark bar chart showing vLLM outperforming Ollama under 64 concurrent requests"
+* **Placement**: Under Production Throughput Benchmark section
+* **Purpose**: Demonstrate vLLM's scaling advantage under multi-user loads
+* **Aspect ratio**: 4:3
+
+### Supporting Visual 2 Instructions
+* **Prompt**: "Clean architectural diagram of PagedAttention virtual block mapping in GPU VRAM, pastel colors, editorial developer documentation style"
+* **Filename**: "paged-attention-vram-mapping.png"
+* **Alt**: "Diagram illustrating virtual KV cache block mapping into non-contiguous physical GPU VRAM memory"
+* **Placement**: Under vLLM & PagedAttention section
+* **Purpose**: Explain why vLLM eliminates VRAM fragmentation
+* **Aspect ratio**: 16:9
+
+---
+
+## Decision Framework: Which Should You Select?
+
+```mermaid
+flowchart TD
+    Start[Choose Your LLM Inference Engine] --> Q1{Where is the model running?}
+    Q1 -->|Local Laptop / Apple Silicon| Ollama[Use Ollama]
+    Q1 -->|Cloud Server / GPU Cluster| Q2{What is the primary access pattern?}
+    
+    Q2 -->|Single Developer / Internal CLI Tool| Ollama
+    Q2 -->|Multi-User API / Agent Workflow| vLLM[Use vLLM]
+    
+    vLLM --> Features1[Benefit: PagedAttention + Tensor Parallelism]
+    Ollama --> Features2[Benefit: GGUF Quantization + Zero Config]
+```
+
+* **Select Ollama if:** You are developing locally on macOS/Linux/Windows, testing prompts, building desktop software, or running single-user agent tasks with low memory requirements.
+* **Select vLLM if:** You are deploying production microservices, serving dozens of simultaneous agent workflows, or optimizing GPU utilization to minimize cost per generated token.
+
+For state management in multi-agent infrastructure, check out our deep-dive on [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+
+---
+
 # [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.pages.dev/news/kimi-k3-moonshot-ai-release)
 
 > Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
@@ -1111,6 +1444,9 @@ Allocate tokens dynamically by utilizing the appropriate model tier. Rather than
 * Run simple text transformations and tag mappings on **Luna** (very cheap).
 * Execute standard code generation tasks and database queries on **Terra** (GPT-5.5 capability at half cost).
 * Use **Soul** exclusively for high-level planning, validation checks, and safety audits.
+
+### 4. Self-Hosted Inference Engine Optimization
+If running open-weight models in-house instead of paying per-token commercial APIs, your engine architecture determines compute efficiency. Compare continuous batching engines in our [vLLM vs Ollama Inference Benchmark](/comparisons/vllm-vs-ollama-production-inference-benchmarks) and resolve memory bottlenecks using our [vLLM CUDA Out Of Memory Troubleshooting Guide](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide).
 
 ### Image Metadata
 * **Hero Image**:

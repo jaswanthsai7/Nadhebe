@@ -1,5 +1,25 @@
 [
   {
+    "title": "Fixing vLLM Out Of Memory (OOM) Errors: KV Cache Sizing & Memory Tuning",
+    "description": "A step-by-step developer guide to resolving torch.cuda.OutOfMemoryError and KV cache allocation failures in vLLM production deployments.",
+    "url": "https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"vllm\", \"cuda-oom\", \"gpu-optimization\", \"llm-ops\", \"troubleshooting\"]"
+    ],
+    "pubDate": "2026-07-24T00:00:00.000Z"
+  },
+  {
+    "title": "vLLM vs Ollama: Production Benchmark & Engine Selection Guide",
+    "description": "A head-to-head architectural and throughput comparison of vLLM and Ollama for open-weight LLM inference, memory management, and API serving.",
+    "url": "https://nadhebe.pages.dev/comparisons/vllm-vs-ollama-production-inference-benchmarks",
+    "category": "Comparisons",
+    "tags": [
+      "[\"vllm\", \"ollama\", \"llm-inference\", \"open-source-ai\", \"benchmarks\"]"
+    ],
+    "pubDate": "2026-07-24T00:00:00.000Z"
+  },
+  {
     "title": "Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer",
     "description": "Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.",
     "url": "https://nadhebe.pages.dev/news/kimi-k3-moonshot-ai-release",
