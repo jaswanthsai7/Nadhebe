@@ -6,6 +6,7 @@
   Permissions-Policy: geolocation=(), camera=(), microphone=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Vary: Accept
+  Content-Signal: search=yes,ai-train=no,use=reference
   Link: </llms.txt>; rel="describedby"; type="text/markdown", </llms-full.txt>; rel="describedby"; type="text/markdown", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </.well-known/api-catalog>; rel="api-catalog", </auth.md>; rel="service-doc"; type="text/markdown", </.well-known/oauth-protected-resource>; rel="oauth-protected-resource"
 
 /.well-known/oauth-protected-resource
