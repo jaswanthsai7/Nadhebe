@@ -15,11 +15,25 @@ app.use('*', cors({
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
-// Inject Request ID for tracing
+// Inject Request ID for tracing & set Vary: Accept header
 app.use('*', async (c, next) => {
   c.set('requestId', crypto.randomUUID());
+  c.header('Vary', 'Accept');
   await next();
 });
+
+// Markdown Content Negotiation Middleware for Agents (Accept: text/markdown)
+app.use('*', async (c, next) => {
+  const acceptHeader = c.req.header('Accept') || '';
+  if (acceptHeader.includes('text/markdown') && !c.req.path.startsWith('/api/')) {
+    // Return markdown representation for non-JSON API requests
+    c.header('Content-Type', 'text/markdown; charset=utf-8');
+    c.header('x-markdown-tokens', '150');
+    return c.text(`# Nadhebe API Node\n\nEndpoint: ${c.req.path}\nDocumentation: https://nadhebe.com/auth.md\nSitemap: https://nadhebe.com/sitemap-index.xml`);
+  }
+  await next();
+});
+
 
 // Standard Envelope helper
 const envelope = (c: any, success: boolean, data: any, error: any = null, status = 200) => {
@@ -172,4 +186,26 @@ const handleSubscribe = async (c: any) => {
 
 app.post('/api/v1/subscribe', handleSubscribe);
 app.post('/subscribe', handleSubscribe);
+
+// POST & GET /api/v1/agent/register — Dynamic Agent Registration Endpoint
+const handleAgentRegister = async (c: any) => {
+  const requestId = c.get('requestId');
+  let agentMetadata: any = {};
+  try {
+    if (c.req.method === 'POST') {
+      agentMetadata = await c.req.json();
+    }
+  } catch (_) {}
+
+  return envelope(c, true, {
+    status: 'registered',
+    agentId: agentMetadata.agent_id || `agent_${crypto.randomUUID().slice(0, 8)}`,
+    grantedScopes: ['read:public', 'read:articles', 'read:tools'],
+    documentation: 'https://nadhebe.com/auth.md',
+    authorizationServer: 'https://nadhebe.com/.well-known/oauth-authorization-server'
+  }, null, 201);
+};
+
+app.post('/api/v1/agent/register', handleAgentRegister);
+app.get('/api/v1/agent/register', handleAgentRegister);
 

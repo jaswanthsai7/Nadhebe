@@ -6,7 +6,7 @@
 
 ### Tutorials
 
-- [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache Sizing & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide): A step-by-step developer guide to resolving torch.cuda.OutOfMemoryError and KV cache allocation failures in vLLM production deployments.
+- [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide): A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
 - [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial): A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
 - [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow): A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
 - [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
@@ -15,7 +15,7 @@
 
 ### Comparisons
 
-- [vLLM vs Ollama: Production Benchmark & Engine Selection Guide](https://nadhebe.pages.dev/comparisons/vllm-vs-ollama-production-inference-benchmarks): A head-to-head architectural and throughput comparison of vLLM and Ollama for open-weight LLM inference, memory management, and API serving.
+- [vLLM vs Ollama: Architectural & Memory Management Comparison](https://nadhebe.pages.dev/comparisons/vllm-vs-ollama-architectural-comparison): An evidence-based architectural comparison of vLLM and Ollama for serving open-weight LLMs, memory management, and API concurrency.
 - [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul): An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.
 - [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.pages.dev/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks): A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
 - [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.

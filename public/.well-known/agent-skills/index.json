@@ -2,11 +2,28 @@
   "$schema": "https://agentskills.io/schema/v0.2.0/skills.json",
   "skills": [
     {
-      "name": "search",
-      "type": "query",
-      "description": "Searches all articles, system prompts, comparisons, and tool reviews on the platform.",
-      "url": "https://example.com/search",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "name": "dns-aid",
+      "type": "discovery",
+      "description": "DNS for AI Discovery (DNS-AID) SVCB/HTTPS record discovery skill.",
+      "url": "https://nadhebe.com/.well-known/agent-skills/dns-aid/SKILL.md"
+    },
+    {
+      "name": "markdown-negotiation",
+      "type": "content-negotiation",
+      "description": "Accept header HTTP content negotiation for markdown responses.",
+      "url": "https://nadhebe.com/.well-known/agent-skills/markdown-negotiation/SKILL.md"
+    },
+    {
+      "name": "auth-md",
+      "type": "authentication",
+      "description": "Agent registration and auth.md metadata protocol.",
+      "url": "https://nadhebe.com/.well-known/agent-skills/auth-md/SKILL.md"
+    },
+    {
+      "name": "link-headers",
+      "type": "discovery",
+      "description": "RFC 8288 Link header discovery for agent resources.",
+      "url": "https://nadhebe.com/.well-known/agent-skills/link-headers/SKILL.md"
     }
   ]
 }

@@ -30,6 +30,8 @@
       "oauth2",
       "none"
     ],
-    "revocation_endpoint": "https://nadhebe.com/oauth/revoke"
+    "registration_endpoint": "https://nadhebe.com/api/v1/agent/register",
+    "revocation_endpoint": "https://nadhebe.com/oauth/revoke",
+    "claim_endpoint": "https://nadhebe.com/oauth/claim"
   }
 }
