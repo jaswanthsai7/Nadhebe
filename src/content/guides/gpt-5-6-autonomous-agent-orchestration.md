@@ -77,3 +77,9 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
   - **Prompt**: "A visual workflow diagram represented as pastel cards floating in space, soft blur shadows"
   - **Filename**: "gpt-5-6-workflow.jpg"
   - **Alt**: "Visual workflow cards"
+
+
+## Agent Design & Database Patterns
+
+* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Prevent runaway execution loops with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

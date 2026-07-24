@@ -41,7 +41,10 @@ export function buildSeo(input: SeoInput): SeoMeta {
   const cleanSiteUrl = input.siteUrl.trim();
   const baseUrl = cleanSiteUrl.endsWith('/') ? cleanSiteUrl : `${cleanSiteUrl}/`;
   const cleanPath = input.slug.replace(/^\//, '');
-  const url = new URL(cleanPath, baseUrl).toString();
+  const pathWithSlash = cleanPath && !cleanPath.endsWith('/') && !/\.[a-z0-9]+$/i.test(cleanPath)
+    ? `${cleanPath}/`
+    : cleanPath;
+  const url = new URL(pathWithSlash, baseUrl).toString();
   const image = input.image
     ? (input.image.startsWith('http') ? input.image : new URL(input.image.replace(/^\//, ''), baseUrl).toString())
     : new URL('og-default.png', baseUrl).toString();
@@ -54,7 +57,7 @@ export function buildSeo(input: SeoInput): SeoMeta {
     title: `${title} · ${input.siteName}`,
     description,
     canonical: url,
-    robots: input.noindex ? 'noindex, nofollow' : 'index, follow',
+    robots: input.noindex ? 'noindex, follow' : 'index, follow',
     keywords: (input.keywords ?? []).join(', '),
     ogTitle: title,
     ogDescription: description,

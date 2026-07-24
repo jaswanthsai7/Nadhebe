@@ -144,3 +144,9 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
   - **Placement**: Under 'Step 2: Ingest the Output' section
   - **Purpose**: Workspace GUI demonstration
   - **Aspect ratio**: 4:3
+
+
+## Kimi K3 Developer Resources
+
+* Master large prompt context structures with [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/use-cases/kimi-k3-game-development-use-cases).

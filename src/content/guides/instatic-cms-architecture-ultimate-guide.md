@@ -105,3 +105,9 @@ Watch the complete design system configuration and database architecture setup i
 - **All-in-One Runtime**: Instatic bundles the page builder, CMS, and static site publisher into a single Bun server.
 - **Flexible Databases**: Choose betweenSQLite for simplicity or PostgreSQL for scaling collaborative projects.
 - **Optimized Exports**: Static compiler outputs clean semantic HTML and utility CSS without runtime framework bloat.
+
+
+## Integration & Scaling Resources
+
+* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/frameworks/instatic-astro-islands-frameworks-integration).
+* Structure your CSS system cleanly with [Best Practices for Scaling Design Tokens in Instatic CMS](/best-practices/instatic-design-tokens-scaling).

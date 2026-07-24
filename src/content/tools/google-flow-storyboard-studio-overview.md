@@ -50,3 +50,9 @@ Although the tool speeds up scene creation, character drift remains a challenge.
   - **Prompt**: "Close-up of a modern silver digital pen resting on a crisp white table with natural side lighting"
   - **Filename**: "digital-pen-workstation.jpg"
   - **Alt**: "Digital drawing setup detail"
+
+
+## Pre-Production Tutorials & Guides
+
+* Walk through step-by-step panel creation in [Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Read producer workflows in [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).

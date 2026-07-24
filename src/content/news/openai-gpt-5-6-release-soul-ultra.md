@@ -53,3 +53,9 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
   - **Prompt**: "Overhead shot of a high-end designer keyboard and glass trackpad, modern workspace, soft lighting"
   - **Filename**: "gpt-5-6-hardware.jpg"
   - **Alt**: "Designer workstation accessories"
+
+
+## Autonomous Agent Resources
+
+* Learn how to structure agent execution loops in our guide on [GPT-5.6 Autonomous Agent Orchestration](/guides/gpt-5-6-autonomous-agent-orchestration).
+* Prevent bill shock during continuous execution with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

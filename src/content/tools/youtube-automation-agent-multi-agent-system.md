@@ -47,3 +47,9 @@ This guide examines the core features of the **YouTube Automation Agent** and ho
   - **Prompt**: "Overhead shot of a sleek modern laptop resting open on a light wood desk, soft background blur"
   - **Filename**: "wooden-desk-laptop.jpg"
   - **Alt**: "Workstation wood desk mockup"
+
+
+## System Setup & Database Patterns
+
+* Follow the step-by-step setup tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
+* Learn about SQLite state coordination in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).

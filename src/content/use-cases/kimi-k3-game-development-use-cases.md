@@ -94,3 +94,9 @@ This accelerates the transition from early concepts to actual clickable layouts,
   - **Placement**: Under '3D Printable Physical Asset Specifications' section
   - **Purpose**: Depict hardware feasibility
   - **Aspect ratio**: 4:3
+
+
+## Kimi K3 Developer Resources
+
+* Learn 3D model generation steps in [Generating Support-Free 3D Models with Kimi K3](/tutorials/kimi-k3-3d-modeling-tutorial).
+* Master 1M context windows in [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).

@@ -1,6 +1,6 @@
 ---
-name: Bob Smith
-bio: Tech Journalist and AI Enthusiast. Bob covers the latest breakthroughs and reviews productivity tools.
-avatar: /images/avatars/bob.png
+name: Nadhebe Editorial Team
+bio: Technical research and documentation published by the Nadhebe editorial team.
+avatar: /logo.png
 ---
-Bob is a freelance writer covering artificial intelligence developments and productivity software.
+Articles, documentation, and technical comparisons curated and verified by the Nadhebe Editorial Team.

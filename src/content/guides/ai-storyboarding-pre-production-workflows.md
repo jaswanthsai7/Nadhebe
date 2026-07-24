@@ -64,3 +64,9 @@ A major challenge for creative directors using generative tools is avoiding char
   - **Prompt**: "Minimalist office corner with natural green plant leaves casting soft shadows on a white wall"
   - **Filename**: "office-shadows.jpg"
   - **Alt**: "Minimal office shadows detail"
+
+
+## Step-by-Step Storyboard Guides
+
+* Learn the exact panel creation steps in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tools/google-flow-storyboard-studio-overview).

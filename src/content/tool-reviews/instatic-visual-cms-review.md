@@ -80,3 +80,9 @@ Watch the complete design canvas interface review and feature walkthrough below:
 - **Self-Hosted Value**: Run unlimited projects on a single cloud VPS instance.
 - **Client Security**: Lock page structures to prevent editors from accidentally breaking layouts.
 - **Alpha Warnings**: Since Instatic is currently in **early alpha status**, it should be evaluated in staging environments before transitioning mission-critical websites.
+
+
+## Instatic Case Studies & Benchmarks
+
+* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Compare visual engine specs in [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).

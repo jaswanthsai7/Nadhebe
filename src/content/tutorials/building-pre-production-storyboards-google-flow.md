@@ -63,3 +63,9 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
   - **Prompt**: "Close-up of a designer glass cup and white notepad on a modern clean table with soft shadows"
   - **Filename**: "notepad-detail.jpg"
   - **Alt**: "Designer notepad detail"
+
+
+## Related Production Guides
+
+* For an overview of pre-production workflow optimization, explore [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
+* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).

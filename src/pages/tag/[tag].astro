@@ -40,6 +40,7 @@ const { tagName, posts } = Astro.props;
 <BaseLayout
   title={`Articles on ${tagName}`}
   description={`Browse technical articles, tools comparisons, reviews and prompts for ${tagName}.`}
+  noindex={true}
 >
   <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64">
     <div class="border-b border-border dark:border-border-dark pb-16 mb-24">

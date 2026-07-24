@@ -67,3 +67,9 @@ While highly capable, maintaining perfect character consistency across many shot
   - **Prompt**: "Close-up of a high-end designer tablet displaying stylized sketch concepts in a bright room"
   - **Filename**: "sketch-tablet.jpg"
   - **Alt**: "Creative sketch tablet workstation"
+
+
+## Storyboard Studio Resources
+
+* Follow the complete hands-on guide in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Explore tool features in [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).

@@ -65,3 +65,9 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
   - **Prompt**: "Close-up of a high-end metal mechanical pencil and sketchpad resting on a sleek white workspace desk"
   - **Filename**: "workspace-sketchpad.jpg"
   - **Alt**: "Drawing workstation mockup"
+
+
+## Frontier LLM Benchmark Comparisons
+
+* Compare Claude Fable 5 against OpenAI flagships in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Compare open weights vs proprietary models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).

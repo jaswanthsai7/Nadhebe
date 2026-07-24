@@ -70,3 +70,9 @@ Unlike message-passing multi-agent architectures that can break during individua
   - **Prompt**: "Close-up of a designer metal cup holding white colored pencils next to a modern keyboard"
   - **Filename**: "keyboard-pencil-desk.jpg"
   - **Alt**: "Tech workstation accessories close-up"
+
+
+## YouTube Agent Installation & Features
+
+* Follow the repository installation tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
+* Review multi-agent architecture details in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).

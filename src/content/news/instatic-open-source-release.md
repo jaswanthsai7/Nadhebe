@@ -82,3 +82,9 @@ Watch the release walkthrough detailing the editor features:
 - **Modern Performance**: Bun runtime ensures editor interactions are lightweight and responsive.
 - **Database Flexibility**: Support for SQLite and PostgreSQL database structures.
 - **Pure Semantic Output**: Eliminates proprietary CSS frameworks and JS runtime dependencies to ship native HTML structure.
+
+
+## Related Guides & Comparisons
+
+* Compare visual builder architectures in our deep dive [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).
+* Follow the step-by-step developer tutorial on [How to Install and Set Up Instatic CMS Locally](/tutorials/installing-instatic-cms-locally).

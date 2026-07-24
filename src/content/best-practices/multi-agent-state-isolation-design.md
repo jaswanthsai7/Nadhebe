@@ -52,3 +52,9 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
   - **Prompt**: "Close-up of a designer metal rule and mechanical drawing pencil on a clean white desk, soft side shadow"
   - **Filename**: "ruler-pencil-desk.jpg"
   - **Alt**: "Workspace layout sketch detail"
+
+
+## Multi-Agent Architecture Resources
+
+* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Manage autonomous execution costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

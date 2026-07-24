@@ -67,3 +67,9 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
   - **Prompt**: "Close-up of a designer notebook and sleek silver pen sitting on a white desk with warm morning sun rays"
   - **Filename**: "designer-desk-detail.jpg"
   - **Alt**: "Workspace notebook mockup"
+
+
+## Model Benchmarks & Reviews
+
+* Read detailed benchmark metrics in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Read our complete review of Anthropic's model in [Claude Fable 5 AI Model Review](/reviews/fable-5-ai-model-review).

@@ -63,3 +63,9 @@ import InteractiveWidget from '../components/InteractiveWidget.jsx';
 - **Best-in-class DX**: Combines visual layouts and custom frontend frameworks seamlessly.
 - **Zero Hydration Bloat**: Astro islands ensure standard sections remain raw HTML, enhancing SEO.
 - **Alpha Warnings**: Because Instatic is in an **early alpha stage**, ensure that all custom component slots are checked for layout shifting (CLS) during viewport resizing.
+
+
+## Instatic CMS System Guides
+
+* Understand the Bun compiler and database architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
+* Learn how agencies handle client hand-offs in [Enterprise Editorial Governance with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).

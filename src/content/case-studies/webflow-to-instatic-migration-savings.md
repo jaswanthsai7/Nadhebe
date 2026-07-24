@@ -85,3 +85,9 @@ Watch the visual layout importer convert pages during the migration process:
 - **Performance Gains**: Serving static semantic HTML from edge networks increases mobile page speeds.
 - **Client Satisfaction**: Intuitive editorial dashboards let clients update text copy without layout risks.
 - **Alpha Warnings**: Instatic is currently in an **early alpha stage**. The agency verified each layout variation locally on a SQLite database instance before transferring files to active VPS container mounts.
+
+
+## Self-Hosted CMS Deployment Guides
+
+* Deploy self-hosted instances using Docker in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
+* Set up team permissions and client locks in [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).

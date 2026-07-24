@@ -13,10 +13,11 @@ interface Props {
   description?: string;
   heroImage?: string;
   canonicalUrl?: string;
+  noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
 }
 
-const { seo: propSeo, title, description, heroImage, canonicalUrl, jsonLd = [] } = Astro.props;
+const { seo: propSeo, title, description, heroImage, canonicalUrl, noindex, jsonLd = [] } = Astro.props;
 
 const seo = propSeo || buildSeo({
   title: title || SITE.name,
@@ -25,6 +26,7 @@ const seo = propSeo || buildSeo({
   siteUrl: SITE.url,
   siteName: SITE.name,
   image: heroImage,
+  noindex,
 });
 
 if (canonicalUrl) {

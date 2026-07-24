@@ -84,3 +84,9 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 - **Tokens Over Static Styling**: Defining custom variables simplifies scaling site updates.
 - **Selector Cleanliness**: Use the Selector Manager regularly to delete unused classes.
 - **Alpha Warnings**: Instatic is currently in **early alpha status**, so always run layout updates on a local SQLite instance before deploying changes to active production sites.
+
+
+## Instatic CMS Architecture Guides
+
+* Review the underlying Bun and compiler architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
+* Compare visual builders in [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](/comparisons/instatic-vs-webflow-vs-framer).

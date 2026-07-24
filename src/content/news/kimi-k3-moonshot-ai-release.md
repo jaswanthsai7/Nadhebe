@@ -93,3 +93,9 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
   - **Placement**: Under 'Frontier Capabilities & API Pricing' section
   - **Purpose**: Highlight Kimi K3 cost savings compared to closed-source flagships
   - **Aspect ratio**: 4:3
+
+
+## Related Reading & Workflows
+
+* For long-context engineering guidelines, read our guide on [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+* For a head-to-head performance breakdown against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).

@@ -71,3 +71,9 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 - **Traceable Changes**: Use audit logging to see who modified content and when.
 - **Independent Roles**: Set custom permissions for external contributors, review teams, and developers.
 - **Alpha Warnings**: Given the project's **early alpha status**, test user authentication credentials on a local SQLite instance before deploying container nodes for active client edits.
+
+
+## Instatic Deployment & Migration Resources
+
+* See agency migration cost breakdowns in [Case Study: Migrating 25 Client Sites from Webflow to Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Learn self-hosted VPS installation steps in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).

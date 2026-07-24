@@ -76,3 +76,9 @@ graph TD
   - **Prompt**: "Close-up of a high-end designer office desk, bright daylight, minimal workspace, subtle UI overlay cards showing performance stats"
   - **Filename**: "gpt-5-6-workspace.jpg"
   - **Alt**: "Minimal tech workspace"
+
+
+## Agent Orchestration & Cost Control
+
+* Learn how to structure autonomous execution loops in [GPT-5.6 Autonomous Agent Orchestration](/guides/gpt-5-6-autonomous-agent-orchestration).
+* Control token costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

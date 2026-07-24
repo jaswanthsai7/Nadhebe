@@ -77,3 +77,9 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
   - **Prompt**: "Close-up of a designer metal coffee mug and sleek white notebook resting on a clean desk surface"
   - **Filename**: "workspace-mug-notebook.jpg"
   - **Alt**: "Workplace morning coffee mockup"
+
+
+## Architecture & State Sharing
+
+* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).

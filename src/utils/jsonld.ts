@@ -77,8 +77,9 @@ export function blogPostingJsonLd(input: BlogPostingInput) {
     description: input.description,
     image: input.image,
     author: {
-      '@type': 'Person',
+      '@type': input.authorName.toLowerCase().includes('team') || input.authorName.toLowerCase().includes('nadhebe') ? 'Organization' : 'Person',
       name: input.authorName,
+      url: 'https://nadhebe.com/about/',
     },
     publisher: {
       '@type': 'Organization',

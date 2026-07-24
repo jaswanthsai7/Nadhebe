@@ -298,6 +298,12 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
   - **Purpose**: Highlight Kimi K3 cost savings compared to closed-source flagships
   - **Aspect ratio**: 4:3
 
+
+## Related Reading & Workflows
+
+* For long-context engineering guidelines, read our guide on [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+* For a head-to-head performance breakdown against proprietary models, see [Kimi K3 vs Claude Fable 5 vs GPT-5.6](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+
 ---
 
 # [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial)
@@ -424,6 +430,12 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
   - **Placement**: Under 'Step 2: Ingest the Output' section
   - **Purpose**: Workspace GUI demonstration
   - **Aspect ratio**: 4:3
+
+
+## Kimi K3 Developer Resources
+
+* Master large prompt context structures with [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/use-cases/kimi-k3-game-development-use-cases).
 
 ---
 
@@ -801,6 +813,12 @@ This accelerates the transition from early concepts to actual clickable layouts,
   - **Purpose**: Depict hardware feasibility
   - **Aspect ratio**: 4:3
 
+
+## Kimi K3 Developer Resources
+
+* Learn 3D model generation steps in [Generating Support-Free 3D Models with Kimi K3](/tutorials/kimi-k3-3d-modeling-tutorial).
+* Master 1M context windows in [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+
 ---
 
 # [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.pages.dev/news/openai-gpt-5-6-release-soul-ultra)
@@ -840,6 +858,12 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
   - **Prompt**: "Overhead shot of a high-end designer keyboard and glass trackpad, modern workspace, soft lighting"
   - **Filename**: "gpt-5-6-hardware.jpg"
   - **Alt**: "Designer workstation accessories"
+
+
+## Autonomous Agent Resources
+
+* Learn how to structure agent execution loops in our guide on [GPT-5.6 Autonomous Agent Orchestration](/guides/gpt-5-6-autonomous-agent-orchestration).
+* Prevent bill shock during continuous execution with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
 
 ---
 
@@ -890,6 +914,12 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
   - **Prompt**: "Close-up of a designer glass cup and white notepad on a modern clean table with soft shadows"
   - **Filename**: "notepad-detail.jpg"
   - **Alt**: "Designer notepad detail"
+
+
+## Related Production Guides
+
+* For an overview of pre-production workflow optimization, explore [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
+* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).
 
 ---
 
@@ -954,6 +984,12 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
   - **Filename**: "workspace-mug-notebook.jpg"
   - **Alt**: "Workplace morning coffee mockup"
 
+
+## Architecture & State Sharing
+
+* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).
+
 ---
 
 # [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.pages.dev/youtube/fable-5-vs-gpt-5-5-comparison)
@@ -1005,6 +1041,12 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
   - **Filename**: "designer-desk-detail.jpg"
   - **Alt**: "Workspace notebook mockup"
 
+
+## Model Benchmarks & Reviews
+
+* Read detailed benchmark metrics in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Read our complete review of Anthropic's model in [Claude Fable 5 AI Model Review](/reviews/fable-5-ai-model-review).
+
 ---
 
 # [First Look: Google Flow's New Storyboard Studio Addition](https://nadhebe.pages.dev/youtube/google-flow-storyboard-studio-guide)
@@ -1055,6 +1097,12 @@ While highly capable, maintaining perfect character consistency across many shot
   - **Prompt**: "Close-up of a high-end designer tablet displaying stylized sketch concepts in a bright room"
   - **Filename**: "sketch-tablet.jpg"
   - **Alt**: "Creative sketch tablet workstation"
+
+
+## Storyboard Studio Resources
+
+* Follow the complete hands-on guide in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Explore tool features in [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).
 
 ---
 
@@ -1116,6 +1164,12 @@ graph TD
   - **Filename**: "gpt-5-6-workspace.jpg"
   - **Alt**: "Minimal tech workspace"
 
+
+## Agent Orchestration & Cost Control
+
+* Learn how to structure autonomous execution loops in [GPT-5.6 Autonomous Agent Orchestration](/guides/gpt-5-6-autonomous-agent-orchestration).
+* Control token costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
+
 ---
 
 # [Inside the Multi-Agent YouTube Automation System](https://nadhebe.pages.dev/youtube/open-source-youtube-automation-agent)
@@ -1170,6 +1224,12 @@ Unlike message-passing multi-agent architectures that can break during individua
   - **Filename**: "keyboard-pencil-desk.jpg"
   - **Alt**: "Tech workstation accessories close-up"
 
+
+## YouTube Agent Installation & Features
+
+* Follow the repository installation tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
+* Review multi-agent architecture details in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).
+
 ---
 
 # [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.pages.dev/reviews/fable-5-ai-model-review)
@@ -1217,6 +1277,12 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
   - **Prompt**: "Close-up of a high-end metal mechanical pencil and sketchpad resting on a sleek white workspace desk"
   - **Filename**: "workspace-sketchpad.jpg"
   - **Alt**: "Drawing workstation mockup"
+
+
+## Frontier LLM Benchmark Comparisons
+
+* Compare Claude Fable 5 against OpenAI flagships in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Compare open weights vs proprietary models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
 
 ---
 
@@ -1388,6 +1454,12 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
   - **Filename**: "ruler-pencil-desk.jpg"
   - **Alt**: "Workspace layout sketch detail"
 
+
+## Multi-Agent Architecture Resources
+
+* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Manage autonomous execution costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
+
 ---
 
 # [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.pages.dev/tools/google-flow-storyboard-studio-overview)
@@ -1425,6 +1497,12 @@ Although the tool speeds up scene creation, character drift remains a challenge.
   - **Filename**: "digital-pen-workstation.jpg"
   - **Alt**: "Digital drawing setup detail"
 
+
+## Pre-Production Tutorials & Guides
+
+* Walk through step-by-step panel creation in [Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Read producer workflows in [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
+
 ---
 
 # [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system)
@@ -1458,6 +1536,12 @@ This guide examines the core features of the **YouTube Automation Agent** and ho
   - **Prompt**: "Overhead shot of a sleek modern laptop resting open on a light wood desk, soft background blur"
   - **Filename**: "wooden-desk-laptop.jpg"
   - **Alt**: "Workstation wood desk mockup"
+
+
+## System Setup & Database Patterns
+
+* Follow the step-by-step setup tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
+* Learn about SQLite state coordination in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
 
 ---
 
@@ -1509,6 +1593,12 @@ A major challenge for creative directors using generative tools is avoiding char
   - **Prompt**: "Minimalist office corner with natural green plant leaves casting soft shadows on a white wall"
   - **Filename**: "office-shadows.jpg"
   - **Alt**: "Minimal office shadows detail"
+
+
+## Step-by-Step Storyboard Guides
+
+* Learn the exact panel creation steps in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
+* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tools/google-flow-storyboard-studio-overview).
 
 ---
 
@@ -1573,6 +1663,12 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
   - **Prompt**: "A visual workflow diagram represented as pastel cards floating in space, soft blur shadows"
   - **Filename**: "gpt-5-6-workflow.jpg"
   - **Alt**: "Visual workflow cards"
+
+
+## Agent Design & Database Patterns
+
+* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Prevent runaway execution loops with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
 
 ---
 
@@ -1693,6 +1789,12 @@ Watch the release walkthrough detailing the editor features:
 - **Modern Performance**: Bun runtime ensures editor interactions are lightweight and responsive.
 - **Database Flexibility**: Support for SQLite and PostgreSQL database structures.
 - **Pure Semantic Output**: Eliminates proprietary CSS frameworks and JS runtime dependencies to ship native HTML structure.
+
+
+## Related Guides & Comparisons
+
+* Compare visual builder architectures in our deep dive [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).
+* Follow the step-by-step developer tutorial on [How to Install and Set Up Instatic CMS Locally](/tutorials/installing-instatic-cms-locally).
 
 ---
 
@@ -2049,6 +2151,12 @@ Watch the complete design canvas interface review and feature walkthrough below:
 - **Client Security**: Lock page structures to prevent editors from accidentally breaking layouts.
 - **Alpha Warnings**: Since Instatic is currently in **early alpha status**, it should be evaluated in staging environments before transitioning mission-critical websites.
 
+
+## Instatic Case Studies & Benchmarks
+
+* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Compare visual engine specs in [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).
+
 ---
 
 # [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts)
@@ -2274,6 +2382,12 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 - **Selector Cleanliness**: Use the Selector Manager regularly to delete unused classes.
 - **Alpha Warnings**: Instatic is currently in **early alpha status**, so always run layout updates on a local SQLite instance before deploying changes to active production sites.
 
+
+## Instatic CMS Architecture Guides
+
+* Review the underlying Bun and compiler architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
+* Compare visual builders in [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](/comparisons/instatic-vs-webflow-vs-framer).
+
 ---
 
 # [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.pages.dev/use-cases/instatic-enterprise-editorial-governance)
@@ -2328,6 +2442,12 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 - **Traceable Changes**: Use audit logging to see who modified content and when.
 - **Independent Roles**: Set custom permissions for external contributors, review teams, and developers.
 - **Alpha Warnings**: Given the project's **early alpha status**, test user authentication credentials on a local SQLite instance before deploying container nodes for active client edits.
+
+
+## Instatic Deployment & Migration Resources
+
+* See agency migration cost breakdowns in [Case Study: Migrating 25 Client Sites from Webflow to Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Learn self-hosted VPS installation steps in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
 
 ---
 
@@ -2533,6 +2653,12 @@ Watch the complete design system configuration and database architecture setup i
 - **Flexible Databases**: Choose betweenSQLite for simplicity or PostgreSQL for scaling collaborative projects.
 - **Optimized Exports**: Static compiler outputs clean semantic HTML and utility CSS without runtime framework bloat.
 
+
+## Integration & Scaling Resources
+
+* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/frameworks/instatic-astro-islands-frameworks-integration).
+* Structure your CSS system cleanly with [Best Practices for Scaling Design Tokens in Instatic CMS](/best-practices/instatic-design-tokens-scaling).
+
 ---
 
 # [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.pages.dev/frameworks/instatic-astro-islands-frameworks-integration)
@@ -2579,6 +2705,12 @@ import InteractiveWidget from '../components/InteractiveWidget.jsx';
 - **Best-in-class DX**: Combines visual layouts and custom frontend frameworks seamlessly.
 - **Zero Hydration Bloat**: Astro islands ensure standard sections remain raw HTML, enhancing SEO.
 - **Alpha Warnings**: Because Instatic is in an **early alpha stage**, ensure that all custom component slots are checked for layout shifting (CLS) during viewport resizing.
+
+
+## Instatic CMS System Guides
+
+* Understand the Bun compiler and database architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
+* Learn how agencies handle client hand-offs in [Enterprise Editorial Governance with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).
 
 ---
 
@@ -2648,6 +2780,12 @@ Watch the visual layout importer convert pages during the migration process:
 - **Performance Gains**: Serving static semantic HTML from edge networks increases mobile page speeds.
 - **Client Satisfaction**: Intuitive editorial dashboards let clients update text copy without layout risks.
 - **Alpha Warnings**: Instatic is currently in an **early alpha stage**. The agency verified each layout variation locally on a SQLite database instance before transferring files to active VPS container mounts.
+
+
+## Self-Hosted CMS Deployment Guides
+
+* Deploy self-hosted instances using Docker in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
+* Set up team permissions and client locks in [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).
 
 ---
 
