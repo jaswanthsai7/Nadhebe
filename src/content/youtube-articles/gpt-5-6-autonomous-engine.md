@@ -25,7 +25,7 @@ sources:
     url: "https://openai.com/blog/soul-release"
 ---
 
-# Unpacking GPT-5.6's Autonomous Engine
+## Unpacking GPT-5.6's Autonomous Engine
 
 OpenAI's July 2026 launch of **GPT-5.6** has marked a cinematic transition in the landscape of artificial intelligence. Moving beyond traditional chat interfaces, this release introduces three distinct tiers optimized for agentic operations, all featuring a native **1 million token context window**:
 

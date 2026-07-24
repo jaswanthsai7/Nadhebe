@@ -25,7 +25,7 @@ sources:
     url: "https://github.com/developer/youtube-automation-agent"
 ---
 
-# Inside the Multi-Agent YouTube Automation System
+## Inside the Multi-Agent YouTube Automation System
 
 The **YouTube Automation Agent** is an open-source project featuring a loosely coupled **multi-agent architecture**. By using a central **SQLite database** to coordinate tasks, the system isolates errors and enables continuous execution across the video production pipeline.
 

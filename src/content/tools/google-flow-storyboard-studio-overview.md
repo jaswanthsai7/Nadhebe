@@ -22,7 +22,7 @@ sources:
     url: "https://support.google.com/creative-tools/flow"
 ---
 
-# Google Flow Storyboard Studio: Product Overview and Toolset
+## Google Flow Storyboard Studio: Product Overview and Toolset
 
 Google Flow's **Storyboard Studio** is an experimental feature in **Google Labs** designed to accelerate creative pre-production. This article reviews the core features, visualization capabilities, and style choices available in this toolset.
 

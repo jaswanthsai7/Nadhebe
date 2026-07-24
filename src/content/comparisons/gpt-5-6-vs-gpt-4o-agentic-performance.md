@@ -23,7 +23,7 @@ sources:
     url: "https://openai.com/research/benchmarks"
 ---
 
-# GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison
+## GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison
 
 With the release of GPT-5.6, OpenAI has set a new benchmark for autonomous, agentic workflows. This article compares the new flagship **Soul** model against **GPT-4o** across key dimensions: multi-step planning, sandbox execution, context window limits, and safety controls.
 

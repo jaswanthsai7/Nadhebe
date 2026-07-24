@@ -23,7 +23,7 @@ sources:
     url: "https://github.com/developer/youtube-automation-agent/blob/main/docs/install.md"
 ---
 
-# Tutorial: Setting Up the YouTube Automation Agent
+## Tutorial: Setting Up the YouTube Automation Agent
 
 This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine. The system uses a loosely coupled multi-agent workflow coordinated by a central SQLite database.
 

@@ -22,7 +22,7 @@ sources:
     url: "https://www.smpte.org/journal"
 ---
 
-# The Producer's Guide to AI-Assisted Pre-Production Workflows
+## The Producer's Guide to AI-Assisted Pre-Production Workflows
 
 Integrating generative storyboarding tools like Google Flow's **Storyboard Studio** (available as a shared tool in **Google Labs**) into media production pipelines shifts the traditional timeline, allowing teams to prototype scripts and render high-fidelity camera angles in hours rather than days.
 

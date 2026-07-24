@@ -22,7 +22,7 @@ sources:
     url: "https://platform.openai.com/docs/guides/agents"
 ---
 
-# The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration
+## The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration
 
 GPT-5.6's flagship **Soul** model introduces native code sandboxing, parallel scheduling, and a massive **1 million token context window**, making it a powerful platform for building autonomous agents. This guide outlines how developers can leverage the three GPT-5.6 model tiers (Soul, Terra, Luna) to construct robust agentic pipelines.
 
@@ -39,7 +39,7 @@ When designing a multi-stage agentic workflow, matching the correct model tier t
 To avoid infinite loops and compute drain, developers should implement a structured supervisor pattern that orchestrates tasks across these tiers:
 
 ```python
-# Conceptual loop using GPT-5.6 agentic API and tiers
+## Conceptual loop using GPT-5.6 agentic API and tiers
 class AgentSupervisor:
     def __init__(self, primary_model="soul", worker_model="terra"):
         self.primary_model = primary_model

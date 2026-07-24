@@ -22,7 +22,7 @@ sources:
     url: "https://github.com/developer/youtube-automation-agent/blob/main/docs/features.md"
 ---
 
-# The YouTube Automation Agent: Feature Guide
+## The YouTube Automation Agent: Feature Guide
 
 This guide examines the core features of the **YouTube Automation Agent** and how its multi-agent system manages video production from strategic planning to final metadata generation, using a central **SQLite database** to coordinate tasks.
 

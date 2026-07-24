@@ -26,7 +26,7 @@ sources:
     url: "https://www.anthropic.com/blog/introducing-fable-5"
 ---
 
-# Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
+## Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
 
 Anthropic's release of **Claude Fable 5** has introduced a powerful alternative to standard enterprise models. Designed for complex reasoning and large-scale document parsing, this review examines the capabilities, deployment viability, and safety architecture of Claude Fable 5.
 

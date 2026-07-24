@@ -22,7 +22,7 @@ sources:
     url: "https://www.sqlite.org/arch.html"
 ---
 
-# The SQLite State-Sharing Pattern for Multi-Agent Architectures
+## The SQLite State-Sharing Pattern for Multi-Agent Architectures
 
 When building multi-agent systems, managing communication and state sharing between modules is a key design consideration. While message-passing protocols or webhooks are common, using a shared database like **SQLite** offers major advantages in error isolation, transaction locking, and process scheduling.
 

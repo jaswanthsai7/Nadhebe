@@ -22,7 +22,7 @@ sources:
     url: "https://creativelab.google/flow-storyboard/tutorials"
 ---
 
-# Tutorial: Building Pre-Production Storyboards in Google Flow
+## Tutorial: Building Pre-Production Storyboards in Google Flow
 
 This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import to final asset export and video rendering.
 

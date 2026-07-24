@@ -331,12 +331,12 @@ flowchart TD
 You can track active memory pressure by scraping vLLM's metric endpoint (`/metrics`):
 
 ```text
-# HELP vllm:gpu_cache_usage_perc GPU KV-cache usage percentage.
-# TYPE vllm:gpu_cache_usage_perc gauge
+## HELP vllm:gpu_cache_usage_perc GPU KV-cache usage percentage.
+## TYPE vllm:gpu_cache_usage_perc gauge
 vllm:gpu_cache_usage_perc{model_name="model"} 0.42
 
-# HELP vllm:num_requests_waiting Number of requests waiting in queue.
-# TYPE vllm:num_requests_waiting gauge
+## HELP vllm:num_requests_waiting Number of requests waiting in queue.
+## TYPE vllm:num_requests_waiting gauge
 vllm:num_requests_waiting{model_name="model"} 0
 ```
 
@@ -1065,7 +1065,7 @@ This accelerates the transition from early concepts to actual clickable layouts,
 
 Category: News | Tags: ["gpt-5.6", "openai", "release", "news", "models"]
 
-# OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI
+## OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI
 
 In a landmark release in **July 2026**, OpenAI launched **GPT-5.6**, featuring its highly anticipated **Soul** flagship engine. Rather than publishing a single model, OpenAI introduced a three-tier model family designed specifically for autonomous agent coordination, all supported by a native **1 million token context window**:
 
@@ -1111,7 +1111,7 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
 
 Category: Tutorials | Tags: ["google-flow", "tutorials", "storyboard", "step-by-step", "google-labs"]
 
-# Tutorial: Building Pre-Production Storyboards in Google Flow
+## Tutorial: Building Pre-Production Storyboards in Google Flow
 
 This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import to final asset export and video rendering.
 
@@ -1167,7 +1167,7 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
 
 Category: Tutorials | Tags: ["tutorials", "setup", "youtube-automation", "python"]
 
-# Tutorial: Setting Up the YouTube Automation Agent
+## Tutorial: Setting Up the YouTube Automation Agent
 
 This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine. The system uses a loosely coupled multi-agent workflow coordinated by a central SQLite database.
 
@@ -1236,7 +1236,7 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
 
 Category: YouTube Articles | Tags: ["fable-5", "gpt-5.5", "comparisons", "models", "anthropic"]
 
-# Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance
+## Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance
 
 Anthropic's June 2026 release of **Claude Fable 5** has set off a direct confrontation with OpenAI's **GPT-5.5** in the race for model supremacy. Optimized for long-horizon agentic reasoning, code synthesis, and deep logic operations, Fable 5 represents a major leap in cognitive automation.
 
@@ -1293,7 +1293,7 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
 
 Category: YouTube Articles | Tags: ["google-flow", "storyboard-studio", "pre-production", "filmmaking", "google-labs"]
 
-# First Look: Google Flow's New Storyboard Studio Addition
+## First Look: Google Flow's New Storyboard Studio Addition
 
 Google Flow has expanded its experimental creator toolkit in **Google Labs** with the launch of **Storyboard Studio**. This feature automates script parsing, converting raw text into structured scenes, asset tags, and cinematic storyboard panels.
 
@@ -1350,7 +1350,7 @@ While highly capable, maintaining perfect character consistency across many shot
 
 Category: YouTube Articles | Tags: ["gpt-5.6", "openai", "agentic-ai", "soul-model", "models"]
 
-# Unpacking GPT-5.6's Autonomous Engine
+## Unpacking GPT-5.6's Autonomous Engine
 
 OpenAI's July 2026 launch of **GPT-5.6** has marked a cinematic transition in the landscape of artificial intelligence. Moving beyond traditional chat interfaces, this release introduces three distinct tiers optimized for agentic operations, all featuring a native **1 million token context window**:
 
@@ -1416,7 +1416,7 @@ graph TD
 
 Category: YouTube Articles | Tags: ["multi-agent", "sqlite", "youtube-automation", "open-source"]
 
-# Inside the Multi-Agent YouTube Automation System
+## Inside the Multi-Agent YouTube Automation System
 
 The **YouTube Automation Agent** is an open-source project featuring a loosely coupled **multi-agent architecture**. By using a central **SQLite database** to coordinate tasks, the system isolates errors and enables continuous execution across the video production pipeline.
 
@@ -1476,7 +1476,7 @@ Unlike message-passing multi-agent architectures that can break during individua
 
 Category: Tool Reviews | Tags: ["fable-5", "reviews", "llm", "anthropic"]
 
-# Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
+## Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
 
 Anthropic's release of **Claude Fable 5** has introduced a powerful alternative to standard enterprise models. Designed for complex reasoning and large-scale document parsing, this review examines the capabilities, deployment viability, and safety architecture of Claude Fable 5.
 
@@ -1530,7 +1530,7 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
 
 Category: Comparisons | Tags: ["fable-5", "gpt-5.5", "comparisons", "benchmarks", "anthropic"]
 
-# Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests
+## Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests
 
 To help developers choose the appropriate model for their tooling infrastructure, we conducted rigorous tests comparing Anthropic's **Claude Fable 5** and OpenAI's **GPT-5.5** on coding accuracy, reasoning, and context window recall efficiency.
 
@@ -1570,7 +1570,7 @@ While OpenAI's GPT-5.5 remains the standard for pure code generation speed and l
 
 Category: Comparisons | Tags: ["gpt-5.6", "gpt-4o", "comparisons", "benchmarks", "models"]
 
-# GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison
+## GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison
 
 With the release of GPT-5.6, OpenAI has set a new benchmark for autonomous, agentic workflows. This article compares the new flagship **Soul** model against **GPT-4o** across key dimensions: multi-step planning, sandbox execution, context window limits, and safety controls.
 
@@ -1610,7 +1610,7 @@ GPT-4o excels at prompt-response and conversational reasoning but struggles when
 
 Category: Best Practices | Tags: ["cost-management", "llm-ops", "best-practices", "agents", "models"]
 
-# LLM Autonomous Loops: Best Practices for Token and Cost Management
+## LLM Autonomous Loops: Best Practices for Token and Cost Management
 
 As models like GPT-5.6's flagship **Soul** model transition toward fully autonomous execution, managing token consumption becomes a primary engineering challenge. A parallel execution loop processing multiple large files can consume a monthly API budget in a matter of minutes if left unchecked.
 
@@ -1661,7 +1661,7 @@ If running open-weight models in-house instead of paying per-token commercial AP
 
 Category: Best Practices | Tags: ["multi-agent", "best-practices", "software-architecture", "system-design"]
 
-# Multi-Agent System Design: State Isolation and Coordination
+## Multi-Agent System Design: State Isolation and Coordination
 
 Designing multi-agent systems requires establishing clear patterns for communication and state management. Rather than letting agents communicate directly via message passing, implementing **state isolation** using a centralized database (such as **SQLite**) builds robust, scale-tolerant agent networks.
 
@@ -1706,7 +1706,7 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 Category: Tools | Tags: ["google-flow", "tools", "pre-production", "creative-tech", "google-labs"]
 
-# Google Flow Storyboard Studio: Product Overview and Toolset
+## Google Flow Storyboard Studio: Product Overview and Toolset
 
 Google Flow's **Storyboard Studio** is an experimental feature in **Google Labs** designed to accelerate creative pre-production. This article reviews the core features, visualization capabilities, and style choices available in this toolset.
 
@@ -1749,7 +1749,7 @@ Although the tool speeds up scene creation, character drift remains a challenge.
 
 Category: Tools | Tags: ["tools", "youtube-automation", "open-source", "features"]
 
-# The YouTube Automation Agent: Feature Guide
+## The YouTube Automation Agent: Feature Guide
 
 This guide examines the core features of the **YouTube Automation Agent** and how its multi-agent system manages video production from strategic planning to final metadata generation, using a central **SQLite database** to coordinate tasks.
 
@@ -1789,7 +1789,7 @@ This guide examines the core features of the **YouTube Automation Agent** and ho
 
 Category: Guides | Tags: ["pre-production", "guides", "workflows", "film-tech", "google-labs"]
 
-# The Producer's Guide to AI-Assisted Pre-Production Workflows
+## The Producer's Guide to AI-Assisted Pre-Production Workflows
 
 Integrating generative storyboarding tools like Google Flow's **Storyboard Studio** (available as a shared tool in **Google Labs**) into media production pipelines shifts the traditional timeline, allowing teams to prototype scripts and render high-fidelity camera angles in hours rather than days.
 
@@ -1846,7 +1846,7 @@ A major challenge for creative directors using generative tools is avoiding char
 
 Category: Guides | Tags: ["gpt-5.6", "agentic-ai", "guides", "orchestration", "models"]
 
-# The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration
+## The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration
 
 GPT-5.6's flagship **Soul** model introduces native code sandboxing, parallel scheduling, and a massive **1 million token context window**, making it a powerful platform for building autonomous agents. This guide outlines how developers can leverage the three GPT-5.6 model tiers (Soul, Terra, Luna) to construct robust agentic pipelines.
 
@@ -1863,7 +1863,7 @@ When designing a multi-stage agentic workflow, matching the correct model tier t
 To avoid infinite loops and compute drain, developers should implement a structured supervisor pattern that orchestrates tasks across these tiers:
 
 ```python
-# Conceptual loop using GPT-5.6 agentic API and tiers
+## Conceptual loop using GPT-5.6 agentic API and tiers
 class AgentSupervisor:
     def __init__(self, primary_model="soul", worker_model="terra"):
         self.primary_model = primary_model
@@ -1916,7 +1916,7 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
 
 Category: Frameworks | Tags: ["sqlite", "architecture", "multi-agent", "frameworks"]
 
-# The SQLite State-Sharing Pattern for Multi-Agent Architectures
+## The SQLite State-Sharing Pattern for Multi-Agent Architectures
 
 When building multi-agent systems, managing communication and state sharing between modules is a key design consideration. While message-passing protocols or webhooks are common, using a shared database like **SQLite** offers major advantages in error isolation, transaction locking, and process scheduling.
 

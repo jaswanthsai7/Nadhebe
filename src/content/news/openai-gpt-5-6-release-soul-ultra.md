@@ -22,7 +22,7 @@ sources:
     url: "https://openai.com/news/introducing-gpt-5-6"
 ---
 
-# OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI
+## OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI
 
 In a landmark release in **July 2026**, OpenAI launched **GPT-5.6**, featuring its highly anticipated **Soul** flagship engine. Rather than publishing a single model, OpenAI introduced a three-tier model family designed specifically for autonomous agent coordination, all supported by a native **1 million token context window**:
 

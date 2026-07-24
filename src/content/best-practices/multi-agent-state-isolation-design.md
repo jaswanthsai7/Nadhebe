@@ -22,7 +22,7 @@ sources:
     url: "https://www.computer.org/csdl/magazine/so"
 ---
 
-# Multi-Agent System Design: State Isolation and Coordination
+## Multi-Agent System Design: State Isolation and Coordination
 
 Designing multi-agent systems requires establishing clear patterns for communication and state management. Rather than letting agents communicate directly via message passing, implementing **state isolation** using a centralized database (such as **SQLite**) builds robust, scale-tolerant agent networks.
 

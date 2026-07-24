@@ -23,7 +23,7 @@ sources:
     url: "https://huggingface.co/spaces/lmsys/chatbot-arena"
 ---
 
-# Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests
+## Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests
 
 To help developers choose the appropriate model for their tooling infrastructure, we conducted rigorous tests comparing Anthropic's **Claude Fable 5** and OpenAI's **GPT-5.5** on coding accuracy, reasoning, and context window recall efficiency.
 

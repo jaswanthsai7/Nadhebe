@@ -112,12 +112,12 @@ flowchart TD
 You can track active memory pressure by scraping vLLM's metric endpoint (`/metrics`):
 
 ```text
-# HELP vllm:gpu_cache_usage_perc GPU KV-cache usage percentage.
-# TYPE vllm:gpu_cache_usage_perc gauge
+## HELP vllm:gpu_cache_usage_perc GPU KV-cache usage percentage.
+## TYPE vllm:gpu_cache_usage_perc gauge
 vllm:gpu_cache_usage_perc{model_name="model"} 0.42
 
-# HELP vllm:num_requests_waiting Number of requests waiting in queue.
-# TYPE vllm:num_requests_waiting gauge
+## HELP vllm:num_requests_waiting Number of requests waiting in queue.
+## TYPE vllm:num_requests_waiting gauge
 vllm:num_requests_waiting{model_name="model"} 0
 ```
 

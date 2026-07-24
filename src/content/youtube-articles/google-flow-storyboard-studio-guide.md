@@ -25,7 +25,7 @@ sources:
     url: "https://creativelab.google/flow-storyboard"
 ---
 
-# First Look: Google Flow's New Storyboard Studio Addition
+## First Look: Google Flow's New Storyboard Studio Addition
 
 Google Flow has expanded its experimental creator toolkit in **Google Labs** with the launch of **Storyboard Studio**. This feature automates script parsing, converting raw text into structured scenes, asset tags, and cinematic storyboard panels.
 

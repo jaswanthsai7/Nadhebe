@@ -22,7 +22,7 @@ sources:
     url: "https://github.com/llmops-org/cost-control"
 ---
 
-# LLM Autonomous Loops: Best Practices for Token and Cost Management
+## LLM Autonomous Loops: Best Practices for Token and Cost Management
 
 As models like GPT-5.6's flagship **Soul** model transition toward fully autonomous execution, managing token consumption becomes a primary engineering challenge. A parallel execution loop processing multiple large files can consume a monthly API budget in a matter of minutes if left unchecked.
 
