@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Guides
 tags: ["claude", "agent", "architecture", "cli", "anthropic", "software-design"]
-heroImage: "/images/claude-agent-hero.jpg"
+heroImage: "/images/claude-agent-loop-hero.png"
 heroAlt: "Minimalist architectural diagram showing autonomous agent loops with glowing node paths"
 draft: false
 topic: "Claude Code"
