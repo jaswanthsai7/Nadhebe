@@ -70,7 +70,7 @@ html.dark {
   }
 
   .prose-article > * + * {
-    @apply mt-28;
+    @apply mt-24;
   }
 
   .prose-article h1 {
@@ -78,11 +78,11 @@ html.dark {
   }
 
   .prose-article h2 {
-    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark mt-56 mb-20 scroll-mt-24;
+    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark mt-48 mb-16 scroll-mt-24;
   }
 
   .prose-article h3 {
-    @apply font-display text-h3 font-semibold text-ink dark:text-ink-dark mt-40 mb-16 scroll-mt-24;
+    @apply font-display text-h3 font-semibold text-ink dark:text-ink-dark mt-32 mb-12 scroll-mt-24;
   }
 
   .prose-article h4 {
@@ -105,12 +105,12 @@ html.dark {
   .prose-article ol { @apply list-decimal; }
 
   .prose-article blockquote {
-    @apply border-l-2 border-accent/40 pl-24 pr-8 text-ink2 dark:text-ink2-dark dark:border-accent-dark/40 italic;
+    @apply border-l-2 border-border pl-24 pr-8 text-ink2 dark:text-ink2-dark dark:border-border-dark;
   }
 
   .prose-article img {
-    @apply rounded-16 border border-border dark:border-border-dark block w-full;
-    max-height: 420px;
+    @apply rounded-12 border border-border dark:border-border-dark block w-full;
+    max-height: 320px;
     object-fit: cover;
   }
 
@@ -308,14 +308,12 @@ html.dark {
 
   /* ─── Glassmorphism utilities ─── */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(20px) saturate(1.2) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
   }
   .dark .glass-panel {
-    background: rgba(10, 10, 10, 0.88) !important;
-    backdrop-filter: blur(20px) saturate(1.2) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+    background: rgba(20, 20, 20, 0.75) !important;
   }
 }
 
