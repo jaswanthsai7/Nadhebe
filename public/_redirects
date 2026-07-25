@@ -1,1 +1,2 @@
-https://www.nadhebe.com/* https://nadhebe.com/:splat 301
+# www-to-apex redirect is configured at Cloudflare dashboard level (Bulk Redirects)
+# Cloudflare Pages _redirects only supports relative destination URLs
