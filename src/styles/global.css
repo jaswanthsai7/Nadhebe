@@ -11,6 +11,7 @@
 :root {
   color-scheme: light;
 }
+
 html.dark {
   color-scheme: dark;
 }
@@ -44,6 +45,7 @@ html.dark {
     outline: 2px solid theme('colors.accent.DEFAULT');
     outline-offset: 2px;
   }
+
   .dark :focus-visible {
     outline-color: theme('colors.accent.dark');
   }
@@ -51,11 +53,13 @@ html.dark {
   .skip-link {
     @apply absolute -top-full left-8 z-[100] rounded-8 bg-ink px-16 py-8 text-caption font-medium text-white;
   }
+
   .skip-link:focus {
     @apply top-4;
   }
 
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -71,11 +75,21 @@ html.dark {
 
   /* ─── Article typography ─── */
   .prose-article {
-    @apply mx-auto max-w-article text-body leading-relaxed text-ink2 dark:text-ink2-dark;
+    @apply mx-auto max-w-article text-body leading-relaxed text-ink2 dark:text-ink2-dark min-w-0 w-full;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .prose-article > * + * {
     @apply mt-28;
+  }
+
+  .prose-article h1,
+  .prose-article h2,
+  .prose-article h3,
+  .prose-article h4 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .prose-article h1 {
@@ -125,11 +139,13 @@ html.dark {
 
   .prose-article code {
     @apply rounded-6 bg-code px-6 py-2 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
-    overflow-wrap: anywhere;
-    word-break: break-all;
+    display: inline;
+    max-width: 100%;
+    overflow-wrap: anywhere !important;
+    word-break: break-all !important;
+    white-space: normal !important;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
-    max-width: 100%;
   }
   .prose-article pre code {
     white-space: pre !important;
@@ -142,9 +158,11 @@ html.dark {
     color: theme('colors.ink.dark') !important;
     @apply rounded-12 border border-border-dark p-24 text-caption leading-relaxed overflow-x-auto;
   }
+
   .dark .prose-article pre {
     @apply border-border-dark;
   }
+
   .prose-article pre code {
     background-color: transparent !important;
     color: inherit !important;
@@ -159,6 +177,7 @@ html.dark {
   .prose-article th {
     @apply bg-surface2 px-16 py-12 text-left font-semibold text-ink whitespace-nowrap dark:bg-surface2-dark dark:text-ink-dark;
   }
+
   .prose-article td {
     @apply border-t border-border px-16 py-12 text-ink2 dark:border-border-dark dark:text-ink2-dark;
   }
@@ -209,6 +228,7 @@ html.dark {
     from { opacity: 0; transform: translateY(6px) scale(0.995); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
+
   @keyframes logSlideIn {
     from { opacity: 0; transform: translateX(-12px); }
     to   { opacity: 1; transform: translateX(0); }
@@ -242,11 +262,11 @@ html.dark {
 
   .shimmer-loading {
     background: linear-gradient(90deg,
-      transparent 0%,
+        transparent 0%,
       rgba(255,255,255,0.06) 40%,
       rgba(255,255,255,0.12) 50%,
       rgba(255,255,255,0.06) 60%,
-      transparent 100%);
+        transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 1.8s ease-in-out infinite;
   }
@@ -257,13 +277,14 @@ html.dark {
     animation: progressBar 18s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     border-radius: 999px;
   }
+
   .dark .shimmer-loading {
     background: linear-gradient(90deg,
-      transparent 0%,
+        transparent 0%,
       rgba(255,255,255,0.04) 40%,
       rgba(255,255,255,0.08) 50%,
       rgba(255,255,255,0.04) 60%,
-      transparent 100%);
+        transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 1.8s ease-in-out infinite;
   }
@@ -275,6 +296,7 @@ html.dark {
            text-meta font-mono font-medium uppercase tracking-wider
            text-muted;
   }
+
   .dark .badge {
     background: rgba(30, 30, 30, 0.65);
     @apply text-muted-dark;
@@ -335,7 +357,10 @@ html.dark {
     background: rgba(255, 255, 255, 0.82) !important;
     backdrop-filter: blur(20px) saturate(1.2) !important;
     -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+    max-width: 100%;
+    overflow-x: hidden;
   }
+
   .dark .glass-panel {
     background: rgba(10, 10, 10, 0.88) !important;
     backdrop-filter: blur(20px) saturate(1.2) !important;
@@ -348,18 +373,22 @@ html.dark {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
+
 [data-reveal="left"] {
   transform: translateX(-16px);
 }
+
 [data-reveal="right"] {
   transform: translateX(16px);
 }
+
 [data-reveal="scale"] {
   transform: scale(0.97);
 }
+
 [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0) translateX(0) scale(1);
