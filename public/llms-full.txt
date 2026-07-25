@@ -2055,7 +2055,7 @@ pie title CCDV-F Exam Domain Weightings
     "MCP & Safety Guardrails" : 20
 ```
 
-#### Detailed Domain Objectives:
+#### CCDV-F Domain Objectives:
 
 * **Domain 1: API Integration & SDKs (30%)**
   - Constructing Messages API requests (`/v1/messages`) with explicit `model`, `max_tokens`, and system parameters.
@@ -2098,7 +2098,7 @@ flowchart LR
     end
 ```
 
-#### Detailed Domain Objectives:
+#### CCAR-F Domain Objectives:
 * **Vector & Hybrid Search RAG:** Integrating Qdrant/Pinecone with Claude 200k/1M context windows.
 * **Cost Optimization Architecture:** Tradeoff analysis between Claude 3.5 Haiku (high throughput, low latency) and Claude 3.7 Sonnet (deep reasoning).
 * **Multi-Tenant Deployment & Compliance:** Enterprise VPC endpoints on AWS Bedrock and Google Cloud Vertex AI.
