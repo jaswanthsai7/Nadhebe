@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import { getArticleUrl } from '../utils/content';
+import VerdictGauge from './VerdictGauge.astro';
+
+interface Props {
+  posts: any[];
+}
+
+const { posts } = Astro.props;
+const authors = await getCollection('authors');
+---
+
+<div class="flex flex-col divide-y divide-border/60 dark:divide-border-dark/60">
+  {posts.map((post, index) => {
+    const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+    const displayIndex = String(index + 1).padStart(2, '0');
+    return (
+      <div class="flex flex-col md:flex-row gap-24 items-start justify-between py-32 first:pt-0 last:pb-0">
+        
+        <!-- Left: Big Index Number -->
+        <div class="shrink-0 text-display sm:text-5xl font-black text-ink/20 dark:text-ink-dark/20 select-none pt-4 w-48 sm:w-64">
+          {displayIndex}
+        </div>
+
+        <!-- Middle: Content Info -->
+        <div class="flex-grow flex-1 min-w-0">
+          <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-8 block">
+            {post.data.category || 'Article'}
+          </span>
+          <a href={getArticleUrl(post)} class="group block">
+            <h3 class="font-display text-h3 sm:text-h2 font-bold text-ink dark:text-ink-dark group-hover:underline decoration-ink dark:decoration-ink-dark leading-tight tracking-tight">
+              {post.data.title}
+            </h3>
+          </a>
+          <p class="mt-12 text-body text-ink2 dark:text-ink2-dark leading-relaxed">
+            {post.data.description}
+          </p>
+
+          <!-- Author & metadata row -->
+          <div class="mt-16 flex items-center gap-12 text-meta text-muted dark:text-muted-dark font-sans">
+            {author?.data?.avatar && (
+              <img src={author.data.avatar} alt={author.data.name} width="24" height="24" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
+            )}
+            <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Team'}</span>
+            <span class="text-border dark:text-border-dark">·</span>
+            <time datetime={new Date(post.data.pubDate).toISOString()}>
+              {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+            <span class="text-border dark:text-border-dark">·</span>
+            <span>{post.data.estimatedReadingTime || 5} min read</span>
+          </div>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="shrink-0 w-full md:w-[280px] lg:w-[320px] aspect-[16/10] overflow-hidden rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark relative">
+          <a href={getArticleUrl(post)} class="block w-full h-full group">
+            <img
+              src={post.data.heroImage}
+              alt={post.data.heroAlt || post.data.title}
+              width="320"
+              height="200"
+              fetchpriority={index === 0 ? "high" : "low"}
+              loading={index === 0 ? "eager" : "lazy"}
+              class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.015]"
+            />
+          </a>
+          {post.data.videoDuration && (
+            <span class="absolute bottom-12 right-12 bg-black/75 px-8 py-4 rounded font-mono text-meta text-white">
+              {post.data.videoDuration.replace('PT', '').replace('M', 'm ').replace('S', 's')}
+            </span>
+          )}
+          {post.data.rating !== undefined && (
+            <div class="absolute bottom-8 left-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
+              <VerdictGauge score={post.data.rating} size={36} />
+            </div>
+          )}
+        </div>
+
+      </div>
+    );
+  })}
+</div>
