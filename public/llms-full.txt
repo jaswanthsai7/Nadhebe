@@ -4,6 +4,855 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.pages.dev/tutorials/claude-code-cheat-sheet-commands-shortcuts)
+
+> The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
+
+Category: Tutorials | Tags: ["claude", "cli", "cheat-sheet", "developer-tools", "productivity", "anthropic"]
+
+Anthropic's **Claude Code** CLI is an autonomous, agentic coding tool that reads your local repository codebase, edits multi-file project structures, runs shell terminal commands, and manages git workflows directly from your terminal. Powered by **Claude 3.7 Sonnet**, **Claude Opus 4.8**, and **Claude Fable 5**, it operates as an interactive pair-programmer—interpreting natural language goals into precise file reads, AST searches, and code modifications.
+
+This **Claude Code Cheat Sheet** serves as the definitive reference manual for developers, DevOps engineers, and technical architects. Bookmark this page for quick access to every keyboard shortcut, slash command, CLI flag, configuration schema, and Unix piping script.
+
+---
+
+## ⚡ 1. Quick Installation & Setup
+
+Claude Code runs natively across macOS, Linux, and Windows PowerShell/WSL2 environments.
+
+```bash
+# macOS & Linux (Native POSIX Shell Script - Recommended)
+curl -fsSL https://claude.ai/install.sh | bash
+
+# macOS via Homebrew Cask
+brew install --cask claude-code
+
+# Windows Native PowerShell 7+ (Requires Git for Windows)
+irm https://claude.ai/install.ps1 | iex
+
+# Verify Binary & Authenticate
+claude --version
+claude login
+```
+
+> [!WARNING]
+> **Deprecated Installation Notice**: Anthropic has officially deprecated `npm install -g @anthropic-ai/claude-code` for general usage because npm global installations cannot support background self-updates. Always use native OS scripts.
+
+---
+
+## ⌨️ 2. Essential Keyboard Shortcuts Matrix
+
+These keyboard shortcuts operate inside interactive Claude Code terminal sessions.
+
+### Navigation, Interrupts & Execution
+
+| Keyboard Shortcut | Primary Action | Use Case & Context |
+| :--- | :--- | :--- |
+| **`Ctrl + C`** | Interrupt / Cancel | First press interrupts active tool execution. Second press exits the CLI session. |
+| **`Esc`** | Stop Generation | Interrupts model output mid-turn while preserving all file modifications completed so far. |
+| **`Esc + Esc`** | Open Rewind Menu | Opens interactive checkpoint menu. Select *Restore code and conversation* to roll back. |
+| **`Ctrl + D`** | Exit Session | Cleanly closes active Claude Code terminal process. |
+| **`Ctrl + L`** | Redraw Terminal Screen | Clears screen artifacts and recovers garbled TUI displays. |
+| **`Ctrl + R`** | Reverse History Search | Searches through previous session prompt input history. |
+| **`Shift + Tab`** | Cycle Permission Modes | Cycles between `manual`, `plan`, `acceptEdits`, `auto`, and `bypassPermissions`. |
+| **`Ctrl + G`** | Open External Editor | Opens your active prompt draft inside `$EDITOR` (Neovim/Vim/VS Code). |
+| **`Ctrl + O`** | Toggle Transcript Viewer | Displays raw tool call JSON payloads, API token counts, and expanded MCP calls. |
+| **`Ctrl + T`** | Toggle Task Manager | Displays live list of running background subagents and shell commands. |
+| **`Ctrl + B`** | Detach to Background | Detaches current long-running operation into a background agent task. |
+| **`Ctrl + X Ctrl + K`** | Emergency Subagent Kill | Kills all active background subagents (press twice within 3 seconds). |
+
+### Input Formatting & Line Editing
+
+| Keyboard Shortcut | Primary Action | Platform Availability |
+| :--- | :--- | :--- |
+| **`\ + Enter`** | Multiline New Line | Universal (Works across all terminals) |
+| **`Ctrl + J`** | Multiline New Line | Universal fallback for unconfigured shells |
+| **`Option + Enter`** | New Line | macOS default shortcut |
+| **`Alt + Enter`** | New Line | Linux & Windows Terminal default shortcut |
+| **`Shift + Enter`** | New Line | iTerm2, Ghostty, Kitty, Warp, Windows Terminal |
+| **`Ctrl + A` / `Ctrl + E`** | Start / End of Line | Jumps cursor to absolute start or end of active input line |
+| **`Ctrl + K`** | Delete to EOL | Deletes all text from active cursor position to end of line |
+| **`Ctrl + U`** | Delete to Line Start | Deletes all text from active cursor position back to line start |
+| **`Ctrl + W`** | Delete Previous Word | Deletes word immediately preceding the cursor |
+| **`Ctrl + Y`** | Paste Killed Text | Pastes buffer text deleted via `Ctrl+K`, `Ctrl+U`, or `Ctrl+W` |
+| **`Cmd + V` / `Ctrl + V`** | Paste Image Asset | Pastes clipboard image directly into CLI prompt for visual analysis |
+
+### Model & Reasoning Toggles
+
+| Keyboard Shortcut | Primary Action | Operational Description |
+| :--- | :--- | :--- |
+| **`Option + P` / `Alt + P`** | Switch Model | Interactively cycles active model (`Sonnet 5`, `Opus 4.8`, `Haiku 4.5`, `Fable 5`) |
+| **`Option + T` / `Alt + T`** | Toggle Extended Thinking | Enables or disables `<thinking>` reasoning budget for active turn |
+| **`Option + O` / `Alt + O`** | Toggle Fast Mode | Toggles high-speed output mode for rapid response generation |
+
+---
+
+## 🛠️ 3. Interactive Slash Commands Reference
+
+Slash commands control session state, token usage, code review suites, and environment settings.
+
+```mermaid
+mindmap
+  root((Claude Code Slash Commands))
+    Session Management
+      /clear
+      /compact
+      /cost
+      /context
+      /rewind
+      /cd
+    Project & Code Tools
+      /init
+      /code-review
+      /simplify
+      /verify
+      /plan
+      /branch
+      /batch
+    System & Diagnostics
+      /doctor
+      /checkup
+      /insights
+      /loop
+      /teleport
+      /remote-control
+```
+
+### Context & Session Controls
+
+| Slash Command | Usage Syntax | Operational Purpose |
+| :--- | :--- | :--- |
+| **`/clear`** | `/clear` | Wipes active conversation history completely and resets token context to zero. |
+| **`/compact`** | `/compact [focus topic]` | Summarizes current chat history to free context window space while preserving key state. |
+| **`/cost`** | `/cost` | Displays exact token consumption, cached token reads, and cumulative API USD cost. |
+| **`/context`** | `/context` | Visualizes exact token distribution across files, system prompts, and tool history. |
+| **`/resume`** | `/resume [session-name]` | Displays interactive picker to resume prior conversation sessions. |
+| **`/rename`** | `/rename <new-name>` | Assigns a custom identifier name to the current session for easy resuming. |
+| **`/rewind`** | `/rewind` | Opens checkpoint menu to roll back both filesystem edits and conversation turns. |
+| **`/diff`** | `/diff` | Displays interactive git diff of all uncommitted modifications executed by Claude. |
+| **`/cd`** | `/cd <path>` | Changes active working directory while retaining active prompt cache entries. |
+| **`/background`** | `/background` (or `/bg`) | Detaches current interactive session into a background agent running in user space. |
+
+### Code Analysis & Refactoring Tools
+
+| Slash Command | Usage Syntax | Operational Purpose |
+| :--- | :--- | :--- |
+| **`/init`** | `/init` | Scans workspace and auto-generates a standardized `CLAUDE.md` context file. |
+| **`/code-review`** | `/code-review [--fix] [--comment]` | Audits uncommitted git diff for security flaws and performance bottlenecks. |
+| **`/simplify`** | `/simplify [target-file]` | Performs cleanup-only refactoring (simplifying code, removing boilerplate). |
+| **`/verify`** | `/verify` | Compiles, builds, and executes application tests to confirm code modifications work. |
+| **`/plan`** | `/plan` | Enters read-only planning mode to analyze repository state before editing. |
+| **`/branch`** | `/branch <branch-name>` | Branches active conversation to explore alternative refactoring directions. |
+| **`/fork`** | `/fork <directive>` | Copies current conversation into a new background session while keeping active context. |
+| **`/subtask`** | `/subtask <directive>` | Spawns an in-session subagent that executes a sub-goal and returns findings. |
+| **`/batch`** | `/batch <task-description>` | Decomposes massive changes into parallel units running across separate git worktrees. |
+
+### System Diagnostics & Advanced Utilities
+
+| Slash Command | Usage Syntax | Operational Purpose |
+| :--- | :--- | :--- |
+| **`/doctor`** | `/doctor` (or `/checkup`) | Runs comprehensive diagnostic audit on auth, settings, MCP servers, and updater state. Press `f` to auto-fix issues. |
+| **`/insights`** | `/insights` | Generates analytical report on developer prompting efficiency, waiting times, and token cost patterns. |
+| **`/loop`** | `/loop <interval> <prompt>` | Schedules a prompt or slash command to run repeatedly on a timer (e.g., `/loop 5m /verify`). |
+| **`/teleport`** | `/teleport` | Pulls an active session from the Claude web interface (`claude.ai`) or iOS app into your terminal. |
+| **`/remote-control`**| `/remote-control` | Allows controlling your local terminal Claude session remotely from mobile or web interfaces. |
+| **`/deep-research`** | `/deep-research <topic>` | Fans out web queries, cross-checks technical documentation, and synthesizes a cited report. |
+| **`/btw`** | `/btw <question>` | Asks an ephemeral side question without writing to conversation context or using tokens. |
+
+---
+
+## 🤖 4. Non-Interactive CLI Automation & Piping (`claude -p`)
+
+The `-p` (print) flag runs Claude Code in headless, non-interactive mode. This enables integration into shell scripts, CI/CD runners, and git hooks.
+
+### Core Automation Flags
+
+```bash
+# Simple non-interactive query
+claude -p "Explain the error handling strategy in src/server.ts"
+
+# Read input from standard Unix pipe
+cat error.log | claude -p "What is causing this database connection pool exhaustion?"
+
+# Audit Git Diff non-interactively
+git diff main | claude -p "Review for OWASP Top 10 security vulnerabilities"
+
+# Enforce JSON output format for downstream shell processing
+claude -p "Extract all API route definitions from src/routes/" --output-format json
+
+# Restrict allowed tool calls (Auto-approve specific tools)
+claude -p "Fix unit test failures in tests/auth.test.ts" --allowedTools "Read,Edit,Bash(npm test)"
+
+# Explicitly block destructive commands
+claude -p "Refactor API layer" --disallowedTools "Bash(rm:*),Bash(sudo:*)"
+
+# Set strict spending and turn limits
+claude -p "Refactor database migrations" --max-budget-usd 3.50 --max-turns 5
+
+# Headless CI/CD container mode (Bypasses all confirmation prompts)
+claude --dangerously-skip-permissions -p "Run linter and auto-fix formatting issues"
+```
+
+### JSON Schema Output Enforcement
+
+To force Claude Code to return structured JSON adhering to a specific schema:
+
+```bash
+claude -p "Extract exported function signatures from src/utils.ts" \
+  --output-format json \
+  --json-schema '{
+    "type": "object",
+    "properties": {
+      "functions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "returnType": { "type": "string" }
+          },
+          "required": ["name", "returnType"]
+        }
+      }
+    },
+    "required": ["functions"]
+  }'
+```
+
+---
+
+## 📄 5. `CLAUDE.md` Project Configuration Architecture
+
+`CLAUDE.md` is the primary configuration file for establishing repository-level guidelines, build instructions, and coding standards. It is loaded automatically at the start of every session.
+
+### File Hierarchy & Resolution Order
+
+```text
+Project Root Configuration:
+├── ./CLAUDE.md                  # Project-specific rules (Committed to Git)
+├── ./.claude/CLAUDE.md          # Alternative project path (Committed to Git)
+├── ./.claude/rules/*.md         # Path-specific conditional rules
+└── ~/.claude/CLAUDE.md          # Global user preferences (Personal - Not committed)
+```
+
+### Production `CLAUDE.md` Template
+
+Create `CLAUDE.md` at your repository root:
+
+```markdown
+# Repository Technical Guidelines — Modern E-Commerce API
+
+## Build, Test & Lint Commands
+- Run Unit Tests: `npm test`
+- Run Single Test File: `npx jest tests/auth.test.ts`
+- Execute Production Build: `npm run build`
+- Type Check & Lint: `npm run typecheck && npm run lint`
+
+## Architecture & Framework Stack
+- Runtime & Framework: Node.js v20 LTS + Express.js + TypeScript Strict
+- Database Engine: PostgreSQL 16 managed via Prisma ORM (`prisma/schema.prisma`)
+- Context & Cache Layer: Redis Enterprise (`src/lib/redis.ts`)
+
+## Coding Standards & Conventions
+- All database queries must use parameterized statements or Prisma client calls.
+- Never write bare `any` types; define explicit Zod validation schemas for API inputs.
+- All errors must be handled by `src/middleware/errorHandler.ts`.
+
+## Environment Context References
+- Import Database Schema: @prisma/schema.prisma
+- Import API Package Manifest: @package.json
+```
+
+### Path-Specific Rules (`.claude/rules/*.md`)
+
+To enforce rules that only apply when Claude touches specific subdirectories, create path-targeted rule files under `.claude/rules/`.
+
+Example: `.claude/rules/api-routes.md`:
+
+```markdown
+---
+paths:
+  - "src/routes/**/*.ts"
+  - "src/controllers/**/*.ts"
+---
+
+# REST API Security Guidelines
+- Every endpoint MUST enforce JWT bearer token validation middleware.
+- Input validation MUST be executed using Zod schemas before hitting business logic.
+- API endpoints MUST return standard RFC 7807 problem details JSON on error.
+```
+
+---
+
+## 🔌 6. MCP Servers Setup (`.mcp.json`)
+
+Model Context Protocol (MCP) connects Claude Code to external tools, databases, issue trackers, and third-party APIs.
+
+### Project Configuration (`.mcp.json`)
+
+Create `.mcp.json` at your repository root to share tool integrations across your engineering team:
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN"
+      }
+    },
+    "postgres": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:secret@localhost:5432/production_db"
+      }
+    },
+    "sentry": {
+      "type": "http",
+      "url": "https://mcp.sentry.io/query"
+    }
+  }
+}
+```
+
+### Managing MCP via CLI Subcommands
+
+```bash
+# Add a new stdio MCP server
+claude mcp add github -e GITHUB_TOKEN=$GITHUB_TOKEN -- npx @modelcontextprotocol/server-github
+
+# Add an HTTP transport MCP server
+claude mcp add --transport http sentry https://mcp.sentry.io/query
+
+# List all active MCP server connections
+claude mcp list
+
+# Authenticate OAuth MCP connections
+claude mcp login github
+```
+
+---
+
+## 🧠 7. Custom Skills & Subagents
+
+Extend Claude Code by authoring reusable slash commands (Skills) and specialized subagents.
+
+### Authoring Custom Skills (`.claude/skills/`)
+
+Create `.claude/skills/deploy/SKILL.md`:
+
+```markdown
+---
+name: deploy
+description: Executing automated staging/production deployments
+argument-hint: "[environment]"
+user-invocable: true
+---
+
+Execute a verified deployment to the $0 environment (default: staging).
+
+Execution Workflow:
+1. Run `npm run typecheck` and `npm test` to verify codebase integrity.
+2. Build static artifacts via `npm run build`.
+3. Execute deployment script: `./scripts/deploy.sh $0`.
+4. Trigger health check endpoint and verify HTTP 200 OK response.
+```
+
+Invoke your skill inside terminal sessions:
+
+```bash
+/deploy production
+```
+
+### Authoring Custom Subagents (`.claude/agents/`)
+
+Create `.claude/agents/security-auditor/AGENT.md`:
+
+```markdown
+---
+name: security-auditor
+description: Specialized OWASP security auditing agent
+tools: Read, Grep, Glob, Bash
+model: sonnet
+---
+
+You are an expert Application Security Auditor. When invoked:
+1. Audit all modified files for SQL injection, XSS, and unauthenticated endpoints.
+2. Verify that secrets, private keys, and API tokens are NOT committed.
+3. Validate CORS origins and JWT verification middleware.
+```
+
+Invoke your agent in interactive or headless modes:
+
+```bash
+# Interactive call
+@security-auditor Perform security audit on latest changes
+
+# Headless CLI call
+claude --agent security-auditor -p "Audit src/auth/ for vulnerabilities"
+```
+
+---
+
+## ⚡ 8. Background Agents & Dynamic Workflows
+
+Claude Code supports running full autonomous agent sessions detached in the background.
+
+```bash
+# Launch a background agent session
+claude --bg "Investigate flaky test failures in tests/integration/"
+
+# Launch a background shell command
+claude --bg --exec "npm run test:e2e"
+
+# Open interactive TUI background agent manager
+claude agents
+
+# Manage background sessions by ID
+claude attach 7c5dcf5d    # Attach to terminal
+claude logs 7c5dcf5d      # Tail live log output
+claude stop 7c5dcf5d      # Stop running background session
+```
+
+### Dynamic Multi-Agent Workflows
+
+When handling large tasks under high reasoning effort (`/effort max` or `ultracode`), Claude Code automatically spawns parallel subagents:
+
+* **`/subtask <directive>`**: Spawns an in-session subagent that executes an isolated task and reports back.
+* **`/batch <task>`**: Decomposes repository-wide refactoring into 5–30 units running in parallel git worktrees.
+
+---
+
+## ⚙️ 9. Environment Variables & TUI Optimization
+
+Fine-tune CLI performance, proxy configuration, and rendering settings via environment variables.
+
+### Recommended Shell Profile Exports (`~/.zshrc` / `~/.bashrc`)
+
+```bash
+# Eliminate terminal screen flicker & enable mouse event support
+export CLAUDE_CODE_NO_FLICKER=1
+
+# Set default model & reasoning budget
+export ANTHROPIC_MODEL="sonnet"
+export CLAUDE_CODE_EFFORT_LEVEL="high"
+
+# Configure corporate HTTP proxy
+export HTTPS_PROXY="http://proxy.enterprise.com:8080"
+
+# Safety caps: Limit subagent spawns per session (Default: 200)
+export CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION=100
+```
+
+---
+
+## 🧪 10. Real-World Shell Piping Examples
+
+Claude Code integrates into Unix pipeline chains.
+
+### 1. Automated Git Commit Message Generator
+
+```bash
+git diff --staged | claude -p "Generate a concise Conventional Commit message based on these changes" --model haiku
+```
+
+### 2. Live Log Error Root Cause Analysis
+
+```bash
+tail -n 500 /var/log/nginx/error.log | claude -p "Analyze these Nginx log errors and output root cause troubleshooting steps"
+```
+
+### 3. Kubernetes Pod Failure Audit
+
+```bash
+kubectl logs deployment/payment-service --tail=200 | claude -p "Identify exception stack traces and suggest fixes"
+```
+
+### 4. Docker Container Resource Inspection
+
+```bash
+docker stats --no-stream | claude -p "Which containers are exceeding memory thresholds?"
+```
+
+---
+
+## 📊 Summary Quick Reference Card
+
+```text
+================================================================================
+CLAUDE CODE QUICK REFERENCE CARD
+================================================================================
+Launch Interactive Session:    claude
+Resume Last Session:           claude -c
+Initialize CLAUDE.md:          /init
+Switch Permission Mode:        Shift + Tab
+Rewind Code & History:         Esc + Esc
+Compact Context Window:        /compact
+Check Token Cost:              /cost
+Run Setup Health Check:        /doctor  (press 'f' to auto-fix)
+Headless Non-Interactive Run:  claude -p "prompt" --output-format json
+Flicker-Free TUI Mode:         export CLAUDE_CODE_NO_FLICKER=1
+================================================================================
+```
+
+---
+
+## Related Guides & Workflows
+
+* For native Windows PowerShell & WSL2 setup, read [How to Install and Run Claude Code CLI on Windows](/tutorials/installing-claude-code-cli-windows).
+* For cross-platform installation methods, see [How to Install and Set Up Claude Code CLI](/tutorials/how-to-install-claude-code-cli).
+* For agent loop mechanics, explore [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
+
+---
+
+# [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.pages.dev/tutorials/claude-desktop-download-installation-guide)
+
+> A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.
+
+Category: Tutorials | Tags: ["claude", "claude-desktop", "installation", "mcp", "anthropic", "desktop-app"]
+
+Anthropic's **Claude Desktop** application brings conversational AI, autonomous file analysis, and local tool execution directly to your native operating system. Unlike web browser interfaces, Claude Desktop runs as a dedicated application on **macOS** and **Windows**, providing local filesystem access, menu bar shortcuts, global hotkey triggers, and seamless **Model Context Protocol (MCP)** server integration.
+
+This guide provides step-by-step instructions for downloading, installing, configuring, and optimizing Claude Desktop across macOS and Windows.
+
+---
+
+## Operating System Matrix: Claude Desktop vs Claude Code CLI
+
+| Feature / Capability | Claude Desktop (GUI App) | Claude Code CLI (Terminal Agent) | Web Client (`claude.ai`) |
+| :--- | :--- | :--- | :--- |
+| **Primary Interface** | Native GUI Window / Menu Bar | POSIX Terminal Shell | Web Browser Tab |
+| **Local File Access** | User-granted directory mounts | Direct workspace filesystem access | File attachment upload |
+| **MCP Server Support** | `claude_desktop_config.json` | `.mcp.json` / CLI flags | None |
+| **Target User** | Designers, Writers, Analysts | Software Developers & DevOps | General Knowledge Workers |
+| **Supported OS** | macOS 12+ & Windows 10/11 | macOS, Linux, WSL2 | Any Web Browser |
+
+---
+
+## Step 1: Downloading & Installing Claude Desktop
+
+Always download installer packages directly from Anthropic's verified domain to prevent downloading tampered binaries.
+
+### Installing on macOS (Apple Silicon & Intel)
+
+#### Method A: Direct Installer Download
+1. Visit the official portal: `claude.ai/download`.
+2. Click **Download for macOS** (`Claude-Setup.dmg`).
+3. Open the `.dmg` file and drag **Claude** into your `/Applications` directory.
+4. Launch Claude from Spotlight (`Cmd + Space` -> *Claude*).
+
+#### Method B: Homebrew Cask Package Manager
+If you manage macOS software via Homebrew, execute:
+
+```bash
+brew install --cask claude
+```
+
+To update Claude Desktop in the future:
+
+```bash
+brew upgrade --cask claude
+```
+
+---
+
+### Installing on Windows 10 & 11
+
+1. Visit `claude.ai/download` and select **Download for Windows** (`Claude-Setup.exe`).
+2. Run the `.exe` installer. The application extracts into your user-space `%LOCALAPPDATA%\Programs\Claude` directory without requiring Administrator privileges.
+3. Launch Claude from the Windows Start Menu or Taskbar.
+
+---
+
+## Step 2: Initial Setup & API Credential Sync
+
+Upon first launch, Claude Desktop prompts you to sign in:
+
+```mermaid
+flowchart TD
+    Launch[Launch Claude Desktop App] --> AuthChoice{Authentication Method}
+    AuthChoice -->|Claude Pro / Team| OAuth[OAuth Web Browser Sign-In]
+    AuthChoice -->|Anthropic Console| APIKey[Enter Console API Key]
+    OAuth --> SyncSettings[Sync Workspace & History]
+    APIKey --> SyncSettings
+    SyncSettings --> Ready[App Ready for Operations]
+```
+
+1. **Claude Pro & Team Accounts:** Click **Sign In with Browser** to authorize your existing subscription.
+2. **Anthropic Console API Users:** Enter your API Key (`sk-ant-api03...`) to enable pay-as-you-go usage.
+
+---
+
+## Step 3: Configuring Local MCP Servers (`claude_desktop_config.json`)
+
+One of the most powerful features of Claude Desktop is its native support for **Model Context Protocol (MCP)** servers, allowing Claude to interact with local databases, GitHub repositories, Google Drive, and local filesystem tools.
+
+### Configuration File Locations
+
+Edit the configuration file based on your operating system:
+
+* **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+* **Windows:** `%APPDATA%\Claude\claude_desktop_config.json` (`C:\Users\<Username>\AppData\Roaming\Claude\claude_desktop_config.json`)
+
+### Example `claude_desktop_config.json` Schema
+
+Open or create `claude_desktop_config.json` and add your local tool configurations:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/alice/projects",
+        "/Users/alice/documents"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "github_pat_your_token_here"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://localhost:5432/analytics_db"
+      ]
+    }
+  }
+}
+```
+
+Restart the Claude Desktop application after saving changes. A hammer icon 🛠️ will appear in the input bar confirming connected MCP tools.
+
+---
+
+## Step 4: Local Directory & Filesystem Permissions
+
+Claude Desktop enforces strict OS-level sandbox permissions before accessing local folders.
+
+### Granting Directory Access
+
+1. Open **Settings** inside Claude Desktop (`Cmd + ,` on Mac or `Ctrl + ,` on Windows).
+2. Navigate to **Local Filesystem Permissions**.
+3. Click **Add Directory** and select your project or documents folder.
+4. Claude can now search, read, and create documents inside specified directories without prompting for manual file uploads.
+
+---
+
+## Step 5: Global Hotkeys & Shortcuts
+
+Boost daily productivity using native desktop shortcuts:
+
+| Action | macOS Shortcut | Windows Shortcut |
+| :--- | :--- | :--- |
+| **Open Quick Chat Overlay** | `Option + Space` | `Alt + Space` |
+| **Open App Preferences** | `Cmd + ,` | `Ctrl + ,` |
+| **New Conversation** | `Cmd + N` | `Ctrl + N` |
+| **Attach File / Folder** | `Cmd + Shift + U` | `Ctrl + Shift + U` |
+| **Toggle Menu Bar Window** | `Cmd + Shift + C` | `Ctrl + Shift + C` |
+
+---
+
+## Troubleshooting Common Installation Issues
+
+### 1. Claude Desktop Fails to Launch on Windows
+**Fix**: Verify that Microsoft Edge WebView2 Runtime is installed. Download it from Microsoft's official developer portal if missing.
+
+### 2. MCP Server Hammer Icon Missing
+**Fix**: Check syntax errors in `claude_desktop_config.json` using a JSON validator. Ensure Node.js (`npx`) is accessible in your system `PATH`.
+
+---
+
+## Related Guides & Workflows
+
+* For terminal-native AI coding, read [Claude Code Cheat Sheet: Commands, Shortcuts & Flags](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
+* For desktop agentic workflow deep dives, see [What is Claude Cowork? Desktop Agent Guide](/guides/claude-cowork-desktop-agent-guide).
+* For cross-platform CLI setups, explore [How to Install and Set Up Claude Code CLI](/tutorials/how-to-install-claude-code-cli).
+
+---
+
+# [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.pages.dev/tutorials/how-to-build-custom-claude-code-skills)
+
+> A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.
+
+Category: Tutorials | Tags: ["claude", "cli", "custom-skills", "subagents", "claude-agent-sdk", "anthropic"]
+
+Anthropic's **Claude Code** CLI allows developers to extend its agentic capabilities through **Custom Skills** (reusable slash commands) and **Custom Subagents** (specialized AI personas). Instead of typing long, complex prompts repeatedly, you can package prompt engineering templates, multi-step workflows, and tool execution boundaries into structured markdown files (`SKILL.md` and `AGENT.md`).
+
+This step-by-step developer tutorial covers how to author, test, register, and share custom skills and subagents using local directory conventions and the **Claude Agent SDK**.
+
+---
+
+## Directory Hierarchy & Scope Resolution
+
+Claude Code resolves custom skills and subagents across two primary scopes:
+
+```text
+Directory Structure:
+├── .claude/                             # Project Level (Committed to Git - Team Shared)
+│   ├── skills/                          # Custom Slash Commands
+│   │   ├── deploy/
+│   │   │   └── SKILL.md                 # Triggers via /deploy
+│   │   └── refactor-db/
+│   │       └── SKILL.md                 # Triggers via /refactor-db
+│   └── agents/                          # Custom Subagent Personas
+│       └── security-auditor/
+│           └── AGENT.md                 # Invoked via @security-auditor or --agent
+└── ~/.claude/                           # Global User Level (Personal - All Projects)
+    ├── skills/
+    └── agents/
+```
+
+---
+
+## Step 1: Authoring a Custom Skill (`SKILL.md`)
+
+A Custom Skill defines a structured prompt template that registers as a slash command inside interactive Claude Code sessions.
+
+### Creating Your First Skill File
+
+Create `.claude/skills/code-audit/SKILL.md` in your repository:
+
+```bash
+mkdir -p .claude/skills/code-audit
+```
+
+Add the skill specification:
+
+```markdown
+---
+name: code-audit
+description: Audits modified files for performance bottlenecks, TypeScript errors, and OWASP security risks
+argument-hint: "[target-directory]"
+user-invocable: true
+---
+
+Execute a comprehensive technical code audit on $0 (default: `src/`).
+
+### Inspection Steps:
+1. **Type & Lint Validation:** Run `npm run typecheck` and inspect stdout for strict mode errors.
+2. **Security Audit:** Scan all files in $0 for unauthenticated endpoints, SQL injection vectors, and hardcoded API keys.
+3. **Performance Optimization:** Check for N+1 query patterns and unindexed database queries.
+4. **Summary Report:** Output a structured markdown table categorizing findings into Critical, Warning, and Info tiers.
+```
+
+### Argument Variable Parsing (`$0`, `$1`, `$2`)
+
+Inside `SKILL.md` prompt bodies, argument placeholders dynamically capture parameters passed by the user:
+
+* **`$0`**: Captures the entire raw argument string passed after the command.
+* **`$1`**, **`$2`**: Captures whitespace-delimited individual parameters.
+
+### Invoking Your Custom Skill
+
+Launch Claude Code in your project root and invoke the new command:
+
+```bash
+claude
+/code-audit src/api/v1/
+```
+
+---
+
+## Step 2: Authoring a Custom Subagent (`AGENT.md`)
+
+Custom Subagents are specialized AI worker personas configured with specific model targets (`sonnet` vs `opus`), custom system directives, and restricted toolsets.
+
+### Creating a Custom Subagent File
+
+Create `.claude/agents/reviewer/AGENT.md`:
+
+```bash
+mkdir -p .claude/agents/reviewer
+```
+
+Add the subagent configuration:
+
+```markdown
+---
+name: reviewer
+description: Senior Code Reviewer Subagent. Audits pull requests and git diffs.
+tools: Read, Grep, Glob, Bash
+model: sonnet
+---
+
+You are a Senior Technical Code Reviewer. When reviewing changes:
+- Focus exclusively on correctness, edge case handling, and unit test coverage.
+- Enforce strict adherence to conventions defined in the root `CLAUDE.md`.
+- Flag any missing error handling wrappers in async functions.
+```
+
+### Invoking Subagents Programmatically
+
+```bash
+# Invoke interactively in terminal
+@reviewer Audit the uncommitted git diff in src/auth/
+
+# Select agent for headless CI/CD execution
+claude --agent reviewer -p "Review latest commit"
+```
+
+---
+
+## Step 3: Programmatic Automation via Claude Agent SDK
+
+For advanced workflows, developers can control Claude Code agents programmatically using the **Claude Agent SDK** in TypeScript or Python.
+
+### TypeScript SDK Example
+
+Install the SDK:
+
+```bash
+npm install @anthropic-ai/claude-agent-sdk
+```
+
+Create `scripts/run-agent-review.ts`:
+
+```typescript
+import { ClaudeAgent } from '@anthropic-ai/claude-agent-sdk';
+
+async function executeAutomatedReview() {
+  const agent = new ClaudeAgent({
+    model: 'claude-3-7-sonnet-20250219',
+    workingDirectory: process.cwd(),
+    allowedTools: ['Read', 'Grep', 'Glob', 'Bash(npm test)'],
+    maxTurns: 5
+  });
+
+  const response = await agent.execute({
+    prompt: 'Run unit tests and analyze any failing assertions in tests/auth.test.ts'
+  });
+
+  console.log('Agent Execution Summary:', response.output);
+}
+
+executeAutomatedReview();
+```
+
+---
+
+## Related Guides & Workflows
+
+* For complete CLI cheat sheets, read [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
+* For desktop agentic setup, see [Claude Desktop Download & Setup Guide](/tutorials/claude-desktop-download-installation-guide).
+* For architecture analysis, explore [Inside Claude Code Agent Loop Architecture](/guides/claude-code-agent-loop-architecture).
+
+---
+
 # [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli)
 
 > The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.
@@ -682,6 +1531,96 @@ graph LR
 
 ---
 
+# [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.pages.dev/comparisons/openaicodex-vs-claude-code-vs-opencode)
+
+> A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.
+
+Category: Comparisons | Tags: ["claude", "codex", "opencode", "cli", "ai-agents", "benchmarks", "comparison"]
+
+The landscape of developer tooling is transitioning rapidly from inline code completion plugins to autonomous **terminal AI agents**. Rather than just suggesting auto-complete snippets, modern terminal agents inspect local repositories, execute bash commands, run automated test suites, evaluate error tracebacks, and manage git worktrees.
+
+Three primary contenders dominate this domain: **Anthropic's Claude Code CLI**, **OpenAI Codex**, and the open-source **OpenCode** framework.
+
+This guide provides an architectural, benchmark, and cost comparison across all three platforms.
+
+---
+
+## 📊 Executive Summary & Head-to-Head Matrix
+
+```mermaid
+flowchart TD
+    Task[Terminal Task Goal] --> ChooseAgent{Select Terminal Agent}
+    ChooseAgent -->|Anthropic Enterprise / Sonnet 5| ClaudeCode[Claude Code CLI]
+    ChooseAgent -->|OpenAI Ecosystem / API| Codex[OpenAI Codex]
+    ChooseAgent -->|Local LLMs / Open Source| OpenCode[OpenCode Agent]
+```
+
+### Feature & Capability Comparison
+
+| Metric / Dimension | Anthropic Claude Code CLI | OpenAI Codex | OpenCode (Open Source) |
+| :--- | :--- | :--- | :--- |
+| **Primary Execution Engine** | Claude 3.7 Sonnet / Opus 4.8 | GPT-4o / Codex API | Any Model (Ollama / Local / API) |
+| **Native Context Window** | **1,000,000 Tokens (Sonnet 5)** | 128,000 Tokens | Variable (Model Dependent) |
+| **SWE-bench Verified Score** | **70.3%** | 49.2% | Variable |
+| **TerminalBench 2.1 Score** | **88.8%** | 65.4% | Variable |
+| **Execution Loop Architecture** | Stateful Observe-Plan-Act-Verify | Request-Response Prompt Loop | Configurable Agent Loop |
+| **Permission Controls** | 3-Tier Security + Shift+Tab | Custom System Prompts | Middleware Rules |
+| **Local Model Support** | API Only (Anthropic Console) | API Only (OpenAI) | **Yes (Ollama, vLLM, SGLang)** |
+| **License Type** | Proprietary CLI Client | Proprietary API Platform | **MIT Open Source License** |
+
+---
+
+## 🧠 1. Architectural Deep Dive
+
+### Anthropic Claude Code CLI
+Claude Code operates directly on your POSIX terminal shell. It builds a localized, lightweight AST index of your project files (excluding `.gitignore` patterns), executing atomic tool calls (`FileRead`, `FileEdit`, `BashRun`, `GrepSearch`) inside a stateful Observe-Plan-Act-Verify (OPAV) execution loop.
+
+### OpenAI Codex
+OpenAI Codex operates primarily as an API-driven code synthesis engine. While highly effective at isolated function generation and single-file edits, it lacks a native, interactive terminal TUI runtime wrapper out of the box, requiring secondary CLI tools or IDE plugins to manage context.
+
+### OpenCode (Open-Source Terminal Agent)
+OpenCode is an open-source terminal framework designed for maximum customization. It allows developers to plug in local LLMs running via **Ollama**, **vLLM**, or **SGLang** (e.g. DeepSeek R1, Llama 3.3 70B), freeing engineering teams from proprietary API vendor lock-in.
+
+---
+
+## ⚡ 2. Context Windows & Context Compression
+
+* **Claude Code CLI:** Features a native **1M-token context window** powered by Sonnet 5 and Opus 4.8. It leverages Ephemeral Prompt Caching to reduce token costs by up to 90% and includes the `/compact` command to summarize long multi-turn sessions automatically.
+* **OpenAI Codex:** Operates within standard 128k context limits, requiring frequent prompt truncation when analyzing multi-file project repositories.
+* **OpenCode:** Context window size depends on the underlying model provider (e.g., DeepSeek R1 64k vs Llama 3.3 128k).
+
+---
+
+## 💰 3. Pricing & Token Economics
+
+```text
+Cost Breakdown per 1,000,000 Tokens:
+-------------------------------------------------------------------
+Claude 3.7 Sonnet (Standard Input):   $3.00 USD
+Claude 3.7 Sonnet (Cached Input):     $0.30 USD (90% Savings)
+GPT-4o (Standard Input):              $2.50 USD
+Local Models via OpenCode (Ollama):   $0.00 USD (Self-Hosted Hardware)
+-------------------------------------------------------------------
+```
+
+---
+
+## 🏆 Final Verdict & Decision Matrix
+
+* **Choose Claude Code CLI if:** You need the highest SWE-bench accuracy (70.3%), deep multi-file repo refactoring, strict permission security, and native 1M context caching.
+* **Choose OpenAI Codex if:** Your stack is deeply embedded in the OpenAI API ecosystem or Azure OpenAI Service endpoints.
+* **Choose OpenCode if:** You require 100% open-source software, complete data privacy, and the ability to run local models offline via Ollama.
+
+---
+
+## Related Guides & Workflows
+
+* For complete CLI shortcuts, read [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
+* For desktop agent comparisons, see [Claude Cowork Desktop Agent Guide](/guides/claude-cowork-desktop-agent-guide).
+* For agent loop mechanics, explore [Inside Claude Code Agent Loop Architecture](/guides/claude-code-agent-loop-architecture).
+
+---
+
 # [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.pages.dev/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison)
 
 > An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.
@@ -1283,6 +2222,118 @@ It uses ephemeral prompt caching and automatic context compaction via the `/comp
 * For installation & setup guides across all platforms, see [How to Install and Set Up Claude Code CLI](/tutorials/how-to-install-claude-code-cli).
 * For native Windows setup & WSL2 optimization, read [How to Install and Run Claude Code CLI on Windows](/tutorials/installing-claude-code-cli-windows).
 * For Anthropic official certification pathways, explore [Anthropic Claude Certification Guide](/guides/anthropic-claude-certification-developer-guide).
+
+---
+
+# [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.pages.dev/guides/claude-cowork-desktop-agent-guide)
+
+> A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
+
+Category: Guides | Tags: ["claude", "claude-cowork", "desktop-agent", "productivity", "anthropic", "ai-agents"]
+
+Anthropic's **Claude Cowork** represents a paradigm shift from traditional chat interfaces to autonomous desktop collaboration. Integrated directly into the **Claude Desktop** application, Cowork operates as a persistent, agentic assistant capable of reading, editing, organizing, and synthesizing files across your local computer folders.
+
+Whether you are automating multi-file document refactoring, organizing local media libraries, or generating complex reports from raw spreadsheet data, Claude Cowork provides an interactive, human-in-the-loop desktop agent experience.
+
+This guide details what Claude Cowork is, how its security architecture operates, how to configure local permissions, and key workflow execution patterns.
+
+---
+
+## Architectural Breakdown: How Claude Cowork Operates
+
+Claude Cowork bridges the gap between conversational AI and local operating system task execution.
+
+```mermaid
+flowchart TD
+    UserInstruction[User Goal in Claude Desktop] --> ParseGoal[Parse Objective & Local Context]
+    ParseGoal --> ScopeCheck{Folder Mounted in Cowork?}
+    
+    ScopeCheck -->|No| RequestMount[Prompt User to Mount Target Folder]
+    ScopeCheck -->|Yes| PlanAgent[Plan Agent Sub-Tasks]
+    RequestMount --> PlanAgent
+    
+    PlanAgent --> ExecRead[Read Files & Analyze Metadata]
+    ExecRead --> DetectWrite{Requires File Modification / Creation?}
+    
+    DetectWrite -->|Read Only| OutputSummary[Output Report to User]
+    DetectWrite -->|Write / Edit| PromptConfirm[Display Proposed File Changes]
+    
+    PromptConfirm -->|Approved [Y]| ApplyWrite[Execute Atomic File Write]
+    PromptConfirm -->|Rejected [N]| Abort[Cancel File Operation]
+    
+    ApplyWrite --> OutputSummary
+```
+
+---
+
+## Claude Cowork vs Claude Code CLI vs Web Chat
+
+Understanding where Cowork fits into Anthropic's tool ecosystem:
+
+| Dimension / Feature | Claude Cowork (Desktop GUI) | Claude Code (Terminal CLI) | Web Chat (`claude.ai`) |
+| :--- | :--- | :--- | :--- |
+| **Primary Environment** | Native Desktop App GUI | System Shell Terminal | Browser Window |
+| **Target Document Types** | Docs, PDFs, CSVs, Images, Code | Codebases, Repositories, Git | Text & Uploaded Assets |
+| **Local File Execution** | User-mounted local folders | Full local git repository | Manual file upload |
+| **Permission Controls** | OS Directory Sandbox + Prompts | Shift+Tab Permission Modes | Browser Sandbox |
+| **Primary User Base** | Knowledge Workers & Executives | Software Engineers & DevOps | General Audience |
+
+---
+
+## Step-by-Step: Setting Up Claude Cowork
+
+### 1. Enable Cowork in Claude Desktop
+
+1. Download and install **Claude Desktop** (`claude.ai/download`).
+2. Launch the application and open **Settings** (`Cmd + ,` on macOS or `Ctrl + ,` on Windows).
+3. Navigate to the **Cowork & Agentic Workspaces** tab.
+4. Toggle **Enable Local Workspace Agent** to `ON`.
+
+### 2. Mounting Local Folders & Setting Boundaries
+
+For security, Claude Cowork cannot read your entire hard drive by default. You must explicitly mount specific project folders:
+
+1. Click **+ Add Workspace Folder** in the Cowork panel.
+2. Select target directories (e.g., `~/Documents/Q3-Reports/` or `C:\Users\Alice\Projects\DataAnalysis`).
+3. Set folder permission level:
+   * **Read-Only:** Claude can analyze documents but cannot modify or delete them.
+   * **Interactive Edit (Recommended):** Claude can edit and create files after displaying a confirmation prompt.
+
+---
+
+## Real-World Claude Cowork Workflows
+
+### 1. Automated Financial Report Synthesis
+
+Provide Cowork with access to a folder containing raw CSV sales logs and quarterly PDF invoices:
+
+> **Prompt:** *"Analyze all CSV files in my `~/Documents/Sales-2026/` folder. Extract total revenue by region, calculate month-over-month growth, and create a formatted markdown summary file named `Q2-Revenue-Summary.md`."*
+
+Cowork parses every spreadsheet in the background, calculates totals, and drafts the summary file directly in your folder.
+
+### 2. Multi-Document Restructuring & Editing
+
+Clean up inconsistent document formatting across dozens of files:
+
+> **Prompt:** *"Scan all `.docx` and `.md` files in `~/Projects/User-Docs/`. Ensure every document contains a standardized YAML header, fixes typo inconsistencies, and outputs the updated files to a new `./dist/` directory."*
+
+---
+
+## Security & Privacy Architecture
+
+Anthropic designed Claude Cowork with enterprise-grade security boundaries:
+
+* **Zero Cloud Storage of Files:** Your local files are processed ephemerally during active sessions and are not stored permanently on Anthropic servers.
+* **Granular Directory Mounting:** Cowork is restricted strictly to folders you explicitly mount. System root directories (`/System`, `C:\Windows`) are permanently blocked.
+* **Interactive Diffs:** Before executing any file write, rename, or deletion, Cowork displays a visual diff window requiring human approval.
+
+---
+
+## Related Guides & Workflows
+
+* For native Claude Desktop setup, read [Claude Desktop Download & Setup Guide](/tutorials/claude-desktop-download-installation-guide).
+* For terminal-based software engineering, explore [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
+* For agent loop mechanics, see [Inside Claude Code Agent Architecture](/guides/claude-code-agent-loop-architecture).
 
 ---
 

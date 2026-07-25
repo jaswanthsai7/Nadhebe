@@ -1,5 +1,35 @@
 [
   {
+    "title": "Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills",
+    "description": "The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.",
+    "url": "https://nadhebe.pages.dev/tutorials/claude-code-cheat-sheet-commands-shortcuts",
+    "category": "Tutorials",
+    "tags": [
+      "[\"claude\", \"cli\", \"cheat-sheet\", \"developer-tools\", \"productivity\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions",
+    "description": "A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.",
+    "url": "https://nadhebe.pages.dev/tutorials/claude-desktop-download-installation-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"claude\", \"claude-desktop\", \"installation\", \"mcp\", \"anthropic\", \"desktop-app\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "How to Build Custom Claude Code Skills & Subagents (Developer Guide)",
+    "description": "A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.",
+    "url": "https://nadhebe.pages.dev/tutorials/how-to-build-custom-claude-code-skills",
+    "category": "Tutorials",
+    "tags": [
+      "[\"claude\", \"cli\", \"custom-skills\", \"subagents\", \"claude-agent-sdk\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)",
     "description": "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.",
     "url": "https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli",
@@ -30,6 +60,16 @@
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
+    "title": "OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison",
+    "description": "A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.",
+    "url": "https://nadhebe.pages.dev/comparisons/openaicodex-vs-claude-code-vs-opencode",
+    "category": "Comparisons",
+    "tags": [
+      "[\"claude\", \"codex\", \"opencode\", \"cli\", \"ai-agents\", \"benchmarks\", \"comparison\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?",
     "description": "An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.",
     "url": "https://nadhebe.pages.dev/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison",
@@ -56,6 +96,16 @@
     "category": "Guides",
     "tags": [
       "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\", \"software-design\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide",
+    "description": "A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.",
+    "url": "https://nadhebe.pages.dev/guides/claude-cowork-desktop-agent-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"claude\", \"claude-cowork\", \"desktop-agent\", \"productivity\", \"anthropic\", \"ai-agents\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
