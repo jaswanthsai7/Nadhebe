@@ -125,14 +125,16 @@ html.dark {
 
   .prose-article code {
     @apply rounded-6 bg-code px-6 py-2 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    overflow-wrap: anywhere;
+    word-break: break-all;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+    max-width: 100%;
   }
   .prose-article pre code {
     white-space: pre !important;
     word-break: normal !important;
+    overflow-wrap: normal !important;
   }
 
   .prose-article pre {
@@ -185,18 +187,18 @@ html.dark {
 
   /* ─── Search Dialog ─── */
   .search-overlay {
-    @apply fixed inset-0 z-50 flex items-start justify-center pt-[12vh] sm:pt-[16vh] bg-ink/40 dark:bg-ink-dark/30 backdrop-blur-sm;
+    @apply fixed inset-0 z-50 flex items-start justify-center pt-24 sm:pt-[12vh] px-12 sm:px-0 bg-ink/50 dark:bg-ink-dark/50 backdrop-blur-md;
     animation: fadeIn 100ms ease-out;
   }
   .search-dialog {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    @apply w-[calc(100%-32px)] max-w-[600px] max-h-[70vh] rounded-16 border border-border shadow-large overflow-hidden flex flex-col;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    @apply w-full max-w-[600px] max-h-[85vh] rounded-16 border border-border shadow-large overflow-hidden flex flex-col;
     animation: slideUp 150ms ease-out;
   }
   .dark .search-dialog {
-    background: rgba(20, 20, 20, 0.85);
+    background: rgba(18, 18, 20, 0.98) !important;
     @apply border-border-dark;
   }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
