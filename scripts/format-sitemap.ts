@@ -31,7 +31,12 @@ function run() {
     xml = xml.replace(/><url>/g, '>\n<url>').replace(/><sitemap>/g, '>\n<sitemap>').replace(/><\/urlset>/g, '>\n</urlset>').replace(/><\/sitemapindex>/g, '>\n</sitemapindex>');
 
     fs.writeFileSync(filePath, xml, 'utf-8');
-    console.log(`Formatted ${file}`);
+    
+    // Copy formatted sitemaps to public folder as well
+    const publicFilePath = path.join(process.cwd(), 'public', file);
+    fs.writeFileSync(publicFilePath, xml, 'utf-8');
+    
+    console.log(`Formatted and synced ${file}`);
   });
 
   console.log('Sitemap formatting complete!');
