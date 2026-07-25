@@ -137,7 +137,7 @@ html.dark {
   }
 
   .prose-article table {
-    @apply w-full overflow-hidden rounded-12 border border-border text-caption dark:border-border-dark;
+    @apply my-24 w-full rounded-12 border border-border text-caption dark:border-border-dark;
     border-collapse: separate;
     border-spacing: 0;
   }
@@ -146,6 +146,10 @@ html.dark {
   }
   .prose-article td {
     @apply border-t border-border px-16 py-12 text-ink2 dark:border-border-dark dark:text-ink2-dark;
+  }
+  .prose-article td code {
+    white-space: pre-wrap;
+    word-break: break-all;
   }
 
   /* ─── Card ─── */

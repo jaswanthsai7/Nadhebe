@@ -70,7 +70,7 @@ const moreNav = [
         type="button"
         data-search-trigger
         aria-label="Search articles"
-        class="flex h-32 items-center gap-6 rounded-8 border border-border bg-surface px-12 text-caption font-sans text-muted hover:border-ink2/30 hover:text-ink2 dark:border-border-dark dark:bg-surface-dark dark:text-muted-dark dark:hover:border-border-dark dark:hover:text-ink2-dark transition-all duration-150 cursor-pointer"
+        class="flex h-32 w-32 sm:w-auto items-center justify-center sm:justify-start gap-6 rounded-8 border border-border bg-surface px-0 sm:px-12 text-caption font-sans text-muted hover:border-ink2/30 hover:text-ink2 dark:border-border-dark dark:bg-surface-dark dark:text-muted-dark dark:hover:border-border-dark dark:hover:text-ink2-dark transition-all duration-150 cursor-pointer shrink-0"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14">
           <circle cx="11" cy="11" r="8"></circle>
@@ -146,7 +146,7 @@ const moreNav = [
   }
 
   const stored = localStorage.getItem('theme');
-  applyTheme(stored ? stored === 'dark' : true);
+  applyTheme(stored === 'dark');
 
   toggle?.addEventListener('click', () => {
     const isDark = root.classList.contains('dark');
