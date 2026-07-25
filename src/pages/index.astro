@@ -81,80 +81,161 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
   title="Nadhebe — AI Engineering Publication"
   description="Expert tutorials, in-depth reviews, system prompts, and technical comparisons for AI engineers and developers."
 >
-  <!-- Hero Section -->
+  <!-- Hero Section Slider -->
   <section class="mx-auto max-w-content px-16 sm:px-24 pt-32 pb-48 sm:pt-48 sm:pb-48">
-    {heroPost && (
-      <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 flex flex-col lg:flex-row gap-32 items-center justify-between shadow-medium">
-        
-        <!-- Left Side: Rotated Label + Meta -->
-        <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0">
-          
-          <!-- Rotated Vertical "Featured" Label (Hidden on small screens) -->
-          <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative overflow-hidden">
-            <span class="font-display font-extrabold uppercase tracking-widest text-ink/10 dark:text-ink-dark/10 absolute whitespace-nowrap" style="font-size: 4.5rem; letter-spacing: 0.15em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
-              Featured
-            </span>
-          </div>
+    <div class="relative overflow-hidden glass-panel border border-border dark:border-border-dark rounded-24 shadow-medium">
+      
+      <!-- Slides Container -->
+      <div id="hero-slider" class="relative w-full">
+        {latestPillars.slice(0, 3).map((post, index) => {
+          const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+          return (
+            <div 
+              class={`hero-slide flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 transition-all duration-500 absolute inset-0 opacity-0 pointer-events-none ${index === 0 ? 'relative !opacity-100 !pointer-events-auto' : ''}`}
+              data-slide-index={index}
+            >
+              
+              <!-- Left Side: Rotated Label + Meta -->
+              <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0">
+                <!-- Rotated Vertical "Featured" Label (Hidden on small screens) -->
+                <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative overflow-hidden">
+                  <span class="font-display font-extrabold uppercase tracking-widest text-ink/10 dark:text-ink-dark/10 absolute whitespace-nowrap" style="font-size: 4.5rem; letter-spacing: 0.15em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
+                    Featured
+                  </span>
+                </div>
 
-          <!-- Metadata -->
-          <div class="flex-1" data-reveal="left">
-            <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-12 block">
-              Featured {heroPost.data.category || 'Article'}
-            </span>
-            <a href={getArticleUrl(heroPost)} class="group block">
-              <h1 class="font-display text-h1 sm:text-display font-bold leading-[1.1] text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 tracking-tight">
-                {heroPost.data.title}
-              </h1>
-            </a>
-            <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed max-w-xl">
-              {heroPost.data.description}
-            </p>
-            
-            <!-- Author meta -->
-            <div class="mt-24 flex items-center gap-12 text-meta text-muted dark:text-muted-dark font-sans">
-              {heroAuthor?.data?.avatar && (
-                <img src={heroAuthor.data.avatar} alt={heroAuthor.data.name} width="24" height="24" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
-              )}
-              <span class="font-semibold text-ink2 dark:text-ink2-dark">{heroAuthor?.data?.name || 'Nadhebe Team'}</span>
-              <span class="text-border dark:text-border-dark">·</span>
-              <time datetime={heroPost.data.pubDate.toISOString()}>
-                {heroPost.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-              </time>
-              <span class="text-border dark:text-border-dark">·</span>
-              <span>{heroPost.data.estimatedReadingTime || 5} min read</span>
+                <!-- Metadata -->
+                <div class="flex-1">
+                  <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-12 block">
+                    Featured {post.data.category || 'Article'}
+                  </span>
+                  <a href={getArticleUrl(post)} class="group block">
+                    <h1 class="font-display text-h1 sm:text-display font-bold leading-[1.1] text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 tracking-tight">
+                      {post.data.title}
+                    </h1>
+                  </a>
+                  <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed max-w-xl">
+                    {post.data.description}
+                  </p>
+                  
+                  <!-- Author meta -->
+                  <div class="mt-24 flex items-center gap-12 text-meta text-muted dark:text-muted-dark font-sans">
+                    {author?.data?.avatar && (
+                      <img src={author.data.avatar} alt={author.data.name} width="24" height="24" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
+                    )}
+                    <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Team'}</span>
+                    <span class="text-border dark:text-border-dark">·</span>
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
+                    <span class="text-border dark:text-border-dark">·</span>
+                    <span>{post.data.estimatedReadingTime || 5} min read</span>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="mt-32 flex flex-wrap items-center gap-16">
+                    <a href={getArticleUrl(post)} class="btn-primary">
+                      Read Tutorial
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="/tutorials" class="text-caption font-sans font-semibold text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors inline-flex items-center gap-4">
+                      View all tutorials
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Side: Big Image -->
+              <div class="w-full lg:w-[55%] shrink-0">
+                <a href={getArticleUrl(post)} class="block overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium group">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.heroAlt || post.data.title}
+                    width="800"
+                    height="500"
+                    fetchpriority={index === 0 ? "high" : "low"}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    class="w-full h-auto aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                  />
+                </a>
+              </div>
+
             </div>
-
-            <!-- Buttons -->
-            <div class="mt-32 flex flex-wrap items-center gap-16">
-              <a href={getArticleUrl(heroPost)} class="btn-primary">
-                Read Tutorial
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="/tutorials" class="text-caption font-sans font-semibold text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors inline-flex items-center gap-4">
-                View all tutorials
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Side: Big Image -->
-        <div class="w-full lg:w-[55%] shrink-0" data-reveal="right">
-          <a href={getArticleUrl(heroPost)} class="block overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium group">
-            <img
-              src={heroPost.data.heroImage}
-              alt={heroPost.data.heroAlt || heroPost.data.title}
-              width="800"
-              height="500"
-              fetchpriority="high"
-              class="w-full h-auto aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
-            />
-          </a>
-        </div>
-
+          );
+        })}
       </div>
-    )}
+
+      <!-- Navigation Dots -->
+      <div class="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-8 z-10">
+        {latestPillars.slice(0, 3).map((_, index) => (
+          <button
+            class={`w-8 h-8 rounded-full transition-all duration-300 hero-dot ${index === 0 ? 'bg-accent dark:bg-accent-dark w-24' : 'bg-ink/20 dark:bg-ink-dark/20'}`}
+            data-dot-index={index}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+    </div>
   </section>
+
+  <!-- Slider Client-Side JS -->
+  <script>
+    function initSlider() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      if (slides.length <= 1) return;
+
+      let currentSlide = 0;
+      let timer: any;
+
+      function showSlide(index: number) {
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.remove('absolute', 'opacity-0', 'pointer-events-none');
+            slide.classList.add('relative', '!opacity-100', '!pointer-events-auto');
+          } else {
+            slide.classList.remove('relative', '!opacity-100', '!pointer-events-auto');
+            slide.classList.add('absolute', 'opacity-0', 'pointer-events-none');
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove('bg-ink/20', 'dark:bg-ink-dark/20');
+            dot.classList.add('bg-accent', 'dark:bg-accent-dark', 'w-24');
+          } else {
+            dot.classList.remove('bg-accent', 'dark:bg-accent-dark', 'w-24');
+            dot.classList.add('bg-ink/20', 'dark:bg-ink-dark/20');
+          }
+        });
+
+        currentSlide = index;
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          const next = (currentSlide + 1) % slides.length;
+          showSlide(next);
+        }, 6000);
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          showSlide(i);
+          startTimer(); // reset auto-play timer on click
+        });
+      });
+
+      startTimer();
+    }
+
+    // Run on init and page changes
+    initSlider();
+    document.addEventListener('astro:page-load', initSlider);
+  </script>
 
   <div class="mx-auto max-w-content px-16 sm:px-24 pb-64 sm:pb-96 space-y-48 sm:space-y-80">
 
