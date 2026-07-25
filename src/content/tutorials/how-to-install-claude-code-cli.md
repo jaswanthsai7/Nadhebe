@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Tutorials
 tags: ["claude", "cli", "installation", "anthropic", "developer-tools"]
-heroImage: "/images/claude-cli-hero.jpg"
+heroImage: "/images/claude-cli-hero.png"
 heroAlt: "Minimalist terminal installer schematic showing package manager nodes and clean CLI interface"
 draft: false
 topic: "Claude Code"

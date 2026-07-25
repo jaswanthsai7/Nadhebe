@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Tutorials
 tags: ["claude", "cli", "windows", "wsl2", "powershell", "anthropic"]
-heroImage: "/images/claude-windows-hero.jpg"
+heroImage: "/images/claude-windows-hero.png"
 heroAlt: "Minimalist technical diagram showing terminal execution of Claude Code on Windows"
 draft: false
 topic: "Claude Code"
