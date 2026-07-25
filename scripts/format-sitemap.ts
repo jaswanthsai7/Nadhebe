@@ -4,6 +4,7 @@ import path from 'path';
 function run() {
   console.log('Formatting sitemap XML files with XSL stylesheet...');
   const distDir = path.join(process.cwd(), 'dist');
+  const publicDir = path.join(process.cwd(), 'public');
   if (!fs.existsSync(distDir)) {
     console.error('Dist directory not found.');
     return;
@@ -37,6 +38,14 @@ function run() {
     fs.writeFileSync(publicFilePath, xml, 'utf-8');
     
     console.log(`Formatted and synced ${file}`);
+  });
+
+  // Ensure all root .txt files in public are copied to dist
+  const publicTxtFiles = fs.readdirSync(publicDir).filter(f => f.endsWith('.txt'));
+  publicTxtFiles.forEach(file => {
+    const src = path.join(publicDir, file);
+    const dest = path.join(distDir, file);
+    fs.copyFileSync(src, dest);
   });
 
   console.log('Sitemap formatting complete!');
