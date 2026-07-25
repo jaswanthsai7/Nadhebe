@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const rawSiteUrl = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
-const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
+const SITE_URL = 'https://nadhebe.com';
 
 interface ArticleInfo {
   title: string;
