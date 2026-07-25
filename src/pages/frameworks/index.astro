@@ -20,7 +20,7 @@ const sorted = posts
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
-      {sorted.map((post) => (
+      {sorted.map((post, index) => (
         <a
           href={getArticleUrl({ ...post, collection: 'frameworks' })}
           class="card group flex flex-col overflow-hidden p-0"
@@ -31,7 +31,7 @@ const sorted = posts
               alt={post.data.title}
               width="400"
               height="225"
-              class="w-full h-full object-cover" loading="lazy" />
+              class="w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : undefined} />
           </div>
           <div class="p-16 flex-1 flex flex-col justify-between">
             <div>

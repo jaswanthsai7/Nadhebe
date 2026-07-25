@@ -21,7 +21,7 @@ const sorted = posts
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
-      {sorted.map((post) => (
+      {sorted.map((post, index) => (
         <a
           href={getArticleUrl({ ...post, collection: 'comparisons' })}
           class="card group flex flex-col overflow-hidden p-0"
@@ -32,7 +32,7 @@ const sorted = posts
               alt={post.data.title}
               width="400"
               height="225"
-              class="w-full h-full object-cover" loading="lazy" />
+              class="w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : undefined} />
             {post.data.itemsCompared && (
               <span class="absolute top-12 right-12 bg-black/75 px-8 py-4 rounded font-mono text-meta text-white">
                 {post.data.itemsCompared.length} compared

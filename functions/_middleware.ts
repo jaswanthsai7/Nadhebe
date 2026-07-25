@@ -10,6 +10,17 @@ export const onRequest = async (context: PagesContext) => {
     const url = new URL(request.url);
     const origin = `${url.protocol}//${url.host}`;
 
+    // Redirect www.nadhebe.com to nadhebe.com (301 Permanent Redirect)
+    if (url.hostname === 'www.nadhebe.com') {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          'Location': `https://nadhebe.com${url.pathname}${url.search}`,
+          'Cache-Control': 'public, max-age=31536000'
+        }
+      });
+    }
+
     // Serve IndexNow Verification Key File
     if (url.pathname === '/4d98a2f7c03e4b1a8d562f790c1e8a9f.txt') {
       return new Response('4d98a2f7c03e4b1a8d562f790c1e8a9f', {
@@ -93,7 +104,7 @@ export const onRequest = async (context: PagesContext) => {
           'x-original-tokens': String(originalTokenCount),
           'Vary': 'Accept',
           'Access-Control-Allow-Origin': '*',
-          'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
           'Link': '</llms.txt>; rel="describedby"; type="text/markdown", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"'
         },
       });
