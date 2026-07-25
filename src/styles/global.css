@@ -137,19 +137,24 @@ html.dark {
   }
 
   .prose-article table {
-    @apply my-24 w-full rounded-12 border border-border text-caption dark:border-border-dark;
-    border-collapse: separate;
-    border-spacing: 0;
+    @apply my-24 block w-full overflow-x-auto rounded-12 border border-border bg-surface/95 text-caption dark:border-border-dark dark:bg-surface-dark/95;
+    border-collapse: collapse;
+    -webkit-overflow-scrolling: touch;
   }
   .prose-article th {
-    @apply bg-surface2 px-16 py-12 text-left font-semibold text-ink dark:bg-surface2-dark dark:text-ink-dark;
+    @apply bg-surface2 px-16 py-12 text-left font-semibold text-ink whitespace-nowrap dark:bg-surface2-dark dark:text-ink-dark;
   }
   .prose-article td {
     @apply border-t border-border px-16 py-12 text-ink2 dark:border-border-dark dark:text-ink2-dark;
   }
-  .prose-article td code {
-    white-space: pre-wrap;
-    word-break: break-all;
+  .prose-article td:nth-child(2) {
+    white-space: normal;
+    min-width: 180px;
+  }
+  .prose-article code {
+    white-space: nowrap !important;
+    word-break: normal !important;
+    display: inline-block;
   }
 
   /* ─── Card ─── */

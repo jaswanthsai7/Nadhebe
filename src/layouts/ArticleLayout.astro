@@ -139,16 +139,16 @@ const breadcrumbItems = [
   <ReadingProgress />
   <ScrollToTop />
 
-  <div class="mx-auto mt-32 sm:mt-64 flex max-w-screen-xl items-start gap-48 px-16 sm:px-24" data-reveal>
+  <div class="mx-auto mt-24 sm:mt-64 flex max-w-screen-xl items-start gap-48 px-12 sm:px-24" data-reveal>
 
     <!-- Center content -->
-    <div class="flex-1 min-w-0 max-w-article mx-auto">
+    <div class="flex-1 min-w-0 max-w-article mx-auto w-full">
 
         <!-- Breadcrumb -->
         <Breadcrumb items={breadcrumbItems} />
 
         <!-- Hero header (glass panel for readability over nature background) -->
-        <header class="mt-24 mb-48 rounded-16 p-24 sm:p-32 glass-panel border border-border dark:border-border-dark relative overflow-hidden">
+        <header class="mt-16 sm:mt-24 mb-32 sm:mb-48 rounded-16 p-16 sm:p-32 glass-panel border border-border dark:border-border-dark relative overflow-hidden">
           <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent/0 via-accent to-accent/0 dark:from-accent-dark/0 dark:via-accent-dark dark:to-accent-dark/0"></div>
           <span class="badge mb-16 inline-block">{post.data.category}</span>
 
@@ -317,7 +317,7 @@ const breadcrumbItems = [
         )}
 
         <!-- Post-article sections (glass-panel for readability over nature bg) -->
-        <div class="glass-panel rounded-16 p-24 sm:p-32 border border-border dark:border-border-dark">
+        <div class="glass-panel rounded-16 p-16 sm:p-32 border border-border dark:border-border-dark">
           <FAQSection items={post.data.faq || []} />
           <SourceList references={references} />
 
@@ -357,8 +357,8 @@ const breadcrumbItems = [
   </div>
 
   <!-- Bottom section -->
-  <div class="mx-auto max-w-content px-16 sm:px-24 pb-64 sm:pb-96 mt-48 sm:mt-64 pt-32 sm:pt-48">
-    <div class="glass-panel rounded-16 p-24 sm:p-32 border border-border dark:border-border-dark">
+  <div class="mx-auto max-w-content px-12 sm:px-24 pb-64 sm:pb-96 mt-48 sm:mt-64 pt-32 sm:pt-48">
+    <div class="glass-panel rounded-16 p-16 sm:p-32 border border-border dark:border-border-dark">
       <RelatedPosts posts={relatedArticles} />
       <div class="mt-32">
         <PreviousNext prev={prevProps} next={nextProps} />
