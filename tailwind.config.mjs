@@ -16,6 +16,7 @@ export default {
       16: '16px',
       20: '20px',
       24: '24px',
+      28: '28px',
       32: '32px',
       40: '40px',
       48: '48px',
@@ -27,11 +28,11 @@ export default {
     },
     extend: {
       maxWidth: {
-        article: '720px',
+        article: '860px',
         content: '1120px',
       },
       width: {
-        sidebar: '224px',
+        sidebar: '240px',
       },
       colors: {
         bg: {
@@ -96,11 +97,11 @@ export default {
         display: ['48px', { lineHeight: '1.08', letterSpacing: '-0.025em', fontWeight: '700' }],
         hero: ['36px', { lineHeight: '1.12', letterSpacing: '-0.02em', fontWeight: '700' }],
         h1: ['30px', { lineHeight: '1.2', letterSpacing: '-0.02em', fontWeight: '600' }],
-        h2: ['22px', { lineHeight: '1.3', letterSpacing: '-0.01em', fontWeight: '600' }],
-        h3: ['18px', { lineHeight: '1.35', letterSpacing: '-0.01em', fontWeight: '600' }],
+        h2: ['24px', { lineHeight: '1.3', letterSpacing: '-0.015em', fontWeight: '600' }],
+        h3: ['19px', { lineHeight: '1.35', letterSpacing: '-0.01em', fontWeight: '600' }],
         h4: ['15px', { lineHeight: '1.4', fontWeight: '600' }],
-        'body-large': ['17px', { lineHeight: '1.6' }],
-        body: ['15px', { lineHeight: '1.65' }],
+        'body-large': ['17px', { lineHeight: '1.7' }],
+        body: ['16px', { lineHeight: '1.75' }],
         caption: ['13px', { lineHeight: '1.5' }],
         meta: ['12px', { lineHeight: '1.5', fontFamily: '"JetBrains Mono", ui-monospace, monospace' }],
         xs: ['11px', { lineHeight: '1.4' }],
