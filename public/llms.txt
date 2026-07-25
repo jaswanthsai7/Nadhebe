@@ -29,10 +29,27 @@
 - [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 - [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
 
+### Best Practices
+
+- [Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering](https://nadhebe.pages.dev/best-practices/claude-code-best-practices-vibe-coding-to-production): A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees.
+- [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.pages.dev/best-practices/kimi-k3-context-window-best-practices): Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.
+- [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management): Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
+- [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design): Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
+- [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling): Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
+
+### Tools
+
+- [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.pages.dev/tools/ultimate-claude-code-resource-list-agents-skills-mcp): The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.
+- [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.pages.dev/tools/google-flow-storyboard-studio-overview): An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
+- [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
+- [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.pages.dev/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
+- [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.pages.dev/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
+
 ### Guides
 
 - [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide): A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
 - [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.pages.dev/guides/claude-code-agent-loop-architecture): An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
+- [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.pages.dev/guides/claude-code-complete-guide-beginner-to-power-user): The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
 - [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.pages.dev/guides/claude-cowork-desktop-agent-guide): A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
 - [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.pages.dev/guides/google-ai-certification-cost-free-vs-paid): A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
 - [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.pages.dev/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
@@ -49,13 +66,6 @@
 
 - [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.pages.dev/prompts/kimi-k3-structured-prompt-engineering-framework): Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
 - [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts): Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
-
-### Best Practices
-
-- [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.pages.dev/best-practices/kimi-k3-context-window-best-practices): Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.
-- [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management): Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
-- [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design): Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
-- [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling): Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
 
 ### Use Cases
 
@@ -75,13 +85,6 @@
 
 - [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.pages.dev/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
 - [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.pages.dev/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
-
-### Tools
-
-- [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.pages.dev/tools/google-flow-storyboard-studio-overview): An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
-- [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
-- [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.pages.dev/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
-- [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.pages.dev/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
 
 ### Frameworks
 

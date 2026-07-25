@@ -80,6 +80,26 @@
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
+    "title": "Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering",
+    "description": "A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees.",
+    "url": "https://nadhebe.pages.dev/best-practices/claude-code-best-practices-vibe-coding-to-production",
+    "category": "Best Practices",
+    "tags": [
+      "[\"claude\", \"cli\", \"best-practices\", \"vibe-coding\", \"devops\", \"enterprise\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins",
+    "description": "The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.",
+    "url": "https://nadhebe.pages.dev/tools/ultimate-claude-code-resource-list-agents-skills-mcp",
+    "category": "Tools",
+    "tags": [
+      "[\"claude\", \"cli\", \"mcp-servers\", \"skills\", \"subagents\", \"developer-tools\", \"awesome-list\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements",
     "description": "A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.",
     "url": "https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide",
@@ -96,6 +116,16 @@
     "category": "Guides",
     "tags": [
       "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\", \"software-design\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Claude Code Complete Guide 2026: From Beginner to Power User",
+    "description": "The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.",
+    "url": "https://nadhebe.pages.dev/guides/claude-code-complete-guide-beginner-to-power-user",
+    "category": "Guides",
+    "tags": [
+      "[\"claude\", \"cli\", \"guide\", \"developer-tools\", \"productivity\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
