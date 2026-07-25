@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getAllArticles, getArticleUrl } from '../utils/content';
+import { getCollection } from 'astro:content';
 import VerdictGauge from '@/components/VerdictGauge.astro';
 import Newsletter from '@/components/Newsletter.astro';
 
 const allArticles = await getAllArticles();
+const authors = await getCollection('authors');
 
 const latestPillars = allArticles.filter(p => p.data.isPillar === true).slice(0, 3);
 const latestVideos = allArticles.filter(p => p.collection === 'youtube-articles').slice(0, 4);
@@ -71,75 +73,137 @@ const categoryMeta: Record<string, { description: string; iconPath: string }> = 
 };
 
 const heroPost = latestPillars[0] || allArticles[0];
+const heroAuthor = heroPost.data.author ? authors.find(a => a.id === heroPost.data.author.id) : null;
+const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 ---
 
 <BaseLayout
   title="Nadhebe — AI Engineering Publication"
   description="Expert tutorials, in-depth reviews, system prompts, and technical comparisons for AI engineers and developers."
 >
-  <!-- Hero -->
-  <section class="mx-auto max-w-content px-16 sm:px-24 pt-48 pb-48 sm:pt-64 sm:pb-80">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-48 items-center">
-      <div data-reveal="left">
-        <p class="section-label mb-16">AI Engineering Publication</p>
-        <h1 class="font-display text-display font-bold leading-tight text-ink dark:text-ink-dark">
-          Deep dives into AI tools, agents, and engineering.
-        </h1>
-        <p class="mt-20 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed max-w-lg">
-          Production-ready tutorials, unbiased tool reviews, system prompts, and technical comparisons for developers building with AI.
-        </p>
-        <div class="mt-32 flex items-center gap-12">
-          <a href="/tutorials" class="btn-primary">
-            Browse tutorials
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="/youtube" class="btn-secondary">Watch videos</a>
-        </div>
-      </div>
-
-      {heroPost && (
-        <a href={getArticleUrl(heroPost)} class="card group p-0 overflow-hidden block" data-reveal="right">
-          <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
-            <img
-              src={heroPost.data.heroImage}
-              alt={heroPost.data.heroAlt || heroPost.data.title}
-              width="600"
-              height="375"
-              fetchpriority="high"
-              class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
-            />
-            {heroPost.data.rating !== undefined && (
-              <div class="absolute bottom-12 right-12 bg-surface dark:bg-surface-dark p-4 rounded-12 border border-border dark:border-border-dark shadow-medium">
-                <VerdictGauge score={heroPost.data.rating} size={48} />
-              </div>
-            )}
+  <!-- Hero Section -->
+  <section class="mx-auto max-w-content px-16 sm:px-24 pt-32 pb-48 sm:pt-48 sm:pb-48">
+    {heroPost && (
+      <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 flex flex-col lg:flex-row gap-32 items-center justify-between shadow-medium">
+        
+        <!-- Left Side: Rotated Label + Meta -->
+        <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0">
+          
+          <!-- Rotated Vertical "Featured" Label (Hidden on small screens) -->
+          <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative overflow-hidden">
+            <span class="font-display font-extrabold uppercase tracking-widest text-ink/10 dark:text-ink-dark/10 absolute whitespace-nowrap" style="font-size: 4.5rem; letter-spacing: 0.15em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
+              Featured
+            </span>
           </div>
-          <div class="p-24">
-            <span class="badge mb-12">Featured</span>
-            <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150">
-              {heroPost.data.title}
-            </h2>
-            <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2">
+
+          <!-- Metadata -->
+          <div class="flex-1" data-reveal="left">
+            <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-12 block">
+              Featured {heroPost.data.category || 'Article'}
+            </span>
+            <a href={getArticleUrl(heroPost)} class="group block">
+              <h1 class="font-display text-h1 sm:text-display font-bold leading-[1.1] text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 tracking-tight">
+                {heroPost.data.title}
+              </h1>
+            </a>
+            <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed max-w-xl">
               {heroPost.data.description}
             </p>
-            <div class="mt-16 flex items-center gap-8 text-meta text-muted dark:text-muted-dark">
+            
+            <!-- Author meta -->
+            <div class="mt-24 flex items-center gap-12 text-meta text-muted dark:text-muted-dark font-sans">
+              {heroAuthor?.data?.avatar && (
+                <img src={heroAuthor.data.avatar} alt={heroAuthor.data.name} width="24" height="24" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
+              )}
+              <span class="font-semibold text-ink2 dark:text-ink2-dark">{heroAuthor?.data?.name || 'Nadhebe Team'}</span>
+              <span class="text-border dark:text-border-dark">·</span>
               <time datetime={heroPost.data.pubDate.toISOString()}>
                 {heroPost.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               </time>
-              {heroPost.data.topic && (
-                <>
-                  <span class="text-border dark:text-border-dark">·</span>
-                  <span>{heroPost.data.topic}</span>
-                </>
-              )}
+              <span class="text-border dark:text-border-dark">·</span>
+              <span>{heroPost.data.estimatedReadingTime || 5} min read</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-32 flex flex-wrap items-center gap-16">
+              <a href={getArticleUrl(heroPost)} class="btn-primary">
+                Read Tutorial
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="/tutorials" class="text-caption font-sans font-semibold text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors inline-flex items-center gap-4">
+                View all tutorials
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
             </div>
           </div>
-        </a>
-      )}
-    </div>
+        </div>
+
+        <!-- Right Side: Big Image -->
+        <div class="w-full lg:w-[55%] shrink-0" data-reveal="right">
+          <a href={getArticleUrl(heroPost)} class="block overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium group">
+            <img
+              src={heroPost.data.heroImage}
+              alt={heroPost.data.heroAlt || heroPost.data.title}
+              width="800"
+              height="500"
+              fetchpriority="high"
+              class="w-full h-auto aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+            />
+          </a>
+        </div>
+
+      </div>
+    )}
   </section>
 
   <div class="mx-auto max-w-content px-16 sm:px-24 pb-64 sm:pb-96 space-y-48 sm:space-y-80">
+
+    <!-- Top Stories -->
+    {topStories.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-32">
+          <h2 class="section-title">Top Stories</h2>
+          <a href="/tutorials" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
+            View all articles
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-24" data-reveal-stagger>
+          {topStories.map(post => (
+            <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0" data-reveal>
+              <div class="relative aspect-video w-full overflow-hidden bg-surface2 dark:bg-surface2-dark border-b border-border dark:border-border-dark">
+                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="320" height="180" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" />
+                {post.data.rating !== undefined && (
+                  <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-2 rounded-8 border border-border dark:border-border-dark shadow-medium">
+                    <VerdictGauge score={post.data.rating} size={36} />
+                  </div>
+                )}
+              </div>
+              <div class="p-16 flex-1 flex flex-col justify-between">
+                <div>
+                  <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-8 block">{post.data.category}</span>
+                  <h3 class="font-display text-caption font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-8 text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-2">{post.data.description}</p>
+                </div>
+                {(() => {
+                  const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+                  return (
+                    <div class="mt-16 flex items-center justify-between text-meta text-muted dark:text-muted-dark">
+                      <span class="font-medium">{author?.data?.name || 'Nadhebe'}</span>
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </time>
+                    </div>
+                  );
+                })()}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- Topics -->
     <section data-reveal>
@@ -158,46 +222,6 @@ const heroPost = latestPillars[0] || allArticles[0];
         ))}
       </div>
     </section>
-
-
-    <!-- Pillar Guides -->
-    {latestPillars.length > 0 && (
-      <section>
-        <div class="flex items-center justify-between mb-32">
-          <h2 class="section-title">Pillar Guides</h2>
-          <a href="/guides" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
-            View all
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24" data-reveal-stagger>
-          {latestPillars.map(post => (
-            <a href={getArticleUrl(post)} class="card group flex flex-col overflow-hidden p-0" data-reveal>
-              <div class="relative aspect-[16/10] w-full overflow-hidden bg-surface2 dark:bg-surface2-dark">
-                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="400" height="250" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" />
-                {post.data.rating !== undefined && (
-                  <div class="absolute bottom-8 right-8 bg-surface dark:bg-surface-dark p-4 rounded-8 border border-border dark:border-border-dark shadow-medium">
-                    <VerdictGauge score={post.data.rating} size={40} />
-                  </div>
-                )}
-              </div>
-              <div class="p-20 flex-1 flex flex-col justify-between">
-                <div>
-                  <span class="badge mb-8">Pillar Guide</span>
-                  <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-2">
-                    {post.data.title}
-                  </h3>
-                  <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2">{post.data.description}</p>
-                </div>
-                <time class="mt-16 text-meta text-muted dark:text-muted-dark block" datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </time>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
     
      <!-- Category Explorer -->
     <section data-reveal>
