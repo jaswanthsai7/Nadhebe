@@ -1,0 +1,29 @@
+---
+import { SITE } from '@/config';
+
+const baseUrl = SITE.url.endsWith('/') ? SITE.url : `${SITE.url}/`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${baseUrl}#website`,
+  "url": baseUrl,
+  "name": "Nadhebe",
+  "description": "Expert AI engineering publications, developer guides, system prompts, and tool benchmarks.",
+  "publisher": {
+    "@type": "Organization",
+    "@id": `${baseUrl}#organization`
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${baseUrl}search?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "inLanguage": "en"
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

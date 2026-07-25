@@ -2,6 +2,8 @@
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SearchDialog from '@/components/search/SearchDialog.astro';
+import OrganizationSchema from '@/components/seo/OrganizationSchema.astro';
+import WebSiteSchema from '@/components/seo/WebSiteSchema.astro';
 import '@/styles/global.css';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
@@ -76,6 +78,8 @@ if (canonicalUrl) {
     <meta name="twitter:image" content={seo.twitterImage} />
 
     <!-- Structured data -->
+    <OrganizationSchema />
+    <WebSiteSchema />
     {jsonLd.map((block) => (
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}

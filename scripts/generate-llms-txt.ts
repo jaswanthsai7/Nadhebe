@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const SITE_URL = 'https://nadhebe.pages.dev';
+const rawSiteUrl = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
+const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
 
 interface ArticleInfo {
   title: string;
@@ -74,6 +75,8 @@ function run() {
         const rawContent = fs.readFileSync(filePath, 'utf-8');
         const { data, body } = parseFrontmatter(rawContent);
         const slug = file.replace(/\.(md|mdx)$/, '');
+
+        if (data.draft === true) return;
 
         if (data.title) {
           articles.push({

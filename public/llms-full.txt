@@ -4,7 +4,7 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
-# [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.pages.dev/tutorials/claude-code-cheat-sheet-commands-shortcuts)
+# [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts)
 
 > The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
 
@@ -509,7 +509,7 @@ Flicker-Free TUI Mode:         export CLAUDE_CODE_NO_FLICKER=1
 
 ---
 
-# [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.pages.dev/tutorials/claude-desktop-download-installation-guide)
+# [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.com/tutorials/claude-desktop-download-installation-guide)
 
 > A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.
 
@@ -685,7 +685,7 @@ Boost daily productivity using native desktop shortcuts:
 
 ---
 
-# [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.pages.dev/tutorials/how-to-build-custom-claude-code-skills)
+# [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills)
 
 > A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.
 
@@ -853,7 +853,7 @@ executeAutomatedReview();
 
 ---
 
-# [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli)
+# [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.com/tutorials/how-to-install-claude-code-cli)
 
 > The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.
 
@@ -1170,7 +1170,7 @@ You can overwrite the active key by re-exporting `export ANTHROPIC_API_KEY="new-
 
 ---
 
-# [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.pages.dev/tutorials/installing-claude-code-cli-windows)
+# [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.com/tutorials/installing-claude-code-cli-windows)
 
 > A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.
 
@@ -1433,7 +1433,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ---
 
-# [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-deepseek-r1-comparison)
+# [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison)
 
 > A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
 
@@ -1531,7 +1531,7 @@ graph LR
 
 ---
 
-# [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.pages.dev/comparisons/openaicodex-vs-claude-code-vs-opencode)
+# [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode)
 
 > A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.
 
@@ -1621,7 +1621,7 @@ Local Models via OpenCode (Ollama):   $0.00 USD (Self-Hosted Hardware)
 
 ---
 
-# [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.pages.dev/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison)
+# [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison)
 
 > An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.
 
@@ -1759,7 +1759,7 @@ graph TD
 
 ---
 
-# [Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering](https://nadhebe.pages.dev/best-practices/claude-code-best-practices-vibe-coding-to-production)
+# [Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering](https://nadhebe.com/best-practices/claude-code-best-practices-vibe-coding-to-production)
 
 > A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees.
 
@@ -1922,7 +1922,7 @@ Benefits of Worktree Isolation:
 
 ---
 
-# [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.pages.dev/tools/ultimate-claude-code-resource-list-agents-skills-mcp)
+# [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp)
 
 > The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.
 
@@ -2014,7 +2014,7 @@ Subagents define specialized AI worker personas with restricted toolsets.
 
 ---
 
-# [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide)
+# [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide)
 
 > A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
 
@@ -2266,7 +2266,7 @@ The passing scaled score for CCDV-F is 720 out of 1000 across 60 multiple-choice
 
 ---
 
-# [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.pages.dev/guides/claude-code-agent-loop-architecture)
+# [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture)
 
 > An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
 
@@ -2480,7 +2480,7 @@ It uses ephemeral prompt caching and automatic context compaction via the `/comp
 
 ---
 
-# [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.pages.dev/guides/claude-code-complete-guide-beginner-to-power-user)
+# [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user)
 
 > The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
 
@@ -2670,7 +2670,7 @@ export CLAUDE_CODE_NO_FLICKER=1
 
 ---
 
-# [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.pages.dev/guides/claude-cowork-desktop-agent-guide)
+# [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide)
 
 > A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
 
@@ -2782,7 +2782,7 @@ Anthropic designed Claude Cowork with enterprise-grade security boundaries:
 
 ---
 
-# [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.pages.dev/guides/google-ai-certification-cost-free-vs-paid)
+# [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid)
 
 > A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
 
@@ -2970,7 +2970,7 @@ Google Cloud Certifications remain valid for 2 years from the date of passing, r
 
 ---
 
-# [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.pages.dev/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
+# [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
 
 > A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
 
@@ -3076,7 +3076,7 @@ For an architectural comparison between vLLM and Ollama, read our guide on [vLLM
 
 ---
 
-# [vLLM vs Ollama: Architectural & Memory Management Comparison](https://nadhebe.pages.dev/comparisons/vllm-vs-ollama-architectural-comparison)
+# [vLLM vs Ollama: Architectural & Memory Management Comparison](https://nadhebe.com/comparisons/vllm-vs-ollama-architectural-comparison)
 
 > An evidence-based architectural comparison of vLLM and Ollama for serving open-weight LLMs, memory management, and API concurrency.
 
@@ -3191,7 +3191,7 @@ For multi-agent state architectures, see [The SQLite State-Sharing Pattern for M
 
 ---
 
-# [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.pages.dev/news/kimi-k3-moonshot-ai-release)
+# [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release)
 
 > Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
 
@@ -3274,7 +3274,7 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
 
 ---
 
-# [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.pages.dev/tutorials/kimi-k3-3d-modeling-tutorial)
+# [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial)
 
 > A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
 
@@ -3407,7 +3407,7 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
 
 ---
 
-# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.pages.dev/prompts/kimi-k3-structured-prompt-engineering-framework)
+# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.com/prompts/kimi-k3-structured-prompt-engineering-framework)
 
 > Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
 
@@ -3518,7 +3518,7 @@ By structuring your prompts using these four pillars, Kimi K3 can compile, organ
 
 ---
 
-# [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.pages.dev/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul)
+# [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul)
 
 > An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.
 
@@ -3615,7 +3615,7 @@ On internal reasoning and coding benchmarks, Moonshot AI reports that Kimi K3 ra
 
 ---
 
-# [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.pages.dev/best-practices/kimi-k3-context-window-best-practices)
+# [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.com/best-practices/kimi-k3-context-window-best-practices)
 
 > Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.
 
@@ -3706,7 +3706,7 @@ Following these practices ensures your agentic development workflows remain high
 
 ---
 
-# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.pages.dev/use-cases/kimi-k3-game-development-use-cases)
+# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.com/use-cases/kimi-k3-game-development-use-cases)
 
 > Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.
 
@@ -3789,7 +3789,7 @@ This accelerates the transition from early concepts to actual clickable layouts,
 
 ---
 
-# [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.pages.dev/news/openai-gpt-5-6-release-soul-ultra)
+# [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra)
 
 > OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
 
@@ -3835,7 +3835,7 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
 
 ---
 
-# [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.pages.dev/tutorials/building-pre-production-storyboards-google-flow)
+# [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow)
 
 > A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
 
@@ -3891,7 +3891,7 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
 
 ---
 
-# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.pages.dev/tutorials/setting-up-youtube-automation-agent)
+# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent)
 
 > A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
 
@@ -3960,7 +3960,7 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
 
 ---
 
-# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.pages.dev/youtube/fable-5-vs-gpt-5-5-comparison)
+# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.com/youtube/fable-5-vs-gpt-5-5-comparison)
 
 > Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.
 
@@ -4017,7 +4017,7 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
 
 ---
 
-# [First Look: Google Flow's New Storyboard Studio Addition](https://nadhebe.pages.dev/youtube/google-flow-storyboard-studio-guide)
+# [First Look: Google Flow's New Storyboard Studio Addition](https://nadhebe.com/youtube/google-flow-storyboard-studio-guide)
 
 > A walk-through of Google Flow's Storyboard Studio, exploring how its AI script analysis, asset consistency maps, and camera presets optimize pre-production.
 
@@ -4074,7 +4074,7 @@ While highly capable, maintaining perfect character consistency across many shot
 
 ---
 
-# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.pages.dev/youtube/gpt-5-6-autonomous-engine)
+# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.com/youtube/gpt-5-6-autonomous-engine)
 
 > Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.
 
@@ -4140,7 +4140,7 @@ graph TD
 
 ---
 
-# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.pages.dev/youtube/open-source-youtube-automation-agent)
+# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/youtube/open-source-youtube-automation-agent)
 
 > Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.
 
@@ -4200,7 +4200,7 @@ Unlike message-passing multi-agent architectures that can break during individua
 
 ---
 
-# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.pages.dev/reviews/fable-5-ai-model-review)
+# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review)
 
 > An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
 
@@ -4256,7 +4256,7 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
 
 ---
 
-# [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.pages.dev/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks)
+# [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks)
 
 > A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
 
@@ -4296,7 +4296,7 @@ While OpenAI's GPT-5.5 remains the standard for pure code generation speed and l
 
 ---
 
-# [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.pages.dev/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance)
+# [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance)
 
 > A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 
@@ -4336,7 +4336,7 @@ GPT-4o excels at prompt-response and conversational reasoning but struggles when
 
 ---
 
-# [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.pages.dev/best-practices/llm-autonomous-loop-cost-management)
+# [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.com/best-practices/llm-autonomous-loop-cost-management)
 
 > Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
 
@@ -4387,7 +4387,7 @@ If running open-weight models in-house instead of paying per-token commercial AP
 
 ---
 
-# [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.pages.dev/best-practices/multi-agent-state-isolation-design)
+# [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.com/best-practices/multi-agent-state-isolation-design)
 
 > Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
 
@@ -4432,7 +4432,7 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 ---
 
-# [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.pages.dev/tools/google-flow-storyboard-studio-overview)
+# [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.com/tools/google-flow-storyboard-studio-overview)
 
 > An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
 
@@ -4475,7 +4475,7 @@ Although the tool speeds up scene creation, character drift remains a challenge.
 
 ---
 
-# [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.pages.dev/tools/youtube-automation-agent-multi-agent-system)
+# [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system)
 
 > Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
 
@@ -4515,7 +4515,7 @@ This guide examines the core features of the **YouTube Automation Agent** and ho
 
 ---
 
-# [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.pages.dev/guides/ai-storyboarding-pre-production-workflows)
+# [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows)
 
 > Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
 
@@ -4572,7 +4572,7 @@ A major challenge for creative directors using generative tools is avoiding char
 
 ---
 
-# [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.pages.dev/guides/gpt-5-6-autonomous-agent-orchestration)
+# [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration)
 
 > Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 
@@ -4642,7 +4642,7 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
 
 ---
 
-# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.pages.dev/frameworks/sqlite-state-sharing-multi-agent-architecture)
+# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.com/frameworks/sqlite-state-sharing-multi-agent-architecture)
 
 > A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.
 
@@ -4695,7 +4695,7 @@ If a worker agent crashes or encounters a network API timeout, the orchestrator 
 
 ---
 
-# [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.pages.dev/news/instatic-open-source-release)
+# [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release)
 
 > CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
@@ -4768,7 +4768,7 @@ Watch the release walkthrough detailing the editor features:
 
 ---
 
-# [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.pages.dev/tutorials/deploying-instatic-docker-vps)
+# [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.com/tutorials/deploying-instatic-docker-vps)
 
 > Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
 
@@ -4880,7 +4880,7 @@ For a visual demonstration of the editor's responsive canvas, CSS variables toke
 
 ---
 
-# [How to Install and Set Up Instatic CMS Locally](https://nadhebe.pages.dev/tutorials/installing-instatic-cms-locally)
+# [How to Install and Set Up Instatic CMS Locally](https://nadhebe.com/tutorials/installing-instatic-cms-locally)
 
 > A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
 
@@ -4960,7 +4960,7 @@ Open your web browser and navigate to the address shown in the terminal (usually
 
 ---
 
-# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.pages.dev/youtube/instatic-local-setup-importer)
+# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/youtube/instatic-local-setup-importer)
 
 > Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.
 
@@ -5018,7 +5018,7 @@ The HTML importer wizard lets developers import visual page layouts by drag-and-
 
 ---
 
-# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.pages.dev/youtube/instatic-visual-cms-walkthrough)
+# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/youtube/instatic-visual-cms-walkthrough)
 
 > Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.
 
@@ -5069,7 +5069,7 @@ The editor supports bringing your own API keys (OpenAI, Anthropic, or OpenRouter
 
 ---
 
-# [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.pages.dev/reviews/instatic-visual-cms-review)
+# [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review)
 
 > A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
 
@@ -5129,7 +5129,7 @@ Watch the complete design canvas interface review and feature walkthrough below:
 
 ---
 
-# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.pages.dev/prompts/instatic-ai-assisted-design-prompts)
+# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.com/prompts/instatic-ai-assisted-design-prompts)
 
 > Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
 
@@ -5198,7 +5198,7 @@ Watch the AI assistant execute layouts, write copy, and adjust spacing in real t
 
 ---
 
-# [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.pages.dev/comparisons/instatic-vs-webflow-vs-framer)
+# [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer)
 
 > A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
 
@@ -5286,7 +5286,7 @@ Watch the editor workflow in action to compare interfaces:
 
 ---
 
-# [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.pages.dev/best-practices/instatic-design-tokens-scaling)
+# [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.com/best-practices/instatic-design-tokens-scaling)
 
 > Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
 
@@ -5360,7 +5360,7 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 
 ---
 
-# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.pages.dev/use-cases/instatic-enterprise-editorial-governance)
+# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/use-cases/instatic-enterprise-editorial-governance)
 
 > How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 
@@ -5421,7 +5421,7 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 
 ---
 
-# [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.pages.dev/tools/instatic-html-importer-guide)
+# [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.com/tools/instatic-html-importer-guide)
 
 > An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
 
@@ -5475,7 +5475,7 @@ If you re-import a template to apply updates, choose the **Override All** option
 
 ---
 
-# [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.pages.dev/tools/instatic-html-site-import-migration)
+# [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.com/tools/instatic-html-site-import-migration)
 
 > A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
 
@@ -5533,7 +5533,7 @@ Watch the importer process and convert external layouts into clean, editable vis
 
 ---
 
-# [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.pages.dev/guides/instatic-cms-architecture-ultimate-guide)
+# [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide)
 
 > A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
@@ -5631,7 +5631,7 @@ Watch the complete design system configuration and database architecture setup i
 
 ---
 
-# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.pages.dev/frameworks/instatic-astro-islands-frameworks-integration)
+# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.com/frameworks/instatic-astro-islands-frameworks-integration)
 
 > An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
 
@@ -5684,7 +5684,7 @@ import InteractiveWidget from '../components/InteractiveWidget.jsx';
 
 ---
 
-# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.pages.dev/case-studies/webflow-to-instatic-migration-savings)
+# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/case-studies/webflow-to-instatic-migration-savings)
 
 > How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.
 
