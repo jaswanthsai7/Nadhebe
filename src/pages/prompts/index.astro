@@ -32,8 +32,7 @@ const sorted = posts
               alt={post.data.title}
               width="400"
               height="225"
-              class="w-full h-full object-cover"
-            />
+              class="w-full h-full object-cover" loading="lazy" />
             {post.data.rating !== undefined && (
               <div class="absolute bottom-12 right-12 z-10 bg-surface dark:bg-surface-dark p-2 rounded-pill border border-border dark:border-border-dark shadow-card">
                 <VerdictGauge score={post.data.rating} size={48} />
