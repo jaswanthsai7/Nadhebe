@@ -1,5 +1,5 @@
-const rawSiteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
-export const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
+const rawSiteUrl = 'https://nadhebe.com';
+export const SITE_URL = rawSiteUrl;
 
 export const SITE = {
   name: 'Nadhebe',
