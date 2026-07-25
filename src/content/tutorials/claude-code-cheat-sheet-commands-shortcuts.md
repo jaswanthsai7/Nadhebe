@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Tutorials
 tags: ["claude", "cli", "cheat-sheet", "developer-tools", "productivity", "anthropic"]
-heroImage: "/images/claude-cli-hero.jpg"
+heroImage: "/images/claude-cheat-sheet-hero.png"
 heroAlt: "Minimalist technical cheat sheet schematic showing terminal execution shortcuts and slash commands"
 draft: false
 topic: "Claude Code"

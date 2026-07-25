@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Tutorials
 tags: ["claude", "claude-desktop", "installation", "mcp", "anthropic", "desktop-app"]
-heroImage: "/images/claude-cli-hero.jpg"
+heroImage: "/images/claude-desktop-guide-hero.png"
 heroAlt: "Minimalist desktop app schematic showing local filesystem permissions and MCP server nodes"
 draft: false
 topic: "Claude Desktop"
