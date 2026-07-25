@@ -20,6 +20,11 @@ html.dark {
     @apply border-border dark:border-border-dark;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -120,6 +125,14 @@ html.dark {
 
   .prose-article code {
     @apply rounded-6 bg-code px-6 py-2 font-mono text-[0.875em] text-ink dark:bg-code-dark dark:text-ink-dark;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .prose-article pre code {
+    white-space: pre !important;
+    word-break: normal !important;
   }
 
   .prose-article pre {
