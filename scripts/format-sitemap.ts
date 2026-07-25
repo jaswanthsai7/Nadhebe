@@ -48,6 +48,26 @@ function run() {
     fs.copyFileSync(src, dest);
   });
 
+  // Inject image and video sitemaps into sitemap-index.xml
+  const sitemapIndexPath = path.join(distDir, 'sitemap-index.xml');
+  if (fs.existsSync(sitemapIndexPath)) {
+    let indexXml = fs.readFileSync(sitemapIndexPath, 'utf-8');
+    const extraSitemaps: string[] = [];
+    if (!indexXml.includes('sitemap-image.xml')) {
+      extraSitemaps.push('<sitemap><loc>https://nadhebe.com/sitemap-image.xml</loc></sitemap>');
+    }
+    if (!indexXml.includes('sitemap-video.xml')) {
+      extraSitemaps.push('<sitemap><loc>https://nadhebe.com/sitemap-video.xml</loc></sitemap>');
+    }
+    if (extraSitemaps.length > 0) {
+      indexXml = indexXml.replace('</sitemapindex>', extraSitemaps.join('\n') + '\n</sitemapindex>');
+      fs.writeFileSync(sitemapIndexPath, indexXml, 'utf-8');
+      const publicIndexPath = path.join(process.cwd(), 'public', 'sitemap-index.xml');
+      fs.writeFileSync(publicIndexPath, indexXml, 'utf-8');
+      console.log('Injected image and video sitemaps into sitemap-index.xml');
+    }
+  }
+
   console.log('Sitemap formatting complete!');
 }
 

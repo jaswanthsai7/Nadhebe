@@ -173,7 +173,7 @@ const breadcrumbItems = [
             <div class="flex items-center gap-8 font-medium text-ink2 dark:text-ink2-dark">
               {author?.avatar && (
                 <img src={author.avatar} alt={author?.name} width="28" height="28"
-                  class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" />
+                  class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" loading="lazy" />
               )}
               <span>{author?.name || 'Anonymous'}</span>
             </div>
