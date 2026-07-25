@@ -63,10 +63,11 @@ export const onRequest = async (context: PagesContext) => {
 
     const accept = (request.headers.get('Accept') || request.headers.get('accept') || '').toLowerCase();
     const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
-    const isHtml = contentType.includes('text/html');
+    const isHtml = contentType.includes('text/html') || url.pathname.endsWith('/') || !url.pathname.includes('.') || url.pathname.endsWith('.html');
+    const isMarkdownRequest = accept.includes('text/markdown') || accept.includes('text/x-markdown') || url.pathname.endsWith('.md');
 
-    // Handle Markdown Content Negotiation for Agents (Accept: text/markdown or text/x-markdown)
-    if ((accept.includes('text/markdown') || accept.includes('text/x-markdown')) && isHtml && response.status === 200) {
+    // Handle Markdown Content Negotiation for Agents (Accept: text/markdown or .md extension)
+    if (isMarkdownRequest && isHtml && response.status === 200) {
       const html = await response.clone().text();
       const markdown = convertHtmlToMarkdown(html);
 
@@ -80,8 +81,9 @@ export const onRequest = async (context: PagesContext) => {
           'x-markdown-tokens': String(tokenCount),
           'x-original-tokens': String(originalTokenCount),
           'Vary': 'Accept',
+          'Access-Control-Allow-Origin': '*',
           'Cache-Control': response.headers.get('Cache-Control') || 'public, max-age=0, must-revalidate',
-          'Link': '</llms.txt>; rel="describedby"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"'
+          'Link': '</llms.txt>; rel="describedby"; type="text/markdown", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"'
         },
       });
     }
