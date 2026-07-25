@@ -1,8 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { getArticleUrl } from '../utils/content';
 import { getCollection } from 'astro:content';
-import VerdictGauge from '@/components/VerdictGauge.astro';
 import FeedList from '@/components/FeedList.astro';
 
 const authors = await getCollection('authors');
@@ -51,7 +49,9 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-32 items-start">
       <!-- Main content -->
-      <div class="lg:col-span-9 space-y-64">        <!-- Unified numbered vertical list feed -->
+      <div class="lg:col-span-9 space-y-64">
+        <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
+        <!-- Unified numbered vertical list feed -->
         {posts.length > 0 ? (
           <FeedList posts={posts} />
         ) : (
@@ -65,6 +65,14 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
             </p>
           </div>
         )}
+      
+        </div>
+    <!-- Standalone floating footer pill -->
+    <div class="mt-32 flex justify-center">
+      <div class="inline-flex items-center gap-8 px-24 py-12 rounded-full border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-caption font-sans font-medium text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md">
+        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-115 transition-transform duration-150 cursor-default">🧡</span>
+      </div>
+    </div>
       </div>
 
       <!-- Sidebar -->

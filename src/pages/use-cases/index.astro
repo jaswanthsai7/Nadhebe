@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getArticleUrl } from '../../utils/content';
+import FeedList from '../../components/FeedList.astro';
 
 const posts = await getCollection('use-cases');
 const sorted = posts
@@ -13,48 +13,22 @@ const sorted = posts
   title="Use Cases - Nadhebe"
   description="Learn how static content platforms solve real-world engineering and business problems."
 >
-  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64" data-reveal>
+  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
+
     <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
       <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
       <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Use Cases</h1>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
-      {sorted.map((post, index) => (
-        <a
-          href={getArticleUrl({ ...post, collection: 'use-cases' })}
-          class="card group flex flex-col overflow-hidden p-0"
-        >
-          <div class="aspect-video w-full overflow-hidden relative border-b border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark">
-            <img
-              src={post.data.heroImage}
-              alt={post.data.title}
-              width="400"
-              height="225"
-              class="w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : undefined} />
-          </div>
-          <div class="p-16 flex-1 flex flex-col justify-between">
-            <div>
-              <span class="badge mb-12">
-                {post.data.category}
-              </span>
-              <h3 class="text-h3 font-display font-semibold leading-snug text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors">
-                {post.data.title}
-              </h3>
-              <p class="text-meta font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mt-12">
-                {post.data.description}
-              </p>
-            </div>
-            <div class="text-meta font-mono font-semibold text-muted dark:text-muted-dark mt-16">
-              {new Date(post.data.pubDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </div>
-          </div>
-        </a>
-      ))}
+    <FeedList posts={posts} />
+  
+    </div>
+    <!-- Standalone floating footer pill -->
+    <div class="mt-32 flex justify-center">
+      <div class="inline-flex items-center gap-8 px-24 py-12 rounded-full border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-caption font-sans font-medium text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md">
+        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-115 transition-transform duration-150 cursor-default">🧡</span>
+      </div>
     </div>
   </div>
 </BaseLayout>

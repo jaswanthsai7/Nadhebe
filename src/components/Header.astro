@@ -19,6 +19,9 @@ const moreNav = [
   { label: 'Frameworks', href: '/frameworks' },
   { label: 'Case Studies', href: '/case-studies' },
 ];
+
+const pathname = Astro.url.pathname;
+const isMoreActive = moreNav.some(item => pathname.startsWith(item.href));
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-border bg-bg/95 backdrop-blur-md dark:border-border-dark dark:bg-bg-dark/95">
@@ -32,18 +35,21 @@ const moreNav = [
 
     <!-- Desktop Nav -->
     <nav aria-label="Primary" class="hidden items-center gap-6 md:flex">
-      {mainNav.map((item) => (
-        <a
-          href={item.href}
-          class="px-12 py-6 text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 rounded-6"
-        >
-          {item.label}
-        </a>
-      ))}
+      {mainNav.map((item) => {
+        const isActive = pathname.startsWith(item.href) && (item.href !== '/' || pathname === '/');
+        return (
+          <a
+            href={item.href}
+            class={`px-12 py-6 text-caption font-sans font-medium transition-colors duration-150 rounded-6 ${isActive ? 'text-ink dark:text-ink-dark underline decoration-accent decoration-[2px] underline-offset-[6px]' : 'text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'}`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
 
       <!-- More Dropdown -->
       <div class="relative group">
-        <button class="flex items-center gap-4 px-12 py-6 text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 rounded-6 cursor-pointer">
+        <button class={`flex items-center gap-4 px-12 py-6 text-caption font-sans font-medium transition-colors duration-150 rounded-6 cursor-pointer ${isMoreActive ? 'text-ink dark:text-ink-dark underline decoration-accent decoration-[2px] underline-offset-[6px]' : 'text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'}`}>
           More
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-50">
             <path d="m6 9 6 6 6-6" />
@@ -51,14 +57,17 @@ const moreNav = [
         </button>
         <div class="absolute right-0 mt-4 w-[200px] origin-top-right rounded-12 border border-border bg-surface p-6 shadow-large opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-200 dark:border-border-dark dark:bg-surface-dark z-50">
           <div class="flex flex-col">
-            {moreNav.map((item) => (
-              <a
-                href={item.href}
-                class="block rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark transition-colors duration-150"
-              >
-                {item.label}
-              </a>
-            ))}
+            {moreNav.map((item) => {
+              const isActive = pathname.startsWith(item.href);
+              return (
+                <a
+                  href={item.href}
+                  class={`block rounded-8 px-12 py-8 text-caption font-sans font-medium transition-colors duration-150 ${isActive ? 'text-ink dark:text-ink-dark bg-hover/45 dark:bg-hover-dark/45 font-semibold' : 'text-ink2 hover:bg-hover hover:text-ink dark:text-ink2-dark dark:hover:bg-hover-dark dark:hover:text-ink-dark'}`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

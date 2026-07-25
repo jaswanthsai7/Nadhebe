@@ -13,12 +13,22 @@ const sorted = posts
   title="Tutorials - Nadhebe"
   description="Browse our in-depth guides and tutorials on AI and development."
 >
-  <div class="mx-auto max-w-6xl px-24 py-48 sm:py-64" data-reveal>
+  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
+
     <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
       <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
       <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">AI Tutorials</h1>
     </div>
 
     <FeedList posts={sorted} />
+  
+    </div>
+    <!-- Standalone floating footer pill -->
+    <div class="mt-32 flex justify-center">
+      <div class="inline-flex items-center gap-8 px-24 py-12 rounded-full border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-caption font-sans font-medium text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md">
+        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-115 transition-transform duration-150 cursor-default">🧡</span>
+      </div>
+    </div>
   </div>
 </BaseLayout>
