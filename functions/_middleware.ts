@@ -10,6 +10,17 @@ export const onRequest = async (context: PagesContext) => {
     const url = new URL(request.url);
     const origin = `${url.protocol}//${url.host}`;
 
+    // Serve IndexNow Verification Key File
+    if (url.pathname === '/4d98a2f7c03e4b1a8d562f790c1e8a9f.txt') {
+      return new Response('4d98a2f7c03e4b1a8d562f790c1e8a9f', {
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400',
+          'Access-Control-Allow-Origin': '*'
+        }
+      });
+    }
+
     // Serve OAuth Protected Resource Metadata (RFC 9728)
     if (url.pathname.replace(/\/$/, '') === '/.well-known/oauth-protected-resource') {
       const resourceMetadata = {
