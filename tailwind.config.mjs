@@ -68,8 +68,8 @@ export default {
           dark: '#525252',
         },
         accent: {
-          DEFAULT: '#5E6AD2',
-          dark: '#818CF8',
+          DEFAULT: '#D97706',
+          dark: '#F59E0B',
         },
         'rating-gold': {
           DEFAULT: '#B7862C',
