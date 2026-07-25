@@ -1,21 +1,21 @@
 [
   {
     "title": "How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)",
-    "description": "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and Windows.",
+    "description": "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.",
     "url": "https://nadhebe.pages.dev/tutorials/how-to-install-claude-code-cli",
     "category": "Tutorials",
     "tags": [
-      "[\"claude\", \"cli\", \"installation\", \"npm\", \"anthropic\"]"
+      "[\"claude\", \"cli\", \"installation\", \"anthropic\", \"developer-tools\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
     "title": "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)",
-    "description": "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool on Windows using PowerShell and WSL2.",
+    "description": "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.",
     "url": "https://nadhebe.pages.dev/tutorials/installing-claude-code-cli-windows",
     "category": "Tutorials",
     "tags": [
-      "[\"claude\", \"cli\", \"windows\", \"wsl2\", \"anthropic\"]"
+      "[\"claude\", \"cli\", \"windows\", \"wsl2\", \"powershell\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
@@ -41,21 +41,21 @@
   },
   {
     "title": "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements",
-    "description": "A comprehensive guide to Anthropic's official Claude Certification Program, covering exam tracks, Pearson VUE proctoring, and Credly digital badges.",
+    "description": "A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.",
     "url": "https://nadhebe.pages.dev/guides/anthropic-claude-certification-developer-guide",
     "category": "Guides",
     "tags": [
-      "[\"anthropic\", \"claude\", \"certification\", \"pearson-vue\", \"credly\"]"
+      "[\"anthropic\", \"claude\", \"certification\", \"pearson-vue\", \"credly\", \"ai-education\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
     "title": "Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls",
-    "description": "An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, and security prompts.",
+    "description": "An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.",
     "url": "https://nadhebe.pages.dev/guides/claude-code-agent-loop-architecture",
     "category": "Guides",
     "tags": [
-      "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\"]"
+      "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\", \"software-design\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
@@ -65,7 +65,7 @@
     "url": "https://nadhebe.pages.dev/guides/google-ai-certification-cost-free-vs-paid",
     "category": "Guides",
     "tags": [
-      "[\"google\", \"ai-certification\", \"google-cloud\", \"skills-boost\", \"machine-learning\"]"
+      "[\"google\", \"ai-certification\", \"google-cloud\", \"skills-boost\", \"machine-learning\", \"ai-education\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
