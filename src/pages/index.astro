@@ -4,6 +4,7 @@ import { getAllArticles, getArticleUrl } from '../utils/content';
 import { getCollection } from 'astro:content';
 import VerdictGauge from '@/components/VerdictGauge.astro';
 import Newsletter from '@/components/Newsletter.astro';
+import FeedList from '@/components/FeedList.astro';
 
 const allArticles = await getAllArticles();
 const authors = await getCollection('authors');
@@ -425,28 +426,11 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
     )}
 
     <!-- Latest Articles -->
-    <section data-reveal>
-      <div class="flex items-center justify-between mb-32">
-        <h2 class="section-title">Latest</h2>
+    <section class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium" data-reveal>
+      <div class="flex items-center justify-between mb-32 border-b border-border dark:border-border-dark pb-16">
+        <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark leading-tight">Latest Articles</h2>
       </div>
-      <div class="divide-y divide-border dark:divide-border-dark">
-        {latestArticles.map(post => (
-          <a href={getArticleUrl(post)} class="group flex items-start gap-16 py-20 first:pt-0 last:pb-0" data-reveal>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-8 mb-4">
-                <span class="badge">{post.data.category}</span>
-              </div>
-              <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 line-clamp-1">
-                {post.data.title}
-              </h3>
-              <p class="mt-4 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-1">{post.data.description}</p>
-            </div>
-            <time class="shrink-0 text-meta text-muted dark:text-muted-dark mt-8" datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            </time>
-          </a>
-        ))}
-      </div>
+      <FeedList posts={latestArticles} />
     </section>
     
    
