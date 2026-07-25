@@ -21,11 +21,6 @@ html.dark {
     @apply border-border dark:border-border-dark;
   }
 
-  html, body {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-
   html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
