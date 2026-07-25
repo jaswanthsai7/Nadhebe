@@ -112,7 +112,7 @@ const prompts = defineCollection({
 const comparisons = defineCollection({
   type: 'content',
   schema: withYoutubeImage(sharedSchema.extend({
-    itemsCompared: z.array(z.string()),
+    itemsCompared: z.array(z.string()).optional(),
   })),
 });
 
