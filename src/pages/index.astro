@@ -110,7 +110,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
                     Featured {post.data.category || 'Article'}
                   </span>
                   <a href={getArticleUrl(post)} class="group block">
-                    <h1 class="font-display text-h1 sm:text-display font-bold leading-[1.1] text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 tracking-tight">
+                    <h1 class="font-display text-h1 sm:text-display font-bold leading-[1.1] text-accent dark:text-accent-dark group-hover:underline decoration-ink dark:decoration-ink-dark transition-all duration-150 tracking-tight">
                       {post.data.title}
                     </h1>
                   </a>
