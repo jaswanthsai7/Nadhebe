@@ -4,16 +4,12 @@
 
 ## Content Directory
 
-### News
-
-- [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide): Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
-- [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide): An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
-- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
-- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
-- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
-
 ### Tutorials
 
+- [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide): Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.
+- [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting): Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.
+- [Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)](https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide): Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts.
+- [Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)](https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli): Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux.
 - [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts): The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
 - [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.com/tutorials/claude-desktop-download-installation-guide): A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.
 - [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills): A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.
@@ -30,6 +26,8 @@
 
 ### Comparisons
 
+- [Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?](https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced): Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.
+- [NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison](https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison): Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows.
 - [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026): An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.
 - [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison): A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
 - [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode): A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.
@@ -39,6 +37,29 @@
 - [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks): A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
 - [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 - [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
+
+### Guides
+
+- [Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)](https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits): Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing.
+- [How to Get a Gemini API Key (2026 Developer Setup Guide)](https://nadhebe.com/guides/how-to-get-gemini-api-key): Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications.
+- [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide): A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
+- [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture): An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
+- [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user): The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
+- [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide): A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
+- [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide): A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.
+- [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide): A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.
+- [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid): A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
+- [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
+- [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
+- [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
+
+### News
+
+- [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide): Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
+- [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide): An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
+- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
+- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
+- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
 ### Best Practices
 
@@ -55,19 +76,6 @@
 - [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
 - [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.com/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
 - [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.com/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
-
-### Guides
-
-- [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide): A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
-- [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture): An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
-- [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user): The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
-- [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide): A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
-- [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide): A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.
-- [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide): A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.
-- [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid): A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
-- [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
-- [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
-- [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
 ### Prompts
 

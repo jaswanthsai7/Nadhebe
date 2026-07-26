@@ -4,6 +4,572 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide)
+
+> Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.
+
+Category: Tutorials | Tags: ["gemini-photo", "imagen-3", "ai-image-generation", "prompt-engineering", "google-ai"]
+
+Google Gemini incorporates **Imagen 3**, Google's most capable text-to-image generation model. It allows users to generate photorealistic images, editorial graphics, UI mockups, and artistic illustrations directly within the Gemini interface or via API.
+
+---
+
+## How to Access Image Generation in Gemini
+
+1. Navigate to [gemini.google.com](https://gemini.google.com/).
+2. In the text prompt box, type `Create an image of...` or `Generate a photo of...`.
+3. Press Enter to render high-resolution 1024x1024 visual outputs.
+
+---
+
+## Prompt Engineering for Photorealism
+
+To achieve photorealistic results, structure your prompt with **Subject + Lighting + Camera Lens + Composition + Style**:
+
+### Recommended Prompt Structure
+
+```text
+Photorealistic cinematic portrait of an AI engineer working in a modern glass studio, soft golden hour sunlight filtering through blinds, shot on 85mm f/1.4 lens, shallow depth of field, subtle film grain, 8k resolution.
+```
+
+### Key Style Modifiers
+
+- **Lighting:** `Golden hour sunlight`, `soft studio softbox`, `neon cyberpunk glow`, `dramatic rim lighting`.
+- **Camera Gear:** `85mm f/1.8 prime lens`, `35mm street photography`, `macro 100mm details`.
+- **Render Style:** `Editorial paper collage`, `vector flat illustration`, `isometric 3D render`.
+
+---
+
+## Image Generation via Gemini API
+
+Developers can generate images programmatically using the Python SDK:
+
+```python
+import os
+from google import genai
+from google.genai import types
+
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+result = client.models.generate_images(
+    model='imagen-3.0-generate-002',
+    prompt='Minimalist vector logo of a glowing blue hummingbird, white background',
+    config=types.GenerateImagesConfig(
+        number_of_images=1,
+        output_mime_type="image/jpeg",
+        aspect_ratio="1:1"
+    )
+)
+
+for generated_image in result.generated_images:
+    with open("output.jpg", "wb") as f:
+        f.write(generated_image.image.image_bytes)
+```
+
+---
+
+## FAQ
+
+### Can Gemini generate images for free?
+Yes. Standard Gemini web users can generate images for free using Imagen 3 model capabilities.
+
+### What aspect ratios are supported?
+Imagen 3 supports `1:1` (square), `16:9` (widescreen), `9:16` (vertical mobile), `4:3`, and `3:4`.
+
+---
+
+# [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting)
+
+> Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.
+
+Category: Tutorials | Tags: ["gemini-api", "troubleshooting", "error-handling", "api-key", "developer-guide"]
+
+When integrating the Google Gemini API in Node.js, Python, or curl requests, developers often encounter common API authentication or quota errors. This guide outlines the exact causes and step-by-step solutions for resolving each error.
+
+---
+
+## 1. Error: `403 Forbidden` / `API_KEY_INVALID`
+
+### Cause
+Your API key string is incorrect, has been deleted in Google AI Studio, or has restrictive HTTP referrer / IP restrictions configured in Google Cloud Console that block your server.
+
+### Fix
+1. Open [Google AI Studio](https://aistudio.google.com/) -> **Get API Key**.
+2. Confirm the key status is **Active**.
+3. If using `.env` files, verify there are no trailing spaces or missing quotes around your key:
+
+```env
+# Correct
+GEMINI_API_KEY="AIzaSyYourExactKey"
+
+# Incorrect (extra space)
+GEMINI_API_KEY= "AIzaSyYourExactKey "
+```
+
+---
+
+## 2. Error: `429 RESOURCE_EXHAUSTED` / `Quota Exceeded`
+
+### Cause
+You have exceeded your assigned Requests Per Minute (RPM), Tokens Per Minute (TPM), or Requests Per Day (RPD) for the Free Tier.
+
+### Fix
+Implement exponential backoff retry logic in your code:
+
+```typescript
+import { GoogleGenAI } from '@google/genai';
+
+async function generateWithRetry(prompt: string, maxRetries = 3) {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  let delay = 1000;
+
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await ai.models.generateContent({
+        model: 'gemini-2.0-flash',
+        contents: prompt,
+      });
+    } catch (err: any) {
+      if (err?.status === 429 && i < maxRetries - 1) {
+        console.warn(`Rate limited. Retrying in ${delay}ms...`);
+        await new Promise((res) => setTimeout(res, delay));
+        delay *= 2; // Exponential backoff
+      } else {
+        throw err;
+      }
+    }
+  }
+}
+```
+
+---
+
+## 3. Error: `INVALID_ARGUMENT` / Model Not Found
+
+### Cause
+Specifying a deprecated model string (e.g. `gemini-pro-vision` or legacy model name) instead of current valid API model aliases.
+
+### Fix
+Use modern model string aliases:
+
+```typescript
+// Recommended model strings in 2026:
+const MODEL_FLASH = 'gemini-2.0-flash';
+const MODEL_PRO = 'gemini-1.5-pro';
+```
+
+---
+
+# [Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)](https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide)
+
+> Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts.
+
+Category: Tutorials | Tags: ["google-flow", "veo-video", "ai-video", "storyboard", "filmmaking"]
+
+**Google Flow** is Google's web-based pre-production studio for AI video generation and storyboarding. Built on Google’s **Veo** generative video models, Flow allows filmmakers and content creators to turn script prompts into consistent video clips, scene storyboards, and camera movements.
+
+---
+
+## Core Capabilities of Google Flow
+
+1. **Text-to-Video Generation:** Generate 1080p high-framerate 4-second video clips from natural language descriptions.
+2. **Image-to-Video Animating:** Upload reference concept art or hero photos to control character consistency.
+3. **Camera Motion Controls:** Specify precise camera movements such as `orbit right`, `drone push-in`, or `whip pan`.
+4. **Multi-Shot Storyboard Timeline:** Organize individual generated clips into a cohesive timeline for export.
+
+---
+
+## Step-by-Step Workflow Tutorial
+
+### Step 1: Initialize a New Storyboard Project
+1. Log in to [flow.google.com](https://flow.google.com/).
+2. Click **New Sequence** and select aspect ratio (`16:9` for landscape cinema or `9:16` for mobile reels).
+
+### Step 2: Crafting Cinematic Camera Prompts
+Structure your video prompt using **Subject + Motion + Lighting + Camera Rig**:
+
+```text
+A futuristic electric hypercar speeding down a neon rainy Tokyo street at night, camera tracking closely alongside at wheel height, wet asphalt reflection, cinematic 24fps film look.
+```
+
+### Step 3: Scene Continuity & Keyframe Anchoring
+To maintain character consistency across shots:
+1. Generate your initial hero frame.
+2. Select **Lock Keyframe Character**.
+3. Type the next action prompt (e.g. `Character turns around and looks toward the horizon`). Flow preserves character facial structure across clips.
+
+---
+
+## Summary Checklist
+
+- Use Veo model integration for high-definition video output.
+- Anchor keyframes to maintain visual consistency across scenes.
+- Export timeline sequences directly to MP4 or Premiere Pro XML files.
+
+---
+
+# [Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)](https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli)
+
+> Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux.
+
+Category: Tutorials | Tags: ["gemini-cli", "terminal", "cli-tools", "developer-workflow", "automation"]
+
+The **Gemini CLI** brings Google's advanced language models directly into your terminal. It enables developers to pipe shell outputs, analyze code repos, automate git commits, and process local files using natural language.
+
+---
+
+## Prerequisites & Installation
+
+Gemini CLI requires **Node.js 18+** or Python installed on your system.
+
+### Install via npm (Global Package)
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+Verify installation:
+
+```bash
+gemini --version
+```
+
+---
+
+## Step 1: Authentication
+
+Export your Gemini API key obtained from Google AI Studio:
+
+### Windows (PowerShell)
+```powershell
+$env:GEMINI_API_KEY="AIzaSyYourGeneratedApiKeyHere"
+```
+
+### macOS / Linux (Bash / Zsh)
+```bash
+export GEMINI_API_KEY="AIzaSyYourGeneratedApiKeyHere"
+```
+
+---
+
+## Core Gemini CLI Commands
+
+### 1. Simple Single Prompt Query
+
+```bash
+gemini "Explain the difference between process.nextTick and setImmediate in Node.js"
+```
+
+### 2. Pipelining Shell Output into Gemini
+
+Pipe the output of any terminal command directly into Gemini for instant debugging:
+
+```bash
+git diff | gemini "Generate a conventional commit message for these changes"
+```
+
+Analyze server log files:
+
+```bash
+cat /var/log/nginx/error.log | gemini "Summarize top 3 recurring errors"
+```
+
+### 3. File Code Review & Refactoring
+
+Pass local source code files for automated review:
+
+```bash
+gemini analyze ./src/utils/auth.ts --prompt "Identify any potential security vulnerabilities"
+```
+
+---
+
+## Interactive Chat Mode
+
+Launch a multi-turn interactive session directly in terminal:
+
+```bash
+gemini chat
+```
+
+Inside chat mode:
+- `/help` — List available CLI helper commands
+- `/clear` — Reset context window
+- `/exit` — End session
+
+---
+
+## Summary Checklist
+
+- Install globally: `npm i -g @google/gemini-cli`
+- Authenticate via `GEMINI_API_KEY`
+- Pipe logs and git diffs directly to speed up daily developer workflows
+
+---
+
+# [Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?](https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced)
+
+> Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.
+
+Category: Comparisons | Tags: ["gemini-free-vs-paid", "gemini-advanced", "pricing", "google-one", "comparison"]
+
+Google offers two consumer tiers for its conversational AI platform: **Gemini Free** and **Gemini Advanced** (included with the Google One AI Premium Plan at $19.99/month). This guide evaluates whether upgrading is worth the investment for developers and power users.
+
+---
+
+## Direct Comparison Table
+
+| Feature | Gemini Free | Gemini Advanced ($19.99/mo) |
+| :--- | :--- | :--- |
+| **Core Model** | Gemini 1.5 Flash / 2.0 Flash | Gemini 1.5 Pro / 2.0 Pro |
+| **Context Window** | 32,000 Tokens | **1,000,000 to 2,000,000 Tokens** |
+| **Document Uploads** | Up to 5 files | Up to 1,500 pages / 30MB files |
+| **Google Workspace Integration** | None | Native in Gmail, Docs, Slides, Sheets |
+| **Python Code Sandbox** | Basic | Advanced multi-file execution & chart rendering |
+| **Cloud Storage Included** | 15 GB | **2 TB Google Drive Storage** |
+
+---
+
+## Key Benefits of Gemini Advanced
+
+### 1. 2 Million Token Context Window
+Gemini Advanced allows you to upload entire 1,000-page textbooks, 30,000 lines of source code, or multi-hour audio recordings in a single prompt without chunking.
+
+### 2. Deep Google Workspace Integration
+Subscribers gain access to **Gemini in Gmail**, **Docs**, and **Slides**, enabling one-click email draft synthesis, document summarization, and slide presentation generation.
+
+### 3. Included 2TB Storage Bundle
+Because the subscription includes the **Google One 2TB Cloud Storage** plan (normally $9.99/month standalone), the net cost of Gemini Advanced effectively drops to ~$10/month.
+
+---
+
+## Verdict: Who Should Upgrade?
+
+- **Upgrade to Gemini Advanced if:** You process long documents (PDFs, research papers), write extensive code, or already pay for Google Cloud storage.
+- **Stick with Gemini Free if:** You only need quick web queries, short summaries, or basic text generation.
+
+---
+
+# [NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison](https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison)
+
+> Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows.
+
+Category: Comparisons | Tags: ["notebooklm", "gemini-notebook", "ai-research", "google-ai", "comparison"]
+
+Google offers two primary notebook-centric AI environments for researchers and developers: **NotebookLM** and **Gemini Notebook**. While both leverage Gemini models for document synthesis, they serve fundamentally different use cases.
+
+---
+
+## Architectural Comparison Table
+
+| Feature | NotebookLM | Gemini Notebook |
+| :--- | :--- | :--- |
+| **Primary Audience** | Researchers, Students, Writers | Developers, Data Scientists |
+| **Source Grounding** | Strictly grounded to uploaded PDFs/Docs | Web search + Custom Docs + Live Code Execution |
+| **Audio Overviews** | Automated AI Podcast Generation | Audio transcripts + Voice synthesis |
+| **Code Execution** | No native code runtime | Python & Node.js Cloud Sandbox |
+| **Citation Precision** | Direct inline source quotes & page numbers | Standard markdown citations |
+| **API Availability** | Consumer web interface | Accessible via Gemini API SDK |
+
+---
+
+## Key Differences Explained
+
+### 1. Source Grounding & Hallucination Prevention
+NotebookLM functions as a **personalized AI research assistant**. When you upload PDFs, Google Docs, or YouTube URLs, NotebookLM restricts its responses strictly to your source material, dramatically reducing hallucinations.
+
+In contrast, Gemini Notebook combines source documents with live Google Search web grounding and real-time execution capabilities.
+
+### 2. Audio Overviews & Deep Dives
+NotebookLM features one-click **Audio Overview** generation, converting your uploaded research documents into an engaging 10-minute conversational podcast hosted by two AI voices.
+
+### 3. Developer & Code Execution Capabilities
+Gemini Notebook includes a full cloud Python code runtime, allowing developers to execute data analysis scripts, render charts, and query databases directly within the notebook interface.
+
+---
+
+## Recommendation Summary
+
+- **Choose NotebookLM if:** You need strict factual grounding across books, PDFs, research papers, or want automated audio overviews.
+- **Choose Gemini Notebook if:** You are executing code, analyzing datasets, or building API integrations.
+
+---
+
+# [Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)](https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits)
+
+> Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing.
+
+Category: Guides | Tags: ["gemini-api", "pricing", "rate-limits", "google-ai", "llm-costs"]
+
+Understanding the **Gemini API pricing structure** and rate limit quotas is critical for building cost-effective production applications. Google offers both a **Free Tier** in Google AI Studio for prototyping and a **Pay-As-You-Go Tier** for production workloads.
+
+---
+
+## Free Tier vs Pay-As-You-Go Model Overview
+
+| Feature | Free Tier (AI Studio) | Pay-As-You-Go Tier |
+| :--- | :--- | :--- |
+| **Price** | $0.00 | Pay per 1M tokens |
+| **Data Privacy** | Prompts used to train models | Prompts **NOT** used to train models |
+| **Gemini 1.5 Flash RPM** | 15 RPM | 1,000 RPM |
+| **Gemini 1.5 Pro RPM** | 2 RPM | 360 RPM |
+| **Max Context Window** | 1,000,000 Tokens | 2,000,000 Tokens |
+
+---
+
+## Token Pricing Breakdown (Pay-As-You-Go)
+
+Google charges based on input tokens (prompt text/images/audio) and output tokens generated by the model.
+
+### 1. Gemini 1.5 & 2.0 Flash (High Speed / Low Cost)
+- **Input Tokens (prompts < 128k):** $0.075 per 1 million tokens
+- **Input Tokens (prompts > 128k):** $0.15 per 1 million tokens
+- **Output Tokens:** $0.30 per 1 million tokens
+- **Context Caching:** $0.01875 per 1M tokens/hour
+
+### 2. Gemini 1.5 Pro (Deep Reasoning / Complex Code)
+- **Input Tokens (prompts < 128k):** $1.25 per 1 million tokens
+- **Input Tokens (prompts > 128k):** $2.50 per 1 million tokens
+- **Output Tokens:** $5.00 per 1 million tokens
+
+---
+
+## Understanding Gemini API Rate Limits
+
+Rate limits are measured across three metrics:
+1. **RPM (Requests Per Minute):** Number of individual API calls per 60 seconds.
+2. **TPM (Tokens Per Minute):** Total combined input + output tokens processed per minute.
+3. **RPD (Requests Per Day):** Hard cap on daily API invocations (1,500 RPD on Free Tier).
+
+```text
+429 Quota Exceeded -> Solution: Implement exponential backoff or upgrade to Pay-As-You-Go billing.
+```
+
+---
+
+## FAQ
+
+### Does Google train on Free Tier API data?
+Yes. On the Free Tier in Google AI Studio, input prompts and output responses may be reviewed by human annotators to improve Google models. If handling sensitive PII data, use the Pay-As-You-Go Tier.
+
+### How do I increase my Gemini API rate limits?
+To increase RPM and TPM limits beyond the free quotas, add a credit card in Google Cloud Console under Billing -> Linked AI Studio Project.
+
+---
+
+# [How to Get a Gemini API Key (2026 Developer Setup Guide)](https://nadhebe.com/guides/how-to-get-gemini-api-key)
+
+> Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications.
+
+Category: Guides | Tags: ["gemini-api", "google-ai", "api-key", "developer-tools", "python", "javascript"]
+
+Integrating Google's **Gemini API** into your applications requires a valid API key issued through **Google AI Studio** or **Google Cloud Vertex AI**. This guide provides a step-by-step walkthrough on generating your key, configuring environment variables, setting up billing limits, and preventing unauthorized quota usage.
+
+---
+
+## What Is a Gemini API Key?
+
+A Gemini API key is a unique 39-character alphanumeric string that authenticates your client application with Google’s Gemini 1.5, 2.0, and 3.x model endpoints. It links your requests to a specific Google AI Studio project for rate limiting, quota tracking, and access management.
+
+```text
+AIzaSyD-ExampleGeminiApiKeyString_2026xY
+```
+
+---
+
+## Step 1: Create a Google AI Studio Project
+
+1. Navigate to [Google AI Studio](https://aistudio.google.com/).
+2. Log in with your standard Google Workspace or Gmail account.
+3. In the left navigation menu, click **Get API Key**.
+4. Click **Create API Key in New Project** (or select an existing Google Cloud Console project).
+5. Copy the generated API key immediately and store it securely.
+
+> [!IMPORTANT]
+> Google AI Studio provides **free API keys** for prototyping with Gemini 1.5 Flash and Gemini 2.0 Flash models subject to rate limits.
+
+---
+
+## Step 2: Configure Environment Variables
+
+Never hardcode your API key directly in source code or commit it to public GitHub repositories. Use `.env` configuration files.
+
+### For Node.js / JavaScript
+Install the official Google Gen AI SDK:
+
+```bash
+npm install @google/genai
+```
+
+Create a `.env` file in your project root:
+
+```env
+GEMINI_API_KEY="AIzaSyYourGeneratedKeyHere"
+```
+
+Access the key securely in code:
+
+```typescript
+import { GoogleGenAI } from '@google/genai';
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const response = await ai.models.generateContent({
+  model: 'gemini-2.0-flash',
+  contents: 'Explain quantum computing in 2 sentences.',
+});
+
+console.log(response.text);
+```
+
+### For Python
+Install the Python SDK:
+
+```bash
+pip install google-genai
+```
+
+Set environment variables in PowerShell or Bash:
+
+```bash
+export GEMINI_API_KEY="AIzaSyYourGeneratedKeyHere"
+```
+
+Run Python code:
+
+```python
+import os
+from google import genai
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents="Write a 3-line Python function to reverse a string."
+)
+
+print(response.text)
+```
+
+---
+
+## Gemini API Key Security Best Practices
+
+1. **Restrict HTTP Referrers & IP Addresses:** In Google Cloud Console, restrict your API key to only accept requests originating from your production domain or server IPs.
+2. **Use Secret Managers in Production:** When deploying to Vercel, AWS Lambda, or Cloudflare Workers, store the API key in environment secrets rather than static configuration files.
+3. **Rotate Keys Regularly:** Set a 90-day key rotation policy for enterprise applications.
+
+---
+
+## FAQ
+
+### Is the Gemini API Key free?
+Yes! Google AI Studio offers a free tier allowing up to 15 Requests Per Minute (RPM) and 1,000,000 Tokens Per Minute (TPM) on Gemini 1.5 Flash and Gemini 2.0 Flash.
+
+### Why do I get a 403 Forbidden error?
+A 403 error occurs if your key is restricted to specific IP addresses/referrers that do not match your current client, or if API access has not been enabled for your Google Cloud billing account.
+
+---
+
 # [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide)
 
 > Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
