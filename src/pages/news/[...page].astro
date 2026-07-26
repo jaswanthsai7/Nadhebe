@@ -1,61 +1,285 @@
 ---
+import { getAllArticles, getArticleUrl } from '../../utils/content';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FeedList from '../../components/FeedList.astro';
 
 export async function getStaticPaths({ paginate }: any) {
   const newsEntries = await getCollection('news');
   const sorted = newsEntries.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-  return paginate(sorted, { pageSize: 6 });
+  return paginate(sorted, { pageSize: 12 });
 }
 
 const { page } = Astro.props;
+const authors = await getCollection('authors');
+const allArticles = await getAllArticles();
+
+// Filter news articles or fallback to all articles if needed
+const newsArticles = allArticles.filter(a => a.collection === 'news' || a.data.category?.toLowerCase() === 'news');
+const pool = newsArticles.length >= 6 ? newsArticles : allArticles;
+
+const featuredNews = pool[0];
+const featuredAuthor = featuredNews?.data?.author ? authors.find(a => a.id === featuredNews.data.author.id) : null;
+
+const latestStack = pool.slice(1, 5);
+const trendingList = pool.slice(0, 4);
+const moreNewsList = page.currentPage === 1 ? pool.slice(5, 12) : page.data;
+const mostReadList = allArticles.filter(a => a.data.isPillar || a.data.rating).slice(0, 4);
 ---
 
 <BaseLayout
-  title={`Latest News - Page ${page.currentPage}`}
-  description="Stay updated with the latest artificial intelligence news, releases, and guides."
+  title={`Latest AI News - Page ${page.currentPage}`}
+  description="Stay updated with the latest AI breakthroughs, product launches and industry trends."
 >
-  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64">
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48 space-y-24 sm:space-y-32">
+    
+    <!-- Master Outer Container / Header Panel -->
     <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
-
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24 flex flex-col sm:flex-row sm:items-end justify-between gap-16">
-      <div>
-        <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-        <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Latest AI News</h1>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-16">
+        <div>
+          <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase mb-8 block">
+            LATEST AI NEWS
+          </span>
+          <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">
+            Breaking developments, releases & industry news
+          </h1>
+          <p class="mt-8 text-body text-ink2 dark:text-ink2-dark max-w-2xl">
+            Stay updated with the latest AI breakthroughs, product launches and industry trends.
+          </p>
+        </div>
+        <div class="flex items-center gap-12 shrink-0">
+          <span class="text-xs font-mono font-semibold text-muted dark:text-muted-dark">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+        </div>
       </div>
-      <span class="text-meta font-mono font-semibold text-muted dark:text-muted-dark">Page {page.currentPage} of {page.lastPage}</span>
     </div>
 
-    <FeedList posts={page.data} />
+    <!-- 2. Top Grid: Featured Large Card (Left) + Latest Stack (Right) -->
+    {featuredNews && (
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-stretch">
+        
+        <!-- Left Featured Hero Card (7 cols) -->
+        <div class="lg:col-span-7 flex">
+          <a href={getArticleUrl(featuredNews)} class="group relative w-full overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium flex flex-col justify-end min-h-[380px] sm:min-h-[440px]">
+            <img
+              src={featuredNews.data.heroImage}
+              alt={featuredNews.data.heroAlt || featuredNews.data.title}
+              width="800"
+              height="500"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              fetchpriority="high"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
+            
+            <div class="relative p-24 sm:p-32 z-10">
+              <span class="inline-flex items-center gap-6 rounded-pill bg-accent px-12 py-4 text-xs font-mono font-bold text-white uppercase tracking-wider mb-16 shadow-subtle">
+                FEATURED
+              </span>
+              <h2 class="font-display text-h2 sm:text-h1 font-bold text-white group-hover:underline leading-tight tracking-tight">
+                {featuredNews.data.title}
+              </h2>
+              <p class="mt-12 text-body text-white/80 line-clamp-2 leading-relaxed max-w-xl">
+                {featuredNews.data.description}
+              </p>
+              <div class="mt-20 flex items-center gap-12 text-meta text-white/70 font-sans text-xs">
+                <span class="font-semibold text-white">{featuredAuthor?.data?.name || 'Nadhebe Team'}</span>
+                <span>·</span>
+                <time datetime={featuredNews.data.pubDate.toISOString()}>
+                  {featuredNews.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </time>
+                <span>·</span>
+                <span>{featuredNews.data.estimatedReadingTime || 5} min read</span>
+              </div>
+            </div>
+          </a>
+        </div>
 
-    <!-- Pagination Controls -->
-    {(page.url.prev || page.url.next) && (
-      <div class="flex items-center justify-between border-t border-border dark:border-border-dark pt-24 mt-48 text-meta font-sans">
-        {page.url.prev ? (
-          <a href={page.url.prev} class="btn-secondary py-12 px-24 font-semibold">
-            ← Previous Page
-          </a>
-        ) : (
-          <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">← Previous Page</span>
-        )}
-        <span class="text-muted dark:text-muted-dark font-mono">Page {page.currentPage} of {page.lastPage}</span>
-        {page.url.next ? (
-          <a href={page.url.next} class="btn-secondary py-12 px-24 font-semibold">
-            Next Page →
-          </a>
-        ) : (
-          <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">Next Page →</span>
-        )}
+        <!-- Right Latest Stack (5 cols) -->
+        <div class="lg:col-span-5 glass-panel border border-border dark:border-border-dark rounded-24 p-24 shadow-medium flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between border-b border-border dark:border-border-dark pb-12 mb-16">
+              <h2 class="text-caption font-mono font-bold text-accent dark:text-accent-dark uppercase tracking-widest">
+                LATEST
+              </h2>
+            </div>
+            
+            <div class="space-y-16">
+              {latestStack.map((item) => (
+                <a href={getArticleUrl(item)} class="group flex items-center justify-between gap-16 border-b border-border/40 dark:border-border-dark/40 pb-16 last:border-0 last:pb-0">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-display text-caption font-bold text-ink dark:text-ink-dark group-hover:underline leading-snug line-clamp-2">
+                      {item.data.title}
+                    </h3>
+                    <div class="mt-6 flex items-center gap-8 text-meta text-muted dark:text-muted-dark text-xs font-sans">
+                      <time datetime={item.data.pubDate.toISOString()}>
+                        {item.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </time>
+                      <span>·</span>
+                      <span>{item.data.estimatedReadingTime || 5} min read</span>
+                    </div>
+                  </div>
+                  <div class="shrink-0 w-56 h-56 rounded-12 overflow-hidden bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
+                    <img src={item.data.heroImage} alt="" width="56" height="56" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105" loading="lazy" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
     )}
-  
-    </div>
-    <!-- Standalone floating footer pill -->
-    <div class="mt-32 flex justify-center" data-reveal>
-      <div class="inline-flex items-center gap-12 px-32 py-16 rounded-2xl border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-body font-sans font-semibold text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md hover:scale-[1.03] transition-all duration-300 hover:shadow-large cursor-default">
-        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-120 transition-transform duration-150 cursor-default">🧡</span>
+
+    <!-- 3. Trending Now Strip (Completely hidden scrollbars across browsers) -->
+    <div
+      class="glass-panel border border-border dark:border-border-dark rounded-24 p-16 sm:px-24 flex items-center justify-between gap-16 overflow-x-auto shadow-medium [&::-webkit-scrollbar]:hidden"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+    >
+      <div class="flex items-center gap-8 shrink-0">
+        <span class="text-accent text-lg">🔥</span>
+        <span class="font-mono text-xs font-bold text-accent dark:text-accent-dark uppercase tracking-widest">TRENDING NOW</span>
+      </div>
+      <div class="flex items-center gap-24 divide-x divide-border dark:divide-border-dark text-caption font-sans shrink-0">
+        {trendingList.map((item, idx) => (
+          <a href={getArticleUrl(item)} class={`group flex items-center gap-12 whitespace-nowrap ${idx > 0 ? 'pl-24' : ''}`}>
+            <span class="font-mono font-bold text-accent dark:text-accent-dark text-caption">0{idx + 1}</span>
+            <span class="font-medium text-ink2 dark:text-ink2-dark group-hover:text-ink dark:group-hover:text-ink-dark transition-colors line-clamp-1 max-w-[200px] sm:max-w-[260px]">
+              {item.data.title}
+            </span>
+          </a>
+        ))}
       </div>
     </div>
+
+    <!-- 4. Bottom Grid: MORE NEWS (Left) vs Sidebar (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-32 items-start">
+      
+      <!-- Left Column: MORE NEWS Card -->
+      <div class="lg:col-span-8 glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 shadow-medium">
+        <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
+          <h2 class="font-display text-h3 font-bold text-ink dark:text-ink-dark uppercase tracking-wider">
+            MORE NEWS
+          </h2>
+        </div>
+
+        <div class="divide-y divide-border dark:divide-border-dark space-y-24">
+          {moreNewsList.map((post, idx) => {
+            const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+            return (
+              <a href={getArticleUrl(post)} class={`group flex flex-col sm:flex-row gap-20 items-start ${idx > 0 ? 'pt-24' : ''}`}>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-display text-h4 sm:text-h3 font-bold text-ink dark:text-ink-dark group-hover:underline decoration-ink dark:decoration-ink-dark leading-snug">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-8 text-caption font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed">
+                    {post.data.description}
+                  </p>
+                  
+                  <div class="mt-12 flex items-center gap-12 text-meta text-muted dark:text-muted-dark font-sans text-xs">
+                    <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Team'}</span>
+                    <span>·</span>
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
+                    <span>·</span>
+                    <span>{post.data.estimatedReadingTime || 5} min read</span>
+                  </div>
+                </div>
+
+                <!-- Thumbnail -->
+                <div class="shrink-0 w-full sm:w-[180px] aspect-[16/10] rounded-16 overflow-hidden bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
+                  <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="180" height="112" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105" loading="lazy" />
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- Pagination Controls -->
+        {(page.url.prev || page.url.next) && (
+          <div class="flex items-center justify-between border-t border-border dark:border-border-dark pt-24 mt-48 text-meta font-sans">
+            {page.url.prev ? (
+              <a href={page.url.prev} class="btn-secondary py-12 px-24 font-semibold">
+                ← Previous Page
+              </a>
+            ) : (
+              <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">← Previous Page</span>
+            )}
+            <span class="text-muted dark:text-muted-dark font-mono">Page {page.currentPage} of {page.lastPage}</span>
+            {page.url.next ? (
+              <a href={page.url.next} class="btn-secondary py-12 px-24 font-semibold">
+                Next Page →
+              </a>
+            ) : (
+              <span class="text-muted dark:text-muted-dark pointer-events-none font-semibold">Next Page →</span>
+            )}
+          </div>
+        )}
+      </div>
+
+      <!-- Right Column: Sidebar (Newsletter + MOST READ) -->
+      <div class="lg:col-span-4 space-y-24 sticky top-80">
+        
+        <!-- Sidebar Card 1: Newsletter -->
+        <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 shadow-medium">
+          <div class="w-40 h-40 rounded-12 bg-accent/15 flex items-center justify-center text-accent dark:text-accent-dark mb-16">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <span class="text-xs font-mono font-bold tracking-widest text-accent dark:text-accent-dark uppercase block mb-4">
+            STAY AHEAD IN AI
+          </span>
+          <h3 class="font-display text-h3 font-bold text-ink dark:text-ink-dark leading-tight">
+            AI news in your inbox
+          </h3>
+          <p class="mt-8 text-xs font-sans text-ink2 dark:text-ink2-dark leading-relaxed">
+            Get the most important AI news and insights delivered weekly.
+          </p>
+
+          <form class="mt-20 space-y-12" onsubmit="event.preventDefault(); alert('Subscribed!');">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              class="w-full rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-16 py-12 text-caption font-sans text-ink dark:text-ink-dark focus:outline-none focus:ring-2 focus:ring-accent"
+            />
+            <button type="submit" class="btn-primary w-full justify-center">
+              Subscribe
+            </button>
+          </form>
+          <p class="mt-12 text-meta text-muted dark:text-muted-dark text-xs">No spam. Unsubscribe anytime.</p>
+        </div>
+
+        <!-- Sidebar Card 2: MOST READ -->
+        <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 shadow-medium">
+          <div class="border-b border-border dark:border-border-dark pb-12 mb-16">
+            <h3 class="text-caption font-mono font-bold text-accent dark:text-accent-dark uppercase tracking-widest">
+              MOST READ
+            </h3>
+          </div>
+
+          <div class="space-y-16">
+            {mostReadList.map((item, idx) => (
+              <a href={getArticleUrl(item)} class="group flex items-center gap-12 border-b border-border/40 dark:border-border-dark/40 pb-16 last:border-0 last:pb-0">
+                <span class="font-mono font-bold text-accent dark:text-accent-dark text-caption shrink-0">0{idx + 1}</span>
+                <div class="shrink-0 w-48 h-48 rounded-12 overflow-hidden bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark flex items-center justify-center">
+                  <img src={item.data.heroImage} alt="" width="48" height="48" class="w-48 h-48 object-cover aspect-square shrink-0 transition-transform duration-200 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h4 class="font-display text-xs font-bold text-ink dark:text-ink-dark group-hover:underline leading-snug line-clamp-2">
+                    {item.data.title}
+                  </h4>
+                  <time class="mt-4 text-meta text-muted dark:text-muted-dark text-xs block" datetime={item.data.pubDate.toISOString()}>
+                    {item.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </time>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </BaseLayout>
