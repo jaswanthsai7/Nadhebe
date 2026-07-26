@@ -1,4 +1,6 @@
 name = "nadhebe"
-pages_build_output_dir = "dist"
 compatibility_date = "2025-07-25"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
