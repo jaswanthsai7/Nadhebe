@@ -4,12 +4,22 @@
 
 ## Content Directory
 
+### News
+
+- [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide): Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
+- [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide): An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
+- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
+- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
+- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
+
 ### Tutorials
 
 - [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts): The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
 - [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.com/tutorials/claude-desktop-download-installation-guide): A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.
 - [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills): A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.
 - [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.com/tutorials/how-to-install-claude-code-cli): The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.
+- [How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding](https://nadhebe.com/tutorials/how-to-use-gemini-canvas): A hands-on tutorial for using Gemini Canvas — Google's collaborative workspace for real-time document editing, code generation, and interactive prototyping with AI assistance.
+- [How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial](https://nadhebe.com/tutorials/how-to-use-gemini-notebook): A step-by-step tutorial for using Google's rebranded Gemini Notebook — from setting up your first notebook to executing code in the secure cloud computer, generating PPTX presentations, and syncing across Google Search.
 - [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.com/tutorials/installing-claude-code-cli-windows): A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.
 - [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide): A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
 - [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial): A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
@@ -20,6 +30,7 @@
 
 ### Comparisons
 
+- [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026): An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.
 - [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison): A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
 - [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode): A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.
 - [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison): An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.
@@ -51,16 +62,12 @@
 - [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture): An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
 - [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user): The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
 - [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide): A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
+- [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide): A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.
+- [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide): A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.
 - [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid): A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
 - [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
 - [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 - [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
-
-### News
-
-- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
-- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
-- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
 ### Prompts
 

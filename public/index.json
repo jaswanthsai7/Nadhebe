@@ -1,5 +1,25 @@
 [
   {
+    "title": "Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing",
+    "description": "Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.",
+    "url": "https://nadhebe.com/news/gemini-omni-video-generation-guide",
+    "category": "News",
+    "tags": [
+      "[\"gemini-omni\", \"video-generation\", \"google-ai\", \"veo\", \"google-vids\", \"ai-video\", \"content-creation\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Google Gemini Spark: The AI Assistant That Works While You Sleep",
+    "description": "An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.",
+    "url": "https://nadhebe.com/news/gemini-spark-agentic-assistant-guide",
+    "category": "News",
+    "tags": [
+      "[\"gemini-spark\", \"google-ai\", \"agentic-ai\", \"productivity\", \"gmail\", \"google-workspace\", \"automation\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills",
     "description": "The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.",
     "url": "https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts",
@@ -40,12 +60,42 @@
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
+    "title": "How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding",
+    "description": "A hands-on tutorial for using Gemini Canvas — Google's collaborative workspace for real-time document editing, code generation, and interactive prototyping with AI assistance.",
+    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-canvas",
+    "category": "Tutorials",
+    "tags": [
+      "[\"gemini-canvas\", \"google-ai\", \"coding\", \"writing\", \"collaborative-workspace\", \"prototyping\", \"productivity\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial",
+    "description": "A step-by-step tutorial for using Google's rebranded Gemini Notebook — from setting up your first notebook to executing code in the secure cloud computer, generating PPTX presentations, and syncing across Google Search.",
+    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-notebook",
+    "category": "Tutorials",
+    "tags": [
+      "[\"gemini-notebook\", \"notebooklm\", \"google-ai\", \"research\", \"cloud-computing\", \"data-analysis\", \"productivity\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
     "title": "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)",
     "description": "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.",
     "url": "https://nadhebe.com/tutorials/installing-claude-code-cli-windows",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"cli\", \"windows\", \"wsl2\", \"powershell\", \"anthropic\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison",
+    "description": "An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.",
+    "url": "https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026",
+    "category": "Comparisons",
+    "tags": [
+      "[\"chatgpt\", \"gemini\", \"claude\", \"ai-comparison\", \"llm\", \"gpt-5\", \"anthropic\", \"google-ai\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
@@ -136,6 +186,26 @@
     "category": "Guides",
     "tags": [
       "[\"claude\", \"claude-cowork\", \"desktop-agent\", \"productivity\", \"anthropic\", \"ai-agents\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model",
+    "description": "A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.",
+    "url": "https://nadhebe.com/guides/gemini-3-6-flash-complete-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"gemini\", \"gemini-3.6-flash\", \"google-ai\", \"api\", \"coding\", \"github-copilot\", \"developer-tools\"]"
+    ],
+    "pubDate": "2026-07-25T00:00:00.000Z"
+  },
+  {
+    "title": "How to Generate Music with Google Gemini and Lyria 3: Complete Guide",
+    "description": "A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.",
+    "url": "https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"gemini-music\", \"lyria-3\", \"google-ai\", \"music-generation\", \"ai-audio\", \"synthid\", \"creative-ai\"]"
     ],
     "pubDate": "2026-07-25T00:00:00.000Z"
   },

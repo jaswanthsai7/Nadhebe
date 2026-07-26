@@ -4,6 +4,446 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide)
+
+> Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
+
+Category: News | Tags: ["gemini-omni", "video-generation", "google-ai", "veo", "google-vids", "ai-video", "content-creation"]
+
+Google has fundamentally restructured its approach to AI video generation. As of mid-2026, the standalone Veo model has been absorbed into the broader Gemini ecosystem through two new models: **Gemini Omni** and **Gemini Omni Flash**. These models do not just generate video clips from text — they enable *conversational video editing*, where you iteratively refine footage through natural language dialogue.
+
+This guide covers the full landscape of Gemini video generation capabilities, from consumer app features to developer API integration.
+
+---
+
+## The Shift from Veo to Gemini Omni
+
+Previously, Google offered video generation through the Veo model, accessible primarily through AI Studio and select consumer features. The transition to Gemini Omni represents a strategic consolidation:
+
+| Aspect | Veo (Previous) | Gemini Omni (Current) |
+| :--- | :--- | :--- |
+| Interaction Model | One-shot generation | Conversational, multi-turn |
+| Editing | Limited post-generation | Full natural language editing |
+| Audio | Separate pipeline | Native audio generation |
+| Integration | Standalone | Embedded in Gemini App & Vids |
+| Avatar Support | No | Yes — selfie-based digital avatars |
+
+The key philosophical shift is from *generation* to *collaboration*. Gemini Omni treats video creation as an ongoing conversation rather than a single prompt-to-output transaction.
+
+---
+
+## Gemini Omni Flash: The Creative Engine
+
+Gemini Omni Flash is the high-performance variant optimized for fast video generation and editing. Released in late June 2026, it is the model that powers most consumer-facing video features in the Gemini app.
+
+### Generation Capabilities
+
+- **Output quality:** 720p video at up to 24 fps
+- **Duration:** 3–10 seconds per generation
+- **Input types:** Text descriptions, still images, or existing video clips
+- **Audio:** Native audio generation synchronized with visual content
+- **Styles:** Photorealistic, animation, cinematic, documentary, abstract
+
+### How to Generate a Video
+
+1. Open the Gemini app (web or mobile)
+2. Describe the video you want to create:
+   ```text
+   "Create a 5-second video of a golden retriever running through
+   autumn leaves in slow motion, with warm afternoon sunlight
+   filtering through the trees"
+   ```
+3. Gemini generates the clip and presents it inline
+4. Review and iterate with follow-up instructions
+
+---
+
+## Conversational Video Editing
+
+The most distinctive feature of Gemini Omni is **conversational editing** — the ability to modify generated or uploaded video clips through natural language instructions.
+
+### What You Can Edit
+
+| Edit Type | Example Prompt |
+| :--- | :--- |
+| **Background** | "Change the background to a tropical beach" |
+| **Lighting** | "Make the lighting more dramatic with golden hour tones" |
+| **Characters** | "Replace the person with an animated cartoon character" |
+| **Wardrobe** | "Change their outfit to a formal business suit" |
+| **Camera** | "Apply a slow zoom-in effect" |
+| **Color Grade** | "Apply a vintage film grain look" |
+| **Weather** | "Add falling snow to the scene" |
+| **Speed** | "Make the motion 50% slower" |
+
+### Multi-Turn Editing Workflow
+
+The conversational model maintains context across turns, so you can progressively refine a clip:
+
+```text
+Turn 1: "Create a video of a modern office space with people working"
+Turn 2: "Change the lighting to warm evening"
+Turn 3: "Add rain visible through the windows"
+Turn 4: "Make the camera slowly pan from left to right"
+Turn 5: "Remove the person in the background"
+```
+
+Each turn modifies the previous result, building up to a polished final clip without starting from scratch.
+
+---
+
+## Google Vids Integration and Digital Avatars
+
+Gemini Omni has been integrated into **Google Vids**, Google's AI-powered video creation tool for Workspace.
+
+### Digital Avatar Generation
+
+One of the most practical features is the ability to create a personalized digital avatar:
+
+1. Take a selfie using the Gemini or Google Vids app
+2. Record a brief voice sample (30 seconds)
+3. The system generates a photorealistic digital avatar that matches your appearance and voice
+4. Use the avatar to deliver presentations, messages, or educational content
+
+### Use Cases for Avatars
+
+- **Internal communications:** Record company updates without scheduling video shoots
+- **Training content:** Create instructional videos at scale with consistent presenter quality
+- **Asynchronous meetings:** Send video messages that look and sound like you without actually recording
+- **Multilingual content:** Generate avatar presentations in multiple languages using your likeness
+
+### Quality and Limitations
+
+- Avatars are currently limited to upper-body framing (head and shoulders)
+- Lip sync accuracy is high but not perfect for all languages
+- Custom gestures and expressions are limited to a predefined set
+- All avatar-generated content includes SynthID watermarking
+
+---
+
+## Developer API Access
+
+For developers and content platforms, Gemini Omni Flash is accessible through the Gemini API and Google AI Studio.
+
+### Pricing
+
+| Operation | Cost |
+| :--- | :--- |
+| Video generation (per second of output) | ~$0.10 |
+| Image-to-video animation | ~$0.08/second |
+| Video editing (per modification) | ~$0.05/edit |
+
+### API Example
+
+```python
+import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+
+model = genai.GenerativeModel("gemini-omni-flash")
+
+# Generate a video from text
+response = model.generate_content(
+    "Create a 5-second product showcase video of a sleek smartwatch "
+    "rotating on a reflective surface with soft studio lighting",
+    generation_config=genai.GenerationConfig(
+        response_modalities=["VIDEO"],
+        video_config={
+            "duration_seconds": 5,
+            "resolution": "720p",
+            "fps": 24,
+        },
+    ),
+)
+
+# Save the generated video
+video_data = response.candidates[0].content.parts[0].video
+with open("product_showcase.mp4", "wb") as f:
+    f.write(video_data)
+```
+
+### Batch Processing
+
+For applications that need to generate video at scale (e-commerce product videos, social media content pipelines), use the batch API to submit multiple generation requests and receive results asynchronously.
+
+---
+
+## Content Transparency and Watermarking
+
+All AI-generated video content from Gemini includes **SynthID** — Google DeepMind's invisible digital watermark technology.
+
+### How SynthID Works
+
+- The watermark is embedded in the pixel data of every generated frame
+- It is invisible to the human eye and does not affect visual quality
+- The watermark survives common post-processing operations (compression, cropping, color adjustments)
+- Google provides a free detector tool to verify whether a video contains SynthID
+
+### Why This Matters
+
+- **Content authenticity:** Viewers and platforms can verify whether footage was AI-generated
+- **Platform compliance:** Major social media platforms are increasingly requiring disclosure of AI-generated content
+- **Legal protection:** The watermark provides evidence of AI origin in case of disputes
+
+---
+
+## Practical Content Creation Workflows
+
+### Social Media Content Pipeline
+
+```mermaid
+graph TD
+    A[Write Brief] --> B[Generate Base Video]
+    B --> C[Conversational Editing]
+    C --> D{Satisfied?}
+    D -->|No| C
+    D -->|Yes| E[Add SynthID Disclosure]
+    E --> F[Export & Upload]
+    F --> G[TikTok / Instagram / YouTube]
+```
+
+### Product Marketing
+
+1. Upload product images as source material
+2. Ask Gemini to animate them into showcase videos
+3. Edit lighting, angles, and backgrounds conversationally
+4. Export at platform-specific aspect ratios (9:16 for Reels, 16:9 for YouTube)
+
+### Educational Content
+
+1. Describe the concept you want to illustrate
+2. Generate animated explainer clips
+3. Create avatar presentations with your digital likeness
+4. Combine clips in Google Vids for a complete lesson
+
+---
+
+## Availability and Subscription Requirements
+
+| Feature | Free Tier | Google AI Pro | Google AI Ultra |
+| :--- | :---: | :---: | :---: |
+| Basic video generation | Limited | ✅ | ✅ |
+| Conversational editing | ❌ | ✅ | ✅ |
+| Digital avatar creation | ❌ | ❌ | ✅ |
+| Google Vids integration | ❌ | ❌ | ✅ |
+| API access | ❌ | ✅ | ✅ |
+
+---
+
+## Key Takeaways
+
+- **Gemini Omni** replaces Veo as Google's primary video generation model, now embedded in the Gemini App
+- **Conversational editing** lets you modify videos through natural language — change backgrounds, lighting, wardrobe, and more
+- **Gemini Omni Flash** generates 3–10 second clips at 720p with native audio
+- **Digital avatars** can be created from a selfie + voice sample for presentations and messaging
+- **Developer API** pricing starts at ~$0.10 per second of generated video
+- All content includes **SynthID watermarks** for transparency and authenticity verification
+
+---
+
+# [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide)
+
+> An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
+
+Category: News | Tags: ["gemini-spark", "google-ai", "agentic-ai", "productivity", "gmail", "google-workspace", "automation"]
+
+Most AI assistants wait for you to ask them something. **Gemini Spark** does not wait. It runs continuously in the background, observing your habits, managing your digital workflow, and performing tasks autonomously — all within the boundaries you define.
+
+Launched as part of Google's broader push into agentic AI, Spark represents a fundamental shift from *reactive chatbot* to *proactive digital agent*. It is not a separate app — it is an always-on layer within the Gemini ecosystem that works across Gmail, Calendar, Drive, and Keep.
+
+---
+
+## What Makes Spark Different
+
+The distinction between Spark and standard Gemini is philosophical before it is technical:
+
+| Aspect | Standard Gemini | Gemini Spark |
+| :--- | :--- | :--- |
+| **Interaction** | You prompt, it responds | It acts proactively |
+| **Scheduling** | No background operation | Runs 24/7 |
+| **Learning** | Stateless per conversation | Learns your habits over time |
+| **Task Scope** | Single conversation | Multi-day workflows |
+| **Autonomy** | None | Autonomous (with safety rails) |
+
+Think of standard Gemini as a brilliant colleague you call into a meeting. Gemini Spark is a reliable executive assistant who manages your day before you even sit down.
+
+---
+
+## Core Features
+
+### 1. Intelligent Inbox Management
+
+Spark's most immediately useful feature is email triage. It continuously monitors your Gmail inbox and performs actions based on your preferences:
+
+**What Spark can do with your email:**
+- Archive newsletters you consistently ignore
+- Unsubscribe from mailing lists you never open
+- Draft replies matching your writing style and tone
+- Summarize long email threads into key action items
+- Flag urgent messages that need immediate attention
+- Group related conversations into topical clusters
+
+**Example:** You receive 150 emails overnight. By the time you check your phone, Spark has archived 80 newsletters, drafted 5 replies for your review, summarized 3 long threads, and flagged 2 urgent items at the top.
+
+### 2. Proactive Daily Briefings
+
+Every morning, Spark generates a personalized daily briefing that organizes your priorities:
+
+```text
+Good morning. Here's your day:
+
+📅 3 meetings (first at 10:00 AM — Q3 Planning)
+📧 12 new emails requiring attention (2 urgent)
+📋 5 tasks due today from your Keep lists
+📊 Weekly report reminder — draft is 70% complete
+🔔 Sarah's birthday is tomorrow — no gift ordered yet
+
+Shall I draft the Q3 agenda and order flowers for Sarah?
+```
+
+The briefing is not generic — it is tailored based on your actual calendar, email, tasks, and historical behavior patterns.
+
+### 3. Workflow Automation
+
+Spark can handle recurring multi-step workflows that span multiple Google Workspace apps:
+
+**Meeting Preparation:**
+1. Pull relevant documents from Drive
+2. Summarize the last meeting's notes
+3. Draft an agenda based on open action items
+4. Share the agenda with attendees 30 minutes before the meeting
+
+**Weekly Reporting:**
+1. Compile data from shared spreadsheets
+2. Summarize key metrics and trends
+3. Draft a report in Google Docs
+4. Share with your manager for review every Friday
+
+**Travel Planning:**
+1. Detect travel-related emails (confirmations, itineraries)
+2. Add flights and hotel check-ins to your calendar
+3. Create a travel brief with all logistics in one document
+4. Set reminders for check-in times and document deadlines
+
+### 4. Teachable Skills
+
+You can create custom **skills** — reusable instruction sets that tell Spark how to handle specific situations:
+
+```text
+Skill: "Weekly Standup Summary"
+Trigger: Every Monday at 9:00 AM
+Action:
+  1. Review all Slack messages from #engineering channel (last 7 days)
+  2. Compile a summary of completed work, blockers, and upcoming goals
+  3. Format as bullet points in a Google Doc
+  4. Share the doc with my team distribution list
+```
+
+Skills are the key to making Spark truly personal. The more skills you define, the more autonomous work Spark can handle.
+
+---
+
+## Safety and Oversight
+
+Google has designed Spark with explicit safety guardrails to prevent unintended actions:
+
+### High-Stakes Action Approval
+
+Spark will **always ask for your approval** before:
+- Sending emails or messages
+- Spending money (purchases, subscriptions)
+- Sharing documents externally
+- Deleting files or data
+- Modifying calendar events with external attendees
+- Changing account settings
+
+For low-stakes actions (archiving newsletters, organizing files, generating summaries), Spark operates autonomously without interruption.
+
+### Activity Log
+
+Every action Spark takes is logged and reviewable:
+1. Open the Gemini app
+2. Navigate to **Spark Activity**
+3. View a chronological list of all actions taken
+4. Undo any action with a single tap
+
+### Kill Switch
+
+You can instantly disable Spark at any time:
+- Say *"Pause Spark"* to temporarily stop all autonomous actions
+- Go to Settings → Gemini Spark → Toggle off
+- Spark will confirm deactivation and stop all background processing
+
+---
+
+## Setting Up Gemini Spark
+
+### Prerequisites
+
+- Google AI Pro subscription (US) or Google AI Ultra subscription (global)
+- Personal Google account (not available for Workspace/school accounts yet)
+- "Keep Activity" must be enabled in your Google account settings
+- Gemini app (web, mobile, or Mac)
+
+### Initial Configuration
+
+1. Open the Gemini app
+2. Look for the **Spark** icon (lightning bolt) in the sidebar
+3. Complete the onboarding walkthrough:
+   - Grant access to Gmail, Calendar, Drive, and Keep
+   - Set your communication preferences (how often Spark should check in)
+   - Define your first 2-3 skills
+4. Spark begins learning your patterns immediately
+
+### Optimization Tips
+
+- **Start small:** Define 2-3 skills and let Spark learn your patterns for a week before adding more
+- **Review the activity log daily** for the first week to ensure Spark's autonomous actions align with your expectations
+- **Be specific in skill definitions** — vague instructions produce inconsistent results
+- **Use the feedback mechanism** — when Spark does something you don't like, explicitly tell it why so it adapts
+
+---
+
+## Regional Availability
+
+| Region | Status |
+| :--- | :--- |
+| United States | ✅ Available (AI Pro & Ultra) |
+| Global (most countries) | ✅ Available (AI Ultra only) |
+| European Economic Area | ❌ Not available |
+| Switzerland | ❌ Not available |
+| United Kingdom | ❌ Not available |
+| Nigeria | ❌ Not available |
+
+The EEA and UK restrictions are likely related to data processing regulations under GDPR and the EU AI Act. Google has not announced a timeline for expansion into these regions.
+
+---
+
+## Comparison: Spark vs Other AI Assistants
+
+| Feature | Gemini Spark | Apple Intelligence | Microsoft Copilot |
+| :--- | :--- | :--- | :--- |
+| **Proactive operation** | ✅ 24/7 background | Limited | Limited |
+| **Email management** | Full triage + drafting | Basic summaries | Summaries only |
+| **Teachable skills** | ✅ Custom workflows | ❌ | ❌ |
+| **Daily briefings** | ✅ Personalized | ❌ | Basic |
+| **Cross-app workflows** | Gmail, Calendar, Drive, Keep | Apple ecosystem | Microsoft 365 |
+| **High-stakes approval** | ✅ Always asks | N/A | N/A |
+| **Availability** | Google AI Pro/Ultra | Apple devices | Microsoft 365 subscribers |
+
+---
+
+## Key Takeaways
+
+- **Gemini Spark** is a proactive, always-on AI assistant — not a chatbot you prompt
+- It manages **email triage, daily briefings, and multi-step workflows** autonomously
+- **Teachable skills** let you create custom automation workflows across Google Workspace
+- **Safety rails** ensure Spark asks for approval before any high-stakes action (sending emails, spending money)
+- Requires **Google AI Pro** (US) or **Google AI Ultra** (global) subscription
+- Currently **unavailable in the EEA, UK, Switzerland, and Nigeria**
+- Every action is **logged and reversible** through the activity dashboard
+
+---
+
 # [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts)
 
 > The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
@@ -1170,6 +1610,504 @@ You can overwrite the active key by re-exporting `export ANTHROPIC_API_KEY="new-
 
 ---
 
+# [How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding](https://nadhebe.com/tutorials/how-to-use-gemini-canvas)
+
+> A hands-on tutorial for using Gemini Canvas — Google's collaborative workspace for real-time document editing, code generation, and interactive prototyping with AI assistance.
+
+Category: Tutorials | Tags: ["gemini-canvas", "google-ai", "coding", "writing", "collaborative-workspace", "prototyping", "productivity"]
+
+Google Gemini Canvas is an interactive workspace that sits alongside the standard chat interface. While regular Gemini conversations are ephemeral — responses scroll past and context fades — Canvas provides a **persistent, editable surface** where you and the AI collaborate on documents, code, and prototypes in real time.
+
+Released on March 18, 2025, Canvas has evolved into a powerful tool for writers, developers, and content creators who need more than a chatbot — they need a creative partner with a shared workspace.
+
+---
+
+## Understanding Canvas vs Regular Chat
+
+The distinction is fundamental to how you work with Gemini:
+
+| Aspect | Regular Gemini Chat | Gemini Canvas |
+| :--- | :--- | :--- |
+| **Output** | Scrollable message stream | Persistent editable document |
+| **Editing** | Ask to regenerate entire response | Select and modify specific sections |
+| **Collaboration** | AI responds, you read | AI and you edit the same surface |
+| **Export** | Copy/paste | Google Docs, code files, Audio Overviews |
+| **Version Control** | No history | Undo/redo and revision history |
+| **Best For** | Quick Q&A | Long-form creation and iteration |
+
+Think of regular chat as asking a colleague for help. Canvas is sitting down at the same desk and working on the document together.
+
+---
+
+## Getting Started with Canvas
+
+### How to Open Canvas
+
+1. Navigate to [gemini.google.com](https://gemini.google.com) or open the Gemini app
+2. Start a new conversation
+3. Click the **Canvas** button in the prompt bar (looks like a document icon with a pencil)
+4. Alternatively, type a prompt that implies creation: *"Write a blog post about..."* — Gemini may automatically open Canvas
+
+### The Canvas Interface
+
+The interface splits into two panels:
+- **Left panel:** Chat conversation for giving instructions and feedback
+- **Right panel:** The Canvas workspace showing your document or code
+
+You interact with Canvas by:
+- Typing instructions in the chat panel
+- Directly editing text in the Canvas panel
+- Selecting text and asking Gemini to modify it
+- Using the toolbar for formatting, tone adjustment, and export
+
+---
+
+## Writing with Canvas
+
+### Document Creation
+
+Canvas excels at long-form document creation where you need iterative refinement:
+
+```text
+"Write a 2000-word blog post about the future of remote work.
+Include sections on: productivity tools, hybrid work models,
+asynchronous communication best practices, and mental health
+considerations."
+```
+
+Gemini generates the full document in the Canvas panel. From there, you can:
+
+1. **Select any paragraph** and ask Gemini to rewrite it
+2. **Adjust tone** using the toolbar (Professional, Casual, Academic, Creative)
+3. **Expand or condense** specific sections
+4. **Add data or citations** by asking Gemini to research and insert
+5. **Restructure** by asking Gemini to reorganize sections
+
+### Tone and Style Controls
+
+The Canvas toolbar provides one-click tone adjustments:
+
+| Button | Effect |
+| :--- | :--- |
+| **More Professional** | Formal language, passive voice, industry terminology |
+| **More Casual** | Conversational tone, contractions, simpler vocabulary |
+| **Shorter** | Condenses paragraphs, removes redundancy |
+| **Longer** | Expands with examples, details, and supporting evidence |
+
+### Export Options
+
+When your document is ready:
+
+- **Google Docs:** One-click export preserving all formatting
+- **Audio Overview:** Convert the document into a podcast-style audio summary
+- **Quiz:** Transform educational content into an interactive quiz
+- **Infographic:** Generate a visual summary of key points
+- **Copy as Markdown:** For blog platforms and CMS systems
+
+---
+
+## Coding with Canvas
+
+Canvas is not just for writing — it is a capable development environment for prototyping and code generation.
+
+### Supported Languages and Frameworks
+
+- HTML, CSS, JavaScript
+- React / JSX
+- Python
+- TypeScript
+- Node.js
+
+### Building a Prototype
+
+```text
+"Create a responsive landing page for a SaaS product called
+'TaskFlow'. Include a hero section with a headline and CTA button,
+a features grid with 3 cards, a pricing table, and a footer.
+Use modern design with a dark theme and purple accent colors."
+```
+
+Canvas generates the complete HTML/CSS/JavaScript and renders a **live preview** directly in the workspace. You can:
+
+1. **See the live output** in real-time as the code is generated
+2. **Edit the code directly** in the Canvas panel
+3. **Ask Gemini to modify** specific elements:
+   ```text
+   "Change the CTA button to gradient from purple to blue"
+   "Add a testimonials section between features and pricing"
+   "Make the pricing table responsive for mobile"
+   ```
+4. **Preview on different screen sizes** using the responsive toggle
+
+### Iterative Code Development
+
+The power of Canvas for coding is the iterative workflow:
+
+```text
+Step 1: "Create a basic calculator app in React"
+Step 2: "Add keyboard support for number input"
+Step 3: "Implement scientific functions (sin, cos, tan, log)"
+Step 4: "Add a history panel that shows previous calculations"
+Step 5: "Style it with a dark theme and rounded buttons"
+```
+
+Each step builds on the previous code, and you can see the result in real-time.
+
+### Code Export
+
+- **Copy code:** Raw code to clipboard for any editor
+- **Download:** As .html, .jsx, .py, or other appropriate file formats
+- **Open in Colab:** Python code can be exported directly to Google Colab
+- **Replit integration:** Deploy prototypes to Replit with one click
+
+---
+
+## Advanced Canvas Workflows
+
+### Research-to-Document Pipeline
+
+1. Start a regular Gemini chat to research a topic
+2. Ask questions, gather information, and refine your understanding
+3. Once you have enough material, switch to Canvas:
+   ```text
+   "Based on our conversation, create a comprehensive report
+   in Canvas covering all the key points we discussed"
+   ```
+4. Canvas synthesizes the entire conversation into a structured document
+5. Iterate and refine in the Canvas workspace
+
+### Collaborative Brainstorming
+
+Canvas can function as a brainstorming whiteboard:
+
+```text
+"Let's brainstorm 20 marketing campaign ideas for a sustainable
+fashion brand. Organize them by category: social media, influencer,
+content marketing, and experiential."
+```
+
+The ideas appear in Canvas where you can:
+- Rate them (ask Gemini to score each idea)
+- Expand favorites into full campaign briefs
+- Delete weak ideas
+- Reorganize by priority
+
+### Multi-Format Content Creation
+
+Create multiple content formats from a single Canvas document:
+
+```text
+"I have this blog post in Canvas. Now also create:
+1. A Twitter thread version (10 tweets)
+2. A LinkedIn post version (300 words, professional tone)
+3. An email newsletter version with a CTA
+4. A YouTube script version with timestamps"
+```
+
+Each format is generated and accessible within the same Canvas session.
+
+---
+
+## Tips for Getting the Most from Canvas
+
+### 1. Be Specific About Structure
+
+Instead of: *"Write an article about AI"*
+Try: *"Write a 1500-word article about AI in healthcare with these sections: Introduction (150 words), Current Applications (400 words), Challenges (300 words), Future Predictions (400 words), Conclusion (250 words)"*
+
+### 2. Use Selection-Based Editing
+
+Instead of regenerating the entire document, select the specific paragraph or code block you want to change and give targeted instructions. This preserves everything you are happy with.
+
+### 3. Leverage the Conversation Panel
+
+The left chat panel maintains context about your creative goals. Use it to explain your overall vision, target audience, and constraints before asking Canvas to create.
+
+### 4. Build Incrementally for Code
+
+Start with a minimal working prototype, then add features one at a time. Canvas maintains code state between turns, so each addition builds on the last.
+
+### 5. Export Early and Often
+
+Canvas documents are cloud-saved, but exporting to Google Docs or downloading code files gives you a backup and makes sharing easier.
+
+---
+
+## Subscription Tiers
+
+| Feature | Free | Google AI Pro | Google AI Ultra |
+| :--- | :---: | :---: | :---: |
+| Basic Canvas (writing) | ✅ | ✅ | ✅ |
+| Code generation & preview | ✅ | ✅ | ✅ |
+| Tone adjustment tools | ✅ | ✅ | ✅ |
+| Google Docs export | ✅ | ✅ | ✅ |
+| Extended context (1M tokens) | ❌ | ✅ | ✅ |
+| Advanced model (Gemini 3.x) | ❌ | ✅ | ✅ |
+| Audio Overview export | ❌ | ✅ | ✅ |
+
+---
+
+## Key Takeaways
+
+- **Gemini Canvas** is a persistent, collaborative workspace — not an ephemeral chat
+- Use it for **long-form writing, code prototyping, and iterative document creation**
+- **Live code preview** lets you build and see functional prototypes in real-time
+- **Tone controls** (Professional, Casual, Shorter, Longer) enable rapid style adjustments
+- **Export to Google Docs, Audio Overviews, quizzes, and code files** with one click
+- Available to **all Gemini users globally** with enhanced features for Pro/Ultra subscribers
+- Best workflow: **Research in chat → Create in Canvas → Iterate → Export**
+
+---
+
+# [How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial](https://nadhebe.com/tutorials/how-to-use-gemini-notebook)
+
+> A step-by-step tutorial for using Google's rebranded Gemini Notebook — from setting up your first notebook to executing code in the secure cloud computer, generating PPTX presentations, and syncing across Google Search.
+
+Category: Tutorials | Tags: ["gemini-notebook", "notebooklm", "google-ai", "research", "cloud-computing", "data-analysis", "productivity"]
+
+Google's research assistant tool — formerly known as NotebookLM — has been rebranded to **Gemini Notebook** as of July 16, 2026. The name change reflects far more than a cosmetic update: it arrives alongside a wave of powerful agentic capabilities that transform the tool from a smart document reader into a full-featured AI research workstation.
+
+This tutorial walks through every major feature, from basic notebook setup to advanced cloud code execution and multi-format document export.
+
+---
+
+## What Changed in the Rebrand
+
+The transition from NotebookLM to Gemini Notebook is not just a rename. Here is what is genuinely new versus what remains the same:
+
+### What's New
+
+| Feature | Before (NotebookLM) | After (Gemini Notebook) |
+| :--- | :--- | :--- |
+| **Cloud Computer** | Not available | Dedicated secure sandbox per notebook |
+| **Code Execution** | No | Python execution with data analysis |
+| **Export Formats** | Text, Audio Overview | PPTX, XLSX, DOCX, PDF, Charts |
+| **Ecosystem Sync** | Standalone | Notes sync with Gemini App & Google Search |
+| **Source Discovery** | Upload only | AI-powered web search to find sources |
+| **Model** | Gemini 2.0 | Gemini 3.5+ |
+
+### What Stays the Same
+
+- All existing notebooks remain intact — no migration needed
+- Existing share links and collaborator permissions continue to work
+- The core interaction model (sources → chat → notes) is unchanged
+- Audio Overview feature still available
+
+---
+
+## Step 1: Creating Your First Gemini Notebook
+
+### Getting Started
+
+1. Navigate to [notebooklm.google.com](https://notebooklm.google.com) (the URL still works post-rebrand)
+2. Sign in with your Google account
+3. Click **"New Notebook"**
+4. Give your notebook a descriptive title
+
+### Adding Sources
+
+Sources are the foundation of every Gemini Notebook. The AI only generates responses grounded in the materials you provide, which eliminates hallucination for document-based research.
+
+**Supported source types:**
+- Google Docs, Google Slides
+- PDF files (up to 500,000 words per document)
+- Web URLs
+- YouTube videos (with transcript)
+- Plain text / Markdown
+- Audio files (new in 2026)
+
+**Pro tip:** Upload 5-10 diverse sources on your topic rather than one massive document. This gives the AI more angles to synthesize from and produces richer, more nuanced responses.
+
+### Starting from Scratch (New Feature)
+
+Previously, you *had* to upload sources before you could interact with a notebook. Now, you can start with just a loose idea:
+
+1. Create a new notebook without any sources
+2. Describe your research topic in the chat
+3. Gemini Notebook will search the web and suggest relevant primary sources
+4. Review and approve the sources it finds
+5. The AI curates them into your notebook automatically
+
+This feature is particularly powerful for exploratory research where you don't yet know which papers, articles, or datasets are most relevant.
+
+---
+
+## Step 2: Using the Secure Cloud Computer
+
+The most significant new feature is the **secure cloud computer** — a dedicated, sandboxed computing environment attached to each notebook.
+
+### What It Can Do
+
+- Write and execute Python code
+- Perform data analysis on your uploaded sources
+- Reconcile messy or inconsistent datasets
+- Generate professional charts and visualizations
+- Create formatted tables from unstructured text
+- Run statistical analyses and produce summary statistics
+
+### How to Use It
+
+1. Ask the AI a question that requires computation — for example: *"Analyze the revenue data in my Q2 report and create a trend chart"*
+2. Gemini Notebook will write Python code in the background
+3. The code executes in the secure sandbox (isolated from your local machine)
+4. Results appear inline — charts render directly in the chat, tables are formatted, and files are downloadable
+
+### Example Workflow: Data Analysis
+
+Suppose you upload a CSV file with monthly sales data. You can ask:
+
+```text
+"Compare Q1 vs Q2 performance across all product lines.
+Create a grouped bar chart and highlight any products with
+declining trends. Export the summary as a table."
+```
+
+The AI will:
+1. Parse your CSV using pandas
+2. Calculate quarter-over-quarter metrics
+3. Generate a matplotlib chart
+4. Render both the chart and summary table inline
+5. Offer to export as XLSX or PPTX
+
+### Security Model
+
+The cloud computer is:
+- **Isolated:** Each notebook gets its own sandbox — no cross-notebook access
+- **Ephemeral:** Compute state is cleared after your session ends
+- **Restricted:** No internet access from the sandbox — it can only process your uploaded sources
+- **Auditable:** All code execution is logged and visible to you
+
+---
+
+## Step 3: Generating Professional Documents
+
+Gemini Notebook can now produce a variety of professional output formats, far beyond the original text and audio options.
+
+### Available Export Formats
+
+| Format | Best For | How to Request |
+| :--- | :--- | :--- |
+| **PPTX** | Presentations, stakeholder decks | "Create a presentation about..." |
+| **XLSX** | Data tables, financial models | "Export this analysis as a spreadsheet" |
+| **DOCX** | Reports, briefs, memos | "Write a formal report on..." |
+| **PDF** | Final deliverables | "Generate a PDF summary of..." |
+| **Charts** | Data visualization | "Create a chart showing..." |
+| **Audio Overview** | Podcast-style summaries | Click the Audio Overview button |
+
+### Creating a Presentation
+
+```text
+"Create a 10-slide presentation summarizing the key findings from my
+research sources. Include:
+- Executive summary slide
+- 3 data visualization slides with charts
+- Competitive analysis comparison table
+- Recommendations slide with bullet points
+- Next steps and timeline"
+```
+
+The generated PPTX is fully editable in Google Slides or Microsoft PowerPoint — it's not a read-only export.
+
+### Creating a Spreadsheet
+
+For data-heavy research, ask Gemini Notebook to organize your findings into a structured spreadsheet:
+
+```text
+"Create an Excel spreadsheet with all the pricing data from my sources.
+Include columns for: Product Name, Free Tier Limits, Pro Price,
+Enterprise Price, and Key Differentiators."
+```
+
+---
+
+## Step 4: Syncing Across the Google Ecosystem
+
+One of the most practical changes in the rebrand is the ability to **sync notes across the broader Google ecosystem**.
+
+### How Syncing Works
+
+- **Notes → Gemini App:** Your saved notes from any notebook can appear as context when you chat with Gemini in the main app
+- **Notes → Google Search:** When you search for topics related to your research, Google can surface your own notebook findings in a dedicated sidebar
+- **Cross-Device:** Notebooks sync across web, mobile, and tablet interfaces
+
+### Enabling Sync
+
+1. Open your notebook settings
+2. Toggle **"Sync with Gemini"** to enabled
+3. Choose which notes to sync (you can be selective)
+4. Synced notes will now appear as contextual suggestions when relevant
+
+### Privacy Considerations
+
+- Synced notes are only visible to you — they are never shared with other users or used for model training
+- You can disable sync at any time and delete synced data from your Gemini account
+- Enterprise Workspace accounts have admin controls to enable or disable sync at the organization level
+
+---
+
+## Step 5: Advanced Research Workflows
+
+### Multi-Source Synthesis
+
+The most powerful use of Gemini Notebook is synthesizing insights across multiple, potentially conflicting sources:
+
+```text
+"Compare what Source A and Source C say about the effectiveness of
+retrieval-augmented generation. Where do they agree? Where do they
+conflict? Which claims are supported by empirical data?"
+```
+
+### Citation Tracking
+
+Every response from Gemini Notebook includes inline citations pointing back to specific passages in your uploaded sources. Click any citation number to jump directly to the relevant paragraph.
+
+### Collaborative Research
+
+Share your notebook with collaborators:
+
+1. Click the **Share** button
+2. Add collaborators by email
+3. Choose permission level (View, Comment, or Edit)
+4. All collaborators see the same sources, chat history, and generated notes
+
+---
+
+## Subscription Tiers and Access
+
+| Feature | Free | Google AI Pro | Google AI Ultra |
+| :--- | :---: | :---: | :---: |
+| Basic notebook creation | ✅ | ✅ | ✅ |
+| Source upload (up to 50) | ✅ | ✅ | ✅ |
+| Audio Overviews | ✅ | ✅ | ✅ |
+| Cloud code execution | ❌ | Coming soon | ✅ |
+| PPTX/XLSX/DOCX export | ❌ | Coming soon | ✅ |
+| Gemini ecosystem sync | ❌ | Coming soon | ✅ |
+| Web source discovery | ❌ | ✅ | ✅ |
+
+Advanced features are rolling out first to **Google AI Ultra** subscribers and eligible **Workspace enterprise** users, with broader availability to **Google AI Pro** users expected in the coming weeks.
+
+---
+
+## Key Takeaways
+
+- **NotebookLM is now Gemini Notebook** — rebranded July 16, 2026 with major new capabilities
+- Each notebook gets a **secure cloud computer** for Python code execution and data analysis
+- Export to **PPTX, XLSX, DOCX, PDF** — not just text and audio
+- **Notes sync** across Gemini App and Google Search for a connected research workflow
+- **Start from scratch** — let the AI find and curate sources for you via web search
+- Existing notebooks, links, and permissions **all continue to work unchanged**
+
+---
+
+## Common Mistakes to Avoid
+
+1. **Uploading too few sources:** The AI performs best with 5-10 diverse, high-quality sources rather than a single massive document
+2. **Ignoring citations:** Always verify generated claims against the cited source passages — the AI is grounded but not infallible
+3. **Not using structured prompts:** Ask for specific output formats (tables, charts, bullet points) rather than open-ended questions
+4. **Skipping the Audio Overview:** The podcast-style summary is one of the best features for quickly absorbing the key themes across all your sources
+
+---
+
 # [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.com/tutorials/installing-claude-code-cli-windows)
 
 > A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.
@@ -1430,6 +2368,238 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 * For general cross-platform macOS and Linux installation, read [How to Install and Set Up Claude Code CLI](/tutorials/how-to-install-claude-code-cli).
 * For agent loop mechanics and security permissions, explore [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
 * For Anthropic official certification pathways, read [Anthropic Claude Certification Guide](/guides/anthropic-claude-certification-developer-guide).
+
+---
+
+# [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026)
+
+> An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.
+
+Category: Comparisons | Tags: ["chatgpt", "gemini", "claude", "ai-comparison", "llm", "gpt-5", "anthropic", "google-ai"]
+
+The AI assistant landscape in 2026 is a three-way race between OpenAI's ChatGPT, Google's Gemini, and Anthropic's Claude. Each platform has carved out distinct strengths while rapidly closing gaps in areas where competitors lead.
+
+This comparison cuts through the marketing to deliver a practical, benchmark-backed analysis of where each model excels, where it falls short, and which one deserves your attention based on your specific needs.
+
+---
+
+## Executive Summary
+
+| Dimension | ChatGPT (GPT-5.x) | Gemini (3.6 Flash) | Claude (Sonnet 4) |
+| :--- | :---: | :---: | :---: |
+| **Coding** | ★★★★☆ | ★★★★★ | ★★★★★ |
+| **Reasoning** | ★★★★★ | ★★★★☆ | ★★★★★ |
+| **Creative Writing** | ★★★★☆ | ★★★☆☆ | ★★★★★ |
+| **Multimodal** | ★★★★☆ | ★★★★★ | ★★★☆☆ |
+| **Context Window** | 1M tokens | **1M tokens** | 200K tokens |
+| **Cost (per 1M output)** | $8.00 | **$7.50** | $15.00 |
+| **Speed** | Fast | **Fastest** | Moderate |
+| **Safety** | Good | Good | **Best-in-class** |
+| **Plugin Ecosystem** | **Largest** | Growing | Limited |
+
+**Bottom line:** Choose ChatGPT for the broadest ecosystem and general-purpose tasks. Choose Gemini for multimodal work, cost efficiency, and agentic coding. Choose Claude for writing quality, safety-critical applications, and long-form analysis.
+
+---
+
+## Coding Performance
+
+### The 2026 Coding Landscape
+
+Coding is the highest-value use case for AI models, and all three competitors have invested heavily in this domain.
+
+**Gemini 3.6 Flash** leads in agentic coding scenarios — tasks where the model needs to search across codebases, execute parallel tool calls, and produce precise multi-file edits. Its 17% token efficiency improvement and parallel tool use capability give it a measurable edge in automated coding workflows (IDE agents, CI/CD integration, automated refactoring).
+
+**Claude Sonnet 4** produces the most human-readable code. Its outputs tend to include better variable naming, more contextual inline comments, and a coding style that feels more natural to review. For pair programming and code review assistance, Claude is often preferred by senior developers.
+
+**ChatGPT (GPT-5.x)** offers the most mature plugin and integration ecosystem. With GPTs, custom instructions, and a vast marketplace of coding-specific extensions, ChatGPT is the most customizable platform for developer workflows.
+
+### Benchmark Comparison
+
+| Benchmark | ChatGPT | Gemini 3.6 Flash | Claude Sonnet 4 |
+| :--- | :---: | :---: | :---: |
+| SWE-bench Verified | Strong | **Strong** | Strong |
+| DeepSWE (Agentic) | Good | **Best** | Good |
+| HumanEval+ | Strong | Strong | Strong |
+| MLE Bench | Good | **Best** | Strong |
+| Multi-file Refactoring | Good | **Best** | Strong |
+
+> **Verdict:** Gemini 3.6 Flash for automated/agentic coding. Claude for pair programming and code review. ChatGPT for ecosystem breadth.
+
+---
+
+## Reasoning and Analysis
+
+### Complex Problem Solving
+
+All three models have achieved strong reasoning capabilities, but they approach problems differently:
+
+**ChatGPT (GPT-5.x)** uses chain-of-thought reasoning with a transparent thinking process. Its o-series models (o3, o4-mini) are specifically optimized for deep reasoning tasks, mathematical proofs, and multi-step logic problems.
+
+**Gemini 3.6 Flash** is optimized for efficient reasoning — solving problems in fewer steps with less token waste. This makes it ideal for applications where reasoning needs to happen at scale (batch processing, automated analysis pipelines).
+
+**Claude Sonnet 4** excels at nuanced analysis where the answer is not clear-cut. It is particularly strong at identifying edge cases, acknowledging uncertainty, and presenting balanced perspectives on complex topics.
+
+### When Each Model Wins
+
+- **Mathematical proofs and formal logic:** ChatGPT (o3/o4-mini)
+- **Efficient, scaled reasoning:** Gemini 3.6 Flash
+- **Nuanced analysis with uncertainty:** Claude Sonnet 4
+
+---
+
+## Multimodal Capabilities
+
+This is where the three platforms diverge most dramatically.
+
+### Google Gemini: The Multimodal Leader
+
+Gemini has the most comprehensive multimodal generation and understanding suite:
+
+- **Image generation:** Imagen 4 (native in Gemini App)
+- **Video generation:** Gemini Omni and Omni Flash (3-10 second clips, conversational editing)
+- **Music generation:** Lyria 3 (30-second stereo tracks with vocals)
+- **Image understanding:** Best-in-class visual analysis
+- **Document understanding:** PDF, slides, and handwritten text
+- **Audio understanding:** Speech, music, and environmental sounds
+
+### ChatGPT: Strong but Narrower
+
+- **Image generation:** DALL-E 4 (high quality, mature)
+- **Video generation:** Limited (Sora integration still restricted)
+- **Image understanding:** Excellent
+- **Document understanding:** Good
+- **Audio:** Voice mode with real-time conversation
+
+### Claude: Analysis-Focused
+
+- **Image generation:** None (no native image generation)
+- **Video generation:** None
+- **Image understanding:** Very strong (analysis and description)
+- **Document understanding:** Excellent (especially for long PDF analysis)
+- **Audio:** Limited
+
+> **Verdict:** Gemini dominates multimodal creation. ChatGPT is strong for image generation. Claude wins at multimodal analysis and understanding, particularly for document-heavy workflows.
+
+---
+
+## Context Window and Memory
+
+| Model | Context Window | Effective Long-Context Quality |
+| :--- | :---: | :---: |
+| ChatGPT (GPT-4.1) | 1M tokens | Good |
+| Gemini 3.6 Flash | **1M tokens** | **Excellent** |
+| Claude Sonnet 4 | 200K tokens | Excellent (within window) |
+
+Gemini and ChatGPT both offer 1M token context windows, but Gemini's long-context performance is widely considered more reliable — it maintains higher accuracy when retrieving information from deep within large contexts (the "needle in a haystack" test).
+
+Claude's 200K token limit is smaller, but within that window, its comprehension quality is exceptional. Anthropic has prioritized depth of understanding over raw context size.
+
+### Practical Implications
+
+- **Ingesting an entire codebase:** Gemini or ChatGPT (1M tokens)
+- **Analyzing a 200-page legal document:** All three are capable, but Claude's comprehension quality edges out
+- **Processing a conversation spanning days:** Gemini handles the longest conversations without degradation
+
+---
+
+## Pricing Deep Dive
+
+### API Pricing (Per 1M Tokens)
+
+| Model | Input Cost | Output Cost | Context Caching |
+| :--- | :---: | :---: | :---: |
+| GPT-4.1 | $2.00 | $8.00 | Available |
+| GPT-4.1 mini | $0.40 | $1.60 | Available |
+| **Gemini 3.6 Flash** | **$1.50** | **$7.50** | **Available** |
+| Gemini 3.5 Flash-Lite | $0.25 | $1.00 | Available |
+| Claude Sonnet 4 | $3.00 | $15.00 | Available |
+| Claude Haiku 3.5 | $0.80 | $4.00 | Available |
+
+### Consumer Subscription Pricing
+
+| Plan | ChatGPT | Gemini | Claude |
+| :--- | :---: | :---: | :---: |
+| Free tier | ✅ (Limited) | ✅ (Limited) | ✅ (Limited) |
+| Pro/Standard | $20/mo | $20/mo (AI Pro) | $20/mo (Pro) |
+| Premium/Ultra | $200/mo (Pro) | $250/mo (AI Ultra) | $200/mo (Max) |
+
+### Cost Efficiency Analysis
+
+For high-volume developer workflows, Gemini 3.6 Flash offers the best cost-per-quality ratio. Its 17% token efficiency improvement means the effective cost is often lower than the nominal pricing suggests. For budget-constrained projects, Gemini 3.5 Flash-Lite at $0.25/$1.00 is unmatched.
+
+---
+
+## Safety and Alignment
+
+### Anthropic Claude: Safety Leader
+
+Claude is built on Anthropic's Constitutional AI framework, making it the most safety-conscious of the three models. It is more likely to refuse harmful requests, acknowledge its limitations, and provide balanced perspectives on controversial topics.
+
+### OpenAI ChatGPT: Balanced Approach
+
+ChatGPT strikes a balance between capability and safety, with configurable safety settings for enterprise deployments and transparent content policies.
+
+### Google Gemini: Enterprise-Grade Controls
+
+Gemini offers granular safety settings through the API, allowing developers to tune sensitivity levels per harm category. Enterprise deployments through Vertex AI include additional data governance and compliance features.
+
+> **Verdict:** Claude for safety-critical applications (healthcare, legal, education). Gemini for enterprise compliance. ChatGPT for the broadest community standards.
+
+---
+
+## Platform Ecosystem
+
+### ChatGPT Advantages
+
+- **GPT Store:** Thousands of custom GPTs for specialized tasks
+- **Plugin ecosystem:** Largest marketplace of third-party integrations
+- **Custom GPTs:** Build and share custom AI assistants without code
+- **Enterprise features:** Team workspaces, admin dashboards, SSO
+
+### Gemini Advantages
+
+- **Google Workspace integration:** Native in Gmail, Docs, Sheets, Slides, Meet
+- **Google Search grounding:** Real-time web access with citation
+- **Gemini Spark:** Proactive agentic assistant that works in the background
+- **Gemini Notebook:** Dedicated research workstation with code execution
+- **GitHub Copilot:** Direct integration for coding workflows
+
+### Claude Advantages
+
+- **Artifacts:** Interactive code previews and document generation inline
+- **Projects:** Organized workspaces with persistent context and knowledge bases
+- **MCP (Model Context Protocol):** Open standard for tool integration
+- **Team collaboration:** Shared conversations and knowledge across organizations
+
+---
+
+## Recommendation Matrix
+
+| If You Need... | Choose |
+| :--- | :--- |
+| Best overall multimodal creation | **Gemini** |
+| Cheapest high-quality API | **Gemini 3.6 Flash** |
+| Longest effective context window | **Gemini** |
+| Best creative writing quality | **Claude** |
+| Most mature plugin ecosystem | **ChatGPT** |
+| Safety-critical applications | **Claude** |
+| Google Workspace integration | **Gemini** |
+| Custom AI assistants (no-code) | **ChatGPT** |
+| Pair programming and code review | **Claude** |
+| Agentic coding workflows | **Gemini** |
+| Deep reasoning (math/logic) | **ChatGPT (o3)** |
+| Enterprise compliance | **Gemini (Vertex AI)** |
+
+---
+
+## Key Takeaways
+
+- **There is no single best AI** — the right choice depends on your specific use case and workflow
+- **Gemini 3.6 Flash** leads in multimodal capabilities, cost efficiency, and agentic coding
+- **Claude Sonnet 4** excels at writing quality, nuanced analysis, and safety
+- **ChatGPT (GPT-5.x)** offers the broadest ecosystem and strongest deep reasoning
+- For **most developers**, trying all three with their free tiers is the best way to find your preference
+- **API pricing** favors Gemini for high-volume production workloads
 
 ---
 
@@ -2779,6 +3949,533 @@ Anthropic designed Claude Cowork with enterprise-grade security boundaries:
 * For native Claude Desktop setup, read [Claude Desktop Download & Setup Guide](/tutorials/claude-desktop-download-installation-guide).
 * For terminal-based software engineering, explore [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
 * For agent loop mechanics, see [Inside Claude Code Agent Architecture](/guides/claude-code-agent-loop-architecture).
+
+---
+
+# [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide)
+
+> A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.
+
+Category: Guides | Tags: ["gemini", "gemini-3.6-flash", "google-ai", "api", "coding", "github-copilot", "developer-tools"]
+
+Google released Gemini 3.6 Flash on July 21, 2026, positioning it as the definitive *workhorse* model in the Gemini 3 series. Built for developers who need fast, precise, and cost-effective AI across coding, knowledge work, and complex multimodal tasks, 3.6 Flash replaces 3.5 Flash as the default recommended model for production agentic workloads.
+
+This guide provides a thorough analysis of the model's architecture improvements, benchmark performance, developer integration pathways, pricing structure, and practical implementation patterns.
+
+---
+
+## What Makes Gemini 3.6 Flash Different
+
+Gemini 3.6 Flash is not a generational leap — it is a surgical optimization of the 3.5 Flash architecture designed to reduce waste while increasing accuracy in the scenarios that matter most to professional developers.
+
+### Core Improvements Over 3.5 Flash
+
+| Metric | Gemini 3.5 Flash | Gemini 3.6 Flash | Improvement |
+| :--- | :---: | :---: | :---: |
+| Output Token Efficiency | Baseline | **−17% tokens** | Fewer tokens for equivalent quality |
+| Reasoning Steps (Multi-Step) | Baseline | **Fewer steps** | Reduced tool call chains |
+| Code Generation Precision | Good | **Higher precision** | Fewer unwanted edits and loops |
+| Knowledge Cutoff | Dec 2025 | **March 2026** | 3 months fresher |
+| Agentic Task Completion | Good | **Improved** | Better long-horizon task handling |
+
+The efficiency gains are not just about speed — they directly reduce API costs. If your application makes thousands of completions per day, a 17% reduction in output tokens translates to meaningful savings at scale.
+
+---
+
+## Architecture and Design Philosophy
+
+Gemini 3.6 Flash was designed for what Google calls the *agentic era* — applications where models operate semi-autonomously, chaining tool calls, processing long contexts, and maintaining coherent state across multi-step workflows.
+
+### Key Architectural Decisions
+
+**Parallel Tool Use:** The model natively supports issuing multiple tool calls in a single generation step. This eliminates the serial bottleneck where previous Flash models would call one tool, wait for a result, then call the next.
+
+```mermaid
+graph LR
+    A[User Query] --> B[Gemini 3.6 Flash]
+    B --> C[Tool Call 1: Search API]
+    B --> D[Tool Call 2: Code Exec]
+    B --> E[Tool Call 3: File Read]
+    C --> F[Aggregate Results]
+    D --> F
+    E --> F
+    F --> G[Final Response]
+```
+
+**Reduced Reasoning Loops:** In benchmark testing, 3.6 Flash completes complex agentic tasks with fewer intermediate reasoning steps. This means fewer API round-trips, lower latency, and reduced token consumption.
+
+**Improved Code Generation:** The model produces more surgically precise code edits — targeting only the lines that need to change rather than regenerating entire functions or files. This is particularly valuable in agentic coding tools like GitHub Copilot and Cursor.
+
+---
+
+## Benchmark Performance
+
+Gemini 3.6 Flash posts significant improvements on the benchmarks that matter most for real-world developer workflows:
+
+### DeepSWE (Agentic Software Engineering)
+
+DeepSWE evaluates a model's ability to navigate codebases, understand issue descriptions, and produce working patches — the kind of task that agentic coding tools perform daily. Gemini 3.6 Flash shows a measurable jump in accuracy while using fewer tool calls per resolution.
+
+### MLE Bench (Machine Learning Engineering)
+
+MLE Bench tests a model's ability to design, implement, and debug machine learning pipelines. 3.6 Flash demonstrates improved performance in experiment design and hyperparameter reasoning.
+
+### Practical Implications
+
+For developers using Gemini 3.6 Flash via API or through tools like GitHub Copilot, these benchmark improvements translate to:
+
+- **Fewer failed code generation attempts** that require re-prompting
+- **More accurate multi-file edits** in complex repositories
+- **Better understanding of project context** across long conversations
+- **Reduced API costs** due to fewer tokens and fewer round-trips
+
+---
+
+## Pricing and Cost Analysis
+
+Google has positioned Gemini 3.6 Flash as one of the most cost-effective frontier models available:
+
+| Model | Input (per 1M tokens) | Output (per 1M tokens) | Context Window |
+| :--- | :---: | :---: | :---: |
+| **Gemini 3.6 Flash** | **$1.50** | **$7.50** | 1M tokens |
+| Gemini 3.5 Flash | $1.25 | $5.00 | 1M tokens |
+| GPT-4.1 | $2.00 | $8.00 | 1M tokens |
+| Claude Sonnet 4 | $3.00 | $15.00 | 200K tokens |
+
+While the per-token price is slightly higher than 3.5 Flash, the 17% reduction in output tokens means the effective cost per task is often *lower*. For applications that generate high volumes of output — code generation, document summarization, agentic workflows — the total spend typically decreases.
+
+### Cost Optimization Tips
+
+1. **Use structured output schemas** to prevent the model from generating verbose explanations when you only need JSON.
+2. **Enable parallel tool use** to reduce the number of API round-trips in agentic chains.
+3. **Set appropriate `max_tokens`** limits to prevent runaway generation on open-ended prompts.
+4. **Cache system prompts** using Google's context caching feature to reduce input token costs on repeated calls.
+
+---
+
+## Getting Started with the API
+
+### Prerequisites
+
+- A Google Cloud account or Google AI Studio API key
+- Node.js 18+ or Python 3.10+
+
+### JavaScript / TypeScript Setup
+
+```javascript
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+async function generateCode(prompt) {
+  const response = await ai.models.generateContent({
+    model: "gemini-3.6-flash",
+    contents: prompt,
+    config: {
+      temperature: 0.2,
+      maxOutputTokens: 4096,
+      responseMimeType: "application/json",
+    },
+  });
+
+  return response.text;
+}
+
+// Example: Generate a React component
+const result = await generateCode(
+  "Create a responsive pricing card component in React with Tailwind CSS"
+);
+console.log(result);
+```
+
+### Python Setup
+
+```python
+import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+
+model = genai.GenerativeModel("gemini-3.6-flash")
+
+response = model.generate_content(
+    "Explain the difference between async/await and Promises in JavaScript",
+    generation_config=genai.GenerationConfig(
+        temperature=0.3,
+        max_output_tokens=2048,
+    ),
+)
+
+print(response.text)
+```
+
+### Using with Google AI Studio
+
+For rapid prototyping, [Google AI Studio](https://aistudio.google.com) provides a browser-based interface where you can:
+
+1. Select **Gemini 3.6 Flash** from the model dropdown
+2. Configure temperature, top-k, top-p, and safety settings
+3. Test prompts with real-time streaming
+4. Export your configuration as API code in Python, JavaScript, or cURL
+
+---
+
+## GitHub Copilot Integration
+
+Gemini 3.6 Flash is available as a model option in GitHub Copilot for Pro, Business, and Enterprise subscribers.
+
+### How to Enable
+
+1. Open your IDE (VS Code, JetBrains, or Neovim)
+2. Open the Copilot Chat panel
+3. Click the model selector dropdown
+4. Choose **Gemini 3.6 Flash** from the list
+5. Start coding — completions will now be powered by Gemini 3.6 Flash
+
+### When to Use Gemini 3.6 Flash in Copilot
+
+- **Multi-file refactoring tasks** where you need the model to understand cross-file dependencies
+- **Agentic coding sessions** where Copilot needs to search, read, and edit multiple files
+- **Complex debugging** where the model needs to reason through stack traces and log outputs
+- **Large context windows** — Gemini 3.6 Flash supports up to 1M tokens, far exceeding most competitors
+
+---
+
+## Best Practices for Production
+
+### 1. System Prompt Engineering
+
+Keep system prompts focused and structured. Gemini 3.6 Flash responds well to clear role definitions and output format specifications:
+
+```text
+You are a senior backend engineer. Generate production-ready code only.
+Follow these rules:
+- Use TypeScript with strict types
+- Include error handling for all async operations
+- Add JSDoc comments for public functions
+- Return JSON responses with consistent error formatting
+```
+
+### 2. Structured Output Mode
+
+Use `responseMimeType: "application/json"` with a JSON schema to get deterministic, parseable output:
+
+```javascript
+const response = await ai.models.generateContent({
+  model: "gemini-3.6-flash",
+  contents: "Analyze this error log and identify the root cause",
+  config: {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: "object",
+      properties: {
+        rootCause: { type: "string" },
+        severity: { type: "string", enum: ["low", "medium", "high", "critical"] },
+        suggestedFix: { type: "string" },
+        affectedFiles: { type: "array", items: { type: "string" } },
+      },
+    },
+  },
+});
+```
+
+### 3. Context Caching for Repeated Workflows
+
+If your application sends the same system prompt or reference documents with every request, use Google's context caching to store them server-side. This can reduce input token costs by up to 90% for cached content.
+
+### 4. Safety and Guardrails
+
+Configure safety settings appropriate for your use case. For developer tools, you may want to relax code-related safety filters while keeping other categories strict:
+
+```javascript
+config: {
+  safetySettings: [
+    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" },
+  ],
+}
+```
+
+---
+
+## Gemini 3.6 Flash vs Competitors
+
+### For Coding Tasks
+
+Gemini 3.6 Flash excels at **multi-step agentic coding** — tasks where the model needs to search a codebase, understand context, and produce precise edits. Its parallel tool use capability gives it a significant speed advantage over models that process tool calls serially.
+
+### For Cost-Sensitive Applications
+
+At $1.50/$7.50 per million tokens with 17% fewer output tokens, Gemini 3.6 Flash is among the most cost-effective frontier models for high-volume applications.
+
+### For Context-Heavy Workflows
+
+With a 1M token context window, Gemini 3.6 Flash can ingest entire codebases, documentation sets, or conversation histories without truncation — a significant advantage over models limited to 128K or 200K tokens.
+
+---
+
+## Key Takeaways
+
+- **Gemini 3.6 Flash** is Google's latest optimized workhorse model, released July 21, 2026
+- It consumes **17% fewer output tokens** than 3.5 Flash for equivalent tasks
+- Pricing is **$1.50 input / $7.50 output** per million tokens with a **1M token context window**
+- Available via **Gemini API, Vertex AI, Google AI Studio, and GitHub Copilot**
+- Built for the **agentic era** with parallel tool use, improved code precision, and reduced reasoning loops
+- Knowledge cutoff is **March 2026**, providing fresher world knowledge than most competitors
+
+---
+
+## What's Next
+
+Google has signaled that Gemini 3.6 Flash is the foundation for upcoming specialized variants. The simultaneously announced **Gemini 3.5 Flash-Lite** targets high-throughput, low-latency batch processing, while **Gemini 3.5 Flash Cyber** is a purpose-built cybersecurity model available to select enterprise partners.
+
+For developers building agentic applications, Gemini 3.6 Flash represents the current sweet spot of capability, speed, and cost — making it the recommended starting point for new projects in the Gemini ecosystem.
+
+---
+
+# [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide)
+
+> A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.
+
+Category: Guides | Tags: ["gemini-music", "lyria-3", "google-ai", "music-generation", "ai-audio", "synthid", "creative-ai"]
+
+Google Gemini can now compose original music. Powered by **Lyria 3**, Google DeepMind's third-generation music model, the system generates high-fidelity audio tracks from text descriptions, photographs, or video clips — complete with instrumentals, vocals, and synchronized lyrics.
+
+This is not a toy demo. Lyria 3 produces broadcast-quality 44.1 kHz stereo audio that rivals production music libraries, making it a legitimate tool for content creators, developers, and small businesses who need custom audio without hiring a composer.
+
+---
+
+## How Lyria 3 Works
+
+Lyria 3 is a multimodal music model trained on a vast corpus of licensed and public-domain music. Unlike earlier music generation tools that produced only instrumental loops, Lyria 3 generates **complete compositions** with:
+
+- Full instrumental arrangements (drums, bass, melody, harmony, pads)
+- AI-generated vocals with intelligible lyrics
+- Timed lyric synchronization
+- Genre-appropriate mixing and mastering
+- Custom cover art generated per track
+
+### Audio Specifications
+
+| Specification | Value |
+| :--- | :--- |
+| Sample Rate | 44.1 kHz (CD quality) |
+| Channels | Stereo |
+| Duration | Up to 30 seconds per generation |
+| Formats | WAV, MP3 |
+| Vocals | Yes — AI-generated with lyrics |
+| Cover Art | Auto-generated per track |
+| Watermark | SynthID embedded |
+
+---
+
+## Generating Music in the Gemini App
+
+### Method 1: Text-to-Music
+
+The simplest approach is describing the song you want:
+
+```text
+"Create an upbeat electronic dance track with a driving bassline,
+shimmering synth pads, and a euphoric buildup to a drop at
+the 15-second mark. 128 BPM, major key."
+```
+
+### Method 2: Image-to-Music
+
+Upload a photograph and Gemini will compose music that matches the mood, atmosphere, and visual themes:
+
+- **A sunset beach photo** → Laid-back acoustic guitar with soft waves
+- **A bustling city street at night** → Energetic electronic with urban textures
+- **A misty mountain landscape** → Ambient, ethereal pad progression
+- **A birthday party scene** → Upbeat, cheerful pop with handclaps
+
+This feature is particularly useful for content creators who need background music that emotionally matches their visual content.
+
+### Method 3: Video-to-Music
+
+Upload a short video clip and Gemini analyzes the visual tempo, mood, and action to generate a synchronized soundtrack:
+
+1. Upload your video clip (up to 30 seconds)
+2. Gemini analyzes motion, scene changes, and visual mood
+3. A custom soundtrack is generated that matches the video's rhythm
+4. Download the audio or export both together
+
+---
+
+## Creative Controls
+
+While Lyria 3 generates music autonomously, you have significant control over the output:
+
+### Genre Specification
+
+Explicitly request genres to guide the model:
+
+```text
+"Create a lo-fi hip-hop beat with vinyl crackle, jazzy piano chords,
+muted drums, and a relaxed atmosphere. No vocals."
+```
+
+### Mood and Energy
+
+Describe the emotional quality you need:
+
+```text
+"Compose a cinematic orchestral piece that starts quietly and
+builds to an intense, heroic climax with brass and timpani."
+```
+
+### Instrumentation
+
+Request specific instruments:
+
+```text
+"Write an acoustic folk song with fingerpicked guitar, harmonica,
+and a warm male vocal. Keep it simple and intimate."
+```
+
+### Structure
+
+Control the arrangement:
+
+```text
+"Create a 30-second track with:
+- 0-8s: Intro with ambient pads
+- 8-20s: Main section with full band
+- 20-30s: Outro with fade"
+```
+
+---
+
+## Practical Use Cases
+
+### Content Creator Background Music
+
+The most immediate application is generating royalty-free background music for YouTube videos, podcasts, social media content, and presentations. Every track is original, so there are no copyright claims from content ID systems.
+
+### Brand Jingles and Audio Logos
+
+Small businesses can generate custom audio branding:
+
+```text
+"Create a 5-second audio logo: a bright, memorable chime progression
+that sounds professional and modern. Think tech startup vibes."
+```
+
+### Personalized Celebrations
+
+Generate custom birthday songs, wedding entrance music, or holiday greetings:
+
+```text
+"Write a happy birthday song with a reggae twist. Include the name
+'Sarah' in the lyrics. Fun, warm, and danceable."
+```
+
+### Game Development Prototyping
+
+Game developers can rapidly prototype soundtracks for different game environments:
+
+```text
+"Create ambient dungeon music with reverberant dripping sounds,
+low drones, and occasional eerie string stabs. Dark fantasy RPG style."
+```
+
+---
+
+## Developer API Access
+
+Beyond the consumer app, Lyria 3 is available to developers through the Gemini API and Google AI Studio.
+
+### API Example
+
+```python
+import google.generativeai as genai
+
+genai.configure(api_key="YOUR_API_KEY")
+
+model = genai.GenerativeModel("lyria-3")
+
+response = model.generate_content(
+    "Create a 30-second upbeat corporate background track "
+    "with acoustic guitar, light percussion, and positive energy",
+    generation_config=genai.GenerationConfig(
+        response_modalities=["AUDIO"],
+        audio_config={
+            "sample_rate": 44100,
+            "channels": 2,
+            "format": "wav",
+        },
+    ),
+)
+
+# Save the generated audio
+audio_data = response.candidates[0].content.parts[0].audio
+with open("corporate_bg.wav", "wb") as f:
+    f.write(audio_data)
+```
+
+### Batch Generation
+
+For music libraries and content platforms, use the batch API to generate hundreds of tracks across different genres, moods, and tempos in a single operation.
+
+---
+
+## SynthID: Transparent AI Music Identification
+
+Every track generated by Lyria 3 includes **SynthID** — an imperceptible digital watermark developed by Google DeepMind.
+
+### Key Properties of SynthID in Audio
+
+- **Inaudible:** The watermark does not affect the listening experience
+- **Resilient:** Survives MP3 compression, format conversion, speed changes, and EQ adjustments
+- **Detectable:** Gemini itself can verify whether an audio file contains SynthID — just upload the file and ask "Was this created by AI?"
+
+### Why SynthID Matters for Music
+
+As AI-generated music becomes indistinguishable from human-composed tracks, SynthID provides a reliable mechanism for:
+
+- **Platform moderation:** Music streaming services can identify AI-generated submissions
+- **Copyright clarity:** Clear provenance helps resolve ownership disputes
+- **Listener transparency:** Audiences can verify the origin of music they consume
+
+---
+
+## Limitations and Honest Assessment
+
+### What Lyria 3 Does Well
+
+- Short-form compositions (jingles, background music, social content)
+- Genre diversity — it handles pop, electronic, classical, jazz, hip-hop, ambient, and world music
+- Speed — tracks generate in under 30 seconds
+- Quality — 44.1 kHz stereo rivals stock music libraries
+
+### Current Limitations
+
+- **30-second maximum:** You cannot generate full-length songs in a single pass
+- **Vocal quality:** While vocals are present, they occasionally sound slightly synthetic compared to top-tier voice models
+- **Lyric coherence:** Lyrics are generally coherent but can drift semantically in longer passages
+- **No stem export:** You cannot separately download individual instrument tracks (yet)
+- **Style mimicry:** The model will refuse requests that attempt to imitate specific living artists
+
+---
+
+## Availability
+
+| Feature | Requirement |
+| :--- | :--- |
+| Basic music generation | Gemini app, 18+ age requirement |
+| Advanced controls | Google AI Pro or Ultra subscription |
+| Developer API (Lyria 3) | Google AI API key |
+| SynthID detection | Available to all Gemini users |
+
+---
+
+## Key Takeaways
+
+- **Lyria 3** powers Gemini's music generation — producing 30-second, 44.1 kHz stereo tracks
+- Generate music from **text descriptions, photos, or video clips**
+- Full compositions include **instrumentals, vocals, and timed lyrics** with auto-generated cover art
+- **SynthID watermarking** ensures all AI-generated music is transparently identifiable
+- Developer API access available through the **Gemini API and AI Studio**
+- Ideal for **content creators, game developers, and small businesses** needing custom royalty-free audio
 
 ---
 

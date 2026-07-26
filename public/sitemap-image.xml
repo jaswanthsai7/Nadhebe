@@ -251,6 +251,9 @@
       <image:loc>https://nadhebe.com/images/comparisons-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
@@ -302,6 +305,12 @@
       <image:loc>https://nadhebe.com/images/claude-complete-guide-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/pre-prod-guide.jpg</image:loc>
     </image:image>
     <image:image>
@@ -315,6 +324,12 @@
     <loc>https://nadhebe.com/category/news</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
@@ -422,6 +437,12 @@
       <image:loc>https://nadhebe.com/images/claude-skills-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.png</image:loc>
     </image:image>
     <image:image>
@@ -468,6 +489,27 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/DwaLQmPlALI/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cli-hero.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://i.ytimg.com/vi/QmC9v-GEOiQ/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -522,6 +564,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/comparisons-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
@@ -599,13 +644,13 @@
       <image:loc>https://nadhebe.com/images/claude-cli-hero.jpg</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/QmC9v-GEOiQ/maxresdefault.jpg</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/claude-windows-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -810,6 +855,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/gemini-3-6-flash-complete-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-complete-guide-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cowork-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-agent-loop-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -863,6 +950,12 @@
       <image:loc>https://nadhebe.com/images/claude-complete-guide-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/pre-prod-guide.jpg</image:loc>
     </image:image>
     <image:image>
@@ -896,16 +989,16 @@
       <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cli-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-windows-hero.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-skills-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-cli-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/T1rf33ToVIE/maxresdefault.jpg</image:loc>
@@ -920,7 +1013,49 @@
       <image:loc>https://i.ytimg.com/vi/EOHodDuJddc/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cli-hero.jpg</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/news/gemini-omni-video-generation-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/news/gemini-spark-agentic-assistant-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -930,6 +1065,12 @@
     <loc>https://nadhebe.com/news</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/oTzHQPE9YRM/maxresdefault.jpg</image:loc>
@@ -1040,7 +1181,7 @@
       <image:loc>https://i.ytimg.com/vi/QmC9v-GEOiQ/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1124,6 +1265,9 @@
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://i.ytimg.com/vi/7f3ZHPyKiwI/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
@@ -1170,6 +1314,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ai-audio</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/ai-certification</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1197,6 +1353,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ai-comparison</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/ai-education</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1206,6 +1374,18 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/anthropic-cert-hero.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/ai-model-comparison</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1236,6 +1416,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ai-video</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/anthropic</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1256,6 +1448,9 @@
       <image:loc>https://nadhebe.com/images/claude-skills-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/claude-cli-hero.jpg</image:loc>
     </image:image>
     <image:image>
@@ -1272,6 +1467,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/QmC9v-GEOiQ/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/api</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1317,6 +1524,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/automation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1410,6 +1629,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/chatgpt</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cheat-sheet</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1443,6 +1674,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-cli-hero.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-resources-hero.png</image:loc>
@@ -1587,6 +1821,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/cloud-computing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cms</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1623,6 +1869,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/coding</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/collaborative-workspace</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/comparison</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1653,6 +1926,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/content-creation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/context-window</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -1671,6 +1956,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/7f3ZHPyKiwI/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/creative-ai</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1731,6 +2028,18 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-skills-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-analysis</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -1824,6 +2133,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-complete-guide-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2001,12 +2313,177 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/gemini</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-3.6-flash</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-canvas</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-music</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-music-generation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-notebook</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-omni</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-spark</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gemini-video-generation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/github-copilot</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gmail</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/google</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/google-ai-cert-hero.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/google-ai</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2076,12 +2553,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/google-vids</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/google-workspace</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/gpt-4o</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/7f3ZHPyKiwI/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gpt-5</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2387,6 +2900,9 @@
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://i.ytimg.com/vi/QmC9v-GEOiQ/maxresdefault.jpg</image:loc>
     </image:image>
     <image:image>
@@ -2499,6 +3015,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/DwaLQmPlALI/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/lyria-3</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2619,12 +3147,36 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/music-generation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/news</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/7f3ZHPyKiwI/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/notebooklm</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2825,7 +3377,16 @@
       <image:loc>https://nadhebe.com/logo.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-cowork-hero.png</image:loc>
@@ -2856,6 +3417,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/prototyping</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -2898,6 +3471,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/research</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -3144,6 +3729,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/synthid</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-music-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/system-design</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -3267,6 +3864,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/veo</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/vibe-coding</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -3285,6 +3894,18 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/maxresdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/video-generation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-video-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -3384,6 +4005,18 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/pre-prod-guide.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/writing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -3693,6 +4326,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/how-to-use-gemini-canvas</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tutorials/how-to-use-gemini-notebook</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-spark-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.png</image:loc>
@@ -3711,6 +4386,12 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-skills-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-notebook-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-canvas-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.png</image:loc>

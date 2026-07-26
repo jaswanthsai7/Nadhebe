@@ -10,6 +10,11 @@ const allArticles = await getAllArticles();
 const authors = await getCollection('authors');
 
 const latestPillars = allArticles.filter(p => p.data.isPillar === true).slice(0, 3);
+const claudeDesktopIdx = latestPillars.findIndex(p => p.id.includes('claude-desktop-download-installation-guide'));
+if (claudeDesktopIdx > -1) {
+  const [claudeDesktop] = latestPillars.splice(claudeDesktopIdx, 1);
+  latestPillars.unshift(claudeDesktop);
+}
 const latestVideos = allArticles.filter(p => p.collection === 'youtube-articles').slice(0, 4);
 const latestArticles = allArticles.slice(0, 6);
 
