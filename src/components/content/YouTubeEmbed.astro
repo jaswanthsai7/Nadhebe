@@ -15,7 +15,7 @@ const { videoId, title } = Astro.props;
   <!-- Thumbnail & Play Button Overlay -->
   <div class="absolute inset-0 cursor-pointer play-overlay z-10">
     <img
-      src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+      src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
       onerror="this.src = this.src.replace('maxresdefault', 'hqdefault');"
       alt={title}
       class="absolute inset-0 w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"

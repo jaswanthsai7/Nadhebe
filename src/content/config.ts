@@ -70,7 +70,7 @@ const getYoutubeIdFromTopic = (topic?: string): string | undefined => {
 const withYoutubeImage = (schema: any) => schema.transform((data: any) => {
   const vid = data.videoId || data.youtubeVideoId || getYoutubeIdFromTopic(data.topic);
   if (vid) {
-    data.heroImage = `https://i.ytimg.com/vi/${vid}/maxresdefault.jpg`;
+    data.heroImage = `https://i.ytimg.com/vi/${vid}/hqdefault.jpg`;
   }
   return data;
 });
