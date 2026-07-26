@@ -1,8 +1,35 @@
 import fs from 'fs';
 import path from 'path';
 
+function getAllHtmlUrls(dir: string, baseDir: string): string[] {
+  const urls: string[] = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      urls.push(...getAllHtmlUrls(fullPath, baseDir));
+    } else if (entry.isFile() && entry.name.endsWith('.html')) {
+      const relPath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
+      if (relPath === '404.html' || relPath.endsWith('/404/index.html')) {
+        continue;
+      }
+      let url = 'https://nadhebe.com/';
+      if (relPath !== 'index.html') {
+        if (relPath.endsWith('/index.html')) {
+          url = `https://nadhebe.com/${relPath.slice(0, -11)}/`;
+        } else {
+          url = `https://nadhebe.com/${relPath.slice(0, -5)}/`;
+        }
+      }
+      urls.push(url);
+    }
+  }
+  return urls;
+}
+
 function run() {
-  console.log('Formatting sitemap XML files with XSL stylesheet...');
+  console.log('Auditing and formatting sitemap XML files...');
   const distDir = path.join(process.cwd(), 'dist');
   const publicDir = path.join(process.cwd(), 'public');
   if (!fs.existsSync(distDir)) {
@@ -10,13 +37,48 @@ function run() {
     return;
   }
 
-  // Ensure public/sitemap.xsl is copied to dist/sitemap.xsl
+  // 1. Collect all HTML URLs built in dist
+  const allSiteUrls = getAllHtmlUrls(distDir, distDir);
+  console.log(`Found ${allSiteUrls.length} total HTML pages in dist.`);
+
+  // 2. Ensure all URLs are present in sitemap-0.xml
+  const sitemap0Path = path.join(distDir, 'sitemap-0.xml');
+  if (fs.existsSync(sitemap0Path)) {
+    let sitemapXml = fs.readFileSync(sitemap0Path, 'utf-8');
+    
+    const existingLocs = new Set<string>();
+    const locRegex = /<loc>(https?:\/\/[^<]+)<\/loc>/g;
+    let match;
+    while ((match = locRegex.exec(sitemapXml)) !== null) {
+      existingLocs.add(match[1].trim());
+    }
+
+    const missingUrls = allSiteUrls.filter(url => !existingLocs.has(url));
+    if (missingUrls.length > 0) {
+      console.log(`Injecting ${missingUrls.length} missing URLs into sitemap-0.xml...`);
+      const nowISO = new Date().toISOString();
+      const newEntries = missingUrls.map(url => `
+  <url>
+    <loc>${url}</loc>
+    <lastmod>${nowISO}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`).join('');
+
+      sitemapXml = sitemapXml.replace('</urlset>', `${newEntries}\n</urlset>`);
+      fs.writeFileSync(sitemap0Path, sitemapXml, 'utf-8');
+      console.log(`Successfully added all ${missingUrls.length} missing URLs to sitemap-0.xml!`);
+    }
+  }
+
+  // 3. Ensure public/sitemap.xsl is copied to dist/sitemap.xsl
   const publicXsl = path.join(process.cwd(), 'public', 'sitemap.xsl');
   const distXsl = path.join(distDir, 'sitemap.xsl');
   if (fs.existsSync(publicXsl)) {
     fs.copyFileSync(publicXsl, distXsl);
   }
 
+  // 4. Format all sitemap XML files
   const sitemapFiles = fs.readdirSync(distDir).filter(f => f.startsWith('sitemap') && f.endsWith('.xml'));
 
   sitemapFiles.forEach(file => {
