@@ -4,21 +4,10 @@
 
 ## Content Directory
 
-### News
-
-- [Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)](https://nadhebe.com/news/gemini-3-6-flash-everything-we-know): Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access.
-- [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide): Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
-- [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide): An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
-- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
-- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
-- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
-
 ### Tutorials
 
 - [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide): Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.
-- [Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)](https://nadhebe.com/tutorials/gemini-api-javascript-node-examples): TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling.
 - [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting): Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.
-- [Gemini API Examples for Python: Complete Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial): Hands-on Python code samples for text generation, structured JSON outputs, image vision parsing, and streaming responses with the Google Gen AI SDK.
 - [Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)](https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide): Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts.
 - [Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)](https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli): Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux.
 - [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts): The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
@@ -37,10 +26,7 @@
 
 ### Comparisons
 
-- [Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)](https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison): Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost.
-- [Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)](https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison): Architectural comparison evaluating speed, context window depth, reasoning accuracy, and pricing between Gemini Flash and Gemini Pro.
 - [Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?](https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced): Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.
-- [Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison](https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026): Comprehensive evaluation of Google Gemini 2.0/3.x vs OpenAI ChatGPT (GPT-4o/5) on coding, 2M context windows, vision, and API costs.
 - [NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison](https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison): Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows.
 - [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026): An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.
 - [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison): A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
@@ -66,6 +52,14 @@
 - [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
 - [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 - [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
+
+### News
+
+- [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide): Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
+- [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide): An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
+- [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
+- [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
+- [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
 ### Best Practices
 

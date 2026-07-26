@@ -1,15 +1,5 @@
 [
   {
-    "title": "Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)",
-    "description": "Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access.",
-    "url": "https://nadhebe.com/news/gemini-3-6-flash-everything-we-know",
-    "category": "News",
-    "tags": [
-      "[\"gemini-3-6\", \"gemini-flash\", \"google-ai\", \"llm-benchmarks\", \"news\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
     "title": "Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)",
     "description": "Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.",
     "url": "https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide",
@@ -20,32 +10,12 @@
     "pubDate": "2026-07-26T00:00:00.000Z"
   },
   {
-    "title": "Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)",
-    "description": "TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-javascript-node-examples",
-    "category": "Tutorials",
-    "tags": [
-      "[\"gemini-api\", \"javascript\", \"typescript\", \"nodejs\", \"developer-guide\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
     "title": "Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors",
     "description": "Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.",
     "url": "https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-api\", \"troubleshooting\", \"error-handling\", \"api-key\", \"developer-guide\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
-    "title": "Gemini API Examples for Python: Complete Developer Guide (2026)",
-    "description": "Hands-on Python code samples for text generation, structured JSON outputs, image vision parsing, and streaming responses with the Google Gen AI SDK.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial",
-    "category": "Tutorials",
-    "tags": [
-      "[\"gemini-api\", \"python\", \"developer-guide\", \"code-examples\", \"sdk\"]"
     ],
     "pubDate": "2026-07-26T00:00:00.000Z"
   },
@@ -70,42 +40,12 @@
     "pubDate": "2026-07-26T00:00:00.000Z"
   },
   {
-    "title": "Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)",
-    "description": "Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost.",
-    "url": "https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison",
-    "category": "Comparisons",
-    "tags": [
-      "[\"gemini-cli\", \"claude-code\", \"cli-tools\", \"terminal\", \"comparison\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
-    "title": "Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)",
-    "description": "Architectural comparison evaluating speed, context window depth, reasoning accuracy, and pricing between Gemini Flash and Gemini Pro.",
-    "url": "https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison",
-    "category": "Comparisons",
-    "tags": [
-      "[\"gemini-flash\", \"gemini-pro\", \"google-ai\", \"comparison\", \"benchmarks\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
     "title": "Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?",
     "description": "Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.",
     "url": "https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced",
     "category": "Comparisons",
     "tags": [
       "[\"gemini-free-vs-paid\", \"gemini-advanced\", \"pricing\", \"google-one\", \"comparison\"]"
-    ],
-    "pubDate": "2026-07-26T00:00:00.000Z"
-  },
-  {
-    "title": "Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison",
-    "description": "Comprehensive evaluation of Google Gemini 2.0/3.x vs OpenAI ChatGPT (GPT-4o/5) on coding, 2M context windows, vision, and API costs.",
-    "url": "https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026",
-    "category": "Comparisons",
-    "tags": [
-      "[\"gemini-vs-chatgpt\", \"gemini-ai\", \"chatgpt\", \"llm-comparison\", \"ai-tools\"]"
     ],
     "pubDate": "2026-07-26T00:00:00.000Z"
   },
