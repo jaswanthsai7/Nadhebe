@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: bob-smith
 category: "Prompts"
 tags: ["kimi-k3", "prompt-engineering", "app-development", "game-dev", "structured-prompts"]
-heroImage: "/images/prompts-hero.png"
+heroImage: "/images/prompts-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing structured prompt building blocks and layout flows"
 draft: false
 topic: "Kimi K3 Prompting"

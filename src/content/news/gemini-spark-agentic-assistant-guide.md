@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: News
 tags: ["gemini-spark", "google-ai", "agentic-ai", "productivity", "gmail", "google-workspace", "automation"]
-heroImage: "/images/gemini-spark-hero.png"
+heroImage: "/images/gemini-spark-hero.webp"
 heroAlt: "Editorial collage illustration of Gemini Spark proactive AI assistant with inbox and calendar automation"
 draft: false
 topic: "Gemini Spark"

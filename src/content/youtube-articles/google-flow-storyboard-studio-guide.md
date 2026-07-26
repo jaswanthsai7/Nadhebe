@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Tutorials
 tags: ["google-flow", "storyboard-studio", "pre-production", "filmmaking", "google-labs"]
-heroImage: "/images/storyboard-studio-hero.jpg"
+heroImage: "/images/storyboard-studio-hero.webp"
 heroAlt: "Polished illustration of film strips layered on top of clean floating interface boards in a bright white workspace"
 estimatedReadingTime: 5
 videoId: "T1rf33ToVIE"

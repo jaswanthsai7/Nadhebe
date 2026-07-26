@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Tools"
 tags: [instatic, site-migration, tools, troubleshoot]
-heroImage: "/images/importer-hero.png"
+heroImage: "/images/importer-hero.webp"
 heroAlt: "Minimalist 3D illustration of document migration flows and folders"
 draft: false
 topic: "Instatic"
@@ -35,7 +35,7 @@ In this guide, we analyze how the Instatic import engine parses templates and ho
 
 When you drag and drop your project folder, the import engine processes files through a three-stage parser:
 
-![Importer Data Flow](/images/importer-step1.png)
+![Importer Data Flow](/images/importer-step1.webp)
 *Figure 1: Pipeline diagram showing HTML parsing, style asset mapping, and conflict override resolution.*
 
 ### 1. Element Mapping
@@ -57,7 +57,7 @@ If layouts load without styling, check the relative resource links. If styleshee
 1. Click on the administrator profile icon in the top left menu.
 2. Select **Run Site Scripts** to trigger layout recompilation.
 
-![Troubleshooting Dashboard Controls](/images/importer-step2.png)
+![Troubleshooting Dashboard Controls](/images/importer-step2.webp)
 *Figure 2: Custom control dialogue location for running local site build scripts.*
 
 ### Conflict Resolution during Repetitive Imports

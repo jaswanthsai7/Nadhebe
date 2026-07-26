@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Comparisons
 tags: ["claude", "codex", "opencode", "cli", "ai-agents", "benchmarks", "comparison"]
-heroImage: "/images/claude-cli-hero.jpg"
+heroImage: "/images/claude-cli-hero.webp"
 heroAlt: "Minimalist technical comparison schematic of terminal AI coding agents"
 draft: false
 topic: "AI Tool Comparisons"

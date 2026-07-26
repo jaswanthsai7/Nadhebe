@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Best Practices
 tags: ["claude", "cli", "best-practices", "vibe-coding", "devops", "enterprise", "anthropic"]
-heroImage: "/images/claude-cli-hero.jpg"
+heroImage: "/images/claude-cli-hero.webp"
 heroAlt: "Minimalist technical diagram showing production engineering guardrails for AI coding agents"
 draft: false
 topic: "Claude Code"

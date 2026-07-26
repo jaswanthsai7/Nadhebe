@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: Tutorials
 tags: ["gemini-notebook", "notebooklm", "google-ai", "research", "cloud-computing", "data-analysis", "productivity"]
-heroImage: "/images/gemini-notebook-hero.png"
+heroImage: "/images/gemini-notebook-hero.webp"
 heroAlt: "Editorial collage illustration of Gemini Notebook with data charts and cloud computing elements"
 draft: false
 topic: "Gemini Notebook"

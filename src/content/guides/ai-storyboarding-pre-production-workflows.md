@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Guides
 tags: ["pre-production", "guides", "workflows", "film-tech", "google-labs"]
-heroImage: "/images/pre-prod-guide.jpg"
+heroImage: "/images/pre-prod-guide.webp"
 heroAlt: "Minimalist layout showing interlocking clean gears and folders, pastel blue and white style"
 estimatedReadingTime: 6
 isPillar: false

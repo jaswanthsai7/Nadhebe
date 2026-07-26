@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Tools
 tags: ["claude", "cli", "mcp-servers", "skills", "subagents", "developer-tools", "awesome-list"]
-heroImage: "/images/claude-resources-hero.png"
+heroImage: "/images/claude-resources-hero.webp"
 heroAlt: "Minimalist resource directory map showing connected MCP server nodes and tool extensions"
 draft: false
 topic: "Claude Resources"

@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: Comparisons
 tags: ["chatgpt", "gemini", "claude", "ai-comparison", "llm", "gpt-5", "anthropic", "google-ai"]
-heroImage: "/images/ai-comparison-hero.png"
+heroImage: "/images/ai-comparison-hero.webp"
 heroAlt: "Editorial collage illustration comparing three major AI assistants with benchmark charts"
 draft: false
 topic: "AI Model Comparison"

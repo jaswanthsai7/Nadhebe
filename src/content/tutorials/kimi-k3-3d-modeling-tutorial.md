@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: bob-smith
 category: "Tutorials"
 tags: ["kimi-k3", "3d-modeling", "3d-printing", "openscad", "tutorials"]
-heroImage: "/images/tutorials-hero.png"
+heroImage: "/images/tutorials-hero.webp"
 heroAlt: "Minimal 3D editorial illustration of a support-free architectural geometric shape on a clean white background"
 draft: false
 topic: "Kimi K3 Tutorials"

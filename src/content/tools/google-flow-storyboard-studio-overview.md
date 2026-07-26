@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Tools
 tags: ["google-flow", "tools", "pre-production", "creative-tech", "google-labs"]
-heroImage: "/images/storyboard-tool-hero.jpg"
+heroImage: "/images/storyboard-tool-hero.webp"
 heroAlt: "Minimalist rendering of floating UI blocks with movie camera icons, bright mint and white backgrounds"
 estimatedReadingTime: 5
 isPillar: false

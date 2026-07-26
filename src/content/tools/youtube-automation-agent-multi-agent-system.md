@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Tools
 tags: ["tools", "youtube-automation", "open-source", "features"]
-heroImage: "/images/yt-features-hero.jpg"
+heroImage: "/images/yt-features-hero.webp"
 heroAlt: "Minimalist mockup displaying digital automation cards in a clean pastel color theme"
 estimatedReadingTime: 5
 isPillar: false

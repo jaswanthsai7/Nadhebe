@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Programming
 tags: ["gpt-5.6", "agentic-ai", "guides", "orchestration", "models"]
-heroImage: "/images/gpt-5-6-guide.jpg"
+heroImage: "/images/gpt-5-6-guide.webp"
 heroAlt: "Minimalist rendering of interlocking frosted glass shapes floating above a clean light grey workspace"
 estimatedReadingTime: 8
 isPillar: false

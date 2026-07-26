@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Guides
 tags: ["anthropic", "claude", "certification", "pearson-vue", "credly", "ai-education"]
-heroImage: "/images/anthropic-cert-hero.jpg"
+heroImage: "/images/anthropic-cert-hero.webp"
 heroAlt: "Minimalist editorial illustration of Anthropic Claude partner certification credential shield"
 draft: false
 topic: "AI Certifications"

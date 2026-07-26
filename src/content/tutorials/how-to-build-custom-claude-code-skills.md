@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Tutorials
 tags: ["claude", "cli", "custom-skills", "subagents", "claude-agent-sdk", "anthropic"]
-heroImage: "/images/claude-skills-hero.png"
+heroImage: "/images/claude-skills-hero.webp"
 heroAlt: "Minimalist technical diagram showing custom skill directory structure and slash command routing"
 draft: false
 topic: "Claude Code"

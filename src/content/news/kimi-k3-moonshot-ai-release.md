@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: bob-smith
 category: "News"
 tags: ["kimi-k3", "moonshot-ai", "open-weight", "moe-models", "release"]
-heroImage: "/images/news-hero.png"
+heroImage: "/images/news-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing the Kimi K3 open-weight release announcement"
 draft: false
 topic: "Kimi K3 Release"

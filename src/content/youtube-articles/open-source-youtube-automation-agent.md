@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: AI
 tags: ["multi-agent", "sqlite", "youtube-automation", "open-source"]
-heroImage: "/images/yt-automation-hero.jpg"
+heroImage: "/images/yt-automation-hero.webp"
 heroAlt: "Minimalist rendering of seven interlocking frosted glass rings resting on a white workspace surface"
 estimatedReadingTime: 6
 videoId: "EOHodDuJddc"

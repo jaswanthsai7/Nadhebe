@@ -6591,7 +6591,7 @@ Deploying a local visual CMS makes template customization faster and keeps datab
 
 Before starting the installation, it helps to understand the local runtime stack of Instatic:
 
-![Instatic Local Runtime Architecture](/images/install-step1.png)
+![Instatic Local Runtime Architecture](/images/install-step1.webp)
 *Figure 1: Core interaction model between Bun, VS Code terminal, and the SQLite local database file.*
 
 Instatic uses Bun to compile scripts and save site configurations to a database backend. By default, local installations run on **SQLite**, compiling site configuration matrices into a single local file.
@@ -6643,7 +6643,7 @@ Once the dependencies load, start the local development server:
 bun run dev
 ```
 
-![Running Local Server Console](/images/install-step2.png)
+![Running Local Server Console](/images/install-step2.webp)
 *Figure 2: Console output upon successfully booting the local server.*
 
 Open your web browser and navigate to the address shown in the terminal (usually `http://localhost:3000`). Follow the setup wizard to configure your site name, database driver (choose **SQLite** for local development, or configure **PostgreSQL** parameters), administrator email, and master password.
@@ -7134,7 +7134,7 @@ In this guide, we analyze how the Instatic import engine parses templates and ho
 
 When you drag and drop your project folder, the import engine processes files through a three-stage parser:
 
-![Importer Data Flow](/images/importer-step1.png)
+![Importer Data Flow](/images/importer-step1.webp)
 *Figure 1: Pipeline diagram showing HTML parsing, style asset mapping, and conflict override resolution.*
 
 ### 1. Element Mapping
@@ -7156,7 +7156,7 @@ If layouts load without styling, check the relative resource links. If styleshee
 1. Click on the administrator profile icon in the top left menu.
 2. Select **Run Site Scripts** to trigger layout recompilation.
 
-![Troubleshooting Dashboard Controls](/images/importer-step2.png)
+![Troubleshooting Dashboard Controls](/images/importer-step2.webp)
 *Figure 2: Custom control dialogue location for running local site build scripts.*
 
 ### Conflict Resolution during Repetitive Imports

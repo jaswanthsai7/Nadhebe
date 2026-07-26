@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Best Practices
 tags: ["multi-agent", "best-practices", "software-architecture", "system-design"]
-heroImage: "/images/state-isolation.jpg"
+heroImage: "/images/state-isolation.webp"
 heroAlt: "Minimalist rendering of separated glass cubes aligned in a row on a white platform"
 estimatedReadingTime: 5
 isPillar: false

@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: bob-smith
 category: AI
 tags: ["fable-5", "gpt-5.5", "comparisons", "models", "anthropic"]
-heroImage: "/images/fable-vs-gpt.jpg"
+heroImage: "/images/fable-vs-gpt.webp"
 heroAlt: "Abstract minimal render of two interlocking geometric pastel shapes floating on a bright cyan background"
 estimatedReadingTime: 8
 videoId: "QmC9v-GEOiQ"

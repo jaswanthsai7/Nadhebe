@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: Tutorials
 tags: ["gemini-canvas", "google-ai", "coding", "writing", "collaborative-workspace", "prototyping", "productivity"]
-heroImage: "/images/gemini-canvas-hero.png"
+heroImage: "/images/gemini-canvas-hero.webp"
 heroAlt: "Editorial collage illustration of Gemini Canvas collaborative AI workspace with code and document editing"
 draft: false
 topic: "Gemini Canvas"

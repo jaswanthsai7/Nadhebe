@@ -5,7 +5,7 @@ pubDate: 2026-07-24
 author: bob-smith
 category: "Tutorials"
 tags: ["vllm", "cuda-oom", "gpu-optimization", "llm-ops", "troubleshooting"]
-heroImage: "/images/tutorials-hero.png"
+heroImage: "/images/tutorials-hero.webp"
 heroAlt: "Technical diagram illustrating GPU VRAM memory division between model weights, KV cache allocation, and activation memory"
 draft: false
 topic: "LLM Infrastructure Troubleshooting"

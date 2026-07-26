@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: AI
 tags: ["gpt-5.6", "openai", "agentic-ai", "soul-model", "models"]
-heroImage: "/images/gpt-5-6-hero.jpg"
+heroImage: "/images/gpt-5-6-hero.webp"
 heroAlt: "Minimalist rendering of a glowing crystalline neural network on a soft blue gradient background"
 estimatedReadingTime: 6
 videoId: "7f3ZHPyKiwI"

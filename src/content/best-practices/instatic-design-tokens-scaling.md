@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Best Practices"
 tags: [instatic, design-tokens, css, styling]
-heroImage: "/images/best-practices-hero.png"
+heroImage: "/images/best-practices-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing design tokens and CSS variable charts"
 draft: false
 topic: "Instatic"

@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Guides
 tags: ["claude", "claude-cowork", "desktop-agent", "productivity", "anthropic", "ai-agents"]
-heroImage: "/images/claude-cowork-hero.png"
+heroImage: "/images/claude-cowork-hero.webp"
 heroAlt: "Minimalist architectural diagram showing Claude Cowork desktop agent interacting with local files"
 draft: false
 topic: "Claude Cowork"

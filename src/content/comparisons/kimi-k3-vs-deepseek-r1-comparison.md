@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: "Comparisons"
 tags: [kimi-k3, deepseek-r1, open-weight, moe-models, llm-benchmarks]
-heroImage: "/images/fable-vs-gpt.jpg"
+heroImage: "/images/fable-vs-gpt.webp"
 heroAlt: "Minimalist technical comparison cover for Kimi K3 and DeepSeek R1 open-weight models"
 draft: false
 topic: "Kimi K3"

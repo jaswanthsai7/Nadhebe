@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: bob-smith
 category: Comparisons
 tags: ["fable-5", "gpt-5.5", "comparisons", "benchmarks", "anthropic"]
-heroImage: "/images/benchmarks-fable-gpt.jpg"
+heroImage: "/images/benchmarks-fable-gpt.webp"
 heroAlt: "Minimalist rendering of pastel geometric towers representing benchmark heights on a white backdrop"
 estimatedReadingTime: 6
 itemsCompared: ["Claude Fable 5", "GPT-5.5"]

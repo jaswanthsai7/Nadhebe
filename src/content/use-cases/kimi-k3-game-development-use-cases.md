@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: alice-chen
 category: "Use Cases"
 tags: ["kimi-k3", "use-cases", "game-dev", "procedural-generation", "rapid-prototyping"]
-heroImage: "/images/use-cases-hero.png"
+heroImage: "/images/use-cases-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing a glowing game controller merging with abstract wireframe geometry"
 draft: false
 topic: "Kimi K3 Use Cases"

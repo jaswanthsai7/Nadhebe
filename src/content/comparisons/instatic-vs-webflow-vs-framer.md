@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: bob-smith
 category: "Comparisons"
 tags: [instatic, webflow, framer, comparison]
-heroImage: "/images/comparisons-hero.png"
+heroImage: "/images/comparisons-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing comparison metrics and benchmarks"
 draft: false
 topic: "Instatic"

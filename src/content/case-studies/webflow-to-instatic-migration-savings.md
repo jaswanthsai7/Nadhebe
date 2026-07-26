@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: bob-smith
 category: "Case Studies"
 tags: [instatic, webflow, migration, hosting-costs]
-heroImage: "/images/case-studies-hero.png"
+heroImage: "/images/case-studies-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing migration cost savings and performance graphs"
 draft: false
 topic: "Instatic"

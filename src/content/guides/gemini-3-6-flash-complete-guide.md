@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: Guides
 tags: ["gemini", "gemini-3.6-flash", "google-ai", "api", "coding", "github-copilot", "developer-tools"]
-heroImage: "/images/gemini-3-6-flash-hero.png"
+heroImage: "/images/gemini-3-6-flash-hero.webp"
 heroAlt: "Bold editorial collage illustration about Gemini 3.6 Flash with speed benchmarks and code snippets"
 draft: false
 topic: "Gemini 3.6 Flash"

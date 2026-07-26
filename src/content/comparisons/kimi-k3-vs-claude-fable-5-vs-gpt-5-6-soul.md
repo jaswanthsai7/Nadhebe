@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: alice-chen
 category: "Comparisons"
 tags: ["kimi-k3", "claude-fable-5", "gpt-5.6", "llm-comparison", "benchmarks"]
-heroImage: "/images/comparisons-hero.png"
+heroImage: "/images/comparisons-hero.webp"
 heroAlt: "Minimalist editorial comparison layout showing three distinct abstract glowing geometries symbolizing Kimi K3, Claude Fable 5, and GPT-5.6 Soul"
 draft: false
 itemsCompared: ["Kimi K3", "Claude Fable 5", "GPT-5.6 Soul"]

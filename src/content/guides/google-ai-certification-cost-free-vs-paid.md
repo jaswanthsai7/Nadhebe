@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: alice-chen
 category: Guides
 tags: ["google", "ai-certification", "google-cloud", "skills-boost", "machine-learning", "ai-education"]
-heroImage: "/images/google-ai-cert-hero.jpg"
+heroImage: "/images/google-ai-cert-hero.webp"
 heroAlt: "Minimalist vector illustration of Google Cloud certificate badge with clean geometric lines"
 draft: false
 topic: "AI Certifications"

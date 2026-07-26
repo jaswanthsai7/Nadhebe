@@ -5,7 +5,7 @@ pubDate: 2026-07-19
 author: bob-smith
 category: "Best Practices"
 tags: ["kimi-k3", "context-window", "developer-practices", "codebase-management", "optimization"]
-heroImage: "/images/best-practices-hero.png"
+heroImage: "/images/best-practices-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing code segments flowing into a central data core"
 draft: false
 topic: "Kimi K3 Context Window"

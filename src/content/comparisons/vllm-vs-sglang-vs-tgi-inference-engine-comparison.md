@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: "Comparisons"
 tags: [vllm, sglang, tgi, llmops, inference, architecture]
-heroImage: "/images/comparisons-hero.png"
+heroImage: "/images/comparisons-hero.webp"
 heroAlt: "Minimalist technical diagram comparing vLLM, SGLang, and TGI inference engine architectures"
 draft: false
 topic: "LLM Serving"

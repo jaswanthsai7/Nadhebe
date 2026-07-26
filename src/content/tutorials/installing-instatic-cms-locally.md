@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "Tutorials"
 tags: [instatic, setup, local-development, bun]
-heroImage: "/images/install-hero.png"
+heroImage: "/images/install-hero.webp"
 heroAlt: "Sleek 3D illustration of terminal commands and database server setups"
 draft: false
 topic: "Instatic"
@@ -33,7 +33,7 @@ Deploying a local visual CMS makes template customization faster and keeps datab
 
 Before starting the installation, it helps to understand the local runtime stack of Instatic:
 
-![Instatic Local Runtime Architecture](/images/install-step1.png)
+![Instatic Local Runtime Architecture](/images/install-step1.webp)
 *Figure 1: Core interaction model between Bun, VS Code terminal, and the SQLite local database file.*
 
 Instatic uses Bun to compile scripts and save site configurations to a database backend. By default, local installations run on **SQLite**, compiling site configuration matrices into a single local file.
@@ -85,7 +85,7 @@ Once the dependencies load, start the local development server:
 bun run dev
 ```
 
-![Running Local Server Console](/images/install-step2.png)
+![Running Local Server Console](/images/install-step2.webp)
 *Figure 2: Console output upon successfully booting the local server.*
 
 Open your web browser and navigate to the address shown in the terminal (usually `http://localhost:3000`). Follow the setup wizard to configure your site name, database driver (choose **SQLite** for local development, or configure **PostgreSQL** parameters), administrator email, and master password.

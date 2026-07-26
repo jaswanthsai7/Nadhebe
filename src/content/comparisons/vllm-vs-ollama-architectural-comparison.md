@@ -5,7 +5,7 @@ pubDate: 2026-07-24
 author: alice-chen
 category: "Comparisons"
 tags: ["vllm", "ollama", "llm-inference", "open-source-ai", "architecture"]
-heroImage: "/images/comparisons-hero.png"
+heroImage: "/images/comparisons-hero.webp"
 heroAlt: "Architectural comparison diagram showing vLLM PagedAttention GPU memory paging alongside Ollama GGML desktop runtime"
 draft: false
 topic: "Open-Source LLM Serving"

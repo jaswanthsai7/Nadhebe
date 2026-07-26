@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: bob-smith
 category: Reviews
 tags: ["fable-5", "reviews", "llm", "anthropic"]
-heroImage: "/images/fable-5-review.jpg"
+heroImage: "/images/fable-5-review.webp"
 heroAlt: "Minimalist editorial review badge floating over a soft blue gradient background"
 estimatedReadingTime: 5
 rating: 8.8

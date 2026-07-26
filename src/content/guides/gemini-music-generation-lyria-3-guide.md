@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: Guides
 tags: ["gemini-music", "lyria-3", "google-ai", "music-generation", "ai-audio", "synthid", "creative-ai"]
-heroImage: "/images/gemini-music-hero.png"
+heroImage: "/images/gemini-music-hero.webp"
 heroAlt: "Editorial collage illustration of AI music generation with waveforms and mixing console"
 draft: false
 topic: "Gemini Music Generation"

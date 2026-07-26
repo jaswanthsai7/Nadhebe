@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: AI
 tags: ["gpt-5.6", "openai", "release", "news", "models"]
-heroImage: "/images/gpt-5-6-news.jpg"
+heroImage: "/images/gpt-5-6-news.webp"
 heroAlt: "Premium clean presentation slide showing a stylized abstract chrome logo against a pastel blue gradient background"
 estimatedReadingTime: 4
 isPillar: false

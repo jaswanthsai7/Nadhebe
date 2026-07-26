@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Tutorials
 tags: ["google-flow", "tutorials", "storyboard", "step-by-step", "google-labs"]
-heroImage: "/images/storyboard-tutorial-hero.jpg"
+heroImage: "/images/storyboard-tutorial-hero.webp"
 heroAlt: "Minimalist mockup displaying a sequence of three frames on a clean white user interface screen"
 estimatedReadingTime: 7
 isPillar: false

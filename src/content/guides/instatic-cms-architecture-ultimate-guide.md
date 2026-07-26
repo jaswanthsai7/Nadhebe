@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: bob-smith
 category: "Guides"
 tags: [instatic, guide, architecture, backend]
-heroImage: "/images/guides-hero.png"
+heroImage: "/images/guides-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing system architecture modules and connections"
 draft: false
 topic: "Instatic"

@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Best Practices
 tags: ["cost-management", "llm-ops", "best-practices", "agents", "models"]
-heroImage: "/images/llm-costs.jpg"
+heroImage: "/images/llm-costs.webp"
 heroAlt: "Minimalist editorial concept showing floating light-cyan blocks forming a balanced scale on a white background"
 estimatedReadingTime: 5
 isPillar: false

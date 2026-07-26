@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: bob-smith
 category: Guides
 tags: ["claude", "cli", "guide", "developer-tools", "productivity", "anthropic"]
-heroImage: "/images/claude-complete-guide-hero.png"
+heroImage: "/images/claude-complete-guide-hero.webp"
 heroAlt: "Minimalist technical diagram showing beginner to power user progression pathways in Claude Code CLI"
 draft: false
 topic: "Claude Code"

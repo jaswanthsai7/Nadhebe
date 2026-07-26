@@ -5,7 +5,7 @@ pubDate: 2026-07-25
 author: nadhebe-team
 category: News
 tags: ["gemini-omni", "video-generation", "google-ai", "veo", "google-vids", "ai-video", "content-creation"]
-heroImage: "/images/gemini-video-hero.png"
+heroImage: "/images/gemini-video-hero.webp"
 heroAlt: "Editorial collage illustration of AI video generation with film reels and editing timeline"
 draft: false
 topic: "Gemini Video Generation"

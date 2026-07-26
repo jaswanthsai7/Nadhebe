@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "YouTube Articles"
 tags: [instatic, youtube, walkthrough, video]
-heroImage: "/images/youtube-hero.png"
+heroImage: "/images/youtube-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing video player overlays and screens"
 draft: false
 topic: "Instatic"

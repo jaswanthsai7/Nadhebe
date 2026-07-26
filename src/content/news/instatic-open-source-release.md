@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: alice-chen
 category: "News"
 tags: [instatic, release, open-source, webflow-alternative]
-heroImage: "/images/news-hero.png"
+heroImage: "/images/news-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing the Instatic open-source release announcement"
 draft: false
 topic: "Instatic"

@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Comparisons
 tags: ["gpt-5.6", "gpt-4o", "comparisons", "benchmarks", "models"]
-heroImage: "/images/gpt-comparison.jpg"
+heroImage: "/images/gpt-comparison.webp"
 heroAlt: "Minimalist presentation showing two glowing glass spheres reflecting light-cyan and light-purple hues side by side"
 estimatedReadingTime: 5
 itemsCompared: ["GPT-5.6 Soul", "GPT-4o"]

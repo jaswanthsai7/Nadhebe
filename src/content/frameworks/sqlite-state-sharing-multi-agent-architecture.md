@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Frameworks
 tags: ["sqlite", "architecture", "multi-agent", "frameworks"]
-heroImage: "/images/sqlite-agent-hero.jpg"
+heroImage: "/images/sqlite-agent-hero.webp"
 heroAlt: "Minimalist rendering of interlocking frosted glass prisms on a pristine white surface"
 estimatedReadingTime: 7
 isPillar: false
