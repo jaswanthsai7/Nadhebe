@@ -13,6 +13,7 @@ export default defineConfig({
   output: 'static',         // Static site — no adapter needed for Cloudflare Pages
   build: {
     assets: '_assets',      // Cloudflare-safe asset directory name
+    inlineStylesheets: 'always',
   },
   vite: {
     resolve: {
