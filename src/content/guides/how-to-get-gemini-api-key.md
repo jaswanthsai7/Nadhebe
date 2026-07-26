@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "guides"
 tags: ["gemini-api", "google-ai", "api-key", "developer-tools", "python", "javascript"]
-heroImage: "/images/claude-desktop-guide-hero.webp"
+heroImage: "/images/gemini-api-key-hero.webp"
 heroAlt: "Clean minimalist technical diagram of Gemini API Key authorization"
 isPillar: true
 rating: 4.9

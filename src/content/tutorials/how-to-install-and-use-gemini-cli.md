@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "tutorials"
 tags: ["gemini-cli", "terminal", "cli-tools", "developer-workflow", "automation"]
-heroImage: "/images/claude-cli-hero.webp"
+heroImage: "/images/gemini-cli-hero.webp"
 heroAlt: "Clean minimalist terminal illustration of Gemini CLI workflow"
 isPillar: false
 rating: 4.8

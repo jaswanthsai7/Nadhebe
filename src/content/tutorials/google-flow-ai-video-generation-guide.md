@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "tutorials"
 tags: ["google-flow", "veo-video", "ai-video", "storyboard", "filmmaking"]
-heroImage: "/images/gemini-video-hero.webp"
+heroImage: "/images/google-flow-hero.webp"
 heroAlt: "Clean minimalist film strip illustration of Google Flow AI video generation"
 isPillar: false
 rating: 4.9

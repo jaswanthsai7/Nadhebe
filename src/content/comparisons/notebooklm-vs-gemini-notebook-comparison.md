@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "comparisons"
 tags: ["notebooklm", "gemini-notebook", "ai-research", "google-ai", "comparison"]
-heroImage: "/images/claude-resources-hero.webp"
+heroImage: "/images/notebooklm-vs-gemini-hero.webp"
 heroAlt: "Clean minimalist comparison illustration of NotebookLM vs Gemini Notebook"
 isPillar: false
 rating: 4.9

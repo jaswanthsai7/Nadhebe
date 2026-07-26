@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "guides"
 tags: ["gemini-api", "pricing", "rate-limits", "google-ai", "llm-costs"]
-heroImage: "/images/claude-cheat-sheet-hero.webp"
+heroImage: "/images/gemini-api-pricing-hero.webp"
 heroAlt: "Clean minimalist technical meter gauge illustration of Gemini API pricing"
 isPillar: false
 rating: 4.8
