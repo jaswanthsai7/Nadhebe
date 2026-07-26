@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "comparisons"
 tags: ["gemini-free-vs-paid", "gemini-advanced", "pricing", "google-one", "comparison"]
-heroImage: "/images/gemini-free-vs-paid-hero.webp"
+heroImage: "/images/gemini-3-6-flash-hero.webp"
 heroAlt: "Clean minimalist star badge illustration of Gemini Free vs Paid"
 isPillar: false
 rating: 4.8

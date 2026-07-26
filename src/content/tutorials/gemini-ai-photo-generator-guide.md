@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "tutorials"
 tags: ["gemini-photo", "imagen-3", "ai-image-generation", "prompt-engineering", "google-ai"]
-heroImage: "/images/gemini-photo-hero.webp"
+heroImage: "/images/gemini-spark-hero.webp"
 heroAlt: "Clean minimalist aperture illustration of Gemini AI Photo Generator"
 isPillar: false
 rating: 4.8

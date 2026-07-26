@@ -5,7 +5,7 @@ pubDate: 2026-07-26
 author: "nadhebe-team"
 category: "tutorials"
 tags: ["gemini-api", "troubleshooting", "error-handling", "api-key", "developer-guide"]
-heroImage: "/images/gemini-api-errors-hero.webp"
+heroImage: "/images/claude-skills-hero.webp"
 heroAlt: "Clean minimalist error shield illustration of Gemini API troubleshooting"
 isPillar: false
 rating: 4.8
