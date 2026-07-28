@@ -1,0 +1,140 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'PPI Calculator – Pixels Per Inch Screen Density | Nadhebe';
+const h1 = 'PPI Calculator (Pixels Per Inch)';
+const description = 'Calculate screen pixel density (PPI) from resolution dimensions and physical diagonal display size in inches.';
+
+const faq = [
+  {
+    question: 'What is PPI and why does it matter?',
+    answer: 'PPI (Pixels Per Inch) measures display pixel density. Higher PPI values yield sharper text, crisp detail, and smoother edges on monitors, smartphones, and laptops.',
+  },
+  {
+    question: 'What PPI is considered Retina or ultra-sharp?',
+    answer: 'For desktop monitors viewed at arm’s length (~20-30 inches), ~110-220 PPI is considered sharp. For smartphones viewed at ~10-12 inches, 300-460+ PPI is standard for Retina-level sharpness.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="ppi-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Presets -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Device Presets:</span>
+      <button type="button" data-ppi-preset="1179,2556,6.1" class="ppi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">iPhone 6.1" (1179×2556)</button>
+      <button type="button" data-ppi-preset="2560,1664,13.6" class="ppi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">MacBook Air 13.6" (2560×1664)</button>
+      <button type="button" data-ppi-preset="3840,2160,27" class="ppi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K Monitor 27" (3840×2160)</button>
+      <button type="button" data-ppi-preset="2560,1440,27" class="ppi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p Monitor 27" (2560×1440)</button>
+      <button type="button" data-ppi-preset="1920,1080,24" class="ppi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p Monitor 24" (1920×1080)</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Input Resolution & Screen Size">
+          <div class="space-y-20">
+            <div class="grid grid-cols-2 gap-16">
+              <div>
+                <label for="ppi-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Pixel Width (px)</label>
+                <input type="number" id="ppi-w" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+              </div>
+              <div>
+                <label for="ppi-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Pixel Height (px)</label>
+                <input type="number" id="ppi-h" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+              </div>
+            </div>
+
+            <div class="pt-16 border-t border-border/60 dark:border-border-dark/60">
+              <label for="ppi-diag" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Diagonal Screen Size (Inches)</label>
+              <input type="number" id="ppi-diag" value="24" step="0.1" min="0.1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Pixel Density Output">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Pixel Density" value="92 PPI" id="res-ppi-val" accent copyable />
+            <ResultCard label="Megapixels" value="2.07 MP" id="res-ppi-mp" copyable />
+            <ResultCard label="Total Pixels" value="2,073,600" id="res-ppi-total" copyable />
+            <ResultCard label="Density Category" value="Desktop Monitor" id="res-ppi-cat" copyable={false} />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>PPI Calculation Formula</h2>
+    <p>
+      Pixel density is calculated using the Pythagorean theorem for diagonal pixels divided by screen size:
+    </p>
+    <pre><code>Diagonal Pixels = √(Width² + Height²)
+PPI = Diagonal Pixels / Diagonal Size (inches)</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const ppiW = document.getElementById('ppi-w');
+    const ppiH = document.getElementById('ppi-h');
+    const ppiDiag = document.getElementById('ppi-diag');
+    const presets = document.querySelectorAll('.ppi-preset-btn');
+
+    const resPpiVal = document.getElementById('res-ppi-val');
+    const resPpiMp = document.getElementById('res-ppi-mp');
+    const resPpiTotal = document.getElementById('res-ppi-total');
+    const resPpiCat = document.getElementById('res-ppi-cat');
+
+    function calculate() {
+      const w = parseFloat(ppiW?.value || '0');
+      const h = parseFloat(ppiH?.value || '0');
+      const diag = parseFloat(ppiDiag?.value || '0');
+
+      if (!w || !h || !diag || w <= 0 || h <= 0 || diag <= 0) return;
+
+      const diagPx = Math.sqrt(w * w + h * h);
+      const ppi = Math.round(diagPx / diag);
+      const total = w * h;
+      const mp = (total / 1000000).toFixed(2);
+
+      if (resPpiVal) resPpiVal.textContent = `${ppi} PPI`;
+      if (resPpiMp) resPpiMp.textContent = `${mp} MP`;
+      if (resPpiTotal) resPpiTotal.textContent = total.toLocaleString('en-US');
+
+      let cat = 'Standard Display';
+      if (ppi >= 400) cat = 'Ultra-High Density (Retina / Flagship)';
+      else if (ppi >= 300) cat = 'High Density (Retina / Laptop)';
+      else if (ppi >= 200) cat = 'Medium-High Density (4K Monitor)';
+      else if (ppi >= 100) cat = 'Standard Monitor (1080p / 1440p)';
+      else cat = 'Low Density / TV';
+
+      if (resPpiCat) resPpiCat.textContent = cat;
+    }
+
+    ppiW?.addEventListener('input', calculate);
+    ppiH?.addEventListener('input', calculate);
+    ppiDiag?.addEventListener('input', calculate);
+
+    presets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [w, h, d] = (btn.getAttribute('data-ppi-preset') || '1920,1080,24').split(',');
+        if (ppiW) ppiW.value = w;
+        if (ppiH) ppiH.value = h;
+        if (ppiDiag) ppiDiag.value = d;
+        calculate();
+      });
+    });
+
+    calculate();
+  })();
+</script>

@@ -1,0 +1,254 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Resize Dimensions Calculator – Proportional Image Resizer | Nadhebe';
+const h1 = 'Resize Dimensions Calculator';
+const description = 'Scale image or video dimensions while preserving original aspect ratios or using percentage scale multipliers instantly.';
+
+const faq = [
+  {
+    question: 'How do I calculate scaled dimensions while preserving aspect ratio?',
+    answer: 'With ratio lock active, entering a new width automatically calculates new height as: (New Width × Original Height) / Original Width. Entering a new height calculates new width as: (New Height × Original Width) / Original Height.',
+  },
+  {
+    question: 'Why does reducing dimensions by 50% reduce total pixels by 75%?',
+    answer: 'Pixel count is a 2D area (width × height). If both width and height are halved (0.5w × 0.5h), the resulting total pixel count becomes 0.25 of the original (75% pixel reduction).',
+  },
+];
+---
+
+<ToolLayout
+  toolId="resize-dimensions-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Quick Percentage Scaling Bar -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Quick Percentage Scaling:</span>
+      <button type="button" data-pct="25" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">25%</button>
+      <button type="button" data-pct="50" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">50%</button>
+      <button type="button" data-pct="75" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">75%</button>
+      <button type="button" data-pct="125" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">125%</button>
+      <button type="button" data-pct="150" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">150%</button>
+      <button type="button" data-pct="200" class="pct-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">200%</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Enter Dimensions & Scaling">
+          <div class="space-y-20">
+            <div class="grid grid-cols-2 gap-16">
+              <div>
+                <label for="orig-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Original Width (px)</label>
+                <input
+                  type="number"
+                  id="orig-w"
+                  value="1920"
+                  min="1"
+                  step="1"
+                  class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                />
+              </div>
+              <div>
+                <label for="orig-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Original Height (px)</label>
+                <input
+                  type="number"
+                  id="orig-h"
+                  value="1080"
+                  min="1"
+                  step="1"
+                  class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Lock Aspect Ratio toggle & Target Inputs -->
+            <div class="pt-16 border-t border-border/60 dark:border-border-dark/60">
+              <div class="flex items-center justify-between mb-12">
+                <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark">New Target Dimensions</span>
+                <label class="inline-flex items-center gap-8 cursor-pointer select-none">
+                  <input type="checkbox" id="lock-ratio" checked class="h-16 w-16 accent-accent rounded" />
+                  <span class="text-caption font-sans font-medium text-ink dark:text-ink-dark">Lock Aspect Ratio</span>
+                </label>
+              </div>
+
+              <div class="grid grid-cols-2 gap-16">
+                <div>
+                  <label for="target-w" class="block text-xs font-sans font-medium text-ink2 dark:text-ink2-dark mb-4">New Target Width (px)</label>
+                  <input
+                    type="number"
+                    id="target-w"
+                    value="1280"
+                    min="1"
+                    step="1"
+                    class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="target-h" class="block text-xs font-sans font-medium text-ink2 dark:text-ink2-dark mb-4">New Target Height (px)</label>
+                  <input
+                    type="number"
+                    id="target-h"
+                    value="720"
+                    min="1"
+                    step="1"
+                    class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <!-- Results Display -->
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Resized Output Metrics">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="New Dimensions" value="1280 × 720" id="res-dims" accent copyable />
+            <ResultCard label="Aspect Ratio" value="16:9" id="res-ratio-str" copyable />
+            <ResultCard label="Original Pixels" value="2.07 MP" id="res-orig-px" subtext="2,073,600 total pixels" copyable={false} />
+            <ResultCard label="New Pixels" value="0.92 MP" id="res-new-px" subtext="921,600 total pixels" copyable={false} />
+          </div>
+
+          <div class="rounded-16 border border-border/80 bg-surface2/60 p-16 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+            <div class="flex items-center justify-between">
+              <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Pixel Area Change</span>
+              <span id="res-pct-badge" class="rounded-pill bg-emerald-500/10 px-8 py-2 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">-55.6%</span>
+            </div>
+            <p id="res-pct-text" class="mt-4 text-caption text-ink2 dark:text-ink2-dark">Pixel count decreased by 55.6% relative to the original image.</p>
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Understanding Image Resizing & Scaling</h2>
+    <p>
+      When scaling images for web design, digital publishing, or video production, maintaining the exact proportion between width and height prevents unnatural stretching or distortion.
+    </p>
+
+    <h3>Aspect Ratio Preservation Formula</h3>
+    <pre><code>Scaled Height = (Target Width × Original Height) / Original Width
+Scaled Width  = (Target Height × Original Width) / Original Height</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    function gcd(a, b) {
+      a = Math.abs(Math.round(a));
+      b = Math.abs(Math.round(b));
+      while (b) {
+        let t = b;
+        b = a % b;
+        a = t;
+      }
+      return a || 1;
+    }
+
+    const origW = document.getElementById('orig-w');
+    const origH = document.getElementById('orig-h');
+    const targetW = document.getElementById('target-w');
+    const targetH = document.getElementById('target-h');
+    const lockRatio = document.getElementById('lock-ratio');
+    const pctBtns = document.querySelectorAll('.pct-btn');
+
+    const resDims = document.getElementById('res-dims');
+    const resRatioStr = document.getElementById('res-ratio-str');
+    const resOrigPx = document.getElementById('res-orig-px');
+    const resNewPx = document.getElementById('res-new-px');
+    const resPctBadge = document.getElementById('res-pct-badge');
+    const resPctText = document.getElementById('res-pct-text');
+
+    function calculate(lastChangedField) {
+      const ow = parseFloat(origW?.value || '0');
+      const oh = parseFloat(origH?.value || '0');
+      let tw = parseFloat(targetW?.value || '0');
+      let th = parseFloat(targetH?.value || '0');
+      const isLocked = lockRatio?.checked ?? true;
+
+      if (!ow || !oh || ow <= 0 || oh <= 0) return;
+
+      if (isLocked) {
+        if (lastChangedField === 'targetW' && tw > 0) {
+          th = Math.round((tw * oh) / ow);
+          if (targetH) targetH.value = String(th);
+        } else if (lastChangedField === 'targetH' && th > 0) {
+          tw = Math.round((th * ow) / oh);
+          if (targetW) targetW.value = String(tw);
+        } else if (!tw || tw <= 0) {
+          tw = ow;
+          th = oh;
+          if (targetW) targetW.value = String(tw);
+          if (targetH) targetH.value = String(th);
+        }
+      }
+
+      if (resDims) resDims.textContent = `${tw} × ${th}`;
+
+      // Aspect ratio
+      let wInt = tw, hInt = th;
+      while (wInt % 1 !== 0 || hInt % 1 !== 0) { wInt *= 10; hInt *= 10; }
+      const divisor = gcd(wInt, hInt);
+      if (resRatioStr) resRatioStr.textContent = `${wInt / divisor}:${hInt / divisor}`;
+
+      const origTotal = ow * oh;
+      const newTotal = tw * th;
+      const origMP = (origTotal / 1000000).toFixed(2);
+      const newMP = (newTotal / 1000000).toFixed(2);
+
+      if (resOrigPx) resOrigPx.textContent = `${origMP} MP`;
+      if (resNewPx) resNewPx.textContent = `${newMP} MP`;
+
+      const pctChange = (((newTotal - origTotal) / origTotal) * 100).toFixed(1);
+      if (resPctBadge) {
+        resPctBadge.textContent = `${pctChange > 0 ? '+' : ''}${pctChange}%`;
+        resPctBadge.className = `rounded-pill px-8 py-2 font-mono text-xs font-semibold ${
+          pctChange < 0
+            ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+            : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+        }`;
+      }
+
+      if (resPctText) {
+        if (pctChange < 0) {
+          resPctText.textContent = `Pixel count decreased by ${Math.abs(parseFloat(pctChange))}% relative to original.`;
+        } else if (pctChange > 0) {
+          resPctText.textContent = `Pixel count increased by ${pctChange}% relative to original.`;
+        } else {
+          resPctText.textContent = `Pixel count remains identical.`;
+        }
+      }
+    }
+
+    origW?.addEventListener('input', () => calculate('targetW'));
+    origH?.addEventListener('input', () => calculate('targetW'));
+    targetW?.addEventListener('input', () => calculate('targetW'));
+    targetH?.addEventListener('input', () => calculate('targetH'));
+    lockRatio?.addEventListener('change', () => calculate('targetW'));
+
+    pctBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pct = parseFloat(btn.getAttribute('data-pct') || '100') / 100;
+        const ow = parseFloat(origW?.value || '1920');
+        const oh = parseFloat(origH?.value || '1080');
+
+        const tw = Math.round(ow * pct);
+        const th = Math.round(oh * pct);
+
+        if (targetW) targetW.value = String(tw);
+        if (targetH) targetH.value = String(th);
+        calculate('none');
+      });
+    });
+
+    calculate('targetW');
+  })();
+</script>

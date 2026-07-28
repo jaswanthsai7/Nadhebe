@@ -1,0 +1,19 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  class?: string;
+}
+
+const { title, description, class: className = '' } = Astro.props;
+---
+
+<div class={`glass-panel relative rounded-24 border border-border bg-surface/90 p-20 sm:p-32 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 ${className}`} data-reveal>
+  {title && (
+    <div class="mb-20 pb-16 border-b border-border/60 dark:border-border-dark/60">
+      <h2 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">{title}</h2>
+      {description && <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">{description}</p>}
+    </div>
+  )}
+  <slot />
+</div>

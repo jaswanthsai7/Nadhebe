@@ -644,6 +644,12 @@
       <image:loc>https://nadhebe.com/images/gemini-vs-chatgpt-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-vs-chatgpt-feature-matrix.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-vs-chatgpt-context.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/ai-comparison-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -1239,6 +1245,12 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-architecture.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-3-6-benchmark-chart.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-spark-hero.webp</image:loc>
@@ -4806,6 +4818,42 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/16-9-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/9-16-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/aspect-ratio-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/dpi-print-size-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/google-flow-storyboard-studio-overview</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4829,19 +4877,19 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://i.ytimg.com/vi/T1rf33ToVIE/hqdefault.jpg</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-resources-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://i.ytimg.com/vi/DwaLQmPlALI/hqdefault.jpg</image:loc>
+      <image:loc>https://i.ytimg.com/vi/T1rf33ToVIE/hqdefault.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/EOHodDuJddc/hqdefault.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/hqdefault.jpg</image:loc>
+      <image:loc>https://i.ytimg.com/vi/DwaLQmPlALI/hqdefault.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-resources-hero.webp</image:loc>
+      <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/hqdefault.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -4875,6 +4923,51 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/hqdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/megapixels-to-resolution-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/pixels-to-megapixels-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/ppi-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/resize-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/social-media-image-sizes</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -4917,6 +5010,15 @@
     </image:image>
     <image:image>
       <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/hqdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/youtube-video-size-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -5022,6 +5124,12 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-javascript-examples-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-js-chat-workflow.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-js-tool-calling.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-api-errors-hero.webp</image:loc>

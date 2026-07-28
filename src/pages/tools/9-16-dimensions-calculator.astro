@@ -1,0 +1,130 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = '9:16 Dimensions Calculator – Vertical Video Sizes | Nadhebe';
+const h1 = '9:16 Dimensions Calculator';
+const description = 'Calculate exact 9:16 vertical video dimensions for YouTube Shorts, Instagram Reels, TikTok, and mobile video content.';
+
+const faq = [
+  {
+    question: 'What is the standard resolution for 9:16 vertical videos?',
+    answer: 'The standard resolution for vertical videos across YouTube Shorts, Instagram Reels, and TikTok is 1080 × 1920 pixels.',
+  },
+  {
+    question: 'How do you calculate 9:16 height from width?',
+    answer: 'Multiply width by 16, then divide by 9. For example, for width 1080: (1080 × 16) / 9 = 1920 px.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="9-16-dimensions-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Presets -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Vertical Presets:</span>
+      <button type="button" data-w916="720" class="btn-916 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">720p (720×1280)</button>
+      <button type="button" data-w916="1080" class="btn-916 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p (1080×1920)</button>
+      <button type="button" data-w916="1440" class="btn-916 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p (1440×2560)</button>
+      <button type="button" data-w916="2160" class="btn-916 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K (2160×3840)</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Enter Width or Height">
+          <div class="space-y-20">
+            <div>
+              <label for="w916-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
+              <input type="number" id="w916-input" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+
+            <div class="text-center font-mono text-caption text-muted dark:text-muted-dark font-semibold">OR</div>
+
+            <div>
+              <label for="h916-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
+              <input type="number" id="h916-input" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="9:16 Calculated Dimensions">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="9:16 Resolution" value="1080 × 1920" id="res-916-dim" accent copyable />
+            <ResultCard label="Decimal Ratio" value="0.5625" id="res-916-dec" copyable={false} />
+            <ResultCard label="Total Pixels" value="2,073,600" id="res-916-total" copyable />
+            <ResultCard label="Megapixels" value="2.07 MP" id="res-916-mp" copyable />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Vertical Video (9:16) Overview</h2>
+    <p>
+      9:16 vertical video is optimized for full-screen smartphone displays on mobile-first platforms like YouTube Shorts, Instagram Reels, TikTok, and Snapchat.
+    </p>
+
+    <h3>Mathematical Formula</h3>
+    <pre><code>Height = (Width × 16) / 9
+Width  = (Height × 9) / 16</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const wInput = document.getElementById('w916-input');
+    const hInput = document.getElementById('h916-input');
+    const btns = document.querySelectorAll('.btn-916');
+
+    const resDim = document.getElementById('res-916-dim');
+    const resDec = document.getElementById('res-916-dec');
+    const resTotal = document.getElementById('res-916-total');
+    const resMp = document.getElementById('res-916-mp');
+
+    function calculate(source) {
+      let w = parseFloat(wInput?.value || '0');
+      let h = parseFloat(hInput?.value || '0');
+
+      if (source === 'w' && w > 0) {
+        h = Math.round((w * 16) / 9);
+        if (hInput) hInput.value = String(h);
+      } else if (source === 'h' && h > 0) {
+        w = Math.round((h * 9) / 16);
+        if (wInput) wInput.value = String(w);
+      }
+
+      if (w <= 0 || h <= 0) return;
+
+      const total = w * h;
+      const mp = (total / 1000000).toFixed(2);
+
+      if (resDim) resDim.textContent = `${w} × ${h}`;
+      if (resDec) resDec.textContent = (w / h).toFixed(4);
+      if (resTotal) resTotal.textContent = total.toLocaleString('en-US');
+      if (resMp) resMp.textContent = `${mp} MP`;
+    }
+
+    wInput?.addEventListener('input', () => calculate('w'));
+    hInput?.addEventListener('input', () => calculate('h'));
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-w916') || '1080';
+        if (wInput) wInput.value = val;
+        calculate('w');
+      });
+    });
+
+    calculate('w');
+  })();
+</script>

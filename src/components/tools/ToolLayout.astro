@@ -1,0 +1,178 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import RelatedToolsCard from '@/components/tools/RelatedToolsCard.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { SITE } from '@/config';
+import { getToolBySlug } from '@/config/tools';
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  toolId: string;
+  title: string;
+  h1: string;
+  description: string;
+  keywords?: string[];
+  canonicalUrl?: string;
+  faq?: FaqItem[];
+}
+
+const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [] } = Astro.props;
+
+const toolConfig = getToolBySlug(toolId);
+const currentUrl = canonicalUrl || `${SITE.url}/tools/${toolId}/`;
+
+// WebApplication JSON-LD schema
+const webAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: title,
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'All',
+  url: currentUrl,
+  description,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+
+// FAQPage JSON-LD schema if FAQ items exist
+const faqSchema = faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+} : null;
+
+const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={currentUrl}
+  jsonLd={jsonLdBlocks}
+>
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+    <Breadcrumb
+      items={[
+        { name: 'Home', href: '/' },
+        { name: 'Tools', href: '/tools/' },
+        { name: h1, href: `/tools/${toolId}/` },
+      ]}
+    />
+
+    <!-- Header Section -->
+    <header class="mb-32" data-reveal>
+      <div class="flex flex-wrap items-center gap-12 mb-12">
+        <span class="inline-flex items-center gap-6 rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-12 py-4 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          100% Client-Side — Your data stays in your browser
+        </span>
+        {toolConfig?.category && (
+          <span class="rounded-pill border border-border/80 bg-surface2/60 px-10 py-4 font-mono text-xs text-muted dark:border-border-dark/80 dark:bg-surface2-dark/60 dark:text-muted-dark">
+            {toolConfig.category}
+          </span>
+        )}
+      </div>
+
+      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight tracking-tight">
+        {h1}
+      </h1>
+      <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">
+        {description}
+      </p>
+    </header>
+
+    <!-- Main Tool Workspace -->
+    <div class="mb-48" id="tool-workspace">
+      <slot name="calculator" />
+    </div>
+
+    <!-- Ad Placement after Tool Results -->
+    <AdSlot slotId="tools-mid-banner" format="horizontal" label="Advertisement" />
+
+    <!-- Educational & Explanatory SEO Content Slot -->
+    <div class="glass-panel my-48 rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-accent dark:prose-a:text-accent-dark" data-reveal>
+      <slot name="content" />
+    </div>
+
+    <!-- FAQ Accordion Section (if present) -->
+    {faq.length > 0 && (
+      <section class="my-48 rounded-24 border border-border bg-surface/80 p-24 sm:p-32 shadow-medium dark:border-border-dark dark:bg-surface-dark/80" data-reveal>
+        <div class="border-b border-border/60 pb-16 mb-24 dark:border-border-dark/60">
+          <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark">Frequently Asked Questions</h2>
+          <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">Common questions regarding dimensions, aspect ratios, and resolution calculations.</p>
+        </div>
+        <div class="space-y-16">
+          {faq.map((item) => (
+            <details class="group rounded-16 border border-border/60 bg-surface2/40 p-16 dark:border-border-dark/60 dark:bg-surface2-dark/40 transition-all duration-150">
+              <summary class="flex items-center justify-between font-display text-h4 font-semibold text-ink dark:text-ink-dark cursor-pointer list-none">
+                <span>{item.question}</span>
+                <span class="ml-12 transition-transform duration-200 group-open:rotate-180 text-muted dark:text-muted-dark">▼</span>
+              </summary>
+              <p class="mt-12 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Related Tools Cross-Linking Section -->
+    <RelatedToolsCard currentToolId={toolId} />
+  </div>
+</BaseLayout>
+
+<!-- Copy-to-Clipboard Client Helper -->
+<script is:inline>
+  (function() {
+    function setupCopyButtons() {
+      document.querySelectorAll('[data-copy-trigger]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-copy-val') || '';
+          if (!val) return;
+
+          navigator.clipboard.writeText(val).then(() => {
+            const copyIcon = btn.querySelector('.copy-icon');
+            const checkIcon = btn.querySelector('.check-icon');
+
+            if (copyIcon && checkIcon) {
+              copyIcon.classList.add('hidden');
+              checkIcon.classList.remove('hidden');
+              setTimeout(() => {
+                copyIcon.classList.remove('hidden');
+                checkIcon.classList.add('hidden');
+              }, 2000);
+            }
+
+            // Track GA Analytics Event if gtag is defined
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', 'tool_copy_result', {
+                tool_name: window.location.pathname,
+              });
+            }
+          }).catch(err => {
+            console.error('Copy failed', err);
+          });
+        });
+      });
+    }
+
+    setupCopyButtons();
+    document.addEventListener('astro:page-load', setupCopyButtons);
+  })();
+</script>

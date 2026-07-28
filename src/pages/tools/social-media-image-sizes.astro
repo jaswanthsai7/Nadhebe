@@ -1,0 +1,229 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+import { SOCIAL_MEDIA_PRESETS } from '@/config/social-media';
+
+const title = 'Social Media Image Sizes Helper – Interactive Guide | Nadhebe';
+const h1 = 'Social Media Image Size Helper';
+const description = 'Interactive reference helper for recommended image and video dimensions across YouTube, Instagram, X (Twitter), LinkedIn, and TikTok.';
+
+const platforms = ['All', 'YouTube', 'Instagram', 'X (Twitter)', 'LinkedIn', 'TikTok'];
+
+const faq = [
+  {
+    question: 'What image format is best for social media posts?',
+    answer: 'PNG format is ideal for graphics with text, sharp logos, or line art to avoid compression artifacts. JPG/JPEG format is best for complex photographic images to optimize file size.',
+  },
+  {
+    question: 'Why do social media images look blurry after uploading?',
+    answer: 'Platforms automatically compress uploaded images that exceed maximum file sizes or non-standard pixel dimensions. Uploading at exact recommended pixel dimensions prevents aggressive re-compression.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="social-media-image-sizes"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Platform Selector Tabs -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border bg-surface2/60 p-8 dark:border-border-dark dark:bg-surface2-dark/60" data-reveal>
+      {platforms.map((plat, i) => (
+        <button
+          type="button"
+          data-sm-platform={plat}
+          class={`sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer ${
+            i === 0
+              ? 'bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark font-semibold'
+              : 'border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'
+          }`}
+        >
+          {plat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Active Preset Interactive Highlight Card -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24" data-reveal>
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Select Platform Format">
+          <div class="space-y-16">
+            <label for="sm-format-select" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Content Format</label>
+            <select
+              id="sm-format-select"
+              class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+            >
+              {SOCIAL_MEDIA_PRESETS.map((item) => (
+                <option value={item.id}>
+                  [{item.platform}] {item.format} ({item.width} × {item.height})
+                </option>
+              ))}
+            </select>
+
+            <div class="p-16 rounded-16 border border-border/60 bg-surface2/40 dark:border-border-dark/60 dark:bg-surface2-dark/40">
+              <span class="block font-mono text-xs text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Platform & Format Guidelines</span>
+              <p id="sm-notes-text" class="text-body-small text-ink dark:text-ink-dark leading-relaxed">
+                {SOCIAL_MEDIA_PRESETS[0].notes}
+              </p>
+              {SOCIAL_MEDIA_PRESETS[0].safeZone && (
+                <p id="sm-safe-text" class="mt-8 text-xs font-mono text-accent dark:text-accent-dark">
+                  Safe Zone: {SOCIAL_MEDIA_PRESETS[0].safeZone}
+                </p>
+              )}
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Recommended Dimensions">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Recommended Size" value={`${SOCIAL_MEDIA_PRESETS[0].width} × ${SOCIAL_MEDIA_PRESETS[0].height}`} id="res-sm-dims" accent copyable />
+            <ResultCard label="Aspect Ratio" value={SOCIAL_MEDIA_PRESETS[0].aspectRatio} id="res-sm-ratio" copyable={false} />
+            <ResultCard label="Orientation" value={SOCIAL_MEDIA_PRESETS[0].orientation} id="res-sm-orient" copyable={false} />
+            <ResultCard label="Megapixels" value={`${((SOCIAL_MEDIA_PRESETS[0].width * SOCIAL_MEDIA_PRESETS[0].height) / 1000000).toFixed(2)} MP`} id="res-sm-mp" copyable />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+
+    <!-- Complete Quick Copy Reference Grid -->
+    <CalculatorCard title="Quick Social Media Dimensions Reference Table">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-body-small">
+          <thead>
+            <tr class="border-b border-border dark:border-border-dark">
+              <th class="py-12 px-16 font-mono text-caption">Platform</th>
+              <th class="py-12 px-16 font-mono text-caption">Format</th>
+              <th class="py-12 px-16 font-mono text-caption">Width × Height</th>
+              <th class="py-12 px-16 font-mono text-caption">Aspect Ratio</th>
+              <th class="py-12 px-16 font-mono text-caption">Action</th>
+            </tr>
+          </thead>
+          <tbody id="sm-table-body">
+            {SOCIAL_MEDIA_PRESETS.map((item) => (
+              <tr data-table-row data-platform={item.platform} class="border-b border-border/40 dark:border-border-dark/40 hover:bg-hover/30 dark:hover:bg-hover-dark/30">
+                <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">{item.platform}</td>
+                <td class="py-12 px-16 font-sans text-ink dark:text-ink-dark">{item.format}</td>
+                <td class="py-12 px-16 font-mono font-bold text-ink dark:text-ink-dark">{item.width} × {item.height} px</td>
+                <td class="py-12 px-16 font-mono text-muted dark:text-muted-dark">{item.aspectRatio}</td>
+                <td class="py-12 px-16">
+                  <button
+                    type="button"
+                    data-copy-trigger
+                    data-copy-val={`${item.width}x${item.height}`}
+                    class="rounded-6 border border-border px-10 py-4 font-mono text-xs text-ink2 hover:border-accent hover:text-accent dark:border-border-dark dark:text-ink2-dark cursor-pointer transition-all"
+                  >
+                    Copy {item.width}×{item.height}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </CalculatorCard>
+  </div>
+
+  <div slot="content">
+    <h2>Social Media Dimensions Best Practices</h2>
+    <p>
+      Each social media platform optimizes images differently depending on mobile screen ratios, desktop feeds, and video players.
+    </p>
+
+    <ul>
+      <li><strong>YouTube:</strong> Standard videos require 16:9 (1920×1080 or 3840×2160). Shorts require 9:16 (1080×1920). Banners require 2560×1440 with a 1235×338 safe zone.</li>
+      <li><strong>Instagram:</strong> Portrait feed posts (1080×1350, 4:5) maximize screen area compared to traditional square (1080×1080). Reels require 9:16 (1080×1920).</li>
+      <li><strong>X (Twitter):</strong> Landscape 16:9 (1600×900) prevents unexpected cropping in feed timeline previews.</li>
+      <li><strong>LinkedIn:</strong> Standard posts use 16:9 (1280×720) or 1:1 square. Profile banners use 1584×396 (4:1).</li>
+    </ul>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const presets = [
+      { id: 'yt-banner', platform: 'YouTube', format: 'Channel Banner / Header', width: 2560, height: 1440, aspectRatio: '16:9', orientation: 'Landscape', notes: 'Safe area for text and logos on all devices is 1235 × 338 px (centered).', safeZone: '1235 × 338 px' },
+      { id: 'yt-thumb', platform: 'YouTube', format: 'Video Thumbnail', width: 1280, height: 720, aspectRatio: '16:9', orientation: 'Landscape', notes: 'Minimum width is 640 px. File size under 2MB (JPG, PNG, GIF).' },
+      { id: 'yt-shorts', platform: 'YouTube', format: 'YouTube Shorts Video', width: 1080, height: 1920, aspectRatio: '9:16', orientation: 'Portrait', notes: 'Vertical mobile video format. Up to 60 seconds duration.' },
+      { id: 'yt-avatar', platform: 'YouTube', format: 'Channel Profile Picture', width: 800, height: 800, aspectRatio: '1:1', orientation: 'Square', notes: 'Rendered as a circle in YouTube UI.' },
+      { id: 'ig-portrait', platform: 'Instagram', format: 'Portrait Feed Post', width: 1080, height: 1350, aspectRatio: '4:5', orientation: 'Portrait', notes: 'Takes up maximum vertical screen real estate in mobile feed.' },
+      { id: 'ig-square', platform: 'Instagram', format: 'Square Feed Post', width: 1080, height: 1080, aspectRatio: '1:1', orientation: 'Square', notes: 'Classic square grid post format.' },
+      { id: 'ig-reels', platform: 'Instagram', format: 'Reels & Stories Video', width: 1080, height: 1920, aspectRatio: '9:16', orientation: 'Portrait', notes: 'Keep important captions away from top header and bottom captions overlay.' },
+      { id: 'x-header', platform: 'X (Twitter)', format: 'Profile Header Banner', width: 1500, height: 500, aspectRatio: '3:1', orientation: 'Landscape', notes: 'Profile avatar overlaps bottom-left corner of header by ~133px.' },
+      { id: 'x-post', platform: 'X (Twitter)', format: 'In-Feed Image Post', width: 1600, height: 900, aspectRatio: '16:9', orientation: 'Landscape', notes: 'Single image post aspect ratio ideal for feed preview.' },
+      { id: 'li-banner', platform: 'LinkedIn', format: 'Profile Cover Banner', width: 1584, height: 396, aspectRatio: '4:1', orientation: 'Landscape', notes: 'Personal profile background image.' },
+      { id: 'li-company-banner', platform: 'LinkedIn', format: 'Company Page Cover', width: 1128, height: 191, aspectRatio: '5.9:1', orientation: 'Landscape', notes: 'Company brand page cover banner.' },
+      { id: 'li-post', platform: 'LinkedIn', format: 'In-Feed Image / Carousel', width: 1280, height: 720, aspectRatio: '16:9', orientation: 'Landscape', notes: '1:1 (1080×1080) and 4:5 (1080×1350) also supported for documents/PDF carousels.' },
+      { id: 'tt-video', platform: 'TikTok', format: 'Vertical Video Post', width: 1080, height: 1920, aspectRatio: '9:16', orientation: 'Portrait', notes: 'Full screen vertical format. Leave right margin clear for like/share buttons.' }
+    ];
+
+    const platBtns = document.querySelectorAll('.sm-plat-btn');
+    const selectEl = document.getElementById('sm-format-select');
+    const notesText = document.getElementById('sm-notes-text');
+    const safeText = document.getElementById('sm-safe-text');
+
+    const resDims = document.getElementById('res-sm-dims');
+    const resRatio = document.getElementById('res-sm-ratio');
+    const resOrient = document.getElementById('res-sm-orient');
+    const resMp = document.getElementById('res-sm-mp');
+    const tableRows = document.querySelectorAll('[data-table-row]');
+
+    function updateHighlight(presetId) {
+      const p = presets.find(item => item.id === presetId) || presets[0];
+      if (resDims) resDims.textContent = `${p.width} × ${p.height}`;
+      if (resRatio) resRatio.textContent = p.aspectRatio;
+      if (resOrient) resOrient.textContent = p.orientation;
+      if (resMp) resMp.textContent = `${((p.width * p.height) / 1000000).toFixed(2)} MP`;
+      if (notesText) notesText.textContent = p.notes;
+      if (safeText) {
+        if (p.safeZone) {
+          safeText.textContent = `Safe Zone: ${p.safeZone}`;
+          safeText.classList.remove('hidden');
+        } else {
+          safeText.classList.add('hidden');
+        }
+      }
+
+      // Update copy button attribute if target present
+      const copyBtn = resDims?.closest('div')?.querySelector('[data-copy-trigger]');
+      if (copyBtn) copyBtn.setAttribute('data-copy-val', `${p.width}x${p.height}`);
+    }
+
+    selectEl?.addEventListener('change', (e) => {
+      updateHighlight(e.target.value);
+    });
+
+    platBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        platBtns.forEach(b => b.className = 'sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
+        btn.className = 'sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark font-semibold';
+
+        const filterPlat = btn.getAttribute('data-sm-platform') || 'All';
+
+        // Filter select options and table rows
+        let firstMatch = null;
+        tableRows.forEach(row => {
+          const rowPlat = row.getAttribute('data-platform');
+          if (filterPlat === 'All' || rowPlat === filterPlat) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        const matched = presets.filter(p => filterPlat === 'All' || p.platform === filterPlat);
+        if (selectEl && matched.length > 0) {
+          selectEl.value = matched[0].id;
+          updateHighlight(matched[0].id);
+        }
+      });
+    });
+
+    updateHighlight(presets[0].id);
+  })();
+</script>

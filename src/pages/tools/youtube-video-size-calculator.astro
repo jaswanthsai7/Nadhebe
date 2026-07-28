@@ -1,0 +1,210 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'YouTube Video Size & Resolution Calculator | Nadhebe';
+const h1 = 'YouTube Video Size & Resolution Calculator';
+const description = 'Calculate recommended YouTube video resolutions and aspect ratios across 16:9 widescreen, 9:16 Shorts, and 1:1 video formats.';
+
+const faq = [
+  {
+    question: 'What is the best resolution for YouTube videos in 2026?',
+    answer: 'For standard widescreen videos, 1080p Full HD (1920×1080) or 4K UHD (3840×2160) at 16:9 aspect ratio is recommended. For YouTube Shorts, use 1080×1920 (9:16).',
+  },
+  {
+    question: 'What happens if I upload a non-16:9 video to YouTube?',
+    answer: 'YouTube automatically adjusts its player to fit your video’s aspect ratio without stretching. Non-16:9 widescreen videos (such as 4:3 or 21:9) will display pillarboxing or letterboxing on standard screens.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="youtube-video-size-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Format Selector Tabs -->
+    <div class="flex flex-wrap items-center gap-12 rounded-16 border border-border bg-surface2/60 p-8 dark:border-border-dark dark:bg-surface2-dark/60" data-reveal>
+      <button type="button" data-yt-format="16:9" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark">
+        16:9 Standard Widescreen
+      </button>
+      <button type="button" data-yt-format="9:16" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+        9:16 YouTube Shorts
+      </button>
+      <button type="button" data-yt-format="1:1" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+        1:1 Square / Community
+      </button>
+    </div>
+
+    <!-- Presets -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Presets:</span>
+      <button type="button" data-yt-res="3840,2160" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K UHD (3840×2160)</button>
+      <button type="button" data-yt-res="2560,1440" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p 2K (2560×1440)</button>
+      <button type="button" data-yt-res="1920,1080" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p FHD (1920×1080)</button>
+      <button type="button" data-yt-res="1280,720" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">720p HD (1280×720)</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="YouTube Video Dimension Controls">
+          <div class="space-y-20">
+            <div>
+              <label for="yt-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
+              <input type="number" id="yt-w" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+
+            <div>
+              <label for="yt-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
+              <input type="number" id="yt-h" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Target YouTube Resolution Output">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Video Dimensions" value="1920 × 1080" id="res-yt-dim" accent copyable />
+            <ResultCard label="Aspect Ratio" value="16:9" id="res-yt-ratio" copyable={false} />
+            <ResultCard label="Quality Class" value="1080p Full HD" id="res-yt-class" copyable={false} />
+            <ResultCard label="Megapixels" value="2.07 MP" id="res-yt-mp" copyable />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>YouTube Video Resolution Standards</h2>
+    <p>
+      YouTube encodes and renders uploaded videos into several standardized resolution tiers depending on your uploaded source file.
+    </p>
+
+    <div class="overflow-x-auto my-24">
+      <table class="w-full text-left text-body-small">
+        <thead>
+          <tr class="border-b border-border dark:border-border-dark">
+            <th class="py-12 px-16 font-mono text-caption">Quality Tier</th>
+            <th class="py-12 px-16 font-mono text-caption">16:9 Widescreen</th>
+            <th class="py-12 px-16 font-mono text-caption">9:16 Shorts</th>
+            <th class="py-12 px-16 font-mono text-caption">Bitrate Recommendation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">4K UHD</td>
+            <td class="py-12 px-16 font-mono">3840 × 2160</td>
+            <td class="py-12 px-16 font-mono">2160 × 3840</td>
+            <td class="py-12 px-16">35–68 Mbps</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">1440p (2K)</td>
+            <td class="py-12 px-16 font-mono">2560 × 1440</td>
+            <td class="py-12 px-16 font-mono">1440 × 2560</td>
+            <td class="py-12 px-16">16–24 Mbps</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">1080p (FHD)</td>
+            <td class="py-12 px-16 font-mono">1920 × 1080</td>
+            <td class="py-12 px-16 font-mono">1080 × 1920</td>
+            <td class="py-12 px-16">8–12 Mbps</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">720p (HD)</td>
+            <td class="py-12 px-16 font-mono">1280 × 720</td>
+            <td class="py-12 px-16 font-mono">720 × 1280</td>
+            <td class="py-12 px-16">5–7.5 Mbps</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    let currentFmt = '16:9';
+
+    const fmtBtns = document.querySelectorAll('.yt-fmt-btn');
+    const resBtns = document.querySelectorAll('.yt-res-btn');
+    const ytW = document.getElementById('yt-w');
+    const ytH = document.getElementById('yt-h');
+
+    const resDim = document.getElementById('res-yt-dim');
+    const resRatio = document.getElementById('res-yt-ratio');
+    const resClass = document.getElementById('res-yt-class');
+    const resMp = document.getElementById('res-yt-mp');
+
+    function calculate(source) {
+      let w = parseFloat(ytW?.value || '0');
+      let h = parseFloat(ytH?.value || '0');
+
+      let rw = 16, rh = 9;
+      if (currentFmt === '9:16') { rw = 9; rh = 16; }
+      else if (currentFmt === '1:1') { rw = 1; rh = 1; }
+
+      if (source === 'w' && w > 0) {
+        h = Math.round((w * rh) / rw);
+        if (ytH) ytH.value = String(h);
+      } else if (source === 'h' && h > 0) {
+        w = Math.round((h * rw) / rh);
+        if (ytW) ytW.value = String(w);
+      }
+
+      if (w <= 0 || h <= 0) return;
+
+      const total = w * h;
+      const mp = (total / 1000000).toFixed(2);
+
+      if (resDim) resDim.textContent = `${w} × ${h}`;
+      if (resRatio) resRatio.textContent = `${rw}:${rh}`;
+      if (resMp) resMp.textContent = `${mp} MP`;
+
+      let qClass = 'Custom Resolution';
+      if (w === 3840 || h === 3840) qClass = '4K Ultra HD';
+      else if (w === 2560 || h === 2560) qClass = '1440p 2K QHD';
+      else if (w === 1920 || h === 1920) qClass = '1080p Full HD';
+      else if (w === 1280 || h === 1280) qClass = '720p HD';
+      if (resClass) resClass.textContent = qClass;
+    }
+
+    fmtBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        fmtBtns.forEach(b => b.className = 'yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
+        btn.className = 'yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark';
+
+        currentFmt = btn.getAttribute('data-yt-format') || '16:9';
+
+        if (currentFmt === '16:9') { if (ytW) ytW.value = '1920'; if (ytH) ytH.value = '1080'; }
+        else if (currentFmt === '9:16') { if (ytW) ytW.value = '1080'; if (ytH) ytH.value = '1920'; }
+        else if (currentFmt === '1:1') { if (ytW) ytW.value = '1080'; if (ytH) ytH.value = '1080'; }
+
+        calculate('w');
+      });
+    });
+
+    ytW?.addEventListener('input', () => calculate('w'));
+    ytH?.addEventListener('input', () => calculate('h'));
+
+    resBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [w, h] = (btn.getAttribute('data-yt-res') || '1920,1080').split(',');
+        if (currentFmt === '9:16') {
+          if (ytW) ytW.value = h;
+          if (ytH) ytH.value = w;
+        } else {
+          if (ytW) ytW.value = w;
+          if (ytH) ytH.value = h;
+        }
+        calculate('w');
+      });
+    });
+
+    calculate('w');
+  })();
+</script>

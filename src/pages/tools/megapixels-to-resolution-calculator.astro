@@ -1,0 +1,176 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Megapixels to Resolution Calculator – Calculate Width × Height | Nadhebe';
+const h1 = 'Megapixels to Resolution Calculator';
+const description = 'Estimate corresponding pixel width and height dimensions for any target megapixel count across standard or custom aspect ratios.';
+
+const faq = [
+  {
+    question: 'What pixel dimensions equal 24 megapixels?',
+    answer: 'At a 3:2 aspect ratio (standard DSLR), 24 MP corresponds to 6000 × 4000 pixels. At 16:9 widescreen, 24 MP corresponds to approximately 6532 × 3674 pixels.',
+  },
+  {
+    question: 'Why are calculated dimensions sometimes approximate?',
+    answer: 'Pixel dimensions must be whole integer numbers. Because target megapixel calculations require taking square roots of ratios, exact integer width × height results may round slightly.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="megapixels-to-resolution-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Presets -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">MP Presets:</span>
+      <button type="button" data-mp="12" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">12 MP</button>
+      <button type="button" data-mp="24" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">24 MP</button>
+      <button type="button" data-mp="33" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">33 MP</button>
+      <button type="button" data-mp="45" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">45 MP</button>
+      <button type="button" data-mp="50" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">50 MP</button>
+      <button type="button" data-mp="61" class="target-mp-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">61 MP</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Target MP & Aspect Ratio">
+          <div class="space-y-20">
+            <div>
+              <label for="target-mp-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Target Megapixels (MP)</label>
+              <input
+                type="number"
+                id="target-mp-input"
+                value="24"
+                min="0.1"
+                step="0.1"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="ratio-select" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Target Aspect Ratio</label>
+              <select
+                id="ratio-select"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+              >
+                <option value="3:2" selected>3:2 (Standard Photo DSLR)</option>
+                <option value="4:3">4:3 (Micro Four Thirds / iPad)</option>
+                <option value="16:9">16:9 (Widescreen Video)</option>
+                <option value="9:16">9:16 (Vertical Mobile Video)</option>
+                <option value="1:1">1:1 (Square)</option>
+                <option value="custom">Custom Ratio...</option>
+              </select>
+            </div>
+
+            <div id="custom-ratio-box" class="hidden grid grid-cols-2 gap-16 pt-12">
+              <div>
+                <label for="custom-rw" class="block text-xs font-mono text-muted dark:text-muted-dark mb-4">Ratio Width</label>
+                <input type="number" id="custom-rw" value="16" min="1" class="w-full rounded-8 border border-border bg-surface px-12 py-8 text-body font-mono text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+              </div>
+              <div>
+                <label for="custom-rh" class="block text-xs font-mono text-muted dark:text-muted-dark mb-4">Ratio Height</label>
+                <input type="number" id="custom-rh" value="9" min="1" class="w-full rounded-8 border border-border bg-surface px-12 py-8 text-body font-mono text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+              </div>
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Calculated Pixel Dimensions">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Resolution" value="6000 × 4000" id="res-dims-output" accent copyable />
+            <ResultCard label="Actual Megapixels" value="24.00 MP" id="res-actual-mp" copyable />
+            <ResultCard label="Total Pixels" value="24,000,000" id="res-mp-raw" copyable />
+            <ResultCard label="Accuracy" value="Exact Integer" id="res-accuracy" copyable={false} />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>How to Calculate Resolution from Megapixels</h2>
+    <p>
+      Given a target megapixel count $MP$ and an aspect ratio $W:H$:
+    </p>
+    <pre><code>Target Pixels = MP × 1,000,000
+Height = √(Target Pixels × H / W)
+Width  = Height × (W / H)</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const mpInput = document.getElementById('target-mp-input');
+    const ratioSelect = document.getElementById('ratio-select');
+    const customBox = document.getElementById('custom-ratio-box');
+    const customRw = document.getElementById('custom-rw');
+    const customRh = document.getElementById('custom-rh');
+    const mpBtns = document.querySelectorAll('.target-mp-btn');
+
+    const resDims = document.getElementById('res-dims-output');
+    const resActualMp = document.getElementById('res-actual-mp');
+    const resMpRaw = document.getElementById('res-mp-raw');
+    const resAccuracy = document.getElementById('res-accuracy');
+
+    function calculate() {
+      const mp = parseFloat(mpInput?.value || '0');
+      if (!mp || mp <= 0) return;
+
+      let rVal = ratioSelect?.value || '3:2';
+      if (rVal === 'custom') {
+        customBox?.classList.remove('hidden');
+      } else {
+        customBox?.classList.add('hidden');
+      }
+
+      let rw = 3, rh = 2;
+      if (rVal === '3:2') { rw = 3; rh = 2; }
+      else if (rVal === '4:3') { rw = 4; rh = 3; }
+      else if (rVal === '16:9') { rw = 16; rh = 9; }
+      else if (rVal === '9:16') { rw = 9; rh = 16; }
+      else if (rVal === '1:1') { rw = 1; rh = 1; }
+      else if (rVal === 'custom') {
+        rw = parseFloat(customRw?.value || '16');
+        rh = parseFloat(customRh?.value || '9');
+      }
+
+      const totalTarget = mp * 1000000;
+      const height = Math.round(Math.sqrt((totalTarget * rh) / rw));
+      const width = Math.round((height * rw) / rh);
+
+      const actualTotal = width * height;
+      const actualMP = (actualTotal / 1000000).toFixed(2);
+
+      if (resDims) resDims.textContent = `${width} × ${height}`;
+      if (resActualMp) resActualMp.textContent = `${actualMP} MP`;
+      if (resMpRaw) resMpRaw.textContent = actualTotal.toLocaleString('en-US');
+
+      const isExact = Math.abs(parseFloat(actualMP) - mp) < 0.05;
+      if (resAccuracy) resAccuracy.textContent = isExact ? 'Exact Match' : 'Approx (Rounded Px)';
+    }
+
+    mpInput?.addEventListener('input', calculate);
+    ratioSelect?.addEventListener('change', calculate);
+    customRw?.addEventListener('input', calculate);
+    customRh?.addEventListener('input', calculate);
+
+    mpBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-mp') || '24';
+        if (mpInput) mpInput.value = val;
+        calculate();
+      });
+    });
+
+    calculate();
+  })();
+</script>

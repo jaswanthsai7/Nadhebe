@@ -1,0 +1,232 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'DPI / Print Size Calculator – Convert Pixels to Print Dimensions | Nadhebe';
+const h1 = 'DPI / Print Size Calculator';
+const description = 'Convert digital pixel dimensions to physical print size in inches, centimeters, or millimeters at 300 DPI, 150 DPI, or custom resolutions.';
+
+const faq = [
+  {
+    question: 'What DPI is best for high-quality printing?',
+    answer: '300 DPI (dots per inch) is the industry standard for crisp, high-resolution photo prints, magazines, posters, and professional marketing materials.',
+  },
+  {
+    question: 'How do you calculate required pixel dimensions for a 10×8 inch photo print?',
+    answer: 'Multiply physical print size in inches by target DPI. For a 10×8 photo at 300 DPI: Width = 10 × 300 = 3000 px, Height = 8 × 300 = 2400 px (3000 × 2400 pixels).',
+  },
+];
+---
+
+<ToolLayout
+  toolId="dpi-print-size-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Preset DPI Bar -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">DPI Presets:</span>
+      <button type="button" data-dpi="72" class="dpi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">72 DPI (Web)</button>
+      <button type="button" data-dpi="150" class="dpi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">150 DPI (Draft Print)</button>
+      <button type="button" data-dpi="300" class="dpi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">300 DPI (Pro Print)</button>
+      <button type="button" data-dpi="600" class="dpi-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">600 DPI (Fine Art)</button>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div class="flex items-center gap-12 rounded-16 border border-border bg-surface2/60 p-8 dark:border-border-dark dark:bg-surface2-dark/60">
+      <button type="button" id="mode-a-tab" class="mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark">
+        Mode A: Pixels + DPI &rarr; Physical Print Size
+      </button>
+      <button type="button" id="mode-b-tab" class="mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+        Mode B: Print Size + DPI &rarr; Required Pixels
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Inputs">
+          <div class="space-y-20">
+            <!-- Common DPI & Unit Selectors -->
+            <div class="grid grid-cols-2 gap-16">
+              <div>
+                <label for="dpi-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Target DPI</label>
+                <input type="number" id="dpi-input" value="300" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+              </div>
+              <div>
+                <label for="unit-select" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Print Unit</label>
+                <select id="unit-select" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all">
+                  <option value="in" selected>Inches (in)</option>
+                  <option value="cm">Centimeters (cm)</option>
+                  <option value="mm">Millimeters (mm)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Mode A Inputs -->
+            <div id="mode-a-box" class="space-y-16 pt-16 border-t border-border/60 dark:border-border-dark/60">
+              <div class="grid grid-cols-2 gap-16">
+                <div>
+                  <label for="mode-a-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Width (px)</label>
+                  <input type="number" id="mode-a-w" value="3000" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono text-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+                </div>
+                <div>
+                  <label for="mode-a-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Height (px)</label>
+                  <input type="number" id="mode-a-h" value="2400" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono text-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Mode B Inputs -->
+            <div id="mode-b-box" class="hidden space-y-16 pt-16 border-t border-border/60 dark:border-border-dark/60">
+              <div class="grid grid-cols-2 gap-16">
+                <div>
+                  <label for="mode-b-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Print Width</label>
+                  <input type="number" id="mode-b-w" value="10" step="0.1" min="0.1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono text-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+                </div>
+                <div>
+                  <label for="mode-b-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Print Height</label>
+                  <input type="number" id="mode-b-h" value="8" step="0.1" min="0.1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono text-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Converted Results">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Physical Print Size" value="10 × 8 in" id="res-dpi-print" accent copyable />
+            <ResultCard label="Pixel Resolution" value="3000 × 2400 px" id="res-dpi-pixels" copyable />
+            <ResultCard label="Megapixels" value="7.20 MP" id="res-dpi-mp" copyable />
+            <ResultCard label="Print Quality" value="300 DPI (High Pro)" id="res-dpi-quality" copyable={false} />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>DPI vs. PPI in Printing</h2>
+    <p>
+      <strong>DPI (Dots Per Inch)</strong> refers to physical printer ink droplet density, whereas <strong>PPI (Pixels Per Inch)</strong> defines digital display resolution.
+    </p>
+
+    <h3>Formula</h3>
+    <pre><code>Print Width (inches)  = Pixel Width / DPI
+Required Pixel Width  = Print Width (inches) × DPI</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    let currentMode = 'A'; // 'A' or 'B'
+
+    const modeATab = document.getElementById('mode-a-tab');
+    const modeBTab = document.getElementById('mode-b-tab');
+    const modeABox = document.getElementById('mode-a-box');
+    const modeBBox = document.getElementById('mode-b-box');
+
+    const dpiInput = document.getElementById('dpi-input');
+    const unitSelect = document.getElementById('unit-select');
+
+    const modeAW = document.getElementById('mode-a-w');
+    const modeAH = document.getElementById('mode-a-h');
+    const modeBW = document.getElementById('mode-b-w');
+    const modeBH = document.getElementById('mode-b-h');
+
+    const dpiBtns = document.querySelectorAll('.dpi-preset-btn');
+
+    const resPrint = document.getElementById('res-dpi-print');
+    const resPixels = document.getElementById('res-dpi-pixels');
+    const resMp = document.getElementById('res-dpi-mp');
+    const resQuality = document.getElementById('res-dpi-quality');
+
+    function calculate() {
+      const dpi = parseFloat(dpiInput?.value || '300');
+      const unit = unitSelect?.value || 'in';
+
+      let multToInches = 1;
+      if (unit === 'cm') multToInches = 1 / 2.54;
+      if (unit === 'mm') multToInches = 1 / 25.4;
+
+      let wPx = 0, hPx = 0;
+      let printWIn = 0, printHIn = 0;
+
+      if (currentMode === 'A') {
+        wPx = parseFloat(modeAW?.value || '0');
+        hPx = parseFloat(modeAH?.value || '0');
+        if (wPx > 0 && hPx > 0 && dpi > 0) {
+          printWIn = wPx / dpi;
+          printHIn = hPx / dpi;
+        }
+      } else {
+        const pW = parseFloat(modeBW?.value || '0');
+        const pH = parseFloat(modeBH?.value || '0');
+        if (pW > 0 && pH > 0 && dpi > 0) {
+          printWIn = pW * multToInches;
+          printHIn = pH * multToInches;
+          wPx = Math.round(printWIn * dpi);
+          hPx = Math.round(printHIn * dpi);
+        }
+      }
+
+      if (wPx <= 0 || hPx <= 0) return;
+
+      const displayW = (printWIn / multToInches).toFixed(2);
+      const displayH = (printHIn / multToInches).toFixed(2);
+      const totalPx = wPx * hPx;
+      const mp = (totalPx / 1000000).toFixed(2);
+
+      if (resPrint) resPrint.textContent = `${displayW} × ${displayH} ${unit}`;
+      if (resPixels) resPixels.textContent = `${wPx} × ${hPx} px`;
+      if (resMp) resMp.textContent = `${mp} MP`;
+
+      let q = `${dpi} DPI (Standard)`;
+      if (dpi >= 300) q = `${dpi} DPI (Pro High Quality)`;
+      else if (dpi >= 200) q = `${dpi} DPI (Good Quality)`;
+      else if (dpi >= 150) q = `${dpi} DPI (Draft Print)`;
+      else q = `${dpi} DPI (Screen / Low Print)`;
+      if (resQuality) resQuality.textContent = q;
+    }
+
+    modeATab?.addEventListener('click', () => {
+      currentMode = 'A';
+      modeATab.className = 'mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark';
+      modeBTab.className = 'mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark';
+      modeABox?.classList.remove('hidden');
+      modeBBox?.classList.add('hidden');
+      calculate();
+    });
+
+    modeBTab?.addEventListener('click', () => {
+      currentMode = 'B';
+      modeBTab.className = 'mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark';
+      modeATab.className = 'mode-tab-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark';
+      modeBBox?.classList.remove('hidden');
+      modeABox?.classList.add('hidden');
+      calculate();
+    });
+
+    dpiInput?.addEventListener('input', calculate);
+    unitSelect?.addEventListener('change', calculate);
+    modeAW?.addEventListener('input', calculate);
+    modeAH?.addEventListener('input', calculate);
+    modeBW?.addEventListener('input', calculate);
+    modeBH?.addEventListener('input', calculate);
+
+    dpiBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-dpi') || '300';
+        if (dpiInput) dpiInput.value = val;
+        calculate();
+      });
+    });
+
+    calculate();
+  })();
+</script>

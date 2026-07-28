@@ -1,0 +1,130 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = '16:9 Dimensions Calculator – Widescreen Video Resolutions | Nadhebe';
+const h1 = '16:9 Dimensions Calculator';
+const description = 'Calculate exact 16:9 widescreen dimensions for videos, monitors, and digital displays by entering width or height.';
+
+const faq = [
+  {
+    question: 'What are standard 16:9 resolutions?',
+    answer: 'Standard 16:9 resolutions include 1280×720 (720p HD), 1920×1080 (1080p Full HD), 2560×1440 (1440p 2K), 3840×2160 (4K UHD), and 7680×4320 (8K UHD).',
+  },
+  {
+    question: 'How do you calculate 16:9 height from a custom width?',
+    answer: 'Multiply width by 9, then divide by 16. For example, for width 1920: (1920 × 9) / 16 = 1080 px.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="16-9-dimensions-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Presets -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Widescreen Presets:</span>
+      <button type="button" data-w169="1280" class="btn-169 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">720p (1280×720)</button>
+      <button type="button" data-w169="1920" class="btn-169 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p (1920×1080)</button>
+      <button type="button" data-w169="2560" class="btn-169 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p (2560×1440)</button>
+      <button type="button" data-w169="3840" class="btn-169 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K UHD (3840×2160)</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Enter Width or Height">
+          <div class="space-y-20">
+            <div>
+              <label for="w169-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
+              <input type="number" id="w169-input" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+
+            <div class="text-center font-mono text-caption text-muted dark:text-muted-dark font-semibold">OR</div>
+
+            <div>
+              <label for="h169-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
+              <input type="number" id="h169-input" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <CalculatorCard title="16:9 Calculated Dimensions">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="16:9 Resolution" value="1920 × 1080" id="res-169-dim" accent copyable />
+            <ResultCard label="Decimal Ratio" value="1.7778" id="res-169-dec" copyable={false} />
+            <ResultCard label="Total Pixels" value="2,073,600" id="res-169-total" copyable />
+            <ResultCard label="Megapixels" value="2.07 MP" id="res-169-mp" copyable />
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Standard 16:9 Resolutions Guide</h2>
+    <p>
+      16:9 is the universal standard aspect ratio for video production, broadcasting, YouTube uploads, and computer displays.
+    </p>
+
+    <h3>Mathematical Formula</h3>
+    <pre><code>Height = (Width × 9) / 16
+Width  = (Height × 16) / 9</code></pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const wInput = document.getElementById('w169-input');
+    const hInput = document.getElementById('h169-input');
+    const btns = document.querySelectorAll('.btn-169');
+
+    const resDim = document.getElementById('res-169-dim');
+    const resDec = document.getElementById('res-169-dec');
+    const resTotal = document.getElementById('res-169-total');
+    const resMp = document.getElementById('res-169-mp');
+
+    function calculate(source) {
+      let w = parseFloat(wInput?.value || '0');
+      let h = parseFloat(hInput?.value || '0');
+
+      if (source === 'w' && w > 0) {
+        h = Math.round((w * 9) / 16);
+        if (hInput) hInput.value = String(h);
+      } else if (source === 'h' && h > 0) {
+        w = Math.round((h * 16) / 9);
+        if (wInput) wInput.value = String(w);
+      }
+
+      if (w <= 0 || h <= 0) return;
+
+      const total = w * h;
+      const mp = (total / 1000000).toFixed(2);
+
+      if (resDim) resDim.textContent = `${w} × ${h}`;
+      if (resDec) resDec.textContent = (w / h).toFixed(4);
+      if (resTotal) resTotal.textContent = total.toLocaleString('en-US');
+      if (resMp) resMp.textContent = `${mp} MP`;
+    }
+
+    wInput?.addEventListener('input', () => calculate('w'));
+    hInput?.addEventListener('input', () => calculate('h'));
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-w169') || '1920';
+        if (wInput) wInput.value = val;
+        calculate('w');
+      });
+    });
+
+    calculate('w');
+  })();
+</script>

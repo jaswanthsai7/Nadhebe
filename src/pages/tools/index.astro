@@ -1,34 +1,229 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FeedList from '../../components/FeedList.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FeedList from '@/components/FeedList.astro';
+import { TOOLS, TOOL_CATEGORIES } from '@/config/tools';
+import { buildSeo } from '@/utils/seo';
+import { SITE } from '@/config';
 
-const posts = await getCollection('tools');
-const sorted = posts
+const articlePosts = await getCollection('tools');
+const sortedArticles = articlePosts
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const seo = buildSeo({
+  title: 'Free Web Utilities & Developer Tools',
+  description: 'Fast, free, 100% client-side web utilities for developers, designers, video creators, and webmasters. No login or database required.',
+  slug: '/tools/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  keywords: ['online tools', 'aspect ratio calculator', 'resize dimensions', 'ppi calculator', 'dpi calculator', 'social media image sizes', 'megapixels calculator'],
+});
+
+const toolsDirectorySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemPage',
+  name: 'Free Web Utilities & Developer Tools',
+  description: 'Directory of fast, client-side developer, media, and designer utilities.',
+  url: `${SITE.url}/tools/`,
+};
 ---
 
-<BaseLayout
-  title="Developer Tools - Nadhebe"
-  description="In-depth reviews and engineering showcases of modern builder utilities."
->
-  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
-    <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
+<BaseLayout seo={seo} jsonLd={[toolsDirectorySchema]}>
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+    
+    <!-- Hero Header -->
+    <header class="glass-panel relative overflow-hidden rounded-24 border border-border p-24 sm:p-40 shadow-medium dark:border-border-dark mb-48" data-reveal>
+      <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/15 blur-3xl dark:bg-accent-dark/15"></div>
+      <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
 
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
-      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Tools</h1>
-    </div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-8 rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-12 py-4 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+          <span class="relative flex h-8 w-8">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex h-8 w-8 rounded-full bg-emerald-500"></span>
+          </span>
+          100% Free & Client-Side Utilities
+        </div>
 
-    <FeedList posts={posts} />
-  
-    </div>
-    <!-- Standalone floating footer pill -->
-    <div class="mt-32 flex justify-center" data-reveal>
-      <div class="inline-flex items-center gap-12 px-32 py-16 rounded-2xl border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-body font-sans font-semibold text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md hover:scale-[1.03] transition-all duration-300 hover:shadow-large cursor-default">
-        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-120 transition-transform duration-150 cursor-default">🧡</span>
+        <h1 class="mt-16 font-display text-h1 sm:text-display font-bold leading-tight text-ink dark:text-ink-dark">
+          Free Utilities & Developer Tools
+        </h1>
+        <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">
+          Ultra-fast, browser-based calculators and engineering tools built for designers, video editors, frontend developers, and content creators. Privacy-first with zero tracking of your inputs.
+        </p>
+
+        <!-- Metrics bar -->
+        <div class="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-12 pt-20 border-t border-border/60 dark:border-border-dark/60">
+          <div>
+            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Interactive Utilities</span>
+            <p class="font-display text-h3 font-bold text-ink dark:text-ink-dark">{TOOLS.length}</p>
+          </div>
+          <div>
+            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Privacy</span>
+            <p class="font-display text-h3 font-bold text-emerald-600 dark:text-emerald-400">100% Local</p>
+          </div>
+          <div>
+            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Speed</span>
+            <p class="font-display text-h3 font-bold text-accent dark:text-accent-dark">Instant (0ms)</p>
+          </div>
+          <div>
+            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Access</span>
+            <p class="font-display text-h3 font-bold text-ink dark:text-ink-dark">No Account</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Category Filter Bar & Live Search -->
+    <div class="sticky top-72 z-30 mb-32 flex flex-col gap-16 rounded-16 border border-border/80 bg-surface/90 p-16 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 sm:flex-row sm:items-center sm:justify-between" data-reveal>
+      <nav class="flex flex-wrap items-center gap-8" aria-label="Tool Category Filters" id="tools-category-tabs">
+        <button
+          type="button"
+          data-category-filter="all"
+          class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer bg-ink text-white shadow-soft dark:bg-ink-dark dark:text-ink"
+        >
+          All ({TOOLS.length})
+        </button>
+        {TOOL_CATEGORIES.map((cat) => {
+          const count = TOOLS.filter(t => t.category === cat).length;
+          if (count === 0) return null;
+          return (
+            <button
+              type="button"
+              data-category-filter={cat}
+              class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer border border-border/60 bg-surface/50 text-ink2 hover:border-ink2/30 hover:text-ink dark:border-border-dark/60 dark:bg-surface-dark/50 dark:text-ink2-dark dark:hover:text-ink-dark"
+            >
+              {cat} ({count})
+            </button>
+          );
+        })}
+      </nav>
+
+      <div class="relative min-w-[220px] sm:w-72">
+        <input
+          type="search"
+          id="tool-dir-search"
+          placeholder="Filter tools by keyword..."
+          class="w-full rounded-pill border border-border/80 bg-surface pl-36 pr-16 py-8 text-caption text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark/80 dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all duration-150"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-12 top-1/2 h-16 w-16 -translate-y-1/2 text-muted dark:text-muted-dark pointer-events-none">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
       </div>
     </div>
+
+    <!-- Tools Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 mb-64" id="tools-directory-grid">
+      {TOOLS.map((tool) => (
+        <article
+          data-tool-card
+          data-category={tool.category}
+          data-search-text={`${tool.name} ${tool.description} ${tool.category} ${tool.tags.join(' ')}`.toLowerCase()}
+          class="glass-panel group relative flex flex-col justify-between overflow-hidden rounded-20 border border-border/80 p-24 shadow-medium hover:border-accent/50 hover:shadow-large transition-all duration-300 dark:border-border-dark/80 dark:hover:border-accent-dark/50"
+        >
+          <div>
+            <div class="flex items-center justify-between gap-8 mb-12">
+              <span class="rounded-8 bg-surface2/80 px-10 py-4 font-mono text-xs font-semibold text-ink2 dark:bg-surface2-dark/80 dark:text-ink2-dark">
+                {tool.category}
+              </span>
+              {tool.badge && (
+                <span class="rounded-pill bg-accent/10 px-8 py-2 font-mono text-xs font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+                  {tool.badge}
+                </span>
+              )}
+            </div>
+
+            <h2 class="font-display text-h3 font-semibold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark transition-colors duration-150">
+              <a href={tool.href} class="after:absolute after:inset-0">
+                {tool.name}
+              </a>
+            </h2>
+            
+            <p class="mt-8 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
+              {tool.description}
+            </p>
+          </div>
+
+          <div class="mt-20 pt-16 border-t border-border/40 dark:border-border-dark/40 flex items-center justify-between text-caption font-semibold text-accent dark:text-accent-dark">
+            <span class="text-xs font-mono text-muted dark:text-muted-dark">Free Utility</span>
+            <span class="inline-flex items-center gap-4 group-hover:translate-x-1 transition-transform duration-150">
+              Open Tool &rarr;
+            </span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty Filter Search State -->
+    <div id="tools-no-match" class="hidden rounded-24 border border-dashed border-border p-48 text-center dark:border-border-dark glass-panel mb-64">
+      <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">No matching tools found</h3>
+      <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">Try searching for standard keywords like "16:9", "megapixels", "resize", or "PPI".</p>
+    </div>
+
+    <!-- Tool Guides & Articles Section (Preserving existing Content Collection Articles) -->
+    {sortedArticles.length > 0 && (
+      <section class="mt-64 glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90" data-reveal>
+        <div class="mb-24 pb-16 border-b border-border/60 dark:border-border-dark/60">
+          <p class="text-meta font-mono font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Engineering & Showcase Articles</p>
+          <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark">Tool Guides & In-Depth Technical Reviews</h2>
+        </div>
+        <FeedList posts={sortedArticles} />
+      </section>
+    )}
   </div>
 </BaseLayout>
+
+<!-- Client Filtering & Search JavaScript -->
+<script is:inline>
+  (function() {
+    const tabBtns = document.querySelectorAll('.cat-tab-btn');
+    const searchInput = document.getElementById('tool-dir-search');
+    const toolCards = document.querySelectorAll('[data-tool-card]');
+    const noMatch = document.getElementById('tools-no-match');
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function filterDirectory() {
+      let count = 0;
+      toolCards.forEach(card => {
+        const cat = card.getAttribute('data-category') || '';
+        const text = card.getAttribute('data-search-text') || '';
+
+        const matchesCat = (activeFilter === 'all' || cat === activeFilter);
+        const matchesSearch = (!searchQuery || text.includes(searchQuery));
+
+        if (matchesCat && matchesSearch) {
+          card.style.display = '';
+          count++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (noMatch) {
+        noMatch.classList.toggle('hidden', count > 0);
+      }
+    }
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => {
+          b.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer border border-border/60 bg-surface/50 text-ink2 hover:border-ink2/30 hover:text-ink dark:border-border-dark/60 dark:bg-surface-dark/50 dark:text-ink2-dark dark:hover:text-ink-dark';
+        });
+
+        btn.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer bg-ink text-white shadow-soft dark:bg-ink-dark dark:text-ink';
+        
+        activeFilter = btn.getAttribute('data-category-filter') || 'all';
+        filterDirectory();
+      });
+    });
+
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = (e.target.value || '').toLowerCase().trim();
+      filterDirectory();
+    });
+  })();
+</script>

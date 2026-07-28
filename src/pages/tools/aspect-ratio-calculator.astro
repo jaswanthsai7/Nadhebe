@@ -1,0 +1,364 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Aspect Ratio Calculator – Calculate & Resize Dimensions | Nadhebe';
+const h1 = 'Aspect Ratio Calculator';
+const description = 'Calculate aspect ratios from width and height, resize dimensions while preserving the original ratio, and find common equivalent resolutions instantly.';
+
+const faq = [
+  {
+    question: 'How do you calculate aspect ratio from width and height?',
+    answer: 'Divide both the width and height by their Greatest Common Divisor (GCD). For instance, for 1920 × 1080, the GCD is 120. Dividing 1920 by 120 gives 16, and dividing 1080 by 120 gives 9, resulting in a 16:9 ratio.',
+  },
+  {
+    question: 'What is the standard aspect ratio for video?',
+    answer: 'The universal widescreen standard for video displays, YouTube, and television is 16:9 (such as 1920×1080 or 3840×2160). For vertical mobile content like Shorts, Reels, and TikTok, 9:16 (1080×1920) is standard.',
+  },
+  {
+    question: 'How do I resize an image without distorting it?',
+    answer: 'To preserve the original aspect ratio when resizing, calculate the new height as (New Width × Original Height) / Original Width, or new width as (New Height × Original Width) / Original Height.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="aspect-ratio-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24">
+    <!-- Preset Pills -->
+    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
+      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Presets:</span>
+      <button type="button" data-preset="1920,1080" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">16:9 (1920×1080)</button>
+      <button type="button" data-preset="1080,1920" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">9:16 (1080×1920)</button>
+      <button type="button" data-preset="1080,1080" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1:1 (1080×1080)</button>
+      <button type="button" data-preset="1024,768" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4:3 (1024×768)</button>
+      <button type="button" data-preset="3000,2000" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">3:2 (3000×2000)</button>
+      <button type="button" data-preset="2560,1080" class="preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">21:9 (2560×1080)</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <!-- Calculator Inputs -->
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Input Original Dimensions">
+          <div class="space-y-20">
+            <div class="grid grid-cols-2 gap-16">
+              <div>
+                <label for="input-width" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Original Width (px)</label>
+                <input
+                  type="number"
+                  id="input-width"
+                  value="1920"
+                  min="1"
+                  step="1"
+                  class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                />
+              </div>
+              <div>
+                <label for="input-height" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Original Height (px)</label>
+                <input
+                  type="number"
+                  id="input-height"
+                  value="1080"
+                  min="1"
+                  step="1"
+                  class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Optional Resize Calculation inputs -->
+            <div class="pt-20 border-t border-border/60 dark:border-border-dark/60">
+              <span class="block text-caption font-mono uppercase tracking-wider text-muted dark:text-muted-dark mb-12">Optional: Resize while preserving ratio</span>
+              <div class="grid grid-cols-2 gap-16">
+                <div>
+                  <label for="new-width" class="block text-xs font-sans font-medium text-ink2 dark:text-ink2-dark mb-4">New Width (px)</label>
+                  <input
+                    type="number"
+                    id="new-width"
+                    placeholder="e.g. 1280"
+                    min="1"
+                    step="1"
+                    class="w-full rounded-8 border border-border/80 bg-surface px-12 py-8 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark/80 dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="new-height" class="block text-xs font-sans font-medium text-ink2 dark:text-ink2-dark mb-4">New Height (px)</label>
+                  <input
+                    type="number"
+                    id="new-height"
+                    placeholder="e.g. 720"
+                    min="1"
+                    step="1"
+                    class="w-full rounded-8 border border-border/80 bg-surface px-12 py-8 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark/80 dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center justify-between pt-12">
+              <button
+                type="button"
+                id="swap-btn"
+                class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-medium text-ink2 hover:text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 22l4-4M17 22l-4-4"/></svg>
+                Swap W / H
+              </button>
+              <button
+                type="button"
+                id="reset-btn"
+                class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-medium text-muted hover:text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <!-- Calculation Results -->
+      <div class="lg:col-span-6">
+        <CalculatorCard title="Calculated Results">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+            <ResultCard label="Aspect Ratio" value="16:9" id="res-ratio" accent copyable />
+            <ResultCard label="Decimal Ratio" value="1.7778" id="res-decimal" copyable />
+            <ResultCard label="Orientation" value="Landscape" id="res-orientation" copyable={false} />
+            <ResultCard label="Standard Preset" value="16:9 Widescreen" id="res-standard" copyable={false} />
+          </div>
+
+          <div id="new-dim-container" class="rounded-16 border border-accent/30 bg-accent/5 p-16 dark:border-accent-dark/30 dark:bg-accent-dark/10">
+            <span class="text-meta font-mono uppercase text-accent dark:text-accent-dark">Resized Result</span>
+            <p id="res-new-dim" class="mt-4 font-display text-h2 font-bold text-ink dark:text-ink-dark">1920 × 1080 px</p>
+            <p class="mt-2 text-xs font-mono text-muted dark:text-muted-dark">Proportionally scaled based on aspect ratio</p>
+          </div>
+        </CalculatorCard>
+      </div>
+    </div>
+
+    <!-- Common Equivalent Resolutions -->
+    <CalculatorCard title="Equivalent Common Resolutions" description="Scales preserving the exact calculated ratio">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-12" id="equiv-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </CalculatorCard>
+  </div>
+
+  <div slot="content">
+    <h2>How the Aspect Ratio Calculator Works</h2>
+    <p>
+      An aspect ratio represents the proportional relationship between an image or display screen’s width and height. Regardless of the actual physical size or pixel count, the aspect ratio remains constant.
+    </p>
+
+    <h3>Mathematical Formula</h3>
+    <p>
+      The simplified ratio is calculated by dividing both width and height by their <strong>Greatest Common Divisor (GCD)</strong>:
+    </p>
+    <pre><code>GCD = gcd(width, height)
+Ratio Width  = width / GCD
+Ratio Height = height / GCD</code></pre>
+
+    <p>
+      To compute a missing dimension while preserving the aspect ratio:
+    </p>
+    <pre><code>New Height = (New Width × Original Height) / Original Width
+New Width  = (New Height × Original Width) / Original Height</code></pre>
+
+    <h2>Common Aspect Ratios & Use Cases Reference Table</h2>
+    <div class="overflow-x-auto my-24">
+      <table class="w-full text-left text-body-small">
+        <thead>
+          <tr class="border-b border-border dark:border-border-dark">
+            <th class="py-12 px-16 font-mono text-caption">Aspect Ratio</th>
+            <th class="py-12 px-16 font-mono text-caption">Decimal</th>
+            <th class="py-12 px-16 font-mono text-caption">Common Resolutions</th>
+            <th class="py-12 px-16 font-mono text-caption">Primary Use Cases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">16:9</td>
+            <td class="py-12 px-16 font-mono">1.7778</td>
+            <td class="py-12 px-16 font-mono">1280×720, 1920×1080, 3840×2160</td>
+            <td class="py-12 px-16">YouTube, HDTV, PC Monitors, Video Games</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">9:16</td>
+            <td class="py-12 px-16 font-mono">0.5625</td>
+            <td class="py-12 px-16 font-mono">720×1280, 1080×1920, 1440×2560</td>
+            <td class="py-12 px-16">YouTube Shorts, Instagram Reels, TikTok, Stories</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">1:1</td>
+            <td class="py-12 px-16 font-mono">1.0000</td>
+            <td class="py-12 px-16 font-mono">1080×1080, 2048×2048</td>
+            <td class="py-12 px-16">Instagram Posts, Profile Avatars, Product Cards</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">4:3</td>
+            <td class="py-12 px-16 font-mono">1.3333</td>
+            <td class="py-12 px-16 font-mono">1024×768, 1600×1200, 2048×1536</td>
+            <td class="py-12 px-16">Legacy Displays, iPads, Photography, Micro Four Thirds</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">3:2</td>
+            <td class="py-12 px-16 font-mono">1.5000</td>
+            <td class="py-12 px-16 font-mono">3000×2000, 2160×1440</td>
+            <td class="py-12 px-16">DSLR & Mirrorless Cameras, Surface Laptops</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">21:9</td>
+            <td class="py-12 px-16 font-mono">2.3333</td>
+            <td class="py-12 px-16 font-mono">2560×1080, 3440×1440, 5120×2160</td>
+            <td class="py-12 px-16">Ultrawide Gaming Monitors, Cinematic Film</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    function gcd(a, b) {
+      a = Math.abs(Math.round(a));
+      b = Math.abs(Math.round(b));
+      while (b) {
+        let t = b;
+        b = a % b;
+        a = t;
+      }
+      return a || 1;
+    }
+
+    const inputW = document.getElementById('input-width');
+    const inputH = document.getElementById('input-height');
+    const newW = document.getElementById('new-width');
+    const newH = document.getElementById('new-height');
+    const swapBtn = document.getElementById('swap-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    const resRatio = document.getElementById('res-ratio');
+    const resDecimal = document.getElementById('res-decimal');
+    const resOrientation = document.getElementById('res-orientation');
+    const resStandard = document.getElementById('res-standard');
+    const resNewDim = document.getElementById('res-new-dim');
+    const equivGrid = document.getElementById('equiv-grid');
+    const presetBtns = document.querySelectorAll('.preset-btn');
+
+    function calculate() {
+      const w = parseFloat(inputW?.value || '0');
+      const h = parseFloat(inputH?.value || '0');
+
+      if (!w || !h || w <= 0 || h <= 0) {
+        if (resRatio) resRatio.textContent = 'Invalid';
+        if (resDecimal) resDecimal.textContent = '0';
+        return;
+      }
+
+      // GCD Simplification
+      let wInt = w;
+      let hInt = h;
+      while (wInt % 1 !== 0 || hInt % 1 !== 0) {
+        wInt *= 10;
+        hInt *= 10;
+      }
+      const divisor = gcd(wInt, hInt);
+      const rW = wInt / divisor;
+      const rH = hInt / divisor;
+      const dec = (w / h).toFixed(4);
+
+      if (resRatio) resRatio.textContent = `${rW}:${rH}`;
+      if (resDecimal) resDecimal.textContent = dec;
+
+      let orientation = 'Landscape';
+      if (w < h) orientation = 'Portrait';
+      else if (w === h) orientation = 'Square';
+      if (resOrientation) resOrientation.textContent = orientation;
+
+      // Check standard matching
+      let stdName = 'Custom';
+      if (Math.abs(w / h - 16 / 9) < 0.01) stdName = '16:9 Widescreen';
+      else if (Math.abs(w / h - 9 / 16) < 0.01) stdName = '9:16 Vertical';
+      else if (Math.abs(w / h - 4 / 3) < 0.01) stdName = '4:3 Standard';
+      else if (Math.abs(w / h - 1) < 0.01) stdName = '1:1 Square';
+      else if (Math.abs(w / h - 3 / 2) < 0.01) stdName = '3:2 Photo';
+      else if (Math.abs(w / h - 21 / 9) < 0.01) stdName = '21:9 Ultrawide';
+      if (resStandard) resStandard.textContent = stdName;
+
+      // Handle Resize inputs
+      let nw = parseFloat(newW?.value || '0');
+      let nh = parseFloat(newH?.value || '0');
+
+      if (nw && nw > 0) {
+        nh = Math.round((nw * h) / w);
+        if (newH) newH.value = String(nh);
+      } else if (nh && nh > 0) {
+        nw = Math.round((nh * w) / h);
+        if (newW) newW.value = String(nw);
+      } else {
+        nw = w;
+        nh = h;
+      }
+      if (resNewDim) resNewDim.textContent = `${nw} × ${nh} px`;
+
+      // Render Common Equivalents
+      if (equivGrid) {
+        const heights = [360, 480, 720, 1080, 1440, 2160];
+        equivGrid.innerHTML = heights.map(targetH => {
+          const targetW = Math.round((targetH * rW) / rH);
+          const mp = ((targetW * targetH) / 1000000).toFixed(2);
+          return `
+            <div class="rounded-12 border border-border/60 bg-surface2/40 p-12 text-center dark:border-border-dark/60 dark:bg-surface2-dark/40">
+              <span class="block font-mono text-xs text-muted dark:text-muted-dark">${targetH}p</span>
+              <span class="block font-mono font-bold text-ink dark:text-ink-dark text-caption mt-2">${targetW} × ${targetH}</span>
+              <span class="block font-mono text-xs text-accent dark:text-accent-dark mt-2">${mp} MP</span>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    inputW?.addEventListener('input', () => { if (newW) newW.value = ''; if (newH) newH.value = ''; calculate(); });
+    inputH?.addEventListener('input', () => { if (newW) newW.value = ''; if (newH) newH.value = ''; calculate(); });
+    newW?.addEventListener('input', () => { if (newH) newH.value = ''; calculate(); });
+    newH?.addEventListener('input', () => { calculate(); });
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const [pw, ph] = (btn.getAttribute('data-preset') || '1920,1080').split(',');
+        if (inputW) inputW.value = pw;
+        if (inputH) inputH.value = ph;
+        if (newW) newW.value = '';
+        if (newH) newH.value = '';
+        calculate();
+      });
+    });
+
+    swapBtn?.addEventListener('click', () => {
+      const curW = inputW?.value;
+      const curH = inputH?.value;
+      if (inputW && curH) inputW.value = curH;
+      if (inputH && curW) inputH.value = curW;
+      if (newW) newW.value = '';
+      if (newH) newH.value = '';
+      calculate();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      if (inputW) inputW.value = '1920';
+      if (inputH) inputH.value = '1080';
+      if (newW) newW.value = '';
+      if (newH) newH.value = '';
+      calculate();
+    });
+
+    calculate();
+  })();
+</script>

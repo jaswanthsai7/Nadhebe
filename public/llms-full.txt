@@ -21,9 +21,13 @@ Google's **Gemini 3.6** and **Gemini 3.6 Flash** represent the next evolution in
 3. **Native Multimodal Audio & Vision:** Native processing of high-framerate 60fps video and multi-track audio without pre-segmentation.
 4. **Expanded 1 Million Token Context Window:** Process extensive technical repositories and multi-hour media streams in a single prompt call.
 
+![Gemini 3.6 Flash Architecture & Speculative Decoding Schematic](/images/gemini-3-6-flash-architecture.webp)
+
 ---
 
 ## Benchmark Comparison Table
+
+![Gemini 3.6 Flash Benchmark Performance Comparison](/images/gemini-3-6-benchmark-chart.webp)
 
 | Benchmark Test | Gemini 1.5 Flash | Gemini 2.0 Flash | Gemini 3.6 Flash |
 | :--- | :--- | :--- | :--- |
@@ -190,11 +194,15 @@ response = await chat.sendMessage({ message: 'How do islands work in Astro?' });
 console.log(response.text);
 ```
 
+![Multi-Turn Conversational Chat Session Diagram](/images/gemini-js-chat-workflow.webp)
+
 ---
 
 ## 3. Function Calling (Tool Integration)
 
 Give Gemini the ability to execute JavaScript functions:
+
+![JavaScript Function Calling and Tool Execution Workflow](/images/gemini-js-tool-calling.webp)
 
 ```typescript
 const fetchWeather = {
@@ -704,6 +712,8 @@ Google Gemini and OpenAI ChatGPT remain the top two flagship AI platforms for de
 
 ## Comparison Summary Table
 
+![Gemini vs ChatGPT Feature Capability Matrix](/images/gemini-vs-chatgpt-feature-matrix.webp)
+
 | Metric | Google Gemini (2.0 / 3.x) | OpenAI ChatGPT (GPT-4o / GPT-5) |
 | :--- | :--- | :--- |
 | **Max Context Window** | **2,000,000 Tokens** | 128,000 Tokens |
@@ -715,6 +725,8 @@ Google Gemini and OpenAI ChatGPT remain the top two flagship AI platforms for de
 ---
 
 ## Strengths of Gemini
+
+![2,000,000 Token Context Window Visual Comparison](/images/gemini-vs-chatgpt-context.webp)
 
 1. **Massive 2 Million Token Context:** Gemini can ingest full codebases, multi-hour video recordings, or hundreds of documentation pages without retrieval chunking loss.
 2. **Deep Google Ecosystem Synergy:** Seamlessly drafts emails in Gmail, generates slides in Google Slides, and queries Google Drive files natively.
