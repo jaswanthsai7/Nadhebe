@@ -122,7 +122,7 @@ Width  = Height × (W / H)</code></pre>
     const resAccuracy = document.getElementById('res-accuracy');
 
     function calculate() {
-      const mp = parseFloat(mpInput?.value || '0');
+      const mp = Math.min(Math.abs(parseFloat(mpInput?.value || '0')), 100000);
       if (!mp || mp <= 0) return;
 
       let rVal = ratioSelect?.value || '3:2';
@@ -139,8 +139,8 @@ Width  = Height × (W / H)</code></pre>
       else if (rVal === '9:16') { rw = 9; rh = 16; }
       else if (rVal === '1:1') { rw = 1; rh = 1; }
       else if (rVal === 'custom') {
-        rw = parseFloat(customRw?.value || '16');
-        rh = parseFloat(customRh?.value || '9');
+        rw = Math.min(Math.abs(parseFloat(customRw?.value || '16')), 1000);
+        rh = Math.min(Math.abs(parseFloat(customRh?.value || '9')), 1000);
       }
 
       const totalTarget = mp * 1000000;
@@ -148,13 +148,18 @@ Width  = Height × (W / H)</code></pre>
       const width = Math.round((height * rw) / rh);
 
       const actualTotal = width * height;
-      const actualMP = (actualTotal / 1000000).toFixed(2);
+      let actualMpText = '';
+      if (actualTotal >= 10000000000) {
+        actualMpText = `${(actualTotal / 1000000000).toFixed(2)}B MP`;
+      } else {
+        actualMpText = `${(actualTotal / 1000000).toFixed(2)} MP`;
+      }
 
       if (resDims) resDims.textContent = `${width} × ${height}`;
-      if (resActualMp) resActualMp.textContent = `${actualMP} MP`;
+      if (resActualMp) resActualMp.textContent = actualMpText;
       if (resMpRaw) resMpRaw.textContent = actualTotal.toLocaleString('en-US');
 
-      const isExact = Math.abs(parseFloat(actualMP) - mp) < 0.05;
+      const isExact = Math.abs((actualTotal / 1000000) - mp) < 0.05;
       if (resAccuracy) resAccuracy.textContent = isExact ? 'Exact Match' : 'Approx (Rounded Px)';
     }
 

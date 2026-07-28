@@ -49,6 +49,7 @@ const faq = [
                   id="mp-w"
                   value="6000"
                   min="1"
+                  max="100000"
                   step="1"
                   class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
                 />
@@ -60,6 +61,7 @@ const faq = [
                   id="mp-h"
                   value="4000"
                   min="1"
+                  max="100000"
                   step="1"
                   class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
                 />
@@ -73,6 +75,8 @@ const faq = [
                 id="raw-px"
                 placeholder="e.g. 24000000"
                 min="1"
+                max="100000000000"
+                maxlength="12"
                 step="1"
                 class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
               />
@@ -125,9 +129,9 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
     }
 
     function calculate(source) {
-      let w = parseFloat(mpW?.value || '0');
-      let h = parseFloat(mpH?.value || '0');
-      let raw = parseFloat(rawPx?.value || '0');
+      let w = Math.min(Math.abs(parseFloat(mpW?.value || '0')), 100000);
+      let h = Math.min(Math.abs(parseFloat(mpH?.value || '0')), 100000);
+      let raw = Math.min(Math.abs(parseFloat(rawPx?.value || '0')), 1000000000000);
       let total = 0;
 
       if (source === 'raw' && raw > 0) {
@@ -138,8 +142,15 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
 
       if (total <= 0) return;
 
-      const mp = (total / 1000000).toFixed(2);
-      if (resMp) resMp.textContent = `${mp} MP`;
+      let mpText = '';
+      if (total >= 10000000000) {
+        mpText = `${(total / 1000000000).toFixed(2)}B MP`;
+      } else {
+        const mp = (total / 1000000).toFixed(2);
+        mpText = `${mp} MP`;
+      }
+
+      if (resMp) resMp.textContent = mpText;
       if (resTotalPx) resTotalPx.textContent = total.toLocaleString('en-US');
 
       if (w > 0 && h > 0) {
@@ -150,7 +161,7 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
       }
 
       let category = 'Standard Photo';
-      const mpNum = parseFloat(mp);
+      const mpNum = total / 1000000;
       if (mpNum >= 100) category = 'Ultra-High Res';
       else if (mpNum >= 45) category = 'Studio / Commercial';
       else if (mpNum >= 24) category = 'Full-Frame Sensor';

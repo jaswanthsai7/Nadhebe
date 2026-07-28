@@ -253,8 +253,8 @@ New Width  = (New Height × Original Width) / Original Height</code></pre>
     const presetBtns = document.querySelectorAll('.preset-btn');
 
     function calculate() {
-      const w = parseFloat(inputW?.value || '0');
-      const h = parseFloat(inputH?.value || '0');
+      const w = Math.min(Math.abs(parseFloat(inputW?.value || '0')), 100000);
+      const h = Math.min(Math.abs(parseFloat(inputH?.value || '0')), 100000);
 
       if (!w || !h || w <= 0 || h <= 0) {
         if (resRatio) resRatio.textContent = 'Invalid';
