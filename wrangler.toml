@@ -1,6 +1,11 @@
 name = "nadhebe"
 compatibility_date = "2025-07-25"
 compatibility_flags = ["nodejs_compat"]
+main = "worker.ts"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+
+[ai]
+binding = "AI"
