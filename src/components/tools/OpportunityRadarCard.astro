@@ -3,30 +3,30 @@
 ---
 
 <div class="space-y-32">
-  <!-- Centered & Scaled Prominent Domain Input & Form Card -->
-  <div class="rounded-28 border-2 border-border/80 bg-surface/95 p-32 sm:p-48 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/95 no-print max-w-960 mx-auto" data-reveal>
-    <form id="radar-form" class="space-y-24">
-      <div class="text-center">
-        <label for="domain-input" class="block text-h2 sm:text-h1 font-sans font-black text-ink dark:text-ink-dark mb-16 tracking-tight">
+  <!-- Clean Prominent Domain Input & Form Card -->
+  <div class="rounded-24 border border-border/80 bg-surface/95 p-24 sm:p-36 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/95 no-print max-w-840 mx-auto" data-reveal>
+    <form id="radar-form" class="space-y-20">
+      <div class="text-center space-y-16">
+        <label for="domain-input" class="block text-h2 font-sans font-bold text-ink dark:text-ink-dark tracking-tight">
           Analyze Website Domain
         </label>
-        <div class="relative flex flex-col sm:flex-row items-center justify-center gap-16 max-w-840 mx-auto">
+        <div class="relative flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-12 max-w-680 mx-auto">
           <input
             type="text"
             id="domain-input"
             placeholder="e.g. nadhebe.com or stripe.com"
             value="nadhebe.com"
             required
-            class="w-full sm:flex-1 rounded-20 border-2 border-border bg-surface px-28 py-22 text-h3 font-mono font-bold text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all shadow-medium"
+            class="w-full sm:flex-1 rounded-14 border border-border bg-surface px-20 py-14 text-body-medium sm:text-h4 font-mono text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all shadow-soft"
           />
           <button
             type="submit"
             id="radar-submit"
-            class="w-full sm:w-auto rounded-20 bg-accent px-40 py-22 text-h3 font-sans font-extrabold text-white shadow-medium hover:bg-accent/90 focus:outline-none transition-all cursor-pointer flex items-center justify-center gap-12 shrink-0 dark:bg-accent-dark dark:hover:bg-accent-dark/90"
+            class="w-full sm:w-auto rounded-14 bg-accent px-28 py-14 text-body-medium font-sans font-bold text-white shadow-soft hover:bg-accent/90 focus:outline-none transition-all cursor-pointer inline-flex items-center justify-center gap-8 shrink-0 whitespace-nowrap dark:bg-accent-dark dark:hover:bg-accent-dark/90"
           >
             <span>Analyze</span>
-            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </button>
         </div>
@@ -34,21 +34,21 @@
     </form>
 
     <!-- Brief Visual Explanatory Steps -->
-    <div class="mt-32 pt-24 border-t border-border/60 dark:border-border-dark/60 grid grid-cols-2 sm:grid-cols-4 gap-16 text-body-small">
-      <div class="flex items-center justify-center gap-10 text-ink dark:text-ink-dark font-medium">
-        <span class="flex h-28 w-28 items-center justify-center rounded-full bg-accent/15 font-mono text-body-small font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">1</span>
+    <div class="mt-24 pt-20 border-t border-border/60 dark:border-border-dark/60 grid grid-cols-2 sm:grid-cols-4 gap-12 text-caption">
+      <div class="flex items-center justify-center gap-8 text-ink dark:text-ink-dark font-medium">
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/15 font-mono text-caption font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">1</span>
         <span>Analyze site</span>
       </div>
-      <div class="flex items-center justify-center gap-10 text-ink dark:text-ink-dark font-medium">
-        <span class="flex h-28 w-28 items-center justify-center rounded-full bg-accent/15 font-mono text-body-small font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">2</span>
+      <div class="flex items-center justify-center gap-8 text-ink dark:text-ink-dark font-medium">
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/15 font-mono text-caption font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">2</span>
         <span>Extract topics</span>
       </div>
-      <div class="flex items-center justify-center gap-10 text-ink dark:text-ink-dark font-medium">
-        <span class="flex h-28 w-28 items-center justify-center rounded-full bg-accent/15 font-mono text-body-small font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">3</span>
+      <div class="flex items-center justify-center gap-8 text-ink dark:text-ink-dark font-medium">
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/15 font-mono text-caption font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">3</span>
         <span>Compare trends</span>
       </div>
-      <div class="flex items-center justify-center gap-10 text-ink dark:text-ink-dark font-medium">
-        <span class="flex h-28 w-28 items-center justify-center rounded-full bg-accent/15 font-mono text-body-small font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">4</span>
+      <div class="flex items-center justify-center gap-8 text-ink dark:text-ink-dark font-medium">
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/15 font-mono text-caption font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark">4</span>
         <span>Surface gaps</span>
       </div>
     </div>
@@ -57,7 +57,7 @@
   <!-- Loading State -->
   <div id="radar-loading" class="hidden rounded-24 border border-border/80 bg-surface/90 p-32 text-center shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 no-print max-w-840 mx-auto">
     <div class="inline-flex items-center justify-center p-16 rounded-full bg-accent/10 mb-16 dark:bg-accent-dark/20">
-      <svg style="width: 36px; height: 36px;" class="animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
+      <svg style="width: 32px; height: 32px;" class="animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
@@ -101,9 +101,9 @@
           <button
             type="button"
             id="btn-export-pdf"
-            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+            class="rounded-12 border border-border bg-surface px-16 py-10 text-body-small font-sans font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all inline-flex items-center gap-6 shadow-soft shrink-0 whitespace-nowrap"
           >
-            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span>Export PDF / Print</span>
@@ -111,9 +111,9 @@
           <button
             type="button"
             id="btn-copy-md"
-            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+            class="rounded-12 border border-border bg-surface px-16 py-10 text-body-small font-sans font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all inline-flex items-center gap-6 shadow-soft shrink-0 whitespace-nowrap"
           >
-            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
             </svg>
             <span>Copy Markdown Report</span>
@@ -131,7 +131,7 @@
         <button
           type="button"
           id="btn-view-saved"
-          class="rounded-pill border border-accent/40 bg-accent/10 px-12 py-6 font-mono text-caption font-bold text-accent hover:bg-accent hover:text-white dark:border-accent-dark/40 dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-6"
+          class="rounded-pill border border-accent/40 bg-accent/10 px-12 py-6 font-mono text-caption font-bold text-accent hover:bg-accent hover:text-white dark:border-accent-dark/40 dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all inline-flex items-center gap-6 shrink-0 whitespace-nowrap"
         >
           <span>Saved Opportunities</span>
           <span id="saved-badge" class="rounded-full bg-accent px-6 py-2 text-[10px] text-white dark:bg-accent-dark">0</span>
@@ -168,9 +168,9 @@
   </div>
 </div>
 
-<!-- Native UI Glassmorphism Research Brief Modal (CENTERED & ENLARGED BUTTONS) -->
+<!-- Native UI Glassmorphism Research Brief Modal -->
 <div id="research-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-16 backdrop-blur-md no-print">
-  <div class="relative w-full max-w-680 rounded-24 border border-border/80 bg-surface p-24 sm:p-36 shadow-medium dark:border-border-dark/80 dark:bg-surface-dark space-y-24 max-h-[90vh] overflow-y-auto">
+  <div class="relative w-full max-w-640 rounded-24 border border-border/80 bg-surface p-24 sm:p-32 shadow-medium dark:border-border-dark/80 dark:bg-surface-dark space-y-20 max-h-[90vh] overflow-y-auto">
     <button
       type="button"
       id="modal-close"
@@ -182,48 +182,48 @@
     </button>
 
     <div>
-      <span class="rounded-pill bg-accent/10 px-12 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+      <span class="rounded-pill bg-accent/10 px-10 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
         Topic Research Brief
       </span>
-      <h3 class="text-h2 font-sans font-bold text-ink dark:text-ink-dark pt-8" id="modal-title">
+      <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark pt-8" id="modal-title">
         Claude Code MCP Servers
       </h3>
     </div>
 
     <!-- Metrics Summary -->
-    <div class="grid grid-cols-3 gap-8 rounded-12 bg-surface2/60 p-16 text-center dark:bg-surface2-dark/60 border border-border/60 dark:border-border-dark/60">
+    <div class="grid grid-cols-3 gap-8 rounded-12 bg-surface2/60 p-12 text-center dark:bg-surface2-dark/60 border border-border/60 dark:border-border-dark/60">
       <div>
         <span class="block text-caption font-mono text-muted dark:text-muted-dark">Opportunity Score</span>
-        <span class="text-h2 font-mono font-extrabold text-accent dark:text-accent-dark" id="modal-score">94/100</span>
+        <span class="text-h3 font-mono font-extrabold text-accent dark:text-accent-dark" id="modal-score">94/100</span>
       </div>
       <div>
         <span class="block text-caption font-mono text-muted dark:text-muted-dark">Relevance</span>
-        <span class="text-h2 font-mono font-bold text-ink dark:text-ink-dark" id="modal-relevance">97%</span>
+        <span class="text-h3 font-mono font-bold text-ink dark:text-ink-dark" id="modal-relevance">97%</span>
       </div>
       <div>
         <span class="block text-caption font-mono text-muted dark:text-muted-dark">Content Gap</span>
-        <span class="text-h2 font-mono font-bold text-accent dark:text-accent-dark" id="modal-gap">High</span>
+        <span class="text-h3 font-mono font-bold text-accent dark:text-accent-dark" id="modal-gap">High</span>
       </div>
     </div>
 
     <!-- Suggested Outline -->
     <div class="space-y-12">
       <h4 class="text-caption font-mono font-bold uppercase text-muted dark:text-muted-dark">Recommended Article Outline</h4>
-      <div class="rounded-16 border border-border bg-surface2/40 p-20 space-y-12 text-body text-ink dark:border-border-dark dark:bg-surface2-dark/40 dark:text-ink-dark" id="modal-outline">
+      <div class="rounded-12 border border-border bg-surface2/40 p-16 space-y-10 text-body-small text-ink dark:border-border-dark dark:bg-surface2-dark/40 dark:text-ink-dark" id="modal-outline">
         <p><strong>H1:</strong> Complete Guide to Claude Code MCP Servers</p>
         <p><strong>Key Focus:</strong> How developers can integrate Model Context Protocol (MCP) plugins to give Claude Code CLI contextual filesystem and API access.</p>
         <p><strong>Target Audience:</strong> AI engineers, full-stack developers, and automated workflow creators.</p>
       </div>
     </div>
 
-    <!-- Modal Actions (CENTERED & ENLARGED BUTTONS) -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-16 pt-20 border-t border-border/60 dark:border-border-dark/60">
+    <!-- Modal Actions -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-12 pt-16 border-t border-border/60 dark:border-border-dark/60">
       <button
         type="button"
         id="modal-copy-outline"
-        class="w-full sm:w-auto rounded-14 bg-accent px-28 py-16 text-body font-mono font-bold text-white shadow-medium hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all flex items-center justify-center gap-8"
+        class="w-full sm:w-auto rounded-12 bg-accent px-20 py-12 text-body-small font-sans font-bold text-white shadow-soft hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all inline-flex items-center justify-center gap-6 whitespace-nowrap"
       >
-        <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
         </svg>
         <span>Copy Outline (Markdown)</span>
@@ -231,9 +231,9 @@
       <button
         type="button"
         id="modal-pdf"
-        class="w-full sm:w-auto rounded-14 border border-border bg-surface2 px-28 py-16 text-body font-mono font-bold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center justify-center gap-8"
+        class="w-full sm:w-auto rounded-12 border border-border bg-surface2 px-20 py-12 text-body-small font-sans font-bold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all inline-flex items-center justify-center gap-6 whitespace-nowrap"
       >
-        <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
         </svg>
         <span>Print / PDF</span>
@@ -614,11 +614,11 @@
 
       if (modalOutline) {
         modalOutline.innerHTML = `
-          <p class="font-bold text-accent dark:text-accent-dark">H1: ${opp.suggestedWriteTitle}</p>
-          <p><strong>Category:</strong> ${opp.category}</p>
-          <p><strong>Rationale:</strong> ${opp.why}</p>
-          <p class="font-semibold pt-4">Suggested Headings & Key Angles:</p>
-          <ul class="list-disc pl-20 space-y-4">
+          <p class="font-bold text-accent dark:text-accent-dark text-h3">H1: ${opp.suggestedWriteTitle}</p>
+          <p class="text-body-medium"><strong>Category:</strong> ${opp.category}</p>
+          <p class="text-body-medium"><strong>Rationale:</strong> ${opp.why}</p>
+          <p class="font-semibold pt-4 text-body-medium">Suggested Headings & Key Angles:</p>
+          <ul class="list-disc pl-24 space-y-6 text-body-medium">
             ${opp.queries.map(q => `<li>${q}</li>`).join('')}
           </ul>
         `;
