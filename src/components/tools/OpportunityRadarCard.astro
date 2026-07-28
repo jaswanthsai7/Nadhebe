@@ -25,7 +25,7 @@
             class="rounded-12 bg-accent px-24 py-14 font-sans font-semibold text-white shadow-soft hover:bg-accent/90 focus:outline-none transition-all cursor-pointer flex items-center justify-center gap-8 shrink-0 dark:bg-accent-dark dark:hover:bg-accent-dark/90"
           >
             <span>Find Opportunities</span>
-            <svg class="w-18 h-18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </button>
@@ -57,7 +57,7 @@
   <!-- Loading State -->
   <div id="radar-loading" class="hidden rounded-24 border border-border/80 bg-surface/90 p-32 text-center shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 no-print">
     <div class="inline-flex items-center justify-center p-16 rounded-full bg-accent/10 mb-16 dark:bg-accent-dark/20">
-      <svg class="w-32 h-32 animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
+      <svg style="width: 32px; height: 32px;" class="animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
@@ -69,7 +69,7 @@
   <!-- Error State -->
   <div id="radar-error" class="hidden rounded-20 border border-red-500/30 bg-red-500/5 p-24 text-red-600 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-400 no-print">
     <div class="flex items-start gap-12">
-      <svg class="w-24 h-24 shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg style="width: 24px; height: 24px;" class="shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
       </svg>
       <div>
@@ -103,7 +103,7 @@
             id="btn-export-pdf"
             class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
           >
-            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span>Export PDF / Print</span>
@@ -113,7 +113,7 @@
             id="btn-copy-md"
             class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
           >
-            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
             </svg>
             <span>Copy Markdown Report</span>
@@ -128,7 +128,31 @@
         <span class="rounded-pill border border-border bg-surface2 px-12 py-6 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="pill-url-count">
           375 Pages Analyzed
         </span>
+        <button
+          type="button"
+          id="btn-view-saved"
+          class="rounded-pill border border-accent/40 bg-accent/10 px-12 py-6 font-mono text-caption font-bold text-accent hover:bg-accent hover:text-white dark:border-accent-dark/40 dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-6"
+        >
+          <span>Saved Opportunities</span>
+          <span id="saved-badge" class="rounded-full bg-accent px-6 py-2 text-[10px] text-white dark:bg-accent-dark">0</span>
+        </button>
       </div>
+    </div>
+
+    <!-- Saved Opportunities Drawer (collapsible persistent local storage queue) -->
+    <div id="saved-queue-drawer" class="hidden rounded-24 border border-accent/40 bg-accent/5 p-24 space-y-16 dark:border-accent-dark/40 dark:bg-accent-dark/5 no-print">
+      <div class="flex items-center justify-between gap-12 pb-12 border-b border-accent/20 dark:border-accent-dark/20">
+        <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark flex items-center gap-8">
+          <span>Saved Research Queue</span>
+          <span class="text-caption font-mono font-normal text-muted dark:text-muted-dark">(Saved to LocalStorage)</span>
+        </h3>
+        <div class="flex items-center gap-8">
+          <button type="button" id="btn-clear-saved" class="text-caption font-mono text-muted hover:text-red-500 dark:text-muted-dark dark:hover:text-red-400 cursor-pointer">
+            Clear Queue
+          </button>
+        </div>
+      </div>
+      <div id="saved-items-container" class="space-y-8"></div>
     </div>
 
     <!-- Featured #1 Hero Card ("YOUR BEST OPPORTUNITY") -->
@@ -144,7 +168,7 @@
   </div>
 </div>
 
-<!-- Native UI Glassmorphism Research Brief Modal (NO BROWSER ALERT POPUPS) -->
+<!-- Native UI Glassmorphism Research Brief Modal -->
 <div id="research-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-16 backdrop-blur-md no-print">
   <div class="relative w-full max-w-640 rounded-24 border border-border/80 bg-surface p-24 sm:p-32 shadow-medium dark:border-border-dark/80 dark:bg-surface-dark space-y-20 max-h-[90vh] overflow-y-auto">
     <button
@@ -152,7 +176,7 @@
       id="modal-close"
       class="absolute top-20 right-20 rounded-full p-8 text-muted hover:bg-surface2 hover:text-ink dark:text-muted-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark cursor-pointer transition-all"
     >
-      <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -259,6 +283,11 @@
 
     const btnExportPdf = document.getElementById('btn-export-pdf');
     const btnCopyMd = document.getElementById('btn-copy-md');
+    const btnViewSaved = document.getElementById('btn-view-saved');
+    const savedBadge = document.getElementById('saved-badge');
+    const savedQueueDrawer = document.getElementById('saved-queue-drawer');
+    const savedItemsContainer = document.getElementById('saved-items-container');
+    const btnClearSaved = document.getElementById('btn-clear-saved');
 
     const researchModal = document.getElementById('research-modal');
     const modalClose = document.getElementById('modal-close');
@@ -275,6 +304,78 @@
 
     let currentOpportunities = [];
     let currentDomain = '';
+
+    const STORAGE_KEY = 'nadhebe_saved_opportunities';
+
+    function getSavedOpportunities() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveOpportunityItem(opp) {
+      const saved = getSavedOpportunities();
+      if (!saved.some(item => item.topic === opp.topic)) {
+        saved.push(opp);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+        updateSavedUI();
+        showToast(`✓ "${opp.topic}" saved to your research queue`);
+      } else {
+        showToast(`"${opp.topic}" is already in your saved queue`);
+      }
+    }
+
+    function removeSavedOpportunity(topic) {
+      let saved = getSavedOpportunities();
+      saved = saved.filter(item => item.topic !== topic);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      updateSavedUI();
+      showToast('Removed topic from saved queue');
+    }
+
+    function updateSavedUI() {
+      const saved = getSavedOpportunities();
+      if (savedBadge) savedBadge.textContent = String(saved.length);
+
+      if (savedItemsContainer) {
+        if (saved.length === 0) {
+          savedItemsContainer.innerHTML = '<p class="text-body-small text-muted dark:text-muted-dark">No saved opportunities yet. Click "Save Opportunity" on any topic card to bookmark it.</p>';
+        } else {
+          savedItemsContainer.innerHTML = saved.map(item => `
+            <div class="flex items-center justify-between gap-12 rounded-12 border border-border bg-surface p-12 dark:border-border-dark dark:bg-surface-dark">
+              <div>
+                <span class="text-body font-sans font-bold text-ink dark:text-ink-dark">${item.topic}</span>
+                <span class="text-caption font-mono text-accent dark:text-accent-dark ml-8">(Score: ${item.totalScore}/100)</span>
+                <p class="text-caption font-mono text-muted dark:text-muted-dark mt-2">→ ${item.suggestedWriteTitle}</p>
+              </div>
+              <button type="button" data-remove-topic="${item.topic}" class="btn-remove-saved rounded-6 border border-border px-8 py-4 text-caption font-mono text-muted hover:text-red-500 dark:border-border-dark cursor-pointer">
+                Remove
+              </button>
+            </div>
+          `).join('');
+
+          document.querySelectorAll('.btn-remove-saved').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              const topic = e.currentTarget.getAttribute('data-remove-topic');
+              if (topic) removeSavedOpportunity(topic);
+            });
+          });
+        }
+      }
+    }
+
+    btnViewSaved?.addEventListener('click', () => {
+      savedQueueDrawer?.classList.toggle('hidden');
+    });
+
+    btnClearSaved?.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      updateSavedUI();
+      showToast('Saved research queue cleared');
+    });
 
     function showToast(msg) {
       if (!toast || !toastMsg) return;
@@ -601,7 +702,7 @@
         <div class="flex items-center gap-12 flex-wrap pt-4">
           <button type="button" data-hero-action="research" class="rounded-12 bg-accent px-20 py-12 text-body-small font-sans font-bold text-white shadow-soft hover:bg-accent/90 cursor-pointer transition-all flex items-center gap-8 dark:bg-accent-dark dark:hover:bg-accent-dark/90">
             <span>Research This Topic</span>
-            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
@@ -610,15 +711,15 @@
           </button>
         </div>
 
-        <!-- Accordion Details -->
-        <details class="pt-12 border-t border-border/40 dark:border-border-dark/40 group">
-          <summary class="text-caption font-mono font-semibold text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all list-none flex items-center gap-6">
+        <!-- Accordion Details (Clean, Fixed-Size Arrow) -->
+        <div class="pt-12 border-t border-border/40 dark:border-border-dark/40">
+          <button type="button" id="toggle-why-btn" class="text-caption font-mono font-semibold text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all flex items-center gap-6">
             <span>Why this was recommended</span>
-            <svg class="w-14 h-14 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg id="toggle-why-arrow" style="width: 14px; height: 14px; display: inline-block;" class="transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
-          </summary>
-          <div class="pt-12 grid grid-cols-3 gap-8 text-center text-caption font-mono">
+          </button>
+          <div id="toggle-why-content" class="hidden pt-12 grid grid-cols-3 gap-8 text-center text-caption font-mono">
             <div class="p-8 rounded-8 bg-surface2/60 dark:bg-surface2-dark/60">
               <span class="block text-muted dark:text-muted-dark">Relevance</span>
               <span class="font-bold text-ink dark:text-ink-dark text-body-small">${hero.relevance}%</span>
@@ -632,10 +733,26 @@
               <span class="font-bold text-ink dark:text-ink-dark text-body-small">Curated</span>
             </div>
           </div>
-        </details>
+        </div>
       `;
 
       heroCardContainer.appendChild(heroCard);
+
+      // Accordion toggle listener
+      const toggleWhyBtn = heroCard.querySelector('#toggle-why-btn');
+      const toggleWhyArrow = heroCard.querySelector('#toggle-why-arrow');
+      const toggleWhyContent = heroCard.querySelector('#toggle-why-content');
+
+      toggleWhyBtn?.addEventListener('click', () => {
+        const isHidden = toggleWhyContent?.classList.contains('hidden');
+        if (isHidden) {
+          toggleWhyContent?.classList.remove('hidden');
+          toggleWhyArrow?.classList.add('rotate-180');
+        } else {
+          toggleWhyContent?.classList.add('hidden');
+          toggleWhyArrow?.classList.remove('rotate-180');
+        }
+      });
 
       // Render Secondary Mini-Cards (#2 to #5)
       secondaries.forEach((opp, idx) => {
@@ -675,7 +792,7 @@
               <button type="button" data-sec-index="${rank - 1}" class="btn-sec-research rounded-8 bg-accent/10 px-12 py-8 text-caption font-mono font-bold text-accent hover:bg-accent hover:text-white dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all">
                 Research
               </button>
-              <button type="button" class="btn-sec-save rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all">
+              <button type="button" data-sec-save-idx="${rank - 1}" class="btn-sec-save rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all">
                 Save
               </button>
             </div>
@@ -691,7 +808,7 @@
       });
 
       heroCard.querySelector('[data-hero-action="save"]')?.addEventListener('click', () => {
-        showToast('✓ Hero opportunity saved to research queue');
+        saveOpportunityItem(hero);
       });
 
       document.querySelectorAll('.btn-sec-research').forEach(btn => {
@@ -704,11 +821,17 @@
       });
 
       document.querySelectorAll('.btn-sec-save').forEach(btn => {
-        btn.addEventListener('click', () => {
-          showToast('✓ Opportunity saved to research queue');
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-sec-save-idx') || '1', 10);
+          if (opportunities[idx]) {
+            saveOpportunityItem(opportunities[idx]);
+          }
         });
       });
     }
+
+    // Initialize Saved UI on load
+    updateSavedUI();
 
     // Robust Fallback Analyzer
     async function fallbackAnalyzeClient(domainStr) {
