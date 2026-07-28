@@ -149,14 +149,14 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
         if (resMpRatio) resMpRatio.textContent = 'N/A';
       }
 
-      let category = 'Standard Digital Photo';
+      let category = 'Standard Photo';
       const mpNum = parseFloat(mp);
-      if (mpNum >= 100) category = 'Ultra-High Res Medium Format';
-      else if (mpNum >= 45) category = 'High-Res Studio / Commercial';
-      else if (mpNum >= 24) category = 'Standard Full-Frame / Mirrorless';
-      else if (mpNum >= 12) category = 'Smartphone / Web Resolution';
-      else if (mpNum >= 2) category = 'Full HD Display Resolution';
-      else category = 'Low Resolution / Web Thumbnail';
+      if (mpNum >= 100) category = 'Ultra-High Res';
+      else if (mpNum >= 45) category = 'Studio / Commercial';
+      else if (mpNum >= 24) category = 'Full-Frame Sensor';
+      else if (mpNum >= 12) category = 'Smartphone Camera';
+      else if (mpNum >= 2) category = 'Full HD Display';
+      else category = 'Web Thumbnail';
 
       if (resMpClass) resMpClass.textContent = category;
     }

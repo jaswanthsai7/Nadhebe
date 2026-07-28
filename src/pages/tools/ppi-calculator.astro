@@ -112,11 +112,11 @@ PPI = Diagonal Pixels / Diagonal Size (inches)</code></pre>
       if (resPpiTotal) resPpiTotal.textContent = total.toLocaleString('en-US');
 
       let cat = 'Standard Display';
-      if (ppi >= 400) cat = 'Ultra-High Density (Retina / Flagship)';
-      else if (ppi >= 300) cat = 'High Density (Retina / Laptop)';
-      else if (ppi >= 200) cat = 'Medium-High Density (4K Monitor)';
-      else if (ppi >= 100) cat = 'Standard Monitor (1080p / 1440p)';
-      else cat = 'Low Density / TV';
+      if (ppi >= 400) cat = 'Ultra-High Density';
+      else if (ppi >= 300) cat = 'High Density Retina';
+      else if (ppi >= 200) cat = 'Medium-High Density';
+      else if (ppi >= 100) cat = 'Standard Monitor';
+      else cat = 'Low Density TV';
 
       if (resPpiCat) resPpiCat.textContent = cat;
     }

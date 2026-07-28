@@ -12,7 +12,7 @@ interface Props {
 const { label, value, subtext, badge, copyable = true, accent = false, id } = Astro.props;
 ---
 
-<div class={`group relative flex flex-col justify-between rounded-16 border p-16 sm:p-20 transition-all duration-200 ${
+<div class={`group relative flex flex-col justify-between rounded-16 border p-16 sm:p-20 transition-all duration-200 min-h-[128px] h-full ${
   accent
     ? 'border-accent/40 bg-accent/5 dark:border-accent-dark/40 dark:bg-accent-dark/10 shadow-soft'
     : 'border-border/80 bg-surface2/60 dark:border-border-dark/80 dark:bg-surface2-dark/60'
@@ -27,11 +27,11 @@ const { label, value, subtext, badge, copyable = true, accent = false, id } = As
       )}
     </div>
 
-    <div class="flex items-baseline justify-between gap-8">
+    <div class="flex items-start justify-between gap-8 min-h-[52px]">
       <span
         id={id}
-        class={`font-display font-bold tracking-tight select-all ${
-          accent ? 'text-accent dark:text-accent-dark text-h2 sm:text-h1' : 'text-ink dark:text-ink-dark text-h3 sm:text-h2'
+        class={`font-display font-bold tracking-tight select-all leading-tight break-words ${
+          accent ? 'text-accent dark:text-accent-dark text-h3 sm:text-h2' : 'text-ink dark:text-ink-dark text-h4 sm:text-h3'
         }`}
       >
         {value}
@@ -44,7 +44,7 @@ const { label, value, subtext, badge, copyable = true, accent = false, id } = As
           data-copy-target={id || ''}
           data-copy-val={String(value)}
           aria-label={`Copy ${label}`}
-          class="inline-flex h-32 w-32 items-center justify-center rounded-8 border border-border/80 bg-surface/80 text-ink2 hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150 cursor-pointer shrink-0"
+          class="inline-flex h-32 w-32 items-center justify-center rounded-8 border border-border/80 bg-surface/80 text-ink2 hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150 cursor-pointer shrink-0 mt-2"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 copy-icon">
             <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
