@@ -5,6 +5,212 @@ export interface Env {
   };
 }
 
+// Curated Trends for Deterministic Opportunity Radar Matching
+const CURATED_TRENDS = [
+  {
+    id: 'claude-code-mcp',
+    topic: 'Claude Code MCP Servers',
+    aliases: ['claude code mcp', 'mcp servers claude', 'model context protocol claude', 'claude code skills'],
+    category: 'AI Developer Tools',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'How to Connect MCP Servers to Claude Code CLI',
+      'Best MCP servers for developer workflows',
+      'Building custom MCP plugins for Claude Code'
+    ]
+  },
+  {
+    id: 'gemini-3-6-flash',
+    topic: 'Gemini 3.6 Flash API & Canvas',
+    aliases: ['gemini 3.6 flash', 'gemini 3.6 canvas', 'google gemini 3.6', 'gemini api javascript node'],
+    category: 'AI Models & APIs',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Gemini 3.6 Flash benchmarks and latency',
+      'How to use Gemini Canvas for coding',
+      'Gemini API Node.js integration tutorial'
+    ]
+  },
+  {
+    id: 'deepseek-r1-local-vllm',
+    topic: 'Local DeepSeek R1 Deployment with vLLM',
+    aliases: ['deepseek r1 vllm', 'deepseek r1 local setup', 'vllm gpu oom fix', 'deepseek r1 ollama'],
+    category: 'Local AI & LLMs',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'How to Deploy DeepSeek R1 Locally Using vLLM',
+      'Fixing vLLM GPU out of memory errors for DeepSeek R1',
+      'DeepSeek R1 vs Claude 3.5 Sonnet local benchmark'
+    ]
+  },
+  {
+    id: 'google-flow-storyboard-studio',
+    topic: 'Google Flow Storyboard Studio',
+    aliases: ['google flow storyboard', 'google flow ai video', 'flow studio ai', 'google flow video generator'],
+    category: 'AI Video & Visual Tools',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Google Flow Storyboard Studio Guide',
+      'Building pre-production storyboards with Google Flow',
+      'Google Flow vs Runway Gen-3 comparison'
+    ]
+  },
+  {
+    id: 'kimi-k3-3d-modeling',
+    topic: 'Kimi K3 3D Spatial Generation',
+    aliases: ['kimi k3 3d', 'kimi k3 spatial ai', 'kimi k3 game development', 'kimi k3 mesh generation'],
+    category: '3D & Spatial Computing',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Kimi K3 3D Generation Guide',
+      'Kimi K3 3D modeling workflow for game developers',
+      'Exporting Kimi K3 3D assets to Unreal Engine 5'
+    ]
+  },
+  {
+    id: 'agentic-youtube-automation',
+    topic: 'Multi-Agent YouTube Automation',
+    aliases: ['youtube automation agent', 'ai youtube automation', 'multi agent video generator', 'python youtube bot'],
+    category: 'Autonomous Agents',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Build a Multi-Agent YouTube Workflow',
+      'Setting up an open-source YouTube automation agent',
+      'Automating YouTube Short uploads with AI agents'
+    ]
+  },
+  {
+    id: 'instatic-cms-visual-editor',
+    topic: 'Instatic CMS Visual Importer',
+    aliases: ['instatic cms', 'instatic html importer', 'instatic local vps', 'instatic visual cms'],
+    category: 'Web Development & CMS',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'How to import static HTML sites into Instatic CMS',
+      'Deploying Instatic Docker on VPS',
+      'Instatic enterprise editorial governance guide'
+    ]
+  },
+  {
+    id: 'nextjs-15-server-actions',
+    topic: 'Next.js 15 Server Actions & PPR',
+    aliases: ['next.js 15', 'nextjs 15 ppr', 'partial prerendering nextjs', 'nextjs server actions best practices'],
+    category: 'Web Frameworks',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Next.js 15 Server Actions: Complete Guide',
+      'Next.js 15 Partial Prerendering setup guide',
+      'Securing Next.js Server Actions in production'
+    ]
+  },
+  {
+    id: 'davinci-resolve-vertical-render',
+    topic: 'DaVinci Resolve 9:16 Vertical Video Workflows',
+    aliases: ['davinci resolve 1080x1350', 'davinci resolve 9:16', 'davinci resolve shorts render', 'davinci resolve aspect ratio'],
+    category: 'Social & Creator',
+    source: 'Nadhebe Developer Radar',
+    relatedQueries: [
+      'Best DaVinci Resolve render settings for 1080×1350 and 9:16 Shorts',
+      'Auto-cropping 16:9 video to 9:16 vertical in DaVinci Resolve'
+    ]
+  }
+];
+
+// Helper to extract keywords
+function extractKeywords(text: string): string[] {
+  const stop = new Set(['how', 'to', 'for', 'the', 'and', 'in', 'of', 'a', 'an', 'with', 'on', 'at', 'by', 'is', 'are', 'guide', 'tutorial']);
+  return text.toLowerCase().split(/[\s/_\-:,.\s]+/).filter(t => t.length > 1 && !stop.has(t));
+}
+
+// Deterministic gap matching engine
+interface SiteProfile {
+  topics: string[];
+  categories: string[];
+  existingSlugs: string[];
+}
+
+function matchOpportunities(profile: SiteProfile) {
+  const siteTopics = new Set(profile.topics.map(t => t.toLowerCase()));
+  const siteCategories = new Set(profile.categories.map(c => c.toLowerCase()));
+  const siteSlugs = profile.existingSlugs.map(s => s.toLowerCase());
+
+  const results = [];
+
+  for (const trend of CURATED_TRENDS) {
+    const trendTokens = Array.from(new Set([...extractKeywords(trend.topic), ...trend.aliases.flatMap(extractKeywords)]));
+
+    let topicHits = 0;
+    const matchedTopics: string[] = [];
+    for (const token of trendTokens) {
+      for (const sTopic of siteTopics) {
+        if (sTopic.includes(token) || token.includes(sTopic)) {
+          topicHits++;
+          if (!matchedTopics.includes(sTopic)) matchedTopics.push(sTopic);
+        }
+      }
+    }
+
+    let catMatch = false;
+    for (const cat of siteCategories) {
+      if (cat.includes(trend.category.toLowerCase()) || trend.category.toLowerCase().includes(cat)) {
+        catMatch = true;
+        break;
+      }
+    }
+
+    let relevance = 40;
+    if (trendTokens.length > 0) {
+      relevance += Math.round(Math.min(1, topicHits / Math.max(2, trendTokens.length)) * 40);
+    }
+    if (catMatch) relevance += 20;
+    if (matchedTopics.length > 0) relevance += Math.min(20, matchedTopics.length * 5);
+    relevance = Math.min(100, Math.max(30, relevance));
+
+    let exactMatches = 0;
+    const relatedPages: string[] = [];
+    for (const slug of siteSlugs) {
+      const slugTokens = extractKeywords(slug);
+      const overlap = trendTokens.filter(t => slugTokens.includes(t)).length;
+      if (overlap >= Math.min(2, trendTokens.length)) {
+        relatedPages.push(slug);
+        if (overlap >= Math.min(3, trendTokens.length)) exactMatches++;
+      }
+    }
+
+    let gapScore = 100;
+    let gapStrength = 'High';
+    if (exactMatches > 0) {
+      gapScore = 15; gapStrength = 'Low';
+    } else if (relatedPages.length >= 2) {
+      gapScore = 70; gapStrength = 'Medium';
+    } else {
+      gapScore = 100; gapStrength = 'High';
+    }
+
+    const totalScore = Math.round(0.6 * relevance + 0.4 * gapScore);
+    const topTopicsStr = matchedTopics.slice(0, 2).join(', ') || 'related topics';
+
+    const why = relatedPages.length > 0
+      ? `You cover ${topTopicsStr}, but we couldn't find an article specifically covering ${trend.topic}.`
+      : `Missing from your ${trend.category.toLowerCase()} content.`;
+
+    results.push({
+      topic: trend.topic,
+      category: trend.category,
+      relevance,
+      gapScore,
+      gapStrength,
+      totalScore,
+      source: trend.source,
+      why,
+      suggestedWriteTitle: trend.relatedQueries[0] || `Guide to ${trend.topic}`,
+      queries: trend.relatedQueries
+    });
+  }
+
+  return results.sort((a, b) => b.totalScore - a.totalScore).slice(0, 5);
+}
+
 // Robust SSRF protection
 function isSSRFSafe(urlStr: string): boolean {
   try {
@@ -32,22 +238,64 @@ function isSSRFSafe(urlStr: string): boolean {
   }
 }
 
-// Clean up code blocks if the model wrapped output in markdown
-function cleanJsonResponse(raw: string): string {
-  return raw
-    .replace(/```json/gi, '')
-    .replace(/```/gi, '')
-    .trim();
+// Manual redirect following with SSRF check at every hop
+async function fetchWithSafeRedirects(initialUrl: string, maxRedirects = 3): Promise<Response> {
+  let currentUrl = initialUrl;
+  let redirectCount = 0;
+
+  while (redirectCount <= maxRedirects) {
+    if (!isSSRFSafe(currentUrl)) {
+      throw new Error(`SSRF Blocked: URL target is not safe.`);
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    const res = await fetch(currentUrl, {
+      method: 'GET',
+      redirect: 'manual', // Intercept redirects manually
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'NadhebeOpportunityRadar/1.0'
+      }
+    });
+    clearTimeout(timeoutId);
+
+    if (res.status >= 300 && res.status < 400) {
+      const location = res.headers.get('location');
+      if (!location) {
+        return res;
+      }
+      
+      const absoluteLocation = new URL(location, currentUrl).toString();
+      currentUrl = absoluteLocation;
+      redirectCount++;
+      continue;
+    }
+
+    return res;
+  }
+
+  throw new Error(`Too many redirects followed (max ${maxRedirects})`);
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    // Route: /api/analyze-site
-    if (url.pathname === '/api/analyze-site' && request.method === 'POST') {
+    // Route: /api/analyze-site (CONSUMES ZERO AI NEURONS - purely deterministic)
+    if (url.pathname === '/api/analyze-site') {
+      if (request.method !== 'POST') {
+        return Response.json({ success: false, error: 'Method Not Allowed' }, { status: 405 });
+      }
+
       try {
-        const { domain } = await request.json() as { domain?: string };
+        const bodyText = await request.text();
+        if (bodyText.length > 1000) { // Capped request body size
+          return Response.json({ success: false, error: 'Payload Too Large' }, { status: 413 });
+        }
+
+        const { domain } = JSON.parse(bodyText) as { domain?: string };
         if (!domain) {
           return Response.json({ success: false, error: 'Domain is required' }, { status: 400 });
         }
@@ -62,23 +310,19 @@ export default {
         const parsed = new URL(origin);
         const host = parsed.hostname;
 
-        // Fetch sitemap with strict timeout
+        // Fetch sitemap with strict redirects and timeouts
         let sitemapText = '';
-        const fetchController = new AbortController();
-        const timeoutId = setTimeout(() => fetchController.abort(), 6000);
-
         try {
-          const sitemapRes = await fetch(`${parsed.origin}/sitemap.xml`, { signal: fetchController.signal });
+          const sitemapRes = await fetchWithSafeRedirects(`${parsed.origin}/sitemap.xml`);
           if (sitemapRes.ok) sitemapText = await sitemapRes.text();
         } catch {}
 
         if (!sitemapText) {
           try {
-            const sitemap0Res = await fetch(`${parsed.origin}/sitemap-0.xml`, { signal: fetchController.signal });
+            const sitemap0Res = await fetchWithSafeRedirects(`${parsed.origin}/sitemap-0.xml`);
             if (sitemap0Res.ok) sitemapText = await sitemap0Res.text();
           } catch {}
         }
-        clearTimeout(timeoutId);
 
         const urls: string[] = [];
         const locRegex = /<loc>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/loc>/gi;
@@ -110,68 +354,23 @@ export default {
           } catch {}
         }
 
-        const topics = Array.from(topicsSet).slice(0, 30).join(', ');
-        const categories = Array.from(categoriesSet).slice(0, 10).join(', ');
+        const profile: SiteProfile = {
+          topics: Array.from(topicsSet).slice(0, 50),
+          categories: Array.from(categoriesSet).slice(0, 10),
+          existingSlugs: existingSlugs.slice(0, 100)
+        };
 
-        const systemPrompt = `You are a professional SEO Content Strategist and Topic Cluster Architect.
-Your task is to analyze a website profile and identify 5 high-impact content opportunities (gaps).
-Analyze the site's categories and topics:
-Categories: ${categories || 'general tech'}
-Topics: ${topics || 'software engineering, web development'}
-
-Generate 5 distinct content opportunities. Each opportunity must have:
-1. topic: A short, trending technology topic name.
-2. category: General niche category (e.g. AI Developer Tools, Web Frameworks, Local AI).
-3. relevance: A percentage score (30 to 100) based on how relevant this is to the site's profile.
-4. gapStrength: "High", "Medium", or "Low" (use "High" if the site definitely doesn't cover this trending topic).
-5. totalScore: An aggregate score (30 to 100) reflecting high relevance and high gap strength.
-6. source: An authoritative signal source (e.g., Google Trends, GitHub Trending, Vercel Radar).
-7. why: A detailed 1-sentence explanation of why the site needs this topic (e.g., "You cover next.js, but we couldn't find an article specifically covering Next.js 15 Server Actions").
-8. suggestedWriteTitle: A highly clickable, SEO-friendly article title.
-9. queries: An array of 3 specific heading suggestions or sub-topics to cover.
-
-You MUST return the output ONLY as a raw JSON array of 5 objects, with exactly this schema:
-[
-  {
-    "topic": "Topic Name",
-    "category": "Category Name",
-    "relevance": 85,
-    "gapStrength": "High",
-    "totalScore": 88,
-    "source": "GitHub Trending",
-    "why": "Explanation goes here.",
-    "suggestedWriteTitle": "Clickable Title Guide",
-    "queries": ["Heading 1", "Heading 2", "Heading 3"]
-  }
-]
-Do not wrap your response in markdown code blocks like \`\`\`json. Return only raw JSON.`;
-
-        const aiResponse = await env.AI.run("@cf/google/gemma-4-26b-a4b-it", {
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: `Analyze the domain: ${host}. Find 5 SEO content opportunities (gaps).` }
-          ]
-        });
-
-        let rawResponse = '';
-        if (typeof aiResponse === 'object' && aiResponse !== null && 'response' in aiResponse) {
-          rawResponse = (aiResponse as any).response;
-        } else if (typeof aiResponse === 'string') {
-          rawResponse = aiResponse;
-        } else {
-          rawResponse = JSON.stringify(aiResponse);
-        }
-
-        const opportunities = JSON.parse(cleanJsonResponse(rawResponse));
+        // Deterministic Opportunity Radar Matching (ZERO AI neurons used!)
+        const opportunities = matchOpportunities(profile);
 
         return Response.json({
           success: true,
           profile: {
             domain: host,
             urlCount: Math.max(targetUrls.length, 1),
-            topics: Array.from(topicsSet).slice(0, 50),
-            categories: Array.from(categoriesSet).slice(0, 10),
-            existingSlugs: existingSlugs.slice(0, 100),
+            topics: profile.topics,
+            categories: profile.categories,
+            existingSlugs: profile.existingSlugs,
             analyzedAt: new Date().toISOString()
           },
           opportunities
@@ -182,10 +381,19 @@ Do not wrap your response in markdown code blocks like \`\`\`json. Return only r
       }
     }
 
-    // Route: /api/research-topic
-    if (url.pathname === '/api/research-topic' && request.method === 'POST') {
+    // Route: /api/research-topic (Workers AI research endpoint)
+    if (url.pathname === '/api/research-topic') {
+      if (request.method !== 'POST') {
+        return Response.json({ success: false, error: 'Method Not Allowed' }, { status: 405 });
+      }
+
       try {
-        const { topic, category } = await request.json() as { topic?: string, category?: string };
+        const bodyText = await request.text();
+        if (bodyText.length > 1000) { // Request body size limit
+          return Response.json({ success: false, error: 'Payload Too Large' }, { status: 413 });
+        }
+
+        const { topic, category } = JSON.parse(bodyText) as { topic?: string, category?: string };
         
         // Request validation
         if (!topic || typeof topic !== 'string' || topic.trim().length > 100) {
@@ -198,6 +406,7 @@ Do not wrap your response in markdown code blocks like \`\`\`json. Return only r
         const sanitizedTopic = topic.trim();
         const sanitizedCategory = category ? category.trim() : 'General Technology';
 
+        // Non-client editable system prompt
         const systemPrompt = `You are a Senior Technical Writer and SEO Strategist. 
 Generate a detailed content research brief / outline for a blog post or tutorial on the given topic.
 Keep the outline structured, professional, and optimized for search intent.
@@ -208,7 +417,7 @@ Format the output in clean Markdown. Do not exceed 800 tokens.`;
             { role: 'system', content: systemPrompt },
             { role: 'user', content: `Create a detailed content research outline for the topic: "${sanitizedTopic}" (Category: "${sanitizedCategory}").` }
           ],
-          max_tokens: 800 // Limit token counts to prevent abuse
+          max_tokens: 800 // Strict output token limit
         });
 
         let brief = '';
@@ -230,6 +439,11 @@ Format the output in clean Markdown. Do not exceed 800 tokens.`;
       } catch (error: any) {
         return Response.json({ success: false, error: error.message || 'Internal Server Error' }, { status: 500 });
       }
+    }
+
+    // Explicitly reject any other /api/* routes to avoid falling through to static pages
+    if (url.pathname.startsWith('/api/')) {
+      return Response.json({ success: false, error: 'API route not found' }, { status: 404 });
     }
 
     // Default route: Fallback to Astro static assets
