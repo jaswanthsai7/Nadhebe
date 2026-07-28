@@ -931,6 +931,7 @@
       if (loadingStep) loadingStep.textContent = `Discovering sitemap directives for ${domain}...`;
 
       let profile = null;
+      let apiOpportunities = null;
 
       try {
         const res = await fetch('/api/analyze-site', {
@@ -941,8 +942,11 @@
 
         if (res.ok) {
           const data = await res.json();
-          if (data.success && data.profile) {
+          if (data.success) {
             profile = data.profile;
+            if (data.opportunities && data.opportunities.length > 0) {
+              apiOpportunities = data.opportunities;
+            }
           }
         }
       } catch (e) {}
@@ -961,7 +965,11 @@
       if (loadingStep) loadingStep.textContent = `Analyzing ${profile.urlCount} sitemap URLs and matching content gaps...`;
 
       setTimeout(() => {
-        currentOpportunities = matchOpportunities(profile);
+        if (apiOpportunities) {
+          currentOpportunities = apiOpportunities;
+        } else {
+          currentOpportunities = matchOpportunities(profile);
+        }
         currentDomain = profile.domain;
 
         loadingState?.classList.add('hidden');

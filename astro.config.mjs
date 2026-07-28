@@ -4,13 +4,20 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import path from 'path';
 
+import cloudflare from '@astrojs/cloudflare';
+
 const rawSite = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
 const site = rawSite.trim().replace(/\/+$/, '');
 
 // https://astro.build/config
 export default defineConfig({
   site,
-  output: 'static',         // Static site — no adapter needed for Cloudflare Pages
+  output: 'static',
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
   build: {
     assets: '_assets',      // Cloudflare-safe asset directory name
     inlineStylesheets: 'always',
