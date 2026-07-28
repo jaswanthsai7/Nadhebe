@@ -1,0 +1,252 @@
+---
+import ReferencePageLayout from '@/components/tools/ReferencePageLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+import {
+  PRINT_SIZES_300_DPI,
+  RESOLUTION_CHART_16_9,
+  TOOL_REFERENCES,
+} from '@/config/reference-data';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: '300-dpi-print-size-chart' } },
+    { params: { slug: '16-9-resolution-chart' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const isPrintChart = slug === '300-dpi-print-size-chart';
+const isWidescreenChart = slug === '16-9-resolution-chart';
+---
+
+{isPrintChart && (
+  <ReferencePageLayout
+    title="300 DPI Print Size Reference Chart — Pixel to Inches & CM Table | Nadhebe"
+    description="Comprehensive 300 DPI print size chart converting pixel dimensions to inches, cm, mm, and paper series (A4, A3, Photo prints) at 300, 150, and 72 DPI."
+    h1="300 DPI Print Size Reference Chart"
+    targetKeyword="300 dpi print size chart"
+    slug={slug}
+    lastVerified="2026-07-28"
+    sourceLabel="ISO 216 & Professional Print Guidelines"
+    sourceUrl="https://nadhebe.com/tools/dpi-print-size-calculator/"
+    faq={[
+      {
+        question: "Why is 300 DPI the standard for photo printing?",
+        answer: "At 300 Dots Per Inch (DPI), individual ink dots are smaller than the resolving limit of the human eye at standard viewing distances (~12-15 inches). This delivers razor-sharp photographic prints without pixelation."
+      },
+      {
+        question: "How do I calculate pixel dimensions for any print size at 300 DPI?",
+        answer: "Multiply the physical width and height in inches by 300. For example, for an 8×10 inch print: 8 × 300 = 2,400 px, and 10 × 300 = 3,000 px (2400 × 3000 pixels)."
+      },
+      {
+        question: "What is the difference between 300 DPI and 72 DPI?",
+        answer: "300 DPI is intended for physical paper/canvas printing where high dot density is required. 72 DPI was the historical baseline for web displays where screen pixels per inch are much lower."
+      }
+    ]}
+  >
+    <!-- Interactive Quick Lookup -->
+    <CalculatorCard title="Instant 300 DPI Print Lookup Calculator" description="Enter physical print size or select a standard paper size to compute required 300 DPI pixels">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-16 mb-24">
+        <div>
+          <label for="ref-in-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (Inches)</label>
+          <input
+            type="number"
+            id="ref-in-w"
+            value="8"
+            min="0.5"
+            max="200"
+            step="0.1"
+            class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+          />
+        </div>
+        <div>
+          <label for="ref-in-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (Inches)</label>
+          <input
+            type="number"
+            id="ref-in-h"
+            value="10"
+            min="0.5"
+            max="200"
+            step="0.1"
+            class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+          />
+        </div>
+        <div>
+          <label for="ref-dpi" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Target Resolution (DPI)</label>
+          <select
+            id="ref-dpi"
+            class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-body-small font-mono font-semibold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
+          >
+            <option value="300" selected>300 DPI (High Quality Print)</option>
+            <option value="150">150 DPI (Medium / Newspaper)</option>
+            <option value="72">72 DPI (Web Screen Baseline)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16">
+        <ResultCard label="Required Pixels" value="2400 × 3000 px" id="ref-res-px" accent copyable />
+        <ResultCard label="Megapixels (MP)" value="7.20 MP" id="ref-res-mp" copyable />
+        <ResultCard label="Size in Centimeters" value="20.3 × 25.4 cm" id="ref-res-cm" copyable />
+        <ResultCard label="Aspect Ratio" value="4:5" id="ref-res-ratio" copyable={false} />
+      </div>
+    </CalculatorCard>
+
+    <!-- Semantic HTML Reference Table -->
+    <CalculatorCard title="Standard Print Sizes & Pixel Chart (300 DPI, 150 DPI, 72 DPI)">
+      <div class="overflow-x-auto my-16">
+        <table class="w-full text-left border-collapse text-body-small">
+          <thead>
+            <tr class="border-b border-border bg-surface2/80 dark:border-border-dark dark:bg-surface2-dark/80 text-caption font-mono text-ink dark:text-ink-dark">
+              <th class="p-12">Format Name</th>
+              <th class="p-12">Category</th>
+              <th class="p-12">Inches</th>
+              <th class="p-12">Centimeters</th>
+              <th class="p-12">300 DPI Pixels</th>
+              <th class="p-12">150 DPI Pixels</th>
+              <th class="p-12">72 DPI Pixels</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/60 dark:divide-border-dark/60 font-mono text-xs">
+            {PRINT_SIZES_300_DPI.map((item) => (
+              <tr class="hover:bg-surface2/40 dark:hover:bg-surface2-dark/40 transition-colors">
+                <td class="p-12 font-bold text-ink dark:text-ink-dark">{item.name}</td>
+                <td class="p-12"><span class="rounded-pill bg-accent/10 px-8 py-2 text-accent dark:bg-accent-dark/20 dark:text-accent-dark font-semibold">{item.category}</span></td>
+                <td class="p-12 text-ink2 dark:text-ink2-dark">{item.inchesWidth} × {item.inchesHeight} in</td>
+                <td class="p-12 text-ink2 dark:text-ink2-dark">{item.cmWidth} × {item.cmHeight} cm</td>
+                <td class="p-12 font-bold text-accent dark:text-accent-dark">{item.px300DpiWidth} × {item.px300DpiHeight} px</td>
+                <td class="p-12 text-ink2 dark:text-ink2-dark">{item.px150DpiWidth} × {item.px150DpiHeight} px</td>
+                <td class="p-12 text-muted dark:text-muted-dark">{item.px72DpiWidth} × {item.px72DpiHeight} px</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </CalculatorCard>
+
+    <div class="prose prose-slate dark:prose-invert max-w-none glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+      <h2>Understanding 300 DPI Resolution for Commercial Printing</h2>
+      <p>
+        Dots Per Inch (DPI) defines how many ink dots a physical commercial printer places within a single inch of paper. When preparing digital artwork for physical print, maintaining 300 DPI prevents blurry edges and visible pixel blocks.
+      </p>
+      <ul>
+        <li><strong>ISO A-Series Papers</strong>: Standardized globally based on a constant $\sqrt{2}$ (1:1.414) aspect ratio.</li>
+        <li><strong>Photo Prints (4×6, 5×7, 8×10)</strong>: Standard photographic aspect ratios designed for photo frames and albums.</li>
+      </ul>
+      <p>
+        For customized physical print size calculations, use our dedicated <a href="/tools/dpi-print-size-calculator/">DPI Print Size Calculator</a>.
+      </p>
+    </div>
+
+    <script is:inline>
+      (function() {
+        const inW = document.getElementById('ref-in-w');
+        const inH = document.getElementById('ref-in-h');
+        const dpiSel = document.getElementById('ref-dpi');
+
+        const resPx = document.getElementById('ref-res-px');
+        const resMp = document.getElementById('ref-res-mp');
+        const resCm = document.getElementById('ref-res-cm');
+        const resRatio = document.getElementById('ref-res-ratio');
+
+        function gcd(a, b) {
+          a = Math.abs(Math.round(a)); b = Math.abs(Math.round(b));
+          while (b) { let t = b; b = a % b; a = t; }
+          return a || 1;
+        }
+
+        function calculate() {
+          const wIn = Math.min(Math.abs(parseFloat(inW?.value || '0')), 200);
+          const hIn = Math.min(Math.abs(parseFloat(inH?.value || '0')), 200);
+          const dpi = parseFloat(dpiSel?.value || '300');
+
+          if (!wIn || !hIn || wIn <= 0 || hIn <= 0) return;
+
+          const pxW = Math.round(wIn * dpi);
+          const pxH = Math.round(hIn * dpi);
+          const totalPx = pxW * pxH;
+          const mp = (totalPx / 1000000).toFixed(2);
+          const cmW = (wIn * 2.54).toFixed(1);
+          const cmH = (hIn * 2.54).toFixed(1);
+
+          const div = gcd(pxW, pxH);
+          const rW = Math.round(pxW / div);
+          const rH = Math.round(pxH / div);
+
+          if (resPx) resPx.textContent = `${pxW} × ${pxH} px`;
+          if (resMp) resMp.textContent = `${mp} MP`;
+          if (resCm) resCm.textContent = `${cmW} × ${cmH} cm`;
+          if (resRatio) resRatio.textContent = `${rW}:${rH}`;
+        }
+
+        inW?.addEventListener('input', calculate);
+        inH?.addEventListener('input', calculate);
+        dpiSel?.addEventListener('change', calculate);
+      })();
+    </script>
+  </ReferencePageLayout>
+)}
+
+{isWidescreenChart && (
+  <ReferencePageLayout
+    title="16:9 Widescreen Resolution Reference Chart — SD to 8K Table | Nadhebe"
+    description="Comprehensive 16:9 widescreen resolution chart listing pixel dimensions, total pixel counts, megapixels, and common display standards from 360p to 8K."
+    h1="16:9 Widescreen Resolution Reference Chart"
+    targetKeyword="16:9 resolution chart"
+    slug={slug}
+    lastVerified="2026-07-28"
+    sourceLabel="CTA Display Standards & Video Industry Specifications"
+    sourceUrl="https://nadhebe.com/tools/16-9-dimensions-calculator/"
+    faq={[
+      {
+        question: "What is the official pixel resolution for 16:9 Full HD?",
+        answer: "16:9 Full HD (1080p) has a resolution of 1920 × 1080 pixels, totaling 2.07 Megapixels."
+      },
+      {
+        question: "What pixel resolutions qualify as true 16:9 widescreen?",
+        answer: "Common 16:9 widescreen resolutions include 1280×720 (720p HD), 1920×1080 (1080p Full HD), 2560×1440 (1440p QHD), 3840×2160 (4K UHD), and 7680×4320 (8K UHD)."
+      }
+    ]}
+  >
+    <CalculatorCard title="Complete 16:9 Widescreen Resolution Matrix">
+      <div class="overflow-x-auto my-16">
+        <table class="w-full text-left border-collapse text-body-small">
+          <thead>
+            <tr class="border-b border-border bg-surface2/80 dark:border-border-dark dark:bg-surface2-dark/80 text-caption font-mono text-ink dark:text-ink-dark">
+              <th class="p-12">Format Name</th>
+              <th class="p-12">Standard Classification</th>
+              <th class="p-12">Width × Height (px)</th>
+              <th class="p-12">Total Pixels</th>
+              <th class="p-12">Megapixels</th>
+              <th class="p-12">Common Devices & Video Use</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/60 dark:divide-border-dark/60 font-mono text-xs">
+            {RESOLUTION_CHART_16_9.map((item) => (
+              <tr class="hover:bg-surface2/40 dark:hover:bg-surface2-dark/40 transition-colors">
+                <td class="p-12 font-bold text-ink dark:text-ink-dark">{item.name}</td>
+                <td class="p-12"><span class="rounded-pill bg-accent/10 px-8 py-2 text-accent dark:bg-accent-dark/20 dark:text-accent-dark font-semibold">{item.standardLabel}</span></td>
+                <td class="p-12 font-bold text-accent dark:text-accent-dark">{item.width} × {item.height} px</td>
+                <td class="p-12 text-ink2 dark:text-ink2-dark">{item.totalPixels.toLocaleString('en-US')}</td>
+                <td class="p-12 text-ink2 dark:text-ink2-dark">{item.megapixels} MP</td>
+                <td class="p-12 text-muted dark:text-muted-dark">{item.commonDevices}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </CalculatorCard>
+
+    <div class="prose prose-slate dark:prose-invert max-w-none glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+      <h2>Why 16:9 is the Global Video Standard</h2>
+      <p>
+        The 16:9 aspect ratio was established in the late 1980s as the compromise standard between 4:3 television broadcasting and 2.39:1 widescreen cinema. Today, it is the native display standard for YouTube, television broadcasting, gaming monitors, and laptops.
+      </p>
+      <p>
+        To scale custom 16:9 dimensions interactively, use our dedicated <a href="/tools/16-9-dimensions-calculator/">16:9 Dimensions Calculator</a>.
+      </p>
+    </div>
+  </ReferencePageLayout>
+)}

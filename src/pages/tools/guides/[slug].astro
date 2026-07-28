@@ -1,0 +1,131 @@
+---
+import GuidePageLayout from '@/components/tools/GuidePageLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'davinci-resolve-1080x1350-render-guide' } },
+  ];
+}
+
+const { slug } = Astro.params;
+---
+
+<GuidePageLayout
+  title="DaVinci Resolve 1080×1350 Render Guide — Vertical 4:5 Export Settings | Nadhebe"
+  description="Step-by-step workflow guide to set timeline resolution, image scaling, and export settings for 1080×1350 vertical video in DaVinci Resolve without black bars."
+  h1="DaVinci Resolve 1080×1350 Vertical Video Render Guide"
+  targetKeyword="davinci resolve 1080x1350 render guide"
+  slug={slug}
+  software="DaVinci Resolve 18 / 19"
+>
+  <!-- Embedded Quick Scaler Calculator -->
+  <CalculatorCard title="Embedded 4:5 Vertical Scaler for DaVinci Timelines" description="Quickly compute timeline or export pixel dimensions preserving 4:5 vertical proportions">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
+      <div>
+        <label for="dv-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Timeline Width (px)</label>
+        <input
+          type="number"
+          id="dv-w"
+          value="1080"
+          min="1"
+          max="100000"
+          class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+        />
+      </div>
+      <div>
+        <label for="dv-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Timeline Height (px)</label>
+        <input
+          type="number"
+          id="dv-h"
+          value="1350"
+          min="1"
+          max="100000"
+          class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-16">
+      <ResultCard label="Export Dimensions" value="1080 × 1350" id="dv-res-dims" accent copyable />
+      <ResultCard label="Aspect Ratio" value="4:5 Portrait" id="dv-res-ratio" copyable={false} />
+      <ResultCard label="DaVinci Timeline Mode" value="Custom Resolution" id="dv-res-mode" copyable={false} />
+    </div>
+  </CalculatorCard>
+
+  <!-- Verified Step-by-Step Instructions -->
+  <div class="prose prose-slate dark:prose-invert max-w-none glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+    <h2>Step 1: Set Up Timeline Resolution (Project Settings)</h2>
+    <ol>
+      <li>Open DaVinci Resolve and press <code>Shift + 9</code> to open <strong>Project Settings</strong>.</li>
+      <li>In the <strong>Master Settings</strong> tab under <strong>Timeline Format</strong>:
+        <ul>
+          <li>Set <strong>Timeline Resolution</strong> to <code>Custom</code>.</li>
+          <li>Enter <code>1080</code> for Width and <code>1350</code> for Height.</li>
+          <li>Alternatively, check <strong>Use vertical resolution</strong> if working in DaVinci Resolve 18.5+.</li>
+        </ul>
+      </li>
+      <li>Set <strong>Pixel Aspect Ratio</strong> to <code>Square</code>.</li>
+    </ol>
+
+    <h2>Step 2: Configure Image Scaling (Prevent Black Pillarboxes)</h2>
+    <ol>
+      <li>Under <strong>Image Scaling</strong> $\rightarrow$ <strong>Input Scaling</strong>:</li>
+      <li>Set <strong>Mismatched Resolution Files</strong> to <code>Scale full frame with crop</code> to fill the 1080×1350 canvas without black bars on the sides.</li>
+    </ol>
+
+    <h2>Step 3: Export & Render Settings (Deliver Page)</h2>
+    <ol>
+      <li>Navigate to the <strong>Deliver Page</strong> (Rocket Icon).</li>
+      <li>In the Render Settings panel:
+        <ul>
+          <li><strong>Format</strong>: MP4 or QuickTime</li>
+          <li><strong>Codec</strong>: H.264 or H.265 (HEVC)</li>
+          <li><strong>Resolution</strong>: <code>Custom</code> $\rightarrow$ <code>1080 × 1350</code></li>
+          <li><strong>Frame Rate</strong>: Match your timeline (e.g. 23.976, 29.97, or 60 fps)</li>
+          <li><strong>Encoding Profile</strong>: Main or High</li>
+        </ul>
+      </li>
+      <li>Click <strong>Add to Render Queue</strong> and start rendering.</li>
+    </ol>
+  </div>
+
+  <CodeSnippet
+    title="DaVinci Resolve Quick Specs Copy"
+    cssSnippet="1080 x 1350 (4:5 Ratio)"
+    tailwindSnippet="Codec: H.264 / MP4"
+    htmlSnippet="Color Space: Rec.709 / Gamma 2.4"
+    id="dv-code-snippet"
+  />
+
+  <script is:inline>
+    (function() {
+      const inW = document.getElementById('dv-w');
+      const inH = document.getElementById('dv-h');
+      const resDims = document.getElementById('dv-res-dims');
+
+      function calculate(event) {
+        const target = event?.target?.id;
+        let w = Math.min(Math.abs(parseFloat(inW?.value || '0')), 100000);
+        let h = Math.min(Math.abs(parseFloat(inH?.value || '0')), 100000);
+
+        if (target === 'dv-w' && w > 0) {
+          h = Math.round((w * 5) / 4);
+          if (inH) inH.value = String(h);
+        } else if (target === 'dv-h' && h > 0) {
+          w = Math.round((h * 4) / 5);
+          if (inW) inW.value = String(w);
+        }
+
+          if (w > 0 && h > 0 && resDims) {
+            resDims.textContent = `${w} × ${h}`;
+          }
+      }
+
+      inW?.addEventListener('input', calculate);
+      inH?.addEventListener('input', calculate);
+    })();
+  </script>
+</GuidePageLayout>

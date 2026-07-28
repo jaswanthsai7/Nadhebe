@@ -101,6 +101,7 @@ const faq = [
               <th class="py-12 px-16 font-mono text-caption">Format</th>
               <th class="py-12 px-16 font-mono text-caption">Width × Height</th>
               <th class="py-12 px-16 font-mono text-caption">Aspect Ratio</th>
+              <th class="py-12 px-16 font-mono text-caption">Verification</th>
               <th class="py-12 px-16 font-mono text-caption">Action</th>
             </tr>
           </thead>
@@ -111,6 +112,16 @@ const faq = [
                 <td class="py-12 px-16 font-sans text-ink dark:text-ink-dark">{item.format}</td>
                 <td class="py-12 px-16 font-mono font-bold text-ink dark:text-ink-dark">{item.width} × {item.height} px</td>
                 <td class="py-12 px-16 font-mono text-muted dark:text-muted-dark">{item.aspectRatio}</td>
+                <td class="py-12 px-16 font-mono text-xs">
+                  <span class={`rounded-pill px-8 py-2 font-semibold ${
+                    item.type === 'official'
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                  }`}>
+                    {item.type === 'official' ? 'Official Spec' : 'Recommended'}
+                  </span>
+                  <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" class="ml-6 text-[10px] text-muted underline hover:text-accent">Source</a>
+                </td>
                 <td class="py-12 px-16">
                   <button
                     type="button"

@@ -1,0 +1,78 @@
+---
+interface Props {
+  title?: string;
+  cssSnippet: string;
+  tailwindSnippet?: string;
+  htmlSnippet?: string;
+  id?: string;
+}
+
+const {
+  title = 'Copyable Developer Snippets',
+  cssSnippet,
+  tailwindSnippet,
+  htmlSnippet,
+  id = 'code-snippet-box',
+} = Astro.props;
+---
+
+<div class="rounded-16 border border-border bg-surface2/60 p-16 sm:p-20 dark:border-border-dark dark:bg-surface2-dark/60" id={id}>
+  <div class="flex items-center justify-between gap-12 mb-12">
+    <h3 class="font-display text-h4 font-semibold text-ink dark:text-ink-dark">{title}</h3>
+    <span class="text-caption font-mono text-muted dark:text-muted-dark">CSS / Tailwind / HTML</span>
+  </div>
+
+  <div class="space-y-12">
+    <!-- CSS Standard -->
+    <div>
+      <div class="flex items-center justify-between gap-8 mb-4 text-xs font-mono text-muted dark:text-muted-dark">
+        <span>CSS Property</span>
+        <button
+          type="button"
+          data-copy-trigger
+          data-copy-val={cssSnippet}
+          class="hover:text-accent dark:hover:text-accent-dark transition-colors cursor-pointer"
+        >
+          Copy CSS
+        </button>
+      </div>
+      <pre class="rounded-8 bg-surface p-12 font-mono text-xs text-ink dark:bg-surface-dark dark:text-ink-dark overflow-x-auto border border-border/60 dark:border-border-dark/60"><code>{cssSnippet}</code></pre>
+    </div>
+
+    <!-- Tailwind Equivalent -->
+    {tailwindSnippet && (
+      <div>
+        <div class="flex items-center justify-between gap-8 mb-4 text-xs font-mono text-muted dark:text-muted-dark">
+          <span>Tailwind CSS Utility</span>
+          <button
+            type="button"
+            data-copy-trigger
+            data-copy-val={tailwindSnippet}
+            class="hover:text-accent dark:hover:text-accent-dark transition-colors cursor-pointer"
+          >
+            Copy Tailwind
+          </button>
+        </div>
+        <pre class="rounded-8 bg-surface p-12 font-mono text-xs text-ink dark:bg-surface-dark dark:text-ink-dark overflow-x-auto border border-border/60 dark:border-border-dark/60"><code>{tailwindSnippet}</code></pre>
+      </div>
+    )}
+
+    <!-- HTML Snippet -->
+    {htmlSnippet && (
+      <div>
+        <div class="flex items-center justify-between gap-8 mb-4 text-xs font-mono text-muted dark:text-muted-dark">
+          <span>HTML Attribute</span>
+          <button
+            type="button"
+            data-copy-trigger
+            data-copy-val={htmlSnippet}
+            class="hover:text-accent dark:hover:text-accent-dark transition-colors cursor-pointer"
+          >
+            Copy HTML
+          </button>
+        </div>
+        <pre class="rounded-8 bg-surface p-12 font-mono text-xs text-ink dark:bg-surface-dark dark:text-ink-dark overflow-x-auto border border-border/60 dark:border-border-dark/60"><code>{htmlSnippet}</code></pre>
+      </div>
+    )}
+  </div>
+</div>

@@ -1,0 +1,148 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import RelatedToolsCard from '@/components/tools/RelatedToolsCard.astro';
+import { KEYWORD_OWNERSHIP_MAP } from '@/config/reference-data';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  targetKeyword: string;
+  slug: string;
+  lastVerified?: string;
+  sourceLabel?: string;
+  sourceUrl?: string;
+  faq?: FAQItem[];
+}
+
+const {
+  title,
+  description,
+  h1,
+  targetKeyword,
+  slug,
+  lastVerified = '2026-07-28',
+  sourceLabel = 'Official Documentation & Standards',
+  sourceUrl = 'https://nadhebe.com/',
+  faq = [],
+} = Astro.props;
+
+const currentUrl = `https://nadhebe.com/tools/reference/${slug}/`;
+
+const jsonLdBlocks = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${currentUrl}#webpage`,
+    url: currentUrl,
+    name: title,
+    description: description,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Nadhebe',
+      url: 'https://nadhebe.com/',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://nadhebe.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://nadhebe.com/tools/' },
+      { '@type': 'ListItem', position: 3, name: 'Reference', item: 'https://nadhebe.com/tools/reference/' },
+      { '@type': 'ListItem', position: 4, name: h1, item: currentUrl },
+    ],
+  },
+];
+
+if (faq.length > 0) {
+  jsonLdBlocks.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  });
+}
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={currentUrl} jsonLd={jsonLdBlocks}>
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+    <Breadcrumb
+      items={[
+        { name: 'Home', href: '/' },
+        { name: 'Tools', href: '/tools/' },
+        { name: 'Reference', href: '/tools/' },
+        { name: h1, href: currentUrl },
+      ]}
+    />
+
+    <!-- Reference Asset Header -->
+    <header class="glass-panel mb-32 rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90" data-reveal>
+      <div class="flex flex-wrap items-center gap-12 mb-16">
+        <span class="inline-flex items-center gap-6 rounded-pill border border-accent/30 bg-accent/10 px-12 py-6 font-mono text-xs font-semibold text-accent dark:text-accent-dark">
+          Verified Reference Utility
+        </span>
+        <span class="rounded-pill border border-border bg-surface2 px-12 py-6 font-mono text-xs font-medium text-ink2 dark:border-border-dark dark:bg-surface2-dark dark:text-ink2-dark">
+          Verified: {lastVerified}
+        </span>
+      </div>
+
+      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight tracking-tight">
+        {h1}
+      </h1>
+      <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">
+        {description}
+      </p>
+
+      {sourceUrl && sourceLabel && (
+        <div class="mt-16 text-caption font-mono text-muted dark:text-muted-dark">
+          Source: <a href={sourceUrl} target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">{sourceLabel}</a>
+        </div>
+      )}
+    </header>
+
+    <!-- Main Content Slot -->
+    <div class="space-y-48">
+      <slot />
+    </div>
+
+    <!-- FAQ Accordion Section (if present) -->
+    {faq.length > 0 && (
+      <section class="my-48 glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-32 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90" data-reveal>
+        <div class="border-b border-border/60 pb-16 mb-24 dark:border-border-dark/60">
+          <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark">Frequently Asked Questions</h2>
+        </div>
+        <div class="space-y-16">
+          {faq.map((item) => (
+            <details class="group rounded-16 border border-border/60 bg-surface2/40 p-16 dark:border-border-dark/60 dark:bg-surface2-dark/40 transition-all duration-150">
+              <summary class="flex items-center justify-between font-display text-h4 font-semibold text-ink dark:text-ink-dark cursor-pointer list-none">
+                <span>{item.question}</span>
+                <span class="ml-12 transition-transform duration-200 group-open:rotate-180 text-muted dark:text-muted-dark">▼</span>
+              </summary>
+              <p class="mt-12 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Contextual Related Tools Interlinking -->
+    <div class="mt-64">
+      <RelatedToolsCard currentToolId="reference" />
+    </div>
+  </div>
+</BaseLayout>

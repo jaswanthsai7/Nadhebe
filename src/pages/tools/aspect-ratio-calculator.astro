@@ -2,6 +2,8 @@
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
+import VisualizerCanvas from '@/components/tools/VisualizerCanvas.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
 
 const title = 'Aspect Ratio Calculator – Calculate & Resize Dimensions | Nadhebe';
 const h1 = 'Aspect Ratio Calculator';
@@ -123,8 +125,10 @@ const faq = [
         </CalculatorCard>
       </div>
 
-      <!-- Calculation Results -->
-      <div class="lg:col-span-6">
+      <!-- Calculation Results & Visualizer -->
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={1920} height={1080} ratioLabel="16:9 Widescreen" id="ar-main-viz" />
+
         <CalculatorCard title="Calculated Results">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
             <ResultCard label="Aspect Ratio" value="16:9" id="res-ratio" accent copyable />
@@ -139,6 +143,14 @@ const faq = [
             <p class="mt-2 text-xs font-mono text-muted dark:text-muted-dark">Proportionally scaled based on aspect ratio</p>
           </div>
         </CalculatorCard>
+
+        <CodeSnippet
+          title="Copyable Aspect Ratio Snippets"
+          cssSnippet="aspect-ratio: 16 / 9;"
+          tailwindSnippet="aspect-video"
+          htmlSnippet='<iframe width="560" height="315" style="aspect-ratio: 16 / 9;"></iframe>'
+          id="ar-code-snippets"
+        />
       </div>
     </div>
 
@@ -276,6 +288,20 @@ New Width  = (New Height × Original Width) / Original Height</code></pre>
 
       if (resRatio) resRatio.textContent = `${rW}:${rH}`;
       if (resDecimal) resDecimal.textContent = dec;
+
+      const vizBadge = document.getElementById('ar-main-viz-badge');
+      const vizText = document.getElementById('ar-main-viz-text');
+      const vizRect = document.getElementById('ar-main-viz-rect');
+      const vizDims = document.getElementById('ar-main-viz-dims-label');
+      if (vizBadge) vizBadge.textContent = `${rW}:${rH}`;
+      if (vizText) vizText.textContent = `${rW}:${rH}`;
+      if (vizDims) vizDims.textContent = `${w} × ${h}`;
+      if (vizRect) {
+        const maxDim = 240;
+        const scale = Math.min(maxDim / w, maxDim / h);
+        vizRect.style.width = `${Math.max(Math.round(w * scale), 40)}px`;
+        vizRect.style.height = `${Math.max(Math.round(h * scale), 40)}px`;
+      }
 
       let orientation = 'Landscape';
       if (w < h) orientation = 'Portrait';

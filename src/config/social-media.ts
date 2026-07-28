@@ -8,6 +8,10 @@ export interface SocialMediaPreset {
   orientation: 'Landscape' | 'Portrait' | 'Square';
   notes: string;
   safeZone?: string;
+  source: string;
+  sourceUrl: string;
+  lastVerified: string;
+  type: 'official' | 'recommended';
 }
 
 export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
@@ -22,6 +26,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     orientation: 'Landscape',
     notes: 'Safe area for text and logos on all devices is 1235 × 338 px (centered).',
     safeZone: '1235 × 338 px',
+    source: 'YouTube Help Documentation',
+    sourceUrl: 'https://support.google.com/youtube/answer/2660551',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'yt-thumb',
@@ -32,6 +40,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '16:9',
     orientation: 'Landscape',
     notes: 'Minimum width is 640 px. File size under 2MB (JPG, PNG, GIF).',
+    source: 'YouTube Creator Help',
+    sourceUrl: 'https://support.google.com/youtube/answer/72431',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'yt-shorts',
@@ -42,6 +54,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '9:16',
     orientation: 'Portrait',
     notes: 'Vertical mobile video format. Up to 60 seconds duration.',
+    source: 'YouTube Creator Help',
+    sourceUrl: 'https://support.google.com/youtube/answer/10059070',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'yt-avatar',
@@ -52,6 +68,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '1:1',
     orientation: 'Square',
     notes: 'Rendered as a circle in YouTube UI.',
+    source: 'YouTube Creator Help',
+    sourceUrl: 'https://support.google.com/youtube/answer/2972003',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
 
   // Instagram
@@ -64,6 +84,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '4:5',
     orientation: 'Portrait',
     notes: 'Takes up maximum vertical screen real estate in mobile feed.',
+    source: 'Instagram Help Center',
+    sourceUrl: 'https://help.instagram.com/1038071037000574',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'ig-square',
@@ -74,6 +98,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '1:1',
     orientation: 'Square',
     notes: 'Classic square grid post format.',
+    source: 'Instagram Help Center',
+    sourceUrl: 'https://help.instagram.com/1038071037000574',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'ig-reels',
@@ -84,6 +112,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '9:16',
     orientation: 'Portrait',
     notes: 'Keep important captions away from top header and bottom captions overlay.',
+    source: 'Instagram Business Guidelines',
+    sourceUrl: 'https://help.instagram.com/1038071037000574',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
 
   // X (Twitter)
@@ -96,6 +128,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '3:1',
     orientation: 'Landscape',
     notes: 'Profile avatar overlaps bottom-left corner of header by ~133px.',
+    source: 'X Help Center',
+    sourceUrl: 'https://help.twitter.com/en/managing-your-account/how-to-customize-your-profile',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'x-post',
@@ -106,6 +142,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '16:9',
     orientation: 'Landscape',
     notes: 'Single image post aspect ratio ideal for feed preview.',
+    source: 'X Business Guidelines',
+    sourceUrl: 'https://business.twitter.com/en/help/campaign-editing-and-optimization/media-specs.html',
+    lastVerified: '2026-07-28',
+    type: 'recommended',
   },
 
   // LinkedIn
@@ -118,6 +158,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '4:1',
     orientation: 'Landscape',
     notes: 'Personal profile background image.',
+    source: 'LinkedIn Help Center',
+    sourceUrl: 'https://www.linkedin.com/help/linkedin/answer/a524794',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'li-company-banner',
@@ -128,6 +172,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '5.9:1',
     orientation: 'Landscape',
     notes: 'Company brand page cover banner.',
+    source: 'LinkedIn Help Center',
+    sourceUrl: 'https://www.linkedin.com/help/linkedin/answer/a545596',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
   {
     id: 'li-post',
@@ -138,6 +186,10 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '16:9',
     orientation: 'Landscape',
     notes: '1:1 (1080×1080) and 4:5 (1080×1350) also supported for documents/PDF carousels.',
+    source: 'LinkedIn Marketing Solutions',
+    sourceUrl: 'https://www.linkedin.com/help/linkedin/answer/a545596',
+    lastVerified: '2026-07-28',
+    type: 'recommended',
   },
 
   // TikTok
@@ -150,5 +202,9 @@ export const SOCIAL_MEDIA_PRESETS: SocialMediaPreset[] = [
     aspectRatio: '9:16',
     orientation: 'Portrait',
     notes: 'Full screen vertical format. Leave right margin clear for like/share buttons.',
+    source: 'TikTok Business Help Center',
+    sourceUrl: 'https://ads.tiktok.com/help/article/image-ad-specifications',
+    lastVerified: '2026-07-28',
+    type: 'official',
   },
 ];

@@ -1,0 +1,276 @@
+---
+import RatioPageLayout from '@/components/tools/RatioPageLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+import VisualizerCanvas from '@/components/tools/VisualizerCanvas.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: '1080x1350' } },
+    { params: { slug: '4-5' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const is1080x1350 = slug === '1080x1350';
+const is4x5 = slug === '4-5';
+---
+
+{is1080x1350 && (
+  <RatioPageLayout
+    title="1080×1350 Aspect Ratio & Pixel Specs (4:5 Portrait) | Nadhebe"
+    description="Complete guide to 1080×1350 resolution: 4:5 aspect ratio math, 1.458 Megapixels, visual preview, interactive scaling, and copyable CSS snippets."
+    h1="1080×1350 Aspect Ratio & Pixel Specification Guide"
+    targetKeyword="1080x1350 aspect ratio"
+    slug={slug}
+    ratio="4:5"
+    dimensions="1080×1350 px"
+    orientation="Portrait"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={1080} height={1350} ratioLabel="4:5 (1080×1350)" id="viz-1080x1350" />
+
+        <CalculatorCard title="Interactive 1080×1350 Scaling Calculator" description="Scale 1080×1350 proportionally to any target width or height">
+          <div class="grid grid-cols-2 gap-16 mb-20">
+            <div>
+              <label for="scale-w-1350" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
+              <input
+                type="number"
+                id="scale-w-1350"
+                value="1080"
+                min="1"
+                max="100000"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+              />
+            </div>
+            <div>
+              <label for="scale-h-1350" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
+              <input
+                type="number"
+                id="scale-h-1350"
+                value="1350"
+                min="1"
+                max="100000"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-16">
+            <ResultCard label="Scaled Resolution" value="1080 × 1350" id="res-scaled-1350" accent copyable />
+            <ResultCard label="Total Megapixels" value="1.46 MP" id="res-mp-1350" copyable />
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6 space-y-24">
+        <CalculatorCard title="1080×1350 Resolution Specifications">
+          <div class="grid grid-cols-2 gap-16">
+            <ResultCard label="Simplified Ratio" value="4:5" id="spec-ratio" copyable={false} />
+            <ResultCard label="Decimal Ratio" value="0.80" id="spec-decimal" copyable={false} />
+            <ResultCard label="Total Pixel Count" value="1,458,000" id="spec-pixels" copyable />
+            <ResultCard label="Megapixels" value="1.458 MP" id="spec-mp" copyable />
+            <ResultCard label="Orientation" value="Portrait (Vertical)" id="spec-orient" copyable={false} />
+            <ResultCard label="Primary Platform" value="Instagram Feed / Pinterest" id="spec-platform" copyable={false} />
+          </div>
+        </CalculatorCard>
+
+        <CodeSnippet
+          title="Developer & Designer Code Snippets"
+          cssSnippet="aspect-ratio: 4 / 5;"
+          tailwindSnippet="aspect-[4/5]"
+          htmlSnippet='<img src="image.jpg" width="1080" height="1350" alt="Instagram Portrait">'
+          id="code-1080x1350"
+        />
+      </div>
+    </div>
+
+    <!-- Semantic Common 4:5 Resolution Table -->
+    <CalculatorCard title="Equivalent 4:5 Aspect Ratio Resolutions">
+      <div class="overflow-x-auto my-16">
+        <table class="w-full text-left border-collapse text-body-small">
+          <thead>
+            <tr class="border-b border-border bg-surface2/80 dark:border-border-dark dark:bg-surface2-dark/80 text-caption font-mono text-ink dark:text-ink-dark">
+              <th class="p-12">Width × Height (px)</th>
+              <th class="p-12">Total Pixels</th>
+              <th class="p-12">Megapixels</th>
+              <th class="p-12">Primary Use Case</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border/60 dark:divide-border-dark/60 font-mono text-xs">
+            <tr class="hover:bg-surface2/40 dark:hover:bg-surface2-dark/40">
+              <td class="p-12 font-bold text-accent dark:text-accent-dark">1080 × 1350 px</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">1,458,000</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">1.46 MP</td>
+              <td class="p-12 text-muted dark:text-muted-dark">Instagram Feed Standard Portrait</td>
+            </tr>
+            <tr class="hover:bg-surface2/40 dark:hover:bg-surface2-dark/40">
+              <td class="p-12 font-bold text-accent dark:text-accent-dark">1440 × 1800 px</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">2,592,000</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">2.59 MP</td>
+              <td class="p-12 text-muted dark:text-muted-dark">High-res Instagram / Pinterest pins</td>
+            </tr>
+            <tr class="hover:bg-surface2/40 dark:hover:bg-surface2-dark/40">
+              <td class="p-12 font-bold text-accent dark:text-accent-dark">2160 × 2700 px</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">5,832,000</td>
+              <td class="p-12 text-ink2 dark:text-ink2-dark">5.83 MP</td>
+              <td class="p-12 text-muted dark:text-muted-dark">Retina Display & Fine Art Photography</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </CalculatorCard>
+
+    <div class="prose prose-slate dark:prose-invert max-w-none glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+      <h2>Why 1080×1350 is the Ideal Instagram Portrait Resolution</h2>
+      <p>
+        On mobile feeds, vertical space determines visual engagement. 1080×1350 pixels occupies the maximum allowable vertical real estate in the Instagram mobile feed without triggering automatic cropping.
+      </p>
+      <p>
+        If you are rendering vertical video in post-production software, check our step-by-step <a href="/tools/guides/davinci-resolve-1080x1350-render-guide/">DaVinci Resolve 1080×1350 Render Guide</a>.
+      </p>
+    </div>
+
+    <script is:inline>
+      (function() {
+        const inputW = document.getElementById('scale-w-1350');
+        const inputH = document.getElementById('scale-h-1350');
+        const resScaled = document.getElementById('res-scaled-1350');
+        const resMp = document.getElementById('res-mp-1350');
+
+        function calculate(event) {
+          const target = event?.target?.id;
+          let w = Math.min(Math.abs(parseFloat(inputW?.value || '0')), 100000);
+          let h = Math.min(Math.abs(parseFloat(inputH?.value || '0')), 100000);
+
+          if (target === 'scale-w-1350' && w > 0) {
+            h = Math.round((w * 5) / 4);
+            if (inputH) inputH.value = String(h);
+          } else if (target === 'scale-h-1350' && h > 0) {
+            w = Math.round((h * 4) / 5);
+            if (inputW) inputW.value = String(w);
+          }
+
+          if (w > 0 && h > 0) {
+            const total = w * h;
+            const mp = (total / 1000000).toFixed(2);
+            if (resScaled) resScaled.textContent = `${w} × ${h}`;
+            if (resMp) resMp.textContent = `${mp} MP`;
+          }
+        }
+
+        inputW?.addEventListener('input', calculate);
+        inputH?.addEventListener('input', calculate);
+      })();
+    </script>
+  </RatioPageLayout>
+)}
+
+{is4x5 && (
+  <RatioPageLayout
+    title="4:5 Aspect Ratio Guide & Scaler — Calculator & Resolutions | Nadhebe"
+    description="4:5 aspect ratio calculator: convert any width or height to 4:5 portrait, view common resolutions (1080x1350, 2160x2700), and copy CSS code."
+    h1="4:5 Aspect Ratio Guide & Scaler"
+    targetKeyword="4:5 aspect ratio"
+    slug={slug}
+    ratio="4:5"
+    orientation="Portrait"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={4} height={5} ratioLabel="4:5 Ratio" id="viz-4-5" />
+
+        <CalculatorCard title="4:5 Aspect Ratio Scaler" description="Calculate proportional 4:5 width or height for any dimension">
+          <div class="grid grid-cols-2 gap-16 mb-20">
+            <div>
+              <label for="w-45" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
+              <input
+                type="number"
+                id="w-45"
+                value="1080"
+                min="1"
+                max="100000"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+              />
+            </div>
+            <div>
+              <label for="h-45" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
+              <input
+                type="number"
+                id="h-45"
+                value="1350"
+                min="1"
+                max="100000"
+                class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h3 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-16">
+            <ResultCard label="4:5 Result" value="1080 × 1350" id="res-45-out" accent copyable />
+            <ResultCard label="Decimal Ratio" value="0.80" id="res-45-dec" copyable={false} />
+          </div>
+        </CalculatorCard>
+      </div>
+
+      <div class="lg:col-span-6 space-y-24">
+        <CalculatorCard title="4:5 Ratio Key Attributes">
+          <div class="grid grid-cols-2 gap-16">
+            <ResultCard label="Ratio Fraction" value="4 / 5" id="att-frac" copyable={false} />
+            <ResultCard label="Decimal Ratio" value="0.8000" id="att-dec" copyable={false} />
+            <ResultCard label="Inverse (5:4)" value="1.2500" id="att-inv" copyable={false} />
+            <ResultCard label="Orientation" value="Vertical Portrait" id="att-orient" copyable={false} />
+          </div>
+        </CalculatorCard>
+
+        <CodeSnippet
+          title="Developer & Designer Code Snippets"
+          cssSnippet="aspect-ratio: 4 / 5;"
+          tailwindSnippet="aspect-[4/5]"
+          htmlSnippet='<div style="aspect-ratio: 4 / 5;">Content</div>'
+          id="code-45"
+        />
+      </div>
+    </div>
+
+    <!-- Related ratio pages link -->
+    <div class="prose prose-slate dark:prose-invert max-w-none glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+      <h2>Common 4:5 Aspect Ratio Applications</h2>
+      <p>
+        The 4:5 aspect ratio is widely used for vertical social graphics and traditional 8×10 inch photographic prints. For standard Instagram feed dimensions, see our dedicated <a href="/tools/aspect-ratio/1080x1350/">1080×1350 Aspect Ratio Guide</a>.
+      </p>
+    </div>
+
+    <script is:inline>
+      (function() {
+        const inW = document.getElementById('w-45');
+        const inH = document.getElementById('h-45');
+        const resOut = document.getElementById('res-45-out');
+
+        function calculate(event) {
+          const target = event?.target?.id;
+          let w = Math.min(Math.abs(parseFloat(inW?.value || '0')), 100000);
+          let h = Math.min(Math.abs(parseFloat(inH?.value || '0')), 100000);
+
+          if (target === 'w-45' && w > 0) {
+            h = Math.round((w * 5) / 4);
+            if (inH) inH.value = String(h);
+          } else if (target === 'h-45' && h > 0) {
+            w = Math.round((h * 4) / 5);
+            if (inW) inW.value = String(w);
+          }
+
+          if (w > 0 && h > 0) {
+            if (resOut) resOut.textContent = `${w} × ${h}`;
+          }
+        }
+
+        inW?.addEventListener('input', calculate);
+        inH?.addEventListener('input', calculate);
+      })();
+    </script>
+  </RatioPageLayout>
+)}
