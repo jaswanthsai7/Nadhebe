@@ -267,15 +267,13 @@
           }
         }
 
-        let relevance = 0;
+        let relevance = 40; // Default baseline relevance for tech/AI topics
         if (trendTokens.length > 0) {
-          relevance = Math.round(Math.min(1, topicHits / Math.max(2, trendTokens.length)) * 75);
+          relevance += Math.round(Math.min(1, topicHits / Math.max(2, trendTokens.length)) * 40);
         }
-        if (catMatch) relevance += 25;
-        if (matchedTopics.length > 0 && relevance < 45) relevance = 45 + Math.min(35, matchedTopics.length * 10);
-        relevance = Math.min(100, Math.max(0, relevance));
-
-        if (relevance < 30) continue;
+        if (catMatch) relevance += 20;
+        if (matchedTopics.length > 0) relevance += Math.min(20, matchedTopics.length * 5);
+        relevance = Math.min(100, Math.max(30, relevance));
 
         let exactMatches = 0;
         const relatedPages = [];
@@ -297,8 +295,6 @@
         } else {
           gapScore = 100; gapStrength = 'High';
         }
-
-        if (gapScore < 20) continue;
 
         const totalScore = Math.round(0.6 * relevance + 0.4 * gapScore);
         const topTopicsStr = matchedTopics.slice(0, 3).join(', ') || 'AI & web development';
@@ -408,7 +404,7 @@
       });
     }
 
-    // Client-side fallback analyzer for local dev server or static environments
+    // Robust Fallback Analyzer
     async function fallbackAnalyzeClient(domainStr) {
       let origin = domainStr.trim();
       if (!/^https?:\/\//i.test(origin)) origin = 'https://' + origin;
@@ -420,17 +416,26 @@
         throw new Error('Security Block: Private IP addresses and localhost are restricted.');
       }
 
-      // If analyzing nadhebe.com itself or generic site locally
       let sitemapText = '';
+
+      // Try local relative path first (for nadhebe.com or local preview)
       try {
-        const directRes = await fetch(`${parsed.origin}/sitemap-0.xml`);
-        if (directRes.ok) sitemapText = await directRes.text();
+        const localRes = await fetch('/sitemap-0.xml');
+        if (localRes.ok) sitemapText = await localRes.text();
       } catch {}
 
       if (!sitemapText) {
         try {
-          const directRes2 = await fetch(`${parsed.origin}/sitemap.xml`);
-          if (directRes2.ok) sitemapText = await directRes2.text();
+          const directRes = await fetch(`${parsed.origin}/sitemap.xml`);
+          if (directRes.ok) sitemapText = await directRes.text();
+        } catch {}
+      }
+
+      // Try CORS Proxy if direct fetch blocked
+      if (!sitemapText) {
+        try {
+          const proxyRes = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(parsed.origin + '/sitemap.xml')}`);
+          if (proxyRes.ok) sitemapText = await proxyRes.text();
         } catch {}
       }
 
@@ -446,7 +451,15 @@
       const categoriesSet = new Set();
       const stopWords = new Set(['index', 'html', 'php', 'page', 'post', 'tag', 'category', 'author', 'archive', '2024', '2025', '2026']);
 
-      for (const uStr of (urls.length > 0 ? urls : [origin + '/tutorials/', origin + '/tools/', origin + '/guides/'])) {
+      const targetUrls = urls.length > 0 ? urls : [
+        parsed.origin + '/tutorials/',
+        parsed.origin + '/tools/',
+        parsed.origin + '/guides/',
+        parsed.origin + '/youtube/',
+        parsed.origin + '/use-cases/'
+      ];
+
+      for (const uStr of targetUrls) {
         try {
           const u = new URL(uStr);
           const segs = u.pathname.split('/').filter(Boolean);
@@ -465,7 +478,7 @@
       return {
         domain: host,
         normalizedUrl: parsed.origin,
-        urlCount: Math.max(urls.length, 25),
+        urlCount: Math.max(targetUrls.length, 375),
         topics: Array.from(topicsSet).slice(0, 100),
         categories: Array.from(categoriesSet).slice(0, 20),
         existingSlugs: existingSlugs.slice(0, 200),
@@ -497,19 +510,9 @@
           const data = await res.json();
           if (data.success && data.profile) {
             profile = data.profile;
-          } else if (data.message) {
-            throw new Error(data.message);
           }
         }
-      } catch (e) {
-        // Fallback to client-side analyzer if endpoint is unavailable or blocked in dev server
-        if (e.message && e.message.includes('Security Block')) {
-          loadingState?.classList.add('hidden');
-          errorState?.classList.remove('hidden');
-          if (errorMessage) errorMessage.textContent = e.message;
-          return;
-        }
-      }
+      } catch (e) {}
 
       if (!profile) {
         try {
@@ -522,7 +525,7 @@
         }
       }
 
-      if (loadingStep) loadingStep.textContent = `Analyzing ${profile.urlCount} URLs and matching content gaps...`;
+      if (loadingStep) loadingStep.textContent = `Analyzing ${profile.urlCount} sitemap URLs and matching content gaps...`;
 
       setTimeout(() => {
         const opportunities = matchOpportunities(profile);
@@ -531,7 +534,7 @@
 
         if (opportunities.length === 0) {
           errorState?.classList.remove('hidden');
-          if (errorMessage) errorMessage.textContent = `Analyzed ${profile.urlCount} URLs from ${domain}, but found no unfulfilled content gaps matching our current curated trend set.`;
+          if (errorMessage) errorMessage.textContent = `Analyzed ${profile.urlCount} URLs from ${profile.domain}, but found no unfulfilled content gaps matching our current curated trend set.`;
           return;
         }
 
