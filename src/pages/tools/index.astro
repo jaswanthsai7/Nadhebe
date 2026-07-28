@@ -77,11 +77,12 @@ const toolsDirectorySchema = {
 
     <!-- Category Filter Bar & Live Search -->
     <div class="sticky top-72 z-30 mb-32 flex flex-col gap-16 rounded-16 border border-border/80 bg-surface/90 p-16 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 sm:flex-row sm:items-center sm:justify-between" data-reveal>
-      <nav class="flex flex-wrap items-center gap-8" aria-label="Tool Category Filters" id="tools-category-tabs">
+      <nav class="relative flex flex-wrap items-center gap-8 p-4 rounded-pill border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60" aria-label="Tool Category Filters" id="tools-category-tabs">
+        <div id="cat-tab-slider" class="absolute rounded-pill bg-surface shadow-soft border border-border/80 dark:bg-surface-dark dark:border-border-dark/80 transition-all duration-300 ease-out pointer-events-none" style="opacity: 0; left: 0; top: 0;"></div>
         <button
           type="button"
           data-category-filter="all"
-          class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer bg-ink text-white shadow-soft dark:bg-ink-dark dark:text-ink"
+          class="cat-tab-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-colors duration-200 cursor-pointer text-ink dark:text-ink-dark"
         >
           All ({TOOLS.length})
         </button>
@@ -92,7 +93,7 @@ const toolsDirectorySchema = {
             <button
               type="button"
               data-category-filter={cat}
-              class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer border border-border/60 bg-surface/50 text-ink2 hover:border-ink2/30 hover:text-ink dark:border-border-dark/60 dark:bg-surface-dark/50 dark:text-ink2-dark dark:hover:text-ink-dark"
+              class="cat-tab-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark"
             >
               {cat} ({count})
             </button>
@@ -117,11 +118,12 @@ const toolsDirectorySchema = {
     <!-- Tools Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 mb-64" id="tools-directory-grid">
       {TOOLS.map((tool) => (
-        <article
+        <a
+          href={tool.href}
           data-tool-card
           data-category={tool.category}
           data-search-text={`${tool.name} ${tool.description} ${tool.category} ${tool.tags.join(' ')}`.toLowerCase()}
-          class="glass-panel group relative flex flex-col justify-between overflow-hidden rounded-20 border border-border/80 p-24 shadow-medium hover:border-accent/50 hover:shadow-large transition-all duration-300 dark:border-border-dark/80 dark:hover:border-accent-dark/50"
+          class="glass-panel group relative flex flex-col justify-between overflow-hidden rounded-20 border border-border/80 p-24 shadow-medium hover:border-accent/50 hover:shadow-large transition-all duration-300 dark:border-border-dark/80 dark:hover:border-accent-dark/50 cursor-pointer no-underline block"
         >
           <div>
             <div class="flex items-center justify-between gap-8 mb-12">
@@ -136,9 +138,7 @@ const toolsDirectorySchema = {
             </div>
 
             <h2 class="font-display text-h3 font-semibold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark transition-colors duration-150">
-              <a href={tool.href} class="after:absolute after:inset-0">
-                {tool.name}
-              </a>
+              {tool.name}
             </h2>
             
             <p class="mt-8 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
@@ -152,7 +152,7 @@ const toolsDirectorySchema = {
               Open Tool &rarr;
             </span>
           </div>
-        </article>
+        </a>
       ))}
     </div>
 
@@ -208,18 +208,40 @@ const toolsDirectorySchema = {
       }
     }
 
+    const slider = document.getElementById('cat-tab-slider');
+    const container = document.getElementById('tools-category-tabs');
+
+    function updateSlider(activeBtn) {
+      if (!slider || !container || !activeBtn) return;
+      const cRect = container.getBoundingClientRect();
+      const bRect = activeBtn.getBoundingClientRect();
+      slider.style.opacity = '1';
+      slider.style.width = `${bRect.width}px`;
+      slider.style.height = `${bRect.height}px`;
+      slider.style.transform = `translate3d(${bRect.left - cRect.left}px, ${bRect.top - cRect.top}px, 0)`;
+    }
+
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         tabBtns.forEach(b => {
-          b.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer border border-border/60 bg-surface/50 text-ink2 hover:border-ink2/30 hover:text-ink dark:border-border-dark/60 dark:bg-surface-dark/50 dark:text-ink2-dark dark:hover:text-ink-dark';
+          b.className = 'cat-tab-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark';
         });
 
-        btn.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-medium transition-all duration-200 cursor-pointer bg-ink text-white shadow-soft dark:bg-ink-dark dark:text-ink';
+        btn.className = 'cat-tab-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-colors duration-200 cursor-pointer text-ink dark:text-ink-dark';
         
+        updateSlider(btn);
         activeFilter = btn.getAttribute('data-category-filter') || 'all';
         filterDirectory();
       });
     });
+
+    if (tabBtns.length > 0) {
+      setTimeout(() => updateSlider(tabBtns[0]), 50);
+      window.addEventListener('resize', () => {
+        const currentActive = document.querySelector('.cat-tab-btn.font-semibold');
+        if (currentActive) updateSlider(currentActive);
+      });
+    }
 
     searchInput?.addEventListener('input', (e) => {
       searchQuery = (e.target.value || '').toLowerCase().trim();

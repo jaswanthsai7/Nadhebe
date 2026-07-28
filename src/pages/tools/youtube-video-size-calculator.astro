@@ -2,6 +2,8 @@
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
+import VisualizerCanvas from '@/components/tools/VisualizerCanvas.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
 
 const title = 'YouTube Video Size & Resolution Calculator | Nadhebe';
 const h1 = 'YouTube Video Size & Resolution Calculator';
@@ -27,46 +29,61 @@ const faq = [
   faq={faq}
 >
   <div slot="calculator" class="space-y-24">
-    <!-- Format Selector Tabs -->
-    <div class="flex flex-wrap items-center gap-12 rounded-16 border border-border bg-surface2/60 p-8 dark:border-border-dark dark:bg-surface2-dark/60" data-reveal>
-      <button type="button" data-yt-format="16:9" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark">
+    <!-- Format Selector Tabs with Smooth Sliding Pill Animation -->
+    <div class="relative flex flex-wrap items-center gap-8 rounded-pill border border-border/80 bg-surface2/60 p-4 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60" id="yt-fmt-container" data-reveal>
+      <div id="yt-fmt-slider" class="absolute rounded-pill bg-surface shadow-soft border border-border/80 dark:bg-surface-dark dark:border-border-dark/80 transition-all duration-300 ease-out pointer-events-none" style="opacity: 0; left: 0; top: 0;"></div>
+      <button type="button" data-yt-format="16:9" class="yt-fmt-btn relative z-10 flex-1 rounded-pill py-10 text-caption font-sans font-semibold transition-colors duration-200 cursor-pointer text-ink dark:text-ink-dark">
         16:9 Standard Widescreen
       </button>
-      <button type="button" data-yt-format="9:16" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+      <button type="button" data-yt-format="9:16" class="yt-fmt-btn relative z-10 flex-1 rounded-pill py-10 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
         9:16 YouTube Shorts
       </button>
-      <button type="button" data-yt-format="1:1" class="yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
+      <button type="button" data-yt-format="1:1" class="yt-fmt-btn relative z-10 flex-1 rounded-pill py-10 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark">
         1:1 Square / Community
       </button>
     </div>
 
-    <!-- Presets -->
-    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border/80 bg-surface/80 p-16 dark:border-border-dark/80 dark:bg-surface-dark/80" data-reveal>
-      <span class="text-caption font-mono uppercase text-muted dark:text-muted-dark mr-8">Presets:</span>
-      <button type="button" data-yt-res="3840,2160" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K UHD (3840×2160)</button>
-      <button type="button" data-yt-res="2560,1440" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p 2K (2560×1440)</button>
-      <button type="button" data-yt-res="1920,1080" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p FHD (1920×1080)</button>
-      <button type="button" data-yt-res="1280,720" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">720p HD (1280×720)</button>
+    <!-- Presets Bar with Gap Below -->
+    <div class="mb-32 flex flex-wrap items-center gap-12 rounded-20 border border-border/80 bg-surface/90 p-16 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90" data-reveal>
+      <span class="text-caption font-mono uppercase font-semibold text-muted dark:text-muted-dark tracking-wider shrink-0">Presets:</span>
+      <div class="flex flex-wrap items-center gap-8 flex-1">
+        <button type="button" data-yt-res="3840,2160" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K UHD (3840×2160)</button>
+        <button type="button" data-yt-res="2560,1440" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1440p 2K (2560×1440)</button>
+        <button type="button" data-yt-res="1920,1080" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p FHD (1920×1080)</button>
+        <button type="button" data-yt-res="1280,720" class="yt-res-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">720p HD (1280×720)</button>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
-      <div class="lg:col-span-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+      <!-- Controls & Code Snippets (Left Column) -->
+      <div class="lg:col-span-6 space-y-24">
         <CalculatorCard title="YouTube Video Dimension Controls">
           <div class="space-y-20">
             <div>
               <label for="yt-w" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
-              <input type="number" id="yt-w" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+              <input type="number" id="yt-w" value="1920" min="1" max="100000" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
             </div>
 
             <div>
               <label for="yt-h" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
-              <input type="number" id="yt-h" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+              <input type="number" id="yt-h" value="1080" min="1" max="100000" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
             </div>
           </div>
         </CalculatorCard>
+
+        <CodeSnippet
+          title="YouTube Video Embed Code"
+          cssSnippet="aspect-ratio: 16 / 9;"
+          tailwindSnippet="aspect-video"
+          htmlSnippet='<iframe width="1920" height="1080" src="https://www.youtube.com/embed/VIDEO_ID"></iframe>'
+          id="code-yt-video"
+        />
       </div>
 
-      <div class="lg:col-span-6">
+      <!-- Visualizer & Output (Right Column) -->
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={16} height={9} ratioLabel="16:9 Widescreen" id="viz-yt" />
+
         <CalculatorCard title="Target YouTube Resolution Output">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
             <ResultCard label="Video Dimensions" value="1920 × 1080" id="res-yt-dim" accent copyable />
@@ -140,9 +157,22 @@ const faq = [
     const resClass = document.getElementById('res-yt-class');
     const resMp = document.getElementById('res-yt-mp');
 
+    const fmtSlider = document.getElementById('yt-fmt-slider');
+    const fmtContainer = document.getElementById('yt-fmt-container');
+
+    function updateFmtSlider(activeBtn) {
+      if (!fmtSlider || !fmtContainer || !activeBtn) return;
+      const cRect = fmtContainer.getBoundingClientRect();
+      const bRect = activeBtn.getBoundingClientRect();
+      fmtSlider.style.opacity = '1';
+      fmtSlider.style.width = `${bRect.width}px`;
+      fmtSlider.style.height = `${bRect.height}px`;
+      fmtSlider.style.transform = `translate3d(${bRect.left - cRect.left}px, ${bRect.top - cRect.top}px, 0)`;
+    }
+
     function calculate(source) {
-      let w = parseFloat(ytW?.value || '0');
-      let h = parseFloat(ytH?.value || '0');
+      let w = Math.min(Math.abs(parseFloat(ytW?.value || '0')), 100000);
+      let h = Math.min(Math.abs(parseFloat(ytH?.value || '0')), 100000);
 
       let rw = 16, rh = 9;
       if (currentFmt === '9:16') { rw = 9; rh = 16; }
@@ -171,13 +201,36 @@ const faq = [
       else if (w === 1920 || h === 1920) qClass = '1080p Full HD';
       else if (w === 1280 || h === 1280) qClass = '720p HD';
       if (resClass) resClass.textContent = qClass;
+
+      // Dynamically update right VisualizerCanvas box shape, text watermark, and labels
+      const vizDims = document.getElementById('viz-yt-dims-label');
+      const vizBadge = document.getElementById('viz-yt-badge');
+      const vizText = document.getElementById('viz-yt-text');
+      const vizRect = document.getElementById('viz-yt-rect');
+
+      const labelText = currentFmt === '9:16' ? '9:16 Shorts' : (currentFmt === '1:1' ? '1:1 Square' : '16:9 Widescreen');
+
+      if (vizDims) vizDims.textContent = `${w} × ${h}`;
+      if (vizBadge) vizBadge.textContent = `${rw}:${rh} (${w}×${h})`;
+      if (vizText) vizText.textContent = labelText;
+
+      if (vizRect) {
+        const maxW = 260;
+        const maxH = 220;
+        const scale = Math.min(maxW / w, maxH / h);
+        const boxW = Math.max(50, Math.round(w * scale));
+        const boxH = Math.max(50, Math.round(h * scale));
+        vizRect.style.width = `${boxW}px`;
+        vizRect.style.height = `${boxH}px`;
+      }
     }
 
     fmtBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        fmtBtns.forEach(b => b.className = 'yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
-        btn.className = 'yt-fmt-btn flex-1 rounded-12 py-10 text-caption font-sans font-semibold transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark';
+        fmtBtns.forEach(b => b.className = 'yt-fmt-btn relative z-10 flex-1 rounded-pill py-10 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
+        btn.className = 'yt-fmt-btn relative z-10 flex-1 rounded-pill py-10 text-caption font-sans font-semibold transition-colors duration-200 cursor-pointer text-ink dark:text-ink-dark';
 
+        updateFmtSlider(btn);
         currentFmt = btn.getAttribute('data-yt-format') || '16:9';
 
         if (currentFmt === '16:9') { if (ytW) ytW.value = '1920'; if (ytH) ytH.value = '1080'; }
@@ -204,6 +257,14 @@ const faq = [
         calculate('w');
       });
     });
+
+    if (fmtBtns.length > 0) {
+      setTimeout(() => updateFmtSlider(fmtBtns[0]), 50);
+      window.addEventListener('resize', () => {
+        const currentActive = document.querySelector('.yt-fmt-btn.font-semibold');
+        if (currentActive) updateFmtSlider(currentActive);
+      });
+    }
 
     calculate('w');
   })();

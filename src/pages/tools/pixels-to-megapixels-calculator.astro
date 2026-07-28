@@ -2,6 +2,8 @@
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
+import VisualizerCanvas from '@/components/tools/VisualizerCanvas.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
 
 const title = 'Pixels to Megapixels Calculator – Convert Dimensions to MP | Nadhebe';
 const h1 = 'Pixels to Megapixels Calculator';
@@ -37,8 +39,9 @@ const faq = [
       <button type="button" data-preset="1920,1080" class="mp-preset-btn rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">1080p Full HD (1920×1080)</button>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
-      <div class="lg:col-span-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+      <!-- Calculator Inputs & Code Snippets (Left Column) -->
+      <div class="lg:col-span-6 space-y-24">
         <CalculatorCard title="Input Width & Height or Raw Pixels">
           <div class="space-y-20">
             <div class="grid grid-cols-2 gap-16">
@@ -83,15 +86,26 @@ const faq = [
             </div>
           </div>
         </CalculatorCard>
+
+        <CodeSnippet
+          title="Megapixel Math & Formulas"
+          cssSnippet="Megapixels = (Width * Height) / 1,000,000;"
+          tailwindSnippet="24 MP = 6000 x 4000 px"
+          htmlSnippet='<img src="photo.jpg" width="6000" height="4000" alt="24MP Image">'
+          id="code-mp"
+        />
       </div>
 
-      <div class="lg:col-span-6">
+      <!-- Visualizer & Results (Right Column) -->
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={6000} height={4000} ratioLabel="3:2 Sensor" id="viz-mp" />
+
         <CalculatorCard title="Megapixel Output">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
             <ResultCard label="Megapixels" value="24 MP" id="res-mp" accent copyable />
             <ResultCard label="Total Pixels" value="24,000,000" id="res-total-px" copyable />
             <ResultCard label="Aspect Ratio" value="3:2" id="res-mp-ratio" copyable={false} />
-            <ResultCard label="Classification" value="24MP Full-Frame" id="res-mp-class" copyable={false} />
+            <ResultCard label="Classification" value="Full-Frame Sensor" id="res-mp-class" copyable={false} />
           </div>
         </CalculatorCard>
       </div>
@@ -153,9 +167,11 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
       if (resMp) resMp.textContent = mpText;
       if (resTotalPx) resTotalPx.textContent = total.toLocaleString('en-US');
 
+      let ratioStr = 'N/A';
       if (w > 0 && h > 0) {
         const div = gcd(w, h);
-        if (resMpRatio) resMpRatio.textContent = `${w / div}:${h / div}`;
+        ratioStr = `${w / div}:${h / div}`;
+        if (resMpRatio) resMpRatio.textContent = ratioStr;
       } else {
         if (resMpRatio) resMpRatio.textContent = 'N/A';
       }
@@ -170,6 +186,26 @@ Megapixels   = Total Pixels / 1,000,000</code></pre>
       else category = 'Web Thumbnail';
 
       if (resMpClass) resMpClass.textContent = category;
+
+      // Update right VisualizerCanvas dynamically
+      const vizDims = document.getElementById('viz-mp-dims-label');
+      const vizBadge = document.getElementById('viz-mp-badge');
+      const vizText = document.getElementById('viz-mp-text');
+      const vizRect = document.getElementById('viz-mp-rect');
+
+      if (vizDims) vizDims.textContent = w > 0 && h > 0 ? `${w} × ${h}` : `${mpText}`;
+      if (vizBadge) vizBadge.textContent = ratioStr !== 'N/A' ? `${ratioStr} (${mpText})` : mpText;
+      if (vizText) vizText.textContent = ratioStr !== 'N/A' ? ratioStr : mpText;
+
+      if (vizRect && w > 0 && h > 0) {
+        const maxW = 260;
+        const maxH = 200;
+        const scale = Math.min(maxW / w, maxH / h);
+        const boxW = Math.max(50, Math.round(w * scale));
+        const boxH = Math.max(50, Math.round(h * scale));
+        vizRect.style.width = `${boxW}px`;
+        vizRect.style.height = `${boxH}px`;
+      }
     }
 
     mpW?.addEventListener('input', () => { if (rawPx) rawPx.value = ''; calculate('dim'); });

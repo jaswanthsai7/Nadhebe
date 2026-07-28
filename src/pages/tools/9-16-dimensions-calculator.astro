@@ -134,6 +134,26 @@ const faq = [
       if (resDec) resDec.textContent = (w / h).toFixed(4);
       if (resTotal) resTotal.textContent = total.toLocaleString('en-US');
       if (resMp) resMp.textContent = `${mp} MP`;
+
+      // Update right visualizer canvas labels & box shape
+      const vizDims = document.getElementById('viz-916-dims-label');
+      const vizBadge = document.getElementById('viz-916-badge');
+      const vizText = document.getElementById('viz-916-text');
+      const vizRect = document.getElementById('viz-916-rect');
+
+      if (vizDims) vizDims.textContent = `${w} × ${h}`;
+      if (vizBadge) vizBadge.textContent = `9:16 (${w}×${h})`;
+      if (vizText) vizText.textContent = `9:16 (${w}×${h})`;
+
+      if (vizRect) {
+        const maxW = 200;
+        const maxH = 260;
+        const scale = Math.min(maxW / w, maxH / h);
+        const boxW = Math.max(50, Math.round(w * scale));
+        const boxH = Math.max(50, Math.round(h * scale));
+        vizRect.style.width = `${boxW}px`;
+        vizRect.style.height = `${boxH}px`;
+      }
     }
 
     wInput?.addEventListener('input', () => calculate('w'));

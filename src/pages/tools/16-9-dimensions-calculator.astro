@@ -2,6 +2,8 @@
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
+import VisualizerCanvas from '@/components/tools/VisualizerCanvas.astro';
+import CodeSnippet from '@/components/tools/CodeSnippet.astro';
 
 const title = '16:9 Dimensions Calculator – Widescreen Video Resolutions | Nadhebe';
 const h1 = '16:9 Dimensions Calculator';
@@ -36,26 +38,38 @@ const faq = [
       <button type="button" data-w169="3840" class="btn-169 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono font-medium hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:hover:border-accent-dark cursor-pointer transition-all">4K UHD (3840×2160)</button>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
-      <div class="lg:col-span-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+      <!-- Calculator Inputs & Code Snippet (Left Column) -->
+      <div class="lg:col-span-6 space-y-24">
         <CalculatorCard title="Enter Width or Height">
           <div class="space-y-20">
             <div>
               <label for="w169-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Width (px)</label>
-              <input type="number" id="w169-input" value="1920" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
+              <input type="number" id="w169-input" value="1920" min="1" max="100000" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-accent focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-accent-dark dark:focus:border-accent-dark transition-all" />
             </div>
 
             <div class="text-center font-mono text-caption text-muted dark:text-muted-dark font-semibold">OR</div>
 
             <div>
               <label for="h169-input" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-6">Height (px)</label>
-              <input type="number" id="h169-input" value="1080" min="1" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
+              <input type="number" id="h169-input" value="1080" min="1" max="100000" class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-h2 font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all" />
             </div>
           </div>
         </CalculatorCard>
+
+        <CodeSnippet
+          title="Developer & Creator Code Snippets"
+          cssSnippet="aspect-ratio: 16 / 9;"
+          tailwindSnippet="aspect-video"
+          htmlSnippet='<iframe width="1920" height="1080" style="aspect-ratio: 16 / 9;"></iframe>'
+          id="code-169"
+        />
       </div>
 
-      <div class="lg:col-span-6">
+      <!-- Visualizer & Results (Right Column) -->
+      <div class="lg:col-span-6 space-y-24">
+        <VisualizerCanvas width={16} height={9} ratioLabel="16:9 Widescreen" id="viz-169" />
+
         <CalculatorCard title="16:9 Calculated Dimensions">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-20">
             <ResultCard label="16:9 Resolution" value="1920 × 1080" id="res-169-dim" accent copyable />
@@ -96,8 +110,8 @@ Width  = (Height × 16) / 9</code></pre>
     const resMp = document.getElementById('res-169-mp');
 
     function calculate(source) {
-      let w = parseFloat(wInput?.value || '0');
-      let h = parseFloat(hInput?.value || '0');
+      let w = Math.min(Math.abs(parseFloat(wInput?.value || '0')), 100000);
+      let h = Math.min(Math.abs(parseFloat(hInput?.value || '0')), 100000);
 
       if (source === 'w' && w > 0) {
         h = Math.round((w * 9) / 16);
@@ -116,6 +130,26 @@ Width  = (Height × 16) / 9</code></pre>
       if (resDec) resDec.textContent = (w / h).toFixed(4);
       if (resTotal) resTotal.textContent = total.toLocaleString('en-US');
       if (resMp) resMp.textContent = `${mp} MP`;
+
+      // Update right visualizer canvas labels & box shape
+      const vizDims = document.getElementById('viz-169-dims-label');
+      const vizBadge = document.getElementById('viz-169-badge');
+      const vizText = document.getElementById('viz-169-text');
+      const vizRect = document.getElementById('viz-169-rect');
+
+      if (vizDims) vizDims.textContent = `${w} × ${h}`;
+      if (vizBadge) vizBadge.textContent = `16:9 (${w}×${h})`;
+      if (vizText) vizText.textContent = `16:9 (${w}×${h})`;
+
+      if (vizRect) {
+        const maxW = 260;
+        const maxH = 200;
+        const scale = Math.min(maxW / w, maxH / h);
+        const boxW = Math.max(50, Math.round(w * scale));
+        const boxH = Math.max(50, Math.round(h * scale));
+        vizRect.style.width = `${boxW}px`;
+        vizRect.style.height = `${boxH}px`;
+      }
     }
 
     wInput?.addEventListener('input', () => calculate('w'));

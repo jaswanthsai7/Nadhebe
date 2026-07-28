@@ -31,15 +31,16 @@ const faq = [
 >
   <div slot="calculator" class="space-y-24">
     <!-- Platform Selector Tabs -->
-    <div class="flex flex-wrap items-center gap-8 rounded-16 border border-border bg-surface2/60 p-8 dark:border-border-dark dark:bg-surface2-dark/60" data-reveal>
+    <div class="relative flex flex-wrap items-center gap-8 rounded-pill border border-border/80 bg-surface2/60 p-4 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60" id="sm-plat-container" data-reveal>
+      <div id="sm-plat-slider" class="absolute rounded-pill bg-surface shadow-soft border border-border/80 dark:bg-surface-dark dark:border-border-dark/80 transition-all duration-300 ease-out pointer-events-none" style="opacity: 0; left: 0; top: 0;"></div>
       {platforms.map((plat, i) => (
         <button
           type="button"
           data-sm-platform={plat}
-          class={`sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer ${
+          class={`sm-plat-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer ${
             i === 0
-              ? 'bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark font-semibold'
-              : 'border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'
+              ? 'text-ink font-semibold dark:text-ink-dark'
+              : 'text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'
           }`}
         >
           {plat}
@@ -52,17 +53,21 @@ const faq = [
       <div class="lg:col-span-6">
         <CalculatorCard title="Select Platform Format">
           <div class="space-y-16">
-            <label for="sm-format-select" class="block text-caption font-sans font-medium text-ink dark:text-ink-dark mb-4">Content Format</label>
-            <select
-              id="sm-format-select"
-              class="w-full rounded-12 border border-border bg-surface px-16 py-12 text-body font-mono text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all"
-            >
-              {SOCIAL_MEDIA_PRESETS.map((item) => (
-                <option value={item.id}>
-                  [{item.platform}] {item.format} ({item.width} × {item.height})
-                </option>
-              ))}
-            </select>
+            <div class="relative w-full">
+              <select
+                id="sm-format-select"
+                class="w-full rounded-12 border border-border bg-surface pl-16 pr-40 py-12 text-body-small font-mono font-medium text-ink appearance-none focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:focus:border-accent-dark transition-all cursor-pointer text-ellipsis overflow-hidden"
+              >
+                {SOCIAL_MEDIA_PRESETS.map((item) => (
+                  <option value={item.id}>
+                    {item.platform}: {item.format} ({item.width}×{item.height})
+                  </option>
+                ))}
+              </select>
+              <div class="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 text-muted dark:text-muted-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+            </div>
 
             <div class="p-16 rounded-16 border border-border/60 bg-surface2/40 dark:border-border-dark/60 dark:bg-surface2-dark/40">
               <span class="block font-mono text-xs text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Platform & Format Guidelines</span>
@@ -209,15 +214,28 @@ const faq = [
       updateHighlight(e.target.value);
     });
 
+    const platSlider = document.getElementById('sm-plat-slider');
+    const platContainer = document.getElementById('sm-plat-container');
+
+    function updatePlatSlider(activeBtn) {
+      if (!platSlider || !platContainer || !activeBtn) return;
+      const cRect = platContainer.getBoundingClientRect();
+      const bRect = activeBtn.getBoundingClientRect();
+      platSlider.style.opacity = '1';
+      platSlider.style.width = `${bRect.width}px`;
+      platSlider.style.height = `${bRect.height}px`;
+      platSlider.style.transform = `translate3d(${bRect.left - cRect.left}px, ${bRect.top - cRect.top}px, 0)`;
+    }
+
     platBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        platBtns.forEach(b => b.className = 'sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer border border-transparent text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
-        btn.className = 'sm-plat-btn rounded-12 px-16 py-8 text-caption font-sans font-medium transition-all cursor-pointer bg-surface text-ink shadow-soft dark:bg-surface-dark dark:text-ink-dark font-semibold';
+        platBtns.forEach(b => b.className = 'sm-plat-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-medium transition-colors duration-200 cursor-pointer text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark');
+        btn.className = 'sm-plat-btn relative z-10 rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-colors duration-200 cursor-pointer text-ink dark:text-ink-dark';
 
+        updatePlatSlider(btn);
         const filterPlat = btn.getAttribute('data-sm-platform') || 'All';
 
         // Filter select options and table rows
-        let firstMatch = null;
         tableRows.forEach(row => {
           const rowPlat = row.getAttribute('data-platform');
           if (filterPlat === 'All' || rowPlat === filterPlat) {
@@ -234,6 +252,14 @@ const faq = [
         }
       });
     });
+
+    if (platBtns.length > 0) {
+      setTimeout(() => updatePlatSlider(platBtns[0]), 50);
+      window.addEventListener('resize', () => {
+        const currentActive = document.querySelector('.sm-plat-btn.text-white');
+        if (currentActive) updatePlatSlider(currentActive);
+      });
+    }
 
     updateHighlight(presets[0].id);
   })();
