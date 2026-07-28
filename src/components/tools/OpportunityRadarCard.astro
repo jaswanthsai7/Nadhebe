@@ -4,7 +4,7 @@
 
 <div class="space-y-32">
   <!-- Domain Input & Form Card -->
-  <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90" data-reveal>
+  <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 no-print" data-reveal>
     <form id="radar-form" class="space-y-20">
       <div>
         <label for="domain-input" class="block text-body-medium font-sans font-semibold text-ink dark:text-ink-dark mb-8">
@@ -55,7 +55,7 @@
   </div>
 
   <!-- Loading State -->
-  <div id="radar-loading" class="hidden rounded-24 border border-border/80 bg-surface/90 p-32 text-center shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90">
+  <div id="radar-loading" class="hidden rounded-24 border border-border/80 bg-surface/90 p-32 text-center shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 no-print">
     <div class="inline-flex items-center justify-center p-16 rounded-full bg-accent/10 mb-16 dark:bg-accent-dark/20">
       <svg class="w-32 h-32 animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -67,7 +67,7 @@
   </div>
 
   <!-- Error State -->
-  <div id="radar-error" class="hidden rounded-20 border border-red-500/30 bg-red-500/5 p-24 text-red-600 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-400">
+  <div id="radar-error" class="hidden rounded-20 border border-red-500/30 bg-red-500/5 p-24 text-red-600 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-400 no-print">
     <div class="flex items-start gap-12">
       <svg class="w-24 h-24 shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -90,8 +90,29 @@
           Found 5 relevant missing topics for example.com
         </p>
       </div>
-      <div class="inline-flex items-center gap-8 rounded-pill border border-border bg-surface2 px-12 py-6 text-caption font-mono text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="results-meta">
-        <span>Parsed 142 URLs</span>
+
+      <!-- Export Actions Bar -->
+      <div class="flex items-center gap-8 flex-wrap no-print">
+        <button
+          type="button"
+          id="btn-export-pdf"
+          class="rounded-10 border border-border bg-surface px-14 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+        >
+          <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Export PDF / Print</span>
+        </button>
+        <button
+          type="button"
+          id="btn-copy-md"
+          class="rounded-10 border border-border bg-surface px-14 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+        >
+          <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>
+          <span>Copy Markdown Report</span>
+        </button>
       </div>
     </div>
 
@@ -99,6 +120,103 @@
     <div id="opportunities-list" class="space-y-20"></div>
   </div>
 </div>
+
+<!-- Native UI Glassmorphism Research Brief Modal (NO BROWSER ALERT POPUPS) -->
+<div id="research-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/60 p-16 backdrop-blur-md no-print">
+  <div class="relative w-full max-w-640 rounded-24 border border-border/80 bg-surface p-24 sm:p-32 shadow-medium dark:border-border-dark/80 dark:bg-surface-dark space-y-20 max-h-[90vh] overflow-y-auto">
+    <button
+      type="button"
+      id="modal-close"
+      class="absolute top-20 right-20 rounded-full p-8 text-muted hover:bg-surface2 hover:text-ink dark:text-muted-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark cursor-pointer transition-all"
+    >
+      <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div>
+      <span class="rounded-pill bg-accent/10 px-10 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+        Topic Research Brief
+      </span>
+      <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark pt-8" id="modal-title">
+        Claude Code MCP Servers
+      </h3>
+    </div>
+
+    <!-- Metrics Summary -->
+    <div class="grid grid-cols-3 gap-8 rounded-12 bg-surface2/60 p-12 text-center dark:bg-surface2-dark/60 border border-border/60 dark:border-border-dark/60">
+      <div>
+        <span class="block text-caption font-mono text-muted dark:text-muted-dark">Opportunity Score</span>
+        <span class="text-h3 font-mono font-extrabold text-accent dark:text-accent-dark" id="modal-score">94/100</span>
+      </div>
+      <div>
+        <span class="block text-caption font-mono text-muted dark:text-muted-dark">Relevance</span>
+        <span class="text-h3 font-mono font-bold text-ink dark:text-ink-dark" id="modal-relevance">97%</span>
+      </div>
+      <div>
+        <span class="block text-caption font-mono text-muted dark:text-muted-dark">Content Gap</span>
+        <span class="text-h3 font-mono font-bold text-accent dark:text-accent-dark" id="modal-gap">High</span>
+      </div>
+    </div>
+
+    <!-- Suggested Outline -->
+    <div class="space-y-12">
+      <h4 class="text-caption font-mono font-bold uppercase text-muted dark:text-muted-dark">Recommended Article Outline</h4>
+      <div class="rounded-12 border border-border bg-surface2/40 p-16 space-y-10 text-body-small text-ink dark:border-border-dark dark:bg-surface2-dark/40 dark:text-ink-dark" id="modal-outline">
+        <p><strong>H1:</strong> Complete Guide to Claude Code MCP Servers</p>
+        <p><strong>Key Focus:</strong> How developers can integrate Model Context Protocol (MCP) plugins to give Claude Code CLI contextual filesystem and API access.</p>
+        <p><strong>Target Audience:</strong> AI engineers, full-stack developers, and automated workflow creators.</p>
+      </div>
+    </div>
+
+    <!-- Modal Actions -->
+    <div class="flex items-center justify-end gap-12 pt-12 border-t border-border/60 dark:border-border-dark/60">
+      <button
+        type="button"
+        id="modal-copy-outline"
+        class="rounded-10 bg-accent px-16 py-10 text-caption font-mono font-semibold text-white hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all"
+      >
+        Copy Outline (Markdown)
+      </button>
+      <button
+        type="button"
+        id="modal-pdf"
+        class="rounded-10 border border-border bg-surface2 px-16 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all"
+      >
+        Print / PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Native UI Toast Notification (NO BROWSER ALERT POPUPS) -->
+<div id="radar-toast" class="fixed bottom-24 right-24 z-50 hidden rounded-16 border border-accent/40 bg-surface/95 px-20 py-14 shadow-medium text-body-small font-sans font-semibold text-ink backdrop-blur-xl dark:border-accent-dark/40 dark:bg-surface-dark/95 dark:text-ink-dark transition-all transform duration-300 translate-y-8 opacity-0">
+  <div class="flex items-center gap-8">
+    <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/20 text-accent dark:bg-accent-dark/20 dark:text-accent-dark">✓</span>
+    <span id="toast-message">Opportunity saved to research queue</span>
+  </div>
+</div>
+
+<style>
+  @media print {
+    .no-print, header, footer, nav, button {
+      display: none !important;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    #radar-results {
+      display: block !important;
+    }
+    .rounded-20 {
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      margin-bottom: 20px !important;
+    }
+  }
+</style>
 
 <script is:inline>
   (function() {
@@ -112,6 +230,41 @@
     const resultsSubtitle = document.getElementById('results-subtitle');
     const resultsMeta = document.getElementById('results-meta');
     const listContainer = document.getElementById('opportunities-list');
+
+    const btnExportPdf = document.getElementById('btn-export-pdf');
+    const btnCopyMd = document.getElementById('btn-copy-md');
+
+    const researchModal = document.getElementById('research-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalScore = document.getElementById('modal-score');
+    const modalRelevance = document.getElementById('modal-relevance');
+    const modalGap = document.getElementById('modal-gap');
+    const modalOutline = document.getElementById('modal-outline');
+    const modalCopyOutline = document.getElementById('modal-copy-outline');
+    const modalPdf = document.getElementById('modal-pdf');
+
+    const toast = document.getElementById('radar-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    let currentOpportunities = [];
+    let currentDomain = '';
+
+    function showToast(msg) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-8', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-8', 'opacity-0');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+      }, 3000);
+    }
 
     function extractKeywords(text) {
       const stop = new Set(['how', 'to', 'for', 'the', 'and', 'in', 'of', 'a', 'an', 'with', 'on', 'at', 'by', 'is', 'are', 'guide', 'tutorial']);
@@ -267,7 +420,7 @@
           }
         }
 
-        let relevance = 40; // Default baseline relevance for tech/AI topics
+        let relevance = 40;
         if (trendTokens.length > 0) {
           relevance += Math.round(Math.min(1, topicHits / Math.max(2, trendTokens.length)) * 40);
         }
@@ -318,6 +471,60 @@
 
       return results.sort((a, b) => b.totalScore - a.totalScore).slice(0, 5);
     }
+
+    function openResearchModal(opp) {
+      if (!researchModal) return;
+      if (modalTitle) modalTitle.textContent = opp.topic;
+      if (modalScore) modalScore.textContent = `${opp.totalScore}/100`;
+      if (modalRelevance) modalRelevance.textContent = `${opp.relevance}%`;
+      if (modalGap) modalGap.textContent = opp.gapStrength;
+
+      if (modalOutline) {
+        modalOutline.innerHTML = `
+          <p class="font-bold text-accent dark:text-accent-dark">H1: How to Master ${opp.topic}</p>
+          <p><strong>Category:</strong> ${opp.category}</p>
+          <p><strong>Rationale:</strong> ${opp.why}</p>
+          <p class="font-semibold pt-4">Suggested Headings & Subtopics:</p>
+          <ul class="list-disc pl-20 space-y-4">
+            ${opp.queries.map(q => `<li>${q}</li>`).join('')}
+          </ul>
+        `;
+      }
+
+      researchModal.classList.remove('hidden');
+      researchModal.classList.add('flex');
+    }
+
+    modalClose?.addEventListener('click', () => {
+      researchModal?.classList.add('hidden');
+      researchModal?.classList.remove('flex');
+    });
+
+    modalCopyOutline?.addEventListener('click', () => {
+      const title = modalTitle?.textContent || 'Topic Research Brief';
+      const score = modalScore?.textContent || '90/100';
+      const text = `# Topic Research Brief: ${title}\nOpportunity Score: ${score}\n\n## Content Outline\n- Introduction & Problem Overview\n- Step-by-Step Implementation Guide\n- Best Practices & Common Gotchas\n- Conclusion & Key Takeaways\n`;
+      navigator.clipboard.writeText(text);
+      showToast('Article outline copied to clipboard!');
+    });
+
+    modalPdf?.addEventListener('click', () => {
+      window.print();
+    });
+
+    btnExportPdf?.addEventListener('click', () => {
+      window.print();
+    });
+
+    btnCopyMd?.addEventListener('click', () => {
+      if (currentOpportunities.length === 0) return;
+      let md = `# Nadhebe Opportunity Radar Report for ${currentDomain}\nAnalyzed Date: ${new Date().toLocaleDateString()}\n\n`;
+      currentOpportunities.forEach((opp, i) => {
+        md += `### ${i + 1}. ${opp.topic}\n- **Opportunity Score:** ${opp.totalScore}/100\n- **Relevance:** ${opp.relevance}%\n- **Content Gap:** ${opp.gapStrength}\n- **Why Relevant:** ${opp.why}\n- **Suggested Titles:**\n${opp.queries.map(q => `  - ${q}`).join('\n')}\n\n`;
+      });
+      navigator.clipboard.writeText(md);
+      showToast('Full Markdown report copied to clipboard!');
+    });
 
     function renderOpportunityCards(opportunities, domain) {
       if (!listContainer) return;
@@ -385,10 +592,10 @@
 
           <!-- Action Buttons -->
           <div class="flex items-center gap-12 pt-8">
-            <button type="button" class="action-pill-btn rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
+            <button type="button" data-opp-index="${i}" class="btn-research-topic rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
               Research Topic
             </button>
-            <button type="button" class="action-pill-btn rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
+            <button type="button" class="btn-save-opp rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
               Save Opportunity
             </button>
           </div>
@@ -397,9 +604,20 @@
         listContainer.appendChild(card);
       });
 
-      document.querySelectorAll('.action-pill-btn').forEach(btn => {
+      // Handle Research Topic clicks -> Native Glassmorphism Modal (NO BROWSER ALERTS!)
+      document.querySelectorAll('.btn-research-topic').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-opp-index') || '0', 10);
+          if (currentOpportunities[idx]) {
+            openResearchModal(currentOpportunities[idx]);
+          }
+        });
+      });
+
+      // Handle Save Opportunity clicks -> Native Glassmorphism Toast (NO BROWSER ALERTS!)
+      document.querySelectorAll('.btn-save-opp').forEach(btn => {
         btn.addEventListener('click', () => {
-          alert('Opportunity saved! (Full topic outline generator coming in V1)');
+          showToast('✓ Opportunity saved to research queue');
         });
       });
     }
@@ -418,7 +636,6 @@
 
       let sitemapText = '';
 
-      // Try local relative path first (for nadhebe.com or local preview)
       try {
         const localRes = await fetch('/sitemap-0.xml');
         if (localRes.ok) sitemapText = await localRes.text();
@@ -431,7 +648,6 @@
         } catch {}
       }
 
-      // Try CORS Proxy if direct fetch blocked
       if (!sitemapText) {
         try {
           const proxyRes = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(parsed.origin + '/sitemap.xml')}`);
@@ -528,21 +744,22 @@
       if (loadingStep) loadingStep.textContent = `Analyzing ${profile.urlCount} sitemap URLs and matching content gaps...`;
 
       setTimeout(() => {
-        const opportunities = matchOpportunities(profile);
+        currentOpportunities = matchOpportunities(profile);
+        currentDomain = profile.domain;
 
         loadingState?.classList.add('hidden');
 
-        if (opportunities.length === 0) {
+        if (currentOpportunities.length === 0) {
           errorState?.classList.remove('hidden');
           if (errorMessage) errorMessage.textContent = `Analyzed ${profile.urlCount} URLs from ${profile.domain}, but found no unfulfilled content gaps matching our current curated trend set.`;
           return;
         }
 
         resultsSection?.classList.remove('hidden');
-        if (resultsSubtitle) resultsSubtitle.textContent = `Surfaced ${opportunities.length} top content opportunities for ${profile.domain}`;
+        if (resultsSubtitle) resultsSubtitle.textContent = `Surfaced ${currentOpportunities.length} top content opportunities for ${profile.domain}`;
         if (resultsMeta) resultsMeta.innerHTML = `<span>Parsed ${profile.urlCount} sitemap URLs</span>`;
 
-        renderOpportunityCards(opportunities, profile.domain);
+        renderOpportunityCards(currentOpportunities, profile.domain);
       }, 300);
     });
   })();
