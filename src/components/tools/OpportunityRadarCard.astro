@@ -7,7 +7,7 @@
   <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 no-print" data-reveal>
     <form id="radar-form" class="space-y-20">
       <div>
-        <label for="domain-input" class="block text-body-medium font-sans font-semibold text-ink dark:text-ink-dark mb-8">
+        <label for="domain-input" class="block text-body-medium font-sans font-bold text-ink dark:text-ink-dark mb-8">
           Website Domain
         </label>
         <div class="relative flex flex-col sm:flex-row gap-12">
@@ -17,16 +17,16 @@
             placeholder="e.g. nadhebe.com or stripe.com"
             value="nadhebe.com"
             required
-            class="flex-1 rounded-12 border border-border bg-surface px-16 py-14 text-body font-mono text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all"
+            class="flex-1 rounded-12 border border-border bg-surface px-16 py-14 text-body font-mono text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all shadow-inner-light"
           />
           <button
             type="submit"
             id="radar-submit"
-            class="rounded-12 bg-accent px-24 py-14 font-sans font-semibold text-white shadow-soft hover:bg-accent/90 focus:outline-none transition-all cursor-pointer flex items-center justify-center gap-8 shrink-0 dark:bg-accent-dark dark:hover:bg-accent-dark/90"
+            class="rounded-12 bg-accent px-28 py-14 font-sans font-bold text-white shadow-medium hover:bg-accent/90 hover:shadow-soft focus:outline-none transition-all cursor-pointer flex items-center justify-center gap-8 shrink-0 dark:bg-accent-dark dark:hover:bg-accent-dark/90"
           >
             <span>Find Opportunities</span>
             <svg style="width: 18px; height: 18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </button>
         </div>
@@ -36,20 +36,20 @@
     <!-- Brief Visual Explanatory Steps -->
     <div class="mt-24 pt-20 border-t border-border/60 dark:border-border-dark/60 grid grid-cols-2 sm:grid-cols-4 gap-12 text-caption">
       <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
-        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">1</span>
-        <span>Analyze site</span>
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">1</span>
+        <span class="font-medium">Analyze site</span>
       </div>
       <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
-        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">2</span>
-        <span>Extract topics</span>
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">2</span>
+        <span class="font-medium">Extract topics</span>
       </div>
       <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
-        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">3</span>
-        <span>Compare trends</span>
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">3</span>
+        <span class="font-medium">Compare trends</span>
       </div>
       <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
-        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">4</span>
-        <span>Surface gaps</span>
+        <span class="flex h-22 w-22 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">4</span>
+        <span class="font-medium">Surface gaps</span>
       </div>
     </div>
   </div>
@@ -81,8 +81,8 @@
 
   <!-- Results Section -->
   <div id="radar-results" class="hidden space-y-32">
-    <!-- Analysis Summary Banner -->
-    <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 space-y-16">
+    <!-- Analysis Summary Header Banner -->
+    <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 space-y-20">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-16 pb-16 border-b border-border/60 dark:border-border-dark/60">
         <div>
           <span class="rounded-pill bg-accent/10 px-12 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark uppercase tracking-wider">
@@ -96,58 +96,58 @@
           </p>
         </div>
 
-        <!-- Export Actions -->
-        <div class="flex items-center gap-8 flex-wrap shrink-0 no-print">
+        <!-- Premium Styled Export Actions Control Group -->
+        <div class="flex items-center gap-10 no-print shrink-0">
           <button
             type="button"
             id="btn-export-pdf"
-            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+            class="rounded-12 border border-border/80 bg-surface2/60 px-16 py-10 text-body-small font-sans font-semibold text-ink hover:border-accent hover:bg-accent hover:text-white dark:border-border-dark/80 dark:bg-surface2-dark/60 dark:text-ink-dark dark:hover:border-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-8 shadow-sm"
           >
-            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <span>Export PDF / Print</span>
+            <span>Export PDF</span>
           </button>
           <button
             type="button"
             id="btn-copy-md"
-            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+            class="rounded-12 border border-border/80 bg-surface2/60 px-16 py-10 text-body-small font-sans font-semibold text-ink hover:border-accent hover:bg-accent hover:text-white dark:border-border-dark/80 dark:bg-surface2-dark/60 dark:text-ink-dark dark:hover:border-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-8 shadow-sm"
           >
-            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
             </svg>
-            <span>Copy Markdown Report</span>
+            <span>Copy Report</span>
           </button>
         </div>
       </div>
 
       <div class="flex items-center gap-12 flex-wrap">
-        <span class="rounded-pill bg-accent/10 px-12 py-6 font-mono text-caption font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark" id="pill-opp-count">
+        <span class="rounded-pill bg-accent/10 px-14 py-6 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark" id="pill-opp-count">
           5 Opportunities
         </span>
-        <span class="rounded-pill border border-border bg-surface2 px-12 py-6 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="pill-url-count">
+        <span class="rounded-pill border border-border bg-surface2 px-14 py-6 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="pill-url-count">
           375 Pages Analyzed
         </span>
         <button
           type="button"
           id="btn-view-saved"
-          class="rounded-pill border border-accent/40 bg-accent/10 px-12 py-6 font-mono text-caption font-bold text-accent hover:bg-accent hover:text-white dark:border-accent-dark/40 dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-6"
+          class="rounded-pill border border-accent/40 bg-accent/10 px-14 py-6 font-mono text-caption font-bold text-accent hover:bg-accent hover:text-white dark:border-accent-dark/40 dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all flex items-center gap-6"
         >
           <span>Saved Opportunities</span>
-          <span id="saved-badge" class="rounded-full bg-accent px-6 py-2 text-[10px] text-white dark:bg-accent-dark">0</span>
+          <span id="saved-badge" class="rounded-full bg-accent px-8 py-2 text-[11px] font-bold text-white dark:bg-accent-dark">0</span>
         </button>
       </div>
     </div>
 
-    <!-- Saved Opportunities Drawer (collapsible persistent local storage queue) -->
+    <!-- Saved Opportunities Drawer -->
     <div id="saved-queue-drawer" class="hidden rounded-24 border border-accent/40 bg-accent/5 p-24 space-y-16 dark:border-accent-dark/40 dark:bg-accent-dark/5 no-print">
       <div class="flex items-center justify-between gap-12 pb-12 border-b border-accent/20 dark:border-accent-dark/20">
         <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark flex items-center gap-8">
           <span>Saved Research Queue</span>
-          <span class="text-caption font-mono font-normal text-muted dark:text-muted-dark">(Saved to LocalStorage)</span>
+          <span class="text-caption font-mono font-normal text-muted dark:text-muted-dark">(Saved in Browser Storage)</span>
         </h3>
         <div class="flex items-center gap-8">
-          <button type="button" id="btn-clear-saved" class="text-caption font-mono text-muted hover:text-red-500 dark:text-muted-dark dark:hover:text-red-400 cursor-pointer">
+          <button type="button" id="btn-clear-saved" class="text-caption font-mono font-bold text-muted hover:text-red-500 dark:text-muted-dark dark:hover:text-red-400 cursor-pointer">
             Clear Queue
           </button>
         </div>
@@ -216,19 +216,19 @@
       </div>
     </div>
 
-    <!-- Modal Actions -->
-    <div class="flex items-center justify-center gap-12 pt-12 border-t border-border/60 dark:border-border-dark/60">
+    <!-- Modal Actions Centered -->
+    <div class="flex items-center justify-center gap-12 pt-16 border-t border-border/60 dark:border-border-dark/60">
       <button
         type="button"
         id="modal-copy-outline"
-        class="rounded-10 bg-accent px-16 py-10 text-caption font-mono font-semibold text-white hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all"
+        class="rounded-12 bg-accent px-20 py-12 text-body-small font-sans font-bold text-white shadow-soft hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all"
       >
         Copy Outline (Markdown)
       </button>
       <button
         type="button"
         id="modal-pdf"
-        class="rounded-10 border border-border bg-surface2 px-16 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all"
+        class="rounded-12 border border-border bg-surface2 px-20 py-12 text-body-small font-sans font-bold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all"
       >
         Print / PDF
       </button>
@@ -239,7 +239,7 @@
 <!-- Floating Native UI Toast Notification -->
 <div id="radar-toast" class="fixed bottom-24 right-24 z-50 hidden rounded-16 border border-accent/40 bg-surface/95 px-20 py-14 shadow-medium text-body-small font-sans font-semibold text-ink backdrop-blur-xl dark:border-accent-dark/40 dark:bg-surface-dark/95 dark:text-ink-dark transition-all transform duration-300 translate-y-8 opacity-0">
   <div class="flex items-center gap-8">
-    <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/20 text-accent dark:bg-accent-dark/20 dark:text-accent-dark">✓</span>
+    <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/20 text-accent dark:bg-accent-dark/20 dark:text-accent-dark font-bold">✓</span>
     <span id="toast-message">Opportunity saved to research queue</span>
   </div>
 </div>
@@ -351,7 +351,7 @@
                 <span class="text-caption font-mono text-accent dark:text-accent-dark ml-8">(Score: ${item.totalScore}/100)</span>
                 <p class="text-caption font-mono text-muted dark:text-muted-dark mt-2">→ ${item.suggestedWriteTitle}</p>
               </div>
-              <button type="button" data-remove-topic="${item.topic}" class="btn-remove-saved rounded-6 border border-border px-8 py-4 text-caption font-mono text-muted hover:text-red-500 dark:border-border-dark cursor-pointer">
+              <button type="button" data-remove-topic="${item.topic}" class="btn-remove-saved rounded-8 border border-border px-10 py-6 text-caption font-mono font-bold text-muted hover:text-red-500 dark:border-border-dark cursor-pointer transition-all">
                 Remove
               </button>
             </div>
@@ -665,13 +665,13 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12">
           <div class="space-y-4">
             <div class="flex items-center gap-8 flex-wrap">
-              <span class="rounded-pill bg-accent px-12 py-4 font-mono text-caption font-extrabold text-white uppercase tracking-wider">
+              <span class="rounded-pill bg-accent px-12 py-4 font-sans text-caption font-bold text-white uppercase tracking-wider shadow-sm">
                 ★ Your Best Opportunity
               </span>
               <span class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark">
                 Signal: ${hero.source}
               </span>
-              <span class="text-caption font-mono font-semibold text-accent dark:text-accent-dark uppercase">
+              <span class="text-caption font-mono font-bold text-accent dark:text-accent-dark uppercase">
                 ${hero.gapStrength} Opportunity
               </span>
             </div>
@@ -679,41 +679,44 @@
               🔥 ${hero.topic}
             </h3>
           </div>
-          <div class="rounded-20 border border-accent/40 bg-accent/10 p-16 text-center shrink-0 dark:border-accent-dark/40 dark:bg-accent-dark/20 min-w-140">
+          <div class="rounded-20 border border-accent/40 bg-accent/10 p-16 text-center shrink-0 dark:border-accent-dark/40 dark:bg-accent-dark/20 min-w-140 shadow-sm">
             <span class="block text-caption font-mono uppercase text-muted dark:text-muted-dark font-semibold">Opportunity Score</span>
             <span class="text-h1 font-mono font-black text-accent dark:text-accent-dark">${hero.totalScore}<span class="text-caption font-normal text-muted dark:text-muted-dark">/100</span></span>
           </div>
         </div>
 
         <!-- Rationale Callout -->
-        <p class="text-body font-sans text-ink dark:text-ink-dark">
+        <p class="text-body font-sans text-ink dark:text-ink-dark leading-relaxed">
           ${hero.why}
         </p>
 
         <!-- Suggested Article Title Box -->
-        <div class="rounded-16 border border-border bg-surface2/80 p-20 dark:border-border-dark dark:bg-surface2-dark/80 space-y-6">
+        <div class="rounded-16 border border-border/80 bg-surface2/80 p-20 dark:border-border-dark/80 dark:bg-surface2-dark/80 space-y-6">
           <span class="block text-caption font-mono uppercase font-bold text-accent dark:text-accent-dark tracking-wider">Write This Next:</span>
           <p class="text-h3 font-sans font-bold text-ink dark:text-ink-dark">
             → ${hero.suggestedWriteTitle}
           </p>
         </div>
 
-        <!-- Action Bar -->
+        <!-- Action Bar with Premium Buttons -->
         <div class="flex items-center gap-12 flex-wrap pt-4">
-          <button type="button" data-hero-action="research" class="rounded-12 bg-accent px-20 py-12 text-body-small font-sans font-bold text-white shadow-soft hover:bg-accent/90 cursor-pointer transition-all flex items-center gap-8 dark:bg-accent-dark dark:hover:bg-accent-dark/90">
+          <button type="button" data-hero-action="research" class="rounded-12 bg-accent px-22 py-12 text-body-small font-sans font-bold text-white shadow-medium hover:bg-accent/90 hover:shadow-soft cursor-pointer transition-all flex items-center gap-8 dark:bg-accent-dark dark:hover:bg-accent-dark/90">
             <span>Research This Topic</span>
             <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-          <button type="button" data-hero-action="save" class="rounded-12 border border-border bg-surface px-18 py-12 text-body-small font-sans font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
-            Save Opportunity
+          <button type="button" data-hero-action="save" class="rounded-12 border border-border bg-surface px-20 py-12 text-body-small font-sans font-bold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-8 shadow-sm">
+            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+            </svg>
+            <span>Save Opportunity</span>
           </button>
         </div>
 
-        <!-- Accordion Details (Clean, Fixed-Size Arrow) -->
+        <!-- Accordion Details (Clean Inline Arrow) -->
         <div class="pt-12 border-t border-border/40 dark:border-border-dark/40">
-          <button type="button" id="toggle-why-btn" class="text-caption font-mono font-semibold text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all flex items-center gap-6">
+          <button type="button" id="toggle-why-btn" class="text-caption font-sans font-semibold text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all flex items-center gap-6">
             <span>Why this was recommended</span>
             <svg id="toggle-why-arrow" style="width: 14px; height: 14px; display: inline-block;" class="transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -789,10 +792,10 @@
               <span class="text-h3 font-mono font-extrabold text-accent dark:text-accent-dark">${opp.totalScore}</span>
             </div>
             <div class="flex items-center gap-8">
-              <button type="button" data-sec-index="${rank - 1}" class="btn-sec-research rounded-8 bg-accent/10 px-12 py-8 text-caption font-mono font-bold text-accent hover:bg-accent hover:text-white dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all">
+              <button type="button" data-sec-index="${rank - 1}" class="btn-sec-research rounded-10 bg-accent px-14 py-8 text-caption font-sans font-bold text-white shadow-soft hover:bg-accent/90 dark:bg-accent-dark dark:hover:bg-accent-dark/90 cursor-pointer transition-all">
                 Research
               </button>
-              <button type="button" data-sec-save-idx="${rank - 1}" class="btn-sec-save rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all">
+              <button type="button" data-sec-save-idx="${rank - 1}" class="btn-sec-save rounded-10 border border-border bg-surface px-14 py-8 text-caption font-sans font-bold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all shadow-sm">
                 Save
               </button>
             </div>
