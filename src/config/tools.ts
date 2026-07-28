@@ -130,8 +130,18 @@ export const TOOLS: ToolMetadata[] = [
     description: 'Interactive lookup tool for recommended image and video dimensions across YouTube, X, Instagram, LinkedIn, and Facebook.',
     category: 'Social & Creator',
     icon: 'share-2',
-    badge: 'New',
     tags: ['social media', 'image sizes', 'instagram', 'youtube banner', 'x header', 'linkedin'],
+  },
+  {
+    id: 'opportunity-radar',
+    name: 'Nadhebe Opportunity Radar',
+    slug: 'opportunity-radar',
+    href: '/tools/opportunity-radar/',
+    description: 'Discover emerging topics and content gaps your website should cover next based on sitemap analysis.',
+    category: 'SEO & Webmaster',
+    icon: 'radar',
+    badge: 'New',
+    tags: ['opportunity radar', 'content gap', 'trending topics', 'seo tool', 'sitemap analyzer', 'content strategy'],
   },
 ];
 

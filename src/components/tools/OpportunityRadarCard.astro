@@ -1,0 +1,468 @@
+---
+// Nadhebe Opportunity Radar Interactive Calculator & Results Card
+---
+
+<div class="space-y-32">
+  <!-- Domain Input & Form Card -->
+  <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90" data-reveal>
+    <form id="radar-form" class="space-y-20">
+      <div>
+        <label for="domain-input" class="block text-body-medium font-sans font-semibold text-ink dark:text-ink-dark mb-8">
+          Website Domain
+        </label>
+        <div class="relative flex flex-col sm:flex-row gap-12">
+          <input
+            type="text"
+            id="domain-input"
+            placeholder="e.g. nadhebe.com or stripe.com"
+            value="nadhebe.com"
+            required
+            class="flex-1 rounded-12 border border-border bg-surface px-16 py-14 text-body font-mono text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all"
+          />
+          <button
+            type="submit"
+            id="radar-submit"
+            class="rounded-12 bg-accent px-24 py-14 font-sans font-semibold text-white shadow-soft hover:bg-accent/90 focus:outline-none transition-all cursor-pointer flex items-center justify-center gap-8 shrink-0 dark:bg-accent-dark dark:hover:bg-accent-dark/90"
+          >
+            <span>Find Opportunities</span>
+            <svg class="w-18 h-18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Brief Visual Explanatory Steps -->
+    <div class="mt-24 pt-20 border-t border-border/60 dark:border-border-dark/60 grid grid-cols-2 sm:grid-cols-4 gap-12 text-caption">
+      <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
+        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">1</span>
+        <span>Analyze site</span>
+      </div>
+      <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
+        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">2</span>
+        <span>Extract topics</span>
+      </div>
+      <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
+        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">3</span>
+        <span>Compare trends</span>
+      </div>
+      <div class="flex items-center gap-8 text-muted dark:text-muted-dark">
+        <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">4</span>
+        <span>Surface gaps</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div id="radar-loading" class="hidden rounded-24 border border-border/80 bg-surface/90 p-32 text-center shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90">
+    <div class="inline-flex items-center justify-center p-16 rounded-full bg-accent/10 mb-16 dark:bg-accent-dark/20">
+      <svg class="w-32 h-32 animate-spin text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+    <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark mb-8" id="loading-title">Scanning Website Sitemap</h3>
+    <p class="text-body-small text-muted dark:text-muted-dark" id="loading-step">Discovering public sitemap and extracting content coverage...</p>
+  </div>
+
+  <!-- Error State -->
+  <div id="radar-error" class="hidden rounded-20 border border-red-500/30 bg-red-500/5 p-24 text-red-600 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-400">
+    <div class="flex items-start gap-12">
+      <svg class="w-24 h-24 shrink-0 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <div>
+        <h4 class="font-sans font-bold text-body" id="error-title">Analysis Failure</h4>
+        <p class="text-body-small mt-4 opacity-90" id="error-message">We couldn't locate a public sitemap for this website.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div id="radar-results" class="hidden space-y-24">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12 pb-16 border-b border-border/80 dark:border-border-dark/80">
+      <div>
+        <h2 class="text-h2 font-sans font-bold text-ink dark:text-ink-dark">
+          Top Content Opportunities
+        </h2>
+        <p class="text-body-small text-muted dark:text-muted-dark mt-2" id="results-subtitle">
+          Found 5 relevant missing topics for example.com
+        </p>
+      </div>
+      <div class="inline-flex items-center gap-8 rounded-pill border border-border bg-surface2 px-12 py-6 text-caption font-mono text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="results-meta">
+        <span>Parsed 142 URLs</span>
+      </div>
+    </div>
+
+    <!-- Cards Container -->
+    <div id="opportunities-list" class="space-y-20"></div>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    const form = document.getElementById('radar-form');
+    const domainInput = document.getElementById('domain-input');
+    const loadingState = document.getElementById('radar-loading');
+    const loadingStep = document.getElementById('loading-step');
+    const errorState = document.getElementById('radar-error');
+    const errorMessage = document.getElementById('error-message');
+    const resultsSection = document.getElementById('radar-results');
+    const resultsSubtitle = document.getElementById('results-subtitle');
+    const resultsMeta = document.getElementById('results-meta');
+    const listContainer = document.getElementById('opportunities-list');
+
+    // Inline fallback matcher in case module bundler delay
+    function extractKeywords(text) {
+      const stop = new Set(['how', 'to', 'for', 'the', 'and', 'in', 'of', 'a', 'an', 'with', 'on', 'at', 'by', 'is', 'are', 'guide', 'tutorial']);
+      return text.toLowerCase().split(/[\s/_\-:,.\s]+/).filter(t => t.length > 1 && !stop.has(t));
+    }
+
+    const CURATED_TRENDS = [
+      {
+        id: 'claude-code-mcp',
+        topic: 'Claude Code MCP Servers',
+        aliases: ['claude code mcp', 'mcp servers claude', 'model context protocol claude', 'claude code skills'],
+        category: 'AI Developer Tools',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'How to connect MCP servers to Claude Code CLI',
+          'Best MCP servers for developer workflows',
+          'Building custom MCP plugins for Claude Code'
+        ]
+      },
+      {
+        id: 'gemini-3-6-flash',
+        topic: 'Gemini 3.6 Flash API & Canvas',
+        aliases: ['gemini 3.6 flash', 'gemini 3.6 canvas', 'google gemini 3.6', 'gemini api javascript node'],
+        category: 'AI Models & APIs',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Gemini 3.6 Flash benchmarks and latency',
+          'How to use Gemini Canvas for coding',
+          'Gemini API Node.js integration tutorial'
+        ]
+      },
+      {
+        id: 'deepseek-r1-local-vllm',
+        topic: 'Local DeepSeek R1 Deployment with vLLM',
+        aliases: ['deepseek r1 vllm', 'deepseek r1 local setup', 'vllm gpu oom fix', 'deepseek r1 ollama'],
+        category: 'Local AI & LLMs',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'How to deploy DeepSeek R1 locally using vLLM',
+          'Fixing vLLM GPU out of memory errors for DeepSeek R1',
+          'DeepSeek R1 vs Claude 3.5 Sonnet local benchmark'
+        ]
+      },
+      {
+        id: 'google-flow-storyboard-studio',
+        topic: 'Google Flow Storyboard Studio',
+        aliases: ['google flow storyboard', 'google flow ai video', 'flow studio ai', 'google flow video generator'],
+        category: 'AI Video & Visual Tools',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Building pre-production storyboards with Google Flow',
+          'Google Flow AI video generation guide',
+          'Google Flow vs Runway Gen-3 comparison'
+        ]
+      },
+      {
+        id: 'kimi-k3-3d-modeling',
+        topic: 'Kimi K3 3D Spatial Generation',
+        aliases: ['kimi k3 3d', 'kimi k3 spatial ai', 'kimi k3 game development', 'kimi k3 mesh generation'],
+        category: '3D & Spatial Computing',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Kimi K3 3D modeling workflow for game developers',
+          'Exporting Kimi K3 3D assets to Unreal Engine 5',
+          'Kimi K3 spatial mesh generation tutorial'
+        ]
+      },
+      {
+        id: 'agentic-youtube-automation',
+        topic: 'Multi-Agent YouTube Automation Workflows',
+        aliases: ['youtube automation agent', 'ai youtube automation', 'multi agent video generator', 'python youtube bot'],
+        category: 'Autonomous Agents',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Setting up an open-source YouTube automation agent',
+          'Python script for multi-agent video rendering',
+          'Automating YouTube Short uploads with AI agents'
+        ]
+      },
+      {
+        id: 'instatic-cms-visual-editor',
+        topic: 'Instatic CMS Visual Importer',
+        aliases: ['instatic cms', 'instatic html importer', 'instatic local vps', 'instatic visual cms'],
+        category: 'Web Development & CMS',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'How to import static HTML sites into Instatic CMS',
+          'Deploying Instatic Docker on VPS',
+          'Instatic enterprise editorial governance guide'
+        ]
+      },
+      {
+        id: 'nextjs-15-server-actions',
+        topic: 'Next.js 15 Server Actions & PPR',
+        aliases: ['next.js 15', 'nextjs 15 ppr', 'partial prerendering nextjs', 'nextjs server actions best practices'],
+        category: 'Web Frameworks',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Next.js 15 Partial Prerendering setup guide',
+          'Securing Next.js Server Actions in production',
+          'Next.js 15 App Router performance optimization'
+        ]
+      },
+      {
+        id: 'davinci-resolve-vertical-render',
+        topic: 'DaVinci Resolve 9:16 Vertical Video Workflows',
+        aliases: ['davinci resolve 1080x1350', 'davinci resolve 9:16', 'davinci resolve shorts render', 'davinci resolve aspect ratio'],
+        category: 'Social & Creator',
+        sourceType: 'curated',
+        source: 'Nadhebe Developer Radar',
+        relatedQueries: [
+          'Best DaVinci Resolve render settings for 1080×1350 and 9:16 Shorts',
+          'Auto-cropping 16:9 video to 9:16 vertical in DaVinci Resolve',
+          'DaVinci Resolve GPU export presets for TikTok and Reels'
+        ]
+      }
+    ];
+
+    function matchOpportunities(profile) {
+      const siteTopics = new Set(profile.topics.map(t => t.toLowerCase()));
+      const siteCategories = new Set(profile.categories.map(c => c.toLowerCase()));
+      const siteSlugs = profile.existingSlugs.map(s => s.toLowerCase());
+
+      const results = [];
+
+      for (const trend of CURATED_TRENDS) {
+        const trendTokens = Array.from(new Set([...extractKeywords(trend.topic), ...trend.aliases.flatMap(extractKeywords)]));
+
+        let topicHits = 0;
+        const matchedTopics = [];
+        for (const token of trendTokens) {
+          for (const sTopic of siteTopics) {
+            if (sTopic.includes(token) || token.includes(sTopic)) {
+              topicHits++;
+              if (!matchedTopics.includes(sTopic)) matchedTopics.push(sTopic);
+            }
+          }
+        }
+
+        let catMatch = false;
+        for (const cat of siteCategories) {
+          if (cat.includes(trend.category.toLowerCase()) || trend.category.toLowerCase().includes(cat)) {
+            catMatch = true;
+            break;
+          }
+        }
+
+        let relevance = 0;
+        if (trendTokens.length > 0) {
+          relevance = Math.round(Math.min(1, topicHits / Math.max(2, trendTokens.length)) * 75);
+        }
+        if (catMatch) relevance += 25;
+        if (matchedTopics.length > 0 && relevance < 45) relevance = 45 + Math.min(35, matchedTopics.length * 10);
+        relevance = Math.min(100, Math.max(0, relevance));
+
+        if (relevance < 30) continue;
+
+        let exactMatches = 0;
+        const relatedPages = [];
+        for (const slug of siteSlugs) {
+          const slugTokens = extractKeywords(slug);
+          const overlap = trendTokens.filter(t => slugTokens.includes(t)).length;
+          if (overlap >= Math.min(2, trendTokens.length)) {
+            relatedPages.push(slug);
+            if (overlap >= Math.min(3, trendTokens.length)) exactMatches++;
+          }
+        }
+
+        let gapScore = 100;
+        let gapStrength = 'High';
+        if (exactMatches > 0) {
+          gapScore = 15; gapStrength = 'Low';
+        } else if (relatedPages.length >= 2) {
+          gapScore = 70; gapStrength = 'Medium';
+        } else {
+          gapScore = 100; gapStrength = 'High';
+        }
+
+        if (gapScore < 20) continue;
+
+        const totalScore = Math.round(0.6 * relevance + 0.4 * gapScore);
+        const topTopicsStr = matchedTopics.slice(0, 3).join(', ') || 'AI & web development';
+
+        const why = relatedPages.length > 0
+          ? `Your website has ${profile.urlCount} pages covering related topics (${topTopicsStr}), but we couldn't find a page specifically covering ${trend.topic}.`
+          : `Matches your site's ${trend.category} topic focus, representing a highly relevant missing content opportunity.`;
+
+        results.push({
+          topic: trend.topic,
+          category: trend.category,
+          relevance,
+          gapScore,
+          gapStrength,
+          totalScore,
+          source: trend.source,
+          why,
+          queries: trend.relatedQueries
+        });
+      }
+
+      return results.sort((a, b) => b.totalScore - a.totalScore).slice(0, 5);
+    }
+
+    function renderOpportunityCards(opportunities, domain) {
+      if (!listContainer) return;
+      listContainer.innerHTML = '';
+
+      opportunities.forEach((opp, i) => {
+        const card = document.createElement('div');
+        card.className = 'rounded-20 border border-border/80 bg-surface/90 p-24 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 space-y-16 transition-all hover:border-accent/40 dark:hover:border-accent-dark/40';
+
+        const queriesHtml = opp.queries.map(q => `<li class="flex items-center gap-8 text-body-small text-ink dark:text-ink-dark"><span class="text-accent dark:text-accent-dark">•</span> <span>${q}</span></li>`).join('');
+
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12">
+            <div class="space-y-4">
+              <div class="flex items-center gap-8 flex-wrap">
+                <span class="rounded-pill bg-accent/10 px-10 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+                  #${i + 1} Opportunity
+                </span>
+                <span class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark">
+                  Signal: ${opp.source}
+                </span>
+                <span class="text-caption font-mono text-muted dark:text-muted-dark">
+                  ${opp.category}
+                </span>
+              </div>
+              <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark pt-4">
+                🔥 ${opp.topic}
+              </h3>
+            </div>
+            <div class="rounded-16 border border-border/80 bg-surface2/60 p-12 text-center shrink-0 dark:border-border-dark/80 dark:bg-surface2-dark/60 min-w-120">
+              <span class="block text-caption font-mono uppercase text-muted dark:text-muted-dark font-semibold">Opportunity Score</span>
+              <span class="text-h2 font-mono font-extrabold text-accent dark:text-accent-dark">${opp.totalScore}<span class="text-caption font-normal text-muted dark:text-muted-dark">/100</span></span>
+            </div>
+          </div>
+
+          <!-- Score Metrics Breakdown -->
+          <div class="grid grid-cols-3 gap-8 rounded-12 bg-surface2/40 p-12 text-center dark:bg-surface2-dark/40 border border-border/40 dark:border-border-dark/40">
+            <div>
+              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Relevance</span>
+              <span class="text-body font-mono font-bold text-ink dark:text-ink-dark">${opp.relevance}%</span>
+            </div>
+            <div>
+              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Content Gap</span>
+              <span class="text-body font-mono font-bold text-accent dark:text-accent-dark">${opp.gapStrength}</span>
+            </div>
+            <div>
+              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Signal</span>
+              <span class="text-body font-mono font-medium text-ink dark:text-ink-dark">Curated</span>
+            </div>
+          </div>
+
+          <!-- Why Relevant Explanation -->
+          <div class="rounded-12 border border-accent/20 bg-accent/5 p-16 dark:border-accent-dark/20 dark:bg-accent-dark/5">
+            <h4 class="text-caption font-mono font-bold uppercase text-accent dark:text-accent-dark mb-4">Why This Is Relevant</h4>
+            <p class="text-body-small text-ink dark:text-ink-dark">${opp.why}</p>
+          </div>
+
+          <!-- Suggested Articles -->
+          <div>
+            <h4 class="text-caption font-mono font-bold uppercase text-muted dark:text-muted-dark mb-8">Suggested Content Titles:</h4>
+            <ul class="space-y-6">
+              ${queriesHtml}
+            </ul>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-12 pt-8">
+            <button type="button" class="action-pill-btn rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
+              Research Topic
+            </button>
+            <button type="button" class="action-pill-btn rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
+              Save Opportunity
+            </button>
+          </div>
+        `;
+
+        listContainer.appendChild(card);
+      });
+
+      // Add click handlers for action buttons
+      document.querySelectorAll('.action-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          alert('Opportunity saved! (Full topic outline generator coming in V1)');
+        });
+      });
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const domain = domainInput?.value?.trim();
+      if (!domain) return;
+
+      // UI States
+      loadingState?.classList.remove('hidden');
+      errorState?.classList.add('hidden');
+      resultsSection?.classList.add('hidden');
+
+      if (loadingStep) loadingStep.textContent = `Discovering sitemap directives for ${domain}...`;
+
+      try {
+        const res = await fetch('/api/analyze-site', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domain })
+        });
+
+        const data = await res.json();
+
+        if (!data.success || !data.profile) {
+          loadingState?.classList.add('hidden');
+          errorState?.classList.remove('hidden');
+          if (errorMessage) errorMessage.textContent = data.message || 'We couldn\'t locate a public sitemap for this domain.';
+          return;
+        }
+
+        if (loadingStep) loadingStep.textContent = `Analyzing ${data.profile.urlCount} URLs and matching content gaps...`;
+
+        setTimeout(() => {
+          const opportunities = matchOpportunities(data.profile);
+
+          loadingState?.classList.add('hidden');
+
+          if (opportunities.length === 0) {
+            errorState?.classList.remove('hidden');
+            if (errorMessage) errorMessage.textContent = `Analyzed ${data.profile.urlCount} URLs from ${domain}, but found no unfulfilled content gaps matching our current curated trend set.`;
+            return;
+          }
+
+          resultsSection?.classList.remove('hidden');
+          if (resultsSubtitle) resultsSubtitle.textContent = `Surfaced ${opportunities.length} top content opportunities for ${data.profile.domain}`;
+          if (resultsMeta) resultsMeta.innerHTML = `<span>Parsed ${data.profile.urlCount} sitemap URLs</span>`;
+
+          renderOpportunityCards(opportunities, data.profile.domain);
+        }, 400);
+
+      } catch (err) {
+        loadingState?.classList.add('hidden');
+        errorState?.classList.remove('hidden');
+        if (errorMessage) errorMessage.textContent = 'Network or API error occurred while inspecting sitemap.';
+      }
+    });
+  })();
+</script>

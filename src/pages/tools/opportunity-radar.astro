@@ -1,0 +1,111 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import OpportunityRadarCard from '@/components/tools/OpportunityRadarCard.astro';
+
+const title = 'Nadhebe Opportunity Radar | Find What Your Website Should Write About Next';
+const h1 = 'Find What Your Website Should Write About Next';
+const description = 'Enter your website domain and discover emerging topics relevant to your audience that you have not covered yet.';
+
+const faq = [
+  {
+    question: 'What is a content opportunity?',
+    answer: 'A content opportunity is an emerging, high-intent topic relevant to your audience that your competitors or market are searching for, but your website currently lacks dedicated coverage for.',
+  },
+  {
+    question: 'How does Nadhebe Opportunity Radar work?',
+    answer: 'Opportunity Radar inspects your website’s public XML sitemap to build a lightweight site profile of covered topics and categories. It then compares your site profile against our curated developer and tech trend radar to surface exact content gaps.',
+  },
+  {
+    question: 'How are Opportunity Scores calculated?',
+    answer: 'Opportunity Scores use a transparent formula: 60% Website Relevance (how closely the topic fits your site’s domain focus) + 40% Content Gap Strength (how completely missing the topic is from your sitemap).',
+  },
+  {
+    question: 'How is this different from Google Trends?',
+    answer: 'Google Trends shows generic global search volume. Opportunity Radar is personalized to your specific domain—it cross-references your existing sitemap pages so you only see high-value topics you haven’t written about yet.',
+  },
+  {
+    question: 'Does Nadhebe require access to my Google Search Console or private data?',
+    answer: 'No. Opportunity Radar analyzes 100% public XML sitemaps and site structure. Zero credentials, OAuth logins, or private analytics access are required.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="opportunity-radar"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <!-- Calculator Slot -->
+  <div slot="calculator">
+    <OpportunityRadarCard />
+  </div>
+
+  <!-- Deep Static SEO Content Guide -->
+  <div slot="content">
+    <h2>Discover High-Value Content Gaps Before Competitors Do</h2>
+    <p>
+      Creating great content requires knowing exactly what your audience is searching for today. Most content strategists spend hours manually cross-referencing search engines, social feeds, and published article lists to identify missing topics.
+    </p>
+
+    <p>
+      <strong>Nadhebe Opportunity Radar</strong> automates content gap analysis. By analyzing your public XML sitemap and comparing your published topics against emerging developer, AI, and web technology trends, Opportunity Radar highlights high-intent topics your site should cover next.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-20 my-32">
+      <div class="rounded-16 border border-border/80 bg-surface/80 p-20 dark:border-border-dark/80 dark:bg-surface-dark/80">
+        <h3 class="text-h4 font-sans font-bold text-ink dark:text-ink-dark mb-8">1. Automated Sitemap Discovery</h3>
+        <p class="text-body-small text-muted dark:text-muted-dark">
+          We inspect your <code>sitemap.xml</code> or <code>robots.txt</code> file, parsing published URLs to extract existing topics, categories, and article slugs without slow page crawling.
+        </p>
+      </div>
+
+      <div class="rounded-16 border border-border/80 bg-surface/80 p-20 dark:border-border-dark/80 dark:bg-surface-dark/80">
+        <h3 class="text-h4 font-sans font-bold text-ink dark:text-ink-dark mb-8">2. Transparent Scoring & Provenance</h3>
+        <p class="text-body-small text-muted dark:text-muted-dark">
+          Every recommendation includes provenance data from the Nadhebe Developer Radar and a transparent Opportunity Score based 60% on site relevance and 40% on content gap strength.
+        </p>
+      </div>
+    </div>
+
+    <h2>Why Focus on Content Opportunities?</h2>
+    <p>
+      Publishing content on topics adjacent to your core expertise builds topical authority. Search engines favor websites that thoroughly cover interconnected subtopics within a domain. By identifying and filling content gaps early, you establish topical depth before competitors saturate the keyword space.
+    </p>
+
+    <div class="overflow-x-auto my-24">
+      <table class="w-full text-left text-body-small">
+        <thead>
+          <tr class="border-b border-border dark:border-border-dark">
+            <th class="py-12 px-16 font-mono text-caption">Feature</th>
+            <th class="py-12 px-16 font-mono text-caption">Google Trends</th>
+            <th class="py-12 px-16 font-mono text-caption">Nadhebe Opportunity Radar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">Personalization</td>
+            <td class="py-12 px-16">Global / Regional Search Volume</td>
+            <td class="py-12 px-16 font-semibold">Personalized to Your Sitemap</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">Content Gap Detection</td>
+            <td class="py-12 px-16">No Site Context</td>
+            <td class="py-12 px-16 font-semibold">Detects Uncovered Topics</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">Setup & Credentials</td>
+            <td class="py-12 px-16">None</td>
+            <td class="py-12 px-16 font-semibold">Zero Login / 100% Public Data</td>
+          </tr>
+          <tr class="border-b border-border/40 dark:border-border-dark/40">
+            <td class="py-12 px-16 font-mono font-semibold text-accent dark:text-accent-dark">Actionability</td>
+            <td class="py-12 px-16">Raw Charts</td>
+            <td class="py-12 px-16 font-semibold">Suggested Titles & Scores</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ToolLayout>
