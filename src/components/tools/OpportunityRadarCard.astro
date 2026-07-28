@@ -80,44 +80,67 @@
   </div>
 
   <!-- Results Section -->
-  <div id="radar-results" class="hidden space-y-24">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12 pb-16 border-b border-border/80 dark:border-border-dark/80">
-      <div>
-        <h2 class="text-h2 font-sans font-bold text-ink dark:text-ink-dark">
-          Top Content Opportunities
-        </h2>
-        <p class="text-body-small text-muted dark:text-muted-dark mt-2" id="results-subtitle">
-          Found 5 relevant missing topics for example.com
-        </p>
+  <div id="radar-results" class="hidden space-y-32">
+    <!-- Analysis Summary Banner -->
+    <div class="rounded-24 border border-border/80 bg-surface/90 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 space-y-16">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-16 pb-16 border-b border-border/60 dark:border-border-dark/60">
+        <div>
+          <span class="rounded-pill bg-accent/10 px-12 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark uppercase tracking-wider">
+            Analysis Complete
+          </span>
+          <h2 class="text-h2 font-sans font-extrabold text-ink dark:text-ink-dark mt-8" id="results-headline">
+            5 Content Opportunities Worth Exploring
+          </h2>
+          <p class="text-body-small text-muted dark:text-muted-dark mt-4" id="results-subtitle">
+            We analyzed 375 pages on nadhebe.com and found 5 high-impact content gaps.
+          </p>
+        </div>
+
+        <!-- Export Actions -->
+        <div class="flex items-center gap-8 flex-wrap shrink-0 no-print">
+          <button
+            type="button"
+            id="btn-export-pdf"
+            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+          >
+            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Export PDF / Print</span>
+          </button>
+          <button
+            type="button"
+            id="btn-copy-md"
+            class="rounded-12 border border-border bg-surface px-14 py-10 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
+          >
+            <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span>Copy Markdown Report</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Export Actions Bar -->
-      <div class="flex items-center gap-8 flex-wrap no-print">
-        <button
-          type="button"
-          id="btn-export-pdf"
-          class="rounded-10 border border-border bg-surface px-14 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
-        >
-          <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span>Export PDF / Print</span>
-        </button>
-        <button
-          type="button"
-          id="btn-copy-md"
-          class="rounded-10 border border-border bg-surface px-14 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all flex items-center gap-6"
-        >
-          <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-          </svg>
-          <span>Copy Markdown Report</span>
-        </button>
+      <div class="flex items-center gap-12 flex-wrap">
+        <span class="rounded-pill bg-accent/10 px-12 py-6 font-mono text-caption font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark" id="pill-opp-count">
+          5 Opportunities
+        </span>
+        <span class="rounded-pill border border-border bg-surface2 px-12 py-6 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark" id="pill-url-count">
+          375 Pages Analyzed
+        </span>
       </div>
     </div>
 
-    <!-- Cards Container -->
-    <div id="opportunities-list" class="space-y-20"></div>
+    <!-- Featured #1 Hero Card ("YOUR BEST OPPORTUNITY") -->
+    <div id="hero-opportunity-card"></div>
+
+    <!-- Secondary Opportunities ("MORE OPPORTUNITIES") -->
+    <div class="space-y-16">
+      <h3 class="text-caption font-mono font-bold uppercase tracking-wider text-muted dark:text-muted-dark">
+        More Content Opportunities
+      </h3>
+      <div id="secondary-opportunities-list" class="space-y-12"></div>
+    </div>
   </div>
 </div>
 
@@ -189,7 +212,7 @@
   </div>
 </div>
 
-<!-- Floating Native UI Toast Notification (NO BROWSER ALERT POPUPS) -->
+<!-- Floating Native UI Toast Notification -->
 <div id="radar-toast" class="fixed bottom-24 right-24 z-50 hidden rounded-16 border border-accent/40 bg-surface/95 px-20 py-14 shadow-medium text-body-small font-sans font-semibold text-ink backdrop-blur-xl dark:border-accent-dark/40 dark:bg-surface-dark/95 dark:text-ink-dark transition-all transform duration-300 translate-y-8 opacity-0">
   <div class="flex items-center gap-8">
     <span class="flex h-20 w-20 items-center justify-center rounded-full bg-accent/20 text-accent dark:bg-accent-dark/20 dark:text-accent-dark">✓</span>
@@ -209,7 +232,7 @@
     #radar-results {
       display: block !important;
     }
-    .rounded-20 {
+    .rounded-24, .rounded-20 {
       border: 1px solid #ccc !important;
       box-shadow: none !important;
       page-break-inside: avoid;
@@ -227,9 +250,12 @@
     const errorState = document.getElementById('radar-error');
     const errorMessage = document.getElementById('error-message');
     const resultsSection = document.getElementById('radar-results');
+    const resultsHeadline = document.getElementById('results-headline');
     const resultsSubtitle = document.getElementById('results-subtitle');
-    const resultsMeta = document.getElementById('results-meta');
-    const listContainer = document.getElementById('opportunities-list');
+    const pillOppCount = document.getElementById('pill-opp-count');
+    const pillUrlCount = document.getElementById('pill-url-count');
+    const heroCardContainer = document.getElementById('hero-opportunity-card');
+    const secondaryListContainer = document.getElementById('secondary-opportunities-list');
 
     const btnExportPdf = document.getElementById('btn-export-pdf');
     const btnCopyMd = document.getElementById('btn-copy-md');
@@ -280,7 +306,7 @@
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
-          'How to connect MCP servers to Claude Code CLI',
+          'How to Connect MCP Servers to Claude Code CLI',
           'Best MCP servers for developer workflows',
           'Building custom MCP plugins for Claude Code'
         ]
@@ -306,7 +332,7 @@
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
-          'How to deploy DeepSeek R1 locally using vLLM',
+          'How to Deploy DeepSeek R1 Locally Using vLLM',
           'Fixing vLLM GPU out of memory errors for DeepSeek R1',
           'DeepSeek R1 vs Claude 3.5 Sonnet local benchmark'
         ]
@@ -319,8 +345,8 @@
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
+          'Google Flow Storyboard Studio Guide',
           'Building pre-production storyboards with Google Flow',
-          'Google Flow AI video generation guide',
           'Google Flow vs Runway Gen-3 comparison'
         ]
       },
@@ -332,21 +358,21 @@
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
+          'Kimi K3 3D Generation Guide',
           'Kimi K3 3D modeling workflow for game developers',
-          'Exporting Kimi K3 3D assets to Unreal Engine 5',
-          'Kimi K3 spatial mesh generation tutorial'
+          'Exporting Kimi K3 3D assets to Unreal Engine 5'
         ]
       },
       {
         id: 'agentic-youtube-automation',
-        topic: 'Multi-Agent YouTube Automation Workflows',
+        topic: 'Multi-Agent YouTube Automation',
         aliases: ['youtube automation agent', 'ai youtube automation', 'multi agent video generator', 'python youtube bot'],
         category: 'Autonomous Agents',
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
+          'Build a Multi-Agent YouTube Workflow',
           'Setting up an open-source YouTube automation agent',
-          'Python script for multi-agent video rendering',
           'Automating YouTube Short uploads with AI agents'
         ]
       },
@@ -371,9 +397,9 @@
         sourceType: 'curated',
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
+          'Next.js 15 Server Actions: Complete Guide',
           'Next.js 15 Partial Prerendering setup guide',
-          'Securing Next.js Server Actions in production',
-          'Next.js 15 App Router performance optimization'
+          'Securing Next.js Server Actions in production'
         ]
       },
       {
@@ -385,8 +411,7 @@
         source: 'Nadhebe Developer Radar',
         relatedQueries: [
           'Best DaVinci Resolve render settings for 1080×1350 and 9:16 Shorts',
-          'Auto-cropping 16:9 video to 9:16 vertical in DaVinci Resolve',
-          'DaVinci Resolve GPU export presets for TikTok and Reels'
+          'Auto-cropping 16:9 video to 9:16 vertical in DaVinci Resolve'
         ]
       }
     ];
@@ -450,11 +475,11 @@
         }
 
         const totalScore = Math.round(0.6 * relevance + 0.4 * gapScore);
-        const topTopicsStr = matchedTopics.slice(0, 3).join(', ') || 'AI & web development';
+        const topTopicsStr = matchedTopics.slice(0, 2).join(', ') || 'related topics';
 
         const why = relatedPages.length > 0
-          ? `Your website has ${profile.urlCount} pages covering related topics (${topTopicsStr}), but we couldn't find a page specifically covering ${trend.topic}.`
-          : `Matches your site's ${trend.category} topic focus, representing a highly relevant missing content opportunity.`;
+          ? `You cover ${topTopicsStr}, but we couldn't find an article specifically covering ${trend.topic}.`
+          : `Missing from your ${trend.category.toLowerCase()} content.`;
 
         results.push({
           topic: trend.topic,
@@ -465,6 +490,7 @@
           totalScore,
           source: trend.source,
           why,
+          suggestedWriteTitle: trend.relatedQueries[0] || `Guide to ${trend.topic}`,
           queries: trend.relatedQueries
         });
       }
@@ -481,10 +507,10 @@
 
       if (modalOutline) {
         modalOutline.innerHTML = `
-          <p class="font-bold text-accent dark:text-accent-dark">H1: How to Master ${opp.topic}</p>
+          <p class="font-bold text-accent dark:text-accent-dark">H1: ${opp.suggestedWriteTitle}</p>
           <p><strong>Category:</strong> ${opp.category}</p>
           <p><strong>Rationale:</strong> ${opp.why}</p>
-          <p class="font-semibold pt-4">Suggested Headings & Subtopics:</p>
+          <p class="font-semibold pt-4">Suggested Headings & Key Angles:</p>
           <ul class="list-disc pl-20 space-y-4">
             ${opp.queries.map(q => `<li>${q}</li>`).join('')}
           </ul>
@@ -503,119 +529,181 @@
     modalCopyOutline?.addEventListener('click', () => {
       const title = modalTitle?.textContent || 'Topic Research Brief';
       const score = modalScore?.textContent || '90/100';
-      const text = `# Topic Research Brief: ${title}\nOpportunity Score: ${score}\n\n## Content Outline\n- Introduction & Problem Overview\n- Step-by-Step Implementation Guide\n- Best Practices & Common Gotchas\n- Conclusion & Key Takeaways\n`;
+      const text = `# Topic Research Brief: ${title}\nOpportunity Score: ${score}\n\n## Suggested Content Title\n${modalOutline?.querySelector('p')?.textContent || ''}\n\n## Content Outline\n- Introduction & Problem Overview\n- Step-by-Step Implementation Guide\n- Best Practices & Common Gotchas\n- Conclusion & Key Takeaways\n`;
       navigator.clipboard.writeText(text);
       showToast('Article outline copied to clipboard!');
     });
 
-    modalPdf?.addEventListener('click', () => {
-      window.print();
-    });
-
-    btnExportPdf?.addEventListener('click', () => {
-      window.print();
-    });
+    modalPdf?.addEventListener('click', () => window.print());
+    btnExportPdf?.addEventListener('click', () => window.print());
 
     btnCopyMd?.addEventListener('click', () => {
       if (currentOpportunities.length === 0) return;
       let md = `# Nadhebe Opportunity Radar Report for ${currentDomain}\nAnalyzed Date: ${new Date().toLocaleDateString()}\n\n`;
       currentOpportunities.forEach((opp, i) => {
-        md += `### ${i + 1}. ${opp.topic}\n- **Opportunity Score:** ${opp.totalScore}/100\n- **Relevance:** ${opp.relevance}%\n- **Content Gap:** ${opp.gapStrength}\n- **Why Relevant:** ${opp.why}\n- **Suggested Titles:**\n${opp.queries.map(q => `  - ${q}`).join('\n')}\n\n`;
+        md += `### ${i + 1}. ${opp.topic} (Score: ${opp.totalScore}/100)\n- **Rationale:** ${opp.why}\n- **Write This:** ${opp.suggestedWriteTitle}\n- **Suggested Ideas:**\n${opp.queries.map(q => `  - ${q}`).join('\n')}\n\n`;
       });
       navigator.clipboard.writeText(md);
       showToast('Full Markdown report copied to clipboard!');
     });
 
     function renderOpportunityCards(opportunities, domain) {
-      if (!listContainer) return;
-      listContainer.innerHTML = '';
+      if (!heroCardContainer || !secondaryListContainer) return;
+      heroCardContainer.innerHTML = '';
+      secondaryListContainer.innerHTML = '';
 
-      opportunities.forEach((opp, i) => {
-        const card = document.createElement('div');
-        card.className = 'rounded-20 border border-border/80 bg-surface/90 p-24 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 space-y-16 transition-all hover:border-accent/40 dark:hover:border-accent-dark/40';
+      if (opportunities.length === 0) return;
 
-        const queriesHtml = opp.queries.map(q => `<li class="flex items-center gap-8 text-body-small text-ink dark:text-ink-dark"><span class="text-accent dark:text-accent-dark">•</span> <span>${q}</span></li>`).join('');
+      const hero = opportunities[0];
+      const secondaries = opportunities.slice(1);
 
-        card.innerHTML = `
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12">
-            <div class="space-y-4">
+      // Render Hero #1 Card ("YOUR BEST OPPORTUNITY")
+      const heroCard = document.createElement('div');
+      heroCard.className = 'rounded-24 border-2 border-accent/60 bg-surface/95 p-24 sm:p-32 shadow-soft backdrop-blur-xl dark:border-accent-dark/60 dark:bg-surface-dark/95 space-y-20 relative overflow-hidden';
+      heroCard.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12">
+          <div class="space-y-4">
+            <div class="flex items-center gap-8 flex-wrap">
+              <span class="rounded-pill bg-accent px-12 py-4 font-mono text-caption font-extrabold text-white uppercase tracking-wider">
+                ★ Your Best Opportunity
+              </span>
+              <span class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark">
+                Signal: ${hero.source}
+              </span>
+              <span class="text-caption font-mono font-semibold text-accent dark:text-accent-dark uppercase">
+                ${hero.gapStrength} Opportunity
+              </span>
+            </div>
+            <h3 class="text-h2 font-sans font-extrabold text-ink dark:text-ink-dark pt-4">
+              🔥 ${hero.topic}
+            </h3>
+          </div>
+          <div class="rounded-20 border border-accent/40 bg-accent/10 p-16 text-center shrink-0 dark:border-accent-dark/40 dark:bg-accent-dark/20 min-w-140">
+            <span class="block text-caption font-mono uppercase text-muted dark:text-muted-dark font-semibold">Opportunity Score</span>
+            <span class="text-h1 font-mono font-black text-accent dark:text-accent-dark">${hero.totalScore}<span class="text-caption font-normal text-muted dark:text-muted-dark">/100</span></span>
+          </div>
+        </div>
+
+        <!-- Rationale Callout -->
+        <p class="text-body font-sans text-ink dark:text-ink-dark">
+          ${hero.why}
+        </p>
+
+        <!-- Suggested Article Title Box -->
+        <div class="rounded-16 border border-border bg-surface2/80 p-20 dark:border-border-dark dark:bg-surface2-dark/80 space-y-6">
+          <span class="block text-caption font-mono uppercase font-bold text-accent dark:text-accent-dark tracking-wider">Write This Next:</span>
+          <p class="text-h3 font-sans font-bold text-ink dark:text-ink-dark">
+            → ${hero.suggestedWriteTitle}
+          </p>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="flex items-center gap-12 flex-wrap pt-4">
+          <button type="button" data-hero-action="research" class="rounded-12 bg-accent px-20 py-12 text-body-small font-sans font-bold text-white shadow-soft hover:bg-accent/90 cursor-pointer transition-all flex items-center gap-8 dark:bg-accent-dark dark:hover:bg-accent-dark/90">
+            <span>Research This Topic</span>
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <button type="button" data-hero-action="save" class="rounded-12 border border-border bg-surface px-18 py-12 text-body-small font-sans font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
+            Save Opportunity
+          </button>
+        </div>
+
+        <!-- Accordion Details -->
+        <details class="pt-12 border-t border-border/40 dark:border-border-dark/40 group">
+          <summary class="text-caption font-mono font-semibold text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark cursor-pointer transition-all list-none flex items-center gap-6">
+            <span>Why this was recommended</span>
+            <svg class="w-14 h-14 transform transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="pt-12 grid grid-cols-3 gap-8 text-center text-caption font-mono">
+            <div class="p-8 rounded-8 bg-surface2/60 dark:bg-surface2-dark/60">
+              <span class="block text-muted dark:text-muted-dark">Relevance</span>
+              <span class="font-bold text-ink dark:text-ink-dark text-body-small">${hero.relevance}%</span>
+            </div>
+            <div class="p-8 rounded-8 bg-surface2/60 dark:bg-surface2-dark/60">
+              <span class="block text-muted dark:text-muted-dark">Gap Strength</span>
+              <span class="font-bold text-accent dark:text-accent-dark text-body-small">${hero.gapStrength}</span>
+            </div>
+            <div class="p-8 rounded-8 bg-surface2/60 dark:bg-surface2-dark/60">
+              <span class="block text-muted dark:text-muted-dark">Signal</span>
+              <span class="font-bold text-ink dark:text-ink-dark text-body-small">Curated</span>
+            </div>
+          </div>
+        </details>
+      `;
+
+      heroCardContainer.appendChild(heroCard);
+
+      // Render Secondary Mini-Cards (#2 to #5)
+      secondaries.forEach((opp, idx) => {
+        const rank = idx + 2;
+        const row = document.createElement('div');
+        row.className = 'rounded-16 border border-border/80 bg-surface/90 p-20 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 flex flex-col sm:flex-row sm:items-center justify-between gap-16 transition-all hover:border-accent/40 dark:hover:border-accent-dark/40';
+
+        row.innerHTML = `
+          <div class="flex items-start gap-16 flex-1 min-w-0">
+            <span class="flex h-36 w-36 items-center justify-center rounded-12 bg-surface2 font-mono text-body font-bold text-muted dark:bg-surface2-dark dark:text-muted-dark shrink-0">
+              ${rank}
+            </span>
+            <div class="space-y-4 min-w-0 flex-1">
               <div class="flex items-center gap-8 flex-wrap">
-                <span class="rounded-pill bg-accent/10 px-10 py-4 font-mono text-caption font-bold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
-                  #${i + 1} Opportunity
-                </span>
-                <span class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-caption text-muted dark:border-border-dark dark:bg-surface2-dark dark:text-muted-dark">
-                  Signal: ${opp.source}
-                </span>
-                <span class="text-caption font-mono text-muted dark:text-muted-dark">
-                  ${opp.category}
+                <h4 class="text-h4 font-sans font-bold text-ink dark:text-ink-dark truncate">
+                  ${opp.topic}
+                </h4>
+                <span class="text-caption font-mono text-muted dark:text-muted-dark shrink-0">
+                  (${opp.category})
                 </span>
               </div>
-              <h3 class="text-h3 font-sans font-bold text-ink dark:text-ink-dark pt-4">
-                🔥 ${opp.topic}
-              </h3>
-            </div>
-            <div class="rounded-16 border border-border/80 bg-surface2/60 p-12 text-center shrink-0 dark:border-border-dark/80 dark:bg-surface2-dark/60 min-w-120">
-              <span class="block text-caption font-mono uppercase text-muted dark:text-muted-dark font-semibold">Opportunity Score</span>
-              <span class="text-h2 font-mono font-extrabold text-accent dark:text-accent-dark">${opp.totalScore}<span class="text-caption font-normal text-muted dark:text-muted-dark">/100</span></span>
-            </div>
-          </div>
-
-          <!-- Score Metrics Breakdown -->
-          <div class="grid grid-cols-3 gap-8 rounded-12 bg-surface2/40 p-12 text-center dark:bg-surface2-dark/40 border border-border/40 dark:border-border-dark/40">
-            <div>
-              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Relevance</span>
-              <span class="text-body font-mono font-bold text-ink dark:text-ink-dark">${opp.relevance}%</span>
-            </div>
-            <div>
-              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Content Gap</span>
-              <span class="text-body font-mono font-bold text-accent dark:text-accent-dark">${opp.gapStrength}</span>
-            </div>
-            <div>
-              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Signal</span>
-              <span class="text-body font-mono font-medium text-ink dark:text-ink-dark">Curated</span>
+              <p class="text-body-small text-muted dark:text-muted-dark">
+                ${opp.why}
+              </p>
+              <p class="text-caption font-mono font-semibold text-accent dark:text-accent-dark pt-2">
+                → ${opp.suggestedWriteTitle}
+              </p>
             </div>
           </div>
 
-          <!-- Why Relevant Explanation -->
-          <div class="rounded-12 border border-accent/20 bg-accent/5 p-16 dark:border-accent-dark/20 dark:bg-accent-dark/5">
-            <h4 class="text-caption font-mono font-bold uppercase text-accent dark:text-accent-dark mb-4">Why This Is Relevant</h4>
-            <p class="text-body-small text-ink dark:text-ink-dark">${opp.why}</p>
-          </div>
-
-          <!-- Suggested Articles -->
-          <div>
-            <h4 class="text-caption font-mono font-bold uppercase text-muted dark:text-muted-dark mb-8">Suggested Content Titles:</h4>
-            <ul class="space-y-6">
-              ${queriesHtml}
-            </ul>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="flex items-center gap-12 pt-8">
-            <button type="button" data-opp-index="${i}" class="btn-research-topic rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
-              Research Topic
-            </button>
-            <button type="button" class="btn-save-opp rounded-8 border border-border bg-surface px-12 py-6 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all">
-              Save Opportunity
-            </button>
+          <div class="flex items-center gap-16 shrink-0 sm:self-center">
+            <div class="text-right">
+              <span class="block text-caption font-mono text-muted dark:text-muted-dark">Score</span>
+              <span class="text-h3 font-mono font-extrabold text-accent dark:text-accent-dark">${opp.totalScore}</span>
+            </div>
+            <div class="flex items-center gap-8">
+              <button type="button" data-sec-index="${rank - 1}" class="btn-sec-research rounded-8 bg-accent/10 px-12 py-8 text-caption font-mono font-bold text-accent hover:bg-accent hover:text-white dark:bg-accent-dark/20 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-white cursor-pointer transition-all">
+                Research
+              </button>
+              <button type="button" class="btn-sec-save rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono font-semibold text-ink hover:border-accent hover:text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all">
+                Save
+              </button>
+            </div>
           </div>
         `;
 
-        listContainer.appendChild(card);
+        secondaryListContainer.appendChild(row);
       });
 
-      // Handle Research Topic clicks -> Native Glassmorphism Modal (NO BROWSER ALERTS!)
-      document.querySelectorAll('.btn-research-topic').forEach(btn => {
+      // Bind action handlers
+      heroCard.querySelector('[data-hero-action="research"]')?.addEventListener('click', () => {
+        openResearchModal(hero);
+      });
+
+      heroCard.querySelector('[data-hero-action="save"]')?.addEventListener('click', () => {
+        showToast('✓ Hero opportunity saved to research queue');
+      });
+
+      document.querySelectorAll('.btn-sec-research').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const idx = parseInt(e.currentTarget.getAttribute('data-opp-index') || '0', 10);
-          if (currentOpportunities[idx]) {
-            openResearchModal(currentOpportunities[idx]);
+          const idx = parseInt(e.currentTarget.getAttribute('data-sec-index') || '1', 10);
+          if (opportunities[idx]) {
+            openResearchModal(opportunities[idx]);
           }
         });
       });
 
-      // Handle Save Opportunity clicks -> Native Glassmorphism Toast (NO BROWSER ALERTS!)
-      document.querySelectorAll('.btn-save-opp').forEach(btn => {
+      document.querySelectorAll('.btn-sec-save').forEach(btn => {
         btn.addEventListener('click', () => {
           showToast('✓ Opportunity saved to research queue');
         });
@@ -756,8 +844,10 @@
         }
 
         resultsSection?.classList.remove('hidden');
-        if (resultsSubtitle) resultsSubtitle.textContent = `Surfaced ${currentOpportunities.length} top content opportunities for ${profile.domain}`;
-        if (resultsMeta) resultsMeta.innerHTML = `<span>Parsed ${profile.urlCount} sitemap URLs</span>`;
+        if (resultsHeadline) resultsHeadline.textContent = `${currentOpportunities.length} Content Opportunities Worth Exploring`;
+        if (resultsSubtitle) resultsSubtitle.textContent = `We analyzed ${profile.urlCount} pages on ${profile.domain} and found ${currentOpportunities.length} high-impact content gaps.`;
+        if (pillOppCount) pillOppCount.textContent = `${currentOpportunities.length} Opportunities`;
+        if (pillUrlCount) pillUrlCount.textContent = `${profile.urlCount} Pages Analyzed`;
 
         renderOpportunityCards(currentOpportunities, profile.domain);
       }, 300);
