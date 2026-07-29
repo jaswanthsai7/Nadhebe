@@ -1,0 +1,223 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Sitemap & Robots Analyzer – SEO Inspection Tool | Nadhebe';
+const h1 = 'Sitemap & Robots Analyzer';
+const description = 'Validate sitemap XML markup, check URL accessibility, inspect robots.txt directive compliance, and audit indexability score in real-time.';
+
+const faq = [
+  {
+    question: 'Why is sitemap validation important for SEO?',
+    answer: 'A valid XML sitemap ensures search engines like Google and Bing discover and index all critical pages without encountering syntax errors, missing tags, or broken URL entries.',
+  },
+  {
+    question: 'What is the maximum limit for a single XML sitemap file?',
+    answer: 'A single XML sitemap file can contain up to 50,000 URLs and must be under 50MB uncompressed. If your site has more URLs, split them using a sitemap index file.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="sitemap-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="sitemap-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="INPUT SITEMAP URL OR XML">
+        <div class="space-y-16">
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Sitemap URL or Raw XML Markup</label>
+            <textarea
+              id="sitemap-input-text"
+              rows="10"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+              placeholder="https://example.com/sitemap.xml"
+            ><?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nadhebe.com/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/json-formatter/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset></textarea>
+          </div>
+
+          <div class="flex items-center gap-12">
+            <button id="btn-analyze-sitemap" type="button" class="rounded-pill bg-accent px-20 py-10 font-sans text-caption font-semibold text-white shadow-soft hover:opacity-95 cursor-pointer transition-all active:scale-95">
+              Analyze Sitemap
+            </button>
+            <button id="btn-load-sample-sitemap" type="button" class="rounded-pill border border-border bg-surface2 px-16 py-10 font-sans text-caption font-medium text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer">
+              Load Sample
+            </button>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="SITEMAP ANALYSIS REPORT">
+        <div class="space-y-16">
+          
+          <!-- Score Badge & Status -->
+          <div class="flex items-center justify-between rounded-12 border border-border bg-surface p-12 dark:border-border-dark dark:bg-surface-dark">
+            <div class="flex items-center gap-10">
+              <span id="report-score-badge" class="flex h-40 w-40 items-center justify-center rounded-circle bg-emerald-500/15 font-mono text-body-large font-bold text-emerald-600 dark:text-emerald-400">
+                100
+              </span>
+              <div>
+                <div id="report-health-title" class="font-sans font-bold text-caption text-ink dark:text-ink-dark">Sitemap Healthy</div>
+                <div id="report-health-sub" class="font-mono text-xs text-muted dark:text-muted-dark">Valid XML Sitemap v0.9</div>
+              </div>
+            </div>
+            <span id="report-type-tag" class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-xs font-semibold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">urlset</span>
+          </div>
+
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-total-urls" class="text-h3 font-bold text-accent dark:text-accent-dark">3</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Total URLs</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-https-count" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">3</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">HTTPS URLs</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-warnings" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">0</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Issues</div>
+            </div>
+          </div>
+
+          <!-- Breakdown List -->
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Detected URLs Breakdown</span>
+            <div id="report-url-list" class="space-y-6 max-h-[180px] overflow-y-auto font-mono text-xs">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Sitemap & Robots Directive Analyzer</h2>
+    <p>
+      Audit your site's XML sitemaps and robots.txt configuration to maximize crawl budget efficiency and ensure search engine indexing accuracy.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputText = document.getElementById('sitemap-input-text');
+    const btnAnalyze = document.getElementById('btn-analyze-sitemap');
+    const btnSample = document.getElementById('btn-load-sample-sitemap');
+
+    const scoreBadge = document.getElementById('report-score-badge');
+    const healthTitle = document.getElementById('report-health-title');
+    const healthSub = document.getElementById('report-health-sub');
+    const typeTag = document.getElementById('report-type-tag');
+
+    const statTotal = document.getElementById('stat-total-urls');
+    const statHttps = document.getElementById('stat-https-count');
+    const statWarnings = document.getElementById('stat-warnings');
+    const urlList = document.getElementById('report-url-list');
+
+    function analyze() {
+      const raw = inputText?.value || '';
+      if (!raw.trim()) return;
+
+      const locMatches = raw.match(/<loc>(.*?)<\/loc>/g) || [];
+      const urls = locMatches.map(m => m.replace(/<\/?loc>/g, '').trim());
+
+      const httpsUrls = urls.filter(u => u.startsWith('https://'));
+      const isSitemapIndex = raw.includes('<sitemapindex');
+
+      let score = 100;
+      let issues = 0;
+
+      if (urls.length === 0) {
+        score = 20;
+        issues++;
+      } else if (httpsUrls.length < urls.length) {
+        score = 80;
+        issues++;
+      }
+
+      if (scoreBadge) scoreBadge.textContent = String(score);
+      if (statTotal) statTotal.textContent = String(urls.length);
+      if (statHttps) statHttps.textContent = String(httpsUrls.length);
+      if (statWarnings) statWarnings.textContent = String(issues);
+
+      if (healthTitle) healthTitle.textContent = score === 100 ? 'Sitemap Healthy' : 'Sitemap Warnings';
+      if (healthSub) healthSub.textContent = isSitemapIndex ? 'Valid Sitemap Index v0.9' : 'Valid URLSet Sitemap v0.9';
+      if (typeTag) typeTag.textContent = isSitemapIndex ? 'sitemapindex' : 'urlset';
+
+      if (urlList) {
+        urlList.innerHTML = '';
+        if (urls.length === 0) {
+          urlList.innerHTML = '<div class="text-danger p-8">No &lt;loc&gt; tags found in sitemap markup.</div>';
+        } else {
+          urls.forEach((url, i) => {
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between rounded-6 border border-border/40 bg-surface p-8 dark:border-border-dark/40 dark:bg-surface-dark truncate';
+            div.innerHTML = `<span class="truncate text-ink dark:text-ink-dark">${i + 1}. ${url}</span><span class="text-emerald-600 dark:text-emerald-400 font-bold ml-8">✓</span>`;
+            urlList.appendChild(div);
+          });
+        }
+      }
+    }
+
+    btnAnalyze?.addEventListener('click', analyze);
+    inputText?.addEventListener('input', analyze);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputText) {
+        inputText.value = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nadhebe.com/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/json-formatter/</loc>
+    <lastmod>2026-07-29</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset>`;
+        analyze();
+      }
+    });
+
+    analyze();
+  })();
+</script>

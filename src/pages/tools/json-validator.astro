@@ -1,0 +1,47 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'JSON Validator – Online Syntax Checker & Linter | Nadhebe';
+const h1 = 'JSON Validator';
+const description = 'Validate JSON syntax errors, inspect line numbers, and debug malformed JSON payloads instantly with 100% client-side precision.';
+
+const initialCode = `{\n  "name": "JSON Validator Test",\n  "status": "valid",\n  "count": 42,\n  "tags": ["testing", "validation"]\n}`;
+
+const faq = [
+  {
+    question: 'How does JSON validation work?',
+    answer: 'The tool parses input string against strict RFC 8259 JSON grammar rules, highlighting syntax error lines, unescaped quotes, missing commas, or trailing brackets.',
+  },
+  {
+    question: 'Can I format and fix JSON while validating?',
+    answer: 'Yes! Simply click "Format / Beautify" to automatically structure and format your JSON while validating its syntax.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="validator" />
+  </div>
+
+  <div slot="content">
+    <h2>Online JSON Validator & Syntax Checker</h2>
+    <p>
+      Identify and debug JSON syntax errors instantly. Get precise diagnostic feedback on syntax issues like unclosed quotes, missing commas, unescaped characters, or illegal trailing commas.
+    </p>
+
+    <h3>Common JSON Syntax Errors</h3>
+    <ul>
+      <li><strong>Trailing Commas:</strong> Standard JSON does not permit trailing commas after the last object property or array item.</li>
+      <li><strong>Single Quotes:</strong> JSON keys and string values must strictly use double quotes (<code>"key"</code>).</li>
+      <li><strong>Unescaped Newlines:</strong> Multi-line strings in JSON require <code>\n</code> escaping.</li>
+    </ul>
+  </div>
+</ToolLayout>

@@ -358,7 +358,6 @@ html.dark {
     backdrop-filter: blur(20px) saturate(1.2) !important;
     -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   .dark .glass-panel {

@@ -1,0 +1,10 @@
+---
+import RelatedTools from './tools/RelatedTools.astro';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof RelatedTools>;
+
+const props = Astro.props;
+---
+
+<RelatedTools {...props} />

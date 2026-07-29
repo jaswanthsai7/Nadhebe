@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
+import RelatedTools from '@/components/tools/RelatedTools.astro';
 import RelatedToolsCard from '@/components/tools/RelatedToolsCard.astro';
 
 interface Props {
@@ -80,6 +81,9 @@ const jsonLdBlocks = [
         {description}
       </p>
     </header>
+
+    <!-- Compact Related Tools Bar -->
+    <RelatedTools currentToolId="aspect-ratio-calculator" />
 
     <div class="space-y-48">
       <slot />

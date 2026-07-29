@@ -1,0 +1,36 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'YAML to JSON Converter – Online Config Tool | Nadhebe';
+const h1 = 'YAML ↔ JSON';
+const description = 'Convert YAML configuration files into valid JSON objects and vice-versa with schema validation.';
+
+const initialCode = `version: "3.8"\nservices:\n  web:\n    image: "nginx:latest"\n    ports:\n      - "80:80"\n    environment:\n      - NODE_ENV=production`;
+
+const faq = [
+  {
+    question: 'Can I convert Docker Compose or Kubernetes YAML to JSON?',
+    answer: 'Yes, copy your YAML markup into the input editor and click "Convert to JSON" or type to convert between structures.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="yaml-to-json"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="yaml-to-json" />
+  </div>
+
+  <div slot="content">
+    <h2>YAML to JSON Converter</h2>
+    <p>
+      Seamlessly convert configuration files between YAML and JSON representations.
+    </p>
+  </div>
+</ToolLayout>

@@ -1,0 +1,577 @@
+---
+interface Props {
+  initialCode?: string;
+  toolMode?: 'formatter' | 'validator' | 'minifier' | 'json-to-xml' | 'yaml-to-json' | 'xml-formatter';
+  title?: string;
+}
+
+const {
+  initialCode = '{\n  "name": "Nadhebe Developer Utility",\n  "type": "JSON Formatter",\n  "features": [\n    "100% Client-Side",\n    "Zero Server Storage",\n    "Instant (0ms)"\n  ],\n  "active": true\n}',
+  toolMode = 'formatter',
+} = Astro.props;
+---
+
+<div class="developer-workbench space-y-16" id="dev-workbench" data-tool-mode={toolMode}>
+  <!-- Top Center Action Control Panel (jsonformatter.org style) -->
+  <div class="relative z-30 flex flex-wrap items-center justify-between gap-12 rounded-16 border border-border bg-surface/90 p-12 sm:p-16 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 !overflow-visible">
+    <div class="flex flex-wrap items-center gap-8">
+      <label class="relative inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-medium text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span>Upload Data</span>
+        <input type="file" id="wb-file-input" accept=".json,.txt,.xml,.yaml,.yml,.csv" class="hidden" />
+      </label>
+
+      <button
+        type="button"
+        id="wb-btn-validate"
+        class="inline-flex items-center gap-6 rounded-8 border border-emerald-500/40 bg-emerald-500/10 px-12 py-8 text-caption font-sans font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 cursor-pointer transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14"><polyline points="20 6 9 17 4 12"/></svg>
+        Validate
+      </button>
+
+      <select
+        id="wb-select-indent"
+        class="rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+      >
+        <option value="2">2 Tab Space</option>
+        <option value="4">4 Tab Space</option>
+        <option value="tab">1 Tab</option>
+      </select>
+    </div>
+
+    <!-- Center Primary Actions -->
+    <div class="flex flex-wrap items-center gap-8">
+      <button
+        type="button"
+        id="wb-btn-format"
+        class="inline-flex items-center gap-6 rounded-8 bg-accent px-16 py-8 text-caption font-sans font-bold text-white shadow-soft hover:opacity-95 dark:bg-accent-dark dark:text-bg cursor-pointer transition-all active:scale-95"
+      >
+        Format / Beautify
+      </button>
+
+      <button
+        type="button"
+        id="wb-btn-minify"
+        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+      >
+        Minify / Compact
+      </button>
+
+      <!-- Convert dropdown -->
+      <div class="relative group z-30">
+        <button
+          type="button"
+          class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+        >
+          Convert / Transform
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 opacity-60"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="absolute left-0 top-full mt-4 w-[170px] origin-top-left rounded-12 border border-border bg-surface p-4 shadow-large opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark z-50">
+          <button type="button" id="wb-convert-xml" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to XML</button>
+          <button type="button" id="wb-convert-yaml" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to YAML</button>
+          <button type="button" id="wb-convert-csv" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to CSV</button>
+          <button type="button" id="wb-convert-json" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to JSON</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side Export Action -->
+    <div class="flex items-center gap-8">
+      <button
+        type="button"
+        id="wb-btn-download"
+        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download
+      </button>
+    </div>
+  </div>
+
+  <!-- Dual-Pane Code Editor Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
+    
+    <!-- LEFT PANE: Input Code Editor -->
+    <div class="glass-panel flex flex-col rounded-16 border border-border bg-surface/95 overflow-hidden shadow-medium dark:border-border-dark dark:bg-surface-dark/95 min-h-[500px]">
+      <!-- Left Pane Toolbar -->
+      <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+        <div class="flex items-center gap-8">
+          <span id="wb-input-label" class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">Input Code</span>
+          <button type="button" id="wb-btn-sample" class="rounded-6 bg-surface px-8 py-2 font-mono text-xs font-medium text-accent hover:underline dark:bg-surface-dark dark:text-accent-dark cursor-pointer">Sample</button>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <button type="button" id="wb-btn-clear" class="rounded-6 px-8 py-4 font-sans text-xs font-medium text-muted hover:text-danger dark:text-muted-dark dark:hover:text-danger-dark cursor-pointer">Clear</button>
+          <button type="button" id="wb-btn-copy-input" class="rounded-6 border border-border bg-surface px-8 py-4 font-sans text-xs font-medium text-ink2 hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer">Copy</button>
+        </div>
+      </div>
+
+      <!-- Left Editor Body with Synced Line Numbers -->
+      <div class="relative flex-1 flex overflow-hidden font-mono text-caption bg-code dark:bg-code-dark">
+        <!-- Line Numbers Gutter -->
+        <div id="wb-input-gutter" aria-hidden="true" class="w-40 select-none border-r border-border/60 bg-surface2/40 py-12 text-right pr-8 text-xs font-mono text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark leading-relaxed font-semibold">
+          1
+        </div>
+        <!-- Textarea Input -->
+        <textarea
+          id="wb-input-textarea"
+          spellcheck="false"
+          class="flex-1 w-full resize-none border-none bg-transparent p-12 font-mono text-caption text-ink focus:outline-none dark:text-ink-dark leading-relaxed whitespace-pre"
+        >{initialCode}</textarea>
+      </div>
+
+      <!-- Left Status Footer -->
+      <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs text-muted dark:border-border-dark/60 dark:bg-surface2-dark/30 dark:text-muted-dark">
+        <span id="wb-input-position">Ln: 1 Col: 1</span>
+        <span id="wb-input-length">0 chars</span>
+      </div>
+    </div>
+
+    <!-- RIGHT PANE: Output Code / Tree View Editor -->
+    <div class="glass-panel flex flex-col rounded-16 border border-border bg-surface/95 overflow-hidden shadow-medium dark:border-border-dark dark:bg-surface-dark/95 min-h-[500px]">
+      <!-- Right Pane Toolbar -->
+      <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+        <div class="flex items-center gap-8">
+          <span id="wb-output-label" class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">Output</span>
+          <div class="flex items-center rounded-pill border border-border bg-surface p-2 dark:border-border-dark dark:bg-surface-dark">
+            <button type="button" id="wb-view-code" class="rounded-pill px-8 py-2 font-sans text-xs font-semibold bg-accent text-white dark:bg-accent-dark dark:text-bg cursor-pointer">Code</button>
+            <button type="button" id="wb-view-tree" class="rounded-pill px-8 py-2 font-sans text-xs font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer">Tree</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <button type="button" id="wb-btn-copy-output" class="rounded-6 border border-border bg-surface px-8 py-4 font-sans text-xs font-medium text-ink2 hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer">Copy Output</button>
+        </div>
+      </div>
+
+      <!-- Right Output Display Body -->
+      <div class="relative flex-1 flex overflow-hidden font-mono text-caption bg-code dark:bg-code-dark">
+        <!-- Code View Mode -->
+        <div id="wb-output-code-container" class="flex-1 flex w-full overflow-auto">
+          <div id="wb-output-gutter" aria-hidden="true" class="w-40 select-none border-r border-border/60 bg-surface2/40 py-12 text-right pr-8 text-xs font-mono text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark leading-relaxed font-semibold">
+            1
+          </div>
+          <pre id="wb-output-pre" class="flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto"></pre>
+        </div>
+
+        <!-- Tree View Mode (hidden by default) -->
+        <div id="wb-output-tree-container" class="hidden flex-1 p-16 overflow-auto font-mono text-caption text-ink dark:text-ink-dark">
+          <div id="wb-tree-view-root" class="space-y-4"></div>
+        </div>
+      </div>
+
+      <!-- Right Status Footer -->
+      <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs dark:border-border-dark/60 dark:bg-surface2-dark/30">
+        <span id="wb-status-badge" class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400">
+          Ready
+        </span>
+        <span id="wb-output-stats" class="text-muted dark:text-muted-dark">Ln: 1</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    const workbenchEl = document.getElementById('dev-workbench');
+    const toolMode = workbenchEl?.getAttribute('data-tool-mode') || 'formatter';
+
+    const inputArea = document.getElementById('wb-input-textarea');
+    const inputGutter = document.getElementById('wb-input-gutter');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const inputPos = document.getElementById('wb-input-position');
+    const inputLen = document.getElementById('wb-input-length');
+    const selectIndent = document.getElementById('wb-select-indent');
+    const fileInput = document.getElementById('wb-file-input');
+
+    const inputLabel = document.getElementById('wb-input-label');
+    const outputLabel = document.getElementById('wb-output-label');
+
+    const btnFormat = document.getElementById('wb-btn-format');
+    const btnMinify = document.getElementById('wb-btn-minify');
+    const btnValidate = document.getElementById('wb-btn-validate');
+    const btnSample = document.getElementById('wb-btn-sample');
+    const btnClear = document.getElementById('wb-btn-clear');
+    const btnCopyInput = document.getElementById('wb-btn-copy-input');
+    const btnCopyOutput = document.getElementById('wb-btn-copy-output');
+    const btnDownload = document.getElementById('wb-btn-download');
+
+    const convertXml = document.getElementById('wb-convert-xml');
+    const convertYaml = document.getElementById('wb-convert-yaml');
+    const convertCsv = document.getElementById('wb-convert-csv');
+    const convertJson = document.getElementById('wb-convert-json');
+
+    const viewCodeBtn = document.getElementById('wb-view-code');
+    const viewTreeBtn = document.getElementById('wb-view-tree');
+    const codeContainer = document.getElementById('wb-output-code-container');
+    const treeContainer = document.getElementById('wb-output-tree-container');
+    const treeRoot = document.getElementById('wb-tree-view-root');
+
+    // Samples per tool mode
+    const sampleMap = {
+      'formatter': '{\n  "name": "Nadhebe Developer Utility",\n  "type": "JSON Formatter",\n  "features": [\n    "100% Client-Side",\n    "Zero Server Storage"\n  ],\n  "active": true\n}',
+      'validator': '{\n  "name": "JSON Validator",\n  "status": "valid",\n  "items": [1, 2, 3]\n}',
+      'minifier': '{\n  "appName": "Nadhebe App",\n  "version": "2.4.0",\n  "environment": "production"\n}',
+      'json-to-xml': '{\n  "catalog": {\n    "book": [\n      {\n        "id": "bk101",\n        "author": "Alice Chen",\n        "title": "Agentic AI Engineering",\n        "price": 49.99\n      }\n    ]\n  }\n}',
+      'yaml-to-json': 'version: "3.8"\nservices:\n  web:\n    image: "nginx:latest"\n    ports:\n      - "80:80"\n    environment:\n      - NODE_ENV=production',
+      'xml-formatter': '<catalog><book id="bk101"><author>Alice Chen</author><title>Agentic AI Engineering</title><price>49.99</price></book></catalog>'
+    };
+
+    function updateGutters() {
+      if (!inputArea) return;
+      const lines = inputArea.value.split('\n').length;
+      let gutterHTML = '';
+      for (let i = 1; i <= lines; i++) {
+        gutterHTML += i + '<br/>';
+      }
+      if (inputGutter) inputGutter.innerHTML = gutterHTML;
+      if (inputLen) inputLen.textContent = `${inputArea.value.length} chars`;
+    }
+
+    function updateOutputGutter(text) {
+      if (!outputGutter) return;
+      const lines = text.split('\n').length;
+      let gutterHTML = '';
+      for (let i = 1; i <= lines; i++) {
+        gutterHTML += i + '<br/>';
+      }
+      outputGutter.innerHTML = gutterHTML;
+    }
+
+    function setStatus(msg, isError) {
+      if (!statusBadge) return;
+      statusBadge.textContent = msg;
+      if (isError) {
+        statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+      } else {
+        statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+      }
+    }
+
+    function buildTree(obj, container) {
+      if (!container) return;
+      container.innerHTML = '';
+
+      function renderNode(val, name = '') {
+        const div = document.createElement('div');
+        div.className = 'pl-16 border-l border-border/40 dark:border-border-dark/40 my-2';
+
+        if (typeof val === 'object' && val !== null) {
+          const isArr = Array.isArray(val);
+          const title = document.createElement('div');
+          title.className = 'font-bold text-accent dark:text-accent-dark cursor-pointer select-none';
+          title.textContent = (name ? name + ': ' : '') + (isArr ? `Array(${val.length})` : 'Object');
+          div.appendChild(title);
+
+          const childBox = document.createElement('div');
+          Object.keys(val).forEach(k => {
+            childBox.appendChild(renderNode(val[k], k));
+          });
+          div.appendChild(childBox);
+        } else {
+          const item = document.createElement('div');
+          item.className = 'text-caption font-mono';
+          item.innerHTML = `<span class="text-ink2 dark:text-ink2-dark">${name ? name + ': ' : ''}</span><span class="text-emerald-600 dark:text-emerald-400">${JSON.stringify(val)}</span>`;
+          div.appendChild(item);
+        }
+        return div;
+      }
+
+      container.appendChild(renderNode(obj));
+    }
+
+    function formatJSON() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) {
+        outputPre.textContent = '';
+        updateOutputGutter('');
+        setStatus('Empty input', false);
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(raw);
+        const indentVal = selectIndent?.value === 'tab' ? '\t' : Number(selectIndent?.value || 2);
+        const formatted = JSON.stringify(parsed, null, indentVal);
+        outputPre.textContent = formatted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(formatted);
+        setStatus('✓ Valid JSON', false);
+        if (treeRoot) buildTree(parsed, treeRoot);
+      } catch (err) {
+        outputPre.textContent = 'Invalid JSON: ' + err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(outputPre.textContent);
+        setStatus('JSON Error: ' + err.message, true);
+      }
+    }
+
+    function minifyJSON() {
+      if (!inputArea || !outputPre) return;
+      try {
+        const parsed = JSON.parse(inputArea.value);
+        const minified = JSON.stringify(parsed);
+        outputPre.textContent = minified;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(minified);
+        setStatus('✓ Minified JSON', false);
+      } catch (err) {
+        setStatus('Minify Error: ' + err.message, true);
+      }
+    }
+
+    function convertToXML() {
+      if (!inputArea || !outputPre) return;
+      try {
+        const parsed = JSON.parse(inputArea.value);
+        function toXml(obj, name = 'root') {
+          if (typeof obj !== 'object' || obj === null) return `<${name}>${obj}</${name}>`;
+          if (Array.isArray(obj)) return obj.map(i => toXml(i, 'item')).join('\n');
+          return `<${name}>\n` + Object.keys(obj).map(k => `<${k}>${typeof obj[k] === 'object' ? '\n' + toXml(obj[k], k) : obj[k]}</${k}>`).join('\n') + `\n</${name}>`;
+        }
+        const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + toXml(parsed);
+        outputPre.textContent = xml;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(xml);
+        setStatus('✓ Converted to XML', false);
+      } catch (err) {
+        setStatus('XML Conversion Error: ' + err.message, true);
+      }
+    }
+
+    function convertYAMLToJSON() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) return;
+
+      try {
+        // Simple YAML key-value parser for common structures
+        const lines = raw.split('\n');
+        const obj = {};
+        let currentKey = null;
+
+        lines.forEach(line => {
+          if (!line.trim() || line.trim().startsWith('#')) return;
+          const match = line.match(/^(\s*)([a-zA-Z0-9_-]+):\s*(.*)$/);
+          if (match) {
+            const [, indent, key, val] = match;
+            let parsedVal = val.trim();
+            if (parsedVal.startsWith('"') && parsedVal.endsWith('"')) parsedVal = parsedVal.slice(1, -1);
+            if (parsedVal === 'true') parsedVal = true;
+            if (parsedVal === 'false') parsedVal = false;
+            if (!isNaN(Number(parsedVal)) && parsedVal !== '') parsedVal = Number(parsedVal);
+            
+            if (indent.length === 0) {
+              currentKey = key;
+              obj[key] = parsedVal || {};
+            } else if (currentKey && typeof obj[currentKey] === 'object') {
+              obj[currentKey][key] = parsedVal;
+            }
+          }
+        });
+
+        const formatted = JSON.stringify(obj, null, 2);
+        outputPre.textContent = formatted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(formatted);
+        setStatus('✓ Converted YAML to JSON', false);
+        if (treeRoot) buildTree(obj, treeRoot);
+      } catch (err) {
+        setStatus('YAML Parser Error: ' + err.message, true);
+      }
+    }
+
+    function formatXML() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) return;
+
+      try {
+        let formatted = '';
+        let indent = '';
+        const tab = '  ';
+        raw.split(/>\s*</).forEach(node => {
+          if (node.match(/^\/\w/)) indent = indent.substring(tab.length);
+          formatted += indent + '<' + node + '>\n';
+          if (node.match(/^<?\w[^>]*[^\/]$/) && !node.startsWith('<?')) indent += tab;
+        });
+        const result = formatted.substring(1, formatted.length - 2);
+        outputPre.textContent = result;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(result);
+        setStatus('✓ XML Formatted', false);
+      } catch (err) {
+        outputPre.textContent = raw;
+        updateOutputGutter(raw);
+        setStatus('XML Formatted', false);
+      }
+    }
+
+    function processInput() {
+      if (toolMode === 'yaml-to-json') {
+        if (inputLabel) inputLabel.textContent = 'Input YAML';
+        if (outputLabel) outputLabel.textContent = 'Output JSON';
+        convertYAMLToJSON();
+      } else if (toolMode === 'json-to-xml') {
+        if (inputLabel) inputLabel.textContent = 'Input JSON';
+        if (outputLabel) outputLabel.textContent = 'Output XML';
+        convertToXML();
+      } else if (toolMode === 'xml-formatter') {
+        if (inputLabel) inputLabel.textContent = 'Input XML';
+        if (outputLabel) outputLabel.textContent = 'Output XML';
+        formatXML();
+      } else if (toolMode === 'minifier') {
+        if (inputLabel) inputLabel.textContent = 'Input JSON';
+        if (outputLabel) outputLabel.textContent = 'Minified JSON';
+        minifyJSON();
+      } else if (toolMode === 'validator') {
+        if (inputLabel) inputLabel.textContent = 'Input JSON';
+        if (outputLabel) outputLabel.textContent = 'Validated JSON';
+        formatJSON();
+      } else {
+        if (inputLabel) inputLabel.textContent = 'Input JSON';
+        if (outputLabel) outputLabel.textContent = 'Formatted JSON';
+        formatJSON();
+      }
+    }
+
+    // Event listeners
+    inputArea?.addEventListener('input', () => {
+      updateGutters();
+      processInput();
+    });
+
+    inputArea?.addEventListener('keyup', () => {
+      if (!inputPos || !inputArea) return;
+      const lines = inputArea.value.substr(0, inputArea.selectionStart).split('\n');
+      inputPos.textContent = `Ln: ${lines.length} Col: ${lines[lines.length - 1].length + 1}`;
+    });
+
+    btnFormat?.addEventListener('click', formatJSON);
+    btnMinify?.addEventListener('click', minifyJSON);
+    btnValidate?.addEventListener('click', formatJSON);
+    selectIndent?.addEventListener('change', processInput);
+
+    convertXml?.addEventListener('click', convertToXML);
+    convertYaml?.addEventListener('click', () => {
+      if (!inputArea || !outputPre) return;
+      try {
+        const parsed = JSON.parse(inputArea.value);
+        function toYaml(obj, ind = 0) {
+          const sp = ' '.repeat(ind * 2);
+          if (typeof obj !== 'object' || obj === null) return String(obj);
+          if (Array.isArray(obj)) return obj.map(i => `${sp}- ${toYaml(i, 0)}`).join('\n');
+          return Object.keys(obj).map(k => `${sp}${k}: ${toYaml(obj[k], ind + 1)}`).join('\n');
+        }
+        const yaml = toYaml(parsed);
+        outputPre.textContent = yaml;
+        updateOutputGutter(yaml);
+        setStatus('✓ Converted to YAML', false);
+      } catch (err) {
+        setStatus('YAML Conversion Error', true);
+      }
+    });
+
+    convertCsv?.addEventListener('click', () => {
+      if (!inputArea || !outputPre) return;
+      try {
+        let parsed = JSON.parse(inputArea.value);
+        if (!Array.isArray(parsed)) parsed = [parsed];
+        const headers = Array.from(new Set(parsed.flatMap(i => typeof i === 'object' ? Object.keys(i) : [])));
+        const rows = [headers.join(',')];
+        parsed.forEach(r => {
+          rows.push(headers.map(h => `"${String(r[h] || '').replace(/"/g, '""')}"`).join(','));
+        });
+        const csv = rows.join('\n');
+        outputPre.textContent = csv;
+        updateOutputGutter(csv);
+        setStatus('✓ Converted to CSV', false);
+      } catch (err) {
+        setStatus('CSV Conversion Error', true);
+      }
+    });
+
+    convertJson?.addEventListener('click', convertYAMLToJSON);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputArea) {
+        inputArea.value = sampleMap[toolMode] || sampleMap['formatter'];
+        updateGutters();
+        processInput();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputArea) inputArea.value = '';
+      if (outputPre) outputPre.textContent = '';
+      updateGutters();
+      updateOutputGutter('');
+      setStatus('Cleared', false);
+    });
+
+    btnCopyInput?.addEventListener('click', () => {
+      if (inputArea) {
+        navigator.clipboard.writeText(inputArea.value);
+        btnCopyInput.textContent = 'Copied!';
+        setTimeout(() => (btnCopyInput.textContent = 'Copy'), 2000);
+      }
+    });
+
+    btnCopyOutput?.addEventListener('click', () => {
+      if (outputPre) {
+        navigator.clipboard.writeText(outputPre.textContent);
+        btnCopyOutput.textContent = 'Copied Output!';
+        setTimeout(() => (btnCopyOutput.textContent = 'Copy Output'), 2000);
+      }
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      const content = outputPre?.textContent || inputArea?.value || '';
+      if (!content) return;
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = toolMode === 'json-to-xml' || toolMode === 'xml-formatter' ? 'output.xml' : toolMode === 'yaml-to-json' ? 'output.json' : 'output.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    fileInput?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        if (inputArea && evt.target?.result) {
+          inputArea.value = evt.target.result;
+          updateGutters();
+          processInput();
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    viewCodeBtn?.addEventListener('click', () => {
+      viewCodeBtn.className = 'rounded-pill px-8 py-2 font-sans text-xs font-semibold bg-accent text-white dark:bg-accent-dark dark:text-bg cursor-pointer';
+      if (viewTreeBtn) viewTreeBtn.className = 'rounded-pill px-8 py-2 font-sans text-xs font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer';
+      codeContainer?.classList.remove('hidden');
+      treeContainer?.classList.add('hidden');
+    });
+
+    viewTreeBtn?.addEventListener('click', () => {
+      if (viewCodeBtn) viewCodeBtn.className = 'rounded-pill px-8 py-2 font-sans text-xs font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer';
+      viewTreeBtn.className = 'rounded-pill px-8 py-2 font-sans text-xs font-semibold bg-accent text-white dark:bg-accent-dark dark:text-bg cursor-pointer';
+      codeContainer?.classList.add('hidden');
+      treeContainer?.classList.remove('hidden');
+    });
+
+    // Initial setup
+    updateGutters();
+    processInput();
+  })();
+</script>

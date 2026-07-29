@@ -1,7 +1,8 @@
 ---
 interface Props {
-  label: string;
-  value: string | number;
+  label?: string;
+  title?: string;
+  value?: string | number;
   subtext?: string;
   badge?: string;
   copyable?: boolean;
@@ -9,7 +10,8 @@ interface Props {
   id?: string;
 }
 
-const { label, value, subtext, badge, copyable = true, accent = false, id } = Astro.props;
+const { label, title, value, subtext, badge, copyable = true, accent = false, id } = Astro.props;
+const displayTitle = label || title || 'Result';
 ---
 
 <div class={`group relative flex flex-col justify-between overflow-hidden rounded-16 border p-16 sm:p-20 transition-all duration-200 min-h-[128px] h-full w-full ${
@@ -19,7 +21,7 @@ const { label, value, subtext, badge, copyable = true, accent = false, id } = As
 }`}>
   <div class="w-full overflow-hidden">
     <div class="flex items-center justify-between gap-8 mb-8">
-      <span class="text-meta font-mono uppercase tracking-wider text-muted dark:text-muted-dark truncate">{label}</span>
+      <span class="text-meta font-mono uppercase tracking-wider text-muted dark:text-muted-dark truncate">{displayTitle}</span>
       {badge && (
         <span class="rounded-pill bg-accent/10 px-8 py-2 font-mono text-xs font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark shrink-0">
           {badge}
@@ -27,37 +29,42 @@ const { label, value, subtext, badge, copyable = true, accent = false, id } = As
       )}
     </div>
 
-    <div class="flex items-center justify-between gap-8 min-h-[48px] w-full min-w-0">
-      <span
-        id={id}
-        class={`font-display font-bold tracking-tight select-all leading-tight min-w-0 max-w-full overflow-hidden whitespace-normal break-words ${
-          accent
-            ? 'text-accent dark:text-accent-dark text-h4 sm:text-h3'
-            : 'text-ink dark:text-ink-dark text-body-large sm:text-h4 font-mono font-semibold'
-        }`}
-      >
-        {value}
-      </span>
-
-      {copyable && (
-        <button
-          type="button"
-          data-copy-trigger
-          data-copy-target={id || ''}
-          data-copy-val={String(value)}
-          aria-label={`Copy ${label}`}
-          class="inline-flex h-32 w-32 items-center justify-center rounded-8 border border-border/80 bg-surface/80 text-ink2 hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150 cursor-pointer shrink-0"
+    {value !== undefined && value !== '' && (
+      <div class="flex items-center justify-between gap-8 min-h-[48px] w-full min-w-0">
+        <span
+          id={id}
+          class={`font-display font-bold tracking-tight select-all leading-tight min-w-0 max-w-full overflow-hidden whitespace-normal break-words ${
+            accent
+              ? 'text-accent dark:text-accent-dark text-h4 sm:text-h3'
+              : 'text-ink dark:text-ink-dark text-body-large sm:text-h4 font-mono font-semibold'
+          }`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 copy-icon">
-            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden h-14 w-14 check-icon text-emerald-500">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </button>
-      )}
-    </div>
+          {value}
+        </span>
+
+        {copyable && (
+          <button
+            type="button"
+            data-copy-trigger
+            data-copy-target={id || ''}
+            data-copy-val={String(value)}
+            aria-label={`Copy ${displayTitle}`}
+            class="inline-flex h-32 w-32 items-center justify-center rounded-8 border border-border/80 bg-surface/80 text-ink2 hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150 cursor-pointer shrink-0"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 copy-icon">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden h-14 w-14 check-icon text-emerald-500">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+        )}
+      </div>
+    )}
+
+    <!-- Slot for children elements -->
+    <slot />
   </div>
 
   {subtext && <p class="mt-8 text-xs font-mono text-muted dark:text-muted-dark">{subtext}</p>}

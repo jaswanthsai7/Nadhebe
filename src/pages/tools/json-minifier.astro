@@ -1,0 +1,40 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'JSON Minifier & Compressor – Instant Online Tool | Nadhebe';
+const h1 = 'JSON Minifier';
+const description = 'Compress and minify JSON data by stripping unnecessary whitespace and comments for optimal payload size and fast network transfer.';
+
+const initialCode = `{\n  "appName": "Nadhebe App",\n  "version": "2.4.0",\n  "environment": "production",\n  "config": {\n    "maxConnections": 100,\n    "timeoutMs": 5000\n  }\n}`;
+
+const faq = [
+  {
+    question: 'Why should I minify JSON data?',
+    answer: 'Minifying JSON removes extra spaces, line breaks, and indentation, reducing payload byte size by 20% to 50% for faster HTTP responses and lower bandwidth usage.',
+  },
+  {
+    question: 'Can I un-minify compressed JSON back to formatted code?',
+    answer: 'Yes! Click "Format / Beautify" anytime in the workbench to restore human-readable indentation.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-minifier"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="minifier" />
+  </div>
+
+  <div slot="content">
+    <h2>Online JSON Minifier & Payload Compressor</h2>
+    <p>
+      Optimize your JSON data for web distribution and API performance. Minification strips indentation spaces, tabs, and line feeds to generate compact JSON payloads.
+    </p>
+  </div>
+</ToolLayout>

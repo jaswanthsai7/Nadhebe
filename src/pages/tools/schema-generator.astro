@@ -1,0 +1,222 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JSON-LD Schema Generator – Interactive Structured Data Tool | Nadhebe';
+const h1 = 'JSON-LD Schema Generator';
+const description = 'Generate structured JSON-LD schemas for WebPage, Article, TechArticle, Product, FAQPage, and WebApplication markup instantly.';
+
+const faq = [
+  {
+    question: 'How do JSON-LD schemas benefit website SEO?',
+    answer: 'JSON-LD structured data provides search engines explicit clues about page intent, enabling rich snippets, FAQ accordions, and enhanced search result features.',
+  },
+  {
+    question: 'Where should I place JSON-LD schema on my webpage?',
+    answer: 'Place the generated <script type="application/ld+json"> tag inside the <head> section or near the top of the <body> of your HTML page.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="schema-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="schema-gen-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="SCHEMA TYPE & INPUT PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Schema Type</label>
+            <select id="schema-select-type" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer">
+              <option value="TechArticle">TechArticle Schema</option>
+              <option value="WebApplication">WebApplication Schema</option>
+              <option value="FAQPage">FAQPage Schema</option>
+              <option value="Organization">Organization Schema</option>
+              <option value="Product">Product Schema</option>
+            </select>
+          </div>
+
+          <!-- Dynamic Form Inputs -->
+          <div id="schema-form-fields" class="space-y-12">
+            <!-- Rendered dynamically by script -->
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED JSON-LD SCHEMA">
+        <div class="space-y-16">
+          <div class="flex items-center justify-between">
+            <span id="schema-status" class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-xs font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400">✓ Valid JSON-LD</span>
+            <button type="button" id="btn-copy-schema" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy JSON-LD</button>
+          </div>
+
+          <pre id="schema-json-output" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre"></pre>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON-LD Schema Generator</h2>
+    <p>
+      Create valid, Google-compliant JSON-LD structured data snippets for technical content and web tools.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectType = document.getElementById('schema-select-type');
+    const formFields = document.getElementById('schema-form-fields');
+    const jsonOutput = document.getElementById('schema-json-output');
+    const btnCopy = document.getElementById('btn-copy-schema');
+    const statusBadge = document.getElementById('schema-status');
+
+    const schemas = {
+      'TechArticle': {
+        fields: [
+          { id: 'headline', label: 'Article Headline', val: 'Building Agentic AI Tools with Astro & Tailwind' },
+          { id: 'url', label: 'Article Canonical URL', val: 'https://nadhebe.com/tutorials/building-agentic-ai/' },
+          { id: 'author', label: 'Author Name', val: 'Nadhebe Engineering' },
+          { id: 'publisher', label: 'Publisher', val: 'Nadhebe' },
+          { id: 'datePublished', label: 'Publish Date', val: '2026-07-29' }
+        ],
+        build: (d) => ({
+          '@context': 'https://schema.org',
+          '@type': 'TechArticle',
+          headline: d.headline,
+          url: d.url,
+          author: { '@type': 'Person', name: d.author },
+          publisher: { '@type': 'Organization', name: d.publisher },
+          datePublished: d.datePublished,
+          inLanguage: 'en-US'
+        })
+      },
+      'WebApplication': {
+        fields: [
+          { id: 'name', label: 'App Name', val: 'Nadhebe Developer Utilities' },
+          { id: 'url', label: 'App URL', val: 'https://nadhebe.com/tools/json-formatter/' },
+          { id: 'category', label: 'Application Category', val: 'DeveloperApplication' },
+          { id: 'os', label: 'Operating System', val: 'All' },
+          { id: 'price', label: 'Price', val: '0' }
+        ],
+        build: (d) => ({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: d.name,
+          url: d.url,
+          applicationCategory: d.category,
+          operatingSystem: d.os,
+          offers: { '@type': 'Offer', price: d.price, priceCurrency: 'USD' }
+        })
+      },
+      'FAQPage': {
+        fields: [
+          { id: 'q1', label: 'Question 1', val: 'Is Nadhebe free to use?' },
+          { id: 'a1', label: 'Answer 1', val: 'Yes, 100% free and client-side executed.' },
+          { id: 'q2', label: 'Question 2', val: 'Is my data stored on a server?' },
+          { id: 'a2', label: 'Answer 2', val: 'No, all calculations happen inside your browser.' }
+        ],
+        build: (d) => ({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: [
+            { '@type': 'Question', name: d.q1, acceptedAnswer: { '@type': 'Answer', text: d.a1 } },
+            { '@type': 'Question', name: d.q2, acceptedAnswer: { '@type': 'Answer', text: d.a2 } }
+          ]
+        })
+      },
+      'Organization': {
+        fields: [
+          { id: 'name', label: 'Organization Name', val: 'Nadhebe Inc.' },
+          { id: 'url', label: 'Official Website URL', val: 'https://nadhebe.com/' },
+          { id: 'logo', label: 'Logo Image URL', val: 'https://nadhebe.com/logo.png' }
+        ],
+        build: (d) => ({
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: d.name,
+          url: d.url,
+          logo: d.logo
+        })
+      },
+      'Product': {
+        fields: [
+          { id: 'name', label: 'Product Name', val: 'Nadhebe Pro Developer Suite' },
+          { id: 'description', label: 'Description', val: 'All-in-one developer utilities & SEO suite.' },
+          { id: 'brand', label: 'Brand', val: 'Nadhebe' },
+          { id: 'price', label: 'Price', val: '49' }
+        ],
+        build: (d) => ({
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: d.name,
+          description: d.description,
+          brand: { '@type': 'Brand', name: d.brand },
+          offers: { '@type': 'Offer', price: d.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' }
+        })
+      }
+    };
+
+    function renderForm() {
+      const type = selectType?.value || 'TechArticle';
+      const config = schemas[type] || schemas['TechArticle'];
+      if (!formFields) return;
+
+      formFields.innerHTML = '';
+      config.fields.forEach(f => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">${f.label}</label>
+          <input id="field-${f.id}" type="text" value="${f.val}" class="w-full rounded-8 border border-border bg-surface px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark font-sans" />
+        `;
+        formFields.appendChild(div);
+      });
+
+      // Attach event listeners to new inputs
+      config.fields.forEach(f => {
+        document.getElementById(`field-${f.id}`)?.addEventListener('input', generateSchema);
+      });
+
+      generateSchema();
+    }
+
+    function generateSchema() {
+      const type = selectType?.value || 'TechArticle';
+      const config = schemas[type] || schemas['TechArticle'];
+      const data = {};
+
+      config.fields.forEach(f => {
+        const input = document.getElementById(`field-${f.id}`);
+        data[f.id] = input?.value || f.val;
+      });
+
+      const schemaObj = config.build(data);
+      const jsonStr = JSON.stringify(schemaObj, null, 2);
+      const scriptTagStr = `<script type="application/ld+json">\n${jsonStr}\n<\/script>`;
+
+      if (jsonOutput) jsonOutput.textContent = scriptTagStr;
+    }
+
+    selectType?.addEventListener('change', renderForm);
+
+    btnCopy?.addEventListener('click', () => {
+      if (jsonOutput) {
+        navigator.clipboard.writeText(jsonOutput.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy JSON-LD'), 2000);
+      }
+    });
+
+    renderForm();
+  })();
+</script>

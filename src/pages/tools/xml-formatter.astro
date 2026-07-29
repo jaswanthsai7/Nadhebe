@@ -1,0 +1,36 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'XML Formatter & Beautifier – Online Code Editor | Nadhebe';
+const h1 = 'XML Formatter';
+const description = 'Format, indent, and sanitize raw XML strings into clean readable hierarchies with syntax validation.';
+
+const initialCode = `<catalog><book id="bk101"><author>Alice Chen</author><title>Agentic AI Engineering</title><price>49.99</price></book></catalog>`;
+
+const faq = [
+  {
+    question: 'How do I format unindented XML files?',
+    answer: 'Paste your unindented XML string or upload a .xml file, then click "Format / Beautify" to format elements cleanly.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="xml-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="xml-formatter" />
+  </div>
+
+  <div slot="content">
+    <h2>Online XML Formatter & Beautifier</h2>
+    <p>
+      Format unindented or minified XML files into structured, readable tag hierarchies.
+    </p>
+  </div>
+</ToolLayout>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
+import RelatedTools from '@/components/tools/RelatedTools.astro';
 import RelatedToolsCard from '@/components/tools/RelatedToolsCard.astro';
 import { KEYWORD_OWNERSHIP_MAP } from '@/config/reference-data';
 
@@ -112,6 +113,9 @@ if (faq.length > 0) {
         </div>
       )}
     </header>
+
+    <!-- Compact Related Tools Bar -->
+    <RelatedTools currentToolId="opportunity-radar" />
 
     <!-- Main Content Slot -->
     <div class="space-y-48">

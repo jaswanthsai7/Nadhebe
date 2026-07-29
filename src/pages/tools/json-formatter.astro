@@ -1,0 +1,57 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'JSON Formatter & Beautifier – Online JSON Editor | Nadhebe';
+const h1 = 'JSON Formatter';
+const description = 'Format, beautify, minify, and validate JSON data instantly. 100% client-side, privacy-first online JSON editor with tree view inspection.';
+
+const initialCode = `{\n  "service": "Nadhebe Developer Utilities",\n  "tool": "JSON Formatter & Beautifier",\n  "status": 200,\n  "features": [\n    "100% Client-Side Execution",\n    "Collapsible Tree View",\n    "JSON to XML/YAML/CSV Conversion",\n    "Zero Data Logging"\n  ],\n  "settings": {\n    "indent": 2,\n    "autofix": true\n  }\n}`;
+
+const faq = [
+  {
+    question: 'Is my JSON data secure when using Nadhebe JSON Formatter?',
+    answer: 'Yes, 100%. All JSON parsing, formatting, minifying, and conversion happen entirely in your browser using local Web APIs. Your raw data is never uploaded, stored, or sent to external server logs.',
+  },
+  {
+    question: 'How do I convert JSON to XML, YAML, or CSV?',
+    answer: 'Load or paste your JSON payload into the input editor, then click the "Convert JSON to" dropdown in the workbench header to instantly export to XML, YAML, or CSV format.',
+  },
+  {
+    question: 'What is the maximum file size supported?',
+    answer: 'Because processing takes place client-side using your hardware resources, Nadhebe JSON Formatter easily handles large JSON files up to 50MB without server timeout limits.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="formatter" />
+  </div>
+
+  <div slot="content">
+    <h2>Online JSON Formatter & Code Editor</h2>
+    <p>
+      Nadhebe JSON Formatter is a privacy-focused developer workbench designed for software engineers, frontend developers, and API creators. Format minified JSON payloads into clean, readable code with customizable 2-space, 4-space, or tab indentation.
+    </p>
+
+    <h3>Key Developer Features</h3>
+    <ul>
+      <li><strong>Interactive Dual-Pane Editor:</strong> Synced line numbers gutter, error line highlight, and live formatting feedback.</li>
+      <li><strong>Multiple View Modes:</strong> Toggle between raw Code view and collapsible Tree View for inspecting nested objects.</li>
+      <li><strong>Data Conversions:</strong> One-click export to XML, YAML, and CSV.</li>
+      <li><strong>Local File Operations:</strong> Upload local <code>.json</code> or <code>.txt</code> files directly into the workbench and download formatted output.</li>
+    </ul>
+
+    <h3>Why Use Client-Side JSON Utilities?</h3>
+    <p>
+      Many online tools send sensitive payload data to external servers. Nadhebe guarantees 100% client-side privacy. Whether you are debugging API responses, formatting config files, or inspecting tokens, your data never leaves your device.
+    </p>
+  </div>
+</ToolLayout>

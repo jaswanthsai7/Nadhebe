@@ -1,0 +1,36 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'JSON to XML Converter – Online Transform Utility | Nadhebe';
+const h1 = 'JSON ↔ XML';
+const description = 'Convert JSON data to formatted XML markup or transform XML nodes into structured JSON objects seamlessly.';
+
+const initialCode = `{\n  "catalog": {\n    "book": [\n      {\n        "id": "bk101",\n        "author": "Alice Chen",\n        "title": "Agentic AI Engineering",\n        "price": 49.99\n      }\n    ]\n  }\n}`;
+
+const faq = [
+  {
+    question: 'How does JSON to XML conversion work?',
+    answer: 'The converter maps JSON object keys to XML element tags and JSON array elements into repeating sibling XML nodes.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-to-xml"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator">
+    <DeveloperWorkbench initialCode={initialCode} toolMode="json-to-xml" />
+  </div>
+
+  <div slot="content">
+    <h2>JSON to XML Converter</h2>
+    <p>
+      Transform structured data between JSON and XML formats instantly in your browser.
+    </p>
+  </div>
+</ToolLayout>

@@ -28,6 +28,114 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 ];
 
 export const TOOLS: ToolMetadata[] = [
+  // Developer Tools
+  {
+    id: 'json-formatter',
+    name: 'JSON Formatter',
+    slug: 'json-formatter',
+    href: '/tools/json-formatter/',
+    description: 'Format, beautify, and validate JSON instantly with syntax checking and collapsible tree inspection.',
+    category: 'Developer',
+    icon: 'code',
+    badge: 'Popular',
+    tags: ['json', 'formatter', 'beautify', 'pretty print', 'developer tools'],
+  },
+  {
+    id: 'json-validator',
+    name: 'JSON Validator',
+    slug: 'json-validator',
+    href: '/tools/json-validator/',
+    description: 'Validate JSON structure and syntax errors with clear line numbers and error diagnostics.',
+    category: 'Developer',
+    icon: 'check-circle',
+    tags: ['json', 'validator', 'syntax check', 'lint', 'developer tools'],
+  },
+  {
+    id: 'json-minifier',
+    name: 'JSON Minifier',
+    slug: 'json-minifier',
+    href: '/tools/json-minifier/',
+    description: 'Compress and minify JSON data by stripping whitespace and comments for optimal payload size.',
+    category: 'Developer',
+    icon: 'minimize-2',
+    tags: ['json', 'minifier', 'compress', 'compact json', 'developer tools'],
+  },
+  {
+    id: 'json-to-xml',
+    name: 'JSON ↔ XML',
+    slug: 'json-to-xml',
+    href: '/tools/json-to-xml/',
+    description: 'Convert JSON data to formatted XML tags or parse XML structures into clean JSON objects.',
+    category: 'Developer',
+    icon: 'repeat',
+    tags: ['json', 'xml', 'converter', 'transform', 'developer tools'],
+  },
+  {
+    id: 'yaml-to-json',
+    name: 'YAML ↔ JSON',
+    slug: 'yaml-to-json',
+    href: '/tools/yaml-to-json/',
+    description: 'Convert YAML configuration files into JSON and vice-versa with schema validation.',
+    category: 'Developer',
+    icon: 'file-text',
+    tags: ['yaml', 'json', 'converter', 'config', 'developer tools'],
+  },
+  {
+    id: 'xml-formatter',
+    name: 'XML Formatter',
+    slug: 'xml-formatter',
+    href: '/tools/xml-formatter/',
+    description: 'Format, indent, and sanitize raw XML strings into clean readable hierarchies.',
+    category: 'Developer',
+    icon: 'file-code',
+    tags: ['xml', 'formatter', 'beautify', 'indentation', 'developer tools'],
+  },
+
+  // SEO & Webmaster Tools
+  {
+    id: 'opportunity-radar',
+    name: 'Nadhebe Opportunity Radar',
+    slug: 'opportunity-radar',
+    href: '/tools/opportunity-radar/',
+    description: 'Discover emerging topics and content gaps your website should cover next based on sitemap analysis.',
+    category: 'SEO & Webmaster',
+    icon: 'radar',
+    badge: 'New',
+    tags: ['opportunity radar', 'content gap', 'trending topics', 'seo tool', 'sitemap analyzer', 'content strategy'],
+  },
+  {
+    id: 'sitemap-validator',
+    name: 'Sitemap & Robots Analyzer',
+    slug: 'sitemap-validator',
+    href: '/tools/sitemap-validator/',
+    description: 'Validate sitemap XML markup, check URL accessibility, and inspect robots.txt directive compliance.',
+    category: 'SEO & Webmaster',
+    icon: 'file-text',
+    badge: 'New',
+    tags: ['sitemap', 'robots.txt', 'seo analyzer', 'xml sitemap', 'indexing'],
+  },
+  {
+    id: 'meta-tag-analyzer',
+    name: 'OpenGraph & Meta Tag Checker',
+    slug: 'meta-tag-analyzer',
+    href: '/tools/meta-tag-analyzer/',
+    description: 'Inspect OpenGraph social preview tags, Twitter cards, meta descriptions, and page title metrics.',
+    category: 'SEO & Webmaster',
+    icon: 'share-2',
+    tags: ['meta tags', 'opengraph', 'social preview', 'twitter card', 'seo checker'],
+  },
+  {
+    id: 'schema-generator',
+    name: 'JSON-LD Schema Generator',
+    slug: 'schema-generator',
+    href: '/tools/schema-generator/',
+    description: 'Generate structured JSON-LD schemas for WebPage, Article, Product, FAQ, and LocalBusiness markup.',
+    category: 'SEO & Webmaster',
+    icon: 'database',
+    tags: ['json-ld', 'schema markup', 'structured data', 'rich snippets', 'seo generator'],
+  },
+
+  // Image & Dimensions Tools
   {
     id: 'aspect-ratio-calculator',
     name: 'Aspect Ratio Calculator',
@@ -101,6 +209,8 @@ export const TOOLS: ToolMetadata[] = [
     badge: 'Popular',
     tags: ['16:9', 'widescreen', '1080p', '4k', 'video dimensions'],
   },
+
+  // Social & Creator Tools
   {
     id: '9-16-dimensions-calculator',
     name: '9:16 Dimensions Calculator',
@@ -132,17 +242,6 @@ export const TOOLS: ToolMetadata[] = [
     icon: 'share-2',
     tags: ['social media', 'image sizes', 'instagram', 'youtube banner', 'x header', 'linkedin'],
   },
-  {
-    id: 'opportunity-radar',
-    name: 'Nadhebe Opportunity Radar',
-    slug: 'opportunity-radar',
-    href: '/tools/opportunity-radar/',
-    description: 'Discover emerging topics and content gaps your website should cover next based on sitemap analysis.',
-    category: 'SEO & Webmaster',
-    icon: 'radar',
-    badge: 'New',
-    tags: ['opportunity radar', 'content gap', 'trending topics', 'seo tool', 'sitemap analyzer', 'content strategy'],
-  },
 ];
 
 export function getToolBySlug(slug: string): ToolMetadata | undefined {
@@ -153,11 +252,62 @@ export function getRelatedTools(currentId: string, limit = 4): ToolMetadata[] {
   const current = getToolBySlug(currentId);
   if (!current) return TOOLS.slice(0, limit);
 
-  return TOOLS.filter((t) => t.id !== currentId)
+  return TOOLS.filter((t) => t.id !== current.id && t.slug !== current.slug)
     .sort((a, b) => {
       const sameCategory = a.category === current.category ? 1 : 0;
       const bSameCategory = b.category === current.category ? 1 : 0;
       return bSameCategory - sameCategory;
     })
     .slice(0, limit);
+}
+
+export interface RelatedToolsResult {
+  categoryName: string;
+  items: ToolMetadata[];
+}
+
+export function getRelatedToolsForComponent(
+  currentId: string,
+  options: { customCategory?: string; customTools?: ToolMetadata[]; limit?: number } = {}
+): RelatedToolsResult {
+  const limit = Math.min(Math.max(options.limit || 6, 4), 6);
+
+  if (options.customTools && options.customTools.length > 0) {
+    const category = options.customCategory || 'Related Tools';
+    return {
+      categoryName: category.endsWith('Tools') ? category : `${category} Tools`,
+      items: options.customTools.slice(0, limit),
+    };
+  }
+
+  const current = getToolBySlug(currentId);
+  const category = options.customCategory || (current ? current.category : 'Developer');
+  const categoryName = category.endsWith('Tools') ? category : `${category} Tools`;
+
+  // Get tools in same category
+  const sameCat = TOOLS.filter((t) => t.category === category);
+
+  let selected: ToolMetadata[] = [...sameCat];
+
+  // If current tool exists and is not in selected, prepend it
+  if (current && !selected.some((t) => t.id === current.id)) {
+    selected.unshift(current);
+  }
+
+  // Fill up to limit with other tools if needed
+  if (selected.length < limit) {
+    const extra = TOOLS.filter((t) => !selected.some((s) => s.id === t.id));
+    selected = [...selected, ...extra];
+  }
+
+  // Ensure current tool is present in final items if it exists
+  let finalItems = selected.slice(0, limit);
+  if (current && !finalItems.some((t) => t.id === current.id)) {
+    finalItems[finalItems.length - 1] = current;
+  }
+
+  return {
+    categoryName,
+    items: finalItems,
+  };
 }
