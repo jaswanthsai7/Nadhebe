@@ -1,0 +1,180 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Color Contrast Checker — WCAG AA/AAA Accessibility Tool | Nadhebe';
+const h1 = 'Color Contrast Checker — WCAG AA/AAA';
+const description = 'Test text and background HEX color contrast ratios against WCAG 2.1 Level AA and AAA accessibility standards with live typography previews.';
+
+const faq = [
+  {
+    question: 'What contrast ratio is required for WCAG Level AA compliance?',
+    answer: 'WCAG 2.1 Level AA requires a minimum contrast ratio of 4.5:1 for normal body text and 3:1 for large text (18pt / 24px or 14pt / 18px bold).',
+  },
+  {
+    question: 'What contrast ratio is required for Level AAA compliance?',
+    answer: 'WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="color-contrast-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="contrast-checker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Colors -->
+      <CalculatorCard title="SELECT FOREGROUND & BACKGROUND COLORS">
+        <div class="space-y-16">
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Text Color (Foreground HEX)</label>
+            <div class="flex items-center gap-8">
+              <input id="color-fg-picker" type="color" value="#0f172a" class="h-40 w-40 rounded-8 border border-border cursor-pointer" />
+              <input id="color-fg-hex" type="text" value="#0f172a" class="flex-1 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Background Color (Background HEX)</label>
+            <div class="flex items-center gap-8">
+              <input id="color-bg-picker" type="color" value="#ffffff" class="h-40 w-40 rounded-8 border border-border cursor-pointer" />
+              <input id="color-bg-hex" type="text" value="#ffffff" class="flex-1 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Output Ratio & WCAG Badges -->
+      <ResultCard title="CONTRAST RATIO & WCAG COMPLIANCE">
+        <div class="space-y-16">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs uppercase text-muted dark:text-muted-dark">Calculated Ratio</span>
+            <span id="contrast-ratio-value" class="font-display text-h2 font-bold text-accent dark:text-accent-dark">16.3:1</span>
+          </div>
+
+          <!-- WCAG Badges -->
+          <div class="grid grid-cols-2 gap-8 font-mono text-xs">
+            <div class="p-10 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between">
+              <span>AA Normal Text (4.5:1)</span>
+              <span id="badge-aa-normal" class="font-bold text-emerald-600 dark:text-emerald-400">PASS</span>
+            </div>
+            <div class="p-10 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between">
+              <span>AA Large Text (3.0:1)</span>
+              <span id="badge-aa-large" class="font-bold text-emerald-600 dark:text-emerald-400">PASS</span>
+            </div>
+            <div class="p-10 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between">
+              <span>AAA Normal Text (7.0:1)</span>
+              <span id="badge-aaa-normal" class="font-bold text-emerald-600 dark:text-emerald-400">PASS</span>
+            </div>
+            <div class="p-10 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between">
+              <span>AAA Large Text (4.5:1)</span>
+              <span id="badge-aaa-large" class="font-bold text-emerald-600 dark:text-emerald-400">PASS</span>
+            </div>
+          </div>
+
+          <!-- Live Typography Render Window -->
+          <div id="render-preview-box" class="p-16 rounded-12 border border-border transition-colors duration-200" style="background-color: #ffffff; color: #0f172a;">
+            <p class="font-sans font-bold text-caption">Large Heading (18pt / 24px Bold)</p>
+            <p class="font-sans text-caption mt-4">Normal body text preview rendering using selected foreground and background HEX values.</p>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>WCAG 2.1 Color Contrast Guidelines</h2>
+    <p>
+      Ensuring sufficient color contrast between text and background elements is critical for users with visual impairments or color vision deficiencies.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const fgPicker = document.getElementById('color-fg-picker');
+    const fgHex = document.getElementById('color-fg-hex');
+    const bgPicker = document.getElementById('color-bg-picker');
+    const bgHex = document.getElementById('color-bg-hex');
+
+    const ratioVal = document.getElementById('contrast-ratio-value');
+    const badgeAaNormal = document.getElementById('badge-aa-normal');
+    const badgeAaLarge = document.getElementById('badge-aa-large');
+    const badgeAaaNormal = document.getElementById('badge-aaa-normal');
+    const badgeAaaLarge = document.getElementById('badge-aaa-large');
+    const previewBox = document.getElementById('render-preview-box');
+
+    function hexToLuminance(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      const r = parseInt(hex.substr(0, 2), 16) / 255;
+      const g = parseInt(hex.substr(2, 2), 16) / 255;
+      const b = parseInt(hex.substr(4, 2), 16) / 255;
+
+      const a = [r, g, b].map(c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+      return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+    }
+
+    function update() {
+      const fg = fgHex?.value || '#000000';
+      const bg = bgHex?.value || '#ffffff';
+
+      try {
+        const l1 = hexToLuminance(fg);
+        const l2 = hexToLuminance(bg);
+
+        const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+        const ratioFormatted = ratio.toFixed(1) + ':1';
+
+        if (ratioVal) ratioVal.textContent = ratioFormatted;
+
+        const setBadge = (el, pass) => {
+          if (!el) return;
+          el.textContent = pass ? 'PASS' : 'FAIL';
+          el.className = pass ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger dark:text-danger-dark';
+        };
+
+        setBadge(badgeAaNormal, ratio >= 4.5);
+        setBadge(badgeAaLarge, ratio >= 3.0);
+        setBadge(badgeAaaNormal, ratio >= 7.0);
+        setBadge(badgeAaaLarge, ratio >= 4.5);
+
+        if (previewBox) {
+          previewBox.style.backgroundColor = bg;
+          previewBox.style.color = fg;
+        }
+      } catch (e) {}
+    }
+
+    fgPicker?.addEventListener('input', (e) => {
+      if (fgHex) fgHex.value = e.target.value;
+      update();
+    });
+
+    fgHex?.addEventListener('input', (e) => {
+      if (fgPicker) fgPicker.value = e.target.value;
+      update();
+    });
+
+    bgPicker?.addEventListener('input', (e) => {
+      if (bgHex) bgHex.value = e.target.value;
+      update();
+    });
+
+    bgHex?.addEventListener('input', (e) => {
+      if (bgPicker) bgPicker.value = e.target.value;
+      update();
+    });
+
+    update();
+  })();
+</script>

@@ -1,0 +1,56 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'CSV to JSON & JSON to CSV Converter – Instant Private Tool | Nadhebe';
+const h1 = 'CSV to JSON & JSON to CSV';
+const description = 'Convert CSV data to JSON objects and vice-versa instantly in your browser. 100% private client-side converter supporting custom delimiters.';
+
+const initialCode = `id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Editor,Active\n3,Carol Danvers,carol@example.com,User,Pending`;
+
+const faq = [
+  {
+    question: 'Is my uploaded CSV data stored on any server?',
+    answer: 'No, 100% of calculations and file conversions execute locally in your browser memory. Your raw data is never uploaded or logged on any external server.',
+  },
+  {
+    question: 'Can I convert tab-separated values (TSV) into JSON?',
+    answer: 'Yes, select the tab delimiter option or upload a `.tsv` file to convert tab-separated data into formatted JSON objects.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="csv-to-json"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-16">
+    <!-- Local Privacy Selling Point Badge -->
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        🔒 Runs locally in your browser · Your data isn't uploaded
+      </span>
+      <span>Supports CSV, TSV, Pipe, & Semicolon</span>
+    </div>
+
+    <!-- Developer Workbench with CSV support -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="csv-to-json" />
+  </div>
+
+  <div slot="content">
+    <h2>Client-Side CSV & JSON Data Converter</h2>
+    <p>
+      Nadhebe CSV to JSON Converter transforms tabular spreadsheet data into structured JSON object arrays instantly inside browser memory.
+    </p>
+
+    <h3>Supported Features</h3>
+    <ul>
+      <li><strong>Multiple Delimiters:</strong> Auto-detects and parses comma (<code>,</code>), tab (<code>\t</code>), pipe (<code>|</code>), and semicolon (<code>;</code>) delimited data.</li>
+      <li><strong>Two-Way Transformation:</strong> Convert CSV to JSON or export JSON array payloads to formatted CSV files.</li>
+      <li><strong>Local File Processing:</strong> Drag and drop local <code>.csv</code> or <code>.tsv</code> files directly into the workbench.</li>
+    </ul>
+  </div>
+</ToolLayout>

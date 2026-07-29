@@ -1,0 +1,213 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'E-Commerce Profit Margin & Markup Calculator | Nadhebe';
+const h1 = 'Profit Margin & Fee Calculator';
+const description = 'Calculate gross margin, markup percentage, and net profit after factoring Shopify, Stripe, and PayPal payment processing fees.';
+
+const faq = [
+  {
+    question: 'What is the difference between profit margin and markup?',
+    answer: 'Profit margin measures profit relative to the selling price (Profit / Selling Price), while markup measures profit relative to the item cost (Profit / Cost).',
+  },
+  {
+    question: 'What is a healthy profit margin for an e-commerce store?',
+    answer: 'A healthy gross profit margin for e-commerce generally ranges between 50%–70%, while a sustainable net profit margin is typically 15%–25% after processing and shipping overhead.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="profit-margin-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="profit-calc-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Parameters -->
+      <CalculatorCard title="UNIT ECONOMICS INPUTS">
+        <div class="space-y-16">
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Item Cost / COGS ($)</label>
+              <input id="pm-cogs" type="number" value="40" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Selling Price ($)</label>
+              <input id="pm-price" type="number" value="100" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono font-bold text-accent" />
+            </div>
+          </div>
+
+          <div class="relative group z-30">
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Payment Processing Preset</label>
+            <button
+              type="button"
+              id="pm-preset-trigger"
+              class="w-full inline-flex items-center justify-between min-h-[44px] rounded-12 border border-border bg-surface2 px-16 py-12 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              <span id="pm-preset-label">Shopify Payments (2.9% + $0.30)</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[14px] h-[14px] shrink-0 text-muted dark:text-muted-dark transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <input type="hidden" id="pm-preset" value="shopify" />
+            <div id="pm-preset-menu" class="absolute left-0 bottom-full mb-6 w-full origin-bottom-left rounded-16 border border-border bg-surface/95 p-6 shadow-large backdrop-blur-xl opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark/95 z-50">
+              <button type="button" data-preset-val="shopify" class="preset-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Shopify Payments (2.9% + $0.30)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark">✓</span>
+              </button>
+              <button type="button" data-preset-val="stripe" class="preset-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Stripe Standard (2.9% + $0.30)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+              <button type="button" data-preset-val="paypal" class="preset-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>PayPal Checkout (3.49% + $0.49)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+              <button type="button" data-preset-val="amazon" class="preset-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Amazon Seller Fee (15.0% + $0.00)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+              <button type="button" data-preset-val="none" class="preset-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Zero Fees (0.0% + $0.00)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Shipping Overhead ($)</label>
+              <input id="pm-shipping" type="number" value="5" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Processing Fee ($)</label>
+              <input id="pm-fee-amount" type="number" value="3.20" readonly class="w-full rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-muted dark:bg-surface-dark" />
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Output Unit Economics -->
+      <ResultCard title="PROFITABILITY & MARGIN METRICS">
+        <div class="space-y-16">
+          <div class="grid grid-cols-2 gap-12 text-center font-mono">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mb-4">Gross Margin</div>
+              <div id="pm-gross-margin" class="text-h3 font-bold text-accent dark:text-accent-dark">60.0%</div>
+              <div id="pm-gross-profit" class="text-xs text-ink2 dark:text-ink2-dark mt-2">$60.00 Gross Profit</div>
+            </div>
+
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mb-4">Net Profit Margin</div>
+              <div id="pm-net-margin" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">51.8%</div>
+              <div id="pm-net-profit" class="text-xs text-ink2 dark:text-ink2-dark mt-2">$51.80 Net Profit</div>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark flex items-center justify-between font-mono text-caption">
+            <span>Markup Percentage</span>
+            <span id="pm-markup-val" class="font-bold text-ink dark:text-ink-dark">150.0%</span>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>E-Commerce Unit Economics</h2>
+    <p>
+      Accurate profit margin calculations must account for payment gateway transaction rates and fulfillment costs to determine true net profitability per unit sold.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const cogsEl = document.getElementById('pm-cogs');
+    const priceEl = document.getElementById('pm-price');
+    const presetEl = document.getElementById('pm-preset');
+    const presetLabel = document.getElementById('pm-preset-label');
+    const presetOptions = document.querySelectorAll('.preset-option');
+    presetOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const val = opt.getAttribute('data-preset-val');
+        const text = opt.querySelector('span')?.textContent || val;
+        if (presetEl) presetEl.value = val;
+        if (presetLabel) presetLabel.textContent = text;
+
+        presetOptions.forEach(o => {
+          const chk = o.querySelector('.check-mark');
+          if (chk) chk.classList.add('hidden');
+        });
+        const activeChk = opt.querySelector('.check-mark');
+        if (activeChk) activeChk.classList.remove('hidden');
+
+        calculate();
+      });
+    });
+    const shippingEl = document.getElementById('pm-shipping');
+    const feeAmountEl = document.getElementById('pm-fee-amount');
+
+    const grossMarginEl = document.getElementById('pm-gross-margin');
+    const grossProfitEl = document.getElementById('pm-gross-profit');
+    const netMarginEl = document.getElementById('pm-net-margin');
+    const netProfitEl = document.getElementById('pm-net-profit');
+    const markupValEl = document.getElementById('pm-markup-val');
+
+    const feePresets = {
+      shopify: { pct: 0.029, fixed: 0.30 },
+      stripe: { pct: 0.029, fixed: 0.30 },
+      paypal: { pct: 0.0349, fixed: 0.49 },
+      amazon: { pct: 0.15, fixed: 0.00 },
+      none: { pct: 0, fixed: 0 }
+    };
+
+    function calculate() {
+      const cogs = parseFloat(cogsEl?.value || 0);
+      const price = parseFloat(priceEl?.value || 0);
+      const shipping = parseFloat(shippingEl?.value || 0);
+      const presetKey = presetEl?.value || 'shopify';
+
+      if (price <= 0) return;
+
+      const preset = feePresets[presetKey] || feePresets.shopify;
+      const processingFee = (price * preset.pct) + preset.fixed;
+
+      if (feeAmountEl) feeAmountEl.value = processingFee.toFixed(2);
+
+      const grossProfit = price - cogs;
+      const grossMarginPct = (grossProfit / price) * 100;
+      const markupPct = cogs > 0 ? (grossProfit / cogs) * 100 : 0;
+
+      const netProfit = grossProfit - processingFee - shipping;
+      const netMarginPct = (netProfit / price) * 100;
+
+      if (grossMarginEl) grossMarginEl.textContent = `${grossMarginPct.toFixed(1)}%`;
+      if (grossProfitEl) grossProfitEl.textContent = `$${grossProfit.toFixed(2)} Gross Profit`;
+      if (netMarginEl) netMarginEl.textContent = `${netMarginPct.toFixed(1)}%`;
+      if (netProfitEl) netProfitEl.textContent = `$${netProfit.toFixed(2)} Net Profit`;
+      if (markupValEl) markupValEl.textContent = `${markupPct.toFixed(1)}%`;
+
+      // Track analytics
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'tool_used', {
+          tool_slug: 'profit-margin-calculator',
+          tool_category: 'Business',
+          action: 'calculate'
+        });
+      }
+    }
+
+    [cogsEl, priceEl, presetEl, shippingEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

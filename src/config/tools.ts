@@ -8,6 +8,12 @@ export interface ToolMetadata {
   icon: string;
   badge?: 'Popular' | 'New';
   tags: string[];
+  keywords?: string[];
+  relatedTools?: string[];
+  relatedArticles?: string[];
+  faq?: { question: string; answer: string }[];
+  features?: string[];
+  noApi?: boolean;
 }
 
 export type ToolCategory =
@@ -29,6 +35,45 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 
 export const TOOLS: ToolMetadata[] = [
   // Developer Tools
+  {
+    id: 'json-to-typescript',
+    name: 'JSON to TypeScript Generator',
+    slug: 'json-to-typescript',
+    href: '/tools/json-to-typescript/',
+    description: 'Convert JSON objects into clean TypeScript interfaces or type aliases instantly. 100% browser-based AST type inference.',
+    category: 'Developer',
+    icon: 'code',
+    badge: 'New',
+    tags: ['json', 'typescript', 'ts interface', 'type generator', 'developer tools'],
+    keywords: ['json to typescript', 'json to ts', 'convert json to typescript', 'generate typescript from json'],
+    noApi: true,
+  },
+  {
+    id: 'csv-to-json',
+    name: 'CSV to JSON & JSON to CSV',
+    slug: 'csv-to-json',
+    href: '/tools/csv-to-json/',
+    description: 'Convert CSV data to JSON objects and vice versa instantly in your browser with custom delimiter and header toggles.',
+    category: 'Developer',
+    icon: 'file-spreadsheet',
+    badge: 'Popular',
+    tags: ['csv to json', 'json to csv', 'converter', 'data utility', 'developer tools'],
+    keywords: ['csv to json', 'convert csv to json', 'json to csv converter'],
+    noApi: true,
+  },
+  {
+    id: 'svg-to-jsx',
+    name: 'SVG to JSX / React Component',
+    slug: 'svg-to-jsx',
+    href: '/tools/svg-to-jsx/',
+    description: 'Transform raw SVG code into clean, production-ready React JSX or TypeScript component templates.',
+    category: 'Developer',
+    icon: 'code',
+    badge: 'New',
+    tags: ['svg to jsx', 'react svg', 'typescript component', 'svg converter', 'developer tools'],
+    keywords: ['svg to jsx', 'convert svg to jsx', 'svg react component generator'],
+    noApi: true,
+  },
   {
     id: 'json-formatter',
     name: 'JSON Formatter',
@@ -91,7 +136,70 @@ export const TOOLS: ToolMetadata[] = [
     tags: ['xml', 'formatter', 'beautify', 'indentation', 'developer tools'],
   },
 
-  // SEO & Webmaster Tools
+  // CSS & Frontend Tools
+  {
+    id: 'css-clamp-calculator',
+    name: 'CSS Clamp Calculator',
+    slug: 'css-clamp-calculator',
+    href: '/tools/css-clamp-calculator/',
+    description: 'Calculate responsive CSS clamp() formulas for fluid typography and viewport spacing with live viewport scaling preview.',
+    category: 'CSS & Frontend',
+    icon: 'sliders',
+    badge: 'New',
+    tags: ['css clamp', 'fluid typography', 'responsive font', 'rem units', 'frontend tools'],
+    keywords: ['css clamp calculator', 'fluid typography generator', 'font size clamp calculator'],
+    noApi: true,
+  },
+  {
+    id: 'px-to-rem',
+    name: 'PX to REM Converter',
+    slug: 'px-to-rem',
+    href: '/tools/px-to-rem/',
+    description: 'Convert pixels (px) to REM units instantly with custom base font sizes and full copyable conversion lookup matrix.',
+    category: 'CSS & Frontend',
+    icon: 'repeat',
+    badge: 'Popular',
+    tags: ['px to rem', 'rem to px', 'css units', 'font size converter', 'frontend tools'],
+    keywords: ['px to rem', 'rem to px', 'pixels to rem converter', 'css rem calculator'],
+    noApi: true,
+  },
+  {
+    id: 'color-contrast-checker',
+    name: 'Color Contrast Checker — WCAG AA/AAA',
+    slug: 'color-contrast-checker',
+    href: '/tools/color-contrast-checker/',
+    description: 'Test color contrast ratios against WCAG AA and AAA accessibility standards with live typography previews and instant fixes.',
+    category: 'CSS & Frontend',
+    icon: 'eye',
+    badge: 'New',
+    tags: ['color contrast', 'wcag', 'accessibility', 'a11y', 'hex color picker'],
+    keywords: ['color contrast checker', 'wcag contrast checker', 'accessible color ratio'],
+    noApi: true,
+  },
+  {
+    id: 'profit-margin-calculator',
+    name: 'Profit Margin & Fee Calculator',
+    slug: 'profit-margin-calculator',
+    href: '/tools/profit-margin-calculator/',
+    description: 'Calculate gross margin, markup percentage, and net profit after factoring Shopify, Stripe, and PayPal processing fees.',
+    category: 'Text & Content',
+    icon: 'dollar-sign',
+    tags: ['profit margin', 'markup calculator', 'ecommerce profit', 'unit economics'],
+    keywords: ['profit margin calculator', 'markup calculator', 'gross margin calculator'],
+    noApi: true,
+  },
+  {
+    id: 'percentage-difference-calculator',
+    name: 'Percentage Difference & Change Calculator',
+    slug: 'percentage-difference-calculator',
+    href: '/tools/percentage-difference-calculator/',
+    description: 'Calculate percentage difference, percentage increase, and percent change with step-by-step mathematical breakdowns.',
+    category: 'Text & Content',
+    icon: 'percent',
+    tags: ['percentage difference', 'percent change', 'increase decrease', 'math calculator'],
+    keywords: ['percentage difference calculator', 'percentage change calculator', 'percent increase calculator'],
+    noApi: true,
+  },
   {
     id: 'opportunity-radar',
     name: 'Nadhebe Opportunity Radar',

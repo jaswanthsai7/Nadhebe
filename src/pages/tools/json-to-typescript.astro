@@ -1,0 +1,66 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'JSON to TypeScript Generator – Free Instant Online Converter | Nadhebe';
+const h1 = 'JSON to TypeScript Generator';
+const description = 'Convert JSON objects into clean TypeScript interfaces or type aliases instantly. 100% browser-based JSON to TS generator with nested object support.';
+
+const initialCode = `{\n  "id": 101,\n  "username": "alex_dev",\n  "email": "alex@example.com",\n  "isVerified": true,\n  "roles": ["admin", "editor"],\n  "profile": {\n    "firstName": "Alex",\n    "lastName": "Chen",\n    "bio": null\n  }\n}`;
+
+const faq = [
+  {
+    question: 'Is my JSON data secure when using this converter?',
+    answer: 'Yes, 100%. All JSON parsing and TypeScript code generation happen entirely inside your browser using client-side Web APIs. Your data is never sent to a server.',
+  },
+  {
+    question: 'Can I generate TypeScript type aliases instead of interfaces?',
+    answer: 'Yes, you can toggle between generating standard TypeScript interfaces (`interface User { ... }`) or type aliases (`type User = { ... }`).',
+  },
+  {
+    question: 'How are nested JSON objects and arrays handled?',
+    answer: 'Nested objects are recursively parsed into separate sub-interfaces, and array elements are automatically inferred into primitive or union types.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-to-typescript"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-16">
+    <!-- Local Privacy Selling Point Badge -->
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        🔒 Runs locally in your browser · Your data isn't uploaded
+      </span>
+      <span>No API required</span>
+    </div>
+
+    <!-- Interactive Workspace Container -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="json-to-typescript" />
+  </div>
+
+  <div slot="content">
+    <h2>Automated JSON to TypeScript Type Inference</h2>
+    <p>
+      Nadhebe JSON to TypeScript Generator parses raw JSON strings, recursively inspects object properties, and automatically constructs strongly-typed TypeScript interfaces and type definitions.
+    </p>
+
+    <h3>Key Capabilities</h3>
+    <ul>
+      <li><strong>Recursive Type Inference:</strong> Infers numbers, strings, booleans, arrays, null values, and nested objects.</li>
+      <li><strong>Interface vs Type Alias:</strong> Choose your preferred TypeScript syntax declaration.</li>
+      <li><strong>Optional Property Flags:</strong> Toggle optional property modifiers (<code>?</code>) for nullable or undefined keys.</li>
+      <li><strong>0ms Local Execution:</strong> Process large JSON responses without network latency or server timeouts.</li>
+    </ul>
+
+    <h3>Why Use Client-Side TypeScript Generators?</h3>
+    <p>
+      Manual type definitions are error-prone and slow down API integration. By generating TypeScript definitions directly from sample API responses, frontend developers save hours of boilerplate coding while preventing runtime type mismatch bugs.
+    </p>
+  </div>
+</ToolLayout>

@@ -1,0 +1,56 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+
+const title = 'SVG to JSX / React Component Generator – Online Tool | Nadhebe';
+const h1 = 'SVG to JSX / React Component';
+const description = 'Transform raw SVG code into clean, production-ready React JSX or TypeScript component templates. Converts attributes to camelCase automatically.';
+
+const initialCode = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon">\n  <circle cx="12" cy="12" r="10"/>\n  <polyline points="12 6 12 12 16 14"/>\n</svg>`;
+
+const faq = [
+  {
+    question: 'How does SVG to JSX attribute conversion work?',
+    answer: 'The converter transforms standard SVG attributes into React-compatible camelCase props (e.g., `stroke-width` → `strokeWidth`, `class` → `className`, `fill-rule` → `fillRule`).',
+  },
+  {
+    question: 'Can I generate TypeScript React components?',
+    answer: 'Yes, the tool can wrap the generated SVG in a TypeScript functional component with `React.SVGProps<SVGSVGElement>` type definitions.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="svg-to-jsx"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-16">
+    <!-- Local Privacy Selling Point Badge -->
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        🔒 Runs locally in your browser · Your data isn't uploaded
+      </span>
+      <span>Converts attributes to camelCase</span>
+    </div>
+
+    <!-- Developer Workbench with SVG conversion -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="svg-to-jsx" />
+  </div>
+
+  <div slot="content">
+    <h2>SVG to React JSX Component Converter</h2>
+    <p>
+      Transform inline SVG graphic markup into clean React functional components for Next.js, Vite, and Remix applications.
+    </p>
+
+    <h3>Automatic SVG Transformations</h3>
+    <ul>
+      <li><strong>Attribute camelCasing:</strong> Converts attributes like <code>stroke-width</code>, <code>stroke-linecap</code>, and <code>fill-opacity</code>.</li>
+      <li><strong>Class to className:</strong> Swaps HTML <code>class</code> attributes for JSX <code>className</code>.</li>
+      <li><strong>TypeScript Support:</strong> Automatically types props using <code>React.SVGProps&lt;SVGSVGElement&gt;</code>.</li>
+    </ul>
+  </div>
+</ToolLayout>

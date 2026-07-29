@@ -1,0 +1,196 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Percentage Difference & Change Calculator | Nadhebe';
+const h1 = 'Percentage Difference & Change Calculator';
+const description = 'Calculate percentage difference, percentage change, and percent increase/decrease with step-by-step mathematical breakdowns.';
+
+const faq = [
+  {
+    question: 'When should I use percentage difference instead of percentage change?',
+    answer: 'Use percentage difference when comparing two numbers without a time direction or initial benchmark. Use percentage change when comparing an initial starting value to a final resulting value.',
+  },
+  {
+    question: 'Can percentage difference be negative?',
+    answer: 'No, percentage difference compares the absolute difference divided by the average of two numbers, so it is always positive. Percentage change, however, can be negative indicating a decrease.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="percentage-difference-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="percent-calc-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Parameters -->
+      <CalculatorCard title="CALCULATION MODE & INPUTS">
+        <div class="space-y-16">
+          <div class="relative group z-30">
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Calculation Mode</label>
+            <button
+              type="button"
+              id="perc-mode-trigger"
+              class="w-full inline-flex items-center justify-between min-h-[44px] rounded-12 border border-border bg-surface2 px-16 py-12 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              <span id="perc-mode-label">Percentage Difference (Unordered Values)</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[14px] h-[14px] shrink-0 text-muted dark:text-muted-dark transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <input type="hidden" id="perc-mode" value="diff" />
+            <div id="perc-mode-menu" class="absolute left-0 bottom-full mb-6 w-full origin-bottom-left rounded-16 border border-border bg-surface/95 p-6 shadow-large backdrop-blur-xl opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark/95 z-50">
+              <button type="button" data-mode-val="diff" class="mode-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Percentage Difference (Unordered Values)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark">✓</span>
+              </button>
+              <button type="button" data-mode-val="change" class="mode-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Percentage Change (Initial → Final)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+              <button type="button" data-mode-val="of" class="mode-option w-full text-left rounded-8 px-12 py-8 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+                <span>Percentage of a Value (X% of Y)</span>
+                <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label id="lbl-val1" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">First Value (V1)</label>
+              <input id="perc-v1" type="number" value="50" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+            <div>
+              <label id="lbl-val2" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Second Value (V2)</label>
+              <input id="perc-v2" type="number" value="75" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Output Result & Step Breakdown -->
+      <ResultCard title="CALCULATED RESULT & BREAKDOWN">
+        <div class="space-y-16">
+          <div class="flex items-center justify-between">
+            <span id="perc-result-title" class="font-mono text-xs uppercase text-muted dark:text-muted-dark">Percentage Difference</span>
+            <span id="perc-result-val" class="font-display text-h2 font-bold text-accent dark:text-accent-dark">40.0%</span>
+          </div>
+
+          <div class="p-16 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <span class="font-bold uppercase text-muted dark:text-muted-dark block">Step-by-Step Solution</span>
+            <div id="perc-step-breakdown" class="text-ink2 dark:text-ink2-dark leading-relaxed whitespace-pre-line">
+              <!-- Generated by JS -->
+            </div>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>How to Calculate Percentage Difference</h2>
+    <p>
+      Percentage difference measures the relative change between two numbers divided by their average value:
+    </p>
+    <pre class="font-mono text-caption">Percentage Difference = (|V1 - V2| / ((V1 + V2) / 2)) * 100</pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const modeEl = document.getElementById('perc-mode');
+    const modeLabel = document.getElementById('perc-mode-label');
+    const modeOptions = document.querySelectorAll('.mode-option');
+    modeOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const val = opt.getAttribute('data-mode-val');
+        const text = opt.querySelector('span')?.textContent || val;
+        if (modeEl) modeEl.value = val;
+        if (modeLabel) modeLabel.textContent = text;
+
+        modeOptions.forEach(o => {
+          const chk = o.querySelector('.check-mark');
+          if (chk) chk.classList.add('hidden');
+        });
+        const activeChk = opt.querySelector('.check-mark');
+        if (activeChk) activeChk.classList.remove('hidden');
+
+        calculate();
+      });
+    });
+    const v1El = document.getElementById('perc-v1');
+    const v2El = document.getElementById('perc-v2');
+
+    const lblVal1 = document.getElementById('lbl-val1');
+    const lblVal2 = document.getElementById('lbl-val2');
+
+    const resultTitle = document.getElementById('perc-result-title');
+    const resultVal = document.getElementById('perc-result-val');
+    const stepBreakdown = document.getElementById('perc-step-breakdown');
+
+    function calculate() {
+      const mode = modeEl?.value || 'diff';
+      const v1 = parseFloat(v1El?.value || 0);
+      const v2 = parseFloat(v2El?.value || 0);
+
+      if (mode === 'diff') {
+        if (lblVal1) lblVal1.textContent = 'First Value (V1)';
+        if (lblVal2) lblVal2.textContent = 'Second Value (V2)';
+        if (resultTitle) resultTitle.textContent = 'Percentage Difference';
+
+        const diff = Math.abs(v1 - v2);
+        const avg = (v1 + v2) / 2;
+        const res = avg !== 0 ? (diff / avg) * 100 : 0;
+
+        if (resultVal) resultVal.textContent = `${res.toFixed(2)}%`;
+        if (stepBreakdown) {
+          stepBreakdown.textContent = `1. Absolute Difference: |${v1} - ${v2}| = ${diff}\n2. Average Value: (${v1} + ${v2}) / 2 = ${avg}\n3. Difference: (${diff} / ${avg}) × 100 = ${res.toFixed(2)}%`;
+        }
+      } else if (mode === 'change') {
+        if (lblVal1) lblVal1.textContent = 'Initial Value (V1)';
+        if (lblVal2) lblVal2.textContent = 'Final Value (V2)';
+        if (resultTitle) resultTitle.textContent = 'Percentage Change';
+
+        const change = v2 - v1;
+        const res = v1 !== 0 ? (change / Math.abs(v1)) * 100 : 0;
+
+        if (resultVal) resultVal.textContent = `${res > 0 ? '+' : ''}${res.toFixed(2)}%`;
+        if (stepBreakdown) {
+          stepBreakdown.textContent = `1. Amount of Change: ${v2} - ${v1} = ${change}\n2. Divide by Initial Value: ${change} / |${v1}| = ${(change / Math.abs(v1)).toFixed(4)}\n3. Percentage Change: ${res.toFixed(2)}% (${res >= 0 ? 'Increase' : 'Decrease'})`;
+        }
+      } else if (mode === 'of') {
+        if (lblVal1) lblVal1.textContent = 'Percentage (X%)';
+        if (lblVal2) lblVal2.textContent = 'Total Value (Y)';
+        if (resultTitle) resultTitle.textContent = 'Calculated Amount';
+
+        const res = (v1 / 100) * v2;
+
+        if (resultVal) resultVal.textContent = `${res.toFixed(2)}`;
+        if (stepBreakdown) {
+          stepBreakdown.textContent = `1. Convert Percentage: ${v1}% = ${v1 / 100}\n2. Multiply by Total: (${v1 / 100}) × ${v2} = ${res.toFixed(2)}`;
+        }
+      }
+
+      // Track analytics
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'tool_used', {
+          tool_slug: 'percentage-difference-calculator',
+          tool_category: 'Math & Utility',
+          action: 'calculate'
+        });
+      }
+    }
+
+    [modeEl, v1El, v2El].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

@@ -1,0 +1,200 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSS Clamp Calculator – Fluid Typography & Spacing Generator | Nadhebe';
+const h1 = 'CSS Clamp & Fluid Typography Calculator';
+const description = 'Calculate responsive CSS clamp() formulas for fluid typography and spacing. Features live viewport scaling preview and custom rem conversion.';
+
+const faq = [
+  {
+    question: 'Why should I use CSS clamp() instead of media queries?',
+    answer: 'CSS clamp() enables smooth, fluid scaling between minimum and maximum viewport widths without requiring discrete media query breakpoints.',
+  },
+  {
+    question: 'Is CSS clamp() supported in modern browsers?',
+    answer: 'Yes, CSS clamp() has over 96% global browser support across Chrome, Safari, Firefox, and Edge.',
+  },
+  {
+    question: 'How does the root base font size affect REM calculation?',
+    answer: 'Standard browser default root font size is 16px (1rem = 16px). Changing the root base font recalculates REM outputs accurately.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="css-clamp-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="clamp-calculator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Parameters -->
+      <CalculatorCard title="INPUT PARAMETERS">
+        <div class="space-y-16">
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Min Font Size (px)</label>
+              <input id="clamp-min-size" type="number" value="16" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Max Font Size (px)</label>
+              <input id="clamp-max-size" type="number" value="32" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Min Viewport (px)</label>
+              <input id="clamp-min-vp" type="number" value="320" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+            <div>
+              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Max Viewport (px)</label>
+              <input id="clamp-max-vp" type="number" value="1280" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Root Base Size (px)</label>
+            <input id="clamp-root-size" type="number" value="16" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Output Snippet & Live Viewport Simulator -->
+      <ResultCard title="GENERATED CSS CLAMP RULE">
+        <div class="space-y-16">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-muted dark:text-muted-dark">Copyable CSS Snippet</span>
+            <button type="button" id="btn-copy-clamp" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Snippet</button>
+          </div>
+
+          <pre id="clamp-output-code" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 font-bold leading-relaxed whitespace-pre"></pre>
+
+          <!-- Live Scaling Preview Slider -->
+          <div class="rounded-12 border border-border p-16 bg-surface dark:border-border-dark dark:bg-surface-dark space-y-12">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="font-bold uppercase text-ink dark:text-ink-dark">Simulated Viewport Width</span>
+              <span id="preview-vp-val" class="text-accent dark:text-accent-dark font-bold">800px</span>
+            </div>
+            <input id="preview-slider" type="range" min="320" max="1440" value="800" class="w-full accent-accent cursor-pointer" />
+            <div class="p-12 rounded-8 border border-border bg-surface2 text-center overflow-hidden dark:border-border-dark dark:bg-surface2-dark">
+              <p id="preview-sample-text" class="font-sans font-bold text-ink dark:text-ink-dark truncate">
+                Fluid Typography Preview
+              </p>
+            </div>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Understanding CSS clamp() for Fluid Typography</h2>
+    <p>
+      The <code>clamp()</code> CSS function accepts three parameters: a minimum value, a preferred value (usually calculated using viewport units <code>vw</code>), and a maximum value.
+    </p>
+
+    <h3>Mathematical Formula</h3>
+    <pre class="font-mono text-caption">slope = (maxSize - minSize) / (maxViewport - minViewport)
+intersection = -minViewport * slope + minSize
+preferred = (intersection / base)rem + (slope * 100)vw
+clamp = clamp((minSize / base)rem, preferred, (maxSize / base)rem)</pre>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const minSizeEl = document.getElementById('clamp-min-size');
+    const maxSizeEl = document.getElementById('clamp-max-size');
+    const minVpEl = document.getElementById('clamp-min-vp');
+    const maxVpEl = document.getElementById('clamp-max-vp');
+    const rootSizeEl = document.getElementById('clamp-root-size');
+
+    const outputCode = document.getElementById('clamp-output-code');
+    const btnCopy = document.getElementById('btn-copy-clamp');
+    const slider = document.getElementById('preview-slider');
+    const vpVal = document.getElementById('preview-vp-val');
+    const sampleText = document.getElementById('preview-sample-text');
+
+    function calculate() {
+      const minSize = parseFloat(minSizeEl?.value || 16);
+      const maxSize = parseFloat(maxSizeEl?.value || 32);
+      const minVp = parseFloat(minVpEl?.value || 320);
+      const maxVp = parseFloat(maxVpEl?.value || 1280);
+      const rootSize = parseFloat(rootSizeEl?.value || 16);
+
+      if (maxVp <= minVp || rootSize <= 0) return;
+
+      const slope = (maxSize - minSize) / (maxVp - minVp);
+      const intersection = -minVp * slope + minSize;
+
+      const minRem = (minSize / rootSize).toFixed(4).replace(/\.?0+$/, '');
+      const maxRem = (maxSize / rootSize).toFixed(4).replace(/\.?0+$/, '');
+      const intersectionRem = (intersection / rootSize).toFixed(4).replace(/\.?0+$/, '');
+      const slopeVw = (slope * 100).toFixed(4).replace(/\.?0+$/, '');
+
+      const sign = parseFloat(intersectionRem) < 0 ? '-' : '+';
+      const absIntersectionRem = Math.abs(parseFloat(intersectionRem));
+
+      const clampRule = `font-size: clamp(${minRem}rem, ${absIntersectionRem}${minRem < 0 ? 'rem' : 'rem ' + sign} ${slopeVw}vw, ${maxRem}rem);`;
+
+      if (outputCode) outputCode.textContent = clampRule;
+
+      // Track analytics
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'tool_used', {
+          tool_slug: 'css-clamp-calculator',
+          tool_category: 'CSS & Frontend',
+          action: 'calculate'
+        });
+      }
+
+      updatePreview();
+    }
+
+    function updatePreview() {
+      if (!slider || !vpVal || !sampleText) return;
+      const currentVp = parseFloat(slider.value);
+      vpVal.textContent = `${currentVp}px`;
+
+      const minSize = parseFloat(minSizeEl?.value || 16);
+      const maxSize = parseFloat(maxSizeEl?.value || 32);
+      const minVp = parseFloat(minVpEl?.value || 320);
+      const maxVp = parseFloat(maxVpEl?.value || 1280);
+
+      let computedSize = minSize;
+      if (currentVp <= minVp) {
+        computedSize = minSize;
+      } else if (currentVp >= maxVp) {
+        computedSize = maxSize;
+      } else {
+        const factor = (currentVp - minVp) / (maxVp - minVp);
+        computedSize = minSize + factor * (maxSize - minSize);
+      }
+
+      sampleText.style.fontSize = `${computedSize.toFixed(1)}px`;
+    }
+
+    [minSizeEl, maxSizeEl, minVpEl, maxVpEl, rootSizeEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+    });
+
+    slider?.addEventListener('input', updatePreview);
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputCode) {
+        navigator.clipboard.writeText(outputCode.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Snippet'), 2000);
+      }
+    });
+
+    calculate();
+  })();
+</script>

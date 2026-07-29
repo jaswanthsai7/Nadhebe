@@ -1,7 +1,7 @@
 ---
 interface Props {
   initialCode?: string;
-  toolMode?: 'formatter' | 'validator' | 'minifier' | 'json-to-xml' | 'yaml-to-json' | 'xml-formatter';
+  toolMode?: 'formatter' | 'validator' | 'minifier' | 'json-to-xml' | 'yaml-to-json' | 'xml-formatter' | 'csv-to-json' | 'svg-to-jsx' | 'json-to-typescript';
   title?: string;
 }
 
@@ -15,8 +15,8 @@ const {
   <!-- Top Center Action Control Panel (jsonformatter.org style) -->
   <div class="relative z-30 flex flex-wrap items-center justify-between gap-12 rounded-16 border border-border bg-surface/90 p-12 sm:p-16 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 !overflow-visible">
     <div class="flex flex-wrap items-center gap-8">
-      <label class="relative inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-medium text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <label class="relative inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all shadow-subtle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[14px] h-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         <span>Upload Data</span>
         <input type="file" id="wb-file-input" accept=".json,.txt,.xml,.yaml,.yml,.csv" class="hidden" />
       </label>
@@ -24,20 +24,38 @@ const {
       <button
         type="button"
         id="wb-btn-validate"
-        class="inline-flex items-center gap-6 rounded-8 border border-emerald-500/40 bg-emerald-500/10 px-12 py-8 text-caption font-sans font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 cursor-pointer transition-all"
+        class="inline-flex items-center gap-6 rounded-8 border border-emerald-500/40 bg-emerald-500/10 px-12 py-6 text-caption font-sans font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 cursor-pointer transition-all shadow-subtle"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[14px] h-[14px] shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
         Validate
       </button>
 
-      <select
-        id="wb-select-indent"
-        class="rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
-      >
-        <option value="2">2 Tab Space</option>
-        <option value="4">4 Tab Space</option>
-        <option value="tab">1 Tab</option>
-      </select>
+      <!-- Custom Indent Dropdown Menu -->
+      <div class="relative group z-50">
+        <button
+          type="button"
+          id="wb-indent-trigger"
+          class="inline-flex items-center gap-8 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+        >
+          <span id="wb-indent-label">2 Tab Space</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[12px] h-[12px] shrink-0 text-muted dark:text-muted-dark transition-transform duration-200 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <input type="hidden" id="wb-select-indent" value="2" />
+        <div id="wb-indent-menu" class="absolute left-0 top-full mt-4 w-[160px] origin-top-left rounded-12 border border-border bg-surface/95 p-4 shadow-large backdrop-blur-xl opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark/95 z-50">
+          <button type="button" data-indent-val="2" class="indent-option w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+            <span>2 Tab Space</span>
+            <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark">✓</span>
+          </button>
+          <button type="button" data-indent-val="4" class="indent-option w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+            <span>4 Tab Space</span>
+            <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+          </button>
+          <button type="button" data-indent-val="tab" class="indent-option w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors flex items-center justify-between">
+            <span>1 Tab</span>
+            <span class="text-xs font-bold text-accent dark:text-accent-dark check-mark hidden">✓</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Center Primary Actions -->
@@ -45,7 +63,7 @@ const {
       <button
         type="button"
         id="wb-btn-format"
-        class="inline-flex items-center gap-6 rounded-8 bg-accent px-16 py-8 text-caption font-sans font-bold text-white shadow-soft hover:opacity-95 dark:bg-accent-dark dark:text-bg cursor-pointer transition-all active:scale-95"
+        class="inline-flex items-center gap-6 rounded-8 bg-accent px-20 py-6 text-caption font-sans font-bold text-white shadow-soft hover:opacity-95 dark:bg-accent-dark dark:text-bg cursor-pointer transition-all active:scale-95 whitespace-nowrap"
       >
         Format / Beautify
       </button>
@@ -53,7 +71,7 @@ const {
       <button
         type="button"
         id="wb-btn-minify"
-        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-16 py-6 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all whitespace-nowrap"
       >
         Minify / Compact
       </button>
@@ -62,16 +80,16 @@ const {
       <div class="relative group z-30">
         <button
           type="button"
-          class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+          class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-16 py-6 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all whitespace-nowrap"
         >
           Convert / Transform
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 opacity-60"><path d="m6 9 6 6 6-6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[12px] h-[12px] shrink-0 opacity-60"><path d="m6 9 6 6 6-6"/></svg>
         </button>
-        <div class="absolute left-0 top-full mt-4 w-[170px] origin-top-left rounded-12 border border-border bg-surface p-4 shadow-large opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark z-50">
-          <button type="button" id="wb-convert-xml" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to XML</button>
-          <button type="button" id="wb-convert-yaml" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to YAML</button>
-          <button type="button" id="wb-convert-csv" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to CSV</button>
-          <button type="button" id="wb-convert-json" class="w-full text-left rounded-6 px-12 py-6 text-caption font-sans font-medium hover:bg-surface2 hover:text-accent dark:hover:bg-surface2-dark dark:hover:text-accent-dark cursor-pointer">Convert to JSON</button>
+        <div class="absolute left-0 top-full mt-4 w-[170px] origin-top-left rounded-12 border border-border bg-surface/95 p-4 shadow-large backdrop-blur-xl opacity-0 scale-95 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:visible transition-all duration-150 dark:border-border-dark dark:bg-surface-dark/95 z-50">
+          <button type="button" id="wb-convert-xml" class="w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors">Convert to XML</button>
+          <button type="button" id="wb-convert-yaml" class="w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors">Convert to YAML</button>
+          <button type="button" id="wb-convert-csv" class="w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors">Convert to CSV</button>
+          <button type="button" id="wb-convert-json" class="w-full text-left rounded-6 px-10 py-6 text-caption font-sans font-medium text-ink hover:bg-accent/10 hover:text-accent dark:text-ink-dark dark:hover:bg-accent-dark/20 dark:hover:text-accent-dark cursor-pointer transition-colors">Convert to JSON</button>
         </div>
       </div>
     </div>
@@ -81,9 +99,9 @@ const {
       <button
         type="button"
         id="wb-btn-download"
-        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-sans font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+        class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-[14px] h-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download
       </button>
     </div>
@@ -211,6 +229,27 @@ const {
     const treeContainer = document.getElementById('wb-output-tree-container');
     const treeRoot = document.getElementById('wb-tree-view-root');
 
+    // Custom Indent Dropdown Menu Logic
+    const indentLabel = document.getElementById('wb-indent-label');
+    const indentOptions = document.querySelectorAll('.indent-option');
+    indentOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const val = opt.getAttribute('data-indent-val');
+        const text = opt.querySelector('span')?.textContent || val;
+        if (selectIndent) selectIndent.value = val;
+        if (indentLabel) indentLabel.textContent = text;
+
+        indentOptions.forEach(o => {
+          const chk = o.querySelector('.check-mark');
+          if (chk) chk.classList.add('hidden');
+        });
+        const activeChk = opt.querySelector('.check-mark');
+        if (activeChk) activeChk.classList.remove('hidden');
+
+        processInput();
+      });
+    });
+
     // Samples per tool mode
     const sampleMap = {
       'formatter': '{\n  "name": "Nadhebe Developer Utility",\n  "type": "JSON Formatter",\n  "features": [\n    "100% Client-Side",\n    "Zero Server Storage"\n  ],\n  "active": true\n}',
@@ -218,7 +257,10 @@ const {
       'minifier': '{\n  "appName": "Nadhebe App",\n  "version": "2.4.0",\n  "environment": "production"\n}',
       'json-to-xml': '{\n  "catalog": {\n    "book": [\n      {\n        "id": "bk101",\n        "author": "Alice Chen",\n        "title": "Agentic AI Engineering",\n        "price": 49.99\n      }\n    ]\n  }\n}',
       'yaml-to-json': 'version: "3.8"\nservices:\n  web:\n    image: "nginx:latest"\n    ports:\n      - "80:80"\n    environment:\n      - NODE_ENV=production',
-      'xml-formatter': '<catalog><book id="bk101"><author>Alice Chen</author><title>Agentic AI Engineering</title><price>49.99</price></book></catalog>'
+      'xml-formatter': '<catalog><book id="bk101"><author>Alice Chen</author><title>Agentic AI Engineering</title><price>49.99</price></book></catalog>',
+      'csv-to-json': 'id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Editor,Active\n3,Carol Danvers,carol@example.com,User,Pending',
+      'svg-to-jsx': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon">\n  <circle cx="12" cy="12" r="10"/>\n  <polyline points="12 6 12 12 16 14"/>\n</svg>',
+      'json-to-typescript': '{\n  "id": 101,\n  "username": "alex_dev",\n  "email": "alex@example.com",\n  "isVerified": true,\n  "roles": ["admin", "editor"],\n  "profile": {\n    "firstName": "Alex",\n    "lastName": "Chen",\n    "bio": null\n  }\n}'
     };
 
     function updateGutters() {
@@ -344,13 +386,143 @@ const {
       }
     }
 
+    function convertCSVToJSON() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) return;
+
+      try {
+        const lines = raw.trim().split(/\r?\n/);
+        if (lines.length === 0) return;
+
+        const firstLine = lines[0];
+        let delimiter = ',';
+        if (firstLine.includes('\t')) delimiter = '\t';
+        else if (firstLine.includes(';') && !firstLine.includes(',')) delimiter = ';';
+        else if (firstLine.includes('|') && !firstLine.includes(',')) delimiter = '|';
+
+        const parseLine = (line) => {
+          const result = [];
+          let cur = '';
+          let inQuotes = false;
+          for (let i = 0; i < line.length; i++) {
+            const c = line[i];
+            if (c === '"') {
+              inQuotes = !inQuotes;
+            } else if (c === delimiter && !inQuotes) {
+              result.push(cur.trim());
+              cur = '';
+            } else {
+              cur += c;
+            }
+          }
+          result.push(cur.trim());
+          return result;
+        };
+
+        const headers = parseLine(lines[0]);
+        const data = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          if (!lines[i].trim()) continue;
+          const values = parseLine(lines[i]);
+          const row = {};
+          headers.forEach((h, index) => {
+            let val = values[index] !== undefined ? values[index] : '';
+            if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+            row[h] = val;
+          });
+          data.push(row);
+        }
+
+        const indentVal = selectIndent?.value === 'tab' ? '\t' : Number(selectIndent?.value || 2);
+        const formatted = JSON.stringify(data, null, indentVal);
+        outputPre.textContent = formatted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(formatted);
+        setStatus('✓ Converted CSV to JSON', false);
+        if (treeRoot) buildTree(data, treeRoot);
+      } catch (err) {
+        outputPre.textContent = 'CSV Conversion Error: ' + err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
+        setStatus('CSV Error: ' + err.message, true);
+      }
+    }
+
+    function convertSVGToJSX() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) return;
+
+      try {
+        let jsx = raw
+          .replace(/class=/g, 'className=')
+          .replace(/stroke-width=/g, 'strokeWidth=')
+          .replace(/stroke-linecap=/g, 'strokeLinecap=')
+          .replace(/stroke-linejoin=/g, 'strokeLinejoin=')
+          .replace(/fill-rule=/g, 'fillRule=')
+          .replace(/clip-rule=/g, 'clipRule=')
+          .replace(/stroke-dasharray=/g, 'strokeDasharray=')
+          .replace(/stroke-dashoffset=/g, 'strokeDashoffset=')
+          .replace(/fill-opacity=/g, 'fillOpacity=')
+          .replace(/stroke-opacity=/g, 'strokeOpacity=');
+
+        const componentCode = `import React from 'react';\n\nexport const IconComponent = (props: React.SVGProps<SVGSVGElement>) => (\n${jsx.split('\n').map(l => '  ' + l).join('\n')}\n);`;
+        outputPre.textContent = componentCode;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(componentCode);
+        setStatus('✓ Converted SVG to React JSX', false);
+      } catch (err) {
+        setStatus('SVG Conversion Error: ' + err.message, true);
+      }
+    }
+
+    function convertJSONToTS() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) return;
+
+      try {
+        const parsed = JSON.parse(raw);
+        function inferType(val, name = 'RootObject') {
+          if (val === null) return 'any';
+          if (typeof val === 'boolean') return 'boolean';
+          if (typeof val === 'number') return 'number';
+          if (typeof val === 'string') return 'string';
+          if (Array.isArray(val)) {
+            const itemType = val.length > 0 ? inferType(val[0], 'Item') : 'any';
+            return `${itemType}[]`;
+          }
+          if (typeof val === 'object') {
+            const lines = ['export interface ' + name + ' {'];
+            Object.keys(val).forEach(k => {
+              const typeStr = inferType(val[k], k.charAt(0).toUpperCase() + k.slice(1));
+              lines.push(`  ${k}: ${typeStr};`);
+            });
+            lines.push('}');
+            return lines.join('\n');
+          }
+          return 'any';
+        }
+
+        const tsOutput = inferType(parsed, 'RootObject');
+        outputPre.textContent = tsOutput;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        updateOutputGutter(tsOutput);
+        setStatus('✓ Converted JSON to TypeScript', false);
+      } catch (err) {
+        outputPre.textContent = '// Please enter valid JSON\n' + err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
+        setStatus('JSON Syntax Error', true);
+      }
+    }
+
     function convertYAMLToJSON() {
       if (!inputArea || !outputPre) return;
       const raw = inputArea.value;
       if (!raw.trim()) return;
 
       try {
-        // Simple YAML key-value parser for common structures
         const lines = raw.split('\n');
         const obj = {};
         let currentKey = null;
@@ -413,7 +585,19 @@ const {
     }
 
     function processInput() {
-      if (toolMode === 'yaml-to-json') {
+      if (toolMode === 'csv-to-json') {
+        if (inputLabel) inputLabel.textContent = 'Input CSV';
+        if (outputLabel) outputLabel.textContent = 'Output JSON';
+        convertCSVToJSON();
+      } else if (toolMode === 'svg-to-jsx') {
+        if (inputLabel) inputLabel.textContent = 'Input SVG';
+        if (outputLabel) outputLabel.textContent = 'Output React JSX Component';
+        convertSVGToJSX();
+      } else if (toolMode === 'json-to-typescript') {
+        if (inputLabel) inputLabel.textContent = 'Input JSON';
+        if (outputLabel) outputLabel.textContent = 'Output TypeScript Interface';
+        convertJSONToTS();
+      } else if (toolMode === 'yaml-to-json') {
         if (inputLabel) inputLabel.textContent = 'Input YAML';
         if (outputLabel) outputLabel.textContent = 'Output JSON';
         convertYAMLToJSON();

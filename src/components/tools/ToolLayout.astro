@@ -25,6 +25,7 @@ interface Props {
 
 const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader } = Astro.props;
 
+const toolConfig = getToolBySlug(toolId);
 const isHeaderHidden = hideHeader !== undefined ? hideHeader : true;
 const currentUrl = canonicalUrl || `${SITE.url}/tools/${toolId}/`;
 
