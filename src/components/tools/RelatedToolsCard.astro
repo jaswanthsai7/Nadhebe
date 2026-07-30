@@ -6,10 +6,11 @@ interface Props {
   currentToolId: string;
   title?: string;
   limit?: number;
+  tools?: ToolMetadata[];
 }
 
-const { currentToolId, title = 'Related Free Utilities', limit = 4 } = Astro.props;
-const relatedTools: ToolMetadata[] = getRelatedTools(currentToolId, limit);
+const { currentToolId, title = 'Related Free Utilities', limit = 4, tools } = Astro.props;
+const relatedTools: ToolMetadata[] = tools && tools.length > 0 ? tools.slice(0, limit) : getRelatedTools(currentToolId, limit);
 ---
 
 <section class="mt-48 pt-32 border-t border-border/60 dark:border-border-dark/60" data-reveal>

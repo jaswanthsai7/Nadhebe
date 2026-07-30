@@ -5,7 +5,7 @@ import RelatedTools from '@/components/tools/RelatedTools.astro';
 import RelatedToolsCard from '@/components/tools/RelatedToolsCard.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import { SITE } from '@/config';
-import { getToolBySlug } from '@/config/tools';
+import { getToolBySlug, type ToolMetadata } from '@/config/tools';
 
 interface FaqItem {
   question: string;
@@ -21,9 +21,11 @@ interface Props {
   canonicalUrl?: string;
   faq?: FaqItem[];
   hideHeader?: boolean;
+  relatedCategory?: string;
+  relatedTools?: ToolMetadata[];
 }
 
-const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader } = Astro.props;
+const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools } = Astro.props;
 
 const toolConfig = getToolBySlug(toolId);
 const isHeaderHidden = hideHeader !== undefined ? hideHeader : true;
@@ -105,7 +107,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
     )}
 
     <!-- Compact Related Tools Bar -->
-    <RelatedTools currentToolId={toolId} />
+    <RelatedTools currentToolId={toolId} category={relatedCategory} tools={relatedTools} />
 
     <!-- Main Tool Workspace -->
     <div class="mb-48" id="tool-workspace">
@@ -144,7 +146,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
     )}
 
     <!-- Related Tools Cross-Linking Section -->
-    <RelatedToolsCard currentToolId={toolId} />
+    <RelatedToolsCard currentToolId={toolId} tools={relatedTools} />
   </div>
 </BaseLayout>
 

@@ -1,16 +1,80 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import PlatformWorkbench from '@/components/tools/PlatformWorkbench.astro';
+import { PLATFORM_TOOLS, type PlatformTool } from '@/config/platform-tools';
+import { TOOLS, type ToolMetadata } from '@/config/tools';
 
 export async function getStaticPaths() {
   const entries = await getCollection('tools');
-  return entries.map(entry => ({
+  const reservedSlugs = new Set([
+    ...entries.map((entry) => entry.slug),
+    ...TOOLS.map((tool) => tool.slug),
+  ]);
+
+  const articlePaths = entries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
+
+  const platformPaths = PLATFORM_TOOLS
+    .filter((tool) => !reservedSlugs.has(tool.slug))
+    .map((platformTool) => ({
+      params: { slug: platformTool.slug },
+      props: { platformTool },
+    }));
+
+  return [...articlePaths, ...platformPaths];
 }
 
-const { entry } = Astro.props;
+const { entry, platformTool } = Astro.props as { entry?: Awaited<ReturnType<typeof getCollection>>[number]; platformTool?: PlatformTool };
+const platformRelatedTools = platformTool
+  ? PLATFORM_TOOLS
+      .filter((tool) => tool.categorySlug === platformTool.categorySlug)
+      .slice(0, 6)
+      .map((tool) => ({
+        id: tool.id,
+        name: tool.name,
+        slug: tool.slug,
+        href: tool.href,
+        description: tool.description,
+        category: tool.category,
+        icon: 'code',
+        badge: tool.badge,
+        tags: tool.tags,
+        noApi: true,
+      })) as ToolMetadata[]
+  : undefined;
 ---
 
-<ArticleLayout post={entry} />
+{entry ? (
+  <ArticleLayout post={entry} />
+) : platformTool ? (
+  <ToolLayout
+    toolId={platformTool.slug}
+    title={`${platformTool.name} - Free Browser Tool | Nadhebe`}
+    h1={platformTool.name}
+    description={platformTool.description}
+    hideHeader={true}
+    relatedCategory={platformTool.category}
+    relatedTools={platformRelatedTools}
+    faq={[
+      {
+        question: `Is ${platformTool.name} free to use?`,
+        answer: `Yes. ${platformTool.name} is free and runs locally in your browser without an account.`,
+      },
+      {
+        question: 'Does Nadhebe upload my input?',
+        answer: 'No. This utility processes your input in the browser so your working data remains on your device.',
+      },
+    ]}
+  >
+    <div slot="calculator"><PlatformWorkbench tool={platformTool} /></div>
+    <div slot="content">
+      <h2>About this {platformTool.category} utility</h2>
+      <p>{platformTool.description}</p>
+      <p>Use the workspace above to create, transform, calculate, or inspect your input without sending it to a remote service.</p>
+    </div>
+  </ToolLayout>
+) : null}
