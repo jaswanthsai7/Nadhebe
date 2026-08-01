@@ -39,14 +39,34 @@ if (canonicalUrl) {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <!-- Google Analytics 4 (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RFF3QRZNF9"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <!-- Resource Preconnects to eliminate critical request chain delays -->
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
-      gtag('config', 'G-RFF3QRZNF9');
+    <!-- Deferred Google Analytics 4 (gtag.js) -->
+    <script is:inline>
+      (function() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+
+        function loadGA() {
+          if (window.__ga_loaded) return;
+          window.__ga_loaded = true;
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-RFF3QRZNF9';
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', 'G-RFF3QRZNF9');
+        }
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadGA, { timeout: 3000 });
+        } else {
+          window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
+        }
+      })();
     </script>
 
     <!-- Prevent flash: apply stored theme or default light before paint -->
@@ -102,18 +122,7 @@ if (canonicalUrl) {
       <meta name="msvalidate.01" content={import.meta.env.PUBLIC_BING_VERIFICATION} />
     )}
 
-    <!-- Google Analytics 4 -->
-    {import.meta.env.PUBLIC_GA_ID && (
-      <>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
-        <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', gaId);
-        </script>
-      </>
-    )}
+
 
     <!-- Microsoft Clarity -->
     {import.meta.env.PUBLIC_CLARITY_ID && (
