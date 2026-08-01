@@ -80,7 +80,14 @@ const categoryMeta: Record<string, { description: string; iconPath: string }> = 
 
 const heroPost = latestPillars[0] || allArticles[0];
 const heroAuthor = heroPost.data.author ? authors.find(a => a.id === heroPost.data.author.id) : null;
-const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
+
+// Hardcoded Top Story: Gemini 3.6 Overview
+const gemini36Post = allArticles.find(a => a.slug === 'gemini-3-6-flash-everything-we-know' || a.id.includes('gemini-3-6-flash-everything-we-know'));
+const remainingStories = allArticles.filter(a => a.id !== heroPost.id && a.id !== gemini36Post?.id);
+
+const topStories = gemini36Post 
+  ? [gemini36Post, ...remainingStories.slice(0, 3)]
+  : allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 ---
 
 <BaseLayout
