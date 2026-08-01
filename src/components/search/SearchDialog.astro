@@ -16,7 +16,7 @@
           autocomplete="off"
           class="flex-1 bg-transparent border-0 outline-none text-body text-ink placeholder:text-muted focus:ring-0 focus:outline-none dark:text-ink-dark dark:placeholder:text-muted-dark font-sans"
         />
-        <kbd class="hidden sm:flex items-center gap-2 rounded-6 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-6 py-2 text-xs font-mono text-muted dark:text-muted-dark select-none">esc</kbd>
+        <button type="button" id="cmd-search-close-btn" aria-label="Close search" class="hidden sm:flex items-center justify-center rounded-6 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-8 py-4 text-[10px] font-mono text-muted dark:text-muted-dark select-none shadow-sm tracking-widest hover:bg-surface dark:hover:bg-surface-dark hover:text-ink dark:hover:text-ink-dark transition-colors cursor-pointer">ESC</button>
         <div id="cmd-search-spinner" class="hidden animate-spin rounded-full h-16 w-16 border-2 border-accent border-t-transparent dark:border-accent-dark shrink-0"></div>
       </div>
 
@@ -104,11 +104,15 @@
     const resultsContainer = document.getElementById('cmd-search-results');
     const emptyState = document.getElementById('cmd-search-empty');
     const spinner = document.getElementById('cmd-search-spinner');
+    const closeBtn = document.getElementById('cmd-search-close-btn');
 
     // Close on overlay click
     overlay?.addEventListener('click', (e) => {
       if (e.target === overlay) closeSearchDialog();
     });
+
+    // Close on ESC button click
+    closeBtn?.addEventListener('click', closeSearchDialog);
 
     // Close on Escape
     document.addEventListener('keydown', (e) => {
