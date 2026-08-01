@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "best-practices"
 tags: ["Prompt Engineering", "Structured Output", "JSON", "LLM", "OpenAI", "Anthropic"]
-heroImage: "/images/structured-output-prompting-hero.png"
+heroImage: "/images/structured-output-prompting-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing chaotic data flowing into a structured rigid grid"
 estimatedReadingTime: 14
 isPillar: false

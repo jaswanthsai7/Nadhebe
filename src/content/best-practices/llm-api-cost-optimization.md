@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "best-practices"
 tags: ["LLM", "API Costs", "Cost Optimization", "Token Management", "Prompt Engineering", "OpenAI", "Anthropic"]
-heroImage: "/images/llm-cost-optimization-hero.png"
+heroImage: "/images/llm-cost-optimization-hero.webp"
 heroAlt: "Verge-style editorial graphic showing a decreasing cost graph and a computer chip"
 estimatedReadingTime: 15
 isPillar: true

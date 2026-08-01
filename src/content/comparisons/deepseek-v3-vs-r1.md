@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "comparisons"
 tags: ["DeepSeek", "DeepSeek V3", "DeepSeek R1", "MoE", "Reasoning Models", "LLM"]
-heroImage: "/images/deepseek-v3-vs-r1-hero.png"
+heroImage: "/images/deepseek-v3-vs-r1-hero.webp"
 heroAlt: "Retro-tech editorial graphic comparing a fast data node and a reasoning brain node"
 estimatedReadingTime: 14
 isPillar: true

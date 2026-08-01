@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "comparisons"
 tags: ["OpenRouter", "API", "OpenAI", "Anthropic", "LLM Providers", "Architecture"]
-heroImage: "/images/openrouter-vs-direct-hero.png"
+heroImage: "/images/openrouter-vs-direct-hero.webp"
 heroAlt: "Verge-style editorial graphic showing a router node connecting to multiple servers"
 estimatedReadingTime: 12
 isPillar: false

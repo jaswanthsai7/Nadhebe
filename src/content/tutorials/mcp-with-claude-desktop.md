@@ -46,7 +46,7 @@ For AI engineers and developers, integrating MCP with Claude Desktop unlocks mas
 
 Below is a visualization of how Claude Desktop orchestrates local tools through the MCP architecture:
 
-![Claude Desktop MCP Architecture Workflow](/images/mcp-claude-desktop-architecture.png)
+![Claude Desktop MCP Architecture Workflow](/images/mcp-claude-desktop-architecture.webp)
 *A high-level architecture diagram showing the secure `stdio` communication channel between Claude Desktop (the client) and a local Node.js/Python MCP Server.*
 
 ## 4. Installation & Setup
@@ -129,7 +129,7 @@ tail -f ~/Library/Logs/Claude/mcp*.log
 
 When deciding how to use MCP, developers often compare Claude Desktop to Cursor IDE. 
 
-![Claude Desktop vs Cursor MCP Decision Tree](/images/mcp-desktop-vs-cursor-decision.png)
+![Claude Desktop vs Cursor MCP Decision Tree](/images/mcp-desktop-vs-cursor-decision.webp)
 *A decision matrix comparing Claude Desktop's holistic system access vs Cursor's code-focused editor access.*
 
 *   **Claude Desktop:** Best for high-level system orchestration, database querying, and multi-modal tasks (combining images, docs, and web searches).

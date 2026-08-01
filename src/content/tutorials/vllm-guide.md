@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["vLLM", "Inference", "GPU", "LLM", "Deployment"]
-heroImage: "/images/vllm_guide_hero.png"
+heroImage: "/images/vllm_guide_hero.webp"
 heroAlt: "A highly stylized blueprint showing a GPU processing continuous data streams using PagedAttention"
 estimatedReadingTime: 16
 isPillar: false
@@ -45,7 +45,7 @@ Serving LLMs in production is bottlenecked by **memory**, not compute. Specifica
 
 Below is a visualization of how vLLM handles concurrent requests using PagedAttention:
 
-![vLLM PagedAttention Architecture](/images/vllm-paged-attention.png)
+![vLLM PagedAttention Architecture](/images/vllm-paged-attention.webp)
 *Architecture showing continuous batching and the paging of KV cache blocks across GPU VRAM.*
 
 ## 4. Installation & Setup

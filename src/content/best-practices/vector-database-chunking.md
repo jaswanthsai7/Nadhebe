@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "best-practices"
 tags: ["Vector Database", "RAG", "Chunking", "Embeddings", "Search", "AI"]
-heroImage: "/images/vector-database-chunking-hero.png"
+heroImage: "/images/vector-database-chunking-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing a large document being sliced into organized blocks"
 estimatedReadingTime: 16
 isPillar: true

@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "best-practices"
 tags: ["Prompt Caching", "Claude", "Sonnet", "Opus", "Anthropic", "LLM Optimization", "API Costs"]
-heroImage: "/images/prompt-caching-claude-hero.png"
+heroImage: "/images/prompt-caching-claude-hero.webp"
 heroAlt: "Collage art showing prompt caching concepts with memory chips and data reuse"
 estimatedReadingTime: 14
 isPillar: true

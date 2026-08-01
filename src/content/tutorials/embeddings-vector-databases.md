@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["Vector Databases", "Embeddings", "RAG", "AI Search", "Cosine Similarity"]
-heroImage: "/images/vector-database-chunking-hero.png"
+heroImage: "/images/vector-database-chunking-hero.webp"
 heroAlt: "Stylized infographic showing text data being converted into high-dimensional floating point vectors inside a neon database"
 estimatedReadingTime: 18
 isPillar: false
@@ -46,7 +46,7 @@ Understanding embeddings and vector DBs is non-negotiable for AI engineers:
 
 Below is the standard RAG indexing and retrieval pipeline:
 
-![Vector Search RAG Architecture](/images/vector-db-rag-architecture.png)
+![Vector Search RAG Architecture](/images/vector-db-rag-architecture.webp)
 *Architecture showing raw text being chunked, embedded, stored in a Vector DB, and later retrieved via Cosine Similarity search.*
 
 ## 4. Installation & Setup

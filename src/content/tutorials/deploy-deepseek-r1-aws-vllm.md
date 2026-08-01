@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["DeepSeek", "DeepSeek R1", "AWS", "vLLM", "Inference", "Deployment", "LLM Ops"]
-heroImage: "/images/deepseek-r1-aws-vllm-hero.png"
+heroImage: "/images/deepseek-r1-aws-vllm-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing cloud infrastructure interacting with an AI data node"
 estimatedReadingTime: 22
 isPillar: true

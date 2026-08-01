@@ -44,7 +44,7 @@ Implementing AI-driven hooks shifts code review and QA to the earliest possible 
 
 Below is a visualization of how a pre-commit Claude Code hook integrates into a standard Git workflow:
 
-![Claude Code Hook Workflow](/images/claude-hook-workflow.png)
+![Claude Code Hook Workflow](/images/claude-hook-workflow.webp)
 *Architecture showing Git staging changes, triggering a bash script, invoking Claude Code via CLI, and either passing or failing the commit.*
 
 ## 4. Installation & Setup

@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "comparisons"
 tags: ["vLLM", "SGLang", "Inference", "Benchmarks", "LLM Ops", "RadixAttention"]
-heroImage: "/images/sglang-vs-vllm-hero.png"
+heroImage: "/images/sglang-vs-vllm-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing a performance chart comparing two server nodes"
 estimatedReadingTime: 16
 isPillar: false

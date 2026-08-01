@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["MCP", "VS Code", "Cursor", "AI Workflow", "Integration", "Model Context Protocol"]
-heroImage: "/images/mcp-server-vscode-hero.png"
+heroImage: "/images/mcp-server-vscode-hero.webp"
 heroAlt: "Collage art showing MCP integration into VS Code and Cursor"
 estimatedReadingTime: 12
 isPillar: true

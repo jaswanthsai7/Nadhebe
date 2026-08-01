@@ -43,7 +43,7 @@ Integrating the Gemini API allows developers to:
 
 Below is a visualization of a typical Gemini API integration architecture, including the prompt formulation, API request, and structured output parsing.
 
-![Gemini API Workflow Architecture](/images/gemini-api-architecture.png)
+![Gemini API Workflow Architecture](/images/gemini-api-architecture.webp)
 *A high-level architecture diagram demonstrating how a client application sends a multimodal payload to the Gemini API and parses the JSON response.*
 
 ## 4. Installation & Setup
@@ -126,7 +126,7 @@ async function analyzeImage() {
 
 When choosing a model via the API, consider the tradeoff between speed and reasoning capability:
 
-![Gemini Flash vs Pro Benchmark Comparison](/images/gemini-flash-vs-pro.png)
+![Gemini Flash vs Pro Benchmark Comparison](/images/gemini-flash-vs-pro.webp)
 *A comparison table showing latency, cost, and context window differences between Gemini Flash and Gemini Pro.*
 
 ## 9. Related Developer Tools
