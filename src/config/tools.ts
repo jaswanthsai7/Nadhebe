@@ -25,24 +25,30 @@ export function getRelatedToolsForComponent(
   options: { customCategory?: string; customTools?: UnifiedTool[]; limit?: number } = {}
 ): { categoryName: string; items: UnifiedTool[] } {
   const { customCategory, customTools, limit = 6 } = options;
-  if (customTools && customTools.length > 0) {
-    return {
-      categoryName: customCategory || 'Related Tools',
-      items: customTools.slice(0, limit),
-    };
-  }
-
   const currentTool = getToolBySlugFromRegistry(slug);
-  const categoryName = customCategory || (currentTool ? `More ${currentTool.category} Utilities` : 'Related Tools');
-  let items = getRelatedToolsForSlug(slug, limit);
 
-  if (currentTool && !items.find(t => t.slug === currentTool.slug)) {
-    items = [currentTool, ...items].slice(0, limit);
+  let categoryName = customCategory;
+  let items: UnifiedTool[] = [];
+
+  if (customTools && customTools.length > 0) {
+    categoryName = categoryName || 'Related Tools';
+    items = customTools;
+  } else {
+    categoryName = categoryName || (currentTool ? `More ${currentTool.category} Utilities` : 'Related Tools');
+    items = getRelatedToolsForSlug(slug, limit);
   }
+
+  // Inject current tool if not already present
+  if (currentTool && !items.find(t => t.slug === currentTool.slug)) {
+    items = [currentTool, ...items];
+  }
+  
+  // Truncate to limit
+  items = items.slice(0, limit);
 
   return {
     categoryName,
-    items: items || [],
+    items: items,
   };
 }
 
