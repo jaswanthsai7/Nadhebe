@@ -61,20 +61,20 @@ const companyLinks = [
           {SITE.name}
         </a>
         <p class="mt-12 text-caption font-sans text-muted dark:text-muted-dark leading-relaxed max-w-[240px]">{SITE.description}</p>
-        <div class="mt-16 flex items-center gap-12">
-          <a href="https://www.youtube.com/@Nadhebe" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+        <div class="mt-16 flex items-center gap-8">
+          <a href="https://www.youtube.com/@Nadhebe" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel" class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] p-10 rounded-8 border border-border/50 bg-surface2/50 text-muted hover:border-accent hover:text-accent dark:border-border-dark/50 dark:bg-surface2-dark/50 dark:text-muted-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-18 w-18">
               <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
               <path d="m10 15 5-3-5-3z" />
             </svg>
           </a>
-          <a href="https://substack.com/@nadhebeai" target="_blank" rel="noopener noreferrer" aria-label="Substack newsletter" class="text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-16 w-16">
+          <a href="https://substack.com/@nadhebeai" target="_blank" rel="noopener noreferrer" aria-label="Substack newsletter" class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] p-10 rounded-8 border border-border/50 bg-surface2/50 text-muted hover:border-accent hover:text-accent dark:border-border-dark/50 dark:bg-surface2-dark/50 dark:text-muted-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-18 w-18">
               <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
             </svg>
           </a>
-          <a href="https://www.linkedin.com/company/nadhebe/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn company page" class="text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors duration-150">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16">
+          <a href="https://www.linkedin.com/company/nadhebe/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn company page" class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] p-10 rounded-8 border border-border/50 bg-surface2/50 text-muted hover:border-accent hover:text-accent dark:border-border-dark/50 dark:bg-surface2-dark/50 dark:text-muted-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-18 w-18">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
               <rect width="4" height="12" x="2" y="9"/>
               <circle cx="4" cy="4" r="2"/>
@@ -85,27 +85,27 @@ const companyLinks = [
 
       <div>
         <p class="text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Read</p>
-        <ul class="mt-16 space-y-12">
+        <ul class="mt-16 space-y-8">
           {readLinks.map(link => (
-            <li><a href={link.href} class="text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
+            <li><a href={link.href} class="inline-block py-4 text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
           ))}
         </ul>
       </div>
 
       <div>
         <p class="text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Resources</p>
-        <ul class="mt-16 space-y-12">
+        <ul class="mt-16 space-y-8">
           {resourceLinks.map(link => (
-            <li><a href={link.href} class="text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
+            <li><a href={link.href} class="inline-block py-4 text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
           ))}
         </ul>
       </div>
 
       <div>
         <p class="text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Company</p>
-        <ul class="mt-16 space-y-12">
+        <ul class="mt-16 space-y-8">
           {companyLinks.map(link => (
-            <li><a href={link.href} class="text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
+            <li><a href={link.href} class="inline-block py-4 text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
           ))}
         </ul>
       </div>
