@@ -1,12 +1,12 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run preview",
-      "startServerReadyPattern": "local",
+      "startServerCommand": "npx astro preview --host 0.0.0.0 --port 4321",
+      "startServerReadyPattern": "ready in",
       "numberOfRuns": 3,
       "url": [
-        "http://127.0.0.1:4321/",
-        "http://127.0.0.1:4321/tools/meta-tag-analyzer/"
+        "http://localhost:4321/",
+        "http://localhost:4321/tools/meta-tag-analyzer/"
       ]
     },
     "assert": {
