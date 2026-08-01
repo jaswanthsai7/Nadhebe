@@ -189,7 +189,8 @@ html.dark {
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    @apply rounded-12 border border-border p-24 transition-all duration-200
+    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    @apply rounded-12 border border-border p-24
            hover:shadow-medium hover:border-border;
   }
   .dark .card {
@@ -345,18 +346,18 @@ html.dark {
     @apply text-body text-ink2 dark:text-ink2-dark;
   }
 
-  /* ─── Glassmorphism utilities ─── */
+  /* ─── Glassmorphism utilities — optimized blur for 60fps scrolling ─── */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(20px) saturate(1.2) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) saturate(1.1) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
     max-width: 100%;
   }
 
   .dark .glass-panel {
-    background: rgba(10, 10, 10, 0.88) !important;
-    backdrop-filter: blur(20px) saturate(1.2) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+    background: rgba(10, 10, 10, 0.90) !important;
+    backdrop-filter: blur(12px) saturate(1.1) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
   }
 }
 
@@ -364,9 +365,8 @@ html.dark {
 [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-reveal="left"] {

@@ -104,7 +104,7 @@ export default {
         body: ['16px', { lineHeight: '1.75' }],
         caption: ['13px', { lineHeight: '1.5' }],
         meta: ['12px', { lineHeight: '1.5', fontFamily: '"JetBrains Mono", ui-monospace, monospace' }],
-        xs: ['11px', { lineHeight: '1.4' }],
+        xs: ['12px', { lineHeight: '1.4' }],
       },
       borderRadius: {
         4: '4px',

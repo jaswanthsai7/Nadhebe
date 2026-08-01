@@ -37,7 +37,7 @@ if (canonicalUrl) {
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <!-- Resource Preconnects to eliminate critical request chain delays -->
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -80,6 +80,9 @@ if (canonicalUrl) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#D97706" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0A" />
 
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />
@@ -151,6 +154,8 @@ if (canonicalUrl) {
         transition: opacity 0.8s ease;
         opacity: 0;
         background-color: #f8fafc;
+        transform: translateZ(0);
+        will-change: transform;
       }
       .dark #nature-bg {
         background-color: #090d16;
@@ -165,6 +170,7 @@ if (canonicalUrl) {
           rgba(255, 255, 255, 0.08) 100%
         );
         pointer-events: none;
+        transform: translateZ(0);
       }
       .dark #nature-overlay {
         background: linear-gradient(

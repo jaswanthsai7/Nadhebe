@@ -47,8 +47,8 @@ const schema = {
       {tools.map((tool) => (
         <a href={tool.href} class="category-tool-card group flex min-h-[190px] flex-col rounded-16 border border-border bg-surface/95 p-20 no-underline shadow-soft transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
           <div class="flex items-center justify-between gap-8">
-            <span class="rounded-6 bg-surface2 px-8 py-3 font-mono text-[11px] font-semibold text-ink2 dark:bg-surface2-dark dark:text-ink2-dark">{tool.mode}</span>
-            {tool.badge && <span class="rounded-pill bg-accent/10 px-8 py-3 font-mono text-[11px] font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">{tool.badge}</span>}
+            <span class="rounded-6 bg-surface2 px-8 py-3 font-mono text-[12px] font-semibold text-ink2 dark:bg-surface2-dark dark:text-ink2-dark">{tool.mode}</span>
+            {tool.badge && <span class="rounded-pill bg-accent/10 px-8 py-3 font-mono text-[12px] font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">{tool.badge}</span>}
           </div>
           <h3 class="mt-14 font-display text-h3 font-bold text-ink transition-colors group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">{tool.name}</h3>
           <p class="mt-6 line-clamp-3 text-body-small leading-relaxed text-ink2 dark:text-ink2-dark">{tool.description}</p>

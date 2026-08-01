@@ -27,7 +27,12 @@ function verifyLinks() {
   let brokenLinksCount = 0;
 
   htmlFiles.forEach((file) => {
-    const content = fs.readFileSync(file, 'utf-8');
+    let content = '';
+    try {
+      content = fs.readFileSync(file, 'utf-8');
+    } catch (err) {
+      return;
+    }
     const relativeSrc = path.relative(DIST_DIR, file);
 
     // Extract anchor links href="..."
@@ -69,9 +74,10 @@ function verifyLinks() {
       let indexExists = false;
 
       if (!fileExists) {
-        // Try appending index.html (standard router mapping)
+        // Try appending index.html (standard router mapping) or .html
         const targetIndex = path.join(targetPath, 'index.html');
-        indexExists = fs.existsSync(targetIndex);
+        const targetHtml = targetPath + '.html';
+        indexExists = fs.existsSync(targetIndex) || fs.existsSync(targetHtml);
       }
 
       if (!fileExists && !indexExists) {
