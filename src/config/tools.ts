@@ -34,7 +34,11 @@ export function getRelatedToolsForComponent(
 
   const currentTool = getToolBySlugFromRegistry(slug);
   const categoryName = customCategory || (currentTool ? `More ${currentTool.category} Utilities` : 'Related Tools');
-  const items = getRelatedToolsForSlug(slug, limit);
+  let items = getRelatedToolsForSlug(slug, limit);
+
+  if (currentTool && !items.find(t => t.slug === currentTool.slug)) {
+    items = [currentTool, ...items].slice(0, limit);
+  }
 
   return {
     categoryName,

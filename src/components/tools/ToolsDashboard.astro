@@ -95,19 +95,12 @@ function getToolCategory(post: typeof sortedTools[0]): string {
       ))}
     </nav>
 
-    <!-- Search Box -->
-    <div class="relative min-w-[240px] sm:w-72">
-      <input
-        type="search"
-        id="tool-search-input"
-        placeholder="Filter tools by keyword..."
-        class="w-full rounded-pill border border-border/80 bg-surface/80 pl-40 pr-16 py-8 text-caption text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all duration-150"
-      />
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-12 top-1/2 h-16 w-16 -translate-y-1/2 text-muted dark:text-muted-dark pointer-events-none">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </svg>
-    </div>
+    <!-- Search Box Trigger -->
+    <button type="button" class="tool-search-trigger relative min-w-[160px] sm:w-48 text-left group">
+      <div class="w-full rounded-12 border border-border/80 bg-surface/80 pl-12 pr-40 py-8 text-caption text-muted group-hover:border-accent/50 dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-muted-dark dark:group-hover:border-accent-dark/50 transition-all duration-150">
+        Search tools...
+      </div>
+    </button>
   </div>
 
   <!-- Tools Grid with Glassmorphism Cards -->

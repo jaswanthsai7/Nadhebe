@@ -1,0 +1,231 @@
+---
+import { PLATFORM_TOOLS } from '@/config/platform-tools';
+
+// Serialize tools for client-side search
+const toolsData = PLATFORM_TOOLS.map(t => ({
+  id: t.id,
+  name: t.name,
+  description: t.description,
+  href: t.href,
+  icon: t.icon,
+  category: t.category
+}));
+---
+
+<div id="tool-search-modal-wrapper" class="hidden">
+  <!-- Backdrop -->
+  <div class="fixed inset-0 z-[100] bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-sm transition-opacity" id="tool-search-overlay">
+    
+    <!-- Modal -->
+    <div class="fixed inset-0 z-[101] overflow-y-auto p-16 sm:p-48 md:p-64 flex justify-center items-start pt-[10vh]">
+      <div 
+        class="w-full max-w-2xl bg-surface dark:bg-surface-dark border border-border dark:border-border-dark rounded-24 shadow-large overflow-hidden flex flex-col max-h-[80vh] transform transition-all"
+        role="dialog" 
+        aria-modal="true" 
+        aria-label="Search Tools"
+      >
+        <!-- Search Input Header -->
+        <div class="flex items-center gap-12 border-b border-border dark:border-border-dark px-16 py-16 bg-surface2/50 dark:bg-surface2-dark/50 backdrop-blur-md">
+          <svg class="h-20 w-20 shrink-0 text-accent dark:text-accent-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            id="tool-modal-input"
+            placeholder="Search tools by name, description, or category..."
+            autocomplete="off"
+            class="flex-1 bg-transparent border-0 outline-none text-body text-ink placeholder:text-muted focus:ring-0 focus:outline-none dark:text-ink-dark dark:placeholder:text-muted-dark font-display"
+          />
+          <kbd class="hidden sm:flex items-center justify-center rounded-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-8 py-4 text-[10px] font-mono text-muted dark:text-muted-dark select-none shadow-sm tracking-widest">ESC</kbd>
+        </div>
+
+        <!-- Results -->
+        <div id="tool-modal-results" class="flex-1 overflow-y-auto p-12 custom-scrollbar flex flex-col gap-4">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Empty State -->
+        <div id="tool-modal-empty" class="hidden flex-col items-center justify-center py-48 px-16 text-center">
+          <div class="w-48 h-48 rounded-full bg-surface2 dark:bg-surface2-dark flex items-center justify-center mb-16 text-muted dark:text-muted-dark border border-border dark:border-border-dark">
+            <svg class="h-24 w-24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>
+          </div>
+          <p class="text-caption font-sans font-medium text-ink dark:text-ink-dark">No tools found</p>
+          <p class="text-xs font-sans text-muted dark:text-muted-dark mt-4">Try adjusting your search terms.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex items-center justify-between border-t border-border dark:border-border-dark px-16 py-12 text-xs font-sans text-muted dark:text-muted-dark bg-surface2/30 dark:bg-surface2-dark/30">
+          <div class="flex items-center gap-16">
+            <span class="flex items-center gap-6"><kbd class="rounded-4 border border-border/80 dark:border-border-dark/80 bg-surface dark:bg-surface-dark px-6 py-2 shadow-sm font-mono text-[10px] tracking-widest text-ink2 dark:text-ink2-dark">↑</kbd><kbd class="rounded-4 border border-border/80 dark:border-border-dark/80 bg-surface dark:bg-surface-dark px-6 py-2 shadow-sm font-mono text-[10px] tracking-widest text-ink2 dark:text-ink2-dark">↓</kbd> Navigate</span>
+            <span class="flex items-center gap-6"><kbd class="rounded-4 border border-border/80 dark:border-border-dark/80 bg-surface dark:bg-surface-dark px-6 py-2 shadow-sm font-mono text-[10px] tracking-widest text-ink2 dark:text-ink2-dark">↵</kbd> Open Tool</span>
+          </div>
+          <div class="font-mono text-meta text-accent dark:text-accent-dark">{PLATFORM_TOOLS.length} Tools Available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ toolsData }}>
+  function setupToolSearch() {
+    const wrapper = document.getElementById('tool-search-modal-wrapper');
+    const overlay = document.getElementById('tool-search-overlay');
+    const input = document.getElementById('tool-modal-input');
+    const resultsContainer = document.getElementById('tool-modal-results');
+    const emptyState = document.getElementById('tool-modal-empty');
+    
+    // The trigger buttons from the dashboard/index
+    const triggerBtns = document.querySelectorAll('.tool-search-trigger');
+    
+    let selectedIndex = -1;
+    let filteredTools = [...toolsData];
+
+    function openModal() {
+      if (!wrapper) return;
+      wrapper.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      input.value = '';
+      renderResults(toolsData); // show all initially
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeModal() {
+      if (!wrapper) return;
+      wrapper.classList.add('hidden');
+      document.body.style.overflow = '';
+      selectedIndex = -1;
+    }
+
+    function highlightResult(index) {
+      const items = resultsContainer.querySelectorAll('a');
+      items.forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('bg-surface2', 'dark:bg-surface2-dark', 'border-border', 'dark:border-border-dark');
+          item.classList.remove('border-transparent');
+          item.scrollIntoView({ block: 'nearest' });
+        } else {
+          item.classList.remove('bg-surface2', 'dark:bg-surface2-dark', 'border-border', 'dark:border-border-dark');
+          item.classList.add('border-transparent');
+        }
+      });
+    }
+
+    function renderResults(tools) {
+      filteredTools = tools;
+      resultsContainer.innerHTML = '';
+      selectedIndex = -1;
+
+      if (tools.length === 0) {
+        resultsContainer.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+        return;
+      }
+
+      resultsContainer.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+      emptyState.classList.remove('flex');
+
+      tools.forEach((tool, index) => {
+        const a = document.createElement('a');
+        a.href = tool.href;
+        a.className = "flex items-center gap-16 p-12 rounded-16 border border-transparent hover:bg-surface2 dark:hover:bg-surface2-dark hover:border-border dark:hover:border-border-dark transition-all duration-150 group";
+        
+        a.innerHTML = `
+          <div class="flex-shrink-0 w-40 h-40 rounded-12 bg-surface2 dark:bg-surface2-dark border border-border/50 dark:border-border-dark/50 flex items-center justify-center text-accent dark:text-accent-dark group-hover:border-accent/30 transition-colors shadow-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
+              <path d="M8 9l-3 3 3 3"></path>
+              <path d="M16 9l3 3-3 3"></path>
+              <path d="M14 5l-4 14"></path>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0 flex flex-col">
+            <div class="flex items-center gap-8 mb-2">
+              <h3 class="font-display font-bold text-caption text-ink dark:text-ink-dark truncate">${tool.name}</h3>
+              <span class="inline-flex items-center rounded-4 bg-ink/5 dark:bg-ink-dark/10 px-6 py-2 text-[10px] font-mono font-medium text-ink2 dark:text-ink2-dark uppercase tracking-widest border border-border/50 dark:border-border-dark/50">
+                ${tool.category}
+              </span>
+            </div>
+            <p class="text-xs font-sans text-ink2 dark:text-ink2-dark truncate">${tool.description}</p>
+          </div>
+          <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-16 h-16 text-muted dark:text-muted-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        `;
+
+        a.addEventListener('mouseenter', () => {
+          selectedIndex = index;
+          highlightResult(selectedIndex);
+        });
+
+        resultsContainer.appendChild(a);
+      });
+    }
+
+    // Attach click listeners to trigger buttons
+    triggerBtns.forEach(btn => btn.addEventListener('click', openModal));
+
+    // Overlay click to close
+    overlay?.addEventListener('mousedown', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Search logic
+    input?.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) {
+        renderResults(toolsData);
+        return;
+      }
+      
+      const filtered = toolsData.filter(t => 
+        t.name.toLowerCase().includes(q) || 
+        t.description.toLowerCase().includes(q) || 
+        t.category.toLowerCase().includes(q)
+      );
+      
+      renderResults(filtered);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!wrapper || wrapper.classList.contains('hidden')) {
+        // Intercept global Cmd+K to open tools modal IF we are on tools page
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          // If a global search interceptor exists, we should probably stop propagation
+          e.preventDefault();
+          e.stopPropagation();
+          openModal();
+        }
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      }
+
+      const items = resultsContainer.querySelectorAll('a');
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+        highlightResult(selectedIndex);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        highlightResult(selectedIndex);
+      } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        e.preventDefault();
+        items[selectedIndex].click();
+      }
+    }, { capture: true }); // Use capture to intercept Cmd+K before the global SearchDialog
+  }
+
+  // Setup on initial load and Astro page transitions
+  setupToolSearch();
+  document.addEventListener('astro:page-load', setupToolSearch);
+</script>

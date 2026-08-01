@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FeedList from '@/components/FeedList.astro';
 import { PLATFORM_CATEGORIES, PLATFORM_TOOLS, PLATFORM_TOOL_TOTAL } from '@/config/platform-tools';
+import ToolSearchModal from '@/components/tools/ToolSearchModal.astro';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
 
@@ -100,18 +101,12 @@ const toolsDirectorySchema = {
         })}
       </nav>
 
-      <div class="relative min-w-[220px] sm:w-72">
-        <input
-          type="search"
-          id="tool-dir-search"
-          placeholder="Filter tools by keyword..."
-          class="w-full rounded-pill border border-border/80 bg-surface pl-40 pr-16 py-8 text-caption text-ink placeholder:text-muted focus:border-accent focus:outline-none dark:border-border-dark/80 dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark dark:focus:border-accent-dark transition-all duration-150"
-        />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-12 top-1/2 h-16 w-16 -translate-y-1/2 text-muted dark:text-muted-dark pointer-events-none">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-      </div>
+      <!-- Search Box Trigger -->
+      <button type="button" class="tool-search-trigger relative min-w-[160px] sm:w-48 text-left group">
+        <div class="w-full rounded-12 border border-border/80 bg-surface pl-12 pr-40 py-8 text-caption text-muted group-hover:border-accent/50 dark:border-border-dark/80 dark:bg-surface-dark dark:text-muted-dark dark:group-hover:border-accent-dark/50 transition-all duration-150">
+          Search tools...
+        </div>
+      </button>
     </div>
 
     <!-- Tools Cards Grid -->
@@ -194,6 +189,7 @@ const toolsDirectorySchema = {
       </section>
     )}
   </div>
+  <ToolSearchModal />
 </BaseLayout>
 
 <style>
@@ -242,23 +238,19 @@ const toolsDirectorySchema = {
 <script is:inline>
   (function() {
     const tabBtns = document.querySelectorAll('.cat-tab-btn');
-    const searchInput = document.getElementById('tool-dir-search');
     const toolCards = document.querySelectorAll('[data-tool-card]');
     const noMatch = document.getElementById('tools-no-match');
 
     let activeFilter = 'all';
-    let searchQuery = '';
 
     function filterDirectory() {
       let count = 0;
       toolCards.forEach(card => {
         const cat = card.getAttribute('data-category') || '';
-        const text = card.getAttribute('data-search-text') || '';
 
         const matchesCat = (activeFilter === 'all' || cat === activeFilter);
-        const matchesSearch = (!searchQuery || text.includes(searchQuery));
 
-        if (matchesCat && matchesSearch) {
+        if (matchesCat) {
           card.style.display = '';
           count++;
         } else {
@@ -282,11 +274,6 @@ const toolsDirectorySchema = {
         activeFilter = btn.getAttribute('data-category-filter') || 'all';
         filterDirectory();
       });
-    });
-
-    searchInput?.addEventListener('input', (e) => {
-      searchQuery = (e.target.value || '').toLowerCase().trim();
-      filterDirectory();
     });
   })();
 </script>
