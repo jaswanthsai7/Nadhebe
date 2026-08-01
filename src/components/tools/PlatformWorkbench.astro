@@ -1,5 +1,6 @@
 ---
 import type { PlatformTool } from '@/config/platform-tools';
+import ComingSoonWorkbench from './ComingSoonWorkbench.astro';
 
 interface Props {
   tool: PlatformTool;
@@ -17,452 +18,97 @@ const outputLabel = tool.mode === 'analyzer' ? 'Analysis' : 'Result';
 const primaryAction = tool.mode === 'calculator' ? 'Calculate' : tool.mode === 'generator' ? 'Generate' : tool.mode === 'analyzer' ? 'Analyze' : 'Format / Clean';
 ---
 
-{isImplemented ? (
-  <div
-    class="platform-workbench space-y-16"
-    data-platform-mode={tool.mode}
-    data-platform-tool={tool.name}
-    data-platform-slug={tool.slug}
-    data-platform-category={tool.category}
-    data-implemented="true"
-  >
-    <div class="relative z-30 flex flex-wrap items-center justify-between gap-12 rounded-16 border border-border bg-surface/90 p-12 sm:p-16 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
-      <div class="flex flex-wrap items-center gap-8">
-        <label class="relative inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-[14px] w-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span>Upload Data</span>
-          <input type="file" data-platform-file accept=".txt,.json,.csv,.xml,.yaml,.yml,.md,.html,.css,.js,.ts" class="hidden" />
-        </label>
+<div class="platform-workbench-wrapper">
+  {isImplemented && (
+    <div
+      class="platform-workbench space-y-16"
+      data-platform-mode={tool.mode}
+      data-platform-tool={tool.name}
+      data-platform-slug={tool.slug}
+      data-platform-category={tool.category}
+      data-implemented="true"
+    >
+      <div class="relative z-30 flex flex-wrap items-center justify-between gap-12 rounded-16 border border-border bg-surface/90 p-12 sm:p-16 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90">
+        <div class="flex flex-wrap items-center gap-8">
+          <label class="relative inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-[14px] w-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Upload Data</span>
+            <input type="file" data-platform-file accept=".txt,.json,.csv,.xml,.yaml,.yml,.md,.html,.css,.js,.ts" class="hidden" />
+          </label>
 
-        <button type="button" data-platform-sample class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
-          Sample
-        </button>
+          <button type="button" data-platform-sample class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+            Sample
+          </button>
 
-        <button type="button" data-platform-clear class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-danger hover:text-danger dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
-          Clear
-        </button>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-8">
-        <button type="button" data-platform-run class="inline-flex items-center gap-6 rounded-8 bg-accent px-20 py-6 text-caption font-sans font-bold text-white shadow-soft transition-all hover:opacity-95 active:scale-95 dark:bg-accent-dark dark:text-bg">
-          {primaryAction}
-        </button>
-
-        <button type="button" data-platform-copy class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-14 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
-          Copy Output
-        </button>
-
-        <button type="button" data-platform-download class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-[14px] w-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download
-        </button>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 items-stretch gap-16 lg:grid-cols-2">
-      <div class="glass-panel flex min-h-[500px] flex-col overflow-hidden rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
-        <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
-          <div class="flex min-w-0 items-center gap-8">
-            <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">{inputLabel}</span>
-            <span class="max-w-[220px] truncate rounded-6 bg-surface px-8 py-2 font-mono text-xs font-medium text-accent dark:bg-surface-dark dark:text-accent-dark">{tool.category}</span>
-          </div>
-          <button type="button" data-platform-copy-input class="rounded-6 border border-border bg-surface px-8 py-4 font-sans text-xs font-medium text-ink2 hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:text-ink-dark">Copy</button>
-        </div>
-
-        <div class="relative flex flex-1 overflow-hidden bg-code font-mono text-caption dark:bg-code-dark">
-          <div data-platform-input-gutter aria-hidden="true" class="w-40 select-none whitespace-pre border-r border-border/60 bg-surface2/40 py-12 pr-8 text-right font-mono text-xs font-semibold leading-relaxed text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark">1</div>
-          <textarea data-platform-input class="flex-1 resize-none border-none bg-transparent p-12 font-mono text-caption leading-relaxed text-ink outline-none dark:text-ink-dark" spellcheck="false" placeholder="Paste or type content here..."></textarea>
-        </div>
-
-        <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs text-muted dark:border-border-dark/60 dark:bg-surface2-dark/30 dark:text-muted-dark">
-          <span data-platform-position>Ln: 1 Col: 1</span>
-          <span data-platform-input-length>0 chars</span>
-        </div>
-      </div>
-
-      <div class="glass-panel flex min-h-[500px] flex-col overflow-hidden rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
-        <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
-          <div class="flex min-w-0 items-center gap-8">
-            <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">{outputLabel}</span>
-            <span class="max-w-[260px] truncate font-mono text-xs text-muted dark:text-muted-dark">{tool.name}</span>
-          </div>
-          <span data-platform-status class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-8 py-2 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">Ready</span>
-        </div>
-
-        <div class="relative flex flex-1 overflow-hidden bg-code font-mono text-caption dark:bg-code-dark">
-          <div data-platform-output-gutter aria-hidden="true" class="w-40 select-none whitespace-pre border-r border-border/60 bg-surface2/40 py-12 pr-8 text-right font-mono text-xs font-semibold leading-relaxed text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark">1</div>
-          <pre data-platform-output class="flex-1 overflow-auto whitespace-pre-wrap break-words p-12 font-mono text-caption leading-relaxed text-emerald-600 dark:text-emerald-400">Your result will appear here.</pre>
-        </div>
-
-        <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs dark:border-border-dark/60 dark:bg-surface2-dark/30">
-          <span class="text-muted dark:text-muted-dark">100% local processing</span>
-          <span data-platform-output-stats class="text-muted dark:text-muted-dark">Ln: 1</span>
-        </div>
-      </div>
-    </div>
-  </div>
-) : (
-  <div class="coming-soon-workbench space-y-24">
-    <div class="relative overflow-hidden rounded-24 border border-border bg-surface/95 p-24 sm:p-36 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/95">
-      <div class="pointer-events-none absolute -right-40 -top-40 h-80 w-80 rounded-full bg-accent/10 blur-3xl dark:bg-accent-dark/10"></div>
-      
-      <div class="flex flex-wrap items-center justify-between gap-12 border-b border-border/80 pb-20 dark:border-border-dark/80">
-        <div class="flex items-center gap-12">
-          <a
-            href="/tools/"
-            class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-14 py-8 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 shrink-0 text-accent dark:text-accent-dark"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            <span>Back to All Tools</span>
-          </a>
-
-          <button
-            type="button"
-            onclick="history.back()"
-            class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-14 py-8 text-caption font-sans font-semibold text-ink2 transition-all hover:text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink2-dark dark:hover:text-ink-dark"
-          >
-            Go Back
+          <button type="button" data-platform-clear class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-danger hover:text-danger dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+            Clear
           </button>
         </div>
 
-        <div class="flex items-center gap-8">
-          <span class="inline-flex items-center gap-6 rounded-pill bg-amber-500/10 px-12 py-4 font-mono text-xs font-semibold text-amber-600 dark:text-amber-400">
-            <span class="h-6 w-6 rounded-full bg-amber-500 animate-pulse"></span>
-            Status: In Development • Planned Release
-          </span>
+        <div class="flex flex-wrap items-center gap-8">
+          <button type="button" data-platform-run class="inline-flex items-center gap-6 rounded-8 bg-accent px-20 py-6 text-caption font-sans font-bold text-white shadow-soft transition-all hover:opacity-95 active:scale-95 dark:bg-accent-dark dark:text-bg">
+            {primaryAction}
+          </button>
+
+          <button type="button" data-platform-copy class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-14 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+            Copy Output
+          </button>
+
+          <button type="button" data-platform-download class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-sans font-semibold text-ink shadow-subtle transition-all hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-[14px] w-[14px] shrink-0 text-accent dark:text-accent-dark"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </button>
         </div>
       </div>
 
-      <div class="mt-24 space-y-24">
-        <div class="space-y-8">
-          <div class="flex flex-wrap items-center gap-8">
-            <span class="rounded-6 bg-accent/10 px-8 py-2 font-mono text-xs font-bold uppercase text-accent dark:bg-accent-dark/10 dark:text-accent-dark">{tool.category}</span>
-            <span class="font-mono text-xs text-muted dark:text-muted-dark">Category: {tool.categorySlug}</span>
+      <div class="grid grid-cols-1 items-stretch gap-16 lg:grid-cols-2">
+        <div class="glass-panel flex min-h-[500px] flex-col overflow-hidden rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
+          <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+            <div class="flex min-w-0 items-center gap-8">
+              <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">{inputLabel}</span>
+              <span class="max-w-[220px] truncate rounded-6 bg-surface px-8 py-2 font-mono text-xs font-medium text-accent dark:bg-surface-dark dark:text-accent-dark">{tool.category}</span>
+            </div>
+            <button type="button" data-platform-copy-input class="rounded-6 border border-border bg-surface px-8 py-4 font-sans text-xs font-medium text-ink2 hover:text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink2-dark dark:hover:text-ink-dark">Copy</button>
           </div>
-          <h1 class="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl dark:text-ink-dark">{tool.name}</h1>
-          <p class="max-w-3xl font-sans text-base leading-relaxed text-ink2 dark:text-ink2-dark">{tool.description}</p>
+
+          <div class="relative flex flex-1 overflow-hidden bg-code font-mono text-caption dark:bg-code-dark">
+            <div data-platform-input-gutter aria-hidden="true" class="w-40 select-none whitespace-pre border-r border-border/60 bg-surface2/40 py-12 pr-8 text-right font-mono text-xs font-semibold leading-relaxed text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark">1</div>
+            <textarea data-platform-input class="flex-1 resize-none border-none bg-transparent p-12 font-mono text-caption leading-relaxed text-ink outline-none dark:text-ink-dark" spellcheck="false" placeholder="Paste or type content here..."></textarea>
+          </div>
+
+          <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs text-muted dark:border-border-dark/60 dark:bg-surface2-dark/30 dark:text-muted-dark">
+            <span data-platform-position>Ln: 1 Col: 1</span>
+            <span data-platform-input-length>0 chars</span>
+          </div>
         </div>
 
-        <div class="rounded-16 border border-border/80 bg-surface2/50 p-20 dark:border-border-dark/80 dark:bg-surface2-dark/50 space-y-12">
-          <h2 class="font-sans text-sm font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Planned Functionality</h2>
-          <ul class="grid gap-12 sm:grid-cols-2 font-sans text-sm text-ink2 dark:text-ink2-dark">
-            <li class="flex items-start gap-10">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-emerald-500 mt-2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>100% Client-side local execution with zero data server uploads</span>
-            </li>
-            <li class="flex items-start gap-10">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-emerald-500 mt-2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Domain-specific parsing, strict validation, and instant formatting</span>
-            </li>
-            <li class="flex items-start gap-10">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-emerald-500 mt-2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>One-click output copy, text download, and drag-and-drop file support</span>
-            </li>
-            <li class="flex items-start gap-10">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-emerald-500 mt-2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Responsive keyboard-accessible interface and instant preview</span>
-            </li>
-          </ul>
-        </div>
+        <div class="glass-panel flex min-h-[500px] flex-col overflow-hidden rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
+          <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-12 py-8 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+            <div class="flex min-w-0 items-center gap-8">
+              <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">{outputLabel}</span>
+              <span class="max-w-[260px] truncate font-mono text-xs text-muted dark:text-muted-dark">{tool.name}</span>
+            </div>
+            <span data-platform-status class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-8 py-2 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">Ready</span>
+          </div>
 
-        <div class="space-y-12 pt-12">
-          <h2 class="font-sans text-sm font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Explore Working Tools Available Now</h2>
-          <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-            <a href="/tools/json-formatter/" class="group rounded-12 border border-border bg-surface p-14 shadow-subtle transition-all hover:border-accent hover:shadow-medium dark:border-border-dark dark:bg-surface-dark">
-              <div class="font-sans text-sm font-bold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">JSON Formatter</div>
-              <div class="font-sans text-xs text-muted line-clamp-1 dark:text-muted-dark">Beautify & validate JSON</div>
-            </a>
-            <a href="/tools/csv-to-json/" class="group rounded-12 border border-border bg-surface p-14 shadow-subtle transition-all hover:border-accent hover:shadow-medium dark:border-border-dark dark:bg-surface-dark">
-              <div class="font-sans text-sm font-bold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">CSV to JSON</div>
-              <div class="font-sans text-xs text-muted line-clamp-1 dark:text-muted-dark">Convert tabular data</div>
-            </a>
-            <a href="/tools/uuid-generator/" class="group rounded-12 border border-border bg-surface p-14 shadow-subtle transition-all hover:border-accent hover:shadow-medium dark:border-border-dark dark:bg-surface-dark">
-              <div class="font-sans text-sm font-bold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">UUID Generator</div>
-              <div class="font-sans text-xs text-muted line-clamp-1 dark:text-muted-dark">Generate v4 UUIDs</div>
-            </a>
-            <a href="/tools/aspect-ratio-calculator/" class="group rounded-12 border border-border bg-surface p-14 shadow-subtle transition-all hover:border-accent hover:shadow-medium dark:border-border-dark dark:bg-surface-dark">
-              <div class="font-sans text-sm font-bold text-ink group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">Aspect Ratio Calculator</div>
-              <div class="font-sans text-xs text-muted line-clamp-1 dark:text-muted-dark">Calculate dimensions</div>
-            </a>
+          <div class="relative flex flex-1 overflow-hidden bg-code font-mono text-caption dark:bg-code-dark">
+            <div data-platform-output-gutter aria-hidden="true" class="w-40 select-none whitespace-pre border-r border-border/60 bg-surface2/40 py-12 pr-8 text-right font-mono text-xs font-semibold leading-relaxed text-muted dark:border-border-dark/60 dark:bg-surface2-dark/40 dark:text-muted-dark">1</div>
+            <pre data-platform-output class="flex-1 overflow-auto whitespace-pre-wrap break-words p-12 font-mono text-caption leading-relaxed text-emerald-600 dark:text-emerald-400">Your result will appear here.</pre>
+          </div>
+
+          <div class="flex items-center justify-between border-t border-border/60 bg-surface2/30 px-12 py-6 font-mono text-xs dark:border-border-dark/60 dark:bg-surface2-dark/30">
+            <span class="text-muted dark:text-muted-dark">100% local processing</span>
+            <span data-platform-output-stats class="text-muted dark:text-muted-dark">Ln: 1</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-)}
+  )}
 
-<script is:inline>
-  (() => {
-    const root = document.currentScript?.previousElementSibling;
-    if (!root || !root.classList.contains('platform-workbench') || root.dataset.implemented !== 'true') return;
+  {!isImplemented && (
+    <ComingSoonWorkbench tool={tool} />
+  )}
+</div>
 
-    const mode = root.dataset.platformMode || 'transform';
-    const toolName = root.dataset.platformTool || 'Utility';
-    const slug = root.dataset.platformSlug || '';
-    const category = root.dataset.platformCategory || 'Utility';
-    const input = root.querySelector('[data-platform-input]');
-    const output = root.querySelector('[data-platform-output]');
-    const status = root.querySelector('[data-platform-status]');
-    const inputGutter = root.querySelector('[data-platform-input-gutter]');
-    const outputGutter = root.querySelector('[data-platform-output-gutter]');
-    const inputPosition = root.querySelector('[data-platform-position]');
-    const inputLength = root.querySelector('[data-platform-input-length]');
-    const outputStats = root.querySelector('[data-platform-output-stats]');
-    const fileInput = root.querySelector('[data-platform-file]');
-    const copyInputButton = root.querySelector('[data-platform-copy-input]');
-    const copyOutputButton = root.querySelector('[data-platform-copy]');
-
-    function sampleForTool() {
-      if (slug.includes('json-diff')) return `{
-  "name": "Nadhebe",
-  "version": 1,
-  "features": ["local", "fast"]
-}
----
-{
-  "name": "Nadhebe",
-  "version": 2,
-  "features": ["local", "fast", "private"]
-}`;
-      if (slug.includes('base64')) return 'Nadhebe tools run locally in your browser.';
-      if (slug.includes('url-parser')) return 'https://nadhebe.com/tools/json-formatter/?mode=beautify&source=demo#workspace';
-      if (slug.includes('jwt')) return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0IiwibmFtZSI6Ik5hZGhlYmUiLCJpYXQiOjE3MTYyMzkwMjJ9.signature';
-      if (slug.includes('duplicate-remover')) return 'json\ncsv\njson\nxml\ncsv\nregex';
-      if (slug.includes('case-converter')) return 'Nadhebe browser native utility platform';
-      if (slug.includes('slug-generator')) return 'Build 500+ Browser Native Tools';
-      if (slug.includes('text-diff')) return 'first line\nshared line\nold ending\n---\nfirst line\nshared line\nnew ending';
-      return `Nadhebe ${toolName}
-Privacy-first browser utility
-Fast local processing
-Clean output ready to copy`;
-    }
-
-    const sample = sampleForTool();
-
-    function lineNumbers(value) {
-      const count = Math.max(1, value.split(/\r?\n/).length);
-      return Array.from({ length: count }, (_, index) => index + 1).join('\n');
-    }
-
-    function updateEditorMeta() {
-      const value = input?.value || '';
-      if (inputGutter) inputGutter.textContent = lineNumbers(value);
-      if (inputLength) inputLength.textContent = `${value.length.toLocaleString()} chars`;
-      if (!inputPosition || !input) return;
-      const beforeCaret = value.slice(0, input.selectionStart || 0).split(/\r?\n/);
-      inputPosition.textContent = `Ln: ${beforeCaret.length} Col: ${beforeCaret[beforeCaret.length - 1].length + 1}`;
-    }
-
-    function setResult(value, label = 'Updated') {
-      if (output) output.textContent = value;
-      if (status) status.textContent = label;
-      if (outputGutter) outputGutter.textContent = lineNumbers(value || '');
-      if (outputStats) outputStats.textContent = `Ln: ${Math.max(1, (value || '').split(/\r?\n/).length).toLocaleString()}`;
-    }
-
-    function tryParseJson(value) {
-      try {
-        return { ok: true, value: JSON.parse(value) };
-      } catch (error) {
-        return { ok: false, error };
-      }
-    }
-
-    function formatJsonValue(value) {
-      return JSON.stringify(value, null, 2);
-    }
-
-    function splitPair(value) {
-      const parts = value.split(/\n-{3,}\n/);
-      return parts.length >= 2 ? [parts[0].trim(), parts.slice(1).join('\n---\n').trim()] : [value.trim(), ''];
-    }
-
-    function diffLines(left, right) {
-      const aLines = left.split(/\r?\n/);
-      const bLines = right.split(/\r?\n/);
-      const max = Math.max(aLines.length, bLines.length);
-      const lines = [];
-      for (let index = 0; index < max; index += 1) {
-        const oldLine = aLines[index] || '';
-        const newLine = bLines[index] || '';
-        if (oldLine === newLine) lines.push(`  ${oldLine}`);
-        else {
-          if (oldLine) lines.push(`- ${oldLine}`);
-          if (newLine) lines.push(`+ ${newLine}`);
-        }
-      }
-      return lines.join('\n');
-    }
-
-    function decodeBase64Url(value) {
-      const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
-      const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
-      return decodeURIComponent(Array.from(atob(padded), (char) => `%${char.charCodeAt(0).toString(16).padStart(2, '0')}`).join(''));
-    }
-
-    function runSpecialTool(value) {
-      const trimmed = value.trim();
-
-      if (slug.includes('uuid-generator')) {
-        const ids = Array.from({ length: 8 }, () => crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
-          const random = Math.random() * 16 | 0;
-          const result = char === 'x' ? random : (random & 0x3 | 0x8);
-          return result.toString(16);
-        }));
-        return { label: 'Generated', value: ids.join('\n') };
-      }
-
-      if (slug.includes('json-diff') || slug.includes('text-diff')) {
-        const [left, right] = splitPair(trimmed);
-        if (!right) return { label: 'Needs Pair', value: 'Paste two inputs separated by a line containing ---' };
-        if (slug.includes('json-diff')) {
-          const leftJson = tryParseJson(left);
-          const rightJson = tryParseJson(right);
-          if (leftJson.ok && rightJson.ok) {
-            const leftPretty = formatJsonValue(leftJson.value);
-            const rightPretty = formatJsonValue(rightJson.value);
-            return { label: 'Compared', value: diffLines(leftPretty, rightPretty) };
-          }
-        }
-        return { label: 'Compared', value: diffLines(left, right) };
-      }
-
-      if (slug.includes('base64')) {
-        let decoded = 'Input is not valid Base64.';
-        try {
-          decoded = decodeURIComponent(Array.from(atob(trimmed), (char) => `%${char.charCodeAt(0).toString(16).padStart(2, '0')}`).join(''));
-        } catch {}
-        return {
-          label: 'Encoded',
-          value: `Base64 Encoded\n${btoa(unescape(encodeURIComponent(value)))}\n\nDecoded Preview\n${decoded}`,
-        };
-      }
-
-      if (slug.includes('url-parser')) {
-        try {
-          const url = new URL(trimmed);
-          const params = Array.from(url.searchParams.entries()).map(([key, val]) => `  ${key}: ${val}`).join('\n') || '  none';
-          return {
-            label: 'Parsed',
-            value: `Protocol: ${url.protocol}\nHost: ${url.host}\nHostname: ${url.hostname}\nPath: ${url.pathname}\nQuery:\n${params}\nHash: ${url.hash || 'none'}`,
-          };
-        } catch {
-          return { label: 'Invalid URL', value: 'Enter a full URL including protocol, for example https://example.com/path?x=1' };
-        }
-      }
-
-      if (slug.includes('jwt')) {
-        const parts = trimmed.split('.');
-        if (parts.length < 2) return { label: 'Invalid JWT', value: 'Paste a JWT with header.payload.signature sections.' };
-        try {
-          const header = JSON.parse(decodeBase64Url(parts[0]));
-          const payload = JSON.parse(decodeBase64Url(parts[1]));
-          return {
-            label: 'Decoded',
-            value: `Header\n${formatJsonValue(header)}\n\nPayload\n${formatJsonValue(payload)}\n\nSignature\n${parts[2] ? 'Present' : 'Missing'}`,
-          };
-        } catch {
-          return { label: 'Decode Error', value: 'The token header or payload is not valid Base64URL JSON.' };
-        }
-      }
-
-      if (slug.includes('word-counter') || slug.includes('reading-time')) {
-        const words = trimmed ? trimmed.split(/\s+/).length : 0;
-        const minutes = Math.max(1, Math.ceil(words / 220));
-        return { label: 'Counted', value: `Characters: ${value.length}\nWords: ${words}\nLines: ${value ? value.split(/\r?\n/).length : 0}\nEstimated reading time: ${minutes} min` };
-      }
-
-      if (slug.includes('case-converter')) {
-        const lower = trimmed.toLowerCase();
-        const title = lower.replace(/\b[a-z]/g, (letter) => letter.toUpperCase());
-        const camel = lower.replace(/[^a-z0-9]+(.)/g, (_, char) => char.toUpperCase()).replace(/^[A-Z]/, (char) => char.toLowerCase());
-        return { label: 'Converted', value: `lowercase\n${lower}\n\nUPPERCASE\n${trimmed.toUpperCase()}\n\nTitle Case\n${title}\n\ncamelCase\n${camel}` };
-      }
-
-      if (slug.includes('duplicate-remover')) {
-        const seen = new Set();
-        const unique = value.split(/\r?\n/).filter((line) => {
-          const key = line.trim();
-          if (!key || seen.has(key)) return false;
-          seen.add(key);
-          return true;
-        });
-        return { label: 'Deduped', value: unique.join('\n') || 'No unique lines found.' };
-      }
-
-      if (slug.includes('slug-generator')) {
-        const generated = trimmed.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        return { label: 'Generated', value: generated || 'enter-text-to-generate-a-slug' };
-      }
-
-      return null;
-    }
-
-    function process() {
-      const value = input?.value || '';
-      const special = runSpecialTool(value);
-      if (special) {
-        setResult(special.value, special.label);
-        updateEditorMeta();
-      }
-    }
-
-    root.querySelector('[data-platform-sample]')?.addEventListener('click', () => {
-      if (input) input.value = sample;
-      process();
-      updateEditorMeta();
-    });
-
-    root.querySelector('[data-platform-clear]')?.addEventListener('click', () => {
-      if (input) input.value = '';
-      setResult('Your result will appear here.', 'Ready');
-      updateEditorMeta();
-    });
-
-    root.querySelector('[data-platform-run]')?.addEventListener('click', process);
-
-    copyInputButton?.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(input?.value || '');
-      copyInputButton.textContent = 'Copied';
-      setTimeout(() => { copyInputButton.textContent = 'Copy'; }, 1500);
-    });
-
-    copyOutputButton?.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(output?.textContent || '');
-      copyOutputButton.textContent = 'Copied';
-      setTimeout(() => { copyOutputButton.textContent = 'Copy Output'; }, 1500);
-    });
-
-    root.querySelector('[data-platform-download]')?.addEventListener('click', () => {
-      const content = output?.textContent || input?.value || '';
-      if (!content) return;
-      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `${toolName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'nadhebe-tool'}-output.txt`;
-      link.click();
-      URL.revokeObjectURL(url);
-    });
-
-    fileInput?.addEventListener('change', (event) => {
-      const file = event.target?.files?.[0];
-      if (!file || !input) return;
-      const reader = new FileReader();
-      reader.onload = (readerEvent) => {
-        input.value = String(readerEvent.target?.result || '');
-        process();
-        updateEditorMeta();
-      };
-      reader.readAsText(file);
-    });
-
-    input?.addEventListener('input', process);
-    input?.addEventListener('keyup', updateEditorMeta);
-    input?.addEventListener('click', updateEditorMeta);
-
-    process();
-    updateEditorMeta();
-  })();
-</script>
+<script src="../../scripts/platform-workbench.ts"></script>
 
