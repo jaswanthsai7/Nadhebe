@@ -1,5 +1,45 @@
 [
   {
+    "title": "Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison",
+    "description": "An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows.",
+    "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf",
+    "category": "Comparisons",
+    "tags": [
+      "[\"ai coding\", \"claude code\", \"cursor\", \"windsurf\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors",
+    "description": "How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts.",
+    "url": "https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors",
+    "category": "Guides",
+    "tags": [
+      "[\"node\", \"enoent\", \"mcp\", \"claude desktop\", \"cursor\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Fix MCP Server Connection Refused and 404 Proxy Errors",
+    "description": "Step-by-step diagnostic guide to troubleshoot Model Context Protocol (MCP) server socket connection refused and http 404 proxy middleware errors.",
+    "url": "https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors",
+    "category": "Guides",
+    "tags": [
+      "[\"mcp\", \"claude desktop\", \"cursor\", \"node.js\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide",
+    "description": "Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware.",
+    "url": "https://nadhebe.com/guides/installing-kimi-k3-locally-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"kimi k3\", \"local llm\", \"cuda\", \"vllm\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
     "title": "Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)",
     "description": "Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access.",
     "url": "https://nadhebe.com/news/gemini-3-6-flash-everything-we-know",
