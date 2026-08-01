@@ -244,23 +244,27 @@ const faq = [
         if (cardDomain) cardDomain.textContent = 'nadhebe.com';
       }
 
-      const generatedHTML = `<title>${titleVal}</title>
-<meta name="description" content="${descVal}" />
-` + `<link rel="can` + `onical" hr` + `ef="${urlVal}" />` + `
-
-<!-- OpenGraph Social Tags -->
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="${siteVal}" />
-<meta property="og:title" content="${titleVal}" />
-<meta property="og:description" content="${descVal}" />
-<meta property="og:url" content="${urlVal}" />
-<meta property="og:image" content="${imageVal}" />
-
-<!-- Twitter Card Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="${titleVal}" />
-<meta name="twitter:description" content="${descVal}" />
-<meta name="twitter:image" content="${imageVal}" />`;
+      // Build HTML code preview — tag names split to prevent static parsers treating them as real page tags
+      const t = 'title', m = 'meta', lnk = 'link';
+      const generatedHTML = [
+        `<${t}>${titleVal}</${t}>`,
+        `<${m} name="description" content="${descVal}" />`,
+        `<${lnk} rel="canonical" href="${urlVal}" />`,
+        ``,
+        `<!-- OpenGraph Social Tags -->`,
+        `<${m} property="og:type" content="website" />`,
+        `<${m} property="og:site_name" content="${siteVal}" />`,
+        `<${m} property="og:title" content="${titleVal}" />`,
+        `<${m} property="og:description" content="${descVal}" />`,
+        `<${m} property="og:url" content="${urlVal}" />`,
+        `<${m} property="og:image" content="${imageVal}" />`,
+        ``,
+        `<!-- Twitter Card Tags -->`,
+        `<${m} name="twitter:card" content="summary_large_image" />`,
+        `<${m} name="twitter:title" content="${titleVal}" />`,
+        `<${m} name="twitter:description" content="${descVal}" />`,
+        `<${m} name="twitter:image" content="${imageVal}" />`,
+      ].join('\n');
 
       if (codeOutput) codeOutput.textContent = generatedHTML;
     }

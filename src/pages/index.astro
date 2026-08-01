@@ -97,7 +97,7 @@ const topStories = gemini36Post
 >
   <!-- Hero Section Slider -->
   <section class="mx-auto max-w-content px-16 sm:px-24 pt-32 pb-48 sm:pt-48 sm:pb-48">
-    <div class="relative overflow-hidden glass-panel border border-border dark:border-border-dark rounded-24 shadow-medium">
+    <div class="relative overflow-hidden glass-panel border border-border dark:border-border-dark rounded-24 shadow-medium" style="isolation: isolate;">
       
       <!-- Slides Container -->
       <div id="hero-slider" class="relative w-full">
@@ -105,15 +105,15 @@ const topStories = gemini36Post
           const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
           return (
             <div 
-              class={`hero-slide flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 transition-all duration-500 absolute inset-0 opacity-0 pointer-events-none ${index === 0 ? 'relative !opacity-100 !pointer-events-auto' : ''}`}
+              class={`hero-slide flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 transition-all duration-500 absolute inset-0 opacity-0 pointer-events-none min-h-[380px] ${index === 0 ? 'relative !opacity-100 !pointer-events-auto' : ''}`}
               data-slide-index={index}
             >
               
               <!-- Left Side: Rotated Label + Meta -->
-              <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0">
+              <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0 self-stretch">
                 <!-- Rotated Vertical "Featured" Label (Hidden on small screens) -->
-                <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative overflow-hidden">
-                  <span class="font-display font-extrabold uppercase tracking-widest text-ink dark:text-ink-dark absolute whitespace-nowrap" style="font-size: 4.5rem; letter-spacing: 0.15em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
+                <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative">
+                  <span class="font-display font-extrabold uppercase tracking-widest text-ink dark:text-ink-dark absolute whitespace-nowrap" style="font-size: 4rem; letter-spacing: 0.15em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
                     Featured
                   </span>
                 </div>
@@ -184,14 +184,16 @@ const topStories = gemini36Post
         })}
       </div>
 
-      <!-- Navigation Dots -->
-      <div class="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-8 z-10">
+      <!-- Navigation Dots — min 48×48px tap area per Google/WCAG 2.5.5 -->
+      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center z-10">
         {latestPillars.slice(0, 3).map((_, index) => (
           <button
-            class={`w-8 h-8 rounded-full transition-all duration-300 hero-dot ${index === 0 ? 'bg-accent dark:bg-accent-dark w-24' : 'bg-ink/20 dark:bg-ink-dark/20'}`}
+            class="flex items-center justify-center min-w-[48px] min-h-[48px] hero-dot-btn focus:outline-none"
             data-dot-index={index}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <span class={`block rounded-full transition-all duration-300 hero-dot ${index === 0 ? 'bg-accent dark:bg-accent-dark w-20 h-8' : 'w-8 h-8 bg-ink/20 dark:bg-ink-dark/20'}`} />
+          </button>
         ))}
       </div>
 
@@ -202,7 +204,8 @@ const topStories = gemini36Post
   <script>
     function initSlider() {
       const slides = document.querySelectorAll('.hero-slide');
-      const dots = document.querySelectorAll('.hero-dot');
+      const dotBtns = document.querySelectorAll('.hero-dot-btn');
+      const dotSpans = document.querySelectorAll('.hero-dot');
       if (slides.length <= 1) return;
 
       let currentSlide = 0;
@@ -219,13 +222,14 @@ const topStories = gemini36Post
           }
         });
 
-        dots.forEach((dot, i) => {
+        // Update visual dot spans
+        dotSpans.forEach((dot, i) => {
           if (i === index) {
-            dot.classList.remove('bg-ink/20', 'dark:bg-ink-dark/20');
-            dot.classList.add('bg-accent', 'dark:bg-accent-dark', 'w-24');
+            dot.classList.remove('bg-ink/20', 'dark:bg-ink-dark/20', 'w-8');
+            dot.classList.add('bg-accent', 'dark:bg-accent-dark', 'w-20');
           } else {
-            dot.classList.remove('bg-accent', 'dark:bg-accent-dark', 'w-24');
-            dot.classList.add('bg-ink/20', 'dark:bg-ink-dark/20');
+            dot.classList.remove('bg-accent', 'dark:bg-accent-dark', 'w-20');
+            dot.classList.add('bg-ink/20', 'dark:bg-ink-dark/20', 'w-8');
           }
         });
 
@@ -240,8 +244,8 @@ const topStories = gemini36Post
         }, 45000);
       }
 
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
+      dotBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
           showSlide(i);
           startTimer(); // reset auto-play timer on click
         });
