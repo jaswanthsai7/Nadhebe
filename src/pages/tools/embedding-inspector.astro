@@ -1,0 +1,101 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'Embedding Inspector – Vector Analysis | Nadhebe';
+const h1 = 'Embedding Inspector';
+const description = 'Paste an AI embedding or vector array to instantly visualize its dimensionality, magnitude, and sparsity metrics.';
+
+const faq = [
+  {
+    question: 'What models are supported?',
+    answer: 'Any embedding model that outputs a numerical array is supported, including OpenAI text-embedding-3, Gemini embeddings, and open-source models like BAAI/bge-large-en.',
+  }
+];
+---
+
+<ToolLayout
+  toolId="embedding-inspector"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="w-full">
+    <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft max-w-4xl mx-auto">
+      <div class="mb-24">
+        <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Paste Raw Embedding JSON Array</label>
+        <textarea id="embedding-input" rows="5" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="[0.0023, -0.015, 0.998, ...]"></textarea>
+      </div>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-16">
+        <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
+          <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">Dimensions</div>
+          <div id="stat-dims" class="text-h3 font-display font-bold text-ink">0</div>
+        </div>
+        <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
+          <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">Magnitude (Norm)</div>
+          <div id="stat-norm" class="text-h3 font-display font-bold text-ink">0.00</div>
+        </div>
+        <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
+          <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">Min Value</div>
+          <div id="stat-min" class="text-h3 font-display font-bold text-ink">0.00</div>
+        </div>
+        <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
+          <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">Max Value</div>
+          <div id="stat-max" class="text-h3 font-display font-bold text-ink">0.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Analyze High-Dimensional Vectors</h2>
+    <p>
+      The <strong>Embedding Inspector</strong> helps AI developers understand the structure of the vectors returned by models like Gemini and OpenAI. Simply paste your array to instantly extract key mathematical properties like dimensionality and L2 norm magnitude.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupInspector() {
+    const input = document.getElementById('embedding-input') as HTMLTextAreaElement;
+    const sDims = document.getElementById('stat-dims');
+    const sNorm = document.getElementById('stat-norm');
+    const sMin = document.getElementById('stat-min');
+    const sMax = document.getElementById('stat-max');
+
+    if (!input || !sDims) return;
+
+    input.addEventListener('input', () => {
+      const val = input.value.trim();
+      if (!val) return;
+      try {
+        let arr = [];
+        if (val.startsWith('[')) {
+          arr = JSON.parse(val);
+        } else {
+          arr = val.replace(/[\[\]]/g, '').split(/[\s,]+/).map(Number);
+        }
+        
+        if (!Array.isArray(arr) || arr.some(isNaN)) return;
+        
+        const dims = arr.length;
+        let sumSq = 0, min = Infinity, max = -Infinity;
+        
+        for (let i = 0; i < dims; i++) {
+          const v = arr[i];
+          sumSq += v * v;
+          if (v < min) min = v;
+          if (v > max) max = v;
+        }
+        
+        if (sDims) sDims.textContent = dims.toString();
+        if (sNorm) sNorm.textContent = Math.sqrt(sumSq).toFixed(4);
+        if (sMin) sMin.textContent = min.toFixed(4);
+        if (sMax) sMax.textContent = max.toFixed(4);
+      } catch(e) {}
+    });
+  }
+  setupInspector();
+  document.addEventListener('astro:page-load', setupInspector);
+</script>

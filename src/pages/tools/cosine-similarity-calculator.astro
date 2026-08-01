@@ -1,0 +1,221 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'Cosine Similarity Calculator – Vector Distance | Nadhebe';
+const h1 = 'Cosine Similarity Calculator';
+const description = 'Calculate the cosine similarity, euclidean distance, and dot product between two high-dimensional vectors or embeddings instantly in your browser.';
+
+const faq = [
+  {
+    question: 'What is Cosine Similarity?',
+    answer: 'Cosine similarity measures the angle between two vectors in a multi-dimensional space. A value of 1 means the vectors point in the exact same direction (highly similar), 0 means they are orthogonal (unrelated), and -1 means they point in opposite directions.',
+  },
+  {
+    question: 'How do I format my vectors?',
+    answer: 'You can paste standard comma-separated lists of numbers (e.g., 0.1, 0.2, 0.3) or valid JSON arrays (e.g., [0.1, 0.2, 0.3]). The calculator will automatically parse them.',
+  },
+  {
+    question: 'Are my embeddings sent to a server?',
+    answer: 'No. This calculator is 100% client-side. The mathematical operations happen directly in your browser using JavaScript, ensuring your proprietary data embeddings remain secure.',
+  }
+];
+---
+
+<ToolLayout
+  toolId="cosine-similarity-calculator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="cosine-calculator w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+      
+      <!-- Input Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Input Vectors</h2>
+          <button type="button" id="load-sample-btn" class="inline-flex items-center gap-8 px-12 py-6 rounded-8 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark text-caption font-semibold hover:border-accent hover:text-accent dark:hover:border-accent-dark dark:hover:text-accent-dark transition-colors shadow-subtle">
+            Load Sample Vectors
+          </button>
+        </div>
+
+        <div class="space-y-24">
+          <!-- Vector A -->
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <label class="block text-caption font-bold text-ink dark:text-ink-dark">Vector A</label>
+              <span id="dim-a" class="text-xs font-mono text-muted dark:text-muted-dark">0 Dimensions</span>
+            </div>
+            <textarea id="vector-a" rows="4" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="[0.152, -0.231, 0.892, ...]"></textarea>
+          </div>
+
+          <!-- Vector B -->
+          <div>
+             <div class="flex items-center justify-between mb-6">
+              <label class="block text-caption font-bold text-ink dark:text-ink-dark">Vector B</label>
+              <span id="dim-b" class="text-xs font-mono text-muted dark:text-muted-dark">0 Dimensions</span>
+            </div>
+            <textarea id="vector-b" rows="4" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="[0.144, -0.198, 0.822, ...]"></textarea>
+          </div>
+          
+          <div id="error-message" class="hidden rounded-8 bg-red-500/10 border border-red-500/20 px-12 py-8 text-sm text-red-600 dark:text-red-400">
+            Error: Vectors must have the exact same number of dimensions.
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft flex flex-col h-full min-h-[400px]">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Distance Metrics</h2>
+        </div>
+
+        <div class="flex-1 flex flex-col justify-center space-y-24">
+          
+          <!-- Cosine Similarity -->
+          <div class="relative overflow-hidden rounded-16 border border-accent/30 bg-accent/5 p-24 text-center">
+            <div class="text-caption font-bold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Cosine Similarity</div>
+            <div id="result-cosine" class="text-h1 font-display font-bold text-ink dark:text-ink-dark tabular-nums">0.0000</div>
+            <div class="text-sm text-muted dark:text-muted-dark mt-8">Range: [-1, 1]. Higher is more similar.</div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-16">
+            <!-- Dot Product -->
+            <div class="rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-16 text-center">
+              <div class="text-caption font-bold text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Dot Product</div>
+              <div id="result-dot" class="text-h3 font-display font-bold text-ink dark:text-ink-dark tabular-nums">0.0000</div>
+            </div>
+            
+            <!-- Euclidean Distance -->
+            <div class="rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-16 text-center">
+              <div class="text-caption font-bold text-muted dark:text-muted-dark uppercase tracking-wider mb-4">Euclidean Distance</div>
+              <div id="result-euclidean" class="text-h3 font-display font-bold text-ink dark:text-ink-dark tabular-nums">0.0000</div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Vector Math for AI Engineers</h2>
+    <p>
+      The <strong>Cosine Similarity Calculator</strong> is an essential client-side utility for AI engineers building Retrieval-Augmented Generation (RAG) pipelines or evaluating embedding models.
+    </p>
+
+    <h3>Why calculate vector distances manually?</h3>
+    <ul>
+      <li><strong>Debugging RAG Pipelines:</strong> If your vector database (like Pinecone or Milvus) is returning irrelevant chunks, you can paste the raw query embedding and the retrieved chunk embedding here to manually verify their mathematical distance.</li>
+      <li><strong>Model Evaluation:</strong> Test how different models (e.g., OpenAI `text-embedding-3-small` vs Google `text-embedding-004`) cluster specific semantic concepts.</li>
+    </ul>
+    
+    <p>
+      To learn more about the algorithms behind vector databases and approximate nearest neighbor (ANN) search, read our comprehensive guide: <a href="/tutorials/embeddings-vector-databases">Embeddings & Vector Databases Explained</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupVectorCalculator() {
+    const inputA = document.getElementById('vector-a') as HTMLTextAreaElement;
+    const inputB = document.getElementById('vector-b') as HTMLTextAreaElement;
+    const dimA = document.getElementById('dim-a');
+    const dimB = document.getElementById('dim-b');
+    const errorMsg = document.getElementById('error-message');
+    const btnSample = document.getElementById('load-sample-btn');
+    
+    const resCosine = document.getElementById('result-cosine');
+    const resDot = document.getElementById('result-dot');
+    const resEuclidean = document.getElementById('result-euclidean');
+
+    if (!inputA || !resCosine) return;
+    
+    function parseVector(str: string): number[] | null {
+      str = str.trim();
+      if (!str) return null;
+      
+      try {
+        // Try parsing as JSON array
+        if (str.startsWith('[')) {
+          const arr = JSON.parse(str);
+          if (Array.isArray(arr) && arr.every(n => typeof n === 'number')) {
+            return arr;
+          }
+        }
+      } catch (e) {
+        // Fallback to comma separated
+      }
+      
+      // Fallback: comma or space separated
+      const parts = str.replace(/[\[\]]/g, '').split(/[\s,]+/).filter(s => s.length > 0);
+      const nums = parts.map(p => parseFloat(p));
+      
+      if (nums.some(isNaN)) return null;
+      return nums;
+    }
+
+    function calculateMetrics() {
+      const vecA = parseVector(inputA.value);
+      const vecB = parseVector(inputB.value);
+      
+      if (dimA) dimA.textContent = vecA ? `${vecA.length} Dimensions` : '0 Dimensions';
+      if (dimB) dimB.textContent = vecB ? `${vecB.length} Dimensions` : '0 Dimensions';
+      
+      if (!vecA || !vecB) {
+        resetOutputs();
+        if (errorMsg) errorMsg.classList.add('hidden');
+        return;
+      }
+      
+      if (vecA.length !== vecB.length) {
+        resetOutputs();
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        return;
+      }
+      
+      if (errorMsg) errorMsg.classList.add('hidden');
+      
+      // Calculations
+      let dotProduct = 0;
+      let normA = 0;
+      let normB = 0;
+      let sqDiff = 0;
+      
+      for (let i = 0; i < vecA.length; i++) {
+        dotProduct += vecA[i] * vecB[i];
+        normA += vecA[i] * vecA[i];
+        normB += vecB[i] * vecB[i];
+        sqDiff += Math.pow(vecA[i] - vecB[i], 2);
+      }
+      
+      const magnitude = Math.sqrt(normA) * Math.sqrt(normB);
+      const cosine = magnitude === 0 ? 0 : dotProduct / magnitude;
+      const euclidean = Math.sqrt(sqDiff);
+      
+      if (resCosine) resCosine.textContent = cosine.toFixed(6);
+      if (resDot) resDot.textContent = dotProduct.toFixed(6);
+      if (resEuclidean) resEuclidean.textContent = euclidean.toFixed(6);
+    }
+    
+    function resetOutputs() {
+      if (resCosine) resCosine.textContent = '0.0000';
+      if (resDot) resDot.textContent = '0.0000';
+      if (resEuclidean) resEuclidean.textContent = '0.0000';
+    }
+
+    inputA.addEventListener('input', calculateMetrics);
+    inputB.addEventListener('input', calculateMetrics);
+    
+    btnSample?.addEventListener('click', () => {
+      // 5D embeddings representing "King" and "Queen" concepts
+      inputA.value = "[0.23, -0.45, 0.89, 0.11, -0.33]";
+      inputB.value = "[0.21, -0.42, 0.91, 0.08, -0.29]";
+      calculateMetrics();
+    });
+  }
+
+  setupVectorCalculator();
+  document.addEventListener('astro:page-load', setupVectorCalculator);
+</script>

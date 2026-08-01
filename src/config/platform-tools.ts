@@ -92,7 +92,80 @@ function buildCategoryTools(category: ToolRoadmapCategory): PlatformTool[] {
   return items;
 }
 
-export const PLATFORM_TOOLS: PlatformTool[] = ROADMAP_CATEGORIES.flatMap(buildCategoryTools);
+export const PLATFORM_TOOLS: PlatformTool[] = [
+  {
+    id: "mcp-server-config-generator",
+    name: "MCP Server Config Generator",
+    slug: "mcp-server-config-generator",
+    description: "Visually build, validate, and generate the claude_desktop_config.json file for MCP servers.",
+    href: "/tools/mcp-server-config-generator/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "generator",
+    badge: "New",
+    tags: ["mcp", "claude", "json", "config"],
+  },
+  {
+    id: "api-payload-builder",
+    name: "API Payload Builder",
+    slug: "api-payload-builder",
+    description: "Visually construct, validate, and generate complex JSON payloads for the Gemini API.",
+    href: "/tools/api-payload-builder/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "generator",
+    badge: "New",
+    tags: ["api", "json", "gemini", "payload"],
+  },
+  {
+    id: "claude-hook-template-generator",
+    name: "Claude Hook Template Generator",
+    slug: "claude-hook-template-generator",
+    description: "Generate automated Git hook bash scripts powered by Claude Code for automated reviews.",
+    href: "/tools/claude-hook-template-generator/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "generator",
+    tags: ["claude", "git", "bash", "automation"],
+  },
+  {
+    id: "cosine-similarity-calculator",
+    name: "Cosine Similarity Calculator",
+    slug: "cosine-similarity-calculator",
+    description: "Calculate the cosine similarity and euclidean distance between two high-dimensional vectors.",
+    href: "/tools/cosine-similarity-calculator/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "calculator",
+    badge: "New",
+    tags: ["vector", "embeddings", "math", "cosine"],
+  },
+  {
+    id: "embedding-inspector",
+    name: "Embedding Inspector",
+    slug: "embedding-inspector",
+    description: "Paste an AI embedding to instantly visualize its dimensionality, magnitude, and sparsity metrics.",
+    href: "/tools/embedding-inspector/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "analyzer",
+    tags: ["vector", "embeddings", "analysis"],
+  },
+  {
+    id: "gpu-vram-calculator",
+    name: "GPU VRAM Calculator",
+    slug: "gpu-vram-calculator",
+    description: "Estimate the GPU VRAM required to run LLMs, considering weights, quantization, and KV cache.",
+    href: "/tools/gpu-vram-calculator/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "calculator",
+    badge: "New",
+    tags: ["gpu", "vllm", "vram", "llm", "hardware"],
+  },
+  ...ROADMAP_CATEGORIES.flatMap(buildCategoryTools)
+];
+
 export const PLATFORM_CATEGORIES = ROADMAP_CATEGORIES.map((category) => category.name);
 export const PLATFORM_TOOL_TOTAL = PLATFORM_TOOLS.length;
 

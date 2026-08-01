@@ -4095,7 +4095,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://nadhebe.com/tag/infrastructure-&-deployment</loc>
+    <loc>https://nadhebe.com/tag/infrastructure-and-deployment</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -6327,6 +6327,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/api-payload-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/api-planner</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7236,6 +7245,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/claude-hook-template-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/cloud-builder</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7489,6 +7507,15 @@
   </url>
   <url>
     <loc>https://nadhebe.com/tools/correlation-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/cosine-similarity-calculator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -8535,6 +8562,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/gpu-vram-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/gradient-builder</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -9355,6 +9391,15 @@
   </url>
   <url>
     <loc>https://nadhebe.com/tools/mcp-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/mcp-server-config-generator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -11547,6 +11592,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/claude-code-hooks-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude_code_hooks_hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-hook-workflow.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-skills-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cli-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/claude-desktop-download-installation-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -11610,6 +11679,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/embeddings-vector-databases</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embeddings_vector_db_hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vector-db-rag-architecture.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-server-vscode-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -11625,6 +11718,33 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/google-flow-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tutorials/gemini-api-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini_api_guide_hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-api-architecture.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/gemini-flash-vs-pro.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-server-vscode-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>
@@ -11985,6 +12105,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/mcp-with-claude-desktop</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp_claude_desktop_hero_v2.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-claude-desktop-architecture.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-desktop-vs-cursor-decision.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-skills-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/setting-up-youtube-automation-agent</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -12021,6 +12168,27 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-skills-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/favicon.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tutorials/vllm-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm_guide_hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-paged-attention.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/favicon.png</image:loc>

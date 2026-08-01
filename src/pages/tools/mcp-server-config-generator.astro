@@ -1,0 +1,200 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'MCP Server Config Generator – JSON Builder | Nadhebe';
+const h1 = 'MCP Config Generator';
+const description = 'Visually build, validate, and generate the claude_desktop_config.json file required to connect Model Context Protocol (MCP) servers to Claude Desktop. 100% client-side.';
+
+const faq = [
+  {
+    question: 'Where do I put this generated JSON config?',
+    answer: 'On macOS, save it to ~/Library/Application Support/Claude/claude_desktop_config.json. On Windows, save it to %APPDATA%\\Claude\\claude_desktop_config.json.',
+  },
+  {
+    question: 'How do I add multiple MCP servers?',
+    answer: 'Simply click the "Add Server" button to add another MCP server block to the configuration. The generated JSON will automatically format them correctly under the mcpServers object.',
+  },
+  {
+    question: 'Is my configuration data stored anywhere?',
+    answer: 'No. This generator runs 100% client-side in your browser. Your server configurations, absolute paths, and environment variables (like API keys) are never sent to any server.',
+  }
+];
+---
+
+<ToolLayout
+  toolId="mcp-server-config-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="mcp-config-generator w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+      
+      <!-- Input Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Server Configuration</h2>
+          <button type="button" id="add-server-btn" class="inline-flex items-center gap-8 px-12 py-6 rounded-8 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark text-caption font-semibold hover:border-accent hover:text-accent dark:hover:border-accent-dark dark:hover:text-accent-dark transition-colors shadow-subtle">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Add Server
+          </button>
+        </div>
+
+        <div id="servers-container" class="space-y-24">
+          <!-- Server Block Template -->
+          <div class="server-block border border-border dark:border-border-dark rounded-12 p-16 bg-surface dark:bg-surface-dark relative">
+            <div class="grid grid-cols-1 gap-16">
+              <div>
+                <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Server Key (e.g., local_postgres)</label>
+                <input type="text" class="server-key w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" value="my_mcp_server" />
+              </div>
+              <div>
+                <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Command (e.g., npx, node, python3)</label>
+                <input type="text" class="server-command w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" value="npx" />
+              </div>
+              <div>
+                <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Arguments (Comma-separated)</label>
+                <input type="text" class="server-args w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" value="-y,@modelcontextprotocol/server-postgres,postgresql://localhost/mydb" />
+                <p class="text-xs text-muted dark:text-muted-dark mt-4">Example: -y, @modelcontextprotocol/server, arg3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft flex flex-col h-full min-h-[400px]">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Generated JSON</h2>
+          <button type="button" id="copy-json-btn" class="inline-flex items-center gap-8 px-12 py-6 rounded-8 bg-accent dark:bg-accent-dark text-white dark:text-bg text-caption font-bold hover:opacity-90 transition-opacity shadow-soft">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span id="copy-text">Copy to Clipboard</span>
+          </button>
+        </div>
+
+        <div class="flex-1 relative rounded-12 overflow-hidden border border-border dark:border-border-dark bg-[#1e1e1e]">
+          <pre id="json-output" class="absolute inset-0 m-0 p-16 overflow-auto text-sm font-mono text-[#d4d4d4] custom-scrollbar selection:bg-accent/30"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Claude Desktop Configuration Builder</h2>
+    <p>
+      The <strong>MCP Server Config Generator</strong> is a privacy-first, client-side utility designed to help AI engineers and developers safely construct their <code>claude_desktop_config.json</code> files without syntax errors.
+    </p>
+
+    <h3>Why use a generator?</h3>
+    <ul>
+      <li><strong>Prevent Silent Failures:</strong> Claude Desktop will silently ignore malformed JSON configuration files. This generator guarantees valid JSON structure.</li>
+      <li><strong>Array Formatting:</strong> Command-line arguments in MCP require strict array formatting. The tool automatically handles string splitting and quotes.</li>
+      <li><strong>Privacy First:</strong> Because MCP configs often contain absolute file paths to proprietary codebases or local database connection strings, this tool runs entirely locally in your browser.</li>
+    </ul>
+
+    <h3>How to integrate with Claude Desktop</h3>
+    <p>
+      Once you have generated your configuration block, click "Copy to Clipboard". Navigate to your Claude Desktop application support directory (<code>~/Library/Application Support/Claude/</code> on Mac) and paste the contents into <code>claude_desktop_config.json</code>. Restart Claude Desktop for the changes to take effect. 
+    </p>
+    <p>
+      For a complete walkthrough, read our guide on <a href="/tutorials/mcp-with-claude-desktop">How to Integrate MCP Servers with Claude Desktop</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupConfigGenerator() {
+    const container = document.getElementById('servers-container');
+    const addBtn = document.getElementById('add-server-btn');
+    const copyBtn = document.getElementById('copy-json-btn');
+    const copyText = document.getElementById('copy-text');
+    const output = document.getElementById('json-output');
+
+    if (!container || !output) return;
+
+    function generateJSON() {
+      const config: any = { mcpServers: {} };
+      const blocks = container.querySelectorAll('.server-block');
+      
+      blocks.forEach(block => {
+        const key = (block.querySelector('.server-key') as HTMLInputElement).value.trim() || 'unnamed_server';
+        const command = (block.querySelector('.server-command') as HTMLInputElement).value.trim();
+        const argsStr = (block.querySelector('.server-args') as HTMLInputElement).value;
+        
+        const args = argsStr.split(',').map(s => s.trim()).filter(s => s.length > 0);
+        
+        config.mcpServers[key] = {
+          command: command || 'npx',
+          args: args
+        };
+      });
+
+      // Simple syntax highlighting
+      const jsonStr = JSON.stringify(config, null, 2);
+      const highlighted = jsonStr
+        .replace(/"mcpServers":/g, '<span class="text-[#9cdcfe]">"mcpServers"</span>:')
+        .replace(/"command":/g, '<span class="text-[#9cdcfe]">"command"</span>:')
+        .replace(/"args":/g, '<span class="text-[#9cdcfe]">"args"</span>:')
+        .replace(/".*?"(?=:)/g, match => `<span class="text-[#4fc1ff]">${match}</span>`)
+        .replace(/:\s*".*?"/g, match => `: <span class="text-[#ce9178]">${match.substring(1).trim()}</span>`);
+        
+      output.innerHTML = highlighted;
+    }
+
+    function attachListeners(block: Element) {
+      const inputs = block.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.addEventListener('input', generateJSON);
+      });
+      
+      const removeBtn = block.querySelector('.remove-server-btn');
+      if (removeBtn) {
+        removeBtn.addEventListener('click', () => {
+          block.remove();
+          generateJSON();
+        });
+      }
+    }
+
+    // Attach to initial block
+    const initialBlock = container.querySelector('.server-block');
+    if (initialBlock) attachListeners(initialBlock);
+    generateJSON();
+
+    addBtn?.addEventListener('click', () => {
+      const clone = initialBlock?.cloneNode(true) as Element;
+      if (clone) {
+        // Add remove button
+        const header = document.createElement('div');
+        header.className = 'absolute top-16 right-16';
+        header.innerHTML = `<button type="button" class="remove-server-btn text-muted hover:text-red-500 transition-colors"><svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>`;
+        clone.appendChild(header);
+        
+        // Reset values
+        const inputs = clone.querySelectorAll('input');
+        inputs.forEach(input => input.value = '');
+        (clone.querySelector('.server-key') as HTMLInputElement).value = `server_${container.children.length + 1}`;
+        (clone.querySelector('.server-command') as HTMLInputElement).value = 'npx';
+        
+        container.appendChild(clone);
+        attachListeners(clone);
+        generateJSON();
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      const rawText = output.textContent || '';
+      navigator.clipboard.writeText(rawText).then(() => {
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          if (copyText) copyText.textContent = 'Copy to Clipboard';
+        }, 2000);
+      });
+    });
+  }
+
+  // Support Astro view transitions
+  setupConfigGenerator();
+  document.addEventListener('astro:page-load', setupConfigGenerator);
+</script>

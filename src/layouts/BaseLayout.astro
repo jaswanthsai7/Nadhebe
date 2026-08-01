@@ -207,6 +207,7 @@ if (canonicalUrl) {
     <!-- Curated random nature image loader (Only cycles on refresh or tab switch) -->
     <script is:inline>
       (function () {
+        console.time('nature-bg-init');
         const photos = [
           'photo-1507525428034-b723cf961d3e', // tropical beach
           'photo-1441974231531-c6227db76b6e', // forest
@@ -295,6 +296,7 @@ if (canonicalUrl) {
 
         // Apply bg unconditionally once per page load/refresh
         applyBg(true);
+        console.timeEnd('nature-bg-init');
       })();
     </script>
 

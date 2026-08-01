@@ -1,0 +1,171 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'API Payload Builder – JSON Request Generator | Nadhebe';
+const h1 = 'API Payload Builder';
+const description = 'Visually construct, validate, and generate complex JSON payloads for the Gemini API, OpenAI API, and Anthropic API. 100% client-side execution.';
+
+const faq = [
+  {
+    question: 'Does this tool send my data to external servers?',
+    answer: 'No. The API Payload Builder runs 100% client-side. Your prompts, system instructions, and data are processed locally in your browser.',
+  },
+  {
+    question: 'Can I use this for the OpenAI or Anthropic API?',
+    answer: 'Yes! While optimized for Gemini API structures, the tool allows you to build generic JSON payloads that can be adapted for any REST API.',
+  },
+  {
+    question: 'How do I use the generated JSON?',
+    answer: 'Simply copy the generated JSON from the output panel and paste it directly into your fetch requests, Postman, or cURL commands.',
+  }
+];
+---
+
+<ToolLayout
+  toolId="api-payload-builder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="api-payload-builder w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+      
+      <!-- Input Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Payload Configuration</h2>
+        </div>
+
+        <div class="space-y-24">
+          <!-- System Instruction -->
+          <div class="border border-border dark:border-border-dark rounded-12 p-16 bg-surface dark:bg-surface-dark">
+            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">System Instruction (Optional)</label>
+            <textarea id="system-input" rows="2" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="You are a helpful AI assistant..."></textarea>
+          </div>
+
+          <!-- Generation Config -->
+          <div class="border border-border dark:border-border-dark rounded-12 p-16 bg-surface dark:bg-surface-dark grid grid-cols-2 gap-16">
+            <div>
+              <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Temperature</label>
+              <input type="number" id="temp-input" min="0" max="2" step="0.1" value="0.7" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" />
+            </div>
+            <div>
+              <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Max Output Tokens</label>
+              <input type="number" id="tokens-input" min="1" max="8192" value="2048" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" />
+            </div>
+          </div>
+
+          <!-- User Prompt -->
+          <div class="border border-border dark:border-border-dark rounded-12 p-16 bg-surface dark:bg-surface-dark">
+            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">User Prompt</label>
+            <textarea id="prompt-input" rows="4" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="Explain quantum computing..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft flex flex-col h-full min-h-[400px]">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">JSON Payload</h2>
+          <button type="button" id="copy-json-btn" class="inline-flex items-center gap-8 px-12 py-6 rounded-8 bg-accent dark:bg-accent-dark text-white dark:text-bg text-caption font-bold hover:opacity-90 transition-opacity shadow-soft">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span id="copy-text">Copy JSON</span>
+          </button>
+        </div>
+
+        <div class="flex-1 relative rounded-12 overflow-hidden border border-border dark:border-border-dark bg-[#1e1e1e]">
+          <pre id="json-output" class="absolute inset-0 m-0 p-16 overflow-auto text-sm font-mono text-[#d4d4d4] custom-scrollbar selection:bg-accent/30"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Construct Complex API Payloads</h2>
+    <p>
+      The <strong>API Payload Builder</strong> is a developer utility designed to visually generate properly structured JSON payloads for AI model endpoints like the Gemini API. 
+    </p>
+
+    <h3>Why use a payload builder?</h3>
+    <ul>
+      <li><strong>Prevent 400 Bad Request Errors:</strong> LLM APIs require strict JSON structures for their contents array and generation config objects. This tool ensures your payload is always valid.</li>
+      <li><strong>Fast Prototyping:</strong> Quickly test different temperature and token limits without manually editing JSON strings in your code.</li>
+    </ul>
+
+    <p>
+      For a complete walkthrough on how to use this payload, read our <a href="/tutorials/gemini-api-guide">Gemini API Developer Guide</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupPayloadBuilder() {
+    const sysInput = document.getElementById('system-input') as HTMLTextAreaElement;
+    const promptInput = document.getElementById('prompt-input') as HTMLTextAreaElement;
+    const tempInput = document.getElementById('temp-input') as HTMLInputElement;
+    const tokensInput = document.getElementById('tokens-input') as HTMLInputElement;
+    
+    const copyBtn = document.getElementById('copy-json-btn');
+    const copyText = document.getElementById('copy-text');
+    const output = document.getElementById('json-output');
+
+    if (!output || !promptInput) return;
+
+    function generateJSON() {
+      const systemText = sysInput?.value.trim();
+      const promptText = promptInput.value.trim() || 'Explain quantum computing...';
+      const temperature = parseFloat(tempInput?.value) || 0.7;
+      const maxTokens = parseInt(tokensInput?.value) || 2048;
+      
+      const payload: any = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: promptText }]
+          }
+        ],
+        generationConfig: {
+          temperature: temperature,
+          maxOutputTokens: maxTokens
+        }
+      };
+
+      if (systemText) {
+        payload.systemInstruction = {
+          role: "system",
+          parts: [{ text: systemText }]
+        };
+      }
+
+      // Simple syntax highlighting
+      const jsonStr = JSON.stringify(payload, null, 2);
+      const highlighted = jsonStr
+        .replace(/"(contents|generationConfig|systemInstruction|role|parts|text|temperature|maxOutputTokens)":/g, '<span class="text-[#9cdcfe]">"$1"</span>:')
+        .replace(/".*?"(?=:)/g, match => `<span class="text-[#4fc1ff]">${match}</span>`)
+        .replace(/:\s*".*?"/g, match => `: <span class="text-[#ce9178]">${match.substring(1).trim()}</span>`)
+        .replace(/:\s*([0-9.]+)/g, match => `: <span class="text-[#b5cea8]">${match.substring(1).trim()}</span>`);
+        
+      output.innerHTML = highlighted;
+    }
+
+    [sysInput, promptInput, tempInput, tokensInput].forEach(el => {
+      el?.addEventListener('input', generateJSON);
+    });
+
+    generateJSON();
+
+    copyBtn?.addEventListener('click', () => {
+      const rawText = output.textContent || '';
+      navigator.clipboard.writeText(rawText).then(() => {
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          if (copyText) copyText.textContent = 'Copy JSON';
+        }, 2000);
+      });
+    });
+  }
+
+  setupPayloadBuilder();
+  document.addEventListener('astro:page-load', setupPayloadBuilder);
+</script>

@@ -1,0 +1,223 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'Claude Hook Template Generator | Nadhebe';
+const h1 = 'Claude Hook Generator';
+const description = 'Generate automated Git hook bash scripts (pre-commit, pre-push) powered by Claude Code. Automate code reviews, security checks, and formatting.';
+
+const faq = [
+  {
+    question: 'Where do I save the generated bash script?',
+    answer: 'Save it in your repository under `.git/hooks/` and name the file based on the hook type (e.g., `pre-commit` or `pre-push`). Remove any `.sh` extensions.',
+  },
+  {
+    question: 'Why does my hook say "Permission Denied"?',
+    answer: 'Git hooks require execution permissions. Run `chmod +x .git/hooks/pre-commit` in your terminal to make the script executable.',
+  },
+  {
+    question: 'Can I bypass the hook if Claude is taking too long?',
+    answer: 'Yes. You can bypass any local Git hook by appending the `--no-verify` flag to your git command (e.g., `git commit -m "update" --no-verify`).',
+  }
+];
+---
+
+<ToolLayout
+  toolId="claude-hook-template-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="claude-hook-generator w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+      
+      <!-- Input Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Hook Configuration</h2>
+        </div>
+
+        <div class="space-y-24">
+          <!-- Hook Type -->
+          <div>
+            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Git Hook Type</label>
+            <select id="hook-type" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-sans text-ink dark:text-ink-dark focus:border-accent outline-none">
+              <option value="pre-commit">pre-commit (Check staged files)</option>
+              <option value="pre-push">pre-push (Check before pushing to remote)</option>
+              <option value="commit-msg">commit-msg (Check/Write commit message)</option>
+            </select>
+          </div>
+
+          <!-- Objective -->
+          <div>
+            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Primary AI Objective</label>
+            <select id="hook-objective" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-sans text-ink dark:text-ink-dark focus:border-accent outline-none">
+              <option value="security">Security & Secrets Scan</option>
+              <option value="review">Code Quality & Best Practices Review</option>
+              <option value="docs">Missing Documentation Check</option>
+            </select>
+          </div>
+
+          <!-- Custom Instructions -->
+          <div>
+            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Custom Prompt Addition (Optional)</label>
+            <textarea id="custom-prompt" rows="3" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" placeholder="e.g. Ensure no console.logs are left in the code."></textarea>
+          </div>
+          
+          <!-- Strict Mode -->
+          <div class="flex items-center gap-8">
+            <input type="checkbox" id="strict-mode" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+            <label for="strict-mode" class="text-caption font-medium text-ink dark:text-ink-dark">Strict Mode (Block commit/push if Claude finds issues)</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft flex flex-col h-full min-h-[400px]">
+        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
+          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Bash Script</h2>
+          <button type="button" id="copy-bash-btn" class="inline-flex items-center gap-8 px-12 py-6 rounded-8 bg-accent dark:bg-accent-dark text-white dark:text-bg text-caption font-bold hover:opacity-90 transition-opacity shadow-soft">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span id="copy-text">Copy Script</span>
+          </button>
+        </div>
+
+        <div class="flex-1 relative rounded-12 overflow-hidden border border-border dark:border-border-dark bg-[#1e1e1e]">
+          <pre id="bash-output" class="absolute inset-0 m-0 p-16 overflow-auto text-sm font-mono text-[#d4d4d4] custom-scrollbar selection:bg-accent/30"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Automate Git Hooks with AI</h2>
+    <p>
+      The <strong>Claude Hook Template Generator</strong> is a fast, entirely client-side utility that writes customized bash scripts to integrate Anthropic's Claude Code CLI directly into your Git workflow.
+    </p>
+
+    <h3>Supported Hooks</h3>
+    <ul>
+      <li><strong>pre-commit:</strong> Analyzes your staged files (via <code>git diff --cached</code>) before they are committed locally. Great for catching syntax errors, console logs, or missing tests.</li>
+      <li><strong>pre-push:</strong> Analyzes your outgoing commits against the remote branch. Ideal for deep architectural reviews before submitting a Pull Request.</li>
+      <li><strong>commit-msg:</strong> Parses the commit message format and rewrites it to match Conventional Commits or your internal team guidelines.</li>
+    </ul>
+
+    <p>
+      To learn more about how to set up and configure these scripts in your terminal, check out our guide on <a href="/tutorials/claude-code-hooks-guide">Mastering Claude Code Hooks</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupHookGenerator() {
+    const typeSelect = document.getElementById('hook-type') as HTMLSelectElement;
+    const objSelect = document.getElementById('hook-objective') as HTMLSelectElement;
+    const customPrompt = document.getElementById('custom-prompt') as HTMLTextAreaElement;
+    const strictCheckbox = document.getElementById('strict-mode') as HTMLInputElement;
+    
+    const copyBtn = document.getElementById('copy-bash-btn');
+    const copyText = document.getElementById('copy-text');
+    const output = document.getElementById('bash-output');
+
+    if (!output || !typeSelect) return;
+
+    function generateScript() {
+      const type = typeSelect.value;
+      const objective = objSelect.value;
+      const custom = customPrompt.value.trim();
+      const isStrict = strictCheckbox.checked;
+      
+      let diffCmd = 'git diff --cached';
+      let scopeStr = 'staged changes';
+      
+      if (type === 'pre-push') {
+        diffCmd = 'git diff origin/main...HEAD';
+        scopeStr = 'outgoing commits';
+      } else if (type === 'commit-msg') {
+        diffCmd = 'cat $1';
+        scopeStr = 'commit message';
+      }
+      
+      let basePrompt = '';
+      if (objective === 'security') {
+        basePrompt = `Review this for security vulnerabilities like hardcoded API keys or SQL injection.`;
+      } else if (objective === 'review') {
+        basePrompt = `Review this code for quality, performance bottlenecks, and best practices.`;
+      } else if (objective === 'docs') {
+        basePrompt = `Check if new functions or classes are missing JSDoc/docstrings.`;
+      }
+      
+      const fullPrompt = `${basePrompt} ${custom ? custom + ' ' : ''}If it is completely fine, reply exactly with the word 'SAFE'. If there are issues, list them clearly.\n\n$DIFF_OUTPUT`;
+      
+      let script = `#!/bin/bash
+# ${type} hook generated by Nadhebe
+
+echo "🤖 Claude Code is reviewing your ${scopeStr}..."
+
+# Get the relevant diff or content
+DIFF_OUTPUT=$(${diffCmd})
+
+if [ -z "$DIFF_OUTPUT" ]; then
+  exit 0
+fi
+
+# Send to Claude CLI
+# Note: Adjust the --prompt flag syntax based on your installed Claude CLI version
+RESPONSE=$(claude --prompt "${fullPrompt}")
+
+if [[ "$RESPONSE" == *"SAFE"* ]]; then
+  echo "✅ Claude approved."
+  exit 0
+else
+  echo "❌ Claude found potential issues:"
+  echo "$RESPONSE"
+`;
+
+      if (isStrict) {
+        script += `  
+  echo "Commit blocked by strict mode. Fix issues or use --no-verify to bypass."
+  exit 1
+fi`;
+      } else {
+        script += `  
+  echo "Strict mode disabled. Allowing operation to proceed."
+  exit 0
+fi`;
+      }
+
+      // Syntax highlighting for bash
+      const highlighted = script
+        .replace(/#!/g, '<span class="text-[#569cd6]">#!</span>')
+        .replace(/echo /g, '<span class="text-[#569cd6]">echo </span>')
+        .replace(/if \[ /g, '<span class="text-[#c586c0]">if</span> <span class="text-[#d4d4d4]">[ </span>')
+        .replace(/else/g, '<span class="text-[#c586c0]">else</span>')
+        .replace(/fi/g, '<span class="text-[#c586c0]">fi</span>')
+        .replace(/exit ([0-9])/g, '<span class="text-[#c586c0]">exit</span> <span class="text-[#b5cea8]">$1</span>')
+        .replace(/"(.*?)"/g, '<span class="text-[#ce9178]">"$1"</span>')
+        .replace(/\$(?:\w+|\{.*?\})/g, match => `<span class="text-[#9cdcfe]">${match}</span>`)
+        .replace(/#.*?$/gm, match => `<span class="text-[#6a9955]">${match}</span>`);
+        
+      output.innerHTML = highlighted;
+    }
+
+    [typeSelect, objSelect, customPrompt, strictCheckbox].forEach(el => {
+      el?.addEventListener('change', generateScript);
+      el?.addEventListener('input', generateScript);
+    });
+
+    generateScript();
+
+    copyBtn?.addEventListener('click', () => {
+      const rawText = output.textContent || '';
+      navigator.clipboard.writeText(rawText).then(() => {
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          if (copyText) copyText.textContent = 'Copy Script';
+        }, 2000);
+      });
+    });
+  }
+
+  setupHookGenerator();
+  document.addEventListener('astro:page-load', setupHookGenerator);
+</script>
