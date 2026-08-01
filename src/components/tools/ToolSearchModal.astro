@@ -36,7 +36,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
             autocomplete="off"
             class="flex-1 bg-transparent border-0 outline-none text-body text-ink placeholder:text-muted focus:ring-0 focus:outline-none dark:text-ink-dark dark:placeholder:text-muted-dark font-display"
           />
-          <kbd class="hidden sm:flex items-center justify-center rounded-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-8 py-4 text-[10px] font-mono text-muted dark:text-muted-dark select-none shadow-sm tracking-widest">ESC</kbd>
+          <button type="button" id="tool-modal-close-btn" aria-label="Close search" class="hidden sm:flex items-center justify-center rounded-6 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-8 py-4 text-[10px] font-mono text-muted dark:text-muted-dark select-none shadow-sm tracking-widest hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors cursor-pointer">ESC</button>
         </div>
 
         <!-- Results -->
@@ -78,6 +78,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
     
     // The trigger buttons from the dashboard/index
     const triggerBtns = document.querySelectorAll('.tool-search-trigger');
+    const closeBtn = document.getElementById('tool-modal-close-btn');
     
     let selectedIndex = -1;
     let filteredTools = [...toolsData];
@@ -166,6 +167,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
 
     // Attach click listeners to trigger buttons
     triggerBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeBtn?.addEventListener('click', closeModal);
 
     // Overlay click to close
     overlay?.addEventListener('mousedown', (e) => {
