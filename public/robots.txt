@@ -1,8 +1,8 @@
-# Robots.txt for Nadhebe (https://nadhebe.com)
+# Content Signals (https://contentsignals.org)
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 User-agent: *
 Allow: /
-# Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 # Search Engine Crawlers
 User-agent: Googlebot
