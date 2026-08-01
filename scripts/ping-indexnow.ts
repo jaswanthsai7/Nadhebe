@@ -62,6 +62,17 @@ async function run() {
     urlList: urls.slice(0, 10000)
   };
 
+  // IndexNow sometimes requires an initial GET ping to warm up domain authorization
+  // before accepting bulk POST submissions. Do this first.
+  try {
+    const warmupUrl = `https://api.indexnow.org/indexnow?url=${encodeURIComponent(urls[0])}&key=${INDEXNOW_KEY}&keyLocation=${encodeURIComponent(KEY_LOCATION)}`;
+    const warmup = await fetch(warmupUrl, { method: 'GET' });
+    console.log(`IndexNow GET warmup ping: HTTP ${warmup.status}`);
+    // Allow 200, 202, 400 (already submitted), 404 (new URL) as acceptable
+  } catch (warmupErr) {
+    console.warn('IndexNow GET warmup ping failed:', warmupErr);
+  }
+
   const endpoints = [
     'https://api.indexnow.org/indexnow',
     'https://www.bing.com/indexnow'

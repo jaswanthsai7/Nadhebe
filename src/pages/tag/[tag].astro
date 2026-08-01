@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   allArticles.forEach(post => {
     if (post.data.tags) {
       post.data.tags.forEach(tag => {
-        const slug = tag.toLowerCase().replace(/\s+/g, '-');
+        const slug = tag.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
         if (!tagMap.has(slug)) {
           tagMap.set(slug, { tagName: tag, posts: [] });
         }
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
       });
     }
     if (post.data.topic) {
-      const slug = post.data.topic.toLowerCase().replace(/\s+/g, '-');
+      const slug = post.data.topic.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
       if (!tagMap.has(slug)) {
         tagMap.set(slug, { tagName: post.data.topic, posts: [] });
       }

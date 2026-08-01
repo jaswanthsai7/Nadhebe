@@ -363,7 +363,7 @@ const topStories = gemini36Post
       <div class="flex flex-wrap gap-8">
         {trendingTopics.map(topic => (
           <a
-            href={`/tag/${topic!.toLowerCase().replace(/\s+/g, '-')}`}
+            href={`/tag/${topic!.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
             class="inline-flex items-center gap-6 rounded-8 border border-border dark:border-border-dark glass-panel px-12 py-8 text-caption font-sans font-medium text-ink2 hover:text-ink hover:border-ink2/30 dark:text-ink2-dark dark:hover:text-ink-dark transition-all duration-150"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-40">
