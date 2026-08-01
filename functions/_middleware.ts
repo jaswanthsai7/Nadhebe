@@ -123,6 +123,32 @@ export const onRequest = async (context: PagesContext) => {
       });
     }
 
+    // Serve Nadhebe custom 404.html page if response status is 404
+    if (response.status === 404) {
+      try {
+        const notFoundUrl = new URL('/404.html', request.url);
+        let notFoundRes: Response | null = null;
+        if ((context as any).env && (context as any).env.ASSETS) {
+          notFoundRes = await (context as any).env.ASSETS.fetch(new Request(notFoundUrl.toString(), request));
+        } else {
+          notFoundRes = await fetch(notFoundUrl.toString());
+        }
+        if (notFoundRes && (notFoundRes.status === 200 || notFoundRes.status === 404)) {
+          const html404 = await notFoundRes.text();
+          return new Response(html404, {
+            status: 404,
+            statusText: 'Not Found',
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'no-cache, no-store, must-revalidate'
+            }
+          });
+        }
+      } catch (err404) {
+        console.error('404 Page Fetch Error:', err404);
+      }
+    }
+
     return response;
   } catch (err) {
     console.error('Pages Functions Middleware Error:', err);
