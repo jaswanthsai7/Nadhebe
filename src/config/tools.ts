@@ -16,11 +16,30 @@ export function getToolBySlug(slug: string): UnifiedTool | undefined {
 }
 
 export function getRelatedTools(slug: string, count: number = 4): UnifiedTool[] {
-  return getRelatedToolsForSlug(slug, count);
+  const result = getRelatedToolsForSlug(slug, count);
+  return result || [];
 }
 
-export function getRelatedToolsForComponent(slug: string, count: number = 4): UnifiedTool[] {
-  return getRelatedToolsForSlug(slug, count);
+export function getRelatedToolsForComponent(
+  slug: string = '',
+  options: { customCategory?: string; customTools?: UnifiedTool[]; limit?: number } = {}
+): { categoryName: string; items: UnifiedTool[] } {
+  const { customCategory, customTools, limit = 6 } = options;
+  if (customTools && customTools.length > 0) {
+    return {
+      categoryName: customCategory || 'Related Tools',
+      items: customTools.slice(0, limit),
+    };
+  }
+
+  const currentTool = getToolBySlugFromRegistry(slug);
+  const categoryName = customCategory || (currentTool ? `More ${currentTool.category} Utilities` : 'Related Tools');
+  const items = getRelatedToolsForSlug(slug, limit);
+
+  return {
+    categoryName,
+    items: items || [],
+  };
 }
 
 export { UNIFIED_TOOLS_REGISTRY, IMPLEMENTED_TOOLS, PLANNED_TOOLS };
