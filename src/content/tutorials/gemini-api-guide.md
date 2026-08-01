@@ -12,7 +12,8 @@ isPillar: false
 topic: "Gemini APIs"
 parentPillar: "State of Gemini 2026"
 searchIntent: "how-to"
-draft: true
+draft: false
+diagramType: 'gemini'
 faq:
   - question: "How do I get a Gemini API key?"
     answer: "You can generate a Gemini API key directly from Google AI Studio. Ensure you keep it secure and do not commit it to public repositories."

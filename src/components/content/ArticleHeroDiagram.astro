@@ -7,123 +7,234 @@ interface Props {
 const { type, title } = Astro.props;
 ---
 
-<div class="relative w-full overflow-hidden rounded-2xl border border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-900/50 shadow-sm transition-all hover:shadow-md">
-  <!-- Subtle Grid Background -->
-  <div class="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(var(--tw-colors-slate-500) 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="relative w-full overflow-hidden rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white dark:bg-slate-900 shadow-xl transition-all hover:shadow-2xl group">
+  
+  <!-- Subtle Animated Glow Backgrounds -->
+  <div class="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-blue-500/10 dark:bg-blue-500/20 blur-3xl transition-opacity duration-700 group-hover:opacity-70 opacity-50"></div>
+  <div class="absolute -right-32 -bottom-32 h-64 w-64 rounded-full bg-purple-500/10 dark:bg-purple-500/20 blur-3xl transition-opacity duration-700 group-hover:opacity-70 opacity-50"></div>
+  
+  <!-- Premium Dot Grid -->
+  <div class="absolute inset-0 z-0 opacity-[0.15] dark:opacity-[0.2]" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 20px 20px;"></div>
 
   <!-- Content Container -->
-  <div class="relative z-10 flex min-h-[320px] w-full flex-col items-center justify-center p-8 sm:p-12">
+  <div class="relative z-10 flex min-h-[360px] w-full flex-col items-center justify-center p-8 sm:p-12">
     
     {type === 'mcp' && (
-      <svg class="w-full max-w-2xl drop-shadow-sm" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="w-full max-w-3xl drop-shadow-sm" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#2563eb" />
+          </linearGradient>
+          <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a855f7" />
+            <stop offset="100%" stop-color="#7e22ce" />
+          </linearGradient>
+          <linearGradient id="grad-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#059669" />
+          </linearGradient>
+          <!-- Animated gradient for connectors -->
+          <linearGradient id="line-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.2" />
+            <stop offset="50%" stop-color="#8b5cf6" stop-opacity="1">
+              <animate attributeName="offset" values="-0.5; 1.5" dur="3s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.2" />
+          </linearGradient>
+        </defs>
+
         <!-- Title -->
-        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">{title || "MCP Architecture"}</text>
+        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-100 tracking-tight">{title || "MCP Architecture"}</text>
+        <text x="400" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">Context-aware integration via JSON-RPC</text>
+        
+        <!-- Smooth Bezier Connectors -->
+        <!-- Claude to MCP -->
+        <path d="M 230 180 C 270 180, 270 180, 310 180" stroke="url(#line-glow)" stroke-width="3" stroke-dasharray="6 6" fill="none" />
+        <circle cx="270" cy="180" r="3" fill="#8b5cf6" filter="url(#glow)">
+          <animate attributeName="cx" values="230; 310" dur="2s" repeatCount="indefinite" />
+        </circle>
+        
+        <!-- MCP to Local -->
+        <path d="M 490 180 C 530 180, 530 180, 570 180" stroke="url(#line-glow)" stroke-width="3" stroke-dasharray="6 6" fill="none" />
+        <circle cx="530" cy="180" r="3" fill="#10b981" filter="url(#glow)">
+          <animate attributeName="cx" values="490; 570" dur="2s" repeatCount="indefinite" />
+        </circle>
         
         <!-- Nodes -->
-        <!-- Claude Desktop -->
-        <rect x="50" y="100" width="180" height="80" rx="12" fill="var(--tw-colors-blue-50)" stroke="var(--tw-colors-blue-500)" stroke-width="2" class="dark:fill-blue-950/30" />
-        <path d="M140 130 h-20 v20 h20 z" fill="var(--tw-colors-blue-500)" />
-        <text x="140" y="160" font-family="system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" text-anchor="middle" class="text-blue-900 dark:text-blue-100">Claude Desktop</text>
         
-        <!-- MCP Server -->
-        <rect x="310" y="100" width="180" height="80" rx="12" fill="var(--tw-colors-purple-50)" stroke="var(--tw-colors-purple-500)" stroke-width="2" class="dark:fill-purple-950/30" />
-        <circle cx="400" cy="130" r="10" fill="var(--tw-colors-purple-500)" />
-        <text x="400" y="160" font-family="system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" text-anchor="middle" class="text-purple-900 dark:text-purple-100">MCP Server</text>
+        <!-- 1. Claude Desktop -->
+        <g transform="translate(50, 130)">
+          <!-- Glass Panel -->
+          <rect width="180" height="100" rx="16" class="fill-white/80 stroke-slate-200 dark:fill-slate-800/80 dark:stroke-slate-700 backdrop-blur-md" stroke-width="1.5" />
+          <rect width="180" height="100" rx="16" stroke="url(#grad-blue)" stroke-width="1.5" opacity="0.3" filter="url(#glow)" />
+          
+          <!-- Icon -->
+          <rect x="70" y="20" width="40" height="40" rx="10" fill="url(#grad-blue)" fill-opacity="0.1" />
+          <path d="M78 40 h24 M82 32 l-4 8 l4 8 M98 32 l4 8 l-4 8" stroke="url(#grad-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          
+          <text x="90" y="80" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">Claude Desktop</text>
+        </g>
 
-        <!-- Tools / Filesystem -->
-        <rect x="570" y="100" width="180" height="80" rx="12" fill="var(--tw-colors-emerald-50)" stroke="var(--tw-colors-emerald-500)" stroke-width="2" class="dark:fill-emerald-950/30" />
-        <path d="M660 120 l-10 20 h20 z" fill="var(--tw-colors-emerald-500)" />
-        <text x="660" y="160" font-family="system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" text-anchor="middle" class="text-emerald-900 dark:text-emerald-100">Local Resources</text>
-
-        <!-- Connectors -->
-        <path d="M230 140 H310" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" class="text-slate-400 dark:text-slate-600" />
-        <polygon points="310,140 300,135 300,145" fill="currentColor" class="text-slate-400 dark:text-slate-600" />
-        
-        <path d="M490 140 H570" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" class="text-slate-400 dark:text-slate-600" />
-        <polygon points="570,140 560,135 560,145" fill="currentColor" class="text-slate-400 dark:text-slate-600" />
-        
         <!-- Protocol Labels -->
-        <rect x="235" y="115" width="70" height="24" rx="4" fill="var(--tw-colors-slate-100)" class="dark:fill-slate-800" />
-        <text x="270" y="132" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="currentColor" text-anchor="middle" class="text-slate-600 dark:text-slate-300">JSON-RPC</text>
+        <g transform="translate(240, 140)">
+          <rect width="60" height="22" rx="11" class="fill-slate-100 dark:fill-slate-800 border border-slate-200 dark:border-slate-700" stroke-width="1" />
+          <text x="30" y="15" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">JSON-RPC</text>
+        </g>
+        
+        <!-- 2. MCP Server -->
+        <g transform="translate(310, 130)">
+          <rect width="180" height="100" rx="16" class="fill-white/80 stroke-slate-200 dark:fill-slate-800/80 dark:stroke-slate-700 backdrop-blur-md" stroke-width="1.5" />
+          <rect width="180" height="100" rx="16" stroke="url(#grad-purple)" stroke-width="2" opacity="0.5" filter="url(#glow)" />
+          
+          <!-- Icon -->
+          <rect x="70" y="20" width="40" height="40" rx="10" fill="url(#grad-purple)" fill-opacity="0.1" />
+          <path d="M78 30 h24 M78 40 h24 M78 50 h24 M82 30 h2 M82 40 h2 M82 50 h2" stroke="url(#grad-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          
+          <text x="90" y="80" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">MCP Server</text>
+        </g>
 
-        <rect x="495" y="115" width="70" height="24" rx="4" fill="var(--tw-colors-slate-100)" class="dark:fill-slate-800" />
-        <text x="530" y="132" font-family="system-ui, sans-serif" font-size="12" font-weight="500" fill="currentColor" text-anchor="middle" class="text-slate-600 dark:text-slate-300">Exec/Read</text>
+        <!-- Protocol Labels -->
+        <g transform="translate(500, 140)">
+          <rect width="60" height="22" rx="11" class="fill-slate-100 dark:fill-slate-800 border border-slate-200 dark:border-slate-700" stroke-width="1" />
+          <text x="30" y="15" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">Exec/Read</text>
+        </g>
+
+        <!-- 3. Local Resources -->
+        <g transform="translate(570, 130)">
+          <rect width="180" height="100" rx="16" class="fill-white/80 stroke-slate-200 dark:fill-slate-800/80 dark:stroke-slate-700 backdrop-blur-md" stroke-width="1.5" />
+          <rect width="180" height="100" rx="16" stroke="url(#grad-emerald)" stroke-width="1.5" opacity="0.3" filter="url(#glow)" />
+          
+          <!-- Icon -->
+          <rect x="70" y="20" width="40" height="40" rx="10" fill="url(#grad-emerald)" fill-opacity="0.1" />
+          <path d="M78 32 a4 4 0 0 1 4 -4 h6 l4 4 h6 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-20 a4 4 0 0 1 -4 -4 z" stroke="url(#grad-emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          
+          <text x="90" y="80" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">Local Resources</text>
+        </g>
       </svg>
     )}
 
     {type === 'gemini' && (
-      <svg class="w-full max-w-2xl drop-shadow-sm" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">{title || "Gemini Multimodal Processing"}</text>
-        
-        <!-- Inputs -->
-        <rect x="80" y="80" width="120" height="40" rx="8" fill="var(--tw-colors-blue-50)" stroke="var(--tw-colors-blue-500)" stroke-width="2" class="dark:fill-blue-950/30" />
-        <text x="140" y="105" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" text-anchor="middle" class="text-blue-900 dark:text-blue-100">Text Prompt</text>
-        
-        <rect x="80" y="140" width="120" height="40" rx="8" fill="var(--tw-colors-orange-50)" stroke="var(--tw-colors-orange-500)" stroke-width="2" class="dark:fill-orange-950/30" />
-        <text x="140" y="165" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" text-anchor="middle" class="text-orange-900 dark:text-orange-100">Image Data</text>
+      <svg class="w-full max-w-3xl drop-shadow-sm" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <linearGradient id="grad-gemini" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6" />
+            <stop offset="50%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#f43f5e" />
+          </linearGradient>
+        </defs>
 
-        <rect x="80" y="200" width="120" height="40" rx="8" fill="var(--tw-colors-emerald-50)" stroke="var(--tw-colors-emerald-500)" stroke-width="2" class="dark:fill-emerald-950/30" />
-        <text x="140" y="225" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" text-anchor="middle" class="text-emerald-900 dark:text-emerald-100">Video / Audio</text>
+        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-100 tracking-tight">{title || "Gemini Multimodal Processing"}</text>
+        <text x="400" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">Native processing of text, vision, and audio</text>
+        
+        <!-- Connecting Paths -->
+        <path d="M220 120 C 270 120, 270 180, 310 180" stroke="currentColor" class="text-slate-300 dark:text-slate-600" stroke-width="2" fill="none" stroke-dasharray="4 4" />
+        <path d="M220 180 C 270 180, 270 180, 310 180" stroke="currentColor" class="text-slate-300 dark:text-slate-600" stroke-width="2" fill="none" stroke-dasharray="4 4" />
+        <path d="M220 240 C 270 240, 270 180, 310 180" stroke="currentColor" class="text-slate-300 dark:text-slate-600" stroke-width="2" fill="none" stroke-dasharray="4 4" />
+        
+        <path d="M 490 180 L 590 180" stroke="url(#grad-gemini)" stroke-width="4" fill="none" filter="url(#glow2)" />
+        <polygon points="590,180 580,174 580,186" fill="#f43f5e" />
+
+        <!-- Inputs -->
+        <g transform="translate(60, 100)">
+          <rect width="160" height="40" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5" />
+          <circle cx="20" cy="20" r="4" class="fill-blue-500" />
+          <text x="40" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" class="text-slate-700 dark:text-slate-300">Text Prompt</text>
+        </g>
+        
+        <g transform="translate(60, 160)">
+          <rect width="160" height="40" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5" />
+          <circle cx="20" cy="20" r="4" class="fill-orange-500" />
+          <text x="40" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" class="text-slate-700 dark:text-slate-300">Image Data</text>
+        </g>
+
+        <g transform="translate(60, 220)">
+          <rect width="160" height="40" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5" />
+          <circle cx="20" cy="20" r="4" class="fill-emerald-500" />
+          <text x="40" y="25" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="currentColor" class="text-slate-700 dark:text-slate-300">Video / Audio</text>
+        </g>
 
         <!-- Core Model -->
-        <rect x="300" y="80" width="200" height="160" rx="16" fill="var(--tw-colors-slate-900)" stroke="var(--tw-colors-slate-700)" stroke-width="2" class="dark:fill-slate-800" />
-        <path d="M400 120 l20 20 l-10 10 l-20 -20 z" fill="var(--tw-colors-blue-400)" />
-        <path d="M400 120 l-20 20 l10 10 l20 -20 z" fill="var(--tw-colors-indigo-400)" />
-        <text x="400" y="180" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">Gemini 1.5</text>
-        <text x="400" y="210" font-family="system-ui, sans-serif" font-size="14" fill="var(--tw-colors-slate-400)" text-anchor="middle">1M+ Token Context</text>
+        <g transform="translate(310, 100)">
+          <rect width="180" height="160" rx="24" class="fill-slate-900 dark:fill-slate-950 stroke-slate-700 dark:stroke-slate-800" stroke-width="2" />
+          <rect width="180" height="160" rx="24" stroke="url(#grad-gemini)" stroke-width="2" opacity="0.4" filter="url(#glow2)" />
+          
+          <path d="M90 40 l20 20 l-10 10 l-20 -20 z" fill="#3b82f6" />
+          <path d="M90 40 l-20 20 l10 10 l20 -20 z" fill="#8b5cf6" />
+          <circle cx="90" cy="50" r="3" fill="#fff" filter="url(#glow2)" />
+          
+          <text x="90" y="110" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#fff" text-anchor="middle" tracking="tight">Gemini 1.5</text>
+          <text x="90" y="135" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#94a3b8" text-anchor="middle">1M+ Token Context</text>
+        </g>
 
         <!-- Output -->
-        <rect x="600" y="120" width="140" height="80" rx="12" fill="var(--tw-colors-purple-50)" stroke="var(--tw-colors-purple-500)" stroke-width="2" class="dark:fill-purple-950/30" />
-        <text x="670" y="160" font-family="system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" text-anchor="middle" class="text-purple-900 dark:text-purple-100">Structured</text>
-        <text x="670" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="500" fill="currentColor" text-anchor="middle" class="text-purple-900 dark:text-purple-100">JSON Output</text>
-
-        <!-- Connecting Lines -->
-        <path d="M200 100 Q250 100 250 160 T300 160" stroke="currentColor" stroke-width="2" fill="none" class="text-slate-300 dark:text-slate-600" />
-        <path d="M200 160 H300" stroke="currentColor" stroke-width="2" fill="none" class="text-slate-300 dark:text-slate-600" />
-        <path d="M200 220 Q250 220 250 160 T300 160" stroke="currentColor" stroke-width="2" fill="none" class="text-slate-300 dark:text-slate-600" />
-        
-        <path d="M500 160 H600" stroke="currentColor" stroke-width="3" fill="none" class="text-purple-400" />
-        <polygon points="600,160 590,155 590,165" fill="currentColor" class="text-purple-400" />
+        <g transform="translate(600, 140)">
+          <rect width="140" height="80" rx="16" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5" />
+          <rect width="140" height="80" rx="16" stroke="#f43f5e" stroke-width="1.5" opacity="0.3" filter="url(#glow2)" />
+          <text x="70" y="35" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">Structured</text>
+          <text x="70" y="55" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">JSON Output</text>
+        </g>
       </svg>
     )}
 
     {type === 'vllm' && (
-      <svg class="w-full max-w-2xl drop-shadow-sm" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-200">{title || "vLLM PagedAttention"}</text>
+      <svg class="w-full max-w-3xl drop-shadow-sm" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="400" y="40" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="currentColor" text-anchor="middle" class="text-slate-800 dark:text-slate-100 tracking-tight">{title || "vLLM PagedAttention"}</text>
+        <text x="400" y="60" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">Memory fragmentation vs contiguous block allocation</text>
         
         <!-- Standard KV Cache -->
-        <rect x="100" y="80" width="250" height="180" rx="8" fill="var(--tw-colors-red-50)" stroke="var(--tw-colors-red-200)" stroke-width="2" stroke-dasharray="4" class="dark:fill-red-950/20 dark:stroke-red-900/50" />
-        <text x="225" y="110" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="currentColor" text-anchor="middle" class="text-red-800 dark:text-red-400">Standard KV Cache (Fragmented)</text>
+        <g transform="translate(80, 100)">
+          <rect width="260" height="180" rx="12" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5" stroke-dasharray="6 6" />
+          <text x="130" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-700 dark:text-slate-300">Standard KV Cache</text>
+          <text x="130" y="48" font-family="system-ui, sans-serif" font-size="12" fill="#ef4444" text-anchor="middle" font-weight="500">High Fragmentation</text>
+          
+          <!-- Blocks -->
+          <rect x="20" y="70" width="65" height="24" rx="4" class="fill-red-400 dark:fill-red-500/80" />
+          <rect x="95" y="70" width="65" height="24" rx="4" class="fill-slate-100 dark:fill-slate-900" />
+          <rect x="170" y="70" width="65" height="24" rx="4" class="fill-red-400 dark:fill-red-500/80" />
+          
+          <rect x="20" y="104" width="65" height="24" rx="4" class="fill-slate-100 dark:fill-slate-900" />
+          <rect x="95" y="104" width="65" height="24" rx="4" class="fill-red-400 dark:fill-red-500/80" />
+          <rect x="170" y="104" width="65" height="24" rx="4" class="fill-slate-100 dark:fill-slate-900" />
+          
+          <rect x="20" y="138" width="65" height="24" rx="4" class="fill-slate-100 dark:fill-slate-900" />
+          <rect x="95" y="138" width="65" height="24" rx="4" class="fill-red-400 dark:fill-red-500/80" />
+          <rect x="170" y="138" width="65" height="24" rx="4" class="fill-red-400 dark:fill-red-500/80" />
+        </g>
         
-        <!-- Fragmented blocks -->
-        <rect x="120" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-red-400)" />
-        <rect x="190" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-slate-200)" class="dark:fill-slate-800" />
-        <rect x="260" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-red-400)" />
-        <rect x="120" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-slate-200)" class="dark:fill-slate-800" />
-        <rect x="190" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-red-400)" />
-        <rect x="260" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-slate-200)" class="dark:fill-slate-800" />
-        <rect x="120" y="210" width="60" height="30" rx="4" fill="var(--tw-colors-slate-200)" class="dark:fill-slate-800" />
-        <rect x="190" y="210" width="60" height="30" rx="4" fill="var(--tw-colors-red-400)" />
-        <rect x="260" y="210" width="60" height="30" rx="4" fill="var(--tw-colors-red-400)" />
-        
-        <!-- VS -->
-        <text x="400" y="180" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="currentColor" text-anchor="middle" class="text-slate-400">VS</text>
+        <!-- VS Badge -->
+        <g transform="translate(380, 175)">
+          <circle cx="20" cy="15" r="20" class="fill-slate-100 dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="2" />
+          <text x="20" y="20" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="currentColor" text-anchor="middle" class="text-slate-500 dark:text-slate-400">VS</text>
+        </g>
 
         <!-- vLLM KV Cache -->
-        <rect x="450" y="80" width="250" height="180" rx="8" fill="var(--tw-colors-emerald-50)" stroke="var(--tw-colors-emerald-400)" stroke-width="2" class="dark:fill-emerald-950/20 dark:stroke-emerald-700" />
-        <text x="575" y="110" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="currentColor" text-anchor="middle" class="text-emerald-800 dark:text-emerald-400">vLLM (PagedAttention)</text>
-        
-        <!-- Contiguous Blocks -->
-        <rect x="470" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        <rect x="540" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        <rect x="610" y="130" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        <rect x="470" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        <rect x="540" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        <rect x="610" y="170" width="60" height="30" rx="4" fill="var(--tw-colors-emerald-500)" />
-        
-        <!-- Memory Saved -->
-        <rect x="470" y="210" width="200" height="30" rx="4" fill="var(--tw-colors-emerald-100)" stroke="var(--tw-colors-emerald-500)" stroke-dasharray="4" class="dark:fill-emerald-900/50" />
-        <text x="570" y="230" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="currentColor" text-anchor="middle" class="text-emerald-700 dark:text-emerald-300">Freed / Available for Batching</text>
+        <g transform="translate(460, 100)">
+          <rect width="260" height="180" rx="12" class="fill-emerald-50 dark:fill-emerald-950/20 stroke-emerald-500 dark:stroke-emerald-600" stroke-width="2" />
+          <text x="130" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="currentColor" text-anchor="middle" class="text-slate-700 dark:text-slate-300">vLLM (PagedAttention)</text>
+          <text x="130" y="48" font-family="system-ui, sans-serif" font-size="12" fill="#10b981" text-anchor="middle" font-weight="500">Zero Fragmentation</text>
+          
+          <!-- Contiguous Blocks -->
+          <rect x="20" y="70" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          <rect x="95" y="70" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          <rect x="170" y="70" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          
+          <rect x="20" y="104" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          <rect x="95" y="104" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          <rect x="170" y="104" width="65" height="24" rx="4" class="fill-emerald-500 dark:fill-emerald-500/90" />
+          
+          <!-- Memory Saved -->
+          <rect x="20" y="138" width="220" height="24" rx="4" class="fill-emerald-100 dark:fill-emerald-900/40 stroke-emerald-500 dark:stroke-emerald-600" stroke-dasharray="4 4" stroke-width="1.5" />
+          <text x="130" y="154" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="currentColor" text-anchor="middle" class="text-emerald-700 dark:text-emerald-400">Available for Batching</text>
+        </g>
       </svg>
     )}
     

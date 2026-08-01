@@ -12,7 +12,8 @@ isPillar: false
 topic: "MCP Ecosystem"
 parentPillar: "State of MCP 2026"
 searchIntent: "how-to"
-draft: true
+draft: false
+diagramType: 'mcp'
 faq:
   - question: "Why doesn't my MCP server show up in Claude Desktop?"
     answer: "Ensure your claude_desktop_config.json is formatted correctly and placed in the correct Application Support directory. If the server executable isn't in your PATH, provide the absolute path in the config."

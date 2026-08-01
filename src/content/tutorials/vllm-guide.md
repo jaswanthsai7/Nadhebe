@@ -12,7 +12,8 @@ isPillar: false
 topic: "AI Infrastructure"
 parentPillar: "State of Open Source AI Inference 2026"
 searchIntent: "how-to"
-draft: true
+draft: false
+diagramType: 'vllm'
 faq:
   - question: "What is PagedAttention in vLLM?"
     answer: "PagedAttention is vLLM's core innovation. It manages KV cache memory like an operating system manages virtual memory (in blocks/pages), eliminating memory fragmentation and dramatically increasing batch sizes."

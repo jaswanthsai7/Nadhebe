@@ -20,6 +20,7 @@ import RelatedPosts from '@/components/RelatedPosts.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
 import VerdictGauge from '@/components/VerdictGauge.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import ArticleHeroDiagram from '@/components/content/ArticleHeroDiagram.astro';
 
 import { getReadingTime } from '../utils/readingTime';
 import { getRelatedArticles } from '../utils/relatedArticles';
@@ -184,19 +185,25 @@ const breadcrumbItems = [
           </div>
         </header>
 
-        <!-- Hero image: only show when there is no YouTube embed (video already shows the thumbnail) -->
-        {post.data.heroImage && post.collection !== 'tool-reviews' && !post.data.youtubeVideoId && !post.data.videoId && (
-          <div class="mb-48 overflow-hidden rounded-16 border border-border dark:border-border-dark">
-            <img
-              src={post.data.heroImage}
-              alt={post.data.heroAlt || post.data.title}
-              width="800"
-              height="450"
-              class="w-full object-cover"
-              style="max-height:420px; object-position:center top;"
-              fetchpriority="high"
-            />
+        <!-- Hero Visual: Diagram (if specified) OR Image -->
+        {post.data.diagramType && !post.data.youtubeVideoId && !post.data.videoId ? (
+          <div class="mb-48">
+            <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} />
           </div>
+        ) : (
+          post.data.heroImage && post.collection !== 'tool-reviews' && !post.data.youtubeVideoId && !post.data.videoId && (
+            <div class="mb-48 overflow-hidden rounded-16 border border-border dark:border-border-dark">
+              <img
+                src={post.data.heroImage}
+                alt={post.data.heroAlt || post.data.title}
+                width="800"
+                height="450"
+                class="w-full object-cover"
+                style="max-height:420px; object-position:center top;"
+                fetchpriority="high"
+              />
+            </div>
+          )
         )}
 
         <!-- Pillar cluster alert -->

@@ -21,6 +21,7 @@ const sharedSchema = z.object({
   tags: z.array(z.string()),
   heroImage: z.string(),
   heroAlt: z.string().optional(),
+  diagramType: z.enum(['mcp', 'gemini', 'vllm', 'claude', 'vector', 'default']).optional(),
   estimatedReadingTime: z.number().optional(),
   faq: z.array(
     z.object({
