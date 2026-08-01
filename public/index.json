@@ -1,11 +1,111 @@
 [
   {
+    "title": "How to Build a Custom MCP Server in TypeScript",
+    "description": "A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.",
+    "url": "https://nadhebe.com/tutorials/build-custom-mcp-server-typescript",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"TypeScript\", \"Node.js\", \"AI Integration\", \"Server\", \"API\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Deploy DeepSeek R1 on AWS using vLLM",
+    "description": "A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference.",
+    "url": "https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm",
+    "category": "Tutorials",
+    "tags": [
+      "[\"DeepSeek\", \"DeepSeek R1\", \"AWS\", \"vLLM\", \"Inference\", \"Deployment\", \"LLM Ops\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Integrate MCP Server in VS Code & Cursor",
+    "description": "A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows.",
+    "url": "https://nadhebe.com/tutorials/mcp-server-vscode-cursor",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"VS Code\", \"Cursor\", \"AI Workflow\", \"Integration\", \"Model Context Protocol\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
     "title": "Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison",
     "description": "An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows.",
     "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf",
     "category": "Comparisons",
     "tags": [
       "[\"ai coding\", \"claude code\", \"cursor\", \"windsurf\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?",
+    "description": "A comprehensive comparison between DeepSeek V3 (the highly efficient dense/MoE hybrid) and DeepSeek R1 (the reasoning-focused powerhouse).",
+    "url": "https://nadhebe.com/comparisons/deepseek-v3-vs-r1",
+    "category": "Comparisons",
+    "tags": [
+      "[\"DeepSeek\", \"DeepSeek V3\", \"DeepSeek R1\", \"MoE\", \"Reasoning Models\", \"LLM\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "OpenRouter vs Direct Provider APIs: Which Should You Choose?",
+    "description": "An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google.",
+    "url": "https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis",
+    "category": "Comparisons",
+    "tags": [
+      "[\"OpenRouter\", \"API\", \"OpenAI\", \"Anthropic\", \"LLM Providers\", \"Architecture\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "SGLang vs vLLM: Performance Benchmark for LLM Inference",
+    "description": "An in-depth performance benchmark comparing SGLang and vLLM for deploying large language models. Analyze throughput, memory usage, and latency trade-offs.",
+    "url": "https://nadhebe.com/comparisons/sglang-vs-vllm-performance",
+    "category": "Comparisons",
+    "tags": [
+      "[\"vLLM\", \"SGLang\", \"Inference\", \"Benchmarks\", \"LLM Ops\", \"RadixAttention\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "LLM API Cost Optimization Best Practices",
+    "description": "Discover actionable strategies to drastically reduce your Large Language Model API costs without sacrificing output quality. Learn about token optimization, caching, and model routing.",
+    "url": "https://nadhebe.com/best-practices/llm-api-cost-optimization",
+    "category": "Best Practices",
+    "tags": [
+      "[\"LLM\", \"API Costs\", \"Cost Optimization\", \"Token Management\", \"Prompt Engineering\", \"OpenAI\", \"Anthropic\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Prompt Caching Best Practices for Claude Sonnet & Opus",
+    "description": "Master prompt caching for Anthropic's Claude 3.5 Sonnet and Opus models. Learn how to drastically reduce latency and lower your LLM API costs.",
+    "url": "https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus",
+    "category": "Best Practices",
+    "tags": [
+      "[\"Prompt Caching\", \"Claude\", \"Sonnet\", \"Opus\", \"Anthropic\", \"LLM Optimization\", \"API Costs\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Structured Output Prompting Best Practices",
+    "description": "Learn how to enforce 100% reliable JSON outputs from Large Language Models using Structured Outputs, JSON Schemas, and Tool Calling.",
+    "url": "https://nadhebe.com/best-practices/structured-output-prompting",
+    "category": "Best Practices",
+    "tags": [
+      "[\"Prompt Engineering\", \"Structured Output\", \"JSON\", \"LLM\", \"OpenAI\", \"Anthropic\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Vector Database Chunking Best Practices for RAG",
+    "description": "Master the art of document chunking for Vector Databases. Learn strategies for semantic chunking, overlap sizing, and hierarchical indexing to improve your RAG accuracy.",
+    "url": "https://nadhebe.com/best-practices/vector-database-chunking",
+    "category": "Best Practices",
+    "tags": [
+      "[\"Vector Database\", \"RAG\", \"Chunking\", \"Embeddings\", \"Search\", \"AI\"]"
     ],
     "pubDate": "2026-08-01T00:00:00.000Z"
   },

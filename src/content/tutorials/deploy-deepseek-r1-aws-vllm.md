@@ -9,7 +9,7 @@ heroImage: "/images/deepseek-r1-aws-vllm-hero.png"
 heroAlt: "Retro-tech editorial graphic showing cloud infrastructure interacting with an AI data node"
 estimatedReadingTime: 22
 isPillar: true
-topic: "Infrastructure & Deployment"
+topic: "Infrastructure and Deployment"
 searchIntent: "informational"
 draft: false
 faq:
