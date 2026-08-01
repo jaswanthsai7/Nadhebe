@@ -61,23 +61,33 @@ export async function getStaticPaths() {
           slug: platformTool.slug,
           href: platformTool.href,
           description: platformTool.description,
+          seoDescription: platformTool.seo?.description || platformTool.description,
+          seoTitle: platformTool.seo?.title || `${platformTool.name || platformTool.title} - Free Browser Tool | Nadhebe`,
           category: platformTool.category,
           categorySlug: platformTool.categorySlug || platformTool.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
           mode: platformTool.mode || 'transform',
           badge: platformTool.badge,
           tags: platformTool.tags || [],
-        } as PlatformTool,
+          // Pass status so PlatformWorkbench uses registry as single source of truth
+          isImplemented: platformTool.status === 'implemented',
+          // Pass corrected relatedTools from registry (not category-matching)
+          relatedToolSlugs: platformTool.relatedTools || [],
+        } as PlatformTool & { isImplemented: boolean; relatedToolSlugs: string[]; seoDescription: string; seoTitle: string },
       },
     }));
 
   return [...articlePaths, ...platformPaths];
 }
 
-const { entry, platformTool } = Astro.props as { entry?: Awaited<ReturnType<typeof getCollection>>[number]; platformTool?: PlatformTool };
+const { entry, platformTool } = Astro.props as {
+  entry?: Awaited<ReturnType<typeof getCollection>>[number];
+  platformTool?: PlatformTool & { isImplemented: boolean; relatedToolSlugs: string[]; seoDescription: string; seoTitle: string };
+};
+
+// Build related tools from the registry's corrected relatedTools list (not naive category filter)
 const platformRelatedTools = platformTool
   ? UNIFIED_TOOLS_REGISTRY
-      .filter((tool) => tool.category === platformTool.category || tool.categorySlug === platformTool.categorySlug)
-      .slice(0, 6)
+      .filter((tool) => (platformTool.relatedToolSlugs ?? []).includes(tool.slug))
       .map((tool) => ({
         id: tool.id,
         name: tool.name || tool.title,
@@ -85,7 +95,7 @@ const platformRelatedTools = platformTool
         href: tool.href,
         description: tool.description,
         category: tool.category,
-        icon: 'code',
+        icon: tool.icon || 'code',
         badge: tool.badge,
         tags: tool.tags,
         noApi: true,
@@ -98,28 +108,28 @@ const platformRelatedTools = platformTool
 ) : platformTool ? (
   <ToolLayout
     toolId={platformTool.slug}
-    title={`${platformTool.name} - Free Browser Tool | Nadhebe`}
+    title={platformTool.seoTitle || `${platformTool.name} - Free Browser Tool | Nadhebe`}
     h1={platformTool.name}
-    description={platformTool.description}
+    description={platformTool.seoDescription || platformTool.description}
     hideHeader={true}
     relatedCategory={platformTool.category}
     relatedTools={platformRelatedTools}
     faq={[
       {
         question: `Is ${platformTool.name} free to use?`,
-        answer: `Yes. ${platformTool.name} is free and runs locally in your browser without an account.`,
+        answer: `Yes. ${platformTool.name} is completely free and runs locally in your browser — no account required.`,
       },
       {
-        question: 'Does Nadhebe upload my input?',
-        answer: 'No. This utility processes your input in the browser so your working data remains on your device.',
+        question: 'Does Nadhebe upload my data?',
+        answer: 'No. All processing happens in your browser. Your input data never leaves your device or gets sent to any server.',
       },
     ]}
   >
-    <div slot="calculator"><PlatformWorkbench tool={platformTool} /></div>
+    <div slot="calculator"><PlatformWorkbench tool={platformTool} isImplemented={platformTool.isImplemented} /></div>
     <div slot="content">
-      <h2>About this {platformTool.category} utility</h2>
-      <p>{platformTool.description}</p>
-      <p>Use the workspace above to create, transform, calculate, or inspect your input without sending it to a remote service.</p>
+      <h2>About {platformTool.name}</h2>
+      <p>{platformTool.seoDescription || platformTool.description}</p>
+      <p>Use the workspace above to {platformTool.mode === 'calculator' ? 'calculate' : platformTool.mode === 'generator' ? 'generate' : platformTool.mode === 'analyzer' ? 'analyze' : 'transform'} your input — entirely in your browser with no data uploaded to any server.</p>
     </div>
   </ToolLayout>
 ) : null}

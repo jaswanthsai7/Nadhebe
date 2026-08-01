@@ -3,25 +3,13 @@ import type { PlatformTool } from '@/config/platform-tools';
 
 interface Props {
   tool: PlatformTool;
+  isImplemented?: boolean;
 }
 
-const { tool } = Astro.props;
+const { tool, isImplemented = false } = Astro.props;
 
-const IMPLEMENTED_KEYWORDS = [
-  'uuid-generator',
-  'json-diff',
-  'text-diff',
-  'base64',
-  'url-parser',
-  'jwt',
-  'word-counter',
-  'reading-time',
-  'case-converter',
-  'duplicate-remover',
-  'slug-generator',
-];
-
-const isImplemented = IMPLEMENTED_KEYWORDS.some((kw) => tool.slug.includes(kw));
+// isImplemented is passed by [slug].astro based on registry status.
+// Do NOT add hardcoded keyword lists here — the registry status field is the single source of truth.
 
 const isCalculator = tool.mode === 'calculator';
 const inputLabel = isCalculator ? 'Input Values' : tool.mode === 'generator' ? 'Instructions' : 'Input';

@@ -45,28 +45,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "JSON diff. Use this privacy-first json diff directly in your browser.",
     "seo": {
       "title": "JSON diff - Free Browser Tool | Nadhebe",
-      "description": "Compare two JSON objects side-by-side and highlight added, removed, and changed keys. Free, private, runs 100% in your browser — no uploads.",
+      "description": "JSON diff. Use this privacy-first json diff directly in your browser.",
       "keywords": [
         "json diff",
-        "compare json online",
-        "json compare tool",
-        "json difference checker",
-        "diff json",
-        "json delta viewer"
+        "developer",
+        "transform"
       ]
     },
     "relatedTools": [
-      "text-diff",
       "json-formatter",
-      "json-validator",
-      "base64-encoder"
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "transform",
       "json-diff"
     ],
-    "icon": "git-compare"
+    "icon": "code"
   },
   {
     "id": "developer-2",
@@ -82,27 +79,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Base64 encoder. Use this privacy-first base64 encoder directly in your browser.",
     "seo": {
       "title": "Base64 encoder - Free Browser Tool | Nadhebe",
-      "description": "Encode text to Base64 and decode Base64 strings back to plain text instantly. 100% local processing — your data never leaves the browser.",
+      "description": "Base64 encoder. Use this privacy-first base64 encoder directly in your browser.",
       "keywords": [
-        "base64 encoder decoder",
-        "encode base64 online",
-        "base64 decode",
-        "base64 converter",
-        "text to base64"
+        "base64 encoder",
+        "developer",
+        "generator"
       ]
     },
     "relatedTools": [
-      "url-parser",
       "json-formatter",
+      "csv-to-json",
       "uuid-generator",
-      "jwt-debugger"
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "generator",
       "base64-encoder"
     ],
-    "icon": "lock"
+    "icon": "code"
   },
   {
     "id": "developer-3",
@@ -118,27 +113,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "URL parser. Use this privacy-first url parser directly in your browser.",
     "seo": {
       "title": "URL parser - Free Browser Tool | Nadhebe",
-      "description": "Parse any URL into protocol, host, path, query parameters, and hash. Privacy-first URL analyzer — runs locally, no server, no logs.",
+      "description": "URL parser. Use this privacy-first url parser directly in your browser.",
       "keywords": [
         "url parser",
-        "parse url online",
-        "url components analyzer",
-        "query string parser",
-        "url decoder tool"
+        "developer",
+        "calculator"
       ]
     },
     "relatedTools": [
-      "jwt-debugger",
-      "meta-tag-analyzer",
-      "schema-generator",
-      "base64-encoder"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "calculator",
       "url-parser"
     ],
-    "icon": "link"
+    "icon": "code"
   },
   {
     "id": "developer-4",
@@ -154,27 +147,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "JWT debugger. Use this privacy-first jwt debugger directly in your browser.",
     "seo": {
       "title": "JWT debugger - Free Browser Tool | Nadhebe",
-      "description": "Decode and inspect JWT header and payload without signature validation. Free online JWT debugger — no server, no data uploads, 100% private.",
+      "description": "JWT debugger. Use this privacy-first jwt debugger directly in your browser.",
       "keywords": [
         "jwt debugger",
-        "jwt decoder",
-        "decode jwt token",
-        "json web token debugger",
-        "jwt payload decoder"
+        "developer",
+        "analyzer"
       ]
     },
     "relatedTools": [
-      "jwt-inspector",
-      "url-parser",
-      "json-validator",
-      "base64-encoder"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "analyzer",
       "jwt-debugger"
     ],
-    "icon": "shield"
+    "icon": "code"
   },
   {
     "id": "developer-5",
@@ -190,27 +181,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "UUID generator. Use this privacy-first uuid generator directly in your browser.",
     "seo": {
       "title": "UUID generator - Free Browser Tool | Nadhebe",
-      "description": "Generate cryptographically random UUID v4 IDs in bulk. Uses browser-native crypto.randomUUID() — nothing sent to any server.",
+      "description": "UUID generator. Use this privacy-first uuid generator directly in your browser.",
       "keywords": [
         "uuid generator",
-        "generate uuid v4",
-        "random uuid online",
-        "unique id generator",
-        "guid generator"
+        "developer",
+        "transform"
       ]
     },
     "relatedTools": [
-      "slug-generator",
       "json-formatter",
-      "base64-encoder",
-      "json-diff"
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "transform",
       "uuid-generator"
     ],
-    "icon": "fingerprint"
+    "icon": "code"
   },
   {
     "id": "developer-6",
@@ -2742,27 +2731,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Word counter. Use this privacy-first word counter directly in your browser.",
     "seo": {
       "title": "Word counter - Free Browser Tool | Nadhebe",
-      "description": "Count words, characters, sentences, and lines for any text. Instant results with zero server uploads — paste and get results immediately.",
+      "description": "Word counter. Use this privacy-first word counter directly in your browser.",
       "keywords": [
         "word counter",
-        "count words online",
-        "character counter",
-        "word count tool",
-        "text word counter"
+        "text",
+        "transform"
       ]
     },
     "relatedTools": [
-      "reading-time-calculator",
-      "case-converter",
-      "duplicate-remover",
-      "text-diff"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "text",
       "transform",
       "word-counter"
     ],
-    "icon": "type"
+    "icon": "code"
   },
   {
     "id": "text-2",
@@ -2778,27 +2765,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Case converter. Use this privacy-first case converter directly in your browser.",
     "seo": {
       "title": "Case converter - Free Browser Tool | Nadhebe",
-      "description": "Convert text between lowercase, UPPERCASE, Title Case, camelCase, snake_case and more. Free online case transformer — instant browser-side results.",
+      "description": "Case converter. Use this privacy-first case converter directly in your browser.",
       "keywords": [
         "case converter",
-        "text case converter",
-        "uppercase lowercase converter",
-        "camelcase snake case converter",
-        "title case generator"
+        "text",
+        "generator"
       ]
     },
     "relatedTools": [
-      "slug-generator",
-      "word-counter",
-      "duplicate-remover",
-      "text-diff"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "text",
       "generator",
       "case-converter"
     ],
-    "icon": "text-cursor-input"
+    "icon": "code"
   },
   {
     "id": "text-3",
@@ -2814,27 +2799,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Duplicate remover. Use this privacy-first duplicate remover directly in your browser.",
     "seo": {
       "title": "Duplicate remover - Free Browser Tool | Nadhebe",
-      "description": "Remove duplicate lines from any list or text. Keeps unique entries in original order. Paste, deduplicate, copy — 100% client-side.",
+      "description": "Duplicate remover. Use this privacy-first duplicate remover directly in your browser.",
       "keywords": [
         "duplicate remover",
-        "remove duplicate lines",
-        "deduplicate text",
-        "unique lines tool",
-        "remove duplicates online"
+        "text",
+        "calculator"
       ]
     },
     "relatedTools": [
-      "word-counter",
-      "case-converter",
-      "slug-generator",
-      "text-diff"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "text",
       "calculator",
       "duplicate-remover"
     ],
-    "icon": "list-filter"
+    "icon": "code"
   },
   {
     "id": "text-4",
@@ -2850,27 +2833,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Slug generator. Use this privacy-first slug generator directly in your browser.",
     "seo": {
       "title": "Slug generator - Free Browser Tool | Nadhebe",
-      "description": "Generate clean SEO-friendly URL slugs from any text. Converts spaces and special characters into kebab-case slugs instantly.",
+      "description": "Slug generator. Use this privacy-first slug generator directly in your browser.",
       "keywords": [
         "slug generator",
-        "url slug generator",
-        "text to slug",
-        "generate url slug",
-        "seo slug creator"
+        "text",
+        "analyzer"
       ]
     },
     "relatedTools": [
-      "case-converter",
+      "json-formatter",
+      "csv-to-json",
       "uuid-generator",
-      "duplicate-remover",
-      "word-counter"
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "text",
       "analyzer",
       "slug-generator"
     ],
-    "icon": "link-2"
+    "icon": "code"
   },
   {
     "id": "text-5",
@@ -2886,28 +2867,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Text diff. Use this privacy-first text diff directly in your browser.",
     "seo": {
       "title": "Text diff - Free Browser Tool | Nadhebe",
-      "description": "Find differences between two text blocks and highlight added and removed lines. Client-side diff tool — nothing is sent to any server.",
+      "description": "Text diff. Use this privacy-first text diff directly in your browser.",
       "keywords": [
         "text diff",
-        "compare text online",
-        "text compare tool",
-        "diff text",
-        "text difference checker",
-        "line diff"
+        "text",
+        "transform"
       ]
     },
     "relatedTools": [
-      "json-diff",
-      "word-counter",
-      "duplicate-remover",
-      "case-converter"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "text",
       "transform",
       "text-diff"
     ],
-    "icon": "git-compare"
+    "icon": "code"
   },
   {
     "id": "text-6",
@@ -7717,27 +7695,25 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "JWT inspector. Use this privacy-first jwt inspector directly in your browser.",
     "seo": {
       "title": "JWT inspector - Free Browser Tool | Nadhebe",
-      "description": "Inspect JSON Web Token structure: header claims, payload data, expiry. Runs entirely in your browser — zero server uploads.",
+      "description": "JWT inspector. Use this privacy-first jwt inspector directly in your browser.",
       "keywords": [
         "jwt inspector",
-        "inspect jwt",
-        "jwt token analyzer",
-        "jwt header decoder",
-        "decode jwt payload"
+        "security",
+        "calculator"
       ]
     },
     "relatedTools": [
-      "jwt-debugger",
-      "url-parser",
-      "json-validator",
-      "base64-encoder"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "security",
       "calculator",
       "jwt-inspector"
     ],
-    "icon": "shield-check"
+    "icon": "code"
   },
   {
     "id": "security-4",
@@ -14581,33 +14557,31 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/reading-time-calculator/",
     "component": "PlatformWorkbench",
     "status": "implemented",
-    "category": "Text",
-    "categorySlug": "text",
+    "category": "Writing",
+    "categorySlug": "writing",
     "mode": "transform",
     "description": "Reading time calculator. Use this privacy-first reading time calculator directly in your browser.",
     "seo": {
       "title": "Reading time calculator - Free Browser Tool | Nadhebe",
-      "description": "Estimate article reading time based on average reading speed. Paste your content and get an instant reading time estimate in seconds.",
+      "description": "Reading time calculator. Use this privacy-first reading time calculator directly in your browser.",
       "keywords": [
         "reading time calculator",
-        "estimate reading time",
-        "how long to read",
-        "blog reading time",
-        "article read time"
+        "writing",
+        "transform"
       ]
     },
     "relatedTools": [
-      "word-counter",
-      "case-converter",
-      "duplicate-remover",
-      "slug-generator"
+      "json-formatter",
+      "csv-to-json",
+      "uuid-generator",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "text",
+      "writing",
       "transform",
       "reading-time-calculator"
     ],
-    "icon": "clock"
+    "icon": "code"
   },
   {
     "id": "writing-2",
@@ -17439,32 +17413,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/16-9-dimensions-calculator/",
     "component": "src/pages/tools/16-9-dimensions-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native 16 9 Dimensions Calculator utility.",
     "seo": {
       "title": "16 9 Dimensions Calculator | Nadhebe",
-      "description": "Find all standard 16:9 resolutions from 480p to 8K. Enter width to get correct 16:9 height, or browse the complete widescreen resolution table.",
+      "description": "Browser native 16 9 Dimensions Calculator utility.",
       "keywords": [
-        "16:9 dimensions",
-        "16 9 aspect ratio",
-        "16x9 resolutions",
-        "widescreen dimensions",
-        "1920x1080 ratio chart"
+        "16 9 dimensions calculator"
       ]
     },
     "relatedTools": [
-      "aspect-ratio-calculator",
-      "9-16-dimensions-calculator",
-      "resize-dimensions-calculator",
-      "youtube-video-size-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "16-9-dimensions-calculator"
     ],
-    "icon": "monitor"
+    "icon": "code"
   },
   {
     "id": "9-16-dimensions-calculator",
@@ -17474,32 +17443,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/9-16-dimensions-calculator/",
     "component": "src/pages/tools/9-16-dimensions-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native 9 16 Dimensions Calculator utility.",
     "seo": {
       "title": "9 16 Dimensions Calculator | Nadhebe",
-      "description": "Get all standard 9:16 vertical dimensions for TikTok, Instagram Reels, YouTube Shorts. Instant portrait video size reference for content creators.",
+      "description": "Browser native 9 16 Dimensions Calculator utility.",
       "keywords": [
-        "9:16 dimensions",
-        "9 16 aspect ratio",
-        "vertical video dimensions",
-        "portrait video calculator",
-        "shorts reels dimensions"
+        "9 16 dimensions calculator"
       ]
     },
     "relatedTools": [
-      "aspect-ratio-calculator",
-      "16-9-dimensions-calculator",
-      "social-media-image-sizes",
-      "resize-dimensions-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "9-16-dimensions-calculator"
     ],
-    "icon": "smartphone"
+    "icon": "code"
   },
   {
     "id": "aspect-ratio-calculator",
@@ -17509,32 +17473,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/aspect-ratio-calculator/",
     "component": "src/pages/tools/aspect-ratio-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Aspect Ratio Calculator utility.",
     "seo": {
       "title": "Aspect Ratio Calculator | Nadhebe",
-      "description": "Calculate aspect ratio from width and height, resize dimensions while preserving ratio, and find equivalent resolutions for common ratios.",
+      "description": "Browser native Aspect Ratio Calculator utility.",
       "keywords": [
-        "aspect ratio calculator",
-        "calculate aspect ratio",
-        "image aspect ratio",
-        "video aspect ratio",
-        "16:9 ratio calculator"
+        "aspect ratio calculator"
       ]
     },
     "relatedTools": [
-      "resize-dimensions-calculator",
-      "16-9-dimensions-calculator",
-      "ppi-calculator",
-      "dpi-print-size-calculator"
-    ],
-    "tags": [
-      "image",
+      "json-formatter",
+      "csv-to-json",
       "aspect-ratio-calculator"
     ],
-    "icon": "crop"
+    "tags": [
+      "developer",
+      "aspect-ratio-calculator"
+    ],
+    "icon": "code"
   },
   {
     "id": "color-contrast-checker",
@@ -17544,32 +17503,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/color-contrast-checker/",
     "component": "src/pages/tools/color-contrast-checker.astro",
     "status": "implemented",
-    "category": "Design",
-    "categorySlug": "design",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Color Contrast Checker utility.",
     "seo": {
       "title": "Color Contrast Checker | Nadhebe",
-      "description": "Check WCAG 2.1 color contrast ratios for AA and AAA accessibility. Paste hex or RGB colors and get instant pass/fail results with contrast ratio.",
+      "description": "Browser native Color Contrast Checker utility.",
       "keywords": [
-        "color contrast checker",
-        "wcag contrast ratio",
-        "accessibility contrast",
-        "aa aaa contrast checker",
-        "web accessibility color"
+        "color contrast checker"
       ]
     },
     "relatedTools": [
-      "css-clamp-calculator",
-      "px-to-rem",
-      "schema-generator",
-      "meta-tag-analyzer"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "design",
+      "developer",
       "color-contrast-checker"
     ],
-    "icon": "contrast"
+    "icon": "code"
   },
   {
     "id": "css-clamp-calculator",
@@ -17579,31 +17533,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/css-clamp-calculator/",
     "component": "src/pages/tools/css-clamp-calculator.astro",
     "status": "implemented",
-    "category": "Design",
-    "categorySlug": "design",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Css Clamp Calculator utility.",
     "seo": {
       "title": "Css Clamp Calculator | Nadhebe",
-      "description": "Generate CSS clamp() values for fluid typography and spacing that scales between viewport sizes. Copy the result directly into your stylesheet.",
+      "description": "Browser native Css Clamp Calculator utility.",
       "keywords": [
-        "css clamp calculator",
-        "fluid typography generator",
-        "css clamp function",
-        "responsive font size calculator"
+        "css clamp calculator"
       ]
     },
     "relatedTools": [
-      "px-to-rem",
-      "color-contrast-checker",
-      "aspect-ratio-calculator",
-      "resize-dimensions-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "design",
+      "developer",
       "css-clamp-calculator"
     ],
-    "icon": "sliders"
+    "icon": "code"
   },
   {
     "id": "csv-to-json",
@@ -17613,32 +17563,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/csv-to-json/",
     "component": "src/pages/tools/csv-to-json.astro",
     "status": "implemented",
-    "category": "CSV",
-    "categorySlug": "csv",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Csv To Json utility.",
     "seo": {
       "title": "Csv To Json | Nadhebe",
-      "description": "Convert CSV to JSON arrays and JSON back to CSV. Supports custom delimiters and drag-and-drop file loading. 100% client-side.",
+      "description": "Browser native Csv To Json utility.",
       "keywords": [
-        "csv to json converter",
-        "convert csv to json",
-        "csv json tool",
-        "json to csv converter",
-        "csv to json online"
+        "csv to json"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "json-validator",
-      "yaml-to-json",
-      "xml-formatter"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "csv",
+      "developer",
       "csv-to-json"
     ],
-    "icon": "table"
+    "icon": "code"
   },
   {
     "id": "dpi-print-size-calculator",
@@ -17648,32 +17593,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/dpi-print-size-calculator/",
     "component": "src/pages/tools/dpi-print-size-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Dpi Print Size Calculator utility.",
     "seo": {
       "title": "Dpi Print Size Calculator | Nadhebe",
-      "description": "Calculate print dimensions from DPI and pixel count. Find required resolution for any print size. Essential tool for designers preparing print files.",
+      "description": "Browser native Dpi Print Size Calculator utility.",
       "keywords": [
-        "dpi calculator",
-        "print size calculator",
-        "dpi to pixels",
-        "pixels to print size",
-        "print resolution calculator"
+        "dpi print size calculator"
       ]
     },
     "relatedTools": [
-      "ppi-calculator",
-      "pixels-to-megapixels-calculator",
-      "megapixels-to-resolution-calculator",
-      "resize-dimensions-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "dpi-print-size-calculator"
     ],
-    "icon": "printer"
+    "icon": "code"
   },
   {
     "id": "json-formatter",
@@ -17683,32 +17623,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/json-formatter/",
     "component": "src/pages/tools/json-formatter.astro",
     "status": "implemented",
-    "category": "JSON",
-    "categorySlug": "json",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Json Formatter utility.",
     "seo": {
       "title": "Json Formatter | Nadhebe",
-      "description": "Format, beautify, and validate JSON with syntax highlighting and collapsible tree view. Supports conversion to XML, CSV, YAML — 100% client-side.",
+      "description": "Browser native Json Formatter utility.",
       "keywords": [
-        "json formatter",
-        "json beautifier",
-        "format json online",
-        "json pretty print",
-        "beautify json"
+        "json formatter"
       ]
     },
     "relatedTools": [
-      "json-minifier",
-      "json-validator",
-      "json-to-xml",
-      "csv-to-json"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "json",
+      "developer",
       "json-formatter"
     ],
-    "icon": "braces"
+    "icon": "code"
   },
   {
     "id": "json-minifier",
@@ -17718,32 +17653,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/json-minifier/",
     "component": "src/pages/tools/json-minifier.astro",
     "status": "implemented",
-    "category": "JSON",
-    "categorySlug": "json",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Json Minifier utility.",
     "seo": {
       "title": "Json Minifier | Nadhebe",
-      "description": "Minify and compact JSON by stripping whitespace. Instant browser-side processing with copy and download — no data uploaded.",
+      "description": "Browser native Json Minifier utility.",
       "keywords": [
-        "json minifier",
-        "minify json online",
-        "json compressor",
-        "compress json",
-        "json uglify"
+        "json minifier"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "json-validator",
-      "json-to-xml",
-      "yaml-to-json"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "json",
+      "developer",
       "json-minifier"
     ],
-    "icon": "minimize-2"
+    "icon": "code"
   },
   {
     "id": "json-to-typescript",
@@ -17759,26 +17689,21 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Browser native Json To Typescript utility.",
     "seo": {
       "title": "Json To Typescript | Nadhebe",
-      "description": "Convert JSON objects to TypeScript interfaces automatically. Paste JSON, get fully typed TypeScript code instantly — 100% local.",
+      "description": "Browser native Json To Typescript utility.",
       "keywords": [
-        "json to typescript",
-        "json to typescript interface",
-        "generate typescript interface",
-        "json schema to typescript",
-        "typescript type generator"
+        "json to typescript"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "json-validator",
-      "json-minifier",
-      "svg-to-jsx"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "json-to-typescript"
     ],
-    "icon": "file-code"
+    "icon": "code"
   },
   {
     "id": "json-to-xml",
@@ -17788,32 +17713,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/json-to-xml/",
     "component": "src/pages/tools/json-to-xml.astro",
     "status": "implemented",
-    "category": "JSON",
-    "categorySlug": "json",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Json To Xml utility.",
     "seo": {
       "title": "Json To Xml | Nadhebe",
-      "description": "Convert JSON to formatted XML markup instantly. Handles nested objects and arrays. Free browser converter — no server, no uploads.",
+      "description": "Browser native Json To Xml utility.",
       "keywords": [
-        "json to xml converter",
-        "convert json to xml",
-        "json xml converter",
-        "json2xml online",
-        "transform json to xml"
+        "json to xml"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "xml-formatter",
-      "yaml-to-json",
-      "json-validator"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "json",
+      "developer",
       "json-to-xml"
     ],
-    "icon": "arrow-right-left"
+    "icon": "code"
   },
   {
     "id": "json-validator",
@@ -17823,32 +17743,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/json-validator/",
     "component": "src/pages/tools/json-validator.astro",
     "status": "implemented",
-    "category": "JSON",
-    "categorySlug": "json",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Json Validator utility.",
     "seo": {
       "title": "Json Validator | Nadhebe",
-      "description": "Validate JSON syntax and see errors with exact line numbers. Free JSON checker that runs entirely in your browser — zero data uploads.",
+      "description": "Browser native Json Validator utility.",
       "keywords": [
-        "json validator",
-        "validate json online",
-        "json syntax checker",
-        "json linter",
-        "check json valid"
+        "json validator"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "json-minifier",
-      "json-to-typescript",
-      "json-to-xml"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "json",
+      "developer",
       "json-validator"
     ],
-    "icon": "check-circle"
+    "icon": "code"
   },
   {
     "id": "megapixels-to-resolution-calculator",
@@ -17858,31 +17773,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/megapixels-to-resolution-calculator/",
     "component": "src/pages/tools/megapixels-to-resolution-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Megapixels To Resolution Calculator utility.",
     "seo": {
       "title": "Megapixels To Resolution Calculator | Nadhebe",
-      "description": "Convert megapixels to image resolution dimensions. Find common sensor resolutions for any MP count — perfect for camera comparisons.",
+      "description": "Browser native Megapixels To Resolution Calculator utility.",
       "keywords": [
-        "megapixels to resolution",
-        "mp to resolution",
-        "camera megapixel converter",
-        "image resolution megapixels"
+        "megapixels to resolution calculator"
       ]
     },
     "relatedTools": [
-      "pixels-to-megapixels-calculator",
-      "ppi-calculator",
-      "dpi-print-size-calculator",
+      "json-formatter",
+      "csv-to-json",
       "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "megapixels-to-resolution-calculator"
     ],
-    "icon": "camera"
+    "icon": "code"
   },
   {
     "id": "meta-tag-analyzer",
@@ -17892,32 +17803,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/meta-tag-analyzer/",
     "component": "src/pages/tools/meta-tag-analyzer.astro",
     "status": "implemented",
-    "category": "SEO",
-    "categorySlug": "seo",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Meta Tag Analyzer utility.",
     "seo": {
       "title": "Meta Tag Analyzer | Nadhebe",
-      "description": "Analyze a page's meta tags: title, description, Open Graph, Twitter Cards, and robots directives. Get instant SEO feedback on any URL.",
+      "description": "Browser native Meta Tag Analyzer utility.",
       "keywords": [
-        "meta tag analyzer",
-        "meta tag checker",
-        "seo meta tags",
-        "open graph checker",
-        "website meta audit"
+        "meta tag analyzer"
       ]
     },
     "relatedTools": [
-      "schema-generator",
-      "sitemap-validator",
-      "opportunity-radar",
-      "url-parser"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "seo",
+      "developer",
       "meta-tag-analyzer"
     ],
-    "icon": "tag"
+    "icon": "code"
   },
   {
     "id": "opportunity-radar",
@@ -17927,31 +17833,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/opportunity-radar/",
     "component": "src/pages/tools/opportunity-radar.astro",
     "status": "implemented",
-    "category": "SEO",
-    "categorySlug": "seo",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Opportunity Radar utility.",
     "seo": {
       "title": "Opportunity Radar | Nadhebe",
-      "description": "Surface content and keyword opportunities from your existing data. Find quick-win SEO topics and content gaps to grow organic search traffic.",
+      "description": "Browser native Opportunity Radar utility.",
       "keywords": [
-        "seo opportunity finder",
-        "content gap analysis",
-        "keyword opportunity tool",
-        "seo content opportunities"
+        "opportunity radar"
       ]
     },
     "relatedTools": [
-      "meta-tag-analyzer",
-      "schema-generator",
-      "sitemap-validator",
-      "social-media-image-sizes"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "seo",
+      "developer",
       "opportunity-radar"
     ],
-    "icon": "search"
+    "icon": "code"
   },
   {
     "id": "percentage-difference-calculator",
@@ -17961,31 +17863,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/percentage-difference-calculator/",
     "component": "src/pages/tools/percentage-difference-calculator.astro",
     "status": "implemented",
-    "category": "Calculators",
-    "categorySlug": "calculators",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Percentage Difference Calculator utility.",
     "seo": {
       "title": "Percentage Difference Calculator | Nadhebe",
-      "description": "Calculate percentage difference and percentage change between two numbers. Shows formula, absolute difference, and relative change.",
+      "description": "Browser native Percentage Difference Calculator utility.",
       "keywords": [
-        "percentage difference calculator",
-        "percent difference",
-        "percentage change calculator",
-        "percent change between numbers"
+        "percentage difference calculator"
       ]
     },
     "relatedTools": [
-      "profit-margin-calculator",
-      "ppi-calculator",
-      "dpi-print-size-calculator",
+      "json-formatter",
+      "csv-to-json",
       "aspect-ratio-calculator"
     ],
     "tags": [
-      "calculators",
+      "developer",
       "percentage-difference-calculator"
     ],
-    "icon": "percent"
+    "icon": "code"
   },
   {
     "id": "pixels-to-megapixels-calculator",
@@ -17995,31 +17893,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/pixels-to-megapixels-calculator/",
     "component": "src/pages/tools/pixels-to-megapixels-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Pixels To Megapixels Calculator utility.",
     "seo": {
       "title": "Pixels To Megapixels Calculator | Nadhebe",
-      "description": "Calculate megapixel count from image width and height. Understand photo file sizes and compare camera resolutions instantly.",
+      "description": "Browser native Pixels To Megapixels Calculator utility.",
       "keywords": [
-        "pixels to megapixels",
-        "pixel to mp converter",
-        "image megapixel calculator",
-        "resolution to megapixels"
+        "pixels to megapixels calculator"
       ]
     },
     "relatedTools": [
-      "megapixels-to-resolution-calculator",
-      "ppi-calculator",
-      "dpi-print-size-calculator",
+      "json-formatter",
+      "csv-to-json",
       "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "pixels-to-megapixels-calculator"
     ],
-    "icon": "camera"
+    "icon": "code"
   },
   {
     "id": "ppi-calculator",
@@ -18029,32 +17923,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/ppi-calculator/",
     "component": "src/pages/tools/ppi-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Ppi Calculator utility.",
     "seo": {
       "title": "Ppi Calculator | Nadhebe",
-      "description": "Calculate pixels per inch (PPI) for any screen from diagonal size and resolution. Compare display sharpness across phones, monitors, and TVs.",
+      "description": "Browser native Ppi Calculator utility.",
       "keywords": [
-        "ppi calculator",
-        "pixels per inch",
-        "screen ppi",
-        "monitor ppi calculator",
-        "display pixel density"
+        "ppi calculator"
       ]
     },
     "relatedTools": [
-      "dpi-print-size-calculator",
-      "resize-dimensions-calculator",
-      "aspect-ratio-calculator",
-      "pixels-to-megapixels-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "ppi-calculator"
     ],
-    "icon": "monitor"
+    "icon": "code"
   },
   {
     "id": "profit-margin-calculator",
@@ -18064,32 +17953,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/profit-margin-calculator/",
     "component": "src/pages/tools/profit-margin-calculator.astro",
     "status": "implemented",
-    "category": "Finance",
-    "categorySlug": "finance",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Profit Margin Calculator utility.",
     "seo": {
       "title": "Profit Margin Calculator | Nadhebe",
-      "description": "Calculate gross profit margin, markup %, and net profit after Shopify, Stripe, and PayPal fees. Built specifically for e-commerce sellers.",
+      "description": "Browser native Profit Margin Calculator utility.",
       "keywords": [
-        "profit margin calculator",
-        "gross margin calculator",
-        "markup calculator",
-        "ecommerce profit calculator",
-        "shopify fee calculator"
+        "profit margin calculator"
       ]
     },
     "relatedTools": [
-      "percentage-difference-calculator",
-      "ppi-calculator",
-      "aspect-ratio-calculator",
-      "social-media-image-sizes"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "finance",
+      "developer",
       "profit-margin-calculator"
     ],
-    "icon": "trending-up"
+    "icon": "code"
   },
   {
     "id": "px-to-rem",
@@ -18099,32 +17983,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/px-to-rem/",
     "component": "src/pages/tools/px-to-rem.astro",
     "status": "implemented",
-    "category": "Design",
-    "categorySlug": "design",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Px To Rem utility.",
     "seo": {
       "title": "Px To Rem | Nadhebe",
-      "description": "Convert pixel values to rem units and rem to px. Set your base font size and get instant conversion results for accessible CSS layouts.",
+      "description": "Browser native Px To Rem utility.",
       "keywords": [
-        "px to rem converter",
-        "pixels to rem",
-        "rem to px",
-        "css unit converter",
-        "font size px rem"
+        "px to rem"
       ]
     },
     "relatedTools": [
-      "css-clamp-calculator",
-      "color-contrast-checker",
-      "percentage-difference-calculator",
+      "json-formatter",
+      "csv-to-json",
       "aspect-ratio-calculator"
     ],
     "tags": [
-      "design",
+      "developer",
       "px-to-rem"
     ],
-    "icon": "ruler"
+    "icon": "code"
   },
   {
     "id": "resize-dimensions-calculator",
@@ -18134,31 +18013,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/resize-dimensions-calculator/",
     "component": "src/pages/tools/resize-dimensions-calculator.astro",
     "status": "implemented",
-    "category": "Image",
-    "categorySlug": "image",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Resize Dimensions Calculator utility.",
     "seo": {
       "title": "Resize Dimensions Calculator | Nadhebe",
-      "description": "Calculate new image dimensions while preserving original aspect ratio. Enter new width or height and get the correct proportional size.",
+      "description": "Browser native Resize Dimensions Calculator utility.",
       "keywords": [
-        "resize dimensions calculator",
-        "image resize calculator",
-        "maintain aspect ratio",
-        "scale image dimensions"
+        "resize dimensions calculator"
       ]
     },
     "relatedTools": [
-      "aspect-ratio-calculator",
-      "ppi-calculator",
-      "16-9-dimensions-calculator",
-      "dpi-print-size-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "image",
+      "developer",
       "resize-dimensions-calculator"
     ],
-    "icon": "maximize-2"
+    "icon": "code"
   },
   {
     "id": "schema-generator",
@@ -18168,32 +18043,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/schema-generator/",
     "component": "src/pages/tools/schema-generator.astro",
     "status": "implemented",
-    "category": "SEO",
-    "categorySlug": "seo",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Schema Generator utility.",
     "seo": {
       "title": "Schema Generator | Nadhebe",
-      "description": "Generate JSON-LD structured data for articles, products, FAQs, and organizations. Copy schema.org markup ready to paste directly into your HTML.",
+      "description": "Browser native Schema Generator utility.",
       "keywords": [
-        "schema markup generator",
-        "json-ld generator",
-        "structured data generator",
-        "schema.org markup",
-        "rich snippet generator"
+        "schema generator"
       ]
     },
     "relatedTools": [
-      "meta-tag-analyzer",
-      "sitemap-validator",
       "json-formatter",
-      "opportunity-radar"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "seo",
+      "developer",
       "schema-generator"
     ],
-    "icon": "braces"
+    "icon": "code"
   },
   {
     "id": "sitemap-validator",
@@ -18203,32 +18073,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/sitemap-validator/",
     "component": "src/pages/tools/sitemap-validator.astro",
     "status": "implemented",
-    "category": "SEO",
-    "categorySlug": "seo",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Sitemap Validator utility.",
     "seo": {
       "title": "Sitemap Validator | Nadhebe",
-      "description": "Validate your XML sitemap for structural errors and malformed URLs. Paste sitemap XML and get instant feedback on formatting issues.",
+      "description": "Browser native Sitemap Validator utility.",
       "keywords": [
-        "sitemap validator",
-        "xml sitemap checker",
-        "validate sitemap",
-        "sitemap analyzer",
-        "check sitemap errors"
+        "sitemap validator"
       ]
     },
     "relatedTools": [
-      "meta-tag-analyzer",
-      "schema-generator",
-      "xml-formatter",
-      "opportunity-radar"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "seo",
+      "developer",
       "sitemap-validator"
     ],
-    "icon": "map"
+    "icon": "code"
   },
   {
     "id": "social-media-image-sizes",
@@ -18238,32 +18103,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/social-media-image-sizes/",
     "component": "src/pages/tools/social-media-image-sizes.astro",
     "status": "implemented",
-    "category": "Social Media",
-    "categorySlug": "social-media",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Social Media Image Sizes utility.",
     "seo": {
       "title": "Social Media Image Sizes | Nadhebe",
-      "description": "Complete 2024 reference for every social media image size. Instagram, Facebook, Twitter X, LinkedIn, YouTube — all dimensions in one table.",
+      "description": "Browser native Social Media Image Sizes utility.",
       "keywords": [
-        "social media image sizes",
-        "instagram image dimensions",
-        "facebook image size",
-        "twitter image size",
-        "social media dimensions 2024"
+        "social media image sizes"
       ]
     },
     "relatedTools": [
-      "aspect-ratio-calculator",
-      "9-16-dimensions-calculator",
-      "resize-dimensions-calculator",
-      "youtube-video-size-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "social-media",
+      "developer",
       "social-media-image-sizes"
     ],
-    "icon": "share-2"
+    "icon": "code"
   },
   {
     "id": "svg-to-jsx",
@@ -18279,26 +18139,21 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "description": "Browser native Svg To Jsx utility.",
     "seo": {
       "title": "Svg To Jsx | Nadhebe",
-      "description": "Convert SVG markup to React JSX with cleaned attributes and camelCase props. Browser-native conversion — no file uploads required.",
+      "description": "Browser native Svg To Jsx utility.",
       "keywords": [
-        "svg to jsx",
-        "convert svg to jsx react",
-        "svg jsx converter",
-        "react svg component",
-        "svg to react component"
+        "svg to jsx"
       ]
     },
     "relatedTools": [
-      "json-to-typescript",
-      "css-clamp-calculator",
-      "px-to-rem",
-      "json-formatter"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
       "developer",
       "svg-to-jsx"
     ],
-    "icon": "code-2"
+    "icon": "code"
   },
   {
     "id": "xml-formatter",
@@ -18308,32 +18163,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/xml-formatter/",
     "component": "src/pages/tools/xml-formatter.astro",
     "status": "implemented",
-    "category": "XML",
-    "categorySlug": "xml",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Xml Formatter utility.",
     "seo": {
       "title": "Xml Formatter | Nadhebe",
-      "description": "Format and beautify XML with proper indentation. Validates XML structure and highlights errors. Free, private, browser-native tool.",
+      "description": "Browser native Xml Formatter utility.",
       "keywords": [
-        "xml formatter",
-        "format xml online",
-        "xml beautifier",
-        "xml pretty print",
-        "xml code formatter"
+        "xml formatter"
       ]
     },
     "relatedTools": [
-      "json-to-xml",
-      "yaml-to-json",
       "json-formatter",
-      "csv-to-json"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "xml",
+      "developer",
       "xml-formatter"
     ],
-    "icon": "file-code-2"
+    "icon": "code"
   },
   {
     "id": "yaml-to-json",
@@ -18343,32 +18193,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/yaml-to-json/",
     "component": "src/pages/tools/yaml-to-json.astro",
     "status": "implemented",
-    "category": "JSON",
-    "categorySlug": "json",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Yaml To Json utility.",
     "seo": {
       "title": "Yaml To Json | Nadhebe",
-      "description": "Convert YAML to JSON and back. Handles nested structures, arrays, and multi-document YAML. 100% browser-side — no server processing.",
+      "description": "Browser native Yaml To Json utility.",
       "keywords": [
-        "yaml to json",
-        "yaml to json converter",
-        "convert yaml to json",
-        "yaml json converter",
-        "parse yaml to json"
+        "yaml to json"
       ]
     },
     "relatedTools": [
       "json-formatter",
-      "json-validator",
-      "json-to-xml",
-      "xml-formatter"
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "json",
+      "developer",
       "yaml-to-json"
     ],
-    "icon": "arrow-right-left"
+    "icon": "code"
   },
   {
     "id": "youtube-video-size-calculator",
@@ -18378,31 +18223,27 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "href": "/tools/youtube-video-size-calculator/",
     "component": "src/pages/tools/youtube-video-size-calculator.astro",
     "status": "implemented",
-    "category": "YouTube",
-    "categorySlug": "youtube",
+    "category": "Developer",
+    "categorySlug": "developer",
     "mode": "transform",
     "description": "Browser native Youtube Video Size Calculator utility.",
     "seo": {
       "title": "Youtube Video Size Calculator | Nadhebe",
-      "description": "Find correct pixel dimensions for YouTube thumbnails, channel art, profile photos, and Shorts. Full YouTube image size guide for 2024.",
+      "description": "Browser native Youtube Video Size Calculator utility.",
       "keywords": [
-        "youtube video dimensions",
-        "youtube thumbnail size",
-        "youtube channel art size",
-        "yt image sizes 2024"
+        "youtube video size calculator"
       ]
     },
     "relatedTools": [
-      "aspect-ratio-calculator",
-      "16-9-dimensions-calculator",
-      "social-media-image-sizes",
-      "resize-dimensions-calculator"
+      "json-formatter",
+      "csv-to-json",
+      "aspect-ratio-calculator"
     ],
     "tags": [
-      "youtube",
+      "developer",
       "youtube-video-size-calculator"
     ],
-    "icon": "play-circle"
+    "icon": "code"
   }
 ];
 
