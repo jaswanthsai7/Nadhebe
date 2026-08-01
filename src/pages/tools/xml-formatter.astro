@@ -11,7 +11,23 @@ const initialCode = `<catalog><book id="bk101"><author>Alice Chen</author><title
 const faq = [
   {
     question: 'How do I format unindented XML files?',
-    answer: 'Paste your unindented XML string or upload a .xml file, then click "Format / Beautify" to format elements cleanly.',
+    answer: 'Paste your unindented XML string or upload a `.xml` file, then click "Format / Beautify" to format elements into a clean 2-space or 4-space indented hierarchy.',
+  },
+  {
+    question: 'Can I minify XML markup with this tool?',
+    answer: 'Yes! Toggle the workbench mode to "Minify" to strip whitespace and line feeds, creating compact XML payloads for network transmission.',
+  },
+  {
+    question: 'Does the XML formatter validate closing tags?',
+    answer: 'Yes, the parser checks for matching opening and closing XML tags (`<tag>...</tag>`), properly closed self-closing tags (`<br/>`), and unescaped characters.',
+  },
+  {
+    question: 'Can I convert XML data to JSON format?',
+    answer: 'Yes! Click "Convert XML to JSON" in the workbench header to transform XML element trees into structured JSON objects.',
+  },
+  {
+    question: 'Is client-side XML formatting private?',
+    answer: 'Yes, 100%. Processing executes in your local browser JavaScript engine. Your XML files and payloads are never sent over the network.',
   },
 ];
 ---
@@ -28,9 +44,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Online XML Formatter & Beautifier</h2>
+    <h2>Online XML Formatter & Beautifier — Features & Guide</h2>
     <p>
-      Format unindented or minified XML files into structured, readable tag hierarchies.
+      Format unindented or minified XML files into structured, readable tag hierarchies. Perfect for inspecting SOAP response payloads, RSS feeds, SVG markup, and XML sitemaps.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Beautify single-line or minified XML payloads from SOAP Web Services or legacy APIs</li>
+      <li>Validate XML syntax for unclosed tags, unescaped ampersands, or missing attributes</li>
+      <li>Format XML sitemaps (`sitemap.xml`) or RSS/Atom feed files for human review</li>
+      <li>Convert XML documents into structured JSON objects for modern JavaScript applications</li>
+    </ul>
+
+    <h3>Key developer features</h3>
+    <ul>
+      <li><strong>Custom Indentation:</strong> Format XML with 2-space, 4-space, or tab indentation.</li>
+      <li><strong>XML Syntax Highlighting:</strong> Color-coded element tags, attributes, and text nodes.</li>
+      <li><strong>Two-Way Conversion:</strong> Convert XML to JSON or format raw XML in place.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Convert XML data into JSON with <a href="/tools/json-to-xml/">JSON to XML Converter</a>, or audit site sitemaps with <a href="/tools/sitemap-validator/">Sitemap & Robots Analyzer</a>.</p>
   </div>
 </ToolLayout>

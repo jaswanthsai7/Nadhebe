@@ -2,12 +2,13 @@
 interface Props {
   type: 'mcp' | 'gemini' | 'vllm' | 'claude' | 'vector' | 'default';
   title?: string;
+  compact?: boolean;
 }
 
-const { type, title } = Astro.props;
+const { type, title, compact = false } = Astro.props;
 ---
 
-<div class="relative w-full overflow-hidden rounded-2xl border border-slate-200/60 dark:border-slate-700/50 bg-white dark:bg-slate-900 shadow-xl transition-all hover:shadow-2xl group">
+<div class={`relative w-full h-full overflow-hidden ${compact ? '' : 'rounded-2xl border border-slate-200/60 dark:border-slate-700/50 shadow-xl'} bg-white dark:bg-slate-900 group`}>
   
   <!-- Subtle Animated Glow Backgrounds -->
   <div class="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-blue-500/10 dark:bg-blue-500/20 blur-3xl transition-opacity duration-700 group-hover:opacity-70 opacity-50"></div>
@@ -17,7 +18,7 @@ const { type, title } = Astro.props;
   <div class="absolute inset-0 z-0 opacity-[0.15] dark:opacity-[0.2]" style="background-image: radial-gradient(#94a3b8 1px, transparent 1px); background-size: 20px 20px;"></div>
 
   <!-- Content Container -->
-  <div class="relative z-10 flex min-h-[360px] w-full flex-col items-center justify-center p-8 sm:p-12">
+  <div class={`relative z-10 flex w-full h-full flex-col items-center justify-center ${compact ? 'p-2 sm:p-4 min-h-0' : 'min-h-[360px] p-8 sm:p-12'}`}>
     
     {type === 'mcp' && (
       <svg class="w-full max-w-3xl drop-shadow-sm" viewBox="0 0 800 320" fill="none" xmlns="http://www.w3.org/2000/svg">

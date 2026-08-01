@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import VerdictGauge from '@/components/VerdictGauge.astro';
 import Newsletter from '@/components/Newsletter.astro';
 import FeedList from '@/components/FeedList.astro';
+import ArticleHeroDiagram from '@/components/content/ArticleHeroDiagram.astro';
 
 const allArticles = await getAllArticles();
 const authors = await getCollection('authors');
@@ -159,18 +160,22 @@ const topStories = gemini36Post
                 </div>
               </div>
 
-              <!-- Right Side: Big Image -->
+              <!-- Right Side: Big Image or Diagram -->
               <div class="w-full lg:w-[55%] shrink-0">
                 <a href={getArticleUrl(post)} class="block overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium group">
-                  <img
-                    src={post.data.heroImage}
-                    alt={post.data.heroAlt || post.data.title}
-                    width="800"
-                    height="500"
-                    fetchpriority={index === 0 ? "high" : "low"}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    class="w-full h-auto aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
-                  />
+                  {post.data.diagramType ? (
+                    <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                  ) : (
+                    <img
+                      src={post.data.heroImage}
+                      alt={post.data.heroAlt || post.data.title}
+                      width="800"
+                      height="500"
+                      fetchpriority={index === 0 ? "high" : "low"}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      class="w-full h-auto aspect-[16/10] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                    />
+                  )}
                 </a>
               </div>
 
@@ -272,7 +277,11 @@ const topStories = gemini36Post
             return (
               <a href={getArticleUrl(post)} class="lg:col-span-7 group flex flex-col gap-16">
                 <div class="relative w-full aspect-[16/10] overflow-hidden rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
-                  <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="640" height="400" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.015]" loading="lazy" />
+                  {post.data.diagramType ? (
+                    <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                  ) : (
+                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="640" height="400" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.015]" loading="lazy" />
+                  )}
                   {post.data.rating !== undefined && (
                     <div class="absolute bottom-12 right-12 bg-surface dark:bg-surface-dark p-2 rounded-8 border border-border dark:border-border-dark shadow-medium">
                       <VerdictGauge score={post.data.rating} size={40} />
@@ -331,9 +340,13 @@ const topStories = gemini36Post
                     </div>
                   </div>
 
-                  <!-- Small Thumbnail image -->
+                  <!-- Small Thumbnail image or diagram -->
                   <div class="shrink-0 w-128 aspect-video rounded-8 overflow-hidden bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
-                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="128" height="80" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" />
+                    {post.data.diagramType ? (
+                      <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                    ) : (
+                      <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="128" height="80" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" />
+                    )}
                   </div>
                 </a>
               );

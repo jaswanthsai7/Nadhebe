@@ -13,15 +13,23 @@ const description = 'Calculate exact 9:16 vertical video resolutions and preview
 const faq = [
   {
     question: 'What is the recommended resolution for 9:16 vertical video?',
-    answer: 'The industry-standard vertical video resolution is 1080 × 1920 pixels (Full HD 9:16). For 4K vertical displays, use 2160 × 3840 pixels.',
+    answer: 'The industry-standard vertical video resolution is 1080×1920 pixels (Full HD 9:16). For 4K vertical displays, use 2160×3840 pixels. All major platforms (TikTok, Instagram Reels, YouTube Shorts) accept 1080×1920 as the optimal upload resolution.',
   },
   {
     question: 'What are vertical video safe zones for YouTube Shorts and Reels?',
-    answer: 'Safe zones represent the central area of a 9:16 vertical video that remains unobscured by platform UI elements such as usernames, captions, sound titles, and action icons. Keep key text and subjects within the central 1080×1350 region.',
+    answer: 'Safe zones represent the central area of a 9:16 video that is not obscured by platform UI elements (usernames, captions, sound titles, action icons). YouTube Shorts: avoid top 12% and bottom 20%. Instagram Reels: keep key text inside the 1080×1350 vertical safe zone. TikTok: avoid the bottom 24% caption area.',
   },
   {
     question: 'How do you calculate 9:16 height from width?',
-    answer: 'Multiply width by 16, then divide by 9. Formula: Height = (Width × 16) / 9.',
+    answer: 'Multiply width by 16, then divide by 9. Formula: Height = (Width × 16) / 9. For a width of 1080: (1080 × 16) / 9 = 1920 px.',
+  },
+  {
+    question: 'What resolution does TikTok recommend for uploads?',
+    answer: 'TikTok recommends 1080×1920 (9:16 Full HD) at a minimum. Videos can be up to 10 minutes long for standard videos or 60 seconds for standard Shorts-style content. Higher-resolution uploads (2160×3840) are downscaled but retain quality for users with high-DPI displays.',
+  },
+  {
+    question: 'Can I upload a 4:3 or 1:1 video to a vertical video platform?',
+    answer: 'Yes, but the platform will letterbox (add black bars on the sides) to fill the 9:16 player frame. To maximize screen real estate and audience retention on mobile, use native 9:16 framing for content intended for Shorts, Reels, or TikTok.',
   },
 ];
 ---
@@ -88,17 +96,33 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Vertical Video (9:16) & Platform Safe Zones</h2>
+    <h2>9:16 Vertical Video — Dimensions, Safe Zones & Platform Guidelines</h2>
     <p>
-      9:16 vertical video is the native aspect ratio for smartphone mobile screens. However, platform user interface elements (like like buttons, captions, and sound titles) obscure the top and bottom edges.
+      9:16 vertical video is the native aspect ratio for smartphone screens and the format required by YouTube Shorts, Instagram Reels, and TikTok. Platform UI elements (action buttons, captions, usernames) overlay the edges, making safe zone planning essential for professional-looking content.
     </p>
 
-    <h2>Verified Platform Guidelines</h2>
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Calculate exact export dimensions for a Shorts, Reels, or TikTok video in DaVinci Resolve, Premiere, or CapCut</li>
+      <li>Visualize platform safe zones before placing text overlays, logos, or call-to-action elements</li>
+      <li>Convert a horizontal 16:9 video to vertical 9:16 by determining a correct crop region</li>
+      <li>Verify the minimum resolution requirement for each platform before exporting</li>
+      <li>Generate the correct CSS or HTML dimensions for a vertical video embed</li>
+    </ul>
+
+    <h3>Mathematical formula</h3>
+    <pre><code>Height = (Width × 16) / 9
+Width  = (Height × 9) / 16</code></pre>
+
+    <h2>Verified platform guidelines</h2>
     <ul>
       <li><strong>YouTube Shorts</strong>: Verified against Official YouTube Creator Documentation (Verified: {SAFE_ZONE_SPECS['youtube-shorts'].sourceMeta.lastVerified}). Avoid top 12% and bottom 20%.</li>
       <li><strong>Instagram Reels</strong>: Verified against Instagram Business Guidelines (Verified: {SAFE_ZONE_SPECS['instagram-reels'].sourceMeta.lastVerified}). Keep key text inside 1080×1350 vertical safe zone.</li>
       <li><strong>TikTok</strong>: Verified against TikTok Business Help Center (Verified: {SAFE_ZONE_SPECS['tiktok-video'].sourceMeta.lastVerified}). Avoid bottom 24% caption area.</li>
     </ul>
+
+    <h3>Related tools</h3>
+    <p>For horizontal widescreen video, use the <a href="/tools/16-9-dimensions-calculator/">16:9 Dimensions Calculator</a>. To check your upload dimensions before exporting, use the <a href="/tools/aspect-ratio-calculator/">Aspect Ratio Calculator</a>.</p>
   </div>
 </ToolLayout>
 

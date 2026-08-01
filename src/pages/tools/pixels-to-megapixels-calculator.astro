@@ -12,11 +12,23 @@ const description = 'Convert width × height pixel dimensions or total raw pixel
 const faq = [
   {
     question: 'How many pixels are in 1 megapixel?',
-    answer: 'One megapixel equals exactly 1,000,000 (one million) pixels. A 24 MP image contains 24,000,000 individual pixels.',
+    answer: 'One megapixel equals exactly 1,000,000 (one million) pixels. A 24 MP image contains 24,000,000 individual pixels. Megapixels are calculated by multiplying width by height and dividing by 1,000,000.',
   },
   {
     question: 'How do you convert resolution dimensions to megapixels?',
-    answer: 'Multiply the pixel width by the pixel height, then divide by 1,000,000. For example: 6000 × 4000 = 24,000,000 pixels / 1,000,000 = 24 MP.',
+    answer: 'Multiply pixel width by pixel height, then divide by 1,000,000. Example: 6000 × 4000 = 24,000,000 pixels / 1,000,000 = 24 MP. Formula: MP = (Width × Height) / 1,000,000.',
+  },
+  {
+    question: 'Is more megapixels always better?',
+    answer: 'Not always. More megapixels produce larger files and require faster processing. For social media, even 4 MP is sufficient. For large-format prints, 24+ MP is beneficial. Megapixels are one of many sensor quality factors — sensor size, aperture, and ISO performance matter equally.',
+  },
+  {
+    question: 'How many megapixels is a 4K video frame?',
+    answer: '4K UHD (3840×2160) = 8,294,400 pixels = 8.3 MP per frame. Cinema 4K (4096×2160) = 8.85 MP. 8K UHD (7680×4320) = 33.2 MP.',
+  },
+  {
+    question: 'What is a good megapixel count for a portrait photo shoot?',
+    answer: 'For commercial portrait photography printed at standard sizes (5×7 to 8×10"), 12 MP is sufficient. For retouching head shots at full resolution in Photoshop or requiring tight crops, 24 MP provides a comfortable margin. Studio photographers often use 45–61 MP for maximum flexibility.',
   },
 ];
 ---
@@ -113,14 +125,35 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Understanding Megapixels</h2>
+    <h2>Pixels to Megapixels — Formula, Reference Table & Use Cases</h2>
     <p>
-      A <strong>megapixel (MP)</strong> represents one million pixels. Digital camera specifications, smartphone sensor capabilities, and photo prints are categorized by their megapixel counts.
+      A <strong>megapixel (MP)</strong> represents one million pixels. Digital camera specifications, smartphone sensor marketing, and photo print size planning all use megapixels as a shorthand for image resolution.
     </p>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Convert a camera sensor's native width×height spec to its megapixel count</li>
+      <li>Check how many megapixels a video resolution represents (4K = 8.3 MP)</li>
+      <li>Compare the effective resolution of two cameras with different sensor sizes</li>
+      <li>Verify that an image export has the required megapixel count for a client or print job</li>
+      <li>Calculate the file size implications of different MP counts before shooting</li>
+    </ul>
 
     <h3>Formula</h3>
     <pre><code>Total Pixels = Width × Height
 Megapixels   = Total Pixels / 1,000,000</code></pre>
+
+    <h3>Megapixel classification guide</h3>
+    <ul>
+      <li><strong>&lt; 8 MP</strong> — Web and social media. Not suitable for print larger than 4×6".</li>
+      <li><strong>8–16 MP</strong> — Versatile everyday photography. A4 prints at 300 DPI.</li>
+      <li><strong>16–32 MP</strong> — Professional DSLR range. A3 and A2 prints. Cropping flexibility.</li>
+      <li><strong>32–61 MP</strong> — High-resolution mirrorless. Billboard and fine art printing.</li>
+      <li><strong>61+ MP</strong> — Medium-format studio. Extreme detail for fashion and product photography.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>For the reverse calculation (MP to pixel dimensions), use <a href="/tools/megapixels-to-resolution-calculator/">Megapixels to Resolution Calculator</a>. To check how many megapixels you need for a specific print size, use the <a href="/tools/dpi-print-size-calculator/">DPI Print Size Calculator</a>.</p>
   </div>
 </ToolLayout>
 

@@ -10,11 +10,23 @@ const description = 'Validate sitemap XML markup, check URL accessibility, inspe
 const faq = [
   {
     question: 'Why is sitemap validation important for SEO?',
-    answer: 'A valid XML sitemap ensures search engines like Google and Bing discover and index all critical pages without encountering syntax errors, missing tags, or broken URL entries.',
+    answer: 'A valid XML sitemap ensures search engines like Google and Bing discover and index all critical pages without encountering syntax errors, invalid XML markup, unescaped URLs, or missing tags.',
   },
   {
     question: 'What is the maximum limit for a single XML sitemap file?',
-    answer: 'A single XML sitemap file can contain up to 50,000 URLs and must be under 50MB uncompressed. If your site has more URLs, split them using a sitemap index file.',
+    answer: 'A single XML sitemap file can contain up to 50,000 URLs and must be under 50MB uncompressed. If your site has more URLs, split them across multiple child sitemaps using a sitemap index file (`sitemap-index.xml`).',
+  },
+  {
+    question: 'Should non-canonical or redirected URLs be included in a sitemap?',
+    answer: 'No. Sitemaps should ONLY contain indexable, canonical URLs that return an HTTP 200 status code. Including 301 redirects, 404 broken links, noindexed pages, or non-canonical duplicates wastes Googlebot crawl budget.',
+  },
+  {
+    question: 'How does robots.txt interact with XML sitemaps?',
+    answer: '`robots.txt` tells crawlers which directories or paths they are allowed (or forbidden) to access. Sitemaps list the exact URLs you want indexed. Always include a `Sitemap: https://yourdomain.com/sitemap.xml` directive at the top or bottom of your `robots.txt` file.',
+  },
+  {
+    question: 'Does submitting a sitemap guarantee instant indexing?',
+    answer: 'No. Submitting a sitemap via Google Search Console or Bing Webmaster Tools invites crawlers to inspect your URLs, but actual indexing depends on content quality, site performance, and internal linking structure.',
   },
 ];
 ---
@@ -56,36 +68,31 @@ const faq = [
   <url>
     <loc>https://nadhebe.com/tools/json-formatter/</loc>
     <lastmod>2026-07-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>`}</textarea>
           </div>
 
-          <div class="flex items-center gap-12">
-            <button id="btn-analyze-sitemap" type="button" class="rounded-pill bg-accent px-20 py-10 font-sans text-caption font-semibold text-white shadow-soft hover:opacity-95 cursor-pointer transition-all active:scale-95">
-              Analyze Sitemap
+          <div class="flex items-center justify-between gap-12">
+            <button
+              type="button"
+              id="btn-load-sample-sitemap"
+              class="rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark dark:hover:border-accent-dark cursor-pointer transition-all"
+            >
+              Load Sample XML
             </button>
-            <button id="btn-load-sample-sitemap" type="button" class="rounded-pill border border-border bg-surface2 px-16 py-10 font-sans text-caption font-medium text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer">
-              Load Sample
+            <button
+              type="button"
+              id="btn-analyze-sitemap"
+              class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              Validate Sitemap
             </button>
           </div>
         </div>
       </CalculatorCard>
 
-      <!-- OUTPUT CARD -->
-      <ResultCard title="SITEMAP ANALYSIS REPORT">
-        <div class="space-y-16">
-          
-          <!-- Score Badge & Status -->
-          <div class="flex items-center justify-between rounded-12 border border-border bg-surface p-12 dark:border-border-dark dark:bg-surface-dark">
-            <div class="flex items-center gap-10">
-              <span id="report-score-badge" class="flex h-40 w-40 items-center justify-center rounded-circle bg-emerald-500/15 font-mono text-body-large font-bold text-emerald-600 dark:text-emerald-400">
-                100
-              </span>
-              <div>
-                <div id="report-health-title" class="font-sans font-bold text-caption text-ink dark:text-ink-dark">Sitemap Healthy</div>
-                <div id="report-health-sub" class="font-mono text-xs text-muted dark:text-muted-dark">Valid XML Sitemap v0.9</div>
-              </div>
             </div>
             <span id="report-type-tag" class="rounded-pill border border-border bg-surface2 px-10 py-4 font-mono text-xs font-semibold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">urlset</span>
           </div>
@@ -121,10 +128,30 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Sitemap & Robots Directive Analyzer</h2>
+    <h2>Sitemap & Robots Directive Analyzer — Guide & Best Practices</h2>
     <p>
-      Audit your site's XML sitemaps and robots.txt configuration to maximize crawl budget efficiency and ensure search engine indexing accuracy.
+      XML sitemaps serve as the primary roadmap for search engine crawlers. Ensuring your sitemaps are free of syntax errors, broken URLs, non-canonical redirects, or HTTPS protocol mismatches guarantees that Googlebot spends its crawl budget exclusively on your high-value indexable pages.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Audit newly generated <code>sitemap.xml</code> files before submitting to Google Search Console or Bing Webmaster Tools</li>
+      <li>Detect non-HTTPS mixed content links or trailing slash inconsistencies across sitemap URLs</li>
+      <li>Verify syntax compliance against official Sitemaps.org XML schema specifications</li>
+      <li>Identify high-risk URLs returning 301 redirects, 404 errors, or blocked by <code>robots.txt</code></li>
+      <li>Validate sitemap index files (<code>sitemap-index.xml</code>) that reference multiple child sitemaps</li>
+    </ul>
+
+    <h3>Common sitemap pitfalls to avoid</h3>
+    <ul>
+      <li><strong>Non-Canonical URLs</strong> — Including parameter URLs or non-canonical variations causes indexing confusion.</li>
+      <li><strong>Mixed HTTP/HTTPS Protocols</strong> — All sitemap URLs should consistently use <code>https://</code>.</li>
+      <li><strong>Unescaped XML Special Characters</strong> — Amper-sands (<code>&amp;</code>), quotes (<code>"</code>), and angle brackets (<code>&lt;</code>) must be XML-escaped.</li>
+      <li><strong>Excessive File Size</strong> — Exceeding 50,000 URLs or 50MB per file will cause Google Search Console rejection.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Combine sitemap auditing with automated content gap discovery using <a href="/tools/opportunity-radar/">Nadhebe Opportunity Radar</a>, or generate structured page metadata using the <a href="/tools/schema-generator/">JSON-LD Schema Generator</a>.</p>
   </div>
 </ToolLayout>
 

@@ -11,12 +11,24 @@ const description = 'Estimate corresponding pixel width and height dimensions fo
 
 const faq = [
   {
-    question: 'What pixel dimensions equal 24 megapixels?',
-    answer: 'At a 3:2 aspect ratio (standard DSLR), 24 MP corresponds to 6000 × 4000 pixels. At 16:9 widescreen, 24 MP corresponds to approximately 6532 × 3674 pixels.',
+    question: 'What pixel dimensions equal 24 megapixels at 3:2?',
+    answer: 'At a 3:2 aspect ratio (standard DSLR), 24 MP corresponds to 6000×4000 pixels. At 16:9 widescreen, 24 MP corresponds to approximately 6532×3674 pixels. The exact values depend on the aspect ratio since both dimensions scale proportionally.',
   },
   {
     question: 'Why are calculated dimensions sometimes approximate?',
-    answer: 'Pixel dimensions must be whole integer numbers. Because target megapixel calculations require taking square roots of ratios, exact integer width × height results may round slightly.',
+    answer: 'Pixel dimensions must be whole integers. Calculating width and height from a megapixel count requires a square root, which rarely produces exact integers. The calculator rounds to the nearest integer — the resulting actual MP is shown alongside the target to indicate the rounding difference.',
+  },
+  {
+    question: 'What megapixel count is enough for a full-frame print?',
+    answer: 'For a standard 8×10" print at 300 DPI: 2400×3000 = 7.2 MP. For A4 (8.27×11.69") at 300 DPI: 8.7 MP. A modern 12 MP smartphone provides enough resolution for high-quality A4 prints. A 24+ MP DSLR is suitable for large A2 poster prints.',
+  },
+  {
+    question: 'What is the difference between sensor megapixels and effective megapixels?',
+    answer: 'Sensor megapixels is the total pixel count on the imaging chip. Effective megapixels is the count used for the actual image output (some pixels are masked or used for calibration). Camera specs typically advertise effective megapixels.',
+  },
+  {
+    question: 'How does aspect ratio affect megapixel output?',
+    answer: 'The same megapixel count produces different width and height values depending on the aspect ratio. A 24 MP 3:2 sensor gives 6000×4000; the same 24 MP in 16:9 gives 6532×3674. The total area in pixels remains the same; only the proportions change.',
   },
 ];
 ---
@@ -111,13 +123,35 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>How to Calculate Resolution from Megapixels</h2>
+    <h2>Megapixels to Resolution — Formula, Use Cases & Camera Reference</h2>
     <p>
-      Given a target megapixel count $MP$ and an aspect ratio $W:H$:
+      A <strong>megapixel (MP)</strong> is one million pixels. Camera manufacturers spec sensors in megapixels, but print labs, displays, and image editors work in pixel dimensions. This calculator bridges the two.
     </p>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Find the print size limit of a camera sensor before purchasing a camera for a specific use case</li>
+      <li>Determine if a given MP count produces enough pixels for a target print size at 300 DPI</li>
+      <li>Set up an image canvas at the exact pixel dimensions for a target aspect ratio and MP count</li>
+      <li>Convert a video resolution (e.g. 4K = 8.3 MP) to its megapixel equivalent for comparison</li>
+      <li>Reverse-engineer the sensor resolution of a device from its megapixel spec</li>
+    </ul>
+
+    <h3>Formula</h3>
     <pre><code>Target Pixels = MP × 1,000,000
 Height = √(Target Pixels × H / W)
 Width  = Height × (W / H)</code></pre>
+
+    <h3>Common camera MP benchmarks</h3>
+    <ul>
+      <li><strong>12 MP</strong> — Standard smartphone (iPhone default, most Android flagships). 4032×3024. Sufficient for A4 prints.</li>
+      <li><strong>24 MP</strong> — Entry/mid DSLR and mirrorless (Sony A7 IV, Nikon Z6). 6000×4000. Good for A3 prints.</li>
+      <li><strong>45 MP</strong> — High-resolution DSLR (Nikon Z7 II, Canon R5). 8256×5504. Suitable for large-format poster printing.</li>
+      <li><strong>61 MP</strong> — Studio medium-format (Sony A7R V). 9504×6336. Professional fine art and billboard printing.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Use the <a href="/tools/pixels-to-megapixels-calculator/">Pixels to Megapixels Calculator</a> for the reverse conversion, or the <a href="/tools/dpi-print-size-calculator/">DPI Print Size Calculator</a> to determine print dimensions from pixel counts.</p>
   </div>
 </ToolLayout>
 

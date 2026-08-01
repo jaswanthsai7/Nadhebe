@@ -631,28 +631,33 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "AI",
     "categorySlug": "ai",
     "mode": "calculator",
-    "description": "Embedding inspector. Use this privacy-first embedding inspector directly in your browser.",
+    "description": "Inspect AI embedding vectors — compute L2 norm, cosine similarity, dot product, and dimension statistics. Runs fully in your browser.",
     "seo": {
-      "title": "Embedding inspector - Free Browser Tool | Nadhebe",
-      "description": "Embedding inspector. Use this privacy-first embedding inspector directly in your browser.",
+      "title": "Embedding Inspector — Analyze AI Vectors in the Browser | Nadhebe",
+      "description": "Analyze AI embedding vectors locally. Compute L2 norm, cosine similarity, dot product, min/max values, and normalized vectors. 100% browser-side — no data uploaded.",
       "keywords": [
         "embedding inspector",
-        "ai",
-        "calculator"
+        "vector inspector",
+        "cosine similarity calculator",
+        "ai embedding analyzer",
+        "vector norm calculator",
+        "dot product calculator",
+        "embedding similarity tool",
+        "llm vector debugger"
       ]
     },
     "relatedTools": [
+      "cosine-similarity-calculator",
       "json-formatter",
       "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "uuid-generator"
     ],
     "tags": [
       "ai",
       "calculator",
       "embedding-inspector"
     ],
-    "icon": "code"
+    "icon": "binary"
   },
   {
     "id": "ai-4",
@@ -6558,28 +6563,33 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "transform",
-    "description": "CSV deduper. Use this privacy-first csv deduper directly in your browser.",
+    "description": "Remove duplicate rows from CSV files instantly in your browser. Paste your CSV data and get a clean, deduplicated output with a deduplication report.",
     "seo": {
-      "title": "CSV deduper - Free Browser Tool | Nadhebe",
-      "description": "CSV deduper. Use this privacy-first csv deduper directly in your browser.",
+      "title": "CSV Deduper — Remove Duplicate Rows from CSV | Nadhebe",
+      "description": "Paste CSV data and remove duplicate rows in one click. Get a deduplicated CSV with a report showing how many rows were removed. 100% local — your data never leaves your browser.",
       "keywords": [
         "csv deduper",
-        "csv",
-        "transform"
+        "remove duplicate csv rows",
+        "csv duplicate remover",
+        "deduplicate csv online",
+        "csv cleaner tool",
+        "remove duplicates from csv",
+        "csv data cleaning",
+        "csv row deduplication"
       ]
     },
     "relatedTools": [
-      "json-formatter",
       "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "duplicate-remover",
+      "json-formatter",
+      "xml-formatter"
     ],
     "tags": [
       "csv",
       "transform",
       "csv-deduper"
     ],
-    "icon": "code"
+    "icon": "filter"
   },
   {
     "id": "csv-6",
@@ -6898,28 +6908,33 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "Regex",
     "categorySlug": "regex",
     "mode": "calculator",
-    "description": "Escape helper. Use this privacy-first escape helper directly in your browser.",
+    "description": "Escape special characters for HTML, JavaScript strings, and URL encoding. Instantly see HTML entity escaping, JS string escaping, and percent-encoding side by side.",
     "seo": {
-      "title": "Escape helper - Free Browser Tool | Nadhebe",
-      "description": "Escape helper. Use this privacy-first escape helper directly in your browser.",
+      "title": "Escape Helper — HTML, JS & URL Escape Tool | Nadhebe",
+      "description": "Escape special characters for HTML entities, JavaScript strings, and URL encoding. Free browser tool — paste your string and get all three escape formats instantly, no server.",
       "keywords": [
-        "escape helper",
-        "regex",
-        "calculator"
+        "html escape tool",
+        "escape special characters",
+        "url encode online",
+        "javascript string escape",
+        "html entity encoder",
+        "percent encoding tool",
+        "xss escape helper",
+        "string escaper online"
       ]
     },
     "relatedTools": [
+      "url-parser",
+      "base64-encoder",
       "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "slug-generator"
     ],
     "tags": [
       "regex",
       "calculator",
       "escape-helper"
     ],
-    "icon": "code"
+    "icon": "shield-alert"
   },
   {
     "id": "regex-4",
@@ -8464,28 +8479,32 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "DevOps",
     "categorySlug": "devops",
     "mode": "transform",
-    "description": "Dockerfile linter. Use this privacy-first dockerfile linter directly in your browser.",
+    "description": "Lint your Dockerfile for common mistakes and best-practice violations. Detects missing WORKDIR, untagged base images, absent EXPOSE instructions, and more.",
     "seo": {
-      "title": "Dockerfile linter - Free Browser Tool | Nadhebe",
-      "description": "Dockerfile linter. Use this privacy-first dockerfile linter directly in your browser.",
+      "title": "Dockerfile Linter — Validate & Fix Dockerfiles | Nadhebe",
+      "description": "Paste your Dockerfile and catch common issues: missing WORKDIR, :latest tags, absent EXPOSE instructions. Free browser-based linter — your code never leaves the tab.",
       "keywords": [
         "dockerfile linter",
-        "devops",
-        "transform"
+        "dockerfile validator",
+        "docker best practices checker",
+        "lint dockerfile online",
+        "dockerfile static analysis",
+        "docker image optimization",
+        "dockerfile quality check"
       ]
     },
     "relatedTools": [
+      "curl-builder",
       "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "cron-next-run-viewer",
+      "slug-generator"
     ],
     "tags": [
       "devops",
       "transform",
       "dockerfile-linter"
     ],
-    "icon": "code"
+    "icon": "package-check"
   },
   {
     "id": "devops-2",
@@ -11422,28 +11441,32 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "Date & Time",
     "categorySlug": "date-time",
     "mode": "analyzer",
-    "description": "Cron next-run viewer. Use this privacy-first cron next-run viewer directly in your browser.",
+    "description": "Parse a cron expression and preview its next scheduled run times. Shows a plain-English schedule summary and the next 5 execution times. Runs locally in your browser.",
     "seo": {
-      "title": "Cron next-run viewer - Free Browser Tool | Nadhebe",
-      "description": "Cron next-run viewer. Use this privacy-first cron next-run viewer directly in your browser.",
+      "title": "Cron Next-Run Viewer — Preview Cron Schedule Times | Nadhebe",
+      "description": "Paste a cron expression and instantly see a human-readable schedule summary plus the next 5 run times. Free browser tool — no server, no data sent anywhere.",
       "keywords": [
         "cron next run viewer",
-        "date & time",
-        "analyzer"
+        "cron expression parser",
+        "cron schedule preview",
+        "next cron execution time",
+        "cron human readable",
+        "cron job scheduler tool",
+        "parse cron expression online"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "dockerfile-linter",
+      "url-parser",
+      "slug-generator",
+      "json-formatter"
     ],
     "tags": [
       "date & time",
       "analyzer",
       "cron-next-run-viewer"
     ],
-    "icon": "code"
+    "icon": "calendar-clock"
   },
   {
     "id": "date-time-5",
@@ -15878,28 +15901,32 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "Visualization",
     "categorySlug": "visualization",
     "mode": "calculator",
-    "description": "Color scale generator. Use this privacy-first color scale generator directly in your browser.",
+    "description": "Generate a Tailwind-style color palette from any hex color. Enter a base hex value and get a full 10-step shade scale from 50 to 900. Runs in your browser.",
     "seo": {
-      "title": "Color scale generator - Free Browser Tool | Nadhebe",
-      "description": "Color scale generator. Use this privacy-first color scale generator directly in your browser.",
+      "title": "Color Scale Generator — Tailwind Palette from Hex | Nadhebe",
+      "description": "Enter a hex color and generate a complete 10-shade Tailwind-compatible color scale. Get shade values from 50 to 900 instantly. Free browser tool — no uploads.",
       "keywords": [
         "color scale generator",
-        "visualization",
-        "calculator"
+        "tailwind color palette generator",
+        "hex color shades",
+        "color palette from hex",
+        "generate color scale online",
+        "design color system tool",
+        "color tints and shades"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "color-contrast-checker",
+      "css-clamp-calculator",
+      "px-to-rem",
+      "svg-to-jsx"
     ],
     "tags": [
       "visualization",
       "calculator",
       "color-scale-generator"
     ],
-    "icon": "code"
+    "icon": "palette"
   },
   {
     "id": "visualization-4",
@@ -16286,28 +16313,32 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "category": "API",
     "categorySlug": "api",
     "mode": "calculator",
-    "description": "cURL builder. Use this privacy-first curl builder directly in your browser.",
+    "description": "Build a complete cURL command from a human-readable request spec. Paste method, URL, headers, and body — get a ready-to-run curl command. Fully local.",
     "seo": {
-      "title": "cURL builder - Free Browser Tool | Nadhebe",
-      "description": "cURL builder. Use this privacy-first curl builder directly in your browser.",
+      "title": "cURL Builder — Generate curl Commands from HTTP Requests | Nadhebe",
+      "description": "Turn a plain HTTP request spec into a ready-to-run curl command. Specify method, URL, headers, and request body and get the correct curl syntax instantly. Free browser tool.",
       "keywords": [
         "curl builder",
-        "api",
-        "calculator"
+        "generate curl command",
+        "curl command generator",
+        "http request to curl",
+        "api curl generator",
+        "curl syntax builder",
+        "rest api curl tool"
       ]
     },
     "relatedTools": [
+      "url-parser",
       "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "base64-encoder",
+      "dockerfile-linter"
     ],
     "tags": [
       "api",
       "calculator",
       "curl-builder"
     ],
-    "icon": "code"
+    "icon": "terminal"
   },
   {
     "id": "api-4",

@@ -10,11 +10,23 @@ const description = 'Convert pixels (px) to REM units instantly. Free CSS unit c
 const faq = [
   {
     question: 'What is the default base font size in browsers?',
-    answer: 'The standard root font size in virtually all web browsers is 16px (1rem = 16px).',
+    answer: 'The standard root font size in virtually all web browsers is 16px (1rem = 16px). Unless overridden by the user or CSS reset, 1rem equals 16px.',
   },
   {
     question: 'What is the difference between EM and REM in CSS?',
-    answer: 'REM (Root EM) scales relative strictly to the root <html> font size, whereas EM scales relative to the parent container font size.',
+    answer: 'REM (Root EM) scales relative strictly to the root `<html>` font size, whereas EM scales relative to the immediate parent element\'s font size. Using REM prevents compounding font size inheritance bugs.',
+  },
+  {
+    question: 'Why is using REM better for web accessibility than PX?',
+    answer: 'Fixed `px` units override user browser preferences. When visually impaired users increase default font size in browser settings, hardcoded `px` text stays static. `rem` units scale proportionally to respect user preferences.',
+  },
+  {
+    question: 'How do I convert PX to REM manually?',
+    answer: 'Divide the pixel value by the root base font size: `rem = px / base`. For standard 16px base: `24px / 16 = 1.5rem`, `32px / 16 = 2rem`, `12px / 16 = 0.75rem`.',
+  },
+  {
+    question: 'Can I set a custom base font size like 10px in CSS?',
+    answer: 'Setting `html { font-size: 62.5%; }` sets the root base to 10px (10px / 16px = 62.5%), making 1.4rem = 14px and 2.4rem = 24px. However, modern Tailwind and CSS frameworks recommend leaving base at 16px for standard accessibility consistency.',
   },
 ];
 ---
@@ -85,10 +97,25 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>PX to REM Conversion Matrix</h2>
+    <h2>PX to REM Conversion Matrix & Accessibility Guide</h2>
     <p>
-      Converting fixed pixel measurements to relative <code>rem</code> units improves accessibility by allowing text and layout elements to scale smoothly when users alter their default browser font sizes.
+      Converting fixed pixel (<code>px</code>) measurements to relative <code>rem</code> units is a core Web Content Accessibility Guidelines (WCAG) best practice. Relative <code>rem</code> units scale fluidly when users adjust default browser text size settings.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Convert pixel-based font sizes, padding, and margins from Figma specs into <code>rem</code> values</li>
+      <li>Calculate exact <code>rem</code> values for custom base font sizes (e.g. 14px, 16px, or 18px base)</li>
+      <li>Generate CSS custom property snippets for design system spacing tokens</li>
+      <li>Reference common Tailwind CSS spacing step conversions (4px = 0.25rem, 16px = 1rem, 24px = 1.5rem)</li>
+    </ul>
+
+    <h3>Conversion formula</h3>
+    <pre><code>rem = target_pixels / base_font_size
+px  = target_rem * base_font_size</code></pre>
+
+    <h3>Related tools</h3>
+    <p>Build responsive, fluid typography routines using our <a href="/tools/css-clamp-calculator/">CSS Clamp Calculator</a>, or verify text contrast against background surfaces using the <a href="/tools/color-contrast-checker/">Color Contrast Checker</a>.</p>
   </div>
 </ToolLayout>
 

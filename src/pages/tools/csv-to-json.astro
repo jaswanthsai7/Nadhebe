@@ -17,6 +17,18 @@ const faq = [
     question: 'Can I convert tab-separated values (TSV) into JSON?',
     answer: 'Yes, select the tab delimiter option or upload a `.tsv` file to convert tab-separated data into formatted JSON objects.',
   },
+  {
+    question: 'Can I convert JSON back into CSV format?',
+    answer: 'Yes! Click the "Convert to CSV" button in the workbench header to export JSON arrays of objects back into tabular CSV string format.',
+  },
+  {
+    question: 'How are CSV headers handled during conversion?',
+    answer: 'The first row of the CSV is automatically parsed as property keys for the resulting JSON object array. If headers are missing, numeric index keys are assigned.',
+  },
+  {
+    question: 'What is the maximum CSV file size I can convert?',
+    answer: 'Because processing happens entirely in browser JavaScript memory, files up to 50MB (over 100,000 rows) convert in seconds without network timeout limits.',
+  },
 ];
 ---
 
@@ -31,7 +43,7 @@ const faq = [
     <!-- Local Privacy Selling Point Badge -->
     <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
       <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        🔒 Runs locally in your browser · Your data isn't uploaded
+        ✓ Runs locally in your browser — Your data isn't uploaded
       </span>
       <span>Supports CSV, TSV, Pipe, & Semicolon</span>
     </div>
@@ -41,16 +53,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Client-Side CSV & JSON Data Converter</h2>
+    <h2>Client-Side CSV & JSON Data Converter — Features & Guide</h2>
     <p>
       Nadhebe CSV to JSON Converter transforms tabular spreadsheet data into structured JSON object arrays instantly inside browser memory.
     </p>
 
-    <h3>Supported Features</h3>
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Convert exported Excel or Google Sheets CSV files into JSON for frontend web applications</li>
+      <li>Transform database export CSV files into JSON array payloads for REST API testing</li>
+      <li>Convert JSON arrays into downloadable `.csv` files for business reporting</li>
+      <li>Process pipe (`|`) or semicolon (`;`) delimited data files without opening spreadsheet software</li>
+    </ul>
+
+    <h3>Supported features</h3>
     <ul>
       <li><strong>Multiple Delimiters:</strong> Auto-detects and parses comma (<code>,</code>), tab (<code>\t</code>), pipe (<code>|</code>), and semicolon (<code>;</code>) delimited data.</li>
       <li><strong>Two-Way Transformation:</strong> Convert CSV to JSON or export JSON array payloads to formatted CSV files.</li>
       <li><strong>Local File Processing:</strong> Drag and drop local <code>.csv</code> or <code>.tsv</code> files directly into the workbench.</li>
     </ul>
+
+    <h3>Related tools</h3>
+    <p>Format converted JSON objects with <a href="/tools/json-formatter/">JSON Formatter</a>, or generate TypeScript interfaces from your CSV data using <a href="/tools/json-to-typescript/">JSON to TypeScript Generator</a>.</p>
   </div>
 </ToolLayout>

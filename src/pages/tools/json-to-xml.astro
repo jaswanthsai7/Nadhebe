@@ -11,7 +11,23 @@ const initialCode = `{\n  "catalog": {\n    "book": [\n      {\n        "id": "b
 const faq = [
   {
     question: 'How does JSON to XML conversion work?',
-    answer: 'The converter maps JSON object keys to XML element tags and JSON array elements into repeating sibling XML nodes.',
+    answer: 'The converter maps JSON object keys into XML element tags (`<key>value</key>`) and JSON array elements into repeating sibling XML nodes under a parent container element.',
+  },
+  {
+    question: 'Can I convert XML markup back to JSON?',
+    answer: 'Yes! Toggle the direction selector in the workbench header to convert XML markup into structured JSON objects.',
+  },
+  {
+    question: 'How are JSON array items converted to XML tags?',
+    answer: 'JSON array items are mapped to repeating element tags. For example, `"items": ["a", "b"]` converts to `<items><item>a</item><item>b</item></items>`.',
+  },
+  {
+    question: 'Are XML attributes supported during conversion?',
+    answer: 'Yes. Properties prefixed with `@` (e.g., `"@id": "101"`) are automatically mapped as XML element attributes (`<element id="101">`).',
+  },
+  {
+    question: 'Is client-side JSON to XML conversion private?',
+    answer: 'Yes, 100%. All XML serialization and parsing logic runs locally in browser JavaScript memory. Zero byte data is sent over the network.',
   },
 ];
 ---
@@ -28,9 +44,26 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>JSON to XML Converter</h2>
+    <h2>JSON to XML Converter — Guide & Structural Mapping Rules</h2>
     <p>
-      Transform structured data between JSON and XML formats instantly in your browser.
+      Transform structured data between JSON and XML formats instantly in your browser. Easily convert modern JSON API responses for legacy SOAP Web Services, RSS feeds, or enterprise XML database schemas.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Convert REST JSON payload responses into XML format for legacy enterprise systems</li>
+      <li>Transform XML sitemaps or RSS feed data into JSON objects for JavaScript applications</li>
+      <li>Export structured database records between JSON document stores and XML schemas</li>
+    </ul>
+
+    <h3>Key conversion features</h3>
+    <ul>
+      <li><strong>Two-Way Conversion:</strong> Bidirectional transformation between JSON and XML.</li>
+      <li><strong>Attribute Prefixing:</strong> Support for `@` prefixed keys to generate XML attributes.</li>
+      <li><strong>Formatted XML Output:</strong> Automatically indents output XML tags for clean readability.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Format raw XML strings with <a href="/tools/xml-formatter/">XML Formatter</a>, format JSON payloads with <a href="/tools/json-formatter/">JSON Formatter</a>, or convert CSV datasets to JSON using <a href="/tools/csv-to-json/">CSV to JSON Converter</a>.</p>
   </div>
 </ToolLayout>

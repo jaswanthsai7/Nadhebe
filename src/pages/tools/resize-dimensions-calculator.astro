@@ -10,11 +10,23 @@ const description = 'Scale image or video dimensions while preserving original a
 const faq = [
   {
     question: 'How do I calculate scaled dimensions while preserving aspect ratio?',
-    answer: 'With ratio lock active, entering a new width automatically calculates new height as: (New Width × Original Height) / Original Width. Entering a new height calculates new width as: (New Height × Original Width) / Original Height.',
+    answer: 'With ratio lock active, entering a new width automatically calculates new height as: (New Width × Original Height) / Original Width. Entering a new height calculates new width as: (New Height × Original Width) / Original Height. The aspect ratio never changes.',
   },
   {
     question: 'Why does reducing dimensions by 50% reduce total pixels by 75%?',
-    answer: 'Pixel count is a 2D area (width × height). If both width and height are halved (0.5w × 0.5h), the resulting total pixel count becomes 0.25 of the original (75% pixel reduction).',
+    answer: 'Pixel count is a 2D area (width × height). If both dimensions are halved (0.5w × 0.5h), the resulting total pixel count is 0.25 of the original — a 75% reduction in pixel area, even though each dimension is only reduced by 50%.',
+  },
+  {
+    question: 'Can I upscale an image to a larger resolution with this calculator?',
+    answer: 'Yes. Enter the original dimensions and a larger target width or height. The calculator shows the proportional output dimensions. Note: upscaling only adds more pixels — it does not increase the actual image detail or sharpness. Use AI upscaling tools for quality enhancement.',
+  },
+  {
+    question: 'What does unlocking the aspect ratio do?',
+    answer: 'When the aspect ratio lock is disabled, width and height can be set independently. This allows stretching or compressing the image to non-proportional dimensions, which may distort the image. Only unlock the ratio if you specifically need a different aspect ratio for the output.',
+  },
+  {
+    question: 'What are common image resize targets for web use?',
+    answer: 'Blog hero images: 1200×630 px (Open Graph ratio). Full-width banners: 1920×1080 px. Social media square: 1080×1080 px. Profile photos: 400×400 px. For retina displays, double the target dimensions (e.g., 800px wide → 1600px for 2x display).',
   },
 ];
 ---
@@ -129,14 +141,35 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Understanding Image Resizing & Scaling</h2>
+    <h2>Image Resizing & Scaling — Formula, Use Cases & Reference</h2>
     <p>
-      When scaling images for web design, digital publishing, or video production, maintaining the exact proportion between width and height prevents unnatural stretching or distortion.
+      When scaling images for web design, digital publishing, or video production, maintaining the exact proportion between width and height prevents unnatural stretching or distortion. This calculator shows both proportional and non-proportional resize results.
     </p>
 
-    <h3>Aspect Ratio Preservation Formula</h3>
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Resize a hero image to a target width while preserving its original aspect ratio</li>
+      <li>Calculate the correct thumbnail dimensions from a source video resolution</li>
+      <li>Scale an image to a specific percentage of its original size (25%, 50%, 200%)</li>
+      <li>Find out how many pixels remain after resizing (to check if quality will be sufficient)</li>
+      <li>Downscale a print-resolution image (3000+ px) to a web-safe size (1200 px or less)</li>
+    </ul>
+
+    <h3>Aspect ratio preservation formula</h3>
     <pre><code>Scaled Height = (Target Width × Original Height) / Original Width
 Scaled Width  = (Target Height × Original Width) / Original Height</code></pre>
+
+    <h3>Pixel area change at common scale percentages</h3>
+    <ul>
+      <li><strong>25% scale</strong> — 6.25% of original pixel count (93.75% reduction)</li>
+      <li><strong>50% scale</strong> — 25% of original pixel count (75% reduction)</li>
+      <li><strong>75% scale</strong> — 56.25% of original pixel count (43.75% reduction)</li>
+      <li><strong>150% scale</strong> — 225% of original pixel count (2.25× more pixels)</li>
+      <li><strong>200% scale</strong> — 400% of original pixel count (4× more pixels)</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Use the <a href="/tools/aspect-ratio-calculator/">Aspect Ratio Calculator</a> to find the simplified ratio of any resolution, or the <a href="/tools/pixels-to-megapixels-calculator/">Pixels to Megapixels Calculator</a> to check whether the resized output has enough resolution for printing.</p>
   </div>
 </ToolLayout>
 

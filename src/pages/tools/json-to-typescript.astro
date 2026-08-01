@@ -19,7 +19,15 @@ const faq = [
   },
   {
     question: 'How are nested JSON objects and arrays handled?',
-    answer: 'Nested objects are recursively parsed into separate sub-interfaces, and array elements are automatically inferred into primitive or union types.',
+    answer: 'Nested objects are recursively parsed into separate sub-interfaces, and array elements are automatically inferred into primitive, object, or union types.',
+  },
+  {
+    question: 'Does the generator support optional properties for null or undefined keys?',
+    answer: 'Yes! When enabled, nullable keys or missing object properties are generated with optional property flags (`key?: string | null`).',
+  },
+  {
+    question: 'Can I customize the root interface name?',
+    answer: 'Yes, enter any custom root type name (e.g. `ApiResponse`, `UserData`, or `ProductState`) in the workbench header to prefix the top-level interface declaration.',
   },
 ];
 ---
@@ -35,7 +43,7 @@ const faq = [
     <!-- Local Privacy Selling Point Badge -->
     <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
       <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        🔒 Runs locally in your browser · Your data isn't uploaded
+        ✓ Runs locally in your browser — Your data isn't uploaded
       </span>
       <span>No API required</span>
     </div>
@@ -45,12 +53,20 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Automated JSON to TypeScript Type Inference</h2>
+    <h2>Automated JSON to TypeScript Type Inference — Features & Guide</h2>
     <p>
       Nadhebe JSON to TypeScript Generator parses raw JSON strings, recursively inspects object properties, and automatically constructs strongly-typed TypeScript interfaces and type definitions.
     </p>
 
-    <h3>Key Capabilities</h3>
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Generate strongly-typed TypeScript interfaces directly from REST or GraphQL API response JSON</li>
+      <li>Create TypeScript state types for Redux, Zustand, or Vuex stores from raw mock data</li>
+      <li>Speed up frontend API integration while eliminating manual `any` type annotations</li>
+      <li>Generate nested interface hierarchies for complex configuration files</li>
+    </ul>
+
+    <h3>Key capabilities</h3>
     <ul>
       <li><strong>Recursive Type Inference:</strong> Infers numbers, strings, booleans, arrays, null values, and nested objects.</li>
       <li><strong>Interface vs Type Alias:</strong> Choose your preferred TypeScript syntax declaration.</li>
@@ -58,9 +74,12 @@ const faq = [
       <li><strong>0ms Local Execution:</strong> Process large JSON responses without network latency or server timeouts.</li>
     </ul>
 
-    <h3>Why Use Client-Side TypeScript Generators?</h3>
+    <h3>Why use client-side TypeScript generators?</h3>
     <p>
       Manual type definitions are error-prone and slow down API integration. By generating TypeScript definitions directly from sample API responses, frontend developers save hours of boilerplate coding while preventing runtime type mismatch bugs.
     </p>
+
+    <h3>Related tools</h3>
+    <p>Format raw JSON payloads with <a href="/tools/json-formatter/">JSON Formatter</a>, or validate JSON syntax with <a href="/tools/json-validator/">JSON Validator</a>.</p>
   </div>
 </ToolLayout>

@@ -10,11 +10,23 @@ const description = 'Test text and background HEX color contrast ratios against 
 const faq = [
   {
     question: 'What contrast ratio is required for WCAG Level AA compliance?',
-    answer: 'WCAG 2.1 Level AA requires a minimum contrast ratio of 4.5:1 for normal body text and 3:1 for large text (18pt / 24px or 14pt / 18px bold).',
+    answer: 'WCAG 2.1 Level AA requires a minimum contrast ratio of 4.5:1 for normal body text (under 18pt / 24px) and 3:1 for large text (18pt / 24px or larger, or 14pt / 18px bold). UI components and graphical objects require at least 3:1.',
   },
   {
     question: 'What contrast ratio is required for Level AAA compliance?',
-    answer: 'WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.',
+    answer: 'WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text. Achieving AAA compliance ensures optimal readability for users with severe low vision.',
+  },
+  {
+    question: 'How is the color contrast ratio calculated?',
+    answer: 'Contrast ratio is calculated using relative luminance values ($L_1$ and $L_2$) of the foreground and background colors: $(L_1 + 0.05) / (L_2 + 0.05)$, where $L_1$ is the lighter color. The result ranges from 1:1 (zero contrast) to 21:1 (black on white).',
+  },
+  {
+    question: 'Why does color contrast matter for SEO and UX?',
+    answer: 'High contrast text improves readability, reduces visual fatigue, and boosts search engine accessibility rankings. Search engines evaluate visual accessibility and usability metrics as part of page experience signals.',
+  },
+  {
+    question: 'Does WCAG contrast apply to placeholder text and icons?',
+    answer: 'Yes. Essential icons, active form controls, focus indicators, and interactive state borders require a minimum 3:1 contrast ratio under WCAG 2.1 Success Criterion 1.4.11 (Non-text Contrast).',
   },
 ];
 ---
@@ -92,10 +104,29 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>WCAG 2.1 Color Contrast Guidelines</h2>
+    <h2>WCAG 2.1 Color Contrast Guidelines — Standards & Best Practices</h2>
     <p>
-      Ensuring sufficient color contrast between text and background elements is critical for users with visual impairments or color vision deficiencies.
+      Ensuring sufficient color contrast between foreground text and background surface elements is essential for digital accessibility. The Web Content Accessibility Guidelines (WCAG 2.1) specify precise mathematical ratios to ensure content remains readable for individuals with visual impairments or color vision deficiencies.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Verify body copy and background contrast ratios before committing design tokens in Tailwind or CSS</li>
+      <li>Audit call-to-action button text contrast for WCAG 2.1 AA (4.5:1) and AAA (7.0:1) compliance</li>
+      <li>Test dark mode and light mode color palette combinations for readable typography</li>
+      <li>Check non-text UI components (input borders, active tab indicators, icons) for 3.0:1 contrast compliance</li>
+    </ul>
+
+    <h3>WCAG 2.1 compliance levels reference</h3>
+    <ul>
+      <li><strong>Level AA Normal Text (&lt; 18pt)</strong> — Minimum ratio of <strong>4.5:1</strong>. Mandatory standard for most web accessibility legislation.</li>
+      <li><strong>Level AA Large Text (≥ 18pt or 14pt bold)</strong> — Minimum ratio of <strong>3.0:1</strong>. Applies to large headings and hero banners.</li>
+      <li><strong>Level AAA Normal Text (&lt; 18pt)</strong> — Minimum ratio of <strong>7.0:1</strong>. Enhanced accessibility tier for government and healthcare platforms.</li>
+      <li><strong>Level AAA Large Text (≥ 18pt or 14pt bold)</strong> — Minimum ratio of <strong>4.5:1</strong>. Maximum legibility benchmark.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Calculate responsive, scalable fluid typography using our <a href="/tools/css-clamp-calculator/">CSS Clamp Calculator</a>, or convert design token pixel sizes to relative units with the <a href="/tools/px-to-rem/">PX to REM Converter</a>.</p>
   </div>
 </ToolLayout>
 

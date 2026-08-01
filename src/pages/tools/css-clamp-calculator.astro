@@ -10,15 +10,23 @@ const description = 'Calculate responsive CSS clamp() formulas for fluid typogra
 const faq = [
   {
     question: 'Why should I use CSS clamp() instead of media queries?',
-    answer: 'CSS clamp() enables smooth, fluid scaling between minimum and maximum viewport widths without requiring discrete media query breakpoints.',
+    answer: 'CSS clamp() enables smooth, continuous fluid scaling between minimum and maximum viewport widths without requiring discrete media query breakpoints. This results in cleaner CSS and eliminates awkward font size jumps at breakpoint limits.',
   },
   {
     question: 'Is CSS clamp() supported in modern browsers?',
-    answer: 'Yes, CSS clamp() has over 96% global browser support across Chrome, Safari, Firefox, and Edge.',
+    answer: 'Yes, CSS clamp() has over 96% global browser support across Chrome, Safari, Firefox, Edge, and iOS Safari. It has been fully supported in all major browser engines since early 2020.',
   },
   {
     question: 'How does the root base font size affect REM calculation?',
-    answer: 'Standard browser default root font size is 16px (1rem = 16px). Changing the root base font recalculates REM outputs accurately.',
+    answer: 'Standard browser default root font size is 16px (1rem = 16px). Changing the root base font recalculates REM outputs accurately. Converting pixel values to REM ensures fluid text still respects user browser font size scaling preferences.',
+  },
+  {
+    question: 'Can CSS clamp() be used for padding and margin layout spacing?',
+    answer: 'Yes! CSS clamp() is widely used for fluid layout padding, margin gaps, grid gap spacing, and container width constraints (`padding: clamp(1rem, 3vw, 3rem)`), creating responsive layouts that adapt dynamically to any screen width.',
+  },
+  {
+    question: 'What happens if the viewport width falls outside the min/max range?',
+    answer: 'If the viewport width is smaller than the minimum viewport boundary, the minimum font size is enforced. If the viewport width exceeds the maximum viewport boundary, the maximum font size is capped. Inside the viewport range, font size scales linearly.',
   },
 ];
 ---
@@ -95,16 +103,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Understanding CSS clamp() for Fluid Typography</h2>
+    <h2>CSS clamp() & Fluid Typography — Formula, Guide & Use Cases</h2>
     <p>
-      The <code>clamp()</code> CSS function accepts three parameters: a minimum value, a preferred value (usually calculated using viewport units <code>vw</code>), and a maximum value.
+      The <code>clamp()</code> CSS function accepts three parameters: a minimum value, a preferred value (calculated using viewport units <code>vw</code>), and a maximum value (<code>clamp(MIN, PREFERRED, MAX)</code>). It locks font size or layout spacing to bounds while allowing smooth linear scaling in between.
     </p>
 
-    <h3>Mathematical Formula</h3>
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Generate fluid typography CSS for hero H1 headings that scale from mobile (320px) to desktop (1280px) viewports</li>
+      <li>Create responsive section padding and margin gap utilities that eliminate media query boilerplate</li>
+      <li>Convert pixel typography specs from Figma design files into production-ready <code>rem</code>-based <code>clamp()</code> functions</li>
+      <li>Preview live typography rendering across custom viewport slider widths in real-time</li>
+    </ul>
+
+    <h3>Mathematical formula</h3>
     <pre class="font-mono text-caption">slope = (maxSize - minSize) / (maxViewport - minViewport)
 intersection = -minViewport * slope + minSize
-preferred = (intersection / base)rem + (slope * 100)vw
-clamp = clamp((minSize / base)rem, preferred, (maxSize / base)rem)</pre>
+preferred = (intersection / rootBase)rem + (slope * 100)vw
+result = clamp((minSize / rootBase)rem, preferred, (maxSize / rootBase)rem)</pre>
+
+    <h3>Related tools</h3>
+    <p>Convert fixed design token pixels to relative REM units using our <a href="/tools/px-to-rem/">PX to REM Converter</a>, or verify text legibility with the <a href="/tools/color-contrast-checker/">Color Contrast Checker</a>.</p>
   </div>
 </ToolLayout>
 

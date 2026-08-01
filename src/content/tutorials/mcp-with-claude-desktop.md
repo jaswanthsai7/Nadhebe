@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["MCP", "Claude Desktop", "Anthropic", "AI Agents", "Local Tools"]
-heroImage: "/images/mcp_claude_desktop_hero_v2.png"
+heroImage: "/images/claude-desktop-guide-hero.webp"
 heroAlt: "Retro-futuristic editorial infographic showing Claude Desktop connecting to a local MCP Server"
 estimatedReadingTime: 12
 isPillar: false

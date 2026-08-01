@@ -19,6 +19,18 @@ const faq = [
     question: 'Why do social media images look blurry after uploading?',
     answer: 'Platforms automatically compress uploaded images that exceed maximum file sizes or non-standard pixel dimensions. Uploading at exact recommended pixel dimensions prevents aggressive re-compression.',
   },
+  {
+    question: 'What image ratio takes up the most screen real estate on mobile feeds?',
+    answer: 'Vertical and portrait formats take up maximum mobile screen space: 4:5 portrait (1080×1350 px) on Instagram feed posts, and 9:16 vertical (1080×1920 px) on YouTube Shorts, Instagram Reels, and TikTok.',
+  },
+  {
+    question: 'What are safe zones for channel headers and profile banners?',
+    answer: 'Safe zones represent the central region of a header banner that remains visible across all device screen sizes (mobile, desktop, TV). For YouTube banners (2560×1440), keep key logos within the 1235×338 px center box.',
+  },
+  {
+    question: 'What is the standard OpenGraph social sharing image size?',
+    answer: 'The universal OpenGraph image dimension is 1200×630 pixels (1.91:1 aspect ratio). This format renders full-width preview cards on Facebook, LinkedIn, Twitter/X, Discord, Slack, and WhatsApp.',
+  },
 ];
 ---
 
@@ -146,17 +158,30 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Social Media Dimensions Best Practices</h2>
+    <h2>Social Media Image & Video Dimensions Guide</h2>
     <p>
-      Each social media platform optimizes images differently depending on mobile screen ratios, desktop feeds, and video players.
+      Each social media platform optimizes uploaded media differently based on device viewport ratios, feed layouts, and video player containers. Uploading native pixel dimensions ensures sharp rendering without aggressive platform compression or awkward cropping.
     </p>
 
+    <h3>When to use this helper</h3>
     <ul>
-      <li><strong>YouTube:</strong> Standard videos require 16:9 (1920×1080 or 3840×2160). Shorts require 9:16 (1080×1920). Banners require 2560×1440 with a 1235×338 safe zone.</li>
-      <li><strong>Instagram:</strong> Portrait feed posts (1080×1350, 4:5) maximize screen area compared to traditional square (1080×1080). Reels require 9:16 (1080×1920).</li>
-      <li><strong>X (Twitter):</strong> Landscape 16:9 (1600×900) prevents unexpected cropping in feed timeline previews.</li>
-      <li><strong>LinkedIn:</strong> Standard posts use 16:9 (1280×720) or 1:1 square. Profile banners use 1584×396 (4:1).</li>
+      <li>Look up exact pixel specifications for banners, profile avatars, thumbnails, and story cards</li>
+      <li>Verify safe-zone margins before adding text or logos to YouTube headers or mobile video overlays</li>
+      <li>Calculate pixel dimensions for multi-platform promotional campaigns (YouTube + Instagram + X)</li>
+      <li>Select the best aspect ratio to maximize mobile feed screen coverage (e.g. 4:5 portrait vs. 1:1 square)</li>
     </ul>
+
+    <h3>Platform dimension breakdown</h3>
+    <ul>
+      <li><strong>YouTube:</strong> Standard widescreen 16:9 (1920×1080 / 3840×2160). Shorts 9:16 (1080×1920). Channel Banners 2560×1440 with a 1235×338 px center safe zone.</li>
+      <li><strong>Instagram:</strong> Portrait feed posts 4:5 (1080×1350) for maximum vertical feed area. Square feed 1:1 (1080×1080). Stories & Reels 9:16 (1080×1920).</li>
+      <li><strong>X (Twitter):</strong> Landscape feed 16:9 (1600×900) prevents unexpected feed cropping. Profile Header 1500×500 (3:1 ratio).</li>
+      <li><strong>LinkedIn:</strong> Standard posts 16:9 (1280×720) or square (1080×1080). Profile Banners 1584×396 (4:1 ratio).</li>
+      <li><strong>TikTok:</strong> Vertical video 9:16 (1080×1920). Keep key captions away from the bottom 24% overlay zone.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>For dedicated vertical video calculations, use our <a href="/tools/9-16-dimensions-calculator/">9:16 Dimensions Calculator</a>. For standard widescreen video planning, use the <a href="/tools/16-9-dimensions-calculator/">16:9 Dimensions Calculator</a>.</p>
   </div>
 </ToolLayout>
 

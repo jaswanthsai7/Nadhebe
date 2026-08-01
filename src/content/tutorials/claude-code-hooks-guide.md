@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["Claude Code", "Hooks", "Automation", "CLI", "Anthropic"]
-heroImage: "/images/claude_code_hooks_hero.png"
+heroImage: "/images/claude-skills-hero.webp"
 heroAlt: "Stylized infographic showing Claude Code executing automated hooks on a local codebase"
 estimatedReadingTime: 10
 isPillar: false

@@ -11,7 +11,23 @@ const initialCode = `version: "3.8"\nservices:\n  web:\n    image: "nginx:latest
 const faq = [
   {
     question: 'Can I convert Docker Compose or Kubernetes YAML to JSON?',
-    answer: 'Yes, copy your YAML markup into the input editor and click "Convert to JSON" or type to convert between structures.',
+    answer: 'Yes! Paste your Docker Compose (`docker-compose.yml`) or Kubernetes deployment manifest into the input editor to convert indentation-based YAML structures into valid JSON objects.',
+  },
+  {
+    question: 'Can I convert JSON back into YAML format?',
+    answer: 'Yes! Toggle the direction in the workbench header to convert JSON object payloads into clean, 2-space indented YAML configuration files.',
+  },
+  {
+    question: 'How are indentation and spaces handled in YAML parsing?',
+    answer: 'YAML relies strictly on space indentation (tabs are disallowed by the YAML spec). The converter normalizes indentation and validates key-value structure.',
+  },
+  {
+    question: 'Are YAML comments preserved when converting to JSON?',
+    answer: 'Standard JSON does not support comments (`#`), so comments present in the input YAML are omitted during JSON export.',
+  },
+  {
+    question: 'Is client-side YAML conversion secure for secret config files?',
+    answer: 'Yes. 100% of conversion logic runs locally inside browser JavaScript memory. Sensitive environment variables, secrets, and API keys are never uploaded.',
   },
 ];
 ---
@@ -28,9 +44,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>YAML to JSON Converter</h2>
+    <h2>YAML to JSON Converter — Features & Guide</h2>
     <p>
-      Seamlessly convert configuration files between YAML and JSON representations.
+      Seamlessly convert configuration files between YAML and JSON representations. Simplify DevOps workflows, CI/CD pipeline auditing, and cloud configuration parsing.
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Convert Kubernetes manifests, Helm values, or OpenAPI specifications to JSON for programatic parsing</li>
+      <li>Transform Docker Compose configuration files into JSON object trees</li>
+      <li>Convert GitHub Actions or GitLab CI YAML workflows into JSON for API submission</li>
+      <li>Convert JSON schema definitions into readable YAML files for developer documentation</li>
+    </ul>
+
+    <h3>Key conversion features</h3>
+    <ul>
+      <li><strong>Bi-Directional Conversion:</strong> Instant two-way conversion between YAML and JSON.</li>
+      <li><strong>Syntax Validation:</strong> Real-time feedback for invalid indentation or unescaped colons.</li>
+      <li><strong>0ms Client-Side Speed:</strong> Instant local parsing in browser memory.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Format converted JSON configs with <a href="/tools/json-formatter/">JSON Formatter</a>, or validate JSON syntax with <a href="/tools/json-validator/">JSON Validator</a>.</p>
   </div>
 </ToolLayout>

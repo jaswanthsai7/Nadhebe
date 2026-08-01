@@ -20,6 +20,14 @@ const faq = [
     question: 'Why are OpenGraph (og:) tags important for social sharing?',
     answer: 'OpenGraph meta tags control how your content appears when shared on platforms like X (Twitter), Facebook, LinkedIn, Discord, and Slack, ensuring high click-through rates with rich image cards.',
   },
+  {
+    question: 'What is the difference between og:image and twitter:image?',
+    answer: '`og:image` is the standard OpenGraph image property recognized by Facebook, LinkedIn, Discord, and Slack (recommended 1200×630 px). `twitter:image` is specific to Twitter/X. If `twitter:image` is omitted, Twitter falls back to `og:image`.',
+  },
+  {
+    question: 'How do meta tag preview tools simulate Google search results?',
+    answer: 'Meta tag preview tools measure pixel width using a standard desktop sans-serif font (Arial/Roboto at 18px for titles) to render realistic SERP snippet previews matching Google\'s desktop and mobile display boundaries.',
+  },
 ];
 ---
 
@@ -145,10 +153,31 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>OpenGraph & Meta Tag Inspector</h2>
+    <h2>OpenGraph & Meta Tag Checker — Guide, Standards & Use Cases</h2>
     <p>
-      Verify metadata tags before publishing to ensure optimal click-through rates on search engines and social media shares.
+      Meta tags are HTML elements that provide search engines and social media platforms structured information about your web pages. Properly formatted title tags, meta descriptions, and OpenGraph tags directly impact your search engine visibility and click-through rates (CTR).
     </p>
+
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Preview how your title tag and meta description will render in Google SERPs before publishing</li>
+      <li>Audit title tag character length to prevent truncation on mobile (~55 chars) and desktop (~60 chars)</li>
+      <li>Verify OpenGraph card presentation for Twitter/X, Facebook, LinkedIn, Discord, and Slack shares</li>
+      <li>Generate copy-pasteable HTML head meta tags for new blog posts, landing pages, or web apps</li>
+      <li>Troubleshoot social card image rendering issues (e.g. missing <code>og:image</code> or incorrect protocol)</li>
+    </ul>
+
+    <h3>Essential metadata tags checklist</h3>
+    <ul>
+      <li><strong>Meta Title</strong> — 50–60 characters. Primary keyword near the beginning. Unique across every page.</li>
+      <li><strong>Meta Description</strong> — 140–160 characters. Compelling summary with a clear call-to-action.</li>
+      <li><strong>Canonical URL</strong> — <code>&lt;link rel="canonical" href="..."&gt;</code> prevents duplicate content issues.</li>
+      <li><strong>OpenGraph Image</strong> — 1200×630 pixels (1.91:1 ratio). High contrast with readable overlay text.</li>
+      <li><strong>Twitter Card Type</strong> — <code>summary_large_image</code> for full-width visual previews.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Combine meta tag optimization with structured data using our <a href="/tools/schema-generator/">JSON-LD Schema Generator</a>, or check your site's overall indexing health with the <a href="/tools/sitemap-validator/">Sitemap & Robots Analyzer</a>.</p>
   </div>
 </ToolLayout>
 

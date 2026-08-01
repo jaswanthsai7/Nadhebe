@@ -10,11 +10,23 @@ const description = 'Calculate screen pixel density (PPI) from resolution dimens
 const faq = [
   {
     question: 'What is PPI and why does it matter?',
-    answer: 'PPI (Pixels Per Inch) measures display pixel density. Higher PPI values yield sharper text, crisp detail, and smoother edges on monitors, smartphones, and laptops.',
+    answer: 'PPI (Pixels Per Inch) measures display pixel density. Higher PPI values yield sharper text, crisper icons, and smoother edges on monitors, smartphones, and tablets. At the same screen size, a higher-PPI panel reproduces more fine detail.',
   },
   {
     question: 'What PPI is considered Retina or ultra-sharp?',
-    answer: 'For desktop monitors viewed at arm’s length (~20-30 inches), ~110-220 PPI is considered sharp. For smartphones viewed at ~10-12 inches, 300-460+ PPI is standard for Retina-level sharpness.',
+    answer: 'For desktop monitors viewed at arm\'s length (~20–30 inches), 110–220 PPI is considered sharp. For smartphones viewed at ~10–12 inches, 300–460+ PPI is standard for Retina-level sharpness. Apple\'s Retina threshold varies by device: ~227 PPI for iPad, ~326 PPI for iPhone.',
+  },
+  {
+    question: 'What is the difference between PPI and DPI?',
+    answer: 'PPI (Pixels Per Inch) is a property of digital displays and images. DPI (Dots Per Inch) refers to physical printer resolution — the number of ink dots per inch on paper. For printing, you convert a digital image\'s PPI to the output DPI required by your printer or press.',
+  },
+  {
+    question: 'What PPI should I use for printing photos?',
+    answer: 'For high-quality photo prints, 300 PPI at the intended print size is the standard. For large-format prints viewed from a distance (posters, banners), 150 PPI is usually sufficient. Below 72 PPI at print size typically produces visibly pixelated output.',
+  },
+  {
+    question: 'Why is the diagonal used in the PPI formula instead of width or height?',
+    answer: 'The diagonal provides a single scalar measurement of screen size that is independent of aspect ratio. Using the Pythagorean theorem on the pixel grid gives the diagonal pixel count, which when divided by the physical diagonal in inches yields PPI — a true two-dimensional density measure.',
   },
 ];
 ---
@@ -76,10 +88,31 @@ const faq = [
   <div slot="content">
     <h2>PPI Calculation Formula</h2>
     <p>
-      Pixel density is calculated using the Pythagorean theorem for diagonal pixels divided by screen size:
+      Pixel density is calculated using the Pythagorean theorem for diagonal pixels divided by physical screen size:
     </p>
     <pre><code>Diagonal Pixels = √(Width² + Height²)
 PPI = Diagonal Pixels / Diagonal Size (inches)</code></pre>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Verify a monitor or TV meets your sharpness requirement before buying</li>
+      <li>Compare pixel density between two displays with different resolutions and screen sizes</li>
+      <li>Check whether a device qualifies as Retina-class (typically ≥ 220 PPI for monitors)</li>
+      <li>Calculate effective PPI when using a 4K display at a non-native resolution</li>
+      <li>Match output image resolution to a specific printer DPI for photo printing</li>
+    </ul>
+
+    <h3>PPI reference benchmarks</h3>
+    <ul>
+      <li><strong>&lt; 100 PPI</strong> — Large TV screens, typically viewed from 6+ feet</li>
+      <li><strong>100–160 PPI</strong> — Standard desktop monitors (24" 1080p = 92 PPI)</li>
+      <li><strong>160–220 PPI</strong> — High-resolution monitors (27" 4K = 163 PPI)</li>
+      <li><strong>220–300 PPI</strong> — Laptops and tablets (13" Retina MacBook = 227 PPI)</li>
+      <li><strong>&gt; 300 PPI</strong> — Smartphones (iPhone at 326+ PPI, ultra-high-density)</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Use <a href="/tools/aspect-ratio-calculator/">Aspect Ratio Calculator</a> to verify a resolution's proportions before inputting it here, or <a href="/tools/dpi-print-size-calculator/">DPI Print Size Calculator</a> to convert pixel dimensions to physical print sizes.</p>
   </div>
 </ToolLayout>
 

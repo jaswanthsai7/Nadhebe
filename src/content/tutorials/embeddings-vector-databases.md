@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["Vector Databases", "Embeddings", "RAG", "AI Search", "Cosine Similarity"]
-heroImage: "/images/embeddings_vector_db_hero.png"
+heroImage: "/images/vector-database-chunking-hero.png"
 heroAlt: "Stylized infographic showing text data being converted into high-dimensional floating point vectors inside a neon database"
 estimatedReadingTime: 18
 isPillar: false

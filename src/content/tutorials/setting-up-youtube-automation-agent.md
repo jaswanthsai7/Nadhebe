@@ -5,7 +5,7 @@ pubDate: 2026-07-17
 author: alice-chen
 category: Tutorials
 tags: ["tutorials", "setup", "youtube-automation", "python"]
-heroImage: "https://i.ytimg.com/vi/EOHodDuJddc/hqdefault.jpg"
+heroImage: "/images/yt-automation-hero.webp"
 heroAlt: "Step-by-Step Tutorial: Setting Up the YouTube Automation Agent"
 youtubeVideoId: "EOHodDuJddc"
 estimatedReadingTime: 6

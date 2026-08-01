@@ -10,11 +10,23 @@ const description = 'Calculate gross margin, markup percentage, and net profit a
 const faq = [
   {
     question: 'What is the difference between profit margin and markup?',
-    answer: 'Profit margin measures profit relative to the selling price (Profit / Selling Price), while markup measures profit relative to the item cost (Profit / Cost).',
+    answer: 'Profit margin measures profit relative to the final selling price (`Profit / Selling Price × 100`), while markup measures profit relative to the cost of goods sold (`Profit / COGS × 100`). A 50% markup equals a 33.3% profit margin.',
   },
   {
     question: 'What is a healthy profit margin for an e-commerce store?',
-    answer: 'A healthy gross profit margin for e-commerce generally ranges between 50%–70%, while a sustainable net profit margin is typically 15%–25% after processing and shipping overhead.',
+    answer: 'A healthy gross profit margin for e-commerce generally ranges between 50%–70%, while a sustainable net profit margin is typically 15%–25% after factoring payment processing, advertising (CAC), and shipping fulfillment overhead.',
+  },
+  {
+    question: 'How do payment processing fees affect net profit margins?',
+    answer: 'Payment gateways like Stripe and PayPal charge a percentage rate plus a fixed per-transaction fee (e.g., 2.9% + $0.30). On small order values ($10–$20), the fixed fee eats up a higher percentage of gross profit.',
+  },
+  {
+    question: 'How do I calculate required retail price from a target profit margin?',
+    answer: 'To achieve a target gross margin $M$, calculate selling price as: `Selling Price = Cost of Goods / (1 - (Target Margin / 100))`. For example, for a $20 cost item at 60% target margin: `$20 / 0.40 = $50`.',
+  },
+  {
+    question: 'What is COGS (Cost of Goods Sold)?',
+    answer: 'COGS includes all direct expenses required to produce or acquire a product: raw materials, manufacturing labor, packaging, and inbound supplier shipping. It excludes indirect overhead like marketing and office software.',
   },
 ];
 ---
@@ -119,10 +131,28 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>E-Commerce Unit Economics</h2>
+    <h2>E-Commerce Unit Economics & Profit Margin Formulas</h2>
     <p>
-      Accurate profit margin calculations must account for payment gateway transaction rates and fulfillment costs to determine true net profitability per unit sold.
+      Accurate profit margin calculations must account for payment gateway transaction rates (Stripe, PayPal, Shopify Payments) and fulfillment overhead to determine true net profitability per unit sold.
     </p>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Calculate retail selling prices required to hit a target gross or net profit margin percentage</li>
+      <li>Factor payment processing fees (e.g. 2.9% + $0.30) into product pricing to protect net margins</li>
+      <li>Compare gross profit vs. net profit after deducting shipping, packaging, and gateway fees</li>
+      <li>Determine markup percentage needed to achieve a target gross margin on cost of goods (COGS)</li>
+    </ul>
+
+    <h3>Mathematical formulas</h3>
+    <pre><code>Gross Profit = Selling Price - COGS
+Gross Margin (%) = (Gross Profit / Selling Price) × 100
+Markup (%) = (Gross Profit / COGS) × 100
+Net Profit = Selling Price - COGS - Gateway Fees - Shipping Costs
+Net Margin (%) = (Net Profit / Selling Price) × 100</code></pre>
+
+    <h3>Related tools</h3>
+    <p>Compare period-over-period revenue growth or margin changes using our <a href="/tools/percentage-difference-calculator/">Percentage Difference & Change Calculator</a>.</p>
   </div>
 </ToolLayout>
 

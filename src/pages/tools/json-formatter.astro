@@ -21,6 +21,14 @@ const faq = [
     question: 'What is the maximum file size supported?',
     answer: 'Because processing takes place client-side using your hardware resources, Nadhebe JSON Formatter easily handles large JSON files up to 50MB without server timeout limits.',
   },
+  {
+    question: 'How does JSON formatting handle nested objects and arrays?',
+    answer: 'The formatter recursively parses nested structures and applies clean indentation spaces (2-space, 4-space, or tabs) to every nested key, array element, and primitive value.',
+  },
+  {
+    question: 'Can I copy formatted JSON or download it as a .json file?',
+    answer: 'Yes! The workbench includes a one-click "Copy Code" button and a "Download" button to save the formatted JSON directly to your local file system.',
+  },
 ];
 ---
 
@@ -36,12 +44,20 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Online JSON Formatter & Code Editor</h2>
+    <h2>Online JSON Formatter & Code Editor — Features & Guide</h2>
     <p>
       Nadhebe JSON Formatter is a privacy-focused developer workbench designed for software engineers, frontend developers, and API creators. Format minified JSON payloads into clean, readable code with customizable 2-space, 4-space, or tab indentation.
     </p>
 
-    <h3>Key Developer Features</h3>
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Format minified API response payloads into structured, human-readable code</li>
+      <li>Inspect deeply nested JSON objects using the interactive collapsible tree view</li>
+      <li>Validate raw JSON for missing brackets, trailing commas, or syntax errors</li>
+      <li>Convert JSON data into XML, YAML, or CSV format with one click</li>
+    </ul>
+
+    <h3>Key developer features</h3>
     <ul>
       <li><strong>Interactive Dual-Pane Editor:</strong> Synced line numbers gutter, error line highlight, and live formatting feedback.</li>
       <li><strong>Multiple View Modes:</strong> Toggle between raw Code view and collapsible Tree View for inspecting nested objects.</li>
@@ -49,9 +65,12 @@ const faq = [
       <li><strong>Local File Operations:</strong> Upload local <code>.json</code> or <code>.txt</code> files directly into the workbench and download formatted output.</li>
     </ul>
 
-    <h3>Why Use Client-Side JSON Utilities?</h3>
+    <h3>Why use client-side JSON utilities?</h3>
     <p>
-      Many online tools send sensitive payload data to external servers. Nadhebe guarantees 100% client-side privacy. Whether you are debugging API responses, formatting config files, or inspecting tokens, your data never leaves your device.
+      Many online tools send sensitive payload data to external servers. Nadhebe guarantees 100% client-side privacy. Whether you are debugging API responses, formatting config files, or inspecting authentication tokens, your data never leaves your device memory.
     </p>
+
+    <h3>Related tools</h3>
+    <p>Compress JSON data for web transmission using <a href="/tools/json-minifier/">JSON Minifier</a>, generate TypeScript types from JSON payloads with <a href="/tools/json-to-typescript/">JSON to TypeScript Generator</a>, or check syntax errors with <a href="/tools/json-validator/">JSON Validator</a>.</p>
   </div>
 </ToolLayout>

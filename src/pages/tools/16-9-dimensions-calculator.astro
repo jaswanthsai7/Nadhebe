@@ -12,11 +12,23 @@ const description = 'Calculate exact 16:9 widescreen dimensions for videos, moni
 const faq = [
   {
     question: 'What are standard 16:9 resolutions?',
-    answer: 'Standard 16:9 resolutions include 1280×720 (720p HD), 1920×1080 (1080p Full HD), 2560×1440 (1440p 2K), 3840×2160 (4K UHD), and 7680×4320 (8K UHD).',
+    answer: 'Standard 16:9 resolutions include 1280×720 (720p HD), 1920×1080 (1080p Full HD), 2560×1440 (1440p 2K), 3840×2160 (4K UHD), and 7680×4320 (8K UHD). These are the primary tiers used by YouTube, broadcast TV, PC gaming, and streaming platforms.',
   },
   {
     question: 'How do you calculate 16:9 height from a custom width?',
-    answer: 'Multiply width by 9, then divide by 16. For example, for width 1920: (1920 × 9) / 16 = 1080 px.',
+    answer: 'Multiply width by 9, then divide by 16. For example, for width 1920: (1920 × 9) / 16 = 1080 px. Round to the nearest integer for non-standard widths.',
+  },
+  {
+    question: 'Why is 16:9 the standard for video?',
+    answer: '16:9 became the global standard through the ITU-R BT.709 specification for HDTV in the 1990s. It offers a wider field of view than 4:3 for natural scenes and cinema, while still fitting comfortably on rectangular screens. All modern monitors, TVs, YouTube, and streaming platforms use 16:9.',
+  },
+  {
+    question: 'What happens if I upload a non-16:9 video to YouTube?',
+    answer: 'YouTube automatically adds black bars (letterboxing or pillarboxing) to fill the 16:9 player frame. The video itself is not cropped. To avoid black bars on standard uploads, ensure your video dimensions are exactly 16:9.',
+  },
+  {
+    question: 'What is the difference between 16:9 and 16:10?',
+    answer: '16:10 (1.6:1) was popular for widescreen laptops in the 2000s and is still used in some professional monitors. It is slightly taller than 16:9 (1.778:1), providing more vertical working space. 16:10 monitors (like 2560×1600) display 16:9 video with small letterbox bars.',
   },
 ];
 ---
@@ -83,18 +95,39 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Standard 16:9 Resolutions Guide</h2>
+    <h2>16:9 Aspect Ratio — Standard, Formula & Use Cases</h2>
     <p>
-      16:9 is the universal standard aspect ratio for video production, broadcasting, YouTube uploads, and computer displays.
+      16:9 is the universal standard aspect ratio for video production, broadcasting, YouTube uploads, and computer displays. It replaced 4:3 as the global TV and monitor standard after HDTV adoption in the early 2000s.
     </p>
 
     <p class="my-16">
       To view the complete widescreen resolution chart from 360p through 8K with total pixel counts and display standards, check our <a href="/tools/reference/16-9-resolution-chart/">16:9 Widescreen Resolution Reference Chart</a>.
     </p>
 
-    <h3>Mathematical Formula</h3>
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Find the correct height for a custom video width before exporting from Premiere, DaVinci Resolve, or Final Cut</li>
+      <li>Verify YouTube upload dimensions (1080p = 1920×1080, 4K = 3840×2160)</li>
+      <li>Set canvas dimensions in Figma, Canva, or Photoshop for a video thumbnail template</li>
+      <li>Calculate correct embed dimensions for a responsive 16:9 iframe or video player</li>
+      <li>Convert a non-standard width to the nearest valid 16:9 height for a display or projector</li>
+    </ul>
+
+    <h3>Mathematical formula</h3>
     <pre><code>Height = (Width × 9) / 16
 Width  = (Height × 16) / 9</code></pre>
+
+    <h3>Standard 16:9 resolution tiers</h3>
+    <ul>
+      <li><strong>720p HD</strong> — 1280×720 — Minimum for YouTube monetization</li>
+      <li><strong>1080p FHD</strong> — 1920×1080 — Standard broadcast and streaming quality</li>
+      <li><strong>1440p 2K</strong> — 2560×1440 — High-end gaming monitors and YouTube HDR</li>
+      <li><strong>4K UHD</strong> — 3840×2160 — Maximum YouTube quality, 4K TVs</li>
+      <li><strong>8K UHD</strong> — 7680×4320 — Future-proof archival and cinema production</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>For vertical video (TikTok, Reels, Shorts), use the <a href="/tools/9-16-dimensions-calculator/">9:16 Dimensions Calculator</a>. To check your video’s aspect ratio from any resolution, use the <a href="/tools/aspect-ratio-calculator/">Aspect Ratio Calculator</a>.</p>
   </div>
 </ToolLayout>
 

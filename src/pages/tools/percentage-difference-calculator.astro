@@ -10,11 +10,23 @@ const description = 'Calculate percentage difference, percentage change, and per
 const faq = [
   {
     question: 'When should I use percentage difference instead of percentage change?',
-    answer: 'Use percentage difference when comparing two numbers without a time direction or initial benchmark. Use percentage change when comparing an initial starting value to a final resulting value.',
+    answer: 'Use percentage difference when comparing two numbers without a time direction or initial baseline (e.g. comparing height of two buildings). Use percentage change when measuring change from an initial starting value to a final resulting value over time (e.g. revenue growth from Q1 to Q2).',
   },
   {
     question: 'Can percentage difference be negative?',
-    answer: 'No, percentage difference compares the absolute difference divided by the average of two numbers, so it is always positive. Percentage change, however, can be negative indicating a decrease.',
+    answer: 'No. Percentage difference calculates the absolute difference between two numbers divided by their average value, so it is always a positive number. Percentage change can be positive (increase) or negative (decrease).',
+  },
+  {
+    question: 'What is the formula for percentage change?',
+    answer: 'Percentage change is calculated as: `((Final Value - Initial Value) / |Initial Value|) × 100`. A positive result indicates percentage growth; a negative result indicates percentage reduction.',
+  },
+  {
+    question: 'What is the percentage change from 50 to 75?',
+    answer: 'The change is `((75 - 50) / 50) × 100 = (25 / 50) × 100 = 50% increase`. The percentage difference between 50 and 75 is `|50 - 75| / ((50 + 75) / 2) = 25 / 62.5 = 40%`.',
+  },
+  {
+    question: 'How do you calculate percentage points vs percent change?',
+    answer: 'Percentage points measure the simple arithmetic difference between two percentages (e.g., interest rate moving from 5% to 7% is a 2 percentage point increase). Percent change measures the relative shift (`(7 - 5) / 5 = 40% increase`).',
   },
 ];
 ---
@@ -93,11 +105,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>How to Calculate Percentage Difference</h2>
+    <h2>Percentage Difference vs. Percentage Change — Formulas & Guide</h2>
     <p>
-      Percentage difference measures the relative change between two numbers divided by their average value:
+      Understanding the mathematical distinction between <strong>percentage difference</strong> (comparing two independent values) and <strong>percentage change</strong> (measuring growth or decline from an initial value over time) is essential for financial modeling, data analysis, and engineering metrics.
     </p>
-    <pre class="font-mono text-caption">Percentage Difference = (|V1 - V2| / ((V1 + V2) / 2)) * 100</pre>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Calculate growth or decline rates between two time periods (e.g., month-over-month website traffic)</li>
+      <li>Compare two experimental test values where neither value serves as a reference benchmark</li>
+      <li>Determine margin variance between estimated project cost vs. actual final cost</li>
+      <li>Calculate relative error percentage in scientific experiments or performance benchmarks</li>
+    </ul>
+
+    <h3>Mathematical formulas</h3>
+    <pre class="font-mono text-caption">Percentage Difference = (|V1 - V2| / ((V1 + V2) / 2)) × 100
+Percentage Change     = ((V2 - V1) / |V1|) × 100
+Percent Increase      = ((New - Original) / Original) × 100
+Percent Decrease      = ((Original - New) / Original) × 100</pre>
+
+    <h3>Related tools</h3>
+    <p>Calculate unit pricing, markup, and net profit margins using our <a href="/tools/profit-margin-calculator/">Profit Margin & Fee Calculator</a>.</p>
   </div>
 </ToolLayout>
 

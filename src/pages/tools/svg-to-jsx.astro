@@ -11,11 +11,23 @@ const initialCode = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
 const faq = [
   {
     question: 'How does SVG to JSX attribute conversion work?',
-    answer: 'The converter transforms standard SVG attributes into React-compatible camelCase props (e.g., `stroke-width` → `strokeWidth`, `class` → `className`, `fill-rule` → `fillRule`).',
+    answer: 'The converter transforms standard SVG HTML attributes into React-compatible camelCase props (e.g. `stroke-width` → `strokeWidth`, `class` → `className`, `fill-rule` → `fillRule`, `clip-path` → `clipPath`).',
   },
   {
     question: 'Can I generate TypeScript React components?',
-    answer: 'Yes, the tool can wrap the generated SVG in a TypeScript functional component with `React.SVGProps<SVGSVGElement>` type definitions.',
+    answer: 'Yes! The converter automatically wraps generated SVG markup in a TypeScript functional component typed with `React.SVGProps<SVGSVGElement>`.',
+  },
+  {
+    question: 'How are inline CSS style attributes handled?',
+    answer: 'Inline string styles (e.g., `style="display:none; fill:red"`) are converted into React JSX style objects (`style={{ display: "none", fill: "red" }}`).',
+  },
+  {
+    question: 'Does the generator support currentColor for dynamic icon coloring?',
+    answer: 'Yes. You can preserve or convert hardcoded `fill` or `stroke` hex colors to `currentColor`, allowing icons to adopt parent element text colors via Tailwind or CSS.',
+  },
+  {
+    question: 'Is client-side SVG conversion private?',
+    answer: 'Yes, 100%. All string manipulation and AST parsing run in local browser memory. Your proprietary vector artwork is never uploaded.',
   },
 ];
 ---
@@ -31,7 +43,7 @@ const faq = [
     <!-- Local Privacy Selling Point Badge -->
     <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
       <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        🔒 Runs locally in your browser · Your data isn't uploaded
+        ✓ Runs locally in your browser — Your data isn't uploaded
       </span>
       <span>Converts attributes to camelCase</span>
     </div>
@@ -41,16 +53,27 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>SVG to React JSX Component Converter</h2>
+    <h2>SVG to React JSX Component Converter — Features & Guide</h2>
     <p>
-      Transform inline SVG graphic markup into clean React functional components for Next.js, Vite, and Remix applications.
+      Transform inline SVG graphic markup into clean React functional components for Next.js, Vite, Remix, and Astro applications.
     </p>
 
-    <h3>Automatic SVG Transformations</h3>
+    <h3>When to use this tool</h3>
+    <ul>
+      <li>Convert raw SVG icon code from Figma or Illustrator into React JSX components</li>
+      <li>Replace static `<img>` SVG tags with dynamic React components that support `className` and `fill` props</li>
+      <li>Convert HTML attributes to camelCase props to fix React console warnings (`class` → `className`)</li>
+      <li>Generate TypeScript-ready React icon primitives for component libraries</li>
+    </ul>
+
+    <h3>Automatic SVG transformations</h3>
     <ul>
       <li><strong>Attribute camelCasing:</strong> Converts attributes like <code>stroke-width</code>, <code>stroke-linecap</code>, and <code>fill-opacity</code>.</li>
       <li><strong>Class to className:</strong> Swaps HTML <code>class</code> attributes for JSX <code>className</code>.</li>
       <li><strong>TypeScript Support:</strong> Automatically types props using <code>React.SVGProps&lt;SVGSVGElement&gt;</code>.</li>
     </ul>
+
+    <h3>Related tools</h3>
+    <p>Calculate responsive layout font sizes with our <a href="/tools/css-clamp-calculator/">CSS Clamp Calculator</a>, or convert design token units using <a href="/tools/px-to-rem/">PX to REM Converter</a>.</p>
   </div>
 </ToolLayout>

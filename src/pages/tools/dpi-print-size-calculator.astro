@@ -10,11 +10,23 @@ const description = 'Convert digital pixel dimensions to physical print size in 
 const faq = [
   {
     question: 'What DPI is best for high-quality printing?',
-    answer: '300 DPI (dots per inch) is the industry standard for crisp, high-resolution photo prints, magazines, posters, and professional marketing materials.',
+    answer: '300 DPI is the professional standard for photo prints, magazines, marketing materials, and fine art. 150 DPI works for draft proofs and large-format prints viewed from a distance. 72 DPI is screen resolution only and produces blurry prints.',
   },
   {
-    question: 'How do you calculate required pixel dimensions for a 10×8 inch photo print?',
-    answer: 'Multiply physical print size in inches by target DPI. For a 10×8 photo at 300 DPI: Width = 10 × 300 = 3000 px, Height = 8 × 300 = 2400 px (3000 × 2400 pixels).',
+    question: 'How do you calculate required pixel dimensions for a 10×8 inch photo at 300 DPI?',
+    answer: 'Multiply physical print size by DPI: Width = 10 × 300 = 3,000 px; Height = 8 × 300 = 2,400 px. The image needs to be at least 3000×2400 pixels for a sharp 10×8" print at 300 DPI.',
+  },
+  {
+    question: 'What is the difference between DPI and PPI?',
+    answer: 'PPI (Pixels Per Inch) is a digital image property. DPI (Dots Per Inch) is the printer output resolution. When you send a 300 PPI image to a 300 DPI printer, each pixel maps to one ink dot, producing a sharp print. For web display, only PPI matters.',
+  },
+  {
+    question: 'How many megapixels do I need to print an A4 poster at 300 DPI?',
+    answer: 'A4 paper is 8.27×11.69 inches. At 300 DPI: 2481×3508 pixels = 8.7 megapixels. So an 8+ MP camera sensor produces sufficient resolution for a full-size A4 print at 300 DPI.',
+  },
+  {
+    question: 'What happens if I print an image at a lower DPI than 300?',
+    answer: 'At 200 DPI, most prints still look acceptable at normal viewing distance. At 150 DPI, you\'ll see some loss of fine detail in text and hair. Below 100 DPI, pixelation becomes visible to the naked eye at arm\'s length. The minimum acceptable threshold depends on viewing distance.',
   },
 ];
 ---
@@ -111,18 +123,38 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>DPI vs. PPI in Printing</h2>
+    <h2>DPI & Print Size — Formula, Standards & Use Cases</h2>
     <p>
-      <strong>DPI (Dots Per Inch)</strong> refers to physical printer ink droplet density, whereas <strong>PPI (Pixels Per Inch)</strong> defines digital display resolution.
+      <strong>DPI (Dots Per Inch)</strong> refers to physical printer ink droplet density, whereas <strong>PPI (Pixels Per Inch)</strong> defines digital display or image resolution. This calculator converts between the two for print planning.
     </p>
 
     <p class="my-16">
       For a complete lookup matrix of standard photo and ISO A-series paper sizes (A4, A3, A2) at 300 DPI, 150 DPI, and 72 DPI, explore our <a href="/tools/reference/300-dpi-print-size-chart/">300 DPI Print Size Reference Chart</a>.
     </p>
 
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Find the exact pixel dimensions needed to print a photo at a specific size without pixelation</li>
+      <li>Verify an existing image has sufficient resolution for a large-format poster at 300 DPI</li>
+      <li>Calculate the physical print size of an image at 72 DPI (web export) vs. 300 DPI (print export)</li>
+      <li>Determine the minimum camera megapixel count needed for a specific print size</li>
+      <li>Convert A4, A3, or letter-size paper to pixel requirements for printing at 150 or 300 DPI</li>
+    </ul>
+
     <h3>Formula</h3>
     <pre><code>Print Width (inches)  = Pixel Width / DPI
 Required Pixel Width  = Print Width (inches) × DPI</code></pre>
+
+    <h3>DPI quality tiers</h3>
+    <ul>
+      <li><strong>72 DPI</strong> — Screen/web resolution. Prints look blurry at any size.</li>
+      <li><strong>150 DPI</strong> — Acceptable for large-format prints viewed from 3+ feet (banners, posters).</li>
+      <li><strong>300 DPI</strong> — Professional standard for photo prints, magazines, and marketing materials.</li>
+      <li><strong>600 DPI</strong> — Fine art printing, technical drawings, and high-detail photography.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>Use the <a href="/tools/ppi-calculator/">PPI Calculator</a> to check screen display density, or the <a href="/tools/megapixels-to-resolution-calculator/">Megapixels to Resolution Calculator</a> to find what resolution a given MP count produces at a target aspect ratio.</p>
   </div>
 </ToolLayout>
 

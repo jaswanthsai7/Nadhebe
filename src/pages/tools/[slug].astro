@@ -4,6 +4,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import PlatformWorkbench from '@/components/tools/PlatformWorkbench.astro';
 import { UNIFIED_TOOLS_REGISTRY, type UnifiedTool } from '@/config/tools-registry';
+import { TOOL_RICH_CONTENT } from '@/config/tool-content';
 import type { PlatformTool } from '@/config/platform-tools';
 import type { ToolMetadata } from '@/config/tools';
 
@@ -101,6 +102,28 @@ const platformRelatedTools = platformTool
         noApi: true,
       })) as ToolMetadata[]
   : undefined;
+
+// Rich per-tool content (intro, use cases, how it works, example, faq)
+const richContent = platformTool ? TOOL_RICH_CONTENT[platformTool.slug] : undefined;
+
+// Build FAQ: use tool-specific items if available, always append 2 universal items
+const genericFaq = [
+  {
+    question: `Is ${platformTool?.name} free to use?`,
+    answer: `Yes. ${platformTool?.name} is completely free and runs locally in your browser — no account required.`,
+  },
+  {
+    question: 'Does Nadhebe upload my data?',
+    answer: 'No. All processing happens in your browser. Your input data never leaves your device or gets sent to any server.',
+  },
+];
+const toolFaq = richContent ? [...richContent.faq, ...genericFaq] : genericFaq;
+
+// Verb for the generic fallback paragraph
+const modeVerb = platformTool?.mode === 'calculator' ? 'calculate'
+  : platformTool?.mode === 'generator' ? 'generate'
+  : platformTool?.mode === 'analyzer' ? 'analyze'
+  : 'transform';
 ---
 
 {entry ? (
@@ -114,22 +137,59 @@ const platformRelatedTools = platformTool
     hideHeader={true}
     relatedCategory={platformTool.category}
     relatedTools={platformRelatedTools}
-    faq={[
-      {
-        question: `Is ${platformTool.name} free to use?`,
-        answer: `Yes. ${platformTool.name} is completely free and runs locally in your browser — no account required.`,
-      },
-      {
-        question: 'Does Nadhebe upload my data?',
-        answer: 'No. All processing happens in your browser. Your input data never leaves your device or gets sent to any server.',
-      },
-    ]}
+    faq={toolFaq}
   >
     <div slot="calculator"><PlatformWorkbench tool={platformTool} isImplemented={platformTool.isImplemented} /></div>
+
     <div slot="content">
-      <h2>About {platformTool.name}</h2>
-      <p>{platformTool.seoDescription || platformTool.description}</p>
-      <p>Use the workspace above to {platformTool.mode === 'calculator' ? 'calculate' : platformTool.mode === 'generator' ? 'generate' : platformTool.mode === 'analyzer' ? 'analyze' : 'transform'} your input — entirely in your browser with no data uploaded to any server.</p>
+      {richContent ? (
+        <>
+          {/* Intro */}
+          <h2>About {platformTool.name}</h2>
+          <p>{richContent.intro}</p>
+
+          {/* Use cases */}
+          <h3>When to use {platformTool.name}</h3>
+          <ul>
+            {richContent.useCases.map((uc) => (
+              <li>{uc}</li>
+            ))}
+          </ul>
+
+          {/* How it works */}
+          <h3>How it works</h3>
+          <p>{richContent.howItWorks}</p>
+
+          {/* Worked example */}
+          {richContent.example && (
+            <>
+              <h3>Example</h3>
+              {richContent.example.label && <p><strong>{richContent.example.label}</strong></p>}
+              <p><strong>Input:</strong></p>
+              <pre><code>{richContent.example.input}</code></pre>
+              <p><strong>Output:</strong></p>
+              <pre><code>{richContent.example.output}</code></pre>
+            </>
+          )}
+
+          {/* Privacy note */}
+          <h3>Privacy & security</h3>
+          <p>
+            {platformTool.name} runs entirely in your browser. No input data is uploaded to any server, stored in
+            a database, or shared with third parties. You can use it offline once the page has loaded.
+          </p>
+        </>
+      ) : (
+        <>
+          <h2>About {platformTool.name}</h2>
+          <p>{platformTool.seoDescription || platformTool.description}</p>
+          <p>
+            Use the workspace above to {modeVerb} your input — entirely in your browser with no data uploaded
+            to any server.
+          </p>
+        </>
+      )}
     </div>
   </ToolLayout>
 ) : null}
+

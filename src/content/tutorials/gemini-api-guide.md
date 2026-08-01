@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: "tutorials"
 tags: ["Gemini", "API", "Google", "LLM", "Generative AI"]
-heroImage: "/images/gemini_api_guide_hero.png"
+heroImage: "/images/gemini-javascript-examples-hero.webp"
 heroAlt: "Retro-futuristic infographic showing a developer interacting with the Gemini API through glowing nodes"
 estimatedReadingTime: 14
 isPillar: false

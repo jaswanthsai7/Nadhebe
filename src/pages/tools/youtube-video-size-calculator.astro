@@ -12,11 +12,23 @@ const description = 'Calculate recommended YouTube video resolutions and aspect 
 const faq = [
   {
     question: 'What is the best resolution for YouTube videos in 2026?',
-    answer: 'For standard widescreen videos, 1080p Full HD (1920×1080) or 4K UHD (3840×2160) at 16:9 aspect ratio is recommended. For YouTube Shorts, use 1080×1920 (9:16).',
+    answer: 'For standard widescreen videos, 1080p Full HD (1920×1080) offers the best balance of quality and encoding time. 4K UHD (3840×2160) provides maximum quality for tutorials, product reviews, and cinematography. For YouTube Shorts, use 1080×1920 (9:16 vertical).',
   },
   {
     question: 'What happens if I upload a non-16:9 video to YouTube?',
-    answer: 'YouTube automatically adjusts its player to fit your video’s aspect ratio without stretching. Non-16:9 widescreen videos (such as 4:3 or 21:9) will display pillarboxing or letterboxing on standard screens.',
+    answer: 'YouTube adapts its player to your video\'s aspect ratio without cropping or stretching the content. Non-16:9 content (4:3, 21:9, 9:16) will show dark bars on standard screens. For Shorts, only 9:16 fills the full vertical player. For all other content, 16:9 fills the standard YouTube player without bars.',
+  },
+  {
+    question: 'Does YouTube compress uploaded 4K videos?',
+    answer: 'Yes. YouTube re-encodes all uploads using VP9 (or AV1 on some uploads). Upload 4K to ensure the 4K stream is available for viewers, even though YouTube applies its own compression. Uploading at 1080p when you want 4K quality is not recommended — you cannot add resolution during encoding.',
+  },
+  {
+    question: 'What frame rate should I use for YouTube uploads?',
+    answer: 'YouTube supports 24, 25, 30, 48, 50, and 60 fps. For standard vlogs and tutorials, 30 fps is the norm. For gaming and sports, 60 fps provides noticeably smoother motion. For cinematic content, 24 fps matches the film standard. Upload at your native frame rate — do not convert.',
+  },
+  {
+    question: 'What is the maximum file size for YouTube uploads?',
+    answer: 'YouTube allows uploads up to 256 GB or 12 hours, whichever is shorter. For most creators, the practical limit is video bitrate: upload at the highest quality your internet connection supports. YouTube\'s encoder handles the rest.',
   },
 ];
 ---
@@ -99,7 +111,7 @@ const faq = [
   <div slot="content">
     <h2>YouTube Video Resolution Standards</h2>
     <p>
-      YouTube encodes and renders uploaded videos into several standardized resolution tiers depending on your uploaded source file.
+      YouTube encodes and renders uploaded videos into several standardized resolution tiers depending on your uploaded source file. Upload at or above your target quality level — YouTube\'s encoder cannot add resolution that wasn't in the original.
     </p>
 
     <div class="overflow-x-auto my-24">
@@ -140,6 +152,26 @@ const faq = [
         </tbody>
       </table>
     </div>
+
+    <h3>When to use this calculator</h3>
+    <ul>
+      <li>Verify your export settings in Premiere, DaVinci Resolve, or Final Cut match YouTube\'s recommended resolution</li>
+      <li>Calculate correct thumbnail dimensions at the same aspect ratio as your video</li>
+      <li>Check whether a custom resolution maps to 16:9, 9:16, or 1:1 before uploading</li>
+      <li>Find the correct embed dimensions for an iframe that displays a YouTube video at a target size</li>
+      <li>Compare bitrate vs. resolution trade-offs for upload speed vs. quality</li>
+    </ul>
+
+    <h3>YouTube upload best practices</h3>
+    <ul>
+      <li><strong>Always upload at native resolution</strong> — YouTube cannot add quality during re-encoding.</li>
+      <li><strong>Use H.264 or H.265</strong> — Both are widely supported. H.265 produces smaller files at equal quality.</li>
+      <li><strong>Upload at 60 fps for gaming</strong> — 60 fps noticeably improves smoothness on fast-motion content.</li>
+      <li><strong>Thumbnail size</strong> — Thumbnails should be 1280×720 px (16:9) at a minimum of 72 DPI.</li>
+    </ul>
+
+    <h3>Related tools</h3>
+    <p>For vertical video dimensions and platform safe zones, use the <a href="/tools/9-16-dimensions-calculator/">9:16 Dimensions Calculator</a>. For general widescreen resolutions, use the <a href="/tools/16-9-dimensions-calculator/">16:9 Dimensions Calculator</a>.</p>
   </div>
 </ToolLayout>
 
