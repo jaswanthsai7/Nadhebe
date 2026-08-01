@@ -2,7 +2,6 @@
 # Declares AI content usage preferences for agent crawlers
 
 User-agent: *
-Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Allow: /
 
 # Search Engine Crawlers
