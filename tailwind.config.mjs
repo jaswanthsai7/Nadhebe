@@ -89,8 +89,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Geist Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {
