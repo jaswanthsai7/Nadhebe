@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: guides
 tags: ["mcp", "claude desktop", "cursor", "node.js"]
-heroImage: "/images/nadhebe-bright-editorial-hero-2.webp"
+heroImage: "/images/mcp-connection-refused-hero.webp"
 heroAlt: "Infographic describing MCP server connection refused and 404 proxy errors"
 draft: false
 topic: "MCP Debugging"

@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: comparisons
 tags: ["ai coding", "claude code", "cursor", "windsurf"]
-heroImage: "/images/nadhebe-bright-editorial-hero-1.webp"
+heroImage: "/images/ide-comparison-hero.webp"
 heroAlt: "Sleek bright comparison diagram comparing Claude Code, Cursor, and Windsurf Cascade"
 draft: false
 topic: "AI IDEs"

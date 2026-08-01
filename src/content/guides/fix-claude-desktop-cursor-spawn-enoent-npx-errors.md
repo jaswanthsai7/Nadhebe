@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: guides
 tags: ["node", "enoent", "mcp", "claude desktop", "cursor"]
-heroImage: "/images/nadhebe-bright-editorial-hero-2.webp"
+heroImage: "/images/enoent-fix-hero.webp"
 heroAlt: "Error resolution flow diagram for spawn ENOENT and path errors in Cursor and Claude"
 draft: false
 topic: "MCP Debugging"

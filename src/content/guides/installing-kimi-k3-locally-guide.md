@@ -5,7 +5,7 @@ pubDate: 2026-08-01
 author: nadhebe-team
 category: guides
 tags: ["kimi k3", "local llm", "cuda", "vllm"]
-heroImage: "/images/nadhebe-bright-editorial-hero-1.webp"
+heroImage: "/images/kimi-k3-setup-hero.webp"
 heroAlt: "Developer layout schematic explaining Kimi K3 mixture of experts CUDA runtime local setup steps"
 draft: false
 topic: "Local LLM Deployments"
