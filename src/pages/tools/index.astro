@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FeedList from '@/components/FeedList.astro';
+import InlineToolSearch from '@/components/tools/InlineToolSearch.astro';
 import { PLATFORM_CATEGORIES, PLATFORM_TOOLS, PLATFORM_TOOL_TOTAL } from '@/config/platform-tools';
 import ToolSearchModal from '@/components/tools/ToolSearchModal.astro';
 import { buildSeo } from '@/utils/seo';
@@ -77,8 +78,13 @@ const toolsDirectorySchema = {
     </header>
 
     <!-- Category Filter Bar & Live Search -->
-    <div class="sticky top-72 z-30 mb-32 flex flex-col gap-16 rounded-16 border border-border/80 bg-surface/90 p-16 shadow-soft backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/90 sm:flex-row sm:items-center sm:justify-between" data-reveal>
-      <nav class="flex flex-wrap items-center gap-8 p-6 rounded-20 border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60 w-full" aria-label="Tool Category Filters" id="tools-category-tabs">
+    <div class="sticky top-72 z-30 mb-32 flex flex-col gap-16 rounded-20 border border-border/80 bg-surface/95 p-16 shadow-medium backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/95" data-reveal>
+      
+      <!-- Taller & Centered Live Inline Search Input with Dropdown (Positioned ABOVE Categories) -->
+      <InlineToolSearch />
+
+      <!-- Category Filter Tabs (Expanded Full Width to Edge with Hidden Scrollbars) -->
+      <nav class="flex flex-nowrap md:flex-wrap items-center gap-8 p-6 rounded-16 border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none; -ms-overflow-style: none;" aria-label="Tool Category Filters" id="tools-category-tabs">
         <button
           type="button"
           data-category-filter="all"
@@ -101,12 +107,6 @@ const toolsDirectorySchema = {
         })}
       </nav>
 
-      <!-- Search Box Trigger -->
-      <button type="button" class="tool-search-trigger relative min-w-[160px] sm:w-48 text-left group">
-        <div class="w-full rounded-12 border border-border/80 bg-surface pl-12 pr-40 py-8 text-caption text-muted group-hover:border-accent/50 dark:border-border-dark/80 dark:bg-surface-dark dark:text-muted-dark dark:group-hover:border-accent-dark/50 transition-all duration-150">
-          Search tools...
-        </div>
-      </button>
     </div>
 
     <!-- Tools Cards Grid -->
