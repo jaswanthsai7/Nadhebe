@@ -84,9 +84,28 @@ export const onRequest = async (context: PagesContext) => {
     response = await context.next();
 
     const accept = (request.headers.get('Accept') || request.headers.get('accept') || '').toLowerCase();
+    let isMarkdownRequest = accept.includes('text/markdown') || accept.includes('text/x-markdown') || url.pathname.endsWith('.md');
+
+    // If request ends with .md and initial response is 404, try fetching the HTML route equivalent
+    if (url.pathname.endsWith('.md') && response.status === 404) {
+      const cleanPath = url.pathname.slice(0, -3);
+      const htmlUrl = new URL(cleanPath.endsWith('/') ? cleanPath : cleanPath + '/', request.url);
+      try {
+        let altRes: Response | null = null;
+        if ((context as any).env && (context as any).env.ASSETS) {
+          altRes = await (context as any).env.ASSETS.fetch(new Request(htmlUrl.toString(), request));
+        } else {
+          altRes = await fetch(htmlUrl.toString());
+        }
+        if (altRes && altRes.status === 200) {
+          response = altRes;
+          isMarkdownRequest = true;
+        }
+      } catch (e) {}
+    }
+
     const contentType = response.headers.get('content-type') || response.headers.get('Content-Type') || '';
-    const isHtml = contentType.includes('text/html') || url.pathname.endsWith('/') || !url.pathname.includes('.') || url.pathname.endsWith('.html');
-    const isMarkdownRequest = accept.includes('text/markdown') || accept.includes('text/x-markdown') || url.pathname.endsWith('.md');
+    const isHtml = contentType.includes('text/html') || url.pathname.endsWith('/') || !url.pathname.includes('.') || url.pathname.endsWith('.html') || url.pathname.endsWith('.md');
 
     // Handle Markdown Content Negotiation for Agents (Accept: text/markdown or .md extension)
     if (isMarkdownRequest && isHtml && response.status === 200) {

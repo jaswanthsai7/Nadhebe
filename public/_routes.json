@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/_assets/*",
+    "/images/*",
+    "/favicon.png",
+    "/logo.png",
+    "/logo.webp",
+    "/og-default.png",
+    "/pagefind/*"
+  ]
+}
