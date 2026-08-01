@@ -104,17 +104,17 @@ export const onRequest = async (context: PagesContext) => {
           'x-original-tokens': String(originalTokenCount),
           'Vary': 'Accept',
           'Access-Control-Allow-Origin': '*',
-          'Cache-Control': 'no-store, no-cache, must-revalidate',
-          'Link': '</llms.txt>; rel="describedby"; type="text/markdown", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"'
+          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+          'Link': `<${url.pathname}>; rel="canonical", </llms.txt>; rel="describedby"; type="text/markdown", </sitemap-index.xml>; rel="sitemap"; type="application/xml"`
         },
       });
     }
 
-    // Standard HTML responses: attach Link header & Vary
+    // Standard HTML responses: attach Link headers (including alternate text/markdown) & Vary: Accept
     if (isHtml && response.status === 200) {
       const newHeaders = new Headers(response.headers);
-      newHeaders.set('Link', '</llms.txt>; rel="describedby"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml", </api/v1>; rel="api-catalog"');
       newHeaders.set('Vary', 'Accept');
+      newHeaders.set('Link', `<${url.pathname}>; rel="alternate"; type="text/markdown", </llms.txt>; rel="describedby"; type="text/plain", </sitemap-index.xml>; rel="sitemap"; type="application/xml"`);
       
       return new Response(response.body, {
         status: response.status,
