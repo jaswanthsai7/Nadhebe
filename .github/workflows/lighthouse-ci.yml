@@ -32,8 +32,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v11
         with:
           urls: |
-            http://localhost:4321/
-            http://localhost:4321/tools/api-payload-builder
+            http://127.0.0.1:4321/
+            http://127.0.0.1:4321/tools/api-payload-builder
           configPath: ./lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
