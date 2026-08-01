@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   
   allArticles.forEach(post => {
     const catName = post.data.category;
-    const slug = catName.toLowerCase().replace(/\s+/g, '-');
+    const slug = catName.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
     if (!categoryMap.has(slug)) {
       categoryMap.set(slug, { name: catName, posts: [] });
     }

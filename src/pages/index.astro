@@ -385,7 +385,7 @@ const topStories = gemini36Post
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16" data-reveal-stagger>
         {Object.entries(categoryMeta).map(([catName, meta]) => {
           const count = categoryCounts[catName] || 0;
-          const href = catName === 'Tools' ? '/tools' : `/category/${catName.toLowerCase().replace(/\s+/g, '-')}`;
+          const href = catName === 'Tools' ? '/tools' : `/category/${catName.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`;
           return (
             <a
               href={href}

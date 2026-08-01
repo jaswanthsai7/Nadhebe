@@ -83,7 +83,7 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
             <div class="flex flex-col gap-4">
               {popularTopics.map(topic => (
                 <a
-                  href={`/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/tag/${topic.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
                   class="flex items-center justify-between p-8 rounded-8 hover:bg-hover dark:hover:bg-hover text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
                 >
                   <span class="text-caption font-sans font-medium">{topic}</span>
@@ -102,7 +102,7 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
             <div class="flex flex-wrap gap-6">
               {relatedCategories.map(cat => (
                 <a
-                  href={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/category/${cat.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
                   class="badge hover:bg-hover dark:hover:bg-hover hover:text-ink dark:hover:text-ink-dark transition-colors duration-150"
                 >
                   {cat}
