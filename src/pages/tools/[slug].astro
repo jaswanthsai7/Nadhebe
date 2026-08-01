@@ -3,14 +3,46 @@ import { getCollection } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import PlatformWorkbench from '@/components/tools/PlatformWorkbench.astro';
-import { PLATFORM_TOOLS, type PlatformTool } from '@/config/platform-tools';
-import { TOOLS, type ToolMetadata } from '@/config/tools';
+import { UNIFIED_TOOLS_REGISTRY, type UnifiedTool } from '@/config/tools-registry';
+import type { PlatformTool } from '@/config/platform-tools';
+import type { ToolMetadata } from '@/config/tools';
 
 export async function getStaticPaths() {
   const entries = await getCollection('tools');
+  const standaloneAstroSlugs = new Set([
+    '16-9-dimensions-calculator',
+    '9-16-dimensions-calculator',
+    'aspect-ratio-calculator',
+    'color-contrast-checker',
+    'css-clamp-calculator',
+    'csv-to-json',
+    'dpi-print-size-calculator',
+    'json-formatter',
+    'json-minifier',
+    'json-to-typescript',
+    'json-to-xml',
+    'json-validator',
+    'megapixels-to-resolution-calculator',
+    'meta-tag-analyzer',
+    'opportunity-radar',
+    'percentage-difference-calculator',
+    'pixels-to-megapixels-calculator',
+    'ppi-calculator',
+    'profit-margin-calculator',
+    'px-to-rem',
+    'resize-dimensions-calculator',
+    'schema-generator',
+    'sitemap-validator',
+    'social-media-image-sizes',
+    'svg-to-jsx',
+    'xml-formatter',
+    'yaml-to-json',
+    'youtube-video-size-calculator',
+  ]);
+
   const reservedSlugs = new Set([
     ...entries.map((entry) => entry.slug),
-    ...TOOLS.map((tool) => tool.slug),
+    ...standaloneAstroSlugs,
   ]);
 
   const articlePaths = entries.map(entry => ({
@@ -18,11 +50,24 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 
-  const platformPaths = PLATFORM_TOOLS
+  const platformPaths = UNIFIED_TOOLS_REGISTRY
     .filter((tool) => !reservedSlugs.has(tool.slug))
     .map((platformTool) => ({
       params: { slug: platformTool.slug },
-      props: { platformTool },
+      props: {
+        platformTool: {
+          id: platformTool.id,
+          name: platformTool.name || platformTool.title,
+          slug: platformTool.slug,
+          href: platformTool.href,
+          description: platformTool.description,
+          category: platformTool.category,
+          categorySlug: platformTool.categorySlug || platformTool.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+          mode: platformTool.mode || 'transform',
+          badge: platformTool.badge,
+          tags: platformTool.tags || [],
+        } as PlatformTool,
+      },
     }));
 
   return [...articlePaths, ...platformPaths];
@@ -30,12 +75,12 @@ export async function getStaticPaths() {
 
 const { entry, platformTool } = Astro.props as { entry?: Awaited<ReturnType<typeof getCollection>>[number]; platformTool?: PlatformTool };
 const platformRelatedTools = platformTool
-  ? PLATFORM_TOOLS
-      .filter((tool) => tool.categorySlug === platformTool.categorySlug)
+  ? UNIFIED_TOOLS_REGISTRY
+      .filter((tool) => tool.category === platformTool.category || tool.categorySlug === platformTool.categorySlug)
       .slice(0, 6)
       .map((tool) => ({
         id: tool.id,
-        name: tool.name,
+        name: tool.name || tool.title,
         slug: tool.slug,
         href: tool.href,
         description: tool.description,
