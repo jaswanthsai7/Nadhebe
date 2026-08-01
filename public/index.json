@@ -20,12 +20,62 @@
     "pubDate": "2026-08-01T00:00:00.000Z"
   },
   {
+    "title": "The Complete Gemini API Developer Guide (2026)",
+    "description": "Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely.",
+    "url": "https://nadhebe.com/tutorials/gemini-api-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Gemini\", \"API\", \"Google\", \"LLM\", \"Generative AI\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Analyze Meta Tags for SEO: Step-by-Step Tutorial",
+    "description": "Learn how to systematically audit HTML title tags, meta descriptions, canonical URLs, and OpenGraph social cards to maximize search visibility and click-through rates.",
+    "url": "https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo",
+    "category": "Tutorials",
+    "tags": [
+      "[\"seo-tutorial\", \"meta-tags\", \"search-engine-optimization\", \"webmaster\", \"audit\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
     "title": "How to Integrate MCP Server in VS Code & Cursor",
     "description": "A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows.",
     "url": "https://nadhebe.com/tutorials/mcp-server-vscode-cursor",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"VS Code\", \"Cursor\", \"AI Workflow\", \"Integration\", \"Model Context Protocol\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Integrate MCP Servers with Claude Desktop",
+    "description": "A comprehensive developer guide to configuring and integrating the Model Context Protocol (MCP) with the Claude Desktop app. Learn how to expose local tools, debug connection issues, and build your AI engineering workflows.",
+    "url": "https://nadhebe.com/tutorials/mcp-with-claude-desktop",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"Claude Desktop\", \"Anthropic\", \"AI Agents\", \"Local Tools\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "The Ultimate vLLM Deployment Guide (2026)",
+    "description": "Learn how to deploy and scale open-source LLMs using vLLM. Master PagedAttention, continuous batching, and GPU VRAM optimization for production AI inference.",
+    "url": "https://nadhebe.com/tutorials/vllm-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"vLLM\", \"Inference\", \"GPU\", \"LLM\", \"Deployment\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)",
+    "description": "Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.",
+    "url": "https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools",
+    "category": "Tool Reviews",
+    "tags": [
+      "[\"seo-tools\", \"meta-tag-analyzer\", \"developer-utilities\", \"free-tools-roundup\"]"
     ],
     "pubDate": "2026-08-01T00:00:00.000Z"
   },
@@ -50,6 +100,26 @@
     "pubDate": "2026-08-01T00:00:00.000Z"
   },
   {
+    "title": "Meta Tag Analyzer vs Meta Tag Checker: Key Differences & Comparison",
+    "description": "Understand the subtle differences between meta tag analyzers and meta tag checkers, and learn when to use each for technical SEO auditing.",
+    "url": "https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker",
+    "category": "Comparisons",
+    "tags": [
+      "[\"meta-tag-analyzer\", \"meta-tag-checker\", \"seo-tools\", \"technical-seo\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "Open Graph vs Twitter Card Meta Tags: Technical Comparison",
+    "description": "Compare Open Graph (og:) and Twitter Card (twitter:) metadata specifications, property mapping, fallback rules, and social media image optimization.",
+    "url": "https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags",
+    "category": "Comparisons",
+    "tags": [
+      "[\"open-graph\", \"twitter-cards\", \"social-seo\", \"meta-tags-comparison\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
     "title": "OpenRouter vs Direct Provider APIs: Which Should You Choose?",
     "description": "An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google.",
     "url": "https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis",
@@ -66,6 +136,16 @@
     "category": "Comparisons",
     "tags": [
       "[\"vLLM\", \"SGLang\", \"Inference\", \"Benchmarks\", \"LLM Ops\", \"RadixAttention\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "How to Fix Common Meta Tag Errors: Audit & Resolution Guide",
+    "description": "Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images.",
+    "url": "https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors",
+    "category": "Best Practices",
+    "tags": [
+      "[\"seo-errors\", \"meta-tag-fixes\", \"troubleshooting\", \"opengraph-fix\", \"canonical-tags\"]"
     ],
     "pubDate": "2026-08-01T00:00:00.000Z"
   },
@@ -136,6 +216,16 @@
     "category": "Guides",
     "tags": [
       "[\"kimi k3\", \"local llm\", \"cuda\", \"vllm\"]"
+    ],
+    "pubDate": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "title": "What Is a Meta Tag Analyzer? (2026 Guide)",
+    "description": "Discover what a meta tag analyzer is, how search engine crawlers interpret HTML metadata, and why real-time meta tag auditing drives higher SERP click-through rates.",
+    "url": "https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"seo\", \"meta-tags\", \"opengraph\", \"serp-optimization\", \"web-development\"]"
     ],
     "pubDate": "2026-08-01T00:00:00.000Z"
   },

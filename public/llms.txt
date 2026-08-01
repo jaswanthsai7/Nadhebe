@@ -8,7 +8,11 @@
 
 - [How to Build a Custom MCP Server in TypeScript](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript): A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.
 - [How to Deploy DeepSeek R1 on AWS using vLLM](https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm): A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference.
+- [The Complete Gemini API Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-guide): Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely.
+- [How to Analyze Meta Tags for SEO: Step-by-Step Tutorial](https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo): Learn how to systematically audit HTML title tags, meta descriptions, canonical URLs, and OpenGraph social cards to maximize search visibility and click-through rates.
 - [How to Integrate MCP Server in VS Code & Cursor](https://nadhebe.com/tutorials/mcp-server-vscode-cursor): A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows.
+- [How to Integrate MCP Servers with Claude Desktop](https://nadhebe.com/tutorials/mcp-with-claude-desktop): A comprehensive developer guide to configuring and integrating the Model Context Protocol (MCP) with the Claude Desktop app. Learn how to expose local tools, debug connection issues, and build your AI engineering workflows.
+- [The Ultimate vLLM Deployment Guide (2026)](https://nadhebe.com/tutorials/vllm-guide): Learn how to deploy and scale open-source LLMs using vLLM. Master PagedAttention, continuous batching, and GPU VRAM optimization for production AI inference.
 - [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide): Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.
 - [Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)](https://nadhebe.com/tutorials/gemini-api-javascript-node-examples): TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling.
 - [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting): Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.
@@ -29,10 +33,18 @@
 - [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.com/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
 - [How to Install and Set Up Instatic CMS Locally](https://nadhebe.com/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
 
+### Tool Reviews
+
+- [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools): Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
+- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
+
 ### Comparisons
 
 - [Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison](https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf): An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows.
 - [DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?](https://nadhebe.com/comparisons/deepseek-v3-vs-r1): A comprehensive comparison between DeepSeek V3 (the highly efficient dense/MoE hybrid) and DeepSeek R1 (the reasoning-focused powerhouse).
+- [Meta Tag Analyzer vs Meta Tag Checker: Key Differences & Comparison](https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker): Understand the subtle differences between meta tag analyzers and meta tag checkers, and learn when to use each for technical SEO auditing.
+- [Open Graph vs Twitter Card Meta Tags: Technical Comparison](https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags): Compare Open Graph (og:) and Twitter Card (twitter:) metadata specifications, property mapping, fallback rules, and social media image optimization.
 - [OpenRouter vs Direct Provider APIs: Which Should You Choose?](https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis): An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google.
 - [SGLang vs vLLM: Performance Benchmark for LLM Inference](https://nadhebe.com/comparisons/sglang-vs-vllm-performance): An in-depth performance benchmark comparing SGLang and vLLM for deploying large language models. Analyze throughput, memory usage, and latency trade-offs.
 - [Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)](https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison): Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost.
@@ -52,6 +64,7 @@
 
 ### Best Practices
 
+- [How to Fix Common Meta Tag Errors: Audit & Resolution Guide](https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors): Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images.
 - [LLM API Cost Optimization Best Practices](https://nadhebe.com/best-practices/llm-api-cost-optimization): Discover actionable strategies to drastically reduce your Large Language Model API costs without sacrificing output quality. Learn about token optimization, caching, and model routing.
 - [Prompt Caching Best Practices for Claude Sonnet & Opus](https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus): Master prompt caching for Anthropic's Claude 3.5 Sonnet and Opus models. Learn how to drastically reduce latency and lower your LLM API costs.
 - [Structured Output Prompting Best Practices](https://nadhebe.com/best-practices/structured-output-prompting): Learn how to enforce 100% reliable JSON outputs from Large Language Models using Structured Outputs, JSON Schemas, and Tool Calling.
@@ -67,6 +80,7 @@
 - [Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors](https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors): How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts.
 - [How to Fix MCP Server Connection Refused and 404 Proxy Errors](https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors): Step-by-step diagnostic guide to troubleshoot Model Context Protocol (MCP) server socket connection refused and http 404 proxy middleware errors.
 - [Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide](https://nadhebe.com/guides/installing-kimi-k3-locally-guide): Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware.
+- [What Is a Meta Tag Analyzer? (2026 Guide)](https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide): Discover what a meta tag analyzer is, how search engine crawlers interpret HTML metadata, and why real-time meta tag auditing drives higher SERP click-through rates.
 - [Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)](https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits): Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing.
 - [How to Get a Gemini API Key (2026 Developer Setup Guide)](https://nadhebe.com/guides/how-to-get-gemini-api-key): Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications.
 - [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide): A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
@@ -115,11 +129,6 @@
 - [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/youtube/open-source-youtube-automation-agent): Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.
 - [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/youtube/instatic-local-setup-importer): Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.
 - [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/youtube/instatic-visual-cms-walkthrough): Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.
-
-### Tool Reviews
-
-- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
-- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
 
 ### Frameworks
 
