@@ -37,6 +37,7 @@ const faq = [
   h1={h1}
   description={description}
   faq={faq}
+  hideHeader={false}
 >
   <div slot="calculator" class="space-y-24" id="meta-analyzer-app">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
@@ -46,7 +47,7 @@ const faq = [
         <div class="space-y-16">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark">Page Title Tag</label>
+              <label for="meta-input-title" class="block text-caption font-semibold text-ink dark:text-ink-dark">Page Title Tag</label>
               <span id="title-counter" class="font-mono text-xs text-muted dark:text-muted-dark">0 / 60 chars</span>
             </div>
             <input
@@ -59,7 +60,7 @@ const faq = [
 
           <div>
             <div class="flex items-center justify-between mb-4">
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark">Meta Description</label>
+              <label for="meta-input-desc" class="block text-caption font-semibold text-ink dark:text-ink-dark">Meta Description</label>
               <span id="desc-counter" class="font-mono text-xs text-muted dark:text-muted-dark">0 / 160 chars</span>
             </div>
             <textarea
@@ -70,7 +71,7 @@ const faq = [
           </div>
 
           <div>
-            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Canonical URL</label>
+            <label for="meta-input-url" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Canonical URL</label>
             <input
               id="meta-input-url"
               type="url"
@@ -80,7 +81,7 @@ const faq = [
           </div>
 
           <div>
-            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">OpenGraph Image URL</label>
+            <label for="meta-input-image" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">OpenGraph Image URL</label>
             <input
               id="meta-input-image"
               type="url"
@@ -90,7 +91,7 @@ const faq = [
           </div>
 
           <div>
-            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Site Name</label>
+            <label for="meta-input-sitename" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Site Name</label>
             <input
               id="meta-input-sitename"
               type="text"
