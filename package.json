@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && pagefind --site dist",
-    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts && npx tsx scripts/generate-llms-txt.ts && npx tsx scripts/format-sitemap.ts && npx tsx scripts/ping-indexnow.ts && node -e \"if(require('fs').existsSync('dist/pagefind')) require('fs').cpSync('dist/pagefind', 'public/pagefind', { recursive: true, force: true })\" && npx tsx scripts/verify-links.ts",
+    "postbuild": "pagefind --site dist && npx tsx scripts/run-internal-linker.ts && npx tsx scripts/generate-image-sitemap.ts && npx tsx scripts/generate-video-sitemap.ts && npx tsx scripts/generate-llms-txt.ts && npx tsx scripts/format-sitemap.ts && npx tsx scripts/ping-indexnow.ts && node -e \"if(require('fs').existsSync('dist/pagefind')) try { require('fs').cpSync('dist/pagefind', 'public/pagefind', { recursive: true, force: true }); } catch(_){}\" && npx tsx scripts/verify-links.ts",
     "preview": "astro preview --host 0.0.0.0 --port 4321",
     "astro": "astro"
   },

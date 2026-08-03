@@ -4,6 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ProsCons from '@/components/ProsCons.astro';
+import PartnerIcon from '@/components/PartnerIcon.astro';
 import { getAllActiveAffiliates, buildUtmUrl, type AffiliateProgram } from '@/config/affiliates';
 import { getArticleUrl } from '@/utils/content';
 
@@ -27,19 +28,21 @@ const allVideos = await getCollection('youtube-articles');
 const allArticles = [...allTutorials, ...allVideos];
 
 const targetTopics = (program as any).targetTopics || [program.name, program.id, program.category];
-const relatedGuides = allArticles.filter((article) => {
-  const text = (
-    article.data.title +
-    ' ' +
-    article.data.description +
-    ' ' +
-    (article.data.topic || '') +
-    ' ' +
-    (article.data.tags || []).join(' ')
-  ).toLowerCase();
+const relatedGuides = allArticles
+  .filter((article) => {
+    const text = (
+      article.data.title +
+      ' ' +
+      article.data.description +
+      ' ' +
+      (article.data.topic || '') +
+      ' ' +
+      (article.data.tags || []).join(' ')
+    ).toLowerCase();
 
-  return targetTopics.some((topic: string) => text.includes(topic.toLowerCase()));
-}).slice(0, 4);
+    return targetTopics.some((topic: string) => text.includes(topic.toLowerCase()));
+  })
+  .slice(0, 4);
 
 const pageTitle = `${program.name} Review & Setup Guide — Nadhebe`;
 const pageDescription = `Detailed editorial breakdown of ${program.name} for AI developers. Discover key features, pricing, pros & cons, and verified setup tutorials.`;
@@ -48,7 +51,7 @@ const utmUrl = buildUtmUrl(program.affiliateUrl || (program as any).url || '', `
 
 const breadcrumbItems = [
   { name: 'Home', href: '/' },
-  { name: 'Partners', href: '/partners/runpod' },
+  { name: 'Partners', href: '/partners' },
   { name: program.name, href: `/partners/${program.id}` },
 ];
 ---
@@ -59,57 +62,69 @@ const breadcrumbItems = [
 
     {/* Hero Section */}
     <header class="mt-16 sm:mt-24 mb-32 sm:mb-48 rounded-16 glass-panel border border-border dark:border-border-dark p-24 sm:p-48 relative overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent/0 via-accent to-accent/0 dark:from-accent-dark/0 dark:via-accent-dark dark:to-accent-dark/0"></div>
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent/0 via-accent to-accent/0 dark:from-accent-dark/0 dark:via-accent-dark dark:to-accent-dark/0"></div>
       
-      <div class="flex flex-wrap items-center gap-12 mb-16">
-        <span class="badge">{program.category}</span>
-        <span class="inline-flex items-center gap-6 rounded-pill bg-success/10 px-12 py-4 text-xs font-medium text-success dark:bg-success-dark/15 dark:text-success-dark border border-success/20 dark:border-success-dark/20">
-          {program.trustSignal}
-        </span>
-        <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
-          {program.qualitativeBadge || (program as any).badge || 'Editor Choice'}
-        </span>
+      <div class="flex flex-wrap items-center justify-between gap-16 mb-24">
+        <div class="flex flex-wrap items-center gap-12">
+          <span class="badge uppercase tracking-wider text-[11px] font-semibold">{program.category}</span>
+          <span class="inline-flex items-center gap-6 rounded-pill bg-success/10 px-12 py-4 text-xs font-medium text-success dark:bg-success-dark/15 dark:text-success-dark border border-success/20 dark:border-success-dark/20">
+            {program.trustSignal}
+          </span>
+          <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
+            {program.qualitativeBadge || (program as any).badge || 'Editor Choice'}
+          </span>
+        </div>
+
+        <a href="/partners" class="text-xs font-sans font-medium text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark transition-colors flex items-center gap-4">
+          <span>← Browse All Partners</span>
+        </a>
       </div>
 
-      <h1 class="font-display text-display font-bold text-ink dark:text-ink-dark leading-tight max-w-3xl">
-        Why Nadhebe Recommends {program.name}
-      </h1>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-20">
+        <PartnerIcon slug={program.id} size={44} class="shadow-md" />
+        <div>
+          <h1 class="font-display text-display font-bold text-ink dark:text-ink-dark leading-tight">
+            Why Nadhebe Recommends {program.name}
+          </h1>
+          <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-2xl leading-relaxed">
+            {program.description || (program as any).pitch || ''}
+          </p>
+        </div>
+      </div>
 
-      <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark max-w-2xl leading-relaxed">
-        {program.description || (program as any).pitch || ''}
-      </p>
-
-      <div class="mt-32 flex flex-wrap items-center gap-16">
+      <div class="mt-32 pt-24 border-t border-border/50 dark:border-border-dark/50 flex flex-wrap items-center justify-between gap-20">
         <a
           href={utmUrl}
           target="_blank"
           rel="noopener noreferrer nofollow sponsored"
-          class="group inline-flex items-center gap-10 rounded-10 bg-ink px-24 py-12 text-caption font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
+          class="group inline-flex items-center gap-10 rounded-12 bg-ink px-28 py-14 text-body-small font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
         >
           <span>{(program as any).buttonLabel || `Get Started with ${program.name}`}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-2" style="width:16px;height:16px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style="width:16px;height:16px;">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>
         </a>
 
-        <div class="text-xs font-mono text-muted dark:text-muted-dark">
+        <div class="rounded-10 bg-surface2/80 dark:bg-surface2-dark/80 border border-border dark:border-border-dark px-16 py-10 text-xs font-mono text-ink2 dark:text-ink2-dark">
           Pricing: <strong class="text-ink dark:text-ink-dark">{program.pricingSummary}</strong>
         </div>
       </div>
     </header>
 
     {/* Editorial Recommendation Callout */}
-    <section class="mb-48 rounded-16 border border-accent/20 bg-accent/5 p-24 sm:p-32 dark:border-accent-dark/20 dark:bg-accent-dark/5">
-      <div class="flex items-center gap-8 mb-12">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-20 w-20 shrink-0 text-accent dark:text-accent-dark" style="width:20px;height:20px;">
-          <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
-        </svg>
-        <h2 class="font-display text-h3 font-bold text-accent dark:text-accent-dark">
-          Why we recommend it for developers
+    <section class="mb-48 rounded-16 border border-accent/30 bg-accent/5 p-24 sm:p-32 dark:border-accent-dark/30 dark:bg-accent-dark/5 relative overflow-hidden">
+      <div class="flex items-center gap-12 mb-12">
+        <div class="flex h-32 w-32 items-center justify-center rounded-8 bg-accent/15 dark:bg-accent-dark/20 text-accent dark:text-accent-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-18 w-18 shrink-0" style="width:18px;height:18px;">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+          </svg>
+        </div>
+        <h2 class="font-display text-h3 font-bold text-ink dark:text-ink-dark">
+          Editorial Evaluation & Rationale
         </h2>
       </div>
-      <p class="text-body font-sans text-ink dark:text-ink-dark leading-relaxed font-medium">
+      <p class="text-body font-sans text-ink dark:text-ink-dark leading-relaxed font-medium pl-44">
         {program.whyRecommend}
       </p>
     </section>
@@ -117,9 +132,12 @@ const breadcrumbItems = [
     {/* Key Features & Pros/Cons */}
     <section class="mb-64 grid grid-cols-1 md:grid-cols-2 gap-32">
       <div class="rounded-16 glass-panel border border-border dark:border-border-dark p-24 sm:p-32">
-        <h3 class="font-display text-h3 font-bold text-ink dark:text-ink-dark mb-20">
-          Key Capabilities
-        </h3>
+        <div class="flex items-center gap-12 mb-20">
+          <PartnerIcon slug={program.id} size={24} />
+          <h3 class="font-display text-h3 font-bold text-ink dark:text-ink-dark">
+            Key Capabilities
+          </h3>
+        </div>
         <ul class="space-y-16">
           {((program as any).features || program.pros || []).map((feat: string) => (
             <li class="flex items-start gap-12 text-body-small text-ink2 dark:text-ink2-dark">
@@ -167,36 +185,40 @@ const breadcrumbItems = [
     )}
 
     {/* FAQ */}
-    {program.faq && program.faq.length > 0 && (
+    {(program as any).faq && (program as any).faq.length > 0 && (
       <section class="mb-64 glass-panel rounded-16 p-24 sm:p-32 border border-border dark:border-border-dark">
         <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark mb-24">
           Frequently Asked Questions
         </h2>
-        <FAQSection items={program.faq} />
+        <FAQSection items={(program as any).faq} />
       </section>
     )}
 
     {/* Bottom CTA Card */}
-    <section class="rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark p-32 sm:p-48 text-center">
-      <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark mb-12">
-        Ready to try {program.name}?
-      </h2>
-      <p class="text-caption font-sans text-muted dark:text-muted-dark max-w-xl mx-auto mb-24">
-        {program.disclosure}
-      </p>
-
-      <a
-        href={utmUrl}
-        target="_blank"
-        rel="noopener noreferrer nofollow sponsored"
-        class="inline-flex items-center gap-10 rounded-10 bg-ink px-32 py-16 text-body-small font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
-      >
-        <span>{program.buttonLabel || `Visit ${program.name}`}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0" style="width:16px;height:16px;">
-          <line x1="5" y1="12" x2="19" y2="12" />
-          <polyline points="12 5 19 12 12 19" />
-        </svg>
-      </a>
+    <section class="rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark p-32 sm:p-48 text-center relative overflow-hidden">
+      <div class="mx-auto max-w-xl">
+        <div class="mx-auto mb-16 flex justify-center">
+          <PartnerIcon slug={program.id} size={48} />
+        </div>
+        <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark mb-12">
+          Ready to try {program.name}?
+        </h2>
+        <p class="text-body-small text-ink2 dark:text-ink2-dark mb-24">
+          Explore official documentation and claim available developer credits or free tiers.
+        </p>
+        <a
+          href={utmUrl}
+          target="_blank"
+          rel="noopener noreferrer nofollow sponsored"
+          class="group inline-flex items-center gap-10 rounded-12 bg-ink px-32 py-16 text-body-small font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
+        >
+          <span>Visit {program.name}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style="width:16px;height:16px;">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
     </section>
   </main>
 </BaseLayout>

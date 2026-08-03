@@ -1,0 +1,116 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import PartnerIcon from '@/components/PartnerIcon.astro';
+import { getAllActiveAffiliates, buildUtmUrl } from '@/config/affiliates';
+
+const partners = getAllActiveAffiliates();
+
+const pageTitle = 'AI Infrastructure & Developer Tool Partners — Nadhebe';
+const pageDescription = 'Curated directory of high-performance GPU clouds, AI model gateways, audio/video tools, and developer infrastructure recommended by Nadhebe.';
+const canonicalUrl = new URL('/partners', Astro.site || Astro.url.origin).toString();
+
+const breadcrumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Partners', href: '/partners' },
+];
+
+const categoryLabels: Record<string, string> = {
+  'cloud-gpu': 'Cloud GPUs & Inference Platforms',
+  'ai-models': 'AI Models & Gateway APIs',
+  'developer-tools': 'Developer Tools & Cloud Compute',
+  'ai-audio': 'AI Speech & Voice Synthesis',
+  'ai-video': 'AI Video Editing & Generation',
+  'seo-analytics': 'SEO & Growth Intelligence',
+};
+
+// Group partners by category
+const groupedPartners = partners.reduce<Record<string, typeof partners>>((acc, partner) => {
+  const cat = partner.category || 'developer-tools';
+  if (!acc[cat]) acc[cat] = [];
+  acc[cat].push(partner);
+  return acc;
+}, {});
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
+  <main class="mx-auto max-w-screen-xl px-12 sm:px-24 py-32 sm:py-64" data-reveal>
+    <Breadcrumb items={breadcrumbItems} />
+
+    {/* Hero Section */}
+    <header class="mt-16 sm:mt-24 mb-48 rounded-16 glass-panel border border-border dark:border-border-dark p-24 sm:p-48 relative overflow-hidden text-center sm:text-left">
+      <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent/0 via-accent to-accent/0 dark:from-accent-dark/0 dark:via-accent-dark dark:to-accent-dark/0"></div>
+
+      <span class="badge uppercase tracking-wider text-[11px] font-semibold mb-12 inline-block">Directory</span>
+      <h1 class="font-display text-display font-bold text-ink dark:text-ink-dark leading-tight max-w-3xl">
+        AI Engineering Tools & Cloud Infrastructure Partners
+      </h1>
+      <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark max-w-2xl leading-relaxed">
+        We rigorously test and recommend battle-tested GPU providers, model APIs, and developer platforms for building autonomous AI agents and web apps.
+      </p>
+    </header>
+
+    {/* Category Sections */}
+    <div class="space-y-64">
+      {Object.entries(groupedPartners).map(([category, items]) => (
+        <section class="border-b border-border dark:border-border-dark pb-48 last:border-b-0">
+          <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark mb-8 flex items-center gap-10">
+            <span>{categoryLabels[category] || category}</span>
+            <span class="text-xs font-mono font-normal text-muted dark:text-muted-dark">({items.length})</span>
+          </h2>
+
+          <div class="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24">
+            {items.map((item) => {
+              const utmUrl = buildUtmUrl(item.affiliateUrl || (item as any).url || '', `partner-hub-${item.id}`);
+              return (
+                <div class="card p-24 flex flex-col justify-between group hover:border-accent/40 dark:hover:border-accent-dark/40 transition-all duration-200">
+                  <div>
+                    <div class="flex items-center justify-between gap-12 mb-16">
+                      <PartnerIcon slug={item.id} size={32} />
+                      <span class="inline-flex items-center gap-4 rounded-pill bg-accent/10 px-10 py-3 text-[11px] font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
+                        {item.qualitativeBadge || (item as any).badge || 'Editor Choice'}
+                      </span>
+                    </div>
+
+                    <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 mb-8">
+                      {item.name}
+                    </h3>
+                    <p class="text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-3 mb-16 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div class="pt-16 border-t border-border/50 dark:border-border-dark/50 flex items-center justify-between gap-12">
+                    <a
+                      href={`/partners/${item.id}`}
+                      class="text-xs font-sans font-semibold text-accent dark:text-accent-dark hover:underline flex items-center gap-4"
+                    >
+                      <span>Read Review</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 shrink-0" style="width:12px;height:12px;">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </a>
+
+                    <a
+                      href={utmUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow sponsored"
+                      class="inline-flex items-center gap-6 rounded-8 bg-ink px-14 py-6 text-xs font-bold text-surface hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark transition-colors"
+                    >
+                      <span>Visit Site</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 shrink-0" style="width:12px;height:12px;">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
