@@ -45,6 +45,22 @@ const mostReadList = allArticles.filter(a => a.data.isPillar || a.data.rating).s
           <p class="mt-8 text-body text-ink2 dark:text-ink2-dark max-w-2xl">
             Stay updated with the latest AI breakthroughs, product launches and industry trends.
           </p>
+          <div class="mt-20">
+            <a
+              href="/newsletter"
+              class="group inline-flex items-center gap-10 rounded-8 bg-ink px-18 py-10 text-xs font-bold text-surface transition-all duration-200 hover:bg-ink2 hover:shadow-medium dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-15 w-15 text-accent dark:text-accent-dark shrink-0" style="width:15px;height:15px;">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Get Weekly Briefing & Free Starter Kit</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style="width:14px;height:14px;">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+          </div>
         </div>
         <div class="flex items-center gap-12 shrink-0">
           <span class="text-xs font-mono font-semibold text-muted dark:text-muted-dark">

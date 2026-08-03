@@ -16,9 +16,21 @@ const sorted = posts
   <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
     <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
 
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
-      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">AI Tutorials</h1>
+    <div class="border-b border-border dark:border-border-dark pb-16 mb-24 flex flex-col sm:flex-row sm:items-end justify-between gap-16">
+      <div>
+        <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
+        <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">AI Tutorials</h1>
+      </div>
+      <a
+        href="/newsletter"
+        class="group shrink-0 inline-flex items-center gap-8 rounded-10 bg-ink px-16 py-10 text-xs font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-sm"
+      >
+        <span>📩 Get Weekly AI Briefing</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 transition-transform duration-200 group-hover:translate-x-1" style="width:14px;height:14px;">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
     </div>
 
     <FeedList posts={sorted} />
