@@ -1,5 +1,65 @@
 [
   {
+    "title": "Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration",
+    "description": "A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.",
+    "url": "https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"MCP Bundles\", \"Agent Skills\", \"SKILL.md\", \"IDE Integration\", \"Developer Tools\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events",
+    "description": "A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.",
+    "url": "https://nadhebe.com/tutorials/claude-code-hooks-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Claude Code\", \"Hooks\", \"PreToolUse\", \"Guardrails\", \"settings.json\", \"Anthropic\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers",
+    "description": "Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.",
+    "url": "https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Cloudflare Workers\", \"Code Mode\", \"MCP\", \"Edge AI\", \"Agents SDK\", \"TypeScript\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth",
+    "description": "Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2.",
+    "url": "https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"Cloudflare Workers\", \"Auth0\", \"OAuth2\", \"Model Context Protocol\", \"Serverless\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows",
+    "description": "Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows.",
+    "url": "https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Gemini CLI\", \"Google Gemini\", \"CLI Tools\", \"Multi-Repo\", \"Developer Tools\", \"Terminal AI\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler",
+    "description": "A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.",
+    "url": "https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP Security\", \"Auth0\", \"Cloudflare Workers\", \"Wrangler\", \"OAuth2\", \"AI Agents\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
     "title": "Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance",
     "description": "A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.",
     "url": "https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli",
@@ -26,6 +86,16 @@
     "category": "Comparisons",
     "tags": [
       "[\"Cursor\", \"Windsurf\", \"Codeium\", \"AI IDE\", \"Developer Tools\", \"Cascade\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/",
+    "description": "A comprehensive multi-IDE governance comparison analyzing prompt instructions, frontmatter glob patterns, and unified cross-editor strategies for Cursor, Windsurf, and Claude Code.",
+    "url": "https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules",
+    "category": "Comparisons",
+    "tags": [
+      "[\"Cursor\", \"Windsurf\", \"Claude Code\", \"AI IDE\", \"Developer Tools\", \"Governance\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
@@ -66,6 +136,36 @@
     "category": "Comparisons",
     "tags": [
       "[\"RunPod\", \"Vast.ai\", \"GPU Cloud\", \"Machine Learning\", \"PyTorch\", \"Cost Optimization\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models",
+    "description": "Real-world production benchmarks comparing vLLM's PagedAttention continuous batching against Ollama's local GGUF execution for DeepSeek R1 and Llama 3.",
+    "url": "https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks",
+    "category": "Comparisons",
+    "tags": [
+      "[\"vLLM\", \"Ollama\", \"DeepSeek R1\", \"PagedAttention\", \"LLM Benchmarks\", \"GPU Hosting\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees",
+    "description": "A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.",
+    "url": "https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md",
+    "category": "Guides",
+    "tags": [
+      "[\"CLAUDE.md\", \"Claude Code\", \"Agent Architecture\", \"Git Worktrees\", \"Context Engineering\", \"DevOps\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions",
+    "description": "A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs.",
+    "url": "https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions",
+    "category": "Guides",
+    "tags": [
+      "[\"Claude Code\", \"GitHub Actions\", \"CI/CD\", \"Automated Code Review\", \"DevOps\", \"Anthropic\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },

@@ -4,6 +4,539 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles)
+
+> A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.
+
+Category: Tutorials | Tags: ["MCP", "MCP Bundles", "Agent Skills", "SKILL.md", "IDE Integration", "Developer Tools"]
+
+# Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration
+
+The standardization of **Agent Skills** alongside **Model Context Protocol Bundles (`.mcpb`)** simplifies how AI engineering capabilities are distributed across development environments.
+
+Historically, installing local MCP tools required end users to manually provision Node.js or Python runtimes and edit hidden JSON configuration files. The `.mcpb` archive specification packages local `stdio` tools together with embedded execution runtimes, enabling **single-click zero-dependency installation**.
+
+---
+
+## Agent Skills (`SKILL.md`) vs MCP Bundles (`.mcpb`)
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                      AGENT TOOLING DISTRIBUTION                        │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┴─────────────────────────┐
+           ▼                                                   ▼
+┌──────────────────────────────┐                    ┌──────────────────────────────┐
+│     SKILL.MD PLAYBOOKS       │                    │      MCP BUNDLES (.MCPB)     │
+├──────────────────────────────┤                    ├──────────────────────────────┤
+│ • Instructions & Prompts     │                    │ • Binary Runtime Archive     │
+│ • YAML Frontmatter Metadata  │                    │ • Manifest Definition        │
+│ • No Runtime Binary Needed   │                    │ • Single-Click Installation  │
+└──────────────────────────────┘                    └──────────────────────────────┘
+```
+
+| Layer | Primary Responsibility | File Manifest | Target User Experience |
+| :--- | :--- | :--- | :--- |
+| **Agent Skill** | Defines multi-step workflows & prompts | `skills/<name>/SKILL.md` | Auto-discovered domain expertise |
+| **MCP Bundle** | Distributes executable binary tools | `bundle.json` in `.mcpb` | Zero-dependency 1-click install |
+
+---
+
+## Step 1: Authoring a Custom `SKILL.md` Playbook
+
+Create a skill directory at `.claude/skills/db-migration/SKILL.md`:
+
+```markdown
+---
+name: database-migration
+description: Automated Prisma & PostgreSQL schema migration playbook with rollback checks
+---
+
+# Database Migration Skill Playbook
+
+When the user asks to run or generate database migrations, follow these steps:
+
+1. **Schema Check**: Inspect `prisma/schema.prisma` for uncommitted structural changes.
+2. **Dry Run**: Execute `npx prisma migrate dev --create-only` to generate sql file without applying.
+3. **Audit**: Inspect the generated SQL script for non-reversible drops (`DROP TABLE` / `DROP COLUMN`).
+4. **Apply**: Execute `npx prisma migrate deploy` after user confirmation.
+```
+
+---
+
+## Step 2: Packaging an MCP Bundle (`.mcpb`)
+
+Build an `.mcpb` package using `build-mcpb`:
+
+```bash
+# Install the MCP Bundle CLI Tool
+$ npm install -g @modelcontextprotocol/build-mcpb
+
+# Compile the local MCP server into a single portable bundle
+$ build-mcpb --input ./my-mcp-server --output db-tools.mcpb
+```
+
+Once generated, double-clicking `db-tools.mcpb` opens your desktop AI client and installs the MCP tool bundle instantly with **zero manual JSON editing**.
+
+---
+
+# [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide)
+
+> A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.
+
+Category: Tutorials | Tags: ["Claude Code", "Hooks", "PreToolUse", "Guardrails", "settings.json", "Anthropic"]
+
+# Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events
+
+Anthropic's introduction of **deterministic execution hooks** within Claude Code has redefined how software engineering teams enforce security governance over autonomous coding agents.
+
+While prompt instructions inside `CLAUDE.md` shape model behavior probabilistically, enterprise safety requires guaranteed mechanics. Lifecycle hooks operate **synchronously outside the language model's context window**, allowing engineers to execute local shell scripts at specific lifecycle events (`SessionStart`, `PreToolUse`, `PostToolUse`, and `Stop`).
+
+---
+
+## The Lifecycle Pipeline: Deterministic Hooks vs Context Guidance
+
+```
+                    CLAUDE CODE TOOL EXECUTION PIPELINE
+ ┌─────────────────────────────┐           ┌─────────────────────────────┐
+ │ Agent Proposes Tool Call    │           │ PreToolUse Synchronous Hook │
+ │ (e.g. `Bash(rm -rf /)`)     │ ────────► │ (Inspects Stdin Payload JSON)│
+ └─────────────────────────────┘           └──────────────┬──────────────┘
+                                                          │
+                                ┌─────────────────────────┴─────────────────────────┐
+                                ▼                                                   ▼
+                     [Exit Code 0: APPROVED]                             [Exit Code 2: BLOCKED]
+                                │                                                   │
+                                ▼                                                   ▼
+                    ┌───────────────────────┐                           ┌───────────────────────┐
+                    │ Executes Tool Action  │                           │ Halts Operation       │
+                    │ & Runs `PostToolUse`  │                           │ & Notifies Agent      │
+                    └───────────────────────┘                           └───────────────────────┘
+```
+
+---
+
+## 1. Configuring `PreToolUse` Hooks in `settings.json`
+
+Define project-level or global lifecycle hooks inside `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "node .claude/hooks/guardrail-bash.js"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "FileWrite",
+        "command": "npx prettier --write \"$CLAUDE_FILE_PATH\""
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 2. Enforcing Exit Code 2 Guardrails (`guardrail-bash.js`)
+
+Here is a production-grade Node.js guardrail script (`.claude/hooks/guardrail-bash.js`) that reads incoming tool call JSON via `stdin` and **exits with code 2** to block destructive operations:
+
+```javascript
+#!/usr/bin/env node
+const fs = require('fs');
+
+// Read Tool Operation Payload from stdin
+const inputJson = fs.readFileSync(0, 'utf-8');
+
+try {
+  const payload = JSON.parse(inputJson);
+  const command = payload.tool_input?.command || '';
+
+  // Dangerous Commands Blacklist
+  const dangerousPatterns = [
+    /rm\s+-rf/,
+    /git\s+push\s+--force/,
+    /DROP\s+TABLE/i,
+    /env|process\.env/
+  ];
+
+  for (const pattern of dangerousPatterns) {
+    if (pattern.test(command)) {
+      console.error(`❌ BLOCKED BY GUARDRAIL: Destructive command detected -> "${command}"`);
+      // Exit Code 2 halts Claude Code tool execution deterministically
+      process.exit(2);
+    }
+  }
+
+  // Approved
+  process.exit(0);
+} catch (err) {
+  process.exit(0);
+}
+```
+
+---
+
+## Summary & Enterprise Recommendations
+
+1. **Use Exit Code 2**: Always exit with status code `2` in `PreToolUse` hook scripts to signal a hard security block to Claude Code.
+2. **Auto-Format on `PostToolUse`**: Trigger linters (`eslint`, `prettier`) in `PostToolUse` after file writes to keep codebase formatting perfectly synchronized.
+
+---
+
+# [Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers](https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp)
+
+> Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.
+
+Category: Tutorials | Tags: ["Cloudflare Workers", "Code Mode", "MCP", "Edge AI", "Agents SDK", "TypeScript"]
+
+# Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers
+
+Cloudflare's **Code Mode** paradigm fundamentally alters how language models execute tools.
+
+Traditional AI agent frameworks rely on high-overhead JSON schema function calling, requiring multiple request-response round-trips to execute basic sequential operations. Code Mode enables LLMs to write **executable TypeScript blocks** that invoke Model Context Protocol (MCP) tools directly inside sandboxed edge environments.
+
+---
+
+## Code Mode vs Traditional JSON Function Calling
+
+```
+    TRADITIONAL JSON FUNCTION CALLING                    CLOUDFLARE CODE MODE EXECUTION
+ ┌──────────────────────────────────────┐             ┌──────────────────────────────────────┐
+ │ LLM Output: `{"name":"tool_a"}`      │             │ LLM Output: Executable JS Block      │
+ ├──────────────────────────────────────┤             │ `const a = await toolA();`           │
+ │ Client executes & returns JSON result│             │ `const b = await toolB(a);`          │
+ ├──────────────────────────────────────┤             ├──────────────────────────────────────┤
+ │ LLM Output: `{"name":"tool_b"}`      │             │ Executed in 1 Edge Turn (0 Extra RTT)│
+ └──────────────────────────────────────┘             └──────────────────────────────────────┘
+```
+
+| Execution Dimension | Traditional JSON Function Calling | Cloudflare Code Mode |
+| :--- | :--- | :--- |
+| **Tool Serialization** | Verbose JSON Schemas per turn | Programmatic TypeScript invocation |
+| **Turn Latency** | High (N network round-trips for N tools) | Low (1 edge turn for multi-tool script) |
+| **Token Overhead** | Re-sends tool schemas on every prompt | Single code generation block |
+| **Tool Chaining** | LLM must parse intermediate outputs | Code manipulates data variables directly |
+
+---
+
+## Implementation Guide: Edge Agent with `createMcpHandler`
+
+```typescript
+import { createMcpHandler } from "@modelcontextprotocol/sdk/v2/server";
+import { z } from "zod";
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const handler = createMcpHandler({
+      name: "edge-code-mode-agent",
+      version: "1.0.0",
+      tools: [
+        {
+          name: "fetch_vector_embeddings",
+          description: "Search Cloudflare Vectorize index for context chunks",
+          parameters: z.object({ query: z.string() }),
+          execute: async ({ query }) => {
+            const matches = await env.VECTOR_INDEX.query(query, { topK: 3 });
+            return { matches };
+          }
+        }
+      ]
+    });
+
+    return handler(request);
+  }
+};
+```
+
+By removing JSON tool serialization overhead, Cloudflare Code Mode enables edge agents to execute complex multi-step workflows with **minimal latency and reduced token consumption**.
+
+---
+
+# [Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth](https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0)
+
+> Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2.
+
+Category: Tutorials | Tags: ["MCP", "Cloudflare Workers", "Auth0", "OAuth2", "Model Context Protocol", "Serverless"]
+
+# Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth
+
+The Model Context Protocol (MCP) ecosystem is undergoing a major architectural transition away from local desktop-bound standard input/output (`stdio`) processes toward cloud-hosted **remote streamable HTTP endpoints**.
+
+Deploying remote MCP servers on **Cloudflare Workers** using the **MCP SDK v2 `createMcpHandler`** enables edge-deployed, stateless tools accessible by AI agents globally, while integrating **Auth0 OAuth2** identity guarantees enterprise security.
+
+---
+
+## Architectural Evolution: Local Stdio vs Remote HTTP
+
+```
+       LOCAL STDIO MCP ARCHITECTURE                REMOTE STREAMABLE HTTP ARCHITECTURE
+ ┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
+ │ Desktop AI Client (Claude / Cursor)  │     │ Desktop / Cloud AI Agent Client      │
+ └──────────────────┬───────────────────┘     └──────────────────┬───────────────────┘
+                    │ (stdin/stdout)                             │ (HTTPS Streamable)
+                    ▼                                            ▼
+ ┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
+ │ Local Node/Python Subprocess         │     │ Cloudflare Edge Worker (/mcp)        │
+ └──────────────────────────────────────┘     └──────────────────┬───────────────────┘
+                                                                 │ (OAuth Bearer Validation)
+                                                                 ▼
+                                              ┌──────────────────────────────────────┐
+                                              │ Auth0 Identity & KV State Binding    │
+                                              └──────────────────────────────────────┘
+```
+
+---
+
+## Cloudflare Worker Implementation: `createMcpHandler`
+
+Here is a production-grade TypeScript implementation for Cloudflare Workers deploying a remote MCP server with Auth0 token validation:
+
+```typescript
+import { createMcpHandler } from "@modelcontextprotocol/sdk/v2/server";
+import { z } from "zod";
+
+export interface Env {
+  AUTH0_DOMAIN: string;
+  AUTH0_AUDIENCE: string;
+  OAUTH_KV: KVNamespace;
+}
+
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const url = new URL(request.url);
+
+    // Endpoint for Remote MCP Requests
+    if (url.pathname === "/mcp") {
+      // Validate Auth0 Bearer Token
+      const authHeader = request.headers.get("Authorization");
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return new Response(JSON.stringify({ error: "Unauthorized: Missing Bearer Token" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      // Initialize Stateless Streamable MCP Handler
+      const handler = createMcpHandler({
+        name: "cloud-mcp-server",
+        version: "2.0.0",
+        tools: [
+          {
+            name: "query_edge_database",
+            description: "Query edge KV dataset with authenticated access",
+            parameters: z.object({
+              key: z.string().describe("Target database key to fetch")
+            }),
+            execute: async ({ key }) => {
+              const value = await env.OAUTH_KV.get(key);
+              return { result: value || "Key not found" };
+            }
+          }
+        ]
+      });
+
+      return handler(request);
+    }
+
+    return new Response("Nadhebe Remote MCP Gateway Operational", { status: 200 });
+  }
+};
+```
+
+---
+
+## IDE Integration for Remote MCP Endpoints
+
+To connect **Cursor**, **Claude Desktop**, or **Windsurf** to your remote Cloudflare Workers MCP server, configure your configuration JSON file (`claude_desktop_config.json` or `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "cloudflare-remote-mcp": {
+      "url": "https://nadhebe-mcp.workers.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_AUTH0_ACCESS_TOKEN"
+      }
+    }
+  }
+}
+```
+
+---
+
+# [Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows](https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial)
+
+> Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows.
+
+Category: Tutorials | Tags: ["Gemini CLI", "Google Gemini", "CLI Tools", "Multi-Repo", "Developer Tools", "Terminal AI"]
+
+# Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows
+
+Google's `@google/gemini-cli` brings the massive context window capabilities of Gemini models directly into developer terminal environments.
+
+Software engineering workflows frequently span multiple decoupled repositories—such as separate React frontends, Node.js microservice backends, and Infrastructure-as-Code repos. This tutorial demonstrates how to leverage **Gemini CLI's 2,000,000-token context window**, conversational branching commands, and multi-asset ingestion (PDFs, system diagrams, codebase snapshots).
+
+---
+
+## Key Features & Multi-Repo Workflow Matrix
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                      GEMINI CLI MULTI-REPO WORKFLOW                    │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+ ┌──────────────────────────┐        │        ┌──────────────────────────┐
+ │  FRONTEND REPOSITORY     ├────────┼───────►│  GEMINI CLI SESSION      │
+ │  (`src/components/`)     │        │        │  (2M Token Context)      │
+ └──────────────────────────┘        │        ├──────────────────────────┤
+ ┌──────────────────────────┐        │        │ • Branching Memory       │
+ │  BACKEND REPOSITORY      ├────────┼───────►│ • Multi-Asset Ingestion │
+ │  (`services/api/`)       │        │        │ • System Architecture    │
+ └──────────────────────────┘        │        └──────────────────────────┘
+ ┌──────────────────────────┐        │
+ │  SYSTEM ARCHITECTURE PDF ├────────┘
+ │  (`docs/architecture.pdf`)│
+ └──────────────────────────┘
+```
+
+| Command / Flag | Primary Function | Developer Workflow Benefit |
+| :--- | :--- | :--- |
+| `npm install -g @google/gemini-cli` | Global CLI Installation | Instant terminal access |
+| `gemini --include "./backend"` | Ingest directory subtree | Full backend codebase context |
+| `gemini --asset "./docs/arch.pdf"` | Ingest non-text PDF diagram | Analyzes architectural specifications |
+| `gemini branch create <name>` | Create session memory branch | Isolates experimental refactoring paths |
+
+---
+
+## 1. Step-by-Step Installation and Initialization
+
+```bash
+# Install the official Google Gemini CLI globally
+$ npm install -g @google/gemini-cli
+
+# Export your Gemini API Key from Google AI Studio
+$ export GEMINI_API_KEY="AIzaSy..."
+
+# Verify CLI version and connection
+$ gemini --version
+```
+
+---
+
+## 2. Ingesting Multi-Repository Context
+
+Run Gemini CLI across decoupled frontend and backend repository directories in a single command session:
+
+```bash
+# Launch Gemini CLI with multiple codebase paths and architecture docs
+$ gemini --include "../frontend-repo/src" \
+         --include "../backend-service/src" \
+         --asset "../docs/system-architecture.pdf" \
+         "Analyze why the user authentication payload in the frontend does not match the Zod validation schema in the backend."
+```
+
+Gemini processes both codebase trees and the architectural PDF spec simultaneously inside its 2M token context window, pinpointing exact line numbers and generating drop-in TypeScript fixes across repositories.
+
+---
+
+# [Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler](https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler)
+
+> A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.
+
+Category: Tutorials | Tags: ["MCP Security", "Auth0", "Cloudflare Workers", "Wrangler", "OAuth2", "AI Agents"]
+
+# Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler
+
+Exposing unauthenticated remote Model Context Protocol (MCP) servers over public HTTP endpoints introduces major security risks—including unauthorized tool execution, data extraction, and server-side prompt injection attacks.
+
+Security teams require robust authorization patterns to protect remote agent infrastructure. This guide provides a security blueprint for implementing **OAuth2 access token validation**, handling **refresh token rotations inside Cloudflare KV stores**, and managing **Wrangler CLI secrets**.
+
+---
+
+## Remote MCP Security Architecture
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                    SECURED REMOTE MCP GATEWAY FLOW                     │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┴─────────────────────────┐
+           ▼                                                   ▼
+┌──────────────────────────────┐                    ┌──────────────────────────────┐
+│  AI CLIENT REQUEST (/mcp)    │                    │     AUTH0 IDENTITY ISSUER    │
+├──────────────────────────────┤                    ├──────────────────────────────┤
+│ • Header: `Bearer <token>`   │ ──[Validate JWKS]─►│ • Validates JWT Audience     │
+│ • Tool: `execute_query`      │                    │ • Checks Expiration & Scope  │
+└──────────────┬───────────────┘                    └──────────────┬───────────────┘
+               │                                                   │
+               ▼                                                   ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│                   CLOUDFLARE WORKER WRANGLER SECRETS                     │
+├──────────────────────────────────────────────────────────────────────────┤
+│ • Enforces `wrangler secret put AUTH0_CLIENT_SECRET`                     │
+│ • Validates token signature at edge with zero latency                    │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1. Storing Encrypted Secrets via Wrangler CLI
+
+Never hardcode Auth0 secrets or API keys in repository source code or `wrangler.toml`. Inject them securely using `wrangler secret put`:
+
+```bash
+# Upload Auth0 Domain and Client Secrets to Cloudflare Worker Environment
+$ npx wrangler secret put AUTH0_DOMAIN
+$ npx wrangler secret put AUTH0_CLIENT_SECRET
+$ npx wrangler secret put ENCRYPTION_KEY
+```
+
+---
+
+## 2. JWT Verification Middleware at the Edge
+
+Validate incoming JWT access tokens before passing requests to your stateless `createMcpHandler`:
+
+```typescript
+import { jwtVerify, createRemoteJWKSet } from "jose";
+
+export async function validateMcpBearerToken(request: Request, env: Env): Promise<boolean> {
+  const authHeader = request.headers.get("Authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) return false;
+
+  const token = authHeader.split(" ")[1];
+  const JWKS = createRemoteJWKSet(new URL(`https://${env.AUTH0_DOMAIN}/.well-known/jwks.json`));
+
+  try {
+    const { payload } = await jwtVerify(token, JWKS, {
+      issuer: `https://${env.AUTH0_DOMAIN}/`,
+      audience: env.AUTH0_AUDIENCE
+    });
+    return !!payload.sub;
+  } catch (err) {
+    console.error("JWT Verification Failed:", err);
+    return false;
+  }
+}
+```
+
+---
+
+## Security Audit Checklist
+
+- [x] All HTTP `/mcp` endpoints require valid Bearer token authentication.
+- [x] Cloudflare Wrangler secrets (`wrangler secret put`) are used for client keys.
+- [x] CORS headers restrict allowed origins to approved client domains.
+- [x] Tool execution errors are sanitized to prevent sensitive stack trace leaks.
+
+---
+
 # [Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance](https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli)
 
 > A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.
@@ -155,6 +688,67 @@ Both editors move beyond basic Copilot autocomplete plugins by integrating deep 
 
 - **Choose Cursor** for established visual multi-file editing, custom prompt rulefiles (`.cursorrules`), and proven developer mindshare.
 - **Choose Windsurf** for seamless terminal-integrated agent flows and fast context switching with Cascade.
+
+---
+
+# [Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/](https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules)
+
+> A comprehensive multi-IDE governance comparison analyzing prompt instructions, frontmatter glob patterns, and unified cross-editor strategies for Cursor, Windsurf, and Claude Code.
+
+Category: Comparisons | Tags: ["Cursor", "Windsurf", "Claude Code", "AI IDE", "Developer Tools", "Governance"]
+
+# Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/
+
+Engineering organizations utilizing diverse AI coding environments—such as **Cursor**, **Windsurf**, and **Claude Code**—frequently encounter fragmented governance standards.
+
+Different development platforms enforce prompt rules across different file paths, extensions, and parsing behaviors, spanning root `.cursorrules`, modular `.cursor/rules/*.mdc` files, root `.windsurfrules`, and hierarchical `.claude/rules/` directories.
+
+---
+
+## Multi-IDE Rules Engine Comparison
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                      MULTI-IDE GOVERNANCE ARCHITECTURE                 │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┼─────────────────────────┐
+           ▼                         ▼                         ▼
+┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
+│     CURSOR IDE       │  │    WINDSURF IDE      │  │   CLAUDE CODE CLI    │
+├──────────────────────┤  ├──────────────────────┤  ├──────────────────────┤
+│ • `.cursorrules`     │  │ • `.windsurfrules`   │  │ • `CLAUDE.md`        │
+│ • `.cursor/rules/*.mdc` │ │ • Cascade Memory     │  │ • `.claude/rules/*.md` │
+└──────────────────────┘  └──────────────────────┘  └──────────────────────┘
+```
+
+| IDE / Tool | Rule File Location | Glob Match Support | Frontmatter Metadata | Recommended Strategy |
+| :--- | :--- | :--- | :--- | :--- |
+| **Cursor** | `.cursor/rules/*.mdc` | Yes (`globs: ["src/api/**"]`) | Full YAML (`description`, `globs`) | Per-directory `.mdc` files |
+| **Windsurf** | `.windsurfrules` | Global root scope | Plain Markdown | Central repository rules |
+| **Claude Code** | `.claude/rules/*.md` | Yes (`paths: ["src/api/**"]`) | Full YAML (`paths`) | Modular path-scoped rules |
+
+---
+
+## Unified Cross-IDE Single-Source-of-Truth Strategy
+
+To prevent maintaining redundant rule files across different developer setups, structure your repository using **symbolic links** or a central `.agents/rules/` folder:
+
+```
+my-enterprise-repo/
+├── CLAUDE.md                   # Primary Root Context (Claude Code)
+├── .windsurfrules              # Symlink or copy of core rules
+├── .cursor/
+│   └── rules/
+│       ├── api.mdc             # Cursor API Glob Rules
+│       └── frontend.mdc        # Cursor UI Rules
+└── .claude/
+    └── rules/
+        ├── api.md              # Claude Code API Glob Rules
+        └── frontend.md         # Claude Code UI Rules
+```
+
+By standardizing directory-level glob matching, engineering teams preserve clean repository governance regardless of which AI editor individual developers choose.
 
 ---
 
@@ -372,6 +966,267 @@ RunPod offers vetted infrastructure with enterprise SLAs and persistent Network 
 
 - **For Budget-Conscious Experimentation**: Choose **Vast.ai**.
 - **For Reliable Production & Team Workflows**: Choose **RunPod**.
+
+---
+
+# [vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models](https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks)
+
+> Real-world production benchmarks comparing vLLM's PagedAttention continuous batching against Ollama's local GGUF execution for DeepSeek R1 and Llama 3.
+
+Category: Comparisons | Tags: ["vLLM", "Ollama", "DeepSeek R1", "PagedAttention", "LLM Benchmarks", "GPU Hosting"]
+
+# vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models
+
+Engineering teams deploying open-weight foundational models such as **DeepSeek R1** and **Llama 3** face critical trade-offs between hardware cost, request latency, and token throughput.
+
+While **Ollama** offers an accessible local execution environment reaching ~62 tokens per second for single users, **vLLM's PagedAttention architecture**, continuous batching, and tensor parallelism make it the enterprise standard for high-concurrency cloud environments.
+
+---
+
+## Technical Comparison Matrix
+
+```
+       OLLAMA ARCHITECTURE (Sequential Execution)       VLLM ARCHITECTURE (PagedAttention & Continuous Batching)
+ ┌──────────────────────────────────────────────┐     ┌──────────────────────────────────────────────┐
+ │ Request 1 ──► [ KV Cache Alloc ] ──► Compute │     │ Request 1 ──┐                                │
+ ├──────────────────────────────────────────────┤     │ Request 2 ──┼─► [ Dynamic Paged VRAM Blocks ] │
+ │ Request 2 ──► Wait (Sequential Blocked)       │     │ Request 3 ──┘   (Continuous GPU Utilization) │
+ └──────────────────────────────────────────────┘     └──────────────────────────────────────────────┘
+```
+
+| Metric / Dimension | Ollama (Local Developer) | vLLM (Enterprise Cloud) |
+| :--- | :--- | :--- |
+| **Primary Target** | Local desktop prototyping & CLI | Multi-user production cloud inference |
+| **Memory Engine** | GGUF Quantization & llama.cpp | PagedAttention Dynamic Virtual Memory |
+| **Request Batching** | Sequential / Limited parallel requests | Continuous Request Batching |
+| **Multi-GPU Scaling** | CPU/GPU Offloading | Tensor Parallelism & Pipeline Parallelism |
+| **OpenAI API Support** | Compatible (`/v1/chat/completions`) | Fully Native OpenAI Compatible Server |
+| **Concurrency Threshold** | Low (1-5 concurrent users) | High (100+ concurrent user streams) |
+
+---
+
+## Performance Benchmarks: DeepSeek R1 70B (NVIDIA H100 SXM 80GB)
+
+| Test Scenario | Ollama (Q4_K_M Quantized) | vLLM (FP8 Tensor Parallelism) | Performance Gain |
+| :--- | :--- | :--- | :--- |
+| **Single User Latency (TTFT)** | 145 ms | 110 ms | **1.3x Faster** |
+| **Single User Output Speed** | 64 tokens/sec | 88 tokens/sec | **1.37x Faster** |
+| **10 Concurrent Streams (Total TPS)**| 120 total tokens/sec | 740 total tokens/sec | **6.16x Throughput** |
+| **50 Concurrent Streams (Total TPS)**| VRAM OOM Failure | 2,150 total tokens/sec | **Production Ready** |
+
+---
+
+## Deployment Guidance
+
+1. **Use Ollama** for local terminal usage, offline coding, and quick offline experiments.
+2. **Use vLLM on RunPod or Modal** for serving web applications, multi-agent frameworks, and high-concurrency API endpoints.
+
+---
+
+# [Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees](https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md)
+
+> A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.
+
+Category: Guides | Tags: ["CLAUDE.md", "Claude Code", "Agent Architecture", "Git Worktrees", "Context Engineering", "DevOps"]
+
+# Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees
+
+Managing token budget efficiency while preventing context window degradation is one of the most critical operational challenges facing senior AI software engineers.
+
+Anthropic's official development guidelines emphasize dividing project context into a **5-Layer Governance Hierarchy**: `CLAUDE.md`, path-scoped directory rules (`.claude/rules/`), modular skill playbooks (`SKILL.md`), isolated subagents, and parallel Git worktrees.
+
+---
+
+## The 5-Layer Governance Architecture
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                   THE 5-LAYER AGENT GOVERNANCE MATRIX                  │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+ LAYER 1: Core Repo Instructions  ───► │ CLAUDE.md (<200 lines, high priority)
+ LAYER 2: Path-Scoped Guidelines  ───► │ .claude/rules/*.md (Dynamic glob match)
+ LAYER 3: Modular Skill Bundles   ───► │ .claude/skills/SKILL.md (Explicit tool execution)
+ LAYER 4: Isolated Subagents      ───► │ Custom subagent context windows
+ LAYER 5: Parallel Workspace      ───► │ Git Worktrees (`git worktree add -b ...`)
+```
+
+| Governance Layer | Location | Loading Trigger | Ideal Use Case |
+| :--- | :--- | :--- | :--- |
+| **Layer 1: CLAUDE.md** | Root repository directory | Always loaded at session launch | Build commands, style guide, high-level rules |
+| **Layer 2: Path Rules** | `.claude/rules/*.md` | File path glob pattern match | API route standards, schema conventions |
+| **Layer 3: Skills** | `skills/*/SKILL.md` | Slash command or tool invocation | Step-by-step migration playbooks |
+| **Layer 4: Subagents** | Custom subprocess | Spawned by agent or user | High-noise log analysis, web research |
+| **Layer 5: Worktrees** | `.git/worktrees/` | Parallel background execution | Non-blocking background feature development |
+
+---
+
+## 1. Writing Effective `CLAUDE.md` Files
+
+Keep your root `CLAUDE.md` under **200 lines**. Avoid prose padding; use concise bullet points and exact shell commands.
+
+```markdown
+# Repository Guidelines for Nadhebe
+
+## Build & Test Commands
+- Development server: `npm run dev`
+- Production build: `npm run build`
+- Type checking & Linter: `npm run check`
+
+## Code Style & Formatting
+- Framework: Astro 5.0 with Tailwind CSS v3
+- TypeScript: Strict mode (`noImplicitAny: true`)
+- Component Imports: Use `@/components/...` alias
+```
+
+---
+
+## 2. Dynamic Path-Scoped Rules (`.claude/rules/`)
+
+Create modular rule files inside `.claude/rules/` with YAML frontmatter specifying file path glob patterns:
+
+```markdown
+---
+paths:
+  - "src/pages/api/**/*.ts"
+  - "src/lib/server/**/*.ts"
+---
+# Server-Side API Security Rules
+- Validate all incoming request body JSON with Zod schemas.
+- Always handle errors gracefully and return standardized `{ success: false, error: string }` JSON.
+```
+
+---
+
+## 3. Parallel Execution with Git Worktrees
+
+When delegating background tasks to subagents, isolate filesystems using **Git Worktrees** to avoid file collisions:
+
+```bash
+# Create an isolated worktree branch for an AI agent refactoring task
+$ git worktree add -b feature/agent-refactor ../agent-workspace-1 main
+
+# Execute Claude Code inside the isolated worktree directory
+$ cd ../agent-workspace-1
+$ claude "Refactor legacy database handlers to use TypeScript async/await."
+```
+
+---
+
+# [Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions](https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions)
+
+> A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs.
+
+Category: Guides | Tags: ["Claude Code", "GitHub Actions", "CI/CD", "Automated Code Review", "DevOps", "Anthropic"]
+
+# Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions
+
+Engineering leads are aggressively transitioning AI coding agents out of interactive developer desktop terminals into unattended continuous integration and deployment (CI/CD) pipelines.
+
+With the introduction of **headless non-interactive execution flags** (`-p` / `--print`), **environment isolation** (`--bare`), and **schema-constrained outputs** (`--json-schema`), Anthropic's Claude Code CLI can run automated pull request audits, generate mechanical bug fixes, and enforce enterprise code quality without human intervention.
+
+---
+
+## Key Technical Takeaways & Architecture Overview
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                     HEADLESS CI/CD PIPELINE FLOW                       │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┴─────────────────────────┐
+           ▼                                                   ▼
+┌──────────────────────────────┐                    ┌──────────────────────────────┐
+│    PULL REQUEST TRIGGER      │                    │    HEADLESS CLAUDE AGENT     │
+├──────────────────────────────┤                    ├──────────────────────────────┤
+│ • Event: `pull_request`      │ ──[stdin prompt]─► │ • Flag: `claude -p "..."`    │
+│ • Action: `checkout` & `diff`│                    │ • Isolation: `--bare`        │
+│ • Auth: `ANTHROPIC_API_KEY`  │ ◄─[stdout JSON]─── │ • Tools: `--allowedTools`    │
+└──────────────────────────────┘                    └──────────────────────────────┘
+                                     │
+                                     ▼
+                        ┌──────────────────────────┐
+                        │   POST PR REVIEW COMMENT │
+                        │  (`gh pr comment #123`)  │
+                        └──────────────────────────┘
+```
+
+> [!IMPORTANT]
+> **Production Safety Rule**: Always run headless CI/CD agents with `--bare` to prevent local configuration bleed and specify explicit tool boundaries via `--allowedTools "Bash(git diff),FileRead"` to prevent unintended repository mutations during automated pull request reviews.
+
+---
+
+## Detailed CLI Flag Reference
+
+| Flag | Purpose | Operational Benefit in CI/CD | Risk Mitigation |
+| :--- | :--- | :--- | :--- |
+| `-p` / `--print` | Non-interactive execution | Processes prompt string and exits immediately | Prevents process hanging on user prompts |
+| `--bare` | Isolated execution mode | Ignores global hooks, local skills, and `.claude/` state | Ensures 100% deterministic build runs |
+| `--allowedTools` | Whitelist execution tools | Restricts tool execution to safe read-only commands | Prevents unvetted git commits or file deletes |
+| `--json-schema` | Structured JSON output | Enforces programmatic JSON schema response | Enables reliable downstream parsing with `jq` |
+
+---
+
+## GitHub Actions Workflow Implementation
+
+Here is a complete, production-ready GitHub Actions workflow (`.github/workflows/claude-pr-review.yml`) that runs headless Claude Code on every pull request:
+
+```yaml
+name: Automated Claude Code PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Execute Headless PR Review
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_DIFF=$(git diff origin/${{ github.base_ref }}...HEAD)
+          
+          REVIEW_OUTPUT=$(claude -p "Analyze the following git diff for security flaws, performance bottlenecks, and architectural anti-patterns. Provide output in JSON format with fields: summary, score, and findings." \
+            --bare \
+            --allowedTools "FileRead" \
+            --json-schema '{"type":"object","properties":{"summary":{"type":"string"},"score":{"type":"number"},"findings":{"type":"array","items":{"type":"string"}}}}' \
+            <<< "$PR_DIFF")
+            
+          echo "$REVIEW_OUTPUT" > review.json
+          
+          # Post PR comment using GitHub CLI
+          gh pr comment ${{ github.event.pull_request.number }} --body "### 🤖 Claude Code Automated Review Summary
+          
+          \`\`\`json
+          $REVIEW_OUTPUT
+          \`\`\`"
+```
+
+---
+
+## Production Governance Best Practices
+
+1. **Token Cost Caps**: Set explicit environment budget limits or wrap the execution step in a timeout guard (`timeout-minutes: 5`).
+2. **Separation of Concerns**: Never grant a single unattended workflow both PR review permissions and write access to protected production branches.
 
 ---
 
