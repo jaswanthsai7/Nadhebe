@@ -33,8 +33,15 @@ const label = overrideLabel || resolvedConfig.label;
 const format = resolvedConfig.format;
 const minHeightClass = resolvedConfig.minHeightClass;
 
-const enableAds = import.meta.env.PUBLIC_ENABLE_ADSENSE !== 'false';
-const shouldRender = enableAds && !noAds && !!clientId;
+/**
+ * AdSense Approval Gating:
+ * When Approval = No (default): Only the BaseLayout <head> verification script loads for site review.
+ * When Approval = Yes (PUBLIC_ENABLE_ADSENSE=true or PUBLIC_ADSENSE_APPROVED=true): AdSlot components render and push ad units.
+ */
+const isApproved = import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' || import.meta.env.PUBLIC_ADSENSE_APPROVED === 'true';
+
+// Only render ad units when account is approved, page does not opt out via noAds, and clientId is set
+const shouldRender = isApproved && !noAds && !!clientId;
 ---
 
 {shouldRender && (

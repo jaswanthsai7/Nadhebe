@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import { STARTER_KIT_ITEMS } from '@/config/newsletter';
+
+const pageTitle = 'Subscription Confirmed — Welcome to Nadhebe Briefing';
+const pageDescription = 'Thank you for subscribing to Nadhebe Weekly AI Engineering Briefing. Access your Free AI Engineering Starter Kit below.';
+const canonicalUrl = new URL('/newsletter/success', Astro.site || Astro.url.origin).toString();
+
+const breadcrumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Newsletter', href: '/newsletter' },
+  { name: 'Success', href: '/newsletter/success' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} noindex={true}>
+  <main class="mx-auto max-w-screen-xl px-12 sm:px-24 py-32 sm:py-64" data-reveal>
+    <Breadcrumb items={breadcrumbItems} />
+
+    <header class="mt-16 sm:mt-24 mb-32 sm:mb-48 text-center max-w-2xl mx-auto">
+      <div class="inline-flex h-48 w-48 items-center justify-center rounded-circle bg-success/15 text-success dark:bg-success-dark/20 dark:text-success-dark mb-16">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="h-24 w-24" style="width:24px;height:24px;">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+
+      <h1 class="font-display text-display font-bold text-ink dark:text-ink-dark leading-tight">
+        You're Subscribed!
+      </h1>
+      <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed">
+        Check your inbox to confirm your subscription. Your free <strong>AI Engineering Starter Kit</strong> is ready for instant download below.
+      </p>
+    </header>
+
+    {/* Starter Kit Instant Download Card */}
+    <section class="mb-64 max-w-3xl mx-auto rounded-16 border border-accent/20 bg-accent/5 p-24 sm:p-40 text-center dark:border-accent-dark/20 dark:bg-accent-dark/5 shadow-md">
+      <span class="badge mb-12 inline-block">Instant Access</span>
+      <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark mb-8">
+        Free AI Engineering Starter Kit
+      </h2>
+      <p class="text-caption font-sans text-ink2 dark:text-ink2-dark max-w-xl mx-auto mb-24">
+        Includes Claude Code System Prompts, 15 MCP Server Configs, Cursor Rules, Gemini CLI Cheat Sheet, and the 25-Point AI Checklist.
+      </p>
+
+      <a
+        href="#starter-kit-download"
+        onclick="alert('Your AI Engineering Starter Kit download will begin shortly! Check your inbox for your confirmation link.');"
+        class="inline-flex items-center gap-10 rounded-10 bg-accent px-32 py-16 text-body-small font-bold text-white transition-all duration-200 hover:bg-accent/90 dark:bg-accent-dark dark:text-black dark:hover:bg-accent-dark/90 shadow-md"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-20 w-20 shrink-0" style="width:20px;height:20px;">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        <span>Download Starter Kit (.ZIP / .PDF)</span>
+      </a>
+    </section>
+
+    {/* Next Steps Conversion Funnel */}
+    <section class="mb-64 border-t border-border dark:border-border-dark pt-48">
+      <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark text-center mb-32">
+        What to do next:
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+        <div class="rounded-16 glass-panel border border-border dark:border-border-dark p-24 text-center">
+          <div class="text-3xl mb-12">📺</div>
+          <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark mb-8">
+            Watch Latest Video
+          </h3>
+          <p class="text-xs font-sans text-muted dark:text-muted-dark mb-16">
+            Explore deep dives and code walkthroughs on YouTube.
+          </p>
+          <a href="/youtube" class="btn-primary py-8 px-16 text-xs inline-block">
+            Browse Videos →
+          </a>
+        </div>
+
+        <div class="rounded-16 glass-panel border border-border dark:border-border-dark p-24 text-center">
+          <div class="text-3xl mb-12">📖</div>
+          <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark mb-8">
+            Read Top Tutorial
+          </h3>
+          <p class="text-xs font-sans text-muted dark:text-muted-dark mb-16">
+            Deploy DeepSeek R1 on AWS with vLLM or build an MCP server.
+          </p>
+          <a href="/tutorials" class="btn-primary py-8 px-16 text-xs inline-block">
+            Read Tutorials →
+          </a>
+        </div>
+
+        <div class="rounded-16 glass-panel border border-border dark:border-border-dark p-24 text-center">
+          <div class="text-3xl mb-12">🧰</div>
+          <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark mb-8">
+            Explore AI Tools
+          </h3>
+          <p class="text-xs font-sans text-muted dark:text-muted-dark mb-16">
+            Privacy-first developer calculators, converters, and inspectors.
+          </p>
+          <a href="/tools" class="btn-primary py-8 px-16 text-xs inline-block">
+            Explore Tools →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

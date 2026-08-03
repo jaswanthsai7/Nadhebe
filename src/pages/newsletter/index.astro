@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumb from '@/components/Breadcrumb.astro';
+import Newsletter from '@/components/Newsletter.astro';
+import { STARTER_KIT_ITEMS, ARCHIVED_ISSUES } from '@/config/newsletter';
+
+const pageTitle = 'The Weekly AI Engineering Briefing & Free Starter Kit — Nadhebe';
+const pageDescription = 'Join AI engineers building with Claude, MCP, Gemini, and open-source models. Includes instant access to our Free AI Engineering Starter Kit.';
+const canonicalUrl = new URL('/newsletter', Astro.site || Astro.url.origin).toString();
+
+const breadcrumbItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Newsletter', href: '/newsletter' },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
+  <main class="mx-auto max-w-screen-xl px-12 sm:px-24 py-32 sm:py-64" data-reveal>
+    <Breadcrumb items={breadcrumbItems} />
+
+    {/* Hero Section */}
+    <header class="mt-16 sm:mt-24 mb-32 sm:mb-48 text-center max-w-3xl mx-auto">
+      <span class="badge mb-16 inline-block">Weekly Publication</span>
+      <h1 class="font-display text-display font-bold text-ink dark:text-ink-dark leading-tight">
+        The Weekly AI Engineering Briefing
+      </h1>
+      <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark leading-relaxed">
+        Join AI engineers, technical founders, and developers building with Claude, MCP, Gemini, and open-source models. One focused essay & checklist every week.
+      </p>
+    </header>
+
+    {/* Interactive Subscribe Card */}
+    <div class="max-w-2xl mx-auto mb-64">
+      <Newsletter showPreferences={true} source="newsletter_landing" />
+    </div>
+
+    {/* Free Starter Kit Section */}
+    <section class="mb-64 rounded-16 glass-panel border border-border dark:border-border-dark p-24 sm:p-48">
+      <div class="text-center max-w-2xl mx-auto mb-40">
+        <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20 mb-12">
+          Instant Download Included
+        </span>
+        <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark">
+          Free AI Engineering Starter Kit
+        </h2>
+        <p class="mt-8 text-caption text-muted dark:text-muted-dark font-sans">
+          Subscribe above to instantly unlock the complete 6-part developer bundle:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+        {STARTER_KIT_ITEMS.map((item) => (
+          <div class="rounded-12 border border-border/80 bg-surface/80 p-20 dark:border-border-dark/80 dark:bg-surface-dark/80 shadow-sm">
+            <div class="text-2xl mb-12">{item.icon}</div>
+            <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark mb-6">
+              {item.title}
+            </h3>
+            <p class="text-xs font-sans text-muted dark:text-muted-dark leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Recent Archive Highlights */}
+    <section class="mb-64 border-t border-border dark:border-border-dark pt-48">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-16 mb-32">
+        <div>
+          <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark">
+            Recent Issues
+          </h2>
+          <p class="text-caption text-muted dark:text-muted-dark">Read past editions online:</p>
+        </div>
+        <a href="/newsletter/archive" class="btn-primary py-8 px-16 text-caption shrink-0">
+          Browse full archive →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+        {ARCHIVED_ISSUES.slice(0, 3).map((issue) => (
+          <a href={`/newsletter/archive/${issue.slug}`} class="card p-24 block group">
+            <div class="flex items-center justify-between gap-8 mb-12">
+              <span class="badge">Brief #{issue.issueNumber}</span>
+              <time class="font-mono text-meta text-muted dark:text-muted-dark">{issue.pubDate}</time>
+            </div>
+            <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors duration-150 mb-8">
+              {issue.title}
+            </h3>
+            <p class="text-xs font-sans text-muted dark:text-muted-dark line-clamp-2">
+              {issue.summary}
+            </p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

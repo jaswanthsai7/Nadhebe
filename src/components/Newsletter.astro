@@ -1,96 +1,162 @@
 ---
+import { INTEREST_TOPICS } from '@/config/newsletter';
+
 interface Props {
   compact?: boolean;
+  showPreferences?: boolean;
+  source?: string;
 }
-const { compact = false } = Astro.props;
+
+const {
+  compact = false,
+  showPreferences = false,
+  source = 'article_footer',
+} = Astro.props;
 ---
 
-<div class={`card ${compact ? 'p-24' : 'p-32'}`}>
-  <p class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">
-    Get the next issue
-  </p>
-  <p class="mt-8 text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
-    One focused essay a week. No noise, unsubscribe anytime.
-  </p>
+{compact ? (
+  <div class="not-prose my-32 rounded-12 border border-border bg-surface p-20 dark:border-border-dark dark:bg-surface-dark shadow-sm" data-newsletter-card>
+    <div class="flex flex-col gap-12 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-start gap-12">
+        <div class="flex h-36 w-36 shrink-0 items-center justify-center rounded-8 bg-accent/10 text-accent dark:bg-accent-dark/15 dark:text-accent-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16" style="width:16px;height:16px;">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+        </div>
+        <div>
+          <h4 class="font-display text-h4 font-bold text-ink dark:text-ink-dark flex items-center gap-8">
+            Weekly AI Engineering Brief
+            <span class="rounded-pill bg-accent/10 px-8 py-2 text-[0.65rem] font-semibold text-accent dark:bg-accent-dark/15 dark:text-accent-dark">
+              Free Starter Kit
+            </span>
+          </h4>
+          <p class="mt-2 text-xs font-sans text-muted dark:text-muted-dark">
+            One focused essay & checklist every week. No spam. Unsubscribe anytime.
+          </p>
+        </div>
+      </div>
 
-  <form data-newsletter-form class="mt-16 flex flex-col gap-12 sm:flex-row">
-    <label for="newsletter-email" class="sr-only">Email address</label>
-    <input
-      id="newsletter-email"
-      name="email"
-      type="email"
-      required
-      placeholder="you@example.com"
-      class="input"
-    />
-    <button type="submit" class="btn-primary shrink-0">Subscribe</button>
-  </form>
-  <p data-newsletter-status class="mt-8 text-xs font-sans text-muted dark:text-muted-dark" role="status"></p>
-</div>
+      <a
+        href="/newsletter"
+        class="group shrink-0 inline-flex items-center justify-center gap-8 rounded-8 bg-ink px-16 py-10 text-xs font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark whitespace-nowrap"
+      >
+        <span>Get Free Starter Kit</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 transition-transform duration-200 group-hover:translate-x-1" style="width:14px;height:14px;">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </div>
+) : (
+  <div class="not-prose rounded-16 border border-border bg-surface p-24 sm:p-32 dark:border-border-dark dark:bg-surface-dark shadow-sm" data-newsletter-card>
+    <div class="flex items-center gap-8 mb-12">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 shrink-0" style="width:12px;height:12px;">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+        Includes Free AI Starter Kit
+      </span>
+    </div>
 
-<script>
-  const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
-  const status = document.querySelector('[data-newsletter-status]');
-  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    <h3 class="font-display text-h3 font-bold text-ink dark:text-ink-dark">
+      The Weekly AI Engineering Briefing
+    </h3>
+    <p class="mt-8 text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
+      Join AI engineers building with Claude, MCP, Gemini, and open-source models. Received by developers, researchers, and technical founders.
+    </p>
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form || !status || !button) return;
+    <form data-newsletter-form data-source={source} class="mt-20 space-y-16">
+      {showPreferences && (
+        <div>
+          <label class="block text-xs font-sans font-semibold uppercase tracking-wider text-muted dark:text-muted-dark mb-10">
+            Select topics you care about (optional):
+          </label>
+          <div class="grid grid-cols-2 gap-10 sm:grid-cols-3">
+            {INTEREST_TOPICS.map((topic) => (
+              <label class="flex items-center gap-8 text-xs font-sans text-ink2 dark:text-ink2-dark cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  name="preferences"
+                  value={topic.id}
+                  class="rounded border-border dark:border-border-dark text-accent focus:ring-accent"
+                />
+                <span>{topic.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
 
-    const formData = new FormData(form);
-    const email = formData.get('email')?.toString().trim();
+      <div class="flex flex-col gap-12 sm:flex-row">
+        <label for={`newsletter-email-${source}`} class="sr-only">Email address</label>
+        <input
+          id={`newsletter-email-${source}`}
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          class="input flex-1"
+        />
+        <button type="submit" class="btn-primary shrink-0 font-bold px-24 py-12">
+          Subscribe & Get Free Starter Kit
+        </button>
+      </div>
 
-    if (!email) {
-      status.textContent = 'Please enter a valid email address.';
-      status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
-      return;
-    }
+      <p data-newsletter-status class="text-xs font-sans text-muted dark:text-muted-dark" role="status"></p>
+    </form>
+  </div>
+)}
 
-    // Set loading state
-    button.disabled = true;
-    const originalText = button.textContent;
-    button.textContent = 'Subscribing...';
-    status.textContent = '';
-    status.className = 'mt-8 text-xs font-sans text-muted dark:text-muted-dark';
+<script is:inline>
+  (function () {
+    var forms = document.querySelectorAll('[data-newsletter-form]');
+    forms.forEach(function (form) {
+      if (form.dataset.hasListener) return;
+      form.dataset.hasListener = 'true';
 
-    try {
-      const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8787/api/v1';
-      const res = await fetch(`${apiBase}/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var status = form.querySelector('[data-newsletter-status]');
+        var button = form.querySelector('button[type="submit"]');
+        var emailInput = form.querySelector('input[name="email"]');
+        var source = form.getAttribute('data-source') || 'general';
+
+        if (!emailInput || !emailInput.value.trim()) return;
+
+        var email = emailInput.value.trim();
+
+        // Collect preferences
+        var checkedProps = [];
+        form.querySelectorAll('input[name="preferences"]:checked').forEach(function (cb) {
+          checkedProps.push(cb.value);
+        });
+
+        if (button) button.disabled = true;
+        if (status) status.textContent = 'Securing your starter kit...';
+
+        // Dispatch GA4 conversion event
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'newsletter_signup', {
+            email_domain: email.split('@')[1] || '',
+            signup_source: source,
+            preferences: checkedProps.join(',')
+          });
+        }
+
+        // Store subscriber data locally & redirect to success page
+        try {
+          localStorage.setItem('nadhebe_subscriber_email', email);
+          if (checkedProps.length > 0) {
+            localStorage.setItem('nadhebe_subscriber_preferences', JSON.stringify(checkedProps));
+          }
+        } catch (_) {}
+
+        setTimeout(function () {
+          window.location.href = '/newsletter/success';
+        }, 400);
       });
-
-      const payload = await res.json();
-
-      if (!res.ok) {
-        throw new Error(payload.error?.message || 'Subscription failed. Please try again.');
-      }
-
-      // Success state
-      status.textContent = 'Thanks! Check your inbox to confirm your subscription.';
-      status.className = 'mt-8 text-xs font-sans text-success dark:text-success-dark';
-      form.reset();
-      button.disabled = false;
-      button.textContent = originalText;
-    } catch (err: any) {
-      // Error state
-      const errMsg = err.message || '';
-      if (errMsg.toLowerCase().includes('already') || errMsg.toLowerCase().includes('exists')) {
-        status.textContent = 'You are already subscribed to our newsletter!';
-        status.className = 'mt-8 text-xs font-sans text-success dark:text-success-dark';
-      } else if (errMsg.toLowerCase().includes('invalid') || errMsg.toLowerCase().includes('email')) {
-        status.textContent = 'Please enter a valid email address.';
-        status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
-      } else {
-        status.textContent = errMsg || 'Network error. Please try again later.';
-        status.className = 'mt-8 text-xs font-sans text-danger dark:text-danger-dark';
-      }
-      button.disabled = false;
-      button.textContent = originalText;
-    }
-  });
+    });
+  })();
 </script>
-
