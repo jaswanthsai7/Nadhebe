@@ -14,7 +14,7 @@ interface ArticleData {
 // Simple recursive file walk
 function walkDir(dir: string, callback: (filePath: string) => void) {
   if (!fs.existsSync(dir)) return;
-  fs.readdirSync(dir).forEach(f => {
+  fs.readdirSync(dir).forEach((f) => {
     const dirPath = path.join(dir, f);
     const isDirectory = fs.statSync(dirPath).isDirectory();
     if (isDirectory) {
@@ -32,12 +32,11 @@ function parseFrontmatter(filePath: string): any {
   if (!match) return {};
   const yaml = match[1];
   const obj: any = {};
-  yaml.split('\n').forEach(line => {
+  yaml.split('\n').forEach((line) => {
     const idx = line.indexOf(':');
     if (idx !== -1) {
       const key = line.slice(0, idx).trim();
       let val = line.slice(idx + 1).trim();
-      // clean quotes
       if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
         val = val.slice(1, -1);
       }
@@ -56,7 +55,7 @@ function parseFrontmatter(filePath: string): any {
 function getArticles(): ArticleData[] {
   const articles: ArticleData[] = [];
   const contentDir = path.join(process.cwd(), 'src/content');
-  
+
   const folders = [
     { dir: 'news', urlPrefix: '/news' },
     { dir: 'tutorials', urlPrefix: '/tutorials' },
@@ -64,30 +63,32 @@ function getArticles(): ArticleData[] {
     { dir: 'tool-reviews', urlPrefix: '/reviews' },
     { dir: 'prompts', urlPrefix: '/prompts' },
     { dir: 'comparisons', urlPrefix: '/comparisons' },
+    { dir: 'best-practices', urlPrefix: '/best-practices' },
+    { dir: 'use-cases', urlPrefix: '/use-cases' },
+    { dir: 'tools', urlPrefix: '/tools' },
+    { dir: 'guides', urlPrefix: '/guides' },
+    { dir: 'frameworks', urlPrefix: '/frameworks' },
+    { dir: 'case-studies', urlPrefix: '/case-studies' },
   ];
 
   folders.forEach(({ dir, urlPrefix }) => {
-    const folderPath = path.join(contentDir, dir);
-    if (fs.existsSync(folderPath)) {
-      fs.readdirSync(folderPath).forEach(file => {
-        if (file.endsWith('.md') || file.endsWith('.mdx')) {
-          const filePath = path.join(folderPath, file);
-          const meta = parseFrontmatter(filePath);
-          const slug = file.replace(/\.(md|mdx)$/, '');
-          
-          if (meta.title) {
-            articles.push({
-              title: meta.title,
-              slug: slug,
-              url: `${urlPrefix}/${slug}`,
-              topic: meta.topic,
-              isPillar: meta.isPillar === true,
-              parentPillar: meta.parentPillar,
-            });
-          }
-        }
-      });
-    }
+    const targetDir = path.join(contentDir, dir);
+    walkDir(targetDir, (filePath) => {
+      if (filePath.endsWith('.md') || filePath.endsWith('.mdx')) {
+        const fm = parseFrontmatter(filePath);
+        const fileName = path.basename(filePath, path.extname(filePath));
+        const slug = fm.slug || fileName;
+        const url = `${urlPrefix}/${slug}`;
+        articles.push({
+          title: fm.title || slug,
+          slug,
+          url,
+          topic: fm.topic,
+          isPillar: !!fm.isPillar,
+          parentPillar: fm.parentPillar,
+        });
+      }
+    });
   });
 
   return articles;
@@ -98,86 +99,32 @@ function run() {
   const articles = getArticles();
   console.log(`Found ${articles.length} articles in content folders.`);
 
-  const distDir = path.join(process.cwd(), 'dist');
-  if (!fs.existsSync(distDir)) {
-    console.error('Dist directory does not exist! Please run npm run build first.');
-    return;
-  }
+  const targets = articles.map((a) => ({
+    title: a.title,
+    url: a.url,
+  }));
 
-  let filesLinked = 0;
+  const distDir = path.join(process.cwd(), 'dist');
+  let updatedCount = 0;
 
   walkDir(distDir, (filePath) => {
-    if (!filePath.endsWith('.html')) return;
+    if (filePath.endsWith('.html')) {
+      // Derive current URL relative to distDir
+      const relativePath = path.relative(distDir, filePath).replace(/\\/g, '/');
+      let currentUrl = '/' + relativePath.replace(/\/index\.html$/, '').replace(/\.html$/, '');
+      if (currentUrl === '/index') currentUrl = '/';
 
-    let html = fs.readFileSync(filePath, 'utf-8');
-    
-    // Find the main content area (e.g. within `<article>` tag)
-    const articleRegex = /<article([^>]*)>([\s\S]+?)<\/article>/;
-    const match = html.match(articleRegex);
-    if (!match) return;
+      const html = fs.readFileSync(filePath, 'utf-8');
+      const linkedHtml = autoLinkArticles(html, targets, currentUrl);
 
-    const attributes = match[1];
-    const originalContent = match[2];
-
-    // Determine current article from filename/path
-    const relativeUrl = filePath
-      .replace(distDir, '')
-      .replace(/\\/g, '/')
-      .replace(/\/index\.html$/, '')
-      .replace(/\.html$/, '');
-
-    const currentArticle = articles.find(a => a.url === relativeUrl);
-
-    // Build list of target articles for linking
-    let targets = articles.filter(a => a.url !== relativeUrl);
-    if (currentArticle && currentArticle.topic) {
-      // Prioritize same topic OR topics sharing Kimi cluster keyword
-      targets = targets.filter(a => {
-        const t1 = a.topic?.toLowerCase() || '';
-        const t2 = currentArticle.topic?.toLowerCase() || '';
-        return t1 === t2 || (t1.includes('kimi') && t2.includes('kimi'));
-      });
-    } else {
-      // If not in a topic, don't auto-link to restrict keyword cannibalization
-      return;
-    }
-
-    if (targets.length === 0) return;
-
-    // Build rich list of anchor terms for targets to link effectively
-    const linkTargets: { title: string; url: string }[] = [];
-    targets.forEach(t => {
-      // Add full title
-      linkTargets.push({ title: t.title, url: t.url });
-      
-      // Add short trigger phrases based on slug/topic
-      if (t.slug.includes('kimi-k3-moonshot-ai-release')) {
-        linkTargets.push({ title: 'Kimi K3', url: t.url });
-        linkTargets.push({ title: 'Kimi K3 release', url: t.url });
-      } else if (t.slug.includes('structured-prompt')) {
-        linkTargets.push({ title: '4-Pillar Prompt', url: t.url });
-        linkTargets.push({ title: 'structured prompting', url: t.url });
-      } else if (t.slug.includes('context-window')) {
-        linkTargets.push({ title: '1 million token context', url: t.url });
-        linkTargets.push({ title: 'context window', url: t.url });
-      } else if (t.slug.includes('3d-modeling')) {
-        linkTargets.push({ title: '3D printable', url: t.url });
-        linkTargets.push({ title: 'OpenSCAD', url: t.url });
-      } else if (t.slug.includes('game-development')) {
-        linkTargets.push({ title: 'procedural prototyping', url: t.url });
+      if (linkedHtml !== html) {
+        fs.writeFileSync(filePath, linkedHtml, 'utf-8');
+        updatedCount++;
       }
-    });
-
-    const linkedContent = autoLinkArticles(originalContent, linkTargets);
-
-    if (linkedContent !== originalContent) {
-      html = html.replace(articleRegex, `<article${attributes}>${linkedContent}</article>`);
-      fs.writeFileSync(filePath, html, 'utf-8');
-      filesLinked++;
     }
   });
 
-  console.log(`Internal linker complete. Injected contextual links into ${filesLinked} HTML files.`);
+  console.log(`Internal linker complete. Injected contextual links into ${updatedCount} HTML files.`);
 }
 
 run();

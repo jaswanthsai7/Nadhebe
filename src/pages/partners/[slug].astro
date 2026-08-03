@@ -26,6 +26,7 @@ const allTutorials = await getCollection('tutorials');
 const allVideos = await getCollection('youtube-articles');
 const allArticles = [...allTutorials, ...allVideos];
 
+const targetTopics = (program as any).targetTopics || [program.name, program.id, program.category];
 const relatedGuides = allArticles.filter((article) => {
   const text = (
     article.data.title +
@@ -37,13 +38,13 @@ const relatedGuides = allArticles.filter((article) => {
     (article.data.tags || []).join(' ')
   ).toLowerCase();
 
-  return program.targetTopics.some((topic) => text.includes(topic.toLowerCase()));
+  return targetTopics.some((topic: string) => text.includes(topic.toLowerCase()));
 }).slice(0, 4);
 
 const pageTitle = `${program.name} Review & Setup Guide — Nadhebe`;
 const pageDescription = `Detailed editorial breakdown of ${program.name} for AI developers. Discover key features, pricing, pros & cons, and verified setup tutorials.`;
 const canonicalUrl = new URL(`/partners/${program.id}`, Astro.site || Astro.url.origin).toString();
-const utmUrl = buildUtmUrl(program.url, `partner-page-${program.id}`);
+const utmUrl = buildUtmUrl(program.affiliateUrl || (program as any).url || '', `partner-page-${program.id}`);
 
 const breadcrumbItems = [
   { name: 'Home', href: '/' },
@@ -66,7 +67,7 @@ const breadcrumbItems = [
           {program.trustSignal}
         </span>
         <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
-          {program.badge}
+          {program.qualitativeBadge || (program as any).badge || 'Editor Choice'}
         </span>
       </div>
 
@@ -75,7 +76,7 @@ const breadcrumbItems = [
       </h1>
 
       <p class="mt-16 text-body-large text-ink2 dark:text-ink2-dark max-w-2xl leading-relaxed">
-        {program.pitch}
+        {program.description || (program as any).pitch || ''}
       </p>
 
       <div class="mt-32 flex flex-wrap items-center gap-16">
@@ -85,7 +86,7 @@ const breadcrumbItems = [
           rel="noopener noreferrer nofollow sponsored"
           class="group inline-flex items-center gap-10 rounded-10 bg-ink px-24 py-12 text-caption font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
         >
-          <span>{program.buttonLabel || `Get Started with ${program.name}`}</span>
+          <span>{(program as any).buttonLabel || `Get Started with ${program.name}`}</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-2" style="width:16px;height:16px;">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
@@ -120,7 +121,7 @@ const breadcrumbItems = [
           Key Capabilities
         </h3>
         <ul class="space-y-16">
-          {program.features.map((feat) => (
+          {((program as any).features || program.pros || []).map((feat: string) => (
             <li class="flex items-start gap-12 text-body-small text-ink2 dark:text-ink2-dark">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mt-3 h-16 w-16 shrink-0 text-success dark:text-success-dark" style="width:16px;height:16px;">
                 <polyline points="20 6 9 17 4 12" />
@@ -135,7 +136,7 @@ const breadcrumbItems = [
         <h3 class="font-display text-h3 font-bold text-ink dark:text-ink-dark mb-20">
           Pros & Trade-offs
         </h3>
-        <ProsCons pros={program.pros} cons={program.cons} />
+        <ProsCons pros={program.pros || []} cons={program.cons || []} />
       </div>
     </section>
 
