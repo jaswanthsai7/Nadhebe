@@ -4,6 +4,377 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance](https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli)
+
+> A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.
+
+Category: Comparisons | Tags: ["Claude CLI", "Gemini CLI", "CLI Tools", "Anthropic", "Google Gemini", "Terminal Agent"]
+
+# Claude CLI vs Gemini CLI: Terminal AI Tools Compared
+
+As AI development shifts directly into developer terminal workflows, Anthropic's **Claude Code CLI** and Google's **Gemini CLI** have emerged as the leading command-line AI assistants.
+
+---
+
+## Comparison Breakdown
+
+| Feature | Claude CLI (Claude Code) | Gemini CLI |
+| :--- | :--- | :--- |
+| **Backing Engine** | Claude 3.7 Sonnet / Thinking | Gemini 2.5 Flash & 2.5 Pro |
+| **Context Window** | 200,000 Tokens | Up to 2,000,000 Tokens |
+| **Pricing / Rate Limits** | Console API billing or Claude Pro | Free tier (Gemini Flash) & Pay-as-you-go |
+| **Agentic Autonomy** | High (Independent file edits & git commits) | Moderate (Interactive terminal prompts) |
+| **Multimodal Inputs** | Terminal text & image attachments | Multimodal text, image, video & PDF terminal inputs |
+
+---
+
+## Verdict
+
+- **Choose Claude CLI** for deep multi-file codebase refactoring, complex bug fixing, and autonomous terminal agent tools.
+- **Choose Gemini CLI** for massive 2M token context window analysis (uploading entire repos or video files directly in terminal) and cost-free everyday usage.
+
+---
+
+# [Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE](https://nadhebe.com/comparisons/claude-code-vs-cursor)
+
+> An in-depth comparison between Anthropic's terminal-native Claude Code CLI and Cursor's AI-augmented VS Code fork for AI engineering workflows.
+
+Category: Comparisons | Tags: ["Claude Code", "Cursor", "AI IDE", "CLI Tools", "Anthropic", "Developer Tools"]
+
+# Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE
+
+The developer landscape has split into two distinct paradigms for AI-assisted programming: **Terminal-Native Agentic CLI tools** like Anthropic's **Claude Code**, and **AI-Native GUI Editors** like **Cursor**.
+
+While both tools leverage state-of-the-art Large Language Models (LLMs) to write, refactor, and debug code, their architectural philosophies, workflow ergonomics, and integration patterns differ fundamentally.
+
+---
+
+## Executive Summary & Key Takeaways
+
+```
+           ┌────────────────────────────────────────────────────────┐
+           │                   AI DEVELOPER ENGINE                  │
+           └───────────────────────────┬────────────────────────────┘
+                                       │
+                ┌──────────────────────┴──────────────────────┐
+                ▼                                             ▼
+  ┌───────────────────────────┐                 ┌───────────────────────────┐
+  │      CLAUDE CODE CLI      │                 │        CURSOR IDE         │
+  │ (Terminal-First Agent)    │                 │ (GUI-First Editor)        │
+  ├───────────────────────────┤                 ├───────────────────────────┤
+  │ • UNIX Pipe Integration   │                 │ • Real-time Tab Autocomplete│
+  │ • Autonomous File Edits   │                 │ • Visual Side-by-Side Diffs│
+  │ • Subagent Spawning       │                 │ • Multi-Model Selector    │
+  │ • Zero-GUI Memory Footprint│                │ • Integrated Chat & Composer│
+  └───────────────────────────┘                 └───────────────────────────┘
+```
+
+> [!NOTE]
+> **Key Takeaway**: **Cursor** is the premier choice for visual, interactive daily coding, instant tab-completion, and inline file editing. **Claude Code** is the ultimate power-user tool for headless repository analysis, background terminal tasks, custom CLI hook scripts, and multi-file automated refactoring.
+
+---
+
+## Detailed Architectural Comparison
+
+| Feature / Metric | Claude Code (CLI) | Cursor (IDE) |
+| :--- | :--- | :--- |
+| **Primary Interface** | Terminal / Command Line Interface | Desktop GUI (VS Code Fork) |
+| **Model Access** | Anthropic Claude 3.7 Sonnet & Thinking | Claude, GPT-4o, o3-mini, DeepSeek R1 |
+| **Context Indexing** | Local git ripgrep & shell context | Workspace vector embedding & indexer |
+| **Execution Mode** | Autonomous tool calls (bash, grep, edit) | Interactive composer & tab autocomplete |
+| **Terminal Integration** | Native environment execution | Built-in VS Code terminal emulator |
+| **Subagent Delegation** | Supported via custom subagent processes | Not natively customizable via CLI |
+| **Custom Hooks** | Full support (`.claude/hooks/`) | Extensions & VS Code task runner |
+
+---
+
+## Workflow Ergonomics: Terminal vs Visual Canvas
+
+### 1. Claude Code: Command-Line Autonomy
+Claude Code runs inside your existing terminal shell (`zsh`, `bash`, `PowerShell`). It interfaces directly with standard UNIX utilities, Git repositories, and local test runners.
+
+```bash
+# Example: Executing a multi-step refactor with Claude Code CLI
+$ claude "Scan src/components and convert all legacy class components to React functional components with TypeScript props."
+```
+
+- **Strengths**: Lightweight, runs over SSH/remote servers seamlessly, integrates with automated bash scripts and CI/CD pipelines.
+- **Weaknesses**: Lacks visual diff side-by-side split view; users must review changes via terminal git diff output.
+
+### 2. Cursor: Visual Multi-Model Workbench
+Cursor builds on top of VS Code, embedding AI directly into the editing canvas, gutter, and file navigation drawer.
+
+- **Strengths**: Instant Copilot-style Tab autocomplete (Cursor Tab model), multi-file Composer interface with visual inline file insertion, easy model switching.
+- **Weaknesses**: Heavier desktop footprint, locked to desktop GUI environment.
+
+---
+
+## FAQ
+
+### Which tool should AI engineers choose in 2026?
+For maximum efficiency, modern AI engineers use **both in tandem**: Cursor serves as the primary visual IDE for everyday feature development and inline debugging, while Claude Code runs in Cursor's embedded terminal to perform complex multi-file codebase refactoring and batch tasks.
+
+---
+
+# [Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Compared](https://nadhebe.com/comparisons/cursor-vs-windsurf)
+
+> Compare Cursor's Composer and Tab autocompletion against Codeium's Windsurf editor and its Cascade collaborative AI flow.
+
+Category: Comparisons | Tags: ["Cursor", "Windsurf", "Codeium", "AI IDE", "Developer Tools", "Cascade"]
+
+# Cursor vs Windsurf: AI-Native Code Editors Compared
+
+The battle for the ultimate AI-first code editor is centered on two standout VS Code forks: **Cursor** (by Anysphere) and **Windsurf** (by Codeium).
+
+Both editors move beyond basic Copilot autocomplete plugins by integrating deep workspace awareness, agentic multi-file refactoring, and natural language terminal execution.
+
+---
+
+## Comparison Matrix
+
+| Feature | Cursor | Windsurf (Codeium) |
+| :--- | :--- | :--- |
+| **Agentic Workflow** | Cursor Composer | Cascade Agent & Flows |
+| **Autocomplete Engine** | Custom Cursor Tab Model | Codeium Supercomplete |
+| **Supported LLMs** | Claude 3.7 Sonnet, GPT-4o, o3-mini, DeepSeek R1 | Claude 3.7 Sonnet, GPT-4o, DeepSeek R1, Command R+ |
+| **Context Indexing** | Codebase Vector Embeddings & `@Codebase` | Real-time Cascade Context & Terminal Memory |
+| **Terminal Integration** | Natural Language `Cmd+K` in Terminal | Deep Cascade Terminal Command Execution |
+| **Extension Compatibility** | Full VS Code Marketplace Extensions | Full VS Code Marketplace Extensions |
+
+---
+
+## Key Differentiators
+
+### 1. Cursor Composer vs Windsurf Cascade
+- **Cursor Composer**: Focuses on generating visual diffs across multiple files simultaneously. You can preview, accept, or reject specific file edits line-by-line.
+- **Windsurf Cascade**: Acts as an interactive co-pilot that dynamically switches between chat, terminal command execution, file generation, and real-time step inspection.
+
+---
+
+## Summary & Recommendation
+
+- **Choose Cursor** for established visual multi-file editing, custom prompt rulefiles (`.cursorrules`), and proven developer mindshare.
+- **Choose Windsurf** for seamless terminal-integrated agent flows and fast context switching with Cascade.
+
+---
+
+# [ElevenLabs vs PlayHT: Voice Cloning, Conversational AI & Streaming Audio APIs](https://nadhebe.com/comparisons/elevenlabs-vs-playht)
+
+> Compare ElevenLabs and PlayHT across voice cloning quality, ultra-low latency WebSocket streaming APIs, multi-lingual synthesis, and pricing.
+
+Category: Comparisons | Tags: ["ElevenLabs", "PlayHT", "AI Voice", "Text to Speech", "Conversational AI", "Audio API"]
+
+# ElevenLabs vs PlayHT: Voice Cloning & Streaming Audio APIs
+
+In the rapidly evolving AI audio sector, **ElevenLabs** and **PlayHT** are the top two enterprise-grade Text-to-Speech (TTS) and Voice Synthesis platforms.
+
+Whether you are building interactive real-time voice agents, podcasts, localization Dubbing pipelines, or audiobooks, both APIs provide advanced generative voice models.
+
+---
+
+## Comparison Matrix
+
+| Metric / Feature | ElevenLabs | PlayHT |
+| :--- | :--- | :--- |
+| **Flagship Models** | Eleven Multilingual v2, Turbo v2.5 | Play-3.0 Ultra, Play-3.0 Mini |
+| **Streaming Latency** | ~250ms via WebSocket | ~180-220ms via Streaming WebSocket |
+| **Voice Library** | 10,000+ Community Voices & Public Library | 900+ AI Voices across 140+ Languages |
+| **Voice Cloning** | Instant (1 min) & Professional PVC (30 mins) | Instant (30 sec) & High-Fidelity Custom |
+| **Conversational Agent SDK** | Native Conversational AI Agent Platform | Webhook & WebSocket API Integration |
+| **Audio Native FX** | Emotion stability, clarity, exaggeration sliders | SSML tag support, cadence speed controls |
+
+---
+
+## Technical Integration Comparison
+
+### 1. ElevenLabs Node.js SDK Example
+```typescript
+import { ElevenLabsClient } from "elevenlabs";
+
+const client = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KEY });
+const audioStream = await client.textToSpeech.convertAsStream("pNInz6obpgDQGcFmaJgB", {
+  text: "Welcome to Nadhebe AI Engineering Guide.",
+  model_id: "eleven_turbo_v2_5"
+});
+```
+
+### 2. PlayHT Streaming API
+```typescript
+import * as PlayHT from "playht";
+
+PlayHT.init({ apiKey: process.env.PLAYHT_API_KEY, userId: process.env.PLAYHT_USER_ID });
+const stream = await PlayHT.stream("Welcome to Nadhebe AI Engineering Guide.", {
+  voiceEngine: "Play-3.0-mini",
+  voiceId: "s3://voice-cloning-zero-shot/..."
+});
+```
+
+---
+
+## Verdict & Best Fit
+
+- **Choose ElevenLabs** for peak emotional realism, natural human cadence, localization dubbing, and turnkey conversational voice agents.
+- **Choose PlayHT** for ultra-fast streaming APIs, extensive SSML control, and cost-effective high-throughput audio generation.
+
+---
+
+# [OpenRouter vs Anthropic API: Multi-Model Gateway Routing vs Direct Model Provider](https://nadhebe.com/comparisons/openrouter-vs-anthropic-api)
+
+> Analyze the architectural differences, pricing, fallbacks, prompt caching, and latency between using OpenRouter's unified gateway and direct Anthropic API integration.
+
+Category: Comparisons | Tags: ["OpenRouter", "Anthropic API", "LLM Routing", "AI Gateway", "Claude 3.7", "API Architecture"]
+
+# OpenRouter vs Anthropic API: Unified Gateway vs Direct Provider
+
+Building production AI applications requires deciding how to access foundation LLMs like Claude 3.7 Sonnet: through a direct API key from **Anthropic Console**, or via a unified multi-model router like **OpenRouter**.
+
+---
+
+## Comparison Matrix
+
+| Metric | OpenRouter | Direct Anthropic API |
+| :--- | :--- | :--- |
+| **Model Scope** | 200+ LLMs (Claude, OpenAI, Llama 3, DeepSeek) | Anthropic Claude models only |
+| **Rate Limit Management** | Aggregated across multiple provider backends | Account tier limits (Tier 1 to Tier 4) |
+| **Fallback & Redundancy** | Auto-routing to fallback providers on 5xx errors | Manual client-side retry logic required |
+| **Prompt Caching** | Supported | Supported |
+| **Unified Credit Billing** | Single deposit balance for all model providers | Individual monthly invoice / credit balance |
+
+---
+
+## Summary & Verdict
+
+- **Use Direct Anthropic API** for strict corporate data compliance, direct enterprise SLAs, or dedicated account management.
+- **Use OpenRouter** for multi-model fallback, zero single-point-of-failure routing, flexible developer payment methods, and unified API keys.
+
+---
+
+# [RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure](https://nadhebe.com/comparisons/runpod-vs-modal)
+
+> Compare RunPod's raw GPU instance pods against Modal's serverless Python cloud infrastructure for AI model fine-tuning and inference.
+
+Category: Comparisons | Tags: ["RunPod", "Modal", "GPU Cloud", "Serverless AI", "PyTorch", "vLLM", "Infrastructure"]
+
+# RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure
+
+When deploying modern AI models—whether serving LLM inference via **vLLM**, fine-tuning DeepSeek models, or generating media with **ComfyUI**—selecting the right GPU cloud provider directly impacts compute cost and developer productivity.
+
+**RunPod** and **Modal** represent two fundamentally different approaches to cloud GPU computing.
+
+---
+
+## Executive Summary & Comparison Matrix
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        GPU INFRASTRUCTURE CHOICES                       │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+           ┌────────────────────────┴────────────────────────┐
+           ▼                                                 ▼
+┌─────────────────────────────┐                   ┌─────────────────────────────┐
+│         RUNPOD PODS         │                   │    MODAL SERVERLESS PYTHON  │
+├─────────────────────────────┤                   ├─────────────────────────────┤
+│ • Raw Docker Containers     │                   │ • Python Code as Infrastructure│
+│ • Persistent NVMe Volumes   │                   │ • Instant Scale-to-Zero     │
+│ • Fixed Hourly Pricing      │                   │ • Sub-second Cold Starts    │
+│ • Jupyter & SSH Access      │                   │ • Microsecond Bilateral Logs │
+└─────────────────────────────┘                   └─────────────────────────────┘
+```
+
+| Dimension | RunPod | Modal |
+| :--- | :--- | :--- |
+| **Architecture** | Container Pods (Secure & Community Cloud) | Serverless Python Functions |
+| **Scaling** | Manual or Serverless Endpoint scaling | Automatic scale-to-zero per-request |
+| **GPU Availability** | H100 SXM, A100 80GB, L40S, RTX 4090 | H100, A100, L4, T4 |
+| **Developer Experience** | SSH into pod, Web Terminal, Jupyter | `@app.function(gpu="H100")` decorator |
+| **Storage Engine** | Network & Persistent Local Volumes | Modal Volumes & Network Filesystems |
+| **Best For** | Long-running 24/7 inference, training | Event-driven APIs, batch inference |
+
+---
+
+## Deep Dive: Developer Ergonomics & Code Examples
+
+### 1. Modal: Pure Python Infrastructure
+With Modal, your Python script *is* your cloud deployment infrastructure. You define dependencies, GPU requirements, and endpoints in plain Python code.
+
+```python
+import modal
+
+app = modal.App("vllm-inference")
+image = modal.Image.debian_slim().pip_install("vllm", "torch")
+
+@app.function(gpu="A100", image=image, timeout=600)
+def generate_text(prompt: str):
+    from vllm import LLM, SamplingParams
+    llm = LLM(model="meta-llama/Llama-3-8B-Instruct")
+    return llm.generate(prompt)
+```
+
+### 2. RunPod: Container Pod Flexibility
+RunPod provides traditional container instances. You launch a pod, pick a template (e.g., PyTorch 2.4, vLLM, ComfyUI), and connect via SSH or Web Terminal.
+
+---
+
+## FAQ & Final Decision Guide
+
+### When to choose RunPod?
+Choose **RunPod** if you need raw SSH access, persistent volume storage for multi-day fine-tuning runs, or continuous 24/7 dedicated GPU hosting at flat hourly rates.
+
+### When to choose Modal?
+Choose **Modal** if you are building serverless AI APIs, webhooks, or batch processing pipelines that require automated scale-to-zero, instant cold-starts, and pure Python environment definition.
+
+---
+
+# [RunPod vs Vast.ai: Managed Cloud GPU Pods vs Peer-to-Peer GPU Marketplace](https://nadhebe.com/comparisons/runpod-vs-vastai)
+
+> A detailed comparison of RunPod and Vast.ai for low-cost GPU compute, reliability guarantees, security, and PyTorch / LLM workload performance.
+
+Category: Comparisons | Tags: ["RunPod", "Vast.ai", "GPU Cloud", "Machine Learning", "PyTorch", "Cost Optimization"]
+
+# RunPod vs Vast.ai: Managed Cloud GPU Pods vs Peer-to-Peer Marketplace
+
+For AI developers seeking high-performance GPU compute without paying hyperscaler prices (AWS EC2, Google Cloud, Azure), **RunPod** and **Vast.ai** are the leading budget GPU platforms.
+
+While both allow launching Docker containers on NVIDIA hardware (RTX 4090, A100, H100), their operational models, security architectures, and reliability levels differ significantly.
+
+---
+
+## Architectural Comparison Matrix
+
+| Feature | RunPod | Vast.ai |
+| :--- | :--- | :--- |
+| **Model** | Managed Cloud & Vetted Datacenters | Peer-to-Peer (P2P) GPU Sharing Marketplace |
+| **Reliability / Uptime** | High (Tier 3/4 Datacenters) | Variable (Host dependent score rating) |
+| **Price Point** | Low to Moderate | Ultra Low (Rock-bottom bid pricing) |
+| **Security Guarantees** | Enterprise & Secure Cloud tiers | Community host hardware |
+| **Storage Persistence** | Network Volumes (Data persists across pods) | Host local storage volumes |
+| **User Interface** | Polished web console & Serverless REST API | Advanced filtering CLI & Marketplace search |
+
+---
+
+## Key Differences & Workload Recommendations
+
+### 1. Vast.ai: Unbeatable Cost Efficiency
+Vast.ai functions like an Airbnb for GPUs. Independent datacenter operators and individual hosts list idle hardware.
+
+- **Best For**: Personal research projects, hobbyist model fine-tuning, automated hyperparameter sweeps where instance preemption is acceptable.
+- **Pro Tip**: Use Vast.ai's reliability filter (e.g. `reliability > 98.5%`) and download speed metrics before renting.
+
+### 2. RunPod: Production Stability & Network Storage
+RunPod offers vetted infrastructure with enterprise SLAs and persistent Network Volumes that attach seamlessly across different pod instances.
+
+- **Best For**: Production API serving, team collaboration, long-running training jobs requiring guaranteed uptime.
+
+---
+
+## FAQ Summary
+
+- **For Budget-Conscious Experimentation**: Choose **Vast.ai**.
+- **For Reliable Production & Team Workflows**: Choose **RunPod**.
+
+---
+
 # [How to Build a Custom MCP Server in TypeScript](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript)
 
 > A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.
