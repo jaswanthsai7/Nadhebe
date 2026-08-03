@@ -1,0 +1,102 @@
+---
+import { getAffiliateById, buildUtmUrl, type AffiliateProgram } from '@/config/affiliates';
+
+interface Props {
+  toolId?: string;
+  name?: string;
+  price?: string;
+  billingCycle?: string;
+  description?: string;
+  features?: string[];
+  isPopular?: boolean;
+  affiliateUrl?: string;
+  buttonLabel?: string;
+  articleSlug?: string;
+}
+
+const {
+  toolId,
+  isPopular = false,
+  articleSlug,
+} = Astro.props;
+
+const matched = toolId ? getAffiliateById(toolId) : null;
+
+const name = Astro.props.name || matched?.name || 'Partner Tier';
+const price = Astro.props.price || matched?.pricingSummary.split('·')[1]?.trim() || '$19';
+const billingCycle = Astro.props.billingCycle || 'per month';
+const description = Astro.props.description || matched?.pitch || 'Access advanced AI capabilities and team collaboration features.';
+const features = Astro.props.features || matched?.features || [];
+const rawUrl = Astro.props.affiliateUrl || matched?.url || '#';
+const buttonLabel = Astro.props.buttonLabel || matched?.buttonLabel || `Get Started with ${name}`;
+
+const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
+const utmUrl = buildUtmUrl(rawUrl, slug);
+---
+
+<div class={`not-prose relative flex flex-col justify-between rounded-16 border p-24 transition-all duration-300 ${
+  isPopular
+    ? 'border-accent bg-surface shadow-md dark:border-accent-dark dark:bg-surface-dark ring-1 ring-accent/30 dark:ring-accent-dark/30'
+    : 'border-border/80 bg-surface/70 dark:border-border-dark/80 dark:bg-surface-dark/70 hover:border-border dark:hover:border-border-dark'
+}`}>
+  {isPopular && (
+    <div class="absolute -top-12 left-1/2 -translate-x-1/2 rounded-pill bg-accent px-12 py-4 font-mono text-[0.7rem] font-bold uppercase tracking-wider text-white dark:bg-accent-dark dark:text-black shadow-sm">
+      Most Popular Choice
+    </div>
+  )}
+
+  <div>
+    <div class="flex items-center justify-between gap-12">
+      <h4 class="font-display text-h4 font-bold text-ink dark:text-ink-dark">{name}</h4>
+      {matched?.badge && (
+        <span class="rounded-pill bg-surface2 px-8 py-4 text-[0.68rem] font-semibold text-muted dark:bg-surface2-dark dark:text-muted-dark border border-border/40 dark:border-border-dark/40">
+          {matched.badge}
+        </span>
+      )}
+    </div>
+
+    <p class="mt-8 text-xs font-sans leading-relaxed text-muted dark:text-muted-dark min-h-[36px]">
+      {description}
+    </p>
+
+    <div class="mt-20 flex items-baseline gap-4">
+      <span class="font-mono text-3xl font-extrabold text-ink dark:text-ink-dark">{price}</span>
+      <span class="text-xs font-sans text-muted dark:text-muted-dark">/ {billingCycle}</span>
+    </div>
+
+    <div class="my-20 h-px w-full bg-border/60 dark:bg-border-dark/60"></div>
+
+    <ul class="space-y-12">
+      {features.map((feat) => (
+        <li class="flex items-start gap-8 text-xs font-sans text-ink2 dark:text-ink2-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mt-2 h-16 w-16 shrink-0 text-success dark:text-success-dark">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          <span class="leading-snug">{feat}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="mt-28">
+    <a
+      href={utmUrl}
+      target="_blank"
+      rel="noopener noreferrer nofollow sponsored"
+      class={`group flex w-full items-center justify-center gap-8 rounded-8 px-16 py-12 text-xs font-bold transition-all duration-200 whitespace-nowrap ${
+        isPopular
+          ? 'bg-accent text-white hover:bg-accent/90 dark:bg-accent-dark dark:text-black dark:hover:bg-accent-dark/90 shadow-sm'
+          : 'bg-ink text-surface hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark'
+      }`}
+      data-affiliate-link
+      data-tool={name}
+      data-slug={slug}
+    >
+      <span>{buttonLabel}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-2">
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </a>
+  </div>
+</div>

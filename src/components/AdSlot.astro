@@ -1,50 +1,69 @@
 ---
-/**
- * AdSlot.astro
- * Environment-variable-gated AdSense unit.
- *
- * Renders nothing when PUBLIC_ADSENSE_CLIENT_ID is not set.
- * Safe to place in any layout — fully inert until AdSense is approved.
- *
- * Props:
- *   slotId      — AdSense ad unit slot ID (from AdSense dashboard)
- *   format      — 'auto' (default) | 'rectangle' | 'horizontal'
- *   label       — Screen-reader label for the ad region
- */
+import {
+  ADSENSE_PUBLISHER_ID,
+  getAdSlotConfig,
+  type AdType,
+  type AdPosition,
+} from '@/config/ads';
+
 interface Props {
+  type?: AdType;
+  position?: AdPosition;
   slotId?: string;
-  format?: 'auto' | 'rectangle' | 'horizontal';
   label?: string;
+  noAds?: boolean;
+  class?: string;
 }
 
 const {
-  slotId = '',
-  format = 'auto',
-  label = 'Advertisement',
+  type = 'article',
+  position = 'middle',
+  slotId: overrideSlotId,
+  label: overrideLabel,
+  noAds = false,
+  class: className = '',
 } = Astro.props;
 
-const clientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID;
+// Lookup slot configuration from single source of truth (src/config/ads.ts)
+const resolvedConfig = getAdSlotConfig(type, position);
 
-// Only render when env var is present AND a slotId is supplied
-const shouldRender = !!clientId && !!slotId;
+const clientId = import.meta.env.PUBLIC_ADSENSE_CLIENT_ID || ADSENSE_PUBLISHER_ID;
+const slotId = overrideSlotId || resolvedConfig.slotId;
+const label = overrideLabel || resolvedConfig.label;
+const format = resolvedConfig.format;
+const minHeightClass = resolvedConfig.minHeightClass;
+
+const enableAds = import.meta.env.PUBLIC_ENABLE_ADSENSE !== 'false';
+const shouldRender = enableAds && !noAds && !!clientId;
 ---
 
 {shouldRender && (
   <aside
-    class="not-prose my-32"
+    class={`not-prose my-32 flex w-full flex-col items-center justify-center rounded-12 border border-border/60 bg-surface2/40 p-12 dark:border-border-dark/60 dark:bg-surface2-dark/40 ${minHeightClass} ${className}`}
     aria-label={label}
-    data-ad-slot
+    data-ad-type={type}
+    data-ad-position={position}
   >
+    <div class="mb-6 w-full text-center text-[0.65rem] font-sans font-medium uppercase tracking-wider text-muted/70 dark:text-muted-dark/70">
+      {label}
+    </div>
+
     <ins
-      class="adsbygoogle"
+      class="adsbygoogle w-full"
       style="display:block"
       data-ad-client={clientId}
-      data-ad-slot={slotId}
+      {...(slotId ? { 'data-ad-slot': slotId } : {})}
       data-ad-format={format}
       data-full-width-responsive="true"
     />
+
+    {/* Self-contained slot initialization */}
     <script is:inline>
-      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.warn('AdSense slot init error:', e);
+      }
     </script>
   </aside>
 )}

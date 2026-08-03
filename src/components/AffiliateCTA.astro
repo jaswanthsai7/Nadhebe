@@ -1,90 +1,162 @@
 ---
-/**
- * AffiliateCTA.astro
- * Drop into any article via MDX or directly in an Astro page.
- *
- * Props:
- *   toolName    — Display name of the tool (e.g. "Webflow")
- *   affiliateUrl — Base URL (UTM params auto-appended)
- *   pitch       — Short value-prop sentence (1 line)
- *   buttonLabel — CTA button text (default: "Try <toolName>")
- *   articleSlug — Used for utm_campaign; defaults to Astro.url.pathname
- */
+import { getAffiliateById, buildUtmUrl, type AffiliateProgram } from '@/config/affiliates';
+
 interface Props {
-  toolName: string;
-  affiliateUrl: string;
+  toolId?: string;
+  toolName?: string;
+  affiliateUrl?: string;
   pitch?: string;
+  whyRecommend?: string;
+  trustSignal?: string;
+  pricingSummary?: string;
+  features?: string[];
   buttonLabel?: string;
+  badge?: string;
   articleSlug?: string;
 }
 
 const {
-  toolName,
-  affiliateUrl,
-  pitch,
-  buttonLabel = `Try ${toolName}`,
+  toolId,
   articleSlug,
 } = Astro.props;
 
-// Build UTM-tagged URL. articleSlug falls back to current pathname.
+// Look up from registry if toolId is provided
+const matchedProgram: AffiliateProgram | null = toolId ? getAffiliateById(toolId) : null;
+
+const name = Astro.props.toolName || matchedProgram?.name || 'Featured Tool';
+const rawUrl = Astro.props.affiliateUrl || matchedProgram?.url || '#';
+const pitch = Astro.props.pitch || matchedProgram?.pitch || 'Discover top-rated engineering features and performance benchmarks.';
+const whyRecommend = Astro.props.whyRecommend || matchedProgram?.whyRecommend;
+const trustSignal = Astro.props.trustSignal || matchedProgram?.trustSignal || '✓ Tested & recommended by Nadhebe';
+const pricingSummary = Astro.props.pricingSummary || matchedProgram?.pricingSummary;
+const features = Astro.props.features || matchedProgram?.features || [];
+const badge = Astro.props.badge || matchedProgram?.badge || "Editor's Pick";
+const buttonLabel = Astro.props.buttonLabel || matchedProgram?.buttonLabel || `Explore ${name}`;
+const disclosure = matchedProgram?.disclosure || 'Nadhebe is reader-supported. We may earn a commission if you sign up via our partner link.';
+
 const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
-const utmUrl = (() => {
-  try {
-    const u = new URL(affiliateUrl);
-    u.searchParams.set('utm_source', 'nadhebe');
-    u.searchParams.set('utm_medium', 'affiliate');
-    u.searchParams.set('utm_campaign', slug);
-    return u.toString();
-  } catch {
-    // Fallback: simple string append when URL is malformed
-    const sep = affiliateUrl.includes('?') ? '&' : '?';
-    return `${affiliateUrl}${sep}utm_source=nadhebe&utm_medium=affiliate&utm_campaign=${encodeURIComponent(slug)}`;
-  }
-})();
+const utmUrl = buildUtmUrl(rawUrl, slug);
 ---
 
 <aside
-  class="not-prose my-32 rounded-12 border border-border bg-surface p-20 dark:border-border-dark dark:bg-surface-dark"
+  class="not-prose my-32 overflow-hidden rounded-12 border border-border bg-surface p-24 transition-all duration-200 dark:border-border-dark dark:bg-surface-dark shadow-sm"
   data-affiliate-cta
-  data-tool={toolName}
+  data-tool={name}
   data-slug={slug}
 >
-  {pitch && (
-    <p class="mb-16 text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
+  {/* Header: Partner Identity + Qualitative Badges */}
+  <div class="flex flex-wrap items-center justify-between gap-12 border-b border-border/60 pb-16 dark:border-border-dark/60">
+    <div class="flex items-center gap-12">
+      <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-10 bg-surface2 font-display text-h4 font-bold text-ink dark:bg-surface2-dark dark:text-ink-dark border border-border/40 dark:border-border-dark/40">
+        {name.charAt(0)}
+      </div>
+      <div>
+        <h4 class="font-display text-h4 font-bold text-ink dark:text-ink-dark flex items-center gap-8">
+          {name}
+        </h4>
+        <p class="text-xs font-sans text-muted dark:text-muted-dark">{matchedProgram?.category || 'Recommended Solution'}</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-8">
+      {trustSignal && (
+        <span class="inline-flex items-center gap-6 rounded-pill bg-success/10 px-12 py-4 text-xs font-medium text-success dark:bg-success-dark/15 dark:text-success-dark border border-success/20 dark:border-success-dark/20">
+          {trustSignal}
+        </span>
+      )}
+      {badge && (
+        <span class="inline-flex items-center gap-6 rounded-pill bg-accent/10 px-12 py-4 text-xs font-medium text-accent dark:bg-accent-dark/15 dark:text-accent-dark border border-accent/20 dark:border-accent-dark/20">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 shrink-0" style="width:12px;height:12px;">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          {badge}
+        </span>
+      )}
+    </div>
+  </div>
+
+  {/* Editorial "Why We Recommend It" Callout */}
+  <div class="py-16">
+    {whyRecommend && (
+      <div class="mb-16 rounded-10 border border-accent/20 bg-accent/5 p-16 dark:border-accent-dark/20 dark:bg-accent-dark/5">
+        <div class="flex items-center gap-8 mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-accent dark:text-accent-dark" style="width:16px;height:16px;">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+          </svg>
+          <span class="text-xs font-sans font-bold uppercase tracking-wider text-accent dark:text-accent-dark">
+            Why we recommend it for this guide
+          </span>
+        </div>
+        <p class="text-xs font-sans text-ink dark:text-ink-dark leading-relaxed font-medium">
+          {whyRecommend}
+        </p>
+      </div>
+    )}
+
+    <p class="text-caption font-sans leading-relaxed text-ink2 dark:text-ink2-dark">
       {pitch}
     </p>
-  )}
 
-  <div class="flex flex-col gap-12 sm:flex-row sm:items-center">
-    <a
-      href={utmUrl}
-      target="_blank"
-      rel="noopener noreferrer nofollow sponsored"
-      class="btn-primary"
-      id={`affiliate-cta-${slug}-${toolName.toLowerCase().replace(/\s+/g, '-')}`}
-      data-affiliate-link
-      data-tool={toolName}
-      data-slug={slug}
-    >
-      {buttonLabel}
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 shrink-0">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-        <polyline points="15 3 21 3 21 9" />
-        <line x1="10" y1="14" x2="21" y2="3" />
-      </svg>
-    </a>
-
-    {/* FTC-compliant disclosure inline with the button */}
-    <p class="text-xs font-sans text-muted dark:text-muted-dark">
-      ✦ <em>Affiliate link — Nadhebe may earn a commission at no extra cost to you.</em>
-    </p>
+    {features.length > 0 && (
+      <ul class="mt-16 grid grid-cols-1 gap-12 sm:grid-cols-2">
+        {features.slice(0, 4).map((feature) => (
+          <li class="flex items-start gap-8 text-xs font-sans text-ink2 dark:text-ink2-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mt-2 h-16 w-16 shrink-0 text-success dark:text-success-dark" style="width:16px;height:16px;">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span class="leading-snug">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
+
+  {/* Footer: Pricing Badge + Action Button */}
+  <div class="mt-8 pt-16 border-t border-border/60 dark:border-border-dark/60 flex flex-col gap-12 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      {pricingSummary ? (
+        <div class="inline-flex items-center gap-8 rounded-8 bg-surface2 px-12 py-6 text-xs font-sans font-medium text-ink dark:bg-surface2-dark dark:text-ink-dark border border-border/40 dark:border-border-dark/40">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 shrink-0 text-muted dark:text-muted-dark" style="width:16px;height:16px;">
+            <rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" />
+          </svg>
+          <span>Pricing: <strong class="font-mono text-ink dark:text-ink-dark">{pricingSummary}</strong></span>
+        </div>
+      ) : (
+        <p class="text-xs font-sans text-muted dark:text-muted-dark">Verified partner recommendation</p>
+      )}
+    </div>
+
+    <div class="flex flex-col gap-8 sm:flex-row sm:items-center">
+      <a
+        href={utmUrl}
+        target="_blank"
+        rel="noopener noreferrer nofollow sponsored"
+        class="group inline-flex items-center justify-center gap-10 rounded-8 bg-ink px-20 py-10 text-xs font-bold text-surface transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark focus:outline-none focus:ring-2 focus:ring-accent shadow-sm whitespace-nowrap"
+        data-affiliate-link
+        data-tool={name}
+        data-slug={slug}
+      >
+        <span>{buttonLabel}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 shrink-0 transition-transform duration-200 group-hover:translate-x-2" style="width:16px;height:16px;">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  {/* Disclosure Bar */}
+  <p class="mt-12 text-[0.725rem] font-sans text-muted/80 dark:text-muted-dark/80 italic">
+    ✦ {disclosure}
+  </p>
 </aside>
 
-{/* GA4 affiliate_click event — fires only if gtag is loaded by BaseLayout */}
+{/* GA4 Affiliate Click Tracking */}
 <script is:inline>
   (function () {
     document.querySelectorAll('[data-affiliate-link]').forEach(function (el) {
+      if (el.dataset.hasTracking) return;
+      el.dataset.hasTracking = 'true';
       el.addEventListener('click', function () {
         var tool = el.getAttribute('data-tool');
         var slug = el.getAttribute('data-slug');
@@ -92,6 +164,7 @@ const utmUrl = (() => {
           window.gtag('event', 'affiliate_click', {
             tool_name: tool,
             article_slug: slug,
+            click_location: 'affiliate_cta_card'
           });
         }
       });

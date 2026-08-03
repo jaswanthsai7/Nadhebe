@@ -1,0 +1,135 @@
+---
+import { getAffiliateById, buildUtmUrl, type AffiliateProgram } from '@/config/affiliates';
+
+interface ToolComparisonItem {
+  id?: string;
+  name: string;
+  category?: string;
+  rating?: number;
+  pricingSummary?: string;
+  badge?: string;
+  topFeature?: string;
+  affiliateUrl: string;
+  buttonLabel?: string;
+}
+
+interface Props {
+  toolIds?: string[];
+  customTools?: ToolComparisonItem[];
+  title?: string;
+  subtitle?: string;
+  articleSlug?: string;
+}
+
+const {
+  toolIds = [],
+  customTools = [],
+  title = 'Side-by-Side Comparison',
+  subtitle = 'Compare verified specifications, pricing, and ratings.',
+  articleSlug,
+} = Astro.props;
+
+const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
+
+// Resolve tool items from registry or custom inputs
+const resolvedTools: ToolComparisonItem[] = [
+  ...toolIds
+    .map((id) => getAffiliateById(id))
+    .filter((p): p is AffiliateProgram => p !== null)
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      category: p.category,
+      rating: p.rating,
+      pricingSummary: p.pricingSummary,
+      badge: p.badge,
+      topFeature: p.features[0] || p.pitch,
+      affiliateUrl: p.url,
+      buttonLabel: p.buttonLabel || `Try ${p.name}`,
+    })),
+  ...customTools,
+];
+---
+
+<figure class="not-prose my-32 rounded-16 border border-border/80 bg-surface/60 p-20 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface-dark/60 shadow-sm">
+  {(title || subtitle) && (
+    <div class="mb-20">
+      <h4 class="font-display text-h4 font-bold text-ink dark:text-ink-dark">{title}</h4>
+      {subtitle && <p class="mt-4 text-xs font-sans text-muted dark:text-muted-dark">{subtitle}</p>}
+    </div>
+  )}
+
+  <div class="overflow-x-auto">
+    <table class="w-full min-w-[640px] border-collapse text-caption font-sans">
+      <thead>
+        <tr class="border-b border-border/80 bg-surface2/60 dark:border-border-dark/80 dark:bg-surface2-dark/60 text-left">
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Tool</th>
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Category</th>
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Rating</th>
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Pricing</th>
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark">Key Highlight</th>
+          <th class="px-16 py-12 font-display text-xs font-bold uppercase tracking-wider text-ink dark:text-ink-dark text-right">Action</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border/50 dark:divide-border-dark/50">
+        {resolvedTools.map((tool) => {
+          const utmUrl = buildUtmUrl(tool.affiliateUrl, slug);
+          return (
+            <tr class="transition-colors duration-150 hover:bg-surface2/40 dark:hover:bg-surface2-dark/40">
+              <td class="px-16 py-14 font-medium text-ink dark:text-ink-dark">
+                <div class="flex items-center gap-8">
+                  <span class="flex h-28 w-28 shrink-0 items-center justify-center rounded-6 bg-accent/10 font-mono text-xs font-bold text-accent dark:bg-accent-dark/15 dark:text-accent-dark">
+                    {tool.name.charAt(0)}
+                  </span>
+                  <div>
+                    <span class="font-bold">{tool.name}</span>
+                    {tool.badge && (
+                      <span class="ml-6 inline-block rounded-pill bg-accent/10 px-6 py-2 text-[0.65rem] font-semibold text-accent dark:bg-accent-dark/15 dark:text-accent-dark">
+                        {tool.badge}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </td>
+              <td class="px-16 py-14 text-muted dark:text-muted-dark text-xs">{tool.category || 'Tool'}</td>
+              <td class="px-16 py-14 font-mono text-xs font-semibold text-ink dark:text-ink-dark">
+                {tool.rating ? (
+                  <span class="inline-flex items-center gap-4">
+                    <span class="text-accent dark:text-accent-dark">★</span>
+                    {tool.rating.toFixed(1)}
+                  </span>
+                ) : (
+                  '—'
+                )}
+              </td>
+              <td class="px-16 py-14 font-mono text-xs text-ink2 dark:text-ink2-dark">{tool.pricingSummary || 'Free'}</td>
+              <td class="px-16 py-14 text-xs text-ink2 dark:text-ink2-dark max-w-[220px] truncate">{tool.topFeature || 'High performance'}</td>
+              <td class="px-16 py-14 text-right">
+                <a
+                  href={utmUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow sponsored"
+                  class="inline-flex items-center gap-6 rounded-6 bg-accent/10 px-12 py-6 text-xs font-semibold text-accent transition-all duration-150 hover:bg-accent hover:text-white dark:bg-accent-dark/15 dark:text-accent-dark dark:hover:bg-accent-dark dark:hover:text-black whitespace-nowrap"
+                  data-affiliate-link
+                  data-tool={tool.name}
+                  data-slug={slug}
+                >
+                  <span>{tool.buttonLabel || 'Visit'}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-12 w-12 shrink-0">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="mt-16 text-[0.725rem] font-sans text-muted dark:text-muted-dark italic border-t border-border/40 pt-10 dark:border-border-dark/40">
+    ✦ Disclosure: Nadhebe is reader-supported. Commissions may be earned when accessing partner links above.
+  </p>
+</figure>

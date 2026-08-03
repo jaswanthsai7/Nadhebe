@@ -21,6 +21,8 @@ import Breadcrumb from '@/components/Breadcrumb.astro';
 import VerdictGauge from '@/components/VerdictGauge.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import ArticleHeroDiagram from '@/components/content/ArticleHeroDiagram.astro';
+import AffiliateCTA from '@/components/AffiliateCTA.astro';
+import { getAffiliateById } from '@/config/affiliates';
 
 import { getReadingTime } from '../utils/readingTime';
 import { getRelatedArticles } from '../utils/relatedArticles';
@@ -95,6 +97,10 @@ const breadcrumbItems = [
   { name: collectionLabel, href: collectionHref },
   { name: post.data.title, href: slug },
 ];
+
+// Explicit frontmatter affiliate selection (safe, intentional rendering)
+const explicitAffiliateId = post.data.recommendedTools?.[0] || post.data.affiliate || (post.data.topic?.toLowerCase().includes('vllm') || post.data.title?.toLowerCase().includes('vllm') ? 'runpod' : null);
+const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffiliateId) : null;
 ---
 
 <BaseLayout
@@ -301,10 +307,16 @@ const breadcrumbItems = [
           <article class="prose-article" data-article-body>
             <Content />
           </article>
+
+          {selectedAffiliate && (
+            <div class="mt-32 border-t border-border/60 pt-24 dark:border-border-dark/60">
+              <AffiliateCTA toolId={selectedAffiliate.id} articleSlug={slug} />
+            </div>
+          )}
         </div>
 
-        <!-- Ad slot (inert unless PUBLIC_ADSENSE_CLIENT_ID is set) -->
-        <AdSlot slotId={import.meta.env.PUBLIC_ADSENSE_SLOT_ARTICLE || ''} format="auto" label="Article advertisement" />
+        <!-- In-article Ad slot -->
+        <AdSlot type="article" position="middle" noAds={post.data.noAds} />
 
         <!-- Supporting articles -->
         {post.data.isPillar && supportingArticles.length > 0 && (
@@ -355,9 +367,9 @@ const breadcrumbItems = [
       <div class="glass-panel rounded-16 p-16 border border-border dark:border-border-dark">
         <TableOfContents headings={headings} />
       </div>
-      <!-- Sidebar ad slot (inert unless PUBLIC_ADSENSE_CLIENT_ID is set) -->
+      <!-- Sidebar ad slot -->
       <div class="mt-24">
-        <AdSlot slotId={import.meta.env.PUBLIC_ADSENSE_SLOT_SIDEBAR || ''} format="rectangle" label="Sidebar advertisement" />
+        <AdSlot type="sidebar" position="sticky" noAds={post.data.noAds} />
       </div>
     </aside>
 
