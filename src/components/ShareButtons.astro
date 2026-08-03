@@ -9,40 +9,77 @@ const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(title);
 ---
 
-<div class="flex items-center gap-8" data-share-buttons>
+<div class="flex items-center gap-8 flex-wrap" data-share-buttons>
+  {/* Copy Link */}
+  <button
+    type="button"
+    data-copy-link={url}
+    aria-label="Copy link"
+    title="Copy link"
+    class="flex h-32 items-center gap-6 rounded-8 border border-border px-10 text-xs font-sans font-medium text-ink2 transition-colors hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover-dark"
+  >
+    <svg data-copy-icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-14 w-14 shrink-0" style="width:14px;height:14px;">
+      <path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"></path>
+      <path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"></path>
+    </svg>
+    <span>Copy Link</span>
+  </button>
+
+  {/* X / Twitter */}
   <a
     href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Share on X"
+    title="Share on X"
     class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 transition-colors hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover-dark"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-16 w-16">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-14 w-14" style="width:14px;height:14px;">
       <path d="M18.9 2H22l-7.6 8.7L23 22h-7l-5.5-7.2L4.2 22H1l8.1-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L6.4 4H4.6l13.1 16Z"></path>
     </svg>
   </a>
+
+  {/* LinkedIn */}
   <a
     href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Share on LinkedIn"
+    title="Share on LinkedIn"
     class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 transition-colors hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover-dark"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-16 w-16">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-14 w-14" style="width:14px;height:14px;">
       <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.1V21H18v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21H10V9Z"></path>
     </svg>
   </a>
-  <button
-    type="button"
-    data-copy-link={url}
-    aria-label="Copy link"
+
+  {/* Reddit */}
+  <a
+    href={`https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Share on Reddit"
+    title="Share on Reddit"
     class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 transition-colors hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover-dark"
   >
-    <svg data-copy-icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-16 w-16">
-      <path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"></path>
-      <path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"></path>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-14 w-14" style="width:14px;height:14px;">
+      <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.196-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.056 1.597.02.2.03.402.03.606 0 3.107-3.611 5.623-8.065 5.623-4.454 0-8.065-2.516-8.065-5.623 0-.2.01-.399.03-.597A1.752 1.752 0 0 1 2.87 12c0-.968.786-1.754 1.754-1.754.463 0 .883.18 1.192.487 1.189-.85 2.835-1.41 4.652-1.484l.942-4.417 3.268.688a1.246 1.246 0 0 1 .333-.776z"/>
     </svg>
-  </button>
+  </a>
+
+  {/* Bluesky */}
+  <a
+    href={`https://bsky.app/intent/compose?text=${encodedTitle}%20${encodedUrl}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Share on Bluesky"
+    title="Share on Bluesky"
+    class="flex h-32 w-32 items-center justify-center rounded-8 border border-border text-ink2 transition-colors hover:bg-hover dark:border-border-dark dark:text-ink2-dark dark:hover:bg-hover-dark"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-14 w-14" style="width:14px;height:14px;">
+      <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.879.13 2.595-.084 3.793.02 5.097c.365 4.542 2.456 12.01 4.412 13.916 2.57 2.502 6.544.757 7.568-.787 1.024 1.544 4.998 3.289 7.568.787 1.956-1.906 4.047-9.374 4.412-13.916.104-1.304-.11-2.502-.882-3.218-.659-.613-1.664-.935-4.3 1.135C16.046 4.747 13.087 8.686 12 10.8z"/>
+    </svg>
+  </a>
 </div>
 
 <script>
@@ -50,12 +87,12 @@ const encodedTitle = encodeURIComponent(title);
     btn.addEventListener('click', async () => {
       const url = btn.dataset.copyLink!;
       await navigator.clipboard.writeText(url);
-      const icon = btn.querySelector('[data-copy-icon]');
-      if (icon) {
-        icon.innerHTML = '<path d="M20 6 9 17l-5-5"></path>';
+      const span = btn.querySelector('span');
+      if (span) {
+        const originalText = span.textContent;
+        span.textContent = 'Copied!';
         setTimeout(() => {
-          icon.innerHTML =
-            '<path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"></path>';
+          span.textContent = originalText;
         }, 1600);
       }
     });
