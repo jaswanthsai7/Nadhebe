@@ -1,8 +1,13 @@
 ---
-/* Nadhebe Animated Page Loader Component */
+/* Nadhebe Animated Futuristic Page Loader Component */
 ---
 
 <div id="page-loader" class="page-loader-overlay" aria-hidden="true">
+  <!-- Ambient Gradient Background Mesh Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
   <div class="loader-content">
     <!-- Glowing Animated Ring Container -->
     <div class="logo-ring-wrapper">
@@ -13,18 +18,20 @@
       </div>
     </div>
 
-    <!-- Animated Monogram Text -->
+    <!-- Futuristic Brand Typography & Progress Indicator -->
     <div class="loader-text-group">
       <span class="loader-brand">NADHEBE</span>
       <div class="shimmer-bar">
         <div class="shimmer-progress"></div>
       </div>
-      <span class="loader-subtext">Loading context...</span>
+      <span class="loader-subtext">Initializing Agent Context</span>
     </div>
   </div>
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Syne:wght@800&display=swap');
+
   .page-loader-overlay {
     position: fixed;
     inset: 0;
@@ -32,13 +39,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(9, 13, 22, 0.96);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    /* Translucent Adaptive Frosted Glass - Non-Solid Background */
+    background: rgba(248, 250, 252, 0.82);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: auto;
+    overflow: hidden;
+  }
+
+  .dark .page-loader-overlay {
+    background: rgba(10, 14, 24, 0.85);
   }
 
   .page-loader-overlay.loaded {
@@ -47,20 +60,60 @@
     pointer-events: none;
   }
 
+  /* Ambient Pulsing Background Orbs */
+  .ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+    top: 20%;
+    left: 25%;
+    background: radial-gradient(circle, rgba(224, 122, 95, 0.45) 0%, rgba(244, 162, 97, 0) 70%);
+    animation: floatOrb1 6s ease-in-out infinite alternate;
+  }
+
+  .orb-2 {
+    width: 450px;
+    height: 450px;
+    bottom: 15%;
+    right: 20%;
+    background: radial-gradient(circle, rgba(135, 169, 135, 0.45) 0%, rgba(183, 228, 199, 0) 70%);
+    animation: floatOrb2 7s ease-in-out infinite alternate;
+  }
+
+  .orb-3 {
+    width: 350px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(216, 180, 248, 0.35) 0%, rgba(216, 180, 248, 0) 70%);
+    animation: pulseOrb 4s ease-in-out infinite alternate;
+  }
+
   .loader-content {
+    position: relative;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 28px;
     transform: scale(1);
-    transition: transform 0.4s ease;
+    transition: transform 0.45s ease;
   }
 
   .logo-ring-wrapper {
     position: relative;
-    width: 108px;
-    height: 108px;
+    width: 112px;
+    height: 112px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,84 +123,108 @@
   .glowing-ring {
     position: absolute;
     inset: -6px;
-    border-radius: 24px;
-    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #e07a5f);
-    animation: spinRing 2.4s linear infinite;
-    filter: blur(8px);
-    opacity: 0.75;
+    border-radius: 26px;
+    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #d8b4f8, #e07a5f);
+    animation: spinRing 2.2s linear infinite;
+    filter: blur(10px);
+    opacity: 0.85;
   }
 
   .glowing-ring-inner {
     position: absolute;
     inset: -2px;
-    border-radius: 20px;
-    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #e07a5f);
-    animation: spinRing 2.4s linear infinite;
+    border-radius: 22px;
+    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #d8b4f8, #e07a5f);
+    animation: spinRing 2.2s linear infinite;
   }
 
   .logo-box {
     position: relative;
     z-index: 2;
-    width: 96px;
-    height: 96px;
-    border-radius: 18px;
-    background: #0d131f;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05), 0 12px 32px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
     animation: pulseLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  .dark .logo-box {
+    background: #090d16;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
   .loader-logo {
-    width: 64px;
-    height: 64px;
+    width: 66px;
+    height: 66px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+    filter: drop-shadow(0 4px 12px rgba(224, 122, 95, 0.3));
     animation: breatheLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  /* Text & Progress Styles */
+  /* Futuristic Brand Typography */
   .loader-text-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
 
   .loader-brand {
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 1.125rem;
-    font-weight: 800;
-    letter-spacing: 0.35em;
-    color: #ffffff;
+    font-family: 'Orbitron', 'Syne', system-ui, -apple-system, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 0.45em;
+    padding-left: 0.45em;
+    background: linear-gradient(135deg, #1e293b 0%, #e07a5f 60%, #f4a261 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 20px rgba(224, 122, 95, 0.2);
     text-transform: uppercase;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .loader-brand {
+    background: linear-gradient(135deg, #ffffff 0%, #f4a261 50%, #e07a5f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 24px rgba(244, 162, 97, 0.35);
   }
 
   .shimmer-bar {
-    width: 120px;
+    width: 140px;
     height: 3px;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.08);
     overflow: hidden;
     position: relative;
   }
 
+  .dark .shimmer-bar {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
   .shimmer-progress {
-    width: 50%;
+    width: 45%;
     height: 100%;
-    background: linear-gradient(90deg, #e07a5f, #f4a261);
+    background: linear-gradient(90deg, #e07a5f, #f4a261, #87a987);
     border-radius: 9999px;
-    animation: shimmerSlide 1.4s ease-in-out infinite;
+    animation: shimmerSlide 1.3s ease-in-out infinite;
   }
 
   .loader-subtext {
-    font-family: monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #64748b;
     text-transform: uppercase;
+  }
+
+  .dark .loader-subtext {
+    color: rgba(255, 255, 255, 0.5);
   }
 
   /* Keyframe Animations */
@@ -162,13 +239,28 @@
   }
 
   @keyframes breatheLogo {
-    0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)); }
-    50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(244, 162, 97, 0.6)); }
+    0%, 100% { opacity: 0.92; filter: drop-shadow(0 4px 12px rgba(224, 122, 95, 0.3)); }
+    50% { opacity: 1; filter: drop-shadow(0 6px 20px rgba(244, 162, 97, 0.65)); }
   }
 
   @keyframes shimmerSlide {
     0% { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
+    100% { transform: translateX(260%); }
+  }
+
+  @keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, 40px) scale(1.15); }
+  }
+
+  @keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-50px, -30px) scale(1.1); }
+  }
+
+  @keyframes pulseOrb {
+    0% { opacity: 0.25; transform: translate(-50%, -50%) scale(0.9); }
+    100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.2); }
   }
 </style>
 
@@ -182,7 +274,7 @@
       loader.classList.add('loaded');
       setTimeout(function () {
         loader.style.display = 'none';
-      }, 400);
+      }, 450);
     }
 
     // Hide when page is loaded
@@ -196,7 +288,7 @@
     // Safety fallback: maximum 600ms timeout
     setTimeout(hideLoader, 600);
 
-    // Optional smooth transition on internal link clicks
+    // Smooth transition on internal link clicks
     document.addEventListener('click', function (e) {
       const link = e.target.closest('a');
       if (!link) return;
