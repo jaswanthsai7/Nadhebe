@@ -2,6 +2,7 @@
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SearchDialog from '@/components/search/SearchDialog.astro';
+import PageLoader from '@/components/PageLoader.astro';
 import OrganizationSchema from '@/components/seo/OrganizationSchema.astro';
 import WebSiteSchema from '@/components/seo/WebSiteSchema.astro';
 import '@/styles/global.css';
@@ -264,6 +265,7 @@ if (canonicalUrl) {
     </script>
   </head>
   <body class="flex min-h-screen flex-col text-ink dark:text-ink-dark" style="background: transparent;">
+    <PageLoader />
     <!-- Full-screen Dynamic Nature Background -->
     <div id="nature-bg" role="presentation" aria-hidden="true"></div>
     <div id="nature-overlay" aria-hidden="true"></div>

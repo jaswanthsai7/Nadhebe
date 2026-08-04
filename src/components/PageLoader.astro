@@ -1,0 +1,220 @@
+---
+/* Nadhebe Animated Page Loader Component */
+---
+
+<div id="page-loader" class="page-loader-overlay" aria-hidden="true">
+  <div class="loader-content">
+    <!-- Glowing Animated Ring Container -->
+    <div class="logo-ring-wrapper">
+      <div class="glowing-ring"></div>
+      <div class="glowing-ring-inner"></div>
+      <div class="logo-box">
+        <img src="/logo.webp" alt="Nadhebe Logo" class="loader-logo" width="72" height="72" />
+      </div>
+    </div>
+
+    <!-- Animated Monogram Text -->
+    <div class="loader-text-group">
+      <span class="loader-brand">NADHEBE</span>
+      <div class="shimmer-bar">
+        <div class="shimmer-progress"></div>
+      </div>
+      <span class="loader-subtext">Loading context...</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-loader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(9, 13, 22, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
+  }
+
+  .page-loader-overlay.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transform: scale(1);
+    transition: transform 0.4s ease;
+  }
+
+  .logo-ring-wrapper {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Conic Rotating Glowing Outer Ring */
+  .glowing-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 24px;
+    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #e07a5f);
+    animation: spinRing 2.4s linear infinite;
+    filter: blur(8px);
+    opacity: 0.75;
+  }
+
+  .glowing-ring-inner {
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: conic-gradient(from 0deg, #e07a5f, #f4a261, #87a987, #e07a5f);
+    animation: spinRing 2.4s linear infinite;
+  }
+
+  .logo-box {
+    position: relative;
+    z-index: 2;
+    width: 96px;
+    height: 96px;
+    border-radius: 18px;
+    background: #0d131f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05), 0 12px 32px rgba(0, 0, 0, 0.6);
+    animation: pulseLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .loader-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+    animation: breatheLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Text & Progress Styles */
+  .loader-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .loader-brand {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  }
+
+  .shimmer-bar {
+    width: 120px;
+    height: 3px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .shimmer-progress {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, #e07a5f, #f4a261);
+    border-radius: 9999px;
+    animation: shimmerSlide 1.4s ease-in-out infinite;
+  }
+
+  .loader-subtext {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+  }
+
+  /* Keyframe Animations */
+  @keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes pulseLogo {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.97); }
+  }
+
+  @keyframes breatheLogo {
+    0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)); }
+    50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(244, 162, 97, 0.6)); }
+  }
+
+  @keyframes shimmerSlide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const loader = document.getElementById('page-loader');
+    if (!loader) return;
+
+    function hideLoader() {
+      if (loader.classList.contains('loaded')) return;
+      loader.classList.add('loaded');
+      setTimeout(function () {
+        loader.style.display = 'none';
+      }, 400);
+    }
+
+    // Hide when page is loaded
+    if (document.readyState === 'complete') {
+      hideLoader();
+    } else {
+      window.addEventListener('load', hideLoader);
+      document.addEventListener('DOMContentLoaded', hideLoader);
+    }
+
+    // Safety fallback: maximum 600ms timeout
+    setTimeout(hideLoader, 600);
+
+    // Optional smooth transition on internal link clicks
+    document.addEventListener('click', function (e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (
+        href &&
+        href.startsWith('/') &&
+        !href.startsWith('//') &&
+        !href.includes('#') &&
+        link.target !== '_blank' &&
+        !e.ctrlKey &&
+        !e.metaKey
+      ) {
+        loader.style.display = 'flex';
+        requestAnimationFrame(function () {
+          loader.classList.remove('loaded');
+        });
+      }
+    });
+  })();
+</script>
