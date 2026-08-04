@@ -45,14 +45,6 @@ if (canonicalUrl) {
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="theme-color" content="#D97706" />
 
-    <!-- Resource Preconnects — Critical request chain reduction -->
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-
     <!-- Preload Orbitron used in PageLoader (prevents FOUT during first load) -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" media="print" onload="this.media='all'" />
@@ -65,7 +57,7 @@ if (canonicalUrl) {
     <link rel="alternate" type="application/rss+xml" title="Nadhebe Global RSS Feed" href="/rss.xml" />
     <link rel="alternate" type="application/json" title="Nadhebe JSON Feed" href="/feed.json" />
 
-    <!-- Deferred Google Analytics 4 (gtag.js) -->
+    <!-- Deferred Google Analytics 4 — Loaded on interaction for 0ms initial JS overhead -->
     <script is:inline>
       (function() {
         window.dataLayer = window.dataLayer || [];
@@ -75,7 +67,8 @@ if (canonicalUrl) {
         function loadGA() {
           if (window.__ga_loaded) return;
           window.__ga_loaded = true;
-          const s = document.createElement('script');
+          ['pointerdown','touchstart','scroll','keydown'].forEach(function(e){ window.removeEventListener(e, loadGA); });
+          var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=G-RFF3QRZNF9';
           document.head.appendChild(s);
@@ -83,15 +76,14 @@ if (canonicalUrl) {
           gtag('config', 'G-RFF3QRZNF9');
         }
 
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadGA, { timeout: 3000 });
-        } else {
-          window.addEventListener('load', function() { setTimeout(loadGA, 1500); });
-        }
+        ['pointerdown','touchstart','scroll','keydown'].forEach(function(e){
+          window.addEventListener(e, loadGA, { passive: true, once: true });
+        });
+        setTimeout(loadGA, 6000);
       })();
     </script>
 
-    <!-- Ultra-fast 0ms local nature background loader: inline pre-paint execution from local assets -->
+    <!-- Ultra-fast 0ms mobile-aware local nature background loader -->
     <script is:inline>
       (function () {
         var TOTAL_BGS = 12;
@@ -105,7 +97,8 @@ if (canonicalUrl) {
         }
         try { sessionStorage.setItem('nb_bg_idx', String(idx)); } catch(e){}
 
-        var bgUrl = '/images/bg/bg-' + (idx + 1) + '.webp';
+        var isMobile = typeof window !== 'undefined' && (window.innerWidth || 0) < 768;
+        var bgUrl = (isMobile ? '/images/bg/mobile/bg-' : '/images/bg/bg-') + (idx + 1) + '.webp';
 
         // 1. Immediately set CSS variable on document root BEFORE FIRST PAINT
         document.documentElement.style.setProperty('--nature-bg-url', "url('" + bgUrl + "')");
@@ -328,7 +321,8 @@ if (canonicalUrl) {
           var idx = (window.__nb_bg_idx + 1) % total;
           window.__nb_bg_idx = idx;
 
-          var url = '/images/bg/bg-' + (idx + 1) + '.webp';
+          var isMobile = typeof window !== 'undefined' && (window.innerWidth || 0) < 768;
+          var url = (isMobile ? '/images/bg/mobile/bg-' : '/images/bg/bg-') + (idx + 1) + '.webp';
           document.documentElement.style.setProperty('--nature-bg-url', "url('" + url + "')");
         }
 

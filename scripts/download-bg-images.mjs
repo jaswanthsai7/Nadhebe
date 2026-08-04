@@ -23,9 +23,9 @@ const photos = [
 ];
 
 const targetDir = path.join(__dirname, '..', 'public', 'images', 'bg');
-if (!fs.existsSync(targetDir)) {
-  fs.mkdirSync(targetDir, { recursive: true });
-}
+const mobileDir = path.join(targetDir, 'mobile');
+if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+if (!fs.existsSync(mobileDir)) fs.mkdirSync(mobileDir, { recursive: true });
 
 function fetchBuffer(url) {
   return new Promise((resolve, reject) => {
@@ -44,30 +44,38 @@ function fetchBuffer(url) {
 }
 
 async function main() {
-  console.log(`Downloading ${photos.length} nature background photos to local directory...`);
+  console.log(`Downloading ${photos.length} desktop & mobile nature background photos...`);
   
   for (let i = 0; i < photos.length; i++) {
     const photoId = photos[i];
     const unsplashUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1920&q=80&fm=webp`;
     const destPath = path.join(targetDir, `bg-${i + 1}.webp`);
+    const mobPath = path.join(mobileDir, `bg-${i + 1}.webp`);
     
     try {
       console.log(`Fetching photo ${i + 1}/${photos.length}: ${photoId}...`);
       const rawBuf = await fetchBuffer(unsplashUrl);
       
-      // Compress and resize with sharp for ultra-fast local loading (~150KB per background)
+      // Desktop background (1920x1080)
       const optBuf = await sharp(rawBuf)
         .resize(1920, 1080, { fit: 'cover' })
         .webp({ quality: 80, effort: 4 })
         .toBuffer();
-        
       fs.writeFileSync(destPath, optBuf);
-      console.log(`✅ Saved bg-${i + 1}.webp (${Math.round(optBuf.length / 1024)}KB)`);
+
+      // Mobile background (640x1138 — vertical aspect ratio ~35KB)
+      const mobBuf = await sharp(rawBuf)
+        .resize(640, 1138, { fit: 'cover' })
+        .webp({ quality: 75, effort: 4 })
+        .toBuffer();
+      fs.writeFileSync(mobPath, mobBuf);
+
+      console.log(`✅ Saved bg-${i + 1}.webp (Desktop: ${Math.round(optBuf.length / 1024)}KB | Mobile: ${Math.round(mobBuf.length / 1024)}KB)`);
     } catch (err) {
       console.error(`❌ Failed bg-${i + 1}.webp:`, err.message);
     }
   }
-  console.log('\nAll local background images downloaded and optimized!');
+  console.log('\nAll local background images (desktop + mobile) generated successfully!');
 }
 
 main();
