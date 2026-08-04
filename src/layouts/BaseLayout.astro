@@ -137,14 +137,14 @@ if (canonicalUrl) {
         }
         try { sessionStorage.setItem('nb_bg_idx', String(idx)); } catch(e){}
 
-        // Responsive width — DPR-aware, mobile loads much smaller image
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var vw  = window.innerWidth || 768;
+        // Ultra 4K resolution calculation — targets 3840px (4K) on desktop & retina screens
+        var dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+        var vw  = typeof window !== 'undefined' ? Math.max(window.innerWidth || 0, window.screen?.width || 0) : 1920;
         var rawW = vw * dpr;
-        var w = rawW > 3000 ? 3840 : rawW > 2000 ? 2560 : rawW > 1400 ? 1920 : rawW > 900 ? 1280 : 800;
+        var w = rawW >= 1800 ? 3840 : rawW >= 1200 ? 2560 : 1920;
 
         function buildUrl(photoId, width) {
-          return 'https://images.unsplash.com/' + photoId + '?auto=format&fit=crop&w=' + width + '&q=80&fm=webp';
+          return 'https://images.unsplash.com/' + photoId + '?auto=format&fit=crop&w=' + width + '&q=88&fm=webp';
         }
 
         // Apply the loaded photo URL to #nature-bg
@@ -421,7 +421,7 @@ if (canonicalUrl) {
           var idx = (window.__nb_bg_idx + 1) % photos.length;
           window.__nb_bg_idx = idx;
 
-          var url = 'https://images.unsplash.com/' + photos[idx] + '?auto=format&fit=crop&w=' + w + '&q=80&fm=webp';
+          var url = 'https://images.unsplash.com/' + photos[idx] + '?auto=format&fit=crop&w=' + w + '&q=88&fm=webp';
           var img = new Image();
           var done = false;
 
