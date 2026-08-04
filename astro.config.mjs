@@ -14,11 +14,24 @@ export default defineConfig({
   build: {
     assets: '_assets',      // Cloudflare-safe asset directory name
     inlineStylesheets: 'always',
+    concurrency: 8,         // Parallelise page builds for faster CI/deploy
   },
   vite: {
     resolve: {
       alias: {
         '@': path.resolve('./src'),
+      },
+    },
+    build: {
+      target: 'es2020',
+      minify: 'esbuild',
+      // Avoid inlining large assets; threshold in bytes
+      assetsInlineLimit: 2048,
+      rollupOptions: {
+        output: {
+          // Keep chunks simple for static Astro (no client routing)
+          manualChunks: undefined,
+        },
       },
     },
   },

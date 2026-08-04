@@ -180,7 +180,8 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
             <div class="flex items-center gap-8 font-medium text-ink2 dark:text-ink2-dark">
               {author?.avatar && (
                 <img src={author.avatar} alt={author?.name} width="28" height="28"
-                  class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" loading="lazy" />
+                loading="lazy" decoding="async"
+                class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" />
               )}
               <span>{author?.name || 'Anonymous'}</span>
             </div>
@@ -207,6 +208,7 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
                 class="w-full object-cover"
                 style="max-height:420px; object-position:center top;"
                 fetchpriority="high"
+                decoding="async"
               />
             </div>
           )

@@ -187,9 +187,10 @@ html.dark {
   /* ─── Card ─── */
   .card {
     background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    contain: layout style;
     @apply rounded-12 border border-border p-24
            hover:shadow-medium hover:border-border;
   }
@@ -349,24 +350,26 @@ html.dark {
   /* ─── Glassmorphism utilities — optimized blur for 60fps scrolling ─── */
   .glass-panel {
     background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(12px) saturate(1.1) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+    backdrop-filter: blur(10px) saturate(1.05) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(1.05) !important;
     max-width: 100%;
+    contain: layout style;
   }
 
   .dark .glass-panel {
     background: rgba(10, 10, 10, 0.90) !important;
-    backdrop-filter: blur(12px) saturate(1.1) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+    backdrop-filter: blur(10px) saturate(1.05) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(1.05) !important;
   }
 }
 
 /* ─── Scroll-Reveal System ─── */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(12px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 [data-reveal="left"] {

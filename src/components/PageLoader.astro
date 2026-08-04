@@ -30,7 +30,7 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Syne:wght@800&display=swap');
+  /* Orbitron font loaded via BaseLayout preload link for FOUT prevention */
 
   .page-loader-overlay {
     position: fixed;
@@ -39,17 +39,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Hardware accelerated fixed backdrop */
+    /* Hardware accelerated fixed backdrop — only promote transform on GPU */
     transform: translateZ(0);
-    will-change: opacity, visibility;
+    will-change: transform;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     overflow: hidden;
-    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
   }
 
   :global(html.dark) .page-loader-overlay {
@@ -62,14 +62,15 @@
     pointer-events: none !important;
   }
 
-  /* Ambient Pulsing Background Orbs */
+  /* Ambient Pulsing Background Orbs — GPU-accelerated via transform only */
   .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(90px);
-    opacity: 0.55;
+    filter: blur(70px);
+    opacity: 0.5;
     pointer-events: none;
     will-change: transform;
+    contain: strict;
   }
 
   .orb-1 {

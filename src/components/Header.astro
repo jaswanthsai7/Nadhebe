@@ -25,7 +25,7 @@ const pathname = Astro.url.pathname;
 const isMoreActive = moreNav.some(item => pathname.startsWith(item.href));
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-border bg-bg/95 backdrop-blur-md dark:border-border-dark dark:bg-bg-dark/95">
+<header class="sticky top-0 z-50 w-full border-b border-border bg-bg/95 backdrop-blur-md dark:border-border-dark dark:bg-bg-dark/95" style="will-change:transform;contain:layout;transform:translateZ(0)">
   <div class="mx-auto flex h-56 max-w-content items-center justify-between px-12 sm:px-24">
 
     <!-- Logo -->
