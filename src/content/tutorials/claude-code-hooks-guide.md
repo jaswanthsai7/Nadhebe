@@ -8,7 +8,7 @@ tags: ["Claude Code", "Hooks", "PreToolUse", "Guardrails", "settings.json", "Ant
 heroImage: "/images/claude-code-hooks-mastery-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration showing synchronous shell hooks intercepting dangerous tool calls on soft sage green"
 estimatedReadingTime: 14
-isPillar: true
+isPillar: false
 topic: "Claude Code Hooks"
 searchIntent: "tutorial"
 draft: false
