@@ -292,18 +292,20 @@
     function hideLoader() {
       if (loader.classList.contains('loaded')) return;
       loader.classList.add('loaded');
+      setTimeout(function() {
+        if (loader.parentNode) loader.style.display = 'none';
+      }, 300);
     }
 
-    // Dismiss when DOM is ready or fully loaded
-    if (document.readyState === 'complete') {
+    // Dismiss immediately on DOMContentLoaded or if document is interactive
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
       hideLoader();
     } else {
-      window.addEventListener('load', hideLoader);
-      document.addEventListener('DOMContentLoaded', hideLoader);
+      document.addEventListener('DOMContentLoaded', hideLoader, { once: true });
     }
 
-    // Safety timeout: dismiss smoothly after 450ms max
-    setTimeout(hideLoader, 450);
+    // Safety timeout: dismiss smoothly after 100ms max to guarantee 0ms LCP render delay
+    setTimeout(hideLoader, 100);
 
     // Astro page load integration
     document.addEventListener('astro:page-load', hideLoader);
