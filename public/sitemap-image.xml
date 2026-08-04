@@ -203,10 +203,10 @@
       <image:loc>https://nadhebe.com/images/llm-cost-optimization-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -431,6 +431,15 @@
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/mcp-connection-refused-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -513,6 +522,15 @@
     <loc>https://nadhebe.com/category/reviews</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/fable-5-review.webp</image:loc>
@@ -624,6 +642,18 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
@@ -1262,10 +1292,10 @@
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/openrouter-vs-direct-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1292,13 +1322,13 @@
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/sglang-vs-vllm-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cursorrules-vs-windsurfrules-vs-claude-rules-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1449,6 +1479,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/claude-code-pricing-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/claude-cowork-desktop-agent-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -1467,6 +1515,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/cursor-pricing-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -1478,10 +1544,10 @@
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/enoent-fix-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cowork-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/enoent-fix-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1511,7 +1577,10 @@
       <image:loc>https://nadhebe.com/images/enoent-fix-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1619,7 +1688,7 @@
       <image:loc>https://nadhebe.com/images/enterprise-ai-agent-workflows-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cli-vs-gemini-cli-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1650,6 +1719,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/mcp-connection-refused-hero.webp</image:loc>
@@ -1709,13 +1787,13 @@
       <image:loc>https://nadhebe.com/images/kimi-k3-setup-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/mcp-connection-refused-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/enoent-fix-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/enterprise-ai-agent-workflows-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1734,6 +1812,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/instatic-visual-cms-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/guides/runpod-pricing-explained</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1760,19 +1856,19 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/google-gemini-cli-multi-repo-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/storyboard-studio-hero.webp</image:loc>
@@ -1785,12 +1881,6 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gpt-5-6-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/google-gemini-cli-multi-repo-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
@@ -2133,6 +2223,36 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/reviews/best-ai-coding-tools-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/reviews/best-cloud-gpu-providers-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2145,6 +2265,18 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/open-graph-vs-twitter-card-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/reviews/best-mcp-servers-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2166,6 +2298,15 @@
     <loc>https://nadhebe.com/reviews</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-free-meta-tag-tools-hero.webp</image:loc>
@@ -2360,6 +2501,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/ide-comparison-hero.webp</image:loc>
     </image:image>
   </url>
@@ -2399,6 +2543,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cursor-vs-windsurf-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -2406,6 +2553,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cursorrules-vs-windsurfrules-vs-claude-rules-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2478,9 +2628,27 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ai-tool-costs</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/ai-tools</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-vs-chatgpt-hero.webp</image:loc>
@@ -2517,12 +2685,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/aider</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/anthropic</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-cli-vs-gemini-cli-hero.webp</image:loc>
@@ -2532,6 +2712,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/openrouter-vs-direct-hero.webp</image:loc>
@@ -2616,6 +2799,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/openrouter-vs-anthropic-api-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/api-billing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2722,6 +2914,18 @@
     <image:image>
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/authentication</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tag/automated-code-review</loc>
@@ -2769,6 +2973,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/guides-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/bearer-tokens</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2972,6 +3185,12 @@
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/claude-code-vs-cursor-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -2982,6 +3201,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/ide-comparison-hero.webp</image:loc>
@@ -3006,6 +3228,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-complete-guide-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/claude-code-deep-dives</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3096,6 +3327,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/cli-errors</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cli-tools</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3117,6 +3357,18 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/cloud-compute</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cloud-computing</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3132,6 +3384,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-modal-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cloudflare</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3320,6 +3581,9 @@
       <image:loc>https://nadhebe.com/images/runpod-vs-vastai-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/llm-cost-optimization-hero.webp</image:loc>
     </image:image>
   </url>
@@ -3374,6 +3638,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
     </image:image>
   </url>
@@ -3383,6 +3650,12 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cursor-vs-windsurf-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -3390,6 +3663,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cursorrules-vs-windsurfrules-vs-claude-rules-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/mcp-server-vscode-hero.webp</image:loc>
@@ -3402,6 +3678,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/enoent-fix-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cursor-pro</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3447,6 +3732,9 @@
     <loc>https://nadhebe.com/tag/deepseek-r1</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
@@ -3554,6 +3842,15 @@
       <image:loc>https://nadhebe.com/images/google-gemini-cli-multi-repo-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cursor-vs-windsurf-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -3561,6 +3858,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cursorrules-vs-windsurfrules-vs-claude-rules-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-api-key-hero.webp</image:loc>
@@ -4032,6 +4332,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/github</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/github-actions</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4044,6 +4353,9 @@
     <loc>https://nadhebe.com/tag/github-copilot</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.webp</image:loc>
@@ -4319,10 +4631,25 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-modal-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-vastai-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gpu-cloud-infrastructure</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4350,6 +4677,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gpu-pricing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/gpu-vram</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4386,12 +4731,27 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/h100</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/hooks</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4467,6 +4827,9 @@
     <loc>https://nadhebe.com/tag/inference-engines</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
@@ -4671,6 +5034,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/lambda-labs</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/llm</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4731,6 +5103,12 @@
     <loc>https://nadhebe.com/tag/llm-costs</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-api-pricing-hero.webp</image:loc>
@@ -4895,6 +5273,15 @@
       <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -4945,6 +5332,12 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tag/mcp-extension-packaging</loc>
@@ -4962,6 +5355,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5063,6 +5459,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-modal-hero.webp</image:loc>
     </image:image>
   </url>
@@ -5082,6 +5481,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/mcp-server-vscode-hero.webp</image:loc>
@@ -5228,6 +5630,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -5250,6 +5655,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/oauth</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/oauth2</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5259,6 +5673,9 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5429,6 +5846,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
     </image:image>
   </url>
@@ -5457,6 +5877,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/elevenlabs-vs-playht-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/postgresql</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5496,6 +5925,12 @@
     <loc>https://nadhebe.com/tag/pricing</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-free-vs-paid-hero.webp</image:loc>
@@ -5697,15 +6132,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/rtx-4090</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/runpod</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-modal-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-vastai-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6039,6 +6489,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/supermaven</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/synthid</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6141,6 +6600,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/token-limits</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/token-management</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6180,6 +6648,18 @@
     <loc>https://nadhebe.com/tag/troubleshooting</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/fix-common-meta-tag-errors-hero.webp</image:loc>
@@ -6254,6 +6734,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-vastai-hero.webp</image:loc>
     </image:image>
   </url>
@@ -6326,10 +6809,19 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-cloud-gpu-providers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/runpod-vs-modal-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
@@ -6428,6 +6920,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cursor-vs-windsurf-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -6519,6 +7014,96 @@
     <loc>https://nadhebe.com/terms</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/best-ai-coding-tools-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-pricing-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/best-cloud-gpu-providers-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/best-free-meta-tag-analyzer-tools</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/analyzer-vs-checker-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/how-to-analyze-meta-tags-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/open-graph-vs-twitter-card-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/best-mcp-servers-2026</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/fable-5-ai-model-review</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/fable-vs-gpt.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/benchmarks-fable-gpt.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/ai-comparison-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tool-reviews/instatic-visual-cms-review</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://i.ytimg.com/vi/O88lL2v3JkA/hqdefault.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/news-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/instatic-visual-cms-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10193,13 +10778,13 @@
       <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/google-gemini-cli-multi-repo-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10265,10 +10850,25 @@
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tutorials/claude-code-troubleshooting-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10308,6 +10908,21 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -10334,10 +10949,10 @@
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10502,10 +11117,10 @@
       <image:loc>https://nadhebe.com/images/authoring-custom-agent-skills-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10640,6 +11255,18 @@
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/claude-code-troubleshooting-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -10764,6 +11391,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/mcp-server-vscode-cursor</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -10793,13 +11438,13 @@
       <image:loc>https://nadhebe.com/images/mcp-desktop-vs-cursor-decision.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/claude-desktop-guide-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/claude-cheat-sheet-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10811,13 +11456,13 @@
       <image:loc>https://nadhebe.com/images/securing-remote-mcp-server-auth0-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/claude-code-hooks-mastery-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -10839,12 +11484,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-vs-ollama-benchmarks-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sglang-vs-vllm-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cursor-mcp-not-working-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-api-errors-hero.webp</image:loc>

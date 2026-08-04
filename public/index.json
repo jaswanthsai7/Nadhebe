@@ -20,12 +20,32 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
+    "title": "Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits",
+    "description": "A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.",
+    "url": "https://nadhebe.com/tutorials/claude-code-troubleshooting-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Claude Code\", \"Troubleshooting\", \"Anthropic\", \"CLI Errors\", \"OAuth\", \"Hooks\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
     "title": "Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers",
     "description": "Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.",
     "url": "https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp",
     "category": "Tutorials",
     "tags": [
       "[\"Cloudflare Workers\", \"Code Mode\", \"MCP\", \"Edge AI\", \"Agents SDK\", \"TypeScript\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors",
+    "description": "Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors.",
+    "url": "https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Cursor\", \"MCP\", \"Troubleshooting\", \"Developer Tools\", \"Node.js\", \"AI IDE\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
@@ -50,12 +70,62 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
+    "title": "MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer Tokens, and Auth0 Scopes",
+    "description": "A complete troubleshooting guide for diagnosing and fixing Model Context Protocol (MCP) HTTP authentication errors, 401 Unauthorized responses, and OAuth token expiration.",
+    "url": "https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"Authentication\", \"OAuth2\", \"Auth0\", \"Troubleshooting\", \"Bearer Tokens\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
     "title": "Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler",
     "description": "A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.",
     "url": "https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler",
     "category": "Tutorials",
     "tags": [
       "[\"MCP Security\", \"Auth0\", \"Cloudflare Workers\", \"Wrangler\", \"OAuth2\", \"AI Agents\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utilization, and PagedAttention",
+    "description": "Resolve vLLM CUDA Out of Memory errors when serving DeepSeek R1 and Llama models using VRAM allocation flags, KV cache quantization, and tensor parallelism.",
+    "url": "https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix",
+    "category": "Tutorials",
+    "tags": [
+      "[\"vLLM\", \"CUDA OOM\", \"Troubleshooting\", \"GPU VRAM\", \"DeepSeek R1\", \"PagedAttention\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison",
+    "description": "A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.",
+    "url": "https://nadhebe.com/reviews/best-ai-coding-tools-2026",
+    "category": "Tool Reviews",
+    "tags": [
+      "[\"AI Coding\", \"Claude Code\", \"Cursor\", \"Windsurf\", \"GitHub Copilot\", \"Supermaven\", \"Aider\", \"Developer Tools\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026",
+    "description": "An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.",
+    "url": "https://nadhebe.com/reviews/best-cloud-gpu-providers-2026",
+    "category": "Tool Reviews",
+    "tags": [
+      "[\"GPU Cloud\", \"RunPod\", \"Modal\", \"Lambda Labs\", \"Vast.ai\", \"vLLM\", \"H100\", \"Cloud Compute\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026",
+    "description": "A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.",
+    "url": "https://nadhebe.com/reviews/best-mcp-servers-2026",
+    "category": "Tool Reviews",
+    "tags": [
+      "[\"MCP\", \"Model Context Protocol\", \"AI Tools\", \"Developer Tools\", \"PostgreSQL\", \"GitHub\", \"Cloudflare\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
@@ -150,6 +220,26 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
+    "title": "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans",
+    "description": "A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies.",
+    "url": "https://nadhebe.com/guides/claude-code-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Claude Code\", \"Pricing\", \"Anthropic\", \"LLM Costs\", \"Token Limits\", \"API Billing\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage",
+    "description": "A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.",
+    "url": "https://nadhebe.com/guides/cursor-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Cursor\", \"Pricing\", \"AI IDE\", \"Developer Tools\", \"LLM Costs\", \"Cursor Pro\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
     "title": "Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees",
     "description": "A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.",
     "url": "https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md",
@@ -166,6 +256,16 @@
     "category": "Guides",
     "tags": [
       "[\"Claude Code\", \"GitHub Actions\", \"CI/CD\", \"Automated Code Review\", \"DevOps\", \"Anthropic\"]"
+    ],
+    "pubDate": "2026-08-03T00:00:00.000Z"
+  },
+  {
+    "title": "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs",
+    "description": "A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs.",
+    "url": "https://nadhebe.com/guides/runpod-pricing-explained",
+    "category": "Guides",
+    "tags": [
+      "[\"RunPod\", \"GPU Pricing\", \"Cloud Compute\", \"RTX 4090\", \"H100\", \"vLLM\", \"Cost Optimization\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },

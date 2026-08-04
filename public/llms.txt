@@ -8,10 +8,14 @@
 
 - [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles): A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.
 - [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide): A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.
+- [Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits](https://nadhebe.com/tutorials/claude-code-troubleshooting-guide): A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.
 - [Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers](https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp): Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.
+- [Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors](https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting): Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors.
 - [Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth](https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0): Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2.
 - [Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows](https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial): Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows.
+- [MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer Tokens, and Auth0 Scopes](https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting): A complete troubleshooting guide for diagnosing and fixing Model Context Protocol (MCP) HTTP authentication errors, 401 Unauthorized responses, and OAuth token expiration.
 - [Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler](https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler): A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.
+- [vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utilization, and PagedAttention](https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix): Resolve vLLM CUDA Out of Memory errors when serving DeepSeek R1 and Llama models using VRAM allocation flags, KV cache quantization, and tensor parallelism.
 - [How to Build a Custom MCP Server in TypeScript](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript): A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.
 - [How to Deploy DeepSeek R1 on AWS using vLLM](https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm): A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference.
 - [The Complete Gemini API Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-guide): Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely.
@@ -38,6 +42,15 @@
 - [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent): A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
 - [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.com/tutorials/deploying-instatic-docker-vps): Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
 - [How to Install and Set Up Instatic CMS Locally](https://nadhebe.com/tutorials/installing-instatic-cms-locally): A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
+
+### Tool Reviews
+
+- [Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison](https://nadhebe.com/reviews/best-ai-coding-tools-2026): A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.
+- [Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026](https://nadhebe.com/reviews/best-cloud-gpu-providers-2026): An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.
+- [Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026](https://nadhebe.com/reviews/best-mcp-servers-2026): A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.
+- [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools): Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
+- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
 
 ### Comparisons
 
@@ -73,8 +86,11 @@
 
 ### Guides
 
+- [Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans](https://nadhebe.com/guides/claude-code-pricing-guide): A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies.
+- [Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage](https://nadhebe.com/guides/cursor-pricing-guide): A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.
 - [Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees](https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md): A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.
 - [Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions](https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions): A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs.
+- [RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs](https://nadhebe.com/guides/runpod-pricing-explained): A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs.
 - [Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors](https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors): How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts.
 - [How to Fix MCP Server Connection Refused and 404 Proxy Errors](https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors): Step-by-step diagnostic guide to troubleshoot Model Context Protocol (MCP) server socket connection refused and http 404 proxy middleware errors.
 - [Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide](https://nadhebe.com/guides/installing-kimi-k3-locally-guide): Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware.
@@ -91,12 +107,6 @@
 - [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows): Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
 - [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 - [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
-
-### Tool Reviews
-
-- [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools): Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
-- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
-- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
 
 ### Best Practices
 

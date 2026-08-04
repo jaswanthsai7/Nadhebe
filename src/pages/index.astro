@@ -11,11 +11,7 @@ const allArticles = await getAllArticles();
 const authors = await getCollection('authors');
 
 const allPillars = allArticles.filter(p => p.data.isPillar === true);
-const claudeDesktopArticle = allArticles.find(p => p.id.includes('claude-desktop-download-installation-guide'));
-const otherPillars = allPillars.filter(p => p.id !== claudeDesktopArticle?.id);
-const latestPillars = claudeDesktopArticle 
-  ? [claudeDesktopArticle, ...otherPillars.slice(0, 2)]
-  : allPillars.slice(0, 3);
+const latestPillars = allPillars.length >= 3 ? allPillars.slice(0, 3) : allArticles.slice(0, 3);
 const latestVideos = allArticles.filter(p => p.collection === 'youtube-articles').slice(0, 4);
 const latestArticles = allArticles.slice(0, 6);
 
@@ -81,14 +77,7 @@ const categoryMeta: Record<string, { description: string; iconPath: string }> = 
 
 const heroPost = latestPillars[0] || allArticles[0];
 const heroAuthor = heroPost.data.author ? authors.find(a => a.id === heroPost.data.author.id) : null;
-
-// Hardcoded Top Story: Gemini 3.6 Overview
-const gemini36Post = allArticles.find(a => a.slug === 'gemini-3-6-flash-everything-we-know' || a.id.includes('gemini-3-6-flash-everything-we-know'));
-const remainingStories = allArticles.filter(a => a.id !== heroPost.id && a.id !== gemini36Post?.id);
-
-const topStories = gemini36Post 
-  ? [gemini36Post, ...remainingStories.slice(0, 3)]
-  : allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
+const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 ---
 
 <BaseLayout
