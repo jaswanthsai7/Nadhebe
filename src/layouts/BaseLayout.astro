@@ -91,10 +91,10 @@ if (canonicalUrl) {
       })();
     </script>
 
-    <!-- Zero-delay 4K nature background loader executed before first paint -->
+    <!-- Robust nature background loader: preloads before showing, retries on failure -->
     <script is:inline>
       (function () {
-        const photos = [
+        var photos = [
           'photo-1507525428034-b723cf961d3e',
           'photo-1441974231531-c6227db76b6e',
           'photo-1505118380757-91f5f5632de0',
@@ -126,23 +126,86 @@ if (canonicalUrl) {
           'photo-1532274402911-5a369e4c4bb5'
         ];
 
-        let idx = parseInt(sessionStorage.getItem('nb_bg_idx') || '-1', 10);
+        // Pick index — cycle through session to vary photos on each visit
+        var stored = '-1';
+        try { stored = sessionStorage.getItem('nb_bg_idx') || '-1'; } catch(e){}
+        var idx = parseInt(stored, 10);
         if (isNaN(idx) || idx < 0 || idx >= photos.length - 1) {
           idx = Math.floor(Math.random() * photos.length);
         } else {
           idx = idx + 1;
         }
-        const bgId = photos[idx];
         try { sessionStorage.setItem('nb_bg_idx', String(idx)); } catch(e){}
 
-        // Granular breakpoints: mobile loads a much smaller image
+        // Responsive width — DPR-aware, mobile loads much smaller image
         var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var vw = window.innerWidth || 768;
+        var vw  = window.innerWidth || 768;
         var rawW = vw * dpr;
-        var targetWidth = rawW > 3000 ? 3840 : rawW > 2000 ? 2560 : rawW > 1400 ? 1920 : rawW > 900 ? 1280 : 800;
-        var bgUrl = 'https://images.unsplash.com/' + bgId + '?auto=format&fit=crop&w=' + targetWidth + '&q=80&fm=webp';
+        var w = rawW > 3000 ? 3840 : rawW > 2000 ? 2560 : rawW > 1400 ? 1920 : rawW > 900 ? 1280 : 800;
 
-        document.documentElement.style.setProperty('--nature-bg-url', "url('" + bgUrl + "')");
+        function buildUrl(photoId, width) {
+          return 'https://images.unsplash.com/' + photoId + '?auto=format&fit=crop&w=' + width + '&q=80&fm=webp';
+        }
+
+        // Apply the loaded photo URL to #nature-bg
+        // Gradient fallback is already showing at opacity:1, we just swap background-image
+        function applyBg(url) {
+          var el = document.getElementById('nature-bg');
+          if (!el) return;
+          // Briefly dip opacity to allow smooth cross-fade, then swap and restore
+          el.style.transition = 'opacity 0.25s ease';
+          el.style.opacity = '0.4';
+          setTimeout(function() {
+            el.style.backgroundImage = "url('" + url + "')";
+            el.style.transition = 'opacity 0.7s ease';
+            el.style.opacity = '1';
+          }, 250);
+        }
+
+        // Preload via Image() then apply — no flash of missing background
+        function tryLoad(photoId, retried) {
+          var url = buildUrl(photoId, w);
+          var img = new Image();
+          var done = false;
+
+          // Timeout: if image hasn't loaded in 6s, try a fallback photo
+          var t = setTimeout(function() {
+            if (done) return;
+            done = true;
+            img.src = '';  // abort current load
+            if (!retried) {
+              var fallbackIdx = (idx + 5) % photos.length;
+              tryLoad(photos[fallbackIdx], true);
+            }
+            // If retry also fails, the gradient CSS fallback stays visible — looks fine
+          }, 6000);
+
+          img.onload = function() {
+            if (done) return;
+            done = true;
+            clearTimeout(t);
+            applyBg(url);
+          };
+          img.onerror = function() {
+            if (done) return;
+            done = true;
+            clearTimeout(t);
+            if (!retried) {
+              // Try a different random photo once
+              var fallbackIdx = (idx + 3) % photos.length;
+              tryLoad(photos[fallbackIdx], true);
+            }
+            // If retry also fails, gradient stays — nothing else to do
+          };
+
+          img.src = url;
+        }
+
+        // Start loading — also cache the URL globally for Astro page transitions
+        window.__nb_bg_idx = idx;
+        window.__nb_photos = photos;
+        window.__nb_bg_w = w;
+        tryLoad(photos[idx], false);
       })();
     </script>
 
@@ -213,23 +276,29 @@ if (canonicalUrl) {
 
     <!-- Frosted Nature Background Styles -->
     <style>
+      /* Gradient fallback that shows instantly while the real photo loads */
       #nature-bg {
         position: fixed;
         inset: 0;
         z-index: -20;
         width: 100vw;
         height: 100vh;
-        background-image: var(--nature-bg-url);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        /* Gradient visible immediately as fallback */
+        background-color: #e8f0e8;
+        background-image: linear-gradient(135deg, #d4e6d4 0%, #e8f0e8 40%, #dfe8f0 70%, #d4dde8 100%);
         opacity: 1;
-        background-color: #f8fafc;
         transform: translateZ(0);
         will-change: transform;
+        /* Smooth transition when real photo swaps in */
+        transition: background-image 0s, opacity 0.8s ease;
       }
-      .dark #nature-bg {
+      /* In dark mode, use a dark gradient fallback */
+      html.dark #nature-bg {
         background-color: #090d16;
+        background-image: linear-gradient(135deg, #0a1020 0%, #0d1525 40%, #111830 70%, #090d16 100%);
       }
       #nature-overlay {
         position: fixed;
@@ -337,6 +406,48 @@ if (canonicalUrl) {
           initReveal();
         }
         document.addEventListener('astro:page-load', initReveal);
+      })();
+    </script>
+
+    <!-- Re-apply background image on Astro soft-navigation (page transitions) -->
+    <script is:inline>
+      (function() {
+        function reloadBg() {
+          var photos = window.__nb_photos;
+          var w = window.__nb_bg_w;
+          if (!photos || !w) return;
+
+          // Advance to next photo on each page visit
+          var idx = (window.__nb_bg_idx + 1) % photos.length;
+          window.__nb_bg_idx = idx;
+
+          var url = 'https://images.unsplash.com/' + photos[idx] + '?auto=format&fit=crop&w=' + w + '&q=80&fm=webp';
+          var img = new Image();
+          var done = false;
+
+          var t = setTimeout(function() {
+            if (done) return;
+            done = true;
+          }, 5000);
+
+          img.onload = function() {
+            if (done) return;
+            done = true;
+            clearTimeout(t);
+            var el = document.getElementById('nature-bg');
+            if (!el) return;
+            el.style.transition = 'opacity 0.25s ease';
+            el.style.opacity = '0.4';
+            setTimeout(function() {
+              el.style.backgroundImage = "url('" + url + "')";
+              el.style.transition = 'opacity 0.7s ease';
+              el.style.opacity = '1';
+            }, 250);
+          };
+          img.src = url;
+        }
+
+        document.addEventListener('astro:page-load', reloadBg);
       })();
     </script>
   </body>
