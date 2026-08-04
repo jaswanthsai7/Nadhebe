@@ -278,24 +278,51 @@ if (canonicalUrl) {
     <Footer />
     <SearchDialog />
 
-    <!-- Scroll-reveal animations -->
+    <!-- Scroll-reveal animations with immediate fold check & fallback -->
     <script is:inline>
       (function() {
         function initReveal() {
           var els = document.querySelectorAll('[data-reveal]');
           if (!els.length) return;
-          var io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-              if (e.isIntersecting) {
-                e.target.classList.add('revealed');
-                io.unobserve(e.target);
+
+          // Immediate check for elements in/near viewport
+          els.forEach(function(el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < (window.innerHeight || 800) + 150) {
+              el.classList.add('revealed');
+            }
+          });
+
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function(entries) {
+              entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('revealed');
+                  io.unobserve(e.target);
+                }
+              });
+            }, { threshold: 0.01, rootMargin: '150px 0px 150px 0px' });
+
+            els.forEach(function(el) {
+              if (!el.classList.contains('revealed')) {
+                io.observe(el);
               }
             });
-          }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-          els.forEach(function(el) { io.observe(el); });
+          } else {
+            els.forEach(function(el) { el.classList.add('revealed'); });
+          }
+
+          // Safety fallback: ensure nothing stays invisible
+          setTimeout(function() {
+            els.forEach(function(el) { el.classList.add('revealed'); });
+          }, 250);
         }
 
-        initReveal();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initReveal);
+        } else {
+          initReveal();
+        }
         document.addEventListener('astro:page-load', initReveal);
       })();
     </script>
