@@ -270,6 +270,24 @@
     const loader = document.getElementById('page-loader');
     if (!loader) return;
 
+    const subtexts = [
+      "Loading MCP Registry...",
+      "Indexing project graph...",
+      "Synchronizing vector index...",
+      "Loading inference pipeline...",
+      "Initializing agent runtime..."
+    ];
+
+    function pickRandomSubtext() {
+      const el = loader.querySelector('.loader-subtext');
+      if (el) {
+        const msg = subtexts[Math.floor(Math.random() * subtexts.length)];
+        el.textContent = msg;
+      }
+    }
+
+    pickRandomSubtext();
+
     function hideLoader() {
       if (loader.classList.contains('loaded')) return;
       loader.classList.add('loaded');
@@ -303,6 +321,7 @@
         !e.ctrlKey &&
         !e.metaKey
       ) {
+        pickRandomSubtext();
         loader.style.display = 'flex';
         requestAnimationFrame(function () {
           loader.classList.remove('loaded');
