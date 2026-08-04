@@ -1,50 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FeedList from '../../components/FeedList.astro';
+import { getAllArticles } from '../../utils/content';
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
 
-const posts = await getCollection('tutorials');
-const sorted = posts
-  .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const allArticles = await getAllArticles();
+const posts = allArticles.filter(p => p.collection === 'tutorials' || p.data.category?.toLowerCase() === 'tutorials');
 ---
 
-<BaseLayout
-  title="Tutorials - Nadhebe"
-  description="Browse our in-depth guides and tutorials on AI and development."
->
-  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
-    <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
-
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24 flex flex-col sm:flex-row sm:items-end justify-between gap-16">
-      <div>
-        <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-        <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">AI Tutorials</h1>
-      </div>
-      <a
-        href="/newsletter"
-        class="group shrink-0 inline-flex min-h-[50px] items-center gap-14 rounded-12 bg-ink px-28 py-16 text-body-small font-bold text-surface transition-all duration-200 hover:bg-ink2 hover:shadow-large dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark shadow-md"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-20 w-20 text-accent dark:text-accent-dark shrink-0" style="width:20px;height:20px;">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-          <polyline points="22,6 12,13 2,6" />
-        </svg>
-        <span>Get Weekly Briefing & Free Starter Kit</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-18 w-18 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style="width:18px;height:18px;">
-          <line x1="5" y1="12" x2="19" y2="12" />
-          <polyline points="12 5 19 12 12 19" />
-        </svg>
-      </a>
-    </div>
-
-    <FeedList posts={sorted} />
-  
-    </div>
-    <!-- Standalone floating footer pill -->
-    <div class="mt-32 flex justify-center" data-reveal>
-      <div class="inline-flex items-center gap-12 px-32 py-16 rounded-2xl border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-body font-sans font-semibold text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md hover:scale-[1.03] transition-all duration-300 hover:shadow-large cursor-default">
-        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-120 transition-transform duration-150 cursor-default">🧡</span>
-      </div>
-    </div>
-  </div>
-</BaseLayout>
+<CategoryLayout categoryName="Tutorials" posts={posts} allPosts={allArticles} />

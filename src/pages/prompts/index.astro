@@ -1,34 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FeedList from '../../components/FeedList.astro';
+import { getAllArticles } from '../../utils/content';
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
 
-const posts = await getCollection('prompts');
-const sorted = posts
-  .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const allArticles = await getAllArticles();
+const posts = allArticles.filter(p => p.collection === 'prompts' || p.data.category?.toLowerCase() === 'prompts');
 ---
 
-<BaseLayout
-  title="Prompts - Nadhebe"
-  description="Optimized system prompts, templates, and instructions for LLMs, Claude, and GPT."
->
-  <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
-    <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
-
-    <div class="border-b border-border dark:border-border-dark pb-16 mb-24">
-      <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Category Feed</p>
-      <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">System Prompts</h1>
-    </div>
-
-    <FeedList posts={sorted} />
-  
-    </div>
-    <!-- Standalone floating footer pill -->
-    <div class="mt-32 flex justify-center" data-reveal>
-      <div class="inline-flex items-center gap-12 px-32 py-16 rounded-2xl border border-border/40 dark:border-border-dark/40 bg-surface/85 dark:bg-surface-dark/85 text-body font-sans font-semibold text-ink2 dark:text-ink2-dark select-none shadow-medium backdrop-blur-md hover:scale-[1.03] transition-all duration-300 hover:shadow-large cursor-default">
-        That's all, Love <span class="text-accent dark:text-accent-dark inline-block hover:scale-120 transition-transform duration-150 cursor-default">🧡</span>
-      </div>
-    </div>
-  </div>
-</BaseLayout>
+<CategoryLayout categoryName="Prompts" posts={posts} allPosts={allArticles} />
