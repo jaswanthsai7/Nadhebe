@@ -39,26 +39,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Clean Light Mode Background */
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    /* Hardware accelerated fixed backdrop */
+    transform: translateZ(0);
+    will-change: opacity, visibility;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: auto;
     overflow: hidden;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   :global(html.dark) .page-loader-overlay {
-    /* Deep Dark Mode Background */
-    background: rgba(10, 14, 24, 0.92);
+    background: rgba(10, 14, 24, 0.94);
   }
 
   .page-loader-overlay.loaded {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   /* Ambient Pulsing Background Orbs */
@@ -107,8 +108,7 @@
     align-items: center;
     justify-content: center;
     gap: 28px;
-    transform: scale(1);
-    transition: transform 0.45s ease;
+    transform: translateZ(0);
   }
 
   .logo-ring-wrapper {
@@ -145,11 +145,11 @@
     width: 100px;
     height: 100px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
     animation: pulseLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
@@ -250,18 +250,18 @@
   }
 
   @keyframes floatOrb1 {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(60px, 40px) scale(1.15); }
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 30px); }
   }
 
   @keyframes floatOrb2 {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-50px, -30px) scale(1.1); }
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-40px, -20px); }
   }
 
   @keyframes pulseOrb {
-    0% { opacity: 0.25; transform: translate(-50%, -50%) scale(0.9); }
-    100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.2); }
+    0% { opacity: 0.25; transform: translate(-50%, -50%) scale(0.95); }
+    100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1.1); }
   }
 </style>
 
@@ -291,12 +291,9 @@
     function hideLoader() {
       if (loader.classList.contains('loaded')) return;
       loader.classList.add('loaded');
-      setTimeout(function () {
-        loader.style.display = 'none';
-      }, 450);
     }
 
-    // Hide when page is loaded
+    // Dismiss when DOM is ready or fully loaded
     if (document.readyState === 'complete') {
       hideLoader();
     } else {
@@ -304,29 +301,10 @@
       document.addEventListener('DOMContentLoaded', hideLoader);
     }
 
-    // Safety fallback: maximum 600ms timeout
-    setTimeout(hideLoader, 600);
+    // Safety timeout: dismiss smoothly after 450ms max
+    setTimeout(hideLoader, 450);
 
-    // Smooth transition on internal link clicks
-    document.addEventListener('click', function (e) {
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (
-        href &&
-        href.startsWith('/') &&
-        !href.startsWith('//') &&
-        !href.includes('#') &&
-        link.target !== '_blank' &&
-        !e.ctrlKey &&
-        !e.metaKey
-      ) {
-        pickRandomSubtext();
-        loader.style.display = 'flex';
-        requestAnimationFrame(function () {
-          loader.classList.remove('loaded');
-        });
-      }
-    });
+    // Astro page load integration
+    document.addEventListener('astro:page-load', hideLoader);
   })();
 </script>
