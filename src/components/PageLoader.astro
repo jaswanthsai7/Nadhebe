@@ -297,15 +297,24 @@
       }, 300);
     }
 
-    // Dismiss immediately on DOMContentLoaded or if document is interactive
-    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-      hideLoader();
-    } else {
-      document.addEventListener('DOMContentLoaded', hideLoader, { once: true });
+    function checkReadyAndHide() {
+      if (window.__nb_bg_ready) {
+        hideLoader();
+      } else {
+        window.addEventListener('nb-bg-ready', hideLoader, { once: true });
+        setTimeout(hideLoader, 350);
+      }
     }
 
-    // Safety timeout: dismiss smoothly after 100ms max to guarantee 0ms LCP render delay
-    setTimeout(hideLoader, 100);
+    // Dismiss only after background image is 100% decoded in memory
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      checkReadyAndHide();
+    } else {
+      document.addEventListener('DOMContentLoaded', checkReadyAndHide, { once: true });
+    }
+
+    // Fallback safety timeout: 400ms max
+    setTimeout(hideLoader, 400);
 
     // Astro page load integration
     document.addEventListener('astro:page-load', hideLoader);

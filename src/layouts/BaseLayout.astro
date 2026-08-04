@@ -100,7 +100,7 @@ if (canonicalUrl) {
         var isMobile = typeof window !== 'undefined' && (window.innerWidth || 0) < 768;
         var bgUrl = (isMobile ? '/images/bg/mobile/bg-' : '/images/bg/bg-') + (idx + 1) + '.webp';
 
-        // 1. Immediately set CSS variable on document root BEFORE FIRST PAINT
+        // 1. Immediately set CSS variable on document root
         document.documentElement.style.setProperty('--nature-bg-url', "url('" + bgUrl + "')");
 
         // 2. Inject high-priority preload link into head immediately
@@ -110,6 +110,17 @@ if (canonicalUrl) {
         l.href = bgUrl;
         l.fetchPriority = 'high';
         document.head.appendChild(l);
+
+        // 3. Pre-decode image in memory and dispatch nb-bg-ready when 100% loaded
+        var img = new Image();
+        function markReady() {
+          window.__nb_bg_ready = true;
+          try { window.dispatchEvent(new CustomEvent('nb-bg-ready')); } catch(e){}
+        }
+        img.onload = markReady;
+        img.onerror = markReady;
+        img.src = bgUrl;
+        if (img.complete) markReady();
 
         // Store state globally for SPA page transitions
         window.__nb_bg_idx = idx;
