@@ -3,7 +3,11 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import FeedList from '@/components/FeedList.astro';
 import InlineToolSearch from '@/components/tools/InlineToolSearch.astro';
-import { PLATFORM_CATEGORIES, PLATFORM_TOOLS, PLATFORM_TOOL_TOTAL } from '@/config/platform-tools';
+import { PLATFORM_CATEGORIES } from '@/config/platform-tools';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const PLATFORM_TOOLS = UNIFIED_TOOLS_REGISTRY;
+const PLATFORM_TOOL_TOTAL = PLATFORM_TOOLS.length;
 import ToolSearchModal from '@/components/tools/ToolSearchModal.astro';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
@@ -88,7 +92,7 @@ const toolsDirectorySchema = {
         <button
           type="button"
           data-category-filter="all"
-          class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft"
+          class="cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft"
         >
           All ({PLATFORM_TOOL_TOTAL})
         </button>
@@ -99,7 +103,7 @@ const toolsDirectorySchema = {
             <button
               type="button"
               data-category-filter={cat}
-              class="cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink2 hover:text-ink hover:bg-surface/40 dark:text-ink2-dark dark:hover:text-ink-dark dark:hover:bg-surface-dark/40"
+              class="cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink/80 hover:text-ink hover:bg-surface/60 dark:text-ink-dark/80 dark:hover:text-ink-dark dark:hover:bg-surface-dark/60"
             >
               {cat} ({count})
             </button>
@@ -266,10 +270,10 @@ const toolsDirectorySchema = {
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         tabBtns.forEach(b => {
-          b.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink2 hover:text-ink hover:bg-surface/40 dark:text-ink2-dark dark:hover:text-ink-dark dark:hover:bg-surface-dark/40';
+          b.className = 'cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink/80 hover:text-ink hover:bg-surface/60 dark:text-ink-dark/80 dark:hover:text-ink-dark dark:hover:bg-surface-dark/60';
         });
 
-        btn.className = 'cat-tab-btn rounded-pill px-16 py-8 text-caption font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft';
+        btn.className = 'cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft';
         
         activeFilter = btn.getAttribute('data-category-filter') || 'all';
         filterDirectory();

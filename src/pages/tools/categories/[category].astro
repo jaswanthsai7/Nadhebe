@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumb from '@/components/Breadcrumb.astro';
-import { PLATFORM_TOOLS } from '@/config/platform-tools';
+import { PLATFORM_CATEGORIES } from '@/config/platform-tools';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const PLATFORM_TOOLS = UNIFIED_TOOLS_REGISTRY;
 import { ROADMAP_CATEGORIES, type ToolRoadmapCategory } from '@/config/tools-roadmap';
 import { SITE } from '@/config';
 

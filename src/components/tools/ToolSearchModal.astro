@@ -1,5 +1,6 @@
 ---
-import { PLATFORM_TOOLS } from '@/config/platform-tools';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+const PLATFORM_TOOLS = UNIFIED_TOOLS_REGISTRY;
 
 // Serialize tools for client-side search
 const toolsData = PLATFORM_TOOLS.map(t => ({
