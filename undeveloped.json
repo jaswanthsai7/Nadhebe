@@ -1,0 +1,2367 @@
+[
+  {
+    "name": "Developer Builder",
+    "slug": "developer-builder",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Estimator",
+    "slug": "developer-estimator",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Checker",
+    "slug": "developer-checker",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Cleaner",
+    "slug": "developer-cleaner",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Template Maker",
+    "slug": "developer-template-maker",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Planner",
+    "slug": "developer-planner",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Inspector",
+    "slug": "developer-inspector",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Formatter",
+    "slug": "developer-formatter",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Generator",
+    "slug": "developer-generator",
+    "category": "Developer"
+  },
+  {
+    "name": "Developer Calculator",
+    "slug": "developer-calculator",
+    "category": "Developer"
+  },
+  {
+    "name": "Prompt grader",
+    "slug": "prompt-grader",
+    "category": "AI"
+  },
+  {
+    "name": "AI Builder",
+    "slug": "ai-builder",
+    "category": "AI"
+  },
+  {
+    "name": "AI Estimator",
+    "slug": "ai-estimator",
+    "category": "AI"
+  },
+  {
+    "name": "AI Checker",
+    "slug": "ai-checker",
+    "category": "AI"
+  },
+  {
+    "name": "AI Cleaner",
+    "slug": "ai-cleaner",
+    "category": "AI"
+  },
+  {
+    "name": "AI Template Maker",
+    "slug": "ai-template-maker",
+    "category": "AI"
+  },
+  {
+    "name": "AI Planner",
+    "slug": "ai-planner",
+    "category": "AI"
+  },
+  {
+    "name": "AI Inspector",
+    "slug": "ai-inspector",
+    "category": "AI"
+  },
+  {
+    "name": "AI Formatter",
+    "slug": "ai-formatter",
+    "category": "AI"
+  },
+  {
+    "name": "AI Generator",
+    "slug": "ai-generator",
+    "category": "AI"
+  },
+  {
+    "name": "AI Calculator",
+    "slug": "ai-calculator",
+    "category": "AI"
+  },
+  {
+    "name": "Image compressor",
+    "slug": "image-compressor",
+    "category": "Image"
+  },
+  {
+    "name": "EXIF remover",
+    "slug": "exif-remover",
+    "category": "Image"
+  },
+  {
+    "name": "WebP converter",
+    "slug": "webp-converter",
+    "category": "Image"
+  },
+  {
+    "name": "Favicon generator",
+    "slug": "favicon-generator",
+    "category": "Image"
+  },
+  {
+    "name": "Background remover",
+    "slug": "background-remover",
+    "category": "Image"
+  },
+  {
+    "name": "Image Builder",
+    "slug": "image-builder",
+    "category": "Image"
+  },
+  {
+    "name": "Image Estimator",
+    "slug": "image-estimator",
+    "category": "Image"
+  },
+  {
+    "name": "Image Checker",
+    "slug": "image-checker",
+    "category": "Image"
+  },
+  {
+    "name": "Image Cleaner",
+    "slug": "image-cleaner",
+    "category": "Image"
+  },
+  {
+    "name": "Image Template Maker",
+    "slug": "image-template-maker",
+    "category": "Image"
+  },
+  {
+    "name": "Image Planner",
+    "slug": "image-planner",
+    "category": "Image"
+  },
+  {
+    "name": "Image Inspector",
+    "slug": "image-inspector",
+    "category": "Image"
+  },
+  {
+    "name": "Image Formatter",
+    "slug": "image-formatter",
+    "category": "Image"
+  },
+  {
+    "name": "Bitrate calculator",
+    "slug": "bitrate-calculator",
+    "category": "Video"
+  },
+  {
+    "name": "Thumbnail checker",
+    "slug": "thumbnail-checker",
+    "category": "Video"
+  },
+  {
+    "name": "Shorts crop planner",
+    "slug": "shorts-crop-planner",
+    "category": "Video"
+  },
+  {
+    "name": "Frame extractor",
+    "slug": "frame-extractor",
+    "category": "Video"
+  },
+  {
+    "name": "Subtitle converter",
+    "slug": "subtitle-converter",
+    "category": "Video"
+  },
+  {
+    "name": "Video Builder",
+    "slug": "video-builder",
+    "category": "Video"
+  },
+  {
+    "name": "Video Estimator",
+    "slug": "video-estimator",
+    "category": "Video"
+  },
+  {
+    "name": "Video Checker",
+    "slug": "video-checker",
+    "category": "Video"
+  },
+  {
+    "name": "Video Cleaner",
+    "slug": "video-cleaner",
+    "category": "Video"
+  },
+  {
+    "name": "Video Template Maker",
+    "slug": "video-template-maker",
+    "category": "Video"
+  },
+  {
+    "name": "Video Planner",
+    "slug": "video-planner",
+    "category": "Video"
+  },
+  {
+    "name": "Video Inspector",
+    "slug": "video-inspector",
+    "category": "Video"
+  },
+  {
+    "name": "LUFS calculator",
+    "slug": "lufs-calculator",
+    "category": "Audio"
+  },
+  {
+    "name": "BPM tapper",
+    "slug": "bpm-tapper",
+    "category": "Audio"
+  },
+  {
+    "name": "Waveform preview",
+    "slug": "waveform-preview",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio trimmer",
+    "slug": "audio-trimmer",
+    "category": "Audio"
+  },
+  {
+    "name": "Podcast chapter formatter",
+    "slug": "podcast-chapter-formatter",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Builder",
+    "slug": "audio-builder",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Estimator",
+    "slug": "audio-estimator",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Checker",
+    "slug": "audio-checker",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Cleaner",
+    "slug": "audio-cleaner",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Template Maker",
+    "slug": "audio-template-maker",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Planner",
+    "slug": "audio-planner",
+    "category": "Audio"
+  },
+  {
+    "name": "Audio Inspector",
+    "slug": "audio-inspector",
+    "category": "Audio"
+  },
+  {
+    "name": "PDF merge",
+    "slug": "pdf-merge",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF split",
+    "slug": "pdf-split",
+    "category": "PDF"
+  },
+  {
+    "name": "Page counter",
+    "slug": "page-counter",
+    "category": "PDF"
+  },
+  {
+    "name": "Metadata remover",
+    "slug": "metadata-remover",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF to images",
+    "slug": "pdf-to-images",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Builder",
+    "slug": "pdf-builder",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Estimator",
+    "slug": "pdf-estimator",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Checker",
+    "slug": "pdf-checker",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Cleaner",
+    "slug": "pdf-cleaner",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Template Maker",
+    "slug": "pdf-template-maker",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Planner",
+    "slug": "pdf-planner",
+    "category": "PDF"
+  },
+  {
+    "name": "PDF Inspector",
+    "slug": "pdf-inspector",
+    "category": "PDF"
+  },
+  {
+    "name": "Text Builder",
+    "slug": "text-builder",
+    "category": "Text"
+  },
+  {
+    "name": "Text Estimator",
+    "slug": "text-estimator",
+    "category": "Text"
+  },
+  {
+    "name": "Text Checker",
+    "slug": "text-checker",
+    "category": "Text"
+  },
+  {
+    "name": "Text Cleaner",
+    "slug": "text-cleaner",
+    "category": "Text"
+  },
+  {
+    "name": "Text Template Maker",
+    "slug": "text-template-maker",
+    "category": "Text"
+  },
+  {
+    "name": "Text Planner",
+    "slug": "text-planner",
+    "category": "Text"
+  },
+  {
+    "name": "Text Inspector",
+    "slug": "text-inspector",
+    "category": "Text"
+  },
+  {
+    "name": "SERP preview",
+    "slug": "serp-preview",
+    "category": "SEO"
+  },
+  {
+    "name": "Robots tester",
+    "slug": "robots-tester",
+    "category": "SEO"
+  },
+  {
+    "name": "Canonical checker",
+    "slug": "canonical-checker",
+    "category": "SEO"
+  },
+  {
+    "name": "Schema validator",
+    "slug": "schema-validator",
+    "category": "SEO"
+  },
+  {
+    "name": "Redirect chain checker",
+    "slug": "redirect-chain-checker",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Builder",
+    "slug": "seo-builder",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Estimator",
+    "slug": "seo-estimator",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Checker",
+    "slug": "seo-checker",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Cleaner",
+    "slug": "seo-cleaner",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Template Maker",
+    "slug": "seo-template-maker",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Planner",
+    "slug": "seo-planner",
+    "category": "SEO"
+  },
+  {
+    "name": "SEO Inspector",
+    "slug": "seo-inspector",
+    "category": "SEO"
+  },
+  {
+    "name": "UTM builder",
+    "slug": "utm-builder",
+    "category": "Marketing"
+  },
+  {
+    "name": "ROAS calculator",
+    "slug": "roas-calculator",
+    "category": "Marketing"
+  },
+  {
+    "name": "CAC payback",
+    "slug": "cac-payback",
+    "category": "Marketing"
+  },
+  {
+    "name": "Headline variants",
+    "slug": "headline-variants",
+    "category": "Marketing"
+  },
+  {
+    "name": "Campaign URL QA",
+    "slug": "campaign-url-qa",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Builder",
+    "slug": "marketing-builder",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Estimator",
+    "slug": "marketing-estimator",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Checker",
+    "slug": "marketing-checker",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Cleaner",
+    "slug": "marketing-cleaner",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Template Maker",
+    "slug": "marketing-template-maker",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Planner",
+    "slug": "marketing-planner",
+    "category": "Marketing"
+  },
+  {
+    "name": "Marketing Inspector",
+    "slug": "marketing-inspector",
+    "category": "Marketing"
+  },
+  {
+    "name": "Title length checker",
+    "slug": "title-length-checker",
+    "category": "YouTube"
+  },
+  {
+    "name": "Chapter formatter",
+    "slug": "chapter-formatter",
+    "category": "YouTube"
+  },
+  {
+    "name": "Thumbnail safe area",
+    "slug": "thumbnail-safe-area",
+    "category": "YouTube"
+  },
+  {
+    "name": "Description template",
+    "slug": "description-template",
+    "category": "YouTube"
+  },
+  {
+    "name": "Tag extractor",
+    "slug": "tag-extractor",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Builder",
+    "slug": "youtube-builder",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Estimator",
+    "slug": "youtube-estimator",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Checker",
+    "slug": "youtube-checker",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Cleaner",
+    "slug": "youtube-cleaner",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Template Maker",
+    "slug": "youtube-template-maker",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Planner",
+    "slug": "youtube-planner",
+    "category": "YouTube"
+  },
+  {
+    "name": "YouTube Inspector",
+    "slug": "youtube-inspector",
+    "category": "YouTube"
+  },
+  {
+    "name": "LinkedIn post preview",
+    "slug": "linkedin-post-preview",
+    "category": "Social Media"
+  },
+  {
+    "name": "Hashtag counter",
+    "slug": "hashtag-counter",
+    "category": "Social Media"
+  },
+  {
+    "name": "Bio formatter",
+    "slug": "bio-formatter",
+    "category": "Social Media"
+  },
+  {
+    "name": "Carousel size helper",
+    "slug": "carousel-size-helper",
+    "category": "Social Media"
+  },
+  {
+    "name": "X card preview",
+    "slug": "x-card-preview",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Builder",
+    "slug": "social-media-builder",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Estimator",
+    "slug": "social-media-estimator",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Checker",
+    "slug": "social-media-checker",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Cleaner",
+    "slug": "social-media-cleaner",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Template Maker",
+    "slug": "social-media-template-maker",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Planner",
+    "slug": "social-media-planner",
+    "category": "Social Media"
+  },
+  {
+    "name": "Social Media Inspector",
+    "slug": "social-media-inspector",
+    "category": "Social Media"
+  },
+  {
+    "name": "Prompt variable checker",
+    "slug": "prompt-variable-checker",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Eval rubric generator",
+    "slug": "eval-rubric-generator",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Builder",
+    "slug": "prompt-engineering-builder",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Estimator",
+    "slug": "prompt-engineering-estimator",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Checker",
+    "slug": "prompt-engineering-checker",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Cleaner",
+    "slug": "prompt-engineering-cleaner",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Template Maker",
+    "slug": "prompt-engineering-template-maker",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Planner",
+    "slug": "prompt-engineering-planner",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "Prompt Engineering Inspector",
+    "slug": "prompt-engineering-inspector",
+    "category": "Prompt Engineering"
+  },
+  {
+    "name": "LLMs Builder",
+    "slug": "llms-builder",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Estimator",
+    "slug": "llms-estimator",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Checker",
+    "slug": "llms-checker",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Cleaner",
+    "slug": "llms-cleaner",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Template Maker",
+    "slug": "llms-template-maker",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Planner",
+    "slug": "llms-planner",
+    "category": "LLMs"
+  },
+  {
+    "name": "LLMs Inspector",
+    "slug": "llms-inspector",
+    "category": "LLMs"
+  },
+  {
+    "name": "JSON path finder",
+    "slug": "json-path-finder",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON schema generator",
+    "slug": "json-schema-generator",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON repair",
+    "slug": "json-repair",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON sorter",
+    "slug": "json-sorter",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON flatten",
+    "slug": "json-flatten",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Builder",
+    "slug": "json-builder",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Estimator",
+    "slug": "json-estimator",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Checker",
+    "slug": "json-checker",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Cleaner",
+    "slug": "json-cleaner",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Template Maker",
+    "slug": "json-template-maker",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Planner",
+    "slug": "json-planner",
+    "category": "JSON"
+  },
+  {
+    "name": "JSON Inspector",
+    "slug": "json-inspector",
+    "category": "JSON"
+  },
+  {
+    "name": "XPath tester",
+    "slug": "xpath-tester",
+    "category": "XML"
+  },
+  {
+    "name": "XML validator",
+    "slug": "xml-validator",
+    "category": "XML"
+  },
+  {
+    "name": "RSS checker",
+    "slug": "rss-checker",
+    "category": "XML"
+  },
+  {
+    "name": "XML minifier",
+    "slug": "xml-minifier",
+    "category": "XML"
+  },
+  {
+    "name": "XML to CSV",
+    "slug": "xml-to-csv",
+    "category": "XML"
+  },
+  {
+    "name": "XML Builder",
+    "slug": "xml-builder",
+    "category": "XML"
+  },
+  {
+    "name": "XML Estimator",
+    "slug": "xml-estimator",
+    "category": "XML"
+  },
+  {
+    "name": "XML Checker",
+    "slug": "xml-checker",
+    "category": "XML"
+  },
+  {
+    "name": "XML Cleaner",
+    "slug": "xml-cleaner",
+    "category": "XML"
+  },
+  {
+    "name": "XML Template Maker",
+    "slug": "xml-template-maker",
+    "category": "XML"
+  },
+  {
+    "name": "XML Planner",
+    "slug": "xml-planner",
+    "category": "XML"
+  },
+  {
+    "name": "XML Inspector",
+    "slug": "xml-inspector",
+    "category": "XML"
+  },
+  {
+    "name": "CSV validator",
+    "slug": "csv-validator",
+    "category": "CSV"
+  },
+  {
+    "name": "Delimiter converter",
+    "slug": "delimiter-converter",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV preview",
+    "slug": "csv-preview",
+    "category": "CSV"
+  },
+  {
+    "name": "Column extractor",
+    "slug": "column-extractor",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Builder",
+    "slug": "csv-builder",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Estimator",
+    "slug": "csv-estimator",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Checker",
+    "slug": "csv-checker",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Cleaner",
+    "slug": "csv-cleaner",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Template Maker",
+    "slug": "csv-template-maker",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Planner",
+    "slug": "csv-planner",
+    "category": "CSV"
+  },
+  {
+    "name": "CSV Inspector",
+    "slug": "csv-inspector",
+    "category": "CSV"
+  },
+  {
+    "name": "Regex tester",
+    "slug": "regex-tester",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex explainer",
+    "slug": "regex-explainer",
+    "category": "Regex"
+  },
+  {
+    "name": "Named group checker",
+    "slug": "named-group-checker",
+    "category": "Regex"
+  },
+  {
+    "name": "Find and replace lab",
+    "slug": "find-and-replace-lab",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Builder",
+    "slug": "regex-builder",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Estimator",
+    "slug": "regex-estimator",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Checker",
+    "slug": "regex-checker",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Cleaner",
+    "slug": "regex-cleaner",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Template Maker",
+    "slug": "regex-template-maker",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Planner",
+    "slug": "regex-planner",
+    "category": "Regex"
+  },
+  {
+    "name": "Regex Inspector",
+    "slug": "regex-inspector",
+    "category": "Regex"
+  },
+  {
+    "name": "SHA-256 hash",
+    "slug": "sha-256-hash",
+    "category": "Hash"
+  },
+  {
+    "name": "MD5 checksum",
+    "slug": "md5-checksum",
+    "category": "Hash"
+  },
+  {
+    "name": "HMAC generator",
+    "slug": "hmac-generator",
+    "category": "Hash"
+  },
+  {
+    "name": "File hash verifier",
+    "slug": "file-hash-verifier",
+    "category": "Hash"
+  },
+  {
+    "name": "bcrypt checker",
+    "slug": "bcrypt-checker",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Builder",
+    "slug": "hash-builder",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Estimator",
+    "slug": "hash-estimator",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Checker",
+    "slug": "hash-checker",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Cleaner",
+    "slug": "hash-cleaner",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Template Maker",
+    "slug": "hash-template-maker",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Planner",
+    "slug": "hash-planner",
+    "category": "Hash"
+  },
+  {
+    "name": "Hash Inspector",
+    "slug": "hash-inspector",
+    "category": "Hash"
+  },
+  {
+    "name": "CSP builder",
+    "slug": "csp-builder",
+    "category": "Security"
+  },
+  {
+    "name": "Password generator",
+    "slug": "password-generator",
+    "category": "Security"
+  },
+  {
+    "name": "TLS checker",
+    "slug": "tls-checker",
+    "category": "Security"
+  },
+  {
+    "name": "Secret redactor",
+    "slug": "secret-redactor",
+    "category": "Security"
+  },
+  {
+    "name": "Security Builder",
+    "slug": "security-builder",
+    "category": "Security"
+  },
+  {
+    "name": "Security Estimator",
+    "slug": "security-estimator",
+    "category": "Security"
+  },
+  {
+    "name": "Security Checker",
+    "slug": "security-checker",
+    "category": "Security"
+  },
+  {
+    "name": "Security Cleaner",
+    "slug": "security-cleaner",
+    "category": "Security"
+  },
+  {
+    "name": "Security Template Maker",
+    "slug": "security-template-maker",
+    "category": "Security"
+  },
+  {
+    "name": "Security Planner",
+    "slug": "security-planner",
+    "category": "Security"
+  },
+  {
+    "name": "Security Inspector",
+    "slug": "security-inspector",
+    "category": "Security"
+  },
+  {
+    "name": "CIDR calculator",
+    "slug": "cidr-calculator",
+    "category": "Networking"
+  },
+  {
+    "name": "DNS lookup helper",
+    "slug": "dns-lookup-helper",
+    "category": "Networking"
+  },
+  {
+    "name": "HTTP header parser",
+    "slug": "http-header-parser",
+    "category": "Networking"
+  },
+  {
+    "name": "Port reference",
+    "slug": "port-reference",
+    "category": "Networking"
+  },
+  {
+    "name": "IP range planner",
+    "slug": "ip-range-planner",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Builder",
+    "slug": "networking-builder",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Estimator",
+    "slug": "networking-estimator",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Checker",
+    "slug": "networking-checker",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Cleaner",
+    "slug": "networking-cleaner",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Template Maker",
+    "slug": "networking-template-maker",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Planner",
+    "slug": "networking-planner",
+    "category": "Networking"
+  },
+  {
+    "name": "Networking Inspector",
+    "slug": "networking-inspector",
+    "category": "Networking"
+  },
+  {
+    "name": "Cron explainer",
+    "slug": "cron-explainer",
+    "category": "DevOps"
+  },
+  {
+    "name": "Env diff",
+    "slug": "env-diff",
+    "category": "DevOps"
+  },
+  {
+    "name": "Kubernetes resource calculator",
+    "slug": "kubernetes-resource-calculator",
+    "category": "DevOps"
+  },
+  {
+    "name": "Log formatter",
+    "slug": "log-formatter",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Builder",
+    "slug": "devops-builder",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Estimator",
+    "slug": "devops-estimator",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Checker",
+    "slug": "devops-checker",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Cleaner",
+    "slug": "devops-cleaner",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Template Maker",
+    "slug": "devops-template-maker",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Planner",
+    "slug": "devops-planner",
+    "category": "DevOps"
+  },
+  {
+    "name": "DevOps Inspector",
+    "slug": "devops-inspector",
+    "category": "DevOps"
+  },
+  {
+    "name": "Bandwidth cost estimator",
+    "slug": "bandwidth-cost-estimator",
+    "category": "Cloud"
+  },
+  {
+    "name": "S3 policy helper",
+    "slug": "s3-policy-helper",
+    "category": "Cloud"
+  },
+  {
+    "name": "Region latency planner",
+    "slug": "region-latency-planner",
+    "category": "Cloud"
+  },
+  {
+    "name": "Instance comparer",
+    "slug": "instance-comparer",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud egress calculator",
+    "slug": "cloud-egress-calculator",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Builder",
+    "slug": "cloud-builder",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Estimator",
+    "slug": "cloud-estimator",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Checker",
+    "slug": "cloud-checker",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Cleaner",
+    "slug": "cloud-cleaner",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Template Maker",
+    "slug": "cloud-template-maker",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Planner",
+    "slug": "cloud-planner",
+    "category": "Cloud"
+  },
+  {
+    "name": "Cloud Inspector",
+    "slug": "cloud-inspector",
+    "category": "Cloud"
+  },
+  {
+    "name": "Commit message builder",
+    "slug": "commit-message-builder",
+    "category": "Git"
+  },
+  {
+    "name": "Patch viewer",
+    "slug": "patch-viewer",
+    "category": "Git"
+  },
+  {
+    "name": "Gitignore generator",
+    "slug": "gitignore-generator",
+    "category": "Git"
+  },
+  {
+    "name": "Semver helper",
+    "slug": "semver-helper",
+    "category": "Git"
+  },
+  {
+    "name": "Changelog formatter",
+    "slug": "changelog-formatter",
+    "category": "Git"
+  },
+  {
+    "name": "Git Builder",
+    "slug": "git-builder",
+    "category": "Git"
+  },
+  {
+    "name": "Git Estimator",
+    "slug": "git-estimator",
+    "category": "Git"
+  },
+  {
+    "name": "Git Checker",
+    "slug": "git-checker",
+    "category": "Git"
+  },
+  {
+    "name": "Git Cleaner",
+    "slug": "git-cleaner",
+    "category": "Git"
+  },
+  {
+    "name": "Git Template Maker",
+    "slug": "git-template-maker",
+    "category": "Git"
+  },
+  {
+    "name": "Git Planner",
+    "slug": "git-planner",
+    "category": "Git"
+  },
+  {
+    "name": "Git Inspector",
+    "slug": "git-inspector",
+    "category": "Git"
+  },
+  {
+    "name": "SQL formatter",
+    "slug": "sql-formatter",
+    "category": "Database"
+  },
+  {
+    "name": "Index planner",
+    "slug": "index-planner",
+    "category": "Database"
+  },
+  {
+    "name": "ERD helper",
+    "slug": "erd-helper",
+    "category": "Database"
+  },
+  {
+    "name": "Migration diff",
+    "slug": "migration-diff",
+    "category": "Database"
+  },
+  {
+    "name": "Query parameterizer",
+    "slug": "query-parameterizer",
+    "category": "Database"
+  },
+  {
+    "name": "Database Builder",
+    "slug": "database-builder",
+    "category": "Database"
+  },
+  {
+    "name": "Database Estimator",
+    "slug": "database-estimator",
+    "category": "Database"
+  },
+  {
+    "name": "Database Checker",
+    "slug": "database-checker",
+    "category": "Database"
+  },
+  {
+    "name": "Database Cleaner",
+    "slug": "database-cleaner",
+    "category": "Database"
+  },
+  {
+    "name": "Database Template Maker",
+    "slug": "database-template-maker",
+    "category": "Database"
+  },
+  {
+    "name": "Database Planner",
+    "slug": "database-planner",
+    "category": "Database"
+  },
+  {
+    "name": "Database Inspector",
+    "slug": "database-inspector",
+    "category": "Database"
+  },
+  {
+    "name": "MRR calculator",
+    "slug": "mrr-calculator",
+    "category": "Finance"
+  },
+  {
+    "name": "LTV calculator",
+    "slug": "ltv-calculator",
+    "category": "Finance"
+  },
+  {
+    "name": "Fee calculator",
+    "slug": "fee-calculator",
+    "category": "Finance"
+  },
+  {
+    "name": "Compound interest",
+    "slug": "compound-interest",
+    "category": "Finance"
+  },
+  {
+    "name": "Break-even planner",
+    "slug": "break-even-planner",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Builder",
+    "slug": "finance-builder",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Estimator",
+    "slug": "finance-estimator",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Checker",
+    "slug": "finance-checker",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Cleaner",
+    "slug": "finance-cleaner",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Template Maker",
+    "slug": "finance-template-maker",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Planner",
+    "slug": "finance-planner",
+    "category": "Finance"
+  },
+  {
+    "name": "Finance Inspector",
+    "slug": "finance-inspector",
+    "category": "Finance"
+  },
+  {
+    "name": "Percentage change",
+    "slug": "percentage-change",
+    "category": "Calculators"
+  },
+  {
+    "name": "Ratio simplifier",
+    "slug": "ratio-simplifier",
+    "category": "Calculators"
+  },
+  {
+    "name": "Average calculator",
+    "slug": "average-calculator",
+    "category": "Calculators"
+  },
+  {
+    "name": "Triangle solver",
+    "slug": "triangle-solver",
+    "category": "Calculators"
+  },
+  {
+    "name": "Rule of three",
+    "slug": "rule-of-three",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Builder",
+    "slug": "calculators-builder",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Estimator",
+    "slug": "calculators-estimator",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Checker",
+    "slug": "calculators-checker",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Cleaner",
+    "slug": "calculators-cleaner",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Template Maker",
+    "slug": "calculators-template-maker",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Planner",
+    "slug": "calculators-planner",
+    "category": "Calculators"
+  },
+  {
+    "name": "Calculators Inspector",
+    "slug": "calculators-inspector",
+    "category": "Calculators"
+  },
+  {
+    "name": "Length converter",
+    "slug": "length-converter",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Temperature converter",
+    "slug": "temperature-converter",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Area converter",
+    "slug": "area-converter",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Speed converter",
+    "slug": "speed-converter",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Energy converter",
+    "slug": "energy-converter",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Builder",
+    "slug": "unit-conversion-builder",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Estimator",
+    "slug": "unit-conversion-estimator",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Checker",
+    "slug": "unit-conversion-checker",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Cleaner",
+    "slug": "unit-conversion-cleaner",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Template Maker",
+    "slug": "unit-conversion-template-maker",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Planner",
+    "slug": "unit-conversion-planner",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unit Conversion Inspector",
+    "slug": "unit-conversion-inspector",
+    "category": "Unit Conversion"
+  },
+  {
+    "name": "Unix timestamp converter",
+    "slug": "unix-timestamp-converter",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Timezone planner",
+    "slug": "timezone-planner",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date difference",
+    "slug": "date-difference",
+    "category": "Date & Time"
+  },
+  {
+    "name": "ISO date formatter",
+    "slug": "iso-date-formatter",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Builder",
+    "slug": "date-and-time-builder",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Estimator",
+    "slug": "date-and-time-estimator",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Checker",
+    "slug": "date-and-time-checker",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Cleaner",
+    "slug": "date-and-time-cleaner",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Template Maker",
+    "slug": "date-and-time-template-maker",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Planner",
+    "slug": "date-and-time-planner",
+    "category": "Date & Time"
+  },
+  {
+    "name": "Date and Time Inspector",
+    "slug": "date-and-time-inspector",
+    "category": "Date & Time"
+  },
+  {
+    "name": "HEX to RGB",
+    "slug": "hex-to-rgb",
+    "category": "Color"
+  },
+  {
+    "name": "Palette generator",
+    "slug": "palette-generator",
+    "category": "Color"
+  },
+  {
+    "name": "Gradient builder",
+    "slug": "gradient-builder",
+    "category": "Color"
+  },
+  {
+    "name": "Contrast checker",
+    "slug": "contrast-checker",
+    "category": "Color"
+  },
+  {
+    "name": "Color blindness simulator",
+    "slug": "color-blindness-simulator",
+    "category": "Color"
+  },
+  {
+    "name": "Color Builder",
+    "slug": "color-builder",
+    "category": "Color"
+  },
+  {
+    "name": "Color Estimator",
+    "slug": "color-estimator",
+    "category": "Color"
+  },
+  {
+    "name": "Color Checker",
+    "slug": "color-checker",
+    "category": "Color"
+  },
+  {
+    "name": "Color Cleaner",
+    "slug": "color-cleaner",
+    "category": "Color"
+  },
+  {
+    "name": "Color Template Maker",
+    "slug": "color-template-maker",
+    "category": "Color"
+  },
+  {
+    "name": "Color Planner",
+    "slug": "color-planner",
+    "category": "Color"
+  },
+  {
+    "name": "Color Inspector",
+    "slug": "color-inspector",
+    "category": "Color"
+  },
+  {
+    "name": "Grid calculator",
+    "slug": "grid-calculator",
+    "category": "Design"
+  },
+  {
+    "name": "Spacing scale generator",
+    "slug": "spacing-scale-generator",
+    "category": "Design"
+  },
+  {
+    "name": "Icon resizer",
+    "slug": "icon-resizer",
+    "category": "Design"
+  },
+  {
+    "name": "Safe area helper",
+    "slug": "safe-area-helper",
+    "category": "Design"
+  },
+  {
+    "name": "Design token mapper",
+    "slug": "design-token-mapper",
+    "category": "Design"
+  },
+  {
+    "name": "Design Builder",
+    "slug": "design-builder",
+    "category": "Design"
+  },
+  {
+    "name": "Design Estimator",
+    "slug": "design-estimator",
+    "category": "Design"
+  },
+  {
+    "name": "Design Checker",
+    "slug": "design-checker",
+    "category": "Design"
+  },
+  {
+    "name": "Design Cleaner",
+    "slug": "design-cleaner",
+    "category": "Design"
+  },
+  {
+    "name": "Design Template Maker",
+    "slug": "design-template-maker",
+    "category": "Design"
+  },
+  {
+    "name": "Design Planner",
+    "slug": "design-planner",
+    "category": "Design"
+  },
+  {
+    "name": "Design Inspector",
+    "slug": "design-inspector",
+    "category": "Design"
+  },
+  {
+    "name": "Type scale generator",
+    "slug": "type-scale-generator",
+    "category": "Typography"
+  },
+  {
+    "name": "Line-height calculator",
+    "slug": "line-height-calculator",
+    "category": "Typography"
+  },
+  {
+    "name": "Fluid type builder",
+    "slug": "fluid-type-builder",
+    "category": "Typography"
+  },
+  {
+    "name": "Readability checker",
+    "slug": "readability-checker",
+    "category": "Typography"
+  },
+  {
+    "name": "Font fallback stack",
+    "slug": "font-fallback-stack",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Builder",
+    "slug": "typography-builder",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Estimator",
+    "slug": "typography-estimator",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Checker",
+    "slug": "typography-checker",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Cleaner",
+    "slug": "typography-cleaner",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Template Maker",
+    "slug": "typography-template-maker",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Planner",
+    "slug": "typography-planner",
+    "category": "Typography"
+  },
+  {
+    "name": "Typography Inspector",
+    "slug": "typography-inspector",
+    "category": "Typography"
+  },
+  {
+    "name": "ARIA role helper",
+    "slug": "aria-role-helper",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Alt text checker",
+    "slug": "alt-text-checker",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Focus order planner",
+    "slug": "focus-order-planner",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Contrast matrix",
+    "slug": "contrast-matrix",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Tap target checker",
+    "slug": "tap-target-checker",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Builder",
+    "slug": "accessibility-builder",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Estimator",
+    "slug": "accessibility-estimator",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Checker",
+    "slug": "accessibility-checker",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Cleaner",
+    "slug": "accessibility-cleaner",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Template Maker",
+    "slug": "accessibility-template-maker",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Planner",
+    "slug": "accessibility-planner",
+    "category": "Accessibility"
+  },
+  {
+    "name": "Accessibility Inspector",
+    "slug": "accessibility-inspector",
+    "category": "Accessibility"
+  },
+  {
+    "name": "User-agent parser",
+    "slug": "user-agent-parser",
+    "category": "Browser"
+  },
+  {
+    "name": "Viewport tester",
+    "slug": "viewport-tester",
+    "category": "Browser"
+  },
+  {
+    "name": "Cookie decoder",
+    "slug": "cookie-decoder",
+    "category": "Browser"
+  },
+  {
+    "name": "LocalStorage inspector",
+    "slug": "localstorage-inspector",
+    "category": "Browser"
+  },
+  {
+    "name": "Feature support checker",
+    "slug": "feature-support-checker",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Builder",
+    "slug": "browser-builder",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Estimator",
+    "slug": "browser-estimator",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Checker",
+    "slug": "browser-checker",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Cleaner",
+    "slug": "browser-cleaner",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Template Maker",
+    "slug": "browser-template-maker",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Planner",
+    "slug": "browser-planner",
+    "category": "Browser"
+  },
+  {
+    "name": "Browser Inspector",
+    "slug": "browser-inspector",
+    "category": "Browser"
+  },
+  {
+    "name": "Performance budget planner",
+    "slug": "performance-budget-planner",
+    "category": "Performance"
+  },
+  {
+    "name": "LCP image estimator",
+    "slug": "lcp-image-estimator",
+    "category": "Performance"
+  },
+  {
+    "name": "Bundle size calculator",
+    "slug": "bundle-size-calculator",
+    "category": "Performance"
+  },
+  {
+    "name": "CLS checklist",
+    "slug": "cls-checklist",
+    "category": "Performance"
+  },
+  {
+    "name": "Latency simulator",
+    "slug": "latency-simulator",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Builder",
+    "slug": "performance-builder",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Estimator",
+    "slug": "performance-estimator",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Checker",
+    "slug": "performance-checker",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Cleaner",
+    "slug": "performance-cleaner",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Template Maker",
+    "slug": "performance-template-maker",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Planner",
+    "slug": "performance-planner",
+    "category": "Performance"
+  },
+  {
+    "name": "Performance Inspector",
+    "slug": "performance-inspector",
+    "category": "Performance"
+  },
+  {
+    "name": "Checklist builder",
+    "slug": "checklist-builder",
+    "category": "Productivity"
+  },
+  {
+    "name": "Decision matrix",
+    "slug": "decision-matrix",
+    "category": "Productivity"
+  },
+  {
+    "name": "Pomodoro planner",
+    "slug": "pomodoro-planner",
+    "category": "Productivity"
+  },
+  {
+    "name": "Meeting notes formatter",
+    "slug": "meeting-notes-formatter",
+    "category": "Productivity"
+  },
+  {
+    "name": "CSV task importer",
+    "slug": "csv-task-importer",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Builder",
+    "slug": "productivity-builder",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Estimator",
+    "slug": "productivity-estimator",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Checker",
+    "slug": "productivity-checker",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Cleaner",
+    "slug": "productivity-cleaner",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Template Maker",
+    "slug": "productivity-template-maker",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Planner",
+    "slug": "productivity-planner",
+    "category": "Productivity"
+  },
+  {
+    "name": "Productivity Inspector",
+    "slug": "productivity-inspector",
+    "category": "Productivity"
+  },
+  {
+    "name": "Headline analyzer",
+    "slug": "headline-analyzer",
+    "category": "Writing"
+  },
+  {
+    "name": "Outline builder",
+    "slug": "outline-builder",
+    "category": "Writing"
+  },
+  {
+    "name": "Tone checker",
+    "slug": "tone-checker",
+    "category": "Writing"
+  },
+  {
+    "name": "Summary length planner",
+    "slug": "summary-length-planner",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Builder",
+    "slug": "writing-builder",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Estimator",
+    "slug": "writing-estimator",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Checker",
+    "slug": "writing-checker",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Cleaner",
+    "slug": "writing-cleaner",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Template Maker",
+    "slug": "writing-template-maker",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Planner",
+    "slug": "writing-planner",
+    "category": "Writing"
+  },
+  {
+    "name": "Writing Inspector",
+    "slug": "writing-inspector",
+    "category": "Writing"
+  },
+  {
+    "name": "GPA calculator",
+    "slug": "gpa-calculator",
+    "category": "Education"
+  },
+  {
+    "name": "Flashcard generator",
+    "slug": "flashcard-generator",
+    "category": "Education"
+  },
+  {
+    "name": "Citation formatter",
+    "slug": "citation-formatter",
+    "category": "Education"
+  },
+  {
+    "name": "Quiz builder",
+    "slug": "quiz-builder",
+    "category": "Education"
+  },
+  {
+    "name": "Study schedule planner",
+    "slug": "study-schedule-planner",
+    "category": "Education"
+  },
+  {
+    "name": "Education Builder",
+    "slug": "education-builder",
+    "category": "Education"
+  },
+  {
+    "name": "Education Estimator",
+    "slug": "education-estimator",
+    "category": "Education"
+  },
+  {
+    "name": "Education Checker",
+    "slug": "education-checker",
+    "category": "Education"
+  },
+  {
+    "name": "Education Cleaner",
+    "slug": "education-cleaner",
+    "category": "Education"
+  },
+  {
+    "name": "Education Template Maker",
+    "slug": "education-template-maker",
+    "category": "Education"
+  },
+  {
+    "name": "Education Planner",
+    "slug": "education-planner",
+    "category": "Education"
+  },
+  {
+    "name": "Education Inspector",
+    "slug": "education-inspector",
+    "category": "Education"
+  },
+  {
+    "name": "Column profiler",
+    "slug": "column-profiler",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Outlier detector",
+    "slug": "outlier-detector",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Sample size calculator",
+    "slug": "sample-size-calculator",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Correlation helper",
+    "slug": "correlation-helper",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data type detector",
+    "slug": "data-type-detector",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Builder",
+    "slug": "data-analysis-builder",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Estimator",
+    "slug": "data-analysis-estimator",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Checker",
+    "slug": "data-analysis-checker",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Cleaner",
+    "slug": "data-analysis-cleaner",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Template Maker",
+    "slug": "data-analysis-template-maker",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Planner",
+    "slug": "data-analysis-planner",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Data Analysis Inspector",
+    "slug": "data-analysis-inspector",
+    "category": "Data Analysis"
+  },
+  {
+    "name": "Chart chooser",
+    "slug": "chart-chooser",
+    "category": "Visualization"
+  },
+  {
+    "name": "Mermaid preview",
+    "slug": "mermaid-preview",
+    "category": "Visualization"
+  },
+  {
+    "name": "SVG chart builder",
+    "slug": "svg-chart-builder",
+    "category": "Visualization"
+  },
+  {
+    "name": "Sparkline generator",
+    "slug": "sparkline-generator",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Builder",
+    "slug": "visualization-builder",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Estimator",
+    "slug": "visualization-estimator",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Checker",
+    "slug": "visualization-checker",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Cleaner",
+    "slug": "visualization-cleaner",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Template Maker",
+    "slug": "visualization-template-maker",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Planner",
+    "slug": "visualization-planner",
+    "category": "Visualization"
+  },
+  {
+    "name": "Visualization Inspector",
+    "slug": "visualization-inspector",
+    "category": "Visualization"
+  },
+  {
+    "name": "API Builder",
+    "slug": "api-builder",
+    "category": "API"
+  },
+  {
+    "name": "API Estimator",
+    "slug": "api-estimator",
+    "category": "API"
+  },
+  {
+    "name": "API Checker",
+    "slug": "api-checker",
+    "category": "API"
+  },
+  {
+    "name": "API Cleaner",
+    "slug": "api-cleaner",
+    "category": "API"
+  },
+  {
+    "name": "API Template Maker",
+    "slug": "api-template-maker",
+    "category": "API"
+  },
+  {
+    "name": "API Planner",
+    "slug": "api-planner",
+    "category": "API"
+  },
+  {
+    "name": "API Inspector",
+    "slug": "api-inspector",
+    "category": "API"
+  },
+  {
+    "name": "Resource template planner",
+    "slug": "resource-template-planner",
+    "category": "MCP"
+  },
+  {
+    "name": "Server checklist",
+    "slug": "server-checklist",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Builder",
+    "slug": "mcp-builder",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Estimator",
+    "slug": "mcp-estimator",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Checker",
+    "slug": "mcp-checker",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Cleaner",
+    "slug": "mcp-cleaner",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Template Maker",
+    "slug": "mcp-template-maker",
+    "category": "MCP"
+  },
+  {
+    "name": "MCP Planner",
+    "slug": "mcp-planner",
+    "category": "MCP"
+  },
+  {
+    "name": "Agent task graph builder",
+    "slug": "agent-task-graph-builder",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "n8n workflow planner",
+    "slug": "n8n-workflow-planner",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Zapier formatter",
+    "slug": "zapier-formatter",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "ComfyUI prompt helper",
+    "slug": "comfyui-prompt-helper",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Handoff checklist",
+    "slug": "handoff-checklist",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Builder",
+    "slug": "automation-and-agents-builder",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Estimator",
+    "slug": "automation-and-agents-estimator",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Checker",
+    "slug": "automation-and-agents-checker",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Cleaner",
+    "slug": "automation-and-agents-cleaner",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Template Maker",
+    "slug": "automation-and-agents-template-maker",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Planner",
+    "slug": "automation-and-agents-planner",
+    "category": "Automation & Agents"
+  },
+  {
+    "name": "Automation and Agents Inspector",
+    "slug": "automation-and-agents-inspector",
+    "category": "Automation & Agents"
+  }
+]
