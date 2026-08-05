@@ -90,10 +90,10 @@
     const items = document.querySelectorAll('#cmd-search-results a[data-search-result]');
     items.forEach((item, i) => {
       if (i === index) {
-        item.classList.add('bg-hover', 'dark:bg-hover');
+        item.classList.add('bg-hover', 'dark:bg-hover-dark');
         item.scrollIntoView({ block: 'nearest' });
       } else {
-        item.classList.remove('bg-hover', 'dark:bg-hover');
+        item.classList.remove('bg-hover', 'dark:bg-hover-dark');
       }
     });
   }
@@ -141,8 +141,7 @@
       }
     });
 
-    // ⌘K / Ctrl+K to open (Commented out to prevent conflict with InlineToolSearch Cmd+K)
-    /*
+    // ⌘K / Ctrl+K to open
     document.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -154,7 +153,6 @@
         }
       }
     });
-    */
 
     // Search on input
     input?.addEventListener('input', () => {
@@ -198,7 +196,7 @@
               const el = document.createElement('a');
               el.href = data.url;
               el.setAttribute('data-search-result', '');
-              el.className = 'flex flex-col gap-4 px-12 py-12 rounded-8 transition-colors duration-100 hover:bg-hover dark:hover:bg-hover cursor-pointer block';
+              el.className = 'flex flex-col gap-4 px-12 py-12 rounded-8 transition-colors duration-100 hover:bg-hover dark:hover:bg-hover-dark cursor-pointer block';
               el.innerHTML = `
                 <span class="text-caption font-sans font-semibold text-ink dark:text-ink-dark line-clamp-1">${data.meta.title || 'Untitled'}</span>
                 <span class="text-xs font-sans text-ink2 dark:text-ink2-dark line-clamp-1">${data.excerpt || ''}</span>

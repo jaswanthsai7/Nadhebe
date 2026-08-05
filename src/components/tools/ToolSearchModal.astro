@@ -194,13 +194,15 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (!wrapper || wrapper.classList.contains('hidden')) {
-        // Intercept global Cmd+K to open tools modal IF we are on tools page
+        // Intercept global Cmd+K to open tools modal IF we are on tools page (Commented out)
+        /*
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
           // If a global search interceptor exists, we should probably stop propagation
           e.preventDefault();
           e.stopPropagation();
           openModal();
         }
+        */
         return;
       }
 
