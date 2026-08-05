@@ -1,0 +1,182 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'base64-encoder');
+if (!platformTool) throw new Error('Tool not found');
+
+const initialCode = `Hello World!
+Type or paste your text here to encode it into Base64 instantly.`;
+
+const faq = [
+  {
+    question: 'Is my data sent to a server?',
+    answer: 'No. The Base64 encoding and decoding runs entirely in your browser using JavaScript. No data is ever uploaded or stored.',
+  },
+  {
+    question: 'What is Base64?',
+    answer: 'Base64 is an encoding scheme that represents binary data in an ASCII string format. It is commonly used when there is a need to encode binary data that needs to be stored and transferred over media that are designed to deal with ASCII.',
+  },
+  {
+    question: 'Can I decode Base64 back to text?',
+    answer: 'Yes! We support two-way conversion. Just click the "Decode Base64" button in the workbench to switch modes, and paste your Base64 string to instantly convert it back to readable text.',
+  }
+];
+---
+
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser — Your data isn't uploaded
+      </span>
+      
+      <div class="flex bg-surface2 dark:bg-surface2-dark p-4 rounded-8 border border-border dark:border-border-dark">
+        <button id="mode-encode" class="px-12 py-4 rounded-6 text-xs font-semibold bg-accent text-white shadow-soft transition-all">Encode</button>
+        <button id="mode-decode" class="px-12 py-4 rounded-6 text-xs font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-all">Decode</button>
+      </div>
+    </div>
+
+    <!-- Standard workbench with our new base64 mode -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="base64" />
+  </div>
+
+  <div slot="content">
+    <h2>Instantly Encode and Decode Base64</h2>
+    <p>Our free Base64 encoder and decoder is designed for developers who need a quick, privacy-focused way to transform text and data strings without relying on server-side processing.</p>
+
+    <h3>How it works</h3>
+    <p>The tool uses the native JavaScript <code>btoa()</code> and <code>atob()</code> functions with UTF-8 encoding support to ensure that emojis, special characters, and non-English text are properly processed.</p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupBase64() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    const inputLabel = document.querySelector('.glass-panel:first-child .uppercase') as HTMLElement;
+    const outputLabel = document.querySelector('.glass-panel:last-child .uppercase') as HTMLElement;
+    
+    const btnFormat = document.getElementById('wb-btn-format');
+    const btnMinify = document.getElementById('wb-btn-minify');
+    
+    // Hide standard JSON buttons
+    if (btnFormat) btnFormat.style.display = 'none';
+    if (btnMinify) btnMinify.style.display = 'none';
+
+    const btnEncode = document.getElementById('mode-encode');
+    const btnDecode = document.getElementById('mode-decode');
+    
+    let mode = 'encode'; // 'encode' or 'decode'
+
+    // Helper for UTF-8 Base64 encoding
+    function utf8_to_b64(str: string) {
+      return window.btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+          function toSolidBytes(match, p1) {
+              return String.fromCharCode(Number('0x' + p1));
+      }));
+    }
+
+    // Helper for UTF-8 Base64 decoding
+    function b64_to_utf8(str: string) {
+      return decodeURIComponent(window.atob(str).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
+
+    function processBase64() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      
+      if (!raw) {
+        outputPre.textContent = '';
+        if (outputGutter) outputGutter.innerHTML = '1<br/>';
+        if (statusBadge) {
+          statusBadge.textContent = 'Waiting for input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
+        }
+        return;
+      }
+
+      try {
+        let result = '';
+        if (mode === 'encode') {
+          result = utf8_to_b64(raw);
+        } else {
+          // Remove whitespace from base64 string before decoding
+          const cleanRaw = raw.replace(/\\s/g, '');
+          result = b64_to_utf8(cleanRaw);
+        }
+        
+        outputPre.textContent = result;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          const lines = result.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= lines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = mode === 'encode' ? '✓ Encoded to Base64' : '✓ Decoded to Text';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+        }
+      } catch (err: any) {
+        outputPre.textContent = err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          outputGutter.innerHTML = '1<br/>';
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Invalid Input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (inputArea) inputArea.addEventListener('input', processBase64);
+    
+    if (btnEncode && btnDecode) {
+      btnEncode.addEventListener('click', () => {
+        mode = 'encode';
+        btnEncode.className = 'px-12 py-4 rounded-6 text-xs font-semibold bg-accent text-white shadow-soft transition-all';
+        btnDecode.className = 'px-12 py-4 rounded-6 text-xs font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-all';
+        
+        if (inputLabel) inputLabel.textContent = 'Plain Text';
+        if (outputLabel) outputLabel.textContent = 'Base64 Encoded';
+        
+        if (inputArea) {
+          inputArea.value = outputPre?.textContent || '';
+          processBase64();
+        }
+      });
+      
+      btnDecode.addEventListener('click', () => {
+        mode = 'decode';
+        btnDecode.className = 'px-12 py-4 rounded-6 text-xs font-semibold bg-accent text-white shadow-soft transition-all';
+        btnEncode.className = 'px-12 py-4 rounded-6 text-xs font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-all';
+        
+        if (inputLabel) inputLabel.textContent = 'Base64 Encoded';
+        if (outputLabel) outputLabel.textContent = 'Plain Text';
+        
+        if (inputArea) {
+          inputArea.value = outputPre?.textContent || '';
+          processBase64();
+        }
+      });
+    }
+
+    // Initial run
+    setTimeout(processBase64, 50);
+  }
+
+  setupBase64();
+</script>

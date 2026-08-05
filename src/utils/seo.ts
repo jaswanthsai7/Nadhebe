@@ -1,3 +1,5 @@
+import type { ToolDefinition } from '@/config/tool-schema';
+
 export interface SeoInput {
   title: string;
   description: string;
@@ -49,7 +51,7 @@ export function buildSeo(input: SeoInput): SeoMeta {
     ? (input.image.startsWith('http') ? input.image : new URL(input.image.replace(/^\//, ''), baseUrl).toString())
     : new URL('og-default.png', baseUrl).toString();
 
-  const title = input.title.length > 60 ? `${input.title.slice(0, 57)}...` : input.title;
+  const title = input.title; // Do not aggressively truncate title here, wait for rendering
   const description =
     input.description.length > 160 ? `${input.description.slice(0, 157)}...` : input.description;
 
@@ -74,4 +76,109 @@ export function buildSeo(input: SeoInput): SeoMeta {
     modifiedTime: (input.updatedDate ?? input.publishedDate)?.toISOString(),
     locale: input.locale ?? 'en_US',
   };
+}
+
+/** Generates a complete array of JSON-LD schemas for a ToolDefinition */
+export function generateToolJsonLd(tool: ToolDefinition, siteUrl: string): Record<string, any>[] {
+  const currentUrl = `${siteUrl.replace(/\/$/, '')}/tools/${tool.slug}/`;
+  
+  const webAppSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: tool.seo.title || tool.name,
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'All',
+    url: currentUrl,
+    description: tool.seo.description || tool.content.intro,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    softwareVersion: tool.lifecycle.version,
+    datePublished: tool.lifecycle.created,
+    dateModified: tool.lifecycle.lastUpdated,
+  };
+
+  const softwareSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    operatingSystem: 'All',
+    applicationCategory: 'DeveloperApplication',
+    url: currentUrl,
+    description: tool.seo.description || tool.content.intro,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    }
+  };
+
+  const faqSchema = tool.content.faq && tool.content.faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: tool.content.faq.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.example ? `${item.answer}\\n\\nExample:\\n${item.example}` : item.answer,
+      },
+    })),
+  } : null;
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Tools',
+        item: `${siteUrl.replace(/\/$/, '')}/tools/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: tool.name,
+        item: currentUrl,
+      }
+    ]
+  };
+
+  const howToSchema = tool.content.examples && tool.content.examples.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to use ${tool.name}`,
+    description: tool.content.intro,
+    step: tool.content.examples.map((ex, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: `Example: ${ex.explanation.slice(0, 30)}...`,
+      text: ex.explanation,
+      itemListElement: [
+        {
+          '@type': 'HowToDirection',
+          text: `Input: ${ex.input}`
+        },
+        {
+          '@type': 'HowToDirection',
+          text: `Output: ${ex.output}`
+        }
+      ]
+    }))
+  } : null;
+
+  const schemas = [webAppSchema, softwareSchema, breadcrumbSchema];
+  if (faqSchema) schemas.push(faqSchema);
+  if (howToSchema) schemas.push(howToSchema);
+
+  return schemas;
 }

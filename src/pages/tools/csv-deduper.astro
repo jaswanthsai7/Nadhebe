@@ -1,0 +1,148 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'csv-deduper');
+if (!platformTool) throw new Error('Tool not found');
+
+const initialCode = `id,name,email
+1,John Doe,john@example.com
+2,Jane Smith,jane@example.com
+1,John Doe,john@example.com
+3,Alice Johnson,alice@example.com
+2,Jane Smith,jane@example.com`;
+
+const faq = [
+  {
+    question: 'How does it find duplicates?',
+    answer: 'It compares the exact string contents of every row. If two rows are identical (including their columns), the second occurrence is removed.',
+  },
+  {
+    question: 'Is my CSV uploaded to a server?',
+    answer: 'No! The deduplication runs entirely on your device inside your web browser. We never see your data, making it completely secure for sensitive spreadsheets.',
+  }
+];
+---
+
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser
+      </span>
+      <div id="dedupe-stats" class="text-accent dark:text-accent-dark font-bold text-sm hidden">
+        Removed <span id="removed-count">0</span> duplicates
+      </div>
+    </div>
+
+    <!-- Standard workbench with our new csv-deduper mode -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="csv-deduper" />
+  </div>
+
+  <div slot="content">
+    <h2>Clean Your Spreadsheets Instantly</h2>
+    <p>Duplicate rows in CSV files can break data analysis, lead to double-billing in e-commerce, or ruin email marketing campaigns. This tool provides an instant, privacy-focused way to remove identical rows from any CSV string.</p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupCsvDeduper() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    
+    const statsContainer = document.getElementById('dedupe-stats');
+    const removedCountSpan = document.getElementById('removed-count');
+
+    const btnFormat = document.getElementById('wb-btn-format');
+    const btnMinify = document.getElementById('wb-btn-minify');
+    
+    // Hide standard JSON buttons
+    if (btnFormat) btnFormat.style.display = 'none';
+    if (btnMinify) btnMinify.style.display = 'none';
+
+    function processDedupe() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      
+      if (!raw) {
+        outputPre.textContent = '';
+        if (statsContainer) statsContainer.classList.add('hidden');
+        if (outputGutter) outputGutter.innerHTML = '1<br/>';
+        if (statusBadge) {
+          statusBadge.textContent = 'Waiting for input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
+        }
+        return;
+      }
+
+      try {
+        const lines = raw.split(/\\r?\\n/);
+        const seen = new Set();
+        const uniqueLines = [];
+        let duplicatesFound = 0;
+        
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) {
+            uniqueLines.push(line); // preserve empty lines if desired, or skip. Let's preserve empty lines.
+            continue;
+          }
+          
+          if (seen.has(trimmed)) {
+            duplicatesFound++;
+          } else {
+            seen.add(trimmed);
+            uniqueLines.push(line);
+          }
+        }
+        
+        const result = uniqueLines.join('\\n');
+        outputPre.textContent = result;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          const outLines = result.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= outLines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statsContainer && removedCountSpan) {
+          removedCountSpan.textContent = duplicatesFound.toString();
+          statsContainer.classList.remove('hidden');
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = duplicatesFound > 0 ? '✓ Duplicates Removed' : '✓ No Duplicates Found';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+        }
+      } catch (err: any) {
+        outputPre.textContent = err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          outputGutter.innerHTML = '1<br/>';
+        }
+
+        if (statsContainer) statsContainer.classList.add('hidden');
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Invalid Input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (inputArea) inputArea.addEventListener('input', processDedupe);
+    
+    // Initial run
+    setTimeout(processDedupe, 50);
+  }
+
+  setupCsvDeduper();
+</script>

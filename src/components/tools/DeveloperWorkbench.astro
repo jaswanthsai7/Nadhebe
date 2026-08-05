@@ -1,7 +1,7 @@
 ---
 interface Props {
   initialCode?: string;
-  toolMode?: 'formatter' | 'validator' | 'minifier' | 'json-to-xml' | 'yaml-to-json' | 'xml-formatter' | 'csv-to-json' | 'svg-to-jsx' | 'json-to-typescript' | 'json-repair' | 'json-path';
+  toolMode?: 'formatter' | 'validator' | 'minifier' | 'json-to-xml' | 'yaml-to-json' | 'xml-formatter' | 'csv-to-json' | 'svg-to-jsx' | 'json-to-typescript' | 'json-repair' | 'json-path' | 'base64' | 'case-converter' | 'csv-deduper' | 'xpath' | 'slug-generator' | 'dockerfile-linter';
   title?: string;
 }
 
@@ -623,6 +623,24 @@ const {
       } else if (toolMode === 'json-path') {
         if (inputLabel) inputLabel.textContent = 'Input JSON';
         if (outputLabel) outputLabel.textContent = 'Query Results';
+      } else if (toolMode === 'base64') {
+        if (inputLabel) inputLabel.textContent = 'Plain Text';
+        if (outputLabel) outputLabel.textContent = 'Base64 Encoded';
+      } else if (toolMode === 'case-converter') {
+        if (inputLabel) inputLabel.textContent = 'Input Text';
+        if (outputLabel) outputLabel.textContent = 'Converted Text';
+      } else if (toolMode === 'csv-deduper') {
+        if (inputLabel) inputLabel.textContent = 'Input CSV';
+        if (outputLabel) outputLabel.textContent = 'Deduplicated CSV';
+      } else if (toolMode === 'xpath') {
+        if (inputLabel) inputLabel.textContent = 'Input XML';
+        if (outputLabel) outputLabel.textContent = 'Query Results';
+      } else if (toolMode === 'slug-generator') {
+        if (inputLabel) inputLabel.textContent = 'Input Text';
+        if (outputLabel) outputLabel.textContent = 'Generated Slug';
+      } else if (toolMode === 'dockerfile-linter') {
+        if (inputLabel) inputLabel.textContent = 'Dockerfile';
+        if (outputLabel) outputLabel.textContent = 'Lint Report';
       } else {
         if (inputLabel) inputLabel.textContent = 'Input JSON';
         if (outputLabel) outputLabel.textContent = 'Formatted JSON';

@@ -1,0 +1,202 @@
+---
+import ToolLayout from '@/components/tools/NewToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { dockerfileLinterData } from '@/config/tools-data/dockerfile-linter';
+
+const initialCode = `FROM node:latest
+COPY . .
+WORKDIR /app
+RUN npm install
+RUN npm run build
+CMD ["npm", "start"]`;
+---
+
+<ToolLayout tool={dockerfileLinterData}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser
+      </span>
+    </div>
+
+    <!-- Standard workbench with dockerfile-linter mode -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="dockerfile-linter" />
+  </div>
+</ToolLayout>
+
+<script>
+  function setupDockerfileLinter() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    
+    const btnFormat = document.getElementById('wb-btn-format');
+    const btnMinify = document.getElementById('wb-btn-minify');
+    
+    if (btnFormat) btnFormat.style.display = 'none';
+    if (btnMinify) btnMinify.style.display = 'none';
+
+    function lint() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      
+      if (!raw) {
+        outputPre.textContent = '';
+        if (outputGutter) outputGutter.innerHTML = '1<br/>';
+        if (statusBadge) {
+          statusBadge.textContent = 'Waiting for input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
+        }
+        return;
+      }
+
+      try {
+        const lines = raw.split('\\n').map(l => l.trim());
+        const issues: string[] = [];
+
+        let hasExpose = false;
+        let hasWorkdir = false;
+        let hasCmd = 0;
+        let hasEntrypoint = 0;
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const lineNum = i + 1;
+          const upperLine = line.toUpperCase();
+
+          if (upperLine.startsWith('FROM ')) {
+             const parts = line.split(' ');
+             const image = parts[1];
+             if (image && (image.endsWith(':latest') || !image.includes(':'))) {
+                 issues.push('Line ' + lineNum + ': [' + image + '] Avoid using \'latest\' tag. Pin your base image to a specific version.');
+             }
+          }
+
+          if (upperLine.startsWith('WORKDIR ')) {
+             hasWorkdir = true;
+          }
+
+          if (upperLine.startsWith('EXPOSE ')) {
+             hasExpose = true;
+          }
+
+          if (upperLine.startsWith('COPY ') || upperLine.startsWith('ADD ')) {
+             if (!hasWorkdir) {
+                 issues.push('Line ' + lineNum + ': Specify WORKDIR before COPYing files to prevent root directory clutter.');
+             }
+             if (upperLine.startsWith('ADD ')) {
+                 const isTar = line.includes('.tar') || line.includes('.gz');
+                 const isHttp = line.includes('http://') || line.includes('https://');
+                 if (!isTar && !isHttp) {
+                     issues.push('Line ' + lineNum + ': Use COPY instead of ADD for copying local files and directories.');
+                 }
+             }
+          }
+
+          if (upperLine.startsWith('CMD ')) {
+             hasCmd++;
+          }
+          if (upperLine.startsWith('ENTRYPOINT ')) {
+             hasEntrypoint++;
+          }
+
+          if (upperLine.startsWith('RUN ')) {
+             if (line.includes('apt-get install') && !line.includes('rm -rf /var/lib/apt/lists')) {
+                 issues.push('Line ' + lineNum + ': Missing \'rm -rf /var/lib/apt/lists/*\' after apt-get install to keep image size small.');
+             }
+             if (line.includes('apt-get upgrade') || line.includes('apk upgrade')) {
+                 issues.push('Line ' + lineNum + ': Avoid using upgrade commands in Dockerfiles. Update the base image instead.');
+             }
+             if (line.includes('apk add') && !line.includes('--no-cache')) {
+                 issues.push('Line ' + lineNum + ': Use \'--no-cache\' with apk add to keep image size small.');
+             }
+             if (line.includes('npm install') && !line.includes('npm cache clean')) {
+                 // Warning, not always critical but good practice
+                 // issues.push('Line ' + lineNum + ': Consider cleaning npm cache after install.');
+             }
+          }
+
+          if (upperLine.startsWith('USER root')) {
+             issues.push('Line ' + lineNum + ': Avoid running containers as root if possible.');
+          }
+        }
+
+        if (!hasExpose) {
+           issues.push('General: Consider adding an EXPOSE instruction to document container network ports.');
+        }
+
+        if (hasCmd > 1) {
+           issues.push('General: Multiple CMD instructions found. Only the last one will take effect.');
+        }
+
+        if (hasEntrypoint > 1) {
+           issues.push('General: Multiple ENTRYPOINT instructions found. Only the last one will take effect.');
+        }
+
+        // Detect consecutive RUNs
+        let consecutiveRuns = 0;
+        let inRun = false;
+        for (let i = 0; i < lines.length; i++) {
+           const line = lines[i];
+           if (line.toUpperCase().startsWith('RUN ')) {
+              consecutiveRuns++;
+           } else if (line !== '' && !line.startsWith('#')) {
+              if (consecutiveRuns > 1) {
+                  issues.push('General: Found ' + consecutiveRuns + ' consecutive RUN instructions (near line ' + i + '). Combine them with \'&&\' to reduce image layers.');
+              }
+              consecutiveRuns = 0;
+           }
+        }
+
+        if (issues.length === 0) {
+          const result = '✓ No optimization issues found! Your Dockerfile looks great.';
+          outputPre.textContent = result;
+          outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+          if (statusBadge) {
+            statusBadge.textContent = 'Passed';
+            statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+          }
+        } else {
+          const result = 'Found ' + issues.length + ' Dockerfile optimization suggestion' + (issues.length === 1 ? '' : 's') + ':\\n\\n' + issues.map((iss, i) => (i + 1) + '. ' + iss).join('\\n\\n');
+          outputPre.textContent = result;
+          outputPre.className = 'flex-1 p-12 font-mono text-caption text-amber-600 dark:text-amber-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+          
+          if (statusBadge) {
+            statusBadge.textContent = issues.length + ' Issues';
+            statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-amber-600 bg-amber-500/10 dark:text-amber-400';
+          }
+        }
+
+        if (outputGutter) {
+          const outLines = outputPre.textContent?.split('\\n').length || 1;
+          let gutterHTML = '';
+          for (let i = 1; i <= outLines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+      } catch (err: any) {
+        outputPre.textContent = err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          outputGutter.innerHTML = '1<br/>';
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Error';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (inputArea) inputArea.addEventListener('input', lint);
+    
+    // Initial run
+    setTimeout(lint, 50);
+  }
+
+  setupDockerfileLinter();
+</script>

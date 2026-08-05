@@ -1,0 +1,191 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'env-diff');
+if (!platformTool) throw new Error('Tool not found');
+
+const faq = [
+  {
+    question: 'Are my .env secrets sent to a server?',
+    answer: 'Absolutely not. This entire tool runs locally in your browser. Your environment variables, secrets, and API keys are never uploaded or stored anywhere.',
+  },
+  {
+    question: 'What does this tool do?',
+    answer: 'It compares two .env files side-by-side and highlights missing keys, extra keys, and matching keys with different values. This is incredibly useful for ensuring your local .env matches your production .env or .env.example.',
+  },
+  {
+    question: 'Does it support comments and quotes?',
+    answer: 'Yes, it intelligently parses standard .env formats, ignoring comments (#) and correctly handling quoted values.',
+  }
+];
+---
+
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="space-y-16 py-8 max-w-[1400px] mx-auto">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ 100% Local — Your secrets never leave the browser
+      </span>
+      <button id="btn-compare" class="px-16 py-6 rounded-8 text-xs font-bold bg-accent text-white shadow-soft hover:opacity-90 active:scale-95 transition-all uppercase tracking-wider">Compare Files</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
+      <!-- Env A -->
+      <div class="glass-panel flex flex-col rounded-16 border border-border bg-surface/95 overflow-hidden shadow-medium dark:border-border-dark dark:bg-surface-dark/95 min-h-[300px]">
+        <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-16 py-12 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+          <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">.env (Source / Local)</span>
+        </div>
+        <textarea id="env-a" class="flex-1 w-full p-16 font-mono text-caption text-ink dark:text-ink-dark bg-transparent resize-none outline-none leading-relaxed" placeholder="PORT=3000\nAPI_KEY=local_secret\nDEBUG=true"></textarea>
+      </div>
+
+      <!-- Env B -->
+      <div class="glass-panel flex flex-col rounded-16 border border-border bg-surface/95 overflow-hidden shadow-medium dark:border-border-dark dark:bg-surface-dark/95 min-h-[300px]">
+        <div class="flex items-center justify-between border-b border-border/80 bg-surface2/60 px-16 py-12 dark:border-border-dark/80 dark:bg-surface2-dark/60">
+          <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">.env.example (Target / Prod)</span>
+        </div>
+        <textarea id="env-b" class="flex-1 w-full p-16 font-mono text-caption text-ink dark:text-ink-dark bg-transparent resize-none outline-none leading-relaxed" placeholder="PORT=8080\nAPI_KEY=\nDB_HOST=localhost"></textarea>
+      </div>
+    </div>
+    
+    <!-- Output Diff -->
+    <div class="glass-panel flex flex-col rounded-16 border border-border bg-code overflow-hidden shadow-medium dark:border-border-dark dark:bg-code-dark min-h-[250px] mt-16">
+      <div class="flex items-center justify-between border-b border-border/40 bg-surface2/40 px-16 py-12 dark:border-border-dark/40 dark:bg-surface2-dark/40">
+        <span class="font-mono text-xs font-bold uppercase text-ink dark:text-ink-dark">Diff Results</span>
+        <div class="flex gap-16 text-xs font-mono font-semibold">
+          <span class="text-danger dark:text-danger-dark">Missing Keys</span>
+          <span class="text-amber-600 dark:text-amber-400">Value Mismatches</span>
+          <span class="text-emerald-600 dark:text-emerald-400">Extra Keys</span>
+        </div>
+      </div>
+      <div id="diff-output" class="flex-1 p-16 font-mono text-sm leading-relaxed overflow-y-auto space-y-4">
+        <div class="text-muted dark:text-muted-dark opacity-60 flex items-center justify-center h-full">Click "Compare Files" or type to see differences.</div>
+      </div>
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Securely Compare .env Files</h2>
+    <p>Managing environment variables across different environments (local, staging, production) is a common source of bugs. Missing an API key or having a typo in a database URL can bring down your app. This tool allows you to securely compare your `.env` file against `.env.example` or another environment file to instantly spot missing keys or differences.</p>
+
+    <h3>Privacy First</h3>
+    <p>Because `.env` files contain highly sensitive secrets, passwords, and tokens, you should never paste them into random online tools. Our env-diff tool processes everything 100% locally in your browser. No data is sent to our servers.</p>
+  </div>
+</ToolLayout>
+
+<script>
+  function setupEnvDiff() {
+    const envA = document.getElementById('env-a') as HTMLTextAreaElement;
+    const envB = document.getElementById('env-b') as HTMLTextAreaElement;
+    const diffOut = document.getElementById('diff-output');
+    const btnCompare = document.getElementById('btn-compare');
+
+    function parseEnv(str: string) {
+      const obj: Record<string, string> = {};
+      const lines = str.split('\\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        // Ignore comments and empty lines
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        
+        // Find first equals sign
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          let val = trimmed.slice(eqIdx + 1).trim();
+          
+          // Remove quotes if present
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          
+          obj[key] = val;
+        }
+      }
+      return obj;
+    }
+
+    function compare() {
+      if (!envA || !envB || !diffOut) return;
+      
+      const strA = envA.value;
+      const strB = envB.value;
+      
+      if (!strA && !strB) {
+        diffOut.innerHTML = '<div class="text-muted dark:text-muted-dark opacity-60 flex items-center justify-center h-full">Enter environment variables to see diff.</div>';
+        return;
+      }
+      
+      const objA = parseEnv(strA);
+      const objB = parseEnv(strB);
+      
+      const keysA = Object.keys(objA);
+      const keysB = Object.keys(objB);
+      
+      let html = '';
+      
+      // Missing in A (Present in B, not in A)
+      const missingInA = keysB.filter(k => !(k in objA));
+      if (missingInA.length > 0) {
+        html += '<div class="mb-12"><div class="text-xs font-bold text-danger dark:text-danger-dark mb-4 uppercase tracking-wider">Missing in Source (Found in Target)</div>';
+        missingInA.forEach(k => {
+          html += '<div class="py-2 px-8 bg-danger/10 text-danger dark:text-danger-dark rounded mb-2 border border-danger/20">- ' + k + ' (Target has: "' + objB[k] + '")</div>';
+        });
+        html += '</div>';
+      }
+      
+      // Extra in A (Present in A, not in B)
+      const extraInA = keysA.filter(k => !(k in objB));
+      if (extraInA.length > 0) {
+        html += '<div class="mb-12"><div class="text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-wider">Extra in Source (Not in Target)</div>';
+        extraInA.forEach(k => {
+          html += '<div class="py-2 px-8 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 rounded mb-2 border border-emerald-500/20">+ ' + k + ' (Source has: "' + objA[k] + '")</div>';
+        });
+        html += '</div>';
+      }
+      
+      // Value Mismatches
+      const mismatches = keysA.filter(k => (k in objB) && objA[k] !== objB[k]);
+      if (mismatches.length > 0) {
+        html += '<div class="mb-12"><div class="text-xs font-bold text-amber-600 dark:text-amber-400 mb-4 uppercase tracking-wider">Value Mismatches</div>';
+        mismatches.forEach(k => {
+          html += '<div class="py-4 px-8 bg-amber-500/10 text-amber-700 dark:text-amber-400 rounded mb-2 border border-amber-500/20">\\n' +
+            '<div>~ <strong>' + k + '</strong></div>\\n' +
+            '<div class="pl-12 opacity-80 mt-2 text-xs">Source: "' + objA[k] + '"</div>\\n' +
+            '<div class="pl-12 opacity-80 mt-1 text-xs">Target: "' + objB[k] + '"</div>\\n' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+      
+      // Perfect Matches
+      const matches = keysA.filter(k => (k in objB) && objA[k] === objB[k]);
+      if (matches.length > 0) {
+        html += '<div class="mb-12"><div class="text-xs font-bold text-muted dark:text-muted-dark mb-4 uppercase tracking-wider">Perfect Matches</div>';
+        matches.forEach(k => {
+          html += `<div class="py-2 px-8 text-muted dark:text-muted-dark rounded mb-2 opacity-60">✓ \${k}</div>`;
+        });
+        html += '</div>';
+      }
+      
+      if (!html) {
+        html = '<div class="text-emerald-600 dark:text-emerald-400 font-bold flex items-center justify-center h-full">✓ Both files are perfectly identical!</div>';
+      }
+      
+      diffOut.innerHTML = html;
+    }
+
+    if (envA) envA.addEventListener('input', compare);
+    if (envB) envB.addEventListener('input', compare);
+    if (btnCompare) btnCompare.addEventListener('click', compare);
+    
+    // Default load sample
+    if (envA && envB && !envA.value && !envB.value) {
+      envA.value = "PORT=3000\\nDB_URL=localhost\\nSECRET_KEY=super_secret_local\\nDEBUG_MODE=true";
+      envB.value = "PORT=8080\\nDB_URL=\\nSECRET_KEY=\\nANALYTICS_KEY=abc_123";
+      compare();
+    }
+  }
+
+  setupEnvDiff();
+</script>

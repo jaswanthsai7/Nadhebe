@@ -1,0 +1,126 @@
+---
+import ToolLayout from '@/components/tools/NewToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { slugGeneratorData } from '@/config/tools-data/slug-generator';
+
+const initialCode = `Build 500+ Browser Native Tools!
+It's going to be awesome & super fast.`;
+---
+
+<ToolLayout tool={slugGeneratorData}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser
+      </span>
+    </div>
+
+    <!-- Slug Generator Toolbar -->
+    <div class="glass-panel p-16 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-medium relative z-20 flex flex-wrap gap-16 justify-center">
+       <div class="flex items-center gap-8">
+         <input type="checkbox" id="opt-lower" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+         <label for="opt-lower" class="text-sm font-medium text-ink dark:text-ink-dark cursor-pointer">Lowercase</label>
+       </div>
+       <div class="flex items-center gap-8">
+         <label class="text-sm font-medium text-ink dark:text-ink-dark">Separator:</label>
+         <select id="opt-separator" class="bg-surface border border-border dark:bg-surface-dark dark:border-border-dark text-sm rounded px-8 py-4 outline-none cursor-pointer">
+            <option value="-">Dash (-)</option>
+            <option value="_">Underscore (_)</option>
+            <option value="">None</option>
+         </select>
+       </div>
+    </div>
+
+    <DeveloperWorkbench initialCode={initialCode} toolMode="slug-generator" />
+  </div>
+</ToolLayout>
+
+<script>
+  import slugify from 'slugify';
+
+  function setupSlugGenerator() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    
+    const optLower = document.getElementById('opt-lower') as HTMLInputElement;
+    const optSeparator = document.getElementById('opt-separator') as HTMLSelectElement;
+
+    const btnFormat = document.getElementById('wb-btn-format');
+    const btnMinify = document.getElementById('wb-btn-minify');
+    
+    if (btnFormat) btnFormat.style.display = 'none';
+    if (btnMinify) btnMinify.style.display = 'none';
+
+    function generate() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      
+      if (!raw) {
+        outputPre.textContent = '';
+        if (outputGutter) outputGutter.innerHTML = '1<br/>';
+        if (statusBadge) {
+          statusBadge.textContent = 'Waiting for input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
+        }
+        return;
+      }
+
+      try {
+        const lines = raw.split('\\n');
+        
+        const config = {
+          replacement: optSeparator.value,
+          lower: optLower.checked,
+          strict: true, // strip special characters
+          trim: true
+        };
+
+        const convertedLines = lines.map(line => {
+          if (!line.trim()) return line;
+          return slugify(line, config);
+        });
+        
+        const result = convertedLines.join('\\n');
+        outputPre.textContent = result;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          const outLines = result.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= outLines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = '✓ Generated';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+        }
+      } catch (err: any) {
+        outputPre.textContent = err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        
+        if (outputGutter) {
+          outputGutter.innerHTML = '1<br/>';
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Error';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (inputArea) inputArea.addEventListener('input', generate);
+    if (optLower) optLower.addEventListener('change', generate);
+    if (optSeparator) optSeparator.addEventListener('change', generate);
+    
+    // Initial run
+    setTimeout(generate, 50);
+  }
+
+  setupSlugGenerator();
+</script>

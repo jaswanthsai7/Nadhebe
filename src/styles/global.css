@@ -62,6 +62,13 @@ html.dark {
       scroll-behavior: auto !important;
     }
   }
+
+  textarea.font-mono,
+  input.font-mono,
+  .no-ligatures {
+    font-variant-ligatures: none !important;
+    font-feature-settings: "calt" 0, "liga" 0, "dlig" 0 !important;
+  }
 }
 
 @layer components {

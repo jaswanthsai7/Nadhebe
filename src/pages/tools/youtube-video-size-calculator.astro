@@ -197,9 +197,9 @@ const faq = [
       const cRect = fmtContainer.getBoundingClientRect();
       const bRect = activeBtn.getBoundingClientRect();
       fmtSlider.style.opacity = '1';
-      fmtSlider.style.width = `${bRect.width}px`;
-      fmtSlider.style.height = `${bRect.height}px`;
-      fmtSlider.style.transform = `translate3d(${bRect.left - cRect.left}px, ${bRect.top - cRect.top}px, 0)`;
+      fmtSlider.style.width = bRect.width + 'px';
+      fmtSlider.style.height = bRect.height + 'px';
+      fmtSlider.style.transform = 'translate3d(' + (bRect.left - cRect.left) + 'px, ' + (bRect.top - cRect.top) + 'px, 0)';
     }
 
     function calculate(source) {
@@ -223,9 +223,9 @@ const faq = [
       const total = w * h;
       const mp = (total / 1000000).toFixed(2);
 
-      if (resDim) resDim.textContent = `${w} × ${h}`;
-      if (resRatio) resRatio.textContent = `${rw}:${rh}`;
-      if (resMp) resMp.textContent = `${mp} MP`;
+      if (resDim) resDim.textContent = w + ' × ' + h;
+      if (resRatio) resRatio.textContent = rw + ':' + rh;
+      if (resMp) resMp.textContent = mp + ' MP';
 
       let qClass = 'Custom Resolution';
       if (w === 3840 || h === 3840) qClass = '4K Ultra HD';
@@ -242,8 +242,8 @@ const faq = [
 
       const labelText = currentFmt === '9:16' ? '9:16 Shorts' : (currentFmt === '1:1' ? '1:1 Square' : '16:9 Widescreen');
 
-      if (vizDims) vizDims.textContent = `${w} × ${h}`;
-      if (vizBadge) vizBadge.textContent = `${rw}:${rh} (${w}×${h})`;
+      if (vizDims) vizDims.textContent = w + ' × ' + h;
+      if (vizBadge) vizBadge.textContent = rw + ':' + rh + ' (' + w + '×' + h + ')';
       if (vizText) vizText.textContent = labelText;
 
       if (vizRect) {
@@ -252,8 +252,8 @@ const faq = [
         const scale = Math.min(maxW / w, maxH / h);
         const boxW = Math.max(50, Math.round(w * scale));
         const boxH = Math.max(50, Math.round(h * scale));
-        vizRect.style.width = `${boxW}px`;
-        vizRect.style.height = `${boxH}px`;
+        vizRect.style.width = boxW + 'px';
+        vizRect.style.height = boxH + 'px';
       }
     }
 
