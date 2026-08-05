@@ -87,8 +87,8 @@ const toolsDirectorySchema = {
       <!-- Taller & Centered Live Inline Search Input with Dropdown (Positioned ABOVE Categories) -->
       <InlineToolSearch />
 
-      <!-- Category Filter Tabs (Expanded Full Width to Edge with Hidden Scrollbars) -->
-      <nav class="flex flex-nowrap md:flex-wrap items-center gap-8 p-6 rounded-16 border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden" style="scrollbar-width: none; -ms-overflow-style: none;" aria-label="Tool Category Filters" id="tools-category-tabs">
+      <!-- Category Filter Tabs (Single Horizontal Scrollable Row) -->
+      <nav class="flex flex-nowrap items-center gap-8 p-6 rounded-16 border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60 w-full overflow-x-auto custom-scrollbar" aria-label="Tool Category Filters" id="tools-category-tabs">
         <button
           type="button"
           data-category-filter="all"
@@ -235,6 +235,20 @@ const toolsDirectorySchema = {
 
   :global(.dark) .tool-directory-card::before {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(161, 161, 170, 0.3);
+    border-radius: 20px;
+  }
+  :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(161, 161, 170, 0.2);
   }
 </style>
 
