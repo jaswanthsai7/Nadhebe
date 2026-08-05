@@ -1,0 +1,139 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'json-repair');
+if (!platformTool) throw new Error('Tool not found');
+
+const initialCode = `{
+  name: 'Broken JSON',
+  "unquoted": value,
+  'single_quotes': 'yes',
+  trailing_comma: true,
+}`;
+
+const faq = [
+  {
+    question: 'Is my data sent to a server?',
+    answer: 'No. The JSON repair runs entirely in your browser using JavaScript. No data is ever uploaded or stored.',
+  },
+  {
+    question: 'What kind of broken JSON can this tool fix?',
+    answer: 'This tool can repair unquoted keys, single-quoted keys and values, trailing commas, missing commas, comments (// and /* */), and missing quotes.',
+  },
+  {
+    question: 'Is this tool free?',
+    answer: 'Yes, our JSON repair tool is 100% free with no limits.',
+  },
+];
+---
+
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser — Your data isn't uploaded
+      </span>
+    </div>
+
+    <!-- Standard workbench with our new json-repair mode -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="json-repair" />
+  </div>
+
+  <div slot="content">
+    <h2>Instantly Fix Broken JSON</h2>
+    <p>JSON is strict. A single missing quote, trailing comma, or misplaced comment can break your entire application. Our JSON repair tool uses advanced heuristics to automatically fix common JSON syntax errors so you don't have to manually hunt them down.</p>
+
+    <h3>Common JSON errors fixed:</h3>
+    <ul>
+      <li>Removing trailing commas</li>
+      <li>Adding missing quotes around keys and string values</li>
+      <li>Converting single quotes to double quotes</li>
+      <li>Removing JavaScript-style comments</li>
+      <li>Fixing unescaped characters in strings</li>
+    </ul>
+  </div>
+</ToolLayout>
+
+<script>
+  import { jsonrepair } from 'jsonrepair';
+
+  function setupRepair() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    const selectIndent = document.getElementById('wb-select-indent') as HTMLInputElement;
+    const formatBtn = document.getElementById('wb-btn-format');
+    const minifyBtn = document.getElementById('wb-btn-minify');
+
+    // Hide unnecessary buttons since it auto-repairs
+    if (formatBtn) formatBtn.style.display = 'none';
+    if (minifyBtn) minifyBtn.style.display = 'none';
+
+    function doRepair() {
+      if (!inputArea || !outputPre) return;
+      const raw = inputArea.value;
+      if (!raw.trim()) {
+        outputPre.textContent = '';
+        if (outputGutter) outputGutter.innerHTML = '1<br/>';
+        if (statusBadge) {
+          statusBadge.textContent = 'Waiting for input';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
+        }
+        return;
+      }
+
+      try {
+        const repaired = jsonrepair(raw);
+        const indentVal = selectIndent?.value === 'tab' ? '\t' : Number(selectIndent?.value || 2);
+        const formatted = JSON.stringify(JSON.parse(repaired), null, indentVal);
+        
+        outputPre.textContent = formatted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        
+        if (outputGutter) {
+          const lines = formatted.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= lines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = '✓ Successfully Repaired JSON';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+        }
+      } catch (err: any) {
+        outputPre.textContent = 'Could not automatically repair JSON:\\n' + err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
+        
+        if (outputGutter) {
+          const lines = (outputPre.textContent.match(/\\n/g) || []).length + 1;
+          let gutterHTML = '';
+          for (let i = 1; i <= lines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Repair Failed';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (inputArea) {
+      inputArea.addEventListener('input', doRepair);
+    }
+    
+    // Initial run
+    setTimeout(doRepair, 50);
+  }
+
+  // Setup immediately
+  setupRepair();
+</script>

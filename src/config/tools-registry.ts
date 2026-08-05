@@ -5631,7 +5631,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "JSON repair",
     "href": "/tools/json-repair/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "JSON",
     "categorySlug": "json",
     "mode": "calculator",

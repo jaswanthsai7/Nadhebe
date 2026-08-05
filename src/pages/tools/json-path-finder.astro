@@ -1,0 +1,171 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'json-path-finder');
+if (!platformTool) throw new Error('Tool not found');
+
+const initialCode = `{
+  "store": {
+    "book": [
+      {
+        "category": "reference",
+        "author": "Nigel Rees",
+        "title": "Sayings of the Century",
+        "price": 8.95
+      },
+      {
+        "category": "fiction",
+        "author": "Evelyn Waugh",
+        "title": "Sword of Honour",
+        "price": 12.99
+      },
+      {
+        "category": "fiction",
+        "author": "Herman Melville",
+        "title": "Moby Dick",
+        "isbn": "0-553-21311-3",
+        "price": 8.99
+      }
+    ],
+    "bicycle": {
+      "color": "red",
+      "price": 19.95
+    }
+  }
+}`;
+
+const faq = [
+  {
+    question: 'Is my JSON data sent to any server?',
+    answer: 'No. The JSONPath extraction runs entirely in your browser. No data is ever uploaded or stored.',
+  },
+  {
+    question: 'What JSONPath syntax is supported?',
+    answer: 'We support the full standard JSONPath specification, including filters (e.g., `?(@.price < 10)`), wildcards (`*`), deep scans (`..`), and array slices (`[0:2]`).',
+  },
+  {
+    question: 'How do I query the root object?',
+    answer: 'The root object is always represented by the `$` symbol. For example, `$.store.book` gets the book array from the root store object.',
+  },
+];
+---
+
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="space-y-16">
+    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
+        ✓ Runs locally in your browser — Your data isn't uploaded
+      </span>
+    </div>
+
+    <!-- JSONPath Query Input box placed right above the workbench -->
+    <div class="glass-panel p-16 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-medium relative z-20">
+       <label class="block text-xs font-sans font-semibold text-ink2 dark:text-ink2-dark mb-8 uppercase tracking-wide">JSONPath Query</label>
+       <div class="flex items-center gap-8">
+         <input type="text" id="jp-query" value="$.store.book[*].author" class="w-full p-12 border border-border rounded-8 bg-surface2 focus:ring-2 focus:ring-accent focus:border-accent dark:border-border-dark dark:bg-surface2-dark text-sm font-mono text-ink dark:text-ink-dark transition-all outline-none" placeholder="e.g. $.store.book[*].author" />
+       </div>
+       <p class="mt-8 text-xs font-sans text-muted dark:text-muted-dark">Use <code class="bg-surface2 dark:bg-surface2-dark px-4 py-2 rounded">$.store.book[?(@.price &lt; 10)]</code> to filter books under $10.</p>
+    </div>
+
+    <!-- Standard workbench with our new json-path mode -->
+    <DeveloperWorkbench initialCode={initialCode} toolMode="json-path" />
+  </div>
+
+  <div slot="content">
+    <h2>Client-Side JSONPath Finder & Tester</h2>
+    <p>JSONPath is a query language for JSON, similar to XPath for XML. It allows you to extract specific data from complex JSON structures using a simple syntax.</p>
+
+    <h3>Common JSONPath Examples</h3>
+    <ul>
+      <li><code>$</code> : The root object/element</li>
+      <li><code>@</code> : The current object/element (used in filter expressions)</li>
+      <li><code>.</code> or <code>[]</code> : Child operator</li>
+      <li><code>..</code> : Recursive descent (Deep scan)</li>
+      <li><code>*</code> : Wildcard. All objects/elements regardless of their names</li>
+      <li><code>[?()]</code> : Filter expression. Expression must evaluate to a boolean value</li>
+    </ul>
+  </div>
+</ToolLayout>
+
+<script>
+  import { JSONPath } from 'jsonpath-plus';
+
+  function setupJsonPath() {
+    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
+    const outputPre = document.getElementById('wb-output-pre');
+    const statusBadge = document.getElementById('wb-status-badge');
+    const outputGutter = document.getElementById('wb-output-gutter');
+    const queryInput = document.getElementById('jp-query') as HTMLInputElement;
+    const btnFormat = document.getElementById('wb-btn-format');
+    
+    // Hide the format/minify buttons since we run in real-time
+    if (btnFormat) btnFormat.style.display = 'none';
+    const btnMinify = document.getElementById('wb-btn-minify');
+    if (btnMinify) btnMinify.style.display = 'none';
+
+    function runQuery() {
+      if (!inputArea || !outputPre || !queryInput) return;
+      const raw = inputArea.value;
+      const query = queryInput.value;
+      
+      if (!raw.trim()) return;
+
+      try {
+        const parsed = JSON.parse(raw);
+        let results;
+        
+        try {
+          results = JSONPath({path: query, json: parsed});
+        } catch(e: any) {
+          throw new Error("Invalid JSONPath query: " + e.message);
+        }
+        
+        const formatted = JSON.stringify(results, null, 2);
+        outputPre.textContent = formatted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
+        
+        if (outputGutter) {
+          const lines = formatted.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= lines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = '✓ Found ' + results.length + ' matches';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
+        }
+      } catch (err: any) {
+        outputPre.textContent = err.message;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
+        
+        if (outputGutter) {
+          const lines = err.message.split('\\n').length;
+          let gutterHTML = '';
+          for (let i = 1; i <= lines; i++) {
+            gutterHTML += i + '<br/>';
+          }
+          outputGutter.innerHTML = gutterHTML;
+        }
+
+        if (statusBadge) {
+          statusBadge.textContent = 'Error';
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
+        }
+      }
+    }
+
+    if (queryInput) queryInput.addEventListener('input', runQuery);
+    if (inputArea) inputArea.addEventListener('input', runQuery);
+    
+    // Initial run
+    runQuery();
+  }
+
+  // Setup immediately
+  setupJsonPath();
+</script>
