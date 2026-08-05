@@ -588,24 +588,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "ai-2",
-    "slug": "model-comparison-helper",
-    "title": "Model comparison helper",
-    "name": "Model comparison helper",
-    "href": "/tools/model-comparison-helper/",
+    "slug": "llm-model-comparison-matrix",
+    "title": "LLM Provider Arbitrage Matrix",
+    "name": "LLM Model Arbitrage",
+    "href": "/tools/llm-model-comparison-matrix/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "AI",
     "categorySlug": "ai",
     "mode": "generator",
-    "description": "Model comparison helper. Use this privacy-first model comparison helper directly in your browser.",
+    "description": "Dynamically sort and compare LLMs by Intelligence per Dollar (MMLU) and Speed per Dollar (Tokens/sec).",
     "seo": {
-      "title": "Model comparison helper - Free Browser Tool | Nadhebe",
-      "description": "Model comparison helper. Use this privacy-first model comparison helper directly in your browser.",
-      "keywords": [
-        "model comparison helper",
-        "ai",
-        "generator"
-      ]
+      "title": "LLM Provider Arbitrage Matrix & Price Comparison | Nadhebe",
+      "description": "Compare the cheapest and smartest LLM APIs. Sort by intelligence per dollar, context window, and inference speed.",
+      "keywords": ["llm model comparison matrix", "cheapest llm api pricing table", "compare llm costs", "best llm api for production"]
     },
     "relatedTools": [
       "json-formatter",
@@ -616,7 +612,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "ai",
       "generator",
-      "model-comparison-helper"
+      "llm-model-comparison-matrix"
     ],
     "icon": "code"
   },
@@ -661,24 +657,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "ai-4",
-    "slug": "ai-cost-estimator",
-    "title": "AI cost estimator",
-    "name": "AI cost estimator",
-    "href": "/tools/ai-cost-estimator/",
+    "slug": "ai-api-pricing-calculator",
+    "title": "AI API Cost & ROI Simulator",
+    "name": "AI API Cost Simulator",
+    "href": "/tools/ai-api-pricing-calculator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "AI",
     "categorySlug": "ai",
     "mode": "analyzer",
-    "description": "AI cost estimator. Use this privacy-first ai cost estimator directly in your browser.",
+    "description": "Estimate LLM API monthly costs with our multi-agent workflow simulator. Project monthly server bills and break-even points.",
     "seo": {
-      "title": "AI cost estimator - Free Browser Tool | Nadhebe",
-      "description": "AI cost estimator. Use this privacy-first ai cost estimator directly in your browser.",
-      "keywords": [
-        "ai cost estimator",
-        "ai",
-        "analyzer"
-      ]
+      "title": "AI API Cost & ROI Simulator | Nadhebe",
+      "description": "Calculate advanced LLM API costs for multi-agent workflows. Compare GPT-4o, Claude 3.5, and Gemini pricing for production deployments.",
+      "keywords": ["ai api pricing calculator", "estimate llm api monthly costs", "llm cost simulator", "gpt-4 api cost calculator", "claude api pricing estimator"]
     },
     "relatedTools": [
       "json-formatter",
@@ -689,30 +681,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "ai",
       "analyzer",
-      "ai-cost-estimator"
+      "ai-api-pricing-calculator"
     ],
     "icon": "code"
   },
   {
     "id": "ai-5",
-    "slug": "system-prompt-linter",
-    "title": "System prompt linter",
-    "name": "System prompt linter",
-    "href": "/tools/system-prompt-linter/",
+    "slug": "system-prompt-linter-best-practices",
+    "title": "System Prompt Linter & Guardrail Checker",
+    "name": "System Prompt Linter",
+    "href": "/tools/system-prompt-linter-best-practices/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "AI",
     "categorySlug": "ai",
     "mode": "transform",
-    "description": "System prompt linter. Use this privacy-first system prompt linter directly in your browser.",
+    "description": "Analyze prompts against strict engineering rubrics to flag injection vulnerabilities and weak constraints.",
     "seo": {
-      "title": "System prompt linter - Free Browser Tool | Nadhebe",
-      "description": "System prompt linter. Use this privacy-first system prompt linter directly in your browser.",
-      "keywords": [
-        "system prompt linter",
-        "ai",
-        "transform"
-      ]
+      "title": "System Prompt Linter & Best Practices Checker | Nadhebe",
+      "description": "Grade and lint your LLM system prompts. Check for security vulnerabilities, XML tag pairing, and weak formatting directives.",
+      "keywords": ["system prompt linter best practices", "evaluate system prompt security", "llm prompt guardrail checker"]
     },
     "relatedTools": [
       "json-formatter",
@@ -723,7 +711,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "ai",
       "transform",
-      "system-prompt-linter"
+      "system-prompt-linter-best-practices"
     ],
     "icon": "code"
   },
@@ -4786,24 +4774,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "prompt-engineering-1",
-    "slug": "prompt-template-builder",
-    "title": "Prompt template builder",
-    "name": "Prompt template builder",
-    "href": "/tools/prompt-template-builder/",
+    "slug": "prompt-template-variable-tester",
+    "title": "Dynamic Prompt Template Builder",
+    "name": "Prompt Template Builder",
+    "href": "/tools/prompt-template-variable-tester/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Prompt Engineering",
     "categorySlug": "prompt-engineering",
     "mode": "transform",
-    "description": "Prompt template builder. Use this privacy-first prompt template builder directly in your browser.",
+    "description": "Visually highlight {{variables}} and inject test data to preview compiled prompts instantly.",
     "seo": {
-      "title": "Prompt template builder - Free Browser Tool | Nadhebe",
-      "description": "Prompt template builder. Use this privacy-first prompt template builder directly in your browser.",
-      "keywords": [
-        "prompt template builder",
-        "prompt engineering",
-        "transform"
-      ]
+      "title": "Prompt Template Variable Tester | Nadhebe",
+      "description": "Build complex prompts with Handlebars/Jinja syntax. Inject test variables to preview the final compiled prompt output.",
+      "keywords": ["prompt template variable tester", "jinja handlebars prompt tester", "dynamic prompt compiler online"]
     },
     "relatedTools": [
       "json-formatter",
@@ -4814,7 +4798,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "prompt engineering",
       "transform",
-      "prompt-template-builder"
+      "prompt-template-variable-tester"
     ],
     "icon": "code"
   },
@@ -4888,24 +4872,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "prompt-engineering-4",
-    "slug": "role-prompt-builder",
-    "title": "Role prompt builder",
-    "name": "Role prompt builder",
-    "href": "/tools/role-prompt-builder/",
+    "slug": "ai-persona-prompt-generator",
+    "title": "Expert Persona Generator",
+    "name": "Persona Prompt Generator",
+    "href": "/tools/ai-persona-prompt-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Prompt Engineering",
     "categorySlug": "prompt-engineering",
     "mode": "analyzer",
-    "description": "Role prompt builder. Use this privacy-first role prompt builder directly in your browser.",
+    "description": "A step-by-step wizard to generate robust, production-ready system persona prompts with constraints and formatting.",
     "seo": {
-      "title": "Role prompt builder - Free Browser Tool | Nadhebe",
-      "description": "Role prompt builder. Use this privacy-first role prompt builder directly in your browser.",
-      "keywords": [
-        "role prompt builder",
-        "prompt engineering",
-        "analyzer"
-      ]
+      "title": "AI Persona & Role Prompt Generator | Nadhebe",
+      "description": "Generate massive, production-ready system prompts by defining persona depth, audience, constraints, and tone.",
+      "keywords": ["ai persona prompt generator", "create expert ai system prompt", "role prompting tool"]
     },
     "relatedTools": [
       "json-formatter",
@@ -4916,30 +4896,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "prompt engineering",
       "analyzer",
-      "role-prompt-builder"
+      "ai-persona-prompt-generator"
     ],
     "icon": "code"
   },
   {
     "id": "prompt-engineering-5",
-    "slug": "few-shot-formatter",
-    "title": "Few-shot formatter",
-    "name": "Few-shot formatter",
-    "href": "/tools/few-shot-formatter/",
+    "slug": "few-shot-prompt-formatter",
+    "title": "Few-Shot Dataset Formatter",
+    "name": "Few-Shot Formatter",
+    "href": "/tools/few-shot-prompt-formatter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Prompt Engineering",
     "categorySlug": "prompt-engineering",
     "mode": "transform",
-    "description": "Few-shot formatter. Use this privacy-first few-shot formatter directly in your browser.",
+    "description": "Convert CSV/JSON tables into perfectly formatted User/Assistant dialogue trees or XML examples.",
     "seo": {
-      "title": "Few-shot formatter - Free Browser Tool | Nadhebe",
-      "description": "Few-shot formatter. Use this privacy-first few-shot formatter directly in your browser.",
-      "keywords": [
-        "few shot formatter",
-        "prompt engineering",
-        "transform"
-      ]
+      "title": "Few-Shot Prompt Formatter from CSV | Nadhebe",
+      "description": "Easily build few-shot prompting examples by converting CSV or JSON arrays into structured dialogue trees or XML blocks.",
+      "keywords": ["few shot prompt formatter", "convert csv to few shot prompt", "generate llm examples from table"]
     },
     "relatedTools": [
       "json-formatter",
@@ -4950,7 +4926,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "prompt engineering",
       "transform",
-      "few-shot-formatter"
+      "few-shot-prompt-formatter"
     ],
     "icon": "code"
   },
@@ -5194,24 +5170,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "llms-1",
-    "slug": "token-estimator",
-    "title": "Token estimator",
-    "name": "Token estimator",
-    "href": "/tools/token-estimator/",
+    "slug": "llm-token-counter-multi-model",
+    "title": "LLM Token Calculator & Multi-Model Visualizer",
+    "name": "LLM Token Calculator",
+    "href": "/tools/llm-token-counter-multi-model/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "LLMs",
     "categorySlug": "llms",
     "mode": "transform",
-    "description": "Token estimator. Use this privacy-first token estimator directly in your browser.",
+    "description": "Compare GPT-4 vs Claude token counts in real-time. Visualize exactly how text is chunked by different models.",
     "seo": {
-      "title": "Token estimator - Free Browser Tool | Nadhebe",
-      "description": "Token estimator. Use this privacy-first token estimator directly in your browser.",
-      "keywords": [
-        "token estimator",
-        "llms",
-        "transform"
-      ]
+      "title": "LLM Token Calculator & Multi-Model Visualizer | Nadhebe",
+      "description": "Compare token counts across OpenAI, Anthropic, and Llama tokenizers simultaneously. Real-time visual tokenizer highlighting.",
+      "keywords": ["llm token counter multi model", "compare gpt-4 vs claude token counts", "tokenizer visualizer", "tiktoken counter online", "sentencepiece tokenizer tool"]
     },
     "relatedTools": [
       "json-formatter",
@@ -5222,30 +5194,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "llms",
       "transform",
-      "token-estimator"
+      "llm-token-counter-multi-model"
     ],
     "icon": "code"
   },
   {
     "id": "llms-2",
-    "slug": "context-budget-planner",
-    "title": "Context budget planner",
-    "name": "Context budget planner",
-    "href": "/tools/context-budget-planner/",
+    "slug": "rag-context-window-calculator",
+    "title": "RAG Context Window Optimizer",
+    "name": "Context Window Optimizer",
+    "href": "/tools/rag-context-window-calculator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "LLMs",
     "categorySlug": "llms",
     "mode": "generator",
-    "description": "Context budget planner. Use this privacy-first context budget planner directly in your browser.",
+    "description": "Visually allocate percentage limits for System Prompts, RAG context, and Completion buffers.",
     "seo": {
-      "title": "Context budget planner - Free Browser Tool | Nadhebe",
-      "description": "Context budget planner. Use this privacy-first context budget planner directly in your browser.",
-      "keywords": [
-        "context budget planner",
-        "llms",
-        "generator"
-      ]
+      "title": "RAG Context Window Calculator & Optimizer | Nadhebe",
+      "description": "Optimize your LLM context window. Visually plan context sizes for RAG retrieval, system instructions, and generation buffers.",
+      "keywords": ["rag context window calculator", "how to optimize llm context limits", "llm context window visualizer", "rag prompt token planner"]
     },
     "relatedTools": [
       "json-formatter",
@@ -5256,30 +5224,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "llms",
       "generator",
-      "context-budget-planner"
+      "rag-context-window-calculator"
     ],
     "icon": "code"
   },
   {
     "id": "llms-3",
-    "slug": "inference-cost-calculator",
-    "title": "Inference cost calculator",
-    "name": "Inference cost calculator",
-    "href": "/tools/inference-cost-calculator/",
+    "slug": "batch-inference-cost-estimator",
+    "title": "Batch Inference Cost Calculator",
+    "name": "Batch Cost Estimator",
+    "href": "/tools/batch-inference-cost-estimator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "LLMs",
     "categorySlug": "llms",
     "mode": "calculator",
-    "description": "Inference cost calculator. Use this privacy-first inference cost calculator directly in your browser.",
+    "description": "Calculate 50% discount savings using asynchronous Batch APIs. Upload a CSV to estimate total run cost.",
     "seo": {
-      "title": "Inference cost calculator - Free Browser Tool | Nadhebe",
-      "description": "Inference cost calculator. Use this privacy-first inference cost calculator directly in your browser.",
-      "keywords": [
-        "inference cost calculator",
-        "llms",
-        "calculator"
-      ]
+      "title": "Batch Inference Cost Calculator for LLM APIs | Nadhebe",
+      "description": "Calculate the exact savings of using the OpenAI or Anthropic Batch APIs for asynchronous inference. Upload bulk prompts to estimate costs.",
+      "keywords": ["batch inference cost estimator", "calculate openai batch api discount", "llm batch pricing calculator"]
     },
     "relatedTools": [
       "json-formatter",
@@ -5290,30 +5254,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "llms",
       "calculator",
-      "inference-cost-calculator"
+      "batch-inference-cost-estimator"
     ],
     "icon": "code"
   },
   {
     "id": "llms-4",
-    "slug": "chunk-size-planner",
-    "title": "Chunk size planner",
-    "name": "Chunk size planner",
-    "href": "/tools/chunk-size-planner/",
+    "slug": "rag-chunk-size-calculator",
+    "title": "Semantic Chunk Size Planner",
+    "name": "RAG Chunk Planner",
+    "href": "/tools/rag-chunk-size-calculator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "LLMs",
     "categorySlug": "llms",
     "mode": "analyzer",
-    "description": "Chunk size planner. Use this privacy-first chunk size planner directly in your browser.",
+    "description": "Paste documents and visually slice them by token limits (256, 512, 1024) to optimize vector embeddings.",
     "seo": {
-      "title": "Chunk size planner - Free Browser Tool | Nadhebe",
-      "description": "Chunk size planner. Use this privacy-first chunk size planner directly in your browser.",
-      "keywords": [
-        "chunk size planner",
-        "llms",
-        "analyzer"
-      ]
+      "title": "RAG Chunk Size Calculator & Visualizer | Nadhebe",
+      "description": "Optimize your vector database chunks. Visually slice long documents by token limits to find the perfect semantic chunk size for RAG.",
+      "keywords": ["rag chunk size calculator", "best chunk size for vector embeddings", "text chunking visualizer", "token limits for rag"]
     },
     "relatedTools": [
       "json-formatter",
@@ -5324,30 +5284,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "llms",
       "analyzer",
-      "chunk-size-planner"
+      "rag-chunk-size-calculator"
     ],
     "icon": "code"
   },
   {
     "id": "llms-5",
-    "slug": "rate-limit-planner",
-    "title": "Rate limit planner",
-    "name": "Rate limit planner",
-    "href": "/tools/rate-limit-planner/",
+    "slug": "llm-rate-limit-backoff-generator",
+    "title": "API Rate Limit & Backoff Planner",
+    "name": "Rate Limit Planner",
+    "href": "/tools/llm-rate-limit-backoff-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "LLMs",
     "categorySlug": "llms",
     "mode": "transform",
-    "description": "Rate limit planner. Use this privacy-first rate limit planner directly in your browser.",
+    "description": "Generate production-ready Exponential Backoff code snippets based on custom RPM and TPM limits.",
     "seo": {
-      "title": "Rate limit planner - Free Browser Tool | Nadhebe",
-      "description": "Rate limit planner. Use this privacy-first rate limit planner directly in your browser.",
-      "keywords": [
-        "rate limit planner",
-        "llms",
-        "transform"
-      ]
+      "title": "LLM Rate Limit Backoff Code Generator | Nadhebe",
+      "description": "Calculate TPM and RPM limits and instantly generate copy-pasteable Exponential Backoff code for Python and Node.js.",
+      "keywords": ["llm rate limit backoff generator", "calculate tpm and rpm limits", "exponential backoff code snippet openai", "handle 429 too many requests llm"]
     },
     "relatedTools": [
       "json-formatter",
@@ -5358,7 +5314,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "llms",
       "transform",
-      "rate-limit-planner"
+      "llm-rate-limit-backoff-generator"
     ],
     "icon": "code"
   },
@@ -16236,24 +16192,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "api-1",
-    "slug": "openapi-starter",
-    "title": "OpenAPI starter",
-    "name": "OpenAPI starter",
-    "href": "/tools/openapi-starter/",
+    "slug": "openapi-3-yaml-generator",
+    "title": "OpenAPI Boilerplate Generator",
+    "name": "OpenAPI Generator",
+    "href": "/tools/openapi-3-yaml-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "API",
     "categorySlug": "api",
     "mode": "transform",
-    "description": "OpenAPI starter. Use this privacy-first openapi starter directly in your browser.",
+    "description": "Scaffold OpenAPI 3.1 specs rapidly. Generate interactive Swagger-like previews as you type.",
     "seo": {
-      "title": "OpenAPI starter - Free Browser Tool | Nadhebe",
-      "description": "OpenAPI starter. Use this privacy-first openapi starter directly in your browser.",
-      "keywords": [
-        "openapi starter",
-        "api",
-        "transform"
-      ]
+      "title": "OpenAPI 3.1 YAML Generator & Previewer | Nadhebe",
+      "description": "Create OpenAPI specifications with a visual UI. Get instant YAML outputs and Swagger-like interactive previews.",
+      "keywords": ["openapi 3 yaml generator", "scaffold openapi yaml spec", "visual openapi builder online"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16264,30 +16216,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "api",
       "transform",
-      "openapi-starter"
+      "openapi-3-yaml-generator"
     ],
     "icon": "code"
   },
   {
     "id": "api-2",
-    "slug": "webhook-tester",
-    "title": "Webhook tester",
-    "name": "Webhook tester",
-    "href": "/tools/webhook-tester/",
+    "slug": "webhook-payload-signature-generator",
+    "title": "Webhook Payload & Signature Tester",
+    "name": "Webhook Signature Generator",
+    "href": "/tools/webhook-payload-signature-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "API",
     "categorySlug": "api",
     "mode": "generator",
-    "description": "Webhook tester. Use this privacy-first webhook tester directly in your browser.",
+    "description": "Generate massive JSON payloads and cryptographic HMAC headers for testing Stripe, GitHub, and Shopify webhooks.",
     "seo": {
-      "title": "Webhook tester - Free Browser Tool | Nadhebe",
-      "description": "Webhook tester. Use this privacy-first webhook tester directly in your browser.",
-      "keywords": [
-        "webhook tester",
-        "api",
-        "generator"
-      ]
+      "title": "Webhook Payload & HMAC Signature Generator | Nadhebe",
+      "description": "Simulate webhooks locally. Generate payloads and cryptographic signatures (Stripe-Signature, GitHub) to test your endpoints.",
+      "keywords": ["webhook payload signature generator", "simulate stripe github webhook", "test hmac webhook locally"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16298,7 +16246,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "api",
       "generator",
-      "webhook-tester"
+      "webhook-payload-signature-generator"
     ],
     "icon": "code"
   },
@@ -16342,24 +16290,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "api-4",
-    "slug": "http-status-reference",
-    "title": "HTTP status reference",
-    "name": "HTTP status reference",
-    "href": "/tools/http-status-reference/",
+    "slug": "http-status-codes-cheat-sheet",
+    "title": "Interactive HTTP Status Explorer",
+    "name": "HTTP Status Cheat Sheet",
+    "href": "/tools/http-status-codes-cheat-sheet/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "API",
     "categorySlug": "api",
     "mode": "analyzer",
-    "description": "HTTP status reference. Use this privacy-first http status reference directly in your browser.",
+    "description": "A searchable index of HTTP status codes, complete with code snippets for Express and FastAPI.",
     "seo": {
-      "title": "HTTP status reference - Free Browser Tool | Nadhebe",
-      "description": "HTTP status reference. Use this privacy-first http status reference directly in your browser.",
-      "keywords": [
-        "http status reference",
-        "api",
-        "analyzer"
-      ]
+      "title": "HTTP Status Codes Cheat Sheet & Flowchart | Nadhebe",
+      "description": "Quickly find the right HTTP status code. Includes decision flowcharts and copy-pasteable error handling snippets.",
+      "keywords": ["http status codes cheat sheet", "what does http 422 mean", "http error codes flowchart"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16370,30 +16314,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "api",
       "analyzer",
-      "http-status-reference"
+      "http-status-codes-cheat-sheet"
     ],
     "icon": "code"
   },
   {
     "id": "api-5",
-    "slug": "api-error-formatter",
-    "title": "API error formatter",
-    "name": "API error formatter",
-    "href": "/tools/api-error-formatter/",
+    "slug": "rfc-7807-error-json-generator",
+    "title": "RFC 7807 Problem Details Formatter",
+    "name": "RFC 7807 Error Formatter",
+    "href": "/tools/rfc-7807-error-json-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "API",
     "categorySlug": "api",
     "mode": "transform",
-    "description": "API error formatter. Use this privacy-first api error formatter directly in your browser.",
+    "description": "Generate standardized API error blocks enforcing strict RFC 7807 schema structures.",
     "seo": {
-      "title": "API error formatter - Free Browser Tool | Nadhebe",
-      "description": "API error formatter. Use this privacy-first api error formatter directly in your browser.",
-      "keywords": [
-        "api error formatter",
-        "api",
-        "transform"
-      ]
+      "title": "RFC 7807 Error JSON Generator | Nadhebe",
+      "description": "Format your API error responses using the strict RFC 7807 Problem Details specification. Instant JSON preview.",
+      "keywords": ["rfc 7807 error json generator", "standard api error json format", "problem details for http apis tool"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16404,7 +16344,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "api",
       "transform",
-      "api-error-formatter"
+      "rfc-7807-error-json-generator"
     ],
     "icon": "code"
   },
@@ -16648,24 +16588,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "mcp-1",
-    "slug": "mcp-manifest-builder",
-    "title": "MCP manifest builder",
-    "name": "MCP manifest builder",
-    "href": "/tools/mcp-manifest-builder/",
+    "slug": "mcp-server-manifest-generator",
+    "title": "MCP Server Manifest Generator",
+    "name": "MCP Manifest Builder",
+    "href": "/tools/mcp-server-manifest-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "MCP",
     "categorySlug": "mcp",
     "mode": "transform",
-    "description": "MCP manifest builder. Use this privacy-first mcp manifest builder directly in your browser.",
+    "description": "Generate valid mcp.json configurations tailored for specific hosts like Cursor or Claude Desktop.",
     "seo": {
-      "title": "MCP manifest builder - Free Browser Tool | Nadhebe",
-      "description": "MCP manifest builder. Use this privacy-first mcp manifest builder directly in your browser.",
-      "keywords": [
-        "mcp manifest builder",
-        "mcp",
-        "transform"
-      ]
+      "title": "MCP Server Manifest Generator | Model Context Protocol Tools",
+      "description": "Create valid configuration files for your Model Context Protocol (MCP) servers. Supports profiles for Claude Desktop and Cursor.",
+      "keywords": ["mcp server manifest generator", "how to create mcp.json", "model context protocol config builder"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16676,30 +16612,26 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "mcp",
       "transform",
-      "mcp-manifest-builder"
+      "mcp-server-manifest-generator"
     ],
     "icon": "code"
   },
   {
     "id": "mcp-2",
-    "slug": "tool-schema-generator",
-    "title": "Tool schema generator",
-    "name": "Tool schema generator",
-    "href": "/tools/tool-schema-generator/",
+    "slug": "openapi-to-mcp-tool-schema",
+    "title": "OpenAPI to MCP Schema Converter",
+    "name": "MCP Schema Converter",
+    "href": "/tools/openapi-to-mcp-tool-schema/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "MCP",
     "categorySlug": "mcp",
     "mode": "generator",
-    "description": "Tool schema generator. Use this privacy-first tool schema generator directly in your browser.",
+    "description": "Convert standard REST OpenAPI endpoints into strict JSON Schemas required for MCP Tools.",
     "seo": {
-      "title": "Tool schema generator - Free Browser Tool | Nadhebe",
-      "description": "Tool schema generator. Use this privacy-first tool schema generator directly in your browser.",
-      "keywords": [
-        "tool schema generator",
-        "mcp",
-        "generator"
-      ]
+      "title": "OpenAPI to MCP Tool Schema Converter | Nadhebe",
+      "description": "Instantly convert OpenAPI YAML or JSON endpoints into valid Model Context Protocol tool schemas.",
+      "keywords": ["openapi to mcp tool schema", "convert rest api to mcp tools", "mcp json schema generator"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16710,7 +16642,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "mcp",
       "generator",
-      "tool-schema-generator"
+      "openapi-to-mcp-tool-schema"
     ],
     "icon": "code"
   },
@@ -16784,24 +16716,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "mcp-5",
-    "slug": "claude-connector-helper",
-    "title": "Claude connector helper",
-    "name": "Claude connector helper",
-    "href": "/tools/claude-connector-helper/",
+    "slug": "claude-desktop-mcp-config-maker",
+    "title": "Claude Desktop MCP Configurator",
+    "name": "Claude MCP Configurator",
+    "href": "/tools/claude-desktop-mcp-config-maker/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "MCP",
     "categorySlug": "mcp",
     "mode": "transform",
-    "description": "Claude connector helper. Use this privacy-first claude connector helper directly in your browser.",
+    "description": "Generate the exact claude_desktop_config.json configuration and environment variables for local MCP servers.",
     "seo": {
-      "title": "Claude connector helper - Free Browser Tool | Nadhebe",
-      "description": "Claude connector helper. Use this privacy-first claude connector helper directly in your browser.",
-      "keywords": [
-        "claude connector helper",
-        "mcp",
-        "transform"
-      ]
+      "title": "Claude Desktop MCP Config Maker & Generator | Nadhebe",
+      "description": "Easily connect local MCP servers to Claude Desktop. Generates absolute paths and env vars for Mac and Windows.",
+      "keywords": ["claude desktop mcp config maker", "add mcp to claude desktop config", "claude_desktop_config.json generator"]
     },
     "relatedTools": [
       "json-formatter",
@@ -16812,7 +16740,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "mcp",
       "transform",
-      "claude-connector-helper"
+      "claude-desktop-mcp-config-maker"
     ],
     "icon": "code"
   },
@@ -17022,24 +16950,20 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   },
   {
     "id": "mcp-12",
-    "slug": "mcp-inspector",
-    "title": "MCP Inspector",
-    "name": "MCP Inspector",
-    "href": "/tools/mcp-inspector/",
+    "slug": "mcp-json-rpc-payload-tester",
+    "title": "MCP Payload Simulator & Validator",
+    "name": "MCP Payload Validator",
+    "href": "/tools/mcp-json-rpc-payload-tester/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "MCP",
     "categorySlug": "mcp",
     "mode": "analyzer",
-    "description": "Clean, normalize, and calculate MCP Inspector locally in your browser.",
+    "description": "Mock MCP clients by validating raw JSON-RPC responses against the official Model Context Protocol spec.",
     "seo": {
-      "title": "MCP Inspector - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate MCP Inspector locally in your browser.",
-      "keywords": [
-        "mcp inspector",
-        "mcp",
-        "analyzer"
-      ]
+      "title": "MCP JSON-RPC Payload Tester & Validator | Nadhebe",
+      "description": "Debug your MCP server. Paste raw JSON-RPC payloads to validate them against strict Model Context Protocol schemas.",
+      "keywords": ["mcp json rpc payload tester", "debug mcp server json rpc", "validate mcp json response"]
     },
     "relatedTools": [
       "json-formatter",
@@ -17050,7 +16974,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "tags": [
       "mcp",
       "analyzer",
-      "mcp-inspector"
+      "mcp-json-rpc-payload-tester"
     ],
     "icon": "code"
   },

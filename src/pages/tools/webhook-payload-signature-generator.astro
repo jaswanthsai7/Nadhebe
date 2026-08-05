@@ -1,0 +1,24 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'webhook-payload-signature-generator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <div class="flex justify-between items-center bg-surface2 p-16 border border-border rounded-8">
+      <span class="font-bold">Provider:</span> 
+      <select class="bg-surface border border-border p-4 rounded-4"><option>Stripe</option><option>GitHub</option></select>
+    </div>
+    <div class="p-16 border border-border rounded-12 bg-code">
+      <h3 class="text-emerald-500 mb-8 font-bold text-sm">Header</h3>
+      <code class="text-ink dark:text-ink-dark text-xs block break-all">Stripe-Signature: t=1612345678,v1=a1b2c3d4e5f6g7h8...</code>
+    </div>
+    <div class="p-16 border border-border rounded-12 bg-code">
+      <h3 class="text-emerald-500 mb-8 font-bold text-sm">Payload</h3>
+      <code class="text-ink dark:text-ink-dark text-xs block whitespace-pre">{"{ \"id\": \"evt_123\", \"type\": \"payment_intent.succeeded\" }"}</code>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>

@@ -43,8 +43,8 @@
 </div>
 
 <script is:inline>
-  let pagefindInstance: any = null;
-  let debounceTimer: ReturnType<typeof setTimeout>;
+  let pagefindInstance = null;
+  let debounceTimer;
   let selectedIndex = -1;
 
   async function loadPagefind() {
@@ -64,7 +64,7 @@
     if (!wrapper) return;
     wrapper.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    const input = document.getElementById('cmd-search-input');
     input?.focus();
     selectedIndex = -1;
   }
@@ -74,7 +74,7 @@
     if (!wrapper) return;
     wrapper.classList.add('hidden');
     document.body.style.overflow = '';
-    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    const input = document.getElementById('cmd-search-input');
     if (input) input.value = '';
     const results = document.getElementById('cmd-search-results');
     const empty = document.getElementById('cmd-search-empty');
@@ -86,7 +86,7 @@
     selectedIndex = -1;
   }
 
-  function highlightResult(index: number) {
+  function highlightResult(index) {
     const items = document.querySelectorAll('#cmd-search-results a[data-search-result]');
     items.forEach((item, i) => {
       if (i === index) {
@@ -100,7 +100,7 @@
 
   function setupSearchDialog() {
     const overlay = document.getElementById('search-overlay');
-    const input = document.getElementById('cmd-search-input') as HTMLInputElement;
+    const input = document.getElementById('cmd-search-input');
     const resultsContainer = document.getElementById('cmd-search-results');
     const emptyState = document.getElementById('cmd-search-empty');
     const spinner = document.getElementById('cmd-search-spinner');
@@ -137,13 +137,13 @@
         highlightResult(selectedIndex);
       } else if (e.key === 'Enter' && selectedIndex >= 0) {
         e.preventDefault();
-        (items[selectedIndex] as HTMLAnchorElement).click();
+        items[selectedIndex].click();
       }
     });
 
     // ⌘K / Ctrl+K to open
     document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         const wrapper = document.getElementById('search-dialog-wrapper');
         if (wrapper?.classList.contains('hidden')) {

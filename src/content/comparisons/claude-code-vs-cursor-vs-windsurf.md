@@ -33,7 +33,7 @@ estimatedReadingTime: 12
 | Risk | Over-broad agent autonomy | Hidden context selection | Agent plan may need manual steering |
 | Best practice | Use `CLAUDE.md` and plan mode | Keep prompts scoped to files | Review each Cascade step |
 
-For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/token-estimator/) once the tool is available, or track prompt length manually for repeated agent loops.
+For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/llm-token-counter-multi-model/) once the tool is available, or track prompt length manually for repeated agent loops.
 
 ## Multi-file Edits
 

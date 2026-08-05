@@ -19,7 +19,15 @@ const photos = [
   'photo-1448375240586-882707db888b', // Pine forest
   'photo-1506973035872-a4ec16b8e8d9', // Blue ocean
   'photo-1544551763-46a013bb70d5', // Waterfall
-  'photo-1476514525535-07fb3b4ae5f1'  // Mountain lake
+  'photo-1476514525535-07fb3b4ae5f1', // Mountain lake
+  'photo-1472214103451-9374bd1c798e', // Majestic mountains
+  'photo-1447752875215-b2761acb3c5d', // Nature landscape
+  'photo-1464822759023-fed622ff2c3b', // Snowy peaks
+  'photo-1426604966848-d7adac402bff', // Forest trail
+  'photo-1511884642898-4c92249e20b6', // Sunset water
+  'photo-1475924156734-496f6cac6ec1', // Mountains dawn
+  'photo-1433838552652-f9a46b332c40', // Balloon mountains
+  'photo-1501785888041-af3ef285b470'  // Mountains dusk
 ];
 
 const targetDir = path.join(__dirname, '..', 'public', 'images', 'bg');
@@ -44,11 +52,12 @@ function fetchBuffer(url) {
 }
 
 async function main() {
-  console.log(`Downloading ${photos.length} desktop & mobile nature background photos...`);
+  console.log(`Downloading ${photos.length} desktop & mobile nature background photos in ULTRA 4K quality...`);
   
   for (let i = 0; i < photos.length; i++) {
     const photoId = photos[i];
-    const unsplashUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1920&q=80&fm=webp`;
+    // Fetch as high-quality JPG to avoid double WebP compression artifacts
+    const unsplashUrl = `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=3840&q=100&fm=jpg`;
     const destPath = path.join(targetDir, `bg-${i + 1}.webp`);
     const mobPath = path.join(mobileDir, `bg-${i + 1}.webp`);
     
@@ -56,17 +65,19 @@ async function main() {
       console.log(`Fetching photo ${i + 1}/${photos.length}: ${photoId}...`);
       const rawBuf = await fetchBuffer(unsplashUrl);
       
-      // Desktop background (1920x1080)
+      // Desktop background (4K: 3840x2160) - Maximize Realism
       const optBuf = await sharp(rawBuf)
-        .resize(1920, 1080, { fit: 'cover' })
-        .webp({ quality: 80, effort: 4 })
+        .resize(3840, 2160, { fit: 'cover' })
+        .sharpen() // Crisp up details for 4K displays
+        .webp({ quality: 95, effort: 6 }) // Near-lossless WebP
         .toBuffer();
       fs.writeFileSync(destPath, optBuf);
 
-      // Mobile background (640x1138 — vertical aspect ratio ~35KB)
+      // Mobile background (640x1138)
       const mobBuf = await sharp(rawBuf)
         .resize(640, 1138, { fit: 'cover' })
-        .webp({ quality: 75, effort: 4 })
+        .sharpen()
+        .webp({ quality: 85, effort: 6 })
         .toBuffer();
       fs.writeFileSync(mobPath, mobBuf);
 

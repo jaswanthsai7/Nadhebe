@@ -5,7 +5,7 @@ pubDate: 2026-07-10
 author: bob-smith
 category: "Prompts"
 tags: [instatic, ai, prompts, system-prompts]
-heroImage: "/images/prompts-hero.webp"
+heroImage: "/images/instatic-ai-prompts-hero.png"
 heroAlt: "Minimalist 3D editorial illustration representing AI prompt blocks and structural layouts"
 draft: false
 topic: "Instatic"

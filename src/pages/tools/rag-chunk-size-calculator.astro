@@ -1,0 +1,42 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'rag-chunk-size-calculator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel flex flex-col rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 h-[600px]">
+    <div class="p-16 border-b border-border dark:border-border-dark flex justify-between items-center bg-surface2 dark:bg-surface2-dark">
+      <h3 class="font-bold text-ink dark:text-ink-dark">Text Chunker</h3>
+      <select id="chunk-size" class="rounded-8 border border-border bg-surface px-8 py-4 dark:border-border-dark dark:bg-surface-dark text-ink dark:text-ink-dark">
+        <option value="256">256 Chars</option>
+        <option value="512" selected>512 Chars</option>
+        <option value="1024">1024 Chars</option>
+      </select>
+    </div>
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+      <textarea id="chunk-in" class="flex-1 resize-none p-16 bg-transparent outline-none border-r border-border dark:border-border-dark text-ink dark:text-ink-dark" placeholder="Paste document here..."></textarea>
+      <div id="chunk-out" class="flex-1 p-16 overflow-y-auto font-mono text-sm space-y-8 bg-surface2/30 dark:bg-surface2-dark/30"></div>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function chunk() {
+    const text = document.getElementById('chunk-in').value;
+    const size = parseInt(document.getElementById('chunk-size').value);
+    const out = document.getElementById('chunk-out');
+    
+    if (!text) { out.innerHTML = ''; return; }
+    
+    let html = '';
+    for(let i = 0; i < text.length; i += size) {
+      html += '<div class="p-8 bg-accent/10 border border-accent/20 rounded-8 text-ink dark:text-ink-dark break-words">' + text.slice(i, i + size).replace(/</g, '&lt;') + '</div>';
+    }
+    out.innerHTML = html;
+  }
+  document.getElementById('chunk-in').addEventListener('input', chunk);
+  document.getElementById('chunk-size').addEventListener('change', chunk);
+  chunk();
+</script>

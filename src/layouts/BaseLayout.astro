@@ -86,7 +86,7 @@ if (canonicalUrl) {
     <!-- Ultra-fast 0ms mobile-aware local nature background loader -->
     <script is:inline>
       (function () {
-        var TOTAL_BGS = 12;
+        var TOTAL_BGS = 20;
         var stored = '-1';
         try { stored = sessionStorage.getItem('nb_bg_idx') || '-1'; } catch(e){}
         var idx = parseInt(stored, 10);
@@ -102,6 +102,8 @@ if (canonicalUrl) {
 
         // 1. Immediately set CSS variable on document root
         document.documentElement.style.setProperty('--nature-bg-url', "url('" + bgUrl + "')");
+        // Start hidden to allow smooth fade-in once loaded
+        document.documentElement.style.setProperty('--nature-bg-opacity', "0");
 
         // 2. Inject high-priority preload link into head immediately
         var l = document.createElement('link');
@@ -115,6 +117,7 @@ if (canonicalUrl) {
         var img = new Image();
         function markReady() {
           window.__nb_bg_ready = true;
+          document.documentElement.style.setProperty('--nature-bg-opacity', "1");
           try { window.dispatchEvent(new CustomEvent('nb-bg-ready')); } catch(e){}
         }
         img.onload = markReady;
@@ -201,16 +204,24 @@ if (canonicalUrl) {
         z-index: -20;
         width: 100vw;
         height: 100vh;
+        background-color: #e8f0e8;
+        transform: translateZ(0);
+        will-change: transform;
+      }
+      
+      #nature-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-color: #e8f0e8;
         background-image: var(--nature-bg-url);
-        opacity: 1;
-        transform: translateZ(0);
-        will-change: transform;
-        transition: background-image 0.4s ease, opacity 0.4s ease;
+        opacity: var(--nature-bg-opacity, 0);
+        transition: opacity 0.8s ease-in-out;
+        z-index: -1;
       }
+      
       /* In dark mode fallback color */
       html.dark #nature-bg {
         background-color: #090d16;
@@ -328,13 +339,30 @@ if (canonicalUrl) {
     <script is:inline>
       (function() {
         function reloadBg() {
-          var total = window.__nb_total_bgs || 12;
+          var total = window.__nb_total_bgs || 20;
           var idx = (window.__nb_bg_idx + 1) % total;
           window.__nb_bg_idx = idx;
 
           var isMobile = typeof window !== 'undefined' && (window.innerWidth || 0) < 768;
           var url = (isMobile ? '/images/bg/mobile/bg-' : '/images/bg/bg-') + (idx + 1) + '.webp';
-          document.documentElement.style.setProperty('--nature-bg-url', "url('" + url + "')");
+          
+          // Fade out old background
+          document.documentElement.style.setProperty('--nature-bg-opacity', '0');
+          
+          // Wait for fade out, then swap image and fade in after it loads
+          setTimeout(() => {
+            var img = new Image();
+            img.onload = function() {
+              document.documentElement.style.setProperty('--nature-bg-url', "url('" + url + "')");
+              // Use a tiny delay to ensure the browser paints the new url before fading in
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  document.documentElement.style.setProperty('--nature-bg-opacity', '1');
+                });
+              });
+            };
+            img.src = url;
+          }, 800); // 800ms matches the CSS transition time
         }
 
         document.addEventListener('astro:page-load', reloadBg);

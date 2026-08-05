@@ -1,0 +1,54 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+import type { ToolMetadata } from '@/config/tools';
+
+const toolSlug = 'llm-token-counter-multi-model';
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === toolSlug);
+
+if (!platformTool) {
+  throw new Error('Tool not found in registry: ' + toolSlug);
+}
+
+// Build related tools
+const platformRelatedTools = UNIFIED_TOOLS_REGISTRY
+  .filter((tool) => (platformTool.relatedTools || []).includes(tool.slug))
+  .map((tool) => ({
+    id: tool.id,
+    name: tool.name || tool.title,
+    slug: tool.slug,
+    href: tool.href,
+    description: tool.description,
+    category: tool.category,
+    icon: tool.icon || 'code',
+    badge: tool.badge,
+    tags: tool.tags,
+    noApi: true,
+  })) as ToolMetadata[];
+
+const toolFaq = [
+  { question: `Is ${platformTool.name} free?`, answer: 'Yes, it is 100% free and runs locally.' }
+];
+---
+
+<ToolLayout
+  toolId={platformTool.slug}
+  title={platformTool.seo?.title || platformTool.title}
+  h1={platformTool.name}
+  description={platformTool.seo?.description || platformTool.description}
+  hideHeader={true}
+  relatedCategory={platformTool.category}
+  relatedTools={platformRelatedTools}
+  faq={toolFaq}
+>
+  <div slot="calculator" class="min-h-[500px] flex items-center justify-center rounded-16 border border-border bg-surface/95 shadow-medium">
+    <div class="text-center space-y-8 p-24">
+      <h2 class="text-2xl font-bold text-ink">🚧 Development in Progress</h2>
+      <p class="text-ink2">This 10x tool feature is currently being scaffolded.</p>
+    </div>
+  </div>
+  <div slot="content">
+    <h2>About {platformTool.name}</h2>
+    <p>{platformTool.description}</p>
+  </div>
+</ToolLayout>

@@ -1,0 +1,36 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'openapi-3-yaml-generator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <div class="flex gap-16">
+      <input type="text" id="oa-title" value="My API" class="flex-1 p-8 border border-border rounded-8 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" placeholder="API Title" />
+      <input type="text" id="oa-ver" value="1.0.0" class="w-32 p-8 border border-border rounded-8 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" placeholder="Version" />
+    </div>
+    <pre id="oa-out" class="p-16 bg-code dark:bg-code-dark text-emerald-400 font-mono text-sm rounded-12 h-64 overflow-auto whitespace-pre-wrap"></pre>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function gen() {
+    const title = document.getElementById('oa-title').value;
+    const ver = document.getElementById('oa-ver').value;
+    document.getElementById('oa-out').textContent = `openapi: 3.1.0
+info:
+  title: ${title}
+  version: ${ver}
+paths:
+  /ping:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: OK`;
+  }
+  document.querySelectorAll('input').forEach(i => i.addEventListener('input', gen));
+  gen();
+</script>

@@ -1,0 +1,40 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'few-shot-prompt-formatter');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <textarea id="fs-in" class="w-full h-32 p-16 font-mono text-sm border border-border rounded-12 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" placeholder="Input,Output\nHello,Hi there\nBye,See ya"></textarea>
+    <select id="fs-format" class="w-full rounded-8 border border-border bg-surface p-8 dark:border-border-dark dark:bg-surface-dark text-ink dark:text-ink-dark">
+      <option value="xml">XML Tags</option>
+      <option value="chat">Chat (User/Assistant)</option>
+    </select>
+    <pre id="fs-out" class="p-16 bg-code dark:bg-code-dark text-emerald-400 font-mono text-sm rounded-12 overflow-auto h-64"></pre>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function format() {
+    const raw = document.getElementById('fs-in').value;
+    const type = document.getElementById('fs-format').value;
+    const lines = raw.split('\n').filter(Boolean);
+    if(lines.length < 2) { document.getElementById('fs-out').textContent = ''; return; }
+    
+    let out = '';
+    for (let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',');
+      if (parts.length < 2) continue;
+      if (type === 'xml') {
+        out += `<example>\n  <input>${parts[0]}</input>\n  <output>${parts.slice(1).join(',')}</output>\n</example>\n\n`;
+      } else {
+        out += `User: ${parts[0]}\nAssistant: ${parts.slice(1).join(',')}\n\n`;
+      }
+    }
+    document.getElementById('fs-out').textContent = out;
+  }
+  document.getElementById('fs-in').addEventListener('input', format);
+  document.getElementById('fs-format').addEventListener('change', format);
+</script>

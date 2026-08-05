@@ -1,0 +1,39 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'llm-rate-limit-backoff-generator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95">
+    <div class="flex flex-col space-y-16">
+      <div class="grid grid-cols-2 gap-16">
+        <div><label class="font-bold text-ink dark:text-ink-dark">RPM Limit</label><input type="number" id="rl-rpm" value="500" class="w-full mt-4 rounded-8 border border-border bg-surface2 p-8 dark:border-border-dark dark:bg-surface2-dark text-ink dark:text-ink-dark" /></div>
+        <div><label class="font-bold text-ink dark:text-ink-dark">Language</label>
+        <select id="rl-lang" class="w-full mt-4 rounded-8 border border-border bg-surface2 p-8 dark:border-border-dark dark:bg-surface2-dark text-ink dark:text-ink-dark">
+          <option value="python">Python</option>
+          <option value="node">Node.js</option>
+        </select>
+        </div>
+      </div>
+      <pre id="rl-out" class="p-16 bg-code dark:bg-code-dark text-emerald-400 font-mono text-sm rounded-8 overflow-auto"></pre>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function gen() {
+    const rpm = parseInt(document.getElementById('rl-rpm').value) || 500;
+    const lang = document.getElementById('rl-lang').value;
+    const out = document.getElementById('rl-out');
+    
+    if (lang === 'python') {
+      out.textContent = `import time\nimport random\n\nMAX_RETRIES = 5\n\ndef call_api_with_backoff():\n    for i in range(MAX_RETRIES):\n        try:\n            # Make API Call\n            return api.create_completion()\n        except RateLimitError:\n            wait = (2 ** i) + random.uniform(0, 1)\n            print(f"Rate limited. Waiting {wait:.2f}s")\n            time.sleep(wait)\n    raise Exception("Max retries exceeded")`;
+    } else {
+      out.textContent = `const MAX_RETRIES = 5;\n\nasync function callApiWithBackoff() {\n  for (let i = 0; i < MAX_RETRIES; i++) {\n    try {\n      return await api.createCompletion();\n    } catch (error) {\n      if (error.status === 429) {\n        const wait = (Math.pow(2, i) + Math.random()) * 1000;\n        console.log(\`Rate limited. Waiting ${wait}ms\`);\n        await new Promise(r => setTimeout(r, wait));\n      } else throw error;\n    }\n  }\n  throw new Error("Max retries exceeded");\n}`;
+    }
+  }
+  document.querySelectorAll('input, select').forEach(e => e.addEventListener('input', gen));
+  gen();
+</script>

@@ -1,0 +1,32 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'http-status-codes-cheat-sheet');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <input type="text" id="sc-search" class="w-full p-12 border border-border rounded-8 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" placeholder="Search code (e.g. 404, 500, Unauthorized)..." />
+    <div id="sc-out" class="space-y-8 max-h-96 overflow-auto"></div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  const codes = [
+    { c: 200, n: "OK", d: "Standard response for successful HTTP requests." },
+    { c: 201, n: "Created", d: "The request has been fulfilled, resulting in the creation of a new resource." },
+    { c: 400, n: "Bad Request", d: "The server cannot process the request due to a client error (e.g., malformed syntax)." },
+    { c: 401, n: "Unauthorized", d: "Authentication is required and has failed or has not yet been provided." },
+    { c: 403, n: "Forbidden", d: "The client does not have access rights to the content." },
+    { c: 404, n: "Not Found", d: "The server can not find the requested resource." },
+    { c: 500, n: "Internal Server Error", d: "The server has encountered a situation it doesn't know how to handle." }
+  ];
+  function search() {
+    const term = document.getElementById('sc-search').value.toLowerCase();
+    const f = codes.filter(c => c.c.toString().includes(term) || c.n.toLowerCase().includes(term));
+    document.getElementById('sc-out').innerHTML = f.map(c => `<div class="p-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark rounded-8"><span class="font-bold text-accent dark:text-accent-dark">${c.c} ${c.n}</span><p class="text-sm text-ink2 dark:text-ink2-dark">${c.d}</p></div>`).join('');
+  }
+  document.getElementById('sc-search').addEventListener('input', search);
+  search();
+</script>

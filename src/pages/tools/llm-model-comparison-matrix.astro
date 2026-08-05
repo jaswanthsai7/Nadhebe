@@ -1,0 +1,37 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'llm-model-comparison-matrix');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel overflow-x-auto rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95">
+    <table class="w-full text-left font-sans text-sm text-ink dark:text-ink-dark">
+      <thead class="bg-surface2 dark:bg-surface2-dark font-bold">
+        <tr>
+          <th class="p-12 border-b border-border dark:border-border-dark">Model</th>
+          <th class="p-12 border-b border-border dark:border-border-dark">Input Cost (1M)</th>
+          <th class="p-12 border-b border-border dark:border-border-dark">Output Cost (1M)</th>
+          <th class="p-12 border-b border-border dark:border-border-dark">Context Window</th>
+          <th class="p-12 border-b border-border dark:border-border-dark">MMLU Score</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-border dark:divide-border-dark font-mono">
+        <tr class="hover:bg-surface2/50 dark:hover:bg-surface2-dark/50">
+          <td class="p-12 font-bold font-sans">GPT-4o</td><td>$5.00</td><td>$15.00</td><td>128k</td><td>88.7</td>
+        </tr>
+        <tr class="hover:bg-surface2/50 dark:hover:bg-surface2-dark/50">
+          <td class="p-12 font-bold font-sans">Claude 3.5 Sonnet</td><td>$3.00</td><td>$15.00</td><td>200k</td><td>88.3</td>
+        </tr>
+        <tr class="hover:bg-surface2/50 dark:hover:bg-surface2-dark/50">
+          <td class="p-12 font-bold font-sans">Gemini 1.5 Pro</td><td>$3.50</td><td>$10.50</td><td>2M</td><td>85.9</td>
+        </tr>
+        <tr class="hover:bg-surface2/50 dark:hover:bg-surface2-dark/50">
+          <td class="p-12 font-bold font-sans">Llama 3 70B</td><td>$0.50</td><td>$0.50</td><td>8k</td><td>82.0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>

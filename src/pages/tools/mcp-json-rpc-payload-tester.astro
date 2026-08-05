@@ -1,0 +1,28 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'mcp-json-rpc-payload-tester');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <textarea id="mcp-payload" class="w-full h-64 font-mono text-sm p-16 border border-border rounded-12 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" placeholder="Paste JSON-RPC payload here..."></textarea>
+    <div id="mcp-res" class="p-16 rounded-8 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark font-mono text-sm text-ink dark:text-ink-dark"></div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  document.getElementById('mcp-payload').addEventListener('input', (e) => {
+    const val = e.target.value;
+    const res = document.getElementById('mcp-res');
+    try {
+      const p = JSON.parse(val);
+      if (p.jsonrpc !== "2.0") throw new Error('Missing jsonrpc: "2.0"');
+      if (!p.method && !p.result && !p.error) throw new Error('Missing method or result');
+      res.innerHTML = '<span class="text-emerald-500">Valid MCP JSON-RPC Payload!</span>';
+    } catch(err) {
+      res.innerHTML = '<span class="text-danger">Invalid: ' + err.message + '</span>';
+    }
+  });
+</script>

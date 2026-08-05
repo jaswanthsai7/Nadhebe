@@ -1,0 +1,59 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'ai-api-pricing-calculator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel flex flex-col overflow-hidden rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95 p-24 gap-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div class="space-y-12">
+        <label class="block font-sans text-sm font-bold text-ink dark:text-ink-dark">Select Model</label>
+        <select id="model-select" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-sans text-sm text-ink outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+          <option value="gpt-4o">GPT-4o ($5.00 / $15.00)</option>
+          <option value="claude-3-5-sonnet">Claude 3.5 Sonnet ($3.00 / $15.00)</option>
+          <option value="gemini-1-5-pro">Gemini 1.5 Pro ($3.50 / $10.50)</option>
+          <option value="llama-3-70b">Llama 3 70B ($0.50 / $0.50)</option>
+        </select>
+        <label class="block font-sans text-sm font-bold text-ink dark:text-ink-dark mt-12">Daily API Calls</label>
+        <input type="number" id="daily-calls" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-sans text-sm text-ink outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" value="1000" />
+      </div>
+      <div class="space-y-12">
+        <label class="block font-sans text-sm font-bold text-ink dark:text-ink-dark">Avg Input Tokens / Call</label>
+        <input type="number" id="input-tokens" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-sans text-sm text-ink outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" value="2000" />
+        <label class="block font-sans text-sm font-bold text-ink dark:text-ink-dark mt-12">Avg Output Tokens / Call</label>
+        <input type="number" id="output-tokens" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-sans text-sm text-ink outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" value="500" />
+      </div>
+    </div>
+    <div class="mt-16 border-t border-border/80 pt-16 flex justify-between items-center dark:border-border-dark/80">
+      <span class="font-sans text-lg font-bold text-ink dark:text-ink-dark">Estimated Monthly Cost:</span>
+      <span id="monthly-cost" class="font-mono text-3xl font-bold text-emerald-600 dark:text-emerald-400">$0.00</span>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  const prices = {
+    'gpt-4o': { in: 5, out: 15 },
+    'claude-3-5-sonnet': { in: 3, out: 15 },
+    'gemini-1-5-pro': { in: 3.5, out: 10.5 },
+    'llama-3-70b': { in: 0.5, out: 0.5 }
+  };
+  function calculate() {
+    const model = document.getElementById('model-select').value;
+    const calls = parseFloat(document.getElementById('daily-calls').value) || 0;
+    const inTok = parseFloat(document.getElementById('input-tokens').value) || 0;
+    const outTok = parseFloat(document.getElementById('output-tokens').value) || 0;
+    
+    const dailyIn = (calls * inTok) / 1000000;
+    const dailyOut = (calls * outTok) / 1000000;
+    
+    const dailyCost = (dailyIn * prices[model].in) + (dailyOut * prices[model].out);
+    const monthlyCost = dailyCost * 30;
+    
+    document.getElementById('monthly-cost').textContent = '$' + monthlyCost.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculate));
+  calculate();
+</script>

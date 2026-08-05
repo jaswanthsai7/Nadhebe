@@ -1,0 +1,69 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'rag-context-window-calculator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel rounded-16 border border-border bg-surface/95 shadow-medium dark:border-border-dark dark:bg-surface-dark/95 p-24">
+    <div class="space-y-16">
+      <div class="flex justify-between items-center">
+        <span class="font-bold text-ink dark:text-ink-dark">Total Context Limit</span>
+        <select id="ctx-limit" class="rounded-8 border border-border bg-surface2 px-12 py-8 outline-none dark:border-border-dark dark:bg-surface2-dark text-ink dark:text-ink-dark">
+          <option value="8192">8k (Llama 3)</option>
+          <option value="128000" selected>128k (GPT-4o)</option>
+          <option value="200000">200k (Claude 3)</option>
+        </select>
+      </div>
+      
+      <div class="w-full h-24 flex rounded-pill overflow-hidden">
+        <div id="bar-sys" class="h-full bg-blue-500 transition-all duration-300" style="width: 5%"></div>
+        <div id="bar-rag" class="h-full bg-emerald-500 transition-all duration-300" style="width: 75%"></div>
+        <div id="bar-gen" class="h-full bg-purple-500 transition-all duration-300" style="width: 20%"></div>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-12 pt-16">
+        <div class="space-y-4">
+          <label class="text-xs font-bold text-blue-500 uppercase">System Prompt (%)</label>
+          <input type="range" id="slider-sys" min="1" max="98" value="5" class="w-full" />
+          <span id="val-sys" class="block font-mono text-xs text-muted dark:text-muted-dark text-center">6,400 Tokens</span>
+        </div>
+        <div class="space-y-4">
+          <label class="text-xs font-bold text-emerald-500 uppercase">RAG Docs (%)</label>
+          <input type="range" id="slider-rag" min="1" max="98" value="75" class="w-full" />
+          <span id="val-rag" class="block font-mono text-xs text-muted dark:text-muted-dark text-center">96,000 Tokens</span>
+        </div>
+        <div class="space-y-4">
+          <label class="text-xs font-bold text-purple-500 uppercase">Generation (%)</label>
+          <input type="range" id="slider-gen" min="1" max="98" value="20" class="w-full" disabled />
+          <span id="val-gen" class="block font-mono text-xs text-muted dark:text-muted-dark text-center">25,600 Tokens</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function update() {
+    const total = parseInt(document.getElementById('ctx-limit').value);
+    let sys = parseInt(document.getElementById('slider-sys').value);
+    let rag = parseInt(document.getElementById('slider-rag').value);
+    
+    if (sys + rag >= 100) {
+      rag = 99 - sys;
+      document.getElementById('slider-rag').value = rag;
+    }
+    const gen = 100 - sys - rag;
+    
+    document.getElementById('bar-sys').style.width = sys + '%';
+    document.getElementById('bar-rag').style.width = rag + '%';
+    document.getElementById('bar-gen').style.width = gen + '%';
+    
+    document.getElementById('val-sys').textContent = Math.floor((total * sys) / 100).toLocaleString() + ' Tokens';
+    document.getElementById('val-rag').textContent = Math.floor((total * rag) / 100).toLocaleString() + ' Tokens';
+    document.getElementById('val-gen').textContent = Math.floor((total * gen) / 100).toLocaleString() + ' Tokens';
+  }
+  document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', update));
+  update();
+</script>

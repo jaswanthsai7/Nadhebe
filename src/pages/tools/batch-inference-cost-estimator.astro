@@ -1,0 +1,47 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+
+const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'batch-inference-cost-estimator');
+if (!platformTool) throw new Error('Tool not found');
+---
+<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} hideHeader={true} relatedCategory={platformTool.category} relatedTools={[]}>
+  <div slot="calculator" class="glass-panel p-24 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 space-y-16">
+    <div class="grid grid-cols-2 gap-16">
+      <div class="space-y-8">
+        <label class="block text-sm font-bold text-ink dark:text-ink-dark">Total Prompts</label>
+        <input type="number" id="b-prompts" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 dark:border-border-dark dark:bg-surface2-dark text-ink dark:text-ink-dark" value="50000" />
+      </div>
+      <div class="space-y-8">
+        <label class="block text-sm font-bold text-ink dark:text-ink-dark">Model</label>
+        <select id="b-model" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 dark:border-border-dark dark:bg-surface2-dark text-ink dark:text-ink-dark">
+          <option value="5,15">GPT-4o ($5 / $15)</option>
+          <option value="3,15">Claude 3.5 Sonnet</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex justify-between items-center bg-emerald-500/10 p-16 rounded-12 border border-emerald-500/20">
+      <div>
+        <h3 class="text-emerald-700 dark:text-emerald-400 font-bold">Standard API Cost</h3>
+        <p id="b-std" class="font-mono text-2xl font-bold text-emerald-800 dark:text-emerald-300">$0.00</p>
+      </div>
+      <div class="text-right">
+        <h3 class="text-blue-700 dark:text-blue-400 font-bold">Batch API Cost (50% Off)</h3>
+        <p id="b-batch" class="font-mono text-3xl font-bold text-blue-800 dark:text-blue-300">$0.00</p>
+      </div>
+    </div>
+  </div>
+  <div slot="content"><h2>About</h2><p>{platformTool.description}</p></div>
+</ToolLayout>
+<script>
+  function update() {
+    const p = parseFloat(document.getElementById('b-prompts').value) || 0;
+    const m = document.getElementById('b-model').value.split(',').map(Number);
+    // Assume 1k in, 500 out per prompt
+    const std = (p * 1000 / 1000000 * m[0]) + (p * 500 / 1000000 * m[1]);
+    document.getElementById('b-std').textContent = '$' + std.toFixed(2);
+    document.getElementById('b-batch').textContent = '$' + (std / 2).toFixed(2);
+  }
+  document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', update));
+  update();
+</script>
