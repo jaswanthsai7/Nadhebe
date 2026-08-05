@@ -82,34 +82,75 @@ const toolsDirectorySchema = {
     </header>
 
     <!-- Category Filter Bar & Live Search -->
-    <div class="sticky top-72 z-30 mb-32 flex flex-col gap-16 rounded-20 border border-border/80 bg-surface/95 p-16 shadow-medium backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/95" data-reveal>
+    <div class="sticky top-72 z-30 mb-32 flex flex-col md:flex-row gap-16 items-center justify-between rounded-20 border border-border/80 bg-surface/95 p-16 shadow-medium backdrop-blur-xl dark:border-border-dark/80 dark:bg-surface-dark/95" data-reveal>
       
-      <!-- Taller & Centered Live Inline Search Input with Dropdown (Positioned ABOVE Categories) -->
-      <InlineToolSearch />
-
-      <!-- Category Filter Tabs (Single Horizontal Scrollable Row) -->
-      <nav class="flex flex-nowrap items-center gap-8 p-6 rounded-16 border border-border/80 bg-surface2/60 backdrop-blur-md dark:border-border-dark/80 dark:bg-surface2-dark/60 w-full overflow-x-auto custom-scrollbar" aria-label="Tool Category Filters" id="tools-category-tabs">
+      <!-- Custom Dropdown Category Filter -->
+      <div class="relative w-full md:w-[320px] shrink-0" id="category-dropdown-container">
+        <!-- Trigger Button -->
         <button
           type="button"
-          data-category-filter="all"
-          class="cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft"
+          id="category-dropdown-trigger"
+          class="flex w-full sm:w-auto items-center justify-between gap-12 rounded-12 border border-border/80 bg-surface2/60 px-20 py-12 text-[14px] font-sans font-semibold text-ink transition-all duration-200 hover:bg-surface hover:border-border dark:border-border-dark/80 dark:bg-surface2-dark/60 dark:text-ink-dark dark:hover:bg-surface-dark dark:hover:border-border-dark shadow-soft"
+          aria-haspopup="listbox"
+          aria-expanded="false"
         >
-          All ({PLATFORM_TOOL_TOTAL})
+          <span class="flex items-center gap-8">
+            <svg class="h-16 w-16 text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            <span id="category-dropdown-label">Filter by Category: All Tools ({PLATFORM_TOOL_TOTAL})</span>
+          </span>
+          <svg class="h-16 w-16 text-muted transition-transform duration-200" id="category-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
-        {PLATFORM_CATEGORIES.map((cat) => {
-          const count = PLATFORM_TOOLS.filter(t => t.category === cat).length;
-          if (count === 0) return null;
-          return (
-            <button
-              type="button"
-              data-category-filter={cat}
-              class="cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink/80 hover:text-ink hover:bg-surface/60 dark:text-ink-dark/80 dark:hover:text-ink-dark dark:hover:bg-surface-dark/60"
-            >
-              {cat} ({count})
-            </button>
-          );
-        })}
-      </nav>
+
+        <!-- Dropdown Menu -->
+        <div
+          id="category-dropdown-menu"
+          role="listbox"
+          class="absolute left-0 top-[calc(100%+8px)] z-50 hidden max-h-[320px] w-full sm:w-[320px] overflow-y-auto rounded-16 border border-border bg-surface p-8 shadow-large dark:border-border-dark dark:bg-surface-dark custom-scrollbar"
+        >
+          <button
+            type="button"
+            role="option"
+            aria-selected="true"
+            data-category-filter="all"
+            data-category-name="All Tools"
+            data-category-count={PLATFORM_TOOL_TOTAL}
+            class="cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium transition-colors hover:bg-surface2 dark:hover:bg-surface2-dark bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark"
+          >
+            <span>All Tools</span>
+            <span class="rounded-full bg-surface px-6 py-2 text-[12px] dark:bg-surface-dark">{PLATFORM_TOOL_TOTAL}</span>
+          </button>
+          
+          <div class="my-6 h-px w-full bg-border/50 dark:bg-border-dark/50"></div>
+
+          {PLATFORM_CATEGORIES.map((cat) => {
+            const count = PLATFORM_TOOLS.filter(t => t.category === cat).length;
+            if (count === 0) return null;
+            return (
+              <button
+                type="button"
+                role="option"
+                aria-selected="false"
+                data-category-filter={cat}
+                data-category-name={cat}
+                data-category-count={count}
+                class="cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium text-ink2 transition-colors hover:bg-surface2 hover:text-ink dark:text-ink2-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark"
+              >
+                <span>{cat}</span>
+                <span class="rounded-full bg-surface2 px-6 py-2 text-[12px] dark:bg-surface2-dark">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Taller & Centered Live Inline Search Input with Dropdown -->
+      <div class="w-full flex-1">
+        <InlineToolSearch />
+      </div>
 
     </div>
 
@@ -255,11 +296,37 @@ const toolsDirectorySchema = {
 <!-- Client Filtering & Search JavaScript -->
 <script is:inline>
   (function() {
-    const tabBtns = document.querySelectorAll('.cat-tab-btn');
+    const dropdownItems = document.querySelectorAll('.cat-dropdown-item');
     const toolCards = document.querySelectorAll('[data-tool-card]');
     const noMatch = document.getElementById('tools-no-match');
+    
+    const triggerBtn = document.getElementById('category-dropdown-trigger');
+    const dropdownMenu = document.getElementById('category-dropdown-menu');
+    const dropdownIcon = document.getElementById('category-dropdown-icon');
+    const dropdownLabel = document.getElementById('category-dropdown-label');
 
     let activeFilter = 'all';
+    let dropdownOpen = false;
+
+    if (triggerBtn && dropdownMenu) {
+      triggerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownOpen = !dropdownOpen;
+        dropdownMenu.classList.toggle('hidden', !dropdownOpen);
+        triggerBtn.setAttribute('aria-expanded', dropdownOpen.toString());
+        dropdownIcon.style.transform = dropdownOpen ? 'rotate(180deg)' : '';
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (dropdownOpen && !triggerBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownOpen = false;
+          dropdownMenu.classList.add('hidden');
+          triggerBtn.setAttribute('aria-expanded', 'false');
+          dropdownIcon.style.transform = '';
+        }
+      });
+    }
 
     function filterDirectory() {
       let count = 0;
@@ -281,14 +348,36 @@ const toolsDirectorySchema = {
       }
     }
 
-    tabBtns.forEach(btn => {
+    dropdownItems.forEach(btn => {
       btn.addEventListener('click', () => {
-        tabBtns.forEach(b => {
-          b.className = 'cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer border border-transparent text-ink/80 hover:text-ink hover:bg-surface/60 dark:text-ink-dark/80 dark:hover:text-ink-dark dark:hover:bg-surface-dark/60';
+        // Reset styles for all items
+        dropdownItems.forEach(b => {
+          b.setAttribute('aria-selected', 'false');
+          b.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium text-ink2 transition-colors hover:bg-surface2 hover:text-ink dark:text-ink2-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark';
+          const badge = b.querySelector('span:last-child');
+          if(badge) badge.className = 'rounded-full bg-surface2 px-6 py-2 text-[12px] dark:bg-surface2-dark';
         });
 
-        btn.className = 'cat-tab-btn rounded-pill px-20 py-10 text-[14px] font-sans font-semibold transition-all duration-200 cursor-pointer bg-surface border border-border/80 text-ink dark:bg-surface-dark dark:border-border-dark/80 dark:text-ink-dark shadow-soft';
+        // Set active styles
+        btn.setAttribute('aria-selected', 'true');
+        btn.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium transition-colors hover:bg-surface2 dark:hover:bg-surface2-dark bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark';
+        const activeBadge = btn.querySelector('span:last-child');
+        if(activeBadge) activeBadge.className = 'rounded-full bg-surface px-6 py-2 text-[12px] dark:bg-surface-dark';
         
+        // Update trigger label
+        const catName = btn.getAttribute('data-category-name');
+        const catCount = btn.getAttribute('data-category-count');
+        if (dropdownLabel) dropdownLabel.textContent = `Filter by Category: ${catName} (${catCount})`;
+
+        // Close dropdown
+        dropdownOpen = false;
+        dropdownMenu.classList.add('hidden');
+        if (triggerBtn) {
+          triggerBtn.setAttribute('aria-expanded', 'false');
+          dropdownIcon.style.transform = '';
+        }
+
+        // Filter cards
         activeFilter = btn.getAttribute('data-category-filter') || 'all';
         filterDirectory();
       });
