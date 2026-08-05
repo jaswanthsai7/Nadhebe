@@ -141,7 +141,8 @@
       }
     });
 
-    // ⌘K / Ctrl+K to open
+    // ⌘K / Ctrl+K to open (Commented out to prevent conflict with InlineToolSearch Cmd+K)
+    /*
     document.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -153,6 +154,7 @@
         }
       }
     });
+    */
 
     // Search on input
     input?.addEventListener('input', () => {
