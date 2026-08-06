@@ -1,0 +1,304 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Data Pipeline Schema Planner & SQL DDL Generator | Nadhebe';
+const h1 = 'CSV Data Pipeline Schema Planner';
+const description = 'Design CSV ingestion schemas, specify data types and constraints, and generate SQL CREATE TABLE statements and JSON Schema definitions.';
+
+const faq = [
+  {
+    question: 'What outputs does the schema planner generate?',
+    answer: 'It generates ANSI SQL DDL statements (CREATE TABLE), JSON Schema definitions, and CSV header specification lines.'
+  },
+  {
+    question: 'Can I specify Primary Keys and Nullability?',
+    answer: 'Yes! Toggle Primary Key and Nullable attributes per field.'
+  },
+  {
+    question: 'Is my data pipeline plan stored on a server?',
+    answer: 'No. 100% of schema planning runs locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-planner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-planner-app">
+    
+    <!-- Table Name & Global Pipeline Config -->
+    <CalculatorCard title="TARGET PIPELINE SPECIFICATIONS">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 font-mono text-xs">
+        <div class="space-y-6">
+          <label class="block font-bold uppercase text-muted dark:text-muted-dark">Database Table Name</label>
+          <input
+            type="text"
+            id="cp-table-name"
+            value="users_import_staging"
+            class="w-full rounded-8 border border-border bg-surface px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface-dark"
+          />
+        </div>
+
+        <div class="space-y-6">
+          <label class="block font-bold uppercase text-muted dark:text-muted-dark">SQL Dialect Target</label>
+          <select id="cp-sql-dialect" class="w-full rounded-8 border border-border bg-surface px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark">
+            <option value="postgresql">PostgreSQL / Redshift</option>
+            <option value="mysql">MySQL / MariaDB</option>
+            <option value="snowflake">Snowflake / BigQuery</option>
+            <option value="sqlite">SQLite / DuckDB</option>
+          </select>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Field Schema Editor Card -->
+    <CalculatorCard title="COLUMN FIELD SCHEMA DEFINITIONS">
+      <div class="space-y-16 font-mono text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-muted font-bold uppercase">Field Definitions</span>
+          <button type="button" id="cp-btn-add-field" class="rounded-8 bg-accent px-12 py-6 font-bold text-white shadow-soft hover:opacity-90 transition-all">
+            + Add Field
+          </button>
+        </div>
+
+        <!-- Dynamic Field Rows Container -->
+        <div id="cp-field-container" class="space-y-12">
+          <!-- Dynamically populated field rows -->
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Generated SQL DDL & JSON Schema Result Card -->
+    <ResultCard title="GENERATED SQL DDL & JSON SCHEMA">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center rounded-pill border border-border bg-surface p-2 dark:border-border-dark dark:bg-surface-dark font-mono text-xs">
+            <button type="button" id="cp-tab-sql" class="rounded-pill px-10 py-4 font-bold bg-accent text-white dark:bg-accent-dark dark:text-bg">SQL DDL</button>
+            <button type="button" id="cp-tab-json" class="rounded-pill px-10 py-4 font-medium text-ink2 dark:text-ink2-dark">JSON Schema</button>
+          </div>
+
+          <button type="button" id="cp-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+            Copy Code
+          </button>
+        </div>
+
+        <pre id="cp-code-pre" class="w-full min-h-[180px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Generated code will appear here...</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Architect Data Ingestion Schemas</h2>
+    <p>
+      Defining strict data pipeline schemas prevents type coercion failures during CSV bulk loading into data warehouses like Snowflake, BigQuery, or PostgreSQL. Planning column data types in advance establishes robust data contracts.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvPlanner() {
+    const tableNameInput = document.getElementById('cp-table-name') as HTMLInputElement;
+    const dialectSelect = document.getElementById('cp-sql-dialect') as HTMLSelectElement;
+    const fieldContainer = document.getElementById('cp-field-container');
+    const codePre = document.getElementById('cp-code-pre');
+
+    const btnAddField = document.getElementById('cp-btn-add-field');
+    const tabSql = document.getElementById('cp-tab-sql');
+    const tabJson = document.getElementById('cp-tab-json');
+    const btnCopy = document.getElementById('cp-btn-copy');
+
+    let activeTab: 'sql' | 'json' = 'sql';
+
+    interface FieldDef {
+      name: string;
+      type: string;
+      nullable: boolean;
+      primaryKey: boolean;
+    }
+
+    let fields: FieldDef[] = [
+      { name: 'id', type: 'INT', nullable: false, primaryKey: true },
+      { name: 'full_name', type: 'VARCHAR(255)', nullable: false, primaryKey: false },
+      { name: 'email', type: 'VARCHAR(255)', nullable: false, primaryKey: false },
+      { name: 'created_at', type: 'TIMESTAMP', nullable: false, primaryKey: false },
+      { name: 'is_active', type: 'BOOLEAN', nullable: true, primaryKey: false }
+    ];
+
+    function renderFields() {
+      if (!fieldContainer) return;
+
+      let html = '';
+      fields.forEach((f, idx) => {
+        html += `
+          <div class="flex flex-wrap items-center gap-12 p-10 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+            <input type="text" value="${f.name}" class="cp-field-name flex-1 min-w-[120px] rounded-6 border border-border bg-surface2 px-8 py-4 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" data-idx="${idx}" placeholder="field_name" />
+
+            <select class="cp-field-type rounded-6 border border-border bg-surface2 px-8 py-4 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" data-idx="${idx}">
+              <option value="INT" ${f.type === 'INT' ? 'selected' : ''}>INT / BIGINT</option>
+              <option value="VARCHAR(255)" ${f.type === 'VARCHAR(255)' ? 'selected' : ''}>VARCHAR(255)</option>
+              <option value="TEXT" ${f.type === 'TEXT' ? 'selected' : ''}>TEXT</option>
+              <option value="NUMERIC(10,2)" ${f.type === 'NUMERIC(10,2)' ? 'selected' : ''}>DECIMAL / NUMERIC</option>
+              <option value="TIMESTAMP" ${f.type === 'TIMESTAMP' ? 'selected' : ''}>TIMESTAMP / DATETIME</option>
+              <option value="BOOLEAN" ${f.type === 'BOOLEAN' ? 'selected' : ''}>BOOLEAN</option>
+            </select>
+
+            <label class="flex items-center gap-4 cursor-pointer">
+              <input type="checkbox" class="cp-field-null w-14 h-14 rounded border-border text-accent" data-idx="${idx}" ${f.nullable ? 'checked' : ''} />
+              <span class="text-[11px] text-muted font-bold">Nullable</span>
+            </label>
+
+            <label class="flex items-center gap-4 cursor-pointer">
+              <input type="checkbox" class="cp-field-pk w-14 h-14 rounded border-border text-accent" data-idx="${idx}" ${f.primaryKey ? 'checked' : ''} />
+              <span class="text-[11px] text-accent font-bold">PK</span>
+            </label>
+
+            <button type="button" class="cp-btn-del-field text-muted hover:text-danger font-bold text-sm px-4" data-idx="${idx}">✕</button>
+          </div>
+        `;
+      });
+
+      fieldContainer.innerHTML = html;
+      attachFieldListeners();
+      generateCode();
+    }
+
+    function attachFieldListeners() {
+      const nameInputs = fieldContainer?.querySelectorAll('.cp-field-name') as NodeListOf<HTMLInputElement>;
+      nameInputs?.forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const target = e.target as HTMLInputElement;
+          const idx = Number(target.getAttribute('data-idx'));
+          fields[idx].name = target.value;
+          generateCode();
+        });
+      });
+
+      const typeSelects = fieldContainer?.querySelectorAll('.cp-field-type') as NodeListOf<HTMLSelectElement>;
+      typeSelects?.forEach(sel => {
+        sel.addEventListener('change', (e) => {
+          const target = e.target as HTMLSelectElement;
+          const idx = Number(target.getAttribute('data-idx'));
+          fields[idx].type = target.value;
+          generateCode();
+        });
+      });
+
+      const nullChks = fieldContainer?.querySelectorAll('.cp-field-null') as NodeListOf<HTMLInputElement>;
+      nullChks?.forEach(chk => {
+        chk.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          const idx = Number(target.getAttribute('data-idx'));
+          fields[idx].nullable = target.checked;
+          generateCode();
+        });
+      });
+
+      const pkChks = fieldContainer?.querySelectorAll('.cp-field-pk') as NodeListOf<HTMLInputElement>;
+      pkChks?.forEach(chk => {
+        chk.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          const idx = Number(target.getAttribute('data-idx'));
+          fields[idx].primaryKey = target.checked;
+          generateCode();
+        });
+      });
+
+      const delBtns = fieldContainer?.querySelectorAll('.cp-btn-del-field') as NodeListOf<HTMLButtonElement>;
+      delBtns?.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.currentTarget as HTMLButtonElement;
+          const idx = Number(target.getAttribute('data-idx'));
+          if (fields.length > 1) {
+            fields.splice(idx, 1);
+            renderFields();
+          }
+        });
+      });
+    }
+
+    function generateCode() {
+      if (!codePre) return;
+      const tblName = tableNameInput?.value.trim() || 'my_table';
+
+      if (activeTab === 'sql') {
+        const colLines = fields.map(f => {
+          let line = `  ${f.name} ${f.type}`;
+          if (f.primaryKey) line += ' PRIMARY KEY';
+          else if (!f.nullable) line += ' NOT NULL';
+          return line;
+        });
+
+        const sql = `CREATE TABLE ${tblName} (\n${colLines.join(',\n')}\n);`;
+        codePre.textContent = sql;
+      } else {
+        const properties: Record<string, any> = {};
+        const required: string[] = [];
+
+        fields.forEach(f => {
+          let typeStr = 'string';
+          if (f.type.includes('INT') || f.type.includes('NUMERIC')) typeStr = 'number';
+          else if (f.type.includes('BOOLEAN')) typeStr = 'boolean';
+
+          properties[f.name] = { type: typeStr };
+          if (!f.nullable) required.push(f.name);
+        });
+
+        const jsonSchema = {
+          $schema: 'http://json-schema.org/draft-07/schema#',
+          title: tblName,
+          type: 'object',
+          properties,
+          required
+        };
+
+        codePre.textContent = JSON.stringify(jsonSchema, null, 2);
+      }
+    }
+
+    if (tableNameInput) tableNameInput.addEventListener('input', generateCode);
+    if (dialectSelect) dialectSelect.addEventListener('change', generateCode);
+
+    btnAddField?.addEventListener('click', () => {
+      fields.push({ name: `field_${fields.length + 1}`, type: 'VARCHAR(255)', nullable: true, primaryKey: false });
+      renderFields();
+    });
+
+    tabSql?.addEventListener('click', () => {
+      activeTab = 'sql';
+      tabSql.className = 'rounded-pill px-10 py-4 font-bold bg-accent text-white dark:bg-accent-dark dark:text-bg';
+      if (tabJson) tabJson.className = 'rounded-pill px-10 py-4 font-medium text-ink2 dark:text-ink2-dark';
+      generateCode();
+    });
+
+    tabJson?.addEventListener('click', () => {
+      activeTab = 'json';
+      tabJson.className = 'rounded-pill px-10 py-4 font-bold bg-accent text-white dark:bg-accent-dark dark:text-bg';
+      if (tabSql) tabSql.className = 'rounded-pill px-10 py-4 font-medium text-ink2 dark:text-ink2-dark';
+      generateCode();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (codePre) {
+        navigator.clipboard.writeText(codePre.textContent || '');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Code'), 1500);
+      }
+    });
+
+    // Initial render
+    renderFields();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvPlanner);
+  } else {
+    initCsvPlanner();
+  }
+</script>

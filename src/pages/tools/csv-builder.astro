@@ -1,0 +1,271 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Visual CSV Grid Table Builder & Generator | Nadhebe';
+const h1 = 'Visual CSV Grid Table Builder';
+const description = 'Build and edit CSV files visually in your browser with interactive row/column grid controls and instant CSV text export.';
+
+const faq = [
+  {
+    question: 'How do I add or remove columns and rows?',
+    answer: 'Use the interactive "+ Add Row", "+ Add Column", "Remove Row", and "Remove Column" buttons above the visual table grid.'
+  },
+  {
+    question: 'Can I customize header names?',
+    answer: 'Yes! Click directly into any column header cell in the table to edit its header title.'
+  },
+  {
+    question: 'Is my created CSV data saved on a server?',
+    answer: 'No. 100% of grid building runs locally inside your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-builder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-builder-app">
+    
+    <!-- Visual Grid Controls Card -->
+    <CalculatorCard title="VISUAL TABLE GRID EDITOR">
+      <div class="space-y-16">
+        <!-- Toolbar Actions -->
+        <div class="flex flex-wrap items-center justify-between gap-12">
+          <div class="flex flex-wrap items-center gap-8">
+            <button type="button" id="cb-btn-add-row" class="rounded-8 bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              + Add Row
+            </button>
+            <button type="button" id="cb-btn-add-col" class="rounded-8 border border-border bg-surface2 px-12 py-6 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-all">
+              + Add Column
+            </button>
+            <button type="button" id="cb-btn-del-row" class="rounded-8 border border-border bg-surface px-12 py-6 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Remove Last Row
+            </button>
+            <button type="button" id="cb-btn-del-col" class="rounded-8 border border-border bg-surface px-12 py-6 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Remove Last Column
+            </button>
+          </div>
+
+          <button type="button" id="cb-btn-reset" class="rounded-8 border border-border bg-surface px-12 py-6 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+            Reset Grid
+          </button>
+        </div>
+
+        <!-- Editable HTML Grid Table -->
+        <div class="w-full overflow-x-auto rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark max-h-[400px]">
+          <table id="cb-table" class="w-full text-left text-xs font-mono border-collapse">
+            <thead id="cb-thead" class="sticky top-0 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark font-bold border-b border-border dark:border-border-dark z-10">
+              <!-- Dynamically populated headers -->
+            </thead>
+            <tbody id="cb-tbody" class="divide-y divide-border/40 dark:divide-border-dark/40">
+              <!-- Dynamically populated editable cell rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Generated CSV Text Output Card -->
+    <ResultCard title="GENERATED CSV TEXT OUTPUT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span id="cb-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 rows, 0 columns</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cb-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+              Copy
+            </button>
+            <button type="button" id="cb-btn-download" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              Download CSV
+            </button>
+          </div>
+        </div>
+
+        <pre id="cb-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Generated CSV will appear here...</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Build Clean CSV Data Without Spreadsheet Clutter</h2>
+    <p>
+      Creating a quick CSV mock dataset for automated tests or API payloads doesn't require launching heavy desktop spreadsheet software. Our visual CSV Grid Builder lets you add columns, edit headers, and compose rows line-by-line with instant CSV text generation.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvBuilder() {
+    const thead = document.getElementById('cb-thead');
+    const tbody = document.getElementById('cb-tbody');
+    const outputPre = document.getElementById('cb-output-pre');
+    const outputStats = document.getElementById('cb-output-stats');
+
+    const btnAddRow = document.getElementById('cb-btn-add-row');
+    const btnAddCol = document.getElementById('cb-btn-add-col');
+    const btnDelRow = document.getElementById('cb-btn-del-row');
+    const btnDelCol = document.getElementById('cb-btn-del-col');
+    const btnReset = document.getElementById('cb-btn-reset');
+    const btnCopy = document.getElementById('cb-btn-copy');
+    const btnDownload = document.getElementById('cb-btn-download');
+
+    let headers = ['id', 'name', 'email', 'role', 'status'];
+    let gridData: string[][] = [
+      ['1', 'Alice Chen', 'alice@example.com', 'Admin', 'Active'],
+      ['2', 'Bob Smith', 'bob@example.com', 'Developer', 'Active'],
+      ['3', 'Carol Danvers', 'carol@example.com', 'Designer', 'Pending']
+    ];
+
+    function renderGrid() {
+      if (!thead || !tbody) return;
+
+      // Render Header Row with editable inputs
+      let headHtml = '<tr><th class="p-8 border-r border-border dark:border-border-dark text-muted w-10 text-center">#</th>';
+      headers.forEach((h, colIdx) => {
+        headHtml += `
+          <th class="p-6 border-r border-border dark:border-border-dark">
+            <input type="text" value="${h}" class="cb-header-input w-full bg-transparent p-4 font-mono font-bold text-accent focus:outline-none" data-col="${colIdx}" placeholder="Header ${colIdx + 1}" />
+          </th>
+        `;
+      });
+      headHtml += '</tr>';
+      thead.innerHTML = headHtml;
+
+      // Render Body Rows with editable inputs
+      let bodyHtml = '';
+      gridData.forEach((row, rowIdx) => {
+        bodyHtml += `<tr class="hover:bg-surface2/60 dark:hover:bg-surface2-dark/60 transition-colors">`;
+        bodyHtml += `<td class="p-6 border-r border-border/40 dark:border-border-dark/40 font-bold text-muted text-center">${rowIdx + 1}</td>`;
+
+        headers.forEach((_, colIdx) => {
+          const val = row[colIdx] !== undefined ? row[colIdx] : '';
+          bodyHtml += `
+            <td class="p-4 border-r border-border/40 dark:border-border-dark/40">
+              <input type="text" value="${val}" class="cb-cell-input w-full bg-transparent p-4 font-mono text-caption text-ink dark:text-ink-dark focus:bg-accent/10 focus:outline-none rounded-4" data-row="${rowIdx}" data-col="${colIdx}" placeholder="..." />
+            </td>
+          `;
+        });
+
+        bodyHtml += `</tr>`;
+      });
+      tbody.innerHTML = bodyHtml;
+
+      attachInputListeners();
+      generateCsvOutput();
+    }
+
+    function attachInputListeners() {
+      const headerInputs = thead?.querySelectorAll('.cb-header-input') as NodeListOf<HTMLInputElement>;
+      headerInputs?.forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const target = e.target as HTMLInputElement;
+          const colIdx = Number(target.getAttribute('data-col'));
+          headers[colIdx] = target.value;
+          generateCsvOutput();
+        });
+      });
+
+      const cellInputs = tbody?.querySelectorAll('.cb-cell-input') as NodeListOf<HTMLInputElement>;
+      cellInputs?.forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const target = e.target as HTMLInputElement;
+          const rowIdx = Number(target.getAttribute('data-row'));
+          const colIdx = Number(target.getAttribute('data-col'));
+          if (gridData[rowIdx]) {
+            gridData[rowIdx][colIdx] = target.value;
+          }
+          generateCsvOutput();
+        });
+      });
+    }
+
+    function generateCsvOutput() {
+      if (!outputPre || !outputStats) return;
+
+      const formatCell = (val: string) => {
+        if (val.includes(',') || val.includes('"') || val.includes('\n')) {
+          return `"${val.replace(/"/g, '""')}"`;
+        }
+        return val;
+      };
+
+      const csvLines = [
+        headers.map(formatCell).join(','),
+        ...gridData.map(row => headers.map((_, cIdx) => formatCell(row[cIdx] || '')).join(','))
+      ];
+
+      const resultText = csvLines.join('\n');
+      outputPre.textContent = resultText;
+      outputStats.textContent = `${gridData.length} rows, ${headers.length} columns`;
+    }
+
+    btnAddRow?.addEventListener('click', () => {
+      gridData.push(new Array(headers.length).fill(''));
+      renderGrid();
+    });
+
+    btnAddCol?.addEventListener('click', () => {
+      headers.push(`col_${headers.length + 1}`);
+      gridData.forEach(r => r.push(''));
+      renderGrid();
+    });
+
+    btnDelRow?.addEventListener('click', () => {
+      if (gridData.length > 1) {
+        gridData.pop();
+        renderGrid();
+      }
+    });
+
+    btnDelCol?.addEventListener('click', () => {
+      if (headers.length > 1) {
+        headers.pop();
+        gridData.forEach(r => r.pop());
+        renderGrid();
+      }
+    });
+
+    btnReset?.addEventListener('click', () => {
+      headers = ['id', 'name', 'email', 'role', 'status'];
+      gridData = [
+        ['1', 'Alice Chen', 'alice@example.com', 'Admin', 'Active'],
+        ['2', 'Bob Smith', 'bob@example.com', 'Developer', 'Active']
+      ];
+      renderGrid();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputPre) {
+        navigator.clipboard.writeText(outputPre.textContent || '');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy'), 1500);
+      }
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      if (!outputPre?.textContent) return;
+      const blob = new Blob([outputPre.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'builder_export.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial render
+    renderGrid();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvBuilder);
+  } else {
+    initCsvBuilder();
+  }
+</script>

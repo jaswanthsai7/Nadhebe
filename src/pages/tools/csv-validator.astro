@@ -1,0 +1,277 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Schema & Type Constraint Validator | Nadhebe';
+const h1 = 'CSV Schema & Constraint Validator';
+const description = 'Validate CSV rows against data type rules including Email format, ISO Dates, Numeric boundaries, and Non-Empty cell constraints.';
+
+const faq = [
+  {
+    question: 'How do I set validation rules per column?',
+    answer: 'Paste your CSV data, and the tool will generate constraint dropdown selectors for each detected column header.'
+  },
+  {
+    question: 'What data type constraints are supported?',
+    answer: 'We support Non-Empty Text, Email Address, ISO Date (YYYY-MM-DD), Integer, Positive Number, and Boolean.'
+  },
+  {
+    question: 'Is my data processed locally?',
+    answer: 'Yes, 100% of schema validation executes in your web browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-validator-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="RAW CSV DATA FOR VALIDATION">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cv-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Sample User CSV
+            </button>
+            <button type="button" id="cv-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="cv-input-csv"
+          rows="5"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste raw CSV data here..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Schema Definition Panel -->
+    <CalculatorCard title="COLUMN SCHEMA CONSTRAINTS">
+      <div class="space-y-16">
+        <span class="text-xs font-mono text-muted uppercase font-bold">Assign Constraint Rules Per Column</span>
+        <div id="cv-schema-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 font-mono text-xs">
+          <p class="col-span-full text-muted py-8">Paste CSV data above to configure column constraints.</p>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Validation Results Card -->
+    <ResultCard title="VALIDATION REPORT & ANOMALY LOG">
+      <div class="space-y-16 font-mono text-caption">
+        <div id="cv-status-banner" class="p-12 rounded-8 border border-border bg-surface2 font-bold text-xs flex items-center gap-8">
+          <span class="text-muted">Status:</span>
+          <span>Waiting for input data...</span>
+        </div>
+
+        <ul id="cv-error-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40 max-h-[300px] overflow-auto">
+          <li class="p-8 text-muted text-xs">No validation run yet.</li>
+        </ul>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Enforce Strict Data Contracts</h2>
+    <p>
+      Invalid email formats, corrupt date strings, or negative monetary values introduce silent bugs in backend database systems. Setting schema constraints on CSV uploads protects database integrity.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvValidator() {
+    const inputCsv = document.getElementById('cv-input-csv') as HTMLTextAreaElement;
+    const schemaGrid = document.getElementById('cv-schema-grid');
+    const statusBanner = document.getElementById('cv-status-banner');
+    const errorList = document.getElementById('cv-error-list');
+
+    const btnSample = document.getElementById('cv-btn-sample');
+    const btnClear = document.getElementById('cv-btn-clear');
+
+    const sampleUserCsv = `user_id,full_name,email_address,created_at,score,is_active\n101,Alice Chen,alice@example.com,2026-08-01,95,true\n102,Bob Smith,invalid-email-address,2026-08-02,-15,false\n103,Carol Danvers,carol@example.com,not-a-date,88,true`;
+
+    let headers: string[] = [];
+    let parsedRows: string[][] = [];
+    let columnRules: Record<string, string> = {};
+
+    function parseCsvLine(line: string): string[] {
+      const result: string[] = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          inQuotes = !inQuotes;
+        } else if (c === ',' && !inQuotes) {
+          result.push(cur.trim());
+          cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      result.push(cur.trim());
+      return result;
+    }
+
+    function renderSchemaGrid() {
+      if (!inputCsv || !schemaGrid) return;
+      const raw = inputCsv.value.trim();
+
+      if (!raw) {
+        headers = [];
+        parsedRows = [];
+        schemaGrid.innerHTML = '<p class="col-span-full text-muted py-8">Paste CSV data above to configure column constraints.</p>';
+        runValidation();
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (lines.length === 0) return;
+
+      const newHeaders = parseCsvLine(lines[0]);
+      parsedRows = lines.slice(1).map(parseCsvLine);
+
+      if (newHeaders.join(',') !== headers.join(',')) {
+        headers = newHeaders;
+        
+        let gridHtml = '';
+        headers.forEach((h, idx) => {
+          // Auto-infer smart default
+          let defaultRule = 'any';
+          const nameLower = h.toLowerCase();
+          if (nameLower.includes('email')) defaultRule = 'email';
+          else if (nameLower.includes('date') || nameLower.includes('at')) defaultRule = 'date';
+          else if (nameLower.includes('id') || nameLower.includes('count')) defaultRule = 'integer';
+          else if (nameLower.includes('score') || nameLower.includes('amount') || nameLower.includes('price')) defaultRule = 'positive_number';
+          else if (nameLower.includes('is_') || nameLower.includes('has_')) defaultRule = 'boolean';
+
+          columnRules[h] = columnRules[h] || defaultRule;
+
+          gridHtml += `
+            <div class="p-10 rounded-8 border border-border bg-surface space-y-6 dark:border-border-dark dark:bg-surface-dark">
+              <span class="block font-bold text-accent dark:text-accent-dark truncate" title="${h}">${h || 'Col ' + (idx + 1)}</span>
+              <select class="cv-rule-select w-full rounded-6 border border-border bg-surface2 px-8 py-4 font-mono text-xs text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" data-header="${h}">
+                <option value="any" ${columnRules[h] === 'any' ? 'selected' : ''}>Any Value</option>
+                <option value="non_empty" ${columnRules[h] === 'non_empty' ? 'selected' : ''}>Non-Empty Text</option>
+                <option value="email" ${columnRules[h] === 'email' ? 'selected' : ''}>Email Address</option>
+                <option value="date" ${columnRules[h] === 'date' ? 'selected' : ''}>ISO Date (YYYY-MM-DD)</option>
+                <option value="integer" ${columnRules[h] === 'integer' ? 'selected' : ''}>Integer</option>
+                <option value="positive_number" ${columnRules[h] === 'positive_number' ? 'selected' : ''}>Positive Number (>= 0)</option>
+                <option value="boolean" ${columnRules[h] === 'boolean' ? 'selected' : ''}>Boolean (true/false)</option>
+              </select>
+            </div>
+          `;
+        });
+        schemaGrid.innerHTML = gridHtml;
+
+        const selects = schemaGrid.querySelectorAll('.cv-rule-select') as NodeListOf<HTMLSelectElement>;
+        selects.forEach(sel => {
+          sel.addEventListener('change', (e) => {
+            const target = e.target as HTMLSelectElement;
+            const h = target.getAttribute('data-header');
+            if (h) columnRules[h] = target.value;
+            runValidation();
+          });
+        });
+      }
+
+      runValidation();
+    }
+
+    function validateValue(val: string, rule: string): boolean {
+      if (rule === 'any') return true;
+      if (rule === 'non_empty') return val.trim().length > 0;
+      if (rule === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      if (rule === 'date') return !isNaN(Date.parse(val)) && /\d{4}-\d{2}-\d{2}/.test(val);
+      if (rule === 'integer') return /^-?\d+$/.test(val);
+      if (rule === 'positive_number') return !isNaN(Number(val)) && Number(val) >= 0;
+      if (rule === 'boolean') return ['true', 'false', '1', '0', 'yes', 'no'].includes(val.toLowerCase());
+      return true;
+    }
+
+    function runValidation() {
+      if (!statusBanner || !errorList) return;
+
+      if (headers.length === 0 || parsedRows.length === 0) {
+        statusBanner.className = 'p-12 rounded-8 border border-border bg-surface2 font-bold text-xs text-muted';
+        statusBanner.textContent = 'Status: Waiting for input data...';
+        errorList.innerHTML = '<li class="p-8 text-muted text-xs">No validation run yet.</li>';
+        return;
+      }
+
+      const errors: { line: number; col: string; val: string; rule: string }[] = [];
+
+      parsedRows.forEach((row, rowIdx) => {
+        const lineNum = rowIdx + 2; // header is line 1
+        headers.forEach((h, colIdx) => {
+          const rule = columnRules[h] || 'any';
+          const cellVal = row[colIdx] !== undefined ? row[colIdx] : '';
+
+          if (!validateValue(cellVal, rule)) {
+            errors.push({ line: lineNum, col: h, val: cellVal, rule });
+          }
+        });
+      });
+
+      if (errors.length === 0) {
+        statusBanner.className = 'p-12 rounded-8 border border-emerald-500/40 bg-emerald-500/10 font-bold text-xs text-emerald-700 dark:text-emerald-300';
+        statusBanner.textContent = `✓ Schema Validation Passed: All ${parsedRows.length} rows satisfy column constraints.`;
+        errorList.innerHTML = '<li class="p-12 text-emerald-600 dark:text-emerald-400 font-bold text-xs">✓ Zero constraint violations detected.</li>';
+      } else {
+        statusBanner.className = 'p-12 rounded-8 border border-danger/40 bg-danger/10 font-bold text-xs text-danger dark:text-danger-dark';
+        statusBanner.textContent = `⚠️ Validation Failed: Found ${errors.length} constraint violations across ${parsedRows.length} rows.`;
+
+        let errHtml = '';
+        errors.forEach(err => {
+          errHtml += `
+            <li class="p-8 text-xs flex flex-wrap items-center justify-between gap-8">
+              <span class="font-bold text-accent dark:text-accent-dark">Line ${err.line}:</span>
+              <span class="font-bold text-ink dark:text-ink-dark">Column "${err.col}"</span>
+              <span class="text-danger dark:text-danger-dark font-bold">Failed rule "${err.rule}"</span>
+              <span class="text-muted truncate max-w-[150px]">Value: "${err.val}"</span>
+            </li>
+          `;
+        });
+        errorList.innerHTML = errHtml;
+      }
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', renderSchemaGrid);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = sampleUserCsv;
+        renderSchemaGrid();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        renderSchemaGrid();
+      }
+    });
+
+    // Initial run
+    renderSchemaGrid();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvValidator);
+  } else {
+    initCsvValidator();
+  }
+</script>

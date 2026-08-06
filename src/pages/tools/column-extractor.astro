@@ -1,0 +1,282 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Column Extractor & Header Filter | Nadhebe';
+const h1 = 'CSV Column Extractor';
+const description = 'Extract specific columns from raw CSV dataset blocks by selecting headers with live preview and instant CSV export.';
+
+const faq = [
+  {
+    question: 'How do I pick which columns to keep?',
+    answer: 'Paste your raw CSV data, and the tool will automatically generate checkboxes for every detected column header. Simply check or uncheck fields.'
+  },
+  {
+    question: 'Does column extraction work with large files?',
+    answer: 'Yes! The extraction algorithm runs in high-performance browser JavaScript.'
+  },
+  {
+    question: 'Is my dataset uploaded to any server?',
+    answer: 'No. 100% of data processing occurs locally in your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="column-extractor"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="column-extractor-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="INPUT CSV DATA">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Raw CSV Text</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="ce-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Sample CSV
+            </button>
+            <button type="button" id="ce-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="ce-input-csv"
+          rows="5"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste raw CSV data here..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Column Selection Panel -->
+    <CalculatorCard title="SELECT COLUMNS TO EXTRACT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between border-b border-border/40 pb-8 dark:border-border-dark/40">
+          <span class="text-xs font-mono font-bold text-muted uppercase">Detected Column Headers</span>
+          <div class="flex items-center gap-12 text-xs font-mono">
+            <button type="button" id="ce-btn-select-all" class="text-accent dark:text-accent-dark font-bold hover:underline">Select All</button>
+            <span class="text-muted">|</span>
+            <button type="button" id="ce-btn-deselect-all" class="text-muted hover:text-ink dark:hover:text-ink-dark font-semibold">Deselect All</button>
+          </div>
+        </div>
+
+        <!-- Checkbox Grid Container -->
+        <div id="ce-checkbox-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12 font-mono text-xs">
+          <p class="col-span-full text-muted py-8">Paste CSV data above to generate column checkboxes.</p>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Extracted Output Card -->
+    <ResultCard title="EXTRACTED CSV SUBSET">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span id="ce-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 columns selected</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="ce-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+              Copy
+            </button>
+            <button type="button" id="ce-btn-download" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              Download CSV
+            </button>
+          </div>
+        </div>
+
+        <pre id="ce-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Paste CSV data and select columns above to preview extracted subset.</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Streamline Datasets by Extracting Key Fields</h2>
+    <p>
+      Data exports from analytics tools often include dozens of unnecessary columns. Extracting only the required attributes (e.g. `email` and `signup_date`) shrinks file size and simplifies downstream analytics.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initColumnExtractor() {
+    const inputCsv = document.getElementById('ce-input-csv') as HTMLTextAreaElement;
+    const checkboxGrid = document.getElementById('ce-checkbox-grid');
+    const outputPre = document.getElementById('ce-output-pre');
+    const outputStats = document.getElementById('ce-output-stats');
+
+    const btnSample = document.getElementById('ce-btn-sample');
+    const btnClear = document.getElementById('ce-btn-clear');
+    const btnSelectAll = document.getElementById('ce-btn-select-all');
+    const btnDeselectAll = document.getElementById('ce-btn-deselect-all');
+    const btnCopy = document.getElementById('ce-btn-copy');
+    const btnDownload = document.getElementById('ce-btn-download');
+
+    const sampleCsv = `id,first_name,last_name,email,gender,ip_address,company,department,salary\n1,Jeanette,Pendree,jpendree0@census.gov,Female,26.58.193.2,Yoyom,Services,$72500\n2,Gevaney,MacAfee,gmacafee1@github.com,Male,229.179.4.212,Flipstorm,Engineering,$94100\n3,Clementia,O'Doherty,codoherty2@skyrock.com,Female,12.235.132.88,Meetz,Marketing,$63200\n4,Tad,Streatfeild,tstreatfeild3@latimes.com,Male,144.137.234.195,Eimbee,Engineering,$88900`;
+
+    let headers: string[] = [];
+    let parsedRows: string[][] = [];
+    let selectedIndices: Set<number> = new Set();
+
+    function parseCsvLine(line: string): string[] {
+      const result: string[] = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          inQuotes = !inQuotes;
+        } else if (c === ',' && !inQuotes) {
+          result.push(cur.trim());
+          cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      result.push(cur.trim());
+      return result;
+    }
+
+    function renderCheckboxes() {
+      if (!inputCsv || !checkboxGrid) return;
+      const raw = inputCsv.value.trim();
+      
+      if (!raw) {
+        headers = [];
+        parsedRows = [];
+        selectedIndices.clear();
+        checkboxGrid.innerHTML = '<p class="col-span-full text-muted py-8">Paste CSV data above to generate column checkboxes.</p>';
+        updateOutput();
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (lines.length === 0) return;
+
+      const newHeaders = parseCsvLine(lines[0]);
+      parsedRows = lines.slice(1).map(parseCsvLine);
+
+      // If headers changed, re-render checkboxes
+      if (newHeaders.join(',') !== headers.join(',')) {
+        headers = newHeaders;
+        selectedIndices = new Set(headers.map((_, i) => i)); // select all by default
+
+        let html = '';
+        headers.forEach((h, idx) => {
+          html += `
+            <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+              <input type="checkbox" class="ce-col-check w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" data-idx="${idx}" checked />
+              <span class="truncate font-bold text-ink dark:text-ink-dark" title="${h}">${h || 'Col ' + (idx + 1)}</span>
+            </label>
+          `;
+        });
+        checkboxGrid.innerHTML = html;
+
+        // Attach checkbox click listeners
+        const chks = checkboxGrid.querySelectorAll('.ce-col-check');
+        chks.forEach(chk => {
+          chk.addEventListener('change', (e) => {
+            const target = e.target as HTMLInputElement;
+            const idx = Number(target.getAttribute('data-idx'));
+            if (target.checked) selectedIndices.add(idx);
+            else selectedIndices.delete(idx);
+            updateOutput();
+          });
+        });
+      }
+
+      updateOutput();
+    }
+
+    function updateOutput() {
+      if (!outputPre || !outputStats) return;
+
+      if (headers.length === 0 || selectedIndices.size === 0) {
+        outputPre.textContent = 'No columns selected.';
+        outputStats.textContent = '0 columns selected';
+        return;
+      }
+
+      const sortedIndices = Array.from(selectedIndices).sort((a, b) => a - b);
+      const extractedHeaders = sortedIndices.map(i => headers[i]);
+
+      const extractedRows = parsedRows.map(row => {
+        return sortedIndices.map(i => (row[i] !== undefined ? row[i] : ''));
+      });
+
+      const csvLines = [
+        extractedHeaders.map(h => (h.includes(',') ? `"${h}"` : h)).join(','),
+        ...extractedRows.map(r => r.map(cell => (cell.includes(',') ? `"${cell}"` : cell)).join(','))
+      ];
+
+      const resultText = csvLines.join('\n');
+      outputPre.textContent = resultText;
+      outputStats.textContent = `${sortedIndices.length} of ${headers.length} columns selected (${extractedRows.length} rows)`;
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', renderCheckboxes);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = sampleCsv;
+        renderCheckboxes();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        renderCheckboxes();
+      }
+    });
+
+    btnSelectAll?.addEventListener('click', () => {
+      selectedIndices = new Set(headers.map((_, i) => i));
+      const chks = checkboxGrid?.querySelectorAll('.ce-col-check') as NodeListOf<HTMLInputElement>;
+      chks?.forEach(c => (c.checked = true));
+      updateOutput();
+    });
+
+    btnDeselectAll?.addEventListener('click', () => {
+      selectedIndices.clear();
+      const chks = checkboxGrid?.querySelectorAll('.ce-col-check') as NodeListOf<HTMLInputElement>;
+      chks?.forEach(c => (c.checked = false));
+      updateOutput();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputPre) {
+        navigator.clipboard.writeText(outputPre.textContent || '');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy'), 1500);
+      }
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      if (!outputPre?.textContent) return;
+      const blob = new Blob([outputPre.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'extracted_columns.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial run
+    renderCheckboxes();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initColumnExtractor);
+  } else {
+    initColumnExtractor();
+  }
+</script>

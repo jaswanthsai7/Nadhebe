@@ -2063,18 +2063,6 @@ Use our free interactive [Api Payload Builder](/tools/api-payload-builder/) tool
 
 ---
 
-# [WAI-ARIA Role & Accessibility Attribute Helper | Nadhebe](https://nadhebe.com/tools/aria-role-helper)
-
-> Lookup WAI-ARIA roles, aria-expanded, aria-hidden, aria-live attributes, and WCAG accessibility standards for UI components.
-
-Category: Tools | Tags: ["Accessibility","a11y","ARIA","WCAG","HTML"]
-
-## WAI-ARIA Role & Attribute Helper
-
-Use our interactive [WAI-ARIA Role & Attribute Helper](/tools/aria-role-helper/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
 # [Aspect Ratio Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/aspect-ratio-calculator)
 
 > Interactive online Aspect Ratio Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
@@ -2096,18 +2084,6 @@ Category: Tools | Tags: ["Average Calculator", "Developer Tools", "Web Utility"]
 ## Average Calculator
 
 Use our free interactive [Average Calculator](/tools/average-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Image Canvas Background Transparency Tool | Nadhebe](https://nadhebe.com/tools/background-remover)
-
-> Process image alpha channels, replace background colors, and check transparency directly in your browser.
-
-Category: Tools | Tags: ["Image Processing","Canvas","PNG","Graphics"]
-
-## Image Background & Transparency Tool
-
-Use our interactive [Image Background & Transparency Tool](/tools/background-remover/) to process data, format snippets, and analyze metrics directly in your browser.
 
 ---
 
@@ -2168,18 +2144,6 @@ Category: Tools | Tags: ["Cac Payback", "Developer Tools", "Web Utility"]
 ## Cac Payback
 
 Use our free interactive [Cac Payback](/tools/cac-payback/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Social Media Carousel Image Size Helper | Nadhebe](https://nadhebe.com/tools/carousel-size-helper)
-
-> Calculate pixel dimensions, aspect ratios, and export resolutions for Instagram, LinkedIn, and Twitter carousels.
-
-Category: Tools | Tags: ["Social Media","Aspect Ratio","Dimensions","Design"]
-
-## Carousel Dimension & Aspect Helper
-
-Use our interactive [Carousel Dimension & Aspect Helper](/tools/carousel-size-helper/) to process data, format snippets, and analyze metrics directly in your browser.
 
 ---
 
@@ -2303,39 +2267,27 @@ Use our free interactive [Color Contrast Checker](/tools/color-contrast-checker/
 
 ---
 
-# [CSV Column Extractor & Reorder Tool | Nadhebe](https://nadhebe.com/tools/column-extractor)
+# [CSV Column Extractor | Nadhebe](https://nadhebe.com/tools/column-extractor)
 
-> Extract specific columns from raw CSV text, reorder header positions, and filter out unused data fields.
+> Extract specific columns from raw CSV data by header selection.
 
-Category: Tools | Tags: ["Column Extractor","CSV Filtering","Data Processing"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Column Extractor
+# CSV Column Extractor | Nadhebe
 
-Use our interactive [CSV Column Extractor](/tools/column-extractor/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV & Data Column Profiler | Nadhebe](https://nadhebe.com/tools/column-profiler)
-
-> Calculate column statistics, unique count ratios, numeric averages, min/max values, and data type distribution.
-
-Category: Tools | Tags: ["Data Profiler","Column Stats","Data Analysis","Statistics"]
-
-## Data Column Profiler & Statistics
-
-Use our interactive [Data Column Profiler & Statistics](/tools/column-profiler/) to process datasets, format CSV structures, and inspect data payloads.
+Extract specific columns from raw CSV data by header selection.
 
 ---
 
-# [Conventional Commit Message Builder | Nadhebe](https://nadhebe.com/tools/commit-message-builder)
+# [CSV Column Statistics Profiler | Nadhebe](https://nadhebe.com/tools/column-profiler)
 
-> Build standardized conventional git commit messages with scope, breaking change warnings, and issue references.
+> Compute column-level statistics, min/max values, and unique counts.
 
-Category: Tools | Tags: ["Git","Conventional Commits","Version Control","Workflow"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## Conventional Commit Builder
+# CSV Column Statistics Profiler | Nadhebe
 
-Use our interactive [Conventional Commit Builder](/tools/commit-message-builder/) to process data, format snippets, and analyze metrics directly in your browser.
+Compute column-level statistics, min/max values, and unique counts.
 
 ---
 
@@ -2360,30 +2312,6 @@ Category: Tools | Tags: ["Context Window","LLM Budget","Tokens","Prompt Engineer
 ## LLM Context Window Budget Planner
 
 Use our interactive [LLM Context Window Budget Planner](/tools/context-budget-planner/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [HTTP Cookie Header Decoder & Parser | Nadhebe](https://nadhebe.com/tools/cookie-decoder)
-
-> Parse raw Set-Cookie response headers and Cookie strings into readable key-value attributes, SameSite, and Expiration flags.
-
-Category: Tools | Tags: ["HTTP","Cookies","Security","Web Security","Headers"]
-
-## HTTP Cookie Decoder
-
-Use our interactive [HTTP Cookie Decoder](/tools/cookie-decoder/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Pearson Correlation Coefficient Calculator | Nadhebe](https://nadhebe.com/tools/correlation-helper)
-
-> Calculate Pearson correlation coefficient (r), covariance, and linear dependence between paired data series.
-
-Category: Tools | Tags: ["Correlation","Statistics","Pearson r","Data Science"]
-
-## Pearson Correlation Calculator
-
-Use our interactive [Pearson Correlation Calculator](/tools/correlation-helper/) to process datasets, format CSV structures, and inspect data payloads.
 
 ---
 
@@ -2435,39 +2363,39 @@ Use our free interactive [Css Clamp Calculator](/tools/css-clamp-calculator/) to
 
 ---
 
-# [Interactive CSV Table Builder | Nadhebe](https://nadhebe.com/tools/csv-builder)
+# [Visual CSV Grid Table Builder | Nadhebe](https://nadhebe.com/tools/csv-builder)
 
-> Build custom CSV text line-by-line using a visual grid editor with instant row addition and export.
+> Build and edit CSV files visually in your browser with table controls.
 
-Category: Tools | Tags: ["CSV Builder","Grid Editor","Export CSV","Table"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## Interactive CSV Table Builder
+# Visual CSV Grid Table Builder | Nadhebe
 
-Use our interactive [Interactive CSV Table Builder](/tools/csv-builder/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV File Syntax & Delimiter Checker | Nadhebe](https://nadhebe.com/tools/csv-checker)
-
-> Validate CSV line structures, count columns per row, detect mismatched quotes, and identify formatting errors.
-
-Category: Tools | Tags: ["CSV Checker","Data Validation","Delimiter","File Inspection"]
-
-## CSV Syntax & Delimiter Checker
-
-Use our interactive [CSV Syntax & Delimiter Checker](/tools/csv-checker/) to process datasets, format CSV structures, and inspect data payloads.
+Build and edit CSV files visually in your browser with table controls.
 
 ---
 
-# [CSV Line & Special Character Cleaner | Nadhebe](https://nadhebe.com/tools/csv-cleaner)
+# [CSV Delimiter & Column Balance Checker | Nadhebe](https://nadhebe.com/tools/csv-checker)
 
-> Remove blank CSV rows, unescape accidental quotes, replace invalid characters, and sanitize text cells.
+> Audit CSV files line-by-line for mismatched column counts.
 
-Category: Tools | Tags: ["CSV Cleaner","Sanitize","Quote Removal","Data Prep"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Line & Quote Cleaner
+# CSV Delimiter & Column Balance Checker | Nadhebe
 
-Use our interactive [CSV Line & Quote Cleaner](/tools/csv-cleaner/) to process datasets, format CSV structures, and inspect data payloads.
+Audit CSV files line-by-line for mismatched column counts.
+
+---
+
+# [CSV Sanitizer & Blank Line Cleaner | Nadhebe](https://nadhebe.com/tools/csv-cleaner)
+
+> Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.
+
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
+
+# CSV Sanitizer & Blank Line Cleaner | Nadhebe
+
+Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.
 
 ---
 
@@ -2495,111 +2423,63 @@ Use our interactive [CSV Size & Row Estimator](/tools/csv-estimator/) to process
 
 ---
 
-# [JSON Array to CSV Exporter Helper | Nadhebe](https://nadhebe.com/tools/csv-exporter-helper)
+# [CSV Encoding & Line Ending Inspector | Nadhebe](https://nadhebe.com/tools/csv-inspector)
 
-> Transform complex nested JSON arrays into flat CSV structures with header extraction and download links.
+> Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.
 
-Category: Tools | Tags: ["JSON to CSV","Data Exporter","Flat JSON"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## JSON to CSV Exporter Helper
+# CSV Encoding & Line Ending Inspector | Nadhebe
 
-Use our interactive [JSON to CSV Exporter Helper](/tools/csv-exporter-helper/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV Encoding & Delimiter Inspector | Nadhebe](https://nadhebe.com/tools/csv-inspector)
-
-> Inspect CSV character encoding (UTF-8, ASCII), line ending styles (CRLF, LF), and auto-detect delimiters.
-
-Category: Tools | Tags: ["CSV Inspector","Encoding","UTF-8","Line Endings"]
-
-## CSV Encoding & Delimiter Inspector
-
-Use our interactive [CSV Encoding & Delimiter Inspector](/tools/csv-inspector/) to process datasets, format CSV structures, and inspect data payloads.
+Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.
 
 ---
 
-# [CSV File & Table Row Merger | Nadhebe](https://nadhebe.com/tools/csv-merger)
+# [Multi-File CSV Table Merger | Nadhebe](https://nadhebe.com/tools/csv-merger)
 
-> Merge multiple CSV text blocks into a single clean file with header deduplication and automatic alignment.
+> Merge multiple CSV datasets into a single consolidated table.
 
-Category: Tools | Tags: ["CSV Merger","Combine CSV","Data Concatenation"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV File & Table Row Merger
+# Multi-File CSV Table Merger | Nadhebe
 
-Use our interactive [CSV File & Table Row Merger](/tools/csv-merger/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV Data Schema & Pipeline Planner | Nadhebe](https://nadhebe.com/tools/csv-planner)
-
-> Design CSV column headers, data types, required constraints, and import mappings for data ingestion pipelines.
-
-Category: Tools | Tags: ["CSV Planner","Schema Design","Data Pipeline","Ingestion"]
-
-## CSV Schema & Pipeline Planner
-
-Use our interactive [CSV Schema & Pipeline Planner](/tools/csv-planner/) to process datasets, format CSV structures, and inspect data payloads.
+Merge multiple CSV datasets into a single consolidated table.
 
 ---
 
-# [CSV File Interactive Table Previewer | Nadhebe](https://nadhebe.com/tools/csv-preview)
+# [CSV Data Pipeline Schema Planner | Nadhebe](https://nadhebe.com/tools/csv-planner)
 
-> Parse and render CSV raw text into a clean interactive HTML table with search, pagination, and sorting.
+> Plan CSV data pipeline schemas and generate SQL DDL tables.
 
-Category: Tools | Tags: ["CSV Preview","HTML Table","Parser","Data Viewer"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Interactive Table Previewer
+# CSV Data Pipeline Schema Planner | Nadhebe
 
-Use our interactive [CSV Interactive Table Previewer](/tools/csv-preview/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV Task & Project Import Builder | Nadhebe](https://nadhebe.com/tools/csv-task-importer)
-
-> Format custom CSV files for batch importing tasks into Jira, Asana, Trello, Notion, and GitHub Issues.
-
-Category: Tools | Tags: ["Task Importer","Jira","Asana","Notion","CSV Batch"]
-
-## CSV Task Import Builder
-
-Use our interactive [CSV Task Import Builder](/tools/csv-task-importer/) to process datasets, format CSV structures, and inspect data payloads.
+Plan CSV data pipeline schemas and generate SQL DDL tables.
 
 ---
 
-# [CSV Data Import Template Generator | Nadhebe](https://nadhebe.com/tools/csv-template-maker)
+# [CSV Table Preview & Viewer | Nadhebe](https://nadhebe.com/tools/csv-preview)
 
-> Generate standardized CSV templates for customer contact lists, product inventory, and user imports.
+> Preview raw CSV data as an interactive, searchable HTML table.
 
-Category: Tools | Tags: ["CSV Template","Generator","Data Import","Spreadsheet"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Import Template Generator
+# CSV Table Preview & Viewer | Nadhebe
 
-Use our interactive [CSV Import Template Generator](/tools/csv-template-maker/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Csv To Json | Nadhebe Developer Tools](https://nadhebe.com/tools/csv-to-json)
-
-> Interactive online Csv To Json tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Csv To Json", "Developer Tools", "Web Utility"]
-
-## Csv To Json
-
-Use our free interactive [Csv To Json](/tools/csv-to-json/) tool online. Fast, secure, and privacy-first client-side web utility.
+Preview raw CSV data as an interactive, searchable HTML table.
 
 ---
 
-# [CSV Schema & Data Type Validator | Nadhebe](https://nadhebe.com/tools/csv-validator)
+# [CSV Schema & Type Constraint Validator | Nadhebe](https://nadhebe.com/tools/csv-validator)
 
-> Validate CSV files against strict column constraints, date formats, email regex, and integer ranges.
+> Validate CSV data against custom column data type constraints.
 
-Category: Tools | Tags: ["CSV Validator","Data Integrity","Schema Validation"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Schema & Data Validator
+# CSV Schema & Type Constraint Validator | Nadhebe
 
-Use our interactive [CSV Schema & Data Validator](/tools/csv-validator/) to process datasets, format CSV structures, and inspect data payloads.
+Validate CSV data against custom column data type constraints.
 
 ---
 
@@ -2624,18 +2504,6 @@ Category: Tools | Tags: ["Anomaly Detection","Outliers","Data Quality","Z-Score"
 ## Data Analysis Anomaly Checker
 
 Use our interactive [Data Analysis Anomaly Checker](/tools/data-analysis-checker/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Data Analysis Dataset Cleaner | Nadhebe](https://nadhebe.com/tools/data-analysis-cleaner)
-
-> Clean data tables, replace missing null values, normalize column strings, and remove trailing whitespace.
-
-Category: Tools | Tags: ["Data Cleaning","Dataset","Data Preprocessing","Analytics"]
-
-## Dataset & Data Analysis Cleaner
-
-Use our interactive [Dataset & Data Analysis Cleaner](/tools/data-analysis-cleaner/) to process datasets, format CSV structures, and inspect data payloads.
 
 ---
 
@@ -2687,18 +2555,6 @@ Use our interactive [Data Analysis Report Template Maker](/tools/data-analysis-t
 
 ---
 
-# [Column Data Type Auto-Detector | Nadhebe](https://nadhebe.com/tools/data-type-detector)
-
-> Automatically infer data types (String, Integer, Float, Date, Boolean) from sample text data strings.
-
-Category: Tools | Tags: ["Data Type Detector","Schema Inference","Parsing"]
-
-## Column Data Type Auto-Detector
-
-Use our interactive [Column Data Type Auto-Detector](/tools/data-type-detector/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
 # [CRON & Scheduled Date Builder | Nadhebe](https://nadhebe.com/tools/date-and-time-builder)
 
 > Build schedule timestamps, recurrent event series, and cron execution intervals with timezone offsets.
@@ -2708,30 +2564,6 @@ Category: Tools | Tags: ["Cron","Scheduling","Timestamps","Events"]
 ## Scheduled Date & Time Builder
 
 Use our interactive [Scheduled Date & Time Builder](/tools/date-and-time-builder/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Date & Time Validity & Leap Year Checker | Nadhebe](https://nadhebe.com/tools/date-and-time-checker)
-
-> Verify date string validity, check leap years, business day overlaps, and day-of-year indexes.
-
-Category: Tools | Tags: ["Date Checker","Leap Year","Business Days","Validation"]
-
-## Date Validity & Leap Year Checker
-
-Use our interactive [Date Validity & Leap Year Checker](/tools/date-and-time-checker/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Date & Time Epoch Millisecond Estimator | Nadhebe](https://nadhebe.com/tools/date-and-time-estimator)
-
-> Convert between UTC dates, ISO 8601 strings, UNIX epoch timestamps, and relative time offsets.
-
-Category: Tools | Tags: ["Date Time","Epoch","Timestamp","UTC","Timezones"]
-
-## Date & Time Epoch Estimator
-
-Use our interactive [Date & Time Epoch Estimator](/tools/date-and-time-estimator/) to process data, format snippets, and analyze metrics directly in your browser.
 
 ---
 
@@ -2771,15 +2603,15 @@ Use our free interactive [Date Difference](/tools/date-difference/) tool online.
 
 ---
 
-# [CSV, TSV & Pipe Delimiter Converter | Nadhebe](https://nadhebe.com/tools/delimiter-converter)
+# [CSV & Delimiter Converter | Nadhebe](https://nadhebe.com/tools/delimiter-converter)
 
-> Convert table data between comma-separated (CSV), tab-separated (TSV), pipe-separated (|), and semicolon values.
+> Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.
 
-Category: Tools | Tags: ["Delimiter Converter","TSV","CSV","Pipe Separated"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## CSV Delimiter Converter (Comma, TSV, Pipe)
+# CSV & Delimiter Converter | Nadhebe
 
-Use our interactive [CSV Delimiter Converter (Comma, TSV, Pipe)](/tools/delimiter-converter/) to process datasets, format CSV structures, and inspect data payloads.
+Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.
 
 ---
 
@@ -2795,123 +2627,15 @@ Use our interactive [SEO Description Template Maker](/tools/description-template
 
 ---
 
-# [Developer Boilerplate & Config Builder | Nadhebe](https://nadhebe.com/tools/developer-builder)
+# [Code & Console Log Stripper | Nadhebe](https://nadhebe.com/tools/developer-cleaner)
 
-> Generate starter configurations for TypeScript, ESLint, Prettier, Docker, and GitHub Actions CI/CD.
+> Strip console.log calls, debugger statements, and comments from code.
 
-Category: Tools | Tags: ["Builder","Boilerplate","TypeScript","Docker","CI/CD"]
+Category: Tools | Tags: ["CSV", "Data", "Tools"]
 
-## Developer Config Builder
+# Code & Console Log Stripper | Nadhebe
 
-Use our interactive [Developer Config Builder](/tools/developer-builder/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Engineering Capacity & Sprint Calculator | Nadhebe](https://nadhebe.com/tools/developer-calculator)
-
-> Calculate developer sprint capacity, story point velocity, meeting overhead, and focus time per engineer.
-
-Category: Tools | Tags: ["Developer","Agile","Sprint Capacity","Scrum","Engineering"]
-
-## Developer Capacity Calculator
-
-Use our interactive [Developer Capacity Calculator](/tools/developer-calculator/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Code Syntax & Rule Checker | Nadhebe](https://nadhebe.com/tools/developer-checker)
-
-> Check JavaScript, JSON, and HTML for syntax errors, unclosed tags, balanced brackets, and formatting issues.
-
-Category: Tools | Tags: ["Linter","Syntax Checker","JSON Validator","HTML Validator"]
-
-## Developer Code Checker
-
-Use our interactive [Developer Code Checker](/tools/developer-checker/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Code Cleaner & Unused Line Stripper | Nadhebe](https://nadhebe.com/tools/developer-cleaner)
-
-> Clean up code snippets by stripping console log statements, trailing whitespace, empty lines, and comments.
-
-Category: Tools | Tags: ["Formatter","Code Cleaner","JavaScript","Refactoring"]
-
-## Code & Whitespace Cleaner
-
-Use our interactive [Code & Whitespace Cleaner](/tools/developer-cleaner/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Project Time & Cost Estimator | Nadhebe](https://nadhebe.com/tools/developer-estimator)
-
-> Estimate developer engineering hours, complexity buffer, hourly rates, and total project delivery cost.
-
-Category: Tools | Tags: ["Estimator","Engineering Costs","Project Management","Agile"]
-
-## Developer Project Estimator
-
-Use our interactive [Developer Project Estimator](/tools/developer-estimator/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Multi-Language Code Formatter & Indenter | Nadhebe](https://nadhebe.com/tools/developer-formatter)
-
-> Format and beautify JavaScript, HTML, CSS, JSON, and SQL snippets with customizable indentation spaces.
-
-Category: Tools | Tags: ["Code Formatter","Beautifier","JavaScript","SQL","HTML"]
-
-## Developer Code Formatter
-
-Use our interactive [Developer Code Formatter](/tools/developer-formatter/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Mock Data & Schema Generator | Nadhebe](https://nadhebe.com/tools/developer-generator)
-
-> Generate realistic JSON mock data, fake user records, UUIDs, timestamps, and API fixtures for testing.
-
-Category: Tools | Tags: ["Mock Data","JSON","Testing","Faker","API Fixtures"]
-
-## Developer Mock Data Generator
-
-Use our interactive [Developer Mock Data Generator](/tools/developer-generator/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Code & Asset Inspector | Nadhebe](https://nadhebe.com/tools/developer-inspector)
-
-> Inspect JavaScript bundle sizes, DOM node counts, script execution latency, and asset load metrics.
-
-Category: Tools | Tags: ["Inspector","Performance","Web Vitals","DOM"]
-
-## Developer Asset Inspector
-
-Use our interactive [Developer Asset Inspector](/tools/developer-inspector/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer Technical Roadmap Planner | Nadhebe](https://nadhebe.com/tools/developer-planner)
-
-> Plan engineering milestones, task allocation, tech debt ratios, and technical architecture roadmaps.
-
-Category: Tools | Tags: ["Roadmap","Architecture","Agile","Engineering Management"]
-
-## Developer Roadmap Planner
-
-Use our interactive [Developer Roadmap Planner](/tools/developer-planner/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Developer PR & Issue Template Generator | Nadhebe](https://nadhebe.com/tools/developer-template-maker)
-
-> Create standardized GitHub pull request templates, bug report forms, and feature request markdown specifications.
-
-Category: Tools | Tags: ["Templates","GitHub","Pull Requests","Markdown","Open Source"]
-
-## Developer Template Maker
-
-Use our interactive [Developer Template Maker](/tools/developer-template-maker/) to process data, format snippets, and analyze metrics directly in your browser.
+Strip console.log calls, debugger statements, and comments from code.
 
 ---
 
@@ -2939,18 +2663,6 @@ Use our free interactive [Dpi Print Size Calculator](/tools/dpi-print-size-calcu
 
 ---
 
-# [Text & Array Duplicate Line Remover | Nadhebe](https://nadhebe.com/tools/duplicate-remover)
-
-> Instantly strip duplicate lines, lists, JSON arrays, and strings online with case sensitivity and trim options.
-
-Category: Tools | Tags: ["Text Tools","Deduplication","List Cleaner","String Utility"]
-
-## Duplicate Line & Entry Remover
-
-Use our interactive [Duplicate Line & Entry Remover](/tools/duplicate-remover/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
 # [Embedding Inspector | Nadhebe Developer Tools](https://nadhebe.com/tools/embedding-inspector)
 
 > Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
@@ -2972,18 +2684,6 @@ Category: Tools | Tags: ["Env Diff", "Developer Tools", "Web Utility"]
 ## Env Diff
 
 Use our free interactive [Env Diff](/tools/env-diff/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [HTML, SQL & Regex Character Escape Helper | Nadhebe](https://nadhebe.com/tools/escape-helper)
-
-> Escape and unescape special characters for HTML entities, SQL queries, JSON strings, and Regular Expressions.
-
-Category: Tools | Tags: ["Escape Helper","HTML Entities","SQL Injection","Regex"]
-
-## String Escape & Unescape Helper
-
-Use our interactive [String Escape & Unescape Helper](/tools/escape-helper/) to process data, format snippets, and analyze metrics directly in your browser.
 
 ---
 

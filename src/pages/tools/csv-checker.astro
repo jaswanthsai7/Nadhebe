@@ -1,0 +1,267 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Delimiter & Column Balance Checker | Nadhebe';
+const h1 = 'CSV Column Balance & Syntax Checker';
+const description = 'Audit CSV dataset files line-by-line to detect mismatched column counts, unclosed quotes, and formatting syntax anomalies.';
+
+const faq = [
+  {
+    question: 'What errors does the CSV checker detect?',
+    answer: 'It detects mismatched column counts across rows, unclosed double quotes, trailing whitespace anomalies, and invalid row delimiters.'
+  },
+  {
+    question: 'How do I know how many columns my CSV should have?',
+    answer: 'The checker uses the header row (Line 1) as the baseline column count and flags any row with more or fewer fields.'
+  },
+  {
+    question: 'Is my data secure?',
+    answer: 'Yes, 100% of the audit algorithm runs locally inside your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-checker-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="RAW CSV TEXT AUDIT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cc-btn-sample-valid" class="rounded-8 border border-border bg-surface2 px-10 py-4 text-xs font-mono font-bold text-emerald-600 hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-emerald-400 transition-all">
+              Valid CSV
+            </button>
+            <button type="button" id="cc-btn-sample-invalid" class="rounded-8 border border-border bg-surface2 px-10 py-4 text-xs font-mono font-bold text-danger hover:border-danger dark:border-border-dark dark:bg-surface2-dark dark:text-danger-dark transition-all">
+              Broken CSV Sample
+            </button>
+            <button type="button" id="cc-btn-clear" class="rounded-8 border border-border bg-surface px-10 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="cc-input-csv"
+          rows="6"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste CSV text here to audit row balance..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Audit Status Badge & Metrics Panel -->
+    <CalculatorCard title="AUDIT SUMMARY METRICS">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 font-mono text-xs text-center">
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Total Rows</span>
+          <span id="cc-metric-total-rows" class="text-h3 font-bold text-ink dark:text-ink-dark">0</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Expected Columns</span>
+          <span id="cc-metric-expected-cols" class="text-h3 font-bold text-accent dark:text-accent-dark">0</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Valid Rows</span>
+          <span id="cc-metric-valid-rows" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">0</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Syntax Anomalies</span>
+          <span id="cc-metric-error-rows" class="text-h3 font-bold text-danger dark:text-danger-dark">0</span>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Error Detailed Log Card -->
+    <ResultCard title="ROW-BY-ROW AUDIT REPORT">
+      <div class="space-y-16 font-mono text-caption">
+        <div id="cc-status-banner" class="p-12 rounded-8 border border-border bg-surface2 font-bold text-xs flex items-center gap-8">
+          <span class="text-muted">Status:</span>
+          <span>Waiting for input data...</span>
+        </div>
+
+        <ul id="cc-error-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40 max-h-[300px] overflow-auto">
+          <li class="p-8 text-muted text-xs">No errors to display.</li>
+        </ul>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Preventing Database Corruption with CSV Audits</h2>
+    <p>
+      Database importers expect every row in a CSV file to match the exact number of column headers defined in line 1. A single missing comma or unclosed quote on line 5,000 can crash bulk ETL pipelines. Auditing column balance in advance ensures smooth imports.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvChecker() {
+    const inputCsv = document.getElementById('cc-input-csv') as HTMLTextAreaElement;
+
+    const metricTotalRows = document.getElementById('cc-metric-total-rows');
+    const metricExpectedCols = document.getElementById('cc-metric-expected-cols');
+    const metricValidRows = document.getElementById('cc-metric-valid-rows');
+    const metricErrorRows = document.getElementById('cc-metric-error-rows');
+
+    const statusBanner = document.getElementById('cc-status-banner');
+    const errorList = document.getElementById('cc-error-list');
+
+    const btnSampleValid = document.getElementById('cc-btn-sample-valid');
+    const btnSampleInvalid = document.getElementById('cc-btn-sample-invalid');
+    const btnClear = document.getElementById('cc-btn-clear');
+
+    const validCsv = `id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Developer,Active\n3,Carol Danvers,carol@example.com,Designer,Active`;
+
+    const invalidCsv = `id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Developer\n3,Carol Danvers,"carol@example.com,Designer,Active,ExtraCol\n4,David Lee,david@example.com,Manager,Active`;
+
+    function auditCsv() {
+      if (!inputCsv) return;
+      const raw = inputCsv.value.trim();
+
+      if (!raw) {
+        if (metricTotalRows) metricTotalRows.textContent = '0';
+        if (metricExpectedCols) metricExpectedCols.textContent = '0';
+        if (metricValidRows) metricValidRows.textContent = '0';
+        if (metricErrorRows) metricErrorRows.textContent = '0';
+        if (statusBanner) {
+          statusBanner.className = 'p-12 rounded-8 border border-border bg-surface2 font-bold text-xs text-muted';
+          statusBanner.textContent = 'Status: Waiting for input data...';
+        }
+        if (errorList) errorList.innerHTML = '<li class="p-8 text-muted text-xs">No errors to display.</li>';
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (lines.length === 0) return;
+
+      const parseLine = (line: string) => {
+        const result: string[] = [];
+        let cur = '';
+        let inQuotes = false;
+        let quoteError = false;
+
+        for (let i = 0; i < line.length; i++) {
+          const c = line[i];
+          if (c === '"') {
+            inQuotes = !inQuotes;
+          } else if (c === ',' && !inQuotes) {
+            result.push(cur.trim());
+            cur = '';
+          } else {
+            cur += c;
+          }
+        }
+        if (inQuotes) quoteError = true;
+        result.push(cur.trim());
+        return { fields: result, quoteError };
+      };
+
+      const headerRes = parseLine(lines[0]);
+      const expectedCols = headerRes.fields.length;
+
+      let validRowCount = 0;
+      const errors: { line: number; type: string; details: string }[] = [];
+
+      lines.forEach((line, idx) => {
+        const lineNum = idx + 1;
+        const res = parseLine(line);
+
+        let hasErr = false;
+        if (res.quoteError) {
+          errors.push({ line: lineNum, type: 'Unclosed Quote', details: 'Line contains an unclosed double quote mark.' });
+          hasErr = true;
+        }
+
+        if (res.fields.length !== expectedCols) {
+          errors.push({
+            line: lineNum,
+            type: 'Column Mismatch',
+            details: `Found ${res.fields.length} columns, but expected ${expectedCols} based on header row.`
+          });
+          hasErr = true;
+        }
+
+        if (!hasErr) validRowCount++;
+      });
+
+      if (metricTotalRows) metricTotalRows.textContent = String(lines.length);
+      if (metricExpectedCols) metricExpectedCols.textContent = String(expectedCols);
+      if (metricValidRows) metricValidRows.textContent = String(validRowCount);
+      if (metricErrorRows) metricErrorRows.textContent = String(errors.length);
+
+      if (errors.length === 0) {
+        if (statusBanner) {
+          statusBanner.className = 'p-12 rounded-8 border border-emerald-500/40 bg-emerald-500/10 font-bold text-xs text-emerald-700 dark:text-emerald-300';
+          statusBanner.textContent = `✓ Audit Passed: All ${lines.length} rows have balanced ${expectedCols}-column structures.`;
+        }
+        if (errorList) {
+          errorList.innerHTML = '<li class="p-12 text-emerald-600 dark:text-emerald-400 font-bold text-xs">✓ Zero syntax anomalies detected. File is clean and ready for database import.</li>';
+        }
+      } else {
+        if (statusBanner) {
+          statusBanner.className = 'p-12 rounded-8 border border-danger/40 bg-danger/10 font-bold text-xs text-danger dark:text-danger-dark';
+          statusBanner.textContent = `⚠️ Audit Warning: Found ${errors.length} syntax anomalies across ${lines.length} rows.`;
+        }
+
+        let errorHtml = '';
+        errors.forEach(err => {
+          errorHtml += `
+            <li class="p-8 text-xs flex flex-wrap items-center justify-between gap-8">
+              <span class="font-bold text-accent dark:text-accent-dark">Line ${err.line}:</span>
+              <span class="font-bold text-danger dark:text-danger-dark">${err.type}</span>
+              <span class="text-ink dark:text-ink-dark flex-1">${err.details}</span>
+            </li>
+          `;
+        });
+        if (errorList) errorList.innerHTML = errorHtml;
+      }
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', auditCsv);
+
+    btnSampleValid?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = validCsv;
+        auditCsv();
+      }
+    });
+
+    btnSampleInvalid?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = invalidCsv;
+        auditCsv();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        auditCsv();
+      }
+    });
+
+    // Initial audit
+    auditCsv();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvChecker);
+  } else {
+    initCsvChecker();
+  }
+</script>

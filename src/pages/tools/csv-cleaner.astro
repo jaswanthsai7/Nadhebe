@@ -1,0 +1,259 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Sanitizer & Blank Line Cleaner | Nadhebe';
+const h1 = 'CSV Sanitizer & Cleaner';
+const description = 'Sanitize raw CSV data by stripping blank lines, trimming cell whitespace, fixing broken quotes, and normalizing line breaks.';
+
+const faq = [
+  {
+    question: 'What cleanup operations can I run?',
+    answer: 'You can strip empty lines, trim leading/trailing cell spaces, normalize double quotes, remove duplicate rows, and enforce Unix (LF) line endings.'
+  },
+  {
+    question: 'Will cleaning modify my original header row?',
+    answer: 'Headers are preserved intact unless cell trimming is enabled.'
+  },
+  {
+    question: 'Is my data stored anywhere?',
+    answer: 'No. All cleaning runs in local browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-cleaner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-cleaner-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="INPUT RAW CSV">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Raw CSV Text</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cl-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Dirty CSV Sample
+            </button>
+            <button type="button" id="cl-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="cl-input-csv"
+          rows="5"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste raw CSV text here..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Cleaning Controls Card -->
+    <CalculatorCard title="CLEANUP TOGGLES & SANITIZATION OPTIONS">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 font-mono text-xs">
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="cl-opt-strip-empty" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Strip Empty Lines</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="cl-opt-trim-cells" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Trim Cell Whitespace</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="cl-opt-fix-quotes" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Normalize Quotes</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="cl-opt-dedupe" class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Deduplicate Rows</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="cl-opt-unix-lf" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Enforce Unix (LF)</span>
+        </label>
+      </div>
+    </CalculatorCard>
+
+    <!-- Cleaned Output Card -->
+    <ResultCard title="SANITIZED CSV OUTPUT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span id="cl-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 lines sanitized</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cl-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+              Copy
+            </button>
+            <button type="button" id="cl-btn-download" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              Download Clean CSV
+            </button>
+          </div>
+        </div>
+
+        <pre id="cl-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Sanitized CSV will appear here...</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Clean Raw Datasets for Flawless Ingestion</h2>
+    <p>
+      Messy CSV files exported from legacy CRMs or web scraping tools frequently contain trailing empty lines, extra leading spaces, and inconsistent CRLF line breaks. Sanitizing CSV text upfront avoids parsing errors during database migrations.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvCleaner() {
+    const inputCsv = document.getElementById('cl-input-csv') as HTMLTextAreaElement;
+
+    const optStripEmpty = document.getElementById('cl-opt-strip-empty') as HTMLInputElement;
+    const optTrimCells = document.getElementById('cl-opt-trim-cells') as HTMLInputElement;
+    const optFixQuotes = document.getElementById('cl-opt-fix-quotes') as HTMLInputElement;
+    const optDedupe = document.getElementById('cl-opt-dedupe') as HTMLInputElement;
+    const optUnixLf = document.getElementById('cl-opt-unix-lf') as HTMLInputElement;
+
+    const outputPre = document.getElementById('cl-output-pre');
+    const outputStats = document.getElementById('cl-output-stats');
+
+    const btnSample = document.getElementById('cl-btn-sample');
+    const btnClear = document.getElementById('cl-btn-clear');
+    const btnCopy = document.getElementById('cl-btn-copy');
+    const btnDownload = document.getElementById('cl-btn-download');
+
+    const dirtyCsv = `id,name ,email ,role \n1, Alice Chen ,alice@example.com, Admin\n\n2,Bob Smith  ,bob@example.com, Developer\n2,Bob Smith  ,bob@example.com, Developer\n\n3,"Carol Danvers" ,carol@example.com, Designer\n`;
+
+    function cleanCsv() {
+      if (!inputCsv || !outputPre || !outputStats) return;
+      const raw = inputCsv.value;
+
+      if (!raw.trim()) {
+        outputPre.textContent = 'Sanitized CSV will appear here...';
+        outputStats.textContent = '0 lines sanitized';
+        return;
+      }
+
+      let lines = raw.split(/\r?\n/);
+      const originalCount = lines.length;
+
+      // 1. Strip Empty Lines
+      if (optStripEmpty?.checked) {
+        lines = lines.filter(l => l.trim().length > 0);
+      }
+
+      // 2. Trim Cell Whitespace & Normalize Quotes
+      lines = lines.map(line => {
+        if (!line.trim()) return line;
+
+        const parseLine = (str: string) => {
+          const res: string[] = [];
+          let cur = '';
+          let inQ = false;
+          for (let i = 0; i < str.length; i++) {
+            const c = str[i];
+            if (c === '"') {
+              inQ = !inQ;
+            } else if (c === ',' && !inQ) {
+              res.push(cur);
+              cur = '';
+            } else {
+              cur += c;
+            }
+          }
+          res.push(cur);
+          return res;
+        };
+
+        const cells = parseLine(line);
+        const cleanedCells = cells.map(cell => {
+          let c = cell;
+          if (optTrimCells?.checked) {
+            c = c.trim();
+          }
+          if (optFixQuotes?.checked) {
+            if (c.startsWith('"') && c.endsWith('"')) {
+              c = c.slice(1, -1).trim();
+              if (c.includes(',')) {
+                c = `"${c.replace(/"/g, '""')}"`;
+              }
+            }
+          }
+          return c;
+        });
+
+        return cleanedCells.join(',');
+      });
+
+      // 3. Deduplicate Rows
+      if (optDedupe?.checked) {
+        lines = Array.from(new Set(lines));
+      }
+
+      const joinChar = optUnixLf?.checked ? '\n' : '\r\n';
+      const resultText = lines.join(joinChar);
+
+      outputPre.textContent = resultText;
+      outputStats.textContent = `Cleaned ${lines.length} rows (removed ${originalCount - lines.length} lines)`;
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', cleanCsv);
+    [optStripEmpty, optTrimCells, optFixQuotes, optDedupe, optUnixLf].forEach(opt => {
+      opt?.addEventListener('change', cleanCsv);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = dirtyCsv;
+        cleanCsv();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        cleanCsv();
+      }
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputPre) {
+        navigator.clipboard.writeText(outputPre.textContent || '');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy'), 1500);
+      }
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      if (!outputPre?.textContent) return;
+      const blob = new Blob([outputPre.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sanitized_data.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial run
+    cleanCsv();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvCleaner);
+  } else {
+    initCsvCleaner();
+  }
+</script>

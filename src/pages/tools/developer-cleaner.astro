@@ -1,0 +1,220 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Code & Console Log Stripper (JS / TS Sanitizer) | Nadhebe';
+const h1 = 'Code & Console Log Stripper';
+const description = 'Sanitize JavaScript, TypeScript, and web code by stripping console.log statements, debugger keywords, and comments before deployment.';
+
+const faq = [
+  {
+    question: 'Why strip console.log calls before production?',
+    answer: 'Leaving active console logging in production apps leaks internal state and slows down main thread performance.'
+  },
+  {
+    question: 'Can I choose to keep comments while stripping console logs?',
+    answer: 'Yes! Toggle checkboxes independently for console statements, debugger keywords, single-line comments, and multi-line block comments.'
+  },
+  {
+    question: 'Is my source code uploaded to any server?',
+    answer: 'No. 100% of code sanitization runs locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="developer-cleaner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="developer-cleaner-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="INPUT SOURCE CODE">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">JS / TS / Web Code</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="dc-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Sample Code
+            </button>
+            <button type="button" id="dc-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="dc-input-code"
+          rows="6"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste JavaScript, TypeScript, or React code here..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Sanitization Toggles Card -->
+    <CalculatorCard title="CODE SANITIZATION RULES">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 font-mono text-xs">
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="dc-opt-console" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Strip console.log(...)</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="dc-opt-debugger" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Strip debugger</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="dc-opt-single-comments" class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Strip Single // Comments</span>
+        </label>
+
+        <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
+          <input type="checkbox" id="dc-opt-block-comments" class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
+          <span class="font-bold text-ink dark:text-ink-dark">Strip /* Block */ Comments</span>
+        </label>
+      </div>
+    </CalculatorCard>
+
+    <!-- Cleaned Code Output Card -->
+    <ResultCard title="SANITIZED PRODUCTION CODE">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span id="dc-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 chars saved</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="dc-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+              Copy Clean Code
+            </button>
+            <button type="button" id="dc-btn-download" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              Download Output
+            </button>
+          </div>
+        </div>
+
+        <pre id="dc-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Sanitized code output will appear here...</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Clean Production Code Before Bundling</h2>
+    <p>
+      Accidentally shipping `console.log` statements and `debugger` breakpoints to production pollutes developer devtools and leaks user metadata. Sanitizing code blocks upfront keeps application bundles tight.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initDeveloperCleaner() {
+    const inputCode = document.getElementById('dc-input-code') as HTMLTextAreaElement;
+
+    const optConsole = document.getElementById('dc-opt-console') as HTMLInputElement;
+    const optDebugger = document.getElementById('dc-opt-debugger') as HTMLInputElement;
+    const optSingleComments = document.getElementById('dc-opt-single-comments') as HTMLInputElement;
+    const optBlockComments = document.getElementById('dc-opt-block-comments') as HTMLInputElement;
+
+    const outputPre = document.getElementById('dc-output-pre');
+    const outputStats = document.getElementById('dc-output-stats');
+
+    const btnSample = document.getElementById('dc-btn-sample');
+    const btnClear = document.getElementById('dc-btn-clear');
+    const btnCopy = document.getElementById('dc-btn-copy');
+    const btnDownload = document.getElementById('dc-btn-download');
+
+    const sampleCode = `// User authentication handler\nfunction loginUser(email, password) {\n  console.log('Attempting login for:', email);\n  console.debug('Debug payload:', { email, time: Date.now() });\n  debugger;\n\n  /* Multi-line validation check\n     Verifies user credentials */\n  if (!email || !password) {\n    console.warn('Missing required credentials!');\n    return false;\n  }\n\n  return true;\n}`;
+
+    function cleanCode() {
+      if (!inputCode || !outputPre || !outputStats) return;
+      let code = inputCode.value;
+
+      if (!code.trim()) {
+        outputPre.textContent = 'Sanitized code output will appear here...';
+        outputStats.textContent = '0 chars saved';
+        return;
+      }
+
+      const origLen = code.length;
+
+      // 1. Strip Block Comments
+      if (optBlockComments?.checked) {
+        code = code.replace(/\/\*[\s\S]*?\*\//g, '');
+      }
+
+      // 2. Strip Single-line Comments
+      if (optSingleComments?.checked) {
+        code = code.replace(/^\s*\/\/.*/gm, '').replace(/(\s)\/\/.*/g, '$1');
+      }
+
+      // 3. Strip console.log / warn / debug / error
+      if (optConsole?.checked) {
+        code = code.replace(/^\s*console\.(log|debug|info|warn|error|trace|dir)\s*\(.*?\);?/gm, '');
+      }
+
+      // 4. Strip debugger
+      if (optDebugger?.checked) {
+        code = code.replace(/^\s*debugger;?/gm, '');
+      }
+
+      // Strip excess blank lines
+      code = code.replace(/\n\s*\n\s*\n/g, '\n\n').trim();
+
+      outputPre.textContent = code;
+      const savedChars = origLen - code.length;
+      outputStats.textContent = `${savedChars > 0 ? savedChars : 0} characters saved (${code.split('\n').length} lines remaining)`;
+    }
+
+    if (inputCode) inputCode.addEventListener('input', cleanCode);
+    [optConsole, optDebugger, optSingleComments, optBlockComments].forEach(opt => {
+      opt?.addEventListener('change', cleanCode);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCode) {
+        inputCode.value = sampleCode;
+        cleanCode();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCode) {
+        inputCode.value = '';
+        cleanCode();
+      }
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputPre) {
+        navigator.clipboard.writeText(outputPre.textContent || '');
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Clean Code'), 1500);
+      }
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      if (!outputPre?.textContent) return;
+      const blob = new Blob([outputPre.textContent], { type: 'text/plain;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'cleaned_code.js';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial run
+    cleanCode();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDeveloperCleaner);
+  } else {
+    initDeveloperCleaner();
+  }
+</script>

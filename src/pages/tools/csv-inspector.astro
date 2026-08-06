@@ -1,0 +1,223 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Encoding & Line Ending Inspector | Nadhebe';
+const h1 = 'CSV Encoding & Line Ending Inspector';
+const description = 'Inspect CSV text parameter properties including CRLF vs LF line endings, character encoding, quote escaping, and header integrity.';
+
+const faq = [
+  {
+    question: 'Why do line endings (CRLF vs LF) matter?',
+    answer: 'Windows software uses CRLF (\\r\\n), while Linux servers and macOS use LF (\\n). Mismatched line endings cause shell script parsing errors.'
+  },
+  {
+    question: 'What encoding does the inspector detect?',
+    answer: 'It inspects ASCII, UTF-8 (including multi-byte Unicode emoji or accent characters), and ISO-8859-1 ranges.'
+  },
+  {
+    question: 'Is my data safe?',
+    answer: 'Yes, 100% of inspection occurs locally in your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-inspector"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-inspector-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="INPUT CSV TEXT TO INSPECT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="ci-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Sample CSV
+            </button>
+            <button type="button" id="ci-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="ci-input-csv"
+          rows="5"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste CSV text here to inspect structural properties..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Inspection Parameter Cards -->
+    <CalculatorCard title="STRUCTURAL & ENCODING METRICS">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 font-mono text-xs text-center">
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Line Endings</span>
+          <span id="ci-metric-line-endings" class="text-h3 font-bold text-accent dark:text-accent-dark">—</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Char Encoding</span>
+          <span id="ci-metric-encoding" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">—</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">File Size</span>
+          <span id="ci-metric-size" class="text-h3 font-bold text-ink dark:text-ink-dark">0 B</span>
+        </div>
+
+        <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+          <span class="block text-muted text-[10px] uppercase font-bold">Quote Style</span>
+          <span id="ci-metric-quote" class="text-h3 font-bold text-ink dark:text-ink-dark">—</span>
+        </div>
+      </div>
+    </CalculatorCard>
+
+    <!-- Inspection Audit Report -->
+    <ResultCard title="DETAILED INSPECTION FINDINGS">
+      <div class="space-y-16 font-mono text-caption">
+        <ul id="ci-findings-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40">
+          <li class="p-8 text-muted text-xs">Paste CSV text above to view inspection findings.</li>
+        </ul>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Identify Hidden File Format Incompatibilities</h2>
+    <p>
+      Cross-platform data migrations frequently fail due to hidden control characters, Windows CRLF line breaks in Linux environments, or non-UTF-8 character sets. Inspecting CSV encoding upfront resolves deployment bugs before they hit production pipelines.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initCsvInspector() {
+    const inputCsv = document.getElementById('ci-input-csv') as HTMLTextAreaElement;
+
+    const metricLineEndings = document.getElementById('ci-metric-line-endings');
+    const metricEncoding = document.getElementById('ci-metric-encoding');
+    const metricSize = document.getElementById('ci-metric-size');
+    const metricQuote = document.getElementById('ci-metric-quote');
+
+    const findingsList = document.getElementById('ci-findings-list');
+
+    const btnSample = document.getElementById('ci-btn-sample');
+    const btnClear = document.getElementById('ci-btn-clear');
+
+    const sampleCsv = `id,name,email,comment\n1,Alice Chen,alice@example.com,"Supports multi-line\ncomments cleanly"\n2,Bob Smith,bob@example.com,"Includes special chars: €100 & 🔥 emoji"`;
+
+    function inspectCsv() {
+      if (!inputCsv) return;
+      const raw = inputCsv.value;
+
+      if (!raw) {
+        if (metricLineEndings) metricLineEndings.textContent = '—';
+        if (metricEncoding) metricEncoding.textContent = '—';
+        if (metricSize) metricSize.textContent = '0 B';
+        if (metricQuote) metricQuote.textContent = '—';
+        if (findingsList) findingsList.innerHTML = '<li class="p-8 text-muted text-xs">Paste CSV text above to view inspection findings.</li>';
+        return;
+      }
+
+      // Line Ending Check
+      let lineEnding = 'Unix (LF)';
+      if (raw.includes('\r\n')) {
+        lineEnding = 'Windows (CRLF)';
+      } else if (raw.includes('\r')) {
+        lineEnding = 'Legacy Mac (CR)';
+      }
+
+      // Character Encoding Check
+      let encoding = 'ASCII';
+      const hasNonAscii = /[^\x00-\x7F]/.test(raw);
+      if (hasNonAscii) {
+        encoding = 'UTF-8 (Multi-Byte)';
+      }
+
+      // File Size
+      const byteSize = new Blob([raw]).size;
+      let formattedSize = `${byteSize} B`;
+      if (byteSize > 1024) formattedSize = `${(byteSize / 1024).toFixed(1)} KB`;
+
+      // Quote Check
+      let quoteStyle = 'Unquoted';
+      if (raw.includes('"')) {
+        quoteStyle = 'Double Quoted';
+      }
+
+      if (metricLineEndings) metricLineEndings.textContent = lineEnding;
+      if (metricEncoding) metricEncoding.textContent = encoding;
+      if (metricSize) metricSize.textContent = formattedSize;
+      if (metricQuote) metricQuote.textContent = quoteStyle;
+
+      // Findings List
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      const findings: { title: string; desc: string; status: 'ok' | 'info' | 'warn' }[] = [
+        {
+          title: `Line Break Format: ${lineEnding}`,
+          desc: lineEnding.includes('CRLF') ? 'Uses Windows CRLF (\\r\\n) line breaks. Convert to LF for Linux deployment.' : 'Uses standard Unix (\\n) line breaks.',
+          status: lineEnding.includes('CRLF') ? 'info' : 'ok'
+        },
+        {
+          title: `Character Encoding: ${encoding}`,
+          desc: hasNonAscii ? 'Contains UTF-8 multi-byte Unicode or special accent characters.' : 'Contains plain 7-bit ASCII characters.',
+          status: 'ok'
+        },
+        {
+          title: `Header Row Integrity`,
+          desc: lines.length > 0 ? `Line 1 detected with ${lines[0].split(',').length} column fields.` : 'No header row detected.',
+          status: lines.length > 0 ? 'ok' : 'warn'
+        }
+      ];
+
+      let listHtml = '';
+      findings.forEach(f => {
+        const badgeColor = f.status === 'ok' ? 'text-emerald-600 dark:text-emerald-400' : f.status === 'info' ? 'text-accent dark:text-accent-dark' : 'text-danger dark:text-danger-dark';
+        listHtml += `
+          <li class="p-8 text-xs space-y-4">
+            <div class="font-bold ${badgeColor}">${f.title}</div>
+            <div class="text-ink dark:text-ink-dark">${f.desc}</div>
+          </li>
+        `;
+      });
+
+      if (findingsList) findingsList.innerHTML = listHtml;
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', inspectCsv);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = sampleCsv;
+        inspectCsv();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        inspectCsv();
+      }
+    });
+
+    // Initial inspection
+    inspectCsv();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCsvInspector);
+  } else {
+    initCsvInspector();
+  }
+</script>

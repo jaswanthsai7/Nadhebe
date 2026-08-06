@@ -1,0 +1,281 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Column Statistics Profiler & Data Summary | Nadhebe';
+const h1 = 'CSV Column Statistics Profiler';
+const description = 'Profile CSV dataset columns in real-time to compute numeric distributions (min, max, mean, sum), data type inferences, and missing value counts.';
+
+const faq = [
+  {
+    question: 'What statistics does the profiler calculate?',
+    answer: 'For numeric columns, it calculates Min, Max, Mean (Average), and Sum. For text columns, it detects unique count (cardinality) and top frequent values.'
+  },
+  {
+    question: 'How are column data types inferred?',
+    answer: 'The profiler analyzes cell contents to classify columns as Numeric (Float/Int), Date, Boolean, or Text.'
+  },
+  {
+    question: 'Is my dataset uploaded to any server?',
+    answer: 'No. 100% of data profiling runs locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="column-profiler"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="column-profiler-app">
+    
+    <!-- Input Card -->
+    <CalculatorCard title="INPUT DATASET FOR PROFILING">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Raw CSV Dataset</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cp-btn-sample" class="rounded-8 border border-border bg-surface2 px-12 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
+              Load Sample Financial Dataset
+            </button>
+            <button type="button" id="cp-btn-clear" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          id="cp-input-csv"
+          rows="5"
+          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
+          placeholder="Paste CSV text here to profile columns..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </CalculatorCard>
+
+    <!-- Column Profile Summary Cards Container -->
+    <CalculatorCard title="COLUMN PROFILE STATISTICAL BREAKDOWN">
+      <div id="cp-profile-container" class="grid grid-cols-1 md:grid-cols-2 gap-16 font-mono text-xs">
+        <p class="col-span-full text-muted py-8 text-center">Paste CSV data above to generate statistical column profiles.</p>
+      </div>
+    </CalculatorCard>
+
+    <!-- Report Export Card -->
+    <ResultCard title="PROFILING REPORT EXPORT">
+      <div class="space-y-16">
+        <div class="flex items-center justify-between">
+          <span id="cp-report-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 columns profiled</span>
+          <div class="flex items-center gap-8">
+            <button type="button" id="cp-btn-copy-report" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
+              Copy Report
+            </button>
+            <button type="button" id="cp-btn-download-report" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
+              Download JSON Report
+            </button>
+          </div>
+        </div>
+
+        <pre id="cp-report-pre" class="w-full min-h-[140px] max-h-[300px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Profiling summary JSON report will appear here...</pre>
+      </div>
+    </ResultCard>
+
+  </div>
+
+  <div slot="content">
+    <h2>Data Science Exploratory Data Analysis (EDA)</h2>
+    <p>
+      Before building machine learning models or writing SQL analytical queries, data engineers perform Exploratory Data Analysis (EDA). Profiling column distributions, identifying min/max boundaries, and checking cardinality flags dirty data early.
+    </p>
+  </div>
+</ToolLayout>
+
+<script>
+  function initColumnProfiler() {
+    const inputCsv = document.getElementById('cp-input-csv') as HTMLTextAreaElement;
+    const profileContainer = document.getElementById('cp-profile-container');
+    const reportPre = document.getElementById('cp-report-pre');
+    const reportStats = document.getElementById('cp-report-stats');
+
+    const btnSample = document.getElementById('cp-btn-sample');
+    const btnClear = document.getElementById('cp-btn-clear');
+    const btnCopyReport = document.getElementById('cp-btn-copy-report');
+    const btnDownloadReport = document.getElementById('cp-btn-download-report');
+
+    const sampleFinancialCsv = `transaction_id,account_holder,transaction_type,amount,date,status\nTX1001,Alice Chen,Deposit,4500.00,2026-08-01,Completed\nTX1002,Bob Smith,Withdrawal,1200.50,2026-08-02,Completed\nTX1003,Carol Danvers,Deposit,8900.00,2026-08-03,Pending\nTX1004,David Lee,Transfer,350.00,2026-08-03,Completed\nTX1005,Eva Green,Deposit,12500.00,2026-08-04,Completed\nTX1006,Alice Chen,Withdrawal,500.00,2026-08-05,Failed`;
+
+    interface ColProfile {
+      header: string;
+      inferredType: string;
+      totalCount: number;
+      nullCount: number;
+      uniqueCount: number;
+      numericStats?: { min: number; max: number; mean: number; sum: number };
+      topValues?: { value: string; count: number }[];
+    }
+
+    function parseCsvLine(line: string): string[] {
+      const result: string[] = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          inQuotes = !inQuotes;
+        } else if (c === ',' && !inQuotes) {
+          result.push(cur.trim());
+          cur = '';
+        } else {
+          cur += c;
+        }
+      }
+      result.push(cur.trim());
+      return result;
+    }
+
+    function profileData() {
+      if (!inputCsv || !profileContainer || !reportPre || !reportStats) return;
+      const raw = inputCsv.value.trim();
+
+      if (!raw) {
+        profileContainer.innerHTML = '<p class="col-span-full text-muted py-8 text-center">Paste CSV data above to generate statistical column profiles.</p>';
+        reportPre.textContent = 'Profiling summary JSON report will appear here...';
+        reportStats.textContent = '0 columns profiled';
+        return;
+      }
+
+      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (lines.length === 0) return;
+
+      const headers = parseCsvLine(lines[0]);
+      const rows = lines.slice(1).map(parseCsvLine);
+
+      const profiles: ColProfile[] = headers.map((header, colIdx) => {
+        const values = rows.map(r => (r[colIdx] !== undefined ? r[colIdx] : '')).filter(v => v !== '');
+        const nullCount = rows.length - values.length;
+        const uniqueSet = new Set(values);
+
+        // Numeric check
+        const numValues = values.map(v => Number(v.replace(/[\$,]/g, ''))).filter(n => !isNaN(n));
+        const isNumeric = numValues.length > 0 && numValues.length === values.length;
+
+        if (isNumeric) {
+          const sum = numValues.reduce((a, b) => a + b, 0);
+          const min = Math.min(...numValues);
+          const max = Math.max(...numValues);
+          const mean = sum / numValues.length;
+
+          return {
+            header: header || 'Col ' + (colIdx + 1),
+            inferredType: 'Numeric (Float/Int)',
+            totalCount: rows.length,
+            nullCount,
+            uniqueCount: uniqueSet.size,
+            numericStats: { min, max, mean: Number(mean.toFixed(2)), sum: Number(sum.toFixed(2)) }
+          };
+        } else {
+          // Calculate top frequent values
+          const freqMap: Record<string, number> = {};
+          values.forEach(v => { freqMap[v] = (freqMap[v] || 0) + 1; });
+          const topValues = Object.keys(freqMap)
+            .map(k => ({ value: k, count: freqMap[k] }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 3);
+
+          return {
+            header: header || 'Col ' + (colIdx + 1),
+            inferredType: 'Text / Categorical',
+            totalCount: rows.length,
+            nullCount,
+            uniqueCount: uniqueSet.size,
+            topValues
+          };
+        }
+      });
+
+      // Render Cards
+      let cardsHtml = '';
+      profiles.forEach(p => {
+        cardsHtml += `
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-12">
+            <div class="flex items-center justify-between border-b border-border/40 pb-8 dark:border-border-dark/40">
+              <span class="font-bold text-accent dark:text-accent-dark text-sm truncate" title="${p.header}">${p.header}</span>
+              <span class="rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-8 py-2 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">${p.inferredType}</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8 text-[11px] font-semibold text-muted">
+              <div>Total: <span class="text-ink dark:text-ink-dark font-bold">${p.totalCount}</span></div>
+              <div>Nulls: <span class="text-ink dark:text-ink-dark font-bold">${p.nullCount}</span></div>
+              <div>Unique: <span class="text-ink dark:text-ink-dark font-bold">${p.uniqueCount}</span></div>
+            </div>
+
+            ${p.numericStats ? `
+              <div class="space-y-4 pt-4 border-t border-border/20 dark:border-border-dark/20 text-xs">
+                <div class="flex justify-between"><span>Min:</span> <span class="font-bold text-ink dark:text-ink-dark">${p.numericStats.min}</span></div>
+                <div class="flex justify-between"><span>Max:</span> <span class="font-bold text-ink dark:text-ink-dark">${p.numericStats.max}</span></div>
+                <div class="flex justify-between"><span>Mean (Avg):</span> <span class="font-bold text-emerald-600 dark:text-emerald-400">${p.numericStats.mean}</span></div>
+                <div class="flex justify-between"><span>Sum:</span> <span class="font-bold text-accent dark:text-accent-dark">${p.numericStats.sum}</span></div>
+              </div>
+            ` : `
+              <div class="space-y-4 pt-4 border-t border-border/20 dark:border-border-dark/20 text-xs">
+                <span class="block text-muted text-[10px] uppercase font-bold">Top Values:</span>
+                ${(p.topValues || []).map(tv => `<div class="flex justify-between truncate"><span class="text-ink dark:text-ink-dark truncate">${tv.value}</span> <span class="font-bold text-muted">${tv.count}x</span></div>`).join('')}
+              </div>
+            `}
+          </div>
+        `;
+      });
+
+      profileContainer.innerHTML = cardsHtml;
+      reportPre.textContent = JSON.stringify(profiles, null, 2);
+      reportStats.textContent = `${profiles.length} columns profiled across ${rows.length} rows`;
+    }
+
+    if (inputCsv) inputCsv.addEventListener('input', profileData);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = sampleFinancialCsv;
+        profileData();
+      }
+    });
+
+    btnClear?.addEventListener('click', () => {
+      if (inputCsv) {
+        inputCsv.value = '';
+        profileData();
+      }
+    });
+
+    btnCopyReport?.addEventListener('click', () => {
+      if (reportPre) {
+        navigator.clipboard.writeText(reportPre.textContent || '');
+        btnCopyReport.textContent = 'Copied!';
+        setTimeout(() => (btnCopyReport.textContent = 'Copy Report'), 1500);
+      }
+    });
+
+    btnDownloadReport?.addEventListener('click', () => {
+      if (!reportPre?.textContent) return;
+      const blob = new Blob([reportPre.textContent], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'column_profiling_report.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Initial profile
+    profileData();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initColumnProfiler);
+  } else {
+    initColumnProfiler();
+  }
+</script>

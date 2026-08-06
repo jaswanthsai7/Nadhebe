@@ -160,16 +160,6 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "WAI-ARIA Role & Accessibility Attribute Helper | Nadhebe",
-    "description": "Lookup WAI-ARIA roles, aria-expanded, aria-hidden, aria-live attributes, and WCAG accessibility standards for UI components.",
-    "url": "https://nadhebe.com/tools/aria-role-helper",
-    "category": "Tools",
-    "tags": [
-      "[\"Accessibility\",\"a11y\",\"ARIA\",\"WCAG\",\"HTML\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
     "title": "Aspect Ratio Calculator | Nadhebe Developer Tools",
     "description": "Interactive online Aspect Ratio Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
     "url": "https://nadhebe.com/tools/aspect-ratio-calculator",
@@ -186,16 +176,6 @@
     "category": "Tools",
     "tags": [
       "[\"Average Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Image Canvas Background Transparency Tool | Nadhebe",
-    "description": "Process image alpha channels, replace background colors, and check transparency directly in your browser.",
-    "url": "https://nadhebe.com/tools/background-remover",
-    "category": "Tools",
-    "tags": [
-      "[\"Image Processing\",\"Canvas\",\"PNG\",\"Graphics\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -246,16 +226,6 @@
     "category": "Tools",
     "tags": [
       "[\"Cac Payback\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Social Media Carousel Image Size Helper | Nadhebe",
-    "description": "Calculate pixel dimensions, aspect ratios, and export resolutions for Instagram, LinkedIn, and Twitter carousels.",
-    "url": "https://nadhebe.com/tools/carousel-size-helper",
-    "category": "Tools",
-    "tags": [
-      "[\"Social Media\",\"Aspect Ratio\",\"Dimensions\",\"Design\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -360,32 +330,22 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV Column Extractor & Reorder Tool | Nadhebe",
-    "description": "Extract specific columns from raw CSV text, reorder header positions, and filter out unused data fields.",
+    "title": "CSV Column Extractor | Nadhebe",
+    "description": "Extract specific columns from raw CSV data by header selection.",
     "url": "https://nadhebe.com/tools/column-extractor",
     "category": "Tools",
     "tags": [
-      "[\"Column Extractor\",\"CSV Filtering\",\"Data Processing\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV & Data Column Profiler | Nadhebe",
-    "description": "Calculate column statistics, unique count ratios, numeric averages, min/max values, and data type distribution.",
+    "title": "CSV Column Statistics Profiler | Nadhebe",
+    "description": "Compute column-level statistics, min/max values, and unique counts.",
     "url": "https://nadhebe.com/tools/column-profiler",
     "category": "Tools",
     "tags": [
-      "[\"Data Profiler\",\"Column Stats\",\"Data Analysis\",\"Statistics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Conventional Commit Message Builder | Nadhebe",
-    "description": "Build standardized conventional git commit messages with scope, breaking change warnings, and issue references.",
-    "url": "https://nadhebe.com/tools/commit-message-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Git\",\"Conventional Commits\",\"Version Control\",\"Workflow\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -406,26 +366,6 @@
     "category": "Tools",
     "tags": [
       "[\"Context Window\",\"LLM Budget\",\"Tokens\",\"Prompt Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "HTTP Cookie Header Decoder & Parser | Nadhebe",
-    "description": "Parse raw Set-Cookie response headers and Cookie strings into readable key-value attributes, SameSite, and Expiration flags.",
-    "url": "https://nadhebe.com/tools/cookie-decoder",
-    "category": "Tools",
-    "tags": [
-      "[\"HTTP\",\"Cookies\",\"Security\",\"Web Security\",\"Headers\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Pearson Correlation Coefficient Calculator | Nadhebe",
-    "description": "Calculate Pearson correlation coefficient (r), covariance, and linear dependence between paired data series.",
-    "url": "https://nadhebe.com/tools/correlation-helper",
-    "category": "Tools",
-    "tags": [
-      "[\"Correlation\",\"Statistics\",\"Pearson r\",\"Data Science\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -470,32 +410,32 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "Interactive CSV Table Builder | Nadhebe",
-    "description": "Build custom CSV text line-by-line using a visual grid editor with instant row addition and export.",
+    "title": "Visual CSV Grid Table Builder | Nadhebe",
+    "description": "Build and edit CSV files visually in your browser with table controls.",
     "url": "https://nadhebe.com/tools/csv-builder",
     "category": "Tools",
     "tags": [
-      "[\"CSV Builder\",\"Grid Editor\",\"Export CSV\",\"Table\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV File Syntax & Delimiter Checker | Nadhebe",
-    "description": "Validate CSV line structures, count columns per row, detect mismatched quotes, and identify formatting errors.",
+    "title": "CSV Delimiter & Column Balance Checker | Nadhebe",
+    "description": "Audit CSV files line-by-line for mismatched column counts.",
     "url": "https://nadhebe.com/tools/csv-checker",
     "category": "Tools",
     "tags": [
-      "[\"CSV Checker\",\"Data Validation\",\"Delimiter\",\"File Inspection\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV Line & Special Character Cleaner | Nadhebe",
-    "description": "Remove blank CSV rows, unescape accidental quotes, replace invalid characters, and sanitize text cells.",
+    "title": "CSV Sanitizer & Blank Line Cleaner | Nadhebe",
+    "description": "Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.",
     "url": "https://nadhebe.com/tools/csv-cleaner",
     "category": "Tools",
     "tags": [
-      "[\"CSV Cleaner\",\"Sanitize\",\"Quote Removal\",\"Data Prep\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -520,92 +460,52 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "JSON Array to CSV Exporter Helper | Nadhebe",
-    "description": "Transform complex nested JSON arrays into flat CSV structures with header extraction and download links.",
-    "url": "https://nadhebe.com/tools/csv-exporter-helper",
-    "category": "Tools",
-    "tags": [
-      "[\"JSON to CSV\",\"Data Exporter\",\"Flat JSON\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Encoding & Delimiter Inspector | Nadhebe",
-    "description": "Inspect CSV character encoding (UTF-8, ASCII), line ending styles (CRLF, LF), and auto-detect delimiters.",
+    "title": "CSV Encoding & Line Ending Inspector | Nadhebe",
+    "description": "Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.",
     "url": "https://nadhebe.com/tools/csv-inspector",
     "category": "Tools",
     "tags": [
-      "[\"CSV Inspector\",\"Encoding\",\"UTF-8\",\"Line Endings\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV File & Table Row Merger | Nadhebe",
-    "description": "Merge multiple CSV text blocks into a single clean file with header deduplication and automatic alignment.",
+    "title": "Multi-File CSV Table Merger | Nadhebe",
+    "description": "Merge multiple CSV datasets into a single consolidated table.",
     "url": "https://nadhebe.com/tools/csv-merger",
     "category": "Tools",
     "tags": [
-      "[\"CSV Merger\",\"Combine CSV\",\"Data Concatenation\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV Data Schema & Pipeline Planner | Nadhebe",
-    "description": "Design CSV column headers, data types, required constraints, and import mappings for data ingestion pipelines.",
+    "title": "CSV Data Pipeline Schema Planner | Nadhebe",
+    "description": "Plan CSV data pipeline schemas and generate SQL DDL tables.",
     "url": "https://nadhebe.com/tools/csv-planner",
     "category": "Tools",
     "tags": [
-      "[\"CSV Planner\",\"Schema Design\",\"Data Pipeline\",\"Ingestion\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV File Interactive Table Previewer | Nadhebe",
-    "description": "Parse and render CSV raw text into a clean interactive HTML table with search, pagination, and sorting.",
+    "title": "CSV Table Preview & Viewer | Nadhebe",
+    "description": "Preview raw CSV data as an interactive, searchable HTML table.",
     "url": "https://nadhebe.com/tools/csv-preview",
     "category": "Tools",
     "tags": [
-      "[\"CSV Preview\",\"HTML Table\",\"Parser\",\"Data Viewer\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV Task & Project Import Builder | Nadhebe",
-    "description": "Format custom CSV files for batch importing tasks into Jira, Asana, Trello, Notion, and GitHub Issues.",
-    "url": "https://nadhebe.com/tools/csv-task-importer",
-    "category": "Tools",
-    "tags": [
-      "[\"Task Importer\",\"Jira\",\"Asana\",\"Notion\",\"CSV Batch\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Data Import Template Generator | Nadhebe",
-    "description": "Generate standardized CSV templates for customer contact lists, product inventory, and user imports.",
-    "url": "https://nadhebe.com/tools/csv-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV Template\",\"Generator\",\"Data Import\",\"Spreadsheet\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Csv To Json | Nadhebe Developer Tools",
-    "description": "Interactive online Csv To Json tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/csv-to-json",
-    "category": "Tools",
-    "tags": [
-      "[\"Csv To Json\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Schema & Data Type Validator | Nadhebe",
-    "description": "Validate CSV files against strict column constraints, date formats, email regex, and integer ranges.",
+    "title": "CSV Schema & Type Constraint Validator | Nadhebe",
+    "description": "Validate CSV data against custom column data type constraints.",
     "url": "https://nadhebe.com/tools/csv-validator",
     "category": "Tools",
     "tags": [
-      "[\"CSV Validator\",\"Data Integrity\",\"Schema Validation\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -626,16 +526,6 @@
     "category": "Tools",
     "tags": [
       "[\"Anomaly Detection\",\"Outliers\",\"Data Quality\",\"Z-Score\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Dataset Cleaner | Nadhebe",
-    "description": "Clean data tables, replace missing null values, normalize column strings, and remove trailing whitespace.",
-    "url": "https://nadhebe.com/tools/data-analysis-cleaner",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Cleaning\",\"Dataset\",\"Data Preprocessing\",\"Analytics\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -680,42 +570,12 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "Column Data Type Auto-Detector | Nadhebe",
-    "description": "Automatically infer data types (String, Integer, Float, Date, Boolean) from sample text data strings.",
-    "url": "https://nadhebe.com/tools/data-type-detector",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Type Detector\",\"Schema Inference\",\"Parsing\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
     "title": "CRON & Scheduled Date Builder | Nadhebe",
     "description": "Build schedule timestamps, recurrent event series, and cron execution intervals with timezone offsets.",
     "url": "https://nadhebe.com/tools/date-and-time-builder",
     "category": "Tools",
     "tags": [
       "[\"Cron\",\"Scheduling\",\"Timestamps\",\"Events\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Validity & Leap Year Checker | Nadhebe",
-    "description": "Verify date string validity, check leap years, business day overlaps, and day-of-year indexes.",
-    "url": "https://nadhebe.com/tools/date-and-time-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Checker\",\"Leap Year\",\"Business Days\",\"Validation\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Epoch Millisecond Estimator | Nadhebe",
-    "description": "Convert between UTC dates, ISO 8601 strings, UNIX epoch timestamps, and relative time offsets.",
-    "url": "https://nadhebe.com/tools/date-and-time-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Time\",\"Epoch\",\"Timestamp\",\"UTC\",\"Timezones\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -750,12 +610,12 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "CSV, TSV & Pipe Delimiter Converter | Nadhebe",
-    "description": "Convert table data between comma-separated (CSV), tab-separated (TSV), pipe-separated (|), and semicolon values.",
+    "title": "CSV & Delimiter Converter | Nadhebe",
+    "description": "Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.",
     "url": "https://nadhebe.com/tools/delimiter-converter",
     "category": "Tools",
     "tags": [
-      "[\"Delimiter Converter\",\"TSV\",\"CSV\",\"Pipe Separated\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -770,102 +630,12 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "Developer Boilerplate & Config Builder | Nadhebe",
-    "description": "Generate starter configurations for TypeScript, ESLint, Prettier, Docker, and GitHub Actions CI/CD.",
-    "url": "https://nadhebe.com/tools/developer-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Builder\",\"Boilerplate\",\"TypeScript\",\"Docker\",\"CI/CD\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Engineering Capacity & Sprint Calculator | Nadhebe",
-    "description": "Calculate developer sprint capacity, story point velocity, meeting overhead, and focus time per engineer.",
-    "url": "https://nadhebe.com/tools/developer-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Developer\",\"Agile\",\"Sprint Capacity\",\"Scrum\",\"Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Code Syntax & Rule Checker | Nadhebe",
-    "description": "Check JavaScript, JSON, and HTML for syntax errors, unclosed tags, balanced brackets, and formatting issues.",
-    "url": "https://nadhebe.com/tools/developer-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Linter\",\"Syntax Checker\",\"JSON Validator\",\"HTML Validator\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Code Cleaner & Unused Line Stripper | Nadhebe",
-    "description": "Clean up code snippets by stripping console log statements, trailing whitespace, empty lines, and comments.",
+    "title": "Code & Console Log Stripper | Nadhebe",
+    "description": "Strip console.log calls, debugger statements, and comments from code.",
     "url": "https://nadhebe.com/tools/developer-cleaner",
     "category": "Tools",
     "tags": [
-      "[\"Formatter\",\"Code Cleaner\",\"JavaScript\",\"Refactoring\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Project Time & Cost Estimator | Nadhebe",
-    "description": "Estimate developer engineering hours, complexity buffer, hourly rates, and total project delivery cost.",
-    "url": "https://nadhebe.com/tools/developer-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Estimator\",\"Engineering Costs\",\"Project Management\",\"Agile\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Multi-Language Code Formatter & Indenter | Nadhebe",
-    "description": "Format and beautify JavaScript, HTML, CSS, JSON, and SQL snippets with customizable indentation spaces.",
-    "url": "https://nadhebe.com/tools/developer-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Code Formatter\",\"Beautifier\",\"JavaScript\",\"SQL\",\"HTML\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Mock Data & Schema Generator | Nadhebe",
-    "description": "Generate realistic JSON mock data, fake user records, UUIDs, timestamps, and API fixtures for testing.",
-    "url": "https://nadhebe.com/tools/developer-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Mock Data\",\"JSON\",\"Testing\",\"Faker\",\"API Fixtures\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Code & Asset Inspector | Nadhebe",
-    "description": "Inspect JavaScript bundle sizes, DOM node counts, script execution latency, and asset load metrics.",
-    "url": "https://nadhebe.com/tools/developer-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Inspector\",\"Performance\",\"Web Vitals\",\"DOM\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Technical Roadmap Planner | Nadhebe",
-    "description": "Plan engineering milestones, task allocation, tech debt ratios, and technical architecture roadmaps.",
-    "url": "https://nadhebe.com/tools/developer-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"Roadmap\",\"Architecture\",\"Agile\",\"Engineering Management\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer PR & Issue Template Generator | Nadhebe",
-    "description": "Create standardized GitHub pull request templates, bug report forms, and feature request markdown specifications.",
-    "url": "https://nadhebe.com/tools/developer-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Templates\",\"GitHub\",\"Pull Requests\",\"Markdown\",\"Open Source\"]"
+      "[\"CSV\", \"Data\", \"Tools\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -890,16 +660,6 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "Text & Array Duplicate Line Remover | Nadhebe",
-    "description": "Instantly strip duplicate lines, lists, JSON arrays, and strings online with case sensitivity and trim options.",
-    "url": "https://nadhebe.com/tools/duplicate-remover",
-    "category": "Tools",
-    "tags": [
-      "[\"Text Tools\",\"Deduplication\",\"List Cleaner\",\"String Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
     "title": "Embedding Inspector | Nadhebe Developer Tools",
     "description": "Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
     "url": "https://nadhebe.com/tools/embedding-inspector",
@@ -916,16 +676,6 @@
     "category": "Tools",
     "tags": [
       "[\"Env Diff\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "HTML, SQL & Regex Character Escape Helper | Nadhebe",
-    "description": "Escape and unescape special characters for HTML entities, SQL queries, JSON strings, and Regular Expressions.",
-    "url": "https://nadhebe.com/tools/escape-helper",
-    "category": "Tools",
-    "tags": [
-      "[\"Escape Helper\",\"HTML Entities\",\"SQL Injection\",\"Regex\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
