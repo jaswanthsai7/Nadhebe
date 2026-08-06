@@ -1,0 +1,121 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Date & Time Format Pattern Generator | Nadhebe';
+const h1 = 'Date Format Pattern Generator';
+const description = 'Generate date format tokens and code templates for date-fns, Moment.js, Python strftime, and Go time layout.';
+
+const faq = [
+  {
+    question: 'Which programming language formats are supported?',
+    answer: 'JavaScript (date-fns / Luxon), Python (strftime), Go (2006-01-02 layout), and JS Intl.DateTimeFormat options.'
+  },
+  {
+    question: 'Is my template code generated locally?',
+    answer: 'Yes, 100% of token pattern generation executes locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="date-and-time-template-maker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="date-and-time-template-maker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="TARGET DATE FORMAT & FRAMEWORK">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target Date Format Preset</label>
+            <select id="dtm-preset" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="iso">ISO Date (2026-08-06)</option>
+              <option value="iso-time">ISO DateTime (2026-08-06 14:30:00)</option>
+              <option value="us">US Short Date (08/06/2026)</option>
+              <option value="eu">European Short Date (06/08/2026)</option>
+              <option value="full">Full Written (Thursday, August 6, 2026)</option>
+              <option value="custom">Custom Token Pattern</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Custom Token Pattern</label>
+            <input id="dtm-custom" type="text" value="yyyy-MM-dd HH:mm:ss" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+            <span class="block text-xs font-bold text-muted uppercase">Sample Formatted Output</span>
+            <span id="dtm-sample-render" class="block text-body font-bold text-accent dark:text-accent-dark">2026-08-06 14:30:00</span>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Multi-Language Output -->
+      <ResultCard title="MULTI-LANGUAGE CODE TEMPLATES">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Generated Code Snippets</label>
+            <textarea id="dtm-output" rows="14" readonly class="w-full min-h-[360px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark font-semibold"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Date Format Tokens Across Frameworks</h2>
+    <p>
+      Different language ecosystems use distinct date tokens. While JavaScript date-fns uses `yyyy-MM-dd`, Python strftime relies on `%Y-%m-%d`, and Go uses the iconic reference timestamp `2006-01-02 15:04:05`.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const presetEl = document.getElementById('dtm-preset');
+    const customEl = document.getElementById('dtm-custom');
+
+    const sampleRenderEl = document.getElementById('dtm-sample-render');
+    const outputEl = document.getElementById('dtm-output');
+
+    const formatMap = {
+      iso: { dateFns: 'yyyy-MM-dd', py: '%Y-%m-%d', go: '2006-01-02', sample: '2026-08-06' },
+      'iso-time': { dateFns: 'yyyy-MM-dd HH:mm:ss', py: '%Y-%m-%d %H:%M:%S', go: '2006-01-02 15:04:05', sample: '2026-08-06 14:30:00' },
+      us: { dateFns: 'MM/dd/yyyy', py: '%m/%d/%Y', go: '01/02/2006', sample: '08/06/2026' },
+      eu: { dateFns: 'dd/MM/yyyy', py: '%d/%m/%Y', go: '02/01/2006', sample: '06/08/2026' },
+      full: { dateFns: 'EEEE, MMMM d, yyyy', py: '%A, %B %d, %Y', go: 'Monday, January 2, 2006', sample: 'Thursday, August 6, 2026' },
+      custom: { dateFns: 'yyyy-MM-dd HH:mm:ss', py: '%Y-%m-%d %H:%M:%S', go: '2006-01-02 15:04:05', sample: '2026-08-06 14:30:00' }
+    };
+
+    function render() {
+      const preset = presetEl?.value || 'iso';
+      const item = formatMap[preset] || formatMap['iso'];
+
+      if (customEl && preset !== 'custom') {
+        customEl.value = item.dateFns;
+      }
+
+      const token = customEl?.value || item.dateFns;
+
+      if (sampleRenderEl) sampleRenderEl.textContent = item.sample;
+
+      const code = `// 1. JavaScript (date-fns / Luxon)\nimport { format } from 'date-fns';\nconst formatted = format(new Date(), '${token}');\n\n# 2. Python (strftime)\nfrom datetime import datetime\nformatted = datetime.now().strftime('${item.py}')\n\n// 3. Go (Time Layout)\nimport "time"\nformatted := time.Now().Format("${item.go}")\n\n// 4. JS Browser Native (Intl.DateTimeFormat)\nconst formattedIntl = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'medium' }).format(new Date());`;
+
+      if (outputEl) outputEl.value = code;
+    }
+
+    presetEl?.addEventListener('change', render);
+    customEl?.addEventListener('input', render);
+
+    render();
+  })();
+</script>

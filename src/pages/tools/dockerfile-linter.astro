@@ -52,7 +52,7 @@ CMD ["npm", "start"]`;
       }
 
       try {
-        const lines = raw.split('\\n').map(l => l.trim());
+        const lines = raw.split(/\r?\n/).map(l => l.trim());
         const issues: string[] = [];
 
         let hasExpose = false;
@@ -169,7 +169,7 @@ CMD ["npm", "start"]`;
         }
 
         if (outputGutter) {
-          const outLines = outputPre.textContent?.split('\\n').length || 1;
+          const outLines = outputPre.textContent?.split(/\r?\n/).length || 1;
           let gutterHTML = '';
           for (let i = 1; i <= outLines; i++) {
             gutterHTML += i + '<br/>';

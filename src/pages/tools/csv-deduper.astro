@@ -99,12 +99,12 @@ const faq = [
           }
         }
         
-        const result = uniqueLines.join('\\n');
+        const result = uniqueLines.join('\n');
         outputPre.textContent = result;
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
-          const outLines = result.split('\\n').length;
+          const outLines = result.split(/\r?\n/).length;
           let gutterHTML = '';
           for (let i = 1; i <= outLines; i++) {
             gutterHTML += i + '<br/>';

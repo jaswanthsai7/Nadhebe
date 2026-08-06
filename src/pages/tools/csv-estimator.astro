@@ -1,0 +1,204 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSV Size, Row Count & Parse Memory Estimator | Nadhebe';
+const h1 = 'CSV Size & Memory Estimator';
+const description = 'Estimate total row counts, uncompressed byte sizes, RAM footprint in Pandas/JS, and web browser parsing latency for CSV datasets.';
+
+const faq = [
+  {
+    question: 'How is CSV memory consumption calculated?',
+    answer: 'Memory footprint estimates factor in raw byte size plus object header overhead in V8 JavaScript engines and Python Pandas DataFrames (typically 3x-6x raw CSV size).'
+  },
+  {
+    question: 'Is my dataset uploaded to any server?',
+    answer: 'No, all calculations and string metrics execute 100% locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="csv-estimator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csv-estimator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="RAW CSV DATA OR PARAMETERS">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-6">Option 1: Paste CSV Sample / Text</label>
+            <textarea id="ce-input" rows="10" placeholder="Paste your CSV dataset here to analyze..." class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">id,first_name,last_name,email,department,salary,status
+101,Alex,Rivera,alex.rivera@company.com,Engineering,145000,Active
+102,Sarah,Chen,sarah.chen@company.com,Data Science,168000,Active
+103,Michael,Scott,m.scott@company.com,Operations,95000,Active
+104,Elena,Rostova,elena.r@company.com,DevOps,152000,Active
+105,David,Kim,david.k@company.com,Product,128000,Active</textarea>
+          </div>
+
+          <div class="pt-8 border-t border-border/60 dark:border-border-dark/60">
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-8">Option 2: Scale Estimator (Extrapolate Big Data)</label>
+            <div class="grid grid-cols-2 gap-12">
+              <div>
+                <span class="block text-xs text-muted mb-2">Target Rows</span>
+                <input id="ce-rows-input" type="number" value="100000" min="1" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+              </div>
+              <div>
+                <span class="block text-xs text-muted mb-2">Columns</span>
+                <input id="ce-cols-input" type="number" value="15" min="1" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Analysis Results -->
+      <ResultCard title="DATASET & MEMORY METRICS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="grid grid-cols-2 gap-12">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+              <span class="block text-xs text-muted font-bold uppercase">Raw File Size</span>
+              <span id="res-file-size" class="block text-h3 font-bold text-accent dark:text-accent-dark">0 KB</span>
+              <span id="res-char-count" class="block text-[11px] text-muted">0 Chars</span>
+            </div>
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
+              <span class="block text-xs text-muted font-bold uppercase">Estimated Rows</span>
+              <span id="res-row-count" class="block text-h3 font-bold text-ink dark:text-ink-dark">0</span>
+              <span id="res-col-count" class="block text-[11px] text-muted">0 Columns</span>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <span class="block text-xs font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Memory Footprint (In-Memory RAM)</span>
+            <div class="grid grid-cols-2 gap-8 text-xs">
+              <div>
+                <span class="text-muted">JS V8 Engine:</span>
+                <strong id="res-ram-js" class="block font-bold text-ink dark:text-ink-dark">~0 MB</strong>
+              </div>
+              <div>
+                <span class="text-muted">Python Pandas:</span>
+                <strong id="res-ram-pandas" class="block font-bold text-ink dark:text-ink-dark">~0 MB</strong>
+              </div>
+              <div>
+                <span class="text-muted">Polars / Arrow:</span>
+                <strong id="res-ram-polars" class="block font-bold text-ink dark:text-ink-dark">~0 MB</strong>
+              </div>
+              <div>
+                <span class="text-muted">PostgreSQL Copy:</span>
+                <strong id="res-ram-postgres" class="block font-bold text-ink dark:text-ink-dark">~0 MB</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6">
+            <span class="block text-xs font-bold text-ink dark:text-ink-dark uppercase">Estimated Parse Throughput</span>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-muted">Web Browser Parse Time:</span>
+              <strong id="res-parse-time" class="text-accent dark:text-accent-dark font-bold">&lt; 1 ms</strong>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-muted">Transfer Time (100 Mbps):</span>
+              <strong id="res-transfer-time" class="text-ink dark:text-ink-dark font-bold">&lt; 1 ms</strong>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Understanding CSV Memory & Performance Scaling</h2>
+    <p>
+      Raw CSV files are uncompressed plain text. When ingested into memory engines like V8 JavaScript objects or Python Pandas DataFrames, memory footprint increases significantly due to pointer structures and data type allocations.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputEl = document.getElementById('ce-input');
+    const rowsInputEl = document.getElementById('ce-rows-input');
+    const colsInputEl = document.getElementById('ce-cols-input');
+
+    const fileSizeEl = document.getElementById('res-file-size');
+    const charCountEl = document.getElementById('res-char-count');
+    const rowCountEl = document.getElementById('res-row-count');
+    const colCountEl = document.getElementById('res-col-count');
+    const ramJsEl = document.getElementById('res-ram-js');
+    const ramPandasEl = document.getElementById('res-ram-pandas');
+    const ramPolarsEl = document.getElementById('res-ram-polars');
+    const ramPostgresEl = document.getElementById('res-ram-postgres');
+    const parseTimeEl = document.getElementById('res-parse-time');
+    const transferTimeEl = document.getElementById('res-transfer-time');
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function calculate() {
+      const text = inputEl?.value || '';
+      let bytes = new Blob([text]).size;
+      let rows = 0;
+      let cols = 0;
+
+      if (text.trim()) {
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        rows = lines.length;
+        if (rows > 0) {
+          cols = lines[0].split(',').length;
+        }
+      } else {
+        const estRows = parseInt(rowsInputEl?.value || '100000', 10);
+        const estCols = parseInt(colsInputEl?.value || '15', 10);
+        rows = estRows;
+        cols = estCols;
+        bytes = estRows * estCols * 12; // ~12 bytes avg cell length
+      }
+
+      const chars = text.length || (rows * cols * 12);
+
+      // Calculations
+      const jsRam = bytes * 4.5;
+      const pandasRam = bytes * 3.8;
+      const polarsRam = bytes * 1.8;
+      const postgresRam = bytes * 2.2;
+
+      const parseMs = (bytes / (50 * 1024 * 1024)) * 1000; // ~50MB/s parse rate
+      const transferMs = (bytes / (12.5 * 1024 * 1024)) * 1000; // 100 Mbps = 12.5 MB/s
+
+      // Render
+      if (fileSizeEl) fileSizeEl.textContent = formatBytes(bytes);
+      if (charCountEl) charCountEl.textContent = chars.toLocaleString() + ' Chars';
+      if (rowCountEl) rowCountEl.textContent = rows.toLocaleString();
+      if (colCountEl) colCountEl.textContent = cols.toLocaleString() + ' Columns';
+
+      if (ramJsEl) ramJsEl.textContent = '~' + formatBytes(jsRam);
+      if (ramPandasEl) ramPandasEl.textContent = '~' + formatBytes(pandasRam);
+      if (ramPolarsEl) ramPolarsEl.textContent = '~' + formatBytes(polarsRam);
+      if (ramPostgresEl) ramPostgresEl.textContent = '~' + formatBytes(postgresRam);
+
+      if (parseTimeEl) parseTimeEl.textContent = parseMs < 1 ? '< 1 ms' : Math.round(parseMs) + ' ms';
+      if (transferTimeEl) transferTimeEl.textContent = transferMs < 1 ? '< 1 ms' : Math.round(transferMs) + ' ms';
+    }
+
+    [inputEl, rowsInputEl, colsInputEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

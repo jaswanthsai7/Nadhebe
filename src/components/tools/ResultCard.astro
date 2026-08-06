@@ -14,18 +14,41 @@ const { label, title, value, subtext, badge, copyable = true, accent = false, id
 const displayTitle = label || title || 'Result';
 ---
 
-<div class={`group relative flex flex-col justify-between overflow-hidden rounded-16 border p-16 sm:p-20 transition-all duration-200 min-h-[128px] h-full w-full ${
+<div class={`group relative flex flex-col justify-between overflow-hidden rounded-20 border p-20 sm:p-28 shadow-medium transition-all duration-200 min-h-[140px] h-full w-full ${
   accent
-    ? 'border-accent/40 bg-accent/5 dark:border-accent-dark/40 dark:bg-accent-dark/10 shadow-soft'
-    : 'border-border/80 bg-surface2/60 dark:border-border-dark/80 dark:bg-surface2-dark/60'
+    ? 'border-accent/40 bg-surface/95 dark:border-accent-dark/40 dark:bg-surface-dark/95'
+    : 'border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95'
 }`}>
   <div class="w-full overflow-hidden">
-    <div class="flex items-center justify-between gap-8 mb-8">
-      <span class="text-meta font-mono uppercase tracking-wider text-muted dark:text-muted-dark truncate">{displayTitle}</span>
-      {badge && (
-        <span class="rounded-pill bg-accent/10 px-8 py-2 font-mono text-xs font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark shrink-0">
-          {badge}
-        </span>
+    <!-- Top Header Bar with Single-Line Copy Pill Button -->
+    <div class="flex items-center justify-between gap-12 mb-16 pb-12 border-b border-border/50 dark:border-border-dark/50">
+      <div class="flex items-center gap-8 min-w-0">
+        <span class="text-caption font-mono uppercase tracking-wider font-bold text-ink dark:text-ink-dark truncate">{displayTitle}</span>
+        {badge && (
+          <span class="rounded-pill bg-accent/15 px-10 py-4 font-mono text-xs font-bold text-accent dark:bg-accent-dark/25 dark:text-accent-dark shrink-0">
+            {badge}
+          </span>
+        )}
+      </div>
+
+      {copyable && (
+        <button
+          type="button"
+          data-copy-trigger
+          data-copy-target={id || ''}
+          data-copy-val={String(value || '')}
+          aria-label={`Copy ${displayTitle}`}
+          class="inline-flex items-center gap-6 rounded-8 border border-border/80 bg-surface2 px-12 py-4 font-sans text-xs font-bold text-ink whitespace-nowrap shrink-0 shadow-sm hover:bg-surface hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface2-dark dark:text-ink-dark dark:hover:bg-surface-dark transition-all duration-150 cursor-pointer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 copy-icon shrink-0">
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden h-12 w-12 check-icon text-emerald-500 shrink-0">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span class="copy-label whitespace-nowrap">Copy</span>
+        </button>
       )}
     </div>
 
@@ -41,31 +64,74 @@ const displayTitle = label || title || 'Result';
         >
           {value}
         </span>
-
-        {copyable && (
-          <button
-            type="button"
-            data-copy-trigger
-            data-copy-target={id || ''}
-            data-copy-val={String(value)}
-            aria-label={`Copy ${displayTitle}`}
-            class="inline-flex h-32 w-32 items-center justify-center rounded-8 border border-border/80 bg-surface/80 text-ink2 hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark dark:hover:text-accent-dark transition-all duration-150 cursor-pointer shrink-0"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 copy-icon">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden h-14 w-14 check-icon text-emerald-500">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </button>
-        )}
       </div>
     )}
 
-    <!-- Slot for children elements -->
+    <!-- Slot for main tool card contents -->
     <slot />
   </div>
 
   {subtext && <p class="mt-8 text-xs font-mono text-muted dark:text-muted-dark">{subtext}</p>}
 </div>
+
+<script is:inline>
+  (function() {
+    function initCopyButtons() {
+      document.querySelectorAll('[data-copy-trigger], button[id$="-copy"], button.copy-btn').forEach(btn => {
+        if (btn.dataset.copyInited) return;
+        btn.dataset.copyInited = 'true';
+
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          let textToCopy = btn.getAttribute('data-copy-val') || '';
+          const targetId = btn.getAttribute('data-copy-target');
+
+          if (!textToCopy && targetId) {
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) textToCopy = targetEl.value || targetEl.textContent || '';
+          }
+
+          if (!textToCopy) {
+            // Find sibling or parent textarea
+            const card = btn.closest('.group, [id$="-app"], .space-y-16, .space-y-24');
+            const textarea = card?.querySelector('textarea, code, pre');
+            if (textarea) textToCopy = textarea.value || textarea.textContent || '';
+          }
+
+          if (textToCopy) {
+            try {
+              await navigator.clipboard.writeText(textToCopy);
+
+              const copyIcon = btn.querySelector('.copy-icon');
+              const checkIcon = btn.querySelector('.check-icon');
+              const copyLabel = btn.querySelector('.copy-label') || btn;
+
+              btn.classList.add('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+              if (copyIcon) copyIcon.classList.add('hidden');
+              if (checkIcon) checkIcon.classList.remove('hidden');
+
+              const originalText = copyLabel.textContent;
+              copyLabel.textContent = 'Copied!';
+
+              setTimeout(() => {
+                btn.classList.remove('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+                if (copyIcon) copyIcon.classList.remove('hidden');
+                if (checkIcon) checkIcon.classList.add('hidden');
+                copyLabel.textContent = originalText;
+              }, 2000);
+            } catch (err) {
+              console.error('Failed to copy text: ', err);
+            }
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCopyButtons);
+    } else {
+      initCopyButtons();
+    }
+  })();
+</script>

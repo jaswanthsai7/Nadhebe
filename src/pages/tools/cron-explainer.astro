@@ -1,74 +1,149 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
 
 const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'cron-explainer');
-if (!platformTool) throw new Error('Tool not found');
+
+const title = 'Cron Expression Explainer & Schedule Parser | Nadhebe';
+const h1 = 'Cron Expression Explainer';
+const description = 'Parse 5-field cron schedule strings into plain English human explanations and calculate upcoming run execution times.';
 
 const faq = [
   {
     question: 'How do cron expressions work?',
-    answer: 'A cron expression is a string consisting of five or six fields separated by white space that represents a set of times, normally as a schedule to execute some routine. The standard five fields are: Minute (0-59), Hour (0-23), Day of Month (1-31), Month (1-12), and Day of Week (0-6).',
+    answer: 'A cron expression is a string consisting of five or six fields separated by white space representing a recurring schedule. Standard fields are: Minute (0-59), Hour (0-23), Day of Month (1-31), Month (1-12), and Day of Week (0-6).'
   },
   {
     question: 'What do the special characters mean?',
-    answer: 'The asterisk (*) means "every", the slash (/) specifies increments (e.g. */5 for every 5 minutes), the comma (,) separates items in a list, and the hyphen (-) specifies a range.',
+    answer: 'Asterisk (*) means every unit, slash (/) specifies step increments (e.g. */15 for every 15 minutes), comma (,) separates lists, and hyphen (-) specifies ranges.'
   },
   {
     question: 'Is my cron string sent to a server?',
-    answer: 'No. The cron expression is parsed entirely in your browser using JavaScript. We do not upload your data.',
+    answer: 'No. The cron expression is parsed entirely in your browser using local JavaScript.'
   }
 ];
 ---
 
-<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
-  <div slot="calculator" class="max-w-3xl mx-auto space-y-16 py-16">
-    <div class="flex items-center justify-center text-xs font-mono text-muted dark:text-muted-dark mb-16">
-      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        ✓ Runs locally in your browser
-      </span>
+<ToolLayout
+  toolId="cron-explainer"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="cron-explainer-app">
+    
+    <!-- Hero Crontab Guru Style Banner -->
+    <div class="rounded-20 border border-border bg-surface p-20 sm:p-28 shadow-medium dark:border-border-dark dark:bg-surface-dark space-y-20 text-center">
+      
+      <!-- Big Quoted Human Explanation -->
+      <div class="space-y-6">
+        <span class="text-meta font-mono font-bold uppercase tracking-wider text-muted dark:text-muted-dark font-semibold">Cron Plain English Summary</span>
+        <h2 id="ce-human-quote" class="text-h2 font-sans font-bold text-accent dark:text-accent-dark transition-all">
+          “Every 15 minutes.”
+        </h2>
+        <div id="ce-next-immediate" class="text-caption font-mono text-ink2 dark:text-ink2-dark font-medium">
+          next at <span id="ce-next-immediate-val" class="font-bold text-ink dark:text-ink-dark">—</span>
+        </div>
+      </div>
+
+      <!-- Centered 5-Field Input & Field Alignment -->
+      <div class="max-w-xl mx-auto space-y-12">
+        <div class="relative flex items-center">
+          <input
+            type="text"
+            id="ce-cron-input"
+            value="*/15 * * * *"
+            class="w-full rounded-12 border-2 border-border bg-surface2 px-20 py-16 text-center text-h2 font-mono font-bold tracking-widest text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+            placeholder="* * * * *"
+            spellcheck="false"
+          />
+          <button
+            type="button"
+            id="ce-btn-copy"
+            class="absolute right-12 rounded-8 border border-border bg-surface px-12 py-6 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
+          >
+            Copy
+          </button>
+        </div>
+
+        <!-- Field Column Headers Aligned Under Fields -->
+        <div class="grid grid-cols-5 text-center font-mono text-xs font-bold text-muted dark:text-muted-dark">
+          <div class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">minute</div>
+          <div class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">hour</div>
+          <div class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">day (month)</div>
+          <div class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">month</div>
+          <div class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">day (week)</div>
+        </div>
+      </div>
+
+      <!-- Presets & Random Row -->
+      <div class="flex flex-wrap items-center justify-center gap-12 pt-8 text-xs font-mono">
+        <div class="flex items-center gap-6">
+          <span class="text-muted font-semibold">Presets:</span>
+          <select id="ce-preset-select" class="rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+            <option value="*/15 * * * *">Every 15 minutes (*/15 * * * *)</option>
+            <option value="5 4 * * *">At 04:05 (5 4 * * *)</option>
+            <option value="0 0 * * *">Every midnight (0 0 * * *)</option>
+            <option value="0 9 * * 1">Every Monday at 9:00 AM (0 9 * * 1)</option>
+            <option value="0 0 1 * *">First day of every month (0 0 1 * *)</option>
+          </select>
+        </div>
+
+        <button type="button" id="ce-btn-random" class="rounded-8 border border-border bg-surface2 px-12 py-6 font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-all">
+          🎲 Random
+        </button>
+      </div>
+
     </div>
 
-    <!-- Main Input Box -->
-    <div class="glass-panel p-24 md:p-32 rounded-24 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-large relative z-20 overflow-hidden group transition-all focus-within:border-accent dark:focus-within:border-accent-dark focus-within:ring-4 focus-within:ring-accent/10">
-       <label class="block text-sm font-sans font-semibold text-ink2 dark:text-ink2-dark mb-12 uppercase tracking-wider text-center">Cron Expression</label>
-       <div class="flex items-center justify-center">
-         <input type="text" id="cron-input" value="*/15 * * * *" class="w-full max-w-lg p-16 text-center border-b-2 border-border bg-transparent focus:border-accent dark:border-border-dark dark:bg-transparent text-2xl md:text-4xl font-mono text-ink dark:text-ink-dark transition-all outline-none tracking-widest placeholder:text-muted/40" placeholder="* * * * *" />
-       </div>
+    <!-- 2-Column Split: Next Scheduled Runs & Cheat Sheet -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Next Scheduled Runs -->
+      <CalculatorCard title="NEXT 5 SCHEDULED EXECUTION RUNS">
+        <div class="space-y-16 font-mono text-caption">
+          <ul id="ce-next-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40 pt-4">
+            <!-- Populated via cron-parser -->
+          </ul>
+        </div>
+      </CalculatorCard>
+
+      <!-- Cheat Sheet -->
+      <ResultCard title="CRON SPECIAL CHARACTERS">
+        <div class="space-y-16 font-mono text-caption">
+          <div class="w-full overflow-hidden rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+            <table class="w-full text-left text-xs border-collapse font-mono">
+              <thead>
+                <tr class="bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark font-bold border-b border-border dark:border-border-dark">
+                  <th class="p-8 border-r border-border dark:border-border-dark w-24">Symbol</th>
+                  <th class="p-8">Meaning</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border/40 dark:divide-border-dark/40 text-ink2 dark:text-ink2-dark">
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">*</td><td class="p-8">any value (wildcard)</td></tr>
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">,</td><td class="p-8">value list separator</td></tr>
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">-</td><td class="p-8">range of values</td></tr>
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">/</td><td class="p-8">step values</td></tr>
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@daily</td><td class="p-8">run once a day (0 0 * * *)</td></tr>
+                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@hourly</td><td class="p-8">run once an hour (0 * * * *)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ResultCard>
+
     </div>
 
-    <!-- Output Box -->
-    <div class="glass-panel p-24 md:p-32 rounded-24 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-medium relative z-20">
-       <div class="text-center space-y-24">
-         <div class="space-y-8">
-           <h3 class="text-xs font-sans font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Human Readable</h3>
-           <p id="cron-human" class="text-xl md:text-2xl font-semibold text-accent dark:text-accent-dark">Every 15 minutes</p>
-         </div>
-         
-         <div class="h-px w-full bg-border/50 dark:bg-border-dark/50 my-16"></div>
-         
-         <div class="space-y-12">
-           <h3 class="text-xs font-sans font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Next Scheduled Runs</h3>
-           <ul id="cron-next" class="font-mono text-sm md:text-base text-ink dark:text-ink-dark space-y-8 inline-block text-left">
-             <li>Loading...</li>
-           </ul>
-         </div>
-       </div>
-    </div>
   </div>
 
   <div slot="content">
     <h2>Understand and Test Cron Expressions</h2>
-    <p>A Cron expression is a powerful way to define recurring schedules for automated tasks, backups, and deployments. However, the syntax can be tricky to read and verify. Our Cron Explainer translates standard cron strings into plain English and computes the next scheduled execution times instantly.</p>
-
-    <h3>Supported Cron Formats</h3>
-    <ul>
-      <li>Standard 5-field cron (minute, hour, day of month, month, day of week)</li>
-      <li>Second-level precision (6 fields)</li>
-      <li>Lists (<code>1,15,30</code>)</li>
-      <li>Ranges (<code>1-5</code>)</li>
-      <li>Step values (<code>*/10</code>)</li>
-    </ul>
+    <p>
+      A Cron expression is a powerful way to define recurring schedules for automated tasks, backups, and deployments.
+    </p>
   </div>
 </ToolLayout>
 
@@ -76,50 +151,110 @@ const faq = [
   import cronstrue from 'cronstrue';
   import { CronExpressionParser } from 'cron-parser';
 
-  function setupCron() {
-    const input = document.getElementById('cron-input') as HTMLInputElement;
-    const outHuman = document.getElementById('cron-human');
-    const outNext = document.getElementById('cron-next');
-    
+  function initCronExplainer() {
+    const inputEl = document.getElementById('ce-cron-input') as HTMLInputElement;
+    const humanQuoteEl = document.getElementById('ce-human-quote');
+    const nextImmediateValEl = document.getElementById('ce-next-immediate-val');
+    const nextListEl = document.getElementById('ce-next-list');
+    const presetSelectEl = document.getElementById('ce-preset-select') as HTMLSelectElement;
+    const btnRandomEl = document.getElementById('ce-btn-random');
+    const btnCopyEl = document.getElementById('ce-btn-copy');
+
     function update() {
-      if (!input || !outHuman || !outNext) return;
-      const val = input.value.trim();
-      
-      if (!val) {
-        outHuman.textContent = 'Waiting for expression...';
-        outHuman.className = 'text-xl md:text-2xl font-semibold text-muted dark:text-muted-dark';
-        outNext.innerHTML = '<li class="text-muted dark:text-muted-dark">No next runs to display</li>';
+      if (!inputEl) return;
+      const cronStr = inputEl.value.trim();
+
+      if (!cronStr) {
+        if (humanQuoteEl) humanQuoteEl.textContent = '“Enter cron expression”';
+        if (nextListEl) nextListEl.innerHTML = '<li class="p-8 text-muted">No expression entered.</li>';
         return;
       }
-      
+
       try {
-        // 1. Get Human Readable
-        const human = cronstrue.toString(val, { throwExceptionOnParseError: true });
-        outHuman.textContent = `"${human}"`;
-        outHuman.className = 'text-xl md:text-2xl font-semibold text-emerald-600 dark:text-emerald-400';
-        
-        // 2. Get Next Runs
-        const interval = CronExpressionParser.parse(val);
-        let nextHtml = '';
-        for (let i = 0; i < 5; i++) {
-          const nextDate = interval.next();
-          // Format elegantly
-          const d = nextDate.toDate();
-          const str = d.toLocaleString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-          nextHtml += `<li class="flex items-center gap-12 py-4"><span class="w-24 text-right text-xs font-bold text-accent dark:text-accent-dark opacity-80">${i+1}.</span> <span>${str}</span></li>`;
+        const humanText = cronstrue.toString(cronStr, { throwExceptionOnParseError: true });
+        if (humanQuoteEl) {
+          humanQuoteEl.textContent = `“${humanText}.”`;
+          humanQuoteEl.className = 'text-h2 font-sans font-bold text-accent dark:text-accent-dark transition-all';
         }
-        outNext.innerHTML = nextHtml;
-        
+
+        const interval = CronExpressionParser.parse(cronStr);
+        let listHtml = '';
+
+        for (let i = 0; i < 5; i++) {
+          const nextRun = interval.next();
+          const d = nextRun.toDate();
+          const str = new Intl.DateTimeFormat('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+          }).format(d);
+
+          if (i === 0 && nextImmediateValEl) {
+            nextImmediateValEl.textContent = `${d.toISOString().slice(0, 10)} ${d.toTimeString().slice(0, 8)}`;
+          }
+
+          listHtml += `
+            <li class="flex items-center justify-between py-8 px-4 text-xs font-mono">
+              <span class="font-bold text-accent dark:text-accent-dark w-20">${i + 1}.</span>
+              <span class="flex-1 text-ink dark:text-ink-dark font-medium">${str}</span>
+            </li>
+          `;
+        }
+
+        if (nextListEl) nextListEl.innerHTML = listHtml;
+
       } catch (err: any) {
-        outHuman.textContent = 'Invalid Cron Expression';
-        outHuman.className = 'text-xl md:text-2xl font-semibold text-danger dark:text-danger-dark';
-        outNext.innerHTML = `<li class="text-danger dark:text-danger-dark text-xs">${err.toString()}</li>`;
+        if (humanQuoteEl) {
+          humanQuoteEl.textContent = '“Invalid Cron Expression”';
+          humanQuoteEl.className = 'text-h2 font-sans font-bold text-danger';
+        }
+        if (nextImmediateValEl) nextImmediateValEl.textContent = 'Syntax error';
+        if (nextListEl) {
+          nextListEl.innerHTML = `<li class="p-8 text-danger font-mono text-xs font-semibold">Error: ${err.message || err.toString()}</li>`;
+        }
       }
     }
-    
-    if (input) input.addEventListener('input', update);
+
+    if (inputEl) inputEl.addEventListener('input', update);
+
+    presetSelectEl?.addEventListener('change', () => {
+      if (inputEl && presetSelectEl.value) {
+        inputEl.value = presetSelectEl.value;
+        update();
+      }
+    });
+
+    btnRandomEl?.addEventListener('click', () => {
+      const randoms = ['*/15 * * * *', '5 4 * * *', '0 0 * * *', '0 9 * * 1-5', '30 22 * * *'];
+      const pick = randoms[Math.floor(Math.random() * randoms.length)];
+      if (inputEl) {
+        inputEl.value = pick;
+        if (presetSelectEl) presetSelectEl.value = pick;
+        update();
+      }
+    });
+
+    btnCopyEl?.addEventListener('click', () => {
+      if (inputEl) {
+        navigator.clipboard.writeText(inputEl.value);
+        btnCopyEl.textContent = 'Copied!';
+        setTimeout(() => {
+          btnCopyEl.textContent = 'Copy';
+        }, 1500);
+      }
+    });
+
     update();
   }
-  
-  setupCron();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCronExplainer);
+  } else {
+    initCronExplainer();
+  }
 </script>

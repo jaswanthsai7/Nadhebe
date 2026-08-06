@@ -1,0 +1,206 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Interactive Deployment & Task Checklist Builder | Nadhebe';
+const h1 = 'Interactive Checklist Builder';
+const description = 'Build interactive pre-flight release checklists, QA test procedures, and export PR-ready Markdown task lists.';
+
+const faq = [
+  {
+    question: 'How do I export my deployment checklist?',
+    answer: 'You can export your completed checklist as GitHub-flavored Markdown checkboxes (`- [x] Task`), JSON data, or interactive HTML.'
+  },
+  {
+    question: 'Is my checklist state saved online?',
+    answer: 'No, all checklist state and interactive tracking runs 100% locally inside your web browser session.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="checklist-builder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="checklist-builder-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Interactive Checklist Manager -->
+      <CalculatorCard title="CHECKLIST MANIFEST & ITEMS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Preset Templates</label>
+            <select id="clb-preset" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="devops">Production Release Pre-Flight</option>
+              <option value="seo">SEO & OpenGraph Launch Audit</option>
+              <option value="frontend">Frontend Performance Audit</option>
+              <option value="custom">Custom Blank Checklist</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Checklist Items (One per line)</label>
+            <textarea id="clb-input" rows="12" class="w-full min-h-[300px] rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Verify environment variables & API secrets in production VPS
+Run static site build (npm run build) & link audit
+Check 0 broken internal links (verify-links script)
+Verify OpenGraph image meta tags & Twitter card previews
+Confirm HTTPS SSL certificate expiration & redirect headers
+Test client-side JavaScript error handling on staging domain</textarea>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Interactive Progress & Markdown Output -->
+      <ResultCard title="INTERACTIVE AUDIT & MARKDOWN EXPORT">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="text-ink dark:text-ink-dark uppercase">Audit Completion</span>
+              <span id="clb-progress-text" class="text-accent dark:text-accent-dark">0 / 6 Completed (0%)</span>
+            </div>
+            <div class="w-full bg-surface2 dark:bg-surface2-dark rounded-full h-6 overflow-hidden">
+              <div id="clb-progress-bar" class="bg-accent h-full w-0 transition-all duration-200"></div>
+            </div>
+          </div>
+
+          <div id="clb-interactive-list" class="space-y-8 p-12 rounded-10 border border-border bg-surface max-h-[220px] overflow-auto dark:border-border-dark dark:bg-surface-dark text-xs">
+            <!-- Dynamic checkboxes populated here -->
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">GitHub PR Markdown Payload</label>
+            <textarea id="clb-output" rows="8" readonly class="w-full min-h-[180px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Pre-Flight Release Checklist Best Practices</h2>
+    <p>
+      Systematic pre-flight checklists prevent production outages by verifying environment configurations, SSL certificates, build outputs, and SEO tags before pushing code to live servers.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const presetEl = document.getElementById('clb-preset');
+    const inputEl = document.getElementById('clb-input');
+    const listEl = document.getElementById('clb-interactive-list');
+    const progressTextEl = document.getElementById('clb-progress-text');
+    const progressBarEl = document.getElementById('clb-progress-bar');
+    const outputEl = document.getElementById('clb-output');
+
+    const presets = {
+      devops: [
+        'Verify environment variables & API secrets in production VPS',
+        'Run static site build (npm run build) & link audit',
+        'Check 0 broken internal links (verify-links script)',
+        'Verify OpenGraph image meta tags & Twitter card previews',
+        'Confirm HTTPS SSL certificate expiration & redirect headers',
+        'Test client-side JavaScript error handling on staging domain'
+      ],
+      seo: [
+        'Verify unique H1 tag on every page',
+        'Check title tags are under 60 characters',
+        'Verify meta descriptions are 145-160 characters',
+        'Confirm sitemap.xml exists and passes syntax validation',
+        'Inspect robots.txt for disallowed production crawler paths',
+        'Verify canonical URL link tags on static pages'
+      ],
+      frontend: [
+        'Audit Core Web Vitals (LCP < 2.5s, CLS < 0.1)',
+        'Compress and format WebP/AVIF hero assets',
+        'Verify keyboard accessibility (focus-visible states)',
+        'Inspect responsive breakpoints across mobile and desktop',
+        'Verify dark mode toggle & color contrast ratios'
+      ],
+      custom: [
+        'Task 1: Define release scope',
+        'Task 2: Code review approval',
+        'Task 3: Deploy to production'
+      ]
+    };
+
+    let checkedState = {};
+
+    function handlePresetChange() {
+      const selected = presetEl?.value || 'devops';
+      if (presets[selected] && inputEl) {
+        inputEl.value = presets[selected].join('\n');
+        checkedState = {};
+        render();
+      }
+    }
+
+    function render() {
+      const text = inputEl?.value || '';
+      const items = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+      if (items.length === 0) {
+        if (listEl) listEl.innerHTML = '<span class="text-muted">No checklist items defined.</span>';
+        if (outputEl) outputEl.value = '';
+        if (progressTextEl) progressTextEl.textContent = '0 Completed';
+        if (progressBarEl) progressBarEl.style.width = '0%';
+        return;
+      }
+
+      // Render interactive checklist
+      if (listEl) {
+        listEl.innerHTML = items.map((item, idx) => {
+          const isChecked = !!checkedState[idx];
+          return `
+            <label class="flex items-center gap-8 cursor-pointer hover:bg-surface2/50 dark:hover:bg-surface2-dark/50 p-4 rounded transition-colors">
+              <input type="checkbox" data-idx="${idx}" ${isChecked ? 'checked' : ''} class="clb-chk rounded border-border text-accent" />
+              <span class="${isChecked ? 'line-through text-muted' : 'text-ink dark:text-ink-dark'} font-sans">${item}</span>
+            </label>
+          `;
+        }).join('');
+      }
+
+      // Calculate progress
+      const total = items.length;
+      const completedCount = Object.keys(checkedState).filter(k => checkedState[k]).length;
+      const pct = Math.round((completedCount / total) * 100);
+
+      if (progressTextEl) progressTextEl.textContent = `${completedCount} / ${total} Completed (${pct}%)`;
+      if (progressBarEl) progressBarEl.style.width = pct + '%';
+
+      // Generate Markdown
+      const md = items.map((item, idx) => {
+        const isChecked = !!checkedState[idx];
+        return `- [${isChecked ? 'x' : ' '}] ${item}`;
+      }).join('\n');
+
+      if (outputEl) outputEl.value = md;
+
+      // Attach checkbox handlers
+      const checkEls = document.querySelectorAll('.clb-chk');
+      checkEls.forEach(chk => {
+        chk.addEventListener('change', (e) => {
+          const idx = e.target.getAttribute('data-idx');
+          checkedState[idx] = e.target.checked;
+          render();
+        });
+      });
+    }
+
+    presetEl?.addEventListener('change', handlePresetChange);
+    inputEl?.addEventListener('input', () => {
+      render();
+    });
+
+    render();
+  })();
+</script>

@@ -5,9 +5,10 @@ const rawSiteUrl = process.env.PUBLIC_SITE_URL || 'https://nadhebe.com';
 const SITE_URL = rawSiteUrl.trim().replace(/\/+$/, '');
 
 function walkDir(dir: string, callback: (filePath: string) => void) {
-  if (!fs.existsSync(dir)) return;
+  if (!fs.existsSync(dir) || dir.includes('pagefind')) return;
   fs.readdirSync(dir).forEach(f => {
     const dirPath = path.join(dir, f);
+    if (!fs.existsSync(dirPath) || dirPath.includes('pagefind')) return;
     const isDirectory = fs.statSync(dirPath).isDirectory();
     if (isDirectory) {
       walkDir(dirPath, callback);

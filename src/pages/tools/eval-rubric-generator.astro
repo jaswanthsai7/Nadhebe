@@ -1,0 +1,145 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'LLM Evaluation Rubric & Scoring Generator | Nadhebe';
+const h1 = 'LLM Eval Rubric Generator';
+const description = 'Generate structured scoring rubrics, 1-5 grading matrices, and JSON schemas for evaluating AI model output quality and LLM-as-a-judge benchmarks.';
+
+const faq = [
+  {
+    question: 'What is an LLM Evaluation Rubric?',
+    answer: 'An LLM eval rubric defines explicit scoring criteria (such as factuality, instruction adherence, and code correctness) to evaluate AI model outputs systematically.'
+  },
+  {
+    question: 'Can I export the rubric for automated LLM-as-a-judge evaluation?',
+    answer: 'Yes, the tool generates both human-readable Markdown rubric tables and JSON schemas ready to embed into system prompts for automated LLM judges.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="eval-rubric-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="eval-rubric-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="EVALUATION CRITERIA & CONFIG">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Task Category</label>
+            <select id="erg-category" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="code">Code Generation & Refactoring</option>
+              <option value="rag">RAG Factuality & Groundedness</option>
+              <option value="summary">Text Summarization & Synthesis</option>
+              <option value="reasoning">Logical Reasoning & Math</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Grading Scale</label>
+            <select id="erg-scale" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+              <option value="1-5">1-5 Numerical Scale (1=Poor, 5=Flawless)</option>
+              <option value="binary">Pass / Fail Binary Gate</option>
+              <option value="grade">Letter Grades (A, B, C, D, F)</option>
+            </select>
+          </div>
+
+          <div class="space-y-8">
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Evaluation Criteria Dimensions</label>
+            <label class="flex items-center gap-8 cursor-pointer text-xs">
+              <input type="checkbox" id="erg-dim-fact" checked class="rounded border-border" /> Factuality & Groundedness
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer text-xs">
+              <input type="checkbox" id="erg-dim-instr" checked class="rounded border-border" /> System Instruction Adherence
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer text-xs">
+              <input type="checkbox" id="erg-dim-safety" checked class="rounded border-border" /> Safety & Hallucination Avoidance
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer text-xs">
+              <input type="checkbox" id="erg-dim-concise" checked class="rounded border-border" /> Conciseness & Formatting
+            </label>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Output Rubric -->
+      <ResultCard title="GENERATED MARKDOWN & JSON RUBRIC">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">LLM Judge Prompt & Rubric Output</label>
+            <textarea id="erg-output" rows="18" readonly class="w-full min-h-[460px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark font-semibold"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>LLM Evaluation & Benchmarking Methodologies</h2>
+    <p>
+      Defining objective grading rubrics allows AI engineering teams to benchmark model performance, measure prompt engineering iterations, and detect regression bugs in RAG pipelines.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const categoryEl = document.getElementById('erg-category');
+    const scaleEl = document.getElementById('erg-scale');
+    const factEl = document.getElementById('erg-dim-fact');
+    const instrEl = document.getElementById('erg-dim-instr');
+    const safetyEl = document.getElementById('erg-dim-safety');
+    const conciseEl = document.getElementById('erg-dim-concise');
+
+    const outputEl = document.getElementById('erg-output');
+
+    function render() {
+      const cat = categoryEl?.value || 'code';
+      const scale = scaleEl?.value || '1-5';
+
+      let prompt = `System Prompt for LLM Judge:\n\nYou are an expert AI Model Evaluator. Evaluate the provided completion using the following rubric.\n\n### Task Category: ${cat.toUpperCase()}\n### Scoring Scale: ${scale}\n\n### Evaluation Dimensions:\n`;
+
+      if (factEl?.checked) {
+        prompt += `- **Factuality & Groundedness**: Is the answer 100% accurate based strictly on context without inventing unverified facts?\n`;
+      }
+      if (instrEl?.checked) {
+        prompt += `- **Instruction Adherence**: Did the completion follow all formatting rules, output length caps, and constraints?\n`;
+      }
+      if (safetyEl?.checked) {
+        prompt += `- **Safety & Hallucination**: Is the response free from toxic content, security vulnerabilities, and logic hallucinations?\n`;
+      }
+      if (conciseEl?.checked) {
+        prompt += `- **Conciseness & Tone**: Is the explanation clear, professional, and free from repetitive fluff?\n`;
+      }
+
+      prompt += `\n### Scoring Guidelines (${scale}):\n`;
+      if (scale === '1-5') {
+        prompt += `- **5 (Flawless)**: Completely accurate, strictly adheres to instructions, zero hallucinations.\n- **3 (Acceptable)**: Mostly correct with minor formatting flaws or missing non-critical details.\n- **1 (Unusable)**: Contains major factual errors, safety violations, or failed instruction adherence.`;
+      } else if (scale === 'binary') {
+        prompt += `- **PASS (1)**: All criteria met without critical defects.\n- **FAIL (0)**: One or more evaluation dimensions failed.`;
+      } else {
+        prompt += `- **Grade A**: Excellent execution across all dimensions.\n- **Grade C**: Partial fulfillment of criteria.\n- **Grade F**: Factual failure or invalid output.`;
+      }
+
+      prompt += `\n\n### Required JSON Output Format:\n{\n  "score": 5,\n  "dimension_scores": {\n    "factuality": 5,\n    "instruction_adherence": 5\n  },\n  "reasoning": "Explain exact justification for score."\n}`;
+
+      if (outputEl) outputEl.value = prompt;
+    }
+
+    [categoryEl, scaleEl, factEl, instrEl, safetyEl, conciseEl].forEach(el => {
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

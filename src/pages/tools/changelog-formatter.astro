@@ -1,0 +1,139 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Keep a Changelog Markdown Generator | Nadhebe';
+const h1 = 'Changelog Markdown Formatter';
+const description = 'Generate clean, standard Keep a Changelog markdown files with version headings, release dates, and structured section categories.';
+
+const faq = [
+  {
+    question: 'What specification does this changelog generator follow?',
+    answer: 'It strictly follows the Keep a Changelog v1.1.0 and Semantic Versioning (SemVer) standards.'
+  },
+  {
+    question: 'Is my release note data secure?',
+    answer: 'Yes, 100% of formatting happens locally inside your web browser. Zero server uploads.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="changelog-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="changelog-formatter-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="RELEASE METADATA & SECTIONS">
+        <div class="space-y-16 font-mono text-caption">
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Version Tag</label>
+              <input id="clf-version" type="text" value="v1.4.0" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Release Date</label>
+              <input id="clf-date" type="text" value="2026-08-06" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">✨ Added (New features - 1 per line)</label>
+            <textarea id="clf-added" rows="3" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Add client-side CSV table parser with row search filtering
+Add high-contrast dark mode palette for code blocks</textarea>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">⚡ Changed (Modifications - 1 per line)</label>
+            <textarea id="clf-changed" rows="3" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Migrate sidebar tool container to transparent glass line layout
+Optimize V8 JavaScript memory footprint calculation</textarea>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">🐛 Fixed (Bug fixes - 1 per line)</label>
+            <textarea id="clf-fixed" rows="3" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Fix white-on-white text contrast in CategoryLayout topics sidebar
+Fix table header text alignment in mobile viewports</textarea>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">🔒 Security / Deprecated (1 per line)</label>
+            <textarea id="clf-security" rows="2" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Sanitize raw user input before innerHTML injection</textarea>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Formatted Changelog Output -->
+      <ResultCard title="KEEP A CHANGELOG MARKDOWN">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Formatted Markdown Output</label>
+            <textarea id="clf-output" rows="18" readonly class="w-full min-h-[480px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Keep a Changelog Principles</h2>
+    <p>
+      Changelogs are human-readable curated release notes. Grouping changes into Added, Changed, Fixed, and Security categories makes software releases transparent for developers and users.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const versionEl = document.getElementById('clf-version');
+    const dateEl = document.getElementById('clf-date');
+    const addedEl = document.getElementById('clf-added');
+    const changedEl = document.getElementById('clf-changed');
+    const fixedEl = document.getElementById('clf-fixed');
+    const securityEl = document.getElementById('clf-security');
+
+    const outputEl = document.getElementById('clf-output');
+
+    function render() {
+      const ver = (versionEl?.value || 'v1.0.0').trim();
+      const date = (dateEl?.value || new Date().toISOString().split('T')[0]).trim();
+
+      const parseLines = (el) => (el?.value || '').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+      const added = parseLines(addedEl);
+      const changed = parseLines(changedEl);
+      const fixed = parseLines(fixedEl);
+      const security = parseLines(securityEl);
+
+      let md = `# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n## [${ver}] - ${date}\n\n`;
+
+      if (added.length > 0) {
+        md += `### Added\n` + added.map(i => `- ${i}`).join('\n') + `\n\n`;
+      }
+      if (changed.length > 0) {
+        md += `### Changed\n` + changed.map(i => `- ${i}`).join('\n') + `\n\n`;
+      }
+      if (fixed.length > 0) {
+        md += `### Fixed\n` + fixed.map(i => `- ${i}`).join('\n') + `\n\n`;
+      }
+      if (security.length > 0) {
+        md += `### Security\n` + security.map(i => `- ${i}`).join('\n') + `\n\n`;
+      }
+
+      if (outputEl) outputEl.value = md.trim();
+    }
+
+    [versionEl, dateEl, addedEl, changedEl, fixedEl, securityEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

@@ -242,10 +242,10 @@
       <image:loc>https://nadhebe.com/images/structured-output-prompting-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1955,10 +1955,10 @@
       <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/ollama-quantization-formats-compared-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -1988,13 +1988,13 @@
       <image:loc>https://nadhebe.com/images/notebooklm-pro-developer-workflows-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/generative-engine-optimization-geo-guide-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
     </image:image>
   </url>
   <url>
@@ -2093,9 +2093,6 @@
       <image:loc>https://nadhebe.com/images/deepseek-ocr-local-gpu-deployment-hero.png</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/model-context-protocol-mcp-guide-hero.webp</image:loc>
-    </image:image>
-    <image:image>
       <image:loc>https://nadhebe.com/images/storyboard-studio-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -2108,10 +2105,7 @@
       <image:loc>https://nadhebe.com/images/yt-automation-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/qwen-3-5-27b-consumer-gpu-setup-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/run-flux-1-locally-consumer-gpu-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/model-context-protocol-mcp-guide-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2574,6 +2568,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/16-9-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/3d-modeling</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2598,6 +2601,33 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/9-16-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/a11y</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/accessibility</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2670,6 +2700,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/aggregations</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/agile</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/ai</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2697,6 +2745,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-cowork-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/ai-api-pricing-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2898,6 +2955,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ai-persona-prompt-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/ai-pre-production-workflows</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2916,6 +2982,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/notebooklm-vs-gemini-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/ai-testing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2991,6 +3066,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/analytics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/anomaly-detection</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3078,6 +3171,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/apa</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/api</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3126,6 +3228,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/api-fixtures</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/api-infrastructure</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3150,6 +3261,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/api-payload-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/app-development</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3162,6 +3282,9 @@
     <loc>https://nadhebe.com/tag/architecture</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/openrouter-vs-direct-hero.webp</image:loc>
@@ -3177,6 +3300,42 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/guides-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/aria</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/asana</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/aspect-ratio</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/aspect-ratio-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3240,6 +3399,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/author-profile-bio-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/automated-code-review</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3258,6 +3426,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-spark-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/average-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3288,12 +3465,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/base64-encoder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/batch-inference-cost-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/bearer-tokens</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/mcp-authentication-errors-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/beautifier</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3336,12 +3540,57 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/bibtex</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/big-data</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/bio-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/blackwell</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/nvidia-b200-vs-h200-llm-inference-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/boilerplate</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3355,6 +3604,15 @@
   </url>
   <url>
     <loc>https://nadhebe.com/tag/business-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/business-days</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -3390,6 +3648,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/canvas</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/carousel-dimension-aspect-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cascade</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3399,12 +3675,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/case-converter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/certification</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/anthropic-cert-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/changelog</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/changelog-markdown-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3429,6 +3732,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/checklist</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/chromadb</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3446,6 +3758,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
     </image:image>
   </url>
@@ -3453,6 +3768,9 @@
     <loc>https://nadhebe.com/tag/cicd</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
@@ -3465,6 +3783,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/headless-claude-code-ci-cd-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/citations</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3645,12 +3972,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/claude-desktop-mcp-config-maker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/claude-fable-5</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/claude-hook-template-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3792,6 +4137,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/cls</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cls-web-vitals-optimization-checklist</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/cms</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3801,12 +4164,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/code-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/code-examples</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-python-examples-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/code-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3825,6 +4206,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/code-whitespace-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3876,6 +4266,51 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/color-contrast-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/column-data-type-auto-detector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/column-extractor</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/column-stats</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/combine-csv</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/comfyui</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3924,6 +4359,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/compound-interest</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/consumer-gpu</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -3959,7 +4403,28 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/best-practices-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/conventional-commit-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/conventional-commits</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -3969,6 +4434,42 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/elevenlabs-vs-playht-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cookies</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/core-web-vitals</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/correlation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cosine-similarity-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4029,12 +4530,291 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/cron</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cron-explainer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/cron-next-run-viewer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/css</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-practices-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/css-clamp-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-batch</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-column-extractor</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-deduper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-delimiter-converter-comma-tsv-pipe</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-encoding-delimiter-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-file-table-row-merger</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-filtering</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-import-template-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-interactive-table-previewer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-line-quote-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-merger</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-preview</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-schema-data-validator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-schema-pipeline-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-size-row-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-syntax-delimiter-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-task-import-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-template</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-to-json</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/csv-validator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4127,7 +4907,100 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/gemini-notebook-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-analysis-anomaly-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-analysis-query-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-analysis-report-template-maker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-cleaning</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-column-profiler-statistics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-concatenation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-exporter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-import</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-integrity</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-pipeline</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4137,6 +5010,240 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-ocr-local-gpu-deployment-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-prep</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-preprocessing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-processing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-processing-memory-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-profiler</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-quality</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-science</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-science-metrics-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-type-detector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-validation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/data-viewer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dataset</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dataset-data-analysis-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dataset-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dataset-metric-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-difference</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-fns</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-format-pattern-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-time</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-time-epoch-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-time-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/date-validity-leap-year-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/deduplication</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4203,15 +5310,45 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/delimiter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/delimiter-converter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/deployment</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/design</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4242,6 +5379,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/developer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/developer-agent-frameworks-ai-coding</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4263,6 +5409,51 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/developer-asset-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-capacity-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-code-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-code-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-config-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/developer-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4278,6 +5469,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/developer-mock-data-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/developer-practices</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4287,9 +5487,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/developer-project-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-roadmap-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/developer-template-maker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/developer-tools</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-ai-coding-tools-hero.webp</image:loc>
@@ -4370,6 +5600,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/enterprise-ai-agent-workflows-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -4389,6 +5622,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/dimensions</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/docker</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4397,7 +5639,19 @@
       <image:loc>https://nadhebe.com/images/deepseek-ocr-local-gpu-deployment-hero.png</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dockerfile-linter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4407,6 +5661,33 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-ocr-local-gpu-deployment-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dom</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/dpi-print-size-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/duplicate-line-entry-remover</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4437,12 +5718,60 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/embedding-inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/embeddings</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/encoding</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/engineering</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/engineering-costs</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/engineering-management</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4485,6 +5814,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/env-diff</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/epoch</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/error-handling</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4494,12 +5841,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/escape-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/events</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/exl2</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/ollama-quantization-formats-compared-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/export-csv</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4545,12 +5928,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/faker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/features</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/yt-features-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/few-shot-prompt-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/file-inspection</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/file-size</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4575,6 +5994,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/filtering</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/finops</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4593,12 +6021,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/flat-json</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/flux1</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/run-flux-1-locally-consumer-gpu-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/formatting</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4917,6 +6372,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/geo</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4935,6 +6399,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/git</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/git-worktrees</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4947,6 +6420,9 @@
     <loc>https://nadhebe.com/tag/github</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-mcp-servers-hero.webp</image:loc>
@@ -4971,6 +6447,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-3-6-flash-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/github-profile</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5346,6 +6831,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/gpu-vram-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/graphics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/grid-editor</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/guardrails</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5396,13 +6908,13 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/vllm-kv-cache-optimization-guide-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/nvidia-b200-vs-h200-llm-inference-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-local-llms-8gb-vram-hero.png</image:loc>
@@ -5418,6 +6930,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/nvidia-b200-vs-h200-llm-inference-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/headers</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5451,7 +6972,70 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/html</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/html-entities</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/html-import</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/html-table</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/html-validator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/http</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/http-cookie-decoder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/http-status-codes-cheat-sheet</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -5478,12 +7062,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/ieee</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/image-background-transparency-tool</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/image-generation</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/run-flux-1-locally-consumer-gpu-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/image-processing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5550,6 +7161,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/ingestion</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/inspector</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5634,9 +7263,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/interactive-checklist-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/interactive-csv-table-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/intldatetimeformat</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/javascript</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-javascript-examples-hero.webp</image:loc>
@@ -5646,12 +7305,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/jira</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/json</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/structured-output-prompting-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5664,12 +7344,84 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/json-minifier</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-path-finder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-repair</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/json-rpc</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/model-context-protocol-mcp-guide-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-to-csv</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-to-csv-exporter-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-to-typescript</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-to-xml</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/json-validator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5766,6 +7518,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/kpi-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/kubernetes</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5799,6 +7560,42 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/agentic-rag-workflows-langgraph-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/leap-year</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/line-endings</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/linter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/list-cleaner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5847,6 +7644,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/llm-budget</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/llm-comparison</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5856,6 +7662,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/llm-context-window-budget-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5883,6 +7698,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/llm-eval-rubric-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/llm-evals</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/llm-inference</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5901,6 +7734,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/llm-model-comparison-matrix</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -5949,6 +7791,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/llm-rate-limit-backoff-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/llm-routing</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -5973,6 +7824,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/llm-token-counter-multi-model</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6096,6 +7956,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/markdown</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/mcp</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6189,6 +8058,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/mcp-json-rpc-payload-tester</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/mcp-security</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6201,12 +8079,57 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/mcp-server-config-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/mcp-server-manifest-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/mcp-servers</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-resources-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/megapixels-to-resolution-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/memory-estimator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/meta-description</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6237,6 +8160,9 @@
     <loc>https://nadhebe.com/tag/meta-tag-analyzer</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-free-meta-tag-tools-hero.webp</image:loc>
@@ -6285,12 +8211,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/metrics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/migration</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/case-studies-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/mock-data</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6402,6 +8346,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/news-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/momentjs</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6534,6 +8487,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/notion</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/nvidia-b200</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6626,6 +8588,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/yt-automation-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -6705,6 +8670,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/openapi-3-yaml-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/openapi-to-mcp-tool-schema</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/opencode</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6717,6 +8700,9 @@
     <loc>https://nadhebe.com/tag/opengraph</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/what-is-meta-tag-analyzer-hero.webp</image:loc>
@@ -6753,6 +8739,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/opportunity-radar</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/optimization</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6780,6 +8775,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/outliers</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/page-speed</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/pagedattention</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6795,12 +8808,75 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/pandas</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/parser</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/parsing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/pearson-correlation-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/pearson-r</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/pearson-vue</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/anthropic-cert-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/percentage-difference-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/performance</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6822,12 +8898,57 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/pipe-separated</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/pixels-to-megapixels-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/playht</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/elevenlabs-vs-playht-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/png</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/podcast</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/polars</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6846,6 +8967,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-windows-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/ppi-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6924,6 +9054,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/profit-margin-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/project-management</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/prompt-caching</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -6938,6 +9086,9 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/llm-cost-optimization-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -6948,6 +9099,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/kimi-k3-prompts-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/prompt-template-variable-tester</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -6966,6 +9126,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/gemini-canvas-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/pull-requests</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/px-to-rem</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7026,6 +9204,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/qa-testing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/quantiles</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/quantization</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7035,6 +9231,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/fp4-vs-fp8-vs-int4-quantization-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/query-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/quote-removal</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7070,7 +9284,37 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/rag-chunk-size-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/rag-chunk-size-overlap-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/rag-context-window-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7113,6 +9357,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/refactoring</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/regex</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/release</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7125,12 +9387,42 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/release-notes</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/report-template</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/research</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/gemini-notebook-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/resize-dimensions-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7155,12 +9447,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/rfc-7807-error-json-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/roadmap</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/row-counter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/rtx-4090</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/rubric</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7183,6 +9511,78 @@
   </url>
   <url>
     <loc>https://nadhebe.com/tag/saas-metrics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/sanitize</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/scheduled-date-time-builder</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/scheduling</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/schema-design</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/schema-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/schema-inference</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/schema-validation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/scrum</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -7227,12 +9627,33 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/security</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/seo</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/what-is-meta-tag-analyzer-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/seo-description-template-maker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7368,6 +9789,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/sitemap-validator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/skillmd</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7392,6 +9822,33 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/google-ai-cert-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/slug-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/social-media</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/social-media-image-sizes</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7440,6 +9897,42 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/spreadsheet</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/sprint-capacity</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/sql</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/sql-injection</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/sqlite</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7458,6 +9951,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/sqlite-agent-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/statistics</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7497,6 +9999,33 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/storyboard-tool-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/strftime</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/string-escape-unescape-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/string-utility</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7548,6 +10077,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/svg-to-jsx</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/syntax-checker</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/synthid</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7566,6 +10113,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/system-prompt-linter-best-practices</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/system-prompts</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7575,12 +10131,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/table</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/task-importer</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/technical-citation-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/technical-seo</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/analyzer-vs-checker-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/templates</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7641,6 +10233,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/testing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/text-to-speech</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7650,12 +10251,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/text-tools</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/tgi</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/comparisons-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/timestamp</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/timestamps</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/timezones</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7674,6 +10311,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/llm-cost-optimization-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/tokens</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7731,6 +10377,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/tsv</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/tutorials</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7758,6 +10413,9 @@
     <loc>https://nadhebe.com/tag/typescript</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-workers-ai-code-mode-hero.webp</image:loc>
@@ -7797,6 +10455,42 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/utc</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/utf-8</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/validation</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/variance</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/vastai</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7812,6 +10506,9 @@
     <loc>https://nadhebe.com/tag/vector-database</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
@@ -7836,6 +10533,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/version-control</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/vibe-coding</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7851,6 +10557,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/instatic-visual-cms-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/video-chapter-timestamp-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/video-editing</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7886,13 +10610,13 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/qwen-3-5-27b-consumer-gpu-setup-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vllm-kv-cache-optimization-guide-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/fp4-vs-fp8-vs-int4-quantization-hero.webp</image:loc>
@@ -7962,6 +10686,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/wai-aria-role-attribute-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/walkthrough</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -7971,12 +10704,48 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/wcag</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/web-development</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/what-is-meta-tag-analyzer-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/web-security</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/web-utility</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/web-vitals</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -7998,6 +10767,15 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/news-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/webhook-payload-signature-generator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -8037,6 +10815,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/workflow</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/workflows</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -8073,9 +10860,39 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tag/xml-formatter</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/xpath-tester</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/yaml-to-json</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tag/youtube</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/instatic-visual-cms-hero.webp</image:loc>
@@ -8112,6 +10929,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/yt-features-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/youtube-video-size-calculator</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tag/z-score</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -8407,6 +11242,9 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/aspect-ratio/1080x1350</loc>
@@ -8526,6 +11364,9 @@
     <loc>https://nadhebe.com/tools/background-remover</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -8694,6 +11535,9 @@
     <loc>https://nadhebe.com/tools/carousel-size-helper</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -8979,6 +11823,12 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/chunk-size-planner</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/cidr-calculator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -9121,11 +11971,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/column-profiler</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9139,9 +11995,18 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/compound-interest</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/context-budget-planner</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
@@ -9163,11 +12028,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/correlation-helper</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9205,17 +12076,26 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/csv-checker</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/csv-cleaner</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9231,9 +12111,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tools/csv-exporter-helper</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tools/csv-inspector</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tools/csv-merger</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9241,11 +12142,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/csv-preview</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9253,11 +12160,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/csv-template-maker</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9265,11 +12178,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/csv-validator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9294,6 +12213,9 @@
     <loc>https://nadhebe.com/tools/data-analysis-cleaner</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9324,6 +12246,9 @@
     <loc>https://nadhebe.com/tools/data-type-detector</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9379,6 +12304,9 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/date-and-time-cleaner</loc>
@@ -9390,6 +12318,9 @@
     <loc>https://nadhebe.com/tools/date-and-time-estimator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9426,6 +12357,9 @@
     <loc>https://nadhebe.com/tools/delimiter-converter</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9487,11 +12421,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/developer-calculator</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9499,11 +12439,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/developer-cleaner</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9511,11 +12457,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/developer-formatter</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9523,11 +12475,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/developer-inspector</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9535,11 +12493,17 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/developer-template-maker</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9606,6 +12570,9 @@
     <loc>https://nadhebe.com/tools/duplicate-remover</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -9678,6 +12645,9 @@
     <loc>https://nadhebe.com/tools/escape-helper</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/tools-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -12788,7 +15758,7 @@
       <image:loc>https://nadhebe.com/images/vllm-cuda-out-of-memory-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
+      <image:loc>https://nadhebe.com/images/fp4-vs-fp8-vs-int4-quantization-hero.webp</image:loc>
     </image:image>
   </url>
   <url>

@@ -84,10 +84,10 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
               {popularTopics.map(topic => (
                 <a
                   href={`/tag/${topic.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
-                  class="flex items-center justify-between p-8 rounded-8 hover:bg-hover dark:hover:bg-hover text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150"
+                  class="group flex items-center justify-between px-12 py-8 rounded-8 text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark hover:bg-surface2 dark:hover:bg-surface2-dark/80 transition-all duration-150"
                 >
-                  <span class="text-caption font-sans font-medium">{topic}</span>
-                  <span class="text-meta text-muted dark:text-muted-dark">
+                  <span class="text-caption font-sans font-medium group-hover:text-ink dark:group-hover:text-ink-dark">{topic}</span>
+                  <span class="text-meta font-mono font-medium text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark">
                     {posts.filter(p => p.data.topic === topic).length}
                   </span>
                 </a>
@@ -103,7 +103,7 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
               {relatedCategories.map(cat => (
                 <a
                   href={`/category/${cat.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
-                  class="badge hover:bg-hover dark:hover:bg-hover hover:text-ink dark:hover:text-ink-dark transition-colors duration-150"
+                  class="inline-flex items-center rounded-6 border border-border/60 bg-surface2/80 px-10 py-6 font-mono text-meta font-medium uppercase tracking-wider text-ink2 hover:border-accent/60 hover:bg-surface hover:text-ink dark:border-border-dark/60 dark:bg-surface2-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark/60 dark:hover:bg-surface-dark dark:hover:text-ink-dark transition-all duration-150"
                 >
                   {cat}
                 </a>

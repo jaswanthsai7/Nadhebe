@@ -1,0 +1,160 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'A/B Testing Sample Size & Metrics Planner | Nadhebe';
+const h1 = 'Data Science Metrics Planner';
+const description = 'Calculate required sample sizes for A/B experiment statistical significance, minimum detectable effect (MDE), and test duration.';
+
+const faq = [
+  {
+    question: 'How is A/B test sample size calculated?',
+    answer: 'Sample size calculations use Evan Miller standard formulas based on baseline conversion rate, minimum detectable effect (MDE), significance level (alpha = 0.05), and statistical power (beta = 0.20).'
+  },
+  {
+    question: 'Is my experiment metric configuration private?',
+    answer: 'Yes, 100% of sample size calculations execute locally in your web browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="data-analysis-planner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="data-analysis-planner-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="EXPERIMENT METRICS & CONFIDENCE">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Baseline Conversion Rate (%)</label>
+            <input id="dap-baseline" type="number" value="5.0" step="0.1" min="0.1" max="99.9" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Minimum Detectable Effect (Relative MDE %)</label>
+            <input id="dap-mde" type="number" value="10.0" step="0.5" min="0.5" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Confidence Level (&alpha;)</label>
+              <select id="dap-alpha" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+                <option value="0.05">95% Confidence (&alpha; = 0.05)</option>
+                <option value="0.01">99% Confidence (&alpha; = 0.01)</option>
+                <option value="0.10">90% Confidence (&alpha; = 0.10)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Statistical Power (1-&beta;)</label>
+              <select id="dap-power" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+                <option value="0.80">80% Power (&beta; = 0.20)</option>
+                <option value="0.90">90% Power (&beta; = 0.10)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Daily Visitors / Traffic Volume</label>
+            <input id="dap-daily-traffic" type="number" value="5000" min="10" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Results & Duration Estimate -->
+      <ResultCard title="REQUIRED SAMPLE SIZE & TEST DURATION">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="grid grid-cols-2 gap-12 text-center">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Per-Variant Sample Size</span>
+              <span id="res-sample-variant" class="text-h3 font-bold text-accent dark:text-accent-dark">31,240</span>
+            </div>
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Estimated Test Duration</span>
+              <span id="res-test-days" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">13 Days</span>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 text-xs">
+            <span class="block font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Experiment Target Metrics</span>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Total Sample Size (2 Variants):</span>
+              <strong id="res-sample-total" class="text-ink dark:text-ink-dark font-bold">62,480 Visitors</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Absolute Conversion Target:</span>
+              <strong id="res-abs-target" class="text-ink dark:text-ink-dark font-bold">5.0% &rarr; 5.50% (+0.50%)</strong>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Statistical Significance in A/B Experimentation</h2>
+    <p>
+      Running A/B experiments without adequate sample size leads to false positives (Type I errors) and undetected true improvements (Type II errors).
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const baselineEl = document.getElementById('dap-baseline');
+    const mdeEl = document.getElementById('dap-mde');
+    const alphaEl = document.getElementById('dap-alpha');
+    const powerEl = document.getElementById('dap-power');
+    const dailyTrafficEl = document.getElementById('dap-daily-traffic');
+
+    const sampleVariantEl = document.getElementById('res-sample-variant');
+    const testDaysEl = document.getElementById('res-test-days');
+    const sampleTotalEl = document.getElementById('res-sample-total');
+    const absTargetEl = document.getElementById('res-abs-target');
+
+    function calculate() {
+      const p1 = (parseFloat(baselineEl?.value || '5.0')) / 100;
+      const relativeMde = (parseFloat(mdeEl?.value || '10.0')) / 100;
+      const alpha = parseFloat(alphaEl?.value || '0.05');
+      const power = parseFloat(powerEl?.value || '0.80');
+      const daily = parseInt(dailyTrafficEl?.value || '5000', 10);
+
+      const p2 = p1 * (1 + relativeMde);
+      const absDiff = p2 - p1;
+
+      // Z-scores approx
+      const zAlpha = alpha === 0.01 ? 2.576 : alpha === 0.10 ? 1.645 : 1.96;
+      const zBeta = power === 0.90 ? 1.282 : 0.842;
+
+      const pAvg = (p1 + p2) / 2;
+      const numerator = Math.pow(zAlpha * Math.sqrt(2 * pAvg * (1 - pAvg)) + zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2)), 2);
+      const samplePerVariant = Math.ceil(numerator / Math.pow(absDiff, 2));
+
+      const totalSample = samplePerVariant * 2;
+      const days = Math.ceil(totalSample / Math.max(1, daily));
+
+      if (sampleVariantEl) sampleVariantEl.textContent = samplePerVariant.toLocaleString();
+      if (testDaysEl) testDaysEl.textContent = `${days} Day${days === 1 ? '' : 's'}`;
+      if (sampleTotalEl) sampleTotalEl.textContent = `${totalSample.toLocaleString()} Visitors`;
+      if (absTargetEl) absTargetEl.textContent = `${(p1 * 100).toFixed(2)}% → ${(p2 * 100).toFixed(2)}% (+${(absDiff * 100).toFixed(2)}%)`;
+    }
+
+    [baselineEl, mdeEl, alphaEl, powerEl, dailyTrafficEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

@@ -1,0 +1,157 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Data Processing Memory & DataFrame RAM Estimator | Nadhebe';
+const h1 = 'Dataset RAM & Storage Estimator';
+const description = 'Estimate RAM footprint and storage file sizes for loading datasets into Pandas, Polars, Parquet files, or SQL databases.';
+
+const faq = [
+  {
+    question: 'Why do Pandas DataFrames consume more RAM than raw CSV files?',
+    answer: 'Pandas stores string columns as 64-bit object pointer arrays by default, which can consume 3x-8x more memory than raw uncompressed CSV text.'
+  },
+  {
+    question: 'Is my data configuration processed on a server?',
+    answer: 'No, 100% of memory estimations execute locally in your web browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="data-analysis-estimator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="data-analysis-estimator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="DATASET DIMENSIONS & COLUMN TYPES">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Total Dataset Rows</label>
+            <input id="dae-rows" type="number" value="1000000" min="1" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Numeric Cols (Float64/Int64)</label>
+              <input id="dae-num-cols" type="number" value="10" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Text String Cols</label>
+              <input id="dae-str-cols" type="number" value="5" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Avg Text String Length (Chars)</label>
+            <input id="dae-avg-str-len" type="number" value="25" min="1" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Memory Footprint Output -->
+      <ResultCard title="DATAFRAME RAM & FILE SIZE MATRIX">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="grid grid-cols-2 gap-12 text-center">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Pandas RAM (Default)</span>
+              <span id="res-ram-pandas-raw" class="text-h3 font-bold text-danger">~485 MB</span>
+            </div>
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Apache Parquet Size</span>
+              <span id="res-parquet-size" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">~62 MB</span>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 text-xs">
+            <span class="block font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Engine Memory Footprint Comparison</span>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Polars (Arrow Memory Alignment):</span>
+              <strong id="res-ram-polars" class="text-ink dark:text-ink-dark font-bold">~210 MB</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Pandas (Categorical Optimized):</span>
+              <strong id="res-ram-pandas-opt" class="text-ink dark:text-ink-dark font-bold">~145 MB</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Uncompressed CSV File Size:</span>
+              <strong id="res-csv-file" class="text-ink dark:text-ink-dark font-bold">~205 MB</strong>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Optimizing DataFrame Memory Footprints</h2>
+    <p>
+      Converting high-cardinality string columns to category dtypes and downcasting float64/int64 numeric values reduces Pandas memory usage by up to 70%.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const rowsEl = document.getElementById('dae-rows');
+    const numColsEl = document.getElementById('dae-num-cols');
+    const strColsEl = document.getElementById('dae-str-cols');
+    const avgStrLenEl = document.getElementById('dae-avg-str-len');
+
+    const pandasRawEl = document.getElementById('res-ram-pandas-raw');
+    const parquetSizeEl = document.getElementById('res-parquet-size');
+    const polarsEl = document.getElementById('res-ram-polars');
+    const pandasOptEl = document.getElementById('res-ram-pandas-opt');
+    const csvFileEl = document.getElementById('res-csv-file');
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return '~' + parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function calculate() {
+      const r = parseInt(rowsEl?.value || '1000000', 10);
+      const numC = parseInt(numColsEl?.value || '10', 10);
+      const strC = parseInt(strColsEl?.value || '5', 10);
+      const strLen = parseInt(avgStrLenEl?.value || '25', 10);
+
+      // Bytes calculations
+      const numBytesPerRow = numC * 8; // 64-bit = 8 bytes
+      const strBytesPerRowUnopt = strC * (strLen + 40); // PyObject overhead ~40-60 bytes per string object
+      const totalBytesPerRowUnopt = numBytesPerRow + strBytesPerRowUnopt;
+
+      const rawPandasBytes = r * totalBytesPerRowUnopt;
+      const polarsBytes = r * (numBytesPerRow + strC * (strLen + 4));
+      const pandasOptBytes = r * (numC * 4 + strC * 2); // Category int16 + float32
+      const csvBytes = r * (numC * 10 + strC * strLen + numC + strC);
+      const parquetBytes = csvBytes * 0.3; // Parquet snappy compression ~30%
+
+      if (pandasRawEl) pandasRawEl.textContent = formatBytes(rawPandasBytes);
+      if (parquetSizeEl) parquetSizeEl.textContent = formatBytes(parquetBytes);
+      if (polarsEl) polarsEl.textContent = formatBytes(polarsBytes);
+      if (pandasOptEl) pandasOptEl.textContent = formatBytes(pandasOptBytes);
+      if (csvFileEl) csvFileEl.textContent = formatBytes(csvBytes);
+    }
+
+    [rowsEl, numColsEl, strColsEl, avgStrLenEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

@@ -1,0 +1,169 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Date & Timezone Format Inspector | Nadhebe';
+const h1 = 'Date & Time Zone Inspector';
+const description = 'Inspect Unix timestamps, ISO-8601 strings, timezone offsets, leap years, and international locale formats.';
+
+const faq = [
+  {
+    question: 'What date formats can I inspect?',
+    answer: 'ISO-8601, Unix Epoch seconds/milliseconds, RFC 2822 strings, and standard local date expressions.'
+  },
+  {
+    question: 'Is my date data sent to external servers?',
+    answer: 'No, 100% of date parsing and timezone conversion executes locally in your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="date-and-time-inspector"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="date-and-time-inspector-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="TIMESTAMP / DATE STRING INPUT">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Paste Date String or Epoch Timestamp</label>
+            <input id="dti-input" type="text" value="2026-08-06T14:30:00Z" placeholder="2026-08-06T14:30:00Z or 1785994200" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark font-bold text-accent" />
+          </div>
+
+          <div class="flex items-center gap-8">
+            <button id="dti-btn-now" type="button" class="px-12 py-6 rounded-6 bg-accent text-white text-xs font-bold">Use Current Time (Now)</button>
+            <button id="dti-btn-sample" type="button" class="px-12 py-6 rounded-6 border border-border text-ink dark:text-ink-dark text-xs font-bold hover:bg-surface2">Sample Epoch</button>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 text-xs">
+            <span class="block font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Core Metrics</span>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Unix Epoch (Seconds):</span>
+              <strong id="res-epoch-sec" class="text-ink dark:text-ink-dark font-mono font-bold">1785994200</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Day of Year:</span>
+              <strong id="res-day-of-year" class="text-ink dark:text-ink-dark font-mono font-bold">Day 218 / 365</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Leap Year Status:</span>
+              <strong id="res-leap-year" class="text-emerald-600 dark:text-emerald-400 font-bold">2026 (Common Year)</strong>
+            </div>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Global Timezone Output -->
+      <ResultCard title="GLOBAL TIMEZONE & LOCALE MATRIX">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Timezone Offset Matrix</label>
+            <textarea id="dti-output" rows="12" readonly class="w-full min-h-[300px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark font-semibold"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Understanding ISO-8601 & Timezone Offsets</h2>
+    <p>
+      Standardizing timestamps in ISO-8601 UTC format ensures cross-system compatibility between distributed microservices and database engines.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputEl = document.getElementById('dti-input');
+    const btnNowEl = document.getElementById('dti-btn-now');
+    const btnSampleEl = document.getElementById('dti-btn-sample');
+
+    const resEpochSecEl = document.getElementById('res-epoch-sec');
+    const resDayOfYearEl = document.getElementById('res-day-of-year');
+    const resLeapYearEl = document.getElementById('res-leap-year');
+    const outputEl = document.getElementById('dti-output');
+
+    function isLeapYear(year) {
+      return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+
+    function getDayOfYear(date) {
+      const start = new Date(date.getUTCFullYear(), 0, 0);
+      const diff = date - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+
+    function parseInput(raw) {
+      let d = new Date(raw);
+      if (isNaN(d.getTime()) && !isNaN(Number(raw))) {
+        const num = Number(raw);
+        d = new Date(num > 1e11 ? num : num * 1000);
+      }
+      return isNaN(d.getTime()) ? new Date() : d;
+    }
+
+    function render() {
+      const raw = inputEl?.value || '';
+      const date = parseInput(raw);
+
+      const sec = Math.floor(date.getTime() / 1000);
+      const year = date.getUTCFullYear();
+      const leap = isLeapYear(year);
+      const dayNum = getDayOfYear(date);
+
+      if (resEpochSecEl) resEpochSecEl.textContent = sec.toLocaleString();
+      if (resDayOfYearEl) resDayOfYearEl.textContent = `Day ${dayNum} / ${leap ? 366 : 365}`;
+      if (resLeapYearEl) resLeapYearEl.textContent = `${year} (${leap ? 'Leap Year' : 'Common Year'})`;
+
+      const tzs = [
+        { label: 'UTC (Coordinated Universal)', tz: 'UTC' },
+        { label: 'New York (EST/EDT)', tz: 'America/New_York' },
+        { label: 'London (GMT/BST)', tz: 'Europe/London' },
+        { label: 'Tokyo (JST)', tz: 'Asia/Tokyo' },
+        { label: 'Los Angeles (PST/PDT)', tz: 'America/Los_Angeles' },
+        { label: 'Sydney (AEST/AEDT)', tz: 'Australia/Sydney' }
+      ];
+
+      const lines = tzs.map(item => {
+        try {
+          const str = new Intl.DateTimeFormat('en-US', {
+            timeZone: item.tz,
+            dateStyle: 'medium',
+            timeStyle: 'medium'
+          }).format(date);
+          return `${item.label}:\n  ${str}`;
+        } catch {
+          return `${item.label}:\n  ${date.toUTCString()}`;
+        }
+      });
+
+      if (outputEl) outputEl.value = `Parsed Input: ${date.toISOString()}\n\n` + lines.join('\n\n');
+    }
+
+    btnNowEl?.addEventListener('click', () => {
+      if (inputEl) inputEl.value = new Date().toISOString();
+      render();
+    });
+
+    btnSampleEl?.addEventListener('click', () => {
+      if (inputEl) inputEl.value = Math.floor(Date.now() / 1000).toString();
+      render();
+    });
+
+    inputEl?.addEventListener('input', render);
+
+    render();
+  })();
+</script>

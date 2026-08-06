@@ -1,0 +1,199 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'LLM Context Window Budget Allocation Planner | Nadhebe';
+const h1 = 'LLM Context Window Budget Planner';
+const description = 'Plan and calculate prompt context budget allocation across system prompts, conversation history, RAG documents, and output headroom.';
+
+const faq = [
+  {
+    question: 'Why is context window budget planning necessary?',
+    answer: 'LLMs have fixed context limits. Over-allocating RAG chunks or conversation history risks truncation, high latency, or API token overflow errors.'
+  },
+  {
+    question: 'Is my context prompt metadata secure?',
+    answer: 'Yes, 100% of context budget calculations execute locally inside your web browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="context-budget-planner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="context-budget-planner-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="MODEL & CONTEXT ALLOCATION">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target LLM Model</label>
+            <select id="cbp-model" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="claude-3-5" data-context="200000">Claude 3.5 Sonnet (200k Context)</option>
+              <option value="gpt-4o" data-context="128000">GPT-4o (128k Context)</option>
+              <option value="gemini-1-5" data-context="2000000">Gemini 1.5 Pro (2M Context)</option>
+              <option value="deepseek-r1" data-context="64000">DeepSeek-R1 (64k Context)</option>
+              <option value="llama-3-3" data-context="128000">Llama 3.3 70B (128k Context)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">System Instructions</label>
+              <input id="cbp-system" type="number" value="2500" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Output Headroom</label>
+              <input id="cbp-output-reserve" type="number" value="4096" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Chat History (Turns)</label>
+              <input id="cbp-chat" type="number" value="12000" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">RAG Retrieved Chunks</label>
+              <input id="cbp-rag" type="number" value="32000" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Analysis Results -->
+      <ResultCard title="CONTEXT WINDOW BREAKDOWN & MARGIN">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="text-ink dark:text-ink-dark uppercase">Context Window Usage</span>
+              <span id="cbp-pct-text" class="text-accent dark:text-accent-dark">50,596 / 128,000 Tokens (39.5%)</span>
+            </div>
+            <div class="w-full bg-surface2 dark:bg-surface2-dark rounded-full h-8 overflow-hidden">
+              <div id="cbp-progress-bar" class="bg-accent h-full w-0 transition-all duration-200"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12 text-xs">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-muted mb-2">Total Tokens Allocated:</span>
+              <strong id="res-total-used" class="block text-h3 font-bold text-ink dark:text-ink-dark">50,596</strong>
+            </div>
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-muted mb-2">Remaining Headroom:</span>
+              <strong id="res-remaining-margin" class="block text-h3 font-bold text-emerald-600 dark:text-emerald-400">77,404</strong>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 text-xs">
+            <span class="block font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Segment Share (%)</span>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">System Instructions:</span>
+              <strong id="res-share-system" class="text-ink dark:text-ink-dark font-bold">4.9%</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">RAG Documents:</span>
+              <strong id="res-share-rag" class="text-ink dark:text-ink-dark font-bold">63.2%</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Conversation History:</span>
+              <strong id="res-share-chat" class="text-ink dark:text-ink-dark font-bold">23.7%</strong>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Output Reserve:</span>
+              <strong id="res-share-output" class="text-ink dark:text-ink-dark font-bold">8.1%</strong>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>LLM Context Window Management Strategies</h2>
+    <p>
+      Managing LLM context windows efficiently prevents API rate limits and reduces operational inference costs while maintaining high recall accuracy in RAG pipelines.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const modelEl = document.getElementById('cbp-model');
+    const systemEl = document.getElementById('cbp-system');
+    const outputReserveEl = document.getElementById('cbp-output-reserve');
+    const chatEl = document.getElementById('cbp-chat');
+    const ragEl = document.getElementById('cbp-rag');
+
+    const pctTextEl = document.getElementById('cbp-pct-text');
+    const progressBarEl = document.getElementById('cbp-progress-bar');
+    const totalUsedEl = document.getElementById('res-total-used');
+    const remainingMarginEl = document.getElementById('res-remaining-margin');
+
+    const shareSystemEl = document.getElementById('res-share-system');
+    const shareRagEl = document.getElementById('res-share-rag');
+    const shareChatEl = document.getElementById('res-share-chat');
+    const shareOutputEl = document.getElementById('res-share-output');
+
+    function calculate() {
+      const selectedOption = modelEl?.options[modelEl.selectedIndex];
+      const maxContext = parseInt(selectedOption?.getAttribute('data-context') || '128000', 10);
+
+      const sys = parseInt(systemEl?.value || '0', 10);
+      const outRes = parseInt(outputReserveEl?.value || '0', 10);
+      const chat = parseInt(chatEl?.value || '0', 10);
+      const rag = parseInt(ragEl?.value || '0', 10);
+
+      const total = sys + outRes + chat + rag;
+      const margin = maxContext - total;
+      const pct = Math.min(100, Math.round((total / maxContext) * 100));
+
+      if (totalUsedEl) totalUsedEl.textContent = total.toLocaleString();
+      if (remainingMarginEl) {
+        remainingMarginEl.textContent = margin.toLocaleString();
+        if (margin < 0) {
+          remainingMarginEl.className = 'block text-h3 font-bold text-danger';
+        } else {
+          remainingMarginEl.className = 'block text-h3 font-bold text-emerald-600 dark:text-emerald-400';
+        }
+      }
+
+      if (pctTextEl) {
+        pctTextEl.textContent = `${total.toLocaleString()} / ${maxContext.toLocaleString()} Tokens (${pct}%)`;
+      }
+
+      if (progressBarEl) {
+        progressBarEl.style.width = pct + '%';
+        if (pct > 95) {
+          progressBarEl.className = 'bg-danger h-full transition-all duration-200';
+        } else {
+          progressBarEl.className = 'bg-accent h-full transition-all duration-200';
+        }
+      }
+
+      const totalForPct = Math.max(1, total);
+      if (shareSystemEl) shareSystemEl.textContent = ((sys / totalForPct) * 100).toFixed(1) + '%';
+      if (shareRagEl) shareRagEl.textContent = ((rag / totalForPct) * 100).toFixed(1) + '%';
+      if (shareChatEl) shareChatEl.textContent = ((chat / totalForPct) * 100).toFixed(1) + '%';
+      if (shareOutputEl) shareOutputEl.textContent = ((outRes / totalForPct) * 100).toFixed(1) + '%';
+    }
+
+    [modelEl, systemEl, outputReserveEl, chatEl, ragEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

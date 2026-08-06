@@ -36,7 +36,7 @@ It's going to be awesome & super fast.`;
 </ToolLayout>
 
 <script>
-  import slugify from 'slugify';
+  import { toSlug } from '@/utils/text-converters';
 
   function setupSlugGenerator() {
     const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
@@ -68,26 +68,21 @@ It's going to be awesome & super fast.`;
       }
 
       try {
-        const lines = raw.split('\\n');
-        
-        const config = {
-          replacement: optSeparator.value,
-          lower: optLower.checked,
-          strict: true, // strip special characters
-          trim: true
-        };
+        const lines = raw.split(/\r?\n/);
+        const lower = optLower ? optLower.checked : true;
+        const sep = optSeparator ? optSeparator.value : '-';
 
         const convertedLines = lines.map(line => {
           if (!line.trim()) return line;
-          return slugify(line, config);
+          return toSlug(line, sep, lower);
         });
         
-        const result = convertedLines.join('\\n');
+        const result = convertedLines.join('\n');
         outputPre.textContent = result;
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
-          const outLines = result.split('\\n').length;
+          const outLines = result.split(/\r?\n/).length;
           let gutterHTML = '';
           for (let i = 1; i <= outLines; i++) {
             gutterHTML += i + '<br/>';
@@ -100,7 +95,7 @@ It's going to be awesome & super fast.`;
           statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
         }
       } catch (err: any) {
-        outputPre.textContent = err.message;
+        outputPre.textContent = err.message || String(err);
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
@@ -117,10 +112,13 @@ It's going to be awesome & super fast.`;
     if (inputArea) inputArea.addEventListener('input', generate);
     if (optLower) optLower.addEventListener('change', generate);
     if (optSeparator) optSeparator.addEventListener('change', generate);
-    
-    // Initial run
-    setTimeout(generate, 50);
+    window.addEventListener('workbench:input', generate);
+    generate();
   }
 
-  setupSlugGenerator();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSlugGenerator);
+  } else {
+    setupSlugGenerator();
+  }
 </script>

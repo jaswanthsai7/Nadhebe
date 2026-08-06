@@ -1,0 +1,171 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'YouTube & Podcast Chapter Timestamp Formatter | Nadhebe';
+const h1 = 'Video & Chapter Timestamp Formatter';
+const description = 'Parse, format, and validate chapter timestamps for YouTube video descriptions and podcast shownotes with 00:00 start checks.';
+
+const faq = [
+  {
+    question: 'What are YouTube chapter timestamp requirements?',
+    answer: 'YouTube requires the first timestamp to start at 00:00, a minimum of 3 chapters, and each chapter to be at least 10 seconds long.'
+  },
+  {
+    question: 'Is my timestamp data stored on any server?',
+    answer: 'No, 100% of timestamp validation and formatting runs locally inside your web browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="chapter-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="chapter-formatter-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="RAW TIMESTAMPS OR NOTES">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Paste Raw Notes / Timestamps</label>
+            <textarea id="chf-input" rows="14" placeholder="Paste notes or timestamps here..." class="w-full min-h-[320px] rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">0:00 Introduction & Overview
+01:30 System Architecture Deep Dive
+04:15 vLLM vs SGLang Benchmarks
+08:45 Local GPU Setup Walkthrough
+12:10 Conclusion & Next Steps</textarea>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <span class="block text-xs font-bold text-ink dark:text-ink-dark uppercase">Formatting Options</span>
+            <div class="grid grid-cols-2 gap-12 text-xs">
+              <label class="flex items-center gap-6 cursor-pointer">
+                <input type="checkbox" id="chf-ensure-zero" checked class="rounded border-border" /> Auto-Insert 00:00 Start
+              </label>
+              <label class="flex items-center gap-6 cursor-pointer">
+                <input type="checkbox" id="chf-pad-digits" checked class="rounded border-border" /> Pad 2-digit minutes (01:30)
+              </label>
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Formatted Output & Validation -->
+      <ResultCard title="VALIDATED YOUTUBE & PODCAST CHAPTERS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div id="chf-status-card" class="p-12 rounded-10 border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-bold space-y-4">
+            <div class="flex items-center justify-between">
+              <span>✓ YOUTUBE CHAPTER VALIDATION: PASSED</span>
+              <span id="chf-count-badge">5 Chapters</span>
+            </div>
+            <p id="chf-status-msg" class="text-[11px] font-sans font-semibold font-normal">Valid start timestamp 00:00 detected. Meets YouTube chapter requirements.</p>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Formatted Video Description Output</label>
+            <textarea id="chf-output" rows="12" readonly class="w-full min-h-[300px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-accent dark:text-accent-dark font-semibold focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>YouTube Video Chapter Requirements</h2>
+    <p>
+      YouTube interactive video chapters divide a video into distinct sections with preview thumbnails. To trigger automatic chapter indexing on YouTube, your video description must contain at least 3 timestamps starting at 00:00.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputEl = document.getElementById('chf-input');
+    const ensureZeroEl = document.getElementById('chf-ensure-zero');
+    const padDigitsEl = document.getElementById('chf-pad-digits');
+
+    const outputEl = document.getElementById('chf-output');
+    const statusCardEl = document.getElementById('chf-status-card');
+    const countBadgeEl = document.getElementById('chf-count-badge');
+    const statusMsgEl = document.getElementById('chf-status-msg');
+
+    function parseLine(line) {
+      const match = line.match(/^(\d{1,2}:)?(\d{1,2}):(\d{2})\s*[-:]?\s*(.*)$/);
+      if (!match) return null;
+      const hrs = match[1] ? parseInt(match[1].replace(':', ''), 10) : 0;
+      const mins = parseInt(match[2], 10);
+      const secs = parseInt(match[3], 10);
+      const title = match[4].trim();
+      const totalSecs = hrs * 3600 + mins * 60 + secs;
+      return { hrs, mins, secs, totalSecs, title };
+    }
+
+    function render() {
+      const text = inputEl?.value || '';
+      const ensureZero = ensureZeroEl?.checked !== false;
+      const padDigits = padDigitsEl?.checked !== false;
+
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      let parsed = [];
+
+      lines.forEach(line => {
+        const item = parseLine(line);
+        if (item) parsed.push(item);
+      });
+
+      if (parsed.length === 0) {
+        if (outputEl) outputEl.value = 'No valid timestamps found. Enter lines formatted like 0:00 Introduction.';
+        if (statusCardEl) statusCardEl.className = 'p-12 rounded-10 border border-border bg-surface2 text-muted text-xs font-bold';
+        if (statusMsgEl) statusMsgEl.textContent = 'Enter timestamps to validate YouTube chapter syntax.';
+        return;
+      }
+
+      // Check zero start
+      if (ensureZero && parsed[0].totalSecs > 0) {
+        parsed.unshift({ hrs: 0, mins: 0, secs: 0, totalSecs: 0, title: 'Introduction' });
+      }
+
+      // Format output lines
+      const formattedLines = parsed.map(p => {
+        const m = padDigits ? String(p.mins).padStart(2, '0') : String(p.mins);
+        const s = String(p.secs).padStart(2, '0');
+        const timeStr = p.hrs > 0 ? `${p.hrs}:${m}:${s}` : `${m}:${s}`;
+        return `${timeStr} ${p.title}`;
+      });
+
+      if (outputEl) outputEl.value = formattedLines.join('\n');
+
+      // Validation check
+      const isValidZero = parsed.length > 0 && parsed[0].totalSecs === 0;
+      const isCountValid = parsed.length >= 3;
+
+      if (countBadgeEl) countBadgeEl.textContent = `${parsed.length} Chapters`;
+
+      if (isValidZero && isCountValid) {
+        if (statusCardEl) statusCardEl.className = 'p-12 rounded-10 border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-bold space-y-4';
+        if (statusMsgEl) statusMsgEl.textContent = '✓ Valid 00:00 start and >= 3 chapters detected. Meets YouTube chapter requirements.';
+      } else {
+        if (statusCardEl) statusCardEl.className = 'p-12 rounded-10 border border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-bold space-y-4';
+        let warning = '';
+        if (!isValidZero) warning += 'First chapter must start at 00:00. ';
+        if (!isCountValid) warning += 'YouTube requires at least 3 chapters. ';
+        if (statusMsgEl) statusMsgEl.textContent = '⚠️ ' + warning;
+      }
+    }
+
+    [inputEl, ensureZeroEl, padDigitsEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

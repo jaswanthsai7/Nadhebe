@@ -94,7 +94,7 @@ const faq = [
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
         
         if (outputGutter) {
-          const lines = formatted.split('\\n').length;
+          const lines = formatted.split(/\r?\n/).length;
           let gutterHTML = '';
           for (let i = 1; i <= lines; i++) {
             gutterHTML += i + '<br/>';

@@ -1,0 +1,126 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Data Analysis Query & Aggregate Builder | Nadhebe';
+const h1 = 'Data Analysis Query Builder';
+const description = 'Build Group-By aggregate queries, SQL GROUP BY statements, and Python Pandas / Polars data transformation pipelines.';
+
+const faq = [
+  {
+    question: 'What query formats are supported?',
+    answer: 'Standard ANSI SQL, Python Pandas (`df.groupby().agg()`), Rust Polars (`df.group_by().agg()`), and DuckDB SQL.'
+  },
+  {
+    question: 'Is my data payload sent to any server?',
+    answer: 'No, 100% of query generation runs locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="data-analysis-builder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="data-analysis-builder-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="DATASET SCHEMA & AGGREGATE SPECS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Table / DataFrame Name</label>
+            <input id="dab-table" type="text" value="employee_salaries" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Group By Column</label>
+              <input id="dab-group-col" type="text" value="department" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Aggregate Measure</label>
+              <input id="dab-agg-col" type="text" value="salary" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Aggregation Function</label>
+            <select id="dab-func" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark">
+              <option value="AVG">AVG (Average)</option>
+              <option value="SUM">SUM (Total Sum)</option>
+              <option value="COUNT">COUNT (Row Count)</option>
+              <option value="MIN">MIN (Minimum Value)</option>
+              <option value="MAX">MAX (Maximum Value)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Filter Condition (WHERE Clause)</label>
+            <input id="dab-where" type="text" value="status = 'Active' AND region = 'US-East'" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Multi-Format Query Output -->
+      <ResultCard title="GENERATED MULTI-LANGUAGE QUERIES">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Executable Query Code</label>
+            <textarea id="dab-output" rows="16" readonly class="w-full min-h-[400px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark font-semibold"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Data Aggregation Across SQL & Dataframes</h2>
+    <p>
+      Grouping data by categorical dimensions allows analysts to compute summary statistics, compute averages across departments, and detect metric trends.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const tableEl = document.getElementById('dab-table');
+    const groupColEl = document.getElementById('dab-group-col');
+    const aggColEl = document.getElementById('dab-agg-col');
+    const funcEl = document.getElementById('dab-func');
+    const whereEl = document.getElementById('dab-where');
+
+    const outputEl = document.getElementById('dab-output');
+
+    function render() {
+      const tbl = (tableEl?.value || 'dataset').trim();
+      const grp = (groupColEl?.value || 'category').trim();
+      const agg = (aggColEl?.value || 'val').trim();
+      const fn = funcEl?.value || 'AVG';
+      const whr = (whereEl?.value || '').trim();
+
+      const whereSql = whr ? `\nWHERE ${whr}` : '';
+      const sql = `-- 1. ANSI SQL Query\nSELECT\n  ${grp},\n  ${fn}(${agg}) AS ${fn.toLowerCase()}_${agg}\nFROM ${tbl}${whereSql}\nGROUP BY ${grp}\nORDER BY ${fn.toLowerCase()}_${agg} DESC;`;
+
+      const pandasPy = `# 2. Python Pandas\nimport pandas as pd\n\ndf = pd.read_csv("${tbl}.csv")\n${whr ? 'filtered_df = df.query("' + whr.replace(/'/g, '"') + '")\n' : 'filtered_df = df\n'}result = filtered_df.groupby("${grp}")["${agg}"].${fn.toLowerCase()}().reset_index()`;
+
+      const polarsPy = `# 3. Python / Rust Polars\nimport polars as pl\n\ndf = pl.read_csv("${tbl}.csv")\nresult = df.filter(pl.col("status") == "Active").group_by("${grp}").agg(pl.col("${agg}").${fn.toLowerCase()}().alias("${fn.toLowerCase()}_${agg}"))`;
+
+      if (outputEl) outputEl.value = `${sql}\n\n${pandasPy}\n\n${polarsPy}`;
+    }
+
+    [tableEl, groupColEl, aggColEl, funcEl, whereEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

@@ -638,9 +638,75 @@ const {
       } else if (toolMode === 'slug-generator') {
         if (inputLabel) inputLabel.textContent = 'Input Text';
         if (outputLabel) outputLabel.textContent = 'Generated Slug';
-      } else if (toolMode === 'dockerfile-linter') {
-        if (inputLabel) inputLabel.textContent = 'Dockerfile';
-        if (outputLabel) outputLabel.textContent = 'Lint Report';
+        const raw = inputArea.value;
+        if (!raw) {
+          outputPre.textContent = '';
+          updateOutputGutter('');
+          setStatus('Waiting for input', false);
+          return;
+        }
+        const optLower = document.getElementById('opt-lower');
+        const optSeparator = document.getElementById('opt-separator');
+        const lower = optLower ? optLower.checked : true;
+        const sep = optSeparator ? optSeparator.value : '-';
+        const lines = raw.split(/\r?\n/);
+        const converted = lines.map(line => {
+          if (!line.trim()) return line;
+          let s = line.trim();
+          if (lower) s = s.toLowerCase();
+          s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          s = s.replace(/[^a-z0-9]+/gi, sep);
+          if (sep) {
+            const esc = sep.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+            s = s.replace(new RegExp('^' + esc + '+|' + esc + '+$', 'g'), '');
+          }
+          return s;
+        }).join('\n');
+        outputPre.textContent = converted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        updateOutputGutter(converted);
+        setStatus('✓ Generated Slug', false);
+      } else if (toolMode === 'case-converter') {
+        if (inputLabel) inputLabel.textContent = 'Input Text';
+        if (outputLabel) outputLabel.textContent = 'Converted Text';
+        const raw = inputArea.value;
+        if (!raw) {
+          outputPre.textContent = '';
+          updateOutputGutter('');
+          setStatus('Waiting for input', false);
+          return;
+        }
+        const activeBtn = document.querySelector('.case-btn.bg-accent') || document.querySelector('.case-btn[data-case="camel"]');
+        const currentCase = activeBtn ? activeBtn.getAttribute('data-case') : 'camel';
+        const lines = raw.split(/\r?\n/);
+        const converted = lines.map(line => {
+          if (!line.trim()) return line;
+          const words = line.trim().split(/[\s_-]+/);
+          if (currentCase === 'camel') {
+            return words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+          } else if (currentCase === 'pascal') {
+            return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+          } else if (currentCase === 'snake') {
+            return words.map(w => w.toLowerCase()).join('_');
+          } else if (currentCase === 'kebab') {
+            return words.map(w => w.toLowerCase()).join('-');
+          } else if (currentCase === 'constant') {
+            return words.map(w => w.toUpperCase()).join('_');
+          } else if (currentCase === 'lower') {
+            return line.toLowerCase();
+          } else if (currentCase === 'upper') {
+            return line.toUpperCase();
+          } else if (currentCase === 'sentence') {
+            return line.charAt(0).toUpperCase() + line.slice(1).toLowerCase();
+          } else if (currentCase === 'capital') {
+            return words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+          }
+          return line;
+        }).join('\n');
+        outputPre.textContent = converted;
+        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
+        updateOutputGutter(converted);
+        setStatus('✓ Converted Text', false);
       } else {
         if (inputLabel) inputLabel.textContent = 'Input JSON';
         if (outputLabel) outputLabel.textContent = 'Formatted JSON';
@@ -652,6 +718,7 @@ const {
     inputArea?.addEventListener('input', () => {
       updateGutters();
       processInput();
+      window.dispatchEvent(new CustomEvent('workbench:input', { detail: { value: inputArea.value } }));
     });
 
     inputArea?.addEventListener('keyup', () => {

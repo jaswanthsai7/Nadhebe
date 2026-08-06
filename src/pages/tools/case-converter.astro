@@ -53,7 +53,17 @@ const faq = [
 </ToolLayout>
 
 <script>
-  import * as changeCase from "change-case";
+  import {
+    toCamelCase,
+    toPascalCase,
+    toSnakeCase,
+    toKebabCase,
+    toConstantCase,
+    toLowerCase,
+    toUpperCase,
+    toSentenceCase,
+    toCapitalCase
+  } from "@/utils/text-converters";
 
   function setupCaseConverter() {
     const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
@@ -64,7 +74,6 @@ const faq = [
     const btnFormat = document.getElementById('wb-btn-format');
     const btnMinify = document.getElementById('wb-btn-minify');
     
-    // Hide standard JSON buttons
     if (btnFormat) btnFormat.style.display = 'none';
     if (btnMinify) btnMinify.style.display = 'none';
 
@@ -105,29 +114,29 @@ const faq = [
       }
 
       try {
-        const lines = raw.split('\\n');
+        const lines = raw.split(/\r?\n/);
         const convertedLines = lines.map(line => {
           if (!line.trim()) return line;
           switch (currentCase) {
-            case 'camel': return changeCase.camelCase(line);
-            case 'pascal': return changeCase.pascalCase(line);
-            case 'snake': return changeCase.snakeCase(line);
-            case 'kebab': return changeCase.kebabCase(line);
-            case 'constant': return changeCase.constantCase(line);
-            case 'lower': return line.toLowerCase();
-            case 'upper': return line.toUpperCase();
-            case 'sentence': return changeCase.sentenceCase(line);
-            case 'capital': return changeCase.capitalCase(line);
+            case 'camel': return toCamelCase(line);
+            case 'pascal': return toPascalCase(line);
+            case 'snake': return toSnakeCase(line);
+            case 'kebab': return toKebabCase(line);
+            case 'constant': return toConstantCase(line);
+            case 'lower': return toLowerCase(line);
+            case 'upper': return toUpperCase(line);
+            case 'sentence': return toSentenceCase(line);
+            case 'capital': return toCapitalCase(line);
             default: return line;
           }
         });
         
-        const result = convertedLines.join('\\n');
+        const result = convertedLines.join('\n');
         outputPre.textContent = result;
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
-          const outLines = result.split('\\n').length;
+          const outLines = result.split(/\r?\n/).length;
           let gutterHTML = '';
           for (let i = 1; i <= outLines; i++) {
             gutterHTML += i + '<br/>';
@@ -140,7 +149,7 @@ const faq = [
           statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
         }
       } catch (err: any) {
-        outputPre.textContent = err.message;
+        outputPre.textContent = err.message || String(err);
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
@@ -155,11 +164,16 @@ const faq = [
     }
 
     if (inputArea) inputArea.addEventListener('input', processCase);
+    window.addEventListener('workbench:input', processCase);
     
     // Initial run
     setActiveButton();
-    setTimeout(processCase, 50);
+    processCase();
   }
 
-  setupCaseConverter();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCaseConverter);
+  } else {
+    setupCaseConverter();
+  }
 </script>

@@ -1,0 +1,123 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Data Science & Analysis Report Template Maker | Nadhebe';
+const h1 = 'Data Analysis Report Template Maker';
+const description = 'Generate structured Markdown reports, Jupyter notebook headers, and executive data science documentation templates.';
+
+const faq = [
+  {
+    question: 'What report formats can I generate?',
+    answer: 'Exploratory Data Analysis (EDA) reports, Executive Metric Dashboards, Model Performance Evaluations, and A/B Test Post-Mortems.'
+  },
+  {
+    question: 'Is my report configuration secure?',
+    answer: 'Yes, 100% of template building executes locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="data-analysis-template-maker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="data-analysis-template-maker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="REPORT METADATA & ARCHITECTURE">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Report Title</label>
+            <input id="dat-title" type="text" value="Q3 Customer Churn & Cohort Retention Analysis" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Lead Data Scientist</label>
+              <input id="dat-author" type="text" value="Alex Rivera" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Report Type</label>
+              <select id="dat-type" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+                <option value="eda">Exploratory Data Analysis (EDA)</option>
+                <option value="exec">Executive Metrics Summary</option>
+                <option value="model">ML Model Benchmark Evaluation</option>
+                <option value="ab">A/B Test Post-Mortem</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="space-y-8">
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Include Code Snippets</label>
+            <label class="flex items-center gap-8 cursor-pointer text-xs">
+              <input type="checkbox" id="dat-inc-pandas" checked class="rounded border-border" /> Include Python Pandas / Matplotlib Setup Code
+            </label>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Markdown Output -->
+      <ResultCard title="GENERATED MARKDOWN REPORT TEMPLATE">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Report Markdown Document</label>
+            <textarea id="dat-output" rows="18" readonly class="w-full min-h-[460px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark font-semibold"></textarea>
+          </div>
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Data Science Report Structuring Guidelines</h2>
+    <p>
+      Structuring data analysis reports into Executive Summaries, Key Findings, Visualizations, and Actionable Next Steps enables stakeholders to make data-driven decisions quickly.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const titleEl = document.getElementById('dat-title');
+    const authorEl = document.getElementById('dat-author');
+    const typeEl = document.getElementById('dat-type');
+    const pandasEl = document.getElementById('dat-inc-pandas');
+
+    const outputEl = document.getElementById('dat-output');
+
+    function render() {
+      const title = (titleEl?.value || 'Data Analysis Report').trim();
+      const author = (authorEl?.value || 'Data Scientist').trim();
+      const type = typeEl?.value || 'eda';
+      const incPandas = pandasEl?.checked !== false;
+
+      const dateStr = new Date().toISOString().split('T')[0];
+
+      let doc = `# ${title}\n\n**Author**: ${author}  \n**Date**: ${dateStr}  \n**Category**: ${type.toUpperCase()}  \n\n---  \n\n## Executive Summary\nProvide a concise 2-3 sentence summary of core findings, key KPI deviations, and actionable recommendations.\n\n## 1. Dataset Overview & Data Quality\n- **Total Sample Size**: 100,000 records\n- **Primary Features**: \`user_id\`, \`created_at\`, \`total_spent\`, \`churn_status\`\n- **Missing Data Strategy**: Imputed numerical means, stripped invalid records\n\n`;
+
+      if (incPandas) {
+        doc += `\`\`\`python\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv("dataset.csv")\nprint(df.info())\nprint(df.describe())\n\`\`\`\n\n`;
+      }
+
+      doc += `## 2. Key Metrics & Statistical Distributions\n| Metric | Baseline | Target / Observed | Variance (% Delta) |\n| :--- | :--- | :--- | :--- |\n| **Conversion Rate** | 4.5% | 5.2% | +15.5% |\n| **Avg Order Value (AOV)** | $124.50 | $138.20 | +11.0% |\n| **Monthly Churn** | 3.2% | 2.8% | -12.5% |\n\n## 3. Findings & Insights\n1. **Cohort Behavior**: Retention remains high for users onboarded during Q3 campaign.\n2. **Feature Correlation**: Strong positive correlation ($r = 0.74$) between session count and LTV.\n\n## 4. Next Steps & Action Items\n- [ ] Deploy optimized checkout flow to 100% of user traffic.\n- [ ] Audit potential anomaly outliers in high-tier subscription segment.\n`;
+
+      if (outputEl) outputEl.value = doc;
+    }
+
+    [titleEl, authorEl, typeEl, pandasEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

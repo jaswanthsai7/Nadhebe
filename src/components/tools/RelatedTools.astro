@@ -8,6 +8,7 @@ interface Props {
   tools?: ToolMetadata[];
   limit?: number;
   class?: string;
+  singleColumn?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   tools: customTools,
   limit = 6,
   class: className = '',
+  singleColumn = false,
 } = Astro.props;
 
 const { categoryName, items } = getRelatedToolsForComponent(currentToolId, {
@@ -25,39 +27,74 @@ const { categoryName, items } = getRelatedToolsForComponent(currentToolId, {
 });
 ---
 
-<nav
-  aria-label="Related tools"
-  class={`rounded-16 border border-border/80 bg-surface/80 p-12 sm:p-16 shadow-soft dark:border-border-dark/80 dark:bg-surface-dark/80 mb-24 sm:mb-32 ${className}`}
-  data-reveal
->
-  <div class="flex items-center justify-between gap-12 mb-10 sm:mb-12 px-4">
-    <span class="font-display text-caption font-semibold text-ink dark:text-ink-dark tracking-tight">
-      {categoryName}
-    </span>
-    <a
-      href="/tools/"
-      class="inline-flex items-center min-h-[44px] px-12 py-8 rounded-8 bg-surface2/60 hover:bg-surface2 text-caption font-sans font-medium text-accent hover:underline dark:bg-surface2-dark/60 dark:hover:bg-surface2-dark dark:text-accent-dark shrink-0 transition-all"
-    >
-      View all tools &rarr;
-    </a>
-  </div>
-
-  <div class="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-8">
+{singleColumn ? (
+  <div class="flex flex-col gap-12">
     {items.map((tool) => {
       const isCurrent = tool.id === currentToolId || tool.slug === currentToolId;
       return (
         <a
           href={tool.href}
           aria-current={isCurrent ? 'page' : undefined}
-          class={`inline-flex items-center justify-center rounded-8 px-12 py-8 text-caption font-sans transition-all duration-150 text-center ${
+          class={`group flex items-center justify-between rounded-12 border px-20 py-12 backdrop-blur-md transition-all duration-200 shadow-sm ${
             isCurrent
-              ? 'bg-accent/15 border border-accent text-accent font-semibold dark:bg-accent-dark/20 dark:border-accent-dark dark:text-accent-dark shadow-subtle pointer-events-none'
-              : 'border border-border bg-surface2/80 text-ink2 hover:border-accent/50 hover:text-ink dark:border-border-dark dark:bg-surface2-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark/50 dark:hover:text-ink-dark font-medium'
+              ? 'border-accent bg-accent/20 text-accent font-bold dark:border-accent-dark dark:bg-accent-dark/25 dark:text-accent-dark pointer-events-none'
+              : 'border-border/60 bg-surface/90 hover:border-accent/60 hover:bg-surface dark:border-border-dark/60 dark:bg-surface-dark/90 dark:hover:border-accent-dark/60 dark:hover:bg-surface-dark'
           }`}
         >
-          {tool.name}
+          <div class="flex items-center justify-between gap-8">
+            <div class="flex items-center gap-6 min-w-0">
+              <span class={`font-display text-xs font-bold truncate ${isCurrent ? 'text-accent dark:text-accent-dark' : 'text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark'}`}>
+                {tool.name}
+              </span>
+              {tool.category && (
+                <span class="rounded-pill border border-border/50 bg-surface2/80 px-6 py-1 font-mono text-[9px] font-semibold text-muted dark:border-border-dark/50 dark:bg-surface2-dark/80 dark:text-muted-dark uppercase shrink-0">
+                  {tool.category}
+                </span>
+              )}
+            </div>
+            <span class="text-xs font-bold text-accent dark:text-accent-dark shrink-0 group-hover:translate-x-1 transition-transform">
+              &rarr;
+            </span>
+          </div>
         </a>
       );
     })}
   </div>
-</nav>
+) : (
+  <nav
+    aria-label="Related tools"
+    class={`rounded-16 border border-border/80 bg-surface/80 p-12 sm:p-16 shadow-soft dark:border-border-dark/80 dark:bg-surface-dark/80 mb-24 sm:mb-32 ${className}`}
+    data-reveal
+  >
+    <div class="flex items-center justify-between gap-12 mb-10 sm:mb-12 px-4">
+      <span class="font-display text-caption font-semibold text-ink dark:text-ink-dark tracking-tight">
+        {categoryName}
+      </span>
+      <a
+        href="/tools/"
+        class="inline-flex items-center min-h-[44px] px-12 py-8 rounded-8 bg-surface2/60 hover:bg-surface2 text-caption font-sans font-medium text-accent hover:underline dark:bg-surface2-dark/60 dark:hover:bg-surface2-dark dark:text-accent-dark shrink-0 transition-all"
+      >
+        View all tools &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-center gap-8">
+      {items.map((tool) => {
+        const isCurrent = tool.id === currentToolId || tool.slug === currentToolId;
+        return (
+          <a
+            href={tool.href}
+            aria-current={isCurrent ? 'page' : undefined}
+            class={`inline-flex items-center justify-center rounded-8 px-12 py-8 text-caption font-sans transition-all duration-150 text-center ${
+              isCurrent
+                ? 'bg-accent/15 border border-accent text-accent font-semibold dark:bg-accent-dark/20 dark:border-accent-dark dark:text-accent-dark shadow-subtle pointer-events-none'
+                : 'border border-border bg-surface2/80 text-ink2 hover:border-accent/50 hover:text-ink dark:border-border-dark dark:bg-surface2-dark/80 dark:text-ink2-dark dark:hover:border-accent-dark/50 dark:hover:text-ink-dark font-medium'
+            }`}
+          >
+            {tool.name}
+          </a>
+        );
+      })}
+    </div>
+  </nav>
+)}

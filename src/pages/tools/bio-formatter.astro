@@ -1,0 +1,166 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Developer Bio & Social Profile Formatter | Nadhebe';
+const h1 = 'Developer Profile & Bio Formatter';
+const description = 'Generate and format developer social bios, GitHub README intros, and technical author bios with live character count limits.';
+
+const faq = [
+  {
+    question: 'What platforms are supported by the bio formatter?',
+    answer: 'It includes predefined character constraints and templates for Twitter/X (160 chars), GitHub Bio (160 chars), LinkedIn Tagline (220 chars), and Technical Author Bios.'
+  },
+  {
+    question: 'Is my personal bio data sent to any server?',
+    answer: 'No, 100% of formatting and character count calculations run locally in your browser memory.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="bio-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="bio-formatter-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="DEVELOPER PROFILE DETAILS">
+        <div class="space-y-16 font-mono text-caption">
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Full Name & Primary Title</label>
+            <input id="bf-name" type="text" value="Alex Rivera" placeholder="Name" class="w-full mb-8 rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+            <input id="bf-title" type="text" value="Staff AI Engineer & Open Source Developer" placeholder="Title / Role" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target Platform Format</label>
+            <select id="bf-format" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="twitter">Twitter / X Bio (160 Char Max)</option>
+              <option value="github">GitHub Profile Bio (160 Char Max)</option>
+              <option value="linkedin">LinkedIn Headline (220 Char Max)</option>
+              <option value="author">Technical Article Author Bio (Longer)</option>
+              <option value="markdown">Markdown Badge List Format</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Key Tech Stack / Focus Areas (Comma separated)</label>
+            <input id="bf-skills" type="text" value="Python, PyTorch, vLLM, TypeScript, Astro" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Current Building / Working On</label>
+            <input id="bf-project" type="text" value="Building local LLM inference engines and MCP servers." class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- Formatted Output -->
+      <ResultCard title="FORMATTED BIO & CHARACTER COUNTS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-ink dark:text-ink-dark uppercase">Character Constraint</span>
+              <span id="bf-char-counter" class="font-bold text-accent dark:text-accent-dark">0 / 160 Chars</span>
+            </div>
+            <div class="w-full bg-surface2 dark:bg-surface2-dark rounded-full h-6 overflow-hidden">
+              <div id="bf-progress-bar" class="bg-accent h-full w-0 transition-all duration-200"></div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Generated Bio Output</label>
+            <textarea id="bf-output" rows="8" readonly class="w-full min-h-[220px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Optimizing Developer Bios Across Social & Technical Platforms</h2>
+    <p>
+      An effective developer bio balances technical credentials, primary programming languages, and current active projects within strict character boundaries.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const nameEl = document.getElementById('bf-name');
+    const titleEl = document.getElementById('bf-title');
+    const formatEl = document.getElementById('bf-format');
+    const skillsEl = document.getElementById('bf-skills');
+    const projectEl = document.getElementById('bf-project');
+
+    const outputEl = document.getElementById('bf-output');
+    const charCounterEl = document.getElementById('bf-char-counter');
+    const progressBarEl = document.getElementById('bf-progress-bar');
+
+    function render() {
+      const name = nameEl?.value || '';
+      const title = titleEl?.value || '';
+      const format = formatEl?.value || 'twitter';
+      const skills = (skillsEl?.value || '').split(',').map(s => s.trim()).filter(Boolean);
+      const project = projectEl?.value || '';
+
+      let bio = '';
+      let maxLimit = 160;
+
+      if (format === 'twitter') {
+        maxLimit = 160;
+        bio = `${title}. Building ${project.replace(/building /i, '')}. Stack: ${skills.slice(0, 4).join(' • ')}.`;
+      } else if (format === 'github') {
+        maxLimit = 160;
+        bio = `👋 ${name} | ${title} | ${skills.slice(0, 3).join(', ')} | ${project}`;
+      } else if (format === 'linkedin') {
+        maxLimit = 220;
+        bio = `${name} — ${title} | Specializing in ${skills.join(', ')} | ${project}`;
+      } else if (format === 'author') {
+        maxLimit = 400;
+        bio = `${name} is a ${title}. They specialize in ${skills.join(', ')}. Currently, they are focused on ${project.toLowerCase()}.`;
+      } else if (format === 'markdown') {
+        maxLimit = 500;
+        bio = `### Hi there, I'm ${name} 👋\n- 🔭 **Role**: ${title}\n- 🛠️ **Tech**: ${skills.map(s => `\`${s}\``).join(' ')}\n- 🚀 **Focus**: ${project}`;
+      }
+
+      if (outputEl) outputEl.value = bio;
+      const count = bio.length;
+
+      if (charCounterEl) {
+        charCounterEl.textContent = `${count} / ${maxLimit} Chars`;
+        if (count > maxLimit) {
+          charCounterEl.className = 'font-bold text-danger';
+        } else {
+          charCounterEl.className = 'font-bold text-accent dark:text-accent-dark';
+        }
+      }
+
+      if (progressBarEl) {
+        const pct = Math.min(100, Math.round((count / maxLimit) * 100));
+        progressBarEl.style.width = pct + '%';
+        if (count > maxLimit) {
+          progressBarEl.className = 'bg-danger h-full transition-all duration-200';
+        } else {
+          progressBarEl.className = 'bg-accent h-full transition-all duration-200';
+        }
+      }
+    }
+
+    [nameEl, titleEl, formatEl, skillsEl, projectEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

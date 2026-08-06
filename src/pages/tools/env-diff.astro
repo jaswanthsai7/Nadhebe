@@ -82,7 +82,7 @@ const faq = [
 
     function parseEnv(str: string) {
       const obj: Record<string, string> = {};
-      const lines = str.split('\\n');
+      const lines = str.split(/\r?\n/);
       for (const line of lines) {
         const trimmed = line.trim();
         // Ignore comments and empty lines

@@ -107,7 +107,7 @@ const faq = [
           result = utf8_to_b64(raw);
         } else {
           // Remove whitespace from base64 string before decoding
-          const cleanRaw = raw.replace(/\\s/g, '');
+          const cleanRaw = raw.replace(/\s/g, '');
           result = b64_to_utf8(cleanRaw);
         }
         
@@ -115,7 +115,7 @@ const faq = [
         outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
         
         if (outputGutter) {
-          const lines = result.split('\\n').length;
+          const lines = result.split(/\r?\n/).length;
           let gutterHTML = '';
           for (let i = 1; i <= lines; i++) {
             gutterHTML += i + '<br/>';

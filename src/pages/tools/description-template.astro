@@ -1,0 +1,155 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'SEO Meta Description & OpenGraph Snippet Generator | Nadhebe';
+const h1 = 'SEO Description Template Maker';
+const description = 'Craft high-CTR SEO meta descriptions, OpenGraph snippet tags, and preview Google SERP search results with live character counters.';
+
+const faq = [
+  {
+    question: 'What is the optimal length for an SEO meta description?',
+    answer: 'Google typically truncates meta descriptions after 155-160 characters (or 960 pixels on desktop). Aim for 145 to 155 characters.'
+  },
+  {
+    question: 'Is my meta description content safe?',
+    answer: 'Yes, 100% of formatting and Google SERP preview generation runs locally in your browser.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="description-template"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="description-template-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="META DESCRIPTION BUILDER">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Page Title</label>
+            <input id="dt-title" type="text" value="Generative Engine Optimization (GEO): Technical Architecture" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target Keyword / Topic</label>
+            <input id="dt-keyword" type="text" value="Generative Engine Optimization" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Meta Description Summary / Action CTA</label>
+            <textarea id="dt-summary" rows="5" class="w-full min-h-[140px] rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark">Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG vector indexing protocols and ranking factors for AI engines.</textarea>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- SERP Preview & Output -->
+      <ResultCard title="GOOGLE SERP PREVIEW & HTML TAGS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <!-- Simulated Google Search Result -->
+          <div class="p-16 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 font-sans">
+            <span class="block text-[11px] text-muted font-mono uppercase tracking-wider font-bold">Google SERP Snippet Preview</span>
+            <div class="space-y-4">
+              <div class="text-xs text-[#202124] dark:text-[#bdc1c6] truncate">https://nadhebe.com › guides › geo-guide</div>
+              <div id="serp-title" class="text-body font-semibold text-[#1a0dab] dark:text-[#8ab4f8] hover:underline cursor-pointer leading-tight">Generative Engine Optimization (GEO): Technical Architecture</div>
+              <div id="serp-desc" class="text-caption text-[#4d5156] dark:text-[#bdc1c6] leading-snug line-clamp-2">Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG vector indexing protocols and ranking factors for AI engines.</div>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="text-ink dark:text-ink-dark uppercase">Character Count</span>
+              <span id="dt-char-count" class="text-accent dark:text-accent-dark">128 / 160 Chars</span>
+            </div>
+            <div class="w-full bg-surface2 dark:bg-surface2-dark rounded-full h-6 overflow-hidden">
+              <div id="dt-progress-bar" class="bg-accent h-full w-0 transition-all duration-200"></div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">HTML Meta & OpenGraph Code</label>
+            <textarea id="dt-output" rows="6" readonly class="w-full min-h-[160px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Writing High-CTR SEO Meta Descriptions</h2>
+    <p>
+      Meta descriptions do not directly impact Google search ranking algorithms, but compelling, keyword-rich summaries directly increase organic click-through rates (CTR).
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const titleEl = document.getElementById('dt-title');
+    const keywordEl = document.getElementById('dt-keyword');
+    const summaryEl = document.getElementById('dt-summary');
+
+    const serpTitleEl = document.getElementById('serp-title');
+    const serpDescEl = document.getElementById('serp-desc');
+    const charCountEl = document.getElementById('dt-char-count');
+    const progressBarEl = document.getElementById('dt-progress-bar');
+    const outputEl = document.getElementById('dt-output');
+
+    function render() {
+      const title = (titleEl?.value || '').trim();
+      const keyword = (keywordEl?.value || '').trim();
+      const summary = (summaryEl?.value || '').trim();
+
+      if (serpTitleEl) serpTitleEl.textContent = title || 'Page Title Here';
+      if (serpDescEl) serpDescEl.textContent = summary || 'Meta description summary will appear here in Google SERP format.';
+
+      const count = summary.length;
+      const targetMin = 140;
+      const targetMax = 160;
+
+      if (charCountEl) {
+        charCountEl.textContent = `${count} / 160 Chars`;
+        if (count > targetMax) {
+          charCountEl.className = 'text-danger font-bold';
+        } else if (count >= targetMin && count <= targetMax) {
+          charCountEl.className = 'text-emerald-600 dark:text-emerald-400 font-bold';
+        } else {
+          charCountEl.className = 'text-accent dark:text-accent-dark font-bold';
+        }
+      }
+
+      if (progressBarEl) {
+        const pct = Math.min(100, Math.round((count / targetMax) * 100));
+        progressBarEl.style.width = pct + '%';
+        if (count > targetMax) {
+          progressBarEl.className = 'bg-danger h-full transition-all duration-200';
+        } else if (count >= targetMin && count <= targetMax) {
+          progressBarEl.className = 'bg-emerald-500 h-full transition-all duration-200';
+        } else {
+          progressBarEl.className = 'bg-accent h-full transition-all duration-200';
+        }
+      }
+
+      const html = `<meta name="description" content="${summary}" />\n<meta property="og:description" content="${summary}" />\n<meta name="twitter:description" content="${summary}" />`;
+      if (outputEl) outputEl.value = html;
+    }
+
+    [titleEl, keywordEl, summaryEl].forEach(el => {
+      el?.addEventListener('input', render);
+      el?.addEventListener('change', render);
+    });
+
+    render();
+  })();
+</script>

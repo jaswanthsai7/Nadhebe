@@ -23,9 +23,10 @@ interface Props {
   hideHeader?: boolean;
   relatedCategory?: string;
   relatedTools?: ToolMetadata[];
+  sidebarLayout?: boolean;
 }
 
-const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools } = Astro.props;
+const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools, sidebarLayout = false } = Astro.props;
 
 const toolConfig = getToolBySlug(toolId);
 const isHeaderHidden = hideHeader !== undefined ? hideHeader : true;
@@ -70,7 +71,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
   canonicalUrl={currentUrl}
   jsonLd={jsonLdBlocks}
 >
-  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+  <div class={sidebarLayout ? "w-full px-16 sm:px-28 py-24 sm:py-32" : "mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48"}>
     <Breadcrumb
       items={[
         { name: 'Home', href: '/' },
@@ -106,47 +107,91 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
       <h1 class="sr-only">{h1}</h1>
     )}
 
-    <!-- Compact Related Tools Bar -->
-    <RelatedTools currentToolId={toolId} category={relatedCategory} tools={relatedTools} />
-
-    <!-- Main Tool Workspace -->
-    <div class="mb-48" id="tool-workspace">
-      <slot name="calculator" />
-    </div>
-
-    <!-- Ad Placement after Tool Results -->
-    <AdSlot slotId="tools-mid-banner" format="horizontal" label="Advertisement" />
-
-    <!-- Educational & Explanatory SEO Content Slot -->
-    <div class="glass-panel my-48 rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-accent dark:prose-a:text-accent-dark" data-reveal>
-      <slot name="content" />
-    </div>
-
-    <!-- FAQ Accordion Section (if present) -->
-    {faq.length > 0 && (
-      <section class="my-48 rounded-24 border border-border bg-surface/80 p-24 sm:p-32 shadow-medium dark:border-border-dark dark:bg-surface-dark/80" data-reveal>
-        <div class="border-b border-border/60 pb-16 mb-24 dark:border-border-dark/60">
-          <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark">Frequently Asked Questions</h2>
-          <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">Common questions about this tool.</p>
+    {sidebarLayout ? (
+      <!-- Sidebar Layout: 78% Tool + 20% Related Tools -->
+      <div class="flex flex-col lg:flex-row gap-20 lg:gap-24 items-start mb-48">
+        <!-- Left: Tool Workspace (78%) -->
+        <div class="w-full lg:w-[78%] min-w-0">
+          <div class="mb-0" id="tool-workspace">
+            <slot name="calculator" />
+          </div>
         </div>
-        <div class="space-y-16">
-          {faq.map((item) => (
-            <details class="group rounded-16 border border-border/60 bg-surface2/40 p-16 dark:border-border-dark/60 dark:bg-surface2-dark/40 transition-all duration-150">
-              <summary class="flex items-center justify-between font-display text-h4 font-semibold text-ink dark:text-ink-dark cursor-pointer list-none">
-                <span>{item.question}</span>
-                <span class="ml-12 transition-transform duration-200 group-open:rotate-180 text-muted dark:text-muted-dark">▼</span>
-              </summary>
-              <p class="mt-12 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
-                {item.answer}
-              </p>
-            </details>
-          ))}
+
+        <!-- Right: Sticky Related Tools Sidebar (20%) -->
+        <aside class="w-full lg:w-[20%] lg:sticky lg:top-24 shrink-0">
+          <!-- Transparent Outer Container Div with Border -->
+          <div class="bg-transparent border border-border/60 dark:border-border-dark/60 rounded-24 p-16 space-y-12" data-reveal>
+            <!-- Tinted Header Box -->
+            <div class="flex items-center justify-between rounded-12 border border-border/60 bg-surface/90 dark:border-border-dark/60 dark:bg-surface-dark/90 px-20 py-12 backdrop-blur-md shadow-xs">
+              <span class="font-display text-caption font-bold text-ink dark:text-ink-dark tracking-wider uppercase">
+                Related Tools
+              </span>
+              <a href="/tools/" class="text-caption font-sans font-semibold text-accent dark:text-accent-dark hover:underline transition-all">All →</a>
+            </div>
+            <!-- Horizontal Line below the header box -->
+            <div class="border-b border-border/50 dark:border-border-dark/50 my-12"></div>
+            <!-- Pill Cards stacked vertically -->
+            <nav aria-label="Related tools">
+              <RelatedTools currentToolId={toolId} category={relatedCategory} tools={relatedTools} limit={10} singleColumn={true} />
+            </nav>
+          </div>
+
+          <!-- Privacy badge -->
+          <div class="mt-16 flex items-center gap-10 rounded-16 border border-emerald-500/40 bg-surface/40 dark:bg-surface-dark/40 backdrop-blur-xl p-12 sm:p-14 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16 text-emerald-600 dark:text-emerald-400 shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="text-xs font-sans font-semibold text-emerald-700 dark:text-emerald-300 leading-snug">100% Client-Side — Data stays in browser.</span>
+          </div>
+        </aside>
+      </div>
+    ) : (
+      <!-- Default Layout: Horizontal Related Bar on Top + Full Width Tool -->
+      <>
+        <!-- Compact Related Tools Bar -->
+        <RelatedTools currentToolId={toolId} category={relatedCategory} tools={relatedTools} />
+
+        <!-- Main Tool Workspace -->
+        <div class="mb-48" id="tool-workspace">
+          <slot name="calculator" />
         </div>
-      </section>
+      </>
     )}
 
-    <!-- Related Tools Cross-Linking Section -->
-    <RelatedToolsCard currentToolId={toolId} tools={relatedTools} />
+    <!-- Bottom Educational & FAQ Section wrapped in max-w-content container like blog layout -->
+    <div class="mx-auto max-w-content">
+      <!-- Ad Placement after Tool Results -->
+      <AdSlot slotId="tools-mid-banner" format="horizontal" label="Advertisement" />
+
+      <!-- Educational & Explanatory SEO Content Slot -->
+      <div class="glass-panel my-48 rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-accent dark:prose-a:text-accent-dark" data-reveal>
+        <slot name="content" />
+      </div>
+
+      <!-- FAQ Accordion Section (if present) -->
+      {faq.length > 0 && (
+        <section class="my-48 rounded-24 border border-border bg-surface/80 p-24 sm:p-32 shadow-medium dark:border-border-dark dark:bg-surface-dark/80" data-reveal>
+          <div class="border-b border-border/60 pb-16 mb-24 dark:border-border-dark/60">
+            <h2 class="font-display text-h2 font-semibold text-ink dark:text-ink-dark">Frequently Asked Questions</h2>
+            <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">Common questions about this tool.</p>
+          </div>
+          <div class="space-y-16">
+            {faq.map((item) => (
+              <details class="group rounded-16 border border-border/60 bg-surface2/40 p-16 dark:border-border-dark/60 dark:bg-surface2-dark/40 transition-all duration-150">
+                <summary class="flex items-center justify-between font-display text-h4 font-semibold text-ink dark:text-ink-dark cursor-pointer list-none">
+                  <span>{item.question}</span>
+                  <span class="ml-12 transition-transform duration-200 group-open:rotate-180 text-muted dark:text-muted-dark">▼</span>
+                </summary>
+                <p class="mt-12 text-body-small text-ink2 dark:text-ink2-dark leading-relaxed">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Related Tools Cross-Linking Section -->
+      <RelatedToolsCard currentToolId={toolId} tools={relatedTools} />
+    </div>
   </div>
 </BaseLayout>
 

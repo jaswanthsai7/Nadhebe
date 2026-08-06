@@ -1,0 +1,181 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'RAG Text Chunk Size & Overlap Planner | Nadhebe';
+const h1 = 'RAG Chunk Size & Overlap Planner';
+const description = 'Calculate chunk counts, overlap ratios, effective window sizes, and vector storage RAM requirements for LLM RAG pipelines.';
+
+const faq = [
+  {
+    question: 'How is chunk overlap percentage calculated?',
+    answer: 'Overlap percentage is (Overlap Tokens / Chunk Tokens) * 100. Overlaps between 10% and 20% preserve semantic context across chunk boundaries.'
+  },
+  {
+    question: 'Is my document metadata private?',
+    answer: 'Yes, 100% of chunking calculations run locally inside your web browser session.'
+  }
+];
+---
+
+<ToolLayout
+  toolId="chunk-size-planner"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="chunk-size-planner-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- Input Controls -->
+      <CalculatorCard title="RAG CHUNKING PARAMETERS">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Total Document Size (Tokens or Words)</label>
+            <input id="csp-doc-size" type="number" value="100000" min="100" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target Chunk Size (Tokens)</label>
+              <input id="csp-chunk-size" type="number" value="512" min="64" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+            <div>
+              <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Overlap (Tokens)</label>
+              <input id="csp-overlap" type="number" value="64" min="0" class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Target Embedding Model</label>
+            <select id="csp-model" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
+              <option value="1536" data-name="OpenAI text-embedding-3-small">OpenAI text-embedding-3-small (1536 Dim)</option>
+              <option value="3072" data-name="OpenAI text-embedding-3-large">OpenAI text-embedding-3-large (3072 Dim)</option>
+              <option value="1024" data-name="BGE-large-en-v1.5">BGE-large-en-v1.5 (1024 Dim)</option>
+              <option value="768" data-name="Nomic-embed-text">Nomic-embed-text (768 Dim)</option>
+            </select>
+          </div>
+
+        </div>
+      </CalculatorCard>
+
+      <!-- Analysis Results -->
+      <ResultCard title="CHUNK METRICS & VECTOR STORE ESTIMATION">
+        <div class="space-y-16 font-mono text-caption">
+          
+          <div class="grid grid-cols-2 gap-12 text-center">
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Total Chunks</span>
+              <span id="res-total-chunks" class="text-h3 font-bold text-accent dark:text-accent-dark">223</span>
+            </div>
+            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+              <span class="block text-xs text-muted font-bold uppercase mb-4">Overlap Ratio</span>
+              <span id="res-overlap-pct" class="text-h3 font-bold text-ink dark:text-ink-dark">12.5%</span>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8">
+            <span class="block text-xs font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Vector Store RAM Footprint (Float32)</span>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-muted">Raw Embedding Vectors:</span>
+              <strong id="res-vector-ram" class="text-ink dark:text-ink-dark font-bold">1.37 MB</strong>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-muted">HNSW Index Overhead (~1.5x):</span>
+              <strong id="res-hnsw-ram" class="text-ink dark:text-ink-dark font-bold">2.05 MB</strong>
+            </div>
+          </div>
+
+          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-6 text-xs">
+            <span class="block font-bold text-ink dark:text-ink-dark uppercase border-b border-border/50 pb-4 dark:border-border-dark/50">Pipeline Recommendations</span>
+            <div class="flex items-center justify-between">
+              <span class="text-muted">Effective Step Size:</span>
+              <strong id="res-step-size" class="text-ink dark:text-ink-dark font-bold">448 Tokens</strong>
+            </div>
+            <div id="res-eval-status" class="text-emerald-600 dark:text-emerald-400 font-bold">
+              ✓ Optimal 12.5% overlap ratio prevents context loss.
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>RAG Text Chunking Best Practices</h2>
+    <p>
+      Chunking large documents splits raw text into semantically cohesive passages suitable for vector search embedding models. Setting an appropriate overlap ensures boundary sentences are not fragmented.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const docSizeEl = document.getElementById('csp-doc-size');
+    const chunkSizeEl = document.getElementById('csp-chunk-size');
+    const overlapEl = document.getElementById('csp-overlap');
+    const modelEl = document.getElementById('csp-model');
+
+    const totalChunksEl = document.getElementById('res-total-chunks');
+    const overlapPctEl = document.getElementById('res-overlap-pct');
+    const vectorRamEl = document.getElementById('res-vector-ram');
+    const hnswRamEl = document.getElementById('res-hnsw-ram');
+    const stepSizeEl = document.getElementById('res-step-size');
+    const evalStatusEl = document.getElementById('res-eval-status');
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function calculate() {
+      const doc = parseInt(docSizeEl?.value || '100000', 10);
+      const chunk = parseInt(chunkSizeEl?.value || '512', 10);
+      const overlap = parseInt(overlapEl?.value || '64', 10);
+      const dim = parseInt(modelEl?.value || '1536', 10);
+
+      const step = Math.max(1, chunk - overlap);
+      const totalChunks = Math.ceil(doc / step);
+      const overlapPct = Number(((overlap / chunk) * 100).toFixed(1));
+
+      // 4 bytes per Float32 float
+      const bytesPerVector = dim * 4;
+      const rawVectorBytes = totalChunks * bytesPerVector;
+      const hnswBytes = rawVectorBytes * 1.5;
+
+      if (totalChunksEl) totalChunksEl.textContent = totalChunks.toLocaleString();
+      if (overlapPctEl) overlapPctEl.textContent = overlapPct + '%';
+      if (vectorRamEl) vectorRamEl.textContent = formatBytes(rawVectorBytes);
+      if (hnswRamEl) hnswRamEl.textContent = formatBytes(hnswBytes);
+      if (stepSizeEl) stepSizeEl.textContent = step + ' Tokens';
+
+      if (evalStatusEl) {
+        if (overlapPct < 5) {
+          evalStatusEl.className = 'text-amber-600 dark:text-amber-400 font-bold';
+          evalStatusEl.textContent = '⚠️ Low overlap (<5%). Risk of lost context at boundaries.';
+        } else if (overlapPct > 30) {
+          evalStatusEl.className = 'text-amber-600 dark:text-amber-400 font-bold';
+          evalStatusEl.textContent = '⚠️ High overlap (>30%). Increases vector index size & cost.';
+        } else {
+          evalStatusEl.className = 'text-emerald-600 dark:text-emerald-400 font-bold';
+          evalStatusEl.textContent = '✓ Optimal overlap ratio (' + overlapPct + '%). Good semantic boundary preservation.';
+        }
+      }
+    }
+
+    [docSizeEl, chunkSizeEl, overlapEl, modelEl].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>
