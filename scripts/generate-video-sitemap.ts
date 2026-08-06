@@ -34,7 +34,7 @@ function parseFrontmatter(filePath: string): any {
 
 function parseDurationToSeconds(duration: string): number {
   if (!duration) return 600; // default 10 minutes
-  
+
   // Parse ISO 8601 duration format (e.g., PT15M42S, PT1H2M3S)
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
   const matches = duration.match(regex);
@@ -79,16 +79,16 @@ function run() {
           const filePath = path.join(folderPath, file);
           const meta = parseFrontmatter(filePath);
           const slug = file.replace(/\.(md|mdx)$/, '');
-          
+
           // Check for video details
           // YouTube articles use videoId, but other collections might use youtubeVideoId
           const videoId = meta.youtubeVideoId || meta.videoId;
-          
+
           if (videoId && meta.title) {
             const pageUrl = `${SITE_URL}${urlPrefix}/${slug}`;
             const uploadDateStr = meta.videoUploadDate || meta.pubDate || new Date().toISOString();
             const uploadDate = new Date(uploadDateStr).toISOString();
-            
+
             // Format video duration
             const rawDuration = meta.videoDuration || 'PT10M00S';
             const durationInSeconds = parseDurationToSeconds(rawDuration);
