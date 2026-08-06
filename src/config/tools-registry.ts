@@ -321,7 +321,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Developer Cleaner",
     "href": "/tools/developer-cleaner/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Developer",
     "categorySlug": "developer",
     "mode": "transform",
@@ -601,7 +601,12 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "LLM Provider Arbitrage Matrix & Price Comparison | Nadhebe",
       "description": "Compare the cheapest and smartest LLM APIs. Sort by intelligence per dollar, context window, and inference speed.",
-      "keywords": ["llm model comparison matrix", "cheapest llm api pricing table", "compare llm costs", "best llm api for production"]
+      "keywords": [
+        "llm model comparison matrix",
+        "cheapest llm api pricing table",
+        "compare llm costs",
+        "best llm api for production"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -670,7 +675,13 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "AI API Cost & ROI Simulator | Nadhebe",
       "description": "Calculate advanced LLM API costs for multi-agent workflows. Compare GPT-4o, Claude 3.5, and Gemini pricing for production deployments.",
-      "keywords": ["ai api pricing calculator", "estimate llm api monthly costs", "llm cost simulator", "gpt-4 api cost calculator", "claude api pricing estimator"]
+      "keywords": [
+        "ai api pricing calculator",
+        "estimate llm api monthly costs",
+        "llm cost simulator",
+        "gpt-4 api cost calculator",
+        "claude api pricing estimator"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -700,7 +711,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "System Prompt Linter & Best Practices Checker | Nadhebe",
       "description": "Grade and lint your LLM system prompts. Check for security vulnerabilities, XML tag pairing, and weak formatting directives.",
-      "keywords": ["system prompt linter best practices", "evaluate system prompt security", "llm prompt guardrail checker"]
+      "keywords": [
+        "system prompt linter best practices",
+        "evaluate system prompt security",
+        "llm prompt guardrail checker"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -1198,7 +1213,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Background remover",
     "href": "/tools/background-remover/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Image",
     "categorySlug": "image",
     "mode": "transform",
@@ -3623,7 +3638,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CAC payback",
     "href": "/tools/cac-payback/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Marketing",
     "categorySlug": "marketing",
     "mode": "calculator",
@@ -3997,7 +4012,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Chapter formatter",
     "href": "/tools/chapter-formatter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "YouTube",
     "categorySlug": "youtube",
     "mode": "generator",
@@ -4065,7 +4080,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Description template",
     "href": "/tools/description-template/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "YouTube",
     "categorySlug": "youtube",
     "mode": "analyzer",
@@ -4439,7 +4454,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Bio formatter",
     "href": "/tools/bio-formatter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Social Media",
     "categorySlug": "social-media",
     "mode": "calculator",
@@ -4473,7 +4488,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Carousel size helper",
     "href": "/tools/carousel-size-helper/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Social Media",
     "categorySlug": "social-media",
     "mode": "analyzer",
@@ -4787,7 +4802,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "Prompt Template Variable Tester | Nadhebe",
       "description": "Build complex prompts with Handlebars/Jinja syntax. Inject test variables to preview the final compiled prompt output.",
-      "keywords": ["prompt template variable tester", "jinja handlebars prompt tester", "dynamic prompt compiler online"]
+      "keywords": [
+        "prompt template variable tester",
+        "jinja handlebars prompt tester",
+        "dynamic prompt compiler online"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -4843,7 +4862,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Eval rubric generator",
     "href": "/tools/eval-rubric-generator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Prompt Engineering",
     "categorySlug": "prompt-engineering",
     "mode": "calculator",
@@ -4885,7 +4904,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "AI Persona & Role Prompt Generator | Nadhebe",
       "description": "Generate massive, production-ready system prompts by defining persona depth, audience, constraints, and tone.",
-      "keywords": ["ai persona prompt generator", "create expert ai system prompt", "role prompting tool"]
+      "keywords": [
+        "ai persona prompt generator",
+        "create expert ai system prompt",
+        "role prompting tool"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -4915,7 +4938,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "Few-Shot Prompt Formatter from CSV | Nadhebe",
       "description": "Easily build few-shot prompting examples by converting CSV or JSON arrays into structured dialogue trees or XML blocks.",
-      "keywords": ["few shot prompt formatter", "convert csv to few shot prompt", "generate llm examples from table"]
+      "keywords": [
+        "few shot prompt formatter",
+        "convert csv to few shot prompt",
+        "generate llm examples from table"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5183,7 +5210,13 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "LLM Token Calculator & Multi-Model Visualizer | Nadhebe",
       "description": "Compare token counts across OpenAI, Anthropic, and Llama tokenizers simultaneously. Real-time visual tokenizer highlighting.",
-      "keywords": ["llm token counter multi model", "compare gpt-4 vs claude token counts", "tokenizer visualizer", "tiktoken counter online", "sentencepiece tokenizer tool"]
+      "keywords": [
+        "llm token counter multi model",
+        "compare gpt-4 vs claude token counts",
+        "tokenizer visualizer",
+        "tiktoken counter online",
+        "sentencepiece tokenizer tool"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5213,7 +5246,12 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "RAG Context Window Calculator & Optimizer | Nadhebe",
       "description": "Optimize your LLM context window. Visually plan context sizes for RAG retrieval, system instructions, and generation buffers.",
-      "keywords": ["rag context window calculator", "how to optimize llm context limits", "llm context window visualizer", "rag prompt token planner"]
+      "keywords": [
+        "rag context window calculator",
+        "how to optimize llm context limits",
+        "llm context window visualizer",
+        "rag prompt token planner"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5243,7 +5281,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "Batch Inference Cost Calculator for LLM APIs | Nadhebe",
       "description": "Calculate the exact savings of using the OpenAI or Anthropic Batch APIs for asynchronous inference. Upload bulk prompts to estimate costs.",
-      "keywords": ["batch inference cost estimator", "calculate openai batch api discount", "llm batch pricing calculator"]
+      "keywords": [
+        "batch inference cost estimator",
+        "calculate openai batch api discount",
+        "llm batch pricing calculator"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5273,7 +5315,12 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "RAG Chunk Size Calculator & Visualizer | Nadhebe",
       "description": "Optimize your vector database chunks. Visually slice long documents by token limits to find the perfect semantic chunk size for RAG.",
-      "keywords": ["rag chunk size calculator", "best chunk size for vector embeddings", "text chunking visualizer", "token limits for rag"]
+      "keywords": [
+        "rag chunk size calculator",
+        "best chunk size for vector embeddings",
+        "text chunking visualizer",
+        "token limits for rag"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5303,7 +5350,12 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "LLM Rate Limit Backoff Code Generator | Nadhebe",
       "description": "Calculate TPM and RPM limits and instantly generate copy-pasteable Exponential Backoff code for Python and Node.js.",
-      "keywords": ["llm rate limit backoff generator", "calculate tpm and rpm limits", "exponential backoff code snippet openai", "handle 429 too many requests llm"]
+      "keywords": [
+        "llm rate limit backoff generator",
+        "calculate tpm and rpm limits",
+        "exponential backoff code snippet openai",
+        "handle 429 too many requests llm"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -5563,7 +5615,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "JSON path finder",
     "href": "/tools/json-path-finder/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "JSON",
     "categorySlug": "json",
     "mode": "transform",
@@ -6379,7 +6431,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV validator",
     "href": "/tools/csv-validator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "transform",
@@ -6413,7 +6465,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Delimiter converter",
     "href": "/tools/delimiter-converter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "generator",
@@ -6447,7 +6499,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV preview",
     "href": "/tools/csv-preview/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "calculator",
@@ -6481,7 +6533,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Column extractor",
     "href": "/tools/column-extractor/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "analyzer",
@@ -6554,7 +6606,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Builder",
     "href": "/tools/csv-builder/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "generator",
@@ -6588,7 +6640,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Estimator",
     "href": "/tools/csv-estimator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "calculator",
@@ -6622,7 +6674,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Checker",
     "href": "/tools/csv-checker/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "analyzer",
@@ -6656,7 +6708,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Cleaner",
     "href": "/tools/csv-cleaner/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "transform",
@@ -6724,7 +6776,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Planner",
     "href": "/tools/csv-planner/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "calculator",
@@ -6758,7 +6810,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CSV Inspector",
     "href": "/tools/csv-inspector/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "CSV",
     "categorySlug": "csv",
     "mode": "analyzer",
@@ -9387,7 +9439,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Changelog formatter",
     "href": "/tools/changelog-formatter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Git",
     "categorySlug": "git",
     "mode": "transform",
@@ -11465,7 +11517,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Date and Time Builder",
     "href": "/tools/date-and-time-builder/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Date & Time",
     "categorySlug": "date-time",
     "mode": "generator",
@@ -11601,7 +11653,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Date and Time Template Maker",
     "href": "/tools/date-and-time-template-maker/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Date & Time",
     "categorySlug": "date-time",
     "mode": "generator",
@@ -11669,7 +11721,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Date and Time Inspector",
     "href": "/tools/date-and-time-inspector/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Date & Time",
     "categorySlug": "date-time",
     "mode": "analyzer",
@@ -13845,7 +13897,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "CLS checklist",
     "href": "/tools/cls-checklist/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Performance",
     "categorySlug": "performance",
     "mode": "analyzer",
@@ -14151,7 +14203,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Checklist builder",
     "href": "/tools/checklist-builder/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Productivity",
     "categorySlug": "productivity",
     "mode": "transform",
@@ -15037,7 +15089,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Citation formatter",
     "href": "/tools/citation-formatter/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Education",
     "categorySlug": "education",
     "mode": "calculator",
@@ -15377,7 +15429,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Column profiler",
     "href": "/tools/column-profiler/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "transform",
@@ -15547,7 +15599,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Builder",
     "href": "/tools/data-analysis-builder/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "generator",
@@ -15581,7 +15633,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Estimator",
     "href": "/tools/data-analysis-estimator/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "calculator",
@@ -15615,7 +15667,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Checker",
     "href": "/tools/data-analysis-checker/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "analyzer",
@@ -15683,7 +15735,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Template Maker",
     "href": "/tools/data-analysis-template-maker/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "generator",
@@ -15717,7 +15769,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Planner",
     "href": "/tools/data-analysis-planner/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "calculator",
@@ -15751,7 +15803,7 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "name": "Data Analysis Inspector",
     "href": "/tools/data-analysis-inspector/",
     "component": "PlatformWorkbench",
-    "status": "planned",
+    "status": "implemented",
     "category": "Data Analysis",
     "categorySlug": "data-analysis",
     "mode": "analyzer",
@@ -16205,7 +16257,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "OpenAPI 3.1 YAML Generator & Previewer | Nadhebe",
       "description": "Create OpenAPI specifications with a visual UI. Get instant YAML outputs and Swagger-like interactive previews.",
-      "keywords": ["openapi 3 yaml generator", "scaffold openapi yaml spec", "visual openapi builder online"]
+      "keywords": [
+        "openapi 3 yaml generator",
+        "scaffold openapi yaml spec",
+        "visual openapi builder online"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16235,7 +16291,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "Webhook Payload & HMAC Signature Generator | Nadhebe",
       "description": "Simulate webhooks locally. Generate payloads and cryptographic signatures (Stripe-Signature, GitHub) to test your endpoints.",
-      "keywords": ["webhook payload signature generator", "simulate stripe github webhook", "test hmac webhook locally"]
+      "keywords": [
+        "webhook payload signature generator",
+        "simulate stripe github webhook",
+        "test hmac webhook locally"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16303,7 +16363,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "HTTP Status Codes Cheat Sheet & Flowchart | Nadhebe",
       "description": "Quickly find the right HTTP status code. Includes decision flowcharts and copy-pasteable error handling snippets.",
-      "keywords": ["http status codes cheat sheet", "what does http 422 mean", "http error codes flowchart"]
+      "keywords": [
+        "http status codes cheat sheet",
+        "what does http 422 mean",
+        "http error codes flowchart"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16333,7 +16397,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "RFC 7807 Error JSON Generator | Nadhebe",
       "description": "Format your API error responses using the strict RFC 7807 Problem Details specification. Instant JSON preview.",
-      "keywords": ["rfc 7807 error json generator", "standard api error json format", "problem details for http apis tool"]
+      "keywords": [
+        "rfc 7807 error json generator",
+        "standard api error json format",
+        "problem details for http apis tool"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16601,7 +16669,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "MCP Server Manifest Generator | Model Context Protocol Tools",
       "description": "Create valid configuration files for your Model Context Protocol (MCP) servers. Supports profiles for Claude Desktop and Cursor.",
-      "keywords": ["mcp server manifest generator", "how to create mcp.json", "model context protocol config builder"]
+      "keywords": [
+        "mcp server manifest generator",
+        "how to create mcp.json",
+        "model context protocol config builder"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16631,7 +16703,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "OpenAPI to MCP Tool Schema Converter | Nadhebe",
       "description": "Instantly convert OpenAPI YAML or JSON endpoints into valid Model Context Protocol tool schemas.",
-      "keywords": ["openapi to mcp tool schema", "convert rest api to mcp tools", "mcp json schema generator"]
+      "keywords": [
+        "openapi to mcp tool schema",
+        "convert rest api to mcp tools",
+        "mcp json schema generator"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16729,7 +16805,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "Claude Desktop MCP Config Maker & Generator | Nadhebe",
       "description": "Easily connect local MCP servers to Claude Desktop. Generates absolute paths and env vars for Mac and Windows.",
-      "keywords": ["claude desktop mcp config maker", "add mcp to claude desktop config", "claude_desktop_config.json generator"]
+      "keywords": [
+        "claude desktop mcp config maker",
+        "add mcp to claude desktop config",
+        "claude_desktop_config.json generator"
+      ]
     },
     "relatedTools": [
       "json-formatter",
@@ -16963,7 +17043,11 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "seo": {
       "title": "MCP JSON-RPC Payload Tester & Validator | Nadhebe",
       "description": "Debug your MCP server. Paste raw JSON-RPC payloads to validate them against strict Model Context Protocol schemas.",
-      "keywords": ["mcp json rpc payload tester", "debug mcp server json rpc", "validate mcp json response"]
+      "keywords": [
+        "mcp json rpc payload tester",
+        "debug mcp server json rpc",
+        "validate mcp json response"
+      ]
     },
     "relatedTools": [
       "json-formatter",

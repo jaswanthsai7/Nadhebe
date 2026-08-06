@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-builder-app">
-    
-    <!-- Visual Grid Controls Card -->
-    <CalculatorCard title="VISUAL TABLE GRID EDITOR">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-builder-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="VISUAL TABLE GRID EDITOR">
       <div class="space-y-16">
         <!-- Toolbar Actions -->
         <div class="flex flex-wrap items-center justify-between gap-12">
@@ -70,9 +70,11 @@ const faq = [
         </div>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Generated CSV Text Output Card -->
-    <ResultCard title="GENERATED CSV TEXT OUTPUT">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <ResultCard title="GENERATED CSV TEXT OUTPUT">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span id="cb-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 rows, 0 columns</span>
@@ -89,7 +91,7 @@ const faq = [
         <pre id="cb-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Generated CSV will appear here...</pre>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

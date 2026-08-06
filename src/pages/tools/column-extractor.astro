@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="column-extractor-app">
-    
-    <!-- Input Card -->
-    <CalculatorCard title="INPUT CSV DATA">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="column-extractor-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="INPUT CSV DATA">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Raw CSV Text</span>
@@ -56,9 +56,11 @@ const faq = [
         ></textarea>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Column Selection Panel -->
-    <CalculatorCard title="SELECT COLUMNS TO EXTRACT">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="SELECT COLUMNS TO EXTRACT">
       <div class="space-y-16">
         <div class="flex items-center justify-between border-b border-border/40 pb-8 dark:border-border-dark/40">
           <span class="text-xs font-mono font-bold text-muted uppercase">Detected Column Headers</span>
@@ -76,7 +78,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Extracted Output Card -->
     <ResultCard title="EXTRACTED CSV SUBSET">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
@@ -94,7 +95,7 @@ const faq = [
         <pre id="ce-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Paste CSV data and select columns above to preview extracted subset.</pre>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

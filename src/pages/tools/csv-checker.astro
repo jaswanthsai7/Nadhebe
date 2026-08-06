@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-checker-app">
-    
-    <!-- Input Card -->
-    <CalculatorCard title="RAW CSV TEXT AUDIT">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-checker-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="RAW CSV TEXT AUDIT">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
@@ -59,9 +59,11 @@ const faq = [
         ></textarea>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Audit Status Badge & Metrics Panel -->
-    <CalculatorCard title="AUDIT SUMMARY METRICS">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="AUDIT SUMMARY METRICS">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 font-mono text-xs text-center">
         <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
           <span class="block text-muted text-[10px] uppercase font-bold">Total Rows</span>
@@ -85,7 +87,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Error Detailed Log Card -->
     <ResultCard title="ROW-BY-ROW AUDIT REPORT">
       <div class="space-y-16 font-mono text-caption">
         <div id="cc-status-banner" class="p-12 rounded-8 border border-border bg-surface2 font-bold text-xs flex items-center gap-8">
@@ -98,7 +99,7 @@ const faq = [
         </ul>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

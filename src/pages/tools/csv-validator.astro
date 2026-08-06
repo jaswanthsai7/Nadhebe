@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-validator-app">
-    
-    <!-- Input Card -->
-    <CalculatorCard title="RAW CSV DATA FOR VALIDATION">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-validator-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="RAW CSV DATA FOR VALIDATION">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
@@ -56,9 +56,11 @@ const faq = [
         ></textarea>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Schema Definition Panel -->
-    <CalculatorCard title="COLUMN SCHEMA CONSTRAINTS">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="COLUMN SCHEMA CONSTRAINTS">
       <div class="space-y-16">
         <span class="text-xs font-mono text-muted uppercase font-bold">Assign Constraint Rules Per Column</span>
         <div id="cv-schema-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 font-mono text-xs">
@@ -67,7 +69,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Validation Results Card -->
     <ResultCard title="VALIDATION REPORT & ANOMALY LOG">
       <div class="space-y-16 font-mono text-caption">
         <div id="cv-status-banner" class="p-12 rounded-8 border border-border bg-surface2 font-bold text-xs flex items-center gap-8">
@@ -80,7 +81,7 @@ const faq = [
         </ul>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

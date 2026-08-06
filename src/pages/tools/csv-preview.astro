@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-preview-app">
-    
-    <!-- Top Input Card -->
-    <CalculatorCard title="RAW CSV DATA INPUT">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-preview-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="RAW CSV DATA INPUT">
       <div class="space-y-16">
         <div class="flex flex-wrap items-center justify-between gap-12">
           <div class="flex items-center gap-8">
@@ -82,9 +82,11 @@ const faq = [
         </div>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Table Preview Card -->
-    <ResultCard title="INTERACTIVE TABLE PREVIEW">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <ResultCard title="INTERACTIVE TABLE PREVIEW">
       <div class="space-y-16">
         
         <!-- Controls Bar: Search Filter & Export -->
@@ -122,7 +124,7 @@ const faq = [
 
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-planner-app">
-    
-    <!-- Table Name & Global Pipeline Config -->
-    <CalculatorCard title="TARGET PIPELINE SPECIFICATIONS">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-planner-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="TARGET PIPELINE SPECIFICATIONS">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 font-mono text-xs">
         <div class="space-y-6">
           <label class="block font-bold uppercase text-muted dark:text-muted-dark">Database Table Name</label>
@@ -56,9 +56,11 @@ const faq = [
         </div>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Field Schema Editor Card -->
-    <CalculatorCard title="COLUMN FIELD SCHEMA DEFINITIONS">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="COLUMN FIELD SCHEMA DEFINITIONS">
       <div class="space-y-16 font-mono text-xs">
         <div class="flex items-center justify-between">
           <span class="text-muted font-bold uppercase">Field Definitions</span>
@@ -74,7 +76,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Generated SQL DDL & JSON Schema Result Card -->
     <ResultCard title="GENERATED SQL DDL & JSON SCHEMA">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
@@ -91,7 +92,7 @@ const faq = [
         <pre id="cp-code-pre" class="w-full min-h-[180px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Generated code will appear here...</pre>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

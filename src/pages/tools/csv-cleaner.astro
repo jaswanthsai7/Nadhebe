@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-cleaner-app">
-    
-    <!-- Input Card -->
-    <CalculatorCard title="INPUT RAW CSV">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-cleaner-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="INPUT RAW CSV">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Raw CSV Text</span>
@@ -56,9 +56,11 @@ const faq = [
         ></textarea>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Cleaning Controls Card -->
-    <CalculatorCard title="CLEANUP TOGGLES & SANITIZATION OPTIONS">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="CLEANUP TOGGLES & SANITIZATION OPTIONS">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 font-mono text-xs">
         <label class="flex items-center gap-8 p-8 rounded-8 border border-border bg-surface hover:border-accent cursor-pointer transition-all dark:border-border-dark dark:bg-surface-dark">
           <input type="checkbox" id="cl-opt-strip-empty" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent/20 cursor-pointer" />
@@ -87,7 +89,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Cleaned Output Card -->
     <ResultCard title="SANITIZED CSV OUTPUT">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
@@ -105,7 +106,7 @@ const faq = [
         <pre id="cl-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Sanitized CSV will appear here...</pre>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">

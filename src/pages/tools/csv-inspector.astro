@@ -30,10 +30,10 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="csv-inspector-app">
-    
-    <!-- Input Card -->
-    <CalculatorCard title="INPUT CSV TEXT TO INSPECT">
+  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="csv-inspector-app">
+    <!-- Left Column: Input & Controls -->
+    <div class="space-y-24">
+      <CalculatorCard title="INPUT CSV TEXT TO INSPECT">
       <div class="space-y-16">
         <div class="flex items-center justify-between">
           <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">CSV Input</span>
@@ -56,9 +56,11 @@ const faq = [
         ></textarea>
       </div>
     </CalculatorCard>
+    </div>
 
-    <!-- Inspection Parameter Cards -->
-    <CalculatorCard title="STRUCTURAL & ENCODING METRICS">
+    <!-- Right Column: Results & Metrics -->
+    <div class="space-y-24">
+      <CalculatorCard title="STRUCTURAL & ENCODING METRICS">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 font-mono text-xs text-center">
         <div class="p-12 rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-4">
           <span class="block text-muted text-[10px] uppercase font-bold">Line Endings</span>
@@ -82,7 +84,6 @@ const faq = [
       </div>
     </CalculatorCard>
 
-    <!-- Inspection Audit Report -->
     <ResultCard title="DETAILED INSPECTION FINDINGS">
       <div class="space-y-16 font-mono text-caption">
         <ul id="ci-findings-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40">
@@ -90,7 +91,7 @@ const faq = [
         </ul>
       </div>
     </ResultCard>
-
+    </div>
   </div>
 
   <div slot="content">
