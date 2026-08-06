@@ -1,5 +1,165 @@
 [
   {
+    "title": "How to Build Local Agentic RAG Workflows using LangGraph and Ollama",
+    "description": "Step-by-step developer tutorial to build stateful agentic RAG workflows using LangGraph, Ollama, and ChromaDB locally without cloud API keys.",
+    "url": "https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph",
+    "category": "Tutorials",
+    "tags": [
+      "[\"LangGraph\", \"Agentic RAG\", \"Ollama\", \"ChromaDB\", \"Python\", \"Local AI\", \"AI Agents\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines",
+    "description": "Step-by-step tutorial to deploy DeepSeek-OCR locally on GPUs for document extraction. Includes context compression math, PyTorch pipelines, layout parsing, and Docker configs.",
+    "url": "https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment",
+    "category": "Tutorials",
+    "tags": [
+      "[\"DeepSeek-OCR\", \"Vision AI\", \"PyTorch\", \"Local GPU\", \"Document Processing\", \"Docker\", \"Data Pipelines\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Model Context Protocol (MCP) Architecture and Production API Tutorial",
+    "description": "Comprehensive developer tutorial on Model Context Protocol (MCP) architecture. Learn JSON-RPC schema transport over stdio/SSE, tool definition syntax, and Python implementation.",
+    "url": "https://nadhebe.com/tutorials/model-context-protocol-mcp-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Model Context Protocol\", \"MCP\", \"AI Infrastructure\", \"Claude Code\", \"Python\", \"JSON-RPC\", \"API Architecture\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide",
+    "description": "Hardware setup tutorial to run Qwen 3.5 27B locally on consumer GPUs. Includes INT4 GGUF quantization, FlashAttention-2 compilation, and multi-GPU tensor parallelism.",
+    "url": "https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Qwen 3.5\", \"Local LLM\", \"Consumer GPU\", \"FlashAttention-2\", \"Ollama\", \"VRAM Optimization\", \"vLLM\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "How to Run DeepSeek R1 Locally with Ollama: Complete Guide",
+    "description": "Complete developer setup guide to run DeepSeek R1 locally using Ollama. Includes VRAM memory formulas, GGUF quantization comparisons, CLI integration, and ChromaDB Python code.",
+    "url": "https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama",
+    "category": "Tutorials",
+    "tags": [
+      "[\"DeepSeek R1\", \"Ollama\", \"Local LLM\", \"AI Engineering\", \"VRAM Optimization\", \"ChromaDB\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Running Flux.1 Local Image Generation on Consumer GPUs",
+    "description": "Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup.",
+    "url": "https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu",
+    "category": "Tutorials",
+    "tags": [
+      "[\"Flux.1\", \"ComfyUI\", \"Local AI\", \"Consumer GPU\", \"Image Generation\", \"NF4 Quantization\", \"Diffusion Models\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Optimizing KV Cache Utilization in vLLM Production Clusters",
+    "description": "Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs.",
+    "url": "https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"vLLM\", \"KV Cache\", \"PagedAttention\", \"GPU Optimization\", \"Python\", \"Kubernetes\", \"AI Infrastructure\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark",
+    "description": "Head-to-head benchmark comparison of frontier AI reasoning models: DeepSeek V4, OpenAI o3-mini, and Claude 3.7 Sonnet. Evaluates coding pass rates, math accuracy, and API pricing.",
+    "url": "https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude",
+    "category": "Comparisons",
+    "tags": [
+      "[\"DeepSeek V4\", \"OpenAI o3-mini\", \"Claude 3.7 Sonnet\", \"AI Benchmarks\", \"Reasoning Models\", \"Code Generation\", \"Model Comparison\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis",
+    "description": "Architectural benchmark comparison of NVIDIA Blackwell B200 vs Hopper H200 for LLM inference. Evaluates HBM3e memory bandwidth, FP4 FLOPS throughput, and TCO.",
+    "url": "https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference",
+    "category": "Comparisons",
+    "tags": [
+      "[\"NVIDIA B200\", \"NVIDIA H200\", \"Blackwell\", \"Hopper\", \"GPU Benchmarks\", \"LLM Inference\", \"HBM3e\", \"AI Hardware\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "SaaS CAC Payback Period & LTV:CAC Calculator",
+    "description": "Interactive calculator tool for SaaS CAC payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.",
+    "url": "https://nadhebe.com/tools/cac-payback-calculator",
+    "category": "Tools",
+    "tags": [
+      "[\"CAC Payback\", \"SaaS Metrics\", \"Unit Economics\", \"LTV:CAC\", \"Business Calculator\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks",
+    "description": "Hardware benchmark guide evaluating the best open-weight local LLMs for 8GB VRAM consumer GPUs. Includes token-per-second decoding speeds, context spillover, and quantization metrics.",
+    "url": "https://nadhebe.com/guides/best-local-llms-8gb-vram",
+    "category": "Guides",
+    "tags": [
+      "[\"8GB VRAM\", \"Local LLM\", \"Ollama\", \"GPU Benchmarks\", \"Qwen 2.5\", \"Llama 3.1\", \"Phi-4 Mini\", \"AI Hardware\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy",
+    "description": "Technical comparison guide analyzing FP4, FP8, and INT4 quantization formats. Evaluates micro-scaling formats, hardware acceleration across NVIDIA Hopper & Blackwell, and accuracy.",
+    "url": "https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization",
+    "category": "Guides",
+    "tags": [
+      "[\"FP4\", \"FP8\", \"INT4\", \"Quantization\", \"NVIDIA Blackwell\", \"TensorRT-LLM\", \"vLLM\", \"GPU Architecture\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols",
+    "description": "Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols.",
+    "url": "https://nadhebe.com/guides/generative-engine-optimization-geo-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Generative Engine Optimization\", \"GEO\", \"SEO Strategy\", \"RAG Grounding\", \"JSON-LD Schema\", \"AI Overviews\", \"Search Architecture\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols",
+    "description": "Developer workflows guide for Google NotebookLM Pro. Learn source document ingestion limits, multi-file context indexing, Audio Overview podcast pipelines, and API integrations.",
+    "url": "https://nadhebe.com/guides/notebooklm-pro-developer-workflows",
+    "category": "Guides",
+    "tags": [
+      "[\"NotebookLM Pro\", \"Google AI\", \"Knowledge Management\", \"Audio Overview\", \"Developer Workflows\", \"AI Research\", \"Gemini 2.0\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs EXL2)",
+    "description": "Technical comparison guide evaluating Ollama GGUF quantization formats. Compares Q4_K_M, Q5_K_M, Q8_0, and EXL2 across perplexity, VRAM savings, and decode speed.",
+    "url": "https://nadhebe.com/guides/ollama-quantization-formats-compared",
+    "category": "Guides",
+    "tags": [
+      "[\"Ollama\", \"Quantization\", \"GGUF\", \"Q4_K_M\", \"Q8_0\", \"EXL2\", \"VRAM Optimization\", \"Local LLM\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
+    "title": "Self-Hosting LLMs vs API Costs: Break-Even Math Guide",
+    "description": "Comprehensive financial math guide for self-hosting LLMs versus using cloud APIs. Includes GPU TCO formulas, break-even token volume curves, and server energy cost analysis.",
+    "url": "https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown",
+    "category": "Guides",
+    "tags": [
+      "[\"LLM Self-Hosting\", \"Cloud API Costs\", \"GPU Infrastructure\", \"vLLM\", \"Cost Optimization\", \"FinOps\", \"Enterprise AI\"]"
+    ],
+    "pubDate": "2026-08-06T00:00:00.000Z"
+  },
+  {
     "title": "Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison",
     "description": "A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.",
     "url": "https://nadhebe.com/reviews/best-ai-coding-tools-2026",

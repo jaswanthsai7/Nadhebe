@@ -4,17 +4,15 @@
 
 ## Content Directory
 
-### Tool Reviews
-
-- [Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison](https://nadhebe.com/reviews/best-ai-coding-tools-2026): A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.
-- [Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026](https://nadhebe.com/reviews/best-cloud-gpu-providers-2026): An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.
-- [Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026](https://nadhebe.com/reviews/best-mcp-servers-2026): A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.
-- [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools): Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
-- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
-- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
-
 ### Tutorials
 
+- [How to Build Local Agentic RAG Workflows using LangGraph and Ollama](https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph): Step-by-step developer tutorial to build stateful agentic RAG workflows using LangGraph, Ollama, and ChromaDB locally without cloud API keys.
+- [Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines](https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment): Step-by-step tutorial to deploy DeepSeek-OCR locally on GPUs for document extraction. Includes context compression math, PyTorch pipelines, layout parsing, and Docker configs.
+- [Model Context Protocol (MCP) Architecture and Production API Tutorial](https://nadhebe.com/tutorials/model-context-protocol-mcp-guide): Comprehensive developer tutorial on Model Context Protocol (MCP) architecture. Learn JSON-RPC schema transport over stdio/SSE, tool definition syntax, and Python implementation.
+- [Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide](https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup): Hardware setup tutorial to run Qwen 3.5 27B locally on consumer GPUs. Includes INT4 GGUF quantization, FlashAttention-2 compilation, and multi-GPU tensor parallelism.
+- [How to Run DeepSeek R1 Locally with Ollama: Complete Guide](https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama): Complete developer setup guide to run DeepSeek R1 locally using Ollama. Includes VRAM memory formulas, GGUF quantization comparisons, CLI integration, and ChromaDB Python code.
+- [Running Flux.1 Local Image Generation on Consumer GPUs](https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu): Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup.
+- [Optimizing KV Cache Utilization in vLLM Production Clusters](https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide): Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs.
 - [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles): A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.
 - [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide): A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.
 - [Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits](https://nadhebe.com/tutorials/claude-code-troubleshooting-guide): A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.
@@ -54,6 +52,8 @@
 
 ### Comparisons
 
+- [DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark](https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude): Head-to-head benchmark comparison of frontier AI reasoning models: DeepSeek V4, OpenAI o3-mini, and Claude 3.7 Sonnet. Evaluates coding pass rates, math accuracy, and API pricing.
+- [NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis](https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference): Architectural benchmark comparison of NVIDIA Blackwell B200 vs Hopper H200 for LLM inference. Evaluates HBM3e memory bandwidth, FP4 FLOPS throughput, and TCO.
 - [Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance](https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli): A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.
 - [Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE](https://nadhebe.com/comparisons/claude-code-vs-cursor): An in-depth comparison between Anthropic's terminal-native Claude Code CLI and Cursor's AI-augmented VS Code fork for AI engineering workflows.
 - [Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Compared](https://nadhebe.com/comparisons/cursor-vs-windsurf): Compare Cursor's Composer and Tab autocompletion against Codeium's Windsurf editor and its Cascade collaborative AI flow.
@@ -84,8 +84,23 @@
 - [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance): A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 - [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer): A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
 
+### Tools
+
+- [SaaS CAC Payback Period & LTV:CAC Calculator](https://nadhebe.com/tools/cac-payback-calculator): Interactive calculator tool for SaaS CAC payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.
+- [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp): The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.
+- [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.com/tools/google-flow-storyboard-studio-overview): An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
+- [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
+- [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.com/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
+- [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.com/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
+
 ### Guides
 
+- [Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks](https://nadhebe.com/guides/best-local-llms-8gb-vram): Hardware benchmark guide evaluating the best open-weight local LLMs for 8GB VRAM consumer GPUs. Includes token-per-second decoding speeds, context spillover, and quantization metrics.
+- [FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy](https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization): Technical comparison guide analyzing FP4, FP8, and INT4 quantization formats. Evaluates micro-scaling formats, hardware acceleration across NVIDIA Hopper & Blackwell, and accuracy.
+- [Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols](https://nadhebe.com/guides/generative-engine-optimization-geo-guide): Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols.
+- [Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols](https://nadhebe.com/guides/notebooklm-pro-developer-workflows): Developer workflows guide for Google NotebookLM Pro. Learn source document ingestion limits, multi-file context indexing, Audio Overview podcast pipelines, and API integrations.
+- [Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs EXL2)](https://nadhebe.com/guides/ollama-quantization-formats-compared): Technical comparison guide evaluating Ollama GGUF quantization formats. Compares Q4_K_M, Q5_K_M, Q8_0, and EXL2 across perplexity, VRAM savings, and decode speed.
+- [Self-Hosting LLMs vs API Costs: Break-Even Math Guide](https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown): Comprehensive financial math guide for self-hosting LLMs versus using cloud APIs. Includes GPU TCO formulas, break-even token volume curves, and server energy cost analysis.
 - [Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans](https://nadhebe.com/guides/claude-code-pricing-guide): A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies.
 - [Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage](https://nadhebe.com/guides/cursor-pricing-guide): A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.
 - [Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees](https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md): A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.
@@ -108,6 +123,15 @@
 - [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration): Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 - [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
+### Tool Reviews
+
+- [Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison](https://nadhebe.com/reviews/best-ai-coding-tools-2026): A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.
+- [Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026](https://nadhebe.com/reviews/best-cloud-gpu-providers-2026): An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.
+- [Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026](https://nadhebe.com/reviews/best-mcp-servers-2026): A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.
+- [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools): Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
+- [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review): An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+- [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review): A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
+
 ### Best Practices
 
 - [How to Fix Common Meta Tag Errors: Audit & Resolution Guide](https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors): Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images.
@@ -129,14 +153,6 @@
 - [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release): Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
 - [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra): OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
 - [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release): CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
-
-### Tools
-
-- [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp): The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.
-- [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.com/tools/google-flow-storyboard-studio-overview): An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
-- [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system): Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
-- [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.com/tools/instatic-html-importer-guide): An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
-- [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.com/tools/instatic-html-site-import-migration): A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
 
 ### Prompts
 

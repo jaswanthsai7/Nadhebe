@@ -6,15 +6,20 @@ const DIST_DIR = path.resolve('dist');
 
 function getFiles(dir: string): string[] {
   let results: string[] = [];
+  if (!fs.existsSync(dir)) return results;
   const list = fs.readdirSync(dir);
   list.forEach((file) => {
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
-    if (stat && stat.isDirectory()) {
-      results = results.concat(getFiles(filePath));
-    } else if (filePath.endsWith('.html')) {
-      results.push(filePath);
-    }
+    if (!fs.existsSync(filePath)) return;
+    try {
+      const stat = fs.statSync(filePath);
+      if (stat && stat.isDirectory()) {
+        if (file === 'pagefind') return;
+        results = results.concat(getFiles(filePath));
+      } else if (filePath.endsWith('.html')) {
+        results.push(filePath);
+      }
+    } catch (_) {}
   });
   return results;
 }
@@ -63,24 +68,28 @@ function verifyLinks() {
 
       if (cleanUrl.startsWith('/')) {
         // Absolute internal URL
-        targetPath = path.join(DIST_DIR, cleanUrl);
+        targetPath = path.join(DIST_DIR, cleanUrl.replace(/^\/+/, ''));
       } else {
         // Relative internal URL
         targetPath = path.join(path.dirname(file), cleanUrl);
       }
 
-      // Check if target is a file or directory with index.html
-      const fileExists = fs.existsSync(targetPath);
-      let indexExists = false;
+      let exists = false;
 
-      if (!fileExists) {
-        // Try appending index.html (standard router mapping) or .html
-        const targetIndex = path.join(targetPath, 'index.html');
-        const targetHtml = targetPath + '.html';
-        indexExists = fs.existsSync(targetIndex) || fs.existsSync(targetHtml);
+      if (fs.existsSync(targetPath)) {
+        try {
+          const stat = fs.statSync(targetPath);
+          if (stat.isDirectory()) {
+            exists = fs.existsSync(path.join(targetPath, 'index.html'));
+          } else {
+            exists = true;
+          }
+        } catch (_) {}
+      } else {
+        exists = fs.existsSync(path.join(targetPath, 'index.html')) || fs.existsSync(targetPath + '.html');
       }
 
-      if (!fileExists && !indexExists) {
+      if (!exists) {
         console.error(`\x1b[31mBroken Link:\x1b[0m in ${relativeSrc} -> points to: "${url}" (Resolved: ${path.relative(DIST_DIR, targetPath)})`);
         hasErrors = true;
         brokenLinksCount++;
