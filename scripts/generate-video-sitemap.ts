@@ -128,7 +128,8 @@ function run() {
     xml += `      <video:thumbnail_loc>${thumbnailUrl}</video:thumbnail_loc>\n`;
     xml += `      <video:title><![CDATA[${entry.title}]]></video:title>\n`;
     xml += `      <video:description><![CDATA[${entry.description}]]></video:description>\n`;
-    xml += `      <video:player_loc allow_embed="yes">${embedUrl}</video:player_loc>\n`;
+    xml += `      <video:content_loc>${contentUrl}</video:content_loc>\n`;
+    xml += `      <video:embed_loc>${embedUrl}</video:embed_loc>\n`;
     xml += `      <video:publication_date>${entry.uploadDate}</video:publication_date>\n`;
     xml += `      <video:duration>${entry.duration}</video:duration>\n`;
     xml += `    </video:video>\n`;
