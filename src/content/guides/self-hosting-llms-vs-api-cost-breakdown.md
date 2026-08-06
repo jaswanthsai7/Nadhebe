@@ -1,7 +1,7 @@
 ---
 title: "Self-Hosting LLMs vs API Costs: Break-Even Math Guide"
 description: "Comprehensive financial math guide for self-hosting LLMs versus using cloud APIs. Includes GPU TCO formulas, break-even token volume curves, and server energy cost analysis."
-pubDate: 2026-08-06
+pubDate: 2026-08-06T11:00:00.000Z
 author: nadhebe-team
 category: "guides"
 tags: ["LLM Self-Hosting", "Cloud API Costs", "GPU Infrastructure", "vLLM", "Cost Optimization", "FinOps", "Enterprise AI"]

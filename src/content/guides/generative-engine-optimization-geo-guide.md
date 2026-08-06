@@ -1,7 +1,7 @@
 ---
 title: "Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols"
 description: "Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols."
-pubDate: 2026-08-06
+pubDate: 2026-08-06T12:00:00.000Z
 author: nadhebe-team
 category: "guides"
 tags: ["Generative Engine Optimization", "GEO", "SEO Strategy", "RAG Grounding", "JSON-LD Schema", "AI Overviews", "Search Architecture"]
