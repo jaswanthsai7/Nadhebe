@@ -271,6 +271,16 @@
     const loader = document.getElementById('page-loader');
     if (!loader) return;
 
+    // Check repeat visits within session to bypass loader instantly
+    try {
+      if (sessionStorage.getItem('nb_visited')) {
+        loader.style.display = 'none';
+        loader.classList.add('loaded');
+        return;
+      }
+      sessionStorage.setItem('nb_visited', '1');
+    } catch (e) {}
+
     const subtexts = [
       "Loading MCP Registry...",
       "Indexing project graph...",
@@ -294,27 +304,18 @@
       loader.classList.add('loaded');
       setTimeout(function() {
         if (loader.parentNode) loader.style.display = 'none';
-      }, 300);
+      }, 200);
     }
 
-    function checkReadyAndHide() {
-      if (window.__nb_bg_ready) {
-        hideLoader();
-      } else {
-        window.addEventListener('nb-bg-ready', hideLoader, { once: true });
-        setTimeout(hideLoader, 350);
-      }
-    }
-
-    // Dismiss only after background image is 100% decoded in memory
+    // Hide loader as soon as DOM is interactive (0ms artificial delay)
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
-      checkReadyAndHide();
+      requestAnimationFrame(hideLoader);
     } else {
-      document.addEventListener('DOMContentLoaded', checkReadyAndHide, { once: true });
+      document.addEventListener('DOMContentLoaded', hideLoader, { once: true });
     }
 
-    // Fallback safety timeout: 400ms max
-    setTimeout(hideLoader, 400);
+    // Immediate fallback safety timeout
+    setTimeout(hideLoader, 100);
 
     // Astro page load integration
     document.addEventListener('astro:page-load', hideLoader);
