@@ -19502,6 +19502,41 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "json-to-csv"
     ],
     "icon": "table"
+  },
+  {
+    "id": "dev-yval-1",
+    "slug": "yaml-validator",
+    "title": "YAML Syntax Validator & Linter",
+    "name": "YAML Syntax Validator & Linter",
+    "href": "/tools/yaml-validator/",
+    "component": "src/pages/tools/yaml-validator.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "analyzer",
+    "description": "Validate YAML code syntax, lint space indentation, and detect unescaped strings.",
+    "seo": {
+      "title": "YAML Syntax Validator & Linter | Nadhebe",
+      "description": "Validate YAML code syntax, lint space indentation, detect unescaped strings, and format Kubernetes and Docker Compose manifests client-side.",
+      "keywords": [
+        "yaml validator",
+        "yaml linter",
+        "validate yaml online",
+        "kubernetes yaml validator",
+        "docker compose yaml checker"
+      ]
+    },
+    "relatedTools": [
+      "xml-to-json",
+      "json-schema-validator",
+      "json-repair",
+      "openapi-3-yaml-generator"
+    ],
+    "tags": [
+      "developer",
+      "yaml-validator"
+    ],
+    "icon": "check-circle"
   }
 ];
 

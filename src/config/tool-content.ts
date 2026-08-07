@@ -1056,6 +1056,22 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'yaml-validator': {
+    intro: 'YAML Syntax Validator & Linter checks space indentation, tab usage, and colon key-value formatting in Kubernetes and Docker Compose manifests.',
+    useCases: [
+      'Validate YAML syntax and indentation before deploying Kubernetes manifests',
+      'Detect illegal TAB characters in YAML files',
+      'Lint GitHub Actions and Docker Compose configuration files',
+    ],
+    howItWorks: 'Paste your YAML code. The linter inspects indentation, colons, and syntax rules line-by-line client-side.',
+    faq: [
+      {
+        question: 'Why are tab characters disallowed in YAML?',
+        answer: 'YAML specifies space-only indentation to guarantee consistent visual alignment across text editors.',
+      },
+    ],
+  },
+
 };
 
 

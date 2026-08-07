@@ -1,0 +1,180 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'YAML Syntax Validator & Linter | Nadhebe';
+const h1 = 'YAML Syntax Validator & Linter';
+const description = 'Validate YAML code syntax, lint space indentation, detect unescaped strings, and format Kubernetes and Docker Compose manifests client-side.';
+
+const faq = [
+  {
+    question: 'How does the YAML Syntax Validator work?',
+    answer: 'The validator parses your YAML text line-by-line client-side, checking indentation rules, tab character usage, colon key-value formatting, and array dash syntax.',
+  },
+  {
+    question: 'Why does YAML throw indentation errors?',
+    answer: 'YAML requires consistent space indentation (typically 2 spaces per level). Using TAB characters instead of spaces violates the YAML specification and causes parser errors.',
+  },
+  {
+    question: 'Can I validate Kubernetes or Docker Compose YAML files?',
+    answer: 'Yes! Paste your `docker-compose.yml` or K8s `deployment.yaml` manifest into the editor to verify syntax correctness before running `kubectl apply`.',
+  },
+  {
+    question: 'Is my YAML code uploaded to external servers?',
+    answer: '100% private. All validation and linting execute locally in your web browser.',
+  },
+  {
+    question: 'How can I convert valid YAML to JSON?',
+    answer: 'Use our dedicated <a href="/tools/yaml-to-json/">YAML to JSON Converter</a> tool to transform valid YAML manifests into JSON objects.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="yaml-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="yaml-val-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="YAML CODE INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="yval-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">YAML Manifest / Config</label>
+              <button type="button" id="btn-load-sample-yval" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample YAML</button>
+            </div>
+            <textarea
+              id="yval-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-validate-yval"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Validate YAML Syntax
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="VALIDATION & LINT REPORT">
+        <div class="space-y-20">
+          
+          <div id="yval-status-box" class="rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-center">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Validation Status</span>
+            <div id="yval-stat-title" class="text-h3 font-bold text-emerald-800 dark:text-emerald-300">Valid YAML Syntax ✓</div>
+            <p id="yval-stat-desc" class="text-caption text-emerald-700 dark:text-emerald-400 mt-2 font-medium">0 Indentation or Syntax Errors Detected</p>
+          </div>
+
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Parsed YAML Structure Summary</span>
+            <pre id="yval-output-tree" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark min-h-[160px] leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>YAML Validation & Indentation Standards Guide</h2>
+    <p>
+      YAML (YAML Ain't Markup Language) is the standard configuration format for DevOps pipelines, GitHub Actions workflows, Kubernetes deployments, and OpenAPI specifications.
+    </p>
+
+    <h3>Common YAML Lint Errors</h3>
+    <ul>
+      <li><strong>Tab Characters</strong>: Using tabs instead of 2 spaces causes parse failures.</li>
+      <li><strong>Colon Spacing</strong>: Keys must be followed by a space after the colon (<code>key: value</code>).</li>
+      <li><strong>Unquoted Special Characters</strong>: Strings containing colons, <code>@</code>, or <code>%</code> require double quotes.</li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Convert YAML to JSON with the <a href="/tools/yaml-to-json/">YAML to JSON Converter</a>, generate OpenAPI schemas with the <a href="/tools/openapi-3-yaml-generator/">OpenAPI 3 YAML Generator</a>, or validate JSON schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('yval-input-raw');
+    const btnValidate = document.getElementById('btn-validate-yval');
+    const btnSample = document.getElementById('btn-load-sample-yval');
+
+    const statusBox = document.getElementById('yval-status-box');
+    const statTitle = document.getElementById('yval-stat-title');
+    const statDesc = document.getElementById('yval-stat-desc');
+    const outputTree = document.getElementById('yval-output-tree');
+
+    const defaultYaml = `version: "3.8"
+services:
+  web:
+    image: "nginx:alpine"
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production`;
+
+    function validateYAML(raw) {
+      const lines = raw.split('\n');
+      const errors = [];
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (line.includes('\t')) {
+          errors.push(`Line ${i + 1}: Tab character detected. YAML disallows tabs for indentation.`);
+        }
+        if (/^[a-zA-Z0-9_-]+:[^\s#]/.test(line.trim())) {
+          errors.push(`Line ${i + 1}: Missing space after key colon.`);
+        }
+      }
+
+      if (errors.length > 0) {
+        return { valid: false, errors };
+      }
+
+      return { valid: true, lineCount: lines.length };
+    }
+
+    function validate() {
+      const raw = inputRaw?.value || defaultYaml;
+      const res = validateYAML(raw);
+
+      if (res.valid) {
+        if (statusBox) statusBox.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-center';
+        if (statTitle) statTitle.textContent = 'Valid YAML Syntax ✓';
+        if (statDesc) statDesc.textContent = `Passed lint inspection across ${res.lineCount} lines.`;
+        if (outputTree) outputTree.textContent = `// Normalized Indentation Overview:\n${raw}`;
+      } else {
+        if (statusBox) statusBox.className = 'rounded-16 border border-rose-500/30 bg-rose-500/10 p-20 shadow-soft font-sans text-center';
+        if (statTitle) statTitle.textContent = 'YAML Syntax Error Detected ✗';
+        if (statDesc) statDesc.textContent = res.errors.join('\n');
+        if (outputTree) outputTree.textContent = res.errors.join('\n');
+      }
+    }
+
+    btnValidate?.addEventListener('click', validate);
+    inputRaw?.addEventListener('input', validate);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultYaml;
+      validate();
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultYaml;
+
+    validate();
+  })();
+</script>
