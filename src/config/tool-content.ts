@@ -1088,6 +1088,38 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'compound-interest': {
+    intro: 'Compound Interest & Investment Growth Calculator computes future balances, total interest earned, and APY returns for recurring monthly contributions.',
+    useCases: [
+      'Project future portfolio growth with annual interest compounding',
+      'Calculate the impact of monthly recurring investment deposits',
+      'Compare out-of-pocket contributions against total interest earned',
+    ],
+    howItWorks: 'Input principal, monthly deposit, interest rate, and horizon in years. The calculator computes compounding formulas client-side.',
+    faq: [
+      {
+        question: 'What is the formula for monthly compound interest?',
+        answer: 'Future Value = Principal * (1 + r/12)^(12*t) + PMT * [((1 + r/12)^(12*t) - 1) / (r/12)].',
+      },
+    ],
+  },
+
+  'cac-payback': {
+    intro: 'SaaS CAC Payback Period & LTV Calculator calculates gross-margin adjusted payback periods in months and LTV:CAC ratios for B2B SaaS startups.',
+    useCases: [
+      'Calculate gross margin adjusted CAC payback period in months',
+      'Evaluate LTV to CAC ratios for unit economics health',
+      'Project customer lifetime values based on monthly churn rates',
+    ],
+    howItWorks: 'Input CAC, ARPU, gross margin %, and churn rate %. The calculator computes payback duration and unit economics ratings.',
+    faq: [
+      {
+        question: 'What is a healthy CAC payback period for SaaS?',
+        answer: 'Under 12 months for SMB SaaS and under 18-24 months for Enterprise SaaS.',
+      },
+    ],
+  },
+
 };
 
 

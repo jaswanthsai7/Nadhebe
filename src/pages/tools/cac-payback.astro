@@ -3,30 +3,30 @@ import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'SaaS CAC Payback Period & LTV:CAC Calculator | Nadhebe';
-const h1 = 'CAC Payback Period Calculator';
-const description = 'Calculate your SaaS Customer Acquisition Cost (CAC) payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.';
+const title = 'SaaS CAC Payback Period & LTV Calculator | Nadhebe';
+const h1 = 'SaaS CAC Payback Period & LTV Calculator';
+const description = 'Calculate SaaS Customer Acquisition Cost (CAC) payback period in months, LTV to CAC ratio, and Gross Margin Adjusted payback client-side.';
 
 const faq = [
   {
-    question: 'What is a good CAC payback period for SaaS startups?',
-    answer: 'For early-stage SaaS companies (Seed to Series A), a healthy CAC payback period is 12 to 18 months. For scaling or public B2B SaaS companies, top-tier efficiency is under 12 months (and under 6 months for product-led growth / PLG models).',
+    question: 'What is SaaS CAC Payback Period?',
+    answer: 'CAC Payback Period is the number of months required for a SaaS business to recover the sales and marketing money spent to acquire a single customer.',
   },
   {
-    question: 'How do you calculate gross-margin adjusted CAC payback?',
-    answer: 'Gross-margin adjusted CAC payback calculates the months of gross profit needed to recover customer acquisition costs: `CAC / (ARPU × Gross Margin %)`. Factoring in gross margin (e.g. 80%) prevents overestimating payback speed compared to unadjusted revenue.',
+    question: 'What is the formula for Gross Margin Adjusted CAC Payback?',
+    answer: '`CAC Payback (Months) = CAC / (ARPU * Gross Margin %)` where ARPU is Average Revenue Per User per month.',
   },
   {
-    question: 'What is the relationship between CAC payback and LTV:CAC ratio?',
-    answer: 'CAC payback measures liquidity speed (how fast cash is recovered to reinvest in growth), while LTV:CAC measures long-term return on capital. A healthy SaaS business targets an LTV:CAC ratio > 3x and CAC payback < 12 months.',
+    question: 'What is a good CAC Payback Period benchmark for SaaS startups?',
+    answer: 'Under 12 months is considered healthy for SMB SaaS. For Enterprise SaaS with multi-year contracts, 18-24 months is standard.',
   },
   {
-    question: 'How does churn rate impact customer lifetime value (LTV)?',
-    answer: 'Customer lifetime is inversely proportional to monthly churn rate (`1 / Monthly Churn %`). A lower churn rate extends average customer lifespan, increasing total lifetime gross profit generated per acquired account.',
+    question: 'What is the LTV:CAC Ratio?',
+    answer: 'Lifetime Value (LTV) divided by CAC. An LTV:CAC ratio of 3.0x or higher indicates strong unit economics.',
   },
   {
-    question: 'What expenses should be included in Customer Acquisition Cost (CAC)?',
-    answer: 'CAC includes all sales and marketing costs over a given period: ad spend, software tools, sales reps & SDR salaries, commission bonuses, content creation, and event sponsorship overhead.',
+    question: 'Is my financial SaaS data kept private?',
+    answer: '100% private. All calculations run locally in your web browser.',
   },
 ];
 ---
@@ -38,68 +38,102 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="cac-calc-app">
+  <div slot="calculator" class="space-y-24" id="cac-payback-app">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
       
-      <!-- Input Parameters -->
-      <CalculatorCard title="SAAS UNIT ECONOMICS INPUTS">
+      <!-- INPUT CARD -->
+      <CalculatorCard title="SAAS UNIT ECONOMICS PARAMETERS">
         <div class="space-y-16">
-          <div class="grid grid-cols-2 gap-12">
-            <div>
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Customer Acquisition Cost (CAC) ($)</label>
-              <input id="cac-amount" type="number" value="1200" min="1" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono font-bold text-accent" />
-            </div>
-            <div>
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Avg Revenue Per User (ARPU / Mo) ($)</label>
-              <input id="cac-arpu" type="number" value="150" min="1" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
-            </div>
+          <div>
+            <label for="cac-input-cost" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Customer Acquisition Cost (CAC) ($)</label>
+            <input
+              id="cac-input-cost"
+              type="number"
+              min="1"
+              step="50"
+              value="1200"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
           </div>
 
-          <div class="grid grid-cols-2 gap-12">
-            <div>
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Gross Margin (%)</label>
-              <input id="cac-margin" type="number" value="80" min="1" max="100" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
-            </div>
-            <div>
-              <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly Churn Rate (%)</label>
-              <input id="cac-churn" type="number" value="2.5" step="0.1" min="0.1" max="50" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono" />
-            </div>
+          <div>
+            <label for="cac-input-arpu" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Average Monthly Revenue (ARPU) ($)</label>
+            <input
+              id="cac-input-arpu"
+              type="number"
+              min="1"
+              step="10"
+              value="150"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
           </div>
 
-          <div class="p-12 rounded-10 border border-border/60 bg-surface/50 dark:border-border-dark/60 dark:bg-surface-dark/50 font-mono text-xs text-muted dark:text-muted-dark">
-            <div>Annual Contract Value (ACV): <span id="cac-acv-val" class="font-bold text-ink dark:text-ink-dark">$1,800</span></div>
-            <div>Avg Customer Lifespan: <span id="cac-lifespan-val" class="font-bold text-ink dark:text-ink-dark">40 Months</span></div>
+          <div>
+            <label for="cac-input-margin" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Gross Margin (%)</label>
+            <input
+              id="cac-input-margin"
+              type="number"
+              min="1"
+              max="100"
+              step="1"
+              value="80"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
           </div>
+
+          <div>
+            <label for="cac-input-churn" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly Customer Churn Rate (%)</label>
+            <input
+              id="cac-input-churn"
+              type="number"
+              min="0.1"
+              max="20"
+              step="0.1"
+              value="2.5"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-cac"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate SaaS Payback
+          </button>
         </div>
       </CalculatorCard>
 
-      <!-- Output Results -->
-      <ResultCard title="PAYBACK & LTV:CAC BENCHMARKS">
-        <div class="space-y-16">
-          <div class="grid grid-cols-2 gap-12 text-center font-mono">
-            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
-              <div class="text-xs text-muted dark:text-muted-dark uppercase mb-4">CAC Payback Period</div>
-              <div id="cac-payback-months" class="text-h3 font-bold text-accent dark:text-accent-dark">10.0 mos</div>
-              <div id="cac-payback-days" class="text-xs text-ink2 dark:text-ink2-dark mt-2">~304 Days</div>
+      <!-- OUTPUT CARD -->
+      <ResultCard title="PAYBACK & UNIT ECONOMICS METRICS">
+        <div class="space-y-20">
+          
+          <div class="grid grid-cols-2 gap-12 font-mono text-center">
+            <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16">
+              <div id="stat-cac-months" class="text-h2 font-bold text-emerald-800 dark:text-emerald-300">10.0 Mos</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Gross Margin CAC Payback</div>
             </div>
-
-            <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
-              <div class="text-xs text-muted dark:text-muted-dark uppercase mb-4">LTV : CAC Ratio</div>
-              <div id="cac-ltv-ratio" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">4.0x</div>
-              <div id="cac-ltv-val" class="text-xs text-ink2 dark:text-ink2-dark mt-2">$4,800 Lifetime Value</div>
+            <div class="rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-cac-ltv-ratio" class="text-h2 font-bold text-accent dark:text-accent-dark">4.0x</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">LTV : CAC Ratio</div>
             </div>
           </div>
 
-          <div class="p-12 rounded-10 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-caption">
-            <div class="flex items-center justify-between">
-              <span>Payback Efficiency Health</span>
-              <span id="cac-health-badge" class="px-8 py-2 rounded-6 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs">Healthy (&lt; 12 Mos)</span>
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Customer Lifetime Value (LTV):</span>
+              <span id="stat-cac-ltv" class="font-bold text-ink dark:text-ink-dark">$4,800</span>
             </div>
-            <div class="flex items-center justify-between">
-              <span>Monthly Gross Profit per User</span>
-              <span id="cac-monthly-profit" class="font-bold text-ink dark:text-ink-dark">$120.00 / mo</span>
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Average Customer Lifespan:</span>
+              <span id="stat-cac-lifespan" class="font-bold text-ink dark:text-ink-dark">40.0 Months</span>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <span>Unit Economics Health Rating:</span>
+              <span id="stat-cac-rating" class="font-bold text-emerald-600 dark:text-emerald-400">Excellent (&lt;12 Mos Payback) ✓</span>
             </div>
           </div>
+
         </div>
       </ResultCard>
 
@@ -107,97 +141,66 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>SaaS CAC Payback & Unit Economics Analysis</h2>
+    <h2>SaaS Unit Economics & Capital Efficiency Guide</h2>
     <p>
-      The **CAC Payback Period** measures the exact number of months required for a customer to generate enough gross profit to cover their customer acquisition cost. It is one of the single most critical metrics evaluated by venture capital investors and finance teams to assess capital efficiency and liquidity risk.
+      Optimizing CAC payback period and LTV:CAC ratios allows B2B SaaS founders to scale sales and marketing acquisition loops sustainably.
     </p>
 
-    <h3>Mathematical Formulas</h3>
-    <pre><code>Gross Profit per Month = ARPU × (Gross Margin % / 100)
-CAC Payback Period (Months) = CAC / Gross Profit per Month
-Customer Lifespan (Months) = 1 / (Monthly Churn % / 100)
-Customer Lifetime Value (LTV) = Gross Profit per Month × Customer Lifespan
-LTV : CAC Ratio = LTV / CAC</code></pre>
-
-    <h3>SaaS CAC Payback Benchmarks</h3>
+    <h3>Benchmark Guidelines</h3>
     <ul>
-      <li><strong>Under 6 Months (PLG / Self-Serve)</strong>: Exceptional capital efficiency; aggressive expansion recommended.</li>
-      <li><strong>6 to 12 Months (Mid-Market B2B)</strong>: Target benchmark for venture-backed SaaS (Series A to Series C).</li>
-      <li><strong>12 to 18 Months (Enterprise B2B)</strong>: Healthy for large contract values ($50k+ ACV) with multi-year commitments.</li>
-      <li><strong>Over 18 Months</strong>: High cash burn risk; focus on improving conversion rates or reducing sales cycles.</li>
+      <li><strong>Payback &lt; 12 Months</strong>: Top-quartile capital efficiency.</li>
+      <li><strong>LTV : CAC &gt; 3.0x</strong>: Healthy scalable SaaS unit economics.</li>
     </ul>
+
+    <h3>Related Financial Tools</h3>
+    <p>
+      Calculate compound interest with the <a href="/tools/compound-interest/">Compound Interest Calculator</a>, calculate profit margins with the <a href="/tools/profit-margin-calculator/">Profit Margin Calculator</a>, or estimate API costs with the <a href="/tools/claude-cost-estimator/">Claude Cost Estimator</a>.
+    </p>
   </div>
 </ToolLayout>
 
 <script is:inline>
   (function() {
-    const cacEl = document.getElementById('cac-amount');
-    const arpuEl = document.getElementById('cac-arpu');
-    const marginEl = document.getElementById('cac-margin');
-    const churnEl = document.getElementById('cac-churn');
+    const inputCost = document.getElementById('cac-input-cost');
+    const inputArpu = document.getElementById('cac-input-arpu');
+    const inputMargin = document.getElementById('cac-input-margin');
+    const inputChurn = document.getElementById('cac-input-churn');
+    const btnCalc = document.getElementById('btn-calc-cac');
 
-    const acvValEl = document.getElementById('cac-acv-val');
-    const lifespanValEl = document.getElementById('cac-lifespan-val');
-    const paybackMonthsEl = document.getElementById('cac-payback-months');
-    const paybackDaysEl = document.getElementById('cac-payback-days');
-    const ltvRatioEl = document.getElementById('cac-ltv-ratio');
-    const ltvValEl = document.getElementById('cac-ltv-val');
-    const healthBadgeEl = document.getElementById('cac-health-badge');
-    const monthlyProfitEl = document.getElementById('cac-monthly-profit');
+    const statMonths = document.getElementById('stat-cac-months');
+    const statLtvRatio = document.getElementById('stat-cac-ltv-ratio');
+    const statLtv = document.getElementById('stat-cac-ltv');
+    const statLifespan = document.getElementById('stat-cac-lifespan');
+    const statRating = document.getElementById('stat-cac-rating');
 
     function calculate() {
-      const cac = parseFloat(cacEl?.value || 0);
-      const arpu = parseFloat(arpuEl?.value || 0);
-      const marginPct = parseFloat(marginEl?.value || 0) / 100;
-      const churnPct = parseFloat(churnEl?.value || 0) / 100;
+      const cac = parseFloat(inputCost?.value || '1200');
+      const arpu = parseFloat(inputArpu?.value || '150');
+      const margin = parseFloat(inputMargin?.value || '80') / 100;
+      const churn = parseFloat(inputChurn?.value || '2.5') / 100;
 
-      if (arpu <= 0 || marginPct <= 0 || churnPct <= 0) return;
+      const monthlyMarginRevenue = arpu * margin;
+      const paybackMonths = monthlyMarginRevenue > 0 ? (cac / monthlyMarginRevenue) : 0;
 
-      const acv = arpu * 12;
-      const monthlyGrossProfit = arpu * marginPct;
-      const paybackMonths = cac / monthlyGrossProfit;
-      const paybackDays = paybackMonths * 30.4375;
+      const lifespanMonths = churn > 0 ? (1 / churn) : 0;
+      const ltv = monthlyMarginRevenue * lifespanMonths;
+      const ltvRatio = cac > 0 ? (ltv / cac) : 0;
 
-      const lifespanMonths = 1 / churnPct;
-      const ltv = monthlyGrossProfit * lifespanMonths;
-      const ltvRatio = cac > 0 ? ltv / cac : 0;
+      if (statMonths) statMonths.textContent = `${paybackMonths.toFixed(1)} Mos`;
+      if (statLtvRatio) statLtvRatio.textContent = `${ltvRatio.toFixed(1)}x`;
+      if (statLtv) statLtv.textContent = `$${Math.round(ltv).toLocaleString()}`;
+      if (statLifespan) statLifespan.textContent = `${lifespanMonths.toFixed(1)} Months`;
 
-      if (acvValEl) acvValEl.textContent = `$${acv.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
-      if (lifespanValEl) lifespanValEl.textContent = `${lifespanMonths.toFixed(1)} Months`;
-      if (paybackMonthsEl) paybackMonthsEl.textContent = `${paybackMonths.toFixed(1)} mos`;
-      if (paybackDaysEl) paybackDaysEl.textContent = `~${Math.round(paybackDays)} Days`;
-      if (ltvRatioEl) ltvRatioEl.textContent = `${ltvRatio.toFixed(1)}x`;
-      if (ltvValEl) ltvValEl.textContent = `$${Math.round(ltv).toLocaleString()} Lifetime Value`;
-      if (monthlyProfitEl) monthlyProfitEl.textContent = `$${monthlyGrossProfit.toFixed(2)} / mo`;
-
-      if (healthBadgeEl) {
-        if (paybackMonths <= 6) {
-          healthBadgeEl.textContent = 'Ultra Efficient (< 6 Mos)';
-          healthBadgeEl.className = 'px-8 py-2 rounded-6 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs';
-        } else if (paybackMonths <= 12) {
-          healthBadgeEl.textContent = 'Healthy (< 12 Mos)';
-          healthBadgeEl.className = 'px-8 py-2 rounded-6 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs';
-        } else if (paybackMonths <= 18) {
-          healthBadgeEl.textContent = 'Moderate (12-18 Mos)';
-          healthBadgeEl.className = 'px-8 py-2 rounded-6 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs';
-        } else {
-          healthBadgeEl.textContent = 'High Cash Burn (> 18 Mos)';
-          healthBadgeEl.className = 'px-8 py-2 rounded-6 bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold text-xs';
-        }
-      }
-
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'tool_used', {
-          tool_slug: 'cac-payback-calculator',
-          tool_category: 'Business',
-          action: 'calculate'
-        });
+      if (statRating) {
+        if (paybackMonths <= 12 && ltvRatio >= 3) statRating.textContent = 'Excellent (<12 Mos Payback) ✓';
+        else if (paybackMonths <= 18) statRating.textContent = 'Good (Healthy SaaS Scaling)';
+        else statRating.textContent = 'High Payback Period (>18 Mos)';
       }
     }
 
-    [cacEl, arpuEl, marginEl, churnEl].forEach(el => {
+    btnCalc?.addEventListener('click', calculate);
+    [inputCost, inputArpu, inputMargin, inputChurn].forEach(el => {
       el?.addEventListener('input', calculate);
-      el?.addEventListener('change', calculate);
     });
 
     calculate();

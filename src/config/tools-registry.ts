@@ -19572,6 +19572,76 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "date-difference"
     ],
     "icon": "calendar"
+  },
+  {
+    "id": "fin-ci-1",
+    "slug": "compound-interest",
+    "title": "Compound Interest & Investment Growth Calculator",
+    "name": "Compound Interest & Investment Growth Calculator",
+    "href": "/tools/compound-interest/",
+    "component": "src/pages/tools/compound-interest.astro",
+    "status": "implemented",
+    "category": "Finance",
+    "categorySlug": "finance",
+    "mode": "calculator",
+    "description": "Calculate compound interest growth, annual compounding returns, and recurring monthly deposits.",
+    "seo": {
+      "title": "Compound Interest & Investment Growth Calculator | Nadhebe",
+      "description": "Calculate compound interest growth, annual compounding returns, and recurring monthly contributions client-side for financial planning.",
+      "keywords": [
+        "compound interest calculator",
+        "investment growth calculator",
+        "monthly deposit compound",
+        "future value calculator",
+        "apy interest calculator"
+      ]
+    },
+    "relatedTools": [
+      "cac-payback",
+      "profit-margin-calculator",
+      "openai-cost-estimator",
+      "date-difference"
+    ],
+    "tags": [
+      "finance",
+      "compound-interest"
+    ],
+    "icon": "trending-up"
+  },
+  {
+    "id": "fin-cac-1",
+    "slug": "cac-payback",
+    "title": "SaaS CAC Payback Period & LTV Calculator",
+    "name": "SaaS CAC Payback Period & LTV Calculator",
+    "href": "/tools/cac-payback/",
+    "component": "src/pages/tools/cac-payback.astro",
+    "status": "implemented",
+    "category": "Finance",
+    "categorySlug": "finance",
+    "mode": "calculator",
+    "description": "Calculate SaaS Customer Acquisition Cost (CAC) payback period in months and LTV:CAC ratios.",
+    "seo": {
+      "title": "SaaS CAC Payback Period & LTV Calculator | Nadhebe",
+      "description": "Calculate SaaS Customer Acquisition Cost (CAC) payback period in months, LTV to CAC ratio, and Gross Margin Adjusted payback client-side.",
+      "keywords": [
+        "cac payback calculator",
+        "saas ltv cac ratio",
+        "gross margin payback",
+        "customer acquisition cost",
+        "saas unit economics"
+      ]
+    },
+    "relatedTools": [
+      "compound-interest",
+      "profit-margin-calculator",
+      "claude-cost-estimator",
+      "gemini-cost-estimator"
+    ],
+    "tags": [
+      "finance",
+      "cac-payback"
+    ],
+    "icon": "pie-chart"
   }
 ];
 

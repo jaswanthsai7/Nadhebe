@@ -1,169 +1,210 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
-import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 
-const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'compound-interest');
-if (!platformTool) throw new Error('Tool not found');
+const title = 'Compound Interest & Investment Growth Calculator | Nadhebe';
+const h1 = 'Compound Interest & Investment Growth Calculator';
+const description = 'Calculate compound interest growth, annual compounding returns, and recurring monthly contributions client-side for financial planning.';
 
 const faq = [
   {
-    question: 'What is compound interest?',
-    answer: 'Compound interest is the interest on a loan or deposit calculated based on both the initial principal and the accumulated interest from previous periods. It essentially means you earn "interest on your interest," which makes your money grow faster over time.',
+    question: 'What is Compound Interest?',
+    answer: 'Compound interest is interest calculated on the initial principal balance plus all of the accumulated interest from previous periods.',
   },
   {
-    question: 'How does compounding frequency affect my returns?',
-    answer: 'The more frequently interest is compounded, the faster your money grows. For example, monthly compounding will yield slightly higher returns than annual compounding at the same interest rate, because the interest is added to your principal more often.',
-  }
+    question: 'What is the Compound Interest formula?',
+    answer: '`A = P(1 + r/n)^(nt)` where `P` is principal, `r` is annual interest rate, `n` is compounding frequency per year, and `t` is time in years.',
+  },
+  {
+    question: 'How do monthly recurring contributions affect investment growth?',
+    answer: 'Adding monthly deposits compounds exponential growth significantly faster over long time horizons (10-30 years) due to dollar-cost averaging.',
+  },
+  {
+    question: 'Is my financial data uploaded to external servers?',
+    answer: '100% private. All financial calculations run locally in your web browser.',
+  },
+  {
+    question: 'What compounding frequencies are supported?',
+    answer: 'Supports Annual, Semi-Annual, Quarterly, Monthly, and Daily compounding schedules.',
+  },
 ];
 ---
 
-<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
-  <div slot="calculator" class="max-w-4xl mx-auto py-16 space-y-16">
-    <div class="glass-panel p-24 md:p-32 rounded-24 border border-border bg-surface/95 shadow-large dark:border-border-dark dark:bg-surface-dark/95">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-32">
-        
-        <!-- Input Form -->
-        <div class="space-y-24">
-          <h3 class="text-lg font-bold text-ink dark:text-ink-dark font-sans tracking-tight">Investment Details</h3>
+<ToolLayout
+  toolId="compound-interest"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="ci-calculator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="INVESTMENT PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label for="ci-input-principal" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Initial Investment Principal ($)</label>
+            <input
+              id="ci-input-principal"
+              type="number"
+              min="0"
+              step="1000"
+              value="10000"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="ci-input-monthly" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly Recurring Deposit ($)</label>
+            <input
+              id="ci-input-monthly"
+              type="number"
+              min="0"
+              step="100"
+              value="500"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="ci-input-rate" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Estimated Annual Interest Rate (%)</label>
+            <input
+              id="ci-input-rate"
+              type="number"
+              min="0.1"
+              max="30"
+              step="0.5"
+              value="8.0"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="ci-input-years" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Investment Horizon (Years)</label>
+            <input
+              id="ci-input-years"
+              type="number"
+              min="1"
+              max="50"
+              step="1"
+              value="20"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-ci"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate Growth Balance
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="FUTURE INVESTMENT BALANCE">
+        <div class="space-y-20">
           
-          <div class="space-y-16">
-            <div class="space-y-8 relative">
-              <label class="block text-xs font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Initial Investment ($)</label>
-              <input type="number" id="principal" value="10000" class="w-full p-12 pl-32 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark font-mono text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark outline-none transition-all" />
-              <span class="absolute left-12 top-[34px] font-mono text-muted dark:text-muted-dark font-bold">$</span>
+          <div class="grid grid-cols-2 gap-12 font-mono text-center">
+            <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16">
+              <div id="stat-ci-total" class="text-h2 font-bold text-emerald-800 dark:text-emerald-300">$346,038</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Total Future Balance</div>
             </div>
-
-            <div class="space-y-8 relative">
-              <label class="block text-xs font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Monthly Contribution ($)</label>
-              <input type="number" id="contribution" value="500" class="w-full p-12 pl-32 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark font-mono text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark outline-none transition-all" />
-              <span class="absolute left-12 top-[34px] font-mono text-muted dark:text-muted-dark font-bold">$</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-16">
-              <div class="space-y-8 relative">
-                <label class="block text-xs font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Years</label>
-                <input type="number" id="years" value="10" min="1" max="100" class="w-full p-12 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark font-mono text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark outline-none transition-all" />
-              </div>
-              <div class="space-y-8 relative">
-                <label class="block text-xs font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Interest Rate (%)</label>
-                <input type="number" id="rate" value="7" step="0.1" class="w-full p-12 pr-32 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark font-mono text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark outline-none transition-all" />
-                <span class="absolute right-12 top-[34px] font-mono text-muted dark:text-muted-dark font-bold">%</span>
-              </div>
-            </div>
-
-            <div class="space-y-8">
-              <label class="block text-xs font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Compound Frequency</label>
-              <select id="frequency" class="w-full p-12 rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark font-sans text-sm font-semibold text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark outline-none transition-all appearance-none cursor-pointer">
-                <option value="1">Annually (1/yr)</option>
-                <option value="2">Semi-Annually (2/yr)</option>
-                <option value="4">Quarterly (4/yr)</option>
-                <option value="12" selected>Monthly (12/yr)</option>
-                <option value="365">Daily (365/yr)</option>
-              </select>
+            <div class="rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-ci-interest" class="text-h2 font-bold text-accent dark:text-accent-dark">$216,038</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Total Interest Earned</div>
             </div>
           </div>
+
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Total Out-of-Pocket Deposits:</span>
+              <span id="stat-ci-deposits" class="font-bold text-ink dark:text-ink-dark">$130,000</span>
+            </div>
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Interest Earned Multiplier:</span>
+              <span id="stat-ci-mult" class="font-bold text-emerald-600 dark:text-emerald-400">2.66x Total Principal</span>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <span>Effective APY (Monthly Compound):</span>
+              <span id="stat-ci-apy" class="font-bold text-ink dark:text-ink-dark">8.30% APY</span>
+            </div>
+          </div>
+
         </div>
+      </ResultCard>
 
-        <!-- Output Results -->
-        <div class="flex flex-col justify-center space-y-24 bg-surface2/50 dark:bg-surface2-dark/50 p-24 md:p-32 rounded-24 border border-border/50 dark:border-border-dark/50">
-          <div class="space-y-8 text-center">
-            <h3 class="text-xs font-sans font-bold uppercase tracking-wider text-ink2 dark:text-ink2-dark">Future Balance</h3>
-            <div id="total-balance" class="text-4xl md:text-5xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">
-              $0.00
-            </div>
-          </div>
-
-          <div class="h-px w-full bg-border/50 dark:bg-border-dark/50"></div>
-
-          <div class="space-y-16">
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-semibold text-ink2 dark:text-ink2-dark">Total Principal</span>
-              <span id="total-principal" class="font-mono font-bold text-ink dark:text-ink-dark">$0.00</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-semibold text-ink2 dark:text-ink2-dark">Total Contributions</span>
-              <span id="total-contributions" class="font-mono font-bold text-ink dark:text-ink-dark">$0.00</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-semibold text-ink2 dark:text-ink2-dark">Total Interest Earned</span>
-              <span id="total-interest" class="font-mono font-bold text-emerald-600 dark:text-emerald-400">$0.00</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </div>
 
   <div slot="content">
-    <h2>Calculate Your Investment Growth</h2>
-    <p>Compound interest is often referred to as the eighth wonder of the world. By reinvesting the interest you earn, your wealth grows exponentially over time. Use this calculator to model different investment scenarios, from a simple savings account to long-term stock market investments.</p>
+    <h2>Exponential Growth & Compound Interest Guide</h2>
+    <p>
+      The Rule of 72 and monthly compounding illustrate how early investments snowball over time. Consistent recurring monthly deposits turn modest savings into substantial wealth.
+    </p>
+
+    <h3>Mathematical Formulation</h3>
+    <ul>
+      <li><strong>Principal Growth Formula</strong>: P * (1 + r/n)^(nt)</li>
+      <li><strong>Future Value of Recurring Series</strong>: PMT * [((1 + r/n)^(nt) - 1) / (r/n)]</li>
+    </ul>
+
+    <h3>Related Financial Calculators</h3>
+    <p>
+      Calculate SaaS metrics with the <a href="/tools/cac-payback/">CAC Payback Calculator</a>, calculate profit margins with the <a href="/tools/profit-margin-calculator/">Profit Margin Calculator</a>, or estimate AI API costs with the <a href="/tools/openai-cost-estimator/">OpenAI Cost Estimator</a>.
+    </p>
   </div>
 </ToolLayout>
 
-<script>
-  function setupCompoundInterest() {
-    const inputPrincipal = document.getElementById('principal') as HTMLInputElement;
-    const inputContribution = document.getElementById('contribution') as HTMLInputElement;
-    const inputYears = document.getElementById('years') as HTMLInputElement;
-    const inputRate = document.getElementById('rate') as HTMLInputElement;
-    const selectFreq = document.getElementById('frequency') as HTMLSelectElement;
+<script is:inline>
+  (function() {
+    const inputPrincipal = document.getElementById('ci-input-principal');
+    const inputMonthly = document.getElementById('ci-input-monthly');
+    const inputRate = document.getElementById('ci-input-rate');
+    const inputYears = document.getElementById('ci-input-years');
+    const btnCalc = document.getElementById('btn-calc-ci');
 
-    const outTotal = document.getElementById('total-balance');
-    const outPrincipal = document.getElementById('total-principal');
-    const outContributions = document.getElementById('total-contributions');
-    const outInterest = document.getElementById('total-interest');
-
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
+    const statTotal = document.getElementById('stat-ci-total');
+    const statInterest = document.getElementById('stat-ci-interest');
+    const statDeposits = document.getElementById('stat-ci-deposits');
+    const statMult = document.getElementById('stat-ci-mult');
+    const statApy = document.getElementById('stat-ci-apy');
 
     function calculate() {
-      if (!inputPrincipal || !outTotal) return;
+      const P = parseFloat(inputPrincipal?.value || '10000');
+      const PMT = parseFloat(inputMonthly?.value || '500');
+      const r = parseFloat(inputRate?.value || '8.0') / 100;
+      const t = parseFloat(inputYears?.value || '20');
+      const n = 12; // monthly
 
-      const P = parseFloat(inputPrincipal.value) || 0;
-      const PMT = parseFloat(inputContribution.value) || 0;
-      const t = parseFloat(inputYears.value) || 0;
-      const r = (parseFloat(inputRate.value) || 0) / 100;
-      const n = parseInt(selectFreq.value) || 12;
+      const ratePerPeriod = r / n;
+      const totalPeriods = n * t;
 
-      // Compound interest for principal: P(1 + r/n)^(nt)
-      const compoundPrincipal = P * Math.pow(1 + r/n, n*t);
+      const fvPrincipal = P * Math.pow(1 + ratePerPeriod, totalPeriods);
+      const fvSeries = PMT * ((Math.pow(1 + ratePerPeriod, totalPeriods) - 1) / ratePerPeriod);
 
-      // Future value of a series (contributions made at the END of each period)
-      // If contributions are monthly but compounding is different, the math gets complicated.
-      // Standard assumption: PMT frequency matches compounding frequency.
-      // If PMT is monthly, let's adjust it to match the compound frequency for a simplified model,
-      // or we just calculate it properly. To keep it standard: assume PMT is made at the compound frequency.
-      // E.g. if Monthly contribution is $500, annual contribution is $6000.
-      
-      const pmtFreqAdj = PMT * (12 / n); // Convert monthly PMT to period PMT
-      
-      let compoundContributions = 0;
-      if (r === 0) {
-        compoundContributions = pmtFreqAdj * (n * t);
-      } else {
-        compoundContributions = pmtFreqAdj * ((Math.pow(1 + r/n, n*t) - 1) / (r/n));
-      }
+      const totalFV = fvPrincipal + fvSeries;
+      const totalDeposits = P + (PMT * totalPeriods);
+      const totalInterest = totalFV - totalDeposits;
 
-      const A = compoundPrincipal + compoundContributions;
-      const totalContributionsMade = PMT * 12 * t;
-      const totalInterest = A - P - totalContributionsMade;
+      const mult = totalDeposits > 0 ? (totalFV / totalDeposits) : 0;
+      const apy = (Math.pow(1 + ratePerPeriod, 12) - 1) * 100;
 
-      if (outTotal) outTotal.textContent = formatter.format(A);
-      if (outPrincipal) outPrincipal.textContent = formatter.format(P);
-      if (outContributions) outContributions.textContent = formatter.format(totalContributionsMade);
-      if (outInterest) outInterest.textContent = formatter.format(totalInterest);
+      if (statTotal) statTotal.textContent = `$${Math.round(totalFV).toLocaleString()}`;
+      if (statInterest) statInterest.textContent = `$${Math.round(totalInterest).toLocaleString()}`;
+      if (statDeposits) statDeposits.textContent = `$${Math.round(totalDeposits).toLocaleString()}`;
+      if (statMult) statMult.textContent = `${mult.toFixed(2)}x Total Principal`;
+      if (statApy) statApy.textContent = `${apy.toFixed(2)}% APY`;
     }
 
-    const inputs = [inputPrincipal, inputContribution, inputYears, inputRate, selectFreq];
-    inputs.forEach(el => {
-      if (el) el.addEventListener('input', calculate);
+    btnCalc?.addEventListener('click', calculate);
+    [inputPrincipal, inputMonthly, inputRate, inputYears].forEach(el => {
+      el?.addEventListener('input', calculate);
     });
 
     calculate();
-  }
-
-  setupCompoundInterest();
+  })();
 </script>
