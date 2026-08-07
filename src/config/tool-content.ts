@@ -1312,6 +1312,38 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'base64-image-converter': {
+    intro: 'Base64 Image Converter & Data URL Encoder converts image files into ASCII text strings for inline CSS/HTML embedding.',
+    useCases: [
+      'Inline icons and favicons directly into CSS stylesheets',
+      'Encode PNG, JPEG, WebP, SVG images into data:image/png;base64,... strings',
+      'Preview image renderings from pasted Base64 strings',
+    ],
+    howItWorks: 'Upload an image or paste a Data URL. The browser reads binary bytes and outputs valid Base64 string data.',
+    faq: [
+      {
+        question: 'Are my uploaded images sent to remote servers?',
+        answer: '100% private. All Base64 encoding executes locally inside your web browser.',
+      },
+    ],
+  },
+
+  'css-flexbox-generator': {
+    intro: 'CSS Flexbox Layout Generator & Visual Builder builds responsive flexbox container layouts with live visual canvas controls.',
+    useCases: [
+      'Configure flex-direction, justify-content, align-items, flex-wrap, and gap',
+      'Preview multi-item flex layouts visually in real-time',
+      'Export production-ready CSS container rules to clipboard',
+    ],
+    howItWorks: 'Adjust layout dropdowns and gaps. The tool renders live item elements and formats CSS flexbox code.',
+    faq: [
+      {
+        question: 'What is the difference between justify-content and align-items?',
+        answer: 'justify-content aligns items along the main axis; align-items aligns items along the cross axis.',
+      },
+    ],
+  },
+
 };
 
 

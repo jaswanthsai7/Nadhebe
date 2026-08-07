@@ -20062,6 +20062,76 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "markdown-table-generator"
     ],
     "icon": "table"
+  },
+  {
+    "id": "dev-b64i-1",
+    "slug": "base64-image-converter",
+    "title": "Base64 Image Converter & Data URL Encoder",
+    "name": "Base64 Image Converter & Data URL Encoder",
+    "href": "/tools/base64-image-converter/",
+    "component": "src/pages/tools/base64-image-converter.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "converter",
+    "description": "Convert images into Base64 Data URL strings client-side for HTML/CSS embedding.",
+    "seo": {
+      "title": "Base64 Image Converter & Data URL Encoder | Nadhebe",
+      "description": "Convert images (PNG, JPEG, WebP, SVG) into Base64 Data URL strings client-side. Inline images directly into CSS stylesheets or HTML `<img>` src tags.",
+      "keywords": [
+        "base64 image converter",
+        "image to base64 data url",
+        "css background base64 image",
+        "inline image encoder",
+        "base64 img src generator"
+      ]
+    },
+    "relatedTools": [
+      "base64-encoder",
+      "webp-to-png",
+      "svg-to-png",
+      "png-to-webp"
+    ],
+    "tags": [
+      "developer",
+      "base64-image-converter"
+    ],
+    "icon": "image"
+  },
+  {
+    "id": "design-flex-1",
+    "slug": "css-flexbox-generator",
+    "title": "CSS Flexbox Layout Generator & Visual Builder",
+    "name": "CSS Flexbox Layout Generator & Visual Builder",
+    "href": "/tools/css-flexbox-generator/",
+    "component": "src/pages/tools/css-flexbox-generator.astro",
+    "status": "implemented",
+    "category": "Design",
+    "categorySlug": "design",
+    "mode": "generator",
+    "description": "Build and preview CSS Flexbox layouts interactively with live alignment and gap controls.",
+    "seo": {
+      "title": "CSS Flexbox Layout Generator & Visual Builder | Nadhebe",
+      "description": "Build and preview CSS Flexbox layouts interactively. Configure flex-direction, justify-content, align-items, flex-wrap, and export production CSS code.",
+      "keywords": [
+        "css flexbox generator",
+        "flexbox visual builder",
+        "css justify content align items",
+        "flex layout maker",
+        "responsive flexbox css"
+      ]
+    },
+    "relatedTools": [
+      "css-clamp-calculator",
+      "color-contrast-checker",
+      "px-to-rem",
+      "aspect-ratio-calculator"
+    ],
+    "tags": [
+      "design",
+      "css-flexbox-generator"
+    ],
+    "icon": "layout"
   }
 ];
 

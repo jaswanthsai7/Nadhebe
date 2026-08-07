@@ -1,0 +1,197 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Base64 Image Converter & Data URL Encoder | Nadhebe';
+const h1 = 'Base64 Image Converter & Data URL Encoder';
+const description = 'Convert images (PNG, JPEG, WebP, SVG) into Base64 Data URL strings client-side. Inline images directly into CSS stylesheets or HTML `<img>` src tags.';
+
+const faq = [
+  {
+    question: 'How does the Base64 Image Converter work?',
+    answer: 'Upload an image file or paste an existing Base64 Data URL. The converter encodes image binaries into `data:image/png;base64,...` text strings locally in your browser.',
+  },
+  {
+    question: 'Why encode images into Base64 Data URLs?',
+    answer: 'Base64 Data URLs allow embedding small icons, favicons, and background images directly inside CSS or HTML files without extra HTTP requests.',
+  },
+  {
+    question: 'What image formats are supported?',
+    answer: 'Supports PNG, JPEG, WebP, GIF, SVG, and ICO image formats.',
+  },
+  {
+    question: 'Is my uploaded image sent to external servers?',
+    answer: '100% private. All Base64 encoding and image decoding execute locally inside your web browser.',
+  },
+  {
+    question: 'How much overhead does Base64 image encoding add?',
+    answer: 'Base64 encoding increases raw binary image file size by approximately 33% (4 characters represent 3 bytes).',
+  },
+];
+---
+
+<ToolLayout
+  toolId="base64-image-converter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="b64-img-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="UPLOAD IMAGE OR PASTE BASE64">
+        <div class="space-y-16">
+          <!-- File Drag Drop Zone -->
+          <div class="border-2 border-dashed border-border dark:border-border-dark rounded-12 p-20 text-center bg-surface2/40 dark:bg-surface2-dark/40 hover:border-accent transition-colors">
+            <label for="b64i-file-input" class="cursor-pointer space-y-8 block">
+              <svg class="w-32 h-32 mx-auto text-accent dark:text-accent-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-caption font-semibold text-ink dark:text-ink-dark block">Click or Drag & Drop Image File</span>
+              <span class="text-xs text-muted dark:text-muted-dark block">Supports PNG, JPEG, WebP, SVG (Client-side)</span>
+              <input id="b64i-file-input" type="file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="b64i-text-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Or Paste Base64 Data URL</label>
+              <button type="button" id="btn-load-sample-b64i" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Base64</button>
+            </div>
+            <textarea
+              id="b64i-text-raw"
+              rows="6"
+              placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="BASE64 DATA URL OUTPUT & PREVIEW">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span id="b64i-size-info" class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Base64 Length: 0 chars</span>
+            <div class="flex items-center gap-8">
+              <button type="button" id="btn-copy-b64-str" class="rounded-6 bg-accent px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Data URL</button>
+              <button type="button" id="btn-copy-img-tag" class="rounded-6 bg-accent/80 px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy &lt;img&gt; Tag</button>
+            </div>
+          </div>
+
+          <!-- Image Preview -->
+          <div class="w-full rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60 min-h-[160px] flex items-center justify-center">
+            <img id="b64i-preview-img" src="" alt="Base64 Preview" class="max-w-full max-h-[180px] rounded-8 shadow-soft border border-border/40 dark:border-border-dark/40 hidden" />
+            <span id="b64i-no-img-text" class="text-xs font-mono text-muted dark:text-muted-dark">No valid Base64 image loaded</span>
+          </div>
+
+          <!-- Output Code -->
+          <pre id="b64i-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 max-h-[140px] leading-relaxed whitespace-pre-wrap truncate"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Base64 Image Encoding & Data URL Specification</h2>
+    <p>
+      Base64 Data URLs represent binary image files as ASCII text strings (`data:image/png;base64,...`). Inlining small icons into CSS reduces network request round-trips (RTT).
+    </p>
+
+    <h3>HTML & CSS Usage Snippets</h3>
+    <ul>
+      <li><strong>HTML Tag</strong>: <code>&lt;img src="data:image/png;base64,..." alt="Icon" /&gt;</code></li>
+      <li><strong>CSS Background</strong>: <code>background-image: url("data:image/png;base64,...");</code></li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Encode text with the <a href="/tools/base64-encoder/">Base64 Encoder/Decoder</a>, convert WebP to PNG with the <a href="/tools/webp-to-png/">WebP to PNG Converter</a>, or convert SVG to PNG with the <a href="/tools/svg-to-png/">SVG to PNG Converter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const fileInput = document.getElementById('b64i-file-input');
+    const textRaw = document.getElementById('b64i-text-raw');
+    const btnSample = document.getElementById('btn-load-sample-b64i');
+
+    const sizeInfo = document.getElementById('b64i-size-info');
+    const previewImg = document.getElementById('b64i-preview-img');
+    const noImgText = document.getElementById('b64i-no-img-text');
+    const outputText = document.getElementById('b64i-output-text');
+
+    const btnCopyStr = document.getElementById('btn-copy-b64-str');
+    const btnCopyTag = document.getElementById('btn-copy-img-tag');
+
+    const sampleB64 = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzYzNjZmMSIvPjwvc3ZnPg==`;
+
+    function updatePreview(dataUrl) {
+      if (!dataUrl || !dataUrl.startsWith('data:image/')) {
+        if (previewImg) previewImg.classList.add('hidden');
+        if (noImgText) noImgText.classList.remove('hidden');
+        if (sizeInfo) sizeInfo.textContent = 'Base64 Length: 0 chars';
+        if (outputText) outputText.textContent = '';
+        return;
+      }
+
+      if (previewImg) {
+        previewImg.src = dataUrl;
+        previewImg.classList.remove('hidden');
+      }
+      if (noImgText) noImgText.classList.add('hidden');
+
+      if (sizeInfo) sizeInfo.textContent = `Base64 Length: ${dataUrl.length.toLocaleString()} chars`;
+      if (outputText) outputText.textContent = dataUrl;
+    }
+
+    fileInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const result = evt.target.result;
+        if (textRaw) textRaw.value = result;
+        updatePreview(result);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    textRaw?.addEventListener('input', () => {
+      updatePreview(textRaw.value.trim());
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (textRaw) textRaw.value = sampleB64;
+      updatePreview(sampleB64);
+    });
+
+    btnCopyStr?.addEventListener('click', () => {
+      if (outputText && outputText.textContent) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopyStr.textContent = 'Copied!';
+        setTimeout(() => (btnCopyStr.textContent = 'Copy Data URL'), 2000);
+      }
+    });
+
+    btnCopyTag?.addEventListener('click', () => {
+      if (outputText && outputText.textContent) {
+        const tag = `<img src="${outputText.textContent}" alt="Embedded Image" />`;
+        navigator.clipboard.writeText(tag);
+        btnCopyTag.textContent = 'Copied!';
+        setTimeout(() => (btnCopyTag.textContent = 'Copy <img> Tag'), 2000);
+      }
+    });
+
+    if (textRaw && !textRaw.value) textRaw.value = sampleB64;
+    updatePreview(sampleB64);
+  })();
+</script>
