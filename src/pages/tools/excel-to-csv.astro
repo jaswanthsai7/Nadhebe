@@ -1,0 +1,174 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Excel to CSV Converter | Nadhebe';
+const h1 = 'Excel to CSV Converter';
+const description = 'Convert Excel TSV clipboard data and spreadsheets into clean, standardized CSV files client-side.';
+
+const faq = [
+  {
+    question: 'How does the Excel to CSV converter work?',
+    answer: 'Copy your spreadsheet cells directly from Microsoft Excel or Google Sheets and paste them into the input text area. The converter transforms tab-delimited cells into RFC 4180 compliant CSV text.',
+  },
+  {
+    question: 'Does this tool preserve special characters and line breaks inside cells?',
+    answer: 'Yes! String values containing quotes, commas, or line breaks are automatically wrapped in double quotes according to standard CSV rules.',
+  },
+  {
+    question: 'Is my spreadsheet data uploaded to external servers?',
+    answer: '100% private. All conversions execute locally in your web browser.',
+  },
+  {
+    question: 'Can I download the converted CSV file?',
+    answer: 'Yes! Click "Download .CSV File" to save the converted spreadsheet.',
+  },
+  {
+    question: 'How do I convert JSON arrays to CSV?',
+    answer: 'Use our dedicated <a href="/tools/json-to-csv/">JSON to CSV Converter</a> tool.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="excel-to-csv"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="e2c-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="EXCEL TSV CLIPBOARD INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="e2c-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Paste Excel Cells or TSV Text</label>
+              <button type="button" id="btn-load-sample-e2c" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample TSV</button>
+            </div>
+            <textarea
+              id="e2c-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-convert-e2c"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert to Clean CSV
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED CSV OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">CSV Standard Output</span>
+            <div class="flex items-center gap-8">
+              <button type="button" id="btn-copy-e2c" class="rounded-6 bg-accent/80 px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy</button>
+              <button type="button" id="btn-dl-e2c" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Download .CSV</button>
+            </div>
+          </div>
+
+          <pre id="e2c-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Excel to CSV Conversion Guide</h2>
+    <p>
+      Converting Excel clipboard selection into clean CSV text allows seamless data imports into SQL databases, Pandas DataFrames, and web data visualizations.
+    </p>
+
+    <h3>Formatting Standard</h3>
+    <ul>
+      <li><strong>Input Format</strong>: Tab-Separated Values (TSV) from Excel/Sheets.</li>
+      <li><strong>Output Standard</strong>: RFC 4180 Comma-Separated Values (CSV).</li>
+    </ul>
+
+    <h3>Related Data Tools</h3>
+    <p>
+      Convert CSV to Excel format with the <a href="/tools/csv-to-excel/">CSV to Excel Converter</a>, extract columns with the <a href="/tools/column-extractor/">CSV Column Extractor</a>, or convert delimiters with the <a href="/tools/delimiter-converter/">Delimiter Converter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('e2c-input-raw');
+    const btnConvert = document.getElementById('btn-convert-e2c');
+    const btnSample = document.getElementById('btn-load-sample-e2c');
+
+    const outputText = document.getElementById('e2c-output-text');
+    const btnCopy = document.getElementById('btn-copy-e2c');
+    const btnDl = document.getElementById('btn-dl-e2c');
+
+    const defaultTsv = `ID\tProduct Name\tCategory\tPrice
+1\tMechanical Keyboard\tPeripherals\t120.00
+2\tErgonomic Mouse\tPeripherals\t75.50
+3\t4K Monitor 27-inch\tDisplays\t399.99`;
+
+    function tsvToCsv(tsv) {
+      const lines = tsv.split('\n');
+      const csvLines = lines.map(line => {
+        if (!line.trim()) return '';
+        const parts = line.split('\t');
+        const escaped = parts.map(val => {
+          const v = val.replace(/"/g, '""');
+          return v.includes(',') || v.includes('"') || v.includes('\n') ? `"${v}"` : v;
+        });
+        return escaped.join(',');
+      });
+      return csvLines.join('\n');
+    }
+
+    function convert() {
+      const raw = inputRaw?.value || defaultTsv;
+      const csv = tsvToCsv(raw);
+      if (outputText) outputText.textContent = csv;
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    inputRaw?.addEventListener('input', convert);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultTsv;
+      convert();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy'), 2000);
+      }
+    });
+
+    btnDl?.addEventListener('click', () => {
+      if (!outputText) return;
+      const blob = new Blob([outputText.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'nadhebe-converted.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultTsv;
+
+    convert();
+  })();
+</script>

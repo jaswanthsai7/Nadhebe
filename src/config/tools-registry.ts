@@ -19642,6 +19642,181 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "cac-payback"
     ],
     "icon": "pie-chart"
+  },
+  {
+    "id": "conv-delim-1",
+    "slug": "delimiter-converter",
+    "title": "CSV / TSV / Pipe Delimiter Converter",
+    "name": "CSV / TSV / Pipe Delimiter Converter",
+    "href": "/tools/delimiter-converter/",
+    "component": "src/pages/tools/delimiter-converter.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert tabular data between Comma (CSV), Tab (TSV), Pipe (|), and Semicolon (;) delimiters.",
+    "seo": {
+      "title": "CSV / TSV / Pipe Delimiter Converter | Nadhebe",
+      "description": "Convert tabular data between Comma (CSV), Tab (TSV), Pipe (|), and Semicolon (;) delimiters client-side for database import.",
+      "keywords": [
+        "delimiter converter",
+        "csv to tsv",
+        "csv to pipe delimited",
+        "convert tsv to csv",
+        "semicolon csv converter"
+      ]
+    },
+    "relatedTools": [
+      "json-to-csv",
+      "csv-to-json",
+      "sql-formatter",
+      "markdown-to-html"
+    ],
+    "tags": [
+      "converters",
+      "delimiter-converter"
+    ],
+    "icon": "columns"
+  },
+  {
+    "id": "conv-ce-1",
+    "slug": "column-extractor",
+    "title": "CSV Column Extractor & Filter",
+    "name": "CSV Column Extractor & Filter",
+    "href": "/tools/column-extractor/",
+    "component": "src/pages/tools/column-extractor.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Extract specific columns from CSV datasets, reorder fields, and drop unwanted columns client-side.",
+    "seo": {
+      "title": "CSV Column Extractor & Filter | Nadhebe",
+      "description": "Extract specific columns from CSV datasets, reorder table fields, and drop unwanted columns client-side without uploading spreadsheets.",
+      "keywords": [
+        "csv column extractor",
+        "filter csv columns",
+        "drop pii columns csv",
+        "select csv columns online",
+        "csv field isolator"
+      ]
+    },
+    "relatedTools": [
+      "delimiter-converter",
+      "json-to-csv",
+      "csv-to-excel",
+      "excel-to-csv"
+    ],
+    "tags": [
+      "converters",
+      "column-extractor"
+    ],
+    "icon": "filter"
+  },
+  {
+    "id": "seo-cls-1",
+    "slug": "cls-checklist",
+    "title": "Cumulative Layout Shift (CLS) Audit & Fix Checklist",
+    "name": "Cumulative Layout Shift (CLS) Audit & Fix Checklist",
+    "href": "/tools/cls-checklist/",
+    "component": "src/pages/tools/cls-checklist.astro",
+    "status": "implemented",
+    "category": "SEO",
+    "categorySlug": "seo",
+    "mode": "analyzer",
+    "description": "Audit Web Vitals Cumulative Layout Shift (CLS) score and apply CSS width/height fixes.",
+    "seo": {
+      "title": "Cumulative Layout Shift (CLS) Audit & Fix Checklist | Nadhebe",
+      "description": "Audit Web Vitals Cumulative Layout Shift (CLS) score, identify layout instability causes, and apply CSS width/height fixes for Google PageSpeed.",
+      "keywords": [
+        "cls checklist",
+        "cumulative layout shift audit",
+        "fix cls pagespeed",
+        "core web vitals cls",
+        "prevent layout shift css"
+      ]
+    },
+    "relatedTools": [
+      "serp-preview",
+      "seo-checker",
+      "meta-tag-analyzer",
+      "canonical-checker"
+    ],
+    "tags": [
+      "seo",
+      "cls-checklist"
+    ],
+    "icon": "layout"
+  },
+  {
+    "id": "conv-c2e-1",
+    "slug": "csv-to-excel",
+    "title": "CSV to Excel XLSX & TSV Converter",
+    "name": "CSV to Excel XLSX & TSV Converter",
+    "href": "/tools/csv-to-excel/",
+    "component": "src/pages/tools/csv-to-excel.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert CSV files into Excel-compatible TSV spreadsheets and export table files client-side.",
+    "seo": {
+      "title": "CSV to Excel XLSX & TSV Converter | Nadhebe",
+      "description": "Convert CSV files into Excel-compatible TSV spreadsheets, format column data types, and export table files client-side.",
+      "keywords": [
+        "csv to excel",
+        "csv to tsv excel",
+        "convert csv for excel",
+        "excel tsv paste",
+        "csv leading zero excel"
+      ]
+    },
+    "relatedTools": [
+      "excel-to-csv",
+      "json-to-csv",
+      "column-extractor",
+      "delimiter-converter"
+    ],
+    "tags": [
+      "converters",
+      "csv-to-excel"
+    ],
+    "icon": "file-spreadsheet"
+  },
+  {
+    "id": "conv-e2c-1",
+    "slug": "excel-to-csv",
+    "title": "Excel to CSV Converter",
+    "name": "Excel to CSV Converter",
+    "href": "/tools/excel-to-csv/",
+    "component": "src/pages/tools/excel-to-csv.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert Excel TSV clipboard data and spreadsheets into clean, standardized CSV files client-side.",
+    "seo": {
+      "title": "Excel to CSV Converter | Nadhebe",
+      "description": "Convert Excel TSV clipboard data and spreadsheets into clean, standardized CSV files client-side.",
+      "keywords": [
+        "excel to csv",
+        "convert excel to csv",
+        "tsv to csv converter",
+        "sheets to csv online",
+        "clean csv generator"
+      ]
+    },
+    "relatedTools": [
+      "csv-to-excel",
+      "json-to-csv",
+      "column-extractor",
+      "delimiter-converter"
+    ],
+    "tags": [
+      "converters",
+      "excel-to-csv"
+    ],
+    "icon": "file-text"
   }
 ];
 

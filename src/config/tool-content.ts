@@ -1120,6 +1120,86 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'delimiter-converter': {
+    intro: 'CSV / TSV / Pipe Delimiter Converter transforms tabular datasets between Comma, Tab, Pipe, and Semicolon delimiter formats client-side.',
+    useCases: [
+      'Convert CSV spreadsheets into Pipe-delimited text for database ETL loaders',
+      'Transform TSV clipboard copies into standard CSV files',
+      'Format delimited text rows for SQL bulk import commands',
+    ],
+    howItWorks: 'Select input and output delimiters. The converter parses text rows and joins columns with the target delimiter character.',
+    faq: [
+      {
+        question: 'Why convert CSV to Pipe-delimited format?',
+        answer: 'Pipe delimiters (|) prevent parsing errors in database pipelines when string values contain commas.',
+      },
+    ],
+  },
+
+  'column-extractor': {
+    intro: 'CSV Column Extractor & Filter isolates specific CSV dataset columns and drops unwanted fields client-side.',
+    useCases: [
+      'Extract target columns from large CSV spreadsheets',
+      'Remove PII columns (emails, phone numbers) before dataset sharing',
+      'Reorder CSV table fields for database loading',
+    ],
+    howItWorks: 'Paste CSV text. The tool auto-detects header column names and lets you check/uncheck columns to output a filtered CSV.',
+    faq: [
+      {
+        question: 'Is my CSV data kept private?',
+        answer: '100% private. All column extraction runs locally in your browser.',
+      },
+    ],
+  },
+
+  'cls-checklist': {
+    intro: 'Cumulative Layout Shift (CLS) Audit & Fix Checklist evaluates page layout stability and recommends CSS Web Vitals fixes.',
+    useCases: [
+      'Audit Web Vitals CLS score against Google PageSpeed 0.10 targets',
+      'Check HTML <img> tags for explicit width and height attributes',
+      'Prevent layout shifts from dynamic ads and web fonts',
+    ],
+    howItWorks: 'Select optimization rules. The tool computes estimated CLS scores and displays Google Web Vitals health ratings.',
+    faq: [
+      {
+        question: 'What is a good Google PageSpeed CLS score?',
+        answer: 'A CLS score of 0.10 or lower is classified as Good by Google Web Vitals.',
+      },
+    ],
+  },
+
+  'csv-to-excel': {
+    intro: 'CSV to Excel XLSX & TSV Converter formats CSV rows into TSV spreadsheets for direct copy-pasting into Microsoft Excel.',
+    useCases: [
+      'Convert CSV datasets to Excel TSV clipboard format',
+      'Prevent leading zero truncation on zip codes and product SKUs',
+      'Download clean .tsv files for Excel import',
+    ],
+    howItWorks: 'Paste CSV code. The converter formats tab-separated columns that paste seamlessly into Excel cells.',
+    faq: [
+      {
+        question: 'Why does Excel mangle leading zeros in CSV files?',
+        answer: 'Direct CSV opening coerces numeric strings into integers. TSV format preserves raw text formatting.',
+      },
+    ],
+  },
+
+  'excel-to-csv': {
+    intro: 'Excel to CSV Converter transforms tab-delimited Excel clipboard selections into clean RFC 4180 CSV files.',
+    useCases: [
+      'Convert Excel or Google Sheets clipboard cells into clean CSV text',
+      'Format cell strings containing quotes or line breaks for SQL import',
+      'Download standardized .csv files from Excel selections',
+    ],
+    howItWorks: 'Paste Excel TSV cells. The converter wraps special characters in quotes and outputs valid CSV text.',
+    faq: [
+      {
+        question: 'Can I paste directly from Google Sheets?',
+        answer: 'Yes! Copying cells in Google Sheets copies TSV text, which converts seamlessly to CSV.',
+      },
+    ],
+  },
+
 };
 
 

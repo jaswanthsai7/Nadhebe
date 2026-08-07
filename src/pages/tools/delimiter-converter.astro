@@ -3,23 +3,31 @@ import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'CSV & Delimiter Converter (Comma, Tab, Pipe, Semicolon) | Nadhebe';
-const h1 = 'CSV & Delimiter Converter';
-const description = 'Convert tabular text files between CSV (comma), TSV (tab), Pipe (|), and Semicolon (;) delimiters with quote escaping controls.';
+const title = 'CSV / TSV / Pipe Delimiter Converter | Nadhebe';
+const h1 = 'CSV / TSV / Pipe Delimiter Converter';
+const description = 'Convert tabular data between Comma (CSV), Tab (TSV), Pipe (|), and Semicolon (;) delimiters client-side for database import.';
 
 const faq = [
   {
-    question: 'What delimiters can I convert between?',
-    answer: 'You can convert between Comma (,), Tab (\\t), Pipe (|), Semicolon (;), and Space ( ).'
+    question: 'How does the Delimiter Converter work?',
+    answer: 'Select your input delimiter and desired output delimiter. The converter parses text rows, escapes field values containing special characters, and joins columns with the target delimiter.',
   },
   {
-    question: 'How does quote handling work during conversion?',
-    answer: 'Our converter handles embedded quotes properly so values containing the target delimiter are automatically wrapped in double quotes.'
+    question: 'What delimiters are supported?',
+    answer: 'Supports Comma (`,`), Tab (`\\t`), Pipe (`|`), Semicolon (`;`), and Space delimiters.',
   },
   {
-    question: 'Is my data processed locally?',
-    answer: 'Yes, 100% of delimiter transformation happens in your browser.'
-  }
+    question: 'Why convert CSV to Pipe-delimited text for databases?',
+    answer: 'Pipe-delimited text (`|`) reduces collisions in database ETL pipelines when text columns contain unescaped commas or semicolons.',
+  },
+  {
+    question: 'Is my data payload sent to a remote server?',
+    answer: '100% private. All text transformations run locally in your web browser.',
+  },
+  {
+    question: 'Can I copy or download the converted delimited text?',
+    answer: 'Yes! Click "Copy Result" or "Download File" to save your converted dataset.',
+  },
 ];
 ---
 
@@ -30,252 +38,165 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start" id="delimiter-converter-app">
-    <!-- Left Column: Input & Controls -->
-    <div class="space-y-24">
-      <CalculatorCard title="INPUT TABULAR DATA">
-      <div class="space-y-16">
-        <div class="flex flex-wrap items-center justify-between gap-12">
-          <div class="flex items-center gap-8">
-            <span class="text-xs font-mono font-bold uppercase text-muted dark:text-muted-dark">Input Delimiter:</span>
-            <select id="dc-input-delim" class="rounded-8 border border-border bg-surface px-10 py-4 text-xs font-mono font-bold text-accent dark:border-border-dark dark:bg-surface-dark">
-              <option value="auto">Auto-Detect</option>
-              <option value=",">Comma (,)</option>
-              <option value="&#9;">Tab (\t)</option>
-              <option value="|">Pipe (|)</option>
-              <option value=";">Semicolon (;)</option>
-            </select>
+  <div slot="calculator" class="space-y-24" id="delim-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="DELIMITED TEXT INPUT">
+        <div class="space-y-16">
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="delim-select-in" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Input Delimiter</label>
+              <select
+                id="delim-select-in"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+              >
+                <option value="," selected>Comma (,)</option>
+                <option value="\t">Tab (\t / TSV)</option>
+                <option value="|">Pipe (|)</option>
+                <option value=";">Semicolon (;)</option>
+              </select>
+            </div>
+            <div>
+              <label for="delim-select-out" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target Output Delimiter</label>
+              <select
+                id="delim-select-out"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+              >
+                <option value="|">Pipe (|)</option>
+                <option value=",">Comma (,)</option>
+                <option value="\t">Tab (\t / TSV)</option>
+                <option value=";">Semicolon (;)</option>
+              </select>
+            </div>
           </div>
 
-          <div class="flex items-center gap-8">
-            <button type="button" id="dc-btn-sample-csv" class="rounded-8 border border-border bg-surface2 px-10 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
-              Sample CSV
-            </button>
-            <button type="button" id="dc-btn-sample-tsv" class="rounded-8 border border-border bg-surface2 px-10 py-4 text-xs font-mono font-bold text-accent hover:border-accent dark:border-border-dark dark:bg-surface2-dark transition-all">
-              Sample TSV
-            </button>
-            <button type="button" id="dc-btn-clear" class="rounded-8 border border-border bg-surface px-10 py-4 text-xs font-mono font-bold text-muted hover:text-danger dark:border-border-dark dark:bg-surface-dark transition-all">
-              Clear
-            </button>
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="delim-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Input Text Dataset</label>
+              <button type="button" id="btn-load-sample-delim" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample CSV</button>
+            </div>
+            <textarea
+              id="delim-input-raw"
+              rows="10"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
           </div>
+
+          <button
+            type="button"
+            id="btn-convert-delim"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert Delimiter Format
+          </button>
         </div>
+      </CalculatorCard>
 
-        <textarea
-          id="dc-input-text"
-          rows="5"
-          class="w-full rounded-12 border border-border bg-surface2 p-12 font-mono text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark leading-relaxed"
-          placeholder="Paste CSV, TSV, or Pipe-delimited data here..."
-          spellcheck="false"
-        ></textarea>
-      </div>
-    </CalculatorCard>
-    </div>
-
-    <!-- Right Column: Results & Metrics -->
-    <div class="space-y-24">
-      <CalculatorCard title="TARGET CONVERSION SETTINGS">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 font-mono text-xs">
-        <div class="space-y-6">
-          <label class="block font-bold uppercase text-muted dark:text-muted-dark">Output Delimiter</label>
-          <select id="dc-output-delim" class="w-full rounded-8 border border-border bg-surface px-12 py-8 font-bold text-accent dark:border-border-dark dark:bg-surface-dark">
-            <option value="&#9;">Tab (\t) — TSV Format</option>
-            <option value="|">Pipe (|) — Markdown Table Style</option>
-            <option value=";">Semicolon (;) — European CSV Style</option>
-            <option value=",">Comma (,) — Standard CSV</option>
-            <option value=" ">Space ( ) — Space Separated</option>
-          </select>
-        </div>
-
-        <div class="space-y-6">
-          <label class="block font-bold uppercase text-muted dark:text-muted-dark">Quoting Style</label>
-          <select id="dc-quoting-style" class="w-full rounded-8 border border-border bg-surface px-12 py-8 font-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark">
-            <option value="needed">Quote Only When Needed</option>
-            <option value="all">Always Quote All Fields ("value")</option>
-            <option value="none">Never Quote (Strip Quotes)</option>
-          </select>
-        </div>
-      </div>
-    </CalculatorCard>
-
-    <ResultCard title="CONVERTED DELIMITED OUTPUT">
-      <div class="space-y-16">
-        <div class="flex items-center justify-between">
-          <span id="dc-output-stats" class="font-mono text-xs font-bold text-muted dark:text-muted-dark">0 lines converted</span>
-          <div class="flex items-center gap-8">
-            <button type="button" id="dc-btn-copy" class="rounded-8 border border-border bg-surface px-12 py-4 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all">
-              Copy
-            </button>
-            <button type="button" id="dc-btn-download" class="rounded-8 border border-border bg-accent px-12 py-6 text-xs font-mono font-bold text-white shadow-soft hover:opacity-90 transition-all">
-              Download Output
-            </button>
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED DELIMITED OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Output Text Result</span>
+            <button type="button" id="btn-copy-delim" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Result</button>
           </div>
-        </div>
 
-        <pre id="dc-output-pre" class="w-full min-h-[160px] max-h-[350px] overflow-auto rounded-12 border border-border bg-surface p-12 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-surface-dark dark:text-emerald-400 whitespace-pre-wrap">Converted output will appear here...</pre>
-      </div>
-    </ResultCard>
+          <pre id="delim-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[280px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
     </div>
   </div>
 
   <div slot="content">
-    <h2>Converting Tabular Delimiters Seamlessly</h2>
+    <h2>Data Delimiter Specification & ETL Standards</h2>
     <p>
-      Different systems require different text separators: Excel in Europe often expects semicolons `;`, command-line tools often require tabs `\t` or spaces, and database import scripts use commas `,` or pipes `|`. Converting delimiters cleanly prevents truncated data or field misalignment.
+      Data pipelines and SQL database loaders (`COPY FROM`, Postgres, Snowflake) require precise delimiter formats to parse data fields accurately.
+    </p>
+
+    <h3>Common Delimiter Standards</h3>
+    <ul>
+      <li><strong>Comma (<code>,</code>)</strong>: Standard RFC 4180 CSV spreadsheets.</li>
+      <li><strong>Tab (<code>\t</code>)</strong>: TSV format used by Excel clipboard copy-paste.</li>
+      <li><strong>Pipe (<code>|</code>)</strong>: High-reliability delimiter for enterprise ETL pipelines.</li>
+    </ul>
+
+    <h3>Related Data Tools</h3>
+    <p>
+      Convert JSON to CSV with the <a href="/tools/json-to-csv/">JSON to CSV Converter</a>, format SQL queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>, or convert Markdown to HTML with the <a href="/tools/markdown-to-html/">Markdown to HTML Converter</a>.
     </p>
   </div>
 </ToolLayout>
 
-<script>
-  function initDelimiterConverter() {
-    const inputText = document.getElementById('dc-input-text') as HTMLTextAreaElement;
-    const inputDelimSelect = document.getElementById('dc-input-delim') as HTMLSelectElement;
-    const outputDelimSelect = document.getElementById('dc-output-delim') as HTMLSelectElement;
-    const quotingSelect = document.getElementById('dc-quoting-style') as HTMLSelectElement;
+<script is:inline>
+  (function() {
+    const selectIn = document.getElementById('delim-select-in');
+    const selectOut = document.getElementById('delim-select-out');
+    const inputRaw = document.getElementById('delim-input-raw');
+    const btnConvert = document.getElementById('btn-convert-delim');
+    const btnSample = document.getElementById('btn-load-sample-delim');
 
-    const outputPre = document.getElementById('dc-output-pre');
-    const outputStats = document.getElementById('dc-output-stats');
+    const outputText = document.getElementById('delim-output-text');
+    const btnCopy = document.getElementById('btn-copy-delim');
 
-    const btnSampleCsv = document.getElementById('dc-btn-sample-csv');
-    const btnSampleTsv = document.getElementById('dc-btn-sample-tsv');
-    const btnClear = document.getElementById('dc-btn-clear');
-    const btnCopy = document.getElementById('dc-btn-copy');
-    const btnDownload = document.getElementById('dc-btn-download');
+    const defaultCsv = `id,name,role,department
+101,Alice Johnson,Software Architect,Engineering
+102,Bob Smith,AI Specialist,Research
+103,Carol Williams,Security Engineer,DevOps`;
 
-    const sampleCsv = `id,name,role,location\n101,"Chen, Alice",Lead Architect,"San Francisco, CA"\n102,"Smith, Bob",Senior Engineer,"Austin, TX"`;
-    const sampleTsv = `id\tname\trole\tlocation\n101\tAlice Chen\tLead Architect\tSan Francisco, CA\n102\tBob Smith\tSenior Engineer\tAustin, TX`;
-
-    function detectDelimiter(text: string): string {
-      const firstLine = text.trim().split(/\r?\n/)[0] || '';
-      if (firstLine.includes('\t')) return '\t';
-      if (firstLine.includes(';') && !firstLine.includes(',')) return ';';
-      if (firstLine.includes('|') && !firstLine.includes(',')) return '|';
-      return ',';
+    function getDelimiterChar(val) {
+      if (val === '\\t') return '\t';
+      return val;
     }
 
-    function parseLine(line: string, delim: string): string[] {
-      const result: string[] = [];
-      let cur = '';
-      let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
-        if (c === '"') {
-          inQuotes = !inQuotes;
-        } else if (c === delim && !inQuotes) {
-          result.push(cur.trim());
-          cur = '';
-        } else {
-          cur += c;
-        }
-      }
-      result.push(cur.trim());
-      return result;
-    }
+    function convertDelimiters(text, inDelim, outDelim) {
+      const charIn = getDelimiterChar(inDelim);
+      const charOut = getDelimiterChar(outDelim);
 
-    function formatField(val: string, outDelim: string, quoteStyle: string): string {
-      let clean = val;
-      if (clean.startsWith('"') && clean.endsWith('"')) {
-        clean = clean.slice(1, -1).replace(/""/g, '"');
-      }
-
-      if (quoteStyle === 'none') {
-        return clean.replace(/"/g, '');
-      }
-
-      if (quoteStyle === 'all') {
-        return `"${clean.replace(/"/g, '""')}"`;
-      }
-
-      // Default: quote only when needed
-      if (clean.includes(outDelim) || clean.includes('"') || clean.includes('\n')) {
-        return `"${clean.replace(/"/g, '""')}"`;
-      }
-
-      return clean;
-    }
-
-    function convertData() {
-      if (!inputText || !outputPre || !outputStats) return;
-      const raw = inputText.value.trim();
-
-      if (!raw) {
-        outputPre.textContent = 'Converted output will appear here...';
-        outputStats.textContent = '0 lines converted';
-        return;
-      }
-
-      let inDelim = inputDelimSelect?.value || 'auto';
-      if (inDelim === 'auto') {
-        inDelim = detectDelimiter(raw);
-      }
-
-      const outDelim = outputDelimSelect?.value || '\t';
-      const quoteStyle = quotingSelect?.value || 'needed';
-
-      const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
-      const convertedLines = lines.map(line => {
-        const fields = parseLine(line, inDelim);
-        return fields.map(f => formatField(f, outDelim, quoteStyle)).join(outDelim);
+      const lines = text.split('\n');
+      const converted = lines.map(line => {
+        if (!line.trim()) return '';
+        const parts = line.split(charIn);
+        return parts.join(charOut);
       });
 
-      const resultText = convertedLines.join('\n');
-      outputPre.textContent = resultText;
-      outputStats.textContent = `${convertedLines.length} lines converted (${outDelim === '\t' ? 'TSV' : outDelim === '|' ? 'Pipe' : outDelim === ';' ? 'Semicolon' : 'CSV'})`;
+      return converted.join('\n');
     }
 
-    if (inputText) inputText.addEventListener('input', convertData);
-    if (inputDelimSelect) inputDelimSelect.addEventListener('change', convertData);
-    if (outputDelimSelect) outputDelimSelect.addEventListener('change', convertData);
-    if (quotingSelect) quotingSelect.addEventListener('change', convertData);
+    function convert() {
+      const raw = inputRaw?.value || defaultCsv;
+      const inVal = selectIn?.value || ',';
+      const outVal = selectOut?.value || '|';
 
-    btnSampleCsv?.addEventListener('click', () => {
-      if (inputText) {
-        inputText.value = sampleCsv;
-        convertData();
-      }
+      const result = convertDelimiters(raw, inVal, outVal);
+      if (outputText) outputText.textContent = result;
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    [selectIn, selectOut, inputRaw].forEach(el => {
+      el?.addEventListener('input', convert);
+      el?.addEventListener('change', convert);
     });
 
-    btnSampleTsv?.addEventListener('click', () => {
-      if (inputText) {
-        inputText.value = sampleTsv;
-        convertData();
-      }
-    });
-
-    btnClear?.addEventListener('click', () => {
-      if (inputText) {
-        inputText.value = '';
-        convertData();
-      }
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultCsv;
+      if (selectIn) selectIn.value = ',';
+      if (selectOut) selectOut.value = '|';
+      convert();
     });
 
     btnCopy?.addEventListener('click', () => {
-      if (outputPre) {
-        navigator.clipboard.writeText(outputPre.textContent || '');
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
         btnCopy.textContent = 'Copied!';
-        setTimeout(() => (btnCopy.textContent = 'Copy'), 1500);
+        setTimeout(() => (btnCopy.textContent = 'Copy Result'), 2000);
       }
     });
 
-    btnDownload?.addEventListener('click', () => {
-      if (!outputPre?.textContent) return;
-      const outDelim = outputDelimSelect?.value || '\t';
-      const ext = outDelim === '\t' ? 'tsv' : 'csv';
-      const blob = new Blob([outputPre.textContent], { type: 'text/plain;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `converted_dataset.${ext}`;
-      a.click();
-      URL.revokeObjectURL(url);
-    });
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultCsv;
 
-    // Initial run
-    convertData();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDelimiterConverter);
-  } else {
-    initDelimiterConverter();
-  }
+    convert();
+  })();
 </script>

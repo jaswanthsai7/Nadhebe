@@ -3,19 +3,31 @@ import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'Cumulative Layout Shift (CLS) Web Vitals Audit | Nadhebe';
-const h1 = 'CLS Web Vitals Audit & Score Calculator';
-const description = 'Audit Cumulative Layout Shift (CLS) risk factors, calculate layout stability scores, and generate CSS fixes for font swaps and unreserved DOM slots.';
+const title = 'Cumulative Layout Shift (CLS) Audit & Fix Checklist | Nadhebe';
+const h1 = 'Cumulative Layout Shift (CLS) Audit & Fix Checklist';
+const description = 'Audit Web Vitals Cumulative Layout Shift (CLS) score, identify layout instability causes, and apply CSS width/height fixes for Google PageSpeed.';
 
 const faq = [
   {
-    question: 'What is a good Cumulative Layout Shift (CLS) score?',
-    answer: 'Google Core Web Vitals guidelines define a Good CLS score as 0.1 or below. Scores between 0.1 and 0.25 need improvement, and scores above 0.25 are poor.'
+    question: 'What is Cumulative Layout Shift (CLS)?',
+    answer: 'CLS is a Core Web Vitals metric measuring unexpected visual layout shifts that occur while a page loads (target score is 0.1 or lower).',
   },
   {
-    question: 'How do unreserved image dimensions cause CLS?',
-    answer: 'If <img> elements lack explicit width and height attributes or aspect-ratio CSS, the browser cannot reserve vertical layout space before the image binary loads.'
-  }
+    question: 'What causes high CLS scores on web pages?',
+    answer: 'Images without explicit `width` and `height` attributes, dynamically injected ads or banners, FOIT web fonts, and CSS animations mutating width/height.',
+  },
+  {
+    question: 'How do explicit width and height attributes prevent CLS?',
+    answer: 'Setting `width` and `height` attributes on HTML `<img>` elements allows modern browsers to calculate aspect ratio and reserve layout space before images load.',
+  },
+  {
+    question: 'What is the CSS `font-display: swap` impact on CLS?',
+    answer: 'Custom web fonts loaded dynamically cause text layout shifts when fallback system fonts swap to custom fonts. `font-display: optional` eliminates FOIT shifts.',
+  },
+  {
+    question: 'Is my web audit data stored remotely?',
+    answer: '100% private. All checklist selections and score calculations run locally in your browser.',
+  },
 ];
 ---
 
@@ -29,63 +41,64 @@ const faq = [
   <div slot="calculator" class="space-y-24" id="cls-checklist-app">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
       
-      <!-- Interactive Audit Controls -->
-      <CalculatorCard title="LAYOUT SHIFT DIAGNOSTIC FACTORS">
-        <div class="space-y-16 font-mono text-caption">
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CLS OPTIMIZATION AUDIT CHECKLIST">
+        <div class="space-y-12" id="cls-items-list">
           
-          <div class="space-y-8">
-            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">1. Images & Media Dimensions</label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-img-attrs" checked class="rounded border-border" /> All &lt;img&gt; & &lt;video&gt; have explicit width & height attributes
-            </label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-aspect-ratio" checked class="rounded border-border" /> CSS uses aspect-ratio: attr(width) / attr(height)
-            </label>
-          </div>
+          <label class="flex items-start gap-10 rounded-8 border border-border p-10 bg-surface2 dark:border-border-dark dark:bg-surface2-dark cursor-pointer">
+            <input type="checkbox" data-weight="0.04" class="mt-2 rounded border-border focus:ring-accent cls-cb" checked />
+            <div class="text-xs">
+              <strong class="text-ink dark:text-ink-dark block">Set explicit width & height on all <code>&lt;img&gt;</code> tags</strong>
+              <span class="text-muted dark:text-muted-dark">Prevents image layout collapse before asset download.</span>
+            </div>
+          </label>
 
-          <div class="space-y-8 pt-8 border-t border-border/60 dark:border-border-dark/60">
-            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">2. Web Fonts & FOIT / FOUT</label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-font-display" checked class="rounded border-border" /> Web fonts use font-display: swap or optional
-            </label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-font-fallback" checked class="rounded border-border" /> Fallback font metrics matched (size-adjust, override-descriptors)
-            </label>
-          </div>
+          <label class="flex items-start gap-10 rounded-8 border border-border p-10 bg-surface2 dark:border-border-dark dark:bg-surface2-dark cursor-pointer">
+            <input type="checkbox" data-weight="0.05" class="mt-2 rounded border-border focus:ring-accent cls-cb" checked />
+            <div class="text-xs">
+              <strong class="text-ink dark:text-ink-dark block">Reserve DOM container height for dynamic Ads & Banners</strong>
+              <span class="text-muted dark:text-muted-dark">Use CSS <code>min-height</code> or <code>aspect-ratio</code> on ad slots.</span>
+            </div>
+          </label>
 
-          <div class="space-y-8 pt-8 border-t border-border/60 dark:border-border-dark/60">
-            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">3. Dynamic Banners, Ads & Async Embeds</label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-ads-reserved" checked class="rounded border-border" /> Ad slots & iframe wrappers have min-height reserved containers
-            </label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-top-inserts" checked class="rounded border-border" /> Avoid injecting dynamic banners above existing visible text
-            </label>
-          </div>
+          <label class="flex items-start gap-10 rounded-8 border border-border p-10 bg-surface2 dark:border-border-dark dark:bg-surface2-dark cursor-pointer">
+            <input type="checkbox" data-weight="0.03" class="mt-2 rounded border-border focus:ring-accent cls-cb" />
+            <div class="text-xs">
+              <strong class="text-ink dark:text-ink-dark block">Preload key custom web fonts & use <code>font-display: optional</code></strong>
+              <span class="text-muted dark:text-muted-dark">Eliminates Flash of Unstyled Text (FOUT) font reflows.</span>
+            </div>
+          </label>
 
-          <div class="space-y-8 pt-8 border-t border-border/60 dark:border-border-dark/60">
-            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">4. CSS Animations & Transitions</label>
-            <label class="flex items-center gap-8 cursor-pointer text-xs">
-              <input type="checkbox" id="cls-transform-anim" checked class="rounded border-border" /> Animations use transform / opacity instead of top/left/height
-            </label>
-          </div>
+          <label class="flex items-start gap-10 rounded-8 border border-border p-10 bg-surface2 dark:border-border-dark dark:bg-surface2-dark cursor-pointer">
+            <input type="checkbox" data-weight="0.03" class="mt-2 rounded border-border focus:ring-accent cls-cb" checked />
+            <div class="text-xs">
+              <strong class="text-ink dark:text-ink-dark block">Use CSS <code>transform</code> instead of top/left/height animations</strong>
+              <span class="text-muted dark:text-muted-dark">GPU compositor animations do not trigger layout recalculation.</span>
+            </div>
+          </label>
 
         </div>
       </CalculatorCard>
 
-      <!-- Score & Recommendations -->
-      <ResultCard title="CLS WEB VITALS AUDIT SCORE">
-        <div class="space-y-16 font-mono text-caption">
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CLS HEALTH SCORE & AUDIT RATING">
+        <div class="space-y-20">
           
-          <div id="cls-score-card" class="p-16 rounded-10 border border-emerald-500/40 bg-emerald-500/10 text-center space-y-4">
-            <span class="block text-xs font-bold uppercase text-muted">Estimated CLS Score</span>
-            <span id="cls-score-value" class="block text-display font-bold text-emerald-600 dark:text-emerald-400">0.01</span>
-            <span id="cls-score-label" class="inline-block px-12 py-4 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs">GOOD (&le; 0.10)</span>
+          <div class="rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-center">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Estimated CLS Score</span>
+            <div id="stat-cls-score" class="text-h1 font-bold text-emerald-800 dark:text-emerald-300">0.03</div>
+            <p id="stat-cls-rating" class="text-caption text-emerald-700 dark:text-emerald-400 mt-2 font-medium">Good (Passed Core Web Vitals) ✓</p>
           </div>
 
-          <div>
-            <label class="block font-semibold text-ink dark:text-ink-dark mb-4">Actionable CSS & HTML Remediation Code</label>
-            <textarea id="cls-remediation-output" rows="10" readonly class="w-full min-h-[260px] rounded-8 border border-border bg-surface px-12 py-8 text-caption font-mono text-ink dark:text-ink-dark focus:outline-none dark:border-border-dark dark:bg-surface-dark"></textarea>
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Google PageSpeed Target:</span>
+              <span class="font-bold text-ink dark:text-ink-dark">&le; 0.10 CLS</span>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <span>Checklist Items Passed:</span>
+              <span id="stat-cls-passed" class="font-bold text-emerald-600 dark:text-emerald-400">3 / 4 Rules</span>
+            </div>
           </div>
 
         </div>
@@ -95,96 +108,67 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>Cumulative Layout Shift (CLS) Optimization</h2>
+    <h2>Core Web Vitals Cumulative Layout Shift (CLS) Guide</h2>
     <p>
-      Cumulative Layout Shift measures visual stability by tracking unprompted DOM movement during page load. Reserving exact dimensions for images, web fonts, and dynamic ad containers eliminates layout shifts.
+      Optimizing CLS ensures stable visual page rendering, preventing accidental user clicks on moving UI elements and boosting Google Search Page Experience rankings.
+    </p>
+
+    <h3>Recommended CSS Rules</h3>
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400">img &#123;
+  aspect-ratio: attr(width) / attr(height);
+  height: auto;
+  max-width: 100%;
+&#125;</pre>
+
+    <h3>Related SEO & Performance Tools</h3>
+    <p>
+      Audit SERP snippets with the <a href="/tools/serp-preview/">SERP Preview Simulator</a>, analyze metadata with the <a href="/tools/meta-tag-analyzer/">Meta Tag Analyzer</a>, or test canonical URLs with the <a href="/tools/canonical-checker/">Canonical Link Auditor</a>.
     </p>
   </div>
 </ToolLayout>
 
 <script is:inline>
   (function() {
-    const imgAttrsEl = document.getElementById('cls-img-attrs');
-    const aspectRatioEl = document.getElementById('cls-aspect-ratio');
-    const fontDisplayEl = document.getElementById('cls-font-display');
-    const fontFallbackEl = document.getElementById('cls-font-fallback');
-    const adsReservedEl = document.getElementById('cls-ads-reserved');
-    const topInsertsEl = document.getElementById('cls-top-inserts');
-    const transformAnimEl = document.getElementById('cls-transform-anim');
-
-    const scoreValueEl = document.getElementById('cls-score-value');
-    const scoreLabelEl = document.getElementById('cls-score-label');
-    const scoreCardEl = document.getElementById('cls-score-card');
-    const outputEl = document.getElementById('cls-remediation-output');
+    const list = document.getElementById('cls-items-list');
+    const statScore = document.getElementById('stat-cls-score');
+    const statRating = document.getElementById('stat-cls-rating');
+    const statPassed = document.getElementById('stat-cls-passed');
 
     function calculate() {
-      let shiftPoints = 0;
-      const fixes = [];
+      const checkboxes = list?.querySelectorAll('.cls-cb');
+      if (!checkboxes) return;
 
-      if (!imgAttrsEl?.checked) {
-        shiftPoints += 0.08;
-        fixes.push('/* Fix 1: Add width and height to <img> elements */\nimg {\n  width: 100%;\n  height: auto;\n  aspect-ratio: attr(width) / attr(height);\n}');
-      }
-      if (!aspectRatioEl?.checked) {
-        shiftPoints += 0.05;
-        fixes.push('/* Fix 2: Set explicit aspect-ratio for video & responsive media */\n.media-wrapper {\n  aspect-ratio: 16 / 9;\n}');
-      }
-      if (!fontDisplayEl?.checked) {
-        shiftPoints += 0.06;
-        fixes.push('/* Fix 3: Add font-display: swap to Google Fonts or @font-face */\n@font-face {\n  font-family: "CustomFont";\n  font-display: swap;\n}');
-      }
-      if (!fontFallbackEl?.checked) {
-        shiftPoints += 0.03;
-        fixes.push('/* Fix 4: Match fallback font metric metrics */\n@font-face {\n  font-family: "FallbackMatch";\n  src: local("Arial");\n  size-adjust: 98%;\n}');
-      }
-      if (!adsReservedEl?.checked) {
-        shiftPoints += 0.12;
-        fixes.push('/* Fix 5: Reserve min-height for async ad slots & embeds */\n.ad-slot-container {\n  min-height: 250px;\n  background: rgba(0,0,0,0.02);\n}');
-      }
-      if (!topInsertsEl?.checked) {
-        shiftPoints += 0.07;
-        fixes.push('/* Fix 6: Avoid inserting DOM banners above visible viewport content */');
-      }
-      if (!transformAnimEl?.checked) {
-        shiftPoints += 0.04;
-        fixes.push('/* Fix 7: Use CSS transform instead of top/left/height animations */\n.animated-element {\n  will-change: transform;\n  transition: transform 150ms ease-out;\n}');
-      }
+      let totalPenalty = 0.15; // baseline unoptimized penalty
+      let passed = 0;
 
-      const score = Number(shiftPoints.toFixed(2));
-      if (scoreValueEl) scoreValueEl.textContent = score === 0 ? '0.00' : score.toFixed(2);
-
-      if (scoreCardEl && scoreLabelEl) {
-        if (score <= 0.10) {
-          scoreCardEl.className = 'p-16 rounded-10 border border-emerald-500/40 bg-emerald-500/10 text-center space-y-4';
-          scoreValueEl.className = 'block text-display font-bold text-emerald-600 dark:text-emerald-400';
-          scoreLabelEl.className = 'inline-block px-12 py-4 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs';
-          scoreLabelEl.textContent = 'GOOD (≤ 0.10)';
-        } else if (score <= 0.25) {
-          scoreCardEl.className = 'p-16 rounded-10 border border-amber-500/40 bg-amber-500/10 text-center space-y-4';
-          scoreValueEl.className = 'block text-display font-bold text-amber-600 dark:text-amber-400';
-          scoreLabelEl.className = 'inline-block px-12 py-4 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-300 font-bold text-xs';
-          scoreLabelEl.textContent = 'NEEDS IMPROVEMENT (0.10 - 0.25)';
-        } else {
-          scoreCardEl.className = 'p-16 rounded-10 border border-danger/40 bg-danger/10 text-center space-y-4';
-          scoreValueEl.className = 'block text-display font-bold text-danger';
-          scoreLabelEl.className = 'inline-block px-12 py-4 rounded-full bg-danger/20 text-danger font-bold text-xs';
-          scoreLabelEl.textContent = 'POOR (> 0.25)';
+      checkboxes.forEach(cb => {
+        const weight = parseFloat(cb.getAttribute('data-weight') || '0.03');
+        if (cb.checked) {
+          totalPenalty -= weight;
+          passed++;
         }
-      }
+      });
 
-      if (outputEl) {
-        if (fixes.length === 0) {
-          outputEl.value = '/* All CLS best practices are checked! Your page layout stability score is optimal (0.00). */';
+      const score = Math.max(0.01, totalPenalty).toFixed(2);
+
+      if (statScore) statScore.textContent = score;
+      if (statPassed) statPassed.textContent = `${passed} / ${checkboxes.length} Rules`;
+
+      if (statRating) {
+        if (score <= 0.10) {
+          statRating.textContent = 'Good (Passed Core Web Vitals) ✓';
+          statRating.className = 'text-caption text-emerald-700 dark:text-emerald-400 mt-2 font-medium';
+        } else if (score <= 0.25) {
+          statRating.textContent = 'Needs Improvement';
+          statRating.className = 'text-caption text-amber-700 dark:text-amber-400 mt-2 font-medium';
         } else {
-          outputEl.value = fixes.join('\n\n');
+          statRating.textContent = 'Poor Layout Instability ✗';
+          statRating.className = 'text-caption text-rose-700 dark:text-rose-400 mt-2 font-medium';
         }
       }
     }
 
-    [imgAttrsEl, aspectRatioEl, fontDisplayEl, fontFallbackEl, adsReservedEl, topInsertsEl, transformAnimEl].forEach(el => {
-      el?.addEventListener('change', calculate);
-    });
-
+    list?.addEventListener('change', calculate);
     calculate();
   })();
 </script>
