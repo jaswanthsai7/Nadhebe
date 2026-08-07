@@ -1,0 +1,25 @@
+---
+title: "Embedding Inspector | Nadhebe Developer Tools"
+description: "Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads."
+pubDate: 2026-08-06
+author: nadhebe-team
+category: Tools
+tags: ["Embedding Inspector", "Developer Tools", "Web Utility"]
+heroImage: "/images/tools-hero.webp"
+heroAlt: "Minimalist rendering of Embedding Inspector interface"
+estimatedReadingTime: 4
+isPillar: false
+topic: "Embedding Inspector"
+searchIntent: "embedding-inspector tool"
+difficulty: "beginner"
+faq:
+  - question: "What does the Embedding Inspector tool do?"
+    answer: "The Embedding Inspector tool provides interactive, zero-latency client-side processing for your data directly inside your browser."
+sources:
+  - label: "Nadhebe Tools Directory"
+    url: "https://nadhebe.com/tools/embedding-inspector/"
+---
+
+## Embedding Inspector
+
+Use our free interactive [Embedding Inspector](/tools/embedding-inspector/) tool online. Fast, secure, and privacy-first client-side web utility.
