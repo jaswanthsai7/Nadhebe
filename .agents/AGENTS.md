@@ -130,3 +130,28 @@ Images should resemble premium editorial illustrations similar in quality to mod
 
 Before finishing verify:
 - Originality, research backing, distinct search intent and keyword, EEAT compliance, SEO optimization, internal link presence, image assets with alt text, ready to publish.
+
+---
+
+# Workspace Rules: Google Technical SEO, Developer & Tool Specifications
+
+Adhere strictly to the following mandatory platform standards derived from **Google Search Central's Official Developer Guidelines & Helpful Content Systems**:
+
+## 1. TECHNICAL SEO & ACCESSIBILITY
+- Every route MUST define an absolute canonical URL tag (`<link rel="canonical" href="...">`).
+- Use exactly one `<h1>` per page. Preserve strict heading hierarchy (`<h1>` → `<h2>` → `<h3>`).
+- Output JSON-LD structured data (`WebApplication`, `FAQPage`, `TechArticle`, `BreadcrumbList`) in `<head>`.
+- All interactive controls (inputs, selects, buttons) MUST have unique `id`, `name`, `for`, and `aria-label` attributes.
+
+## 2. CLIENT-SIDE SCRIPT & HYDRATION LIFECYCLE
+- Client-side scripts MUST register with `document.addEventListener('astro:page-load', initFn)` to maintain functionality across Astro View Transitions.
+- Scoped element lookups: Always guard against null elements (`if (!el) return;`). Never leak variables globally.
+
+## 3. UI/UX & COPY BUTTON ANIMATIONS
+- Preserves design token styling without layout shifts.
+- Copy buttons MUST support fallback extraction (textareas, code blocks, tables formatted as `Key: Value`).
+- Smooth icon transition on click: Copy icon scales to `scale(0)` / `opacity: 0`, checkmark tick mark scales to `scale(1)` / `opacity: 1`, border highlights in `emerald-500` for 2,000ms.
+
+## 4. BUILD VERIFICATION
+- Every change MUST pass `npm run build` with 0 broken links across all compiled static HTML pages prior to git commit and push.
+
