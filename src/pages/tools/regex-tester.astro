@@ -1,0 +1,231 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Regex Pattern Tester & Match Explainer | Nadhebe';
+const h1 = 'Regex Pattern Tester & Match Explainer';
+const description = 'Test Regular Expressions (Regex) against sample text client-side. Inspect pattern capture groups, flag toggles (g, i, m, s), and match highlighting.';
+
+const faq = [
+  {
+    question: 'How does the Regex Tester work?',
+    answer: 'Enter your regex pattern and target text. The tester evaluates the JavaScript `RegExp` engine in real-time, highlighting matching substrings and capture groups.',
+  },
+  {
+    question: 'What flags are supported?',
+    answer: 'Supports `g` (Global match), `i` (Case-insensitive), `m` (Multiline), and `s` (Dot matches all newline characters).',
+  },
+  {
+    question: 'Is my input text uploaded to external servers?',
+    answer: '100% private. All regular expression evaluations execute locally in your web browser.',
+  },
+  {
+    question: 'How do capture groups work in regular expressions?',
+    answer: 'Parentheses `(...)` define capture groups. Extracted group values are displayed in a structured match inspection table.',
+  },
+  {
+    question: 'What are common regex patterns?',
+    answer: 'Common patterns include Email Validation (`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`), URL Extraction, and IPv4 Addresses.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="regex-tester"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="regex-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="REGEX PATTERN & TEST TEXT">
+        <div class="space-y-16">
+          <div>
+            <label for="regex-pattern-input" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Regular Expression Pattern</label>
+            <div class="flex items-center gap-8">
+              <span class="font-mono text-base font-bold text-muted dark:text-muted-dark">/</span>
+              <input
+                id="regex-pattern-input"
+                type="text"
+                value="([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\.[a-zA-Z]+)"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              />
+              <span class="font-mono text-base font-bold text-muted dark:text-muted-dark">/</span>
+              <input
+                id="regex-flags-input"
+                type="text"
+                value="gi"
+                placeholder="gim"
+                class="w-20 rounded-8 border border-border bg-surface2 px-8 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs text-center"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="regex-text-input" class="block text-caption font-semibold text-ink dark:text-ink-dark">Test String / Input Data</label>
+              <button type="button" id="btn-load-sample-regex" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Email Text</button>
+            </div>
+            <textarea
+              id="regex-text-input"
+              rows="8"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="REGEX MATCH RESULT & CAPTURE GROUPS">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Total Matches: <span id="stat-regex-count" class="text-accent dark:text-accent-dark">0</span></span>
+            <span id="regex-error-msg" class="text-xs font-mono text-rose-500 font-bold"></span>
+          </div>
+
+          <!-- Highlighted Output -->
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Highlighted Text Result</label>
+            <div id="regex-highlighted-box" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark min-h-[140px] leading-relaxed whitespace-pre-wrap"></div>
+          </div>
+
+          <!-- Capture Groups Table -->
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Extracted Capture Groups</label>
+            <div class="w-full overflow-x-auto rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark max-h-[180px]">
+              <table class="w-full text-left font-mono text-xs border-collapse">
+                <thead class="bg-surface2 dark:bg-surface2-dark border-b border-border dark:border-border-dark text-ink dark:text-ink-dark font-bold">
+                  <tr>
+                    <th class="p-8">Match #</th>
+                    <th class="p-8">Full Match</th>
+                    <th class="p-8">Group 1</th>
+                    <th class="p-8">Group 2</th>
+                  </tr>
+                </thead>
+                <tbody id="regex-groups-tbody" class="divide-y divide-border/40 dark:divide-border-dark/40 text-ink dark:text-ink-dark">
+                  <tr>
+                    <td colspan="4" class="p-16 text-center text-muted dark:text-muted-dark">No matches found.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Regular Expression (Regex) Syntax & Pattern Matching Guide</h2>
+    <p>
+      Regular Expressions (Regex) provide pattern matching logic for string validation, log parsing, data sanitization, and text refactoring across programming languages.
+    </p>
+
+    <h3>Common Pattern Cheat Sheet</h3>
+    <ul>
+      <li><strong>Email Address</strong>: <code>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]&#123;2,&#125;$</code></li>
+      <li><strong>IPv4 Address</strong>: <code>^(?:[0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;$</code></li>
+      <li><strong>URL Protocol</strong>: <code>^https?:\/\/[^\s/$.?#].[^\s]*$</code></li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Convert case formats with the <a href="/tools/case-converter/">Case Converter</a>, generate clean slugs with the <a href="/tools/slug-generator/">Slug Generator</a>, or explain cron schedules with the <a href="/tools/cron-explainer/">Cron Explainer</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const patternInput = document.getElementById('regex-pattern-input');
+    const flagsInput = document.getElementById('regex-flags-input');
+    const textInput = document.getElementById('regex-text-input');
+    const btnSample = document.getElementById('btn-load-sample-regex');
+
+    const statCount = document.getElementById('stat-regex-count');
+    const errorMsg = document.getElementById('regex-error-msg');
+    const highlightBox = document.getElementById('regex-highlighted-box');
+    const groupsTbody = document.getElementById('regex-groups-tbody');
+
+    const defaultText = `Contact our engineering team at dev@nadhebe.com or security@nadhebe.com for questions.
+Alternative contact: support@example.org.`;
+
+    function evaluateRegex() {
+      const pat = patternInput?.value || '';
+      const flags = flagsInput?.value || 'gi';
+      const text = textInput?.value || defaultText;
+
+      if (!pat) {
+        if (statCount) statCount.textContent = '0';
+        if (highlightBox) highlightBox.textContent = text;
+        if (groupsTbody) groupsTbody.innerHTML = `<tr><td colspan="4" class="p-16 text-center text-muted dark:text-muted-dark">No regex pattern specified.</td></tr>`;
+        return;
+      }
+
+      try {
+        if (errorMsg) errorMsg.textContent = '';
+        const re = new RegExp(pat, flags);
+
+        const matches = [...text.matchAll(new RegExp(pat, flags.includes('g') ? flags : flags + 'g'))];
+
+        if (statCount) statCount.textContent = matches.length;
+
+        // Render Highlighted Text
+        let html = '';
+        let lastIdx = 0;
+
+        matches.forEach((m) => {
+          const matchText = m[0];
+          const idx = m.index;
+          html += escapeHtml(text.substring(lastIdx, idx));
+          html += `<mark class="bg-amber-300 dark:bg-amber-500/40 text-ink dark:text-ink-dark px-2 rounded border border-amber-400 font-bold">${escapeHtml(matchText)}</mark>`;
+          lastIdx = idx + matchText.length;
+        });
+
+        html += escapeHtml(text.substring(lastIdx));
+        if (highlightBox) highlightBox.innerHTML = html;
+
+        // Render Groups Table
+        if (groupsTbody) {
+          if (matches.length === 0) {
+            groupsTbody.innerHTML = `<tr><td colspan="4" class="p-16 text-center text-muted dark:text-muted-dark">No matches found for current pattern.</td></tr>`;
+          } else {
+            groupsTbody.innerHTML = matches.map((m, i) => `<tr>
+              <td class="p-8 font-bold">#${i + 1}</td>
+              <td class="p-8 text-emerald-600 dark:text-emerald-400 font-bold">${escapeHtml(m[0])}</td>
+              <td class="p-8 text-muted dark:text-muted-dark">${escapeHtml(m[1] || '-')}</td>
+              <td class="p-8 text-muted dark:text-muted-dark">${escapeHtml(m[2] || '-')}</td>
+            </tr>`).join('');
+          }
+        }
+
+      } catch(e) {
+        if (errorMsg) errorMsg.textContent = `Invalid Regex: ${e.message}`;
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    [patternInput, flagsInput, textInput].forEach(el => {
+      el?.addEventListener('input', evaluateRegex);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (textInput) textInput.value = defaultText;
+      evaluateRegex();
+    });
+
+    if (textInput && !textInput.value) textInput.value = defaultText;
+
+    evaluateRegex();
+  })();
+</script>

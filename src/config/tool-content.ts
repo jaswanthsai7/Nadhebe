@@ -1216,6 +1216,102 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'svg-to-png': {
+    intro: 'SVG to PNG Converter & Vector Exporter renders raw SVG markup into high-resolution PNG image files client-side.',
+    useCases: [
+      'Export scalable SVG graphics into PNG raster images for social media',
+      'Render 2x Retina and 4x Ultra-HD resolution PNGs',
+      'Toggle transparent vs solid white/black backgrounds',
+    ],
+    howItWorks: 'Paste SVG markup or load a sample. The tool renders SVG nodes onto an HTML5 canvas and exports PNG binaries.',
+    faq: [
+      {
+        question: 'Are my SVG graphics uploaded to remote servers?',
+        answer: '100% private. All canvas rendering and image exports execute locally in your web browser.',
+      },
+    ],
+  },
+
+  'webp-to-png': {
+    intro: 'WebP to PNG Converter transforms compressed WebP images into universally compatible lossless PNG files.',
+    useCases: [
+      'Convert web-optimized WebP images into PNGs for Photoshop and design tools',
+      'Preserve image alpha transparency channels',
+      'Download full-resolution PNG images client-side',
+    ],
+    howItWorks: 'Upload a WebP image. The browser decodes WebP pixels and exports a PNG image file.',
+    faq: [
+      {
+        question: 'Is WebP transparency preserved when converting to PNG?',
+        answer: 'Yes! Full alpha channel transparency is preserved in the output PNG file.',
+      },
+    ],
+  },
+
+  'json-to-yaml': {
+    intro: 'JSON to YAML Converter & Config Builder transforms JSON objects into clean 2-space indented YAML manifests.',
+    useCases: [
+      'Convert JSON payloads into Kubernetes and Docker Compose YAML manifests',
+      'Format JSON arrays into YAML bulleted list items',
+      'Generate readable YAML configuration files for DevOps pipelines',
+    ],
+    howItWorks: 'Paste JSON code. The converter recursively formats key-value pairs and arrays into valid YAML text.',
+    faq: [
+      {
+        question: 'How do I convert YAML back to JSON?',
+        answer: 'Use our dedicated YAML to JSON converter tool.',
+      },
+    ],
+  },
+
+  'png-to-webp': {
+    intro: 'PNG to WebP Converter & Image Compressor encodes PNG graphics into lightweight WebP format to speed up web page load times.',
+    useCases: [
+      'Compress heavy PNG images by 50% to 80% without quality loss',
+      'Preserve image alpha transparency for web icons and graphics',
+      'Adjust WebP quality sliders from 10% to 100% lossy/lossless ratio',
+    ],
+    howItWorks: 'Upload a PNG file. The browser canvas encodes WebP binaries and provides 1-click file download.',
+    faq: [
+      {
+        question: 'How much file size reduction can I expect?',
+        answer: 'WebP compression typically yields 50% to 80% smaller file sizes than uncompressed PNGs.',
+      },
+    ],
+  },
+
+  'regex-tester': {
+    intro: 'Regex Pattern Tester & Match Explainer evaluates Regular Expressions against text input with real-time match highlighting.',
+    useCases: [
+      'Validate string patterns for email addresses, URLs, and IPv4 addresses',
+      'Inspect regex capture group extractions in structured table views',
+      'Toggle regex flags (g, i, m, s) for global and case-insensitive matching',
+    ],
+    howItWorks: 'Input pattern and text. The JavaScript RegExp engine evaluates matches in real-time.',
+    faq: [
+      {
+        question: 'Are my regex pattern tests uploaded to remote servers?',
+        answer: '100% private. All regex evaluations execute locally in your web browser.',
+      },
+    ],
+  },
+
+  'markdown-table-generator': {
+    intro: 'Markdown Table Generator & Prettifier builds, formats, and aligns GitHub Flavored Markdown (GFM) tables client-side.',
+    useCases: [
+      'Generate formatted GFM Markdown tables for GitHub Readmes and issues',
+      'Align columns (Left, Center, Right) with padded pipe characters',
+      'Copy clean Markdown code blocks to clipboard',
+    ],
+    howItWorks: 'Set row/col counts, fill in table cell values, and copy padded Markdown table code.',
+    faq: [
+      {
+        question: 'How do column alignments work in GFM Markdown?',
+        answer: 'Colons set alignments: :--- for Left, :---: for Center, and ---: for Right.',
+      },
+    ],
+  },
+
 };
 
 

@@ -1,0 +1,176 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'WebP to PNG Converter | Nadhebe';
+const h1 = 'WebP to PNG Converter';
+const description = 'Convert WebP images into lossless PNG files client-side. Preserve image transparency and download full-resolution PNG images.';
+
+const faq = [
+  {
+    question: 'How does the WebP to PNG converter work?',
+    answer: 'The converter decodes uploaded `.webp` images client-side using browser-native image decoding APIs and re-encodes them into lossless `.png` image files on an HTML5 canvas.',
+  },
+  {
+    question: 'Are my uploaded WebP images sent to a server?',
+    answer: '100% private. All image decoding and PNG file generation execute locally inside your web browser without uploading images to any remote server.',
+  },
+  {
+    question: 'Is image alpha transparency preserved when converting WebP to PNG?',
+    answer: 'Yes! WebP alpha transparency channels are fully preserved during PNG re-encoding.',
+  },
+  {
+    question: 'Why convert WebP to PNG?',
+    answer: 'PNG files offer universal compatibility across legacy graphic design software, email clients, and desktop applications that do not support WebP.',
+  },
+  {
+    question: 'Can I convert multiple WebP files at once?',
+    answer: 'Upload any `.webp` image to instantly view and download the converted PNG file.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="webp-to-png"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="w2p-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="UPLOAD WEBP IMAGE FILE">
+        <div class="space-y-16">
+          <!-- File Drag Drop Zone -->
+          <div class="border-2 border-dashed border-border dark:border-border-dark rounded-12 p-24 text-center bg-surface2/40 dark:bg-surface2-dark/40 hover:border-accent transition-colors">
+            <label for="w2p-file-input" class="cursor-pointer space-y-8 block">
+              <svg class="w-36 h-36 mx-auto text-accent dark:text-accent-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-caption font-semibold text-ink dark:text-ink-dark block">Click or Drag & Drop WebP File</span>
+              <span class="text-xs text-muted dark:text-muted-dark block">Supports .webp image format (Client-side)</span>
+              <input id="w2p-file-input" type="file" accept="image/webp" class="hidden" />
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <button type="button" id="btn-load-sample-w2p" class="rounded-8 bg-accent/15 text-accent dark:text-accent-dark px-16 py-8 text-xs font-semibold hover:bg-accent/25 cursor-pointer">
+              Load Sample WebP Graphic
+            </button>
+            <span id="w2p-file-info" class="text-xs font-mono text-muted dark:text-muted-dark">No file selected</span>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED PNG PREVIEW & DOWNLOAD">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span id="w2p-dim-info" class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">PNG File Ready</span>
+            <button type="button" id="btn-dl-w2p" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft">
+              Download .PNG File
+            </button>
+          </div>
+
+          <div class="w-full rounded-12 border border-border bg-surface2/60 p-20 dark:border-border-dark dark:bg-surface2-dark/60 min-h-[280px] flex items-center justify-center overflow-hidden">
+            <canvas id="w2p-canvas" class="max-w-full max-h-[300px] rounded-8 shadow-soft border border-border/40 dark:border-border-dark/40"></canvas>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>WebP to PNG Image Format Conversion Guide</h2>
+    <p>
+      WebP is Google's modern image format designed for web bandwidth savings. Converting WebP graphics into uncompressed PNG files restores compatibility with image editors (Photoshop, GIMP) and desktop publishing tools.
+    </p>
+
+    <h3>Comparison: WebP vs PNG</h3>
+    <ul>
+      <li><strong>WebP</strong>: Highly compressed lossy/lossless format for web browsers.</li>
+      <li><strong>PNG</strong>: Universally compatible lossless format with full alpha channel support.</li>
+    </ul>
+
+    <h3>Related Image Tools</h3>
+    <p>
+      Convert SVG to PNG with the <a href="/tools/svg-to-png/">SVG to PNG Converter</a>, calculate aspect ratios with the <a href="/tools/aspect-ratio-calculator/">Aspect Ratio Calculator</a>, or calculate DPI print sizes with the <a href="/tools/dpi-print-size-calculator/">DPI Print Size Calculator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const fileInput = document.getElementById('w2p-file-input');
+    const btnSample = document.getElementById('btn-load-sample-w2p');
+    const fileInfo = document.getElementById('w2p-file-info');
+
+    const canvas = document.getElementById('w2p-canvas');
+    const dimInfo = document.getElementById('w2p-dim-info');
+    const btnDl = document.getElementById('btn-dl-w2p');
+
+    function drawToCanvas(imgSrc, fileName = 'converted.png') {
+      const img = new Image();
+      img.onload = function() {
+        if (!canvas) return;
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, img.width, img.height);
+        ctx.drawImage(img, 0, 0);
+
+        if (dimInfo) dimInfo.textContent = `PNG: ${img.width} x ${img.height} px`;
+      };
+      img.src = imgSrc;
+    }
+
+    fileInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (fileInfo) fileInfo.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        drawToCanvas(evt.target.result, file.name.replace(/\.webp$/i, '.png'));
+      };
+      reader.readAsDataURL(file);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      // Create a sample SVG/WebP canvas image
+      const sampleCanvas = document.createElement('canvas');
+      sampleCanvas.width = 400;
+      sampleCanvas.height = 300;
+      const sCtx = sampleCanvas.getContext('2d');
+
+      sCtx.fillStyle = '#10b981';
+      sCtx.fillRect(0, 0, 400, 300);
+      sCtx.fillStyle = '#ffffff';
+      sCtx.font = 'bold 24px sans-serif';
+      sCtx.textAlign = 'center';
+      sCtx.fillText('Nadhebe WebP Sample', 200, 150);
+
+      drawToCanvas(sampleCanvas.toDataURL('image/png'), 'sample-webp.png');
+      if (fileInfo) fileInfo.textContent = 'Sample WebP Image Loaded';
+    });
+
+    btnDl?.addEventListener('click', () => {
+      if (!canvas) return;
+      const a = document.createElement('a');
+      a.download = 'nadhebe-converted.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    });
+
+    // Load initial sample
+    btnSample?.click();
+  })();
+</script>

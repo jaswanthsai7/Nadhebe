@@ -19852,6 +19852,216 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "evtx-to-csv"
     ],
     "icon": "shield"
+  },
+  {
+    "id": "img-s2p-1",
+    "slug": "svg-to-png",
+    "title": "SVG to PNG Converter & Vector Exporter",
+    "name": "SVG to PNG Converter & Vector Exporter",
+    "href": "/tools/svg-to-png/",
+    "component": "src/pages/tools/svg-to-png.astro",
+    "status": "implemented",
+    "category": "Image",
+    "categorySlug": "image",
+    "mode": "converter",
+    "description": "Convert SVG vector graphics and code into high-resolution PNG image files client-side.",
+    "seo": {
+      "title": "SVG to PNG Converter & Vector Exporter | Nadhebe",
+      "description": "Convert SVG vector graphics and code into high-resolution PNG image files client-side. Set custom width, height, and background transparency.",
+      "keywords": [
+        "svg to png",
+        "convert svg to png",
+        "svg canvas renderer",
+        "retina svg export",
+        "transparent png converter"
+      ]
+    },
+    "relatedTools": [
+      "webp-to-png",
+      "svg-to-jsx",
+      "aspect-ratio-calculator",
+      "dpi-print-size-calculator"
+    ],
+    "tags": [
+      "image",
+      "svg-to-png"
+    ],
+    "icon": "image"
+  },
+  {
+    "id": "img-w2p-1",
+    "slug": "webp-to-png",
+    "title": "WebP to PNG Converter",
+    "name": "WebP to PNG Converter",
+    "href": "/tools/webp-to-png/",
+    "component": "src/pages/tools/webp-to-png.astro",
+    "status": "implemented",
+    "category": "Image",
+    "categorySlug": "image",
+    "mode": "converter",
+    "description": "Convert WebP images into lossless PNG files client-side preserving image transparency.",
+    "seo": {
+      "title": "WebP to PNG Converter | Nadhebe",
+      "description": "Convert WebP images into lossless PNG files client-side. Preserve image transparency and download full-resolution PNG images.",
+      "keywords": [
+        "webp to png",
+        "convert webp to png",
+        "webp decoder online",
+        "transparent webp converter",
+        "lossless png generator"
+      ]
+    },
+    "relatedTools": [
+      "svg-to-png",
+      "aspect-ratio-calculator",
+      "dpi-print-size-calculator",
+      "json-to-yaml"
+    ],
+    "tags": [
+      "image",
+      "webp-to-png"
+    ],
+    "icon": "image"
+  },
+  {
+    "id": "conv-j2y-1",
+    "slug": "json-to-yaml",
+    "title": "JSON to YAML Converter & Config Builder",
+    "name": "JSON to YAML Converter & Config Builder",
+    "href": "/tools/json-to-yaml/",
+    "component": "src/pages/tools/json-to-yaml.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert JSON object structures into clean, 2-space indented YAML files client-side.",
+    "seo": {
+      "title": "JSON to YAML Converter & Config Builder | Nadhebe",
+      "description": "Convert JSON object structures into clean, 2-space indented YAML files client-side. Generate Docker Compose and Kubernetes manifests.",
+      "keywords": [
+        "json to yaml",
+        "convert json to yaml",
+        "docker compose yaml generator",
+        "json to kubernetes manifest",
+        "yaml formatter online"
+      ]
+    },
+    "relatedTools": [
+      "yaml-to-json",
+      "yaml-validator",
+      "json-formatter",
+      "json-repair"
+    ],
+    "tags": [
+      "converters",
+      "json-to-yaml"
+    ],
+    "icon": "file-code"
+  },
+  {
+    "id": "img-p2w-1",
+    "slug": "png-to-webp",
+    "title": "PNG to WebP Converter & Image Compressor",
+    "name": "PNG to WebP Converter & Image Compressor",
+    "href": "/tools/png-to-webp/",
+    "component": "src/pages/tools/png-to-webp.astro",
+    "status": "implemented",
+    "category": "Image",
+    "categorySlug": "image",
+    "mode": "converter",
+    "description": "Convert PNG images into lightweight WebP format client-side with quality sliders.",
+    "seo": {
+      "title": "PNG to WebP Converter & Image Compressor | Nadhebe",
+      "description": "Convert PNG images into lightweight WebP format client-side. Reduce image file size by up to 80% while preserving visual quality and transparency.",
+      "keywords": [
+        "png to webp",
+        "convert png to webp",
+        "compress png webp",
+        "webp quality converter",
+        "lcp webp optimization"
+      ]
+    },
+    "relatedTools": [
+      "webp-to-png",
+      "svg-to-png",
+      "aspect-ratio-calculator",
+      "dpi-print-size-calculator"
+    ],
+    "tags": [
+      "image",
+      "png-to-webp"
+    ],
+    "icon": "image"
+  },
+  {
+    "id": "dev-reg-1",
+    "slug": "regex-tester",
+    "title": "Regex Pattern Tester & Match Explainer",
+    "name": "Regex Pattern Tester & Match Explainer",
+    "href": "/tools/regex-tester/",
+    "component": "src/pages/tools/regex-tester.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "tester",
+    "description": "Test Regular Expressions (Regex) against text client-side with match highlighting and capture group tables.",
+    "seo": {
+      "title": "Regex Pattern Tester & Match Explainer | Nadhebe",
+      "description": "Test Regular Expressions (Regex) against sample text client-side. Inspect pattern capture groups, flag toggles (g, i, m, s), and match highlighting.",
+      "keywords": [
+        "regex tester",
+        "regular expression evaluator",
+        "regex match highlighter",
+        "capture group inspector",
+        "regex online tester"
+      ]
+    },
+    "relatedTools": [
+      "case-converter",
+      "slug-generator",
+      "cron-explainer",
+      "sql-formatter"
+    ],
+    "tags": [
+      "developer",
+      "regex-tester"
+    ],
+    "icon": "code"
+  },
+  {
+    "id": "dev-mdt-1",
+    "slug": "markdown-table-generator",
+    "title": "Markdown Table Generator & Prettifier",
+    "name": "Markdown Table Generator & Prettifier",
+    "href": "/tools/markdown-table-generator/",
+    "component": "src/pages/tools/markdown-table-generator.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "generator",
+    "description": "Build, format, and align GitHub Flavored Markdown (GFM) tables client-side.",
+    "seo": {
+      "title": "Markdown Table Generator & Prettifier | Nadhebe",
+      "description": "Build, format, and align GitHub Flavored Markdown (GFM) tables client-side. Set column alignments (Left, Center, Right) and export Markdown markup.",
+      "keywords": [
+        "markdown table generator",
+        "gfm table builder",
+        "github markdown table creator",
+        "format markdown table",
+        "markdown table alignment"
+      ]
+    },
+    "relatedTools": [
+      "html-to-markdown",
+      "markdown-to-html",
+      "sql-formatter",
+      "json-to-csv"
+    ],
+    "tags": [
+      "developer",
+      "markdown-table-generator"
+    ],
+    "icon": "table"
   }
 ];
 

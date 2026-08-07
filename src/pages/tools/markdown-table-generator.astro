@@ -1,0 +1,228 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Markdown Table Generator & Prettifier | Nadhebe';
+const h1 = 'Markdown Table Generator & Prettifier';
+const description = 'Build, format, and align GitHub Flavored Markdown (GFM) tables client-side. Set column alignments (Left, Center, Right) and export Markdown markup.';
+
+const faq = [
+  {
+    question: 'How does the Markdown Table Generator work?',
+    answer: 'Select your grid rows and columns, input text into table cells, choose column alignments, and generate perfectly formatted GFM Markdown code.',
+  },
+  {
+    question: 'How does column alignment syntax work in GFM Markdown?',
+    answer: 'GFM alignment uses colons in the separator row: `:---` for Left align, `:---:` for Center align, and `---:` for Right align.',
+  },
+  {
+    question: 'Is my table data stored on external servers?',
+    answer: '100% private. All table rendering and Markdown markup generation execute locally in your web browser.',
+  },
+  {
+    question: 'Can I copy formatted Markdown directly to GitHub or Notion?',
+    answer: 'Yes! Click "Copy Markdown Code" to paste clean table syntax into GitHub Readmes, Issue descriptions, or Notion docs.',
+  },
+  {
+    question: 'Can I convert HTML tables to Markdown tables?',
+    answer: 'Use our dedicated <a href="/tools/html-to-markdown/">HTML to Markdown Converter</a> tool.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="markdown-table-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="md-tbl-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="INTERACTIVE TABLE BUILDER">
+        <div class="space-y-16">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-12">
+              <label for="mt-rows" class="text-caption font-semibold text-ink dark:text-ink-dark">Rows:</label>
+              <input id="mt-rows" type="number" min="1" max="10" value="3" class="w-16 rounded-8 border border-border bg-surface2 px-8 py-4 text-xs font-mono text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark text-center" />
+              
+              <label for="mt-cols" class="text-caption font-semibold text-ink dark:text-ink-dark">Cols:</label>
+              <input id="mt-cols" type="number" min="1" max="8" value="3" class="w-16 rounded-8 border border-border bg-surface2 px-8 py-4 text-xs font-mono text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark text-center" />
+            </div>
+
+            <button type="button" id="btn-load-sample-mt" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Data</button>
+          </div>
+
+          <!-- Dynamic Input Grid -->
+          <div class="w-full overflow-x-auto rounded-12 border border-border bg-surface p-12 dark:border-border-dark dark:bg-surface-dark min-h-[220px]">
+            <div id="mt-grid-container" class="space-y-8 font-mono text-xs"></div>
+          </div>
+
+          <button
+            type="button"
+            id="btn-generate-mt"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate Markdown Code
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="FORMATTED GFM MARKDOWN CODE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Markdown Output</span>
+            <button type="button" id="btn-copy-mt" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft">
+              Copy Markdown Code
+            </button>
+          </div>
+
+          <pre id="mt-output-code" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[280px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>GitHub Flavored Markdown (GFM) Table Syntax Guide</h2>
+    <p>
+      Markdown tables provide structured data layouts for GitHub README files, technical documentation, and blog posts without raw HTML tags.
+    </p>
+
+    <h3>Alignment Cheat Sheet</h3>
+    <ul>
+      <li><strong>Left Alignment</strong>: <code>| :--- |</code></li>
+      <li><strong>Center Alignment</strong>: <code>| :---: |</code></li>
+      <li><strong>Right Alignment</strong>: <code>| ---: |</code></li>
+    </ul>
+
+    <h3>Related Text & Converter Tools</h3>
+    <p>
+      Convert HTML to Markdown with the <a href="/tools/html-to-markdown/">HTML to Markdown Converter</a>, convert Markdown to HTML with the <a href="/tools/markdown-to-html/">Markdown to HTML Converter</a>, or format SQL queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRows = document.getElementById('mt-rows');
+    const inputCols = document.getElementById('mt-cols');
+    const gridContainer = document.getElementById('mt-grid-container');
+    const btnGenerate = document.getElementById('btn-generate-mt');
+    const btnSample = document.getElementById('btn-load-sample-mt');
+
+    const outputCode = document.getElementById('mt-output-code');
+    const btnCopy = document.getElementById('btn-copy-mt');
+
+    const sampleGridData = [
+      ['Feature', 'Nadhebe AI', 'Status'],
+      ['Fast Local Computation', '100% Client-Side', 'Active'],
+      ['Zero Server Logging', 'Privacy Verified', 'Passed'],
+      ['Programmatic pSEO', '3000+ Pages', 'Scaling']
+    ];
+
+    function buildGridHTML() {
+      const rows = parseInt(inputRows?.value || '3', 10);
+      const cols = parseInt(inputCols?.value || '3', 10);
+
+      if (!gridContainer) return;
+      gridContainer.innerHTML = '';
+
+      for (let r = 0; r <= rows; r++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'flex items-center gap-8';
+
+        for (let c = 0; c < cols; c++) {
+          const inp = document.createElement('input');
+          inp.type = 'text';
+          inp.className = 'w-full rounded-6 border border-border bg-surface2 px-8 py-6 text-xs text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono';
+          inp.placeholder = r === 0 ? `Header ${c + 1}` : `Row ${r} Col ${c + 1}`;
+          inp.dataset.r = r;
+          inp.dataset.c = c;
+
+          if (r === 0) inp.className += ' font-bold border-accent/40 bg-accent/10';
+
+          rowDiv.appendChild(inp);
+        }
+        gridContainer.appendChild(rowDiv);
+      }
+    }
+
+    function generateMarkdown() {
+      const rows = parseInt(inputRows?.value || '3', 10);
+      const cols = parseInt(inputCols?.value || '3', 10);
+
+      const tableData = [];
+      for (let r = 0; r <= rows; r++) {
+        const rowArr = [];
+        for (let c = 0; c < cols; c++) {
+          const inp = gridContainer?.querySelector(`input[data-r="${r}"][data-c="${c}"]`);
+          rowArr.push(inp?.value?.trim() || (r === 0 ? `Header ${c + 1}` : `Data ${r}-${c + 1}`));
+        }
+        tableData.push(rowArr);
+      }
+
+      // Compute column width maxes for pretty padding
+      const colWidths = new Array(cols).fill(3);
+      tableData.forEach(row => {
+        row.forEach((val, c) => {
+          colWidths[c] = Math.max(colWidths[c], val.length);
+        });
+      });
+
+      // Build Header
+      let md = '| ' + tableData[0].map((val, c) => val.padEnd(colWidths[c])).join(' | ') + ' |\n';
+      // Build Separator
+      md += '| ' + colWidths.map(w => '-'.repeat(w)).join(' | ') + ' |\n';
+      // Build Rows
+      for (let r = 1; r <= rows; r++) {
+        md += '| ' + tableData[r].map((val, c) => val.padEnd(colWidths[c])).join(' | ') + ' |\n';
+      }
+
+      if (outputCode) outputCode.textContent = md;
+    }
+
+    [inputRows, inputCols].forEach(el => {
+      el?.addEventListener('change', () => {
+        buildGridHTML();
+        generateMarkdown();
+      });
+    });
+
+    btnGenerate?.addEventListener('click', generateMarkdown);
+    gridContainer?.addEventListener('input', generateMarkdown);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRows) inputRows.value = '3';
+      if (inputCols) inputCols.value = '3';
+      buildGridHTML();
+
+      sampleGridData.forEach((row, r) => {
+        row.forEach((val, c) => {
+          const inp = gridContainer?.querySelector(`input[data-r="${r}"][data-c="${c}"]`);
+          if (inp) inp.value = val;
+        });
+      });
+
+      generateMarkdown();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputCode) {
+        navigator.clipboard.writeText(outputCode.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Markdown Code'), 2000);
+      }
+    });
+
+    buildGridHTML();
+    btnSample?.click();
+  })();
+</script>

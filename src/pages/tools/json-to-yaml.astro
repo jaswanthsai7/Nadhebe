@@ -1,0 +1,197 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JSON to YAML Converter & Config Builder | Nadhebe';
+const h1 = 'JSON to YAML Converter & Config Builder';
+const description = 'Convert JSON object structures into clean, 2-space indented YAML files client-side. Generate Docker Compose and Kubernetes manifests.';
+
+const faq = [
+  {
+    question: 'How does the JSON to YAML converter work?',
+    answer: 'The tool parses JSON payloads client-side and formats object key-value pairs into clean, space-indented YAML configuration blocks.',
+  },
+  {
+    question: 'Are nested JSON objects and arrays supported?',
+    answer: 'Yes! Nested objects become indented YAML keys and JSON arrays become dash-prefixed YAML lists (`- item`).',
+  },
+  {
+    question: 'Is my JSON payload kept private?',
+    answer: '100% private. All parsing and YAML generation execute locally in your web browser.',
+  },
+  {
+    question: 'Can I convert Docker Compose or Kubernetes JSON configs?',
+    answer: 'Yes! Convert any JSON deployment configuration into valid `.yaml` manifest files.',
+  },
+  {
+    question: 'How do I convert YAML back to JSON?',
+    answer: 'Use our dedicated <a href="/tools/yaml-to-json/">YAML to JSON Converter</a> tool.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-to-yaml"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="j2y-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RAW JSON INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="j2y-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">JSON Document</label>
+              <button type="button" id="btn-load-sample-j2y" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample JSON</button>
+            </div>
+            <textarea
+              id="j2y-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-convert-j2y"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert JSON to YAML
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="FORMATTED YAML OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Parsed YAML Result</span>
+            <button type="button" id="btn-copy-j2y" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy YAML</button>
+          </div>
+
+          <pre id="j2y-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON to YAML Configuration Conversion Specification</h2>
+    <p>
+      YAML (YAML Ain't Markup Language) provides a human-readable config format favored by DevOps engineers for Kubernetes, Ansible, and Docker. Converting JSON API payloads into clean YAML simplifies manifest creation.
+    </p>
+
+    <h3>Mapping Matrix</h3>
+    <ul>
+      <li><strong>JSON Keys</strong> → YAML Key-Value Pairs</li>
+      <li><strong>JSON Arrays</strong> → YAML Bulleted Lists (<code>- item</code>)</li>
+      <li><strong>Nested Objects</strong> → 2-Space Indented Blocks</li>
+    </ul>
+
+    <h3>Related Config Tools</h3>
+    <p>
+      Convert YAML to JSON with the <a href="/tools/yaml-to-json/">YAML to JSON Converter</a>, validate YAML syntax with the <a href="/tools/yaml-validator/">YAML Validator</a>, or format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('j2y-input-raw');
+    const btnConvert = document.getElementById('btn-convert-j2y');
+    const btnSample = document.getElementById('btn-load-sample-j2y');
+
+    const outputText = document.getElementById('j2y-output-text');
+    const btnCopy = document.getElementById('btn-copy-j2y');
+
+    const defaultJson = `{
+  "version": "3.8",
+  "services": {
+    "web": {
+      "image": "nginx:latest",
+      "ports": [
+        "80:80"
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}`;
+
+    function jsonToYaml(obj, indent = 0) {
+      const spacing = ' '.repeat(indent);
+      let str = '';
+
+      if (obj === null || obj === undefined) return 'null\n';
+      if (typeof obj !== 'object') return `${JSON.stringify(obj)}\n`;
+
+      if (Array.isArray(obj)) {
+        if (obj.length === 0) return '[]\n';
+        for (const item of obj) {
+          if (typeof item === 'object' && item !== null) {
+            str += `${spacing}- ${jsonToYaml(item, indent + 2).trim()}\n`;
+          } else {
+            str += `${spacing}- ${item}\n`;
+          }
+        }
+        return str;
+      }
+
+      for (const [key, val] of Object.entries(obj)) {
+        if (typeof val === 'object' && val !== null) {
+          if (Array.isArray(val) && val.length === 0) {
+            str += `${spacing}${key}: []\n`;
+          } else if (Object.keys(val).length === 0) {
+            str += `${spacing}${key}: {}\n`;
+          } else {
+            str += `${spacing}${key}:\n${jsonToYaml(val, indent + 2)}`;
+          }
+        } else {
+          str += `${spacing}${key}: ${val}\n`;
+        }
+      }
+
+      return str;
+    }
+
+    function convert() {
+      const raw = inputRaw?.value || defaultJson;
+      try {
+        const parsed = JSON.parse(raw);
+        const yaml = jsonToYaml(parsed);
+        if (outputText) outputText.textContent = yaml;
+      } catch(e) {
+        if (outputText) outputText.textContent = `// JSON Syntax Error: ${e.message}`;
+      }
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    inputRaw?.addEventListener('input', convert);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultJson;
+      convert();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy YAML'), 2000);
+      }
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultJson;
+
+    convert();
+  })();
+</script>
