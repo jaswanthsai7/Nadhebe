@@ -198,32 +198,101 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
 <!-- Copy-to-Clipboard Client Helper -->
 <script is:inline>
   (function() {
-    function setupCopyButtons() {
-      document.querySelectorAll('[data-copy-trigger]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const val = btn.getAttribute('data-copy-val') || '';
-          if (!val) return;
+    function extractElementText(el) {
+      if (!el) return '';
+      if (el.value !== undefined && el.value !== '') return el.value;
+      if (el.tagName === 'TABLE' || el.tagName === 'TBODY') {
+        var rows = Array.from(el.querySelectorAll('tr'));
+        return rows.map(function(r) {
+          var cells = Array.from(r.querySelectorAll('th, td')).map(function(c) { return c.textContent.trim(); });
+          if (cells.length === 2) return cells[0] + ': ' + cells[1];
+          return cells.join('\t');
+        }).filter(function(s) { return s.trim() && !s.includes('Paste headers'); }).join('\n');
+      }
+      return el.textContent ? el.textContent.trim() : '';
+    }
 
-          navigator.clipboard.writeText(val).then(() => {
-            const copyIcon = btn.querySelector('.copy-icon');
-            const checkIcon = btn.querySelector('.check-icon');
+    function findCopyCard(btn) {
+      var card = btn.closest('.group');
+      if (card && card !== btn.parentElement) return card;
+      card = btn.closest('[id$="-app"], [slot="calculator"], .glass-panel, .space-y-24, .space-y-16');
+      if (card) return card;
+      var parent = btn.parentElement;
+      while (parent && parent !== document.body) {
+        if (parent.querySelector('textarea, code, pre, table, tbody, input')) {
+          return parent;
+        }
+        parent = parent.parentElement;
+      }
+      return document.body;
+    }
+
+    function setupCopyButtons() {
+      document.querySelectorAll('[data-copy-trigger]').forEach(function(btn) {
+        if (btn.dataset.tlCopyInited) return;
+        btn.dataset.tlCopyInited = 'true';
+
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var val = btn.getAttribute('data-copy-val') || '';
+          var targetId = btn.getAttribute('data-copy-target');
+
+          if (!val && targetId) {
+            var targetEl = document.getElementById(targetId);
+            if (targetEl) val = extractElementText(targetEl);
+          }
+
+          if (!val) {
+            var card = findCopyCard(btn);
+            var el = card ? card.querySelector('textarea, code, pre, table, tbody') : null;
+            if (el) val = extractElementText(el);
+          }
+
+          if (!val || !val.trim()) return;
+
+          navigator.clipboard.writeText(val.trim()).then(function() {
+            var copyIcon = btn.querySelector('.copy-icon');
+            var checkIcon = btn.querySelector('.check-icon');
+            var copyLabel = btn.querySelector('.copy-label');
+
+            btn.classList.add('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400', 'bg-emerald-500/10');
+            btn.classList.remove('border-border/80', 'text-ink');
 
             if (copyIcon && checkIcon) {
-              copyIcon.classList.add('hidden');
-              checkIcon.classList.remove('hidden');
-              setTimeout(() => {
-                copyIcon.classList.remove('hidden');
-                checkIcon.classList.add('hidden');
-              }, 2000);
+              copyIcon.style.transform = 'scale(0)';
+              copyIcon.style.opacity = '0';
+              checkIcon.style.transform = 'scale(1)';
+              checkIcon.style.opacity = '1';
             }
 
-            // Track GA Analytics Event if gtag is defined
+            if (copyLabel) {
+              var origText = copyLabel.dataset.origText || copyLabel.textContent;
+              copyLabel.dataset.origText = origText;
+              copyLabel.textContent = 'Copied!';
+            }
+
+            setTimeout(function() {
+              btn.classList.remove('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400', 'bg-emerald-500/10');
+              btn.classList.add('border-border/80', 'text-ink');
+
+              if (copyIcon && checkIcon) {
+                copyIcon.style.transform = 'scale(1)';
+                copyIcon.style.opacity = '1';
+                checkIcon.style.transform = 'scale(0)';
+                checkIcon.style.opacity = '0';
+              }
+
+              if (copyLabel && copyLabel.dataset.origText) {
+                copyLabel.textContent = copyLabel.dataset.origText;
+              }
+            }, 2000);
+
             if (typeof window.gtag === 'function') {
               window.gtag('event', 'tool_copy_result', {
                 tool_name: window.location.pathname,
               });
             }
-          }).catch(err => {
+          }).catch(function(err) {
             console.error('Copy failed', err);
           });
         });

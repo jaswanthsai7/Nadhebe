@@ -38,15 +38,17 @@ const displayTitle = label || title || 'Result';
           data-copy-target={id || ''}
           data-copy-val={String(value || '')}
           aria-label={`Copy ${displayTitle}`}
-          class="inline-flex items-center gap-6 rounded-8 border border-border/80 bg-surface2 px-12 py-4 font-sans text-xs font-bold text-ink whitespace-nowrap shrink-0 shadow-sm hover:bg-surface hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface2-dark dark:text-ink-dark dark:hover:bg-surface-dark transition-all duration-150 cursor-pointer"
+          class="inline-flex items-center gap-6 rounded-8 border border-border/80 bg-surface2 px-12 py-4 font-sans text-xs font-bold text-ink whitespace-nowrap shrink-0 shadow-sm hover:bg-surface hover:border-accent hover:text-accent dark:border-border-dark/80 dark:bg-surface2-dark dark:text-ink-dark dark:hover:bg-surface-dark transition-all duration-200 cursor-pointer"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 copy-icon shrink-0">
-            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden h-12 w-12 check-icon text-emerald-500 shrink-0">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
+          <span class="relative flex items-center justify-center w-12 h-12 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 copy-icon absolute transition-all duration-200 ease-out transform scale-100 opacity-100">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 check-icon absolute text-emerald-500 transition-all duration-200 ease-out transform scale-0 opacity-0">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
           <span class="copy-label whitespace-nowrap">Copy</span>
         </button>
       )}
@@ -76,62 +78,102 @@ const displayTitle = label || title || 'Result';
 
 <script is:inline>
   (function() {
-    function initCopyButtons() {
-      document.querySelectorAll('[data-copy-trigger], button[id$="-copy"], button.copy-btn').forEach(btn => {
-        if (btn.dataset.copyInited) return;
-        btn.dataset.copyInited = 'true';
+    function getCardToCopy(btn) {
+      var parent = btn.parentElement;
+      while (parent && parent !== document.body) {
+        if (parent.classList.contains('group') || parent.id.endsWith('-app') || parent.classList.contains('space-y-24')) {
+          return parent;
+        }
+        parent = parent.parentElement;
+      }
+      return btn.closest('.group') || document.body;
+    }
 
-        btn.addEventListener('click', async (e) => {
+    function getTextFromElement(el) {
+      if (!el) return '';
+      if (el.value !== undefined && el.value !== '') return el.value;
+      if (el.tagName === 'TABLE' || el.tagName === 'TBODY') {
+        var rows = Array.from(el.querySelectorAll('tr'));
+        return rows.map(function(r) {
+          var cells = Array.from(r.querySelectorAll('th, td')).map(function(c) { return c.textContent.trim(); });
+          if (cells.length === 2) return cells[0] + ': ' + cells[1];
+          return cells.join('\t');
+        }).filter(function(s) { return s.trim() && !s.includes('Paste headers'); }).join('\n');
+      }
+      return el.textContent ? el.textContent.trim() : '';
+    }
+
+    function initResultCardCopy() {
+      document.querySelectorAll('[data-copy-trigger]').forEach(function(btn) {
+        if (btn.dataset.rcInited) return;
+        btn.dataset.rcInited = 'true';
+
+        btn.addEventListener('click', async function(e) {
           e.preventDefault();
 
-          let textToCopy = btn.getAttribute('data-copy-val') || '';
-          const targetId = btn.getAttribute('data-copy-target');
+          var textToCopy = btn.getAttribute('data-copy-val') || '';
+          var targetId = btn.getAttribute('data-copy-target');
 
           if (!textToCopy && targetId) {
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) textToCopy = targetEl.value || targetEl.textContent || '';
+            var targetEl = document.getElementById(targetId);
+            if (targetEl) textToCopy = getTextFromElement(targetEl);
           }
 
           if (!textToCopy) {
-            // Find sibling or parent textarea
-            const card = btn.closest('.group, [id$="-app"], .space-y-16, .space-y-24');
-            const textarea = card?.querySelector('textarea, code, pre');
-            if (textarea) textToCopy = textarea.value || textarea.textContent || '';
+            var card = getCardToCopy(btn);
+            var el = card ? card.querySelector('textarea, code, pre, table, tbody, [id]') : null;
+            if (el) textToCopy = getTextFromElement(el);
           }
 
-          if (textToCopy) {
-            try {
-              await navigator.clipboard.writeText(textToCopy);
+          if (!textToCopy) {
+            var cardFallback = getCardToCopy(btn);
+            textToCopy = cardFallback ? cardFallback.textContent.trim() : '';
+          }
 
-              const copyIcon = btn.querySelector('.copy-icon');
-              const checkIcon = btn.querySelector('.check-icon');
-              const copyLabel = btn.querySelector('.copy-label') || btn;
+          if (!textToCopy || !textToCopy.trim()) return;
 
-              btn.classList.add('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
-              if (copyIcon) copyIcon.classList.add('hidden');
-              if (checkIcon) checkIcon.classList.remove('hidden');
+          try {
+            await navigator.clipboard.writeText(textToCopy.trim());
 
-              const originalText = copyLabel.textContent;
-              copyLabel.textContent = 'Copied!';
+            var copyIcon = btn.querySelector('.copy-icon');
+            var checkIcon = btn.querySelector('.check-icon');
+            var copyLabel = btn.querySelector('.copy-label');
 
-              setTimeout(() => {
-                btn.classList.remove('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
-                if (copyIcon) copyIcon.classList.remove('hidden');
-                if (checkIcon) checkIcon.classList.add('hidden');
-                copyLabel.textContent = originalText;
-              }, 2000);
-            } catch (err) {
-              console.error('Failed to copy text: ', err);
+            btn.classList.add('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+
+            if (copyIcon && checkIcon) {
+              copyIcon.style.transform = 'scale(0)';
+              copyIcon.style.opacity = '0';
+              checkIcon.style.transform = 'scale(1)';
+              checkIcon.style.opacity = '1';
             }
+
+            if (copyLabel) {
+              var orig = copyLabel.dataset.origText || copyLabel.textContent;
+              copyLabel.dataset.origText = orig;
+              copyLabel.textContent = 'Copied!';
+            }
+
+            setTimeout(function() {
+              btn.classList.remove('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+              if (copyIcon && checkIcon) {
+                copyIcon.style.transform = 'scale(1)';
+                copyIcon.style.opacity = '1';
+                checkIcon.style.transform = 'scale(0)';
+                checkIcon.style.opacity = '0';
+              }
+              if (copyLabel && copyLabel.dataset.origText) {
+                copyLabel.textContent = copyLabel.dataset.origText;
+              }
+            }, 2000);
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
           }
         });
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCopyButtons);
-    } else {
-      initCopyButtons();
-    }
+    initResultCardCopy();
+    document.addEventListener('astro:page-load', initResultCardCopy);
   })();
 </script>
