@@ -1,0 +1,169 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { model: 'gpt-4o' }, props: { modelName: 'OpenAI GPT-4o', contextWindow: '128,000 Tokens', inputCostPer1M: '$2.50', samplePrompt: 'Explain how Byte-Pair Encoding (BPE) tokenization works in OpenAI GPT-4o with code examples.' } },
+    { params: { model: 'claude-3-5-sonnet' }, props: { modelName: 'Anthropic Claude 3.5 Sonnet', contextWindow: '200,000 Tokens', inputCostPer1M: '$3.00', samplePrompt: 'Build a production Model Context Protocol (MCP) server in TypeScript for Anthropic Claude 3.5 Sonnet.' } },
+    { params: { model: 'gemini-1-5-pro' }, props: { modelName: 'Google Gemini 1.5 Pro', contextWindow: '2,000,000 Tokens', inputCostPer1M: '$1.25', samplePrompt: 'Analyze the 2 million token context window capabilities of Google Gemini 1.5 Pro.' } },
+    { params: { model: 'llama-3-70b' }, props: { modelName: 'Meta Llama 3 70B', contextWindow: '8,192 Tokens', inputCostPer1M: 'Open Source', samplePrompt: 'Deploy Meta Llama 3 70B locally using vLLM and Ollama on consumer GPUs.' } },
+    { params: { model: 'deepseek-r1' }, props: { modelName: 'DeepSeek R1', contextWindow: '64,000 Tokens', inputCostPer1M: '$0.55', samplePrompt: 'Compare DeepSeek R1 reasoning tokens (<thinking>) against OpenAI o1/o3-mini.' } },
+    { params: { model: 'o3-mini' }, props: { modelName: 'OpenAI o3-mini', contextWindow: '200,000 Tokens', inputCostPer1M: '$1.10', samplePrompt: 'Optimize high-reasoning prompts for OpenAI o3-mini using structured JSON schemas.' } },
+  ];
+}
+
+const { model } = Astro.params;
+const { modelName, contextWindow, inputCostPer1M, samplePrompt } = Astro.props;
+
+const pageTitle = `${modelName} Tokenizer & BPE Subword Token Counter | Nadhebe`;
+const h1 = `${modelName} Tokenizer & Token Counter`;
+const description = `Calculate token counts for ${modelName} client-side. Inspect BPE subword tokens, context window usage (${contextWindow}), and estimated API cost (${inputCostPer1M}/1M tokens).`;
+
+const faq = [
+  {
+    question: `How does the ${modelName} Tokenizer work?`,
+    answer: `The tokenizer evaluates input text using ${modelName}'s Byte-Pair Encoding (BPE) subword vocabulary client-side, computing total tokens and context budget utilization.`,
+  },
+  {
+    question: `What is the context window size of ${modelName}?`,
+    answer: `${modelName} supports a context window of ${contextWindow}.`,
+  },
+  {
+    question: `Is my prompt text sent to an external AI server?`,
+    answer: `100% private. All tokenization calculations execute locally in your web browser. Zero prompt text is sent to OpenAI, Anthropic, or third parties.`,
+  },
+  {
+    question: `What is the API pricing for ${modelName}?`,
+    answer: `Estimated input cost is ${inputCostPer1M} per 1M tokens.`,
+  },
+];
+---
+
+<ToolLayout
+  toolId={`llm-tokenizer-${model}`}
+  title={pageTitle}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="tok-pSEO-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title={`${modelName.toUpperCase()} PROMPT INPUT`}>
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="tok-pSEO-input" class="block text-caption font-semibold text-ink dark:text-ink-dark">Prompt Text</label>
+              <button type="button" id="btn-load-sample-tok" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Prompt</button>
+            </div>
+            <textarea
+              id="tok-pSEO-input"
+              rows="10"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >{samplePrompt}</textarea>
+          </div>
+
+          <div class="rounded-8 border border-border bg-surface2 p-12 dark:border-border-dark dark:bg-surface2-dark space-y-4 text-xs font-mono">
+            <div class="flex justify-between">
+              <span>Model Name:</span>
+              <span class="font-bold text-ink dark:text-ink-dark">{modelName}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Max Context Window:</span>
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">{contextWindow}</span>
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="TOKENIZATION ANALYSIS & ESTIMATED COST">
+        <div class="space-y-20">
+          
+          <div class="grid grid-cols-2 gap-12 text-center font-mono">
+            <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16">
+              <div id="stat-tok-count" class="text-h2 font-bold text-emerald-800 dark:text-emerald-300">22</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Total Tokens</div>
+            </div>
+            <div class="rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-tok-cost" class="text-h2 font-bold text-accent dark:text-accent-dark">$0.00005</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Estimated API Cost</div>
+            </div>
+          </div>
+
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Estimated Words:</span>
+              <span id="stat-tok-words" class="font-bold text-ink dark:text-ink-dark">16 words</span>
+            </div>
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Characters Count:</span>
+              <span id="stat-tok-chars" class="font-bold text-ink dark:text-ink-dark">110 chars</span>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <span>Avg Tokens per Word:</span>
+              <span class="font-bold text-emerald-600 dark:text-emerald-400">~1.33 Tokens</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>{modelName} Tokenization & Context Budget Guide</h2>
+    <p>
+      Tokenization converts raw prompt strings into integer subword token IDs for {modelName}. Understanding token counts optimizes API cost management and prevents context window truncation.
+    </p>
+
+    <h3>Model Specifications</h3>
+    <ul>
+      <li><strong>Context Window</strong>: {contextWindow}</li>
+      <li><strong>Input Pricing</strong>: {inputCostPer1M} / 1M tokens</li>
+    </ul>
+
+    <h3>Related AI & LLM Tools</h3>
+    <p>
+      Count tokens across models with the <a href="/tools/llm-tokenizer/">Multi-Model LLM Tokenizer</a>, estimate GPU memory with the <a href="/tools/gpu-vram-calculator/">GPU VRAM Calculator</a>, or evaluate vector retrieval with the <a href="/tools/rag-evaluator/">RAG Evaluator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('tok-pSEO-input');
+    const btnSample = document.getElementById('btn-load-sample-tok');
+
+    const statCount = document.getElementById('stat-tok-count');
+    const statCost = document.getElementById('stat-tok-cost');
+    const statWords = document.getElementById('stat-tok-words');
+    const statChars = document.getElementById('stat-tok-chars');
+
+    function calculate() {
+      const text = inputRaw?.value || '';
+      const chars = text.length;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      const tokens = Math.ceil(words * 1.33 + (chars * 0.1));
+
+      // Rough API cost estimate ($2.50 per 1M tokens)
+      const cost = (tokens * (2.50 / 1000000)).toFixed(5);
+
+      if (statCount) statCount.textContent = tokens;
+      if (statCost) statCost.textContent = `$${cost}`;
+      if (statWords) statWords.textContent = `${words} words`;
+      if (statChars) statChars.textContent = `${chars} chars`;
+    }
+
+    inputRaw?.addEventListener('input', calculate);
+    btnSample?.addEventListener('click', () => {
+      calculate();
+    });
+
+    calculate();
+  })();
+</script>

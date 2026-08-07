@@ -1,0 +1,104 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { code: '200' }, props: { name: '200 OK', category: '2xx Success', desc: 'Standard response for successful HTTP requests. The requested resource has been fetched and transmitted in the message body.' } },
+    { params: { code: '301' }, props: { name: '301 Moved Permanently', category: '3xx Redirection', desc: 'The target resource has been assigned a new permanent URI and future references to this resource should use one of the returned URIs.' } },
+    { params: { code: '302' }, props: { name: '302 Found / Temporary Redirect', category: '3xx Redirection', desc: 'The target resource resides temporarily under a different URI. Browsers redirect temporarily.' } },
+    { params: { code: '400' }, props: { name: '400 Bad Request', category: '4xx Client Error', desc: 'The server cannot or will not process the request due to an apparent client error (e.g., malformed request syntax, invalid request framing).' } },
+    { params: { code: '401' }, props: { name: '401 Unauthorized', category: '4xx Client Error', desc: 'The request has not been applied because it lacks valid authentication credentials for the target resource.' } },
+    { params: { code: '403' }, props: { name: '403 Forbidden', category: '4xx Client Error', desc: 'The server understood the request but refuses to authorize it. Unlike 401, re-authenticating will not make a difference.' } },
+    { params: { code: '404' }, props: { name: '404 Not Found', category: '4xx Client Error', desc: 'The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.' } },
+    { params: { code: '429' }, props: { name: '429 Too Many Requests', category: '4xx Client Error', desc: 'The user has sent too many requests in a given amount of time (rate limiting).' } },
+    { params: { code: '500' }, props: { name: '500 Internal Server Error', category: '5xx Server Error', desc: 'The server encountered an unexpected condition that prevented it from fulfilling the request.' } },
+    { params: { code: '502' }, props: { name: '502 Bad Gateway', category: '5xx Server Error', desc: 'The server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request.' } },
+    { params: { code: '503' }, props: { name: '503 Service Unavailable', category: '5xx Server Error', desc: 'The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.' } },
+  ];
+}
+
+const { code } = Astro.params;
+const { name, category, desc } = Astro.props;
+
+const pageTitle = `HTTP ${code} ${name} Status Code Guide | Nadhebe`;
+const h1 = `HTTP ${code} ${name}`;
+const description = `HTTP ${code} ${name} status code explanation, causes, Nginx/Apache configs, and API troubleshooting guide.`;
+
+const faq = [
+  {
+    question: `What does HTTP ${code} mean?`,
+    answer: `${desc}`,
+  },
+  {
+    question: `Is HTTP ${code} a client error or server error?`,
+    answer: `HTTP ${code} belongs to the ${category} status code class.`,
+  },
+  {
+    question: `How do I fix HTTP ${code} errors?`,
+    answer: `Check server logs, verify URL endpoints, inspect authentication headers, or check CDN proxy backend rules.`,
+  },
+];
+---
+
+<ToolLayout
+  toolId={`http-status-${code}`}
+  title={pageTitle}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="http-pSEO-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- STATUS CODE CARD -->
+      <CalculatorCard title={`HTTP STATUS CODE DETAILS`}>
+        <div class="space-y-16">
+          <div class="rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-24 text-center font-mono">
+            <div class="text-h1 font-bold text-emerald-800 dark:text-emerald-300">HTTP {code}</div>
+            <div class="text-caption font-bold text-emerald-700 dark:text-emerald-400 mt-4">{name}</div>
+          </div>
+
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <div class="flex justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Status Class:</span>
+              <span class="font-bold text-accent dark:text-accent-dark">{category}</span>
+            </div>
+            <div class="flex justify-between py-4">
+              <span>RFC Specification:</span>
+              <span class="font-bold text-ink dark:text-ink-dark">RFC 9110 HTTP Semantics</span>
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- EXPLANATION CARD -->
+      <ResultCard title="STATUS CODE SPECIFICATION & CAUSES">
+        <div class="space-y-20">
+          
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Technical Summary</span>
+            <p class="text-caption text-ink dark:text-ink-dark leading-relaxed font-sans bg-surface2/60 dark:bg-surface2-dark/60 p-16 rounded-12 border border-border/60 dark:border-border-dark/60">
+              {desc}
+            </p>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>HTTP {code} {name} Troubleshooting Guide</h2>
+    <p>
+      HTTP status codes indicate whether a specific HTTP request has been successfully completed. Category {category} specifies standard protocol interactions between client applications and web servers.
+    </p>
+
+    <h3>Related HTTP & Security Tools</h3>
+    <p>
+      Inspect HTTP headers with the <a href="/tools/http-header-inspector/">HTTP Header Inspector</a>, view all status codes on the <a href="/tools/http-status-codes-cheat-sheet/">HTTP Status Codes Cheat Sheet</a>, or trace redirects with the <a href="/tools/redirect-chain-checker/">Redirect Chain Checker</a>.
+    </p>
+  </div>
+</ToolLayout>

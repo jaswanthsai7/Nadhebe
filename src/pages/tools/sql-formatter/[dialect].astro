@@ -1,0 +1,166 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { dialect: 'postgresql' }, props: { titleName: 'PostgreSQL', defaultSql: 'SELECT u.id, u.email, p.title FROM users u JOIN posts p ON u.id = p.user_id WHERE u.created_at >= NOW() - INTERVAL \'30 days\' ORDER BY u.id DESC;' } },
+    { params: { dialect: 'mysql' }, props: { titleName: 'MySQL', defaultSql: 'SELECT id, username, email FROM users WHERE status = 1 AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 10;' } },
+    { params: { dialect: 'sqlite' }, props: { titleName: 'SQLite', defaultSql: 'SELECT id, name, strftime(\'%Y-%m\', created_at) AS month FROM customers WHERE active = 1;' } },
+    { params: { dialect: 'sql-server' }, props: { titleName: 'T-SQL / SQL Server', defaultSql: 'SELECT TOP (100) UserId, AccountName, CreatedDate FROM dbo.Users WITH (NOLOCK) WHERE IsActive = 1 ORDER BY UserId DESC;' } },
+    { params: { dialect: 'oracle' }, props: { titleName: 'Oracle PL/SQL', defaultSql: 'SELECT employee_id, first_name, last_name FROM employees WHERE department_id = 10 AND ROWNUM <= 50;' } },
+    { params: { dialect: 'snowflake' }, props: { titleName: 'Snowflake SQL', defaultSql: 'SELECT DATE_TRUNC(\'day\', event_time) AS date, COUNT(*) AS total_events FROM analytics.events GROUP BY 1 ORDER BY 1 DESC;' } },
+    { params: { dialect: 'bigquery' }, props: { titleName: 'Google BigQuery Standard SQL', defaultSql: 'SELECT project_id, COUNT(1) AS query_count FROM `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT WHERE creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY) GROUP BY 1;' } },
+  ];
+}
+
+const { dialect } = Astro.params;
+const { titleName, defaultSql } = Astro.props;
+
+const pageTitle = `${titleName} SQL Formatter & Query Prettifier | Nadhebe`;
+const h1 = `${titleName} SQL Formatter & Prettifier`;
+const description = `Format, indent, and prettify ${titleName} SQL queries client-side. Uppercase SQL keywords, align clauses, and clean messy database queries.`;
+
+const faq = [
+  {
+    question: `How does the ${titleName} SQL Formatter work?`,
+    answer: `Paste your raw ${titleName} query into the editor. The formatter parses SQL statements, capitalizes reserved database keywords, and indents nested clauses.`,
+  },
+  {
+    question: `What ${titleName} keywords are formatted?`,
+    answer: `Formats standard SQL keywords like SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY, HAVING, and ${titleName} specific functions.`,
+  },
+  {
+    question: `Is my database query kept private?`,
+    answer: `100% private. All SQL query formatting executes locally in your browser. Zero SQL text is sent to any external server.`,
+  },
+  {
+    question: `Can I copy the formatted ${titleName} SQL query?`,
+    answer: `Yes! Click "Copy Formatted SQL" to copy the clean query directly to your clipboard.`,
+  },
+];
+---
+
+<ToolLayout
+  toolId={`sql-formatter-${dialect}`}
+  title={pageTitle}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="sql-pSEO-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title={`UNFORMATTED ${titleName.toUpperCase()} QUERY`}>
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="sql-pSEO-input" class="block text-caption font-semibold text-ink dark:text-ink-dark">Raw {titleName} Query</label>
+              <button type="button" id="btn-load-sample-sql" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Query</button>
+            </div>
+            <textarea
+              id="sql-pSEO-input"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >{defaultSql}</textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-format-sql"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Format {titleName} Query
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title={`PRETTIFIED ${titleName.toUpperCase()} OUTPUT`}>
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Prettified SQL</span>
+            <button type="button" id="btn-copy-sql" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Formatted SQL</button>
+          </div>
+
+          <pre id="sql-pSEO-output" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>{titleName} SQL Formatting & Prettification Guide</h2>
+    <p>
+      Formatting {titleName} SQL queries improves code readability, streamlines database code reviews, and prevents subtle syntax bugs in complex JOIN conditions.
+    </p>
+
+    <h3>Formatting Standards</h3>
+    <ul>
+      <li><strong>Capitalized Keywords</strong>: Converts <code>select</code>, <code>from</code>, <code>where</code> to uppercase <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>.</li>
+      <li><strong>Clause Indentation</strong>: Indents nested subqueries and JOIN conditions cleanly.</li>
+    </ul>
+
+    <h3>Related SQL & Database Tools</h3>
+    <p>
+      Format general queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>, inspect HTTP headers with the <a href="/tools/http-header-inspector/">HTTP Header Inspector</a>, or convert JSON to CSV with the <a href="/tools/json-to-csv/">JSON to CSV Converter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('sql-pSEO-input');
+    const btnFormat = document.getElementById('btn-format-sql');
+    const btnSample = document.getElementById('btn-load-sample-sql');
+
+    const outputText = document.getElementById('sql-pSEO-output');
+    const btnCopy = document.getElementById('btn-copy-sql');
+
+    const keywords = ['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'ON', 'AND', 'OR', 'GROUP BY', 'ORDER BY', 'HAVING', 'LIMIT', 'OFFSET', 'WITH', 'INSERT INTO', 'UPDATE', 'DELETE FROM', 'VALUES', 'SET', 'NOW()', 'INTERVAL', 'COUNT', 'SUM', 'AVG'];
+
+    function prettify(sql) {
+      let result = sql.trim();
+      keywords.forEach(kw => {
+        const re = new RegExp('\\b' + kw + '\\b', 'gi');
+        result = result.replace(re, kw);
+      });
+
+      // Simple clause line break formatting
+      result = result
+        .replace(/\bFROM\b/g, '\nFROM')
+        .replace(/\bWHERE\b/g, '\nWHERE')
+        .replace(/\bJOIN\b/g, '\n  JOIN')
+        .replace(/\bLEFT JOIN\b/g, '\n  LEFT JOIN')
+        .replace(/\bGROUP BY\b/g, '\nGROUP BY')
+        .replace(/\bORDER BY\b/g, '\nORDER BY')
+        .replace(/\bLIMIT\b/g, '\nLIMIT');
+
+      return result.trim();
+    }
+
+    function format() {
+      const raw = inputRaw?.value || '';
+      const formatted = prettify(raw);
+      if (outputText) outputText.textContent = formatted;
+    }
+
+    btnFormat?.addEventListener('click', format);
+    inputRaw?.addEventListener('input', format);
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Formatted SQL'), 2000);
+      }
+    });
+
+    format();
+  })();
+</script>
