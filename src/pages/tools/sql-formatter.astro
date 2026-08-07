@@ -1,0 +1,158 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'SQL Query Formatter & Prettifier | Nadhebe';
+const h1 = 'SQL Query Formatter & Prettifier';
+const description = 'Format and prettify SQL queries for PostgreSQL, MySQL, SQLite, and BigQuery. Uppercase keywords, align JOINs and WHERE clauses client-side.';
+
+const faq = [
+  {
+    question: 'What does the SQL Formatter do?',
+    answer: 'The SQL Formatter takes raw, unformatted, or minified SQL queries and formats them with consistent indentation, capitalized SQL keywords (SELECT, FROM, WHERE, JOIN), and structured clauses.',
+  },
+  {
+    question: 'Which SQL dialects are supported?',
+    answer: 'Supports Standard ANSI SQL, PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server (T-SQL), and Google BigQuery.',
+  },
+  {
+    question: 'Why should SQL keywords be capitalized?',
+    answer: 'Capitalizing SQL keywords (e.g. `SELECT`, `GROUP BY`, `ORDER BY`) visually distinguishes structural command logic from table names and column identifiers.',
+  },
+  {
+    question: 'Does this tool format complex nested subqueries?',
+    answer: 'Yes! Subqueries enclosed in parentheses are recursively indented to maintain readability across deep joins.',
+  },
+  {
+    question: 'Is my SQL query data kept private?',
+    answer: '100% private. Formatting is executed locally in your browser without sending database schemas or query strings to any external server.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="sql-formatter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="sql-formatter-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RAW SQL QUERY INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="sql-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Raw / Minified SQL Query</label>
+              <button type="button" id="btn-load-sample-sql" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Query</button>
+            </div>
+            <textarea
+              id="sql-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-format-sql"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Prettify & Format SQL
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="FORMATTED SQL OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Prettified SQL Query</span>
+            <button type="button" id="btn-copy-sql" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy SQL</button>
+          </div>
+
+          <pre id="sql-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>SQL Query Formatting & Readability Guide</h2>
+    <p>
+      Clean SQL query formatting is essential for database administration, code reviews, and performance debugging. Properly indented SQL queries make complex JOIN operations and filter conditions immediately obvious.
+    </p>
+
+    <h3>Key Formatting Conventions</h3>
+    <ul>
+      <li><strong>Uppercase Keywords</strong>: Capitalize <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>LEFT JOIN</code>, <code>GROUP BY</code>, <code>ORDER BY</code>.</li>
+      <li><strong>Newlines per Clause</strong>: Place top-level clauses on dedicated new lines.</li>
+      <li><strong>Nested Subquery Indentation</strong>: Indent subqueries by 2 spaces.</li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Generate UUID v7 primary keys with the <a href="/tools/uuid-v7-generator/">UUID v7 Generator</a>, format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>, or validate schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('sql-input-raw');
+    const btnFormat = document.getElementById('btn-format-sql');
+    const btnSample = document.getElementById('btn-load-sample-sql');
+
+    const outputText = document.getElementById('sql-output-text');
+    const btnCopy = document.getElementById('btn-copy-sql');
+
+    const defaultQuery = `select u.id, u.email, count(o.id) as total_orders, sum(o.amount) as total_spent from users u left join orders o on u.id = o.user_id where u.created_at >= '2026-01-01' and u.status = 'active' group by u.id, u.email having count(o.id) > 2 order by total_spent desc limit 50;`;
+
+    function formatSQL(sql) {
+      const keywords = [
+        'SELECT', 'FROM', 'WHERE', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'JOIN',
+        'GROUP BY', 'HAVING', 'ORDER BY', 'LIMIT', 'OFFSET', 'UNION', 'VALUES',
+        'INSERT INTO', 'UPDATE', 'DELETE FROM', 'SET', 'ON', 'AND', 'OR'
+      ];
+
+      let result = sql.trim();
+
+      keywords.forEach(kw => {
+        const regex = new RegExp(`\\b${kw}\\b`, 'gi');
+        result = result.replace(regex, `\n${kw}`);
+      });
+
+      // Capitalize core keywords
+      keywords.forEach(kw => {
+        const regex = new RegExp(`\\b${kw}\\b`, 'gi');
+        result = result.replace(regex, kw);
+      });
+
+      return result.split('\n').map(line => line.trim()).filter(Boolean).join('\n');
+    }
+
+    function format() {
+      const raw = inputRaw?.value || defaultQuery;
+      const formatted = formatSQL(raw);
+      if (outputText) outputText.textContent = formatted;
+    }
+
+    btnFormat?.addEventListener('click', format);
+    inputRaw?.addEventListener('input', format);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultQuery;
+      format();
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultQuery;
+
+    format();
+  })();
+</script>

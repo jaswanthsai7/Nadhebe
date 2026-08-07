@@ -1,0 +1,210 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'SEO Content Outline & Heading Structure Builder | Nadhebe';
+const h1 = 'SEO Content Outline & Heading Structure Builder';
+const description = 'Build SEO-optimized article outlines, map H1-H3 heading hierarchies, incorporate LSI keywords, and design high-ranking content structures.';
+
+const faq = [
+  {
+    question: 'What is an SEO content outline builder?',
+    answer: 'An SEO content outline builder generates structured heading frameworks (H1, H2, H3) designed to satisfy search intent and cover subtopics thoroughly for target keywords.',
+  },
+  {
+    question: 'Why is logical heading hierarchy important for SEO?',
+    answer: 'Search engine crawlers use heading tags (H1 -> H2 -> H3) to understand the logical progression and main entities of an article, enhancing scannability for both users and crawlers.',
+  },
+  {
+    question: 'What are LSI keywords in content outlines?',
+    answer: 'Latent Semantic Indexing (LSI) keywords are semantically related terms and subtopics that search engines expect to find alongside your primary keyword.',
+  },
+  {
+    question: 'How long should an SEO-optimized article outline be?',
+    answer: 'For competitive technical queries, aim for a comprehensive outline with 1 main H1, 4 to 8 H2 sub-sections, and supporting H3 bullet points totaling 1,500 to 3,000 words.',
+  },
+  {
+    question: 'Can I export the generated outline to Markdown?',
+    answer: 'Yes! The builder generates clean, copy-pasteable Markdown markup ready to paste directly into your CMS or content editor.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="seo-builder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="seo-builder-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="ARTICLE TOPIC & TARGET KEYWORD">
+        <div class="space-y-16">
+          <div>
+            <label for="bld-input-topic" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Article Title / Subject</label>
+            <input
+              id="bld-input-topic"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="Complete Guide to Web Application Security Headers"
+            />
+          </div>
+
+          <div>
+            <label for="bld-input-keyword" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Primary Target Keyword</label>
+            <input
+              id="bld-input-keyword"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="web application security headers"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="bld-select-type" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Content Type</label>
+              <select
+                id="bld-select-type"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+              >
+                <option value="Guide">Comprehensive Guide</option>
+                <option value="Tutorial">Step-by-Step Tutorial</option>
+                <option value="Review">Tool Review / Audit</option>
+                <option value="Comparison">Comparison Article</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="bld-input-words" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target Words</label>
+              <input
+                id="bld-input-words"
+                type="number"
+                min="500"
+                step="250"
+                value="2000"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono"
+              />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            id="btn-build-outline"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate SEO Outline
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED MARKDOWN OUTLINE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Structured Outline Output</span>
+            <button type="button" id="btn-copy-outline" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Markdown</button>
+          </div>
+
+          <pre id="bld-markdown-output" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>SEO Content Outline Strategy — Structuring Articles for Search Intent</h2>
+    <p>
+      Writing high-ranking content begins with a structured SEO outline. By mapping your H1, H2, and H3 heading hierarchy around primary search intent and semantically related terms, you create comprehensive guides that satisfy user queries.
+    </p>
+
+    <h3>Key Components of an SEO Outline</h3>
+    <ul>
+      <li><strong>H1 Title</strong>: Contains your primary target keyword.</li>
+      <li><strong>Introduction</strong>: Defines the problem statement and core concepts.</li>
+      <li><strong>H2 Main Sections</strong>: Answers the primary sub-questions users search for.</li>
+      <li><strong>H3 Sub-bullets</strong>: Code examples, step-by-step instructions, or lists.</li>
+      <li><strong>Conclusion & FAQs</strong>: Wraps up key takeaways and answers high-intent search questions.</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Map content clusters with our <a href="/tools/seo-planner/">Topical SEO Cluster Planner</a>, audit on-page quality with the <a href="/tools/seo-checker/">On-Page SEO Checker</a>, or simulate search listings with the <a href="/tools/serp-preview/">SERP Snippet Simulator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputTopic = document.getElementById('bld-input-topic');
+    const inputKeyword = document.getElementById('bld-input-keyword');
+    const selectType = document.getElementById('bld-select-type');
+    const inputWords = document.getElementById('bld-input-words');
+    const btnBuild = document.getElementById('btn-build-outline');
+
+    const markdownOutput = document.getElementById('bld-markdown-output');
+    const btnCopy = document.getElementById('btn-copy-outline');
+
+    function build() {
+      const topic = inputTopic?.value || 'Target Topic';
+      const kw = inputKeyword?.value || 'target keyword';
+      const type = selectType?.value || 'Guide';
+      const words = inputWords?.value || '2000';
+
+      const outline = [
+        `# ${topic}`,
+        ``,
+        `> **Target Keyword**: ${kw}`,
+        `> **Content Type**: ${type}`,
+        `> **Target Length**: ~${words} words`,
+        ``,
+        `## 1. Introduction & Overview`,
+        `- Define ${kw} and explain why it is essential for modern web applications.`,
+        `- Outline the scope of this ${type.toLowerCase()} and key takeaways.`,
+        ``,
+        `## 2. Core Architecture & Fundamentals of ${kw.toUpperCase()}`,
+        `- How ${kw} interacts with web browsers and HTTP response headers.`,
+        `- Primary configuration directives and parameter values.`,
+        ``,
+        `## 3. Step-by-Step Implementation Guide`,
+        `- Step 1: Audit existing configuration and missing headers.`,
+        `- Step 2: Configure response directives in Nginx, Apache, or Cloudflare.`,
+        `- Step 3: Verify implementation using client-side testing utilities.`,
+        ``,
+        `## 4. Common Mistakes & Troubleshooting`,
+        `- Top 5 mistakes developers make when implementing ${kw}.`,
+        `- How to debug cross-domain protocol mismatches and caching issues.`,
+        ``,
+        `## 5. Frequently Asked Questions (FAQ)`,
+        `- Q: What is the primary benefit of ${kw}?`,
+        `- Q: How does ${kw} impact page performance?`,
+        ``,
+        `## 6. Conclusion & Next Steps`,
+        `- Summary of key takeaways and actionable checklist.`,
+      ].join('\n');
+
+      if (markdownOutput) markdownOutput.textContent = outline;
+    }
+
+    btnBuild?.addEventListener('click', build);
+    [inputTopic, inputKeyword, selectType, inputWords].forEach(el => {
+      el?.addEventListener('input', build);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (markdownOutput) {
+        navigator.clipboard.writeText(markdownOutput.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Markdown'), 2000);
+      }
+    });
+
+    build();
+  })();
+</script>

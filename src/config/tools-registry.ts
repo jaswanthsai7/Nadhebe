@@ -3158,172 +3158,177 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   {
     "id": "seo-1",
     "slug": "serp-preview",
-    "title": "SERP preview",
-    "name": "SERP preview",
+    "title": "SERP Preview",
+    "name": "SERP Preview",
     "href": "/tools/serp-preview/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/serp-preview.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "transform",
-    "description": "SERP preview. Use this privacy-first serp preview directly in your browser.",
+    "description": "Simulate desktop and mobile Google Search result snippets in real-time.",
     "seo": {
-      "title": "SERP preview - Free Browser Tool | Nadhebe",
-      "description": "SERP preview. Use this privacy-first serp preview directly in your browser.",
+      "title": "Google SERP Snippet Preview Tool | Nadhebe",
+      "description": "Simulate exact desktop and mobile Google Search result snippets. Calculate pixel widths, eliminate title truncation, and boost organic CTR.",
       "keywords": [
         "serp preview",
-        "seo",
-        "transform"
+        "google snippet simulator",
+        "meta title length checker",
+        "title pixel width",
+        "serp ctr optimizer"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "meta-tag-analyzer",
+      "schema-generator",
+      "sitemap-validator",
+      "opportunity-radar"
     ],
     "tags": [
       "seo",
-      "transform",
       "serp-preview"
     ],
-    "icon": "code"
+    "icon": "search"
   },
   {
     "id": "seo-2",
     "slug": "robots-tester",
-    "title": "Robots tester",
-    "name": "Robots tester",
+    "title": "Robots Tester",
+    "name": "Robots Tester",
     "href": "/tools/robots-tester/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/robots-tester.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "generator",
-    "description": "Robots tester. Use this privacy-first robots tester directly in your browser.",
+    "description": "Test robots.txt directives and Googlebot / AI crawler accessibility.",
     "seo": {
-      "title": "Robots tester - Free Browser Tool | Nadhebe",
-      "description": "Robots tester. Use this privacy-first robots tester directly in your browser.",
+      "title": "Robots.txt Tester & Crawl Directive Auditor | Nadhebe",
+      "description": "Test robots.txt directives, audit Googlebot and AI crawler accessibility, and prevent accidental search engine indexing blocks.",
       "keywords": [
         "robots tester",
-        "seo",
-        "generator"
+        "robots.txt validator",
+        "googlebot directive checker",
+        "ai crawler block",
+        "crawl budget optimization"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "sitemap-validator",
+      "meta-tag-analyzer",
+      "serp-preview",
+      "opportunity-radar"
     ],
     "tags": [
       "seo",
-      "generator",
       "robots-tester"
     ],
-    "icon": "code"
+    "icon": "file-text"
   },
   {
     "id": "seo-3",
     "slug": "canonical-checker",
-    "title": "Canonical checker",
-    "name": "Canonical checker",
+    "title": "Canonical Checker",
+    "name": "Canonical Checker",
     "href": "/tools/canonical-checker/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/canonical-checker.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "calculator",
-    "description": "Canonical checker. Use this privacy-first canonical checker directly in your browser.",
+    "description": "Audit canonical link tags and eliminate duplicate content issues.",
     "seo": {
-      "title": "Canonical checker - Free Browser Tool | Nadhebe",
-      "description": "Canonical checker. Use this privacy-first canonical checker directly in your browser.",
+      "title": "Canonical Tag Checker & Duplicate Content Inspector | Nadhebe",
+      "description": "Audit canonical HTML link tags, prevent search engine keyword cannibalization, detect cross-domain duplicate URLs, and enforce clean indexing signals.",
       "keywords": [
         "canonical checker",
-        "seo",
-        "calculator"
+        "canonical tag auditor",
+        "duplicate content inspector",
+        "self referencing canonical",
+        "seo link tag"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "meta-tag-analyzer",
+      "schema-generator",
+      "sitemap-validator",
+      "serp-preview"
     ],
     "tags": [
       "seo",
-      "calculator",
       "canonical-checker"
     ],
-    "icon": "code"
+    "icon": "link-2"
   },
   {
     "id": "seo-4",
     "slug": "schema-validator",
-    "title": "Schema validator",
-    "name": "Schema validator",
+    "title": "Schema Validator",
+    "name": "Schema Validator",
     "href": "/tools/schema-validator/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/schema-validator.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "analyzer",
-    "description": "Schema validator. Use this privacy-first schema validator directly in your browser.",
+    "description": "Validate JSON-LD structured data and Schema.org syntax.",
     "seo": {
-      "title": "Schema validator - Free Browser Tool | Nadhebe",
-      "description": "Schema validator. Use this privacy-first schema validator directly in your browser.",
+      "title": "JSON-LD Schema Validator & Structured Data Auditor | Nadhebe",
+      "description": "Validate JSON-LD structured data markup, check Schema.org syntax compliance, verify required properties, and unlock Google Rich Snippets.",
       "keywords": [
         "schema validator",
-        "seo",
-        "analyzer"
+        "json-ld validator",
+        "structured data checker",
+        "schema.org syntax audit",
+        "rich snippet tester"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "schema-generator",
+      "meta-tag-analyzer",
+      "sitemap-validator",
+      "serp-preview"
     ],
     "tags": [
       "seo",
-      "analyzer",
       "schema-validator"
     ],
-    "icon": "code"
+    "icon": "braces"
   },
   {
     "id": "seo-5",
     "slug": "redirect-chain-checker",
-    "title": "Redirect chain checker",
-    "name": "Redirect chain checker",
+    "title": "Redirect Chain Checker",
+    "name": "Redirect Chain Checker",
     "href": "/tools/redirect-chain-checker/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/redirect-chain-checker.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "transform",
-    "description": "Redirect chain checker. Use this privacy-first redirect chain checker directly in your browser.",
+    "description": "Trace multi-hop 301 and 302 HTTP redirect chains.",
     "seo": {
-      "title": "Redirect chain checker - Free Browser Tool | Nadhebe",
-      "description": "Redirect chain checker. Use this privacy-first redirect chain checker directly in your browser.",
+      "title": "301 Redirect Chain Checker & Link Equity Auditor | Nadhebe",
+      "description": "Trace multi-hop 301 and 302 HTTP redirect chains, eliminate crawl budget waste, prevent PageRank link equity dilution, and audit URL migration paths.",
       "keywords": [
         "redirect chain checker",
-        "seo",
-        "transform"
+        "301 redirect tracer",
+        "http status code audit",
+        "link equity calculator",
+        "crawl budget optimization"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "canonical-checker",
+      "sitemap-validator",
+      "serp-preview",
+      "meta-tag-analyzer"
     ],
     "tags": [
       "seo",
-      "transform",
       "redirect-chain-checker"
     ],
-    "icon": "code"
+    "icon": "arrow-right-left"
   },
   {
     "id": "seo-6",
@@ -3331,33 +3336,34 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "title": "SEO Builder",
     "name": "SEO Builder",
     "href": "/tools/seo-builder/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/seo-builder.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "generator",
-    "description": "Clean, normalize, and calculate SEO Builder locally in your browser.",
+    "description": "Build SEO content outlines, heading structures, and article frameworks.",
     "seo": {
-      "title": "SEO Builder - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate SEO Builder locally in your browser.",
+      "title": "SEO Content Outline & Heading Structure Builder | Nadhebe",
+      "description": "Build SEO-optimized article outlines, map H1-H3 heading hierarchies, incorporate LSI keywords, and design high-ranking content structures.",
       "keywords": [
         "seo builder",
-        "seo",
-        "generator"
+        "seo outline generator",
+        "heading structure maker",
+        "content outline builder",
+        "article framework"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "seo-planner",
+      "seo-checker",
+      "serp-preview",
+      "opportunity-radar"
     ],
     "tags": [
       "seo",
-      "generator",
       "seo-builder"
     ],
-    "icon": "code"
+    "icon": "list-tree"
   },
   {
     "id": "seo-7",
@@ -3365,33 +3371,34 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "title": "SEO Estimator",
     "name": "SEO Estimator",
     "href": "/tools/seo-estimator/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/seo-estimator.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "calculator",
-    "description": "Clean, normalize, and calculate SEO Estimator locally in your browser.",
+    "description": "Estimate organic search traffic from search volume and SERP CTR curves.",
     "seo": {
-      "title": "SEO Estimator - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate SEO Estimator locally in your browser.",
+      "title": "Organic Traffic & SERP CTR Estimator | Nadhebe",
+      "description": "Estimate monthly organic search traffic based on target keyword search volume, expected ranking position (#1 to #10), and Industry CTR curves.",
       "keywords": [
-        "seo estimator",
-        "seo",
-        "calculator"
+        "seo traffic estimator",
+        "organic search calculator",
+        "serp ctr curve model",
+        "keyword traffic calculator",
+        "search traffic roi"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "serp-preview",
+      "opportunity-radar",
+      "seo-planner",
+      "seo-checker"
     ],
     "tags": [
       "seo",
-      "calculator",
       "seo-estimator"
     ],
-    "icon": "code"
+    "icon": "trending-up"
   },
   {
     "id": "seo-8",
@@ -3399,33 +3406,34 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "title": "SEO Checker",
     "name": "SEO Checker",
     "href": "/tools/seo-checker/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/seo-checker.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "analyzer",
-    "description": "Clean, normalize, and calculate SEO Checker locally in your browser.",
+    "description": "Audit on-page SEO quality, heading hierarchy, and meta tag completeness.",
     "seo": {
-      "title": "SEO Checker - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate SEO Checker locally in your browser.",
+      "title": "On-Page SEO Quality Checker & Audit Tool | Nadhebe",
+      "description": "Audit on-page SEO factors: meta title length, meta description, H1-H6 heading hierarchy, image alt text coverage, internal linking, and HTTPS canonicals.",
       "keywords": [
         "seo checker",
-        "seo",
-        "analyzer"
+        "on-page seo auditor",
+        "heading tag inspector",
+        "image alt text audit",
+        "seo quality score"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "seo-inspector",
+      "meta-tag-analyzer",
+      "serp-preview",
+      "schema-generator"
     ],
     "tags": [
       "seo",
-      "analyzer",
       "seo-checker"
     ],
-    "icon": "code"
+    "icon": "check-circle"
   },
   {
     "id": "seo-9",
@@ -3501,33 +3509,34 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "title": "SEO Planner",
     "name": "SEO Planner",
     "href": "/tools/seo-planner/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/seo-planner.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "calculator",
-    "description": "Clean, normalize, and calculate SEO Planner locally in your browser.",
+    "description": "Plan topical content clusters, map pillar pages, and design internal linking.",
     "seo": {
-      "title": "SEO Planner - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate SEO Planner locally in your browser.",
+      "title": "Topical SEO Cluster & Content Roadmap Planner | Nadhebe",
+      "description": "Plan topical authority clusters, map pillar pages and subtopic articles, design contextual internal linking structures, and build SEO editorial calendars.",
       "keywords": [
         "seo planner",
-        "seo",
-        "calculator"
+        "topical authority cluster",
+        "content cluster mapper",
+        "pillar page planner",
+        "internal link strategy"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "opportunity-radar",
+      "seo-builder",
+      "seo-estimator",
+      "serp-preview"
     ],
     "tags": [
       "seo",
-      "calculator",
       "seo-planner"
     ],
-    "icon": "code"
+    "icon": "git-pull-request"
   },
   {
     "id": "seo-12",
@@ -3535,33 +3544,34 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
     "title": "SEO Inspector",
     "name": "SEO Inspector",
     "href": "/tools/seo-inspector/",
-    "component": "PlatformWorkbench",
-    "status": "planned",
+    "component": "src/pages/tools/seo-inspector.astro",
+    "status": "implemented",
     "category": "SEO",
     "categorySlug": "seo",
     "mode": "analyzer",
-    "description": "Clean, normalize, and calculate SEO Inspector locally in your browser.",
+    "description": "Inspect live page metadata, OpenGraph tags, Twitter cards, and JSON-LD.",
     "seo": {
-      "title": "SEO Inspector - Free Browser Tool | Nadhebe",
-      "description": "Clean, normalize, and calculate SEO Inspector locally in your browser.",
+      "title": "Page Metadata & OpenGraph SEO Inspector | Nadhebe",
+      "description": "Inspect live meta tags, OpenGraph social cards, Twitter previews, canonical links, robots directives, and JSON-LD structured data.",
       "keywords": [
         "seo inspector",
-        "seo",
-        "analyzer"
+        "metadata inspector",
+        "opengraph social card audit",
+        "twitter card validator",
+        "page head inspector"
       ]
     },
     "relatedTools": [
-      "json-formatter",
-      "csv-to-json",
-      "uuid-generator",
-      "aspect-ratio-calculator"
+      "meta-tag-analyzer",
+      "seo-checker",
+      "schema-validator",
+      "serp-preview"
     ],
     "tags": [
       "seo",
-      "analyzer",
       "seo-inspector"
     ],
-    "icon": "code"
+    "icon": "eye"
   },
   {
     "id": "marketing-1",
@@ -18442,6 +18452,706 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "youtube-video-size-calculator"
     ],
     "icon": "play-circle"
+  },
+  {
+    "id": "ai-1",
+    "slug": "prompt-optimizer",
+    "title": "AI Prompt Optimizer",
+    "name": "AI Prompt Optimizer",
+    "href": "/tools/prompt-optimizer/",
+    "component": "src/pages/tools/prompt-optimizer.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "generator",
+    "description": "Optimize AI system prompts with explicit roles, context variables, and structured output rules.",
+    "seo": {
+      "title": "AI Prompt Optimizer & System Prompt Refiner | Nadhebe",
+      "description": "Optimize AI prompts for GPT-4o, Claude 3.5, and Gemini 1.5. Add clear roles, constraints, context variables, and structured output rules.",
+      "keywords": [
+        "prompt optimizer",
+        "system prompt refiner",
+        "ai prompt engineering",
+        "gpt-4o prompt builder",
+        "claude system prompt"
+      ]
+    },
+    "relatedTools": [
+      "ai-prompt-generator",
+      "prompt-improver",
+      "llm-token-counter-multi-model",
+      "ai-api-pricing-calculator"
+    ],
+    "tags": [
+      "ai",
+      "prompt-optimizer"
+    ],
+    "icon": "sparkles"
+  },
+  {
+    "id": "ai-2",
+    "slug": "ai-prompt-generator",
+    "title": "Multi-Persona AI Prompt Generator",
+    "name": "Multi-Persona AI Prompt Generator",
+    "href": "/tools/ai-prompt-generator/",
+    "component": "src/pages/tools/ai-prompt-generator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "generator",
+    "description": "Generate structured system prompts across software engineering, SEO, and product management personas.",
+    "seo": {
+      "title": "Multi-Persona AI Prompt Generator | Nadhebe",
+      "description": "Generate structured system prompts for ChatGPT, Claude, and Gemini across Software Engineering, SEO, Product Management, and Content Strategy roles.",
+      "keywords": [
+        "ai prompt generator",
+        "multi persona prompt builder",
+        "chatgpt system prompt",
+        "claude persona generator",
+        "prompt template maker"
+      ]
+    },
+    "relatedTools": [
+      "prompt-optimizer",
+      "prompt-improver",
+      "ai-persona-prompt-generator",
+      "llm-token-counter-multi-model"
+    ],
+    "tags": [
+      "ai",
+      "ai-prompt-generator"
+    ],
+    "icon": "user-check"
+  },
+  {
+    "id": "ai-3",
+    "slug": "prompt-improver",
+    "title": "Vague AI Prompt Enhancer & Rewriter",
+    "name": "Vague AI Prompt Enhancer & Rewriter",
+    "href": "/tools/prompt-improver/",
+    "component": "src/pages/tools/prompt-improver.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "generator",
+    "description": "Transform short, vague AI prompts into high-performance system instructions with Chain-of-Thought reasoning.",
+    "seo": {
+      "title": "Vague AI Prompt Enhancer & Rewriter | Nadhebe",
+      "description": "Transform short, vague AI prompts into detailed, high-performance system instructions with Chain-of-Thought reasoning and negative constraints.",
+      "keywords": [
+        "prompt improver",
+        "ai prompt rewriter",
+        "vague prompt enhancer",
+        "chain-of-thought prompt",
+        "prompt engineering"
+      ]
+    },
+    "relatedTools": [
+      "prompt-optimizer",
+      "ai-prompt-generator",
+      "ai-detection-checker",
+      "llm-token-counter-multi-model"
+    ],
+    "tags": [
+      "ai",
+      "prompt-improver"
+    ],
+    "icon": "wand-2"
+  },
+  {
+    "id": "ai-4",
+    "slug": "ai-detection-checker",
+    "title": "AI Text Perplexity & Burstiness Checker",
+    "name": "AI Text Perplexity & Burstiness Checker",
+    "href": "/tools/ai-detection-checker/",
+    "component": "src/pages/tools/ai-detection-checker.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "analyzer",
+    "description": "Audit text for AI generation patterns using sentence burstiness metrics and vocabulary perplexity proxies.",
+    "seo": {
+      "title": "AI Text Perplexity & Burstiness Checker | Nadhebe",
+      "description": "Audit text for AI generation patterns using client-side sentence burstiness metrics, vocabulary perplexity proxies, and common AI buzzword frequency.",
+      "keywords": [
+        "ai detection checker",
+        "text perplexity calculator",
+        "sentence burstiness score",
+        "ai writing pattern audit",
+        "humanize ai text"
+      ]
+    },
+    "relatedTools": [
+      "prompt-improver",
+      "prompt-optimizer",
+      "llm-token-counter-multi-model",
+      "seo-checker"
+    ],
+    "tags": [
+      "ai",
+      "ai-detection-checker"
+    ],
+    "icon": "shield-alert"
+  },
+  {
+    "id": "ai-5",
+    "slug": "llm-tokenizer",
+    "title": "LLM BPE Tokenizer & Multi-Model Counter",
+    "name": "LLM BPE Tokenizer & Multi-Model Counter",
+    "href": "/tools/llm-tokenizer/",
+    "component": "src/pages/tools/llm-tokenizer.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Count tokens across GPT-4o, Claude 3.5 Sonnet, and Llama 3 models.",
+    "seo": {
+      "title": "LLM BPE Tokenizer & Multi-Model Token Counter | Nadhebe",
+      "description": "Count tokens across GPT-4o, Claude 3.5 Sonnet, and Llama 3 models. Inspect BPE subword tokens, estimate API costs, and prevent context window truncation.",
+      "keywords": [
+        "llm tokenizer",
+        "bpe token counter",
+        "gpt-4o token calculator",
+        "claude token counter",
+        "llama 3 tokenizer"
+      ]
+    },
+    "relatedTools": [
+      "llm-token-counter-multi-model",
+      "ai-api-pricing-calculator",
+      "rag-context-window-calculator",
+      "prompt-optimizer"
+    ],
+    "tags": [
+      "ai",
+      "llm-tokenizer"
+    ],
+    "icon": "binary"
+  },
+  {
+    "id": "ai-6",
+    "slug": "rag-evaluator",
+    "title": "RAG Retrieval Precision & Recall Evaluator",
+    "name": "RAG Retrieval Precision & Recall Evaluator",
+    "href": "/tools/rag-evaluator/",
+    "component": "src/pages/tools/rag-evaluator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Audit RAG retrieval quality: calculate Precision@K, Recall@K, F1 Score, and Context Noise Ratio.",
+    "seo": {
+      "title": "RAG Retrieval Precision & Recall Evaluator | Nadhebe",
+      "description": "Audit RAG vector retrieval quality: calculate Precision@K, Recall@K, F1 Score, and Context Noise Ratio to optimize vector search pipelines.",
+      "keywords": [
+        "rag evaluator",
+        "vector retrieval precision",
+        "recall at k calculator",
+        "context noise ratio",
+        "rag f1 score"
+      ]
+    },
+    "relatedTools": [
+      "rag-chunk-size-calculator",
+      "rag-context-window-calculator",
+      "llm-tokenizer",
+      "prompt-optimizer"
+    ],
+    "tags": [
+      "ai",
+      "rag-evaluator"
+    ],
+    "icon": "database"
+  },
+  {
+    "id": "ai-7",
+    "slug": "json-schema-validator",
+    "title": "JSON Schema Validator & Output Auditor",
+    "name": "JSON Schema Validator & Output Auditor",
+    "href": "/tools/json-schema-validator/",
+    "component": "src/pages/tools/json-schema-validator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "analyzer",
+    "description": "Validate JSON payloads against JSON Schema Draft 7 and 2020-12 standards.",
+    "seo": {
+      "title": "JSON Schema Validator & LLM Tool Output Auditor | Nadhebe",
+      "description": "Validate JSON payloads against JSON Schema Draft 7 and 2020-12 standards. Audit LLM function calling responses, check required keys, and verify data types.",
+      "keywords": [
+        "json schema validator",
+        "llm function calling schema",
+        "tool call validator",
+        "draft 7 json schema",
+        "json payload audit"
+      ]
+    },
+    "relatedTools": [
+      "openapi-to-mcp-tool-schema",
+      "json-formatter",
+      "schema-validator",
+      "mcp-json-rpc-payload-tester"
+    ],
+    "tags": [
+      "ai",
+      "json-schema-validator"
+    ],
+    "icon": "file-check"
+  },
+  {
+    "id": "ai-8",
+    "slug": "openai-cost-estimator",
+    "title": "OpenAI GPT-4o & O3-Mini API Cost Estimator",
+    "name": "OpenAI GPT-4o & O3-Mini API Cost Estimator",
+    "href": "/tools/openai-cost-estimator/",
+    "component": "src/pages/tools/openai-cost-estimator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Calculate API pricing for OpenAI GPT-4o, GPT-4o-mini, O3-mini, and O1 models.",
+    "seo": {
+      "title": "OpenAI GPT-4o & O3-Mini API Cost Estimator | Nadhebe",
+      "description": "Calculate API pricing for OpenAI GPT-4o, GPT-4o-mini, O3-mini, and O1 models. Estimate monthly costs based on input tokens, output tokens, and prompt caching.",
+      "keywords": [
+        "openai cost estimator",
+        "gpt-4o api pricing",
+        "o3-mini cost calculator",
+        "openai prompt caching",
+        "llm api budget"
+      ]
+    },
+    "relatedTools": [
+      "ai-api-pricing-calculator",
+      "claude-cost-estimator",
+      "gemini-cost-estimator",
+      "llm-tokenizer"
+    ],
+    "tags": [
+      "ai",
+      "openai-cost-estimator"
+    ],
+    "icon": "calculator"
+  },
+  {
+    "id": "ai-9",
+    "slug": "claude-cost-estimator",
+    "title": "Anthropic Claude 3.5 Sonnet Cost Estimator",
+    "name": "Anthropic Claude 3.5 Sonnet Cost Estimator",
+    "href": "/tools/claude-cost-estimator/",
+    "component": "src/pages/tools/claude-cost-estimator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Calculate API pricing for Anthropic Claude 3.5 Sonnet, Haiku, and Opus models.",
+    "seo": {
+      "title": "Anthropic Claude 3.5 Sonnet & Haiku Cost Estimator | Nadhebe",
+      "description": "Calculate API pricing for Anthropic Claude 3.5 Sonnet, Claude 3.5 Haiku, and Claude 3 Opus. Estimate monthly spend based on prompt tokens, completion tokens, and prompt caching.",
+      "keywords": [
+        "claude cost estimator",
+        "claude 3.5 sonnet pricing",
+        "anthropic prompt caching",
+        "claude haiku cost calculator",
+        "llm api budget"
+      ]
+    },
+    "relatedTools": [
+      "openai-cost-estimator",
+      "gemini-cost-estimator",
+      "ai-api-pricing-calculator",
+      "claude-desktop-mcp-config-maker"
+    ],
+    "tags": [
+      "ai",
+      "claude-cost-estimator"
+    ],
+    "icon": "dollar-sign"
+  },
+  {
+    "id": "ai-10",
+    "slug": "gemini-cost-estimator",
+    "title": "Google Gemini 1.5 Pro & Flash Cost Estimator",
+    "name": "Google Gemini 1.5 Pro & Flash Cost Estimator",
+    "href": "/tools/gemini-cost-estimator/",
+    "component": "src/pages/tools/gemini-cost-estimator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Calculate API pricing for Google Gemini 1.5 Pro, Flash, and 2.0 Flash models.",
+    "seo": {
+      "title": "Google Gemini 1.5 Pro & Flash API Cost Estimator | Nadhebe",
+      "description": "Calculate API pricing for Google Gemini 1.5 Pro, Gemini 1.5 Flash, and Gemini 2.0 Flash. Estimate monthly costs for 1M+ token context windows and multimodal payloads.",
+      "keywords": [
+        "gemini cost estimator",
+        "gemini 1.5 flash pricing",
+        "google context caching",
+        "gemini 1.5 pro calculator",
+        "llm api budget"
+      ]
+    },
+    "relatedTools": [
+      "openai-cost-estimator",
+      "claude-cost-estimator",
+      "ai-api-pricing-calculator",
+      "llm-tokenizer"
+    ],
+    "tags": [
+      "ai",
+      "gemini-cost-estimator"
+    ],
+    "icon": "coins"
+  },
+  {
+    "id": "sec-1",
+    "slug": "csp-header-generator",
+    "title": "Content Security Policy (CSP) Header Generator",
+    "name": "Content Security Policy (CSP) Header Generator",
+    "href": "/tools/csp-header-generator/",
+    "component": "src/pages/tools/csp-header-generator.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "generator",
+    "description": "Generate Content-Security-Policy HTTP headers to block XSS and unauthorized script execution.",
+    "seo": {
+      "title": "Content Security Policy (CSP) Header Generator | Nadhebe",
+      "description": "Generate secure Content-Security-Policy HTTP headers for Nginx, Apache, Cloudflare, and Vercel. Block XSS, clickjacking, and unauthorized inline scripts.",
+      "keywords": [
+        "csp header generator",
+        "content security policy builder",
+        "nginx csp header",
+        "xss prevention header",
+        "script-src directive"
+      ]
+    },
+    "relatedTools": [
+      "hsts-header-generator",
+      "x-frame-options-generator",
+      "cors-header-generator",
+      "jwt-inspector"
+    ],
+    "tags": [
+      "security",
+      "csp-header-generator"
+    ],
+    "icon": "shield-check"
+  },
+  {
+    "id": "sec-2",
+    "slug": "hsts-header-generator",
+    "title": "HTTP Strict Transport Security (HSTS) Generator",
+    "name": "HTTP Strict Transport Security (HSTS) Generator",
+    "href": "/tools/hsts-header-generator/",
+    "component": "src/pages/tools/hsts-header-generator.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "generator",
+    "description": "Generate HTTP Strict-Transport-Security headers and qualify for HSTS preload submission.",
+    "seo": {
+      "title": "HTTP Strict Transport Security (HSTS) Header Generator | Nadhebe",
+      "description": "Generate HTTP Strict-Transport-Security headers for Nginx, Apache, Cloudflare, and Vercel. Enforce HTTPS connections and qualify for HSTS preload submission.",
+      "keywords": [
+        "hsts header generator",
+        "strict-transport-security builder",
+        "hsts preload list",
+        "nginx hsts header",
+        "https enforcement"
+      ]
+    },
+    "relatedTools": [
+      "csp-header-generator",
+      "x-frame-options-generator",
+      "cors-header-generator",
+      "meta-tag-analyzer"
+    ],
+    "tags": [
+      "security",
+      "hsts-header-generator"
+    ],
+    "icon": "lock"
+  },
+  {
+    "id": "sec-3",
+    "slug": "x-frame-options-generator",
+    "title": "X-Frame-Options Clickjacking Protection Generator",
+    "name": "X-Frame-Options Clickjacking Protection Generator",
+    "href": "/tools/x-frame-options-generator/",
+    "component": "src/pages/tools/x-frame-options-generator.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "generator",
+    "description": "Generate X-Frame-Options DENY and SAMEORIGIN HTTP headers to prevent clickjacking.",
+    "seo": {
+      "title": "X-Frame-Options Clickjacking Protection Generator | Nadhebe",
+      "description": "Generate X-Frame-Options HTTP headers to prevent iframe clickjacking attacks on Nginx, Apache, Cloudflare, and Vercel.",
+      "keywords": [
+        "x-frame-options generator",
+        "clickjacking protection header",
+        "deny iframe header",
+        "sameorigin x-frame-options",
+        "nginx clickjacking header"
+      ]
+    },
+    "relatedTools": [
+      "csp-header-generator",
+      "hsts-header-generator",
+      "cors-header-generator",
+      "jwt-inspector"
+    ],
+    "tags": [
+      "security",
+      "x-frame-options-generator"
+    ],
+    "icon": "layout-grid"
+  },
+  {
+    "id": "sec-4",
+    "slug": "cors-header-generator",
+    "title": "CORS Access-Control Header Generator",
+    "name": "CORS Access-Control Header Generator",
+    "href": "/tools/cors-header-generator/",
+    "component": "src/pages/tools/cors-header-generator.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "generator",
+    "description": "Generate Access-Control-Allow-Origin, Methods, and Headers for API endpoints.",
+    "seo": {
+      "title": "CORS Access-Control Header Generator | Nadhebe",
+      "description": "Generate Cross-Origin Resource Sharing (CORS) HTTP headers for API endpoints. Configure Access-Control-Allow-Origin, Methods, and Headers for Nginx and Express.",
+      "keywords": [
+        "cors header generator",
+        "access-control-allow-origin builder",
+        "express cors middleware",
+        "nginx cors header",
+        "cors preflight options"
+      ]
+    },
+    "relatedTools": [
+      "csp-header-generator",
+      "hsts-header-generator",
+      "x-frame-options-generator",
+      "jwt-encoder"
+    ],
+    "tags": [
+      "security",
+      "cors-header-generator"
+    ],
+    "icon": "globe"
+  },
+  {
+    "id": "dev-sec-1",
+    "slug": "jwt-encoder",
+    "title": "JWT Token Generator & Base64URL Encoder",
+    "name": "JWT Token Generator & Base64URL Encoder",
+    "href": "/tools/jwt-encoder/",
+    "component": "src/pages/tools/jwt-encoder.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "generator",
+    "description": "Generate and encode JSON Web Tokens (JWT) with HS256 HMAC signatures client-side.",
+    "seo": {
+      "title": "JWT Token Generator & Base64URL Encoder | Nadhebe",
+      "description": "Generate and encode JSON Web Tokens (JWT) client-side. Configure HS256 header, custom payload claims (sub, iat, exp), secret key signing, and Base64URL strings.",
+      "keywords": [
+        "jwt encoder",
+        "jwt token generator",
+        "hs256 jwt signature",
+        "base64url jwt encoder",
+        "jwt payload builder"
+      ]
+    },
+    "relatedTools": [
+      "jwt-debugger",
+      "jwt-inspector",
+      "uuid-v7-generator",
+      "uuid-generator"
+    ],
+    "tags": [
+      "developer",
+      "jwt-encoder"
+    ],
+    "icon": "key"
+  },
+  {
+    "id": "dev-sec-2",
+    "slug": "uuid-v7-generator",
+    "title": "Time-Ordered UUID v7 Generator",
+    "name": "Time-Ordered UUID v7 Generator",
+    "href": "/tools/uuid-v7-generator/",
+    "component": "src/pages/tools/uuid-v7-generator.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "generator",
+    "description": "Generate time-ordered RFC 9562 UUID v7 primary keys for database B-Tree index optimization.",
+    "seo": {
+      "title": "Time-Ordered UUID v7 Generator | Nadhebe",
+      "description": "Generate time-ordered UUID v7 identifiers in bulk. Optimized for database primary keys (PostgreSQL, MySQL, SQLite) to maximize B-Tree index performance.",
+      "keywords": [
+        "uuid v7 generator",
+        "time ordered uuid",
+        "rfc 9562 uuid v7",
+        "database primary key uuid",
+        "b-tree index uuid"
+      ]
+    },
+    "relatedTools": [
+      "uuid-generator",
+      "jwt-encoder",
+      "json-formatter",
+      "epoch-converter"
+    ],
+    "tags": [
+      "developer",
+      "uuid-v7-generator"
+    ],
+    "icon": "clock"
+  },
+  {
+    "id": "dev-conv-1",
+    "slug": "sql-formatter",
+    "title": "SQL Query Formatter & Prettifier",
+    "name": "SQL Query Formatter & Prettifier",
+    "href": "/tools/sql-formatter/",
+    "component": "src/pages/tools/sql-formatter.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "formatter",
+    "description": "Format and prettify SQL queries for PostgreSQL, MySQL, and BigQuery client-side.",
+    "seo": {
+      "title": "SQL Query Formatter & Prettifier | Nadhebe",
+      "description": "Format and prettify SQL queries for PostgreSQL, MySQL, SQLite, and BigQuery. Uppercase keywords, align JOINs and WHERE clauses client-side.",
+      "keywords": [
+        "sql formatter",
+        "sql query prettifier",
+        "format postgresql query",
+        "mysql sql formatter",
+        "capitalize sql keywords"
+      ]
+    },
+    "relatedTools": [
+      "uuid-v7-generator",
+      "json-formatter",
+      "json-schema-validator",
+      "csv-to-json"
+    ],
+    "tags": [
+      "developer",
+      "sql-formatter"
+    ],
+    "icon": "database"
+  },
+  {
+    "id": "dev-conv-2",
+    "slug": "html-to-markdown",
+    "title": "HTML to Markdown Converter",
+    "name": "HTML to Markdown Converter",
+    "href": "/tools/html-to-markdown/",
+    "component": "src/pages/tools/html-to-markdown.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert HTML markup into clean GitHub Flavored Markdown (GFM) text.",
+    "seo": {
+      "title": "HTML to Markdown Converter | Nadhebe",
+      "description": "Convert raw HTML markup into clean Markdown formatted text. Convert headings, lists, tables, code blocks, and links client-side.",
+      "keywords": [
+        "html to markdown",
+        "convert html to md",
+        "gfm markdown converter",
+        "html table to markdown",
+        "astro markdown import"
+      ]
+    },
+    "relatedTools": [
+      "markdown-to-html",
+      "json-formatter",
+      "sql-formatter",
+      "json-to-xml"
+    ],
+    "tags": [
+      "converters",
+      "html-to-markdown"
+    ],
+    "icon": "file-text"
+  },
+  {
+    "id": "dev-conv-3",
+    "slug": "markdown-to-html",
+    "title": "Markdown to HTML Converter",
+    "name": "Markdown to HTML Converter",
+    "href": "/tools/markdown-to-html/",
+    "component": "src/pages/tools/markdown-to-html.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert GitHub Flavored Markdown (GFM) text into clean HTML5 markup.",
+    "seo": {
+      "title": "Markdown to HTML Converter | Nadhebe",
+      "description": "Convert GitHub Flavored Markdown (GFM) text into clean HTML markup. Render headers, lists, code blocks, blockquotes, and links client-side.",
+      "keywords": [
+        "markdown to html",
+        "convert md to html",
+        "gfm html compiler",
+        "markdown parser javascript",
+        "cms html generator"
+      ]
+    },
+    "relatedTools": [
+      "html-to-markdown",
+      "json-formatter",
+      "sql-formatter",
+      "json-to-xml"
+    ],
+    "tags": [
+      "converters",
+      "markdown-to-html"
+    ],
+    "icon": "code"
+  },
+  {
+    "id": "util-1",
+    "slug": "qr-code-generator",
+    "title": "HTML5 Canvas QR Code Generator",
+    "name": "HTML5 Canvas QR Code Generator",
+    "href": "/tools/qr-code-generator/",
+    "component": "src/pages/tools/qr-code-generator.astro",
+    "status": "implemented",
+    "category": "Utility",
+    "categorySlug": "utility",
+    "mode": "generator",
+    "description": "Generate high-resolution QR codes client-side with PNG download.",
+    "seo": {
+      "title": "HTML5 Canvas QR Code Generator | Nadhebe",
+      "description": "Generate high-resolution QR codes directly in your browser. Custom colors, dimensions, and instant PNG download without server tracking.",
+      "keywords": [
+        "qr code generator",
+        "html5 canvas qr code",
+        "free qr code download",
+        "custom color qr code",
+        "browser qr generator"
+      ]
+    },
+    "relatedTools": [
+      "social-media-image-sizes",
+      "aspect-ratio-calculator",
+      "meta-tag-analyzer",
+      "serp-preview"
+    ],
+    "tags": [
+      "utility",
+      "qr-code-generator"
+    ],
+    "icon": "qr-code"
   }
 ];
 

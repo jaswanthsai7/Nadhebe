@@ -1,0 +1,213 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'RAG Retrieval Precision & Recall Evaluator | Nadhebe';
+const h1 = 'RAG Retrieval Precision & Recall Evaluator';
+const description = 'Audit RAG vector retrieval quality: calculate Precision@K, Recall@K, F1 Score, and Context Noise Ratio to optimize vector search pipelines.';
+
+const faq = [
+  {
+    question: 'What is RAG Retrieval Evaluation?',
+    answer: 'RAG (Retrieval-Augmented Generation) evaluation measures how accurately a vector database retrieves relevant context chunks for a given query before feeding them to an LLM.',
+  },
+  {
+    question: 'What is Precision@K in vector retrieval?',
+    answer: 'Precision@K calculates the percentage of the top K retrieved chunks that are actually relevant to the query (`Relevant Retrieved / Total Retrieved`).',
+  },
+  {
+    question: 'What is Recall@K in vector retrieval?',
+    answer: 'Recall@K measures the percentage of all ground-truth relevant document chunks that were successfully retrieved (`Relevant Retrieved / Total Ground Truth`).',
+  },
+  {
+    question: 'Why is high context noise bad for LLMs?',
+    answer: 'Irrelevant chunks included in the LLM prompt increase token costs and cause the "Lost in the Middle" phenomenon, where LLMs miss critical facts buried in noise.',
+  },
+  {
+    question: 'How do I improve RAG retrieval precision and recall?',
+    answer: 'Optimize chunk sizes (256–512 tokens with 10% overlap), implement hybrid search (dense embeddings + BM25 keyword search), and use cross-encoder re-rankers.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="rag-evaluator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="rag-evaluator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RETRIEVAL METRIC PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label for="rag-input-retrieved" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Total Retrieved Chunks (Top-K)</label>
+            <input
+              id="rag-input-retrieved"
+              type="number"
+              min="1"
+              max="50"
+              value="10"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="rag-input-relevant" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Relevant Chunks Retrieved</label>
+            <input
+              id="rag-input-relevant"
+              type="number"
+              min="0"
+              max="50"
+              value="8"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="rag-input-truth" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Total Ground Truth Relevant Chunks in Knowledge Base</label>
+            <input
+              id="rag-input-truth"
+              type="number"
+              min="1"
+              max="50"
+              value="10"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-rag"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate Retrieval Quality
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="RETRIEVAL QUALITY SCORECARD">
+        <div class="space-y-20">
+          
+          <!-- Summary Score Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-precision" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">80.0%</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Precision@K</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-recall" class="text-h3 font-bold text-accent dark:text-accent-dark">80.0%</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Recall@K</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-f1" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">0.80</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">F1 Score</div>
+            </div>
+          </div>
+
+          <!-- Noise Ratio & Diagnostic Breakdown -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Context Quality & Noise Breakdown</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Context Noise Ratio (Irrelevant Chunks):</span>
+              <span id="stat-noise-pct" class="font-bold text-emerald-600 dark:text-emerald-400">20.0% (2 noise chunks)</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Missed Relevant Chunks:</span>
+              <span id="stat-missed-count" class="font-bold text-accent dark:text-accent-dark">2 chunks missed</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Retrieval Status Recommendation:</span>
+              <span id="stat-rag-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ High Quality Retrieval</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>RAG Retrieval Quality Guide — Optimizing Vector Search Pipelines</h2>
+    <p>
+      Retrieval-Augmented Generation (RAG) performance depends directly on the quality of retrieved context. If vector search returns irrelevant noise or misses critical ground-truth facts, the LLM will generate incomplete or inaccurate responses.
+    </p>
+
+    <h3>Key RAG Retrieval Evaluation Metrics</h3>
+    <ul>
+      <li><strong>Precision@K</strong>: Measures context cleanliness (`Relevant / Top-K`). High precision prevents prompt pollution.</li>
+      <li><strong>Recall@K</strong>: Measures context completeness (`Relevant / Total Ground Truth`). High recall prevents missed facts.</li>
+      <li><strong>F1 Score</strong>: Harmonic mean of Precision@K and Recall@K (`2 * (P * R) / (P + R)`).</li>
+    </ul>
+
+    <h3>Related RAG & AI Tools</h3>
+    <p>
+      Calculate RAG chunk sizes with our <a href="/tools/rag-chunk-size-calculator/">RAG Chunk Size Calculator</a>, estimate context window usage with the <a href="/tools/rag-context-window-calculator/">Context Window Calculator</a>, or count model tokens with the <a href="/tools/llm-token-counter-multi-model/">Multi-Model Token Counter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRetrieved = document.getElementById('rag-input-retrieved');
+    const inputRelevant = document.getElementById('rag-input-relevant');
+    const inputTruth = document.getElementById('rag-input-truth');
+    const btnCalc = document.getElementById('btn-calc-rag');
+
+    const statPrecision = document.getElementById('stat-precision');
+    const statRecall = document.getElementById('stat-recall');
+    const statF1 = document.getElementById('stat-f1');
+    const statNoise = document.getElementById('stat-noise-pct');
+    const statMissed = document.getElementById('stat-missed-count');
+    const statStatus = document.getElementById('stat-rag-status');
+
+    function calculate() {
+      const k = Math.max(1, parseInt(inputRetrieved?.value || '10', 10));
+      const rel = Math.max(0, Math.min(k, parseInt(inputRelevant?.value || '8', 10)));
+      const truth = Math.max(1, parseInt(inputTruth?.value || '10', 10));
+
+      const precision = rel / k;
+      const recall = Math.min(1.0, rel / truth);
+      const f1 = (precision + recall) > 0 ? (2 * precision * recall) / (precision + recall) : 0;
+
+      const noiseChunks = k - rel;
+      const noisePct = ((noiseChunks / k) * 100).toFixed(1);
+      const missedCount = Math.max(0, truth - rel);
+
+      if (statPrecision) statPrecision.textContent = `${(precision * 100).toFixed(1)}%`;
+      if (statRecall) statRecall.textContent = `${(recall * 100).toFixed(1)}%`;
+      if (statF1) statF1.textContent = f1.toFixed(2);
+      if (statNoise) statNoise.textContent = `${noisePct}% (${noiseChunks} noise chunks)`;
+      if (statMissed) statMissed.textContent = `${missedCount} chunks missed`;
+
+      if (statStatus) {
+        if (f1 >= 0.75) {
+          statStatus.textContent = '✓ High Quality Retrieval';
+          statStatus.className = 'font-bold text-emerald-600 dark:text-emerald-400';
+        } else if (f1 >= 0.50) {
+          statStatus.textContent = '⚠ Moderate Quality (Tune Re-ranker)';
+          statStatus.className = 'font-bold text-amber-600';
+        } else {
+          statStatus.textContent = '✕ Low Quality (High Context Noise)';
+          statStatus.className = 'font-bold text-danger';
+        }
+      }
+    }
+
+    btnCalc?.addEventListener('click', calculate);
+    [inputRetrieved, inputRelevant, inputTruth].forEach(el => {
+      el?.addEventListener('input', calculate);
+    });
+
+    calculate();
+  })();
+</script>

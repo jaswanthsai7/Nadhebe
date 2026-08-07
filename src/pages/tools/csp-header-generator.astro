@@ -1,0 +1,188 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Content Security Policy (CSP) Header Generator | Nadhebe';
+const h1 = 'Content Security Policy (CSP) Header Generator';
+const description = 'Generate secure Content-Security-Policy HTTP headers for Nginx, Apache, Cloudflare, and Vercel. Block XSS, clickjacking, and unauthorized inline scripts.';
+
+const faq = [
+  {
+    question: 'What is a Content Security Policy (CSP) header?',
+    answer: 'A Content Security Policy (`Content-Security-Policy`) HTTP header restricts the sources from which scripts, styles, images, and frames can be loaded, shielding web apps from Cross-Site Scripting (XSS).',
+  },
+  {
+    question: 'What does `default-src \'self\'` mean in CSP?',
+    answer: '`default-src \'self\'` serves as a fallback directive that restricts all un-specified resource types (scripts, fonts, images) to load only from the exact same origin domain.',
+  },
+  {
+    question: 'How do nonces and hashes work in script-src directives?',
+    answer: 'Nonces (`\'nonce-rAnd0m\'`) and SHA-256 hashes (`\'sha256-...\'`) allow specific inline scripts to execute while blocking unauthorized injected scripts.',
+  },
+  {
+    question: 'What is the difference between Content-Security-Policy and Report-Only?',
+    answer: '`Content-Security-Policy-Report-Only` monitors and logs policy violations to a reporting endpoint without blocking resource loads, allowing safe staging testing.',
+  },
+  {
+    question: 'How do I deploy CSP headers in Nginx or Cloudflare?',
+    answer: 'Copy the generated `add_header Content-Security-Policy "..."` directive and paste it into your server block or Cloudflare Transform Rules.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="csp-header-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="csp-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CSP DIRECTIVES CONFIGURATION">
+        <div class="space-y-16">
+          <div>
+            <label for="csp-select-preset" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Security Preset Level</label>
+            <select
+              id="csp-select-preset"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="strict">Strict Security (Recommended for Modern Apps)</option>
+              <option value="moderate">Moderate (Allows Analytics & Google Fonts)</option>
+              <option value="report">Report-Only Staging Mode</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="csp-input-scripts" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Allowed Script Sources (script-src)</label>
+            <input
+              id="csp-input-scripts"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="'self' https://www.google-analytics.com"
+            />
+          </div>
+
+          <div>
+            <label for="csp-input-styles" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Allowed Style Sources (style-src)</label>
+            <input
+              id="csp-input-styles"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="'self' https://fonts.googleapis.com 'unsafe-inline'"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-csp"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate CSP Directives
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED CSP HEADER DIRECTIVE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">HTTP Header Output</span>
+            <button type="button" id="btn-copy-csp" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Header</button>
+          </div>
+
+          <pre id="csp-output-header" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[140px] leading-relaxed whitespace-pre-wrap"></pre>
+
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Nginx Config Directive</span>
+            <pre id="csp-output-nginx" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Content Security Policy (CSP) Implementation Guide</h2>
+    <p>
+      Content Security Policy is an essential defense-in-depth HTTP header that guards against Cross-Site Scripting (XSS), data injection, and iframe clickjacking attacks.
+    </p>
+
+    <h3>Recommended CSP Directives</h3>
+    <ul>
+      <li><code>default-src 'self'</code> — Restricts default fallback resources to same origin.</li>
+      <li><code>script-src</code> — Specifies trusted JavaScript sources.</li>
+      <li><code>style-src</code> — Controls stylesheet and font loading.</li>
+      <li><code>frame-ancestors 'none'</code> — Prevents iframe embedding and clickjacking.</li>
+      <li><code>upgrade-insecure-requests</code> — Instructs browsers to automatically upgrade HTTP requests to HTTPS.</li>
+    </ul>
+
+    <h3>Related Security Tools</h3>
+    <p>
+      Generate HSTS headers with our <a href="/tools/hsts-header-generator/">HSTS Header Generator</a>, block clickjacking with the <a href="/tools/x-frame-options-generator/">X-Frame-Options Generator</a>, or test JWTs using the <a href="/tools/jwt-inspector/">JWT Inspector</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectPreset = document.getElementById('csp-select-preset');
+    const inputScripts = document.getElementById('csp-input-scripts');
+    const inputStyles = document.getElementById('csp-input-styles');
+    const btnGen = document.getElementById('btn-gen-csp');
+
+    const outputHeader = document.getElementById('csp-output-header');
+    const outputNginx = document.getElementById('csp-output-nginx');
+    const btnCopy = document.getElementById('btn-copy-csp');
+
+    function generate() {
+      const preset = selectPreset?.value || 'strict';
+      const scripts = inputScripts?.value || "'self'";
+      const styles = inputStyles?.value || "'self'";
+
+      let headerName = 'Content-Security-Policy';
+      if (preset === 'report') headerName = 'Content-Security-Policy-Report-Only';
+
+      const directives = [
+        `default-src 'self'`,
+        `script-src ${scripts}`,
+        `style-src ${styles}`,
+        `img-src 'self' data: https:`,
+        `font-src 'self' https://fonts.gstatic.com`,
+        `object-src 'none'`,
+        `base-uri 'self'`,
+        `form-action 'self'`,
+        `frame-ancestors 'none'`,
+        `upgrade-insecure-requests`
+      ].join('; ');
+
+      const fullHeader = `${headerName}: ${directives}`;
+      const nginxDirective = `add_header ${headerName} "${directives}" always;`;
+
+      if (outputHeader) outputHeader.textContent = fullHeader;
+      if (outputNginx) outputNginx.textContent = nginxDirective;
+    }
+
+    btnGen?.addEventListener('click', generate);
+    [selectPreset, inputScripts, inputStyles].forEach(el => {
+      el?.addEventListener('input', generate);
+      el?.addEventListener('change', generate);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputHeader) {
+        navigator.clipboard.writeText(outputHeader.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Header'), 2000);
+      }
+    });
+
+    generate();
+  })();
+</script>

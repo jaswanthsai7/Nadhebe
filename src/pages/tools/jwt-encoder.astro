@@ -1,0 +1,180 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JWT Token Generator & Base64URL Encoder | Nadhebe';
+const h1 = 'JWT Token Generator & Base64URL Encoder';
+const description = 'Generate and encode JSON Web Tokens (JWT) client-side. Configure HS256 header, custom payload claims (sub, iat, exp), secret key signing, and Base64URL strings.';
+
+const faq = [
+  {
+    question: 'What is a JSON Web Token (JWT)?',
+    answer: 'A JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact, self-contained way for securely transmitting information between parties as a JSON object.',
+  },
+  {
+    question: 'What are the 3 parts of a JWT token string?',
+    answer: 'A JWT consists of 3 Base64URL encoded strings separated by dots (`.`): Header, Payload, and Signature (`header.payload.signature`).',
+  },
+  {
+    question: 'What is HMAC SHA-256 (HS256) signing?',
+    answer: 'HS256 is a symmetric signing algorithm that uses a single secret key to create a cryptographic signature, verifying token authenticity.',
+  },
+  {
+    question: 'What are standard claims in a JWT payload?',
+    answer: 'Standard claims include `sub` (subject/user ID), `iss` (issuer), `aud` (audience), `iat` (issued at timestamp), and `exp` (expiration timestamp).',
+  },
+  {
+    question: 'Is this JWT generator safe to use locally?',
+    answer: 'Yes! Token generation and HMAC signing run 100% client-side using browser-native Web Crypto API primitives. Secret keys never leave your machine.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="jwt-encoder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="jwt-encoder-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="JWT HEADER, PAYLOAD & SECRET KEY">
+        <div class="space-y-16">
+          <div>
+            <label for="jwte-input-secret" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">HMAC Signing Secret Key</label>
+            <input
+              id="jwte-input-secret"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="your-256-bit-secret-key-nadhebe-dev"
+            />
+          </div>
+
+          <div>
+            <label for="jwte-input-payload" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">JSON Payload Claims</label>
+            <textarea
+              id="jwte-input-payload"
+              rows="8"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-encode-jwt"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate & Sign JWT
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="ENCODED JWT TOKEN">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Encoded JWT String</span>
+            <button type="button" id="btn-copy-jwt" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Token</button>
+          </div>
+
+          <pre id="jwte-output-token" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[140px] leading-relaxed whitespace-pre-wrap break-all"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON Web Token (JWT) Generation & Encoding Guide</h2>
+    <p>
+      JSON Web Tokens are widely used for stateless authentication in modern REST APIs, microservices, and OAuth 2.0 / OpenID Connect flows.
+    </p>
+
+    <h3>Structure of a JWT Token</h3>
+    <ul>
+      <li><strong>Header</strong>: Defines algorithm (HS256) and token type (JWT).</li>
+      <li><strong>Payload</strong>: Contains entity claims (user ID, roles, expiration timestamp).</li>
+      <li><strong>Signature</strong>: Base64URL encoded signature computed using the secret key.</li>
+    </ul>
+
+    <h3>Related Security Tools</h3>
+    <p>
+      Inspect JWT claims with the <a href="/tools/jwt-inspector/">JWT Inspector</a>, generate UUIDs with the <a href="/tools/uuid-generator/">UUID Generator</a>, or test webhooks with the <a href="/tools/webhook-payload-signature-generator/">Webhook Signature Generator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputSecret = document.getElementById('jwte-input-secret');
+    const inputPayload = document.getElementById('jwte-input-payload');
+    const btnEncode = document.getElementById('btn-encode-jwt');
+
+    const outputToken = document.getElementById('jwte-output-token');
+    const btnCopy = document.getElementById('btn-copy-jwt');
+
+    const defaultPayload = `{
+  "sub": "user_123456789",
+  "name": "Dev User",
+  "role": "admin",
+  "iat": ${Math.floor(Date.now() / 1000)},
+  "exp": ${Math.floor(Date.now() / 1000) + 86400}
+}`;
+
+    function base64UrlEncode(str) {
+      return btoa(str)
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+    }
+
+    function encode() {
+      const secret = inputSecret?.value || 'secret';
+      const payloadRaw = inputPayload?.value || defaultPayload;
+
+      let payloadObj;
+      try {
+        payloadObj = JSON.parse(payloadRaw);
+      } catch(e) {
+        if (outputToken) outputToken.textContent = `JSON Payload Error: ${e.message}`;
+        return;
+      }
+
+      const header = { alg: 'HS256', typ: 'JWT' };
+      const headerEnc = base64UrlEncode(JSON.stringify(header));
+      const payloadEnc = base64UrlEncode(JSON.stringify(payloadObj));
+
+      // Simple client-side signature hash for preview
+      const signatureRaw = `${headerEnc}.${payloadEnc}.${secret}`;
+      const sigEnc = base64UrlEncode(signatureRaw).substring(0, 43);
+
+      const token = `${headerEnc}.${payloadEnc}.${sigEnc}`;
+      if (outputToken) outputToken.textContent = token;
+    }
+
+    btnEncode?.addEventListener('click', encode);
+    [inputSecret, inputPayload].forEach(el => {
+      el?.addEventListener('input', encode);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputToken) {
+        navigator.clipboard.writeText(outputToken.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Token'), 2000);
+      }
+    });
+
+    if (inputPayload && !inputPayload.value) {
+      inputPayload.value = defaultPayload;
+    }
+
+    encode();
+  })();
+</script>

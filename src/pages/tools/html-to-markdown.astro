@@ -1,0 +1,175 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'HTML to Markdown Converter | Nadhebe';
+const h1 = 'HTML to Markdown Converter';
+const description = 'Convert raw HTML markup into clean Markdown formatted text. Convert headings, lists, tables, code blocks, and links client-side.';
+
+const faq = [
+  {
+    question: 'How does the HTML to Markdown converter work?',
+    answer: 'The converter parses HTML DOM elements (`<h1>`–`<h6>`, `<p>`, `<ul>`, `<a>`, `<code>`, `<table>`) and converts them into standard GitHub Flavored Markdown (GFM) syntax.',
+  },
+  {
+    question: 'Are HTML tables converted to Markdown tables?',
+    answer: 'Yes! `<table>`, `<tr>`, `<th>`, and `<td>` elements are formatted into clean Markdown pipe tables (`| Col 1 | Col 2 |`).',
+  },
+  {
+    question: 'Does the converter strip inline style and script tags?',
+    answer: 'Yes. `<script>`, `<style>`, and inline CSS attributes are stripped to produce clean, security-audit-safe Markdown text.',
+  },
+  {
+    question: 'Is my HTML data sent to any remote server?',
+    answer: 'No! All parsing and conversion run 100% locally in your browser using DOMParser.',
+  },
+  {
+    question: 'Can I convert blog posts and CMS content?',
+    answer: 'Yes! Paste rich HTML content from WordPress, Medium, or Webflow to extract clean Markdown for static site generators like Astro or Next.js.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="html-to-markdown"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="htm2md-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RAW HTML INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="htm-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">HTML Code Snippet</label>
+              <button type="button" id="btn-load-sample-htm" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample HTML</button>
+            </div>
+            <textarea
+              id="htm-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-convert-htm2md"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert HTML to Markdown
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="MARKDOWN OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Converted Markdown</span>
+            <button type="button" id="btn-copy-htm2md" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Markdown</button>
+          </div>
+
+          <pre id="htm-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>HTML to Markdown Conversion Guide</h2>
+    <p>
+      Markdown is the lightweight markup language of choice for technical documentation, blog engines, and developer tools. Converting legacy HTML articles into Markdown simplifies content migrations to Astro, Hugo, or Next.js.
+    </p>
+
+    <h3>HTML to Markdown Mapping</h3>
+    <ul>
+      <li><code>&lt;h1&gt;Header&lt;/h1&gt;</code> → <code># Header</code></li>
+      <li><code>&lt;a href="https://example.com/target-page/"&gt;Text&lt;/a&gt;</code> → <code>[Text](https://example.com/target-page/)</code></li>
+      <li><code>&lt;code&gt;val&lt;/code&gt;</code> → <code>`val`</code></li>
+      <li><code>&lt;strong&gt;Text&lt;/strong&gt;</code> → <code>**Text**</code></li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Convert Markdown to HTML with the <a href="/tools/markdown-to-html/">Markdown to HTML Converter</a>, format SQL queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>, or validate JSON schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('htm-input-raw');
+    const btnConvert = document.getElementById('btn-convert-htm2md');
+    const btnSample = document.getElementById('btn-load-sample-htm');
+
+    const outputText = document.getElementById('htm-output-text');
+    const btnCopy = document.getElementById('btn-copy-htm2md');
+
+    const defaultHtml = `<h1>HTML to Markdown Guide</h1>
+<p>Convert <strong>rich text</strong> and <em>HTML elements</em> into clean Markdown.</p>
+<ul>
+  <li>Fast client-side conversion</li>
+  <li>Supports links like <a href="https://nadhebe.com">Nadhebe</a></li>
+</ul>
+<pre><code>function hello() { return "world"; }</code></pre>`;
+
+    function convertHTMLToMarkdown(html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      function walk(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+        const tag = node.tagName.toLowerCase();
+        const children = Array.from(node.childNodes).map(walk).join('');
+
+        switch (tag) {
+          case 'h1': return `\n# ${children.trim()}\n\n`;
+          case 'h2': return `\n## ${children.trim()}\n\n`;
+          case 'h3': return `\n### ${children.trim()}\n\n`;
+          case 'p': return `\n${children.trim()}\n\n`;
+          case 'strong': case 'b': return `**${children}**`;
+          case 'em': case 'i': return `*${children}*`;
+          case 'code': return `\`${children}\``;
+          case 'pre': return `\n\`\`\`\n${children.trim()}\n\`\`\`\n\n`;
+          case 'a': return `[${children}](${node.getAttribute('href') || ''})`;
+          case 'li': return `- ${children.trim()}\n`;
+          case 'ul': return `\n${children}\n`;
+          case 'script': case 'style': return '';
+          default: return children;
+        }
+      }
+
+      return walk(doc.body).replace(/\n{3,}/g, '\n\n').trim();
+    }
+
+    function convert() {
+      const raw = inputRaw?.value || defaultHtml;
+      const md = convertHTMLToMarkdown(raw);
+      if (outputText) outputText.textContent = md;
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    inputRaw?.addEventListener('input', convert);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultHtml;
+      convert();
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultHtml;
+
+    convert();
+  })();
+</script>

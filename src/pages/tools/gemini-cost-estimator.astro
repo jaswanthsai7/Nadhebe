@@ -1,0 +1,227 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Google Gemini 1.5 Pro & Flash API Cost Estimator | Nadhebe';
+const h1 = 'Google Gemini 1.5 Pro & Flash API Cost Estimator';
+const description = 'Calculate API pricing for Google Gemini 1.5 Pro, Gemini 1.5 Flash, and Gemini 2.0 Flash. Estimate monthly costs for 1M+ token context windows and multimodal payloads.';
+
+const faq = [
+  {
+    question: 'What are the current pricing rates for Google Gemini 1.5 Flash?',
+    answer: 'Gemini 1.5 Flash costs $0.075 per 1M input tokens ($0.01875 per 1M cached input) and $0.30 per 1M output tokens for prompts under 128k tokens.',
+  },
+  {
+    question: 'How does Gemini 1.5 Pro pricing scale for prompts over 128k tokens?',
+    answer: 'For prompts <=128k tokens, Gemini 1.5 Pro costs $1.25 per 1M input / $5.00 per 1M output. For prompts >128k tokens up to 2M, input pricing increases to $2.50 per 1M and output to $10.00 per 1M.',
+  },
+  {
+    question: 'How does Google Context Caching reduce API costs?',
+    answer: 'Google Context Caching allows developers to store large documents or codebases in memory, reducing input token pricing by 75% for cached requests.',
+  },
+  {
+    question: 'What is the maximum context window supported by Gemini 1.5 Pro?',
+    answer: 'Gemini 1.5 Pro supports an industry-leading 2,000,000 token context window, allowing developers to process full codebases, hours of audio, or long PDF documents.',
+  },
+  {
+    question: 'Is there a free tier available for Google Gemini API?',
+    answer: 'Yes! Google AI Studio provides a free tier with rate limits (15 RPM for Gemini 1.5 Flash, 2 RPM for Gemini 1.5 Pro) for non-commercial prototyping.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="gemini-cost-estimator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="gemini-cost-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="GEMINI MODEL & TOKEN USAGE">
+        <div class="space-y-16">
+          <div>
+            <label for="gem-select-model" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Select Google Gemini Model</label>
+            <select
+              id="gem-select-model"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="flash15">Gemini 1.5 Flash ($0.075 in / $0.30 out per 1M)</option>
+              <option value="flash20">Gemini 2.0 Flash ($0.10 in / $0.40 out per 1M)</option>
+              <option value="pro15">Gemini 1.5 Pro (&lt;128k: $1.25 in / $5.00 out per 1M)</option>
+              <option value="pro15-large">Gemini 1.5 Pro (&gt;128k: $2.50 in / $10.00 out per 1M)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="gem-input-reqs" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly API Requests</label>
+            <input
+              id="gem-input-reqs"
+              type="number"
+              min="100"
+              step="1000"
+              value="100000"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="gem-input-in-tokens" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Input Tokens / Req</label>
+              <input id="gem-input-in-tokens" type="number" min="10" step="100" value="2500" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+            <div>
+              <label for="gem-input-out-tokens" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Output Tokens / Req</label>
+              <input id="gem-input-out-tokens" type="number" min="10" step="100" value="500" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+          </div>
+
+          <div class="flex items-center gap-8 pt-4">
+            <label class="flex items-center gap-8 cursor-pointer text-xs font-sans text-ink dark:text-ink-dark">
+              <input id="gem-chk-cached" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Enable Context Caching (75% discount on cached inputs)</span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-gem"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate Gemini API Cost
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GOOGLE GEMINI API COST ESTIMATE">
+        <div class="space-y-20">
+          
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-gem-monthly" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">$19.69</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Est. Monthly Cost</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-gem-per-req" class="text-h3 font-bold text-accent dark:text-accent-dark">$0.00020</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Cost / Request</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-gem-tokens-mo" class="text-h3 font-bold text-ink dark:text-ink-dark">300M</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Total Tokens/Mo</div>
+            </div>
+          </div>
+
+          <!-- Cost Breakdown List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Cost Distribution</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Input Tokens Cost (250M):</span>
+              <span id="stat-gem-incost" class="font-bold text-emerald-600 dark:text-emerald-400">$4.69 / mo</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Output Tokens Cost (50M):</span>
+              <span id="stat-gem-outcost" class="font-bold text-accent dark:text-accent-dark">$15.00 / mo</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Annual Equivalent API Spend:</span>
+              <span id="stat-gem-annual" class="font-bold text-emerald-600 dark:text-emerald-400">$236.25 / yr</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Google Gemini API Pricing & Context Window Optimization</h2>
+    <p>
+      Google Gemini 1.5 Flash and Pro provide high-throughput processing with large context windows (up to 2,000,000 tokens). Flash models deliver cost performance for high-volume API applications.
+    </p>
+
+    <h3>Google Gemini Pricing Rates (per 1,000,000 Tokens)</h3>
+    <ul>
+      <li><strong>Gemini 1.5 Flash</strong>: $0.075 Input / $0.01875 Cached Input / $0.30 Output</li>
+      <li><strong>Gemini 2.0 Flash</strong>: $0.10 Input / $0.025 Cached Input / $0.40 Output</li>
+      <li><strong>Gemini 1.5 Pro (&lt;128k)</strong>: $1.25 Input / $0.3125 Cached Input / $5.00 Output</li>
+      <li><strong>Gemini 1.5 Pro (&gt;128k)</strong>: $2.50 Input / $0.625 Cached Input / $10.00 Output</li>
+    </ul>
+
+    <h3>Related AI Developer Tools</h3>
+    <p>
+      Calculate Anthropic Claude pricing with the <a href="/tools/claude-cost-estimator/">Claude Cost Estimator</a>, calculate OpenAI costs with the <a href="/tools/openai-cost-estimator/">OpenAI Cost Estimator</a>, or compare all providers using the <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectModel = document.getElementById('gem-select-model');
+    const inputReqs = document.getElementById('gem-input-reqs');
+    const inputIn = document.getElementById('gem-input-in-tokens');
+    const inputOut = document.getElementById('gem-input-out-tokens');
+    const chkCached = document.getElementById('gem-chk-cached');
+    const btnCalc = document.getElementById('btn-calc-gem');
+
+    const pricing = {
+      'flash15': { in: 0.075, out: 0.30 },
+      'flash20': { in: 0.10, out: 0.40 },
+      'pro15': { in: 1.25, out: 5.00 },
+      'pro15-large': { in: 2.50, out: 10.00 }
+    };
+
+    const statMonthly = document.getElementById('stat-gem-monthly');
+    const statPerReq = document.getElementById('stat-gem-per-req');
+    const statTotalTok = document.getElementById('stat-gem-tokens-mo');
+    const statInCost = document.getElementById('stat-gem-incost');
+    const statOutCost = document.getElementById('stat-gem-outcost');
+    const statAnnual = document.getElementById('stat-gem-annual');
+
+    function calculate() {
+      const model = selectModel?.value || 'flash15';
+      const reqs = parseInt(inputReqs?.value || '100000', 10);
+      const inToks = parseInt(inputIn?.value || '2500', 10);
+      const outToks = parseInt(inputOut?.value || '500', 10);
+      const isCached = chkCached?.checked ?? true;
+
+      const rates = pricing[model] || pricing['flash15'];
+      const effectiveInRate = isCached ? rates.in * 0.25 : rates.in;
+
+      const totalInM = (reqs * inToks) / 1000000;
+      const totalOutM = (reqs * outToks) / 1000000;
+
+      const monthlyInCost = totalInM * effectiveInRate;
+      const monthlyOutCost = totalOutM * rates.out;
+      const totalMonthly = monthlyInCost + monthlyOutCost;
+
+      const costPerReq = reqs > 0 ? (totalMonthly / reqs) : 0;
+      const totalToksM = totalInM + totalOutM;
+
+      if (statMonthly) statMonthly.textContent = `$${totalMonthly.toFixed(2)}`;
+      if (statPerReq) statPerReq.textContent = `$${costPerReq.toFixed(5)}`;
+      if (statTotalTok) statTotalTok.textContent = `${totalToksM.toFixed(1)}M`;
+
+      if (statInCost) statInCost.textContent = `$${monthlyInCost.toFixed(2)} / mo`;
+      if (statOutCost) statOutCost.textContent = `$${monthlyOutCost.toFixed(2)} / mo`;
+      if (statAnnual) statAnnual.textContent = `$${(totalMonthly * 12).toFixed(2)} / yr`;
+    }
+
+    btnCalc?.addEventListener('click', calculate);
+    [selectModel, inputReqs, inputIn, inputOut, chkCached].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

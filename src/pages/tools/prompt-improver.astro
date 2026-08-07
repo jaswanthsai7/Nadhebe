@@ -1,0 +1,199 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Vague AI Prompt Enhancer & Rewriter | Nadhebe';
+const h1 = 'Vague AI Prompt Enhancer & Rewriter';
+const description = 'Transform short, vague AI prompts into detailed, high-performance system instructions with Chain-of-Thought reasoning and negative constraints.';
+
+const faq = [
+  {
+    question: 'How does Prompt Improver enhance short user prompts?',
+    answer: 'Prompt Improver analyzes your vague instruction and injects missing context, chain-of-thought reasoning directives, negative constraints, and output format requirements.',
+  },
+  {
+    question: 'What is Chain-of-Thought (CoT) prompting?',
+    answer: 'Chain-of-Thought prompting instructs the LLM to write out step-by-step reasoning before outputting the final answer, significantly reducing mathematical and logic errors.',
+  },
+  {
+    question: 'Why do short prompts produce low-quality LLM responses?',
+    answer: 'Short prompts leave room for model assumptions, leading to generic tone, missing edge cases, and uncontrolled length.',
+  },
+  {
+    question: 'Does this tool work for ChatGPT, Claude, and Gemini?',
+    answer: 'Yes! The enhanced prompts use model-agnostic XML tagging and structural rules supported by all major LLMs.',
+  },
+  {
+    question: 'What are few-shot examples in prompt engineering?',
+    answer: 'Few-shot examples provide 1 to 3 input-output pairs inside the prompt to demonstrate exact formatting expectations to the model.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="prompt-improver"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="prompt-improver-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="VAGUE PROMPT INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="imp-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Original Short / Vague Prompt</label>
+            <textarea
+              id="imp-input-raw"
+              rows="3"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >write a technical blog post about 301 redirects and canonical tags for developers</textarea>
+          </div>
+
+          <div class="space-y-8 font-sans text-xs">
+            <span class="block font-semibold text-ink dark:text-ink-dark mb-4">Enhancement Toggles</span>
+            <label class="flex items-center gap-8 cursor-pointer">
+              <input id="chk-cot" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Inject Chain-of-Thought Reasoning (&lt;thinking&gt;)</span>
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer">
+              <input id="chk-neg" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Add Explicit Negative Constraints & Anti-Hallucination Rules</span>
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer">
+              <input id="chk-examples" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Include Few-Shot Example Template (&lt;example&gt;)</span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            id="btn-improve-prompt"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Enhance & Rewrite Prompt
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="ENHANCED HIGH-PERFORMANCE PROMPT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Enhanced System Prompt</span>
+            <button type="button" id="btn-copy-imp-prompt" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Prompt</button>
+          </div>
+
+          <pre id="imp-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[320px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Prompt Rewriting & Enhancement Guide — From Vague Ideas to Production Specs</h2>
+    <p>
+      Vague prompts lead to uninspired LLM completions. By systematically adding structure, role context, Chain-of-Thought reasoning, and negative constraints, you elevate model performance to production grade.
+    </p>
+
+    <h3>Key Prompt Enhancement Techniques</h3>
+    <ul>
+      <li><strong>Chain-of-Thought (CoT)</strong>: Adding <code>&lt;thinking&gt;</code> blocks forces the model to plan step-by-step before outputting final answers.</li>
+      <li><strong>Negative Constraints</strong>: Explicitly listing forbidden terms, conversational filler, and assumption rules prevents hallucinations.</li>
+      <li><strong>Few-Shot Demonstrations</strong>: Providing sample inputs and outputs anchors model formatting.</li>
+    </ul>
+
+    <h3>Related AI Tools</h3>
+    <p>
+      Build system prompts with our <a href="/tools/prompt-optimizer/">AI Prompt Optimizer</a>, generate multi-persona templates using the <a href="/tools/ai-prompt-generator/">Multi-Persona Prompt Generator</a>, or count tokens with the <a href="/tools/llm-token-counter-multi-model/">Multi-Model Token Counter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('imp-input-raw');
+    const chkCot = document.getElementById('chk-cot');
+    const chkNeg = document.getElementById('chk-neg');
+    const chkExamples = document.getElementById('chk-examples');
+    const btnImprove = document.getElementById('btn-improve-prompt');
+
+    const outputText = document.getElementById('imp-output-text');
+    const btnCopy = document.getElementById('btn-copy-imp-prompt');
+
+    function improve() {
+      const raw = inputRaw?.value || 'Task description';
+      const useCot = chkCot?.checked ?? true;
+      const useNeg = chkNeg?.checked ?? true;
+      const useExamples = chkExamples?.checked ?? true;
+
+      const lines = [
+        `<system_instruction>`,
+        `You are a Senior Technical Specialist and Expert Content Writer.`,
+        `</system_instruction>`,
+        ``,
+        `<primary_objective>`,
+        `${raw}`,
+        `</primary_objective>`,
+      ];
+
+      if (useCot) {
+        lines.push(
+          ``,
+          `<reasoning_instruction>`,
+          `Before providing your final response, write out your step-by-step reasoning inside a <thinking> block to ensure logical clarity and technical completeness.`,
+          `</reasoning_instruction>`
+        );
+      }
+
+      if (useNeg) {
+        lines.push(
+          ``,
+          `<negative_constraints>`,
+          `1. Do not use generic AI buzzwords (e.g. "delve", "tapestry", "game-changer").`,
+          `2. Do not invent unverified URLs, package names, or syntax.`,
+          `3. Avoid conversational introductory fluff (e.g. "Sure, here is your article:").`,
+          `</negative_constraints>`
+        );
+      }
+
+      if (useExamples) {
+        lines.push(
+          ``,
+          `<few_shot_example>`,
+          `Input: Explain 301 redirects vs canonical tags.`,
+          `Output:`,
+          `## 301 Redirects vs Canonical Tags: Key Differences`,
+          `| Feature | 301 Redirect | Canonical Tag |`,
+          `| --- | --- | --- |`,
+          `| Action | Forwards HTTP traffic | Signals master indexing URL |`,
+          `</few_shot_example>`
+        );
+      }
+
+      if (outputText) outputText.textContent = lines.join('\n');
+    }
+
+    btnImprove?.addEventListener('click', improve);
+    [inputRaw, chkCot, chkNeg, chkExamples].forEach(el => {
+      el?.addEventListener('change', improve);
+      el?.addEventListener('input', improve);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Prompt'), 2000);
+      }
+    });
+
+    improve();
+  })();
+</script>

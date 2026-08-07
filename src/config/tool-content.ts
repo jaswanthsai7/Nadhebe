@@ -395,4 +395,557 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  // ─── SEO Tools ─────────────────────────────────────────────────────────────
+
+  'serp-preview': {
+    intro: 'SERP Preview simulates how your web page title tag, meta description, and URL breadcrumbs will render in Google Search results on both desktop and mobile screens. It calculates pixel widths in real-time so you can eliminate title truncation and maximize organic click-through rates.',
+    useCases: [
+      'Calculate title tag pixel width (~580px max on desktop, ~380px on mobile)',
+      'Preview desktop vs mobile Google search result snippet layouts',
+      'Optimize meta descriptions to prevent awkward text truncation with ellipses (...)',
+      'Test breadcrumb structures and URL display formatting',
+      'Increase organic search Click-Through Rate (CTR) before publishing articles',
+    ],
+    howItWorks: 'Input your page title, meta description, URL, and breadcrumbs. The tool uses a HTML5 Canvas element to measure the exact pixel width of your title string rendered in Google\'s standard 18px Arial/Roboto font. A visual status badge indicates whether your title fits within desktop and mobile SERP container boundaries.',
+    faq: [
+      {
+        question: 'Why measure title tag length in pixels instead of characters?',
+        answer: 'Google measures title tags in pixels (~580px on desktop) rather than character count. Capital letters like "W" take up more pixel space than "i" or "l", so two 55-character titles can render differently.',
+      },
+      {
+        question: 'What is the maximum pixel width for Google desktop titles?',
+        answer: 'Google allocates approximately 580 to 600 pixels on desktop SERPs. Titles exceeding 580px risk truncation.',
+      },
+    ],
+  },
+
+  'robots-tester': {
+    intro: 'Robots.txt Tester & Auditor allows you to validate robots.txt directives, test URL accessibility for specific search crawlers (Googlebot, Bingbot, Baiduspider) and AI scrapers (GPTBot, CCBot), and detect sitemap declarations.',
+    useCases: [
+      'Audit whether Googlebot or Bingbot can access key landing page paths',
+      'Verify directives blocking AI web scrapers like GPTBot or CCBot',
+      'Check wildcard (*) matching rules against disallow paths',
+      'Inspect sitemap location declarations in robots.txt files',
+      'Prevent accidental site-wide indexing blocks during site migrations',
+    ],
+    howItWorks: 'Paste your robots.txt content, select a target user-agent crawler, and enter a test URL path. The tool parses User-agent blocks, Disallow, and Allow directives, matching rules against your path to determine whether the crawler is permitted or forbidden from accessing the URL.',
+    faq: [
+      {
+        question: 'Does Disallow in robots.txt stop Google from indexing a URL?',
+        answer: 'No. Disallow stops Googlebot from crawling the page content, but Google can still index the URL if external links point to it. Use a noindex meta tag to prevent indexing.',
+      },
+      {
+        question: 'How do I block AI scrapers like GPTBot in robots.txt?',
+        answer: 'Add "User-agent: GPTBot" followed by "Disallow: /" in your robots.txt file.',
+      },
+    ],
+  },
+
+  'canonical-checker': {
+    intro: 'Canonical Tag Checker inspects HTML canonical link elements (<link rel="canonical">) to ensure your master page URLs are absolute HTTPS targets, free of tracking parameters, and properly configured to eliminate duplicate content issues.',
+    useCases: [
+      'Audit canonical tag syntax on single-page applications and CMS sites',
+      'Detect relative canonical URLs that should be absolute HTTPS targets',
+      'Verify canonical tags strip tracking query strings (?utm_source=)',
+      'Inspect self-referencing canonical links across blog posts and tools',
+      'Identify cross-domain canonical directives on syndicated articles',
+    ],
+    howItWorks: 'Input your page URL and canonical HREF target. The checker analyzes protocol specifications, checks query string cleanliness, verifies self-referencing status, and flags cross-domain canonicals.',
+    faq: [
+      {
+        question: 'Why should canonical URLs be absolute instead of relative?',
+        answer: 'Absolute URLs (https://example.com/page/) eliminate protocol and domain ambiguity for search engine crawlers.',
+      },
+      {
+        question: 'What is a self-referencing canonical tag?',
+        answer: 'A self-referencing canonical points a page to its own exact URL, protecting against URL parameter duplicates.',
+      },
+    ],
+  },
+
+  'schema-validator': {
+    intro: 'JSON-LD Schema Validator checks structured data markup for syntax errors, validates Schema.org @context and @type definitions, verifies required properties, and ensures your markup qualifies for Google Rich Results.',
+    useCases: [
+      'Validate TechArticle, WebApplication, FAQPage, Organization, and Product schemas',
+      'Prettify and format minified JSON-LD script blocks',
+      'Detect missing required properties before deploying code to production',
+      'Troubleshoot invalid JSON-LD syntax errors caused by missing commas or brackets',
+      'Ensure compliance with Google Search Essentials structured data rules',
+    ],
+    howItWorks: 'Paste a JSON-LD payload or raw <script type="application/ld+json"> block. The tool parses the JSON structure, checks for @context and @type declarations, inspects core entity properties, and displays syntax diagnostic reports.',
+    faq: [
+      {
+        question: 'Why is @context: "https://schema.org" required?',
+        answer: 'The @context property defines the vocabulary schema dictionary search engines use to interpret entity types.',
+      },
+      {
+        question: 'Do JSON-LD syntax errors prevent Rich Results?',
+        answer: 'Yes. Any JSON syntax error causes search engine parsers to reject the entire structured data block.',
+      },
+    ],
+  },
+
+  'redirect-chain-checker': {
+    intro: '301 Redirect Chain Checker traces multi-hop HTTP redirect paths (301, 302, 307, 308), estimates latency impact, calculates link equity retention, and helps developers streamline URL migration paths.',
+    useCases: [
+      'Trace multi-step 301/302 redirect chains during site domain migrations',
+      'Identify redirect loops and excessive hops that waste crawl budget',
+      'Calculate page load latency penalty caused by intermediate HTTP requests',
+      'Ensure 301 permanent redirects pass 100% of link equity',
+      'Generate direct 1-hop redirect rule recommendations for Nginx or Apache',
+    ],
+    howItWorks: 'Enter an initial request URL and simulated redirect steps. The tool parses each hop, tracks status codes, calculates estimated latency and link equity retention percentage, and displays a step-by-step path visualizer.',
+    faq: [
+      {
+        question: 'Why are redirect chains bad for SEO?',
+        answer: 'Redirect chains slow down page response time, waste crawl budget, and can cause crawlers to abandon requests after 5 hops.',
+      },
+      {
+        question: 'How do I resolve a redirect chain?',
+        answer: 'Update your server rules so the initial URL points directly to the final destination URL in a single 301 hop.',
+      },
+    ],
+  },
+
+  'seo-builder': {
+    intro: 'SEO Content Outline Builder generates structured article frameworks (H1, H2, H3) designed around target search intent, primary keywords, and LSI subtopics to streamline content creation.',
+    useCases: [
+      'Generate structured Markdown article outlines for guides and tutorials',
+      'Ensure proper H1 -> H2 -> H3 heading tag hierarchy for search scannability',
+      'Map LSI target keywords and subtopics across article sections',
+      'Plan target word counts and FAQ sections before writing content',
+      'Create standardized content briefs for technical writers and authors',
+    ],
+    howItWorks: 'Input your article title, target keyword, content type, and word count goal. The builder outputs a structured Markdown outline complete with H1-H3 headings, section briefs, and FAQ placeholders.',
+    faq: [
+      {
+        question: 'Why is logical heading hierarchy important for SEO?',
+        answer: 'Heading tags (H1 -> H2 -> H3) help search engine crawlers parse article organization and core subtopics.',
+      },
+      {
+        question: 'Can I export the outline directly to Markdown?',
+        answer: 'Yes! The builder generates clean Markdown ready to copy directly into your content editor.',
+      },
+    ],
+  },
+
+  'seo-estimator': {
+    intro: 'Organic Traffic & SERP CTR Estimator calculates expected monthly search traffic based on target keyword search volume, expected Google ranking position (#1 to #10), and empirical CTR distribution curves.',
+    useCases: [
+      'Estimate monthly organic traffic volume for target keyword opportunities',
+      'Calculate equivalent monthly paid search ad value (CPC x Organic Visits)',
+      'Model annual traffic ROI when moving from position #5 to position #1',
+      'Compare traffic benchmarks across top 10 Google search positions',
+      'Build revenue projections for content strategy business cases',
+    ],
+    howItWorks: 'Enter monthly search volume, target Google ranking position, and CPC value. The tool applies Google desktop CTR curves (Position #1 = 27.6%, Position #2 = 15.8%, etc.) to compute monthly visits, daily clicks, and annual traffic value.',
+    faq: [
+      {
+        question: 'What is the average CTR for position #1 in Google?',
+        answer: 'Position #1 averages approximately 27.6% CTR for non-branded informational search queries.',
+      },
+      {
+        question: 'How does ranking position impact traffic volume?',
+        answer: 'The top 3 Google search results capture over 54% of all clicks. Moving from position #5 to #1 boosts traffic by over 5.7x.',
+      },
+    ],
+  },
+
+  'seo-checker': {
+    intro: 'On-Page SEO Quality Checker evaluates structural on-page factors — meta title length, meta description, H1 heading hierarchy, image alt text coverage, and internal link density — providing an actionable health score.',
+    useCases: [
+      'Audit on-page SEO factors for blog posts, landing pages, and developer tools',
+      'Verify image alt text coverage across all inline image elements',
+      'Check meta title and description character length bounds',
+      'Ensure single H1 tag presence and subheading (H2) scannability',
+      'Generate an on-page SEO health scorecard (0–100) before publishing',
+    ],
+    howItWorks: 'Input your page metadata, heading text, and image counts. The checker evaluates each element against SEO standards, calculates a weighted score (0–100), and highlights passing vs sub-optimal factors.',
+    faq: [
+      {
+        question: 'Why should a page have exactly one H1 tag?',
+        answer: 'The H1 tag serves as the primary topic title. Multiple H1 tags create hierarchy confusion for crawlers.',
+      },
+      {
+        question: 'Why is image alt text important for SEO?',
+        answer: 'Alt text provides accessibility for screen readers and allows Google Image Search to index visual media.',
+      },
+    ],
+  },
+
+  'seo-planner': {
+    intro: 'Topical SEO Cluster & Content Roadmap Planner helps publishers design topical authority clusters, map pillar pages to supporting subtopic articles, and plan internal linking structures.',
+    useCases: [
+      'Design topical authority content clusters for technical domains',
+      'Map pillar pages to supporting subtopic guides and tutorials',
+      'Plan bi-directional internal linking structures to distribute PageRank',
+      'Calculate Topical Authority Score based on subtopic completeness',
+      'Build quarterly editorial content roadmaps for organic search growth',
+    ],
+    howItWorks: 'Input your main pillar page title, target keyword, and supporting subtopics. The planner generates a visual cluster map, checks subtopic coverage depth, and computes a Topical Authority Score (0–100).',
+    faq: [
+      {
+        question: 'What is a topical SEO content cluster?',
+        answer: 'A content cluster consists of 1 main pillar page linked bi-directionally to multiple detailed subtopic articles.',
+      },
+      {
+        question: 'How many subtopic articles should a pillar page have?',
+        answer: 'A comprehensive cluster typically features 1 pillar page supported by 5 to 12 subtopic guides.',
+      },
+    ],
+  },
+
+  'seo-inspector': {
+    intro: 'Page Metadata & OpenGraph SEO Inspector parses raw HTML head code or page URLs to audit title tags, meta descriptions, canonical links, OpenGraph social cards (og:title, og:image), Twitter cards, and JSON-LD schema.',
+    useCases: [
+      'Inspect HTML head metadata on live or staging web pages',
+      'Simulate social media visual cards (OpenGraph & Twitter Cards)',
+      'Detect missing og:image or og:description tags before sharing links',
+      'Audit canonical link tags and robots directives in page source code',
+      'Verify JSON-LD structured data block presence in HTML head code',
+    ],
+    howItWorks: 'Paste a page URL or raw HTML <head> snippet. The inspector uses regex pattern matching to extract metadata elements, generates a social media card preview, and reports tag presence status.',
+    faq: [
+      {
+        question: 'What happens if a page is missing og:image?',
+        answer: 'Social platforms display a plain text link without a visual card preview, lowering social click-through rates.',
+      },
+      {
+        question: 'What is the recommended size for og:image?',
+        answer: 'Use 1200 x 630 pixels (1.91:1 aspect ratio) for crisp, full-width social card previews.',
+      },
+    ],
+  },
+
+  // ─── AI Tools ──────────────────────────────────────────────────────────────
+
+  'prompt-optimizer': {
+    intro: 'AI Prompt Optimizer transforms raw task descriptions into structured system prompts with assigned roles, context variables, negative constraints, and output format schemas for GPT-4o, Claude 3.5, and Gemini.',
+    useCases: [
+      'Build production system prompts with explicit roles and constraints',
+      'Prevent LLM hallucinations by injecting negative rules',
+      'Specify strict output formats (JSON schema, XML tags, Markdown)',
+      'Optimize prompt structure for OpenAI, Anthropic, and Google models',
+    ],
+    howItWorks: 'Input an assigned role, raw task instruction, and target format. The tool compiles a structured XML system prompt enforcing identity, mission boundaries, rules, and output schemas.',
+    faq: [
+      {
+        question: 'Why are role definitions important in system prompts?',
+        answer: 'Assigning a role anchors the model\'s internal attention to domain-specific vocabulary and technical expectations.',
+      },
+    ],
+  },
+
+  'ai-prompt-generator': {
+    intro: 'Multi-Persona AI Prompt Generator builds tailored system prompts across Software Engineering, SEO Strategy, Technical Writing, and Product Management roles.',
+    useCases: [
+      'Generate expert persona system prompts for developers and marketers',
+      'Build XML-tagged prompt templates compatible with ChatGPT and Claude',
+      'Define clear task goals, constraints, and runtime context variables',
+    ],
+    howItWorks: 'Select a target persona, input your core goal and rules. The generator outputs an XML-structured system prompt ready to paste into ChatGPT or Claude.',
+    faq: [
+      {
+        question: 'How do I use generated prompts with ChatGPT or Claude?',
+        answer: 'Copy the generated prompt and paste it into the System Instructions field in ChatGPT or at the top of your prompt window in Claude.',
+      },
+    ],
+  },
+
+  'prompt-improver': {
+    intro: 'Vague AI Prompt Enhancer & Rewriter turns short prompts into high-performance instructions with Chain-of-Thought reasoning (<thinking>) and negative constraints.',
+    useCases: [
+      'Rewrite short, vague prompts into comprehensive execution briefs',
+      'Inject Chain-of-Thought reasoning directives to reduce logic errors',
+      'Add anti-hallucination rules and few-shot example placeholders',
+    ],
+    howItWorks: 'Paste a short prompt and select enhancement toggles. The improver injects thinking instructions, negative constraints, and sample formatting blocks.',
+    faq: [
+      {
+        question: 'What is Chain-of-Thought (CoT) prompting?',
+        answer: 'CoT prompting instructs the LLM to write out step-by-step reasoning before outputting final answers, reducing errors.',
+      },
+    ],
+  },
+
+  'ai-detection-checker': {
+    intro: 'AI Text Perplexity & Burstiness Checker audits text for AI generation patterns using sentence length variance, vocabulary diversity, and common AI buzzword indicators.',
+    useCases: [
+      'Analyze sentence length variance (burstiness) in technical articles',
+      'Detect overused AI buzzwords ("delve into", "tapestry of")',
+      'Measure unique vocabulary diversity ratio across content drafts',
+    ],
+    howItWorks: 'Paste text into the auditor. The tool calculates standard deviation in sentence character count and flags predictable AI phrases.',
+    faq: [
+      {
+        question: 'What is text Burstiness in AI detection?',
+        answer: 'Burstiness measures variation in sentence length. Human writers naturally mix short punchy sentences with long complex ones.',
+      },
+    ],
+  },
+
+  'llm-tokenizer': {
+    intro: 'LLM BPE Tokenizer & Multi-Model Counter estimates subword tokens across OpenAI (GPT-4o, O3-Mini), Anthropic (Claude 3.5), and Meta (Llama 3) models.',
+    useCases: [
+      'Count tokens for prompts, source code, and JSON payloads',
+      'Inspect character-to-token efficiency ratios',
+      'Prevent context window truncation and calculate API costs',
+    ],
+    howItWorks: 'Input prompt text or code. The tokenizer applies BPE subword estimation logic and computes character density, context window percentage, and input costs.',
+    faq: [
+      {
+        question: 'Why do code payloads consume more tokens?',
+        answer: 'Indentation spaces, JSON brackets, and punctuation require dedicated tokens, making code ~30% denser than prose.',
+      },
+    ],
+  },
+
+  'rag-evaluator': {
+    intro: 'RAG Retrieval Precision & Recall Evaluator audits vector retrieval quality by calculating Precision@K, Recall@K, F1 Score, and Context Noise Ratio.',
+    useCases: [
+      'Audit vector database search precision and recall metrics',
+      'Identify context noise chunks polluting LLM prompt windows',
+      'Tune top-K retrieval parameters and re-ranking thresholds',
+    ],
+    howItWorks: 'Input top-K retrieved chunk count, relevant retrieved count, and ground-truth relevant count to calculate precision, recall, F1, and noise ratio.',
+    faq: [
+      {
+        question: 'What is Precision@K in vector retrieval?',
+        answer: 'Precision@K measures the percentage of retrieved chunks that are actually relevant (Relevant Retrieved / Total Retrieved).',
+      },
+    ],
+  },
+
+  'json-schema-validator': {
+    intro: 'JSON Schema Validator & LLM Output Auditor checks JSON payloads against JSON Schema Draft 7 and 2020-12 standards to prevent runtime API crashes.',
+    useCases: [
+      'Audit LLM function calling and tool use JSON outputs',
+      'Verify required keys, nested objects, and data types',
+      'Catch malformed API arguments before sending data to backends',
+    ],
+    howItWorks: 'Input a JSON Schema and data payload. The validator parses both objects, checks required keys and property types, and reports syntax diagnostic errors.',
+    faq: [
+      {
+        question: 'Why is JSON Schema essential for LLM Tool Calling?',
+        answer: 'LLM APIs use JSON Schema to enforce structured outputs, ensuring function arguments match expected types.',
+      },
+    ],
+  },
+
+  'openai-cost-estimator': {
+    intro: 'OpenAI API Cost Estimator calculates monthly spend for GPT-4o, GPT-4o-mini, O3-mini, and O1 models with prompt caching discount modeling.',
+    useCases: [
+      'Estimate monthly API costs based on request volume and token counts',
+      'Model 50% prompt caching savings on static prefix prompts',
+      'Compare cost differences between GPT-4o and GPT-4o-mini',
+    ],
+    howItWorks: 'Select a model, enter monthly requests and input/output tokens per request. The calculator applies official OpenAI rates and prompt caching discounts.',
+    faq: [
+      {
+        question: 'What is Prompt Caching in OpenAI APIs?',
+        answer: 'Prompt caching provides a 50% discount on input tokens for prompts longer than 1,024 tokens that reuse static prefix contexts.',
+      },
+    ],
+  },
+
+  'claude-cost-estimator': {
+    intro: 'Anthropic Claude API Cost Estimator calculates monthly spend for Claude 3.5 Sonnet, Claude 3.5 Haiku, and Claude 3 Opus with prompt cache read discounts.',
+    useCases: [
+      'Model monthly API spend across Claude 3.5 Sonnet and Haiku',
+      'Calculate 90% prompt cache read savings for large codebases',
+      'Project annual API budget for autonomous agent systems',
+    ],
+    howItWorks: 'Select a model and token usage. The estimator applies Anthropic input, cached input, and output rates to report monthly and annual totals.',
+    faq: [
+      {
+        question: 'How does Anthropic Prompt Caching work?',
+        answer: 'Prompt caching allows you to cache static context for 5 minutes. Cache reads receive a 90% discount ($0.30 vs $3.00 per 1M input).',
+      },
+    ],
+  },
+
+  'gemini-cost-estimator': {
+    intro: 'Google Gemini API Cost Estimator calculates monthly pricing for Gemini 1.5 Flash, Gemini 2.0 Flash, and Gemini 1.5 Pro across small and large context tiers.',
+    useCases: [
+      'Calculate API costs for 1M+ token context window requests',
+      'Model 75% Context Caching discounts for large documents',
+      'Compare pricing between Flash and Pro model tiers',
+    ],
+    howItWorks: 'Select a Gemini model and token payload bounds. The calculator applies Google rates and context caching discounts to report monthly costs.',
+    faq: [
+      {
+        question: 'How does Gemini 1.5 Pro pricing scale for large prompts?',
+        answer: 'For prompts >128k tokens up to 2M, input pricing increases to $2.50 per 1M and output to $10.00 per 1M.',
+      },
+    ],
+  },
+
+  // ─── Security & Developer Tools ─────────────────────────────────────────────
+
+  'csp-header-generator': {
+    intro: 'Content Security Policy (CSP) Header Generator builds secure Content-Security-Policy HTTP headers to restrict script, style, image, and font sources, blocking Cross-Site Scripting (XSS).',
+    useCases: [
+      'Generate XSS prevention headers for Nginx, Apache, and Cloudflare',
+      'Configure script-src and style-src source directives',
+      'Create report-only CSP policies for safe staging environments',
+    ],
+    howItWorks: 'Select a security preset and customize allowed script and style domains. The tool generates HTTP response headers and Nginx directives.',
+    faq: [
+      {
+        question: 'What does default-src \'self\' mean?',
+        answer: 'It restricts un-specified resource types to load exclusively from the exact same origin domain.',
+      },
+    ],
+  },
+
+  'hsts-header-generator': {
+    intro: 'HTTP Strict Transport Security (HSTS) Generator builds Strict-Transport-Security response headers to enforce HTTPS and qualify for Google HSTS Preload List submission.',
+    useCases: [
+      'Enforce HTTPS connections across root domains and subdomains',
+      'Generate 1-year max-age directives for HSTS Preload eligibility',
+      'Output Nginx and Apache server configuration blocks',
+    ],
+    howItWorks: 'Select a max-age duration and toggle includeSubDomains and preload flags. The generator outputs header directives and server config snippets.',
+    faq: [
+      {
+        question: 'What is the recommended max-age for HSTS preload?',
+        answer: 'To qualify for the HSTS Preload List, max-age must be at least 31536000 seconds (1 year) with includeSubDomains and preload.',
+      },
+    ],
+  },
+
+  'x-frame-options-generator': {
+    intro: 'X-Frame-Options Generator builds DENY and SAMEORIGIN HTTP headers to block iframe clickjacking attacks.',
+    useCases: [
+      'Protect web applications from iframe clickjacking attacks',
+      'Generate DENY or SAMEORIGIN X-Frame-Options headers',
+      'Export Nginx add_header configuration blocks',
+    ],
+    howItWorks: 'Select DENY or SAMEORIGIN. The tool formats response headers and Nginx server blocks.',
+    faq: [
+      {
+        question: 'What is the difference between DENY and SAMEORIGIN?',
+        answer: 'DENY blocks all framing across any domain. SAMEORIGIN permits framing only if the embedding page shares the exact same origin.',
+      },
+    ],
+  },
+
+  'cors-header-generator': {
+    intro: 'CORS Access-Control Header Generator configures Access-Control-Allow-Origin, Methods, and Headers for cross-domain API sharing.',
+    useCases: [
+      'Generate CORS response headers for REST API endpoints',
+      'Configure Access-Control-Allow-Credentials for session tokens',
+      'Build Express.js CORS middleware snippets',
+    ],
+    howItWorks: 'Input allowed origin, methods, and headers. The generator outputs HTTP response headers and Express middleware.',
+    faq: [
+      {
+        question: 'Why is wildcard Access-Control-Allow-Origin * dangerous with credentials?',
+        answer: 'Browsers reject wildcard origins when credentials are enabled to prevent exposing user session data.',
+      },
+    ],
+  },
+
+  'jwt-encoder': {
+    intro: 'JWT Token Generator & Base64URL Encoder generates JSON Web Tokens (JWT) client-side with HMAC SHA-256 (HS256) signatures.',
+    useCases: [
+      'Generate signed JWT access tokens for API testing',
+      'Configure custom claims (sub, iat, exp, role) client-side',
+      'Encode Base64URL header and payload segments',
+    ],
+    howItWorks: 'Input a secret key and JSON claims. The encoder formats header/payload segments and computes Base64URL token strings.',
+    faq: [
+      {
+        question: 'Is this JWT generator safe to use locally?',
+        answer: 'Yes! Token encoding runs 100% client-side in JavaScript without sending keys or payloads to external servers.',
+      },
+    ],
+  },
+
+  'uuid-v7-generator': {
+    intro: 'Time-Ordered UUID v7 Generator produces 128-bit RFC 9562 time-ordered unique identifiers optimized for database B-Tree index performance.',
+    useCases: [
+      'Generate time-ordered UUID v7 primary keys in bulk',
+      'Prevent B-Tree database index fragmentation in PostgreSQL & MySQL',
+      'Extract creation timestamps from 48-bit time-ordered prefixes',
+    ],
+    howItWorks: 'Select quantity. The generator embeds current millisecond timestamps into 48-bit hex prefixes followed by cryptographically random bits.',
+    faq: [
+      {
+        question: 'Why is UUID v7 better than UUID v4 for database primary keys?',
+        answer: 'Time-ordered UUID v7 enables sequential append-only index insertions, preventing random disk I/O and page splitting.',
+      },
+    ],
+  },
+
+  // ─── Converter & Utility Tools ─────────────────────────────────────────────
+
+  'sql-formatter': {
+    intro: 'SQL Query Formatter & Prettifier cleans up raw, minified SQL queries by capitalizing core keywords and aligning JOINs, WHERE clauses, and subqueries.',
+    useCases: [
+      'Prettify unformatted SQL queries for PostgreSQL, MySQL, and BigQuery',
+      'Capitalize SQL keywords (SELECT, FROM, WHERE, GROUP BY)',
+      'Indent complex nested subqueries and JOIN conditions',
+    ],
+    howItWorks: 'Paste raw SQL text. The formatter applies regex pattern matching to capitalize keywords and insert structured line breaks.',
+    faq: [
+      {
+        question: 'Why should SQL keywords be capitalized?',
+        answer: 'Capitalizing keywords visually distinguishes structural command logic from table and column names.',
+      },
+    ],
+  },
+
+  'html-to-markdown': {
+    intro: 'HTML to Markdown Converter parses raw HTML code snippets into clean GitHub Flavored Markdown (GFM) text.',
+    useCases: [
+      'Convert legacy HTML articles into Markdown for Astro or Next.js',
+      'Transform HTML tables into Markdown pipe tables',
+      'Strip unnecessary script and style tags from content drafts',
+    ],
+    howItWorks: 'Paste HTML code. The converter uses browser DOMParser to traverse nodes and output clean GFM syntax.',
+    faq: [
+      {
+        question: 'Does the converter strip inline style tags?',
+        answer: 'Yes! Inline CSS styles and script tags are stripped to produce clean Markdown text.',
+      },
+    ],
+  },
+
+  'markdown-to-html': {
+    intro: 'Markdown to HTML Converter compiles GitHub Flavored Markdown (GFM) text into clean HTML5 markup.',
+    useCases: [
+      'Compile Markdown documentation into HTML for CMS publishing',
+      'Render fenced code blocks inside pre and code tags',
+      'Convert Markdown links and lists into semantic HTML elements',
+    ],
+    howItWorks: 'Input Markdown text. The converter parses headers, bold, italics, links, and lists into HTML tags.',
+    faq: [
+      {
+        question: 'Is my Markdown sent to any external server?',
+        answer: 'No! Compilation runs 100% locally in your browser.',
+      },
+    ],
+  },
+
+  'qr-code-generator': {
+    intro: 'HTML5 Canvas QR Code Generator creates high-resolution QR codes directly in your browser with custom colors and instant PNG image download.',
+    useCases: [
+      'Generate QR codes for website URLs and Wi-Fi networks',
+      'Customize foreground and background colors for high contrast',
+      'Download high-res PNG image files for print and web',
+    ],
+    howItWorks: 'Input a URL or text string and select colors. The generator renders a 2D matrix barcode onto an HTML5 canvas element.',
+    faq: [
+      {
+        question: 'Is my QR code data tracked?',
+        answer: 'No! QR codes are generated 100% locally in your browser without tracking or server logs.',
+      },
+    ],
+  },
+
 };
+
+
+
+

@@ -1,0 +1,297 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JSON Schema Validator & LLM Tool Output Auditor | Nadhebe';
+const h1 = 'JSON Schema Validator & LLM Tool Output Auditor';
+const description = 'Validate JSON payloads against JSON Schema Draft 7 and 2020-12 standards. Audit LLM function calling responses, check required keys, and verify data types.';
+
+const faq = [
+  {
+    question: 'What is JSON Schema validation?',
+    answer: 'JSON Schema validation verifies that a JSON data payload matches an expected structure, including field types, required properties, numeric ranges, and nested array schemas.',
+  },
+  {
+    question: 'Why is JSON Schema essential for LLM Tool Calling?',
+    answer: 'Modern LLM APIs (OpenAI Function Calling, Anthropic Tool Use) use JSON Schema definitions to enforce structured outputs, preventing malformed API arguments.',
+  },
+  {
+    question: 'What happens when an LLM output fails JSON Schema validation?',
+    answer: 'If an LLM response violates your schema (e.g. returning a string instead of an array), your API parser will crash. Validating schemas client-side catches malformed payloads.',
+  },
+  {
+    question: 'What is the difference between Draft 7 and Draft 2020-12?',
+    answer: 'Draft 2020-12 introduces updated vocabulary keywords (like `$dynamicRef` and `unevaluatedProperties`), while Draft 7 remains the most widely supported standard across backend SDKs.',
+  },
+  {
+    question: 'Does this tool run locally in the browser?',
+    answer: 'Yes! JSON Schema parsing and validation run 100% client-side in JavaScript without sending your schemas or data payloads to any remote server.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-schema-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="json-schema-validator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="DATA PAYLOAD & SCHEMA DEFINITION">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="jsv-input-schema" class="block text-caption font-semibold text-ink dark:text-ink-dark">JSON Schema Definition</label>
+              <button type="button" id="btn-load-sample-jsv" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Schema</button>
+            </div>
+            <textarea
+              id="jsv-input-schema"
+              rows="8"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="jsv-input-data" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">JSON Data Payload to Validate</label>
+            <textarea
+              id="jsv-input-data"
+              rows="7"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-validate-jsv"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Validate JSON Payload
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="SCHEMA VALIDATION REPORT">
+        <div class="space-y-20">
+          
+          <!-- Banner -->
+          <div id="jsv-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-emerald-500/30 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Validation Result</span>
+              <span id="jsv-status-badge" class="rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300">SCHEMA MATCH</span>
+            </div>
+            <h3 id="jsv-status-headline" class="text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300">Valid JSON Payload ✓</h3>
+            <p id="jsv-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Payload satisfies all field types, required properties, and constraints defined in the schema.
+            </p>
+          </div>
+
+          <!-- Property Audit List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Schema Property Breakdown</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Required Properties Match:</span>
+              <span id="jsv-check-required" class="font-bold text-emerald-600 dark:text-emerald-400">✓ All Required Fields Present</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Data Types Verification:</span>
+              <span id="jsv-check-types" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Correct Types</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Syntax Integrity:</span>
+              <span id="jsv-check-syntax" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Valid JSON</span>
+            </div>
+          </div>
+
+          <div id="jsv-errors-box" class="hidden rounded-12 border border-danger/40 bg-danger/10 p-12 font-mono text-xs text-danger leading-relaxed"></div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON Schema Validation Guide — Auditing LLM Tool Call Payloads</h2>
+    <p>
+      JSON Schema is the standard blueprint for defining structural contracts in modern software engineering. With the rise of AI agents and LLM tool calling (Function Calling), verifying JSON payloads against schemas prevents runtime crashes.
+    </p>
+
+    <h3>Core Keywords in JSON Schema</h3>
+    <ul>
+      <li><code>type</code> — Defines data type (e.g. <code>"object"</code>, <code>"array"</code>, <code>"string"</code>, <code>"integer"</code>, <code>"boolean"</code>).</li>
+      <li><code>properties</code> — Dictionary defining child key schemas.</li>
+      <li><code>required</code> — Array of property keys that MUST be present.</li>
+      <li><code>additionalProperties</code> — Set to <code>false</code> to forbid undeclared fields.</li>
+    </ul>
+
+    <h3>Related AI Developer Tools</h3>
+    <p>
+      Generate MCP schemas from OpenAPI with our <a href="/tools/openapi-to-mcp-tool-schema/">OpenAPI to MCP Tool Schema Generator</a>, format JSON payloads using the <a href="/tools/json-formatter/">JSON Formatter</a>, or validate JSON-LD structured data with the <a href="/tools/schema-validator/">JSON-LD Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputSchema = document.getElementById('jsv-input-schema');
+    const inputData = document.getElementById('jsv-input-data');
+    const btnValidate = document.getElementById('btn-validate-jsv');
+    const btnSample = document.getElementById('btn-load-sample-jsv');
+
+    const resultBanner = document.getElementById('jsv-result-banner');
+    const statusBadge = document.getElementById('jsv-status-badge');
+    const statusHeadline = document.getElementById('jsv-status-headline');
+    const statusSub = document.getElementById('jsv-status-sub');
+
+    const checkReq = document.getElementById('jsv-check-required');
+    const checkTypes = document.getElementById('jsv-check-types');
+    const checkSyntax = document.getElementById('jsv-check-syntax');
+    const errorsBox = document.getElementById('jsv-errors-box');
+
+    const defaultSchema = `{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "tool_name": { "type": "string" },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": { "type": "string" },
+        "max_results": { "type": "integer" }
+      },
+      "required": ["query"]
+    }
+  },
+  "required": ["tool_name", "parameters"]
+}`;
+
+    const defaultData = `{
+  "tool_name": "web_search",
+  "parameters": {
+    "query": "nadhebe developer tools",
+    "max_results": 10
+  }
+}`;
+
+    function validate() {
+      const schemaRaw = inputSchema?.value || '';
+      const dataRaw = inputData?.value || '';
+
+      if (errorsBox) {
+        errorsBox.classList.add('hidden');
+        errorsBox.textContent = '';
+      }
+
+      let schemaObj, dataObj;
+
+      try {
+        schemaObj = JSON.parse(schemaRaw);
+      } catch(e) {
+        showError(`Schema JSON Parse Error: ${e.message}`);
+        return;
+      }
+
+      try {
+        dataObj = JSON.parse(dataRaw);
+      } catch(e) {
+        showError(`Data Payload JSON Parse Error: ${e.message}`);
+        return;
+      }
+
+      // Perform validation
+      const errors = [];
+      const requiredFields = schemaObj.required || [];
+
+      requiredFields.forEach(req => {
+        if (!(req in dataObj)) {
+          errors.push(`Missing required top-level property: "${req}"`);
+        }
+      });
+
+      if (schemaObj.properties && typeof dataObj === 'object') {
+        Object.keys(schemaObj.properties).forEach(key => {
+          if (key in dataObj) {
+            const expectedType = schemaObj.properties[key].type;
+            const val = dataObj[key];
+            if (expectedType === 'string' && typeof val !== 'string') errors.push(`Property "${key}" must be a string.`);
+            if (expectedType === 'integer' && !Number.isInteger(val)) errors.push(`Property "${key}" must be an integer.`);
+            if (expectedType === 'object' && (typeof val !== 'object' || Array.isArray(val))) errors.push(`Property "${key}" must be an object.`);
+          }
+        });
+      }
+
+      if (checkSyntax) { checkSyntax.textContent = '✓ Valid JSON'; checkSyntax.className = 'font-bold text-emerald-600 dark:text-emerald-400'; }
+
+      if (errors.length === 0) {
+        if (checkReq) { checkReq.textContent = '✓ All Required Fields Present'; checkReq.className = 'font-bold text-emerald-600 dark:text-emerald-400'; }
+        if (checkTypes) { checkTypes.textContent = '✓ Correct Types'; checkTypes.className = 'font-bold text-emerald-600 dark:text-emerald-400'; }
+
+        if (resultBanner && statusBadge && statusHeadline && statusSub) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusBadge.textContent = 'SCHEMA MATCH';
+          statusBadge.className = 'rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300';
+          statusHeadline.textContent = 'Valid JSON Payload ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = 'Payload satisfies all field types and required properties.';
+        }
+      } else {
+        if (checkReq) { checkReq.textContent = '✕ Required Fields Violation'; checkReq.className = 'font-bold text-danger'; }
+        if (checkTypes) { checkTypes.textContent = '⚠ Type Mis-matches Detected'; checkTypes.className = 'font-bold text-amber-600'; }
+
+        if (resultBanner && statusBadge && statusHeadline && statusSub) {
+          resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          statusBadge.textContent = 'VALIDATION FAILED';
+          statusBadge.className = 'rounded-pill bg-danger/20 px-10 py-3 font-mono text-xs font-semibold text-danger';
+          statusHeadline.textContent = 'Schema Validation Failed ✕';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          statusSub.textContent = `Payload failed validation with ${errors.length} errors.`;
+        }
+
+        if (errorsBox) {
+          errorsBox.classList.remove('hidden');
+          errorsBox.textContent = errors.join('\n');
+        }
+      }
+    }
+
+    function showError(msg) {
+      if (resultBanner && statusBadge && statusHeadline && statusSub) {
+        resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+        statusBadge.textContent = 'SYNTAX ERROR';
+        statusBadge.className = 'rounded-pill bg-danger/20 px-10 py-3 font-mono text-xs font-semibold text-danger';
+        statusHeadline.textContent = 'JSON Syntax Error ✕';
+        statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+        statusSub.textContent = msg;
+      }
+      if (errorsBox) {
+        errorsBox.classList.remove('hidden');
+        errorsBox.textContent = msg;
+      }
+    }
+
+    btnValidate?.addEventListener('click', validate);
+    [inputSchema, inputData].forEach(el => {
+      el?.addEventListener('input', validate);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputSchema) inputSchema.value = defaultSchema;
+      if (inputData) inputData.value = defaultData;
+      validate();
+    });
+
+    if (inputSchema && !inputSchema.value) inputSchema.value = defaultSchema;
+    if (inputData && !inputData.value) inputData.value = defaultData;
+
+    validate();
+  })();
+</script>

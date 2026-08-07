@@ -1,0 +1,236 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'AI Text Perplexity & Burstiness Checker | Nadhebe';
+const h1 = 'AI Text Perplexity & Burstiness Checker';
+const description = 'Audit text for AI generation patterns using client-side sentence burstiness metrics, vocabulary perplexity proxies, and common AI buzzword frequency.';
+
+const faq = [
+  {
+    question: 'How does the AI Perplexity & Burstiness Checker work?',
+    answer: 'The checker analyzes text structure locally using statistical metrics: Burstiness (variance in sentence length) and Perplexity proxy (vocabulary distribution and AI buzzword density).',
+  },
+  {
+    question: 'What is text Burstiness in AI detection?',
+    answer: 'Burstiness measures the variation in sentence length and structure. Human writers naturally mix short punchy sentences with long complex sentences, whereas AI models tend to produce uniform sentence lengths.',
+  },
+  {
+    question: 'What is Perplexity in language model heuristics?',
+    answer: 'Perplexity measures word predictability. Human writing features higher unpredictability and varied vocabulary, while raw AI outputs favor predictable word transitions.',
+  },
+  {
+    question: 'Which common buzzwords signal AI-generated text?',
+    answer: 'Phrases like "delve into", "testament to", "tapestry of", "in conclusion", "furthermore", "it\'s worth noting", and "seamless integration" frequently indicate raw LLM output.',
+  },
+  {
+    question: 'Is this checker 100% deterministic?',
+    answer: 'No AI detection heuristic is 100% definitive. This tool provides statistical structure analysis to help technical editors refine tone and vary sentence rhythm.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="ai-detection-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="ai-detection-checker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="TEXT AUDIT INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="aid-input-text" class="block text-caption font-semibold text-ink dark:text-ink-dark">Text Content to Analyze</label>
+              <button type="button" id="btn-load-sample-aid" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Text</button>
+            </div>
+            <textarea
+              id="aid-input-text"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >In today's digital landscape, it is important to delve into technical SEO principles. Implementing 301 redirects serves as a testament to clean URL management. Furthermore, canonical tags create a seamless tapestry of indexing signals for search engines.</textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-analyze-text"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Analyze Text Structure
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="PERPLEXITY & BURSTINESS AUDIT">
+        <div class="space-y-20">
+          
+          <!-- Pattern Banner -->
+          <div id="aid-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-amber-500/30 bg-amber-500/10 text-amber-900 dark:text-amber-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Structural Pattern</span>
+              <span id="aid-status-badge" class="rounded-pill bg-amber-500/20 px-10 py-3 font-mono text-xs font-semibold text-amber-700 dark:text-amber-300">UNIFORM PATTERN</span>
+            </div>
+            <h3 id="aid-status-headline" class="text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300">High AI Pattern Risk ⚠</h3>
+            <p id="aid-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Text contains low sentence length variance and frequent AI buzzwords ("delve into", "tapestry of").
+            </p>
+          </div>
+
+          <!-- Statistical Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-burstiness" class="text-h3 font-bold text-amber-600 dark:text-amber-400">12.4</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Burstiness</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-buzzwords" class="text-h3 font-bold text-danger">3</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">AI Buzzwords</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-vocab-diversity" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">74%</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Vocab Diversity</div>
+            </div>
+          </div>
+
+          <!-- Detected Buzzwords List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark font-mono text-xs space-y-6">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block">Detected AI Buzzwords & Phrases</span>
+            <div id="detected-buzzwords-list" class="space-y-4 text-danger">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Text Perplexity & Burstiness Analysis Guide — Humanizing Technical Writing</h2>
+    <p>
+      Analyzing sentence variation and vocabulary distribution helps technical writers improve article readability and eliminate predictable AI generation patterns.
+    </p>
+
+    <h3>The 2 Core Heuristics</h3>
+    <ul>
+      <li><strong>Burstiness Score</strong>: Measures standard deviation in sentence character count. High burstiness indicates varied sentence rhythm.</li>
+      <li><strong>Vocabulary Diversity Ratio</strong>: Unique words divided by total word count. Higher ratios indicate rich vocabulary.</li>
+    </ul>
+
+    <h3>Related AI Tools</h3>
+    <p>
+      Enhance prompt quality with our <a href="/tools/prompt-improver/">AI Prompt Improver</a>, optimize system prompts using the <a href="/tools/prompt-optimizer/">AI Prompt Optimizer</a>, or count tokens with the <a href="/tools/llm-token-counter-multi-model/">Multi-Model Token Counter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputText = document.getElementById('aid-input-text');
+    const btnAnalyze = document.getElementById('btn-analyze-text');
+    const btnSample = document.getElementById('btn-load-sample-aid');
+
+    const resultBanner = document.getElementById('aid-result-banner');
+    const statusBadge = document.getElementById('aid-status-badge');
+    const statusHeadline = document.getElementById('aid-status-headline');
+    const statusSub = document.getElementById('aid-status-sub');
+
+    const statBurst = document.getElementById('stat-burstiness');
+    const statBuzz = document.getElementById('stat-buzzwords');
+    const statDiv = document.getElementById('stat-vocab-diversity');
+    const listBuzz = document.getElementById('detected-buzzwords-list');
+
+    const commonAiBuzzwords = [
+      'delve', 'delve into', 'tapestry', 'tapestry of', 'testament to',
+      'furthermore', 'in conclusion', 'it is important to note',
+      'it\'s worth noting', 'seamless integration', 'game-changer', 'beacon of'
+    ];
+
+    function analyze() {
+      const raw = inputText?.value || '';
+      const words = raw.toLowerCase().match(/\b[a-z0-9'-]+\b/g) || [];
+      const sentences = raw.split(/[.!?]+/).map(s => s.trim()).filter(Boolean);
+
+      const totalWords = words.length;
+      const uniqueWords = new Set(words).size;
+      const divPct = totalWords > 0 ? Math.round((uniqueWords / totalWords) * 100) : 100;
+
+      // Burstiness: standard deviation of sentence character length
+      let burstiness = 0;
+      if (sentences.length > 1) {
+        const lengths = sentences.map(s => s.length);
+        const mean = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+        const variance = lengths.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / lengths.length;
+        burstiness = Math.round(Math.sqrt(variance) * 10) / 10;
+      }
+
+      // Check buzzwords
+      const lowerRaw = raw.toLowerCase();
+      const detected = [];
+      commonAiBuzzwords.forEach(bw => {
+        if (lowerRaw.includes(bw)) detected.push(bw);
+      });
+
+      if (statBurst) statBurst.textContent = String(burstiness);
+      if (statBuzz) statBuzz.textContent = String(detected.length);
+      if (statDiv) statDiv.textContent = `${divPct}%`;
+
+      if (listBuzz) {
+        listBuzz.innerHTML = '';
+        if (detected.length === 0) {
+          listBuzz.innerHTML = '<span class="text-emerald-600 dark:text-emerald-400">✓ No common AI buzzwords detected</span>';
+        } else {
+          detected.forEach(bw => {
+            const div = document.createElement('div');
+            div.textContent = `⚠ Highlighted phrase: "${bw}"`;
+            listBuzz.appendChild(div);
+          });
+        }
+      }
+
+      if (resultBanner && statusBadge && statusHeadline && statusSub) {
+        if (detected.length === 0 && burstiness > 25) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusBadge.textContent = 'HIGH VARIANCE';
+          statusBadge.className = 'rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300';
+          statusHeadline.textContent = 'Human-Like Writing Pattern ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = 'High sentence length variance (burstiness) and natural vocabulary distribution.';
+        } else if (detected.length > 2 || burstiness < 15) {
+          resultBanner.className = 'rounded-16 border border-amber-500/30 bg-amber-500/10 p-20 shadow-soft font-sans text-amber-900 dark:text-amber-200';
+          statusBadge.textContent = 'UNIFORM PATTERN';
+          statusBadge.className = 'rounded-pill bg-amber-500/20 px-10 py-3 font-mono text-xs font-semibold text-amber-700 dark:text-amber-300';
+          statusHeadline.textContent = 'High AI Pattern Risk ⚠';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300';
+          statusSub.textContent = `Contains ${detected.length} common AI buzzwords and low sentence length variance.`;
+        } else {
+          resultBanner.className = 'rounded-16 border border-surface2 p-20 shadow-soft font-sans text-ink dark:text-ink-dark';
+          statusBadge.textContent = 'MODERATE';
+          statusBadge.className = 'rounded-pill bg-accent/20 px-10 py-3 font-mono text-xs font-semibold text-accent dark:text-accent-dark';
+          statusHeadline.textContent = 'Balanced Writing Pattern';
+          statusHeadline.className = 'text-h3 font-bold mb-4';
+          statusSub.textContent = 'Moderate sentence length variation.';
+        }
+      }
+    }
+
+    btnAnalyze?.addEventListener('click', analyze);
+    inputText?.addEventListener('input', analyze);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputText) {
+        inputText.value = `In today's digital landscape, it is important to delve into technical SEO principles. Implementing 301 redirects serves as a testament to clean URL management. Furthermore, canonical tags create a seamless tapestry of indexing signals for search engines.`;
+      }
+      analyze();
+    });
+
+    analyze();
+  })();
+</script>

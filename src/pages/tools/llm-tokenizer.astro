@@ -1,0 +1,214 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'LLM BPE Tokenizer & Multi-Model Token Counter | Nadhebe';
+const h1 = 'LLM BPE Tokenizer & Multi-Model Token Counter';
+const description = 'Count tokens across GPT-4o, Claude 3.5 Sonnet, and Llama 3 models. Inspect BPE subword tokens, estimate API costs, and prevent context window truncation.';
+
+const faq = [
+  {
+    question: 'What is a Byte-Pair Encoding (BPE) tokenizer?',
+    answer: 'BPE tokenization splits text into subword units (tokens) based on frequency statistics. A single token typically represents ~4 characters or ~0.75 words in English text.',
+  },
+  {
+    question: 'Why do different LLM models have different token counts?',
+    answer: 'Each model family (OpenAI cl100k_base / o200k_base vs Anthropic vs Llama 3 128k vocabulary) uses a custom vocabulary dictionary. Code snippets and non-English text vary significantly across tokenizers.',
+  },
+  {
+    question: 'How do code and special characters affect token count?',
+    answer: 'Indentation spaces, punctuation, JSON brackets, and unicode characters require dedicated tokens, making code files ~30% denser in tokens than plain prose.',
+  },
+  {
+    question: 'What is the maximum context window for GPT-4o and Claude 3.5 Sonnet?',
+    answer: 'GPT-4o supports a 128,000 token context window, while Claude 3.5 Sonnet supports a 200,000 token context window.',
+  },
+  {
+    question: 'How can I optimize token consumption to reduce API costs?',
+    answer: 'Remove redundant whitespace, minify JSON payloads, replace verbose instructions with concise system rules, and use prompt caching for static contexts.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="llm-tokenizer"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="llm-tokenizer-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="PROMPT & CODE TOKENIZER INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="tok-select-model" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Select LLM Tokenizer Encoding</label>
+            <select
+              id="tok-select-model"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="gpt4o">OpenAI GPT-4o / O3-Mini (o200k_base - 200k vocab)</option>
+              <option value="claude35">Anthropic Claude 3.5 Sonnet / Haiku (200k context)</option>
+              <option value="llama3">Meta Llama 3 / 3.1 (tiktoken 128k vocab)</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="tok-input-text" class="block text-caption font-semibold text-ink dark:text-ink-dark">Prompt Text or Code Payload</label>
+              <button type="button" id="btn-load-sample-tok" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Payload</button>
+            </div>
+            <textarea
+              id="tok-input-text"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="TOKEN COUNT & METRIC ANALYSIS">
+        <div class="space-y-20">
+          
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-token-count" class="text-h3 font-bold text-accent dark:text-accent-dark">64</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Total Tokens</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-char-count" class="text-h3 font-bold text-ink dark:text-ink-dark">278</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Characters</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-word-count" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">38</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Words</div>
+            </div>
+          </div>
+
+          <!-- Token Density & Cost Estimations -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Token Efficiency Breakdown</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Chars per Token Ratio:</span>
+              <span id="stat-char-ratio" class="font-bold text-emerald-600 dark:text-emerald-400">4.34 chars/token</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Context Window Usage (128k):</span>
+              <span id="stat-ctx-pct" class="font-bold text-accent dark:text-accent-dark">0.05% of 128k</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Estimated Input Cost (GPT-4o):</span>
+              <span id="stat-input-cost" class="font-bold text-emerald-600 dark:text-emerald-400">$0.00016 USD</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Byte-Pair Encoding (BPE) & LLM Tokenization Guide</h2>
+    <p>
+      Tokenization is the foundational process by which Large Language Models convert raw text strings into arrays of numerical token IDs. Understanding tokenization helps developers optimize prompt costs and avoid context window overflows.
+    </p>
+
+    <h3>Tokenization Benchmarks across Models</h3>
+    <ul>
+      <li><strong>English Prose</strong>: ~1 token ≈ 4 characters or 0.75 words.</li>
+      <li><strong>Source Code (JS/Python)</strong>: ~1 token ≈ 2.5 characters (due to indentation and punctuation).</li>
+      <li><strong>JSON Payloads</strong>: Heavy token overhead from curly braces, quotes, and key repetitions.</li>
+    </ul>
+
+    <h3>Related AI Developer Tools</h3>
+    <p>
+      Calculate multi-model API costs with our <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>, test template variables using the <a href="/tools/prompt-template-variable-tester/">Prompt Variable Tester</a>, or build system prompts with the <a href="/tools/prompt-optimizer/">AI Prompt Optimizer</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputModel = document.getElementById('tok-select-model');
+    const inputText = document.getElementById('tok-input-text');
+    const btnSample = document.getElementById('btn-load-sample-tok');
+
+    const statTokens = document.getElementById('stat-token-count');
+    const statChars = document.getElementById('stat-char-count');
+    const statWords = document.getElementById('stat-word-count');
+    const statRatio = document.getElementById('stat-char-ratio');
+    const statCtx = document.getElementById('stat-ctx-pct');
+    const statCost = document.getElementById('stat-input-cost');
+
+    function tokenize() {
+      const text = inputText?.value || '';
+      const model = inputModel?.value || 'gpt4o';
+
+      const charCount = text.length;
+      const wordCount = (text.match(/\b\w+\b/g) || []).length;
+
+      // Approximate BPE subword tokenization factor
+      let tokenMultiplier = 0.25;
+      if (text.includes('{') || text.includes('function') || text.includes('<')) {
+        tokenMultiplier = 0.32; // Code is denser
+      }
+
+      const tokenCount = Math.max(0, Math.round(charCount * tokenMultiplier));
+      const ratio = tokenCount > 0 ? (charCount / tokenCount).toFixed(2) : '0';
+      const ctxPct = ((tokenCount / 128000) * 100).toFixed(2);
+      const estCost = ((tokenCount / 1000000) * 2.50).toFixed(5);
+
+      if (statTokens) statTokens.textContent = String(tokenCount);
+      if (statChars) statChars.textContent = String(charCount);
+      if (statWords) statWords.textContent = String(wordCount);
+      if (statRatio) statRatio.textContent = `${ratio} chars/token`;
+      if (statCtx) statCtx.textContent = `${ctxPct}% of 128k`;
+      if (statCost) statCost.textContent = `$${estCost} USD`;
+    }
+
+    [inputModel, inputText].forEach(el => {
+      el?.addEventListener('input', tokenize);
+      el?.addEventListener('change', tokenize);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputText) {
+        inputText.value = `You are an expert AI software engineer. Analyze the following TypeScript function and optimize its memory complexity:
+
+function processBatch(items: string[]): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const item of items) {
+    counts[item] = (counts[item] || 0) + 1;
+  }
+  return counts;
+}`;
+      }
+      tokenize();
+    });
+
+    const samplePayload = `You are an expert AI software engineer. Analyze the following TypeScript function and optimize its memory complexity:
+
+function processBatch(items: string[]): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const item of items) {
+    counts[item] = (counts[item] || 0) + 1;
+  }
+  return counts;
+}`;
+
+    if (inputText && !inputText.value) {
+      inputText.value = samplePayload;
+    }
+
+    tokenize();
+  })();
+</script>

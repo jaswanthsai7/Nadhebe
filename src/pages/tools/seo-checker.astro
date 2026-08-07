@@ -1,0 +1,316 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'On-Page SEO Quality Checker & Audit Tool | Nadhebe';
+const h1 = 'On-Page SEO Quality Checker & Audit Tool';
+const description = 'Audit on-page SEO factors: meta title length, meta description, H1-H6 heading hierarchy, image alt text coverage, internal linking, and HTTPS canonicals.';
+
+const faq = [
+  {
+    question: 'What is an on-page SEO checker?',
+    answer: 'An on-page SEO checker evaluates structural HTML elements on a webpage (title tags, meta descriptions, headings, alt attributes, and link paths) to identify technical issues that impact search rankings.',
+  },
+  {
+    question: 'Why should a webpage have exactly one H1 tag?',
+    answer: 'The H1 tag serves as the main headline for search crawlers and readers. Having multiple H1 tags creates hierarchy ambiguity, while missing an H1 weakens primary keyword targeting.',
+  },
+  {
+    question: 'Why is image alt text important for SEO?',
+    answer: 'Alt text (`alt="..."`) describes images for screen readers (accessibility) and helps Google Image Search index visual content for target keywords.',
+  },
+  {
+    question: 'What is an ideal internal linking ratio?',
+    answer: 'Aim for at least 3–5 contextual internal links per article connecting to related tools, guides, or pillar pages to distribute link equity and increase dwell time.',
+  },
+  {
+    question: 'Does on-page SEO guarantee #1 Google rankings?',
+    answer: 'On-page SEO ensures crawlers can perfectly parse and index your page. Ranking #1 also depends on domain topical authority, high-quality backlinks, and user intent satisfaction.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="seo-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="seo-checker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="ON-PAGE METADATA & CONTENT INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="chk-input-title" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Meta Title Tag</label>
+            <input
+              id="chk-input-title"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="Nadhebe – AI Tech Articles & Developer Tools"
+            />
+          </div>
+
+          <div>
+            <label for="chk-input-desc" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Meta Description</label>
+            <textarea
+              id="chk-input-desc"
+              rows="2"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans leading-relaxed"
+            >Production-ready AI research, developer guides, and fast client-side developer utilities.</textarea>
+          </div>
+
+          <div>
+            <label for="chk-input-h1" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">H1 Primary Heading</label>
+            <input
+              id="chk-input-h1"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="On-Page SEO Quality Checker & Audit Tool"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <div>
+              <label for="chk-input-h2s" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">H2 Count</label>
+              <input id="chk-input-h2s" type="number" min="0" value="4" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+            <div>
+              <label for="chk-input-imgs" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Images Total</label>
+              <input id="chk-input-imgs" type="number" min="0" value="3" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+            <div>
+              <label for="chk-input-alt" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Images w/ Alt</label>
+              <input id="chk-input-alt" type="number" min="0" value="3" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-12 pt-8">
+            <button
+              type="button"
+              id="btn-chk-sample"
+              class="rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              Load Sample Audit
+            </button>
+            <button
+              type="button"
+              id="btn-chk-run"
+              class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              Run On-Page Audit
+            </button>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="ON-PAGE SEO AUDIT SCORECARD">
+        <div class="space-y-20">
+          
+          <!-- Score Banner -->
+          <div id="chk-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-emerald-500/30 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">On-Page SEO Score</span>
+              <span id="chk-score-badge" class="rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300">95 / 100</span>
+            </div>
+            <h3 id="chk-status-headline" class="text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300">Excellent On-Page SEO Health</h3>
+            <p id="chk-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Page metadata, heading hierarchy, and image alt text coverage meet recommended standards.
+            </p>
+          </div>
+
+          <!-- Audit Factor Breakdown -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">On-Page Factor Checklist</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Title Tag Length (50–60 chars):</span>
+              <span id="chk-title-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Optimal (47 chars)</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Meta Description Length (140–160):</span>
+              <span id="chk-desc-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Optimal (94 chars)</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Single H1 Heading:</span>
+              <span id="chk-h1-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Present & Unique</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Subheading Structure (H2s):</span>
+              <span id="chk-h2-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ 4 H2 Headings</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Image Alt Text Coverage:</span>
+              <span id="chk-alt-status" class="font-bold text-emerald-600 dark:text-emerald-400">✓ 100% (3/3 images)</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>On-Page SEO Optimization Guide — Essential Elements for High Search Rankings</h2>
+    <p>
+      On-page SEO refers to optimizing individual HTML elements and content structure on your web pages to rank higher and earn more relevant organic traffic in search engines. Unlike off-page SEO (which relies on external backlinks), on-page SEO is 100% within your direct control.
+    </p>
+
+    <h3>Top On-Page SEO Ranking Factors</h3>
+    <ul>
+      <li><strong>Meta Title Tag</strong>: Primary ranking signal. Must be unique, under 60 characters, and front-load target keywords.</li>
+      <li><strong>Meta Description</strong>: Drives organic Click-Through Rate (CTR). Must be under 160 characters with a clear call-to-action.</li>
+      <li><strong>H1 Heading Tag</strong>: Every page must have exactly one H1 tag matching the page topic.</li>
+      <li><strong>H2-H3 Subheadings</strong>: Divide long-form content into scannable sub-sections using targeted LSI keywords.</li>
+      <li><strong>Image Alt Text Attributes</strong>: Describe visual media for accessibility and Google Image Search indexation.</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Simulate Google search snippet presentation with our <a href="/tools/serp-preview/">SERP Snippet Simulator</a>, validate JSON-LD structured data using the <a href="/tools/schema-generator/">JSON-LD Schema Generator</a>, or inspect robots directives with the <a href="/tools/robots-tester/">Robots.txt Tester</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputTitle = document.getElementById('chk-input-title');
+    const inputDesc = document.getElementById('chk-input-desc');
+    const inputH1 = document.getElementById('chk-input-h1');
+    const inputH2s = document.getElementById('chk-input-h2s');
+    const inputImgs = document.getElementById('chk-input-imgs');
+    const inputAlt = document.getElementById('chk-input-alt');
+
+    const btnRun = document.getElementById('btn-chk-run');
+    const btnSample = document.getElementById('btn-chk-sample');
+
+    const resultBanner = document.getElementById('chk-result-banner');
+    const scoreBadge = document.getElementById('chk-score-badge');
+    const statusHeadline = document.getElementById('chk-status-headline');
+    const statusSub = document.getElementById('chk-status-sub');
+
+    const titleStat = document.getElementById('chk-title-status');
+    const descStat = document.getElementById('chk-desc-status');
+    const h1Stat = document.getElementById('chk-h1-status');
+    const h2Stat = document.getElementById('chk-h2-status');
+    const altStat = document.getElementById('chk-alt-status');
+
+    function audit() {
+      const titleText = inputTitle?.value || '';
+      const descText = inputDesc?.value || '';
+      const h1Text = inputH1?.value || '';
+      const h2Count = parseInt(inputH2s?.value || '0', 10);
+      const imgCount = parseInt(inputImgs?.value || '0', 10);
+      const altCount = parseInt(inputAlt?.value || '0', 10);
+
+      let score = 100;
+
+      // Title evaluation
+      const tLen = titleText.length;
+      if (tLen === 0) score -= 25;
+      else if (tLen > 60 || tLen < 30) score -= 10;
+
+      // Desc evaluation
+      const dLen = descText.length;
+      if (dLen === 0) score -= 20;
+      else if (dLen > 160 || dLen < 70) score -= 8;
+
+      // H1 evaluation
+      if (!h1Text.trim()) score -= 25;
+
+      // H2 evaluation
+      if (h2Count === 0) score -= 10;
+
+      // Alt text evaluation
+      if (imgCount > 0) {
+        const altPct = Math.round((altCount / imgCount) * 100);
+        if (altPct < 100) score -= Math.round((100 - altPct) * 0.15);
+      }
+
+      score = Math.max(0, Math.min(100, score));
+
+      if (titleStat) {
+        if (tLen >= 40 && tLen <= 60) {
+          titleStat.textContent = `✓ Optimal (${tLen} chars)`;
+          titleStat.className = 'font-bold text-emerald-600 dark:text-emerald-400';
+        } else {
+          titleStat.textContent = `⚠ Sub-optimal (${tLen} chars)`;
+          titleStat.className = 'font-bold text-amber-600';
+        }
+      }
+
+      if (descStat) {
+        if (dLen >= 120 && dLen <= 160) {
+          descStat.textContent = `✓ Optimal (${dLen} chars)`;
+          descStat.className = 'font-bold text-emerald-600 dark:text-emerald-400';
+        } else {
+          descStat.textContent = `⚠ Sub-optimal (${dLen} chars)`;
+          descStat.className = 'font-bold text-amber-600';
+        }
+      }
+
+      if (h1Stat) {
+        h1Stat.textContent = h1Text.trim() ? '✓ Present & Unique' : '✕ Missing H1 Heading';
+        h1Stat.className = h1Text.trim() ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger';
+      }
+
+      if (h2Stat) {
+        h2Stat.textContent = h2Count > 0 ? `✓ ${h2Count} H2 Subheadings` : '⚠ No H2 Subheadings';
+        h2Stat.className = h2Count > 0 ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600';
+      }
+
+      if (altStat) {
+        const pct = imgCount > 0 ? Math.round((altCount / imgCount) * 100) : 100;
+        altStat.textContent = `${pct}% (${altCount}/${imgCount} images)`;
+        altStat.className = pct === 100 ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600';
+      }
+
+      if (scoreBadge) scoreBadge.textContent = `${score} / 100`;
+
+      if (resultBanner && statusHeadline && statusSub) {
+        if (score >= 90) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusHeadline.textContent = 'Excellent On-Page SEO Health ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = 'Page metadata, heading hierarchy, and alt attributes meet standards.';
+        } else if (score >= 70) {
+          resultBanner.className = 'rounded-16 border border-amber-500/30 bg-amber-500/10 p-20 shadow-soft font-sans text-amber-900 dark:text-amber-200';
+          statusHeadline.textContent = 'On-Page SEO Warnings ⚠';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300';
+          statusSub.textContent = 'Adjust title tag length or add missing image alt text attributes.';
+        } else {
+          resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          statusHeadline.textContent = 'Critical SEO Issues Found ✕';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          statusSub.textContent = 'Missing H1 heading or essential metadata elements.';
+        }
+      }
+    }
+
+    btnRun?.addEventListener('click', audit);
+    [inputTitle, inputDesc, inputH1, inputH2s, inputImgs, inputAlt].forEach(el => {
+      el?.addEventListener('input', audit);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputTitle) inputTitle.value = 'Nadhebe – AI Tech Articles & Developer Tools';
+      if (inputDesc) inputDesc.value = 'Production-ready AI research, engineering guides, and fast client-side developer utilities.';
+      if (inputH1) inputH1.value = 'On-Page SEO Quality Checker & Audit Tool';
+      if (inputH2s) inputH2s.value = '4';
+      if (inputImgs) inputImgs.value = '3';
+      if (inputAlt) inputAlt.value = '3';
+      audit();
+    });
+
+    audit();
+  })();
+</script>

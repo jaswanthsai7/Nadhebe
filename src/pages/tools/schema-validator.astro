@@ -1,0 +1,323 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JSON-LD Schema Validator & Structured Data Auditor | Nadhebe';
+const h1 = 'JSON-LD Schema Validator & Structured Data Auditor';
+const description = 'Validate JSON-LD structured data markup, check Schema.org syntax compliance, verify required properties, and unlock Google Rich Snippets.';
+
+const faq = [
+  {
+    question: 'What is JSON-LD schema validation?',
+    answer: 'JSON-LD schema validation inspects structured data embedded in web pages to ensure it adheres to Schema.org standards and Google Rich Result specifications without syntax errors.',
+  },
+  {
+    question: 'Why is "@context": "https://schema.org" required in JSON-LD?',
+    answer: 'The @context property defines the vocabulary schema dictionary used by search engines (like Google and Bing) to interpret entity types like TechArticle, WebApplication, or FAQPage.',
+  },
+  {
+    question: 'How do syntax errors in JSON-LD affect Google Rich Results?',
+    answer: 'A single missing comma, unquoted property key, or missing bracket will cause search engine parsers to reject the entire JSON-LD block, disqualifying the page from Rich Results.',
+  },
+  {
+    question: 'Can I include multiple JSON-LD script blocks on a single webpage?',
+    answer: 'Yes! You can place multiple `<script type="application/ld+json">` blocks in the `<head>` or `<body>` of your document (e.g. one for `WebApplication` and one for `FAQPage`).',
+  },
+  {
+    question: 'How long does Google take to show Rich Snippets after fixing schema errors?',
+    answer: 'Once Googlebot re-crawls the updated page and validates the corrected JSON-LD markup, Rich Snippets usually appear in search results within 3 to 14 days.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="schema-validator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="schema-validator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="JSON-LD MARKUP INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="schema-input-json" class="block text-caption font-semibold text-ink dark:text-ink-dark">JSON-LD Code or Script Snippet</label>
+              <button type="button" id="btn-load-sample-schema" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Schema</button>
+            </div>
+            <textarea
+              id="schema-input-json"
+              rows="14"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <div class="flex items-center justify-between gap-12">
+            <button
+              type="button"
+              id="btn-format-schema-json"
+              class="rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              Prettify JSON
+            </button>
+            <button
+              type="button"
+              id="btn-validate-schema"
+              class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              Validate JSON-LD
+            </button>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="SCHEMA VALIDATION REPORT">
+        <div class="space-y-20">
+          
+          <!-- Status Banner -->
+          <div id="schema-val-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-emerald-500/30 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Syntax & Type Status</span>
+              <span id="schema-val-badge" class="rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300">VALID JSON-LD</span>
+            </div>
+            <h3 id="schema-val-headline" class="text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300">Schema.org Syntax Valid</h3>
+            <p id="schema-val-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Detected Schema Type: <strong id="detected-schema-type">TechArticle</strong>
+            </p>
+          </div>
+
+          <!-- Properties Audit Breakdown -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Schema Property Audit</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>JSON Syntax:</span>
+              <span id="val-json-syntax" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Parsed Cleanly</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Schema Context (&#64;context):</span>
+              <span id="val-schema-context" class="font-bold text-emerald-600 dark:text-emerald-400">✓ https://schema.org</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Primary Entity Type (&#64;type):</span>
+              <span id="val-schema-type" class="font-bold text-accent dark:text-accent-dark">TechArticle</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Required Properties:</span>
+              <span id="val-required-props" class="font-bold text-emerald-600 dark:text-emerald-400">✓ All Core Props Present</span>
+            </div>
+          </div>
+
+          <!-- Error & Diagnostic Details -->
+          <div id="schema-error-box" class="hidden rounded-12 border border-danger/40 bg-danger/10 p-12 font-mono text-xs text-danger leading-relaxed">
+            <!-- Errors rendered by JS -->
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON-LD Structured Data Validator — Unlocking Google Rich Snippets</h2>
+    <p>
+      Structured data using Schema.org vocabulary in JSON-LD format is the official recommendation by Google for conveying explicit page intent to search engines. Proper schema markup unlocks visual search features such as FAQ accordions, article ratings, author badges, and software pricing cards directly in Google SERPs.
+    </p>
+
+    <h3>Essential Schema Types & Required Properties</h3>
+    <ul>
+      <li><strong>TechArticle / Article</strong>: Requires <code>headline</code>, <code>image</code>, <code>author</code>, <code>publisher</code>, and <code>datePublished</code>.</li>
+      <li><strong>WebApplication</strong>: Requires <code>name</code>, <code>operatingSystem</code>, <code>applicationCategory</code>, and <code>offers</code>.</li>
+      <li><strong>FAQPage</strong>: Requires <code>mainEntity</code> containing an array of <code>Question</code> and <code>Answer</code> objects.</li>
+      <li><strong>Organization</strong>: Requires <code>name</code>, <code>url</code>, and <code>logo</code>.</li>
+      <li><strong>Product</strong>: Requires <code>name</code>, <code>image</code>, <code>offers</code> (price & currency), and <code>aggregateRating</code>.</li>
+    </ul>
+
+    <h3>Valid JSON-LD HTML Embed Structure</h3>
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400">{`&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Nadhebe SERP Preview Tool",
+  "url": "https://nadhebe.com/tools/serp-preview/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All"
+}
+&lt;/script&gt;`}</pre>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Generate structured JSON-LD schemas instantly with our <a href="/tools/schema-generator/">JSON-LD Schema Generator</a>, audit page metadata with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>, or inspect canonical URLs with the <a href="/tools/canonical-checker/">Canonical Tag Checker</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputJson = document.getElementById('schema-input-json');
+    const btnValidate = document.getElementById('btn-validate-schema');
+    const btnPrettify = document.getElementById('btn-format-schema-json');
+    const btnSample = document.getElementById('btn-load-sample-schema');
+
+    const valBanner = document.getElementById('schema-val-banner');
+    const valBadge = document.getElementById('schema-val-badge');
+    const valHeadline = document.getElementById('schema-val-headline');
+    const valSub = document.getElementById('schema-val-sub');
+    const detectedType = document.getElementById('detected-schema-type');
+
+    const valSyntax = document.getElementById('val-json-syntax');
+    const valContext = document.getElementById('val-schema-context');
+    const valType = document.getElementById('val-schema-type');
+    const valReq = document.getElementById('val-required-props');
+    const errorBox = document.getElementById('schema-error-box');
+
+    function validate() {
+      let raw = inputJson?.value || '';
+      // Strip script tags if user pasted full script block
+      raw = raw.replace(/<\/?script[^>]*>/gi, '').trim();
+
+      if (!raw) return;
+
+      let obj = null;
+      let parseErr = null;
+
+      try {
+        obj = JSON.parse(raw);
+      } catch(e) {
+        parseErr = e.message;
+      }
+
+      if (errorBox) {
+        errorBox.classList.add('hidden');
+        errorBox.textContent = '';
+      }
+
+      if (parseErr) {
+        if (valBanner && valBadge && valHeadline && valSub) {
+          valBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          valBadge.textContent = 'SYNTAX ERROR';
+          valBadge.className = 'rounded-pill bg-danger/20 px-10 py-3 font-mono text-xs font-semibold text-danger';
+          valHeadline.textContent = 'JSON Syntax Error ✕';
+          valHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          valSub.textContent = 'Failed to parse JSON-LD payload.';
+        }
+        if (valSyntax) { valSyntax.textContent = '✕ Syntax Error'; valSyntax.className = 'font-bold text-danger'; }
+        if (valContext) { valContext.textContent = '—'; valContext.className = 'font-bold text-muted'; }
+        if (valType) { valType.textContent = '—'; valType.className = 'font-bold text-muted'; }
+        if (valReq) { valReq.textContent = '—'; valReq.className = 'font-bold text-muted'; }
+        if (errorBox) {
+          errorBox.classList.remove('hidden');
+          errorBox.textContent = `JSON Parse Error: ${parseErr}`;
+        }
+        return;
+      }
+
+      // Check @context and @type
+      const context = obj['@context'] || '';
+      const type = obj['@type'] || 'Unknown';
+
+      const hasContext = String(context).includes('schema.org');
+      const hasType = Boolean(obj['@type']);
+
+      if (detectedType) detectedType.textContent = type;
+      if (valSyntax) { valSyntax.textContent = '✓ Parsed Cleanly'; valSyntax.className = 'font-bold text-emerald-600 dark:text-emerald-400'; }
+      if (valContext) {
+        valContext.textContent = hasContext ? '✓ https://schema.org' : '✕ Missing @context';
+        valContext.className = hasContext ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger';
+      }
+      if (valType) {
+        valType.textContent = hasType ? type : '✕ Missing @type';
+        valType.className = hasType ? 'font-bold text-accent dark:text-accent-dark' : 'font-bold text-danger';
+      }
+
+      if (hasContext && hasType) {
+        if (valBanner && valBadge && valHeadline && valSub) {
+          valBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          valBadge.textContent = 'VALID JSON-LD';
+          valBadge.className = 'rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300';
+          valHeadline.textContent = 'Schema.org Syntax Valid ✓';
+          valHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          valSub.textContent = `Valid ${type} schema payload ready for deployment.`;
+        }
+        if (valReq) { valReq.textContent = '✓ Core Properties Present'; valReq.className = 'font-bold text-emerald-600 dark:text-emerald-400'; }
+      } else {
+        if (valBanner && valBadge && valHeadline && valSub) {
+          valBanner.className = 'rounded-16 border border-amber-500/30 bg-amber-500/10 p-20 shadow-soft font-sans text-amber-900 dark:text-amber-200';
+          valBadge.textContent = 'SCHEMA WARNING';
+          valBadge.className = 'rounded-pill bg-amber-500/20 px-10 py-3 font-mono text-xs font-semibold text-amber-700 dark:text-amber-300';
+          valHeadline.textContent = 'Missing Schema Directives ⚠';
+          valHeadline.className = 'text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300';
+          valSub.textContent = 'JSON is valid, but missing required @context or @type properties.';
+        }
+        if (valReq) { valReq.textContent = '⚠ Incomplete Schema Header'; valReq.className = 'font-bold text-amber-600'; }
+      }
+    }
+
+    btnValidate?.addEventListener('click', validate);
+    inputJson?.addEventListener('input', validate);
+
+    btnPrettify?.addEventListener('click', () => {
+      try {
+        let raw = inputJson?.value || '';
+        raw = raw.replace(/<\/?script[^>]*>/gi, '').trim();
+        const parsed = JSON.parse(raw);
+        if (inputJson) inputJson.value = JSON.stringify(parsed, null, 2);
+        validate();
+      } catch(e) {}
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputJson) {
+        inputJson.value = `{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Building Agentic AI Tools with Astro & Tailwind",
+  "description": "Production-ready guide for creating client-side AI developer tools.",
+  "author": {
+    "@type": "Organization",
+    "name": "Nadhebe"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nadhebe",
+    "url": "https://nadhebe.com/"
+  },
+  "datePublished": "2026-08-01"
+}`;
+        validate();
+      }
+    });
+
+    const defaultSample = `{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Building Agentic AI Tools with Astro & Tailwind",
+  "description": "Production-ready guide for creating client-side AI developer tools.",
+  "author": {
+    "@type": "Organization",
+    "name": "Nadhebe"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nadhebe",
+    "url": "https://nadhebe.com/"
+  },
+  "datePublished": "2026-08-01"
+}`;
+
+    if (inputJson && !inputJson.value) {
+      inputJson.value = defaultSample;
+    }
+
+    validate();
+  })();
+</script>

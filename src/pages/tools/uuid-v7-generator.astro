@@ -1,0 +1,155 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Time-Ordered UUID v7 Generator | Nadhebe';
+const h1 = 'Time-Ordered UUID v7 Generator';
+const description = 'Generate time-ordered UUID v7 identifiers in bulk. Optimized for database primary keys (PostgreSQL, MySQL, SQLite) to maximize B-Tree index performance.';
+
+const faq = [
+  {
+    question: 'What is a UUID v7 identifier?',
+    answer: 'UUID v7 (RFC 9562) is a 128-bit time-ordered unique identifier that embeds a 48-bit Unix timestamp in its most significant bits, followed by cryptographically random bits.',
+  },
+  {
+    question: 'Why is UUID v7 better than UUID v4 for database primary keys?',
+    answer: 'Random UUID v4 causes severe database index fragmentation and random disk I/O in B-Tree indexes. Time-ordered UUID v7 enables sequential append-only index insertion.',
+  },
+  {
+    question: 'What is the structure of a UUID v7 string?',
+    answer: 'A 36-character string in `8-4-4-4-12` hex format. The first 12 hex characters represent the Unix millisecond timestamp.',
+  },
+  {
+    question: 'Is UUID v7 supported in modern databases?',
+    answer: 'Yes! PostgreSQL, MySQL 8+, SQLite, and MongoDB support UUID v7 as a native or 128-bit binary column type.',
+  },
+  {
+    question: 'Can I extract the creation timestamp from a UUID v7 string?',
+    answer: 'Yes! The first 48 bits contain the millisecond timestamp, allowing you to extract exact creation times without storing a separate `created_at` column.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="uuid-v7-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="uuidv7-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="GENERATION PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label for="v7-input-count" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Quantity to Generate (1 to 50)</label>
+            <input
+              id="v7-input-count"
+              type="number"
+              min="1"
+              max="50"
+              value="5"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-uuidv7"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate UUID v7 Batch
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED TIME-ORDERED UUID v7 LIST">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">UUID v7 Output</span>
+            <button type="button" id="btn-copy-uuidv7" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy List</button>
+          </div>
+
+          <pre id="v7-output-list" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[160px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>UUID v7 Optimization Guide — High-Performance Database Primary Keys</h2>
+    <p>
+      RFC 9562 standardizes UUID v7 as the modern successor to UUID v4. By embedding a 48-bit millisecond timestamp in the leading bits, UUID v7 provides sequential B-Tree index insertions while guaranteeing global uniqueness across distributed systems.
+    </p>
+
+    <h3>Comparison: UUID v4 vs UUID v7</h3>
+    <ul>
+      <li><strong>UUID v4</strong>: Cryptographically random. Causes 40%+ B-Tree index page splitting and high disk I/O.</li>
+      <li><strong>UUID v7</strong>: Time-ordered. Appends sequentially to database indexes, maintaining peak write performance.</li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Generate standard UUID v4 with the <a href="/tools/uuid-generator/">UUID Generator</a>, validate schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>, or format SQL queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputCount = document.getElementById('v7-input-count');
+    const btnGen = document.getElementById('btn-gen-uuidv7');
+
+    const outputList = document.getElementById('v7-output-list');
+    const btnCopy = document.getElementById('btn-copy-uuidv7');
+
+    function generateUUIDv7() {
+      const timestamp = Date.now();
+      const hexTime = timestamp.toString(16).padStart(12, '0');
+      
+      const randBytes = new Uint8Array(10);
+      crypto.getRandomValues(randBytes);
+      const hexRand = Array.from(randBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      // UUID v7 format: 8-4-7-4-12
+      // rand_a (12 bits) + ver 7 (4 bits)
+      const part1 = hexTime.substring(0, 8);
+      const part2 = hexTime.substring(8, 12);
+      const part3 = '7' + hexRand.substring(0, 3);
+      const part4 = (8 + (randBytes[2] % 4)).toString(16) + hexRand.substring(3, 6);
+      const part5 = hexRand.substring(6, 18);
+
+      return `${part1}-${part2}-${part3}-${part4}-${part5}`;
+    }
+
+    function generate() {
+      const count = Math.max(1, Math.min(50, parseInt(inputCount?.value || '5', 10)));
+      const list = [];
+      for (let i = 0; i < count; i++) {
+        list.push(generateUUIDv7());
+      }
+
+      if (outputList) outputList.textContent = list.join('\n');
+    }
+
+    btnGen?.addEventListener('click', generate);
+    inputCount?.addEventListener('input', generate);
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputList) {
+        navigator.clipboard.writeText(outputList.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy List'), 2000);
+      }
+    });
+
+    generate();
+  })();
+</script>

@@ -1,0 +1,322 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Robots.txt Tester & Crawl Directive Auditor | Nadhebe';
+const h1 = 'Robots.txt Tester & Crawl Directive Auditor';
+const description = 'Test robots.txt directives, check Googlebot & AI crawler accessibility, prevent indexing blocks on key landing pages, and optimize site crawl budget.';
+
+const faq = [
+  {
+    question: 'Does Disallow in robots.txt prevent Google from indexing a URL?',
+    answer: 'No. `Disallow` prevents Googlebot from downloading and crawling the page content, but Google can still index the URL if it receives inbound links from external websites. To prevent indexing completely, use a `<meta name="robots" content="noindex">` tag.',
+  },
+  {
+    question: 'How do I block AI web scrapers like GPTBot or CCBot in robots.txt?',
+    answer: 'Add specific `User-agent` directives followed by `Disallow: /`. For example:\nUser-agent: GPTBot\nDisallow: /\nUser-agent: CCBot\nDisallow: /',
+  },
+  {
+    question: 'Where should the Sitemap directive be placed in robots.txt?',
+    answer: 'Place the `Sitemap: https://yourdomain.com/sitemap.xml` directive at the bottom or top of your robots.txt file. It should use an absolute HTTPS URL.',
+  },
+  {
+    question: 'What is the wildcard (*) character in robots.txt?',
+    answer: 'The asterisk wildcard (`*`) matches any sequence of characters in path rules. For example, `Disallow: /*.pdf$` blocks all PDF files across your domain.',
+  },
+  {
+    question: 'How frequently does Google re-fetch robots.txt files?',
+    answer: 'Googlebot typically caches `robots.txt` files for up to 24 hours. Updating rules in your file usually takes effect within a single day.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="robots-tester"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="robots-tester-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="ROBOTS.TXT DIRECTIVES & TEST URL">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="robots-input-rules" class="block text-caption font-semibold text-ink dark:text-ink-dark">Robots.txt Content</label>
+              <button type="button" id="btn-load-default-robots" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Rules</button>
+            </div>
+            <textarea
+              id="robots-input-rules"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >{`User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /internal-search/
+
+Sitemap: https://nadhebe.com/sitemap-index.xml`}</textarea>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+            <div>
+              <label for="robots-select-agent" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">User-Agent Crawler</label>
+              <select
+                id="robots-select-agent"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+              >
+                <option value="Googlebot">Googlebot (Search)</option>
+                <option value="Bingbot">Bingbot (Search)</option>
+                <option value="GPTBot">GPTBot (OpenAI Web Scraper)</option>
+                <option value="CCBot">CCBot (Common Crawl)</option>
+                <option value="ClaudeBot">ClaudeBot (Anthropic)</option>
+                <option value="Baiduspider">Baiduspider (Baidu)</option>
+                <option value="*">* (Wildcard All Bots)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="robots-input-test-url" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Test URL Path</label>
+              <input
+                id="robots-input-test-url"
+                type="text"
+                class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+                value="/admin/dashboard"
+              />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            id="btn-evaluate-robots"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Test Crawl Accessibility
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CRAWL DIRECTIVE AUDIT RESULT">
+        <div class="space-y-20">
+          
+          <!-- Access Status Banner -->
+          <div id="robots-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Crawl Result</span>
+              <span id="robots-status-badge" class="rounded-pill px-10 py-3 font-mono text-xs font-semibold">Evaluated</span>
+            </div>
+            <h3 id="robots-status-headline" class="text-h3 font-bold mb-4">Allowed</h3>
+            <p id="robots-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Googlebot can crawl and access this path.
+            </p>
+          </div>
+
+          <!-- Matching Rule Breakdown -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Matching Directive Rule</span>
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span class="text-muted dark:text-muted-dark">Evaluated User-Agent:</span>
+              <span id="res-agent-val" class="font-bold text-ink dark:text-ink-dark">Googlebot</span>
+            </div>
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span class="text-muted dark:text-muted-dark">Evaluated Path:</span>
+              <span id="res-path-val" class="font-bold text-accent dark:text-accent-dark truncate max-w-[200px]">/admin/dashboard</span>
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <span class="text-muted dark:text-muted-dark">Matching Rule:</span>
+              <span id="res-rule-val" class="font-bold text-emerald-600 dark:text-emerald-400">Disallow: /admin/</span>
+            </div>
+          </div>
+
+          <!-- Sitemap Directives Detected -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark font-mono text-xs space-y-6">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block">Detected Sitemap Directives</span>
+            <div id="detected-sitemaps-list" class="space-y-4 text-emerald-600 dark:text-emerald-400">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Robots.txt Crawl Directive Auditor — Guide & Best Practices</h2>
+    <p>
+      The <code>robots.txt</code> file serves as the traffic controller for search engine web crawlers. It instructs Googlebot, Bingbot, and AI web scrapers which directories, files, or URL parameters they are permitted (or forbidden) to crawl.
+    </p>
+
+    <h3>Key Robots.txt Directives Explained</h3>
+    <ul>
+      <li><code>User-agent:</code> — Specifies which search engine crawler the following rules apply to. Using <code>*</code> targets all crawlers.</li>
+      <li><code>Disallow:</code> — Blocks crawlers from accessing URLs that match the path pattern.</li>
+      <li><code>Allow:</code> — Explicitly permits access to a subpath within a previously disallowed directory.</li>
+      <li><code>Sitemap:</code> — Provides absolute URLs pointing to XML sitemap index files.</li>
+    </ul>
+
+    <h3>Blocking AI Web Scrapers vs Search Engine Crawlers</h3>
+    <p>
+      Modern site owners frequently want to allow search engine bots (like <code>Googlebot</code> and <code>Bingbot</code>) to index their content for organic search traffic, while restricting AI training crawlers (such as OpenAI's <code>GPTBot</code> or Common Crawl's <code>CCBot</code>).
+    </p>
+
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400">
+# Allow Google Search Crawlers
+User-agent: Googlebot
+Allow: /
+
+# Block AI Training Scrapers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /</pre>
+
+    <h3>Common Robots.txt Pitfalls</h3>
+    <ul>
+      <li><strong>Disallowing Entire Site</strong>: A trailing slash on <code>Disallow: /</code> blocks search engines from crawling your entire website!</li>
+      <li><strong>Assuming Disallow = Noindex</strong>: Disallowing a URL in <code>robots.txt</code> does NOT prevent Google from displaying the URL in search results if external links exist. Use a <code>noindex</code> meta tag instead.</li>
+      <li><strong>Blocking CSS/JS Assets</strong>: Blocking <code>/css/</code> or <code>/js/</code> directories prevents Googlebot from rendering your mobile layout, causing ranking drops.</li>
+    </ul>
+
+    <h3>Related Tools</h3>
+    <p>
+      Combine robots directive auditing with XML sitemap validation using our <a href="/tools/sitemap-validator/">Sitemap & Robots Analyzer</a>, audit meta tags with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>, or preview Google search listings with our <a href="/tools/serp-preview/">SERP Snippet Simulator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRules = document.getElementById('robots-input-rules');
+    const selectAgent = document.getElementById('robots-select-agent');
+    const inputTestUrl = document.getElementById('robots-input-test-url');
+    const btnEvaluate = document.getElementById('btn-evaluate-robots');
+    const btnSample = document.getElementById('btn-load-default-robots');
+
+    const resultBanner = document.getElementById('robots-result-banner');
+    const statusBadge = document.getElementById('robots-status-badge');
+    const statusHeadline = document.getElementById('robots-status-headline');
+    const statusSub = document.getElementById('robots-status-sub');
+
+    const resAgent = document.getElementById('res-agent-val');
+    const resPath = document.getElementById('res-path-val');
+    const resRule = document.getElementById('res-rule-val');
+    const sitemapsList = document.getElementById('detected-sitemaps-list');
+
+    function evaluate() {
+      const rawRules = inputRules?.value || '';
+      const agent = selectAgent?.value || 'Googlebot';
+      const testPath = inputTestUrl?.value || '/';
+
+      if (resAgent) resAgent.textContent = agent;
+      if (resPath) resPath.textContent = testPath;
+
+      // Extract sitemaps
+      const sitemapMatches = rawRules.match(/^Sitemap:\s*(.*)$/gmi) || [];
+      if (sitemapsList) {
+        sitemapsList.innerHTML = '';
+        if (sitemapMatches.length === 0) {
+          sitemapsList.innerHTML = '<span class="text-amber-600 dark:text-amber-400">No Sitemap directive found in robots.txt</span>';
+        } else {
+          sitemapMatches.forEach(sm => {
+            const url = sm.replace(/^Sitemap:\s*/i, '').trim();
+            const div = document.createElement('div');
+            div.textContent = `✓ ${url}`;
+            sitemapsList.appendChild(div);
+          });
+        }
+      }
+
+      // Parse rules per agent
+      const lines = rawRules.split('\n');
+      let currentAgents = [];
+      let isAllowed = true;
+      let matchedRule = 'Default (Allow All)';
+
+      for (let line of lines) {
+        line = line.trim();
+        if (!line || line.startsWith('#')) continue;
+
+        if (line.toLowerCase().startsWith('user-agent:')) {
+          const target = line.substring(11).trim();
+          currentAgents.push(target);
+        } else if (line.toLowerCase().startsWith('disallow:') || line.toLowerCase().startsWith('allow:')) {
+          const isDisallowRule = line.toLowerCase().startsWith('disallow:');
+          const rulePath = line.substring(isDisallowRule ? 9 : 6).trim();
+
+          const agentMatches = currentAgents.some(a => a === '*' || a.toLowerCase() === agent.toLowerCase());
+          if (agentMatches && rulePath && testPath.startsWith(rulePath)) {
+            if (isDisallowRule) {
+              isAllowed = false;
+              matchedRule = line;
+            } else {
+              isAllowed = true;
+              matchedRule = line;
+            }
+          }
+        }
+      }
+
+      if (resRule) resRule.textContent = matchedRule;
+
+      if (resultBanner && statusBadge && statusHeadline && statusSub) {
+        if (isAllowed) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusBadge.textContent = 'ALLOWED';
+          statusBadge.className = 'rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300';
+          statusHeadline.textContent = 'Crawl Accessible ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = `${agent} is permitted to crawl ${testPath}.`;
+        } else {
+          resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          statusBadge.textContent = 'DISALLOWED';
+          statusBadge.className = 'rounded-pill bg-danger/20 px-10 py-3 font-mono text-xs font-semibold text-danger';
+          statusHeadline.textContent = 'Crawl Blocked ✕';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          statusSub.textContent = `${agent} is forbidden from crawling ${testPath} by directive "${matchedRule}".`;
+        }
+      }
+    }
+
+    btnEvaluate?.addEventListener('click', evaluate);
+    inputRules?.addEventListener('input', evaluate);
+    selectAgent?.addEventListener('change', evaluate);
+    inputTestUrl?.addEventListener('input', evaluate);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRules) {
+        inputRules.value = `User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /internal-search/
+
+Sitemap: https://nadhebe.com/sitemap-index.xml`;
+        evaluate();
+      }
+    });
+
+    evaluate();
+  })();
+</script>

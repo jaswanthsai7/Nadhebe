@@ -1,0 +1,222 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Organic Traffic & SERP CTR Estimator | Nadhebe';
+const h1 = 'Organic Traffic & SERP CTR Estimator';
+const description = 'Estimate monthly organic search traffic based on target keyword search volume, expected ranking position (#1 to #10), and Industry CTR curves.';
+
+const faq = [
+  {
+    question: 'How does the Organic Traffic Estimator work?',
+    answer: 'The calculator applies industry-standard CTR (Click-Through Rate) curves to monthly search volume and target ranking positions to estimate expected monthly organic visits.',
+  },
+  {
+    question: 'What is the average CTR for position #1 in Google Search?',
+    answer: 'Google position #1 averages approximately 27.6% CTR for non-branded informational queries, though rich snippets and featured snippets can boost this to 35%+.',
+  },
+  {
+    question: 'How does ranking position impact organic traffic volume?',
+    answer: 'The top 3 Google search results attract over 54% of all clicks. Moving from position #5 (~4.8% CTR) to position #1 (~27.6% CTR) increases traffic by over 5.7x!',
+  },
+  {
+    question: 'What is the difference between search volume and traffic volume?',
+    answer: 'Search volume represents the total monthly searches for a keyword. Traffic volume is the subset of searches that actually click through to your specific URL.',
+  },
+  {
+    question: 'How do SERP features (FAQs, Sitemaps) impact CTR?',
+    answer: 'Rich Snippets and FAQ accordions increase visual real estate in search listings, boosting CTR by 15% to 30% compared to plain text listings.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="seo-estimator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="seo-estimator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="SEARCH VOLUME & RANKING PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label for="est-input-vol" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly Target Keyword Search Volume</label>
+            <input
+              id="est-input-vol"
+              type="number"
+              min="100"
+              step="500"
+              value="15000"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div>
+            <label for="est-select-pos" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target Google Search Ranking Position</label>
+            <select
+              id="est-select-pos"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="1">Position #1 (~27.6% CTR)</option>
+              <option value="2">Position #2 (~15.8% CTR)</option>
+              <option value="3">Position #3 (~11.0% CTR)</option>
+              <option value="4">Position #4 (~6.9% CTR)</option>
+              <option value="5">Position #5 (~4.8% CTR)</option>
+              <option value="6">Position #6 (~3.4% CTR)</option>
+              <option value="7">Position #7 (~2.6% CTR)</option>
+              <option value="8">Position #8 (~2.0% CTR)</option>
+              <option value="9">Position #9 (~1.6% CTR)</option>
+              <option value="10">Position #10 (~1.2% CTR)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="est-input-cpc" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Estimated Paid Search CPC ($ USD)</label>
+            <input
+              id="est-input-cpc"
+              type="number"
+              min="0.1"
+              step="0.5"
+              value="3.50"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm"
+            />
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-traffic"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate Estimated Traffic
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="TRAFFIC ESTIMATION & VALUE REPORT">
+        <div class="space-y-20">
+          
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-est-ctr" class="text-h3 font-bold text-accent dark:text-accent-dark">27.6%</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">SERP CTR</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-monthly-visits" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">4,140</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Visits / Mo</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-monthly-val" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">$14,490</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Mo. Traffic Val</div>
+            </div>
+          </div>
+
+          <!-- Position CTR Comparison Table -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Ranking Position CTR Breakdown</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Daily Organic Clicks:</span>
+              <span id="stat-daily-clicks" class="font-bold text-ink dark:text-ink-dark">138 clicks / day</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Annual Organic Visits:</span>
+              <span id="stat-annual-visits" class="font-bold text-accent dark:text-accent-dark">49,680 visits / yr</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Annual Equivalent Ad Value:</span>
+              <span id="stat-annual-val" class="font-bold text-emerald-600 dark:text-emerald-400">$173,880 / yr</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Organic Search Traffic Estimation Guide — Understanding CTR Curves</h2>
+    <p>
+      Estimating potential organic search traffic is an essential step in prioritizing your editorial calendar and ROI modeling. Rather than treating search volume as direct traffic, SEO traffic models apply empirical <strong>Click-Through Rate (CTR) curves</strong> based on ranking position.
+    </p>
+
+    <h3>Google Desktop CTR Distribution Benchmarks</h3>
+    <ul>
+      <li><strong>Position #1</strong>: ~27.6% CTR</li>
+      <li><strong>Position #2</strong>: ~15.8% CTR</li>
+      <li><strong>Position #3</strong>: ~11.0% CTR</li>
+      <li><strong>Position #4–#5</strong>: 4.8% – 6.9% CTR</li>
+      <li><strong>Position #6–#10</strong>: 1.2% – 3.4% CTR</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Simulate Google search snippet presentation with our <a href="/tools/serp-preview/">SERP Snippet Simulator</a>, find content gaps with <a href="/tools/opportunity-radar/">Nadhebe Opportunity Radar</a>, or audit on-page metadata with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputVol = document.getElementById('est-input-vol');
+    const selectPos = document.getElementById('est-select-pos');
+    const inputCpc = document.getElementById('est-input-cpc');
+    const btnCalc = document.getElementById('btn-calc-traffic');
+
+    const ctrTable = {
+      '1': 0.276,
+      '2': 0.158,
+      '3': 0.110,
+      '4': 0.069,
+      '5': 0.048,
+      '6': 0.034,
+      '7': 0.026,
+      '8': 0.020,
+      '9': 0.016,
+      '10': 0.012,
+    };
+
+    const statCtr = document.getElementById('stat-est-ctr');
+    const statVisits = document.getElementById('stat-monthly-visits');
+    const statVal = document.getElementById('stat-monthly-val');
+    const statDaily = document.getElementById('stat-daily-clicks');
+    const statAnnualVisits = document.getElementById('stat-annual-visits');
+    const statAnnualVal = document.getElementById('stat-annual-val');
+
+    function calculate() {
+      const vol = parseInt(inputVol?.value || '10000', 10);
+      const pos = selectPos?.value || '1';
+      const cpc = parseFloat(inputCpc?.value || '3.50');
+
+      const ctr = ctrTable[pos] || 0.276;
+      const visits = Math.round(vol * ctr);
+      const monthlyVal = Math.round(visits * cpc);
+      const dailyClicks = Math.round(visits / 30);
+      const annualVisits = visits * 12;
+      const annualVal = monthlyVal * 12;
+
+      if (statCtr) statCtr.textContent = `${(ctr * 100).toFixed(1)}%`;
+      if (statVisits) statVisits.textContent = visits.toLocaleString();
+      if (statVal) statVal.textContent = `$${monthlyVal.toLocaleString()}`;
+      if (statDaily) statDaily.textContent = `${dailyClicks.toLocaleString()} clicks / day`;
+      if (statAnnualVisits) statAnnualVisits.textContent = `${annualVisits.toLocaleString()} visits / yr`;
+      if (statAnnualVal) statAnnualVal.textContent = `$${annualVal.toLocaleString()} / yr`;
+    }
+
+    btnCalc?.addEventListener('click', calculate);
+    [inputVol, selectPos, inputCpc].forEach(el => {
+      el?.addEventListener('input', calculate);
+    });
+
+    calculate();
+  })();
+</script>

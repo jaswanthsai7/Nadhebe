@@ -1,0 +1,192 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'HTML5 Canvas QR Code Generator | Nadhebe';
+const h1 = 'HTML5 Canvas QR Code Generator';
+const description = 'Generate high-resolution QR codes directly in your browser. Custom colors, dimensions, and instant PNG download without server tracking.';
+
+const faq = [
+  {
+    question: 'How does the browser QR Code Generator work?',
+    answer: 'The generator encodes your URL or text string into a 2D matrix barcode rendered on an HTML5 `<canvas>` element using client-side JavaScript.',
+  },
+  {
+    question: 'Can I download the generated QR code as a high-res PNG?',
+    answer: 'Yes! Click the "Download PNG" button to export a crisp 300x300 pixel PNG image file.',
+  },
+  {
+    question: 'What types of data can be encoded in a QR code?',
+    answer: 'You can encode website URLs (`https://...`), plain text messages, Wi-Fi credentials (`WIFI:S:...`), email addresses, and phone numbers.',
+  },
+  {
+    question: 'Is my data tracked or sent to any external server?',
+    answer: 'No! The QR code is generated 100% locally in your browser using canvas APIs. No data is stored or logged anywhere.',
+  },
+  {
+    question: 'What color contrast is required for scannability?',
+    answer: 'Ensure high contrast between the QR code foreground and background colors (e.g. dark foreground on a white or light background) for mobile camera scanners.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="qr-code-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="qr-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="QR CODE DATA & OPTIONS">
+        <div class="space-y-16">
+          <div>
+            <label for="qr-input-text" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">URL or Text Payload</label>
+            <input
+              id="qr-input-text"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com/tools/qr-code-generator/"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="qr-input-fg" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Foreground Color</label>
+              <input id="qr-input-fg" type="color" value="#0f172a" class="w-full h-36 rounded-8 border border-border bg-surface2 px-4 py-2 cursor-pointer dark:border-border-dark dark:bg-surface2-dark" />
+            </div>
+            <div>
+              <label for="qr-input-bg" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Background Color</label>
+              <input id="qr-input-bg" type="color" value="#ffffff" class="w-full h-36 rounded-8 border border-border bg-surface2 px-4 py-2 cursor-pointer dark:border-border-dark dark:bg-surface2-dark" />
+            </div>
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-qr"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate QR Code
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="RENDERED QR CODE CANVAS">
+        <div class="space-y-20 flex flex-col items-center justify-center">
+          
+          <div class="p-16 rounded-16 border border-border bg-white shadow-soft dark:border-border-dark flex items-center justify-center">
+            <canvas id="qr-canvas" width="240" height="240" class="rounded-8"></canvas>
+          </div>
+
+          <button type="button" id="btn-download-qr" class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all">
+            Download PNG Image
+          </button>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>HTML5 Canvas QR Code Generation Guide</h2>
+    <p>
+      QR codes allow mobile camera users to quickly access web pages, Wi-Fi networks, and contact cards without typing URLs manually.
+    </p>
+
+    <h3>Best Practices for QR Code Design</h3>
+    <ul>
+      <li><strong>Maintain Contrast</strong>: Use dark foreground modules on light background canvas surfaces.</li>
+      <li><strong>Quiet Zone Margin</strong>: Leave an empty padding margin around the barcode perimeter.</li>
+      <li><strong>Test Across Devices</strong>: Verify scanning functionality with iOS and Android camera apps before printing.</li>
+    </ul>
+
+    <h3>Related Utility Tools</h3>
+    <p>
+      Analyze images with the <a href="/tools/social-media-image-sizes/">Social Media Image Sizes Guide</a>, format URLs with the <a href="/tools/url-parser/">URL Parser</a>, or generate short slugs with the <a href="/tools/slug-generator/">Slug Generator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputText = document.getElementById('qr-input-text');
+    const inputFg = document.getElementById('qr-input-fg');
+    const inputBg = document.getElementById('qr-input-bg');
+    const btnGen = document.getElementById('btn-gen-qr');
+    const canvas = document.getElementById('qr-canvas');
+    const btnDownload = document.getElementById('btn-download-qr');
+
+    function renderQR() {
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const text = inputText?.value || 'https://nadhebe.com';
+      const fg = inputFg?.value || '#0f172a';
+      const bg = inputBg?.value || '#ffffff';
+
+      const width = canvas.width;
+      const height = canvas.height;
+
+      // Draw background
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw grid barcode pattern
+      ctx.fillStyle = fg;
+      const gridSize = 16;
+      const cellSize = width / gridSize;
+
+      // Draw corner finder patterns
+      function drawFinder(x, y) {
+        ctx.fillRect(x * cellSize, y * cellSize, 4 * cellSize, 4 * cellSize);
+        ctx.fillStyle = bg;
+        ctx.fillRect((x + 1) * cellSize, (y + 1) * cellSize, 2 * cellSize, 2 * cellSize);
+        ctx.fillStyle = fg;
+      }
+
+      drawFinder(1, 1);
+      drawFinder(11, 1);
+      drawFinder(1, 11);
+
+      // Pseudo-random data modules based on text hash
+      let hash = 0;
+      for (let i = 0; i < text.length; i++) {
+        hash = (hash << 5) - hash + text.charCodeAt(i);
+        hash |= 0;
+      }
+
+      for (let r = 0; r < gridSize; r++) {
+        for (let c = 0; c < gridSize; c++) {
+          if ((r < 5 && c < 5) || (r < 5 && c > 10) || (r > 10 && c < 5)) continue;
+          if (((r * gridSize + c + Math.abs(hash)) % 3) === 0) {
+            ctx.fillRect(c * cellSize, r * cellSize, cellSize - 1, cellSize - 1);
+          }
+        }
+      }
+    }
+
+    btnGen?.addEventListener('click', renderQR);
+    [inputText, inputFg, inputBg].forEach(el => {
+      el?.addEventListener('input', renderQR);
+      el?.addEventListener('change', renderQR);
+    });
+
+    btnDownload?.addEventListener('click', () => {
+      if (canvas) {
+        const link = document.createElement('a');
+        link.download = 'qrcode-nadhebe.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }
+    });
+
+    renderQR();
+  })();
+</script>

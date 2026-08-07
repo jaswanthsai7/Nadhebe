@@ -1,0 +1,290 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Canonical Tag Checker & Duplicate Content Inspector | Nadhebe';
+const h1 = 'Canonical Tag Checker & Duplicate Content Inspector';
+const description = 'Audit canonical HTML link tags, prevent search engine keyword cannibalization, detect cross-domain duplicates, and enforce clean indexing signals.';
+
+const faq = [
+  {
+    question: 'What is a canonical URL tag?',
+    answer: 'A canonical tag (`<link rel="canonical" href="https://example.com/page/" />`) is an HTML element that informs search engines which URL version is the master canonical copy of a page, preventing duplicate content issues.',
+  },
+  {
+    question: 'Why are self-referencing canonical tags recommended?',
+    answer: 'Self-referencing canonical tags (where a page points to its own URL) prevent syndication scrapers, URL parameter tracking strings (`?utm_source=`), and case sensitivity from splitting page rank equity.',
+  },
+  {
+    question: 'Should canonical URLs be absolute or relative?',
+    answer: 'Canonical URLs should ALWAYS be absolute HTTPS URLs (e.g. `https://example.com/page/`) rather than relative paths (`/page/`) to eliminate protocol and hostname ambiguity.',
+  },
+  {
+    question: 'Does Google always honor the canonical tag directive?',
+    answer: 'No. Canonical tags act as strong signals rather than strict directives. If Google considers a canonical target non-indexable, 404ing, or substantially different in content, it may select a different canonical URL.',
+  },
+  {
+    question: 'What is the difference between a 301 redirect and a canonical tag?',
+    answer: 'A 301 redirect automatically forwards site visitors to a new URL, whereas a canonical tag keeps both URLs accessible to humans while consolidating search engine ranking signals into one master URL.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="canonical-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="canonical-checker-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="PAGE & CANONICAL TAG INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="canon-input-page" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Current Page URL</label>
+            <input
+              id="canon-input-page"
+              type="url"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com/tools/canonical-checker/?utm_source=twitter"
+            />
+          </div>
+
+          <div>
+            <label for="canon-input-target" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Canonical Tag HREF Target</label>
+            <input
+              id="canon-input-target"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com/tools/canonical-checker/"
+            />
+          </div>
+
+          <div class="flex items-center justify-between gap-12 pt-8">
+            <button
+              type="button"
+              id="btn-canon-sample"
+              class="rounded-8 border border-border bg-surface2 px-12 py-6 text-caption font-mono text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              Load Sample Data
+            </button>
+            <button
+              type="button"
+              id="btn-canon-audit"
+              class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              Audit Canonical Tag
+            </button>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CANONICAL AUDIT REPORT">
+        <div class="space-y-20">
+          
+          <!-- Health Score Banner -->
+          <div id="canon-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-emerald-500/30 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Canonical Status</span>
+              <span id="canon-score-badge" class="rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300">100 / 100</span>
+            </div>
+            <h3 id="canon-status-headline" class="text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300">Valid Canonical Tag</h3>
+            <p id="canon-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Canonical URL is an absolute HTTPS target that strips tracking query parameters.
+            </p>
+          </div>
+
+          <!-- Audit Criteria Breakdown List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Indexing Signals Audit</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Absolute URL Protocol:</span>
+              <span id="check-absolute" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Absolute HTTPS</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Clean Query Parameters:</span>
+              <span id="check-query" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Clean (Parameters Stripped)</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Self-Referencing / Target Match:</span>
+              <span id="check-match" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Normalized Match</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Domain Scope:</span>
+              <span id="check-domain" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Internal Canonical</span>
+            </div>
+          </div>
+
+          <!-- Generated HTML Link Snippet -->
+          <div>
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Correct HTML Canonical Tag</span>
+              <button type="button" id="btn-copy-canon-code" class="rounded-6 bg-accent px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy HTML</button>
+            </div>
+            <pre id="canon-code-output" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 leading-relaxed"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Canonical Tag Optimization Guide — Preventing Duplicate Content Issues</h2>
+    <p>
+      Duplicate content is one of the most frequent technical SEO challenges facing growing websites. When search engine bots encounter identical or substantially similar content across multiple URLs, they struggle to determine which page should rank in search results, splitting page authority and diluting traffic potential.
+    </p>
+
+    <h3>When to Implement Canonical Link Tags</h3>
+    <ul>
+      <li><strong>E-Commerce Faceted Navigation</strong>: Products filtered by color, size, or price generate unique URLs (e.g. <code>?color=blue&size=m</code>) that should point to the primary product page.</li>
+      <li><strong>Tracking & UTM Parameters</strong>: Marketing campaigns add parameters (e.g. <code>?utm_source=newsletter</code>). Canonical tags ensure search engines index the clean URL.</li>
+      <li><strong>Cross-Domain Syndication</strong>: Republishing articles on Medium, Substack, or partner blogs requires cross-domain canonical tags pointing back to your original domain.</li>
+      <li><strong>HTTP/HTTPS & Trailing Slash Variants</strong>: Ensuring <code>http://</code>, <code>https://</code>, <code>www</code>, and non-<code>www</code> URLs resolve to one canonical standard.</li>
+    </ul>
+
+    <h3>Canonical HTML Tag Syntax</h3>
+    <p>Place the canonical element inside the <code>&lt;head&gt;</code> block of your HTML document:</p>
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400">&lt;head&gt;
+  &lt;link rel="canonical" href="https://nadhebe.com/tools/canonical-checker/" /&gt;
+&lt;/head&gt;</pre>
+
+    <h3>Common Canonical Tag Errors to Avoid</h3>
+    <ul>
+      <li><strong>Relative URLs</strong>: Using <code>href="https://example.com/relative-path/"</code> instead of a clean absolute canonical URL can cause crawler misinterpretation.</li>
+      <li><strong>Multiple Canonical Tags</strong>: Including more than one canonical tag on a single page causes search engine crawlers to ignore all canonical directives on that page.</li>
+      <li><strong>Canonicalizing to 404 or Redirected Pages</strong>: Pointing a canonical tag to a page that returns a 404 status code or 301 redirect forces Googlebot to choose its own fallback canonical.</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Combine canonical auditing with SERP snippet optimization using our <a href="/tools/serp-preview/">SERP Snippet Simulator</a>, audit XML sitemap indexability with the <a href="/tools/sitemap-validator/">Sitemap & Robots Analyzer</a>, or inspect meta tags with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputPage = document.getElementById('canon-input-page');
+    const inputTarget = document.getElementById('canon-input-target');
+    const btnAudit = document.getElementById('btn-canon-audit');
+    const btnSample = document.getElementById('btn-canon-sample');
+
+    const resultBanner = document.getElementById('canon-result-banner');
+    const scoreBadge = document.getElementById('canon-score-badge');
+    const statusHeadline = document.getElementById('canon-status-headline');
+    const statusSub = document.getElementById('canon-status-sub');
+
+    const checkAbs = document.getElementById('check-absolute');
+    const checkQuery = document.getElementById('check-query');
+    const checkMatch = document.getElementById('check-match');
+    const checkDomain = document.getElementById('check-domain');
+
+    const codeOutput = document.getElementById('canon-code-output');
+    const btnCopy = document.getElementById('btn-copy-canon-code');
+
+    function audit() {
+      const pageVal = inputPage?.value || '';
+      const targetVal = inputTarget?.value || '';
+
+      let score = 100;
+      let isAbs = false;
+      let isCleanQuery = true;
+      let isMatch = false;
+      let isInternal = true;
+
+      try {
+        const targetUrl = new URL(targetVal);
+        isAbs = targetUrl.protocol === 'https:' || targetUrl.protocol === 'http:';
+        if (!targetUrl.protocol.startsWith('https')) score -= 20;
+
+        if (targetUrl.search.length > 0) {
+          isCleanQuery = false;
+          score -= 30;
+        }
+
+        try {
+          const pageUrl = new URL(pageVal);
+          isInternal = pageUrl.hostname === targetUrl.hostname;
+          if (!isInternal) score -= 15;
+
+          const normPage = pageUrl.origin + pageUrl.pathname.replace(/\/$/, '');
+          const normTarget = targetUrl.origin + targetUrl.pathname.replace(/\/$/, '');
+          isMatch = normPage === normTarget;
+        } catch(e) {
+          isMatch = false;
+        }
+      } catch(e) {
+        isAbs = false;
+        score = 20;
+      }
+
+      if (checkAbs) {
+        checkAbs.textContent = isAbs ? '✓ Absolute HTTPS' : '✕ Relative / Invalid URL';
+        checkAbs.className = isAbs ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger';
+      }
+
+      if (checkQuery) {
+        checkQuery.textContent = isCleanQuery ? '✓ Clean (No Tracking Parameters)' : '✕ Contains Query Parameters';
+        checkQuery.className = isCleanQuery ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600';
+      }
+
+      if (checkMatch) {
+        checkMatch.textContent = isMatch ? '✓ Normalized Match' : '✕ Canonical Target Mismatch';
+        checkMatch.className = isMatch ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600';
+      }
+
+      if (checkDomain) {
+        checkDomain.textContent = isInternal ? '✓ Internal Domain Canonical' : '⚠ Cross-Domain Canonical';
+        checkDomain.className = isInternal ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-accent dark:text-accent-dark';
+      }
+
+      if (scoreBadge) scoreBadge.textContent = `${score} / 100`;
+
+      if (resultBanner && statusHeadline && statusSub) {
+        if (score >= 90) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusHeadline.textContent = 'Valid Canonical Tag ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = 'Canonical URL is a clean absolute HTTPS target.';
+        } else if (score >= 60) {
+          resultBanner.className = 'rounded-16 border border-amber-500/30 bg-amber-500/10 p-20 shadow-soft font-sans text-amber-900 dark:text-amber-200';
+          statusHeadline.textContent = 'Canonical Warnings ⚠';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300';
+          statusSub.textContent = 'Canonical URL contains query parameters or relative paths.';
+        } else {
+          resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          statusHeadline.textContent = 'Invalid Canonical Setup ✕';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          statusSub.textContent = 'Target URL is malformed or invalid.';
+        }
+      }
+
+      // Generate HTML Link Code
+      const finalUrl = targetVal ? targetVal : 'https://nadhebe.com/tools/canonical-checker/';
+      if (codeOutput) codeOutput.textContent = '<link rel="canonical" hr' + 'ef="' + finalUrl + '" />';
+    }
+
+    btnAudit?.addEventListener('click', audit);
+    inputPage?.addEventListener('input', audit);
+    inputTarget?.addEventListener('input', audit);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputPage) inputPage.value = 'https://nadhebe.com/tools/canonical-checker/?utm_source=twitter&ref=blog';
+      if (inputTarget) inputTarget.value = 'https://nadhebe.com/tools/canonical-checker/';
+      audit();
+    });
+
+    audit();
+  })();
+</script>

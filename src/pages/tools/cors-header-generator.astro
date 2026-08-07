@@ -1,0 +1,195 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CORS Access-Control Header Generator | Nadhebe';
+const h1 = 'CORS Access-Control Header Generator';
+const description = 'Generate Cross-Origin Resource Sharing (CORS) HTTP headers for API endpoints. Configure Access-Control-Allow-Origin, Methods, and Headers for Nginx and Express.';
+
+const faq = [
+  {
+    question: 'What is CORS (Cross-Origin Resource Sharing)?',
+    answer: 'CORS is an HTTP-header-based mechanism that allows a server to indicate any origins (domain, scheme, or port) other than its own from which a browser should permit loading resources.',
+  },
+  {
+    question: 'Why is `Access-Control-Allow-Origin: *` dangerous for authenticated APIs?',
+    answer: 'Using wildcard `*` with credentials (`Access-Control-Allow-Credentials: true`) is rejected by browsers and can expose sensitive user session data to third-party domains.',
+  },
+  {
+    question: 'What is a CORS preflight OPTIONS request?',
+    answer: 'A preflight request is an automatic `OPTIONS` HTTP request sent by browsers before non-simple requests (like `POST` with `Content-Type: application/json` or custom authorization headers).',
+  },
+  {
+    question: 'How do I allow multiple specific domains in CORS?',
+    answer: 'Inspect the incoming `Origin` HTTP request header dynamically in your server code or Nginx map block, returning that origin if it matches your whitelist.',
+  },
+  {
+    question: 'What is `Access-Control-Max-Age`?',
+    answer: '`Access-Control-Max-Age` specifies how many seconds preflight OPTIONS request results can be cached by browsers (e.g. `86400` for 24 hours), reducing API round-trips.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="cors-header-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="cors-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CORS DIRECTIVES CONFIGURATION">
+        <div class="space-y-16">
+          <div>
+            <label for="cors-input-origin" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Allowed Origin (Access-Control-Allow-Origin)</label>
+            <input
+              id="cors-input-origin"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com"
+            />
+          </div>
+
+          <div>
+            <label for="cors-input-methods" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Allowed Methods (Access-Control-Allow-Methods)</label>
+            <input
+              id="cors-input-methods"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="GET, POST, OPTIONS, PUT, DELETE"
+            />
+          </div>
+
+          <div>
+            <label for="cors-input-headers" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Allowed Headers (Access-Control-Allow-Headers)</label>
+            <input
+              id="cors-input-headers"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="Content-Type, Authorization, X-Requested-With"
+            />
+          </div>
+
+          <div class="flex items-center gap-8 pt-4">
+            <label class="flex items-center gap-8 cursor-pointer text-xs font-sans text-ink dark:text-ink-dark">
+              <input id="cors-chk-creds" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Allow Credentials (Access-Control-Allow-Credentials: true)</span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-cors"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate CORS Headers
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED CORS HEADER RESPONSE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">HTTP Headers Block</span>
+            <button type="button" id="btn-copy-cors" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Headers</button>
+          </div>
+
+          <pre id="cors-output-headers" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[140px] leading-relaxed whitespace-pre-wrap"></pre>
+
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Express.js Middleware Snippet</span>
+            <pre id="cors-output-express" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>CORS Security Configuration Guide — Safe API Endpoint Sharing</h2>
+    <p>
+      Cross-Origin Resource Sharing governs how web browsers make cross-domain HTTP requests. Proper CORS header configuration prevents unauthorized domain access while allowing legitimate frontend clients to communicate with API servers.
+    </p>
+
+    <h3>Key Access-Control Headers</h3>
+    <ul>
+      <li><code>Access-Control-Allow-Origin</code> — Specifies authorized client domains.</li>
+      <li><code>Access-Control-Allow-Methods</code> — Lists allowed HTTP methods (GET, POST, OPTIONS).</li>
+      <li><code>Access-Control-Allow-Headers</code> — Specifies allowed custom request headers.</li>
+      <li><code>Access-Control-Max-Age</code> — Caches preflight OPTIONS check duration.</li>
+    </ul>
+
+    <h3>Related Security Tools</h3>
+    <p>
+      Generate CSP headers with the <a href="/tools/csp-header-generator/">CSP Header Generator</a>, enforce HSTS with the <a href="/tools/hsts-header-generator/">HSTS Header Generator</a>, or test JWT tokens with the <a href="/tools/jwt-inspector/">JWT Inspector</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputOrigin = document.getElementById('cors-input-origin');
+    const inputMethods = document.getElementById('cors-input-methods');
+    const inputHeaders = document.getElementById('cors-input-headers');
+    const chkCreds = document.getElementById('cors-chk-creds');
+    const btnGen = document.getElementById('btn-gen-cors');
+
+    const outputHeaders = document.getElementById('cors-output-headers');
+    const outputExpress = document.getElementById('cors-output-express');
+    const btnCopy = document.getElementById('btn-copy-cors');
+
+    function generate() {
+      const origin = inputOrigin?.value || 'https://nadhebe.com';
+      const methods = inputMethods?.value || 'GET, POST, OPTIONS';
+      const headers = inputHeaders?.value || 'Content-Type, Authorization';
+      const creds = chkCreds?.checked ?? true;
+
+      const lines = [
+        `Access-Control-Allow-Origin: ${origin}`,
+        `Access-Control-Allow-Methods: ${methods}`,
+        `Access-Control-Allow-Headers: ${headers}`,
+        `Access-Control-Max-Age: 86400`
+      ];
+
+      if (creds) lines.push(`Access-Control-Allow-Credentials: true`);
+
+      const expressSnippet = [
+        `app.use((req, res, next) => {`,
+        `  res.header('Access-Control-Allow-Origin', '${origin}');`,
+        `  res.header('Access-Control-Allow-Methods', '${methods}');`,
+        `  res.header('Access-Control-Allow-Headers', '${headers}');`,
+        `  ${creds ? "res.header('Access-Control-Allow-Credentials', 'true');" : ""}`,
+        `  if (req.method === 'OPTIONS') return res.sendStatus(204);`,
+        `  next();`,
+        `});`
+      ].filter(Boolean).join('\n');
+
+      if (outputHeaders) outputHeaders.textContent = lines.join('\n');
+      if (outputExpress) outputExpress.textContent = expressSnippet;
+    }
+
+    btnGen?.addEventListener('click', generate);
+    [inputOrigin, inputMethods, inputHeaders, chkCreds].forEach(el => {
+      el?.addEventListener('input', generate);
+      el?.addEventListener('change', generate);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputHeaders) {
+        navigator.clipboard.writeText(outputHeaders.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Headers'), 2000);
+      }
+    });
+
+    generate();
+  })();
+</script>

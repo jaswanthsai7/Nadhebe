@@ -1,0 +1,182 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'AI Prompt Optimizer & System Prompt Refiner | Nadhebe';
+const h1 = 'AI Prompt Optimizer & System Prompt Refiner';
+const description = 'Optimize AI prompts for GPT-4o, Claude 3.5, and Gemini 1.5. Add clear roles, constraints, context variables, and structured output rules to eliminate hallucinations.';
+
+const faq = [
+  {
+    question: 'What is AI prompt optimization?',
+    answer: 'Prompt optimization transforms vague instructions into structured system prompts with explicit roles, context, rules, negative constraints, and output format requirements to get accurate LLM outputs.',
+  },
+  {
+    question: 'Why are role definitions important in system prompts?',
+    answer: 'Assigning a role (e.g. "You are a Senior Technical Editor") anchors the LLM\'s internal attention mechanisms to domain-specific vocabulary and tone expectations.',
+  },
+  {
+    question: 'How do negative constraints prevent LLM hallucinations?',
+    answer: 'Explicit negative constraints (e.g. "Do not assume facts outside the provided text; do not invent URLs") restrict model generation boundaries.',
+  },
+  {
+    question: 'What is the recommended structure for production system prompts?',
+    answer: 'Production system prompts should include 5 components: Role & Identity, Task Goal, Input Context, Constraints & Rules, and Output Format specification (e.g. JSON schema or Markdown).',
+  },
+  {
+    question: 'Does prompt engineering work across all LLM models?',
+    answer: 'Yes. Structured prompting techniques improve generation accuracy across OpenAI GPT-4o, Anthropic Claude 3.5, Google Gemini 1.5, and open-source models like Llama 3.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="prompt-optimizer"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="prompt-optimizer-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="PROMPT INPUT & PARAMETERS">
+        <div class="space-y-16">
+          <div>
+            <label for="popt-input-role" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Assigned AI Role / Persona</label>
+            <input
+              id="popt-input-role"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="Senior Technical Content Strategist & SEO Specialist"
+            />
+          </div>
+
+          <div>
+            <label for="popt-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Raw Prompt / Task Instruction</label>
+            <textarea
+              id="popt-input-raw"
+              rows="4"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >Write a technical guide explaining how to implement 301 redirects in Nginx and Cloudflare for developers.</textarea>
+          </div>
+
+          <div>
+            <label for="popt-select-format" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Desired Output Format</label>
+            <select
+              id="popt-select-format"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+            >
+              <option value="Markdown">Structured Markdown (Headings, Code Blocks)</option>
+              <option value="JSON">Strict JSON Object Schema</option>
+              <option value="XML">XML Tagged Response</option>
+              <option value="BulletList">Concise Bulleted Checklist</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            id="btn-optimize-prompt"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Optimize System Prompt
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="OPTIMIZED PRODUCTION SYSTEM PROMPT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Structured Prompt Output</span>
+            <button type="button" id="btn-copy-prompt" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Prompt</button>
+          </div>
+
+          <pre id="popt-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[320px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>AI Prompt Optimization Guide — Crafting Production System Prompts</h2>
+    <p>
+      Getting reliable, high-quality responses from Large Language Models (LLMs) requires clear prompt engineering. Vague or open-ended prompts result in generic, wordy, or inaccurate outputs. Structuring system prompts with explicit roles, context, rules, and output schemas guarantees consistent results across OpenAI, Anthropic, and Google models.
+    </p>
+
+    <h3>The 5 Core Elements of a Production Prompt</h3>
+    <ol>
+      <li><strong>Identity & Role</strong>: Defines model persona, domain expertise, and communication tone.</li>
+      <li><strong>Core Mission</strong>: Specifies the precise task goal without ambiguity.</li>
+      <li><strong>Input Context</strong>: Provides background facts, source documents, or variables.</li>
+      <li><strong>Negative Constraints</strong>: List forbidden behaviors, assumption rules, and style restrictions.</li>
+      <li><strong>Output Schema</strong>: Defines exact output formatting (e.g. Markdown headers, JSON key definitions).</li>
+    </ol>
+
+    <h3>Related AI Tools</h3>
+    <p>
+      Test variables with our <a href="/tools/prompt-template-variable-tester/">Prompt Variable Tester</a>, calculate API costs using the <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>, or count tokens with the <a href="/tools/llm-token-counter-multi-model/">Multi-Model Token Counter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRole = document.getElementById('popt-input-role');
+    const inputRaw = document.getElementById('popt-input-raw');
+    const selectFormat = document.getElementById('popt-select-format');
+    const btnOptimize = document.getElementById('btn-optimize-prompt');
+
+    const outputText = document.getElementById('popt-output-text');
+    const btnCopy = document.getElementById('btn-copy-prompt');
+
+    function optimize() {
+      const role = inputRole?.value || 'Senior AI Assistant';
+      const raw = inputRaw?.value || 'Task description';
+      const format = selectFormat?.value || 'Markdown';
+
+      const prompt = [
+        `<identity>`,
+        `You are a ${role}. You provide concise, accurate, production-ready outputs.`,
+        `</identity>`,
+        ``,
+        `<task>`,
+        `${raw}`,
+        `</task>`,
+        ``,
+        `<rules>`,
+        `1. Provide actionable, high-quality response content without fluff or meta-commentary.`,
+        `2. Do not make assumptions outside the provided context.`,
+        `3. Follow strict ${format} formatting standards.`,
+        `4. Include clear code snippets and worked examples where applicable.`,
+        `</rules>`,
+        ``,
+        `<output_format>`,
+        `Format your final response in clean ${format}.`,
+        `</output_format>`,
+      ].join('\n');
+
+      if (outputText) outputText.textContent = prompt;
+    }
+
+    btnOptimize?.addEventListener('click', optimize);
+    [inputRole, inputRaw, selectFormat].forEach(el => {
+      el?.addEventListener('input', optimize);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Prompt'), 2000);
+      }
+    });
+
+    optimize();
+  })();
+</script>

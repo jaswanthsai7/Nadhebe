@@ -1,0 +1,134 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'X-Frame-Options Clickjacking Protection Generator | Nadhebe';
+const h1 = 'X-Frame-Options Clickjacking Protection Generator';
+const description = 'Generate X-Frame-Options HTTP headers to prevent iframe clickjacking attacks on Nginx, Apache, Cloudflare, and Vercel.';
+
+const faq = [
+  {
+    question: 'What is the X-Frame-Options header?',
+    answer: 'The `X-Frame-Options` HTTP response header indicates whether a browser should be allowed to render a page inside a `<frame>`, `<iframe>`, `<embed>`, or `<object>` tag, protecting against clickjacking.',
+  },
+  {
+    question: 'What is the difference between DENY and SAMEORIGIN?',
+    answer: '`DENY` blocks all framing attempts across any domain (including your own). `SAMEORIGIN` permits framing only if the embedding site shares the exact same origin domain.',
+  },
+  {
+    question: 'How does CSP frame-ancestors relate to X-Frame-Options?',
+    answer: '`Content-Security-Policy: frame-ancestors` is the modern replacement for `X-Frame-Options`. However, serving both headers ensures protection across legacy browsers.',
+  },
+  {
+    question: 'Why is ALLOW-FROM deprecated?',
+    answer: 'The `ALLOW-FROM uri` directive is deprecated by modern browser standards and unsupported in Chrome/Safari. Use CSP `frame-ancestors uri` instead.',
+  },
+  {
+    question: 'How do I add X-Frame-Options in Nginx?',
+    answer: 'Add `add_header X-Frame-Options "DENY" always;` or `add_header X-Frame-Options "SAMEORIGIN" always;` in your Nginx server block.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="x-frame-options-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="xframe-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CLICKJACKING DIRECTIVE SELECTION">
+        <div class="space-y-16">
+          <div>
+            <label for="xframe-select-action" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Clickjacking Protection Mode</label>
+            <select
+              id="xframe-select-action"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="DENY">DENY (Block All Framing Attempts Completely)</option>
+              <option value="SAMEORIGIN">SAMEORIGIN (Allow Framing Only From Same Domain)</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-xframe"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate Header Directives
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED HEADER DIRECTIVE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">HTTP Header Output</span>
+            <button type="button" id="btn-copy-xframe" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Header</button>
+          </div>
+
+          <pre id="xframe-output-header" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[60px] leading-relaxed whitespace-pre-wrap"></pre>
+
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Nginx Config Directive</span>
+            <pre id="xframe-output-nginx" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>X-Frame-Options & Clickjacking Prevention Guide</h2>
+    <p>
+      Clickjacking attacks trick users into clicking invisible iframe overlays placed over legitimate UI buttons (e.g. "Delete Account" or "Transfer Funds"). Enforcing X-Frame-Options headers eliminates framing risks.
+    </p>
+
+    <h3>Related Security Tools</h3>
+    <p>
+      Generate CSP headers with the <a href="/tools/csp-header-generator/">CSP Header Generator</a>, enforce HTTPS with the <a href="/tools/hsts-header-generator/">HSTS Header Generator</a>, or test CORS policy with the <a href="/tools/cors-header-generator/">CORS Header Generator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectAction = document.getElementById('xframe-select-action');
+    const btnGen = document.getElementById('btn-gen-xframe');
+
+    const outputHeader = document.getElementById('xframe-output-header');
+    const outputNginx = document.getElementById('xframe-output-nginx');
+    const btnCopy = document.getElementById('btn-copy-xframe');
+
+    function generate() {
+      const mode = selectAction?.value || 'DENY';
+      const fullHeader = `X-Frame-Options: ${mode}`;
+      const nginxDirective = `add_header X-Frame-Options "${mode}" always;`;
+
+      if (outputHeader) outputHeader.textContent = fullHeader;
+      if (outputNginx) outputNginx.textContent = nginxDirective;
+    }
+
+    btnGen?.addEventListener('click', generate);
+    selectAction?.addEventListener('change', generate);
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputHeader) {
+        navigator.clipboard.writeText(outputHeader.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Header'), 2000);
+      }
+    });
+
+    generate();
+  })();
+</script>

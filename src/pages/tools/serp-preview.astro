@@ -1,0 +1,339 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Google SERP Snippet Preview Tool – Mobile & Desktop Simulator | Nadhebe';
+const h1 = 'Google SERP Snippet Preview Tool';
+const description = 'Simulate exact desktop and mobile Google Search result snippets in real-time. Calculate title tag pixel widths, prevent description truncation, and boost organic CTR.';
+
+const faq = [
+  {
+    question: 'How does the SERP preview tool measure title tag length?',
+    answer: 'Google measures title tag display limits in pixels (~600px on desktop, ~400px on mobile) using an 18px Arial/Roboto font, rather than strict character counts. Our tool calculates both character length and exact pixel width.',
+  },
+  {
+    question: 'What is the optimal character length for meta title tags?',
+    answer: 'Aim for 50–60 characters (under 580 pixels). Titles longer than 60 characters risk getting truncated with an ellipsis (...) by Google crawlers.',
+  },
+  {
+    question: 'What is the recommended length for meta descriptions?',
+    answer: 'Keep meta descriptions between 140–160 characters (under 960 pixels) for desktop, and under 120 characters for mobile SERPs.',
+  },
+  {
+    question: 'Why does Google rewrite meta titles and descriptions?',
+    answer: 'Google rewrites titles when they are missing, keyword-stuffed, repetitive, or fail to accurately reflect user search intent. Providing clear, concise titles reduces rewrite frequency.',
+  },
+  {
+    question: 'Does optimizing SERP snippet CTR improve rankings?',
+    answer: 'Higher Click-Through Rates (CTR) signal strong user intent relevance to search algorithms, driving organic traffic growth and improving overall ranking stability.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="serp-preview"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="serp-preview-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="SERP METADATA INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="serp-input-title" class="block text-caption font-semibold text-ink dark:text-ink-dark">Page Title Tag</label>
+              <span id="serp-title-counter" class="font-mono text-xs text-muted dark:text-muted-dark">0 / 60 chars (0px)</span>
+            </div>
+            <input
+              id="serp-input-title"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans"
+              value="Nadhebe – AI Research, Tech Articles & Developer Tools"
+            />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="serp-input-desc" class="block text-caption font-semibold text-ink dark:text-ink-dark">Meta Description</label>
+              <span id="serp-desc-counter" class="font-mono text-xs text-muted dark:text-muted-dark">0 / 160 chars</span>
+            </div>
+            <textarea
+              id="serp-input-desc"
+              rows="3"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-sans leading-relaxed"
+            >Production-ready AI research, developer guides, and privacy-first browser utilities for engineers and technical creators.</textarea>
+          </div>
+
+          <div>
+            <label for="serp-input-url" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target URL</label>
+            <input
+              id="serp-input-url"
+              type="url"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com/tools/serp-preview/"
+            />
+          </div>
+
+          <div>
+            <label for="serp-input-breadcrumb" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Breadcrumb Path</label>
+            <input
+              id="serp-input-breadcrumb"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="nadhebe.com › tools › serp-preview"
+            />
+          </div>
+
+          <!-- Device Mode Toggle -->
+          <div>
+            <label class="block text-caption font-semibold text-ink dark:text-ink-dark mb-6">Device View Mode</label>
+            <div class="flex items-center gap-8">
+              <button
+                type="button"
+                id="btn-mode-desktop"
+                class="rounded-8 bg-accent px-16 py-6 text-caption font-sans font-semibold text-white cursor-pointer shadow-subtle transition-all"
+              >
+                Desktop View (~600px)
+              </button>
+              <button
+                type="button"
+                id="btn-mode-mobile"
+                class="rounded-8 border border-border bg-surface2 px-16 py-6 text-caption font-sans font-semibold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+              >
+                Mobile View (~400px)
+              </button>
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="LIVE GOOGLE SERP PREVIEW">
+        <div class="space-y-20">
+          
+          <!-- Desktop Snippet Box -->
+          <div class="rounded-16 border border-border bg-surface p-20 shadow-soft dark:border-border-dark dark:bg-surface-dark font-sans">
+            <div class="flex items-center justify-between mb-12">
+              <span id="serp-view-label" class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Google Desktop SERP Simulator</span>
+              <span id="serp-status-badge" class="rounded-pill bg-emerald-500/10 px-10 py-3 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">Optimal Length</span>
+            </div>
+
+            <!-- Google Snippet Wrapper -->
+            <div id="serp-snippet-container" class="max-w-[600px] space-y-4">
+              <!-- Site Icon & URL Breadcrumb -->
+              <div class="flex items-center gap-8 text-xs text-[#202124] dark:text-[#bdc1c6] font-sans">
+                <div class="w-26 h-26 rounded-full bg-accent/20 flex items-center justify-center font-bold text-accent text-xs">N</div>
+                <div class="truncate font-normal">
+                  <span id="serp-render-domain" class="font-semibold block text-[14px]">nadhebe.com</span>
+                  <span id="serp-render-breadcrumb" class="text-[12px] text-[#4d5156] dark:text-[#9aa0a6]">https://nadhebe.com › tools › serp-preview</span>
+                </div>
+              </div>
+
+              <!-- Title -->
+              <h3 id="serp-render-title" class="text-[20px] font-normal leading-[1.3] text-[#1a0dab] dark:text-[#8ab4f8] hover:underline cursor-pointer truncate">
+                Nadhebe – AI Research, Tech Articles & Developer Tools
+              </h3>
+
+              <!-- Description -->
+              <p id="serp-render-desc" class="text-[14px] font-normal leading-[1.58] text-[#4d5156] dark:text-[#bdc1c6]">
+                Production-ready AI research, developer guides, and privacy-first browser utilities for engineers and technical creators.
+              </p>
+            </div>
+
+            <!-- Pixel Width Meter -->
+            <div class="mt-16 pt-12 border-t border-border/40 dark:border-border-dark/40 space-y-4 font-mono text-xs">
+              <div class="flex items-center justify-between text-muted dark:text-muted-dark">
+                <span>Pixel Width Meter (Max ~580px)</span>
+                <span id="serp-pixel-val">340px / 580px</span>
+              </div>
+              <div class="w-full h-8 rounded-full bg-surface2 dark:bg-surface2-dark overflow-hidden">
+                <div id="serp-pixel-bar" class="h-full bg-emerald-500 transition-all duration-150" style="width: 58%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HTML Meta Tag Generator -->
+          <div>
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Generated Title & Description Tags</span>
+              <button type="button" id="btn-copy-serp-html" class="rounded-6 bg-accent px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy HTML</button>
+            </div>
+            <pre id="serp-html-output" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 max-h-[140px]"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Google SERP Snippet Simulator — Comprehensive Guide & CTR Optimization</h2>
+    <p>
+      Your search engine result page (SERP) snippet is the digital storefront of your website. When users search on Google, your title tag, URL breadcrumb, and meta description determine whether they click through to your site or choose a competitor's listing.
+    </p>
+
+    <h3>Why Pixel Width Matters More Than Character Count</h3>
+    <p>
+      While SEO advice traditionally recommends keeping title tags under 60 characters, Google actually measures title display boundaries in <strong>pixels</strong>. Google allocates a maximum display container width of <strong>580 to 600 pixels</strong> on desktop browsers and roughly <strong>380 to 400 pixels</strong> on mobile devices.
+    </p>
+    <p>
+      Because capital letters like <code>W</code> or <code>M</code> take up significantly more pixel width than narrow letters like <code>i</code> or <code>l</code>, two titles with identical character counts can look completely different in Google search results:
+    </p>
+    <ul>
+      <li><strong>Wide Title (50 chars, 610px)</strong>: <code>WWW.MYWEBSITE.COM WILL ALWAYS WIN HUGE AWARDS NOW</code> → Truncated: <code>WWW.MYWEBSITE.COM WILL ALWAYS WIN HUGE...</code></li>
+      <li><strong>Narrow Title (58 chars, 520px)</strong>: <code>Illinois initial civil litigation filing guidelines for 2026</code> → Renders fully without truncation!</li>
+    </ul>
+
+    <h3>Best Practices for High-CTR Meta Titles</h3>
+    <ul>
+      <li><strong>Front-Load Core Keywords</strong>: Place your primary target keyword within the first 30 characters.</li>
+      <li><strong>Include a Clear Value Proposition</strong>: Highlight what users gain (e.g. <em>Free Tool, Step-by-Step Guide, 2026 Benchmarks</em>).</li>
+      <li><strong>Add Brand Distinction</strong>: End titles with your site name using clean separators like <code>|</code> or <code>–</code>.</li>
+      <li><strong>Avoid Keyword Stuffing</strong>: Repeating terms triggers Google's title rewrite algorithm.</li>
+    </ul>
+
+    <h3>Best Practices for Meta Descriptions</h3>
+    <ul>
+      <li><strong>Optimal Length</strong>: Keep descriptions between 140–155 characters for desktop and ~120 characters for mobile.</li>
+      <li><strong>Include a Call to Action (CTA)</strong>: Use active verbs like <em>Calculate, Discover, Analyze, Learn, Compare</em>.</li>
+      <li><strong>Match Search Intent</strong>: Address the exact question or pain point behind the target query.</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Pair SERP snippet optimization with structured data using our <a href="/tools/schema-generator/">JSON-LD Schema Generator</a>, audit page metadata with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>, or find new content opportunities with <a href="/tools/opportunity-radar/">Nadhebe Opportunity Radar</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputTitle = document.getElementById('serp-input-title');
+    const inputDesc = document.getElementById('serp-input-desc');
+    const inputUrl = document.getElementById('serp-input-url');
+    const inputBc = document.getElementById('serp-input-breadcrumb');
+
+    const btnDesktop = document.getElementById('btn-mode-desktop');
+    const btnMobile = document.getElementById('btn-mode-mobile');
+
+    const renderTitle = document.getElementById('serp-render-title');
+    const renderDesc = document.getElementById('serp-render-desc');
+    const renderDomain = document.getElementById('serp-render-domain');
+    const renderBc = document.getElementById('serp-render-breadcrumb');
+
+    const titleCounter = document.getElementById('serp-title-counter');
+    const descCounter = document.getElementById('serp-desc-counter');
+    const statusBadge = document.getElementById('serp-status-badge');
+    const viewLabel = document.getElementById('serp-view-label');
+
+    const pixelVal = document.getElementById('serp-pixel-val');
+    const pixelBar = document.getElementById('serp-pixel-bar');
+    const htmlOutput = document.getElementById('serp-html-output');
+    const btnCopy = document.getElementById('btn-copy-serp-html');
+    const snippetBox = document.getElementById('serp-snippet-container');
+
+    let currentMode = 'desktop';
+
+    // Canvas element for pixel measurement
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function getPixelWidth(text, font) {
+      if (!ctx) return text.length * 9;
+      ctx.font = font || '18px Arial, sans-serif';
+      return Math.round(ctx.measureText(text).width);
+    }
+
+    function update() {
+      const titleText = inputTitle?.value || '';
+      const descText = inputDesc?.value || '';
+      const urlText = inputUrl?.value || 'https://nadhebe.com/';
+      const bcText = inputBc?.value || 'nadhebe.com › tools';
+
+      const fontSpec = currentMode === 'mobile' ? '16px Roboto, sans-serif' : '18px Arial, sans-serif';
+      const maxPx = currentMode === 'mobile' ? 380 : 580;
+      const titlePx = getPixelWidth(titleText, fontSpec);
+
+      if (titleCounter) titleCounter.textContent = `${titleText.length} / 60 chars (${titlePx}px)`;
+      if (descCounter) descCounter.textContent = `${descText.length} / 160 chars`;
+      if (pixelVal) pixelVal.textContent = `${titlePx}px / ${maxPx}px`;
+
+      const pct = Math.min(100, Math.round((titlePx / maxPx) * 100));
+      if (pixelBar) {
+        pixelBar.style.width = `${pct}%`;
+        if (titlePx > maxPx) {
+          pixelBar.className = 'h-full bg-danger transition-all duration-150';
+        } else {
+          pixelBar.className = 'h-full bg-emerald-500 transition-all duration-150';
+        }
+      }
+
+      if (statusBadge) {
+        if (titleText.length === 0) {
+          statusBadge.textContent = 'Empty Title';
+          statusBadge.className = 'rounded-pill bg-danger/10 px-10 py-3 font-mono text-xs font-semibold text-danger';
+        } else if (titlePx > maxPx) {
+          statusBadge.textContent = `Too Wide (${titlePx}px > ${maxPx}px)`;
+          statusBadge.className = 'rounded-pill bg-amber-500/10 px-10 py-3 font-mono text-xs font-semibold text-amber-600';
+        } else {
+          statusBadge.textContent = 'Optimal Display Length';
+          statusBadge.className = 'rounded-pill bg-emerald-500/10 px-10 py-3 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400';
+        }
+      }
+
+      if (renderTitle) renderTitle.textContent = titleText || 'Page Title Placeholder';
+      if (renderDesc) renderDesc.textContent = descText || 'Page meta description snippet placeholder...';
+      if (renderBc) renderBc.textContent = bcText;
+
+      try {
+        const u = new URL(urlText);
+        if (renderDomain) renderDomain.textContent = u.hostname;
+      } catch(e) {
+        if (renderDomain) renderDomain.textContent = 'nadhebe.com';
+      }
+
+      // Generate HTML code
+      const t = 'title', m = 'meta';
+      const code = `<${t}>${titleText}</${t}>\n<${m} name="description" content="${descText}" />`;
+      if (htmlOutput) htmlOutput.textContent = code;
+    }
+
+    btnDesktop?.addEventListener('click', () => {
+      currentMode = 'desktop';
+      btnDesktop.className = 'rounded-8 bg-accent px-16 py-6 text-caption font-sans font-semibold text-white cursor-pointer shadow-subtle transition-all';
+      btnMobile.className = 'rounded-8 border border-border bg-surface2 px-16 py-6 text-caption font-sans font-semibold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all';
+      if (viewLabel) viewLabel.textContent = 'Google Desktop SERP Simulator';
+      if (snippetBox) snippetBox.style.maxWidth = '600px';
+      update();
+    });
+
+    btnMobile?.addEventListener('click', () => {
+      currentMode = 'mobile';
+      btnMobile.className = 'rounded-8 bg-accent px-16 py-6 text-caption font-sans font-semibold text-white cursor-pointer shadow-subtle transition-all';
+      btnDesktop.className = 'rounded-8 border border-border bg-surface2 px-16 py-6 text-caption font-sans font-semibold text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all';
+      if (viewLabel) viewLabel.textContent = 'Google Mobile SERP Simulator';
+      if (snippetBox) snippetBox.style.maxWidth = '380px';
+      update();
+    });
+
+    [inputTitle, inputDesc, inputUrl, inputBc].forEach(el => {
+      el?.addEventListener('input', update);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (htmlOutput) {
+        navigator.clipboard.writeText(htmlOutput.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy HTML'), 2000);
+      }
+    });
+
+    update();
+  })();
+</script>

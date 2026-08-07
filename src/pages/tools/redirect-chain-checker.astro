@@ -1,0 +1,272 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = '301 Redirect Chain Checker & Link Equity Auditor | Nadhebe';
+const h1 = '301 Redirect Chain Checker & Link Equity Auditor';
+const description = 'Trace multi-hop 301 and 302 HTTP redirect chains, eliminate crawl budget waste, prevent PageRank link equity dilution, and audit URL migration paths.';
+
+const faq = [
+  {
+    question: 'What is a redirect chain?',
+    answer: 'A redirect chain occurs when a initial URL redirects to a second URL, which then redirects to a third URL (e.g. `URL A` -> `URL B` -> `URL C`), causing multiple HTTP requests before reaching the final destination.',
+  },
+  {
+    question: 'Why are redirect chains bad for SEO?',
+    answer: 'Redirect chains slow down page load times, waste search engine crawl budget, increase server latency, and cause Googlebot to abandon crawling after 3–5 redirect hops.',
+  },
+  {
+    question: 'Do 301 redirects pass 100% of PageRank link equity?',
+    answer: 'While a single 301 redirect passes nearly all link equity, multi-hop redirect chains accumulate marginal PageRank loss and increase the risk of broken links.',
+  },
+  {
+    question: 'What is the difference between a 301 and a 302 redirect?',
+    answer: 'A 301 redirect is a permanent redirect that signals search engines to transfer indexation to the new URL. A 302 redirect is temporary, instructing crawlers to keep indexing the original URL.',
+  },
+  {
+    question: 'How do I resolve a redirect chain?',
+    answer: 'Update your server rules or `.htaccess` / Cloudflare redirects so the initial URL (`URL A`) points directly to the final destination URL (`URL C`), bypassing intermediate hops.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="redirect-chain-checker"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="redirect-chain-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="REDIRECT CHAIN SIMULATOR INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="red-input-url" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Initial Request URL</label>
+            <input
+              id="red-input-url"
+              type="url"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="http://nadhebe.com/tools/redirect-chain"
+            />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="red-input-steps" class="block text-caption font-semibold text-ink dark:text-ink-dark">Simulated Redirect Path Hops (Line per Hop)</label>
+              <button type="button" id="btn-load-sample-chain" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Chain</button>
+            </div>
+            <textarea
+              id="red-input-steps"
+              rows="6"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >{`301 -> http://www.nadhebe.com/tools/redirect-chain
+301 -> https://www.nadhebe.com/tools/redirect-chain/
+301 -> https://nadhebe.com/tools/redirect-chain-checker/`}</textarea>
+          </div>
+
+          <div class="flex items-center justify-between gap-12 pt-8">
+            <button
+              type="button"
+              id="btn-fix-direct"
+              class="rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-mono text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer transition-all"
+            >
+              Simulate Single Direct Hop Fix
+            </button>
+            <button
+              type="button"
+              id="btn-audit-chain"
+              class="rounded-8 bg-accent px-20 py-8 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              Trace Redirect Path
+            </button>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="REDIRECT PATH & LINK EQUITY AUDIT">
+        <div class="space-y-20">
+          
+          <!-- Path Health Status Banner -->
+          <div id="red-result-banner" class="rounded-16 border p-20 shadow-soft font-sans transition-all border-amber-500/30 bg-amber-500/10 text-amber-900 dark:text-amber-200">
+            <div class="flex items-center justify-between mb-8">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Redirect Path Status</span>
+              <span id="red-status-badge" class="rounded-pill bg-amber-500/20 px-10 py-3 font-mono text-xs font-semibold text-amber-700 dark:text-amber-300">3 HOPS DETECTED</span>
+            </div>
+            <h3 id="red-status-headline" class="text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300">Redirect Chain Warning</h3>
+            <p id="red-status-sub" class="text-caption text-ink2 dark:text-ink2-dark">
+              Path requires 3 intermediate HTTP requests before reaching the target.
+            </p>
+          </div>
+
+          <!-- Redirect Hops Visualization List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Traced HTTP Redirect Hops</span>
+            <div id="red-hops-list" class="space-y-6">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Summary Statistics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-hop-count" class="text-h3 font-bold text-amber-600 dark:text-amber-400">3</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Total Hops</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-latency-est" class="text-h3 font-bold text-accent dark:text-accent-dark">+360ms</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Est. Latency</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-equity-retained" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">92%</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Link Equity</div>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Redirect Chain Optimization Guide — Eliminating PageRank Dilution</h2>
+    <p>
+      HTTP redirects are necessary tools when migrating content, restructuring URLs, or consolidating domain protocols (`http://` to `https://`). However, when multiple redirects build up over time (e.g. `http://example.com` -> `https://example.com` -> `https://www.example.com/page`), they form a <strong>redirect chain</strong>.
+    </p>
+
+    <h3>Why Redirect Chains Harm SEO & Page Speed</h3>
+    <ul>
+      <li><strong>Increased Server Latency</strong>: Every redirect hop requires an extra HTTP round-trip, adding 100ms–200ms of latency per hop on mobile networks.</li>
+      <li><strong>Crawl Budget Waste</strong>: Googlebot imposes a strict limit on the number of redirect hops it follows (usually stopping after 5 hops), causing crawlers to abandon the page.</li>
+      <li><strong>PageRank Dilution</strong>: While single 301 redirects preserve link equity, multi-step chains increase loss risks and trigger ranking drops.</li>
+    </ul>
+
+    <h3>Types of HTTP Redirect Status Codes</h3>
+    <ul>
+      <li><code>301 Moved Permanently</code> — Permanent redirect. Passes search engine indexation and link equity to destination URL.</li>
+      <li><code>302 Found</code> — Temporary redirect. Instructs crawlers to maintain indexation on original URL.</li>
+      <li><code>307 Temporary Redirect</code> — HTTP/1.1 temporary redirect preserving request method.</li>
+      <li><code>308 Permanent Redirect</code> — HTTP/1.1 permanent redirect preserving request method.</li>
+    </ul>
+
+    <h3>How to Fix Redirect Chains</h3>
+    <p>
+      Audit your server config files (Nginx, Apache <code>.htaccess</code>, or Cloudflare Page Rules) and update initial redirect triggers so they point directly to the final canonical URL in a single hop:
+    </p>
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400"># Before (Chain): http://example.com -> https://example.com -> https://example.com/page/
+# After (Direct 1-Hop): http://example.com -> https://example.com/page/</pre>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Combine redirect auditing with canonical link verification using our <a href="/tools/canonical-checker/">Canonical Tag Checker</a>, validate XML sitemap health with the <a href="/tools/sitemap-validator/">Sitemap & Robots Analyzer</a>, or simulate search engine results with the <a href="/tools/serp-preview/">SERP Snippet Simulator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputUrl = document.getElementById('red-input-url');
+    const inputSteps = document.getElementById('red-input-steps');
+    const btnAudit = document.getElementById('btn-audit-chain');
+    const btnSample = document.getElementById('btn-load-sample-chain');
+    const btnFix = document.getElementById('btn-fix-direct');
+
+    const resultBanner = document.getElementById('red-result-banner');
+    const statusBadge = document.getElementById('red-status-badge');
+    const statusHeadline = document.getElementById('red-status-headline');
+    const statusSub = document.getElementById('red-status-sub');
+
+    const hopsList = document.getElementById('red-hops-list');
+    const statHopCount = document.getElementById('stat-hop-count');
+    const statLatency = document.getElementById('stat-latency-est');
+    const statEquity = document.getElementById('stat-equity-retained');
+
+    function audit() {
+      const initialUrl = inputUrl?.value || '';
+      const stepsRaw = inputSteps?.value || '';
+
+      const lines = stepsRaw.split('\n').map(l => l.trim()).filter(Boolean);
+      const hopCount = lines.length;
+
+      if (statHopCount) statHopCount.textContent = String(hopCount);
+      if (statLatency) statLatency.textContent = `+${hopCount * 120}ms`;
+
+      const equity = Math.max(70, 100 - (hopCount * 4));
+      if (statEquity) statEquity.textContent = `${equity}%`;
+
+      if (hopsList) {
+        hopsList.innerHTML = '';
+        
+        // Initial request step
+        const initDiv = document.createElement('div');
+        initDiv.className = 'flex items-center justify-between p-8 rounded-6 bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark truncate';
+        initDiv.innerHTML = `<span class="truncate">0. ${initialUrl}</span><span class="font-bold text-accent dark:text-accent-dark ml-8 shrink-0">REQUEST</span>`;
+        hopsList.appendChild(initDiv);
+
+        lines.forEach((line, index) => {
+          const parts = line.split('->');
+          const code = parts[0] ? parts[0].trim() : '301';
+          const target = parts[1] ? parts[1].trim() : line;
+
+          const div = document.createElement('div');
+          div.className = 'flex items-center justify-between p-8 rounded-6 border border-border/40 bg-surface dark:border-border-dark/40 dark:bg-surface-dark truncate';
+          div.innerHTML = `<span class="truncate">${index + 1}. ${target}</span><span class="font-bold text-amber-600 dark:text-amber-400 ml-8 shrink-0">${code}</span>`;
+          hopsList.appendChild(div);
+        });
+      }
+
+      if (resultBanner && statusBadge && statusHeadline && statusSub) {
+        if (hopCount <= 1) {
+          resultBanner.className = 'rounded-16 border border-emerald-500/30 bg-emerald-500/10 p-20 shadow-soft font-sans text-emerald-900 dark:text-emerald-200';
+          statusBadge.textContent = '1 HOP (OPTIMAL)';
+          statusBadge.className = 'rounded-pill bg-emerald-500/20 px-10 py-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300';
+          statusHeadline.textContent = 'Direct 1-Hop Redirect ✓';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-emerald-800 dark:text-emerald-300';
+          statusSub.textContent = 'Initial URL redirects directly to destination without multi-hop chains.';
+        } else if (hopCount <= 3) {
+          resultBanner.className = 'rounded-16 border border-amber-500/30 bg-amber-500/10 p-20 shadow-soft font-sans text-amber-900 dark:text-amber-200';
+          statusBadge.textContent = `${hopCount} HOPS DETECTED`;
+          statusBadge.className = 'rounded-pill bg-amber-500/20 px-10 py-3 font-mono text-xs font-semibold text-amber-700 dark:text-amber-300';
+          statusHeadline.textContent = 'Redirect Chain Warning ⚠';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-amber-800 dark:text-amber-300';
+          statusSub.textContent = `Path requires ${hopCount} intermediate HTTP requests before reaching target.`;
+        } else {
+          resultBanner.className = 'rounded-16 border border-danger/30 bg-danger/10 p-20 shadow-soft font-sans text-danger';
+          statusBadge.textContent = `${hopCount} HOPS (EXCESSIVE)`;
+          statusBadge.className = 'rounded-pill bg-danger/20 px-10 py-3 font-mono text-xs font-semibold text-danger';
+          statusHeadline.textContent = 'High-Risk Redirect Chain ✕';
+          statusHeadline.className = 'text-h3 font-bold mb-4 text-danger';
+          statusSub.textContent = 'Excessive redirect hops waste crawl budget and slow down response time.';
+        }
+      }
+    }
+
+    btnAudit?.addEventListener('click', audit);
+    inputUrl?.addEventListener('input', audit);
+    inputSteps?.addEventListener('input', audit);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputUrl) inputUrl.value = 'http://nadhebe.com/tools/redirect-chain';
+      if (inputSteps) {
+        inputSteps.value = `301 -> http://www.nadhebe.com/tools/redirect-chain
+301 -> https://www.nadhebe.com/tools/redirect-chain/
+301 -> https://nadhebe.com/tools/redirect-chain-checker/`;
+      }
+      audit();
+    });
+
+    btnFix?.addEventListener('click', () => {
+      if (inputSteps) {
+        inputSteps.value = `301 -> https://nadhebe.com/tools/redirect-chain-checker/`;
+      }
+      audit();
+    });
+
+    audit();
+  })();
+</script>

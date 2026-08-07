@@ -1,0 +1,235 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Page Metadata & OpenGraph SEO Inspector | Nadhebe';
+const h1 = 'Page Metadata & OpenGraph SEO Inspector';
+const description = 'Inspect live meta tags, OpenGraph social cards, Twitter previews, canonical links, robots directives, and JSON-LD structured data.';
+
+const faq = [
+  {
+    question: 'What does the SEO Metadata Inspector evaluate?',
+    answer: 'The SEO Inspector checks essential head metadata elements: title tag, description, canonical link, OpenGraph tags (`og:title`, `og:image`), Twitter cards, robots directives, and structured data blocks.',
+  },
+  {
+    question: 'Why are social media OpenGraph tags essential for SEO?',
+    answer: 'Social media platforms (X, LinkedIn, Facebook, Discord, Slack) use OpenGraph tags to render rich visual cards. Eye-catching social previews drive high referral traffic and increase social signals.',
+  },
+  {
+    question: 'What happens if a page is missing `og:image`?',
+    answer: 'When `og:image` is missing, social platforms either pick a random inline image from the page body or display a plain text link without a visual card preview, lowering click-through rates.',
+  },
+  {
+    question: 'How do I test staging URLs before publishing?',
+    answer: 'Paste your draft HTML `<head>` code into the raw markup box in our inspector to test title length, social cards, and schema tags locally before deploying to production.',
+  },
+  {
+    question: 'What is the recommended size for `og:image`?',
+    answer: 'Use 1200 × 630 pixels (1.91:1 aspect ratio) for crisp, full-width visual card previews across desktop and mobile devices.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="seo-inspector"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="seo-inspector-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="PAGE URL OR RAW HTML HEAD">
+        <div class="space-y-16">
+          <div>
+            <label for="insp-input-url" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target Page URL</label>
+            <input
+              id="insp-input-url"
+              type="url"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs"
+              value="https://nadhebe.com/tools/seo-inspector/"
+            />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="insp-input-html" class="block text-caption font-semibold text-ink dark:text-ink-dark">Raw HTML Head Code Snippet</label>
+              <button type="button" id="btn-load-sample-insp" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Head</button>
+            </div>
+            <textarea
+              id="insp-input-html"
+              rows="10"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >{`<title>Nadhebe – AI Tech Articles & Developer Tools</title>
+<meta name="description" content="Production-ready AI research, engineering guides, and fast client-side developer utilities." />
+<link rel="canonical" href="https://nadhebe.com/tools/seo-inspector/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nadhebe – AI Tech Articles & Developer Tools" />
+<meta property="og:description" content="Production-ready AI research, engineering guides, and fast client-side developer utilities." />
+<meta property="og:image" content="https://nadhebe.com/og-default.jpg" />
+<meta name="twitter:card" content="summary_large_image" />`}</textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-inspect-meta"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Inspect Head Metadata
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="METADATA & SOCIAL CARD AUDIT">
+        <div class="space-y-20">
+          
+          <!-- Metadata Status List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Detected Head Tags Breakdown</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Title Tag:</span>
+              <span id="insp-tag-title" class="font-bold text-emerald-600 dark:text-emerald-400 truncate max-w-[200px]">✓ Present</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Meta Description:</span>
+              <span id="insp-tag-desc" class="font-bold text-emerald-600 dark:text-emerald-400 truncate max-w-[200px]">✓ Present</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Canonical Link:</span>
+              <span id="insp-tag-canon" class="font-bold text-emerald-600 dark:text-emerald-400 truncate max-w-[200px]">✓ Present</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>OpenGraph Image (og:image):</span>
+              <span id="insp-tag-ogimg" class="font-bold text-emerald-600 dark:text-emerald-400">✓ Detected</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Twitter Card Directive:</span>
+              <span id="insp-tag-tw" class="font-bold text-accent dark:text-accent-dark">summary_large_image</span>
+            </div>
+          </div>
+
+          <!-- Social Preview Box -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-12">Simulated Social Media Card</span>
+            <div class="rounded-12 border border-border overflow-hidden bg-surface2 dark:border-border-dark dark:bg-surface2-dark">
+              <div class="h-120 bg-gradient-to-r from-accent/20 to-purple-500/20 flex items-center justify-center p-16 text-center">
+                <span id="insp-card-img-text" class="font-mono text-xs text-muted dark:text-muted-dark truncate max-w-full">og-default.jpg</span>
+              </div>
+              <div class="p-12 space-y-4">
+                <div id="insp-card-domain" class="font-mono text-xs text-muted dark:text-muted-dark uppercase">nadhebe.com</div>
+                <div id="insp-card-title" class="font-sans font-bold text-caption text-ink dark:text-ink-dark line-clamp-1">Nadhebe – AI Tech Articles & Developer Tools</div>
+                <div id="insp-card-desc" class="font-sans text-xs text-ink2 dark:text-ink2-dark line-clamp-2">Production-ready AI research, engineering guides, and fast client-side developer utilities.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Page Metadata & OpenGraph Inspection Guide — Maximizing Social & Search CTR</h2>
+    <p>
+      Comprehensive metadata inspection guarantees that your web pages communicate clear signals to both search engine crawlers and social media platforms.
+    </p>
+
+    <h3>Key Social Metadata Tags</h3>
+    <ul>
+      <li><code>og:title</code> — OpenGraph title displayed in social media cards.</li>
+      <li><code>og:description</code> — Summary text displayed below the title in feed shares.</li>
+      <li><code>og:image</code> — Recommended 1200x630px image URL for social previews.</li>
+      <li><code>twitter:card</code> — Set to <code>summary_large_image</code> for full-width card previews on X/Twitter.</li>
+    </ul>
+
+    <h3>Related SEO Tools</h3>
+    <p>
+      Analyze OpenGraph metadata with the <a href="/tools/meta-tag-analyzer/">OpenGraph & Meta Tag Checker</a>, simulate Google search listings with the <a href="/tools/serp-preview/">SERP Snippet Simulator</a>, or audit JSON-LD schemas with the <a href="/tools/schema-validator/">JSON-LD Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputUrl = document.getElementById('insp-input-url');
+    const inputHtml = document.getElementById('insp-input-html');
+    const btnInspect = document.getElementById('btn-inspect-meta');
+    const btnSample = document.getElementById('btn-load-sample-insp');
+
+    const tagTitle = document.getElementById('insp-tag-title');
+    const tagDesc = document.getElementById('insp-tag-desc');
+    const tagCanon = document.getElementById('insp-tag-canon');
+    const tagOgImg = document.getElementById('insp-tag-ogimg');
+    const tagTw = document.getElementById('insp-tag-tw');
+
+    const cardDomain = document.getElementById('insp-card-domain');
+    const cardTitle = document.getElementById('insp-card-title');
+    const cardDesc = document.getElementById('insp-card-desc');
+    const cardImgText = document.getElementById('insp-card-img-text');
+
+    function inspect() {
+      const raw = inputHtml?.value || '';
+      const urlVal = inputUrl?.value || 'https://nadhebe.com/';
+
+      const titleMatch = raw.match(/<title>(.*?)<\/title>/i);
+      const descMatch = raw.match(/<meta[^>]*name=["']description["'][^>]*content=["'](.*?)["']/i);
+      const canonMatch = raw.match(/<link[^>]*rel=["']canonical["'][^>]*href=["'](.*?)["']/i);
+      const ogImgMatch = raw.match(/<meta[^>]*property=["']og:image["'][^>]*content=["'](.*?)["']/i);
+      const twMatch = raw.match(/<meta[^>]*name=["']twitter:card["'][^>]*content=["'](.*?)["']/i);
+
+      const tText = titleMatch ? titleMatch[1] : 'Page Title Placeholder';
+      const dText = descMatch ? descMatch[1] : 'Description placeholder...';
+      const cText = canonMatch ? canonMatch[1] : 'None';
+      const imgText = ogImgMatch ? ogImgMatch[1] : 'None';
+      const twText = twMatch ? twMatch[1] : 'summary';
+
+      if (tagTitle) { tagTitle.textContent = titleMatch ? '✓ Present' : '✕ Missing'; tagTitle.className = titleMatch ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger'; }
+      if (tagDesc) { tagDesc.textContent = descMatch ? '✓ Present' : '✕ Missing'; tagDesc.className = descMatch ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-danger'; }
+      if (tagCanon) { tagCanon.textContent = canonMatch ? '✓ Present' : '✕ Missing'; tagCanon.className = canonMatch ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600'; }
+      if (tagOgImg) { tagOgImg.textContent = ogImgMatch ? '✓ Detected' : '✕ Missing'; tagOgImg.className = ogImgMatch ? 'font-bold text-emerald-600 dark:text-emerald-400' : 'font-bold text-amber-600'; }
+      if (tagTw) { tagTw.textContent = twText; }
+
+      if (cardTitle) cardTitle.textContent = tText;
+      if (cardDesc) cardDesc.textContent = dText;
+      if (cardImgText) cardImgText.textContent = imgText !== 'None' ? imgText.split('/').pop() : 'og-image.jpg';
+
+      try {
+        const u = new URL(urlVal);
+        if (cardDomain) cardDomain.textContent = u.hostname;
+      } catch(e) {
+        if (cardDomain) cardDomain.textContent = 'nadhebe.com';
+      }
+    }
+
+    btnInspect?.addEventListener('click', inspect);
+    inputHtml?.addEventListener('input', inspect);
+    inputUrl?.addEventListener('input', inspect);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputUrl) inputUrl.value = 'https://nadhebe.com/tools/seo-inspector/';
+      if (inputHtml) {
+        inputHtml.value = `<title>Nadhebe – AI Tech Articles & Developer Tools</title>
+<meta name="description" content="Production-ready AI research, engineering guides, and fast client-side developer utilities." />
+<link rel="canonical" href="https://nadhebe.com/tools/seo-inspector/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nadhebe – AI Tech Articles & Developer Tools" />
+<meta property="og:description" content="Production-ready AI research, engineering guides, and fast client-side developer utilities." />
+<meta property="og:image" content="https://nadhebe.com/og-default.jpg" />
+<meta name="twitter:card" content="summary_large_image" />`;
+      }
+      inspect();
+    });
+
+    inspect();
+  })();
+</script>

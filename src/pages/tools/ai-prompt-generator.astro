@@ -1,0 +1,181 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Multi-Persona AI Prompt Generator | Nadhebe';
+const h1 = 'Multi-Persona AI Prompt Generator';
+const description = 'Generate structured system prompts for ChatGPT, Claude, and Gemini across Software Engineering, SEO, Product Management, and Content Strategy roles.';
+
+const faq = [
+  {
+    question: 'What is a multi-persona AI prompt generator?',
+    answer: 'A multi-persona AI prompt generator builds tailored system prompts configured with domain-specific expert personas (e.g. Senior Software Architect, SEO Content Strategist, QA Engineer) to steer LLM responses.',
+  },
+  {
+    question: 'Why does persona framing improve LLM output accuracy?',
+    answer: 'Framing an LLM with a specific persona conditions its probability distribution to favor technical terminology, rigorous analytical frameworks, and industry best practices.',
+  },
+  {
+    question: 'How do I use generated prompts with ChatGPT or Claude Desktop?',
+    answer: 'Copy the generated system prompt and paste it into the "System Instructions" or "Custom Instructions" field in ChatGPT, or at the top of your prompt window in Claude.',
+  },
+  {
+    question: 'Can I include custom context variables in the generator?',
+    answer: 'Yes! You can insert template variables like `{{code_snippet}}`, `{{target_keyword}}`, or `{{user_query}}` that will be replaced dynamically at runtime.',
+  },
+  {
+    question: 'Which AI models are supported?',
+    answer: 'Generated prompts follow standard XML-tagged structural rules compatible with OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet, Google Gemini 1.5 Pro, and Meta Llama 3.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="ai-prompt-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="ai-prompt-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="PERSONA & MISSION SELECTION">
+        <div class="space-y-16">
+          <div>
+            <label for="gen-select-persona" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Target Expert Persona</label>
+            <select
+              id="gen-select-persona"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+            >
+              <option value="Senior Software Engineer">Senior Software Engineer (Code Review, Refactoring, Security)</option>
+              <option value="SEO Content Strategist">SEO Content Strategist (Search Intent, Keyword Coverage, EEAT)</option>
+              <option value="Technical Writer">Technical Writer (API Specs, Documentation, Architecture Guides)</option>
+              <option value="Product Manager">Product Manager (PRD Specs, Feature Prioritization, User Stories)</option>
+              <option value="DevOps & Security Engineer">DevOps & Security Engineer (CI/CD Pipelines, Infrastructure as Code)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="gen-input-mission" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Core Mission Goal</label>
+            <textarea
+              id="gen-input-mission"
+              rows="3"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >Perform a thorough code review and security audit of the provided TypeScript API endpoint file.</textarea>
+          </div>
+
+          <div>
+            <label for="gen-input-rules" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Strict Constraints & Rules (Line per Rule)</label>
+            <textarea
+              id="gen-input-rules"
+              rows="4"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            >Never assume uninitialized variables.
+Flag any SQL injection or XSS risks immediately.
+Provide exact diff code blocks for suggested refactors.</textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-build-gen-prompt"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate Multi-Persona System Prompt
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED SYSTEM PROMPT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">XML Structured Prompt</span>
+            <button type="button" id="btn-copy-gen-prompt" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Prompt</button>
+          </div>
+
+          <pre id="gen-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[320px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Multi-Persona AI Prompt Engineering Guide</h2>
+    <p>
+      Creating targeted system prompts with domain persona framing significantly enhances LLM outputs. Whether you are generating technical code reviews, SEO strategy briefs, or API documentation, structured prompt templates provide reliable consistency.
+    </p>
+
+    <h3>Benefits of XML Tagged Prompt Structures</h3>
+    <ul>
+      <li><strong>Clear Boundary Separation</strong>: Models like Claude and GPT-4 parse <code>&lt;role&gt;</code>, <code>&lt;context&gt;</code>, and <code>&lt;rules&gt;</code> tags without mixing instructions with data.</li>
+      <li><strong>Reduced Hallucination Rates</strong>: Explicit negative constraints restrict output space.</li>
+      <li><strong>Reusable System Templates</strong>: Save templates for team-wide developer and content workflows.</li>
+    </ul>
+
+    <h3>Related AI Tools</h3>
+    <p>
+      Refine vague prompts with our <a href="/tools/prompt-optimizer/">AI Prompt Optimizer</a>, count model tokens with the <a href="/tools/llm-token-counter-multi-model/">Multi-Model Token Counter</a>, or calculate API costs with the <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectPersona = document.getElementById('gen-select-persona');
+    const inputMission = document.getElementById('gen-input-mission');
+    const inputRules = document.getElementById('gen-input-rules');
+    const btnBuild = document.getElementById('btn-build-gen-prompt');
+
+    const outputText = document.getElementById('gen-output-text');
+    const btnCopy = document.getElementById('btn-copy-gen-prompt');
+
+    function build() {
+      const persona = selectPersona?.value || 'Senior Software Engineer';
+      const mission = inputMission?.value || 'Task description';
+      const rulesRaw = inputRules?.value || '';
+
+      const ruleLines = rulesRaw.split('\n').map(l => l.trim()).filter(Boolean);
+
+      const prompt = [
+        `<role>`,
+        `You are a world-class ${persona}.`,
+        `</role>`,
+        ``,
+        `<mission>`,
+        `${mission}`,
+        `</mission>`,
+        ``,
+        `<rules>`,
+        ...ruleLines.map((r, i) => `${i + 1}. ${r}`),
+        `</rules>`,
+        ``,
+        `<context>`,
+        `Target Input Code / Text: {{input_content}}`,
+        `</context>`,
+      ].join('\n');
+
+      if (outputText) outputText.textContent = prompt;
+    }
+
+    btnBuild?.addEventListener('click', build);
+    [selectPersona, inputMission, inputRules].forEach(el => {
+      el?.addEventListener('input', build);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Prompt'), 2000);
+      }
+    });
+
+    build();
+  })();
+</script>

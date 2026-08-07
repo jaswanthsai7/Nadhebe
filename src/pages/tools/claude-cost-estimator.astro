@@ -1,0 +1,224 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'Anthropic Claude 3.5 Sonnet & Haiku Cost Estimator | Nadhebe';
+const h1 = 'Anthropic Claude 3.5 Sonnet & Haiku Cost Estimator';
+const description = 'Calculate API pricing for Anthropic Claude 3.5 Sonnet, Claude 3.5 Haiku, and Claude 3 Opus. Estimate monthly spend based on prompt tokens, completion tokens, and prompt caching.';
+
+const faq = [
+  {
+    question: 'What are the current pricing rates for Anthropic Claude 3.5 Sonnet?',
+    answer: 'Claude 3.5 Sonnet costs $3.00 per 1M input tokens ($0.30 per 1M prompt cache write / $0.30 read) and $15.00 per 1M output tokens.',
+  },
+  {
+    question: 'How much cheaper is Claude 3.5 Haiku compared to Sonnet?',
+    answer: 'Claude 3.5 Haiku costs $0.80 per 1M input tokens and $4.00 per 1M output tokens, providing ultra-fast execution for lightweight agent tasks.',
+  },
+  {
+    question: 'How does Anthropic Prompt Caching work?',
+    answer: 'Prompt caching allows you to cache static context (like system instructions or codebases) for 5 minutes. Cache reads receive an 90% discount ($0.30 vs $3.00 per 1M input tokens).',
+  },
+  {
+    question: 'What is the maximum context window supported by Claude 3.5 Sonnet?',
+    answer: 'Claude 3.5 Sonnet supports a 200,000 token context window with up to 8,192 output tokens per request.',
+  },
+  {
+    question: 'How do batch request discounts work with Anthropic Messages Batch API?',
+    answer: 'Anthropic Message Batches provide a 50% discount on input and output tokens for non-urgent tasks processed asynchronously within 24 hours.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="claude-cost-estimator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="claude-cost-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CLAUDE MODEL & TOKEN USAGE">
+        <div class="space-y-16">
+          <div>
+            <label for="cld-select-model" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Select Anthropic Claude Model</label>
+            <select
+              id="cld-select-model"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="sonnet">Claude 3.5 Sonnet ($3.00 in / $15.00 out per 1M)</option>
+              <option value="haiku">Claude 3.5 Haiku ($0.80 in / $4.00 out per 1M)</option>
+              <option value="opus">Claude 3 Opus ($15.00 in / $75.00 out per 1M)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="cld-input-reqs" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Monthly API Requests</label>
+            <input
+              id="cld-input-reqs"
+              type="number"
+              min="100"
+              step="1000"
+              value="50000"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="cld-input-in-tokens" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Input Tokens / Req</label>
+              <input id="cld-input-in-tokens" type="number" min="10" step="100" value="2000" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+            <div>
+              <label for="cld-input-out-tokens" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Output Tokens / Req</label>
+              <input id="cld-input-out-tokens" type="number" min="10" step="100" value="600" class="w-full rounded-8 border border-border bg-surface2 px-8 py-6 text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+          </div>
+
+          <div class="flex items-center gap-8 pt-4">
+            <label class="flex items-center gap-8 cursor-pointer text-xs font-sans text-ink dark:text-ink-dark">
+              <input id="cld-chk-cached" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Enable Prompt Cache Reads (90% discount on cached inputs)</span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            id="btn-calc-cld"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate Claude API Cost
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="ANTHROPIC API COST ESTIMATE">
+        <div class="space-y-20">
+          
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-3 gap-8 font-mono text-center">
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-cld-monthly" class="text-h3 font-bold text-emerald-600 dark:text-emerald-400">$480.00</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Est. Monthly Cost</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-cld-per-req" class="text-h3 font-bold text-accent dark:text-accent-dark">$0.0096</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Cost / Request</div>
+            </div>
+            <div class="rounded-10 border border-border bg-surface2/60 p-10 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-cld-tokens-mo" class="text-h3 font-bold text-ink dark:text-ink-dark">130M</div>
+              <div class="text-[11px] text-muted dark:text-muted-dark uppercase mt-2">Total Tokens/Mo</div>
+            </div>
+          </div>
+
+          <!-- Cost Breakdown List -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-10 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Cost Distribution</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Input Tokens Cost (100M):</span>
+              <span id="stat-cld-incost" class="font-bold text-emerald-600 dark:text-emerald-400">$30.00 / mo</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>Output Tokens Cost (30M):</span>
+              <span id="stat-cld-outcost" class="font-bold text-accent dark:text-accent-dark">$450.00 / mo</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Annual Equivalent API Spend:</span>
+              <span id="stat-cld-annual" class="font-bold text-emerald-600 dark:text-emerald-400">$5,760.00 / yr</span>
+            </div>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>Anthropic Claude API Pricing & Prompt Caching Guide</h2>
+    <p>
+      Anthropic offers models tailored for heavy coding tasks (Claude 3.5 Sonnet), rapid lightweight sub-agents (Claude 3.5 Haiku), and complex reasoning (Claude 3 Opus).
+    </p>
+
+    <h3>Anthropic Pricing Rates (per 1,000,000 Tokens)</h3>
+    <ul>
+      <li><strong>Claude 3.5 Sonnet</strong>: $3.00 Input / $0.30 Cached Read / $15.00 Output</li>
+      <li><strong>Claude 3.5 Haiku</strong>: $0.80 Input / $0.08 Cached Read / $4.00 Output</li>
+      <li><strong>Claude 3 Opus</strong>: $15.00 Input / $1.50 Cached Read / $75.00 Output</li>
+    </ul>
+
+    <h3>Related AI Tools</h3>
+    <p>
+      Calculate OpenAI API costs with the <a href="/tools/openai-cost-estimator/">OpenAI Cost Estimator</a>, compare model pricing with the <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>, or build MCP configs with the <a href="/tools/claude-desktop-mcp-config-maker/">Claude Desktop MCP Maker</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectModel = document.getElementById('cld-select-model');
+    const inputReqs = document.getElementById('cld-input-reqs');
+    const inputIn = document.getElementById('cld-input-in-tokens');
+    const inputOut = document.getElementById('cld-input-out-tokens');
+    const chkCached = document.getElementById('cld-chk-cached');
+    const btnCalc = document.getElementById('btn-calc-cld');
+
+    const pricing = {
+      'sonnet': { in: 3.00, out: 15.00 },
+      'haiku': { in: 0.80, out: 4.00 },
+      'opus': { in: 15.00, out: 75.00 }
+    };
+
+    const statMonthly = document.getElementById('stat-cld-monthly');
+    const statPerReq = document.getElementById('stat-cld-per-req');
+    const statTotalTok = document.getElementById('stat-cld-tokens-mo');
+    const statInCost = document.getElementById('stat-cld-incost');
+    const statOutCost = document.getElementById('stat-cld-outcost');
+    const statAnnual = document.getElementById('stat-cld-annual');
+
+    function calculate() {
+      const model = selectModel?.value || 'sonnet';
+      const reqs = parseInt(inputReqs?.value || '50000', 10);
+      const inToks = parseInt(inputIn?.value || '2000', 10);
+      const outToks = parseInt(inputOut?.value || '600', 10);
+      const isCached = chkCached?.checked ?? true;
+
+      const rates = pricing[model] || pricing['sonnet'];
+      const effectiveInRate = isCached ? rates.in * 0.1 : rates.in;
+
+      const totalInM = (reqs * inToks) / 1000000;
+      const totalOutM = (reqs * outToks) / 1000000;
+
+      const monthlyInCost = totalInM * effectiveInRate;
+      const monthlyOutCost = totalOutM * rates.out;
+      const totalMonthly = monthlyInCost + monthlyOutCost;
+
+      const costPerReq = reqs > 0 ? (totalMonthly / reqs) : 0;
+      const totalToksM = totalInM + totalOutM;
+
+      if (statMonthly) statMonthly.textContent = `$${totalMonthly.toFixed(2)}`;
+      if (statPerReq) statPerReq.textContent = `$${costPerReq.toFixed(4)}`;
+      if (statTotalTok) statTotalTok.textContent = `${totalToksM.toFixed(1)}M`;
+
+      if (statInCost) statInCost.textContent = `$${monthlyInCost.toFixed(2)} / mo`;
+      if (statOutCost) statOutCost.textContent = `$${monthlyOutCost.toFixed(2)} / mo`;
+      if (statAnnual) statAnnual.textContent = `$${(totalMonthly * 12).toFixed(2)} / yr`;
+    }
+
+    btnCalc?.addEventListener('click', calculate);
+    [selectModel, inputReqs, inputIn, inputOut, chkCached].forEach(el => {
+      el?.addEventListener('input', calculate);
+      el?.addEventListener('change', calculate);
+    });
+
+    calculate();
+  })();
+</script>

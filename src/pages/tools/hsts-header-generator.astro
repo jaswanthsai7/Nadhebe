@@ -1,0 +1,168 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'HTTP Strict Transport Security (HSTS) Header Generator | Nadhebe';
+const h1 = 'HTTP Strict Transport Security (HSTS) Header Generator';
+const description = 'Generate HTTP Strict-Transport-Security headers for Nginx, Apache, Cloudflare, and Vercel. Enforce HTTPS connections and qualify for HSTS preload submission.';
+
+const faq = [
+  {
+    question: 'What is an HSTS header?',
+    answer: 'HTTP Strict Transport Security (`Strict-Transport-Security`) is a web security header that forces browsers to interact with your site exclusively over encrypted HTTPS connections, preventing SSL stripping attacks.',
+  },
+  {
+    question: 'What is the recommended max-age for HSTS preload eligibility?',
+    answer: 'To qualify for the Chrome/Firefox HSTS Preload List, the `max-age` directive must be set to at least 31536000 seconds (1 year) and include both `includeSubDomains` and `preload`.',
+  },
+  {
+    question: 'Why should I test with a short max-age first?',
+    answer: 'Setting a long `max-age` (e.g. 1 year) before ensuring all subdomains have valid SSL certificates can lock users out of subdomains that do not support HTTPS.',
+  },
+  {
+    question: 'What does `includeSubDomains` do?',
+    answer: '`includeSubDomains` applies the HSTS policy to all current and future subdomains (e.g. `api.example.com`, `blog.example.com`).',
+  },
+  {
+    question: 'How do I submit my site to the official HSTS Preload List?',
+    answer: 'Once your site serves the header with `max-age=31536000; includeSubDomains; preload`, submit your root domain to hstspreload.org.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="hsts-header-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="hsts-generator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="HSTS HEADER CONFIGURATION">
+        <div class="space-y-16">
+          <div>
+            <label for="hsts-select-duration" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Max-Age Duration</label>
+            <select
+              id="hsts-select-duration"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="31536000">1 Year (31,536,000s) — Preload Eligible</option>
+              <option value="63072000">2 Years (63,072,000s) — Recommended</option>
+              <option value="2592000">30 Days (2,592,000s) — Staging Test</option>
+              <option value="86400">1 Day (86,400s) — Initial Sandbox</option>
+            </select>
+          </div>
+
+          <div class="space-y-8 font-sans text-xs pt-4">
+            <label class="flex items-center gap-8 cursor-pointer">
+              <input id="chk-subdomains" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>Include Subdomains (includeSubDomains)</span>
+            </label>
+            <label class="flex items-center gap-8 cursor-pointer">
+              <input id="chk-preload" type="checkbox" checked class="rounded border-border text-accent focus:ring-accent dark:border-border-dark" />
+              <span>HSTS Preload List Tag (preload)</span>
+            </label>
+          </div>
+
+          <button
+            type="button"
+            id="btn-gen-hsts"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Generate HSTS Directives
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="GENERATED HSTS HEADER DIRECTIVE">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">HTTP Header Output</span>
+            <button type="button" id="btn-copy-hsts" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Header</button>
+          </div>
+
+          <pre id="hsts-output-header" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[80px] leading-relaxed whitespace-pre-wrap"></pre>
+
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Nginx Config Directive</span>
+            <pre id="hsts-output-nginx" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>HSTS Header Best Practices & Preload Guide</h2>
+    <p>
+      HSTS eliminates man-in-the-middle SSL stripping attacks by enforcing client-side HTTPS caching directly in user browsers.
+    </p>
+
+    <h3>HSTS Preload List Submission Criteria</h3>
+    <ol>
+      <li>Serve a valid SSL/TLS certificate on the root domain.</li>
+      <li>Redirect HTTP traffic to HTTPS on port 443.</li>
+      <li>Serve the HSTS header on the root domain with <code>max-age</code> of at least 31536000 seconds.</li>
+      <li>Include the <code>includeSubDomains</code> directive.</li>
+      <li>Include the <code>preload</code> directive.</li>
+    </ol>
+
+    <h3>Related Security Tools</h3>
+    <p>
+      Generate CSP headers with the <a href="/tools/csp-header-generator/">CSP Header Generator</a>, prevent clickjacking with the <a href="/tools/x-frame-options-generator/">X-Frame-Options Generator</a>, or test CORS policy with the <a href="/tools/cors-header-generator/">CORS Header Generator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectDuration = document.getElementById('hsts-select-duration');
+    const chkSubdomains = document.getElementById('chk-subdomains');
+    const chkPreload = document.getElementById('chk-preload');
+    const btnGen = document.getElementById('btn-gen-hsts');
+
+    const outputHeader = document.getElementById('hsts-output-header');
+    const outputNginx = document.getElementById('hsts-output-nginx');
+    const btnCopy = document.getElementById('btn-copy-hsts');
+
+    function generate() {
+      const duration = selectDuration?.value || '31536000';
+      const sub = chkSubdomains?.checked ?? true;
+      const preload = chkPreload?.checked ?? true;
+
+      let directive = `max-age=${duration}`;
+      if (sub) directive += `; includeSubDomains`;
+      if (preload) directive += `; preload`;
+
+      const fullHeader = `Strict-Transport-Security: ${directive}`;
+      const nginxDirective = `add_header Strict-Transport-Security "${directive}" always;`;
+
+      if (outputHeader) outputHeader.textContent = fullHeader;
+      if (outputNginx) outputNginx.textContent = nginxDirective;
+    }
+
+    btnGen?.addEventListener('click', generate);
+    [selectDuration, chkSubdomains, chkPreload].forEach(el => {
+      el?.addEventListener('change', generate);
+      el?.addEventListener('input', generate);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputHeader) {
+        navigator.clipboard.writeText(outputHeader.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy Header'), 2000);
+      }
+    });
+
+    generate();
+  })();
+</script>
