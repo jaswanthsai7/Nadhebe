@@ -19537,6 +19537,41 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "yaml-validator"
     ],
     "icon": "check-circle"
+  },
+  {
+    "id": "util-dd-1",
+    "slug": "date-difference",
+    "title": "Date Difference & Business Days Calculator",
+    "name": "Date Difference & Business Days Calculator",
+    "href": "/tools/date-difference/",
+    "component": "src/pages/tools/date-difference.astro",
+    "status": "implemented",
+    "category": "Utility",
+    "categorySlug": "utility",
+    "mode": "calculator",
+    "description": "Calculate calendar days, weeks, and working business days between two dates.",
+    "seo": {
+      "title": "Date Difference & Business Days Calculator | Nadhebe",
+      "description": "Calculate the exact number of days, weeks, months, and working business days between two calendar dates client-side.",
+      "keywords": [
+        "date difference calculator",
+        "business days calculator",
+        "days between two dates",
+        "work days calculator",
+        "calendar duration online"
+      ]
+    },
+    "relatedTools": [
+      "cron-explainer",
+      "slug-generator",
+      "case-converter",
+      "json-repair"
+    ],
+    "tags": [
+      "utility",
+      "date-difference"
+    ],
+    "icon": "calendar"
   }
 ];
 

@@ -1072,6 +1072,22 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'date-difference': {
+    intro: 'Date Difference & Business Days Calculator computes total days, weeks, months, and working business days between start and end dates.',
+    useCases: [
+      'Calculate exact calendar days between two target dates',
+      'Compute working business days (Monday through Friday)',
+      'Plan project deadlines and sprint duration intervals',
+    ],
+    howItWorks: 'Select start and end dates. The calculator computes calendar diffs and iterates day-by-day to filter weekend days.',
+    faq: [
+      {
+        question: 'Are leap years included in date duration calculations?',
+        answer: 'Yes! Calendar duration calculations automatically adjust for leap years.',
+      },
+    ],
+  },
+
 };
 
 
