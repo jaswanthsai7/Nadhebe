@@ -80,8 +80,8 @@ const faq = [
             </div>
 
             <div>
-              <label for="flex-wrap" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">flex-wrap</label>
-              <select id="flex-wrap" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono cursor-pointer">
+              <label for="flex-wrap-sel" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">flex-wrap</label>
+              <select id="flex-wrap-sel" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono cursor-pointer">
                 <option value="wrap" selected>wrap</option>
                 <option value="nowrap">nowrap</option>
               </select>
@@ -154,11 +154,11 @@ const faq = [
 </ToolLayout>
 
 <script is:inline>
-  (function() {
+  function initFlexboxGenerator() {
     const selectDir = document.getElementById('flex-dir');
     const selectJustify = document.getElementById('flex-justify');
     const selectAlign = document.getElementById('flex-align');
-    const selectWrap = document.getElementById('flex-wrap');
+    const selectWrap = document.getElementById('flex-wrap-sel');
     const inputGap = document.getElementById('flex-gap');
     const inputCount = document.getElementById('flex-count');
 
@@ -166,59 +166,59 @@ const faq = [
     const cssCode = document.getElementById('flex-css-code');
     const btnCopy = document.getElementById('btn-copy-flex');
 
+    if (!selectDir || !previewBox) return;
+
     function updateFlex() {
-      const dir = selectDir?.value || 'row';
-      const justify = selectJustify?.value || 'center';
-      const align = selectAlign?.value || 'center';
-      const wrap = selectWrap?.value || 'wrap';
-      const gap = parseInt(inputGap?.value || '16', 10);
-      const count = parseInt(inputCount?.value || '4', 10);
+      const dir = selectDir.value || 'row';
+      const justify = selectJustify ? selectJustify.value : 'center';
+      const align = selectAlign ? selectAlign.value : 'center';
+      const wrap = selectWrap ? selectWrap.value : 'wrap';
+      const gap = parseInt(inputGap ? inputGap.value : '16', 10);
+      const count = parseInt(inputCount ? inputCount.value : '4', 10);
 
-      if (previewBox) {
-        previewBox.style.flexDirection = dir;
-        previewBox.style.justifyContent = justify;
-        previewBox.style.alignItems = align;
-        previewBox.style.flexWrap = wrap;
-        previewBox.style.gap = `${gap}px`;
+      previewBox.style.display = 'flex';
+      previewBox.style.flexDirection = dir;
+      previewBox.style.justifyContent = justify;
+      previewBox.style.alignItems = align;
+      previewBox.style.flexWrap = wrap;
+      previewBox.style.gap = gap + 'px';
 
-        previewBox.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-          const item = document.createElement('div');
-          item.className = 'rounded-8 bg-accent/20 border border-accent/40 text-accent dark:text-accent-dark font-mono text-xs font-bold p-16 min-w-[70px] min-h-[50px] flex items-center justify-center shadow-soft';
-          item.textContent = `Item ${i}`;
-          previewBox.appendChild(item);
-        }
+      previewBox.innerHTML = '';
+      for (let i = 1; i <= count; i++) {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.4);border-radius:8px;padding:14px 18px;font-family:monospace;font-size:12px;font-weight:700;min-width:70px;min-height:50px;display:flex;align-items:center;justify-content:center;color:var(--color-accent,#6366f1);';
+        item.textContent = 'Item ' + i;
+        previewBox.appendChild(item);
       }
 
-      const css = `.container {
-  display: flex;
-  flex-direction: ${dir};
-  justify-content: ${justify};
-  align-items: ${align};
-  flex-wrap: ${wrap};
-  gap: ${gap}px;
-}
-
-.item {
-  flex: 0 1 auto;
-}`;
+      const css = '.container {\n  display: flex;\n  flex-direction: ' + dir + ';\n  justify-content: ' + justify + ';\n  align-items: ' + align + ';\n  flex-wrap: ' + wrap + ';\n  gap: ' + gap + 'px;\n}\n\n.item {\n  flex: 0 1 auto;\n}';
 
       if (cssCode) cssCode.textContent = css;
     }
 
-    [selectDir, selectJustify, selectAlign, selectWrap, inputGap, inputCount].forEach(el => {
-      el?.addEventListener('input', updateFlex);
-      el?.addEventListener('change', updateFlex);
+    [selectDir, selectJustify, selectAlign, selectWrap, inputGap, inputCount].forEach(function(el) {
+      if (!el) return;
+      el.addEventListener('input', updateFlex);
+      el.addEventListener('change', updateFlex);
     });
 
-    btnCopy?.addEventListener('click', () => {
-      if (cssCode) {
-        navigator.clipboard.writeText(cssCode.textContent);
-        btnCopy.textContent = 'Copied!';
-        setTimeout(() => (btnCopy.textContent = 'Copy CSS Code'), 2000);
-      }
-    });
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function() {
+        if (cssCode) {
+          navigator.clipboard.writeText(cssCode.textContent);
+          btnCopy.textContent = 'Copied!';
+          setTimeout(function() { btnCopy.textContent = 'Copy CSS Code'; }, 2000);
+        }
+      });
+    }
 
     updateFlex();
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initFlexboxGenerator);
+  if (document.readyState !== 'loading') {
+    initFlexboxGenerator();
+  } else {
+    document.addEventListener('DOMContentLoaded', initFlexboxGenerator);
+  }
 </script>

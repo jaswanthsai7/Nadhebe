@@ -130,7 +130,7 @@ const faq = [
 </ToolLayout>
 
 <script is:inline>
-  (function() {
+  function initGridGenerator() {
     const selectCols = document.getElementById('grid-cols');
     const selectRows = document.getElementById('grid-rows');
     const inputGap = document.getElementById('grid-gap');
@@ -140,50 +140,55 @@ const faq = [
     const cssCode = document.getElementById('grid-css-code');
     const btnCopy = document.getElementById('btn-copy-grid');
 
+    if (!selectCols || !previewBox) return;
+
     function updateGrid() {
-      const cols = selectCols?.value || 'repeat(3, 1fr)';
-      const rows = selectRows?.value || 'auto';
-      const gap = parseInt(inputGap?.value || '16', 10);
-      const count = parseInt(inputCount?.value || '6', 10);
+      var cols = selectCols.value || 'repeat(3, 1fr)';
+      var rows = selectRows ? selectRows.value : 'auto';
+      var gap = parseInt(inputGap ? inputGap.value : '16', 10);
+      var count = parseInt(inputCount ? inputCount.value : '6', 10);
 
-      if (previewBox) {
-        previewBox.style.display = 'grid';
-        previewBox.style.gridTemplateColumns = cols;
-        previewBox.style.gridTemplateRows = rows;
-        previewBox.style.gap = `${gap}px`;
+      previewBox.style.display = 'grid';
+      previewBox.style.gridTemplateColumns = cols;
+      previewBox.style.gridTemplateRows = rows;
+      previewBox.style.gap = gap + 'px';
 
-        previewBox.innerHTML = '';
-        for (let i = 1; i <= count; i++) {
-          const item = document.createElement('div');
-          item.className = 'rounded-8 bg-accent/20 border border-accent/40 text-accent dark:text-accent-dark font-mono text-xs font-bold p-16 min-h-[60px] flex items-center justify-center shadow-soft';
-          item.textContent = `Grid ${i}`;
-          previewBox.appendChild(item);
-        }
+      previewBox.innerHTML = '';
+      for (var i = 1; i <= count; i++) {
+        var item = document.createElement('div');
+        item.style.cssText = 'background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.4);border-radius:8px;padding:14px;font-family:monospace;font-size:12px;font-weight:700;min-height:60px;display:flex;align-items:center;justify-content:center;color:var(--color-accent,#6366f1);';
+        item.textContent = 'Grid ' + i;
+        previewBox.appendChild(item);
       }
 
-      const css = `.grid-container {
-  display: grid;
-  grid-template-columns: ${cols};
-  grid-template-rows: ${rows};
-  gap: ${gap}px;
-}`;
-
+      var css = '.grid-container {\n  display: grid;\n  grid-template-columns: ' + cols + ';\n  grid-template-rows: ' + rows + ';\n  gap: ' + gap + 'px;\n}';
       if (cssCode) cssCode.textContent = css;
     }
 
-    [selectCols, selectRows, inputGap, inputCount].forEach(el => {
-      el?.addEventListener('input', updateGrid);
-      el?.addEventListener('change', updateGrid);
+    [selectCols, selectRows, inputGap, inputCount].forEach(function(el) {
+      if (!el) return;
+      el.addEventListener('input', updateGrid);
+      el.addEventListener('change', updateGrid);
     });
 
-    btnCopy?.addEventListener('click', () => {
-      if (cssCode) {
-        navigator.clipboard.writeText(cssCode.textContent);
-        btnCopy.textContent = 'Copied!';
-        setTimeout(() => (btnCopy.textContent = 'Copy CSS Grid Code'), 2000);
-      }
-    });
+    if (btnCopy) {
+      btnCopy.addEventListener('click', function() {
+        if (cssCode) {
+          navigator.clipboard.writeText(cssCode.textContent);
+          btnCopy.textContent = 'Copied!';
+          setTimeout(function() { btnCopy.textContent = 'Copy CSS Grid Code'; }, 2000);
+        }
+      });
+    }
 
     updateGrid();
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initGridGenerator);
+  if (document.readyState !== 'loading') {
+    initGridGenerator();
+  } else {
+    document.addEventListener('DOMContentLoaded', initGridGenerator);
+  }
 </script>
+

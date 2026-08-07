@@ -10039,9 +10039,6 @@
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/${outputText.textContent}</image:loc>
-    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/tools/batch-inference-cost-estimator</loc>

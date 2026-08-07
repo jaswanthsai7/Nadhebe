@@ -3,22 +3,30 @@ import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'CRON Expression Generator & Date Builder | Nadhebe';
-const h1 = 'CRON & Scheduled Date Builder';
-const description = 'Build, parse, and validate 5-field cron schedule expressions with real-time plain English explanations and next run execution times.';
+const title = 'Date & Time Builder — Format, Convert & Calculate Timestamps | Nadhebe';
+const h1 = 'Date & Time Builder & Formatter';
+const description = 'Build, format, and convert dates and timestamps client-side. Convert Unix epoch to human-readable dates, format ISO 8601, and calculate day-of-week.';
 
 const faq = [
   {
-    question: 'How do 5-field cron schedule expressions work?',
-    answer: 'Standard 5-field cron syntax consists of: Minute (0-59), Hour (0-23), Day of Month (1-31), Month (1-12), and Day of Week (0-6 where 0 is Sunday).'
+    question: 'How does the Date & Time Builder work?',
+    answer: 'Enter a date/time or Unix epoch timestamp. The tool formats it into ISO 8601, RFC 2822, human-readable, and relative time formats instantly in your browser.'
   },
   {
-    question: 'What special characters are supported in cron strings?',
-    answer: 'Asterisk (*) for any value, comma (,) for lists, hyphen (-) for ranges, and slash (/) for step increments (e.g. */15).'
+    question: 'What is a Unix epoch timestamp?',
+    answer: 'A Unix timestamp is the number of seconds elapsed since January 1, 1970 00:00:00 UTC (the "Unix epoch"). Used universally in programming for time storage.'
   },
   {
-    question: 'Is my cron schedule data uploaded to any server?',
-    answer: 'No, 100% of cron expression parsing and timestamp calculations run locally inside your web browser.'
+    question: 'What is ISO 8601 date format?',
+    answer: 'ISO 8601 is the international date-time standard: `2026-08-07T14:30:00Z`. It ensures unambiguous time representation across time zones and systems.'
+  },
+  {
+    question: 'Can I convert between time zones?',
+    answer: 'Yes! Select a target timezone from the dropdown. The tool recalculates and displays the equivalent timestamp in that time zone using the Intl.DateTimeFormat API.'
+  },
+  {
+    question: 'Is my date data sent to any server?',
+    answer: '100% private. All date parsing, formatting, and timezone conversions execute locally inside your web browser.'
   }
 ];
 ---
@@ -30,266 +38,298 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="space-y-24" id="cron-builder-app">
-    
-    <!-- Hero Cron Display (Crontab Guru Style) -->
-    <div class="rounded-20 border border-border bg-surface p-20 sm:p-28 shadow-medium dark:border-border-dark dark:bg-surface-dark space-y-20 text-center">
-      
-      <!-- Big Quoted Human Explanation -->
-      <div class="space-y-6">
-        <span class="text-meta font-mono font-bold uppercase tracking-wider text-muted dark:text-muted-dark">Cron Plain English Explanation</span>
-        <h2 id="cron-human-quote" class="text-h2 font-sans font-bold text-accent dark:text-accent-dark transition-all">
-          “At 04:05.”
-        </h2>
-        <div id="cron-next-immediate" class="text-caption font-mono text-ink2 dark:text-ink2-dark font-medium">
-          next at <span id="cron-next-immediate-val" class="font-bold text-ink dark:text-ink-dark">2026-08-07 04:05:00</span>
-        </div>
-      </div>
-
-      <!-- Centered 5-Field Input & Field Alignment -->
-      <div class="max-w-xl mx-auto space-y-12">
-        <div class="relative flex items-center">
-          <input
-            type="text"
-            id="cron-input"
-            value="5 4 * * *"
-            class="w-full rounded-12 border-2 border-border bg-surface2 px-20 py-16 text-center text-h2 font-mono font-bold tracking-widest text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
-            placeholder="* * * * *"
-            spellcheck="false"
-          />
-          <button
-            type="button"
-            id="cron-btn-copy"
-            class="absolute right-12 rounded-8 border border-border bg-surface px-12 py-6 text-xs font-mono font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark transition-all"
-          >
-            Copy
-          </button>
-        </div>
-
-        <!-- Field Column Headers Aligned Under Fields -->
-        <div class="grid grid-cols-5 text-center font-mono text-xs font-bold text-muted dark:text-muted-dark">
-          <div id="hdr-min" class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">minute</div>
-          <div id="hdr-hour" class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">hour</div>
-          <div id="hdr-day" class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">day (month)</div>
-          <div id="hdr-month" class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">month</div>
-          <div id="hdr-dow" class="py-4 rounded hover:bg-surface2 dark:hover:bg-surface2-dark cursor-pointer transition-colors">day (week)</div>
-        </div>
-      </div>
-
-      <!-- Presets & Timezone Selector Row -->
-      <div class="flex flex-wrap items-center justify-center gap-12 pt-8 text-xs font-mono">
-        <div class="flex items-center gap-6">
-          <span class="text-muted font-semibold">Presets:</span>
-          <select id="cron-preset-select" class="rounded-8 border border-border bg-surface2 px-10 py-6 font-bold text-accent dark:border-border-dark dark:bg-surface2-dark">
-            <option value="5 4 * * *">At 04:05 (5 4 * * *)</option>
-            <option value="0 0 * * *">Every midnight (0 0 * * *)</option>
-            <option value="*/15 * * * *">Every 15 minutes (*/15 * * * *)</option>
-            <option value="0 9 * * 1">Every Monday at 9:00 AM (0 9 * * 1)</option>
-            <option value="0 0 1 * *">First day of every month (0 0 1 * *)</option>
-            <option value="0 0 * * 0">Every Sunday at midnight (0 0 * * 0)</option>
-          </select>
-        </div>
-
-        <button type="button" id="cron-btn-random" class="rounded-8 border border-border bg-surface2 px-12 py-6 font-bold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-all">
-          🎲 Random
-        </button>
-      </div>
-
-    </div>
-
-    <!-- 2-Column Split: Next Scheduled Runs & Cheat Sheet -->
+  <div slot="calculator" class="space-y-24" id="datetime-builder-app">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-      
-      <!-- Next Scheduled Runs Panel -->
-      <CalculatorCard title="NEXT 5 SCHEDULED EXECUTION RUNS">
-        <div class="space-y-16 font-mono text-caption">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-muted font-semibold">Timezone:</span>
-            <select id="cron-tz-select" class="rounded-6 border border-border bg-surface px-8 py-4 text-xs font-bold text-ink dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark">
-              <option value="UTC">UTC (Coordinated Universal)</option>
-              <option value="local">Local System Timezone</option>
-              <option value="America/New_York">America / New York (EST)</option>
-              <option value="America/Los_Angeles">America / Los Angeles (PST)</option>
-              <option value="Europe/London">Europe / London (GMT)</option>
-              <option value="Asia/Tokyo">Asia / Tokyo (JST)</option>
+
+      <!-- INPUT CARD -->
+      <CalculatorCard title="DATE & TIME INPUT">
+        <div class="space-y-16">
+
+          <!-- Date/Time Input -->
+          <div>
+            <label for="dt-input-text" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Date, Timestamp, or ISO String</label>
+            <input
+              id="dt-input-text"
+              type="text"
+              placeholder="e.g. 2026-08-07, 1754553600, now"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-10 text-caption font-mono font-bold text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark"
+            />
+          </div>
+
+          <!-- Quick Presets Dropdown -->
+          <div>
+            <label for="dt-preset-select" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Quick Presets</label>
+            <select
+              id="dt-preset-select"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="now">Now — Current Unix Timestamp</option>
+              <option value="start-of-day">Start of Today (00:00:00 UTC)</option>
+              <option value="end-of-day">End of Today (23:59:59 UTC)</option>
+              <option value="unix-0">Unix Epoch Zero (Jan 1, 1970)</option>
+              <option value="y2k">Y2K (Jan 1, 2000 00:00:00 UTC)</option>
             </select>
           </div>
 
-          <ul id="cron-next-list" class="space-y-8 divide-y divide-border/40 dark:divide-border-dark/40 pt-4">
-            <!-- Populated via cron-parser -->
-          </ul>
+          <!-- Timezone Selector -->
+          <div>
+            <label for="dt-tz-select" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Output Timezone</label>
+            <select id="dt-tz-select" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono">
+              <option value="UTC">UTC (Coordinated Universal Time)</option>
+              <option value="America/New_York">America/New_York (EST/EDT)</option>
+              <option value="America/Los_Angeles">America/Los_Angeles (PST/PDT)</option>
+              <option value="America/Chicago">America/Chicago (CST/CDT)</option>
+              <option value="Europe/London">Europe/London (GMT/BST)</option>
+              <option value="Europe/Paris">Europe/Paris (CET/CEST)</option>
+              <option value="Europe/Berlin">Europe/Berlin (CET/CEST)</option>
+              <option value="Asia/Kolkata">Asia/Kolkata (IST +5:30)</option>
+              <option value="Asia/Tokyo">Asia/Tokyo (JST +9:00)</option>
+              <option value="Asia/Shanghai">Asia/Shanghai (CST +8:00)</option>
+              <option value="Asia/Dubai">Asia/Dubai (GST +4:00)</option>
+              <option value="Australia/Sydney">Australia/Sydney (AEST/AEDT)</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            id="btn-dt-parse"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Parse & Format Date
+          </button>
+
         </div>
       </CalculatorCard>
 
-      <!-- Cron Syntax Quick Reference / Cheat Sheet -->
-      <ResultCard title="CRON SYNTAX CHEAT SHEET">
-        <div class="space-y-16 font-mono text-caption">
-          <div class="w-full overflow-hidden rounded-8 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
-            <table class="w-full text-left text-xs border-collapse font-mono">
-              <thead>
-                <tr class="bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark font-bold border-b border-border dark:border-border-dark">
-                  <th class="p-8 border-r border-border dark:border-border-dark w-24">Symbol</th>
-                  <th class="p-8">Meaning / Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border/40 dark:divide-border-dark/40 text-ink2 dark:text-ink2-dark">
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">*</td><td class="p-8">any value (wildcard)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">,</td><td class="p-8">value list separator (e.g. 1,15,30)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">-</td><td class="p-8">range of values (e.g. 1-5 for Mon-Fri)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">/</td><td class="p-8">step values (e.g. */15 for every 15 units)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@yearly</td><td class="p-8">Run once a year (0 0 1 1 *)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@monthly</td><td class="p-8">Run once a month (0 0 1 * *)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@weekly</td><td class="p-8">Run once a week (0 0 * * 0)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@daily</td><td class="p-8">Run once a day at midnight (0 0 * * *)</td></tr>
-                <tr><td class="p-8 font-bold text-accent dark:text-accent-dark border-r border-border dark:border-border-dark">@hourly</td><td class="p-8">Run once an hour (0 * * * *)</td></tr>
-              </tbody>
-            </table>
+      <!-- OUTPUT CARD -->
+      <ResultCard title="PARSED DATE & FORMAT OUTPUT">
+        <div class="space-y-20">
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-2 gap-12 text-center font-mono">
+            <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16">
+              <div id="stat-dt-dow" class="text-h3 font-bold text-emerald-800 dark:text-emerald-300">Thursday</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Day of Week</div>
+            </div>
+            <div class="rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-dt-epoch" class="text-h3 font-bold text-accent dark:text-accent-dark font-mono">1754553600</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Unix Timestamp</div>
+            </div>
           </div>
+
+          <!-- Format Rows Table -->
+          <div class="rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark divide-y divide-border/40 dark:divide-border-dark/40 shadow-subtle">
+
+            <div class="flex items-center justify-between px-14 py-10 gap-8">
+              <span class="font-mono text-xs font-bold text-muted dark:text-muted-dark w-28 shrink-0">ISO 8601</span>
+              <span id="stat-dt-iso" class="font-mono text-xs text-ink dark:text-ink-dark truncate flex-1 text-right">2026-08-07T00:00:00.000Z</span>
+              <button data-copy-field="stat-dt-iso" type="button" class="dt-copy-btn shrink-0 rounded-6 border border-border px-8 py-4 font-mono text-xs font-semibold text-muted hover:border-accent hover:text-accent dark:border-border-dark dark:text-muted-dark cursor-pointer transition-colors">Copy</button>
+            </div>
+
+            <div class="flex items-center justify-between px-14 py-10 gap-8">
+              <span class="font-mono text-xs font-bold text-muted dark:text-muted-dark w-28 shrink-0">RFC 2822</span>
+              <span id="stat-dt-rfc" class="font-mono text-xs text-ink dark:text-ink-dark truncate flex-1 text-right">Thu, 07 Aug 2026 +0000</span>
+              <button data-copy-field="stat-dt-rfc" type="button" class="dt-copy-btn shrink-0 rounded-6 border border-border px-8 py-4 font-mono text-xs font-semibold text-muted hover:border-accent hover:text-accent dark:border-border-dark dark:text-muted-dark cursor-pointer transition-colors">Copy</button>
+            </div>
+
+            <div class="flex items-center justify-between px-14 py-10 gap-8">
+              <span class="font-mono text-xs font-bold text-muted dark:text-muted-dark w-28 shrink-0">Local TZ</span>
+              <span id="stat-dt-local" class="font-mono text-xs text-ink dark:text-ink-dark truncate flex-1 text-right">Aug 7, 2026, 12:00:00 AM</span>
+              <button data-copy-field="stat-dt-local" type="button" class="dt-copy-btn shrink-0 rounded-6 border border-border px-8 py-4 font-mono text-xs font-semibold text-muted hover:border-accent hover:text-accent dark:border-border-dark dark:text-muted-dark cursor-pointer transition-colors">Copy</button>
+            </div>
+
+            <div class="flex items-center justify-between px-14 py-10 gap-8">
+              <span class="font-mono text-xs font-bold text-muted dark:text-muted-dark w-28 shrink-0">Relative</span>
+              <span id="stat-dt-relative" class="font-mono text-xs text-ink dark:text-ink-dark truncate flex-1 text-right">just now</span>
+              <button data-copy-field="stat-dt-relative" type="button" class="dt-copy-btn shrink-0 rounded-6 border border-border px-8 py-4 font-mono text-xs font-semibold text-muted hover:border-accent hover:text-accent dark:border-border-dark dark:text-muted-dark cursor-pointer transition-colors">Copy</button>
+            </div>
+
+            <div class="flex items-center justify-between px-14 py-10 gap-8">
+              <span class="font-mono text-xs font-bold text-muted dark:text-muted-dark w-28 shrink-0">TZ Out</span>
+              <span id="stat-dt-tz" class="font-mono text-xs text-ink dark:text-ink-dark truncate flex-1 text-right">Aug 7, 2026, 12:00:00 AM UTC</span>
+              <button data-copy-field="stat-dt-tz" type="button" class="dt-copy-btn shrink-0 rounded-6 border border-border px-8 py-4 font-mono text-xs font-semibold text-muted hover:border-accent hover:text-accent dark:border-border-dark dark:text-muted-dark cursor-pointer transition-colors">Copy</button>
+            </div>
+
+          </div>
+
+          <div id="dt-error" class="hidden rounded-8 border border-rose-500/30 bg-rose-500/10 px-14 py-10 text-xs font-mono font-bold text-rose-600 dark:text-rose-400 text-center">
+            ⚠ Invalid date — please check your input format.
+          </div>
+
         </div>
       </ResultCard>
-
     </div>
-
   </div>
 
+
   <div slot="content">
-    <h2>Understanding Cron Expressions in Production Automation</h2>
+    <h2>Date & Time Formatting & Timestamp Conversion Guide</h2>
     <p>
-      Cron is a time-based job scheduler in Unix-like operating systems. Developers use cron expressions to trigger recurring background jobs, database backups, email notifications, and server maintenance tasks.
+      Dates and timestamps are fundamental to software engineering. Accurate timestamp handling prevents bugs in scheduling, logging, APIs, and database records across time zones.
+    </p>
+
+    <h3>Key Date Formats</h3>
+    <ul>
+      <li><strong>ISO 8601</strong>: <code>2026-08-07T14:30:00Z</code> — International standard. Use for APIs and databases.</li>
+      <li><strong>Unix Epoch</strong>: <code>1754553600</code> — Seconds since Jan 1, 1970 UTC. Universal for programming.</li>
+      <li><strong>RFC 2822</strong>: <code>Thu, 07 Aug 2026 14:30:00 +0000</code> — Email date format standard.</li>
+    </ul>
+
+    <h3>Related Date & Time Tools</h3>
+    <p>
+      Calculate the difference between two dates with the <a href="/tools/date-difference/">Date Difference Calculator</a>, generate cron schedules with the <a href="/tools/cron-explainer/">Cron Expression Explainer</a>, or format your output slug with the <a href="/tools/slug-generator/">Slug Generator</a>.
     </p>
   </div>
 </ToolLayout>
 
-<script>
-  import cronstrue from 'cronstrue';
-  import { CronExpressionParser } from 'cron-parser';
+<script is:inline>
+  function initDateTimeBuilder() {
+    var inputText = document.getElementById('dt-input-text');
+    var tzSelect = document.getElementById('dt-tz-select');
+    var presetSelect = document.getElementById('dt-preset-select');
+    var btnParse = document.getElementById('btn-dt-parse');
+    var copyBtns = document.querySelectorAll('.dt-copy-btn');
 
-  function initCronBuilder() {
-    const inputEl = document.getElementById('cron-input') as HTMLInputElement;
-    const humanQuoteEl = document.getElementById('cron-human-quote');
-    const nextImmediateValEl = document.getElementById('cron-next-immediate-val');
-    const nextListEl = document.getElementById('cron-next-list');
-    const presetSelectEl = document.getElementById('cron-preset-select') as HTMLSelectElement;
-    const tzSelectEl = document.getElementById('cron-tz-select') as HTMLSelectElement;
-    const btnRandomEl = document.getElementById('cron-btn-random');
-    const btnCopyEl = document.getElementById('cron-btn-copy');
+    var statDow = document.getElementById('stat-dt-dow');
+    var statEpoch = document.getElementById('stat-dt-epoch');
+    var statIso = document.getElementById('stat-dt-iso');
+    var statRfc = document.getElementById('stat-dt-rfc');
+    var statLocal = document.getElementById('stat-dt-local');
+    var statRelative = document.getElementById('stat-dt-relative');
+    var statTz = document.getElementById('stat-dt-tz');
+    var dtError = document.getElementById('dt-error');
 
-    function update() {
-      if (!inputEl) return;
-      const cronStr = inputEl.value.trim();
-      const tz = tzSelectEl?.value || 'UTC';
+    if (!inputText) return;
 
-      if (!cronStr) {
-        if (humanQuoteEl) {
-          humanQuoteEl.textContent = '“Enter a 5-field cron expression”';
-          humanQuoteEl.className = 'text-h2 font-sans font-bold text-muted dark:text-muted-dark';
-        }
-        if (nextImmediateValEl) nextImmediateValEl.textContent = '—';
-        if (nextListEl) nextListEl.innerHTML = '<li class="p-8 text-muted">No expression entered.</li>';
+    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function toRfc2822(d) {
+      var dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getUTCDay()];
+      var mon = MONTHS[d.getUTCMonth()];
+      return dow + ', ' + pad(d.getUTCDate()) + ' ' + mon + ' ' + d.getUTCFullYear()
+        + ' ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds()) + ' +0000';
+    }
+
+    function relativeTime(d) {
+      var now = Date.now();
+      var diff = Math.round((now - d.getTime()) / 1000);
+      var absDiff = Math.abs(diff);
+      var suffix = diff >= 0 ? 'ago' : 'from now';
+      if (absDiff < 60) return 'just now';
+      if (absDiff < 3600) return Math.round(absDiff / 60) + ' minutes ' + suffix;
+      if (absDiff < 86400) return Math.round(absDiff / 3600) + ' hours ' + suffix;
+      if (absDiff < 604800) return Math.round(absDiff / 86400) + ' days ' + suffix;
+      if (absDiff < 2592000) return Math.round(absDiff / 604800) + ' weeks ' + suffix;
+      if (absDiff < 31536000) return Math.round(absDiff / 2592000) + ' months ' + suffix;
+      return Math.round(absDiff / 31536000) + ' years ' + suffix;
+    }
+
+    function parseInput(val) {
+      val = val.trim();
+      if (!val || val === 'now') return new Date();
+      // Pure numeric = Unix epoch
+      if (/^\d+$/.test(val)) {
+        var n = parseInt(val, 10);
+        // If 10 digits → seconds, 13 digits → ms
+        return new Date(n < 1e12 ? n * 1000 : n);
+      }
+      var d = new Date(val);
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function updateOutputs(d) {
+      var tz = tzSelect ? tzSelect.value : 'UTC';
+
+      if (!d || isNaN(d.getTime())) {
+        if (dtError) dtError.classList.remove('hidden');
         return;
       }
+      if (dtError) dtError.classList.add('hidden');
+
+      if (statDow) statDow.textContent = DAYS[d.getUTCDay()];
+      if (statEpoch) statEpoch.textContent = Math.floor(d.getTime() / 1000);
+      if (statIso) statIso.textContent = d.toISOString();
+      if (statRfc) statRfc.textContent = toRfc2822(d);
+      if (statRelative) statRelative.textContent = relativeTime(d);
 
       try {
-        // 1. Plain English Human Translation via cronstrue
-        const humanText = cronstrue.toString(cronStr, { throwExceptionOnParseError: true });
-        if (humanQuoteEl) {
-          humanQuoteEl.textContent = `“${humanText}.”`;
-          humanQuoteEl.className = 'text-h2 font-sans font-bold text-accent dark:text-accent-dark transition-all';
-        }
+        var localFmt = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+          timeZone: 'UTC'
+        }).format(d);
+        if (statLocal) statLocal.textContent = localFmt;
 
-        // 2. Parse Execution Runs via CronExpressionParser
-        const options: any = {};
-        if (tz && tz !== 'local') {
-          options.tz = tz;
-        }
-
-        const interval = CronExpressionParser.parse(cronStr, options);
-
-        let listHtml = '';
-        for (let i = 0; i < 5; i++) {
-          const nextRun = interval.next();
-          const d = nextRun.toDate();
-          
-          let dateStr = '';
-          if (tz === 'local') {
-            dateStr = d.toLocaleString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-          } else {
-            dateStr = new Intl.DateTimeFormat('en-US', {
-              timeZone: tz,
-              weekday: 'short',
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit',
-              hour12: true
-            }).format(d);
-          }
-
-          if (i === 0 && nextImmediateValEl) {
-            nextImmediateValEl.textContent = `${d.toISOString().slice(0, 10)} ${d.toTimeString().slice(0, 8)}`;
-          }
-
-          listHtml += `
-            <li class="flex items-center justify-between py-8 px-4 text-xs font-mono">
-              <span class="font-bold text-accent dark:text-accent-dark w-20">${i + 1}.</span>
-              <span class="flex-1 text-ink dark:text-ink-dark font-medium">${dateStr}</span>
-            </li>
-          `;
-        }
-
-        if (nextListEl) nextListEl.innerHTML = listHtml;
-
-      } catch (err: any) {
-        if (humanQuoteEl) {
-          humanQuoteEl.textContent = '“Invalid Cron Expression”';
-          humanQuoteEl.className = 'text-h2 font-sans font-bold text-danger';
-        }
-        if (nextImmediateValEl) nextImmediateValEl.textContent = 'Syntax error';
-        if (nextListEl) {
-          nextListEl.innerHTML = `<li class="p-8 text-danger font-mono text-xs font-semibold">Error: ${err.message || err.toString()}</li>`;
-        }
+        var tzFmt = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+          timeZoneName: 'short',
+          timeZone: tz
+        }).format(d);
+        if (statTz) statTz.textContent = tzFmt;
+      } catch(e) {
+        if (statLocal) statLocal.textContent = d.toUTCString();
+        if (statTz) statTz.textContent = d.toUTCString();
       }
     }
 
-    if (inputEl) inputEl.addEventListener('input', update);
-    if (tzSelectEl) tzSelectEl.addEventListener('change', update);
+    function parseAndDisplay() {
+      var d = parseInput(inputText.value);
+      updateOutputs(d);
+    }
 
-    presetSelectEl?.addEventListener('change', () => {
-      if (inputEl && presetSelectEl.value) {
-        inputEl.value = presetSelectEl.value;
-        update();
-      }
+    if (btnParse) btnParse.addEventListener('click', parseAndDisplay);
+    if (inputText) inputText.addEventListener('input', parseAndDisplay);
+    if (tzSelect) tzSelect.addEventListener('change', parseAndDisplay);
+
+    if (presetSelect) {
+      presetSelect.addEventListener('change', function() {
+        var preset = presetSelect.value;
+        var now = new Date();
+        if (preset === 'now') {
+          inputText.value = Math.floor(Date.now() / 1000).toString();
+        } else if (preset === 'start-of-day') {
+          var sod = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
+          inputText.value = Math.floor(sod.getTime() / 1000).toString();
+        } else if (preset === 'end-of-day') {
+          var eod = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59));
+          inputText.value = Math.floor(eod.getTime() / 1000).toString();
+        } else if (preset === 'unix-0') {
+          inputText.value = '0';
+        } else if (preset === 'y2k') {
+          inputText.value = '946684800';
+        }
+        parseAndDisplay();
+        // Reset select back to placeholder feel
+        presetSelect.value = 'now';
+      });
+    }
+
+    copyBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var fieldId = btn.getAttribute('data-copy-field');
+        var el = document.getElementById(fieldId);
+        if (el) {
+          navigator.clipboard.writeText(el.textContent);
+          var orig = btn.textContent;
+          btn.textContent = '✓';
+          setTimeout(function() { btn.textContent = orig; }, 1500);
+        }
+      });
     });
 
-    btnRandomEl?.addEventListener('click', () => {
-      const randoms = ['*/5 * * * *', '0 4 * * *', '15 10 * * 1-5', '0 0 1,15 * *', '30 23 * * 0', '*/10 9-18 * * 1-5'];
-      const pick = randoms[Math.floor(Math.random() * randoms.length)];
-      if (inputEl) {
-        inputEl.value = pick;
-        if (presetSelectEl) presetSelectEl.value = pick;
-        update();
-      }
-    });
-
-    btnCopyEl?.addEventListener('click', () => {
-      if (inputEl) {
-        navigator.clipboard.writeText(inputEl.value);
-        const origText = btnCopyEl.textContent;
-        btnCopyEl.textContent = 'Copied!';
-        setTimeout(() => {
-          btnCopyEl.textContent = origText;
-        }, 1500);
-      }
-    });
-
-    update();
+    // Initialize with current time
+    inputText.value = Math.floor(Date.now() / 1000).toString();
+    parseAndDisplay();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCronBuilder);
+  document.addEventListener('astro:page-load', initDateTimeBuilder);
+  if (document.readyState !== 'loading') {
+    initDateTimeBuilder();
   } else {
-    initCronBuilder();
+    document.addEventListener('DOMContentLoaded', initDateTimeBuilder);
   }
 </script>

@@ -118,20 +118,21 @@ const faq = [
 </ToolLayout>
 
 <script is:inline>
-  (function() {
-    const fileInput = document.getElementById('b64i-file-input');
-    const textRaw = document.getElementById('b64i-text-raw');
-    const btnSample = document.getElementById('btn-load-sample-b64i');
+  function initBase64ImageConverter() {
+    var fileInput = document.getElementById('b64i-file-input');
+    var textRaw = document.getElementById('b64i-text-raw');
+    var btnSample = document.getElementById('btn-load-sample-b64i');
 
-    const sizeInfo = document.getElementById('b64i-size-info');
-    const previewImg = document.getElementById('b64i-preview-img');
-    const noImgText = document.getElementById('b64i-no-img-text');
-    const outputText = document.getElementById('b64i-output-text');
+    var sizeInfo = document.getElementById('b64i-size-info');
+    var previewImg = document.getElementById('b64i-preview-img');
+    var noImgText = document.getElementById('b64i-no-img-text');
+    var outputText = document.getElementById('b64i-output-text');
+    var btnCopyStr = document.getElementById('btn-copy-b64-str');
+    var btnCopyTag = document.getElementById('btn-copy-img-tag');
 
-    const btnCopyStr = document.getElementById('btn-copy-b64-str');
-    const btnCopyTag = document.getElementById('btn-copy-img-tag');
+    if (!fileInput && !textRaw) return;
 
-    const sampleB64 = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzYzNjZmMSIvPjwvc3ZnPg==`;
+    var sampleB64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzYzNjZmMSIvPjwvc3ZnPg==';
 
     function updatePreview(dataUrl) {
       if (!dataUrl || !dataUrl.startsWith('data:image/')) {
@@ -141,57 +142,73 @@ const faq = [
         if (outputText) outputText.textContent = '';
         return;
       }
-
       if (previewImg) {
         previewImg.src = dataUrl;
         previewImg.classList.remove('hidden');
       }
       if (noImgText) noImgText.classList.add('hidden');
-
-      if (sizeInfo) sizeInfo.textContent = `Base64 Length: ${dataUrl.length.toLocaleString()} chars`;
+      if (sizeInfo) sizeInfo.textContent = 'Base64 Length: ' + dataUrl.length.toLocaleString() + ' chars';
       if (outputText) outputText.textContent = dataUrl;
     }
 
-    fileInput?.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+    if (fileInput) {
+      fileInput.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+          var result = evt.target.result;
+          if (textRaw) textRaw.value = result;
+          updatePreview(result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
 
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const result = evt.target.result;
-        if (textRaw) textRaw.value = result;
-        updatePreview(result);
-      };
-      reader.readAsDataURL(file);
-    });
+    if (textRaw) {
+      textRaw.addEventListener('input', function() {
+        updatePreview(textRaw.value.trim());
+      });
+    }
 
-    textRaw?.addEventListener('input', () => {
-      updatePreview(textRaw.value.trim());
-    });
+    if (btnSample) {
+      btnSample.addEventListener('click', function() {
+        if (textRaw) textRaw.value = sampleB64;
+        updatePreview(sampleB64);
+      });
+    }
 
-    btnSample?.addEventListener('click', () => {
-      if (textRaw) textRaw.value = sampleB64;
-      updatePreview(sampleB64);
-    });
+    if (btnCopyStr) {
+      btnCopyStr.addEventListener('click', function() {
+        if (outputText && outputText.textContent) {
+          navigator.clipboard.writeText(outputText.textContent);
+          btnCopyStr.textContent = 'Copied!';
+          setTimeout(function() { btnCopyStr.textContent = 'Copy Data URL'; }, 2000);
+        }
+      });
+    }
 
-    btnCopyStr?.addEventListener('click', () => {
-      if (outputText && outputText.textContent) {
-        navigator.clipboard.writeText(outputText.textContent);
-        btnCopyStr.textContent = 'Copied!';
-        setTimeout(() => (btnCopyStr.textContent = 'Copy Data URL'), 2000);
-      }
-    });
-
-    btnCopyTag?.addEventListener('click', () => {
-      if (outputText && outputText.textContent) {
-        const tag = `<img src="${outputText.textContent}" alt="Embedded Image" />`;
-        navigator.clipboard.writeText(tag);
-        btnCopyTag.textContent = 'Copied!';
-        setTimeout(() => (btnCopyTag.textContent = 'Copy <img> Tag'), 2000);
-      }
-    });
+    if (btnCopyTag) {
+      btnCopyTag.addEventListener('click', function() {
+        if (outputText && outputText.textContent) {
+          var tag = '<img src="' + outputText.textContent + '" alt="Embedded Image" />';
+          navigator.clipboard.writeText(tag);
+          btnCopyTag.textContent = 'Copied!';
+          setTimeout(function() { btnCopyTag.textContent = 'Copy <img> Tag'; }, 2000);
+        }
+      });
+    }
 
     if (textRaw && !textRaw.value) textRaw.value = sampleB64;
     updatePreview(sampleB64);
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initBase64ImageConverter);
+  if (document.readyState !== 'loading') {
+    initBase64ImageConverter();
+  } else {
+    document.addEventListener('DOMContentLoaded', initBase64ImageConverter);
+  }
 </script>
+
+

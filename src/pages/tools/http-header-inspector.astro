@@ -128,49 +128,43 @@ const faq = [
 </ToolLayout>
 
 <script is:inline>
-  (function() {
-    const inputRaw = document.getElementById('hhi-input-raw');
-    const btnInspect = document.getElementById('btn-inspect-hhi');
-    const btnSample = document.getElementById('btn-load-sample-hhi');
+  function initHttpHeaderInspector() {
+    var inputRaw = document.getElementById('hhi-input-raw');
+    var btnInspect = document.getElementById('btn-inspect-hhi');
+    var btnSample = document.getElementById('btn-load-sample-hhi');
 
-    const statScore = document.getElementById('stat-hhi-score');
-    const statCount = document.getElementById('stat-hhi-count');
-    const tbody = document.getElementById('hhi-tbody');
+    var statScore = document.getElementById('stat-hhi-score');
+    var statCount = document.getElementById('stat-hhi-count');
+    var tbody = document.getElementById('hhi-tbody');
 
-    const sampleHeaders = `HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'
-Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-X-Frame-Options: DENY
-X-Content-Type-Options: nosniff
-Cache-Control: public, max-age=3600
-Server: cloudflare`;
+    if (!tbody) return;
+
+    var sampleHeaders = 'HTTP/1.1 200 OK\nContent-Type: text/html; charset=utf-8\nContent-Security-Policy: default-src \'self\'; script-src \'self\' \'unsafe-inline\'\nStrict-Transport-Security: max-age=31536000; includeSubDomains; preload\nX-Frame-Options: DENY\nX-Content-Type-Options: nosniff\nCache-Control: public, max-age=3600\nServer: cloudflare';
 
     function inspectHeaders() {
-      const raw = inputRaw?.value || sampleHeaders;
-      const lines = raw.split('\n').filter(l => l.trim());
+      var raw = (inputRaw && inputRaw.value) ? inputRaw.value : sampleHeaders;
+      var lines = raw.split('\n').filter(function(l) { return l.trim(); });
 
-      const headers = [];
-      let secScore = 0;
+      var headers = [];
+      var secScore = 0;
 
-      lines.forEach(line => {
+      lines.forEach(function(line) {
         if (line.startsWith('HTTP/')) return;
-        const idx = line.indexOf(':');
+        var idx = line.indexOf(':');
         if (idx === -1) return;
 
-        const key = line.substring(0, idx).trim();
-        const val = line.substring(idx + 1).trim();
-        const lowerKey = key.toLowerCase();
+        var key = line.substring(0, idx).trim();
+        var val = line.substring(idx + 1).trim();
+        var lowerKey = key.toLowerCase();
 
-        let type = 'Standard';
-        if (['content-security-policy', 'strict-transport-security', 'x-frame-options', 'x-content-type-options', 'referrer-policy'].includes(lowerKey)) {
+        var type = 'Standard';
+        if (['content-security-policy', 'strict-transport-security', 'x-frame-options', 'x-content-type-options', 'referrer-policy'].indexOf(lowerKey) !== -1) {
           type = 'Security';
           secScore++;
-        } else if (['cache-control', 'expires', 'etag'].includes(lowerKey)) {
+        } else if (['cache-control', 'expires', 'etag'].indexOf(lowerKey) !== -1) {
           type = 'Caching';
         }
-
-        headers.push({ key, val, type });
+        headers.push({ key: key, val: val, type: type });
       });
 
       if (statCount) statCount.textContent = headers.length;
@@ -190,26 +184,36 @@ Server: cloudflare`;
 
       if (tbody) {
         if (headers.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="3" class="p-16 text-center text-muted dark:text-muted-dark">No valid HTTP headers detected.</td></tr>`;
+          tbody.innerHTML = '<tr><td colspan="3" class="p-16 text-center text-muted dark:text-muted-dark">No valid HTTP headers detected.</td></tr>';
         } else {
-          tbody.innerHTML = headers.map(h => `<tr>
-            <td class="p-8 font-bold text-ink dark:text-ink-dark">${h.key}</td>
-            <td class="p-8 text-muted dark:text-muted-dark max-w-xs truncate" title="${h.val}">${h.val}</td>
-            <td class="p-8 font-bold ${h.type === 'Security' ? 'text-emerald-600 dark:text-emerald-400' : 'text-accent dark:text-accent-dark'}">${h.type}</td>
-          </tr>`).join('');
+          tbody.innerHTML = headers.map(function(h) {
+            return '<tr><td class="p-8 font-bold text-ink dark:text-ink-dark">' + h.key + '</td><td class="p-8 text-muted dark:text-muted-dark max-w-xs truncate" title="' + h.val + '">' + h.val + '</td><td class="p-8 font-bold ' + (h.type === 'Security' ? 'text-emerald-600 dark:text-emerald-400' : 'text-accent dark:text-accent-dark') + '">' + h.type + '</td></tr>';
+          }).join('');
         }
       }
     }
 
-    btnInspect?.addEventListener('click', inspectHeaders);
-    inputRaw?.addEventListener('input', inspectHeaders);
+    if (btnInspect) btnInspect.addEventListener('click', inspectHeaders);
+    if (inputRaw) inputRaw.addEventListener('input', inspectHeaders);
 
-    btnSample?.addEventListener('click', () => {
-      if (inputRaw) inputRaw.value = sampleHeaders;
-      inspectHeaders();
-    });
+    if (btnSample) {
+      btnSample.addEventListener('click', function() {
+        if (inputRaw) inputRaw.value = sampleHeaders;
+        inspectHeaders();
+      });
+    }
 
     if (inputRaw && !inputRaw.value) inputRaw.value = sampleHeaders;
     inspectHeaders();
-  })();
+  }
+
+  document.addEventListener('astro:page-load', initHttpHeaderInspector);
+  if (document.readyState !== 'loading') {
+    initHttpHeaderInspector();
+  } else {
+    document.addEventListener('DOMContentLoaded', initHttpHeaderInspector);
+  }
 </script>
+
+
+
