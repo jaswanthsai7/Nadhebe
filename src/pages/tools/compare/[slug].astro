@@ -1,0 +1,196 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'uuid-v4-vs-v7' },
+      props: {
+        title: 'UUID v4 vs UUID v7 Comparison & B-Tree Index Benchmark | Nadhebe',
+        h1: 'UUID v4 vs UUID v7 Comparison',
+        description: 'Compare random UUID v4 vs time-ordered RFC 9562 UUID v7 for database B-Tree index performance, fragmentation, and generation speed.',
+        itemA: { name: 'UUID v4', type: 'Random (122-bit entropy)', spec: 'Standard random 128-bit identifier. High DB index fragmentation.', link: '/tools/uuid-v7-generator/' },
+        itemB: { name: 'UUID v7', type: 'Time-Ordered (48-bit timestamp + 74-bit random)', spec: 'Monotonic time-ordered identifier. Optimal B-Tree page locality.', link: '/tools/uuid-v7-generator/' },
+        tableData: [
+          { feature: 'Ordering', a: 'Random (Unordered)', b: 'Monotonic Time-Ordered' },
+          { feature: 'B-Tree Indexing', a: 'Poor (High Fragmentation)', b: 'Excellent (Sequential Insertion)' },
+          { feature: 'RFC Standard', a: 'RFC 4122', b: 'RFC 9562 (2024 Modern)' },
+          { feature: 'Collision Risk', a: '1 in 2^122 (Negligible)', b: '1 in 2^74 per millisecond' },
+        ],
+        verdict: 'Use UUID v7 for primary key columns in SQL databases (PostgreSQL, MySQL) to prevent index fragmentation while maintaining unique global identifiers.',
+      }
+    },
+    {
+      params: { slug: 'gpt-4o-vs-claude-3-5-sonnet' },
+      props: {
+        title: 'OpenAI GPT-4o vs Anthropic Claude 3.5 Sonnet Comparison & Pricing | Nadhebe',
+        h1: 'OpenAI GPT-4o vs Anthropic Claude 3.5 Sonnet',
+        description: 'Compare OpenAI GPT-4o vs Anthropic Claude 3.5 Sonnet API token pricing, context window limits, vision support, and coding benchmarks.',
+        itemA: { name: 'OpenAI GPT-4o', type: 'Omni Multimodal LLM', spec: '128,000 token context window. $2.50 / 1M input tokens.', link: '/tools/openai-cost-estimator/' },
+        itemB: { name: 'Claude 3.5 Sonnet', type: 'Frontier Coding & Reasoning LLM', spec: '200,000 token context window. $3.00 / 1M input tokens.', link: '/tools/claude-cost-estimator/' },
+        tableData: [
+          { feature: 'Context Window', a: '128,000 Tokens', b: '200,000 Tokens' },
+          { feature: 'Input Token Price', a: '$2.50 / 1M Tokens', b: '$3.00 / 1M Tokens' },
+          { feature: 'Output Token Price', a: '$10.00 / 1M Tokens', b: '$15.00 / 1M Tokens' },
+          { feature: 'Coding Quality', a: 'High (SWE-bench 48.9%)', b: 'State-of-the-Art (SWE-bench 53.7%)' },
+        ],
+        verdict: 'Use Claude 3.5 Sonnet for complex software architecture and agentic coding. Use GPT-4o for fast multimodal vision and lower output token costs.',
+      }
+    },
+    {
+      params: { slug: 'png-vs-webp' },
+      props: {
+        title: 'PNG vs WebP Comparison & Image Compression Benchmark | Nadhebe',
+        h1: 'PNG vs WebP Image Format Comparison',
+        description: 'Compare lossless PNG vs modern WebP image formats for web performance, file size savings, alpha transparency, and browser compatibility.',
+        itemA: { name: 'PNG (Portable Network Graphics)', type: 'Uncompressed Lossless Image', spec: 'Universal compatibility across all image editors. Larger file size.', link: '/tools/webp-to-png/' },
+        itemB: { name: 'WebP (Google Modern Web Format)', type: 'Lossy & Lossless Compressed Image', spec: '50% to 80% file size reduction. Supported by 97%+ of web browsers.', link: '/tools/png-to-webp/' },
+        tableData: [
+          { feature: 'Compression Type', a: 'Lossless (Deflate)', b: 'Lossy & Lossless (VP8/VP8L)' },
+          { feature: 'Average File Savings', a: 'Baseline (0%)', b: '50% – 80% Smaller' },
+          { feature: 'Alpha Transparency', a: 'Supported (8-bit alpha)', b: 'Supported (8-bit alpha)' },
+          { feature: 'Browser Support', a: '100% (Legacy)', b: '97%+ Modern Browsers' },
+        ],
+        verdict: 'Use WebP for web assets to boost Core Web Vitals LCP performance. Use PNG for master graphics editing and legacy software compatibility.',
+      }
+    },
+    {
+      params: { slug: 'jwt-vs-session' },
+      props: {
+        title: 'JWT vs Server Session Authentication Comparison | Nadhebe',
+        h1: 'JWT Tokens vs Server Session Authentication',
+        description: 'Compare stateless JSON Web Tokens (JWT) vs stateful server session cookies for web application security, scalability, and revocation.',
+        itemA: { name: 'JWT (JSON Web Token)', type: 'Stateless Signed Token', spec: 'Stored on client (localStorage/cookie). Decoded without DB queries.', link: '/tools/jwt-encoder/' },
+        itemB: { name: 'Server Session', type: 'Stateful Redis/SQL Store', spec: 'Opaque session ID stored in HTTP-Only cookie. Validated against server store.', link: '/tools/jwt-encoder/' },
+        tableData: [
+          { feature: 'State Storage', a: 'Stateless (Inside Payload)', b: 'Stateful (Server DB / Redis)' },
+          { feature: 'Revocation Speed', a: 'Hard (Requires Blacklist)', b: 'Instant (Delete from Redis)' },
+          { feature: 'DB Lookup Overhead', a: 'Zero DB Lookups', b: '1 DB Lookup per Request' },
+          { feature: 'Payload Size', a: 'Large (~500 Bytes)', b: 'Small (~32 Bytes Session ID)' },
+        ],
+        verdict: 'Use JWTs for microservices and mobile APIs. Use HttpOnly Session cookies for B2B SaaS applications requiring immediate user session revocation.',
+      }
+    },
+    {
+      params: { slug: 'csv-vs-json' },
+      props: {
+        title: 'CSV vs JSON Data Format Comparison | Nadhebe',
+        h1: 'CSV vs JSON Data Format Comparison',
+        description: 'Compare tabular CSV spreadsheets vs nested JSON data objects for payload bandwidth, human readability, and database ETL pipelines.',
+        itemA: { name: 'CSV (Comma-Separated Values)', type: 'Tabular Plain Text', spec: 'Compact 2D grid structure. Optimal for Excel and bulk database COPY.', link: '/tools/csv-to-json/' },
+        itemB: { name: 'JSON (JavaScript Object Notation)', type: 'Hierarchical Key-Value Object', spec: 'Supports nested objects and arrays. Universal web API payload standard.', link: '/tools/json-to-csv/' },
+        tableData: [
+          { feature: 'Data Structure', a: '2D Flat Table (Rows/Cols)', b: 'Nested Objects & Arrays' },
+          { feature: 'Payload Size', a: 'Extremely Compact', b: 'Larger (Repeated Keys)' },
+          { feature: 'Data Typing', a: 'Strings Only (Untyped)', b: 'Typed (Strings, Numbers, Booleans)' },
+          { feature: 'Tooling Compatibility', a: 'Excel, Pandas, SQL COPY', b: 'REST APIs, Node.js, Web Browsers' },
+        ],
+        verdict: 'Use CSV for bulk database imports and data analytics. Use JSON for REST APIs and complex nested application states.',
+      }
+    }
+  ];
+}
+
+const { slug } = Astro.params;
+const { title: pageTitle, h1, description, itemA, itemB, tableData, verdict } = Astro.props;
+
+const faq = [
+  {
+    question: `What is the main difference between ${itemA.name} and ${itemB.name}?`,
+    answer: `${itemA.name} uses ${itemA.spec}, whereas ${itemB.name} features ${itemB.spec}.`,
+  },
+  {
+    question: `Which one should I choose for production?`,
+    answer: `${verdict}`,
+  },
+];
+---
+
+<ToolLayout
+  toolId={`compare-${slug}`}
+  title={pageTitle}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="compare-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- ITEM A CARD -->
+      <CalculatorCard title={itemA.name.toUpperCase()}>
+        <div class="space-y-16 font-mono text-xs">
+          <div class="rounded-12 border border-border bg-surface2 p-16 dark:border-border-dark dark:bg-surface2-dark space-y-8">
+            <div class="font-bold text-caption text-ink dark:text-ink-dark">{itemA.name}</div>
+            <div class="text-accent dark:text-accent-dark font-bold">{itemA.type}</div>
+            <p class="text-muted dark:text-muted-dark font-sans leading-relaxed">{itemA.spec}</p>
+          </div>
+
+          <a href={itemA.link} class="block w-full text-center rounded-8 bg-accent px-16 py-10 font-sans text-xs font-semibold text-white hover:opacity-90 transition-all shadow-soft">
+            Open {itemA.name} Tool →
+          </a>
+        </div>
+      </CalculatorCard>
+
+      <!-- ITEM B CARD -->
+      <CalculatorCard title={itemB.name.toUpperCase()}>
+        <div class="space-y-16 font-mono text-xs">
+          <div class="rounded-12 border border-border bg-surface2 p-16 dark:border-border-dark dark:bg-surface2-dark space-y-8">
+            <div class="font-bold text-caption text-ink dark:text-ink-dark">{itemB.name}</div>
+            <div class="text-emerald-600 dark:text-emerald-400 font-bold">{itemB.type}</div>
+            <p class="text-muted dark:text-muted-dark font-sans leading-relaxed">{itemB.spec}</p>
+          </div>
+
+          <a href={itemB.link} class="block w-full text-center rounded-8 bg-emerald-600 px-16 py-10 font-sans text-xs font-semibold text-white hover:opacity-90 transition-all shadow-soft">
+            Open {itemB.name} Tool →
+          </a>
+        </div>
+      </CalculatorCard>
+
+    </div>
+
+    <!-- COMPARISON BENCHMARK TABLE -->
+    <ResultCard title="SIDE-BY-SIDE FEATURE & BENCHMARK COMPARISON">
+      <div class="space-y-20">
+        <div class="w-full overflow-x-auto rounded-12 border border-border bg-surface dark:border-border-dark dark:bg-surface-dark">
+          <table class="w-full text-left font-mono text-xs border-collapse">
+            <thead class="bg-surface2 dark:bg-surface2-dark border-b border-border dark:border-border-dark text-ink dark:text-ink-dark font-bold">
+              <tr>
+                <th class="p-12">Feature / Metric</th>
+                <th class="p-12 text-accent dark:text-accent-dark">{itemA.name}</th>
+                <th class="p-12 text-emerald-600 dark:text-emerald-400">{itemB.name}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border/40 dark:divide-border-dark/40 text-ink dark:text-ink-dark">
+              {tableData.map(row => (
+                <tr class="hover:bg-surface2/50 dark:hover:bg-surface2-dark/50">
+                  <td class="p-12 font-bold">{row.feature}</td>
+                  <td class="p-12 text-muted dark:text-muted-dark">{row.a}</td>
+                  <td class="p-12 text-muted dark:text-muted-dark">{row.b}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16 font-sans">
+          <strong class="text-caption font-bold text-emerald-800 dark:text-emerald-300 block mb-4">Architectural Recommendation:</strong>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 leading-relaxed font-medium">{verdict}</p>
+        </div>
+      </div>
+    </ResultCard>
+  </div>
+
+  <div slot="content">
+    <h2>{h1} Technical Comparison Guide</h2>
+    <p>
+      Evaluating technical tradeoffs between {itemA.name} and {itemB.name} ensures scalable system architecture, lower latency, and reduced API infrastructure costs.
+    </p>
+
+    <h3>Recommended Next Steps</h3>
+    <p>
+      Try our interactive developer tools: <a href={itemA.link}>{itemA.name} Tool</a>, <a href={itemB.link}>{itemB.name} Tool</a>, or explore all developer utilities on the <a href="/tools/">Nadhebe Tools Index</a>.
+    </p>
+  </div>
+</ToolLayout>
