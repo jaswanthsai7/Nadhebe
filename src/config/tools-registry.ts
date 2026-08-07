@@ -20132,6 +20132,76 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "css-flexbox-generator"
     ],
     "icon": "layout"
+  },
+  {
+    "id": "design-grid-1",
+    "slug": "css-grid-generator",
+    "title": "CSS Grid Layout Generator & Visual Builder",
+    "name": "CSS Grid Layout Generator & Visual Builder",
+    "href": "/tools/css-grid-generator/",
+    "component": "src/pages/tools/css-grid-generator.astro",
+    "status": "implemented",
+    "category": "Design",
+    "categorySlug": "design",
+    "mode": "generator",
+    "description": "Build and preview 2D CSS Grid layouts interactively with track size and gap controls.",
+    "seo": {
+      "title": "CSS Grid Layout Generator & Visual Builder | Nadhebe",
+      "description": "Build and preview 2D CSS Grid container layouts interactively. Configure grid-template-columns, grid-template-rows, gap, and export production CSS code.",
+      "keywords": [
+        "css grid generator",
+        "css grid visual builder",
+        "grid template columns maker",
+        "responsive css grid",
+        "2d grid layout"
+      ]
+    },
+    "relatedTools": [
+      "css-flexbox-generator",
+      "css-clamp-calculator",
+      "px-to-rem",
+      "color-contrast-checker"
+    ],
+    "tags": [
+      "design",
+      "css-grid-generator"
+    ],
+    "icon": "grid"
+  },
+  {
+    "id": "sec-hhi-1",
+    "slug": "http-header-inspector",
+    "title": "HTTP Request & Response Header Inspector",
+    "name": "HTTP Request & Response Header Inspector",
+    "href": "/tools/http-header-inspector/",
+    "component": "src/pages/tools/http-header-inspector.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "analyzer",
+    "description": "Inspect, parse, and analyze HTTP request and response headers client-side with security header scoring.",
+    "seo": {
+      "title": "HTTP Request & Response Header Inspector | Nadhebe",
+      "description": "Inspect, parse, and analyze HTTP request and response headers client-side. Evaluate security headers (CSP, HSTS, CORS, X-Frame-Options) and cache directives.",
+      "keywords": [
+        "http header inspector",
+        "parse response headers",
+        "http security header score",
+        "csp hsts header checker",
+        "cache control inspector"
+      ]
+    },
+    "relatedTools": [
+      "csp-header-generator",
+      "hsts-header-generator",
+      "cors-header-generator",
+      "http-status-codes-cheat-sheet"
+    ],
+    "tags": [
+      "security",
+      "http-header-inspector"
+    ],
+    "icon": "list"
   }
 ];
 

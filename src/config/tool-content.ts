@@ -1344,6 +1344,38 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'css-grid-generator': {
+    intro: 'CSS Grid Layout Generator & Visual Builder designs 2-dimensional grid template tracks with real-time visual canvas controls.',
+    useCases: [
+      'Configure grid-template-columns, grid-template-rows, and gap spacing',
+      'Preview multi-cell 2D grid container layouts in real-time',
+      'Export production CSS grid rules to clipboard',
+    ],
+    howItWorks: 'Select column tracks and row heights. The tool renders grid cell elements and exports CSS code.',
+    faq: [
+      {
+        question: 'What is the difference between CSS Flexbox and CSS Grid?',
+        answer: 'Flexbox is 1-dimensional (row or column); CSS Grid is 2-dimensional (rows and columns simultaneously).',
+      },
+    ],
+  },
+
+  'http-header-inspector': {
+    intro: 'HTTP Request & Response Header Inspector parses HTTP headers client-side and evaluates security header compliance.',
+    useCases: [
+      'Inspect HTTP response headers for Content-Security-Policy, HSTS, and CORS directives',
+      'Evaluate security header compliance scores (A+ to D grade)',
+      'Analyze Cache-Control headers and server signatures',
+    ],
+    howItWorks: 'Paste raw HTTP response headers. The parser extracts header key-value pairs and computes security scores.',
+    faq: [
+      {
+        question: 'Are my HTTP headers sent to remote servers?',
+        answer: '100% private. Header parsing and security scoring execute locally in your web browser.',
+      },
+    ],
+  },
+
 };
 
 

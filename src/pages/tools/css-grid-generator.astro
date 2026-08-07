@@ -1,0 +1,189 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'CSS Grid Layout Generator & Visual Builder | Nadhebe';
+const h1 = 'CSS Grid Layout Generator & Visual Builder';
+const description = 'Build and preview 2D CSS Grid container layouts interactively. Configure grid-template-columns, grid-template-rows, gap, and export production CSS code.';
+
+const faq = [
+  {
+    question: 'How does the CSS Grid Generator work?',
+    answer: 'Configure grid columns (`1fr 1fr`), rows, gap spacing, and grid items. The generator renders a live visual canvas and outputs clean CSS Grid code.',
+  },
+  {
+    question: 'What is the difference between CSS Flexbox and CSS Grid?',
+    answer: 'Flexbox is a 1-dimensional layout system (row OR column), whereas CSS Grid is a 2-dimensional layout system managing rows AND columns simultaneously.',
+  },
+  {
+    question: 'What does `1fr` mean in CSS Grid?',
+    answer: '`1fr` represents one fraction of the remaining free space inside the CSS Grid container.',
+  },
+  {
+    question: 'Is my CSS code stored on external servers?',
+    answer: '100% private. All layout previews and CSS code generation execute locally in your web browser.',
+  },
+  {
+    question: 'Can I copy the generated CSS code into my project?',
+    answer: 'Yes! Click "Copy CSS Grid Code" to copy `.grid-container` rules directly into your stylesheet.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="css-grid-generator"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="grid-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="CSS GRID CONTAINER CONTROLS">
+        <div class="space-y-16">
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="grid-cols" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">grid-template-columns</label>
+              <select id="grid-cols" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono cursor-pointer">
+                <option value="repeat(3, 1fr)" selected>repeat(3, 1fr) [3 Equal Cols]</option>
+                <option value="repeat(2, 1fr)">repeat(2, 1fr) [2 Equal Cols]</option>
+                <option value="repeat(4, 1fr)">repeat(4, 1fr) [4 Equal Cols]</option>
+                <option value="200px 1fr">200px 1fr [Sidebar + Content]</option>
+                <option value="1fr 2fr 1fr">1fr 2fr 1fr [3 Column Hero]</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="grid-gap" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">gap (px)</label>
+              <input id="grid-gap" type="number" min="0" max="60" value="16" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <label for="grid-rows" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">grid-template-rows</label>
+              <select id="grid-rows" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono cursor-pointer">
+                <option value="auto" selected>auto (Auto Height)</option>
+                <option value="repeat(2, 100px)">repeat(2, 100px)</option>
+                <option value="repeat(3, 120px)">repeat(3, 120px)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="grid-item-count" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Grid Item Count</label>
+              <input id="grid-item-count" type="number" min="1" max="12" value="6" class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono" />
+            </div>
+          </div>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="LIVE GRID PREVIEW & CSS CODE">
+        <div class="space-y-20">
+          
+          <!-- Live Preview Box -->
+          <div>
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-8">Visual Canvas Preview</span>
+            <div id="grid-preview-box" class="w-full min-h-[220px] rounded-12 border border-border bg-surface2 p-16 dark:border-border-dark dark:bg-surface2-dark transition-all overflow-hidden">
+              <!-- Rendered items -->
+            </div>
+          </div>
+
+          <!-- CSS Code Box -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Generated CSS</span>
+              <button type="button" id="btn-copy-grid" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft">
+                Copy CSS Grid Code
+              </button>
+            </div>
+            <pre id="grid-css-code" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 leading-relaxed whitespace-pre-wrap"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>CSS Grid Layout System Specification</h2>
+    <p>
+      CSS Grid Layout provides a 2-dimensional grid framework for building complex webpage templates, dashboard layouts, and media galleries.
+    </p>
+
+    <h3>Key CSS Grid Properties</h3>
+    <ul>
+      <li><strong>display: grid</strong>: Enables grid formatting context on the parent container.</li>
+      <li><strong>grid-template-columns</strong>: Defines column track sizes using pixels, percentages, or fractional units (`fr`).</li>
+      <li><strong>gap</strong>: Sets vertical and horizontal gutters between grid tracks.</li>
+    </ul>
+
+    <h3>Related CSS Tools</h3>
+    <p>
+      Build 1D flexbox layouts with the <a href="/tools/css-flexbox-generator/">CSS Flexbox Generator</a>, calculate CSS clamp values with the <a href="/tools/css-clamp-calculator/">CSS Clamp Calculator</a>, or convert px to rem with the <a href="/tools/px-to-rem/">PX to REM Converter</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const selectCols = document.getElementById('grid-cols');
+    const selectRows = document.getElementById('grid-rows');
+    const inputGap = document.getElementById('grid-gap');
+    const inputCount = document.getElementById('grid-item-count');
+
+    const previewBox = document.getElementById('grid-preview-box');
+    const cssCode = document.getElementById('grid-css-code');
+    const btnCopy = document.getElementById('btn-copy-grid');
+
+    function updateGrid() {
+      const cols = selectCols?.value || 'repeat(3, 1fr)';
+      const rows = selectRows?.value || 'auto';
+      const gap = parseInt(inputGap?.value || '16', 10);
+      const count = parseInt(inputCount?.value || '6', 10);
+
+      if (previewBox) {
+        previewBox.style.display = 'grid';
+        previewBox.style.gridTemplateColumns = cols;
+        previewBox.style.gridTemplateRows = rows;
+        previewBox.style.gap = `${gap}px`;
+
+        previewBox.innerHTML = '';
+        for (let i = 1; i <= count; i++) {
+          const item = document.createElement('div');
+          item.className = 'rounded-8 bg-accent/20 border border-accent/40 text-accent dark:text-accent-dark font-mono text-xs font-bold p-16 min-h-[60px] flex items-center justify-center shadow-soft';
+          item.textContent = `Grid ${i}`;
+          previewBox.appendChild(item);
+        }
+      }
+
+      const css = `.grid-container {
+  display: grid;
+  grid-template-columns: ${cols};
+  grid-template-rows: ${rows};
+  gap: ${gap}px;
+}`;
+
+      if (cssCode) cssCode.textContent = css;
+    }
+
+    [selectCols, selectRows, inputGap, inputCount].forEach(el => {
+      el?.addEventListener('input', updateGrid);
+      el?.addEventListener('change', updateGrid);
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (cssCode) {
+        navigator.clipboard.writeText(cssCode.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy CSS Grid Code'), 2000);
+      }
+    });
+
+    updateGrid();
+  })();
+</script>
