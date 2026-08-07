@@ -19397,6 +19397,76 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "xml-to-json"
     ],
     "icon": "file-code"
+  },
+  {
+    "id": "ai-vram-1",
+    "slug": "gpu-vram-calculator",
+    "title": "LLM GPU VRAM Memory Requirement Calculator",
+    "name": "LLM GPU VRAM Memory Requirement Calculator",
+    "href": "/tools/gpu-vram-calculator/",
+    "component": "src/pages/tools/gpu-vram-calculator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Calculate GPU VRAM memory requirements for running LLMs locally or in cloud deployments.",
+    "seo": {
+      "title": "LLM GPU VRAM Memory Requirement Calculator | Nadhebe",
+      "description": "Calculate GPU VRAM memory requirements for running LLMs (Llama 3, DeepSeek, Mistral) locally or in cloud deployments (NVIDIA H100, A100, RTX 4090).",
+      "keywords": [
+        "gpu vram calculator",
+        "llm vram requirement",
+        "llama 3 vram calculator",
+        "vllm memory requirement",
+        "cuda oom calculator"
+      ]
+    },
+    "relatedTools": [
+      "ai-api-pricing-calculator",
+      "llm-tokenizer",
+      "rag-evaluator",
+      "cosine-similarity-calculator"
+    ],
+    "tags": [
+      "ai",
+      "gpu-vram-calculator"
+    ],
+    "icon": "cpu"
+  },
+  {
+    "id": "ai-cos-1",
+    "slug": "cosine-similarity-calculator",
+    "title": "Vector Embedding Cosine Similarity Calculator",
+    "name": "Vector Embedding Cosine Similarity Calculator",
+    "href": "/tools/cosine-similarity-calculator/",
+    "component": "src/pages/tools/cosine-similarity-calculator.astro",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "calculator",
+    "description": "Calculate cosine similarity, dot product, and Euclidean distance between 2 vector embeddings.",
+    "seo": {
+      "title": "Vector Embedding Cosine Similarity Calculator | Nadhebe",
+      "description": "Calculate cosine similarity, dot product, and Euclidean distance between 2 vector embeddings client-side. Test OpenAI text-embedding-3 and Voyage AI vectors.",
+      "keywords": [
+        "cosine similarity calculator",
+        "vector embedding similarity",
+        "dot product calculator",
+        "rag vector similarity",
+        "euclidean distance vectors"
+      ]
+    },
+    "relatedTools": [
+      "rag-evaluator",
+      "gpu-vram-calculator",
+      "llm-tokenizer",
+      "prompt-optimizer"
+    ],
+    "tags": [
+      "ai",
+      "cosine-similarity-calculator"
+    ],
+    "icon": "activity"
   }
 ];
 

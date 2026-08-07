@@ -1008,6 +1008,38 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'gpu-vram-calculator': {
+    intro: 'LLM GPU VRAM Memory Requirement Calculator estimates GPU VRAM needed for running open-weights LLMs locally or in cloud cluster deployments.',
+    useCases: [
+      'Calculate required GPU VRAM across INT4, INT8, FP16, and FP32 quantization levels',
+      'Estimate KV cache memory growth for 32k to 128k context windows',
+      'Determine recommended GPU hardware configurations (NVIDIA H100, A100, RTX 4090)',
+    ],
+    howItWorks: 'Input parameter count in billions, quantization precision, and context length. The calculator computes weights, KV cache, and 20% CUDA buffer overhead.',
+    faq: [
+      {
+        question: 'How much VRAM does Llama 3 70B FP16 require?',
+        answer: 'Llama 3 70B FP16 requires ~140GB VRAM for model weights alone, plus KV cache overhead.',
+      },
+    ],
+  },
+
+  'cosine-similarity-calculator': {
+    intro: 'Vector Embedding Cosine Similarity Calculator computes cosine similarity, dot product, and Euclidean distance between two vector embeddings client-side.',
+    useCases: [
+      'Compare similarity scores between two vector embedding arrays',
+      'Test normalized dot products for vector search engines',
+      'Calculate Euclidean L2 distance for vector spatial analysis',
+    ],
+    howItWorks: 'Paste 2 comma-separated number arrays. The calculator computes dot product, L2 magnitudes, and cosine similarity.',
+    faq: [
+      {
+        question: 'What does a cosine similarity of 1.0 mean?',
+        answer: 'A cosine similarity score of 1.0 indicates identical directional orientation in vector space.',
+      },
+    ],
+  },
+
 };
 
 

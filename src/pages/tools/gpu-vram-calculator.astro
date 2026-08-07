@@ -1,23 +1,33 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'GPU VRAM Calculator for LLMs | Nadhebe';
-const h1 = 'GPU VRAM Calculator';
-const description = 'Accurately estimate the GPU VRAM required to load and run Large Language Models (LLMs) in production environments like vLLM, considering weights, quantization, and KV cache.';
+const title = 'LLM GPU VRAM Memory Requirement Calculator | Nadhebe';
+const h1 = 'LLM GPU VRAM Memory Requirement Calculator';
+const description = 'Calculate GPU VRAM memory requirements for running LLMs (Llama 3, DeepSeek, Mistral) locally or in cloud deployments (NVIDIA H100, A100, RTX 4090).';
 
 const faq = [
   {
-    question: 'How is the KV Cache size calculated?',
-    answer: 'KV Cache size depends on the context length, hidden size, number of attention heads, and the precision (e.g., FP16 vs FP8). This calculator uses standard Llama 3 architectures to approximate the KV cache footprint per token.',
+    question: 'How is LLM GPU VRAM memory calculated?',
+    answer: 'Base VRAM requirement = `(Model Parameters in Billions * Precision Bytes per Weight) + KV Cache Overhead + Activation Buffer`.',
   },
   {
-    question: 'Why does 4-bit quantization save so much VRAM?',
-    answer: 'Standard weights are stored as 16-bit floats (2 bytes per parameter). 4-bit quantization (like AWQ or GPTQ) compresses this to 0.5 bytes per parameter, effectively reducing the model weight memory footprint by 75%.',
+    question: 'What are the VRAM bytes per parameter for different quantization levels?',
+    answer: 'FP16 = 2 bytes/param, INT8 (Q8) = 1 byte/param, INT4 (Q4_K_M) = 0.5 bytes/param, FP32 = 4 bytes/param.',
   },
   {
-    question: 'What is the "vLLM Reserved" overhead?',
-    answer: 'Engines like vLLM pre-allocate a large chunk of VRAM to manage continuous batching efficiently using PagedAttention. By default, vLLM reserves 90% of your total GPU VRAM for the model weights and the KV cache block pool.',
-  }
+    question: 'How much KV Cache VRAM is required for context windows?',
+    answer: 'KV cache overhead scales linearly with sequence context length (e.g. 128k context adds ~4GB to 8GB of VRAM depending on model hidden dimensions and layer counts).',
+  },
+  {
+    question: 'Can I run Llama 3 70B on a single RTX 4090 (24GB VRAM)?',
+    answer: 'No. Llama 3 70B quantized to Q4 requires ~40GB VRAM. You need 2x RTX 4090 (48GB combined) or an NVIDIA A6000/A100 (80GB).',
+  },
+  {
+    question: 'Why is an additional 20% VRAM buffer overhead recommended?',
+    answer: 'CUDA runtime initialization, KV cache growth, and batching activations require safety margins to prevent CUDA Out of Memory (OOM) crashes.',
+  },
 ];
 ---
 
@@ -28,169 +38,158 @@ const faq = [
   description={description}
   faq={faq}
 >
-  <div slot="calculator" class="w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+  <div slot="calculator" class="space-y-24" id="vram-calculator-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
       
-      <!-- Input Panel -->
-      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft">
-        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
-          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">Model Configuration</h2>
-        </div>
-
-        <div class="space-y-24">
-          <!-- Parameters -->
+      <!-- INPUT CARD -->
+      <CalculatorCard title="LLM PARAMETERS & QUANTIZATION">
+        <div class="space-y-16">
           <div>
-            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Model Parameters (Billions)</label>
-            <input type="number" id="params-input" min="1" max="1000" step="0.5" value="8" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" />
-            <p class="text-xs text-muted dark:text-muted-dark mt-4">Example: 8 for Llama 3 8B, 70 for Llama 3 70B</p>
+            <label for="vram-input-params" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Model Size (Billions of Parameters)</label>
+            <input
+              id="vram-input-params"
+              type="number"
+              min="1"
+              max="405"
+              step="1"
+              value="70"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
           </div>
 
-          <!-- Precision -->
           <div>
-            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Weight Precision (Quantization)</label>
-            <select id="precision-input" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-sans text-ink dark:text-ink-dark focus:border-accent outline-none">
-              <option value="16">16-bit (FP16/BF16) - Native</option>
-              <option value="8">8-bit (INT8) - SmoothQuant</option>
-              <option value="4">4-bit (INT4) - AWQ/GPTQ</option>
+            <label for="vram-select-quant" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Quantization / Precision Format</label>
+            <select
+              id="vram-select-quant"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-mono"
+            >
+              <option value="0.5">INT4 / Q4_K_M (0.5 Bytes / parameter)</option>
+              <option value="1.0">INT8 / Q8_0 (1.0 Byte / parameter)</option>
+              <option value="2.0" selected>FP16 / BF16 (2.0 Bytes / parameter)</option>
+              <option value="4.0">FP32 Full (4.0 Bytes / parameter)</option>
             </select>
           </div>
 
-          <!-- Context Length -->
           <div>
-            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Context Length (Tokens)</label>
-            <input type="number" id="context-input" min="512" max="128000" step="1024" value="8192" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" />
+            <label for="vram-input-ctx" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Max Context Window (Tokens)</label>
+            <input
+              id="vram-input-ctx"
+              type="number"
+              min="2048"
+              max="131072"
+              step="4096"
+              value="32768"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-sm font-bold"
+            />
           </div>
-          
-          <!-- Batch Size -->
-          <div>
-            <label class="block text-caption font-bold text-ink dark:text-ink-dark mb-6">Concurrent Batch Size</label>
-            <input type="number" id="batch-input" min="1" max="256" value="16" class="w-full rounded-8 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark px-12 py-8 text-body font-mono text-ink dark:text-ink-dark focus:border-accent outline-none" />
-          </div>
-        </div>
-      </div>
 
-      <!-- Output Panel -->
-      <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 bg-surface/50 dark:bg-surface-dark/50 shadow-soft flex flex-col">
-        <div class="flex items-center justify-between mb-24 pb-16 border-b border-border dark:border-border-dark">
-          <h2 class="text-h4 font-display font-bold text-ink dark:text-ink-dark m-0">VRAM Estimation</h2>
+          <button
+            type="button"
+            id="btn-calc-vram"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Calculate GPU VRAM Requirement
+          </button>
         </div>
+      </CalculatorCard>
 
-        <div class="flex-1 flex flex-col justify-center space-y-16">
+      <!-- OUTPUT CARD -->
+      <ResultCard title="ESTIMATED VRAM & HARDWARE RECOMMENDATION">
+        <div class="space-y-20">
           
-          <div class="relative overflow-hidden rounded-16 border border-accent/30 bg-accent/5 p-24 text-center">
-            <div class="text-caption font-bold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Total Required VRAM</div>
-            <div id="result-total" class="text-h1 font-display font-bold text-ink dark:text-ink-dark tabular-nums">0.00 GB</div>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-16">
-            <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
-              <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">Model Weights</div>
-              <div id="result-weights" class="text-h3 font-display font-bold text-ink tabular-nums">0.00 GB</div>
+          <!-- Summary Metrics Grid -->
+          <div class="grid grid-cols-2 gap-12 font-mono text-center">
+            <div class="rounded-12 border border-emerald-500/30 bg-emerald-500/10 p-16">
+              <div id="stat-vram-total" class="text-h2 font-bold text-emerald-800 dark:text-emerald-300">172.8 GB</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Total VRAM Required</div>
             </div>
-            <div class="rounded-12 border border-border dark:border-border-dark bg-surface p-16 text-center">
-              <div class="text-[10px] font-bold text-muted uppercase tracking-wider mb-4">KV Cache (Context)</div>
-              <div id="result-kv" class="text-h3 font-display font-bold text-ink tabular-nums">0.00 GB</div>
+            <div class="rounded-12 border border-border bg-surface2/60 p-16 dark:border-border-dark dark:bg-surface2-dark/60">
+              <div id="stat-vram-weights" class="text-h2 font-bold text-accent dark:text-accent-dark">140.0 GB</div>
+              <div class="text-xs text-muted dark:text-muted-dark uppercase mt-4">Base Model Weights</div>
             </div>
           </div>
-          
-          <div class="rounded-12 border border-border dark:border-border-dark bg-surface/30 p-16">
-            <h3 class="text-caption font-bold text-ink dark:text-ink-dark mb-8">Recommended GPU Options</h3>
-            <ul id="gpu-recs" class="text-sm font-sans text-muted dark:text-muted-dark space-y-4 list-disc pl-16">
-              <li>Loading...</li>
-            </ul>
+
+          <!-- Hardware Recommendation Banner -->
+          <div class="rounded-12 border border-border bg-surface p-16 shadow-subtle dark:border-border-dark dark:bg-surface-dark space-y-8 font-mono text-xs">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark block mb-4">Recommended GPU Setup</span>
+            
+            <div class="flex items-center justify-between py-4 border-b border-border/40 dark:border-border-dark/40">
+              <span>NVIDIA Enterprise Setup:</span>
+              <span id="stat-vram-gpu-enterprise" class="font-bold text-emerald-600 dark:text-emerald-400">2x NVIDIA A100 80GB</span>
+            </div>
+
+            <div class="flex items-center justify-between py-4">
+              <span>Consumer GPU Setup:</span>
+              <span id="stat-vram-gpu-consumer" class="font-bold text-accent dark:text-accent-dark">8x RTX 4090 24GB</span>
+            </div>
           </div>
-          
+
         </div>
-      </div>
+      </ResultCard>
+
     </div>
   </div>
 
   <div slot="content">
-    <h2>Stop Guessing Your GPU Requirements</h2>
+    <h2>LLM GPU VRAM Memory Estimation Guide</h2>
     <p>
-      The <strong>GPU VRAM Calculator</strong> is an engineering utility designed to help AI infrastructure teams estimate exactly how much VRAM they need before renting cloud instances or buying hardware.
+      Planning GPU hardware infrastructure for local or cloud LLM deployment (vLLM, Ollama, TGI) requires calculating model weights, KV cache context buffers, and CUDA memory overhead.
     </p>
 
-    <h3>Understanding the Metrics</h3>
-    <ul>
-      <li><strong>Model Weights:</strong> This is the static memory required just to load the neural network into the GPU. It is calculated as <code>Parameters × (Bits/8)</code>.</li>
-      <li><strong>KV Cache:</strong> This is the dynamic memory used during inference. The longer the context window and the larger the concurrent batch size, the larger the KV cache grows. If your KV cache exceeds available VRAM, engines like vLLM will trigger an Out-Of-Memory (OOM) exception.</li>
-    </ul>
-    
+    <h3>GPU VRAM Memory Formula</h3>
+    <pre class="rounded-12 border border-border bg-code p-16 font-mono text-xs text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400">VRAM (GB) = (Parameters_Billions * Bytes_per_Param) * 1.20 + (Context_Tokens * 0.001)</pre>
+
+    <h3>Related AI Infrastructure Tools</h3>
     <p>
-      To learn more about optimizing your LLM deployments using PagedAttention and continuous batching, read our comprehensive <a href="/tutorials/vllm-guide">Ultimate vLLM Deployment Guide</a>.
+      Calculate API pricing with the <a href="/tools/ai-api-pricing-calculator/">AI API Pricing Calculator</a>, estimate BPE tokens with the <a href="/tools/llm-tokenizer/">LLM BPE Tokenizer</a>, or audit RAG retrieval with the <a href="/tools/rag-evaluator/">RAG Retrieval Evaluator</a>.
     </p>
   </div>
 </ToolLayout>
 
-<script>
-  function setupCalculator() {
-    const paramsInput = document.getElementById('params-input') as HTMLInputElement;
-    const precInput = document.getElementById('precision-input') as HTMLSelectElement;
-    const ctxInput = document.getElementById('context-input') as HTMLInputElement;
-    const batchInput = document.getElementById('batch-input') as HTMLInputElement;
-    
-    const rTotal = document.getElementById('result-total');
-    const rWeights = document.getElementById('result-weights');
-    const rKv = document.getElementById('result-kv');
-    const rGpu = document.getElementById('gpu-recs');
+<script is:inline>
+  (function() {
+    const inputParams = document.getElementById('vram-input-params');
+    const selectQuant = document.getElementById('vram-select-quant');
+    const inputCtx = document.getElementById('vram-input-ctx');
+    const btnCalc = document.getElementById('btn-calc-vram');
 
-    if (!paramsInput || !rTotal) return;
+    const statTotal = document.getElementById('stat-vram-total');
+    const statWeights = document.getElementById('stat-vram-weights');
+    const statGpuEnt = document.getElementById('stat-vram-gpu-enterprise');
+    const statGpuCons = document.getElementById('stat-vram-gpu-consumer');
 
     function calculate() {
-      const p = parseFloat(paramsInput.value) || 8;
-      const bits = parseFloat(precInput.value) || 16;
-      const ctx = parseFloat(ctxInput.value) || 8192;
-      const batch = parseFloat(batchInput.value) || 16;
-      
-      // Weight memory: (Params in B) * (bits / 8) -> GB
-      const weightGB = p * (bits / 8);
-      
-      // KV Cache approximation (simplified formula assuming standard attention head ratios)
-      // Llama 3 8B has 32 heads, 128 head dim, 4 layers (GQA).
-      // Rough heuristic for modern LLMs: ~1MB per 1000 tokens per billion parameters in FP16.
-      // So KV cache in GB = (batch * ctx * p * 0.000001) for FP16
-      const kvGB = (batch * ctx * p * 0.0000012) * (16 / 16); // Assuming KV cache is in FP16
-      
-      // Total + 20% overhead for CUDA contexts and activations
-      const totalGB = (weightGB + kvGB) * 1.2;
-      
-      if (rWeights) rWeights.textContent = `${weightGB.toFixed(2)} GB`;
-      if (rKv) rKv.textContent = `${kvGB.toFixed(2)} GB`;
-      if (rTotal) rTotal.textContent = `${totalGB.toFixed(2)} GB`;
-      
-      // Recommend GPUs
-      let recs = [];
-      if (totalGB < 12) {
-        recs.push('1x RTX 4090 (24GB) or 1x RTX 3090 (24GB)');
-        recs.push('1x L4 (24GB) - Cloud Server');
-      } else if (totalGB < 24) {
-        recs.push('1x RTX 4090 (24GB) or 1x RTX 3090 (24GB)');
-        recs.push('1x A10G (24GB) or 1x L4 (24GB)');
-      } else if (totalGB < 48) {
-        recs.push('2x RTX 4090 (24GB) or 2x RTX 3090 (24GB)');
-        recs.push('1x A6000 (48GB) or 1x A40 (48GB)');
-      } else if (totalGB < 80) {
-        recs.push('1x H100 (80GB) or 1x A100 (80GB)');
-        recs.push('4x RTX 4090 (24GB) via PCIe');
-      } else {
-        recs.push('2x H100 (80GB) or 2x A100 (80GB)');
-        recs.push('8x L40S (48GB) Node');
-      }
-      
-      if (rGpu) {
-        rGpu.innerHTML = recs.map(r => `<li>${r}</li>`).join('');
-      }
+      const paramsB = parseFloat(inputParams?.value || '70');
+      const bytesPerParam = parseFloat(selectQuant?.value || '2.0');
+      const ctxTokens = parseInt(inputCtx?.value || '32768', 10);
+
+      const baseWeightsGB = paramsB * bytesPerParam;
+      const kvCacheGB = (ctxTokens / 1024) * (paramsB / 70) * 8; // approx scaling
+      const totalGB = (baseWeightsGB + kvCacheGB) * 1.20; // 20% overhead
+
+      if (statTotal) statTotal.textContent = `${totalGB.toFixed(1)} GB`;
+      if (statWeights) statWeights.textContent = `${baseWeightsGB.toFixed(1)} GB`;
+
+      let entGpu = '1x NVIDIA RTX 4090 24GB';
+      if (totalGB > 160) entGpu = '4x NVIDIA H100 80GB';
+      else if (totalGB > 80) entGpu = '2x NVIDIA A100 80GB';
+      else if (totalGB > 24) entGpu = '1x NVIDIA A100 80GB or 2x RTX 4090';
+
+      let consGpu = '1x RTX 4090 24GB';
+      if (totalGB > 96) consGpu = 'Requires Cloud Enterprise GPUs';
+      else if (totalGB > 48) consGpu = '4x RTX 4090 24GB';
+      else if (totalGB > 24) consGpu = '2x RTX 4090 24GB';
+
+      if (statGpuEnt) statGpuEnt.textContent = entGpu;
+      if (statGpuCons) statGpuCons.textContent = consGpu;
     }
 
-    [paramsInput, precInput, ctxInput, batchInput].forEach(el => {
+    btnCalc?.addEventListener('click', calculate);
+    [inputParams, selectQuant, inputCtx].forEach(el => {
       el?.addEventListener('input', calculate);
       el?.addEventListener('change', calculate);
     });
 
     calculate();
-  }
-
-  setupCalculator();
-  document.addEventListener('astro:page-load', setupCalculator);
+  })();
 </script>
