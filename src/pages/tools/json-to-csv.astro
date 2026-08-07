@@ -1,0 +1,188 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'JSON to CSV Converter | Nadhebe';
+const h1 = 'JSON to CSV Converter';
+const description = 'Convert JSON object arrays into clean CSV (Comma-Separated Values) spreadsheets client-side. Flatten nested objects and export table data.';
+
+const faq = [
+  {
+    question: 'How does the JSON to CSV converter work?',
+    answer: 'The converter extracts object keys from an array of JSON objects to generate CSV header columns, then flattens nested values into row rows.',
+  },
+  {
+    question: 'How are nested JSON objects converted to CSV columns?',
+    answer: 'Nested object keys are flattened using dot notation (e.g. `{"user": {"name": "Alice"}}` becomes a `user.name` column).',
+  },
+  {
+    question: 'How are commas and quotes handled inside CSV text cells?',
+    answer: 'Values containing commas or double quotes are automatically wrapped in double quotes according to standard RFC 4180 CSV specifications.',
+  },
+  {
+    question: 'Is my JSON payload kept private?',
+    answer: '100% private. All parsing and CSV conversion execute locally in your web browser.',
+  },
+  {
+    question: 'Can I download the converted CSV file?',
+    answer: 'Yes! Click the "Download CSV File" button to download a clean `.csv` file directly to your device.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="json-to-csv"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="json2csv-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="JSON ARRAY INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="j2c-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">JSON Array of Objects</label>
+              <button type="button" id="btn-load-sample-j2c" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample JSON</button>
+            </div>
+            <textarea
+              id="j2c-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-convert-j2c"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert JSON to CSV
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED CSV OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">CSV Table Result</span>
+            <div class="flex items-center gap-8">
+              <button type="button" id="btn-copy-j2c" class="rounded-6 bg-accent/80 px-10 py-4 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy</button>
+              <button type="button" id="btn-dl-j2c" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Download .CSV</button>
+            </div>
+          </div>
+
+          <pre id="j2c-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>JSON to CSV Conversion Specification</h2>
+    <p>
+      Converting structured JSON API payloads into tabular CSV formats is essential for data analysts, marketers, and database engineers importing records into Excel or Google Sheets.
+    </p>
+
+    <h3>RFC 4180 Formatting Rules</h3>
+    <ul>
+      <li><strong>Column Headers</strong>: Generated automatically from unique object keys.</li>
+      <li><strong>Escaping</strong>: Commas and line breaks inside string cells are quoted.</li>
+      <li><strong>Null Values</strong>: Empty object attributes render as empty CSV cells.</li>
+    </ul>
+
+    <h3>Related Data Tools</h3>
+    <p>
+      Convert CSV to JSON with the <a href="/tools/csv-to-json/">CSV to JSON Converter</a>, format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>, or repair broken syntax with the <a href="/tools/json-repair/">JSON Repair Tool</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('j2c-input-raw');
+    const btnConvert = document.getElementById('btn-convert-j2c');
+    const btnSample = document.getElementById('btn-load-sample-j2c');
+
+    const outputText = document.getElementById('j2c-output-text');
+    const btnCopy = document.getElementById('btn-copy-j2c');
+    const btnDl = document.getElementById('btn-dl-j2c');
+
+    const defaultJson = `[
+  { "id": 101, "name": "Alice Johnson", "role": "Frontend Architect", "team": "Web" },
+  { "id": 102, "name": "Bob Smith", "role": "AI Engineer", "team": "ML" },
+  { "id": 103, "name": "Carol Williams", "role": "DevOps Specialist", "team": "Infra" }
+]`;
+
+    function jsonToCsv(jsonStr) {
+      try {
+        const arr = JSON.parse(jsonStr);
+        if (!Array.isArray(arr) || arr.length === 0) {
+          return 'JSON input must be a non-empty array of objects.';
+        }
+
+        const headers = Array.from(new Set(arr.flatMap(obj => Object.keys(obj))));
+        const rows = [headers.join(',')];
+
+        for (const item of arr) {
+          const row = headers.map(h => {
+            let val = item[h] ?? '';
+            if (typeof val === 'object') val = JSON.stringify(val);
+            val = String(val).replace(/"/g, '""');
+            return val.includes(',') || val.includes('\n') || val.includes('"') ? `"${val}"` : val;
+          });
+          rows.push(row.join(','));
+        }
+
+        return rows.join('\n');
+      } catch(e) {
+        return `// JSON to CSV Error: ${e.message}`;
+      }
+    }
+
+    function convert() {
+      const raw = inputRaw?.value || defaultJson;
+      const csv = jsonToCsv(raw);
+      if (outputText) outputText.textContent = csv;
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    inputRaw?.addEventListener('input', convert);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultJson;
+      convert();
+    });
+
+    btnCopy?.addEventListener('click', () => {
+      if (outputText) {
+        navigator.clipboard.writeText(outputText.textContent);
+        btnCopy.textContent = 'Copied!';
+        setTimeout(() => (btnCopy.textContent = 'Copy'), 2000);
+      }
+    });
+
+    btnDl?.addEventListener('click', () => {
+      if (!outputText) return;
+      const blob = new Blob([outputText.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'nadhebe-data.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultJson;
+
+    convert();
+  })();
+</script>

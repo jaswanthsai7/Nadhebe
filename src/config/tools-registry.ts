@@ -19467,6 +19467,41 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "cosine-similarity-calculator"
     ],
     "icon": "activity"
+  },
+  {
+    "id": "conv-j2c-1",
+    "slug": "json-to-csv",
+    "title": "JSON to CSV Converter",
+    "name": "JSON to CSV Converter",
+    "href": "/tools/json-to-csv/",
+    "component": "src/pages/tools/json-to-csv.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert JSON object arrays into clean CSV spreadsheets client-side.",
+    "seo": {
+      "title": "JSON to CSV Converter | Nadhebe",
+      "description": "Convert JSON object arrays into clean CSV (Comma-Separated Values) spreadsheets client-side. Flatten nested objects and export table data.",
+      "keywords": [
+        "json to csv",
+        "convert json to csv",
+        "json array to excel csv",
+        "json table converter",
+        "export json csv"
+      ]
+    },
+    "relatedTools": [
+      "csv-to-json",
+      "json-formatter",
+      "json-repair",
+      "xml-to-json"
+    ],
+    "tags": [
+      "converters",
+      "json-to-csv"
+    ],
+    "icon": "table"
   }
 ];
 

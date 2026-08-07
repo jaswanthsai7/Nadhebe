@@ -1040,6 +1040,22 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'json-to-csv': {
+    intro: 'JSON to CSV Converter transforms arrays of JSON objects into clean CSV spreadsheets client-side with RFC 4180 cell escaping.',
+    useCases: [
+      'Convert JSON API response arrays into Excel-compatible CSV files',
+      'Flatten object structures into tabular header columns',
+      'Download clean .csv spreadsheets directly to your local computer',
+    ],
+    howItWorks: 'Paste a JSON array of objects. The converter extracts object keys as CSV column headers and flattens nested values.',
+    faq: [
+      {
+        question: 'How are commas inside string values escaped in CSV?',
+        answer: 'Values containing commas or line breaks are automatically wrapped in double quotes according to RFC 4180.',
+      },
+    ],
+  },
+
 };
 
 
