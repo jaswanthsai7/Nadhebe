@@ -1,0 +1,205 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
+
+const title = 'XML to JSON Converter | Nadhebe';
+const h1 = 'XML to JSON Converter';
+const description = 'Convert XML documents into clean, structured JSON objects. Parse attributes, nested elements, and XML tags client-side with zero server uploads.';
+
+const faq = [
+  {
+    question: 'How does the XML to JSON converter work?',
+    answer: 'The converter uses the browser-native `DOMParser` to parse the XML DOM tree recursively into JavaScript objects and arrays, which are then formatted into valid JSON.',
+  },
+  {
+    question: 'How are XML attributes handled during JSON conversion?',
+    answer: 'XML element attributes (e.g. `<user id="123">`) are converted into child object keys prefixed with `@` (e.g. `"@id": "123"`).',
+  },
+  {
+    question: 'How are repeated sibling XML elements converted?',
+    answer: 'Repeated XML tags with identical node names (e.g. `<item>1</item><item>2</item>`) are automatically grouped into JSON arrays (`"item": ["1", "2"]`).',
+  },
+  {
+    question: 'Is my XML payload kept private?',
+    answer: '100% private. Parsing runs locally inside your web browser without sending documents to any remote server.',
+  },
+  {
+    question: 'Can I copy the converted JSON payload?',
+    answer: 'Yes! Click the "Copy JSON Output" button to copy clean, formatted JSON directly to your clipboard.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="xml-to-json"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="xml2json-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RAW XML DOCUMENT INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="xml-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">XML Document Code</label>
+              <button type="button" id="btn-load-sample-xml" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample XML</button>
+            </div>
+            <textarea
+              id="xml-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="btn-convert-xml2json"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Convert XML to JSON
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED JSON OUTPUT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Parsed JSON Result</span>
+            <button type="button" id="btn-copy-xml2json" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy JSON</button>
+          </div>
+
+          <pre id="xml-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
+  </div>
+
+  <div slot="content">
+    <h2>XML to JSON Document Conversion Guide</h2>
+    <p>
+      XML (Extensible Markup Language) remains popular in enterprise SOAP web services, RSS feeds, and sitemap protocols. Converting XML into JSON simplifies client-side frontend data binding in JavaScript frameworks.
+    </p>
+
+    <h3>Mapping Rules</h3>
+    <ul>
+      <li><strong>XML Tags</strong> → JSON Object Keys</li>
+      <li><strong>XML Attributes</strong> → <code>@attribute_name</code> Property Keys</li>
+      <li><strong>Repeated Sibling Elements</strong> → JSON Arrays</li>
+    </ul>
+
+    <h3>Related Converter Tools</h3>
+    <p>
+      Convert JSON to XML with the <a href="/tools/json-to-xml/">JSON to XML Converter</a>, format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>, or validate JSON schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+    </p>
+  </div>
+</ToolLayout>
+
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('xml-input-raw');
+    const btnConvert = document.getElementById('btn-convert-xml2json');
+    const btnSample = document.getElementById('btn-load-sample-xml');
+
+    const outputText = document.getElementById('xml-output-text');
+    const btnCopy = document.getElementById('btn-copy-xml2json');
+
+    const defaultXml = `<root>
+  <store name="Nadhebe Bookshop">
+    <book category="tech" price="45.00">
+      <title>Designing Data-Intensive Applications</title>
+      <author>Martin Kleppmann</author>
+    </book>
+    <book category="fiction" price="12.99">
+      <title>Dune</title>
+      <author>Frank Herbert</author>
+    </book>
+  </store>
+</root>`;
+
+    function xmlToJson(xml) {
+      function parseNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const t = node.textContent.trim();
+          return t ? t : null;
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) return null;
+
+        const obj = {};
+
+        // Process attributes
+        if (node.attributes && node.attributes.length > 0) {
+          for (let i = 0; i < node.attributes.length; i++) {
+            const attr = node.attributes[i];
+            obj[`@${attr.name}`] = attr.value;
+          }
+        }
+
+        // Process children
+        for (let i = 0; i < node.childNodes.length; i++) {
+          const child = node.childNodes[i];
+          if (child.nodeType === Node.TEXT_NODE) {
+            const val = child.textContent.trim();
+            if (val) {
+              if (Object.keys(obj).length === 0) return val;
+              obj['#text'] = val;
+            }
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            const childName = child.nodeName;
+            const childObj = parseNode(child);
+
+            if (childName in obj) {
+              if (!Array.isArray(obj[childName])) {
+                obj[childName] = [obj[childName]];
+              }
+              obj[childName].push(childObj);
+            } else {
+              obj[childName] = childObj;
+            }
+          }
+        }
+
+        return obj;
+      }
+
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xml, 'text/xml');
+        const err = doc.querySelector('parsererror');
+        if (err) return `// XML Parser Error: ${err.textContent}`;
+
+        const json = parseNode(doc.documentElement);
+        return JSON.stringify({ [doc.documentElement.nodeName]: json }, null, 2);
+      } catch(e) {
+        return `// XML Conversion Error: ${e.message}`;
+      }
+    }
+
+    function convert() {
+      const raw = inputRaw?.value || defaultXml;
+      const json = xmlToJson(raw);
+      if (outputText) outputText.textContent = json;
+    }
+
+    btnConvert?.addEventListener('click', convert);
+    inputRaw?.addEventListener('input', convert);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultXml;
+      convert();
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultXml;
+
+    convert();
+  })();
+</script>

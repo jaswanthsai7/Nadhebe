@@ -1,179 +1,156 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
-import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
-import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 
-const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'case-converter');
-if (!platformTool) throw new Error('Tool not found');
-
-const initialCode = `convert this string into something else!
-IT MIGHT EVEN HAVE multiple lines.`;
+const title = 'String Case Converter (camelCase, snake_case, kebab-case) | Nadhebe';
+const h1 = 'String Case Converter';
+const description = 'Convert text strings into camelCase, snake_case, kebab-case, PascalCase, and CONSTANT_CASE client-side for software developers.';
 
 const faq = [
   {
-    question: 'What cases are supported?',
-    answer: 'We support Camel Case, Pascal Case, Snake Case, Kebab Case, Constant Case, Header Case, Sentence Case, lowercase, and UPPERCASE.',
+    question: 'What is camelCase?',
+    answer: '`camelCase` capitalizes the first letter of each word except the first word, with zero spaces or punctuation (e.g. `userFirstName`). Used in JavaScript, TypeScript, and Java.',
   },
   {
-    question: 'Is my data sent to a server?',
-    answer: 'No. The text formatting is executed entirely in your browser. No data is ever uploaded or stored.',
-  }
+    question: 'What is snake_case?',
+    answer: '`snake_case` separates words using lowercase letters and underscores (`_`) (e.g. `user_first_name`). Used in Python, Rust, and SQL column naming.',
+  },
+  {
+    question: 'What is kebab-case?',
+    answer: '`kebab-case` separates words using lowercase letters and hyphens (`-`) (e.g. `user-first-name`). Used in CSS class names, HTML attributes, and URL slugs.',
+  },
+  {
+    question: 'What is PascalCase?',
+    answer: '`PascalCase` capitalizes the first letter of every word (e.g. `UserFirstName`). Used for React component names and TypeScript interfaces.',
+  },
+  {
+    question: 'What is CONSTANT_CASE?',
+    answer: '`CONSTANT_CASE` converts all letters to uppercase separated by underscores (e.g. `MAX_RETRY_COUNT`). Used for global environment variables and constants.',
+  },
 ];
 ---
 
-<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
-  <div slot="calculator" class="space-y-16">
-    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
-      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        ✓ Runs locally in your browser
-      </span>
-    </div>
+<ToolLayout
+  toolId="case-converter"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="case-converter-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="RAW TEXT STRING INPUT">
+        <div class="space-y-16">
+          <div>
+            <label for="case-input-text" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">Input Text String</label>
+            <textarea
+              id="case-input-text"
+              rows="6"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+              placeholder="Type string to convert..."
+            >user first name nadhebe developer</textarea>
+          </div>
+        </div>
+      </CalculatorCard>
 
-    <!-- Case Selector Toolbar -->
-    <div class="glass-panel p-16 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-medium relative z-20 flex flex-wrap gap-8 justify-center">
-       <button data-case="camel" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">camelCase</button>
-       <button data-case="pascal" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">PascalCase</button>
-       <button data-case="snake" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">snake_case</button>
-       <button data-case="kebab" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">kebab-case</button>
-       <button data-case="constant" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">CONSTANT_CASE</button>
-       <button data-case="lower" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">lowercase</button>
-       <button data-case="upper" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">UPPERCASE</button>
-       <button data-case="sentence" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">Sentence case</button>
-       <button data-case="capital" class="case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all">Capital Case</button>
-    </div>
+      <!-- OUTPUT CARD -->
+      <ResultCard title="CONVERTED CASE OUTPUTS">
+        <div class="space-y-16 font-mono text-xs">
+          
+          <div>
+            <span class="text-muted dark:text-muted-dark font-bold uppercase block mb-2">camelCase:</span>
+            <pre id="case-out-camel" class="rounded-8 border border-border bg-code p-10 text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 select-all"></pre>
+          </div>
 
-    <!-- Standard workbench with our new base64 mode -->
-    <DeveloperWorkbench initialCode={initialCode} toolMode="case-converter" />
+          <div>
+            <span class="text-muted dark:text-muted-dark font-bold uppercase block mb-2">snake_case:</span>
+            <pre id="case-out-snake" class="rounded-8 border border-border bg-code p-10 text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 select-all"></pre>
+          </div>
+
+          <div>
+            <span class="text-muted dark:text-muted-dark font-bold uppercase block mb-2">kebab-case:</span>
+            <pre id="case-out-kebab" class="rounded-8 border border-border bg-code p-10 text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 select-all"></pre>
+          </div>
+
+          <div>
+            <span class="text-muted dark:text-muted-dark font-bold uppercase block mb-2">PascalCase:</span>
+            <pre id="case-out-pascal" class="rounded-8 border border-border bg-code p-10 text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 select-all"></pre>
+          </div>
+
+          <div>
+            <span class="text-muted dark:text-muted-dark font-bold uppercase block mb-2">CONSTANT_CASE:</span>
+            <pre id="case-out-constant" class="rounded-8 border border-border bg-code p-10 text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 select-all"></pre>
+          </div>
+
+        </div>
+      </ResultCard>
+
+    </div>
   </div>
 
   <div slot="content">
-    <h2>Instantly Convert Text Case</h2>
-    <p>Developers frequently need to convert text between different casing conventions. For example, converting a database column name (<code>user_first_name</code>) into a JavaScript variable (<code>userFirstName</code>). This tool makes that process instantaneous.</p>
+    <h2>String Case Conversion Conventions in Programming</h2>
+    <p>
+      Selecting the correct variable and file naming conventions is essential for code readability and style guide compliance across JavaScript, Python, C++, and CSS.
+    </p>
+
+    <h3>Naming Convention Matrix</h3>
+    <ul>
+      <li><strong>JavaScript/TypeScript</strong>: <code>camelCase</code> variables, <code>PascalCase</code> classes/React components.</li>
+      <li><strong>Python/Rust/SQL</strong>: <code>snake_case</code> functions and database column names.</li>
+      <li><strong>CSS/HTML/URLs</strong>: <code>kebab-case</code> class selectors and URL slugs.</li>
+    </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Generate URL slugs with the <a href="/tools/slug-generator/">Slug Generator</a>, encode Base64 strings with the <a href="/tools/base64-encoder/">Base64 Encoder</a>, or format SQL queries with the <a href="/tools/sql-formatter/">SQL Formatter</a>.
+    </p>
   </div>
 </ToolLayout>
 
-<script>
-  import {
-    toCamelCase,
-    toPascalCase,
-    toSnakeCase,
-    toKebabCase,
-    toConstantCase,
-    toLowerCase,
-    toUpperCase,
-    toSentenceCase,
-    toCapitalCase
-  } from "@/utils/text-converters";
+<script is:inline>
+  (function() {
+    const inputText = document.getElementById('case-input-text');
 
-  function setupCaseConverter() {
-    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
-    const outputPre = document.getElementById('wb-output-pre');
-    const statusBadge = document.getElementById('wb-status-badge');
-    const outputGutter = document.getElementById('wb-output-gutter');
-    
-    const btnFormat = document.getElementById('wb-btn-format');
-    const btnMinify = document.getElementById('wb-btn-minify');
-    
-    if (btnFormat) btnFormat.style.display = 'none';
-    if (btnMinify) btnMinify.style.display = 'none';
+    const outCamel = document.getElementById('case-out-camel');
+    const outSnake = document.getElementById('case-out-snake');
+    const outKebab = document.getElementById('case-out-kebab');
+    const outPascal = document.getElementById('case-out-pascal');
+    const outConstant = document.getElementById('case-out-constant');
 
-    let currentCase = 'camel';
-    const caseBtns = document.querySelectorAll('.case-btn');
-    
-    function setActiveButton() {
-      caseBtns.forEach(btn => {
-        if (btn.getAttribute('data-case') === currentCase) {
-          btn.className = 'case-btn px-12 py-6 rounded-8 text-xs font-mono font-bold border border-transparent bg-accent text-white shadow-soft transition-all';
-        } else {
-          btn.className = 'case-btn px-12 py-6 rounded-8 text-xs font-mono font-medium border border-border bg-surface2 hover:bg-surface text-ink dark:text-ink-dark dark:border-border-dark dark:bg-surface2-dark dark:hover:bg-surface-dark transition-all';
-        }
-      });
+    function getWords(str) {
+      return str
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/[-_]/g, ' ')
+        .replace(/[^a-zA-Z0-9\s]/g, '')
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
     }
 
-    caseBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const target = e.currentTarget as HTMLElement;
-        currentCase = target.getAttribute('data-case') || 'camel';
-        setActiveButton();
-        processCase();
-      });
-    });
+    function convert() {
+      const text = inputText?.value || 'user first name nadhebe developer';
+      const words = getWords(text);
 
-    function processCase() {
-      if (!inputArea || !outputPre) return;
-      const raw = inputArea.value;
-      
-      if (!raw) {
-        outputPre.textContent = '';
-        if (outputGutter) outputGutter.innerHTML = '1<br/>';
-        if (statusBadge) {
-          statusBadge.textContent = 'Waiting for input';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
-        }
-        return;
-      }
+      if (words.length === 0) return;
 
-      try {
-        const lines = raw.split(/\r?\n/);
-        const convertedLines = lines.map(line => {
-          if (!line.trim()) return line;
-          switch (currentCase) {
-            case 'camel': return toCamelCase(line);
-            case 'pascal': return toPascalCase(line);
-            case 'snake': return toSnakeCase(line);
-            case 'kebab': return toKebabCase(line);
-            case 'constant': return toConstantCase(line);
-            case 'lower': return toLowerCase(line);
-            case 'upper': return toUpperCase(line);
-            case 'sentence': return toSentenceCase(line);
-            case 'capital': return toCapitalCase(line);
-            default: return line;
-          }
-        });
-        
-        const result = convertedLines.join('\n');
-        outputPre.textContent = result;
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre-wrap overflow-y-auto';
-        
-        if (outputGutter) {
-          const outLines = result.split(/\r?\n/).length;
-          let gutterHTML = '';
-          for (let i = 1; i <= outLines; i++) {
-            gutterHTML += i + '<br/>';
-          }
-          outputGutter.innerHTML = gutterHTML;
-        }
+      const camel = words.map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+      const snake = words.map(w => w.toLowerCase()).join('_');
+      const kebab = words.map(w => w.toLowerCase()).join('-');
+      const pascal = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+      const constant = words.map(w => w.toUpperCase()).join('_');
 
-        if (statusBadge) {
-          statusBadge.textContent = '✓ Converted';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
-        }
-      } catch (err: any) {
-        outputPre.textContent = err.message || String(err);
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre-wrap overflow-y-auto';
-        
-        if (outputGutter) {
-          outputGutter.innerHTML = '1<br/>';
-        }
-
-        if (statusBadge) {
-          statusBadge.textContent = 'Invalid Input';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
-        }
-      }
+      if (outCamel) outCamel.textContent = camel;
+      if (outSnake) outSnake.textContent = snake;
+      if (outKebab) outKebab.textContent = kebab;
+      if (outPascal) outPascal.textContent = pascal;
+      if (outConstant) outConstant.textContent = constant;
     }
 
-    if (inputArea) inputArea.addEventListener('input', processCase);
-    window.addEventListener('workbench:input', processCase);
-    
-    // Initial run
-    setActiveButton();
-    processCase();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCaseConverter);
-  } else {
-    setupCaseConverter();
-  }
+    inputText?.addEventListener('input', convert);
+    convert();
+  })();
 </script>

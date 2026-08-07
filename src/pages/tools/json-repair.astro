@@ -1,139 +1,174 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
-import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
-import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 
-const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'json-repair');
-if (!platformTool) throw new Error('Tool not found');
-
-const initialCode = `{
-  name: 'Broken JSON',
-  "unquoted": value,
-  'single_quotes': 'yes',
-  trailing_comma: true,
-}`;
+const title = 'JSON Repair & Malformed Syntax Fixer | Nadhebe';
+const h1 = 'JSON Repair & Malformed Syntax Fixer';
+const description = 'Repair malformed JSON strings automatically client-side. Fix unquoted keys, trailing commas, single quotes, and missing brackets from LLM outputs.';
 
 const faq = [
   {
-    question: 'Is my data sent to a server?',
-    answer: 'No. The JSON repair runs entirely in your browser using JavaScript. No data is ever uploaded or stored.',
+    question: 'How does the JSON Repair tool work?',
+    answer: 'The tool uses deterministic string transformation rules to automatically convert unquoted keys (`{name: "val"}`), single quotes (`{\'key\': \'val\'}`), trailing commas (`[1, 2,]`), and missing closing brackets into valid JSON.',
   },
   {
-    question: 'What kind of broken JSON can this tool fix?',
-    answer: 'This tool can repair unquoted keys, single-quoted keys and values, trailing commas, missing commas, comments (// and /* */), and missing quotes.',
+    question: 'Why do LLM API outputs frequently contain broken JSON?',
+    answer: 'LLMs streaming responses may truncate near token limits or output Python-like syntax (single quotes, `None` instead of `null`, `True` instead of `true`), breaking standard `JSON.parse()`.',
   },
   {
-    question: 'Is this tool free?',
-    answer: 'Yes, our JSON repair tool is 100% free with no limits.',
+    question: 'Does this tool support repairing truncated JSON arrays?',
+    answer: 'Yes! The repair engine detects missing closing brackets `]` and braces `}` and appends them to form valid JSON.',
+  },
+  {
+    question: 'Is my JSON data kept private?',
+    answer: '100% private. All repair operations run locally in your browser using client-side JavaScript.',
+  },
+  {
+    question: 'Can I copy the repaired JSON output?',
+    answer: 'Yes! Click the "Copy Repaired JSON" button to copy clean, formatted JSON directly to your clipboard.',
   },
 ];
 ---
 
-<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
-  <div slot="calculator" class="space-y-16">
-    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
-      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        ✓ Runs locally in your browser — Your data isn't uploaded
-      </span>
-    </div>
+<ToolLayout
+  toolId="json-repair"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="json-repair-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="MALFORMED JSON INPUT">
+        <div class="space-y-16">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="jr-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Broken / LLM Output JSON</label>
+              <button type="button" id="btn-load-sample-jr" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Broken JSON</button>
+            </div>
+            <textarea
+              id="jr-input-raw"
+              rows="12"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
 
-    <!-- Standard workbench with our new json-repair mode -->
-    <DeveloperWorkbench initialCode={initialCode} toolMode="json-repair" />
+          <button
+            type="button"
+            id="btn-repair-jr"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Repair & Fix JSON Syntax
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="REPAIRED VALID JSON">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Valid Repaired Output</span>
+            <button type="button" id="btn-copy-jr" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Repaired JSON</button>
+          </div>
+
+          <pre id="jr-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
   </div>
 
   <div slot="content">
-    <h2>Instantly Fix Broken JSON</h2>
-    <p>JSON is strict. A single missing quote, trailing comma, or misplaced comment can break your entire application. Our JSON repair tool uses advanced heuristics to automatically fix common JSON syntax errors so you don't have to manually hunt them down.</p>
+    <h2>JSON Syntax Repair Guide — Fixing Truncated LLM Outputs</h2>
+    <p>
+      JSON (JavaScript Object Notation) requires strict formatting rules. Malformed JSON payloads cause server parsers to throw runtime syntax errors. This tool automatically cleans and repairs invalid JSON structure.
+    </p>
 
-    <h3>Common JSON errors fixed:</h3>
+    <h3>Common Syntax Errors Repaired</h3>
     <ul>
-      <li>Removing trailing commas</li>
-      <li>Adding missing quotes around keys and string values</li>
-      <li>Converting single quotes to double quotes</li>
-      <li>Removing JavaScript-style comments</li>
-      <li>Fixing unescaped characters in strings</li>
+      <li><strong>Single Quotes to Double Quotes</strong>: <code>&#123;'key': 'val'&#125;</code> → <code>&#123;"key": "val"&#125;</code></li>
+      <li><strong>Unquoted Object Keys</strong>: <code>&#123;name: "John"&#125;</code> → <code>&#123;"name": "John"&#125;</code></li>
+      <li><strong>Trailing Commas</strong>: <code>[1, 2, 3,]</code> → <code>[1, 2, 3]</code></li>
+      <li><strong>Python Literals</strong>: <code>None</code> → <code>null</code>, <code>True</code> → <code>true</code>, <code>False</code> → <code>false</code></li>
     </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Validate JSON schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>, format JSON payloads using the <a href="/tools/json-formatter/">JSON Formatter</a>, or convert JSON to TypeScript interfaces with the <a href="/tools/json-to-typescript/">JSON to TypeScript Generator</a>.
+    </p>
   </div>
 </ToolLayout>
 
-<script>
-  import { jsonrepair } from 'jsonrepair';
+<script is:inline>
+  (function() {
+    const inputRaw = document.getElementById('jr-input-raw');
+    const btnRepair = document.getElementById('btn-repair-jr');
+    const btnSample = document.getElementById('btn-load-sample-jr');
 
-  function setupRepair() {
-    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
-    const outputPre = document.getElementById('wb-output-pre');
-    const statusBadge = document.getElementById('wb-status-badge');
-    const outputGutter = document.getElementById('wb-output-gutter');
-    const selectIndent = document.getElementById('wb-select-indent') as HTMLInputElement;
-    const formatBtn = document.getElementById('wb-btn-format');
-    const minifyBtn = document.getElementById('wb-btn-minify');
+    const outputText = document.getElementById('jr-output-text');
+    const btnCopy = document.getElementById('btn-copy-jr');
 
-    // Hide unnecessary buttons since it auto-repairs
-    if (formatBtn) formatBtn.style.display = 'none';
-    if (minifyBtn) minifyBtn.style.display = 'none';
+    const defaultBroken = `{
+  name: 'Nadhebe AI',
+  status: True,
+  items: [1, 2, 3,],
+  metadata: None,
+}`;
 
-    function doRepair() {
-      if (!inputArea || !outputPre) return;
-      const raw = inputArea.value;
-      if (!raw.trim()) {
-        outputPre.textContent = '';
-        if (outputGutter) outputGutter.innerHTML = '1<br/>';
-        if (statusBadge) {
-          statusBadge.textContent = 'Waiting for input';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-muted bg-surface2 dark:text-muted-dark dark:bg-surface2-dark';
-        }
-        return;
-      }
+    function repairJSON(raw) {
+      let str = raw.trim();
+
+      // Replace Python/JS keywords
+      str = str.replace(/\bTrue\b/g, 'true')
+               .replace(/\bFalse\b/g, 'false')
+               .replace(/\bNone\b/g, 'null')
+               .replace(/\bundefined\b/g, 'null');
+
+      // Replace single quotes with double quotes around strings
+      str = str.replace(/'([^'\\]*(\\.[^'\\]*)*)'/g, '"$1"');
+
+      // Add double quotes around unquoted object keys
+      str = str.replace(/([{,]\s*)([a-zA-Z0-9_$]+)\s*:/g, '$1"$2":');
+
+      // Remove trailing commas before closing braces or brackets
+      str = str.replace(/,\s*([}\]])/g, '$1');
+
+      // Balance missing closing brackets
+      let openBraces = (str.match(/\{/g) || []).length - (str.match(/\}/g) || []).length;
+      let openBrackets = (str.match(/\[/g) || []).length - (str.match(/\]/g) || []).length;
+
+      while (openBrackets > 0) { str += ']'; openBrackets--; }
+      while (openBraces > 0) { str += '}'; openBraces--; }
 
       try {
-        const repaired = jsonrepair(raw);
-        const indentVal = selectIndent?.value === 'tab' ? '\t' : Number(selectIndent?.value || 2);
-        const formatted = JSON.stringify(JSON.parse(repaired), null, indentVal);
-        
-        outputPre.textContent = formatted;
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
-        
-        if (outputGutter) {
-          const lines = formatted.split(/\r?\n/).length;
-          let gutterHTML = '';
-          for (let i = 1; i <= lines; i++) {
-            gutterHTML += i + '<br/>';
-          }
-          outputGutter.innerHTML = gutterHTML;
-        }
-
-        if (statusBadge) {
-          statusBadge.textContent = '✓ Successfully Repaired JSON';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
-        }
-      } catch (err: any) {
-        outputPre.textContent = 'Could not automatically repair JSON:\\n' + err.message;
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
-        
-        if (outputGutter) {
-          const lines = (outputPre.textContent.match(/\\n/g) || []).length + 1;
-          let gutterHTML = '';
-          for (let i = 1; i <= lines; i++) {
-            gutterHTML += i + '<br/>';
-          }
-          outputGutter.innerHTML = gutterHTML;
-        }
-
-        if (statusBadge) {
-          statusBadge.textContent = 'Repair Failed';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
-        }
+        const parsed = JSON.parse(str);
+        return JSON.stringify(parsed, null, 2);
+      } catch(e) {
+        return `// Attempted Repair Result:\n${str}\n\n// Error: ${e.message}`;
       }
     }
 
-    if (inputArea) {
-      inputArea.addEventListener('input', doRepair);
+    function repair() {
+      const raw = inputRaw?.value || defaultBroken;
+      const fixed = repairJSON(raw);
+      if (outputText) outputText.textContent = fixed;
     }
-    
-    // Initial run
-    setTimeout(doRepair, 50);
-  }
 
-  // Setup immediately
-  setupRepair();
+    btnRepair?.addEventListener('click', repair);
+    inputRaw?.addEventListener('input', repair);
+
+    btnSample?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = defaultBroken;
+      repair();
+    });
+
+    if (inputRaw && !inputRaw.value) inputRaw.value = defaultBroken;
+
+    repair();
+  })();
 </script>

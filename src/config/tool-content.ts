@@ -944,7 +944,72 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'json-repair': {
+    intro: 'JSON Repair & Malformed Syntax Fixer automatically cleans up broken JSON outputs from LLMs, single quotes, unquoted object keys, and trailing commas.',
+    useCases: [
+      'Repair truncated or malformed LLM JSON API outputs',
+      'Convert Python single quotes and literals (True, False, None) to JSON',
+      'Fix unquoted keys and trailing commas before parsing',
+    ],
+    howItWorks: 'Input malformed JSON text. The repair engine applies string transformations and balances missing closing brackets to yield valid JSON.',
+    faq: [
+      {
+        question: 'Why do LLMs produce invalid JSON?',
+        answer: 'Token truncation, single quotes, and Python keyword substitutions break standard JSON parsers.',
+      },
+    ],
+  },
+
+  'json-path-finder': {
+    intro: 'JSONPath Evaluator & Key Extractor queries nested JSON documents using standard JSONPath syntax to extract property lists and filter array items.',
+    useCases: [
+      'Query nested JSON document structures with JSONPath expressions',
+      'Extract property values across array items using wildcard operators',
+      'Inspect API payload trees without server processing',
+    ],
+    howItWorks: 'Input a JSON document and expression (e.g. $.store.book[*].title). The evaluator traverses the object tree and formats matching results.',
+    faq: [
+      {
+        question: 'What does the $ symbol represent in JSONPath?',
+        answer: 'The $ symbol represents the root object or array of the JSON document.',
+      },
+    ],
+  },
+
+  'cron-explainer': {
+    intro: 'Cron Expression Generator & Explainer translates 5-field crontab schedules into clear, human-readable English and displays upcoming execution times.',
+    useCases: [
+      'Translate 5-part crontab expressions into plain English explanations',
+      'Generate schedules for Linux crontab, Vercel Crons, and AWS CloudWatch',
+      'Verify execution intervals using schedule presets',
+    ],
+    howItWorks: 'Input a 5-field cron expression. The translator parses minute, hour, day, month, and weekday fields to output human explanations.',
+    faq: [
+      {
+        question: 'What does */15 * * * * mean?',
+        answer: 'It means the job executes every 15 minutes, every hour, every day of the month and week.',
+      },
+    ],
+  },
+
+  'xml-to-json': {
+    intro: 'XML to JSON Converter parses XML documents, tags, and attributes into structured JSON objects client-side.',
+    useCases: [
+      'Convert legacy XML API payloads and RSS feeds into JSON objects',
+      'Map XML element attributes to @attribute JSON keys',
+      'Group repeated sibling XML tags into JSON arrays',
+    ],
+    howItWorks: 'Paste XML code. The converter uses browser DOMParser to traverse nodes and produce clean formatted JSON.',
+    faq: [
+      {
+        question: 'How are XML attributes converted to JSON?',
+        answer: 'XML attributes are converted into child object keys prefixed with @ (e.g. "@id": "123").',
+      },
+    ],
+  },
+
 };
+
 
 
 

@@ -19152,6 +19152,251 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "qr-code-generator"
     ],
     "icon": "qr-code"
+  },
+  {
+    "id": "dev-repair-1",
+    "slug": "json-repair",
+    "title": "JSON Repair & Malformed Syntax Fixer",
+    "name": "JSON Repair & Malformed Syntax Fixer",
+    "href": "/tools/json-repair/",
+    "component": "src/pages/tools/json-repair.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "formatter",
+    "description": "Repair malformed JSON strings, single quotes, trailing commas, and unquoted keys.",
+    "seo": {
+      "title": "JSON Repair & Malformed Syntax Fixer | Nadhebe",
+      "description": "Repair malformed JSON strings automatically client-side. Fix unquoted keys, trailing commas, single quotes, and missing brackets from LLM outputs.",
+      "keywords": [
+        "json repair",
+        "fix malformed json",
+        "llm json repair tool",
+        "json syntax fixer",
+        "trailing comma json fix"
+      ]
+    },
+    "relatedTools": [
+      "json-formatter",
+      "json-schema-validator",
+      "json-path-finder",
+      "json-to-typescript"
+    ],
+    "tags": [
+      "developer",
+      "json-repair"
+    ],
+    "icon": "wrench"
+  },
+  {
+    "id": "dev-path-1",
+    "slug": "json-path-finder",
+    "title": "JSONPath Evaluator & Key Extractor",
+    "name": "JSONPath Evaluator & Key Extractor",
+    "href": "/tools/json-path-finder/",
+    "component": "src/pages/tools/json-path-finder.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "analyzer",
+    "description": "Evaluate JSONPath expressions against nested JSON payloads client-side.",
+    "seo": {
+      "title": "JSONPath Evaluator & Key Extractor | Nadhebe",
+      "description": "Evaluate JSONPath expressions against nested JSON payloads. Extract object properties, filter arrays, and query nested JSON trees client-side.",
+      "keywords": [
+        "jsonpath evaluator",
+        "json path tester",
+        "query nested json",
+        "extract json keys",
+        "jsonpath online tool"
+      ]
+    },
+    "relatedTools": [
+      "json-repair",
+      "json-formatter",
+      "json-schema-validator",
+      "json-to-typescript"
+    ],
+    "tags": [
+      "developer",
+      "json-path-finder"
+    ],
+    "icon": "search"
+  },
+  {
+    "id": "dev-cron-1",
+    "slug": "cron-explainer",
+    "title": "Cron Expression Generator & Explainer",
+    "name": "Cron Expression Generator & Explainer",
+    "href": "/tools/cron-explainer/",
+    "component": "src/pages/tools/cron-explainer.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "generator",
+    "description": "Translate 5-part cron expressions into plain English and view next run schedules.",
+    "seo": {
+      "title": "Cron Expression Generator & Explainer | Nadhebe",
+      "description": "Generate and translate 5-part cron expressions into plain English. View next execution timestamps for crontab schedules for Linux, Vercel, and AWS.",
+      "keywords": [
+        "cron expression generator",
+        "crontab explainer",
+        "cron to human readable",
+        "linux cron schedule",
+        "vercel cron schedule"
+      ]
+    },
+    "relatedTools": [
+      "sql-formatter",
+      "uuid-v7-generator",
+      "jwt-encoder",
+      "json-path-finder"
+    ],
+    "tags": [
+      "developer",
+      "cron-explainer"
+    ],
+    "icon": "clock"
+  },
+  {
+    "id": "dev-b64-1",
+    "slug": "base64-encoder",
+    "title": "Base64 Text & Data URL Encoder / Decoder",
+    "name": "Base64 Text & Data URL Encoder / Decoder",
+    "href": "/tools/base64-encoder/",
+    "component": "src/pages/tools/base64-encoder.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "converter",
+    "description": "Encode and decode text strings and binary file Data URLs to Base64 format.",
+    "seo": {
+      "title": "Base64 Text & File Data URL Encoder / Decoder | Nadhebe",
+      "description": "Encode and decode text strings or binary files to Base64 and Data URL format client-side. Convert images and text payloads without server uploads.",
+      "keywords": [
+        "base64 encoder",
+        "base64 decoder",
+        "text to base64",
+        "base64 data url generator",
+        "utf8 base64 converter"
+      ]
+    },
+    "relatedTools": [
+      "jwt-encoder",
+      "json-formatter",
+      "case-converter",
+      "slug-generator"
+    ],
+    "tags": [
+      "developer",
+      "base64-encoder"
+    ],
+    "icon": "binary"
+  },
+  {
+    "id": "dev-case-1",
+    "slug": "case-converter",
+    "title": "String Case Converter (camelCase, snake_case)",
+    "name": "String Case Converter (camelCase, snake_case)",
+    "href": "/tools/case-converter/",
+    "component": "src/pages/tools/case-converter.astro",
+    "status": "implemented",
+    "category": "Developer",
+    "categorySlug": "developer",
+    "mode": "converter",
+    "description": "Convert text strings to camelCase, snake_case, kebab-case, PascalCase, and CONSTANT_CASE.",
+    "seo": {
+      "title": "String Case Converter (camelCase, snake_case, kebab-case) | Nadhebe",
+      "description": "Convert text strings into camelCase, snake_case, kebab-case, PascalCase, and CONSTANT_CASE client-side for software developers.",
+      "keywords": [
+        "case converter",
+        "camelcase converter",
+        "snake_case generator",
+        "kebab-case converter",
+        "pascalcase online"
+      ]
+    },
+    "relatedTools": [
+      "slug-generator",
+      "base64-encoder",
+      "sql-formatter",
+      "json-formatter"
+    ],
+    "tags": [
+      "developer",
+      "case-converter"
+    ],
+    "icon": "type"
+  },
+  {
+    "id": "dev-slug-1",
+    "slug": "slug-generator",
+    "title": "URL-Friendly Slug Generator",
+    "name": "URL-Friendly Slug Generator",
+    "href": "/tools/slug-generator/",
+    "component": "src/pages/tools/slug-generator.astro",
+    "status": "implemented",
+    "category": "Utility",
+    "categorySlug": "utility",
+    "mode": "generator",
+    "description": "Generate clean, URL-safe slugs for blog titles, products, and landing pages.",
+    "seo": {
+      "title": "URL-Friendly Slug Generator | Nadhebe",
+      "description": "Generate clean, URL-safe slugs for blog posts, products, and landing pages. Strip accents, special characters, and uppercase letters client-side.",
+      "keywords": [
+        "slug generator",
+        "url slug creator",
+        "clean url generator",
+        "seo url slug",
+        "remove accents slug"
+      ]
+    },
+    "relatedTools": [
+      "case-converter",
+      "meta-tag-analyzer",
+      "serp-preview",
+      "base64-encoder"
+    ],
+    "tags": [
+      "utility",
+      "slug-generator"
+    ],
+    "icon": "link"
+  },
+  {
+    "id": "dev-xml-1",
+    "slug": "xml-to-json",
+    "title": "XML to JSON Converter",
+    "name": "XML to JSON Converter",
+    "href": "/tools/xml-to-json/",
+    "component": "src/pages/tools/xml-to-json.astro",
+    "status": "implemented",
+    "category": "Converters",
+    "categorySlug": "converters",
+    "mode": "converter",
+    "description": "Convert XML documents into clean, structured JSON objects client-side.",
+    "seo": {
+      "title": "XML to JSON Converter | Nadhebe",
+      "description": "Convert XML documents into clean, structured JSON objects. Parse attributes, nested elements, and XML tags client-side with zero server uploads.",
+      "keywords": [
+        "xml to json",
+        "convert xml to json",
+        "xml parser online",
+        "xml attribute json",
+        "soap xml to json"
+      ]
+    },
+    "relatedTools": [
+      "json-to-xml",
+      "json-formatter",
+      "json-schema-validator",
+      "html-to-markdown"
+    ],
+    "tags": [
+      "converters",
+      "xml-to-json"
+    ],
+    "icon": "file-code"
   }
 ];
 

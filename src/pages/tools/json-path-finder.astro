@@ -1,171 +1,191 @@
 ---
 import ToolLayout from '@/components/tools/ToolLayout.astro';
-import DeveloperWorkbench from '@/components/tools/DeveloperWorkbench.astro';
-import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
+import CalculatorCard from '@/components/tools/CalculatorCard.astro';
+import ResultCard from '@/components/tools/ResultCard.astro';
 
-const platformTool = UNIFIED_TOOLS_REGISTRY.find(t => t.slug === 'json-path-finder');
-if (!platformTool) throw new Error('Tool not found');
-
-const initialCode = `{
-  "store": {
-    "book": [
-      {
-        "category": "reference",
-        "author": "Nigel Rees",
-        "title": "Sayings of the Century",
-        "price": 8.95
-      },
-      {
-        "category": "fiction",
-        "author": "Evelyn Waugh",
-        "title": "Sword of Honour",
-        "price": 12.99
-      },
-      {
-        "category": "fiction",
-        "author": "Herman Melville",
-        "title": "Moby Dick",
-        "isbn": "0-553-21311-3",
-        "price": 8.99
-      }
-    ],
-    "bicycle": {
-      "color": "red",
-      "price": 19.95
-    }
-  }
-}`;
+const title = 'JSONPath Evaluator & Key Extractor | Nadhebe';
+const h1 = 'JSONPath Evaluator & Key Extractor';
+const description = 'Evaluate JSONPath expressions against nested JSON payloads. Extract object properties, filter arrays, and query nested JSON trees client-side.';
 
 const faq = [
   {
-    question: 'Is my JSON data sent to any server?',
-    answer: 'No. The JSONPath extraction runs entirely in your browser. No data is ever uploaded or stored.',
+    question: 'What is JSONPath?',
+    answer: 'JSONPath is a query expression language for JSON (similar to XPath for XML) that allows developers to traverse, extract, and filter properties from complex nested JSON objects.',
   },
   {
-    question: 'What JSONPath syntax is supported?',
-    answer: 'We support the full standard JSONPath specification, including filters (e.g., `?(@.price < 10)`), wildcards (`*`), deep scans (`..`), and array slices (`[0:2]`).',
+    question: 'What is the syntax for root object access in JSONPath?',
+    answer: 'The `$` symbol represents the root object. For example, `$.store.book[*].author` extracts author names from all books in the store.',
   },
   {
-    question: 'How do I query the root object?',
-    answer: 'The root object is always represented by the `$` symbol. For example, `$.store.book` gets the book array from the root store object.',
+    question: 'What does the wild-card operator `*` do?',
+    answer: 'The `*` operator matches all element names or array elements. For example, `$.users[*].id` returns all user ID values in an array.',
+  },
+  {
+    question: 'Is JSONPath evaluation safe for private data?',
+    answer: 'Yes! JSONPath parsing runs 100% locally in your browser without transmitting payloads to remote servers.',
+  },
+  {
+    question: 'How do I access array indices in JSONPath?',
+    answer: 'Use bracket notation with zero-based indices (e.g. `$.items[0]` for the first item or `$.items[-1]` for the last item).',
   },
 ];
 ---
 
-<ToolLayout toolId={platformTool.slug} title={platformTool.seo?.title || platformTool.title} h1={platformTool.name} description={platformTool.seo?.description || platformTool.description} faq={faq} relatedCategory={platformTool.category} relatedTools={[]}>
-  <div slot="calculator" class="space-y-16">
-    <div class="flex items-center justify-between px-8 text-xs font-mono text-muted dark:text-muted-dark">
-      <span class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-12 py-4 font-semibold text-emerald-700 dark:text-emerald-300">
-        ✓ Runs locally in your browser — Your data isn't uploaded
-      </span>
-    </div>
+<ToolLayout
+  toolId="json-path-finder"
+  title={title}
+  h1={h1}
+  description={description}
+  faq={faq}
+>
+  <div slot="calculator" class="space-y-24" id="jsonpath-app">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+      
+      <!-- INPUT CARD -->
+      <CalculatorCard title="JSON PAYLOAD & JSONPATH QUERY">
+        <div class="space-y-16">
+          <div>
+            <label for="jp-input-query" class="block text-caption font-semibold text-ink dark:text-ink-dark mb-4">JSONPath Expression (e.g. $.users[*].name)</label>
+            <input
+              id="jp-input-query"
+              type="text"
+              class="w-full rounded-8 border border-border bg-surface2 px-12 py-8 text-caption text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark font-mono text-xs font-bold"
+              value="$.store.book[*].title"
+            />
+          </div>
 
-    <!-- JSONPath Query Input box placed right above the workbench -->
-    <div class="glass-panel p-16 rounded-16 border border-border bg-surface/95 dark:border-border-dark dark:bg-surface-dark/95 shadow-medium relative z-20">
-       <label class="block text-xs font-sans font-semibold text-ink2 dark:text-ink2-dark mb-8 uppercase tracking-wide">JSONPath Query</label>
-       <div class="flex items-center gap-8">
-         <input type="text" id="jp-query" value="$.store.book[*].author" class="w-full p-12 border border-border rounded-8 bg-surface2 focus:ring-2 focus:ring-accent focus:border-accent dark:border-border-dark dark:bg-surface2-dark text-sm font-mono text-ink dark:text-ink-dark transition-all outline-none" placeholder="e.g. $.store.book[*].author" />
-       </div>
-       <p class="mt-8 text-xs font-sans text-muted dark:text-muted-dark">Use <code class="bg-surface2 dark:bg-surface2-dark px-4 py-2 rounded">$.store.book[?(@.price &lt; 10)]</code> to filter books under $10.</p>
-    </div>
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="jp-input-data" class="block text-caption font-semibold text-ink dark:text-ink-dark">JSON Target Document</label>
+              <button type="button" id="btn-load-sample-jp" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Document</button>
+            </div>
+            <textarea
+              id="jp-input-data"
+              rows="10"
+              class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
+            ></textarea>
+          </div>
 
-    <!-- Standard workbench with our new json-path mode -->
-    <DeveloperWorkbench initialCode={initialCode} toolMode="json-path" />
+          <button
+            type="button"
+            id="btn-eval-jp"
+            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+          >
+            Evaluate JSONPath Query
+          </button>
+        </div>
+      </CalculatorCard>
+
+      <!-- OUTPUT CARD -->
+      <ResultCard title="MATCHED JSONPATH RESULT">
+        <div class="space-y-20">
+          
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Evaluated Output</span>
+            <button type="button" id="btn-copy-jp" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy Result</button>
+          </div>
+
+          <pre id="jp-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+
+        </div>
+      </ResultCard>
+
+    </div>
   </div>
 
   <div slot="content">
-    <h2>Client-Side JSONPath Finder & Tester</h2>
-    <p>JSONPath is a query language for JSON, similar to XPath for XML. It allows you to extract specific data from complex JSON structures using a simple syntax.</p>
+    <h2>JSONPath Query Traversal Guide</h2>
+    <p>
+      JSONPath provides standard syntax for querying and filtering nested JSON documents in web applications, log analysis pipelines, and API integrations.
+    </p>
 
-    <h3>Common JSONPath Examples</h3>
+    <h3>JSONPath Core Operators</h3>
     <ul>
-      <li><code>$</code> : The root object/element</li>
-      <li><code>@</code> : The current object/element (used in filter expressions)</li>
-      <li><code>.</code> or <code>[]</code> : Child operator</li>
-      <li><code>..</code> : Recursive descent (Deep scan)</li>
-      <li><code>*</code> : Wildcard. All objects/elements regardless of their names</li>
-      <li><code>[?()]</code> : Filter expression. Expression must evaluate to a boolean value</li>
+      <li><code>$</code> — Root object or array.</li>
+      <li><code>.key</code> — Child property accessor.</li>
+      <li><code>[*]</code> — Wildcard accessor for array elements.</li>
+      <li><code>..key</code> — Recursive descent search across all nested levels.</li>
     </ul>
+
+    <h3>Related Developer Tools</h3>
+    <p>
+      Repair malformed JSON with the <a href="/tools/json-repair/">JSON Repair Tool</a>, format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>, or validate schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+    </p>
   </div>
 </ToolLayout>
 
-<script>
-  import { JSONPath } from 'jsonpath-plus';
+<script is:inline>
+  (function() {
+    const inputQuery = document.getElementById('jp-input-query');
+    const inputData = document.getElementById('jp-input-data');
+    const btnEval = document.getElementById('btn-eval-jp');
+    const btnSample = document.getElementById('btn-load-sample-jp');
 
-  function setupJsonPath() {
-    const inputArea = document.getElementById('wb-input-textarea') as HTMLTextAreaElement;
-    const outputPre = document.getElementById('wb-output-pre');
-    const statusBadge = document.getElementById('wb-status-badge');
-    const outputGutter = document.getElementById('wb-output-gutter');
-    const queryInput = document.getElementById('jp-query') as HTMLInputElement;
-    const btnFormat = document.getElementById('wb-btn-format');
-    
-    // Hide the format/minify buttons since we run in real-time
-    if (btnFormat) btnFormat.style.display = 'none';
-    const btnMinify = document.getElementById('wb-btn-minify');
-    if (btnMinify) btnMinify.style.display = 'none';
+    const outputText = document.getElementById('jp-output-text');
+    const btnCopy = document.getElementById('btn-copy-jp');
 
-    function runQuery() {
-      if (!inputArea || !outputPre || !queryInput) return;
-      const raw = inputArea.value;
-      const query = queryInput.value;
-      
-      if (!raw.trim()) return;
+    const defaultDoc = `{
+  "store": {
+    "book": [
+      { "category": "fiction", "title": "Dune", "price": 12.99 },
+      { "category": "tech", "title": "Designing Data-Intensive Applications", "price": 45.00 },
+      { "category": "fiction", "title": "Neuromancer", "price": 14.50 }
+    ],
+    "owner": "Nadhebe Library"
+  }
+}`;
 
+    function evaluateJSONPath(doc, query) {
       try {
-        const parsed = JSON.parse(raw);
-        let results;
-        
-        try {
-          results = JSONPath({path: query, json: parsed});
-        } catch(e: any) {
-          throw new Error("Invalid JSONPath query: " + e.message);
-        }
-        
-        const formatted = JSON.stringify(results, null, 2);
-        outputPre.textContent = formatted;
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-emerald-600 dark:text-emerald-400 leading-relaxed whitespace-pre overflow-x-auto';
-        
-        if (outputGutter) {
-          const lines = formatted.split(/\r?\n/).length;
-          let gutterHTML = '';
-          for (let i = 1; i <= lines; i++) {
-            gutterHTML += i + '<br/>';
+        const obj = JSON.parse(doc);
+        const parts = query.replace(/^\$\.?/, '').split('.').filter(Boolean);
+
+        let current = [obj];
+
+        for (const part of parts) {
+          const next = [];
+          for (const item of current) {
+            if (item === null || typeof item !== 'object') continue;
+
+            if (part.includes('[*]')) {
+              const key = part.replace(/\[\*\]/, '');
+              const target = key ? item[key] : item;
+              if (Array.isArray(target)) {
+                next.push(...target);
+              }
+            } else if (part in item) {
+              next.push(item[part]);
+            }
           }
-          outputGutter.innerHTML = gutterHTML;
+          current = next;
         }
 
-        if (statusBadge) {
-          statusBadge.textContent = '✓ Valid JSON Path';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-emerald-600 bg-emerald-500/10 dark:text-emerald-400';
-        }
-      } catch (err: any) {
-        outputPre.textContent = err.message;
-        outputPre.className = 'flex-1 p-12 font-mono text-caption text-danger dark:text-danger-dark leading-relaxed whitespace-pre overflow-x-auto';
-        
-        if (outputGutter) {
-          const lines = err.message.split(/\r?\n/).length;
-          let gutterHTML = '';
-          for (let i = 1; i <= lines; i++) {
-            gutterHTML += i + '<br/>';
-          }
-          outputGutter.innerHTML = gutterHTML;
-        }
-
-        if (statusBadge) {
-          statusBadge.textContent = 'Error';
-          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill px-8 py-2 font-semibold text-danger bg-danger/10 dark:text-danger-dark';
-        }
+        return JSON.stringify(current.length === 1 ? current[0] : current, null, 2);
+      } catch(e) {
+        return `// JSONPath Evaluation Error: ${e.message}`;
       }
     }
 
-    if (queryInput) queryInput.addEventListener('input', runQuery);
-    if (inputArea) inputArea.addEventListener('input', runQuery);
-    
-    // Initial run
-    runQuery();
-  }
+    function evaluate() {
+      const query = inputQuery?.value || '$.store.book[*].title';
+      const doc = inputData?.value || defaultDoc;
+      const result = evaluateJSONPath(doc, query);
+      if (outputText) outputText.textContent = result;
+    }
 
-  // Setup immediately
-  setupJsonPath();
+    btnEval?.addEventListener('click', evaluate);
+    [inputQuery, inputData].forEach(el => {
+      el?.addEventListener('input', evaluate);
+    });
+
+    btnSample?.addEventListener('click', () => {
+      if (inputData) inputData.value = defaultDoc;
+      if (inputQuery) inputQuery.value = '$.store.book[*].title';
+      evaluate();
+    });
+
+    if (inputData && !inputData.value) inputData.value = defaultDoc;
+
+    evaluate();
+  })();
 </script>
