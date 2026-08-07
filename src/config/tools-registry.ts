@@ -19817,6 +19817,41 @@ export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
       "excel-to-csv"
     ],
     "icon": "file-text"
+  },
+  {
+    "id": "sec-evtx-1",
+    "slug": "evtx-to-csv",
+    "title": "Windows EVTX to CSV / TXT Converter & Log Viewer",
+    "name": "Windows EVTX to CSV / TXT Converter & Log Viewer",
+    "href": "/tools/evtx-to-csv/",
+    "component": "src/pages/tools/evtx-to-csv.astro",
+    "status": "implemented",
+    "category": "Security",
+    "categorySlug": "security",
+    "mode": "converter",
+    "description": "Parse Windows Event Log (.evtx, .xml, .txt) files client-side and export to CSV, TXT, or JSON.",
+    "seo": {
+      "title": "Windows EVTX to CSV / TXT Converter & Log Viewer | Nadhebe",
+      "description": "Parse Windows Event Log (.evtx, .xml, .txt) files client-side. Inspect Event IDs (4624, 4625, 7045), filter log events, and export to CSV, TXT, or JSON.",
+      "keywords": [
+        "evtx to csv",
+        "evtx log viewer",
+        "convert evtx to txt",
+        "windows event log parser online",
+        "evtx to json converter"
+      ]
+    },
+    "relatedTools": [
+      "csp-header-generator",
+      "jwt-encoder",
+      "sql-formatter",
+      "json-to-csv"
+    ],
+    "tags": [
+      "security",
+      "evtx-to-csv"
+    ],
+    "icon": "shield"
   }
 ];
 

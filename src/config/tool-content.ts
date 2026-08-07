@@ -1200,6 +1200,22 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'evtx-to-csv': {
+    intro: 'Windows EVTX to CSV / TXT Converter & Log Viewer parses Windows Event Logs (.evtx, .xml, .txt) client-side and exports filtered event records.',
+    useCases: [
+      'Parse Windows Security, System, and Application event logs without uploading sensitive logs',
+      'Filter Event IDs (4624 Logon, 4625 Failed Logon, 7045 Service Installation)',
+      'Export parsed event records into .csv, .txt, or .json for SIEM analysis',
+    ],
+    howItWorks: 'Upload an EVTX/XML file or paste log text. The browser parses event nodes, populates an interactive log table, and exports to CSV or TXT.',
+    faq: [
+      {
+        question: 'Is my enterprise security log data uploaded to external servers?',
+        answer: '100% private. All log parsing and CSV conversion execute locally in your web browser.',
+      },
+    ],
+  },
+
 };
 
 
