@@ -1,6 +1,6 @@
-# Nadhebe Technical SEO, Developer & Content Engine Specification
+# Nadhebe Technical SEO, Search Appearance & Engineering Specification
 
-This specification synthesizes **Google Search Central's Official SEO Fundamentals, Developer Guidelines, and Helpful Content Standards** into a mandatory engineering blueprint for the Nadhebe platform.
+This master specification synthesizes **Google Search Central's Official SEO Fundamentals, Ranking & Search Appearance Standards, Developer Guidelines, and Helpful Content Systems** into a mandatory engineering blueprint for the Nadhebe platform.
 
 ---
 
@@ -17,10 +17,12 @@ This specification synthesizes **Google Search Central's Official SEO Fundamenta
 
 ### B. Structured Data (JSON-LD Schemas)
 Every page MUST output valid JSON-LD script blocks in the `<head>`:
-1. **Developer Tools**: `WebApplication` schema (`name`, `applicationCategory`, `operatingSystem`, `offers`).
-2. **Educational Content**: `FAQPage` schema mapping all Accordion Q&A pairs.
-3. **Articles & Guides**: `TechArticle` / `BlogPosting` schema (`headline`, `author`, `datePublished`, `dateModified`).
-4. **Navigation**: `BreadcrumbList` schema outlining exact hierarchical pathing (`Home` → `Category` → `Tool`).
+1. **WebSite & Brand Identity**: `WebSite` schema (`name: "Nadhebe"`, `alternateName: ["Nadhebe Dev Tools", "Nadhebe AI"]`, `url: "https://nadhebe.com"`).
+2. **Developer Tools**: `WebApplication` schema (`name`, `applicationCategory`, `operatingSystem`, `offers`).
+3. **Educational Content**: `FAQPage` schema mapping all Accordion Q&A pairs.
+4. **Articles & Guides**: `TechArticle` / `BlogPosting` schema (`headline`, `author`, `datePublished`, `dateModified`, `image`).
+5. **Media Content**: `VideoObject` and `ImageObject` schemas for embedded videos and visuals.
+6. **Navigation**: `BreadcrumbList` schema outlining exact hierarchical pathing (`Home` → `Category` → `Tool`).
 
 ### C. Web Vitals & Hydration Lifecycle
 * **Client-Side Script Isolation**: Inline tool scripts MUST use named initialization functions guarded against null elements.
@@ -29,7 +31,31 @@ Every page MUST output valid JSON-LD script blocks in the `<head>`:
 
 ---
 
-## 2. Google Helpful Content & E-E-A-T Guidelines
+## 2. Ranking & Search Appearance (Google Search Central Guidelines)
+
+### A. Title Links, Meta Snippets & Robots Meta
+* **Title Tag Formula**: Primary Keyword First + Action / Benefit + ` | Nadhebe` (e.g. `CSS Grid Layout Generator & Visual Builder | Nadhebe`).
+* **Meta Descriptions**: 140–155 character compelling summary matching explicit search intent.
+* **Robots Meta Tag**: `<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />`.
+* **Site Names & Favicons**: Standardized SVG and PNG favicons (`favicon.svg`, `apple-touch-icon.png`) to ensure brand logo rendering in Google Search Results.
+
+### B. Generative Engine Optimization (GEO) & AI Overviews
+* **Direct Answer Blocks**: Articles must feature concise 2-3 sentence summaries under H2/H3 headers for Google AI Overviews, Perplexity, and ChatGPT Search.
+* **LLM Knowledge Endpoints**: Maintain automated `llms.txt` and `llms-full.txt` endpoints for AI crawler discovery.
+* **Factual Tables & Comparison Matrices**: Standardized markdown and HTML comparison tables for LLM data extraction.
+
+### C. Image & Video Search Optimization
+* **Image Assets**: High-resolution WebP/SVG images with explicit `width` and `height` attributes to prevent CLS.
+* **Alt Text & Captions**: Descriptive, non-stuffed alt text for every visual element.
+* **Media Sitemaps**: Automated build-time generation of `sitemap-image.xml` and `sitemap-video.xml`.
+
+### D. Google Discover & Page Experience
+* **Hero Image Resolution**: Every long-form article MUST include a hero image at least 1,200px wide.
+* **Core Web Vitals Target**: LCP < 1.2s, INP < 100ms, CLS < 0.1.
+
+---
+
+## 3. Google Helpful Content & E-E-A-T Guidelines
 
 ### A. People-First Content (E-E-A-T: Experience, Expertise, Authoritativeness, Trust)
 * **Original Synthesis**: Articles and guides MUST provide at least 70% original technical research, benchmark data, architectural diagrams, and implementation analysis.
@@ -42,7 +68,7 @@ Every page MUST output valid JSON-LD script blocks in the `<head>`:
 
 ---
 
-## 3. UI/UX & Interactive Workbench Specifications
+## 4. UI/UX & Interactive Workbench Specifications
 
 ### A. Element Scoping & Component Isolation
 * **1:1 Slug to ToolID Mapping**: The Astro filename (e.g. `css-grid-generator.astro`) MUST match `toolId="css-grid-generator"` and `src/config/tools-registry.ts` slug exactly.
@@ -59,7 +85,7 @@ Every page MUST output valid JSON-LD script blocks in the `<head>`:
 
 ---
 
-## 4. Continuous Build Verification & Link Integrity
+## 5. Continuous Build Verification & Link Integrity
 
 Before declaring any feature complete or pushing code to remote:
 1. **Production Compilation**: Execute `npm run build` cleanly.

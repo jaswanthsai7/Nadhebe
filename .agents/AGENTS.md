@@ -133,25 +133,33 @@ Before finishing verify:
 
 ---
 
-# Workspace Rules: Google Technical SEO, Developer & Tool Specifications
+# Workspace Rules: Google Technical SEO, Search Appearance & Tool Specifications
 
-Adhere strictly to the following mandatory platform standards derived from **Google Search Central's Official Developer Guidelines & Helpful Content Systems**:
+Adhere strictly to the following mandatory platform standards derived from **Google Search Central's Official Developer Guidelines, Ranking & Search Appearance Standards, and Helpful Content Systems**:
 
-## 1. TECHNICAL SEO & ACCESSIBILITY
+## 1. TECHNICAL SEO, SEARCH APPEARANCE & ACCESSIBILITY
 - Every route MUST define an absolute canonical URL tag (`<link rel="canonical" href="...">`).
 - Use exactly one `<h1>` per page. Preserve strict heading hierarchy (`<h1>` → `<h2>` → `<h3>`).
-- Output JSON-LD structured data (`WebApplication`, `FAQPage`, `TechArticle`, `BreadcrumbList`) in `<head>`.
+- Output JSON-LD structured data (`WebSite`, `WebApplication`, `FAQPage`, `TechArticle`, `VideoObject`, `BreadcrumbList`) in `<head>`.
+- Title tag formula: Primary Keyword First + Action / Benefit + ` | Nadhebe`.
+- Meta robots: `<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />`.
 - All interactive controls (inputs, selects, buttons) MUST have unique `id`, `name`, `for`, and `aria-label` attributes.
 
-## 2. CLIENT-SIDE SCRIPT & HYDRATION LIFECYCLE
+## 2. GENERATIVE ENGINE OPTIMIZATION (GEO) & AI OVERVIEWS
+- Provide direct 2-3 sentence answer blocks under H2/H3 headings for AI Overviews, Perplexity, and ChatGPT Search.
+- Maintain automated `llms.txt` and `llms-full.txt` endpoints for AI crawler discovery.
+- Use structured HTML/Markdown comparison tables for LLM data extraction.
+
+## 3. CLIENT-SIDE SCRIPT & HYDRATION LIFECYCLE
 - Client-side scripts MUST register with `document.addEventListener('astro:page-load', initFn)` to maintain functionality across Astro View Transitions.
 - Scoped element lookups: Always guard against null elements (`if (!el) return;`). Never leak variables globally.
 
-## 3. UI/UX & COPY BUTTON ANIMATIONS
+## 4. UI/UX & COPY BUTTON ANIMATIONS
 - Preserves design token styling without layout shifts.
 - Copy buttons MUST support fallback extraction (textareas, code blocks, tables formatted as `Key: Value`).
 - Smooth icon transition on click: Copy icon scales to `scale(0)` / `opacity: 0`, checkmark tick mark scales to `scale(1)` / `opacity: 1`, border highlights in `emerald-500` for 2,000ms.
 
-## 4. BUILD VERIFICATION
+## 5. BUILD VERIFICATION
 - Every change MUST pass `npm run build` with 0 broken links across all compiled static HTML pages prior to git commit and push.
+
 
