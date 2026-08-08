@@ -1,5 +1,8 @@
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/600.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
 @import "@fontsource/jetbrains-mono/400.css";
 
 @tailwind base;
@@ -93,15 +96,15 @@ html.dark {
   }
 
   .prose-article h1 {
-    @apply font-display text-h1 font-bold text-ink dark:text-ink-dark mt-48 mb-16;
+    @apply font-display text-h1 font-extrabold text-ink dark:text-ink-dark mt-48 mb-16;
   }
 
   .prose-article h2 {
-    @apply font-display text-h2 font-semibold text-ink dark:text-ink-dark mt-56 mb-20 scroll-mt-24;
+    @apply font-display text-h2 font-bold text-ink dark:text-ink-dark mt-56 mb-20 scroll-mt-24;
   }
 
   .prose-article h3 {
-    @apply font-display text-h3 font-semibold text-ink dark:text-ink-dark mt-40 mb-16 scroll-mt-24;
+    @apply font-display text-h3 font-bold text-ink dark:text-ink-dark mt-40 mb-16 scroll-mt-24;
   }
 
   .prose-article h4 {
