@@ -427,3 +427,12 @@ html.dark {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Smooth theme toggle transitions (Low specificity so Tailwind utilities override if needed) */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}

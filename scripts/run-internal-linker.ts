@@ -120,13 +120,15 @@ function run() {
       let currentUrl = '/' + relativePath.replace(/\/index\.html$/, '').replace(/\.html$/, '');
       if (currentUrl === '/index') currentUrl = '/';
 
-      const html = fs.readFileSync(filePath, 'utf-8');
-      const linkedHtml = autoLinkArticles(html, targets, currentUrl);
+      try {
+        const html = fs.readFileSync(filePath, 'utf-8');
+        const linkedHtml = autoLinkArticles(html, targets, currentUrl);
 
-      if (linkedHtml !== html) {
-        fs.writeFileSync(filePath, linkedHtml, 'utf-8');
-        updatedCount++;
-      }
+        if (linkedHtml !== html) {
+          fs.writeFileSync(filePath, linkedHtml, 'utf-8');
+          updatedCount++;
+        }
+      } catch (_) {}
     }
   });
 
