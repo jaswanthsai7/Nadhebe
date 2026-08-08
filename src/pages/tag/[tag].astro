@@ -35,12 +35,15 @@ export async function getStaticPaths() {
 }
 
 const { tagName, posts } = Astro.props;
+
+// Keep noindex if the tag has 0 or 1 article (thin content archive)
+const shouldNoindex = !posts || posts.length <= 1;
 ---
 
 <BaseLayout
   title={`Articles on ${tagName}`}
   description={`Browse technical articles, tools comparisons, reviews and prompts for ${tagName}.`}
-  noindex={true}
+  noindex={shouldNoindex}
 >
   <div class="mx-auto max-w-6xl px-16 sm:px-24 py-48 sm:py-64">
     <div class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">

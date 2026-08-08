@@ -85,29 +85,29 @@ export async function getAllArticles(): Promise<Article[]> {
 export function getArticleUrl(article: { collection: string; slug: string }): string {
   switch (article.collection) {
     case 'news':
-      return `/news/${article.slug}`;
+      return `/news/${article.slug}/`;
     case 'tutorials':
-      return `/tutorials/${article.slug}`;
+      return `/tutorials/${article.slug}/`;
     case 'youtube-articles':
-      return `/youtube/${article.slug}`;
+      return `/youtube/${article.slug}/`;
     case 'tool-reviews':
-      return `/reviews/${article.slug}`;
+      return `/reviews/${article.slug}/`;
     case 'prompts':
-      return `/prompts/${article.slug}`;
+      return `/prompts/${article.slug}/`;
     case 'comparisons':
-      return `/comparisons/${article.slug}`;
+      return `/comparisons/${article.slug}/`;
     case 'best-practices':
-      return `/best-practices/${article.slug}`;
+      return `/best-practices/${article.slug}/`;
     case 'use-cases':
-      return `/use-cases/${article.slug}`;
+      return `/use-cases/${article.slug}/`;
     case 'tools':
-      return `/tools/${article.slug}`;
+      return `/tools/${article.slug}/`;
     case 'guides':
-      return `/guides/${article.slug}`;
+      return `/guides/${article.slug}/`;
     case 'frameworks':
-      return `/frameworks/${article.slug}`;
+      return `/frameworks/${article.slug}/`;
     case 'case-studies':
-      return `/case-studies/${article.slug}`;
+      return `/case-studies/${article.slug}/`;
     default:
       return `/`;
   }
