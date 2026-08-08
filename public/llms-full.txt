@@ -8516,6 +8516,7 @@ To maintain character consistency across shots:
 
 - Use Veo model integration for high-definition video output.
 - Anchor keyframes to maintain visual consistency across scenes.
+- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/youtube/google-flow-storyboard-studio-guide).
 - Export timeline sequences directly to MP4 or Premiere Pro XML files.
 
 ---
@@ -14548,15 +14549,15 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
 
 ---
 
-# [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow)
+# [How to Use Google Flow Storyboard Studio: Script Uploads, Custom Characters & Scenes](https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow)
 
-> A step-by-step tutorial on importing scripts, generating consistent character assets, and exporting storyboards in Google Flow Storyboard Studio.
+> A step-by-step tutorial on importing scripts, uploading custom character reference images, inserting scenes, and locking visual consistency in Google Flow.
 
-Category: Tutorials | Tags: ["google-flow", "tutorials", "storyboard", "step-by-step", "google-labs"]
+Category: Tutorials | Tags: ["google-flow", "tutorials", "storyboard", "custom-characters", "google-labs"]
 
 ## Tutorial: Building Pre-Production Storyboards in Google Flow
 
-This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import to final asset export and video rendering.
+This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import and custom character uploads to inserting new scenes and animating via Google Veo.
 
 ## Step-by-Step Workflow
 
@@ -14564,21 +14565,51 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
 * Launch Google Flow and open **Storyboard Studio** from the tools panel.
 * Select a visual style preset (e.g., *3D Animation*, *Line Art*, or *Photorealistic Cinematic*).
 
-### Step 2: Import and Segment the Script
-* Paste your script into the script panel.
-* Flow will segment the script into locations, actions, and character cues.
-* Review and adjust the generated scene breaks.
+### Step 2: Import and Format the Script
+To achieve optimal scene extraction in Google Flow:
+* Upload a plain text (`.txt`), Markdown (`.md`), or PDF file into the script pane.
+* Structure script lines using clear scene headers (`INT.` / `EXT.`), character tags, and action descriptions.
+* Flow will parse the script automatically into locations, actions, and character cues.
 
-### Step 3: Configure Assets and Render Panels
-* Under the **Assets** tab, assign detailed descriptions to key characters and props to establish baseline visual profiles.
-* Click **Generate Storyboard** to render the sequence of panels.
+```text
+[SCENE 1] EXT. NEON CITY STREET - NIGHT
+@Maya stands under the glowing rain-slicked overhang, holding a digital tablet.
+CAMERA: Close-up on @Maya's face as neon reflections streak across her visor.
+```
 
-### Step 4: Fix Drift with Manual Tagging
+### Step 3: Custom Character Upload & Consistency Anchoring
+
+> [!TIP]
+> To preserve your own original character designs across all storyboard frames, upload reference images directly into the **Assets** catalog before rendering panels.
+
+1. Navigate to the **Assets** tab in the left sidebar.
+2. Click **+ Add Asset Profile** and select **Character**.
+3. Upload 1 to 3 front-facing reference photos or concept art drawings of your character.
+4. Assign a unique tag identifier (e.g., `@Maya` or `@DetectiveJohn`).
+5. Set baseline visual parameters (hair style, outfit colors, art style weights).
+
+When panel generation runs, Google Flow's visual encoder pins your uploaded character identity into every scene prompt, eliminating facial drift across camera angles.
+
+### Step 4: How to Add & Split Scenes in the Storyboard Timeline
+
+Creators often need to add new visual beats or split long script paragraphs into dedicated camera panels after the initial script parse.
+
+```
+Initial Timeline:  [ Scene 1: Frame A ] ----------> [ Scene 2: Frame B ]
+                                            ^
+                                     Click (+ Add Scene)
+Updated Timeline:  [ Scene 1: Frame A ] -> [ NEW SCENE ] -> [ Scene 2: Frame B ]
+```
+
+* **Adding a New Scene**: Hover over the divider between two storyboard panels and click the **+ Insert Scene** icon. You can type a custom prompt or paste a new script excerpt directly into the scene editor.
+* **Splitting an Existing Panel**: Click on a panel, select **Split Scene Frame**, and drag the split handle to separate dialogue from action shots.
+
+### Step 5: Fix Drift with Manual Tagging
 * Review the generated frames for character drift.
 * If a character's face or costume shifts, click the frame editor, highlight the character, and tag it with the registered reference profile from your assets catalog.
 * Re-render the frame to lock in visual consistency.
 
-### Step 5: Animate via Google Veo
+### Step 6: Animate via Google Veo
 * For dynamic previews, select target panels and click the **Animate** toggle.
 * The system sends the layout coordinates to Google's **Veo** video model to compile short pre-visualization clips.
 
@@ -14595,7 +14626,6 @@ This tutorial walks through creating a storyboard using Google Flow's **Storyboa
   - **Prompt**: "Close-up of a designer glass cup and white notepad on a modern clean table with soft shadows"
   - **Filename**: "notepad-detail.jpg"
   - **Alt**: "Designer notepad detail"
-
 
 ## Related Production Guides
 
@@ -14730,11 +14760,11 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
 
 ---
 
-# [First Look: Google Flow's New Storyboard Studio Addition](https://nadhebe.com/youtube/google-flow-storyboard-studio-guide)
+# [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)](https://nadhebe.com/youtube/google-flow-storyboard-studio-guide)
 
-> A walk-through of Google Flow's Storyboard Studio, exploring how its AI script analysis, asset consistency maps, and camera presets optimize pre-production.
+> A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.
 
-Category: YouTube Articles | Tags: ["google-flow", "storyboard-studio", "pre-production", "filmmaking", "google-labs"]
+Category: YouTube Articles | Tags: ["google-flow", "storyboard-studio", "pre-production", "troubleshooting", "google-labs"]
 
 ## First Look: Google Flow's New Storyboard Studio Addition
 
@@ -14762,6 +14792,57 @@ The interface provides precise camera composition controls:
 
 Once storyboard panels are finalized, the tool allows creators to run a video generation pass. By integrating with Google's generative video model, **Veo**, Storyboard Studio can animate individual panels, transforming static concepts into short, cinematic pre-visualization video clips.
 
+## Troubleshooting Common Storyboard Studio Errors
+
+As an experimental **Google Labs** feature, Google Flow Storyboard Studio can occasionally encounter session sync issues or browser rendering glitches. Below are direct solutions for common errors reported by creators.
+
+### Why Storyboard Studio is Missing from Google Flow (Google Labs UI Updates)
+
+> [!NOTE]
+> If Storyboard Studio is missing from your navigation bar, your account workspace may have updated to a newer Google Labs layout or lost experimental feature access.
+
+If you can no longer locate Storyboard Studio in your Google Flow dashboard, check the following configuration steps:
+
+1. **Verify Google Labs Access**: Ensure you are logged in with the Google Account registered for Creative Lab experimental features.
+2. **Check the Tools Dropdown**: In recent interface updates, Storyboard Studio was relocated from the main top navigation to **Tools > Pre-Production Studio**.
+3. **Clear Browser Experimental Flags**: Reset `chrome://flags` if custom web canvas settings interfere with experimental Google Labs features.
+
+### Script & Assets Working But Storyboard Panels Fail to Render
+
+If your script imports correctly and character assets generate under the Assets tab, but the main **Storyboard Canvas** remains blank or spinning indefinitely, the issue is browser-level WebGL context loss or prompt tag syntax mismatch.
+
+```text
+Error: WebGL Canvas Context Lost / Asset Socket Timeout (504)
+Cause: Hardware Acceleration disabled or illegal nested bracket tag in script prompt.
+```
+
+**Step-by-Step Fix**:
+* Enable **Hardware Acceleration** under Chrome Settings (`chrome://settings/system`).
+* Remove nested bracket tags (e.g., `[[Character: Alice]]`) in custom prompts and use standard `@Character` references.
+* Clear cached media assets by opening `DevTools > Application > Storage > Clear Site Data` and re-logging into Google Flow.
+
+### Script Panel Blank or Missing ("Is My Script Stolen?")
+
+A common panic occurs when creators return to a project and find all generated images listed in the **All Media** section, but the script text panel completely blank. **Your script has not been stolen or lost.**
+
+```
++-----------------------------------------------------------------------+
+|                       Google Flow Workspace State                     |
++------------------------------------+----------------------------------+
+|      Primary Script Storage        |       Generated Asset Bucket     |
+|   (Saved in Session IndexedDB)     |     (Persisted in Cloud Storage) |
++------------------------------------+----------------------------------+
+|  Fails on tab idle or throttle    |  Always visible in All Media tab |
++------------------------------------+----------------------------------+
+```
+
+Google Flow separates script state storage (saved in IndexedDB/session memory) from generated image storage (persisted in cloud buckets). If your browser throttles background tabs or clears local storage, the script pane clears while images remain intact.
+
+**How to Recover Missing Script Text**:
+1. Click the **Workspace History** icon on the top-right menu bar.
+2. Select the last auto-saved version timestamp prior to the session reset.
+3. If history is disabled, navigate to **All Media > Metadata Export** to retrieve embedded prompt text and script notes from your generated panels.
+
 ### Known Limitations
 While highly capable, maintaining perfect character consistency across many shots remains challenging. The AI can drift during complex action sequences, requiring creators to perform **manual tagging of character references** to keep visuals aligned.
 
@@ -14778,7 +14859,6 @@ While highly capable, maintaining perfect character consistency across many shot
   - **Prompt**: "Close-up of a high-end designer tablet displaying stylized sketch concepts in a bright room"
   - **Filename**: "sketch-tablet.jpg"
   - **Alt**: "Creative sketch tablet workstation"
-
 
 ## Storyboard Studio Resources
 
@@ -15145,15 +15225,45 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 ---
 
-# [Google Flow Storyboard Studio: Product Overview and Toolset](https://nadhebe.com/tools/google-flow-storyboard-studio-overview)
+# [Google Flow vs Storyboard Studio: Features, 3D Animation & Pre-Production Overview](https://nadhebe.com/tools/google-flow-storyboard-studio-overview)
 
-> An overview of Google Flow's Storyboard Studio tools in Google Labs, including style presets, asset managers, and script automation hooks.
+> An in-depth review comparing regular Google Flow with Storyboard Studio, exploring 3D stylized animation capabilities, asset profiles, and export specs.
 
-Category: Tools | Tags: ["google-flow", "tools", "pre-production", "creative-tech", "google-labs"]
+Category: Tools | Tags: ["google-flow", "tools", "pre-production", "3d-animation", "google-labs"]
 
 ## Google Flow Storyboard Studio: Product Overview and Toolset
 
 Google Flow's **Storyboard Studio** is an experimental feature in **Google Labs** designed to accelerate creative pre-production. This article reviews the core features, visualization capabilities, and style choices available in this toolset.
+
+## Why Creators Use Storyboard Studio Over Regular Google Flow
+
+While regular **Google Flow** excels at fast, single-clip text-to-video rendering, filmmakers and animators rely on **Storyboard Studio** for structured narrative projects. Storyboard Studio bridges the gap between scriptwriting and video production by providing asset continuity tools and multi-shot camera orchestration.
+
+### Feature Comparison Matrix
+
+| Capability | Regular Google Flow | Storyboard Studio |
+| --- | --- | --- |
+| **Primary Goal** | Single video clip generation | Multi-shot pre-production & storyboarding |
+| **Input Format** | Single text prompt | Full script (.txt, .md, PDF) upload |
+| **Asset Continuity** | Single-shot keyframe lock | Global Asset Catalog (characters, props, sets) |
+| **Shot Composition** | Prompt-defined camera angles | Camera dropdowns (Wide, Medium, Dutch Angle) |
+| **Timeline Planning** | Individual video files | Interactive scene break & multi-panel timeline |
+| **Export Formats** | MP4 video clips | MP4, PDF pitch deck, Premiere XML |
+
+## 3D Stylized & Cartoon Animation Capabilities (Digital Circus Style)
+
+One of the most popular applications of Storyboard Studio is producing stylized 3D animated series—such as surreal, high-energy animations reminiscent of *The Amazing Digital Circus*.
+
+```text
+Prompt Preset: [3D Animation Style] + High Saturation Toy render + Stylized Geometry + Octane Lighting
+Asset Tag: @JesterCharacter (Vibrant purple jumpsuit, oversized glossy eyes, plastic hat)
+```
+
+### How to Build a 3D Stylized Animated Sequence:
+1. **Set Visual Style Preset**: Select **3D Stylized Animation** in the project setup menu to force a glossy, surreal 3D render engine baseline.
+2. **Anchor Character Profiles**: Upload 3D concept renders or character models into the **Assets** tab. Lock facial geometry and color palettes to prevent style degradation.
+3. **Draft Dynamic Action Prompts**: Structure scene action with energetic motion tags (e.g. `expressive exaggerated squash-and-stretch, fast camera zoom, candy-colored circus background`).
+4. **Animate Panels via Veo**: Convert static 3D panels into fluid, animated clips using the Google Veo render pipeline.
 
 ## Core Features
 
@@ -15180,11 +15290,11 @@ Although the tool speeds up scene creation, character drift remains a challenge.
   - **Filename**: "digital-pen-workstation.jpg"
   - **Alt**: "Digital drawing setup detail"
 
-
 ## Pre-Production Tutorials & Guides
 
 * Walk through step-by-step panel creation in [Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
 * Read producer workflows in [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
+* Resolve missing script and render errors in [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting](/youtube/google-flow-storyboard-studio-guide).
 
 ---
 
