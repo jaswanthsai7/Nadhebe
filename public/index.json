@@ -1,5 +1,25 @@
 [
   {
+    "title": "NotebookLM Audio Overviews & Source Grounding Developer Tutorial",
+    "description": "Learn how to build, customize, and steer Google NotebookLM Audio Overviews, synthesize multi-document knowledge graphs, and enforce strict source attribution.",
+    "url": "https://nadhebe.com/tutorials/notebooklm-audio-overviews-source-grounding-tutorial",
+    "category": "Tutorials",
+    "tags": [
+      "[\"notebooklm\", \"google-ai\", \"rag\", \"audio-overviews\", \"source-grounding\", \"knowledge-synthesis\"]"
+    ],
+    "pubDate": "2026-08-08T00:00:00.000Z"
+  },
+  {
+    "title": "Google AI Studio System Prompts & Structured Outputs Architecture Guide",
+    "description": "A comprehensive guide on configuring system instructions, JSON Schema structured outputs, function calling, and temperature parameters in Google AI Studio for production AI applications.",
+    "url": "https://nadhebe.com/guides/google-ai-studio-system-prompts-structured-output-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"google-ai-studio\", \"gemini-api\", \"structured-outputs\", \"system-prompts\", \"pydantic\", \"json-schema\"]"
+    ],
+    "pubDate": "2026-08-08T00:00:00.000Z"
+  },
+  {
     "title": "Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols",
     "description": "Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols.",
     "url": "https://nadhebe.com/guides/generative-engine-optimization-geo-guide",

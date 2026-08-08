@@ -52,7 +52,7 @@ export const CURATED_TRENDS: TrendTopic[] = [
   {
     id: 'google-flow-storyboard-studio',
     topic: 'Google Flow Storyboard Studio',
-    aliases: ['google flow storyboard', 'google flow ai video', 'flow studio ai', 'google flow video generator'],
+    aliases: ['google flow storyboard', 'google flow ai video', 'flow studio ai', 'google flow video generator', 'google flow storyboard studio upload images script', 'storyboard studio google flow', 'how to use storyboard studio on google flow'],
     category: 'AI Video & Visual Tools',
     sourceType: 'curated',
     source: 'Nadhebe Developer Radar',
@@ -62,7 +62,9 @@ export const CURATED_TRENDS: TrendTopic[] = [
     relatedQueries: [
       'Building pre-production storyboards with Google Flow',
       'Google Flow AI video generation guide',
-      'Google Flow vs Runway Gen-3 comparison'
+      'Why Google Flow script missing troubleshoot',
+      'Can you make Digital Circus 3D animation with AI',
+      'Google Flow vs Storyboard Studio comparison'
     ]
   },
   {

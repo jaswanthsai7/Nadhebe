@@ -10,6 +10,16 @@ heroAlt: "Clean minimalist film strip illustration of Google Flow AI video gener
 isPillar: false
 rating: 4.9
 estimatedReadingTime: 8
+faq:
+  - question: "How does Google Flow generate video from text?"
+    answer: "Google Flow uses Google's Veo generative video model to convert natural language prompts and keyframe image references into 1080p high-definition video clips."
+  - question: "What is the difference between Google Flow and Google Flow Storyboard Studio?"
+    answer: "Google Flow generates standalone 4-second video clips, while Storyboard Studio provides a multi-shot pre-production environment with automated script parsing, custom character reference uploads, and timeline editing."
+  - question: "How do I fix missing scripts or blank render screens in Google Flow?"
+    answer: "Restore session snapshots via the Workspace History menu, verify WebGL hardware acceleration in Chrome settings, or export character prompts from the All Media section."
+sources:
+  - label: "Google Flow Official Platform"
+    url: "https://flow.google.com"
 ---
 
 **Google Flow** is Google's web-based pre-production studio for AI video generation and storyboarding. Built on Google’s **Veo** generative video models, Flow allows filmmakers and content creators to turn script prompts into consistent video clips, scene storyboards, and camera movements.
@@ -50,4 +60,6 @@ To maintain character consistency across shots:
 
 - Use Veo model integration for high-definition video output.
 - Anchor keyframes to maintain visual consistency across scenes.
+- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/youtube/google-flow-storyboard-studio-guide).
 - Export timeline sequences directly to MP4 or Premiere Pro XML files.
+
