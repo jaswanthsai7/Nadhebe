@@ -84,15 +84,8 @@ export default {
           dark: '#F87171',
         },
         code: {
-          DEFAULT: '#EFEBE3',
-          dark: '#151F2B',
-        },
-        glass: {
-          warm: 'rgba(247, 243, 235, 0.78)',
-          navy: 'rgba(23, 37, 54, 0.075)',
-          blue: 'rgba(52, 78, 101, 0.11)',
-          orange: 'rgba(217, 119, 6, 0.065)',
-          dark: 'rgba(14, 23, 34, 0.80)',
+          DEFAULT: '#F5F5F5',
+          dark: '#141414',
         },
       },
       fontFamily: {
