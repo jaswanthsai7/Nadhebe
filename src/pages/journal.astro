@@ -1,0 +1,377 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getAllArticles, getArticleUrl } from '@/utils/content';
+import { SITE } from '@/config';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getAllArticles();
+const authorsList = await getCollection('authors');
+const authorMap = new Map(authorsList.map((a) => [a.id, a.data]));
+
+// Filter OUT tools: Journal is strictly for reading/editorial content
+const editorialArticles = allArticles.filter((a) => {
+  const cat = (a.data.category || '').toLowerCase();
+  const collection = (a.collection || '').toLowerCase();
+  return cat !== 'tools' && cat !== 'tool' && collection !== 'tools';
+});
+
+// Categories from real editorial data
+const categorySet = new Set<string>();
+editorialArticles.forEach((a) => {
+  if (a.data.category) categorySet.add(a.data.category);
+});
+const categories = Array.from(categorySet).slice(0, 8);
+
+// Featured articles (high rating or pillar)
+const featuredPicks = editorialArticles
+  .filter((a) => a.data.isPillar || (a.data.rating && a.data.rating >= 4))
+  .slice(0, 3);
+const displayPicks = featuredPicks.length >= 3 ? featuredPicks : editorialArticles.slice(0, 3);
+
+const seo = {
+  title: `AI Engineering Journal & Research | Nadhebe`,
+  description: 'Explore the complete Nadhebe editorial journal — AI engineering deep-dives, prompt architectures, comparisons, and research guides.',
+  canonical: `${SITE.url}/journal/`,
+  ogType: 'website',
+  ogTitle: `Nadhebe Journal`,
+  ogDescription: 'The complete editorial reading feed for AI engineers and builders.',
+  ogImage: `${SITE.url}/og-default.png`,
+  ogUrl: `${SITE.url}/journal/`,
+  twitterCard: 'summary_large_image',
+  twitterTitle: `Nadhebe Journal`,
+  twitterDescription: 'AI insights, architectural breakdowns, and prompt engineering.',
+  twitterImage: `${SITE.url}/og-default.png`,
+  robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+    { '@type': 'ListItem', position: 2, name: 'Journal', item: `${SITE.url}/journal/` },
+  ],
+};
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Nadhebe Journal',
+  description: seo.description,
+  url: seo.canonical,
+  numberOfItems: editorialArticles.length,
+};
+---
+
+<BaseLayout seo={seo} jsonLd={[breadcrumbLd, collectionLd]}>
+  <div class="relative z-10 w-full min-h-screen text-ink dark:text-ink-dark font-sans">
+    <div class="mx-auto max-w-[1360px] px-16 sm:px-24 pt-24 sm:pt-32 pb-64">
+
+      <!-- Accessible primary page heading for strict SEO hierarchy -->
+      <h1 class="sr-only">Nadhebe Journal - AI Engineering & Research Insights</h1>
+
+      <!-- Responsive Flex Layout: Left Rail, Center Stream, Right Sidebar as Card Blocks -->
+      <div class="flex flex-col xl:flex-row gap-24 sm:gap-32 items-start justify-center w-full">
+
+        <!-- ── LEFT NAVIGATION RAIL (Appears side-by-side only on Desktop >=1280px) ── -->
+        <aside class="hidden xl:block shrink-0 sticky top-[96px] self-start border border-border/60 dark:border-border-dark/60 p-20 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md rounded-20 shadow-medium" style="width: 240px; min-width: 240px; max-width: 240px;" aria-label="Journal navigation">
+          <nav class="flex flex-col gap-4" aria-label="Main sidebar navigation">
+            <a href="/" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Home</span>
+            </a>
+            <a href="/journal" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans font-semibold bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark" aria-current="page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0 text-accent dark:text-accent-dark"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+              <span>Journal</span>
+            </a>
+            <a href="/guides" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>Guides</span>
+            </a>
+            <a href="/tutorials" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <span>Tutorials</span>
+            </a>
+            <a href="/comparisons" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+              <span>Comparisons</span>
+            </a>
+            <a href="/reviews" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Reviews</span>
+            </a>
+            <a href="/partners" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Partners</span>
+            </a>
+            <a href="/newsletter" class="flex items-center gap-12 px-12 py-8 rounded-control text-caption font-sans text-ink2 dark:text-ink2-dark hover:bg-surface2 dark:hover:bg-surface2-dark hover:text-ink dark:hover:text-ink-dark transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span>Newsletter</span>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- ── CENTER ARTICLE STREAM (Narrow 680px-720px Editorial Column with borders) ── -->
+        <main class="flex-grow min-w-0 p-24 sm:p-32 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md border border-border/60 dark:border-border-dark/60 rounded-20 shadow-medium" style="max-width: 720px;" id="journal-feed" aria-label="Article feed">
+
+          <!-- Sticky tab bar -->
+          <div class="sticky top-[56px] z-30 bg-surface/95 dark:bg-surface-dark/95 backdrop-blur-md border-b border-border/60 dark:border-border-dark/60 flex items-center gap-16 pt-12 pb-0 mb-16 overflow-x-auto no-scrollbar" aria-label="Journal stream selection">
+            <button id="journal-tab-featured" type="button" data-tab="featured" aria-label="Filter feed by featured articles" class="journal-tab focus:outline-none active-tab px-12 pb-12 text-caption font-semibold text-ink dark:text-ink-dark border-b-2 border-ink dark:border-ink-dark transition-colors shrink-0">Featured</button>
+            <button id="journal-tab-latest" type="button" data-tab="latest" aria-label="Filter feed by latest articles" class="journal-tab focus:outline-none px-12 pb-12 text-caption font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark border-b-2 border-transparent transition-colors shrink-0">Latest</button>
+            <button id="journal-tab-research" type="button" data-tab="research" aria-label="Filter feed by research articles" class="journal-tab focus:outline-none px-12 pb-12 text-caption font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark border-b-2 border-transparent transition-colors shrink-0">Research</button>
+            <button id="journal-tab-all" type="button" data-tab="all" aria-label="Show all journal articles" class="journal-tab focus:outline-none px-12 pb-12 text-caption font-medium text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark border-b-2 border-transparent transition-colors shrink-0">All</button>
+          </div>
+
+          <!-- Article list -->
+          <div id="article-list" class="divide-y divide-border/60 dark:divide-border-dark/60">
+            {editorialArticles.map((article, idx) => {
+              const pubDate = article.data.pubDate
+                ? new Date(article.data.pubDate).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric',
+                  })
+                : null;
+              const readTime = article.data.estimatedReadingTime ?? 5;
+              const url = getArticleUrl(article);
+              const isPillar = article.data.isPillar || (article.data.rating && article.data.rating >= 4);
+              const catLower = (article.data.category || '').toLowerCase();
+              const isResearch = catLower.includes('guide') || catLower.includes('tutorial') || catLower.includes('comparison') || catLower.includes('architecture') || catLower.includes('research');
+
+              // Resolve author details
+              const authorId = article.data.author?.id;
+              const authorData = authorId ? authorMap.get(authorId) : null;
+              const authorName = authorData?.name ?? 'Nadhebe Team';
+              const authorAvatar = authorData?.avatar ?? '/logo.webp';
+
+              return (
+                <article
+                  data-category={catLower}
+                  data-pillar={isPillar ? 'true' : 'false'}
+                  data-research={isResearch ? 'true' : 'false'}
+                  data-pubdate={article.data.pubDate ? new Date(article.data.pubDate).getTime() : 0}
+                  class="article-row group flex justify-between gap-24 sm:gap-40 py-28 sm:py-36"
+                >
+                  <!-- Left text column -->
+                  <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                      <!-- Author metadata header row -->
+                      <div class="flex items-center gap-8 mb-12">
+                        <img
+                          src={authorAvatar}
+                          alt={authorName}
+                          width="24" height="24"
+                          class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border border-border/40 dark:border-border-dark/40"
+                          loading="lazy"
+                        />
+                        <span class="text-xs font-semibold text-ink dark:text-ink-dark hover:underline cursor-pointer">{authorName}</span>
+                        <span class="text-xs text-muted dark:text-muted-dark">·</span>
+                        {pubDate && <time datetime={new Date(article.data.pubDate).toISOString()} class="text-xs text-muted dark:text-muted-dark">{pubDate}</time>}
+                      </div>
+
+                      <!-- Title -->
+                      <h2 class="font-serif font-bold text-xl sm:text-[22px] md:text-2xl leading-snug tracking-tight text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors mb-6">
+                        <a href={url} class="block">{article.data.title}</a>
+                      </h2>
+
+                      <!-- Description -->
+                      <p class="text-sm sm:text-[15px] font-sans text-ink2 dark:text-ink2-dark line-clamp-2 leading-relaxed mb-16">
+                        {article.data.description}
+                      </p>
+                    </div>
+
+                    <!-- Bottom Meta Row -->
+                    <div class="flex items-center justify-between text-xs text-muted dark:text-muted-dark font-sans pt-4 mt-auto">
+                      <!-- Left side: Category tag and Read Time -->
+                      <div class="flex items-center gap-8">
+                        {isPillar && (
+                          <span class="text-[#B7862C] dark:text-[#D6A85A]" title="Featured article">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="inline"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                          </span>
+                        )}
+                        <a href={`/journal?category=${catLower}`} class="bg-surface2 dark:bg-surface2-dark text-ink2 dark:text-ink2-dark px-10 py-4 rounded-pill font-medium hover:bg-hover dark:hover:bg-hover-dark transition-colors">
+                          {article.data.category}
+                        </a>
+                        <span>·</span>
+                        <span>{readTime} min read</span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Right Thumbnail image -->
+                  {article.data.heroImage && (
+                    <a href={url} tabindex="-1" aria-hidden="true" class="shrink-0 self-start mt-4">
+                      <img
+                        src={article.data.heroImage}
+                        alt={article.data.heroAlt ?? article.data.title}
+                        width="160" height="107"
+                        class="w-[84px] h-[84px] sm:w-[150px] sm:h-[100px] object-cover rounded-4 shadow-subtle block border border-border/40 dark:border-border-dark/40"
+                        loading={idx < 4 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </a>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+
+          <!-- Empty state -->
+          <div id="empty-state" class="hidden text-center py-64 text-ink2 dark:text-ink2-dark">
+            <p class="text-body-large">No stories matched your filter.</p>
+          </div>
+        </main>
+
+        <!-- ── RIGHT SIDEBAR (Flat editorial columns matching Medium) ── -->
+        <aside class="hidden lg:block shrink-0 sticky top-[96px] self-start border border-border/60 dark:border-border-dark/60 p-24 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md rounded-20 shadow-medium max-h-[calc(100vh-120px)] overflow-y-auto no-scrollbar" style="width: 320px; min-width: 320px; max-width: 320px;" aria-label="Sidebar">
+
+          <!-- Recommended Topics -->
+          <div class="mb-40">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-ink dark:text-ink-dark mb-16">Recommended topics</h3>
+            <div class="flex flex-wrap gap-8">
+              {categories.map((cat, idx) => (
+                <button
+                  id={`topic-pill-${idx}`}
+                  type="button"
+                  data-topic={cat.toLowerCase()}
+                  aria-label={`Filter by topic ${cat}`}
+                  class="journal-topic-pill focus:outline-none border border-border/40 dark:border-border-dark/40 rounded-full px-12 py-6 text-xs font-medium text-ink2 dark:text-ink2-dark bg-surface2 dark:bg-surface2-dark hover:bg-hover dark:hover:bg-hover-dark transition-colors cursor-pointer"
+                >
+                  {cat} <span class="ml-4 font-normal text-muted dark:text-muted-dark">+</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Explore Nadhebe -->
+          <div class="mb-40">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-ink dark:text-ink-dark mb-16">Explore</h3>
+            <div class="flex flex-col gap-12 text-caption">
+              <a href="/guides" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Guides</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/tutorials" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Tutorials</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/comparisons" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Comparisons</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/case-studies" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Case Studies</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/best-practices" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Best Practices</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/frameworks" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Frameworks</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Featured Reads -->
+          <div>
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-ink dark:text-ink-dark mb-16">Featured Reads</h3>
+            <div class="flex flex-col gap-16 divide-y divide-border/60 dark:divide-border-dark/60">
+              {displayPicks.map((pick, pIdx) => {
+                const pickDate = pick.data.pubDate
+                  ? new Date(pick.data.pubDate).toLocaleDateString('en-US', {
+                      month: 'short', day: 'numeric',
+                    })
+                  : null;
+                return (
+                  <div class={`flex flex-col gap-4 ${pIdx > 0 ? 'pt-12' : ''}`}>
+                    <span class="text-[11px] font-mono text-accent dark:text-accent-dark uppercase tracking-wider font-semibold">{pick.data.category}</span>
+                    <a href={getArticleUrl(pick)} class="text-sm sm:text-base font-serif font-bold leading-snug text-ink dark:text-ink-dark hover:text-accent dark:hover:text-accent-dark transition-colors">
+                      {pick.data.title}
+                    </a>
+                    {pickDate && <p class="text-meta text-muted dark:text-muted-dark">{pickDate}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      function initJournal() {
+        const list = document.getElementById('article-list');
+        if (!list || list.dataset.initialized) return;
+        list.dataset.initialized = 'true';
+
+        const tabs = document.querySelectorAll('.journal-tab');
+        const rows = Array.from(document.querySelectorAll('#article-list article'));
+        const emptyState = document.getElementById('empty-state');
+        if (!rows.length) return;
+
+        let activeTab = 'featured';
+        let activeCategory = '';
+
+        function applyFilter() {
+          let visible = 0;
+          rows.forEach((r) => {
+            const cat = (r.dataset.category ?? '').toLowerCase();
+            const isPillar = r.dataset.pillar === 'true';
+            const isResearch = r.dataset.research === 'true';
+
+            let tabMatch = true;
+            if (activeTab === 'featured') tabMatch = isPillar;
+            else if (activeTab === 'research') tabMatch = isResearch;
+
+            const catMatch = !activeCategory || cat.includes(activeCategory);
+
+            const show = tabMatch && catMatch;
+            r.classList.toggle('hidden', !show);
+            if (show) visible++;
+          });
+
+          if (emptyState) emptyState.classList.toggle('hidden', visible > 0);
+        }
+
+        function sortRows(mode) {
+          let sorted = [...rows];
+          if (mode === 'latest') {
+            sorted.sort((a, b) => Number(b.dataset.pubdate) - Number(a.dataset.pubdate));
+          }
+          if (list) sorted.forEach((r) => list.appendChild(r));
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            tabs.forEach((t) => {
+              t.classList.remove('active-tab', 'font-semibold', 'text-ink', 'dark:text-ink-dark', 'border-ink', 'dark:border-ink-dark');
+              t.classList.add('font-medium', 'text-ink2', 'dark:text-ink2-dark', 'border-transparent');
+            });
+            tab.classList.add('active-tab', 'font-semibold', 'text-ink', 'dark:text-ink-dark', 'border-ink', 'dark:border-ink-dark');
+            tab.classList.remove('font-medium', 'text-ink2', 'dark:text-ink2-dark', 'border-transparent');
+
+            activeTab = tab.dataset.tab;
+            sortRows(activeTab);
+            applyFilter();
+          });
+        });
+
+        // Initial filter on load
+        applyFilter();
+
+        const pills = document.querySelectorAll('.journal-topic-pill');
+        pills.forEach((pill) => {
+          pill.addEventListener('click', () => {
+            const topic = pill.dataset.topic ?? '';
+            const isActive = pill.classList.contains('active-pill');
+            pills.forEach((p) => {
+              p.classList.remove('active-pill', 'bg-ink', 'text-bg', 'dark:bg-ink-dark', 'dark:text-bg-dark', 'border-ink', 'dark:border-ink-dark');
+            });
+
+            if (isActive) {
+              activeCategory = '';
+            } else {
+              pill.classList.add('active-pill', 'bg-ink', 'text-bg', 'dark:bg-ink-dark', 'dark:text-bg-dark', 'border-ink', 'dark:border-ink-dark');
+              activeCategory = topic;
+            }
+            applyFilter();
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initJournal);
+      } else {
+        initJournal();
+      }
+      document.addEventListener('astro:page-load', initJournal);
+    })();
+  </script>
+</BaseLayout>

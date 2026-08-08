@@ -60,8 +60,8 @@ function verifyLinks() {
 
       linksCheckedCount++;
 
-      // Clean hash from link
-      const cleanUrl = url.split('#')[0];
+      // Clean hash and query parameters from link
+      const cleanUrl = url.split('#')[0].split('?')[0];
       if (!cleanUrl) continue;
 
       let targetPath = '';

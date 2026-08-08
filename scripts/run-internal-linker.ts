@@ -17,7 +17,12 @@ function walkDir(dir: string, callback: (filePath: string) => void) {
   fs.readdirSync(dir).forEach((f) => {
     const dirPath = path.join(dir, f);
     if (!fs.existsSync(dirPath) || dirPath.includes('pagefind')) return;
-    const isDirectory = fs.statSync(dirPath).isDirectory();
+    let isDirectory = false;
+    try {
+      isDirectory = fs.statSync(dirPath).isDirectory();
+    } catch (_) {
+      return;
+    }
     if (isDirectory) {
       walkDir(dirPath, callback);
     } else {
