@@ -8,8 +8,8 @@ const resources = UNIFIED_RESOURCES_REGISTRY;
 const totalResources = resources.length;
 
 const seo = buildSeo({
-  title: 'Technical Resources & Documents - Nadhebe',
-  description: 'Hand-picked documents, cheat sheets, blueprints, templates and reference material for developers and builders. Instant download.',
+  title: 'Technical Resources & PDF Documents - Nadhebe',
+  description: 'Hand-picked PDF documents, cheat sheets, blueprints, templates and reference material for developers and builders. Instant PDF download.',
   slug: '/resources/',
   siteUrl: SITE.url,
   siteName: SITE.name,
@@ -19,7 +19,7 @@ const seo = buildSeo({
 const resourcesSchema = {
   '@context': 'https://schema.org',
   '@type': 'DataCatalog',
-  name: 'Technical Resources & Documents',
+  name: 'Technical Resources & PDF Documents',
   description: 'Directory of technical cheat sheets, code templates, architecture diagrams, and developer PDF guides.',
   url: `${SITE.url}/resources/`,
 };
@@ -29,7 +29,7 @@ const filterTabs = [
   { id: 'Cheat Sheets', label: 'CHEAT SHEETS' },
   { id: 'Architecture Diagrams', label: 'ARCHITECTURE' },
   { id: 'Templates', label: 'TEMPLATES' },
-  { id: 'Guides & PDFs', label: 'GUIDES' },
+  { id: 'Guides & PDFs', label: 'GUIDES & PDFs' },
   { id: 'Code Bundles', label: 'CODE & SNIPPETS' },
 ];
 ---
@@ -44,32 +44,32 @@ const filterTabs = [
         <!-- LEFT -->
         <div class="lg:col-span-7 flex flex-col justify-between gap-16 z-10">
           <div>
-            <span class="inline-block font-mono text-xs font-bold uppercase tracking-widest text-accent dark:text-accent-dark mb-6">Resource Library</span>
+            <span class="inline-block font-mono text-xs font-bold uppercase tracking-widest text-accent dark:text-accent-dark mb-6">PDF Resource Library</span>
             <h1 class="font-display text-hero font-extrabold tracking-tight text-ink dark:text-ink-dark leading-[1.1]">
-              Technical Resources<br />&amp; Documents
+              Technical Resources<br />&amp; PDF Documents
             </h1>
             <p class="mt-12 text-body text-ink2 dark:text-ink2-dark max-w-xl leading-relaxed">
-              Hand-picked documents, cheat sheets, blueprints, templates and reference material for developers and builders. Instant download. No sign-up. No barriers.
+              Hand-picked PDF cheat sheets, architecture blueprints, and prompt engineering guides. Instant PDF download. Live Markdown document preview with 1-click prompt copying.
             </p>
           </div>
 
           <!-- METRICS -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 pt-16 border-t border-border dark:border-border-dark">
             <div class="flex items-center gap-6">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">6+ Categories</p></div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 12-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">5 Real Resources</p></div>
             </div>
             <div class="flex items-center gap-6">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">PDF, ZIP, JSON</p></div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">Format: PDF</p></div>
+            </div>
+            <div class="flex items-center gap-6">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">Code &amp; Prompt Copy</p></div>
             </div>
             <div class="flex items-center gap-6">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">Direct Download</p></div>
-            </div>
-            <div class="flex items-center gap-6">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">100% Free</p></div>
             </div>
           </div>
         </div>
@@ -79,19 +79,19 @@ const filterTabs = [
           <div class="relative w-full max-w-[260px] aspect-[4/3] flex items-center justify-center">
             <div class="absolute inset-0 rounded-8 bg-[#f3eedf] dark:bg-[#1a1c26] border border-[#d6cfbe] dark:border-gray-700 p-12 shadow-medium transform -rotate-6 -translate-x-[8px] -translate-y-[8px]">
               <p class="font-mono text-[9px] font-bold tracking-wider text-muted uppercase">SYSTEM DESIGN PATTERNS</p>
-              <p class="font-mono text-[8px] text-muted">QUICK REFERENCE</p>
+              <p class="font-mono text-[8px] text-muted">QUICK REFERENCE PDF</p>
               <div class="mt-8 space-y-4"><div class="h-1 w-3/4 bg-muted/30 rounded"></div><div class="h-1 w-1/2 bg-muted/30 rounded"></div></div>
             </div>
             <div class="absolute inset-0 rounded-8 bg-accent text-white p-12 shadow-medium transform rotate-6 translate-x-[16px] translate-y-[8px] flex flex-col justify-between">
-              <p class="font-mono text-[9px] font-bold tracking-wider uppercase">ARCHITECTURE DIAGRAM</p>
+              <p class="font-mono text-[9px] font-bold tracking-wider uppercase">GOOGLE FLOW ADS BLUEPRINT</p>
               <div class="h-12 w-12 border-2 border-white rounded-full"></div>
             </div>
             <div class="absolute w-[78%] rounded-8 bg-[#18181b] text-white p-12 shadow-large z-20 space-y-4 hover:scale-105 transition-transform">
               <div class="flex items-center justify-between border-b border-gray-700 pb-4">
-                <span class="font-mono text-[10px] font-bold tracking-wider">API CHEAT SHEET</span>
-                <span class="font-mono text-[9px] text-accent-dark">v1.2</span>
+                <span class="font-mono text-[10px] font-bold tracking-wider">PDF RESOURCE DECK</span>
+                <span class="font-mono text-[9px] text-accent-dark">v2.0</span>
               </div>
-              <div class="space-y-2 font-mono text-[8px] text-gray-400"><p>POST /api/v1/generate</p><p>Authorization: Bearer ***</p></div>
+              <div class="space-y-2 font-mono text-[8px] text-gray-400"><p>Download: .pdf format</p><p>Preview: Code &amp; Prompt Copy</p></div>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ const filterTabs = [
       <div class="w-full flex-1 relative">
         <div class="relative flex items-center">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-12 text-ink2 dark:text-ink2-dark pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" id="res-search-input" aria-label="Search resources" placeholder="Search resources by title, format (PDF, ZIP, JSON), or topic..." class="w-full rounded-8 border border-border bg-surface2 pl-32 pr-12 py-8 text-caption font-sans text-ink placeholder:text-ink2 dark:placeholder:text-ink2-dark focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-colors" />
+          <input type="text" id="res-search-input" aria-label="Search resources" placeholder="Search resources by title, PDF format, or topic..." class="w-full rounded-8 border border-border bg-surface2 pl-32 pr-12 py-8 text-caption font-sans text-ink placeholder:text-ink2 dark:placeholder:text-ink2-dark focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-colors" />
         </div>
       </div>
 
@@ -149,13 +149,6 @@ const filterTabs = [
     <!-- ─── CARDS GRID ─── -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 mb-48" id="resources-grid">
       {resources.map((item) => {
-        const fmtCls =
-          item.fileType === 'PDF' ? 'bg-red-600/10 text-red-600 dark:text-red-400 border-red-600/20' :
-          item.fileType === 'ZIP' ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border-blue-600/20' :
-          item.fileType === 'JSON' ? 'bg-amber-600/10 text-amber-600 dark:text-amber-400 border-amber-600/20' :
-          item.fileType === 'PNG' ? 'bg-purple-600/10 text-purple-600 dark:text-purple-400 border-purple-600/20' :
-          'bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border-emerald-600/20';
-
         const badgeCls =
           item.badge === 'Popular' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' :
           item.badge === 'Essential' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300' :
@@ -166,65 +159,53 @@ const filterTabs = [
           <div
             data-resource-card
             data-category={item.category}
-            data-search-text={`${item.title} ${item.description} ${item.category} ${item.fileType} ${item.tags.join(' ')}`.toLowerCase()}
+            data-search-text={`${item.title} ${item.description} ${item.category} PDF ${item.tags.join(' ')}`.toLowerCase()}
             class="res-card group relative flex flex-col rounded-16 border border-border bg-surface p-20 shadow-subtle hover:shadow-large hover:border-accent/50 transition-all duration-200 dark:border-border-dark dark:bg-surface-dark"
           >
-            <!-- PREVIEW -->
+            <!-- PREVIEW CARD GRAPHIC -->
             <div class="relative w-full aspect-[16/10] rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark overflow-hidden mb-16 p-12 flex flex-col justify-between group-hover:border-accent/40 transition-colors">
 
               <div class="flex items-center justify-between gap-8 z-10">
-                <span class={`rounded-6 border px-8 py-2 font-mono text-[11px] font-bold uppercase tracking-wider ${fmtCls}`}>{item.fileType}</span>
+                <span class="rounded-6 border border-red-600/20 bg-red-600/10 px-8 py-2 font-mono text-[11px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">PDF DOCUMENT</span>
                 {item.badge && (<span class={`rounded-pill px-8 py-2 font-mono text-[10px] font-bold uppercase tracking-wider ${badgeCls}`}>{item.badge}</span>)}
               </div>
 
               <div class="flex-1 flex items-center justify-center px-4 py-8">
                 {item.previewType === 'pdf-cheatsheet' && (
-                  <div class="w-full rounded-8 bg-white dark:bg-[#1a1c24] border border-border dark:border-gray-700 p-8 space-y-4">
+                  <div class="w-full rounded-8 bg-white dark:bg-[#1a1c24] border border-border dark:border-gray-700 p-8 space-y-4 shadow-sm">
                     <p class="font-mono text-[10px] font-bold text-ink dark:text-ink-dark tracking-wider uppercase">CLAUDE CODE CLI REFERENCE</p>
                     <div class="h-2 w-3/4 bg-accent/30 rounded"></div>
                     <div class="h-2 w-1/2 bg-border dark:bg-border-dark rounded"></div>
                   </div>
                 )}
                 {item.previewType === 'code-template' && (
-                  <div class="w-full rounded-8 bg-[#1e1e1e] border border-gray-800 p-8 font-mono text-[9px] text-gray-300 space-y-4">
+                  <div class="w-full rounded-8 bg-[#1e1e1e] border border-gray-800 p-8 font-mono text-[9px] text-gray-300 space-y-4 shadow-sm">
                     <div class="flex items-center gap-4 pb-4 border-b border-gray-700">
                       <span class="inline-block w-6 h-6 rounded-full bg-red-500"></span>
                       <span class="inline-block w-6 h-6 rounded-full bg-yellow-500"></span>
                       <span class="inline-block w-6 h-6 rounded-full bg-green-500"></span>
-                      <span class="text-[8px] text-gray-500 ml-4">server.ts</span>
+                      <span class="text-[8px] text-gray-500 ml-4">mcp-server.ts</span>
                     </div>
                     <p><span class="text-blue-400">import</span> &#123; Server &#125; <span class="text-blue-400">from</span> <span class="text-emerald-400">"@mcp/sdk"</span>;</p>
                   </div>
                 )}
                 {item.previewType === 'md-checklist' && (
-                  <div class="w-full rounded-8 bg-white dark:bg-[#1c1e28] border border-border dark:border-gray-700 p-8 space-y-4">
+                  <div class="w-full rounded-8 bg-white dark:bg-[#1c1e28] border border-border dark:border-gray-700 p-8 space-y-4 shadow-sm">
                     <p class="font-mono text-[9px] font-bold text-ink dark:text-ink-dark uppercase">LLM GUARDRAIL AUDIT</p>
                     <p class="text-[8px] font-mono text-emerald-600 dark:text-emerald-400">☑ 1. Role Boundary Defined</p>
                     <p class="text-[8px] font-mono text-emerald-600 dark:text-emerald-400">☑ 2. Output Schema Enforced</p>
                   </div>
                 )}
-                {item.previewType === 'png-diagram' && (
-                  <div class="w-full rounded-8 bg-[#12131a] border border-gray-800 p-8 flex items-center justify-around font-mono text-[8px] text-gray-300 gap-4">
-                    <div class="px-4 py-2 rounded bg-gray-800 border border-gray-700">USER</div>
-                    <span class="text-accent-dark">→</span>
-                    <div class="px-4 py-2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">ROUTER</div>
-                    <span class="text-accent-dark">→</span>
-                    <div class="px-4 py-2 rounded bg-gray-800 border border-gray-700">STORE</div>
-                  </div>
-                )}
                 {item.previewType === 'pdf-guide' && (
-                  <div class="w-full rounded-8 bg-white dark:bg-[#181a24] border border-border dark:border-gray-700 p-8 space-y-4">
+                  <div class="w-full rounded-8 bg-white dark:bg-[#181a24] border border-border dark:border-gray-700 p-8 space-y-4 shadow-sm">
                     <p class="font-mono text-[9px] font-bold text-ink dark:text-ink-dark uppercase">DEEPSEEK-R1 vLLM BLUEPRINT</p>
                     <div class="h-2 w-full bg-border dark:bg-border-dark rounded"></div>
                     <div class="h-2 w-2/3 bg-border dark:bg-border-dark rounded"></div>
                   </div>
                 )}
-                {item.previewType === 'json-schema' && (
-                  <div class="w-full rounded-8 bg-[#141620] border border-gray-800 p-8 font-mono text-[9px] text-amber-300 space-y-2">
-                    <p class="text-gray-500">&#123;</p>
-                    <p class="pl-8"><span class="text-blue-400">"name"</span>: <span class="text-emerald-400">"prompt_template"</span>,</p>
-                    <p class="pl-8"><span class="text-blue-400">"type"</span>: <span class="text-emerald-400">"object"</span></p>
-                    <p class="text-gray-500">&#125;</p>
+                {item.previewType === 'mp4-video' && item.videoUrl && (
+                  <div class="w-full h-full rounded-8 overflow-hidden shadow-sm relative border border-border dark:border-gray-800">
+                    <video src={item.videoUrl} autoplay loop muted playsinline class="w-full h-full object-cover scale-[1.02]"></video>
                   </div>
                 )}
               </div>
@@ -238,17 +219,98 @@ const filterTabs = [
               <p class="text-caption text-ink2 dark:text-ink2-dark leading-relaxed line-clamp-3">{item.description}</p>
             </div>
 
-            <!-- FOOTER -->
-            <div class="pt-16 border-t border-border dark:border-border-dark flex items-center justify-between mt-16">
-              <span class="font-mono text-xs text-muted dark:text-muted-dark">{item.fileSize}{item.pageCount ? ` · ${item.pageCount}` : ''}</span>
-              <a href={item.fileUrl} download={item.fileName} class="inline-flex items-center gap-6 font-sans text-caption font-bold text-accent dark:text-accent-dark hover:underline">
-                <span>Download</span><span class="font-bold">→</span>
-              </a>
+            <!-- FOOTER WITH PREVIEW & DOWNLOAD BUTTONS -->
+            <div class="pt-16 border-t border-border dark:border-border-dark flex items-center justify-between gap-8 mt-16">
+              <span class="font-mono text-xs text-muted dark:text-muted-dark truncate min-w-0">{item.fileSize}{item.pageCount ? ` · ${item.pageCount}` : ''}</span>
+              
+              <div class="flex items-center gap-8 shrink-0">
+                <!-- PREVIEW BUTTON -->
+                <button
+                  type="button"
+                  class="btn-preview-res inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-12 py-6 font-sans text-xs font-semibold text-ink hover:border-accent dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                  data-title={item.title}
+                  data-preview-url={item.previewUrl}
+                  data-pdf-url={item.fileUrl}
+                  data-pdf-filename={item.fileName}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <span class="whitespace-nowrap">Preview</span>
+                </button>
+
+                <!-- DOWNLOAD PDF BUTTON -->
+                <a
+                  href={item.fileUrl}
+                  download={item.fileName}
+                  class="inline-flex items-center gap-6 rounded-8 bg-accent px-12 py-6 font-sans text-xs font-bold text-white hover:opacity-90 transition-opacity cursor-pointer shadow-subtle whitespace-nowrap shrink-0"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span class="whitespace-nowrap">Download PDF</span>
+                </a>
+              </div>
+
             </div>
 
           </div>
         );
       })}
+    </div>
+
+    <!-- PREVIEW MODAL OVERLAY -->
+    <div id="res-preview-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-16 sm:p-24 bg-black/60 backdrop-blur-sm transition-opacity">
+      <div class="relative w-full max-w-4xl max-h-[85vh] flex flex-col rounded-20 border border-border bg-surface dark:bg-surface-dark dark:border-border-dark shadow-2xl overflow-hidden">
+        
+        <!-- MODAL HEADER -->
+        <div class="flex items-center justify-between gap-16 border-b border-border dark:border-border-dark px-24 py-16 bg-surface2 dark:bg-surface2-dark shrink-0">
+          <div class="min-w-0 flex-1 pr-12">
+            <span class="font-mono text-[10px] font-bold text-accent dark:text-accent-dark uppercase tracking-wider block truncate mb-2">DOCUMENT PREVIEW</span>
+            <h3 id="modal-res-title" class="font-display text-h4 font-bold text-ink dark:text-ink-dark truncate leading-snug">Resource Preview</h3>
+          </div>
+          
+          <div class="flex items-center space-x-12 shrink-0">
+            <!-- COPY FULL DOCUMENT PROMPT BUTTON -->
+            <button
+              type="button"
+              id="modal-copy-full-btn"
+              class="inline-flex items-center justify-center gap-6 rounded-pill border border-border bg-surface dark:bg-surface-dark dark:border-border-dark px-16 py-8 font-sans text-xs font-semibold text-ink dark:text-ink-dark hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all cursor-pointer whitespace-nowrap shadow-subtle shrink-0"
+            >
+              <svg id="modal-copy-full-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <svg id="modal-copy-full-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden text-emerald-500 shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+              <span id="modal-copy-full-label" class="whitespace-nowrap">Copy Prompt</span>
+            </button>
+
+            <!-- DOWNLOAD PDF BUTTON -->
+            <a
+              id="modal-res-download"
+              href="#"
+              download
+              class="inline-flex items-center justify-center gap-6 rounded-pill bg-accent px-16 py-8 font-sans text-xs font-bold text-white hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap shadow-subtle shrink-0"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span class="whitespace-nowrap">Download PDF</span>
+            </a>
+
+            <!-- CLOSE BUTTON -->
+            <button
+              type="button"
+              id="modal-res-close"
+              class="inline-flex items-center justify-center w-32 h-32 rounded-full border border-border bg-surface dark:bg-surface-dark dark:border-border-dark text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark hover:border-ink/20 transition-all cursor-pointer shrink-0 shadow-subtle ml-8"
+              aria-label="Close preview"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- MODAL BODY -->
+        <div class="flex-1 overflow-y-auto p-24 sm:p-32 space-y-16 text-body text-ink dark:text-ink-dark custom-scrollbar leading-relaxed font-sans" id="modal-res-body">
+          <div class="animate-pulse space-y-12">
+            <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            <div class="h-32 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- NO RESULTS -->
@@ -261,19 +323,19 @@ const filterTabs = [
     <div class="rounded-16 border border-border bg-surface p-24 sm:p-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-24 shadow-subtle dark:border-border-dark dark:bg-surface-dark">
       <div class="flex items-start gap-12">
         <div class="h-32 w-32 rounded-8 bg-accent/10 text-accent dark:text-accent-dark flex items-center justify-center text-body font-bold shrink-0">⚡</div>
-        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Instant Access</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Download immediately from your browser.</p></div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Instant PDF Access</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Download ready-to-print PDFs instantly.</p></div>
       </div>
       <div class="flex items-start gap-12">
-        <div class="h-32 w-32 rounded-8 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-body font-bold shrink-0">🔒</div>
-        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Private &amp; Secure</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Files never leave your device.</p></div>
+        <div class="h-32 w-32 rounded-8 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-body font-bold shrink-0">📋</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">1-Click Prompt Copy</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Copy code blocks and full prompts easily.</p></div>
       </div>
       <div class="flex items-start gap-12">
-        <div class="h-32 w-32 rounded-8 bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-body font-bold shrink-0">✓</div>
-        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">No Limits</p><p class="text-xs text-muted dark:text-muted-dark mt-2">No rate limits, no hidden restrictions.</p></div>
+        <div class="h-32 w-32 rounded-8 bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-body font-bold shrink-0">👁️</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Markdown Preview</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Inspect document text before downloading.</p></div>
       </div>
       <div class="flex items-start gap-12">
         <div class="h-32 w-32 rounded-8 bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center text-body font-bold shrink-0">♥</div>
-        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Always Free</p><p class="text-xs text-muted dark:text-muted-dark mt-2">All resources are 100% free, forever.</p></div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Always Free</p><p class="text-xs text-muted dark:text-muted-dark mt-2">All PDFs are 100% free forever.</p></div>
       </div>
     </div>
 
@@ -291,9 +353,23 @@ const filterTabs = [
       const noResults = document.getElementById('res-no-results');
       const totalBadge = document.getElementById('res-total-badge');
 
+      // Modal elements
+      const previewModal = document.getElementById('res-preview-modal');
+      const modalTitle = document.getElementById('modal-res-title');
+      const modalBody = document.getElementById('modal-res-body');
+      const modalDownloadBtn = document.getElementById('modal-res-download');
+      const modalCloseBtn = document.getElementById('modal-res-close');
+      const copyFullBtn = document.getElementById('modal-copy-full-btn');
+      const copyFullIcon = document.getElementById('modal-copy-full-icon');
+      const copyFullCheck = document.getElementById('modal-copy-full-check');
+      const copyFullLabel = document.getElementById('modal-copy-full-label');
+
+      const previewBtns = document.querySelectorAll('.btn-preview-res');
+
       if (!cards || cards.length === 0) return;
 
       let activeCategory = 'ALL';
+      let currentRawMdContent = '';
 
       tabItems.forEach(function(tab) {
         tab.addEventListener('click', function() {
@@ -352,6 +428,171 @@ const filterTabs = [
           if (visibleCount === 0) noResults.classList.remove('hidden');
           else noResults.classList.add('hidden');
         }
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      // Markdown Formatter with Copy Code Header Cards
+      function formatMarkdownToHtml(md) {
+        let html = md;
+
+        // Code blocks with top action header bar and Copy button
+        html = html.replace(/```([a-z0-9_-]*)\n([\s\S]*?)```/g, function(match, lang, code) {
+          const displayLang = (lang || 'PROMPT / CODE').toUpperCase();
+          const cleanCode = escapeHtml(code.trim());
+          return '<div class="res-code-wrapper relative group my-16 rounded-12 border border-border dark:border-gray-800 bg-[#161822] overflow-hidden shadow-medium">' +
+            '<div class="flex items-center justify-between px-16 py-8 bg-[#1e202e] border-b border-border dark:border-gray-800">' +
+              '<span class="font-mono text-[10px] font-bold text-gray-400 uppercase tracking-wider">' + displayLang + '</span>' +
+              '<button type="button" class="btn-copy-code inline-flex items-center gap-6 rounded-6 bg-surface2 dark:bg-surface2-dark border border-border dark:border-gray-700 px-10 py-4 font-mono text-[11px] font-semibold text-ink dark:text-ink-dark hover:border-emerald-500 hover:text-emerald-500 transition-all cursor-pointer">' +
+                '<svg class="icon-copy w-3 h-3" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+                '<svg class="icon-check w-3 h-3 hidden text-emerald-500" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>' +
+                '<span class="lbl-copy">Copy Code</span>' +
+              '</button>' +
+            '</div>' +
+            '<pre class="p-16 font-mono text-xs text-emerald-400 overflow-x-auto leading-relaxed whitespace-pre-wrap"><code>' + cleanCode + '</code></pre>' +
+          '</div>';
+        });
+
+        // Headings & Inline Formatting
+        html = html
+          .replace(/^### (.*$)/gim, '<h3 class="text-h4 font-bold text-ink dark:text-ink-dark mt-20 mb-8">$1</h3>')
+          .replace(/^## (.*$)/gim, '<h2 class="text-h3 font-bold text-ink dark:text-ink-dark mt-24 mb-10 pb-4 border-b border-border dark:border-border-dark">$1</h2>')
+          .replace(/^# (.*$)/gim, '<h1 class="text-h2 font-extrabold text-ink dark:text-ink-dark mb-14">$1</h1>')
+          .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-ink dark:text-ink-dark">$1</strong>')
+          .replace(/`([^`]+)`/g, '<code class="rounded bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark px-6 py-2 font-mono text-caption text-accent dark:text-accent-dark">$1</code>')
+          .replace(/^\* (.*$)/gim, '<li class="ml-16 list-disc text-caption text-ink2 dark:text-ink2-dark">$1</li>')
+          .replace(/^- (.*$)/gim, '<li class="ml-16 list-disc text-caption text-ink2 dark:text-ink2-dark">$1</li>')
+          .replace(/\n\n/g, '<p class="my-8 text-body leading-relaxed text-ink2 dark:text-ink2-dark"></p>');
+
+        return html;
+      }
+
+      // Copy Text Utility with Fallback
+      function copyToClipboard(text, onSuccess) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+        } else {
+          fallback();
+        }
+
+        function fallback() {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-9999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            document.execCommand('copy');
+            onSuccess();
+          } catch (err) {
+            console.error('Fallback copy failed', err);
+          }
+          document.body.removeChild(textArea);
+        }
+      }
+
+      // Event Delegation for Code Block Copy Buttons
+      if (modalBody) {
+        modalBody.addEventListener('click', function(e) {
+          const btn = e.target.closest('.btn-copy-code');
+          if (!btn) return;
+
+          const wrapper = btn.closest('.res-code-wrapper');
+          if (!wrapper) return;
+
+          const codeEl = wrapper.querySelector('code');
+          if (!codeEl) return;
+
+          const textToCopy = codeEl.innerText || codeEl.textContent || '';
+          const iconCopy = btn.querySelector('.icon-copy');
+          const iconCheck = btn.querySelector('.icon-check');
+          const label = btn.querySelector('.lbl-copy');
+
+          copyToClipboard(textToCopy, function() {
+            btn.classList.add('border-emerald-500', 'text-emerald-500');
+            if (iconCopy) iconCopy.classList.add('hidden');
+            if (iconCheck) iconCheck.classList.remove('hidden');
+            if (label) label.textContent = 'Copied!';
+
+            setTimeout(function() {
+              btn.classList.remove('border-emerald-500', 'text-emerald-500');
+              if (iconCopy) iconCopy.classList.remove('hidden');
+              if (iconCheck) iconCheck.classList.add('hidden');
+              if (label) label.textContent = 'Copy Code';
+            }, 2000);
+          });
+        });
+      }
+
+      // Header Copy Full Prompt Button
+      if (copyFullBtn) {
+        copyFullBtn.addEventListener('click', function() {
+          if (!currentRawMdContent) return;
+          copyToClipboard(currentRawMdContent, function() {
+            copyFullBtn.classList.add('border-emerald-500', 'text-emerald-500');
+            if (copyFullIcon) copyFullIcon.classList.add('hidden');
+            if (copyFullCheck) copyFullCheck.classList.remove('hidden');
+            if (copyFullLabel) copyFullLabel.textContent = 'Copied!';
+
+            setTimeout(function() {
+              copyFullBtn.classList.remove('border-emerald-500', 'text-emerald-500');
+              if (copyFullIcon) copyFullIcon.classList.remove('hidden');
+              if (copyFullCheck) copyFullCheck.classList.add('hidden');
+              if (copyFullLabel) copyFullLabel.textContent = 'Copy Full Prompt';
+            }, 2000);
+          });
+        });
+      }
+
+      // Open Modal & Fetch Markdown
+      previewBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var title = btn.getAttribute('data-title') || 'Document Preview';
+          var previewUrl = btn.getAttribute('data-preview-url');
+          var pdfUrl = btn.getAttribute('data-pdf-url');
+          var pdfFileName = btn.getAttribute('data-pdf-filename') || 'resource.pdf';
+
+          currentRawMdContent = '';
+
+          if (modalTitle) modalTitle.textContent = title;
+          if (modalDownloadBtn) {
+            modalDownloadBtn.setAttribute('href', pdfUrl);
+            modalDownloadBtn.setAttribute('download', pdfFileName);
+          }
+
+          if (modalBody) {
+            modalBody.innerHTML = '<div class="p-24 text-center font-mono text-xs text-muted">Loading document preview &amp; prompts...</div>';
+          }
+
+          if (previewModal) previewModal.classList.remove('hidden');
+
+          if (previewUrl) {
+            fetch(previewUrl)
+              .then(function(res) { return res.text(); })
+              .then(function(mdText) {
+                currentRawMdContent = mdText;
+                if (modalBody) modalBody.innerHTML = formatMarkdownToHtml(mdText);
+              })
+              .catch(function() {
+                if (modalBody) modalBody.innerHTML = '<p class="text-red-500 font-mono text-xs">Failed to load preview.</p>';
+              });
+          }
+        });
+      });
+
+      function closeModal() {
+        if (previewModal) previewModal.classList.add('hidden');
+      }
+
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+      if (previewModal) {
+        previewModal.addEventListener('click', function(e) {
+          if (e.target === previewModal) closeModal();
+        });
       }
     }
 

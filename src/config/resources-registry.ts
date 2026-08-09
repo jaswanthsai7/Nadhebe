@@ -8,107 +8,57 @@ export interface DownloadableResource {
   category: 'Cheat Sheets' | 'Templates' | 'Architecture Diagrams' | 'Guides & PDFs' | 'Code Bundles' | 'Checklists' | 'Diagrams' | 'Documents';
   fileUrl: string;
   fileName: string;
-  fileType: 'PDF' | 'ZIP' | 'JSON' | 'MD' | 'PNG';
+  previewUrl: string;
+  fileType: 'PDF';
   fileSize: string;
   pageCount?: string;
   badge?: 'Popular' | 'New' | 'Essential' | 'Updated';
   tags: string[];
-  previewType: 'pdf-cheatsheet' | 'code-template' | 'md-checklist' | 'png-diagram' | 'pdf-guide' | 'json-schema';
+  previewType: 'pdf-cheatsheet' | 'code-template' | 'md-checklist' | 'png-diagram' | 'pdf-guide' | 'json-schema' | 'mp4-video';
+  videoUrl?: string;
 }
 
 export const RESOURCE_CATEGORIES = [
+  'Guides & PDFs',
   'Cheat Sheets',
   'Templates',
   'Architecture Diagrams',
-  'Guides & PDFs',
   'Code Bundles',
 ] as const;
 
 export const UNIFIED_RESOURCES_REGISTRY: DownloadableResource[] = [
   {
     id: 'res-1',
-    slug: 'claude-code-cli-cheatsheet',
-    title: 'Claude Code CLI Command & Shortcut Cheat Sheet',
-    description: 'Complete one-page reference guide covering all essential Claude Code CLI commands, keyboard shortcuts, permission flags, and usage examples.',
-    category: 'Cheat Sheets',
-    fileUrl: '/resources/claude-code-cli-cheatsheet.pdf',
-    fileName: 'claude-code-cli-cheatsheet.pdf',
+    slug: 'google-flow-ai-ads-script-guide',
+    title: 'Google Flow AI Video Ads Master Prompt & 3-Scene Continuity Guide',
+    description: 'Complete prompt engineering framework and master continuity template for generating 30-second AI influencer video ads across 10-second clips in Google Flow.',
+    category: 'Guides & PDFs',
+    fileUrl: '/resources/google-flow-ai-ads-script-guide.pdf',
+    fileName: 'google-flow-ai-ads-script-guide.pdf',
+    previewUrl: '/resources/google-flow-ai-ads-script-guide.md',
     fileType: 'PDF',
-    fileSize: '1.2 MB',
-    pageCount: '24 Pages',
+    fileSize: '48 KB',
+    pageCount: '4 Pages',
     badge: 'Popular',
-    tags: ['claude-code', 'cli', 'cheatsheet'],
-    previewType: 'pdf-cheatsheet',
+    tags: ['google-flow', 'ai-video', 'chatgpt', 'prompts', 'video-ads'],
+    previewType: 'mp4-video',
+    videoUrl: '/resources/Untitled_Scene_08-09_08_50_31_202608092311_2.mp4',
   },
   {
     id: 'res-2',
-    slug: 'mcp-server-typescript-template',
-    title: 'Production Model Context Protocol (MCP) Starter Template',
-    description: 'Ready-to-use TypeScript repository template with stdio and SSE transport mechanisms, tooling, and examples.',
-    category: 'Templates',
-    fileUrl: '/resources/mcp-server-typescript-template.zip',
-    fileName: 'mcp-server-typescript-template.zip',
-    fileType: 'ZIP',
-    fileSize: '2.4 MB',
-    badge: 'Essential',
-    tags: ['mcp', 'typescript', 'template'],
-    previewType: 'code-template',
-  },
-  {
-    id: 'res-3',
-    slug: 'llm-system-prompt-security-checklist',
-    title: 'LLM System Risk & Guardrail Audit Checklist',
-    description: 'Comprehensive 25-point security & formatting rubric for evaluating LLM system prompts against best practices.',
+    slug: 'google-flow-omni-influencer-prompts',
+    title: 'Google Flow Omni: AI Influencer Presenter Prompt Pack',
+    description: 'Master prompts and video preview for generating continuous long-form YouTube presenter videos using ChatGPT and Google Flow Omni.',
     category: 'Guides & PDFs',
-    fileUrl: '/resources/llm-system-prompt-security-checklist.md',
-    fileName: 'llm-system-prompt-security-checklist.md',
-    fileType: 'MD',
-    fileSize: '34 KB',
-    badge: 'New',
-    tags: ['prompts', 'security', 'guardrails'],
-    previewType: 'md-checklist',
-  },
-  {
-    id: 'res-4',
-    slug: 'agentic-rag-workflow-architecture-diagram',
-    title: 'Multi-Agent RAG & Router Architecture Reference Diagram',
-    description: 'High-resolution vector architecture map illustrating stateful multi-agent workflows, vector retrieval, and data flow.',
-    category: 'Architecture Diagrams',
-    fileUrl: '/resources/agentic-rag-workflow-architecture-diagram.png',
-    fileName: 'agentic-rag-workflow-architecture-diagram.png',
-    fileType: 'PNG',
-    fileSize: '3.8 MB',
-    badge: 'Popular',
-    tags: ['rag', 'architecture', 'diagram'],
-    previewType: 'png-diagram',
-  },
-  {
-    id: 'res-5',
-    slug: 'deepseek-vllm-deployment-blueprint',
-    title: 'DeepSeek-R1 Local & Cloud vLLM Deployment Guide PDF',
-    description: 'Step-by-step production blueprint covering GPU memory estimation, KV cache quantization, and vLLM deployment.',
-    category: 'Guides & PDFs',
-    fileUrl: '/resources/deepseek-vllm-deployment-blueprint.pdf',
-    fileName: 'deepseek-vllm-deployment-blueprint.pdf',
+    fileUrl: '/resources/google-flow-omni-influencer-prompts.pdf',
+    fileName: 'google-flow-omni-influencer-prompts.pdf',
+    previewUrl: '/resources/google-flow-omni-influencer-prompts.md',
     fileType: 'PDF',
-    fileSize: '4.1 MB',
-    pageCount: '36 Pages',
-    badge: 'Updated',
-    tags: ['deepseek', 'vllm', 'gpu'],
-    previewType: 'pdf-guide',
-  },
-  {
-    id: 'res-6',
-    slug: 'structured-json-prompt-schema-bundle',
-    title: 'Structured Output JSON Schema & Pydantic Templates',
-    description: 'Collection of pre-validated JSON Schemas and Pydantic data models for guaranteed structured outputs.',
-    category: 'Templates',
-    fileUrl: '/resources/structured-json-prompt-schema-bundle.json',
-    fileName: 'structured-json-prompt-schema-bundle.json',
-    fileType: 'JSON',
-    fileSize: '112 KB',
-    badge: 'Essential',
-    tags: ['json-schema', 'pydantic', 'openai'],
-    previewType: 'json-schema',
+    fileSize: '32 KB',
+    pageCount: '3 Pages',
+    badge: 'New',
+    tags: ['google-flow', 'omni', 'ai-influencer', 'youtube'],
+    previewType: 'mp4-video',
+    videoUrl: '/resources/google-flow-influencer-preview.mp4',
   },
 ];
