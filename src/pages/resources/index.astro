@@ -1,0 +1,365 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { UNIFIED_RESOURCES_REGISTRY } from '@/config/resources-registry';
+import { buildSeo } from '@/utils/seo';
+import { SITE } from '@/config';
+
+const resources = UNIFIED_RESOURCES_REGISTRY;
+const totalResources = resources.length;
+
+const seo = buildSeo({
+  title: 'Technical Resources & Documents - Nadhebe',
+  description: 'Hand-picked documents, cheat sheets, blueprints, templates and reference material for developers and builders. Instant download.',
+  slug: '/resources/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  keywords: ['technical cheat sheets', 'architecture diagrams', 'pdf downloads', 'mcp starter templates', 'llm prompt checklist', 'developer resources'],
+});
+
+const resourcesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'DataCatalog',
+  name: 'Technical Resources & Documents',
+  description: 'Directory of technical cheat sheets, code templates, architecture diagrams, and developer PDF guides.',
+  url: `${SITE.url}/resources/`,
+};
+
+const filterTabs = [
+  { id: 'ALL', label: 'ALL' },
+  { id: 'Cheat Sheets', label: 'CHEAT SHEETS' },
+  { id: 'Architecture Diagrams', label: 'ARCHITECTURE' },
+  { id: 'Templates', label: 'TEMPLATES' },
+  { id: 'Guides & PDFs', label: 'GUIDES' },
+  { id: 'Code Bundles', label: 'CODE & SNIPPETS' },
+];
+---
+
+<BaseLayout seo={seo} jsonLd={[resourcesSchema]}>
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+
+    <!-- ─── HERO ─── -->
+    <header class="relative overflow-hidden rounded-20 border border-border bg-surface p-20 sm:p-32 shadow-medium mb-20 dark:border-border-dark dark:bg-surface-dark" data-reveal>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-stretch">
+
+        <!-- LEFT -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-16 z-10">
+          <div>
+            <span class="inline-block font-mono text-xs font-bold uppercase tracking-widest text-accent dark:text-accent-dark mb-6">Resource Library</span>
+            <h1 class="font-display text-hero font-extrabold tracking-tight text-ink dark:text-ink-dark leading-[1.1]">
+              Technical Resources<br />&amp; Documents
+            </h1>
+            <p class="mt-12 text-body text-ink2 dark:text-ink2-dark max-w-xl leading-relaxed">
+              Hand-picked documents, cheat sheets, blueprints, templates and reference material for developers and builders. Instant download. No sign-up. No barriers.
+            </p>
+          </div>
+
+          <!-- METRICS -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 pt-16 border-t border-border dark:border-border-dark">
+            <div class="flex items-center gap-6">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">6+ Categories</p></div>
+            </div>
+            <div class="flex items-center gap-6">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">PDF, ZIP, JSON</p></div>
+            </div>
+            <div class="flex items-center gap-6">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">Direct Download</p></div>
+            </div>
+            <div class="flex items-center gap-6">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-ink dark:text-ink-dark shrink-0"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <div><p class="text-xs font-bold text-ink dark:text-ink-dark whitespace-nowrap">100% Free</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT – STACKED DOCUMENT DECK -->
+        <div class="lg:col-span-5 hidden lg:flex flex-col justify-center items-center relative rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark p-20 overflow-hidden">
+          <div class="relative w-full max-w-[260px] aspect-[4/3] flex items-center justify-center">
+            <div class="absolute inset-0 rounded-8 bg-[#f3eedf] dark:bg-[#1a1c26] border border-[#d6cfbe] dark:border-gray-700 p-12 shadow-medium transform -rotate-6 -translate-x-[8px] -translate-y-[8px]">
+              <p class="font-mono text-[9px] font-bold tracking-wider text-muted uppercase">SYSTEM DESIGN PATTERNS</p>
+              <p class="font-mono text-[8px] text-muted">QUICK REFERENCE</p>
+              <div class="mt-8 space-y-4"><div class="h-1 w-3/4 bg-muted/30 rounded"></div><div class="h-1 w-1/2 bg-muted/30 rounded"></div></div>
+            </div>
+            <div class="absolute inset-0 rounded-8 bg-accent text-white p-12 shadow-medium transform rotate-6 translate-x-[16px] translate-y-[8px] flex flex-col justify-between">
+              <p class="font-mono text-[9px] font-bold tracking-wider uppercase">ARCHITECTURE DIAGRAM</p>
+              <div class="h-12 w-12 border-2 border-white rounded-full"></div>
+            </div>
+            <div class="absolute w-[78%] rounded-8 bg-[#18181b] text-white p-12 shadow-large z-20 space-y-4 hover:scale-105 transition-transform">
+              <div class="flex items-center justify-between border-b border-gray-700 pb-4">
+                <span class="font-mono text-[10px] font-bold tracking-wider">API CHEAT SHEET</span>
+                <span class="font-mono text-[9px] text-accent-dark">v1.2</span>
+              </div>
+              <div class="space-y-2 font-mono text-[8px] text-gray-400"><p>POST /api/v1/generate</p><p>Authorization: Bearer ***</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ─── SEARCH & FILTER BAR ─── -->
+    <div class="sticky top-[56px] z-30 mb-20 flex flex-col sm:flex-row gap-12 items-center justify-between rounded-16 border border-border bg-surface p-12 shadow-medium dark:border-border-dark dark:bg-surface-dark" data-reveal>
+
+      <div class="relative w-full sm:w-auto shrink-0">
+        <select id="res-category-select" aria-label="Filter by category" class="w-full sm:w-auto bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark border border-border dark:border-border-dark rounded-8 px-12 py-8 font-sans text-caption font-semibold focus:border-accent focus:outline-none cursor-pointer">
+          <option value="ALL">⚙️ All Resources</option>
+          <option value="Cheat Sheets">📄 Cheat Sheets</option>
+          <option value="Templates">📁 Templates</option>
+          <option value="Architecture Diagrams">⚙️ Architecture</option>
+          <option value="Guides & PDFs">📖 Guides &amp; PDFs</option>
+          <option value="Code Bundles">💻 Code &amp; Snippets</option>
+        </select>
+      </div>
+
+      <div class="w-full flex-1 relative">
+        <div class="relative flex items-center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-12 text-ink2 dark:text-ink2-dark pointer-events-none"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="res-search-input" aria-label="Search resources" placeholder="Search resources by title, format (PDF, ZIP, JSON), or topic..." class="w-full rounded-8 border border-border bg-surface2 pl-32 pr-12 py-8 text-caption font-sans text-ink placeholder:text-ink2 dark:placeholder:text-ink2-dark focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark transition-colors" />
+        </div>
+      </div>
+
+      <div class="relative w-full sm:w-auto shrink-0">
+        <select id="res-sort-select" aria-label="Sort resources" class="w-full sm:w-auto bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark border border-border dark:border-border-dark rounded-8 px-12 py-8 font-sans text-caption font-semibold focus:border-accent focus:outline-none cursor-pointer">
+          <option value="latest">🎛️ Latest First</option>
+          <option value="name">🔤 Alphabetical</option>
+          <option value="popular">🔥 Most Popular</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- ─── TAB STRIP ─── -->
+    <div class="mb-24 flex items-center justify-between gap-20 border border-border dark:border-border-dark rounded-12 bg-surface dark:bg-surface-dark px-16 py-8 overflow-x-auto custom-scrollbar shadow-subtle" id="res-tab-strip">
+      <div class="flex items-center gap-20 shrink-0">
+        {filterTabs.map((tab) => (
+          <button
+            type="button"
+            data-tab-id={tab.id}
+            class={`tab-item pb-8 font-mono text-caption font-bold tracking-wider cursor-pointer transition-colors whitespace-nowrap ${tab.id === 'ALL' ? 'text-accent dark:text-accent-dark border-b-2 border-accent' : 'text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark'}`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <span class="font-mono text-caption text-ink2 dark:text-ink2-dark font-medium shrink-0 hidden sm:inline" id="res-total-badge">{totalResources} Resources</span>
+    </div>
+
+    <!-- ─── CARDS GRID ─── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 mb-48" id="resources-grid">
+      {resources.map((item) => {
+        const fmtCls =
+          item.fileType === 'PDF' ? 'bg-red-600/10 text-red-600 dark:text-red-400 border-red-600/20' :
+          item.fileType === 'ZIP' ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border-blue-600/20' :
+          item.fileType === 'JSON' ? 'bg-amber-600/10 text-amber-600 dark:text-amber-400 border-amber-600/20' :
+          item.fileType === 'PNG' ? 'bg-purple-600/10 text-purple-600 dark:text-purple-400 border-purple-600/20' :
+          'bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border-emerald-600/20';
+
+        const badgeCls =
+          item.badge === 'Popular' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300' :
+          item.badge === 'Essential' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-300' :
+          item.badge === 'New' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300' :
+          'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300';
+
+        return (
+          <div
+            data-resource-card
+            data-category={item.category}
+            data-search-text={`${item.title} ${item.description} ${item.category} ${item.fileType} ${item.tags.join(' ')}`.toLowerCase()}
+            class="res-card group relative flex flex-col rounded-16 border border-border bg-surface p-20 shadow-subtle hover:shadow-large hover:border-accent/50 transition-all duration-200 dark:border-border-dark dark:bg-surface-dark"
+          >
+            <!-- PREVIEW -->
+            <div class="relative w-full aspect-[16/10] rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark overflow-hidden mb-16 p-12 flex flex-col justify-between group-hover:border-accent/40 transition-colors">
+
+              <div class="flex items-center justify-between gap-8 z-10">
+                <span class={`rounded-6 border px-8 py-2 font-mono text-[11px] font-bold uppercase tracking-wider ${fmtCls}`}>{item.fileType}</span>
+                {item.badge && (<span class={`rounded-pill px-8 py-2 font-mono text-[10px] font-bold uppercase tracking-wider ${badgeCls}`}>{item.badge}</span>)}
+              </div>
+
+              <div class="flex-1 flex items-center justify-center px-4 py-8">
+                {item.previewType === 'pdf-cheatsheet' && (
+                  <div class="w-full rounded-8 bg-white dark:bg-[#1a1c24] border border-border dark:border-gray-700 p-8 space-y-4">
+                    <p class="font-mono text-[10px] font-bold text-ink dark:text-ink-dark tracking-wider uppercase">CLAUDE CODE CLI REFERENCE</p>
+                    <div class="h-2 w-3/4 bg-accent/30 rounded"></div>
+                    <div class="h-2 w-1/2 bg-border dark:bg-border-dark rounded"></div>
+                  </div>
+                )}
+                {item.previewType === 'code-template' && (
+                  <div class="w-full rounded-8 bg-[#1e1e1e] border border-gray-800 p-8 font-mono text-[9px] text-gray-300 space-y-4">
+                    <div class="flex items-center gap-4 pb-4 border-b border-gray-700">
+                      <span class="inline-block w-6 h-6 rounded-full bg-red-500"></span>
+                      <span class="inline-block w-6 h-6 rounded-full bg-yellow-500"></span>
+                      <span class="inline-block w-6 h-6 rounded-full bg-green-500"></span>
+                      <span class="text-[8px] text-gray-500 ml-4">server.ts</span>
+                    </div>
+                    <p><span class="text-blue-400">import</span> &#123; Server &#125; <span class="text-blue-400">from</span> <span class="text-emerald-400">"@mcp/sdk"</span>;</p>
+                  </div>
+                )}
+                {item.previewType === 'md-checklist' && (
+                  <div class="w-full rounded-8 bg-white dark:bg-[#1c1e28] border border-border dark:border-gray-700 p-8 space-y-4">
+                    <p class="font-mono text-[9px] font-bold text-ink dark:text-ink-dark uppercase">LLM GUARDRAIL AUDIT</p>
+                    <p class="text-[8px] font-mono text-emerald-600 dark:text-emerald-400">☑ 1. Role Boundary Defined</p>
+                    <p class="text-[8px] font-mono text-emerald-600 dark:text-emerald-400">☑ 2. Output Schema Enforced</p>
+                  </div>
+                )}
+                {item.previewType === 'png-diagram' && (
+                  <div class="w-full rounded-8 bg-[#12131a] border border-gray-800 p-8 flex items-center justify-around font-mono text-[8px] text-gray-300 gap-4">
+                    <div class="px-4 py-2 rounded bg-gray-800 border border-gray-700">USER</div>
+                    <span class="text-accent-dark">→</span>
+                    <div class="px-4 py-2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">ROUTER</div>
+                    <span class="text-accent-dark">→</span>
+                    <div class="px-4 py-2 rounded bg-gray-800 border border-gray-700">STORE</div>
+                  </div>
+                )}
+                {item.previewType === 'pdf-guide' && (
+                  <div class="w-full rounded-8 bg-white dark:bg-[#181a24] border border-border dark:border-gray-700 p-8 space-y-4">
+                    <p class="font-mono text-[9px] font-bold text-ink dark:text-ink-dark uppercase">DEEPSEEK-R1 vLLM BLUEPRINT</p>
+                    <div class="h-2 w-full bg-border dark:bg-border-dark rounded"></div>
+                    <div class="h-2 w-2/3 bg-border dark:bg-border-dark rounded"></div>
+                  </div>
+                )}
+                {item.previewType === 'json-schema' && (
+                  <div class="w-full rounded-8 bg-[#141620] border border-gray-800 p-8 font-mono text-[9px] text-amber-300 space-y-2">
+                    <p class="text-gray-500">&#123;</p>
+                    <p class="pl-8"><span class="text-blue-400">"name"</span>: <span class="text-emerald-400">"prompt_template"</span>,</p>
+                    <p class="pl-8"><span class="text-blue-400">"type"</span>: <span class="text-emerald-400">"object"</span></p>
+                    <p class="text-gray-500">&#125;</p>
+                  </div>
+                )}
+              </div>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="flex-1 flex flex-col gap-6">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-muted dark:text-muted-dark">{item.category}</span>
+              <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors leading-snug">{item.title}</h3>
+              <p class="text-caption text-ink2 dark:text-ink2-dark leading-relaxed line-clamp-3">{item.description}</p>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="pt-16 border-t border-border dark:border-border-dark flex items-center justify-between mt-16">
+              <span class="font-mono text-xs text-muted dark:text-muted-dark">{item.fileSize}{item.pageCount ? ` · ${item.pageCount}` : ''}</span>
+              <a href={item.fileUrl} download={item.fileName} class="inline-flex items-center gap-6 font-sans text-caption font-bold text-accent dark:text-accent-dark hover:underline">
+                <span>Download</span><span class="font-bold">→</span>
+              </a>
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- NO RESULTS -->
+    <div id="res-no-results" class="hidden rounded-16 border border-dashed border-border dark:border-border-dark p-48 text-center my-32">
+      <p class="text-h3 font-bold text-ink dark:text-ink-dark">No documents found</p>
+      <p class="text-body text-muted dark:text-muted-dark mt-8">Try a different category or search term.</p>
+    </div>
+
+    <!-- ─── TRUST STRIP ─── -->
+    <div class="rounded-16 border border-border bg-surface p-24 sm:p-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-24 shadow-subtle dark:border-border-dark dark:bg-surface-dark">
+      <div class="flex items-start gap-12">
+        <div class="h-32 w-32 rounded-8 bg-accent/10 text-accent dark:text-accent-dark flex items-center justify-center text-body font-bold shrink-0">⚡</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Instant Access</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Download immediately from your browser.</p></div>
+      </div>
+      <div class="flex items-start gap-12">
+        <div class="h-32 w-32 rounded-8 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-body font-bold shrink-0">🔒</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Private &amp; Secure</p><p class="text-xs text-muted dark:text-muted-dark mt-2">Files never leave your device.</p></div>
+      </div>
+      <div class="flex items-start gap-12">
+        <div class="h-32 w-32 rounded-8 bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-body font-bold shrink-0">✓</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">No Limits</p><p class="text-xs text-muted dark:text-muted-dark mt-2">No rate limits, no hidden restrictions.</p></div>
+      </div>
+      <div class="flex items-start gap-12">
+        <div class="h-32 w-32 rounded-8 bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center text-body font-bold shrink-0">♥</div>
+        <div><p class="text-caption font-bold text-ink dark:text-ink-dark">Always Free</p><p class="text-xs text-muted dark:text-muted-dark mt-2">All resources are 100% free, forever.</p></div>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function() {
+    function initResourcesPage() {
+      const searchInput = document.getElementById('res-search-input');
+      const sortSelect = document.getElementById('res-sort-select');
+      const categorySelect = document.getElementById('res-category-select');
+      const tabItems = document.querySelectorAll('.tab-item');
+      const cards = document.querySelectorAll('[data-resource-card]');
+      const noResults = document.getElementById('res-no-results');
+      const totalBadge = document.getElementById('res-total-badge');
+
+      if (!cards || cards.length === 0) return;
+
+      let activeCategory = 'ALL';
+
+      tabItems.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          activeCategory = tab.getAttribute('data-tab-id') || 'ALL';
+          tabItems.forEach(function(t) {
+            t.classList.remove('text-accent', 'dark:text-accent-dark', 'border-b-2', 'border-accent');
+            t.classList.add('text-ink2', 'dark:text-ink2-dark');
+          });
+          tab.classList.remove('text-ink2', 'dark:text-ink2-dark');
+          tab.classList.add('text-accent', 'dark:text-accent-dark', 'border-b-2', 'border-accent');
+          if (categorySelect) categorySelect.value = activeCategory;
+          filterCards();
+        });
+      });
+
+      if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+          activeCategory = categorySelect.value;
+          tabItems.forEach(function(t) {
+            var tabId = t.getAttribute('data-tab-id');
+            if (tabId === activeCategory) {
+              t.classList.remove('text-ink2', 'dark:text-ink2-dark');
+              t.classList.add('text-accent', 'dark:text-accent-dark', 'border-b-2', 'border-accent');
+            } else {
+              t.classList.remove('text-accent', 'dark:text-accent-dark', 'border-b-2', 'border-accent');
+              t.classList.add('text-ink2', 'dark:text-ink2-dark');
+            }
+          });
+          filterCards();
+        });
+      }
+
+      if (searchInput) searchInput.addEventListener('input', filterCards);
+      if (sortSelect) sortSelect.addEventListener('change', filterCards);
+
+      function filterCards() {
+        var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+        var visibleCount = 0;
+
+        cards.forEach(function(card) {
+          var cat = card.getAttribute('data-category') || '';
+          var text = card.getAttribute('data-search-text') || '';
+          var matchesCat = (activeCategory === 'ALL' || cat === activeCategory);
+          var matchesQ = (!query || text.includes(query));
+
+          if (matchesCat && matchesQ) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (totalBadge) totalBadge.textContent = visibleCount + ' Resources';
+        if (noResults) {
+          if (visibleCount === 0) noResults.classList.remove('hidden');
+          else noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initResourcesPage);
+    } else {
+      initResourcesPage();
+    }
+    document.addEventListener('astro:page-load', initResourcesPage);
+  })();
+</script>
