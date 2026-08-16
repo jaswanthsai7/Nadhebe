@@ -24,9 +24,10 @@ interface Props {
   relatedCategory?: string;
   relatedTools?: ToolMetadata[];
   sidebarLayout?: boolean;
+  noindex?: boolean;
 }
 
-const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools, sidebarLayout = false } = Astro.props;
+const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools, sidebarLayout = false, noindex } = Astro.props;
 
 const toolConfig = getToolBySlug(toolId);
 const isHeaderHidden = hideHeader !== undefined ? hideHeader : true;
@@ -69,6 +70,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
   title={title}
   description={description}
   canonicalUrl={currentUrl}
+  noindex={noindex}
   jsonLd={jsonLdBlocks}
 >
   <div class={sidebarLayout ? "w-full px-16 sm:px-28 py-24 sm:py-32" : "mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48"}>

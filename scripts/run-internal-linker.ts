@@ -14,7 +14,13 @@ interface ArticleData {
 // Simple recursive file walk
 function walkDir(dir: string, callback: (filePath: string) => void) {
   if (!fs.existsSync(dir) || dir.includes('pagefind')) return;
-  fs.readdirSync(dir).forEach((f) => {
+  let entries: string[] = [];
+  try {
+    entries = fs.readdirSync(dir);
+  } catch (_) {
+    return;
+  }
+  entries.forEach((f) => {
     const dirPath = path.join(dir, f);
     if (!fs.existsSync(dirPath) || dirPath.includes('pagefind')) return;
     let isDirectory = false;

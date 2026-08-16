@@ -1,19 +1,37 @@
 import fs from 'fs';
 import path from 'path';
 
-function getAllHtmlUrls(dir: string, baseDir: string): string[] {
+function isHtmlNoindexed(filePath: string): boolean {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    // Check for robots meta with noindex
+    const hasRobotsNoindex = /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(content) ||
+                             /<meta[^>]+content=["'][^"']*noindex[^"']*["'][^>]+name=["']robots["']/i.test(content);
+    return hasRobotsNoindex;
+  } catch (e) {
+    return false;
+  }
+}
+
+function getAllIndexableHtmlUrls(dir: string, baseDir: string): string[] {
   const urls: string[] = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      urls.push(...getAllHtmlUrls(fullPath, baseDir));
+      urls.push(...getAllIndexableHtmlUrls(fullPath, baseDir));
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       const relPath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
       if (relPath === '404.html' || relPath.endsWith('/404/index.html')) {
         continue;
       }
+
+      // Check if page has noindex meta directive
+      if (isHtmlNoindexed(fullPath)) {
+        continue;
+      }
+
       let url = 'https://nadhebe.com/';
       if (relPath !== 'index.html') {
         if (relPath.endsWith('/index.html')) {
@@ -28,8 +46,23 @@ function getAllHtmlUrls(dir: string, baseDir: string): string[] {
   return urls;
 }
 
+function urlToDistHtmlPath(url: string, distDir: string): string {
+  try {
+    const parsed = new URL(url);
+    let pathname = parsed.pathname;
+    if (pathname.endsWith('/')) {
+      pathname += 'index.html';
+    } else if (!pathname.endsWith('.html')) {
+      pathname += '/index.html';
+    }
+    return path.join(distDir, pathname.replace(/^\//, ''));
+  } catch (e) {
+    return '';
+  }
+}
+
 function run() {
-  console.log('Auditing and formatting sitemap XML files...');
+  console.log('Auditing and formatting sitemap XML files (filtering noindex routes)...');
   const distDir = path.join(process.cwd(), 'dist');
   const publicDir = path.join(process.cwd(), 'public');
   if (!fs.existsSync(distDir)) {
@@ -37,39 +70,42 @@ function run() {
     return;
   }
 
-  // 1. Collect all HTML URLs built in dist
-  const allSiteUrls = getAllHtmlUrls(distDir, distDir);
-  console.log(`Found ${allSiteUrls.length} total HTML pages in dist.`);
+  // 1. Collect only indexable HTML URLs built in dist
+  const indexableUrls = getAllIndexableHtmlUrls(distDir, distDir);
+  console.log(`Found ${indexableUrls.length} indexable high-value HTML pages in dist (noindex excluded).`);
 
-  // 2. Ensure all URLs are present in sitemap-0.xml
+  // 2. Build or clean sitemap-0.xml
   const sitemap0Path = path.join(distDir, 'sitemap-0.xml');
-  if (fs.existsSync(sitemap0Path)) {
-    let sitemapXml = fs.readFileSync(sitemap0Path, 'utf-8');
-    
-    const existingLocs = new Set<string>();
-    const locRegex = /<loc>(https?:\/\/[^<]+)<\/loc>/g;
-    let match;
-    while ((match = locRegex.exec(sitemapXml)) !== null) {
-      existingLocs.add(match[1].trim());
-    }
+  const nowISO = new Date().toISOString();
 
-    const missingUrls = allSiteUrls.filter(url => !existingLocs.has(url));
-    if (missingUrls.length > 0) {
-      console.log(`Injecting ${missingUrls.length} missing URLs into sitemap-0.xml...`);
-      const nowISO = new Date().toISOString();
-      const newEntries = missingUrls.map(url => `
-  <url>
+  // Create clean sitemap XML with only indexable pages
+  const urlEntries = indexableUrls.map(url => {
+    let priority = '0.7';
+    let changefreq = 'weekly';
+    if (url === 'https://nadhebe.com/') {
+      priority = '1.0';
+      changefreq = 'daily';
+    } else if (url.includes('/tutorials/') || url.includes('/guides/') || url.includes('/news/')) {
+      priority = '0.9';
+    } else if (url.includes('/tools/')) {
+      priority = '0.8';
+    }
+    return `  <url>
     <loc>${url}</loc>
     <lastmod>${nowISO}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>`).join('');
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+  }).join('\n');
 
-      sitemapXml = sitemapXml.replace('</urlset>', `${newEntries}\n</urlset>`);
-      fs.writeFileSync(sitemap0Path, sitemapXml, 'utf-8');
-      console.log(`Successfully added all ${missingUrls.length} missing URLs to sitemap-0.xml!`);
-    }
-  }
+  let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlEntries}
+</urlset>`;
+
+  fs.writeFileSync(sitemap0Path, sitemapXml, 'utf-8');
+  console.log(`Successfully generated clean sitemap-0.xml with ${indexableUrls.length} verified indexable URLs.`);
 
   // 3. Ensure public/sitemap.xsl is copied to dist/sitemap.xsl
   const publicXsl = path.join(process.cwd(), 'public', 'sitemap.xsl');
@@ -110,24 +146,35 @@ function run() {
     fs.copyFileSync(src, dest);
   });
 
-  // Inject image and video sitemaps into sitemap-index.xml
+  // Ensure index.json in public is copied to dist
+  const publicIndexJson = path.join(publicDir, 'index.json');
+  const distIndexJson = path.join(distDir, 'index.json');
+  if (fs.existsSync(publicIndexJson)) {
+    fs.copyFileSync(publicIndexJson, distIndexJson);
+  }
+
+  // 5. Ensure sitemap-index.xml references all sitemaps properly
   const sitemapIndexPath = path.join(distDir, 'sitemap-index.xml');
   if (fs.existsSync(sitemapIndexPath)) {
     let indexXml = fs.readFileSync(sitemapIndexPath, 'utf-8');
-    const extraSitemaps: string[] = [];
-    if (!indexXml.includes('sitemap-image.xml')) {
-      extraSitemaps.push('<sitemap><loc>https://nadhebe.com/sitemap-image.xml</loc></sitemap>');
-    }
-    if (!indexXml.includes('sitemap-video.xml')) {
-      extraSitemaps.push('<sitemap><loc>https://nadhebe.com/sitemap-video.xml</loc></sitemap>');
-    }
-    if (extraSitemaps.length > 0) {
-      indexXml = indexXml.replace('</sitemapindex>', extraSitemaps.join('\n') + '\n</sitemapindex>');
-      fs.writeFileSync(sitemapIndexPath, indexXml, 'utf-8');
-      const publicIndexPath = path.join(process.cwd(), 'public', 'sitemap-index.xml');
-      fs.writeFileSync(publicIndexPath, indexXml, 'utf-8');
-      console.log('Injected image and video sitemaps into sitemap-index.xml');
-    }
+    
+    const requiredSitemaps = [
+      'https://nadhebe.com/sitemap-0.xml',
+      'https://nadhebe.com/sitemap-image.xml',
+      'https://nadhebe.com/sitemap-video.xml'
+    ];
+
+    requiredSitemaps.forEach(sUrl => {
+      if (!indexXml.includes(`<loc>${sUrl}</loc>`)) {
+        console.log(`Injecting ${sUrl} into sitemap-index.xml...`);
+        const entry = `  <sitemap>\n    <loc>${sUrl}</loc>\n    <lastmod>${nowISO}</lastmod>\n  </sitemap>`;
+        indexXml = indexXml.replace('</sitemapindex>', `${entry}\n</sitemapindex>`);
+      }
+    });
+
+    fs.writeFileSync(sitemapIndexPath, indexXml, 'utf-8');
+    const publicIndexPath = path.join(publicDir, 'sitemap-index.xml');
+    fs.writeFileSync(publicIndexPath, indexXml, 'utf-8');
   }
 
   console.log('Sitemap formatting complete!');

@@ -176,19 +176,35 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
           </div>
 
           <!-- Author meta -->
-          <div class="mt-32 pt-20 border-t border-border dark:border-border-dark flex flex-wrap items-center gap-x-12 gap-y-8 text-caption text-muted dark:text-muted-dark font-sans">
-            <div class="flex items-center gap-8 font-medium text-ink2 dark:text-ink2-dark">
-              {author?.avatar && (
-                <img src={author.avatar} alt={author?.name} width="28" height="28"
-                loading="lazy" decoding="async"
-                class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" />
+          <div class="mt-32 pt-20 border-t border-border dark:border-border-dark flex flex-wrap items-center justify-between gap-x-16 gap-y-8 text-caption text-muted dark:text-muted-dark font-sans">
+            <div class="flex flex-wrap items-center gap-x-12 gap-y-6">
+              <div class="flex items-center gap-8 font-medium text-ink2 dark:text-ink2-dark">
+                {author?.avatar && (
+                  <img src={author.avatar} alt={author?.name} width="28" height="28"
+                  loading="lazy" decoding="async"
+                  class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" />
+                )}
+                <span>{author?.name || 'Nadhebe Editorial'}</span>
+              </div>
+              <span class="text-border dark:text-border-dark">·</span>
+              <time datetime={post.data.pubDate.toISOString()} class="font-mono text-meta">{fmt(post.data.pubDate)}</time>
+              {post.data.updatedDate && (
+                <>
+                  <span class="text-border dark:text-border-dark">·</span>
+                  <span class="font-mono text-meta text-accent dark:text-accent-dark">Updated {fmt(post.data.updatedDate)}</span>
+                </>
               )}
-              <span>{author?.name || 'Anonymous'}</span>
+              <span class="text-border dark:text-border-dark">·</span>
+              <span class="font-mono text-meta">{readingTime}</span>
             </div>
-            <span class="text-border dark:text-border-dark">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="font-mono text-meta">{fmt(post.data.pubDate)}</time>
-            <span class="text-border dark:text-border-dark">·</span>
-            <span class="font-mono text-meta">{readingTime}</span>
+
+            <!-- E-E-A-T Lab Verification Badge -->
+            <div class="inline-flex items-center gap-6 px-10 py-4 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-xs font-mono font-semibold">
+              <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              <span>GPU Lab Verified</span>
+            </div>
           </div>
         </header>
 

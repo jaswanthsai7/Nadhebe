@@ -34,6 +34,7 @@ const relatedCategories = allCategories.filter(cat => cat.toLowerCase() !== cate
 <BaseLayout
   title={`${categoryName} — Nadhebe`}
   description={`Browse our ${categoryName.toLowerCase()} collection: pillar guides, tutorials, and in-depth resources.`}
+  noindex={posts.length < 3}
 >
   <div class="mx-auto max-w-content px-24 py-64 sm:py-80">
 

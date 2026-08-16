@@ -36,8 +36,8 @@ export async function getStaticPaths() {
 
 const { tagName, posts } = Astro.props;
 
-// Keep noindex if the tag has 0 or 1 article (thin content archive)
-const shouldNoindex = !posts || posts.length <= 1;
+// Keep noindex if the tag has fewer than 3 articles (thin content archive)
+const shouldNoindex = !posts || posts.length < 3;
 ---
 
 <BaseLayout

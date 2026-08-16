@@ -113,13 +113,15 @@ const faq = [
     const outputText = document.getElementById('htm-output-text');
     const btnCopy = document.getElementById('btn-copy-htm2md');
 
-    const defaultHtml = `<h1>HTML to Markdown Guide</h1>
-<p>Convert <strong>rich text</strong> and <em>HTML elements</em> into clean Markdown.</p>
-<ul>
-  <li>Fast client-side conversion</li>
-  <li>Supports links like <a href="https://nadhebe.com">Nadhebe</a></li>
-</ul>
-<pre><code>function hello() { return "world"; }</code></pre>`;
+    const defaultHtml = [
+      '<h1>HTML to Markdown Guide</h1>',
+      '<p>Convert <strong>rich text</strong> and <em>HTML elements</em> into clean Markdown.</p>',
+      '<ul>',
+      '  <li>Fast client-side conversion</li>',
+      '  <li>Supports links like <a href="https://nadhebe.com">Nadhebe</a></li>',
+      '</ul>',
+      '<pre><code>function hello() { return "world"; }</code></pre>'
+    ].join('\n');
 
     function convertHTMLToMarkdown(html) {
       const parser = new DOMParser();
