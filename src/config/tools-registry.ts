@@ -32,6 +32,47 @@ export interface UnifiedTool {
 
 export const UNIFIED_TOOLS_REGISTRY: UnifiedTool[] = [
   {
+    "id": "chatgpt-ad-blocker",
+    "slug": "chatgpt-ad-blocker",
+    "title": "ChatGPT Ad Blocker",
+    "name": "ChatGPT Ad Blocker",
+    "href": "/tools/chatgpt-ad-blocker/",
+    "component": "Standalone",
+    "status": "implemented",
+    "category": "AI",
+    "categorySlug": "ai",
+    "mode": "generator",
+    "badge": "New",
+    "description": "Block ChatGPT upgrade banners, upsell promo cards, and partner app ads with a lightweight, privacy-first Manifest V3 Chrome extension.",
+    "seo": {
+      "title": "ChatGPT Ad Blocker - Remove Upsells, Promos & Partner Ads | Nadhebe",
+      "description": "Block ChatGPT Plus/Pro upgrade banners, partner app suggestions, and sponsored ads with a free, private Manifest V3 Chrome extension & custom rule generator.",
+      "keywords": [
+        "chatgpt ad blocker",
+        "chatgpt adblock",
+        "block chatgpt ads",
+        "chatgpt promo blocker",
+        "chatgpt extension",
+        "remove chatgpt upgrade banner",
+        "manifest v3 chatgpt adblock"
+      ]
+    },
+    "relatedTools": [
+      "claude-hook-template-generator",
+      "gemini-watermark-remover",
+      "mcp-server-config-generator",
+      "prompt-optimizer"
+    ],
+    "tags": [
+      "chatgpt",
+      "adblocker",
+      "extension",
+      "privacy",
+      "chrome"
+    ],
+    "icon": "shield-check"
+  },
+  {
     "id": "developer-1",
     "slug": "json-diff",
     "title": "JSON diff",

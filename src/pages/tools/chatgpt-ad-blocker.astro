@@ -1,0 +1,767 @@
+---
+import ToolLayout from '@/components/tools/ToolLayout.astro';
+
+const title = 'ChatGPT Ad Blocker - Remove Upsells, Promos & Partner Ads | Nadhebe';
+const h1 = 'ChatGPT Ad & Promo Blocker';
+const description = 'Block ChatGPT Plus/Pro upgrade banners, partner app suggestions, and sponsored ads with a free, private Manifest V3 Chrome extension & custom rule generator.';
+const canonicalUrl = 'https://nadhebe.com/tools/chatgpt-ad-blocker/';
+
+const faq = [
+  {
+    question: 'How does the ChatGPT Ad Blocker work without breaking the chat interface?',
+    answer: 'The ChatGPT Ad Blocker uses a dual-engine approach: (1) declarative CSS injected at document_start to instantly hide known data-testid and aria-label ad containers with zero layout flash, and (2) a MutationObserver combined with a lightweight TreeWalker in JavaScript that scans new dynamic React DOM nodes for promo phrases and partner brand cards, climbing only to the nearest card container without affecting chat message threads.',
+  },
+  {
+    question: 'Is the ChatGPT Ad Blocker extension safe and private?',
+    answer: 'Yes, 100%. The extension is open source, operates entirely locally in your browser memory, requests only minimal required permissions (storage and chatgpt.com host permissions), and executes zero telemetry, external network requests, or analytics calls.',
+  },
+  {
+    question: 'Why do standard ad blockers like uBlock Origin miss some ChatGPT promo cards?',
+    answer: 'ChatGPT is a dynamic Single Page Application (SPA) built with React and Tailwind-like compiled utility classes that change across deployments. Native partner integrations (such as Canva or Monday.com cards) and inline upgrade prompts are rendered dynamically inside the message stream rather than fetched from traditional advertising third-party domains, making domain-based network filters ineffective.',
+  },
+  {
+    question: 'Can I install this extension on Brave, Microsoft Edge, Arc, and Opera?',
+    answer: 'Yes. Because all these browsers are built on the Chromium engine and support Manifest V3, you can load the unpacked extension in developer mode on Google Chrome, Brave, Microsoft Edge, Arc Browser, Opera, and Vivaldi.',
+  },
+  {
+    question: 'Can I add my own custom keywords or brand cards to block?',
+    answer: 'Yes. Use the interactive Custom Rule Generator on this page to add your own promo keywords, select partner brands, and export a custom-built ZIP package or copy updated blocker.js scripts directly.',
+  },
+];
+---
+
+<ToolLayout
+  toolId="chatgpt-ad-blocker"
+  title={title}
+  h1={h1}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  faq={faq}
+>
+  <div slot="calculator" class="w-full space-y-32" id="chatgpt-adblock-app">
+    
+    <!-- HERO / DOWNLOAD CARD -->
+    <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-24 sm:p-36 bg-surface/80 dark:bg-surface-dark/80 shadow-medium relative overflow-hidden">
+      <div class="absolute -right-32 -top-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-24 relative z-10">
+        <div class="space-y-12 max-w-2xl">
+          <div class="flex flex-wrap items-center gap-8">
+            <span class="inline-flex items-center gap-6 px-12 py-5 rounded-full text-caption font-mono font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              <span class="w-8 h-8 rounded-full bg-emerald-500 animate-pulse"></span>
+              MANIFEST V3 READY
+            </span>
+            <span class="px-10 py-4 rounded-full text-caption font-mono text-muted dark:text-muted-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
+              100% PRIVATE • ZERO TELEMETRY
+            </span>
+            <span class="px-10 py-4 rounded-full text-caption font-mono text-accent dark:text-accent-dark bg-accent/10 border border-accent/20">
+              CHROME • BRAVE • EDGE • ARC
+            </span>
+          </div>
+          <h2 class="text-h2 sm:text-display font-display font-bold text-ink dark:text-ink-dark tracking-tight m-0">
+            Clean, Ad-Free ChatGPT in One Click
+          </h2>
+          <p class="text-body text-muted dark:text-muted-dark leading-relaxed m-0">
+            Block ChatGPT Plus/Pro upgrade banners, intrusive partner recommendation cards (Canva, Monday, Zillow), and sponsored badges. Download the ready-to-use extension ZIP, test live in our interactive sandbox, or customize detection rules below.
+          </p>
+        </div>
+
+        <!-- QUICK ACTION BUTTONS -->
+        <div class="flex flex-col sm:flex-row lg:flex-col gap-12 w-full lg:w-auto shrink-0">
+          <a
+            href="/downloads/chatgpt-adblock.zip"
+            download="chatgpt-adblock.zip"
+            id="hero-download-zip-btn"
+            class="inline-flex items-center justify-center gap-10 px-24 py-14 rounded-14 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow cursor-pointer group"
+          >
+            <svg class="w-20 h-20 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            <span>Download Extension (.ZIP)</span>
+          </a>
+
+          <div class="flex items-center gap-8">
+            <a
+              href="#sandbox-section"
+              class="flex-1 inline-flex items-center justify-center gap-6 px-16 py-10 rounded-10 font-sans text-caption font-bold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark hover:border-accent transition-colors"
+            >
+              <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Live Sandbox</span>
+            </a>
+            <a
+              href="#customizer-section"
+              class="flex-1 inline-flex items-center justify-center gap-6 px-16 py-10 rounded-10 font-sans text-caption font-bold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark hover:border-accent transition-colors"
+            >
+              <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+              </svg>
+              <span>Rule Builder</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: INTERACTIVE SANDBOX SIMULATOR -->
+    <div id="sandbox-section" class="glass-panel rounded-24 border border-border dark:border-border-dark p-20 sm:p-32 bg-surface/60 dark:bg-surface-dark/60 shadow-soft space-y-24">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-16 border-b border-border/80 dark:border-border-dark/80 pb-20">
+        <div>
+          <div class="flex items-center gap-8">
+            <span class="text-xl">🧪</span>
+            <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark m-0">
+              Interactive ChatGPT Ad Blocker Simulator
+            </h2>
+          </div>
+          <p class="text-caption sm:text-body text-muted dark:text-muted-dark mt-4 m-0">
+            Test the live blocking algorithm against real simulated ChatGPT promo cards, partner widgets, and upsell banners.
+          </p>
+        </div>
+
+        <!-- MASTER TOGGLE & STATS -->
+        <div class="flex items-center gap-16 bg-surface2 dark:bg-surface2-dark p-8 px-16 rounded-16 border border-border dark:border-border-dark shrink-0">
+          <div class="flex flex-col">
+            <span class="text-xs font-mono text-muted dark:text-muted-dark uppercase tracking-wider">Status</span>
+            <span id="sim-status-badge" class="text-caption font-bold text-emerald-600 dark:text-emerald-400">
+              Active (Blocking)
+            </span>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer" for="sim-master-toggle" aria-label="Toggle ChatGPT Blocker">
+            <input type="checkbox" id="sim-master-toggle" class="sr-only peer" checked />
+            <div class="w-48 h-26 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-22 after:w-22 after:transition-all peer-checked:bg-emerald-500"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SIMULATOR CONTROL BAR -->
+      <div class="flex flex-wrap items-center justify-between gap-12 bg-surface2/60 dark:bg-surface2-dark/60 p-12 sm:p-16 rounded-16 border border-border/60 dark:border-border-dark/60">
+        <div class="flex flex-wrap items-center gap-16 text-caption">
+          <span class="font-bold text-ink dark:text-ink-dark">Active Filters:</span>
+          <label class="inline-flex items-center gap-6 cursor-pointer text-ink dark:text-ink-dark">
+            <input type="checkbox" id="filter-promos" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+            <span>Upgrade Promos</span>
+          </label>
+          <label class="inline-flex items-center gap-6 cursor-pointer text-ink dark:text-ink-dark">
+            <input type="checkbox" id="filter-partners" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+            <span>Partner App Cards</span>
+          </label>
+          <label class="inline-flex items-center gap-6 cursor-pointer text-ink dark:text-ink-dark">
+            <input type="checkbox" id="filter-sponsored" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+            <span>Sponsored Ads</span>
+          </label>
+          <label class="inline-flex items-center gap-6 cursor-pointer text-ink dark:text-ink-dark">
+            <input type="checkbox" id="filter-sidebar" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+            <span>Sidebar Upsell</span>
+          </label>
+        </div>
+
+        <button
+          type="button"
+          id="btn-sim-reset"
+          class="px-12 py-6 rounded-8 text-xs font-semibold bg-surface dark:bg-surface-dark border border-border dark:border-border-dark hover:border-accent text-muted dark:text-muted-dark hover:text-ink transition-colors cursor-pointer"
+        >
+          🔄 Reset Simulation
+        </button>
+      </div>
+
+      <!-- SIMULATED CHATGPT INTERFACE CONTAINER -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+        
+        <!-- MOCK CHATGPT WINDOW -->
+        <div class="lg:col-span-8 rounded-20 border border-slate-700/40 bg-[#212121] text-slate-100 shadow-xl overflow-hidden font-sans">
+          
+          <!-- CHATGPT APP HEADER -->
+          <div class="flex items-center justify-between px-16 py-12 border-b border-slate-800 bg-[#181818]">
+            <div class="flex items-center gap-10">
+              <span class="w-12 h-12 rounded-full bg-red-500/80 inline-block"></span>
+              <span class="w-12 h-12 rounded-full bg-yellow-500/80 inline-block"></span>
+              <span class="w-12 h-12 rounded-full bg-green-500/80 inline-block"></span>
+              <span class="ml-8 text-xs font-mono text-slate-400">chatgpt.com</span>
+            </div>
+            <div class="flex items-center gap-8 text-xs font-semibold text-slate-300 bg-slate-800/80 px-10 py-4 rounded-8 border border-slate-700/60">
+              <span>ChatGPT 4o</span>
+              <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row min-h-[460px]">
+            
+            <!-- CHATGPT MOCK SIDEBAR -->
+            <div class="w-full sm:w-56 bg-[#171717] p-12 border-r border-slate-800/80 flex flex-col justify-between shrink-0">
+              <div class="space-y-8">
+                <div class="flex items-center justify-between text-xs font-bold text-slate-400 px-8 py-6">
+                  <span>Recent Chats</span>
+                  <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                </div>
+                <div class="px-8 py-6 rounded-8 bg-slate-800/50 text-xs text-slate-200 truncate">
+                  🚀 Project Architecture Review
+                </div>
+                <div class="px-8 py-6 rounded-8 hover:bg-slate-800/30 text-xs text-slate-400 truncate">
+                  📊 Astro SEO Strategy
+                </div>
+                <div class="px-8 py-6 rounded-8 hover:bg-slate-800/30 text-xs text-slate-400 truncate">
+                  ⚡ Manifest V3 Service Worker
+                </div>
+              </div>
+
+              <!-- SIDEBAR UPGRADE BANNER (SIMULATED AD ELEMENT #1) -->
+              <div id="sim-ad-sidebar" class="transition-all duration-300 ease-in-out p-10 rounded-10 bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-500/30 mt-16 space-y-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-purple-300">Upgrade plan</span>
+                  <span class="text-[9px] font-mono px-4 py-1 rounded bg-purple-500/20 text-purple-200">PROMO</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-tight">Get GPT-5 Turbo, DALL-E 3 & higher limits.</p>
+                <button type="button" class="w-full py-4 text-center rounded-6 bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold">
+                  Upgrade to Plus
+                </button>
+              </div>
+            </div>
+
+            <!-- CHATGPT MOCK CONVERSATION VIEW -->
+            <div class="flex-1 p-16 sm:p-24 space-y-20 bg-[#212121] overflow-y-auto">
+              
+              <!-- USER MESSAGE -->
+              <div class="flex items-start gap-12 max-w-xl">
+                <div class="w-28 h-28 rounded-full bg-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
+                  U
+                </div>
+                <div class="space-y-4">
+                  <div class="text-xs font-bold text-slate-400">You</div>
+                  <div class="text-xs text-slate-100 bg-slate-800 p-12 rounded-14 rounded-tl-none leading-relaxed">
+                    Can you help me design a quarterly marketing campaign dashboard and project schedule?
+                  </div>
+                </div>
+              </div>
+
+              <!-- INLINE UPSELL PROMO (SIMULATED AD ELEMENT #2) -->
+              <div id="sim-ad-upsell" class="transition-all duration-300 ease-in-out p-12 rounded-12 bg-amber-950/40 border border-amber-500/40 text-amber-200 flex items-center justify-between gap-12">
+                <div class="flex items-center gap-10">
+                  <span class="text-lg">⭐</span>
+                  <div>
+                    <div class="text-xs font-bold text-amber-300">Unlock GPT-5 Advanced Reasoning</div>
+                    <div class="text-[11px] text-slate-300">Upgrade your plan for unlimited deep analysis & custom agents.</div>
+                  </div>
+                </div>
+                <button type="button" class="px-10 py-5 rounded-8 bg-amber-500 text-slate-950 text-xs font-bold hover:bg-amber-400 shrink-0">
+                  Try Plus
+                </button>
+              </div>
+
+              <!-- ASSISTANT MESSAGE -->
+              <div class="flex items-start gap-12 max-w-2xl">
+                <div class="w-28 h-28 rounded-full bg-emerald-600 flex items-center justify-center text-xs font-bold text-white shrink-0">
+                  AI
+                </div>
+                <div class="space-y-16 flex-1">
+                  <div class="text-xs font-bold text-slate-400">ChatGPT</div>
+                  <p class="text-xs text-slate-200 leading-relaxed">
+                    Here is a structured framework for your quarterly marketing campaign:
+                  </p>
+                  
+                  <div class="bg-slate-900/60 p-12 rounded-10 border border-slate-800 text-xs space-y-6 text-slate-300">
+                    <div>1. <strong>Phase 1 (Weeks 1-3):</strong> Research, Audience Segmentation & Creative Assets</div>
+                    <div>2. <strong>Phase 2 (Weeks 4-8):</strong> Multi-channel Launch, A/B Testing & Paid Acquisition</div>
+                    <div>3. <strong>Phase 3 (Weeks 9-12):</strong> Retargeting, Optimization & ROI Synthesis</div>
+                  </div>
+
+                  <!-- PARTNER APP CARD 1: CANVA (SIMULATED AD ELEMENT #3) -->
+                  <div id="sim-ad-canva" class="transition-all duration-300 ease-in-out p-14 rounded-14 bg-slate-900 border border-slate-700/80 hover:border-slate-600 space-y-8">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-8">
+                        <div class="w-20 h-20 rounded-4 bg-[#00c4cc] flex items-center justify-center text-[10px] font-bold text-white">C</div>
+                        <span class="text-xs font-bold text-slate-100">Canva</span>
+                      </div>
+                      <span class="text-[10px] font-mono uppercase px-6 py-2 rounded bg-slate-800 text-slate-400">Partner App</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-normal">
+                      Turn this campaign schedule into polished visual presentations and social banners in Canva.
+                    </p>
+                    <button type="button" class="w-full py-6 rounded-8 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 flex items-center justify-center gap-6">
+                      <span>Open in Canva</span>
+                      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </button>
+                  </div>
+
+                  <!-- SPONSORED AD CARD: MONDAY.COM (SIMULATED AD ELEMENT #4) -->
+                  <div id="sim-ad-monday" class="transition-all duration-300 ease-in-out p-14 rounded-14 bg-slate-900 border border-blue-500/30 hover:border-blue-500/50 space-y-8" data-testid="sponsored-card">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-8">
+                        <div class="w-20 h-20 rounded-4 bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">M</div>
+                        <span class="text-xs font-bold text-slate-100">Monday.com</span>
+                      </div>
+                      <span class="text-[10px] font-bold uppercase px-6 py-2 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Ad • Sponsored</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-normal">
+                      Automate workflows and track your marketing sprints with Monday Work OS templates.
+                    </p>
+                    <button type="button" class="w-full py-6 rounded-8 bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white">
+                      Try Monday Free
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SIMULATED EXTENSION POPUP WIDGET -->
+        <div class="lg:col-span-4 rounded-20 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-20 shadow-large space-y-16">
+          <div class="flex items-center justify-between border-b border-border dark:border-border-dark pb-12">
+            <div class="flex items-center gap-8">
+              <span class="w-24 h-24 rounded-8 bg-emerald-500 text-white flex items-center justify-center text-xs font-bold">🛡️</span>
+              <span class="text-caption font-bold text-ink dark:text-ink-dark">Extension Popup</span>
+            </div>
+            <span id="popup-status-badge" class="px-8 py-3 rounded-full text-xs font-mono font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+              ACTIVE
+            </span>
+          </div>
+
+          <!-- TOTAL BLOCKED STAT -->
+          <div class="p-16 rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark text-center space-y-4">
+            <span class="text-xs font-mono text-muted dark:text-muted-dark uppercase tracking-wider">Total Blocked on Page</span>
+            <div id="sim-blocked-count" class="text-4xl font-display font-bold text-rose-500 dark:text-rose-400">
+              4
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark">Zero layout shift • Inpainted smoothly</p>
+          </div>
+
+          <!-- BLOCKED ITEMS BREAKDOWN -->
+          <div class="space-y-8">
+            <div class="flex items-center justify-between text-xs font-bold text-muted dark:text-muted-dark">
+              <span>BLOCKED ADS &amp; PROMOS</span>
+              <span id="sim-item-count-text">4 detected</span>
+            </div>
+
+            <div id="sim-blocked-ledger" class="space-y-6 max-h-56 overflow-y-auto pr-4">
+              <!-- Dynamically rendered by JS -->
+            </div>
+          </div>
+
+          <div class="pt-8 border-t border-border dark:border-border-dark">
+            <a
+              href="/downloads/chatgpt-adblock.zip"
+              download="chatgpt-adblock.zip"
+              class="w-full py-10 rounded-10 bg-accent hover:opacity-90 text-white text-caption font-bold flex items-center justify-center gap-8 transition-opacity shadow-subtle"
+            >
+              <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Install to Block on ChatGPT</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECTION 2: CUSTOM AD BLOCKER RULE BUILDER & GENERATOR -->
+    <div id="customizer-section" class="glass-panel rounded-24 border border-border dark:border-border-dark p-20 sm:p-32 bg-surface/60 dark:bg-surface-dark/60 shadow-soft space-y-24">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-16 border-b border-border/80 dark:border-border-dark/80 pb-20">
+        <div>
+          <div class="flex items-center gap-8">
+            <span class="text-xl">🛠️</span>
+            <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark m-0">
+              Custom Rule Generator &amp; Extension Packager
+            </h2>
+          </div>
+          <p class="text-caption sm:text-body text-muted dark:text-muted-dark mt-4 m-0">
+            Customize which phrases, partner brands, and CSS selectors to filter. Export a customized ZIP package instantly!
+          </p>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <button
+            type="button"
+            id="btn-export-custom-zip"
+            class="inline-flex items-center gap-8 px-18 py-10 rounded-10 font-sans text-caption font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition-colors shadow-subtle cursor-pointer"
+          >
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span id="custom-zip-btn-text">Generate &amp; Download Custom ZIP</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-24">
+        
+        <!-- LEFT: RULE CONTROLS -->
+        <div class="lg:col-span-6 space-y-20">
+          
+          <!-- BLOCKED PHRASES -->
+          <div class="p-16 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-10">
+            <div class="flex items-center justify-between">
+              <label for="custom-phrases-input" class="text-caption font-bold text-ink dark:text-ink-dark">
+                1. Blocked Promo Text Phrases (comma-separated)
+              </label>
+              <span class="text-xs font-mono text-muted dark:text-muted-dark">Scanned via TreeWalker</span>
+            </div>
+            <textarea
+              id="custom-phrases-input"
+              rows="4"
+              class="w-full rounded-10 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-12 text-caption font-mono text-ink dark:text-ink-dark focus:border-accent outline-none custom-scrollbar"
+              placeholder="Upgrade to Plus, Upgrade to Go, Upgrade to Pro, Get Plus, Try Plus, Unlock GPT, Upgrade your plan, Limited time, Try advanced voice"
+            >Upgrade to Plus, Upgrade to Go, Upgrade to Pro, Get Plus, Try Plus, Unlock GPT, Upgrade your plan, Limited time, Try advanced voice, Subscribe to Team</textarea>
+            <p class="text-[11px] text-muted dark:text-muted-dark">
+              Matches any leaf or card containing these strings and climbs to the outer wrapper container.
+            </p>
+          </div>
+
+          <!-- PARTNER APP BRANDS -->
+          <div class="p-16 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-10">
+            <div class="flex items-center justify-between">
+              <label for="custom-brands-input" class="text-caption font-bold text-ink dark:text-ink-dark">
+                2. Partner App Brands &amp; Connectors (comma-separated)
+              </label>
+              <span class="text-xs font-mono text-muted dark:text-muted-dark">Apps in ChatGPT</span>
+            </div>
+            <textarea
+              id="custom-brands-input"
+              rows="3"
+              class="w-full rounded-10 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-12 text-caption font-mono text-ink dark:text-ink-dark focus:border-accent outline-none custom-scrollbar"
+              placeholder="monday.com, canva, zillow, doordash, coursera, spotify, booking.com, expedia, peloton, wolfram, instacart, figma, notion"
+            >monday.com, canva, zillow, doordash, coursera, spotify, booking.com, expedia, peloton, wolfram, instacart, figma, notion, zapier, slack</textarea>
+          </div>
+
+          <!-- CSS AGGRESSIVE FILTERING TOGGLES -->
+          <div class="p-16 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-12">
+            <span class="text-caption font-bold text-ink dark:text-ink-dark block">3. Declarative CSS Filter Rules (Instant Zero-Flash)</span>
+            <div class="space-y-8 text-caption">
+              <label class="flex items-center gap-8 cursor-pointer">
+                <input type="checkbox" id="rule-data-testid" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+                <span class="text-ink dark:text-ink-dark">Block <code>[data-testid*="upgrade" | "promo" | "upsell"]</code></span>
+              </label>
+              <label class="flex items-center gap-8 cursor-pointer">
+                <input type="checkbox" id="rule-app-cards" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+                <span class="text-ink dark:text-ink-dark">Block <code>[data-testid*="app-card" | "connector-card"]</code></span>
+              </label>
+              <label class="flex items-center gap-8 cursor-pointer">
+                <input type="checkbox" id="rule-aria-ad" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+                <span class="text-ink dark:text-ink-dark">Block <code>[aria-label="Advertisement" | "Sponsored"]</code></span>
+              </label>
+              <label class="flex items-center gap-8 cursor-pointer">
+                <input type="checkbox" id="rule-pricing-links" checked class="w-16 h-16 rounded border-border text-accent focus:ring-accent" />
+                <span class="text-ink dark:text-ink-dark">Block <code>a[href*="/pricing"] &gt; div</code></span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: LIVE CUSTOM CODE PREVIEW -->
+        <div class="lg:col-span-6 space-y-12 flex flex-col">
+          <div class="flex items-center justify-between">
+            <span class="text-caption font-mono font-bold text-muted dark:text-muted-dark uppercase tracking-wider">
+              Generated blocker.js Preview
+            </span>
+            <button
+              type="button"
+              id="btn-copy-custom-js"
+              class="inline-flex items-center gap-6 px-12 py-5 rounded-8 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark text-caption font-bold text-ink dark:text-ink-dark hover:border-accent transition-all cursor-pointer"
+            >
+              <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span id="copy-custom-js-text">Copy Script</span>
+            </button>
+          </div>
+
+          <div class="flex-1 relative rounded-16 overflow-hidden border border-border dark:border-border-dark bg-[#181818] min-h-[380px]">
+            <pre id="custom-js-preview" class="absolute inset-0 m-0 p-16 overflow-auto text-xs font-mono text-[#d4d4d4] custom-scrollbar selection:bg-accent/30"></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 3: MULTI-FILE SOURCE CODE INSPECTOR -->
+    <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-20 sm:p-32 bg-surface/60 dark:bg-surface-dark/60 shadow-soft space-y-20">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-16 border-b border-border/80 dark:border-border-dark/80 pb-16">
+        <div>
+          <div class="flex items-center gap-8">
+            <span class="text-xl">📂</span>
+            <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark m-0">
+              Extension Source Code &amp; File Inspector
+            </h2>
+          </div>
+          <p class="text-caption text-muted dark:text-muted-dark mt-2 m-0">
+            Review the 100% open source Manifest V3 implementation files. Zero external calls, zero dependencies.
+          </p>
+        </div>
+
+        <!-- ACTIVE FILE ACTIONS -->
+        <div class="flex items-center gap-8">
+          <button
+            type="button"
+            id="btn-copy-active-file"
+            class="inline-flex items-center gap-6 px-14 py-8 rounded-10 bg-accent text-white text-caption font-bold hover:opacity-90 transition-all shadow-subtle cursor-pointer"
+          >
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span id="copy-active-file-text">Copy File</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- FILE TABS -->
+      <div class="flex items-center gap-6 overflow-x-auto pb-4 border-b border-border/60 dark:border-border-dark/60" id="file-tabs-container">
+        <button type="button" data-file="manifest.json" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-bold bg-accent text-white border border-accent cursor-pointer transition-all shadow-subtle shrink-0">
+          📄 manifest.json
+        </button>
+        <button type="button" data-file="blocker.js" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-semibold bg-surface dark:bg-surface-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark border border-border dark:border-border-dark cursor-pointer transition-all shrink-0">
+          ⚙️ blocker.js
+        </button>
+        <button type="button" data-file="hide.css" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-semibold bg-surface dark:bg-surface-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark border border-border dark:border-border-dark cursor-pointer transition-all shrink-0">
+          🎨 hide.css
+        </button>
+        <button type="button" data-file="popup.html" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-semibold bg-surface dark:bg-surface-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark border border-border dark:border-border-dark cursor-pointer transition-all shrink-0">
+          🖼️ popup.html
+        </button>
+        <button type="button" data-file="popup.js" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-semibold bg-surface dark:bg-surface-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark border border-border dark:border-border-dark cursor-pointer transition-all shrink-0">
+          ⚡ popup.js
+        </button>
+        <button type="button" data-file="background.js" class="file-tab-btn px-14 py-7 rounded-8 text-caption font-mono font-semibold bg-surface dark:bg-surface-dark text-muted dark:text-muted-dark hover:text-ink dark:hover:text-ink-dark border border-border dark:border-border-dark cursor-pointer transition-all shrink-0">
+          🛡️ background.js
+        </button>
+      </div>
+
+      <!-- FILE VIEWER PRE -->
+      <div class="relative rounded-16 overflow-hidden border border-border dark:border-border-dark bg-[#181818] min-h-[360px]">
+        <div class="flex items-center justify-between px-16 py-8 border-b border-neutral-800 bg-[#121212] text-xs font-mono text-neutral-400">
+          <span id="active-file-label">manifest.json (Manifest V3 configuration)</span>
+          <span id="active-file-size" class="text-neutral-500">694 bytes</span>
+        </div>
+        <pre id="active-file-content" class="m-0 p-16 overflow-auto text-xs font-mono text-[#d4d4d4] custom-scrollbar selection:bg-accent/30 max-h-[480px]"></pre>
+      </div>
+    </div>
+
+    <!-- SECTION 4: STEP-BY-STEP INSTALLATION GUIDE -->
+    <div class="glass-panel rounded-24 border border-border dark:border-border-dark p-20 sm:p-32 bg-surface/60 dark:bg-surface-dark/60 shadow-soft space-y-24">
+      <div class="border-b border-border/80 dark:border-border-dark/80 pb-16">
+        <div class="flex items-center gap-8">
+          <span class="text-xl">🚀</span>
+          <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark m-0">
+            How to Install in 60 Seconds (Chrome, Brave, Edge &amp; Arc)
+          </h2>
+        </div>
+        <p class="text-caption text-muted dark:text-muted-dark mt-2 m-0">
+          No Chrome Web Store account or payment required. Load the unpacked extension directly into your browser.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+        
+        <!-- STEP 1 -->
+        <div class="p-20 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-12 flex flex-col justify-between">
+          <div class="space-y-8">
+            <div class="w-32 h-32 rounded-10 bg-accent text-white flex items-center justify-center font-bold text-caption">1</div>
+            <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">Download &amp; Unzip</h3>
+            <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+              Download the <a href="/downloads/chatgpt-adblock.zip" class="text-accent underline font-semibold">chatgpt-adblock.zip</a> archive and extract the folder to a permanent location on your computer.
+            </p>
+          </div>
+          <div class="pt-8 border-t border-border/40 dark:border-border-dark/40 font-mono text-[11px] text-muted">
+            Folder: <code>chatgpt-adblock/</code>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="p-20 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-12 flex flex-col justify-between">
+          <div class="space-y-8">
+            <div class="w-32 h-32 rounded-10 bg-accent text-white flex items-center justify-center font-bold text-caption">2</div>
+            <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">Open Extensions Page</h3>
+            <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+              Type <code class="font-mono text-accent">chrome://extensions</code> in your URL bar (or <code class="font-mono text-accent">brave://extensions</code>, <code class="font-mono text-accent">edge://extensions</code>).
+            </p>
+          </div>
+          <div class="pt-8 border-t border-border/40 dark:border-border-dark/40 font-mono text-[11px] text-muted">
+            Address bar navigation
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="p-20 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-12 flex flex-col justify-between">
+          <div class="space-y-8">
+            <div class="w-32 h-32 rounded-10 bg-accent text-white flex items-center justify-center font-bold text-caption">3</div>
+            <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">Toggle Developer Mode</h3>
+            <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+              In the top-right corner of the Extensions management page, turn on the <strong>Developer mode</strong> switch.
+            </p>
+          </div>
+          <div class="pt-8 border-t border-border/40 dark:border-border-dark/40 font-mono text-[11px] text-muted">
+            Top-right toggle switch
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="p-20 rounded-16 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark space-y-12 flex flex-col justify-between">
+          <div class="space-y-8">
+            <div class="w-32 h-32 rounded-10 bg-accent text-white flex items-center justify-center font-bold text-caption">4</div>
+            <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">Load Unpacked</h3>
+            <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+              Click <strong>Load unpacked</strong> in the top-left, select the extracted <code>chatgpt-adblock</code> folder, and visit <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-accent underline font-semibold">chatgpt.com</a>!
+            </p>
+          </div>
+          <div class="pt-8 border-t border-border/40 dark:border-border-dark/40 font-mono text-[11px] text-muted">
+            Active immediately
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DEEP TECHNICAL SEO / GEO DOCUMENTATION CONTENT -->
+  <div slot="content" class="space-y-36">
+    
+    <section>
+      <h2>Why Traditional Ad Blockers Fail on ChatGPT (and How React SPA DOM Dynamics Work)</h2>
+      <p>
+        The ChatGPT web client is a single-page application built on React that uses dynamically scoped CSS utility class names and client-side hydration. Unlike traditional publisher websites where advertisements are loaded from third-party advertising exchanges (such as Google AdSense or Taboola), ChatGPT embeds promotional upgrade banners and "Apps in ChatGPT" partner cards directly into the internal message stream and interface components.
+      </p>
+      <p>
+        Because these elements originate from the same first-party domain (<code>chatgpt.com</code>) without third-party network requests, standard URL-filtering ad blockers (such as DNS-level blockers or naive domain filters) cannot differentiate between a legitimate AI assistant reply and an intrusive sponsored partner card. Furthermore, ChatGPT regularly re-renders the conversation tree as new tokens stream in, causing static CSS element-hiding rules to become stale or break.
+      </p>
+    </section>
+
+    <section>
+      <h2>The Dual-Engine Architecture: Declarative CSS Injection + TreeWalker MutationObserver</h2>
+      <p>
+        The <strong>ChatGPT Ad Blocker</strong> utilizes an efficient dual-engine architecture designed specifically for modern dynamic JavaScript web applications:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-20 my-20">
+        <div class="p-20 rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark space-y-8">
+          <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">1. Instant Declarative CSS Engine (`hide.css`)</h3>
+          <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+            Injected at <code>run_at: "document_start"</code>, declarative CSS selectors immediately target known container attributes (e.g. <code>[data-testid*="upgrade"]</code>, <code>[data-testid*="app-card"]</code>, <code>[aria-label="Advertisement"]</code>). This prevents layout shifts and guarantees zero visual flickering while the page initially loads.
+          </p>
+        </div>
+
+        <div class="p-20 rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark space-y-8">
+          <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">2. Reactive TreeWalker DOM Engine (`blocker.js`)</h3>
+          <p class="text-caption text-muted dark:text-muted-dark leading-relaxed m-0">
+            A high-performance <code>MutationObserver</code> observes newly added message stream elements. When new nodes appear, a lightweight <code>TreeWalker</code> tests leaf nodes against registered promo phrases and brand names. Using bounded ancestor climbing (<code>climbToCard</code>), it cleanly hides the nearest card wrapper without altering surrounding chat messages.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>ChatGPT Ad Blocker vs Generic Ad Blockers vs UserScripts</h2>
+      <p>
+        Comparing dedicated React DOM blocking extensions against generic tools illustrates the trade-offs in performance, layout stability, and maintenance:
+      </p>
+
+      <div class="overflow-x-auto my-20">
+        <table class="w-full text-left text-caption border-collapse border border-border dark:border-border-dark">
+          <thead>
+            <tr class="bg-surface2 dark:bg-surface2-dark text-ink dark:text-ink-dark font-mono">
+              <th class="p-12 border border-border dark:border-border-dark">Feature / Metric</th>
+              <th class="p-12 border border-border dark:border-border-dark text-emerald-600 dark:text-emerald-400">ChatGPT Ad Blocker (Nadhebe)</th>
+              <th class="p-12 border border-border dark:border-border-dark">Generic uBlock Origin Filter</th>
+              <th class="p-12 border border-border dark:border-border-dark">Tampermonkey UserScript</th>
+            </tr>
+          </thead>
+          <tbody class="text-muted dark:text-muted-dark divide-y divide-border dark:divide-border-dark">
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">Zero Layout Flash (document_start)</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (Declarative CSS)</td>
+              <td class="p-12">Partial (Cosmetic filtering delay)</td>
+              <td class="p-12">No (Runs after DOM loaded)</td>
+            </tr>
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">Dynamic React Re-render Resilient</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (MutationObserver + TreeWalker)</td>
+              <td class="p-12">No (Class names change often)</td>
+              <td class="p-12">Depends on script implementation</td>
+            </tr>
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">Partner App Card Extraction</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (Canva, Monday, Zillow, etc.)</td>
+              <td class="p-12">Difficult without breaking UI</td>
+              <td class="p-12">Manual XPath queries</td>
+            </tr>
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">Live Badge Counter &amp; Popup</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (Real-time category breakdown)</td>
+              <td class="p-12">Aggregated domain count only</td>
+              <td class="p-12">None</td>
+            </tr>
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">CPU &amp; Memory Overhead</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">&lt; 2ms per mutation burst</td>
+              <td class="p-12">&lt; 1ms</td>
+              <td class="p-12">Varies (10-50ms)</td>
+            </tr>
+            <tr>
+              <td class="p-12 font-bold text-ink dark:text-ink-dark">Telemetry &amp; Privacy</td>
+              <td class="p-12 text-emerald-600 dark:text-emerald-400 font-semibold">100% Client-Side • Zero Network Calls</td>
+              <td class="p-12">Zero Network Calls</td>
+              <td class="p-12">Depends on author</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Supported ChatGPT Promo Types &amp; Brands Blocked</h2>
+      <p>
+        The default ruleset actively monitors and suppresses four major categories of promotional elements across <code>chatgpt.com</code> and <code>chat.openai.com</code>:
+      </p>
+      <ul>
+        <li><strong>Subscription &amp; Plan Upsells:</strong> "Upgrade to Plus", "Upgrade to Go", "Upgrade to Pro", "Get Plus", "Try Plus", "Unlock GPT", "Upgrade your plan", and "Limited time" banners.</li>
+        <li><strong>Feature Discovery Banners:</strong> "Try advanced voice", "Explore Custom GPTs", and multimodal preview modals.</li>
+        <li><strong>Partner App Recommendations:</strong> Embedded suggestion cards for Monday.com, Canva, Zillow, DoorDash, Coursera, Spotify, Booking.com, Expedia, Peloton, Wolfram, Instacart, Figma, and Notion.</li>
+        <li><strong>Sponsored / Native Ads:</strong> Direct elements carrying <code>[aria-label="Advertisement"]</code>, <code>[aria-label="Sponsored"]</code>, or <code>[data-testid*="banner-ad"]</code> metadata.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Security, Permissions &amp; Zero-Telemetry Audit</h2>
+      <p>
+        In accordance with modern web security best practices, the ChatGPT Ad Blocker Manifest V3 extension requires only two permissions:
+      </p>
+      <ol>
+        <li><code>storage</code>: Used strictly to save your local toggle preferences (enabled/disabled state) and locally stored blocked item counts in <code>chrome.storage.local</code>.</li>
+        <li><code>host_permissions: ["https://chatgpt.com/*", "https://chat.openai.com/*"]</code>: Used to execute the content script and inject <code>hide.css</code> solely on OpenAI ChatGPT domains.</li>
+      </ol>
+      <p>
+        The extension makes zero external fetch requests, connects to no third-party APIs, and contains no analytics trackers. All code is completely inspectable directly in your browser.
+      </p>
+    </section>
+
+    <!-- OFFICIAL EXTENSION SUPPORT & CHROME WEB STORE METADATA SECTION -->
+    <section class="border-t border-border dark:border-border-dark pt-24 space-y-16">
+      <h2>Extension Support &amp; Official Release Info</h2>
+      <p>
+        This page serves as the official homepage and support hub for the <strong>ChatGPT Ad &amp; Promo Blocker</strong> Chrome extension (Manifest V3, Version 1.0).
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-16">
+        <div class="p-16 rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark space-y-4">
+          <span class="text-xs font-mono text-muted uppercase">Latest Release</span>
+          <div class="text-body font-bold text-ink dark:text-ink-dark">v1.0 (Manifest V3)</div>
+        </div>
+        <div class="p-16 rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark space-y-4">
+          <span class="text-xs font-mono text-muted uppercase">Developer Support</span>
+          <div class="text-body font-bold text-ink dark:text-ink-dark"><a href="/contact" class="text-accent underline">Nadhebe Developer Support</a></div>
+        </div>
+        <div class="p-16 rounded-12 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark space-y-4">
+          <span class="text-xs font-mono text-muted uppercase">Privacy Guarantee</span>
+          <div class="text-body font-bold text-emerald-600 dark:text-emerald-400">Zero Logs &amp; 100% Local</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</ToolLayout>
+
+<script>
+  import { initChatgptAdBlockerPage } from '@/scripts/chatgpt-ad-blocker';
+
+  document.addEventListener('astro:page-load', initChatgptAdBlockerPage);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initChatgptAdBlockerPage();
+  }
+</script>

@@ -1,0 +1,20 @@
+/* Known upgrade/promo banner patterns on chatgpt.com */
+/* Class names on ChatGPT change often — blocker.js handles the rest via text-match */
+
+html:not([data-adblock-disabled="true"]) [data-testid*="upgrade"],
+html:not([data-adblock-disabled="true"]) [data-testid*="promo"],
+html:not([data-adblock-disabled="true"]) [data-testid*="upsell"],
+html:not([data-adblock-disabled="true"]) [data-testid*="banner-ad"],
+html:not([data-adblock-disabled="true"]) [data-testid*="app-card"],
+html:not([data-adblock-disabled="true"]) [data-testid*="app-suggestion"],
+html:not([data-adblock-disabled="true"]) [data-testid*="connector-card"],
+html:not([data-adblock-disabled="true"]) [data-testid*="external-app"],
+html:not([data-adblock-disabled="true"]) [data-testid*="ad-badge"],
+html:not([data-adblock-disabled="true"]) [data-testid*="sponsored"],
+html:not([data-adblock-disabled="true"]) [aria-label="Advertisement"],
+html:not([data-adblock-disabled="true"]) [aria-label="Sponsored"],
+html:not([data-adblock-disabled="true"]) a[href*="/pricing"] > div,
+html:not([data-adblock-disabled="true"]) div[class*="promo-banner"],
+html:not([data-adblock-disabled="true"]) div[class*="upgrade-banner"] {
+  display: none !important;
+}
