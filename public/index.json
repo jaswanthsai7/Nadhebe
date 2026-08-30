@@ -1,5 +1,65 @@
 [
   {
+    "title": "Bilibili Chrome Translator: Real-Time In-Place Translation Without Breaking Vue 3 | Nadhebe",
+    "description": "Translate Bilibili in real time with the Bilibili Chrome translator. Features in-place DOM replacement, 0ms local dictionary lookups, and Danmaku isolation.",
+    "url": "https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Bilibili Translator\", \"Chrome Extension\", \"Vue 3 Hydration\", \"DOM Manipulation\", \"Web Development\", \"Danmaku Isolation\", \"Manifest V3\"]"
+    ],
+    "pubDate": "2026-08-31T00:00:00.000Z"
+  },
+  {
+    "title": "Fine-Tuning DeepSeek-R1 Distill with Unsloth on Consumer GPUs: Complete Walkthrough",
+    "description": "Step-by-step guide to fine-tuning DeepSeek-R1 Distill reasoning models on a single 16GB or 24GB GPU using Unsloth 2x faster kernels, QLoRA, and GGUF export.",
+    "url": "https://nadhebe.com/tutorials/fine-tune-deepseek-r1-unsloth-gpu",
+    "category": "Tutorials",
+    "tags": [
+      "[\"deepseek-r1\", \"unsloth\", \"fine-tuning\", \"qlora\", \"gpu\", \"ollama\", \"tutorials\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Kokoro TTS vs ElevenLabs: Self-Hosting Ultra-Realistic 82M Voice AI for $0",
+    "description": "Compare Kokoro TTS 82M open-source speech model with ElevenLabs. Benchmark latency, audio quality, self-hosting Docker setup, and cloud API cost savings.",
+    "url": "https://nadhebe.com/comparisons/kokoro-tts-vs-elevenlabs",
+    "category": "Comparisons",
+    "tags": [
+      "[\"kokoro-tts\", \"elevenlabs\", \"text-to-speech\", \"voice-ai\", \"self-hosting\", \"docker\", \"comparisons\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents",
+    "description": "Compare Mem0, Microsoft GraphRAG, and traditional Vector RAG for AI agent memory. Benchmark multi-hop reasoning, latency, update costs, and state persistence.",
+    "url": "https://nadhebe.com/comparisons/mem0-vs-graphrag-vs-vector-rag",
+    "category": "Comparisons",
+    "tags": [
+      "[\"mem0\", \"graphrag\", \"vector-rag\", \"agentic-ai\", \"rag\", \"long-term-memory\", \"comparisons\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Claude 3.7 Sonnet Hybrid Reasoning: When to Use Thinking Tokens vs Standard Fast Mode",
+    "description": "Master Claude 3.7 Sonnet's hybrid reasoning architecture. Learn how to configure dynamic thinking budgets, benchmark against o3-mini, and optimize API costs.",
+    "url": "https://nadhebe.com/guides/claude-3-7-sonnet-hybrid-reasoning-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"claude-3-7\", \"anthropic\", \"hybrid-reasoning\", \"extended-thinking\", \"llm-benchmarks\", \"prompt-engineering\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Speculative Decoding in vLLM & SGLang: 3x LLM Inference Speedup Guide",
+    "description": "Accelerate LLM inference throughput and reduce latency by up to 3x using speculative decoding, draft models, and Medusa heads in vLLM and SGLang.",
+    "url": "https://nadhebe.com/guides/speculative-decoding-vllm-sglang-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"speculative-decoding\", \"vllm\", \"sglang\", \"llm-inference\", \"performance\", \"gpu-optimization\", \"guides\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
     "title": "ChatGPT Ad Blocker - Chrome Extension & Rule Generator | Nadhebe",
     "description": "Block ChatGPT upgrade banners, upsell promo cards, and partner app ads with a lightweight, privacy-first Manifest V3 Chrome extension and rule generator.",
     "url": "https://nadhebe.com/tools/chatgpt-ad-blocker",

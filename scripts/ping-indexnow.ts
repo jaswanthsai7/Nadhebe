@@ -85,7 +85,8 @@ async function run() {
         headers: {
           'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(4000)
       });
 
       if (res.status === 200 || res.status === 202) {
