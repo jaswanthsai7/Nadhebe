@@ -2,7 +2,7 @@
 title: "Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?"
 description: "A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs."
 pubDate: 2026-07-10
-author: bob-smith
+author: nadhebe-team
 category: "Comparisons"
 tags: [instatic, webflow, framer, comparison]
 heroImage: "/images/comparisons-hero.webp"

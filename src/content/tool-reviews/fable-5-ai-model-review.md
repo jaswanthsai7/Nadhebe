@@ -2,7 +2,7 @@
 title: "Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding"
 description: "An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture."
 pubDate: 2026-07-17
-author: bob-smith
+author: nadhebe-team
 category: Reviews
 tags: ["fable-5", "reviews", "llm", "anthropic"]
 heroImage: "/images/fable-5-review.webp"

@@ -3,7 +3,7 @@ title: "Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules
 description: "A comprehensive multi-IDE governance comparison analyzing prompt instructions, frontmatter glob patterns, and unified cross-editor strategies for Cursor, Windsurf, and Claude Code."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["Cursor", "Windsurf", "Claude Code", "AI IDE", "Developer Tools", "Governance"]
 heroImage: "/images/cursorrules-vs-windsurfrules-vs-claude-rules-hero.webp"
 heroAlt: "Minimalist vintage editorial collage showing rule configuration files for Cursor, Windsurf, and Claude Code on a warm cream background"

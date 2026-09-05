@@ -2,7 +2,7 @@
 title: "Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills"
 description: "The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Tutorials
 tags: ["claude", "cli", "cheat-sheet", "developer-tools", "productivity", "anthropic"]
 heroImage: "/images/claude-cheat-sheet-hero.webp"

@@ -3,7 +3,7 @@ title: "Prompt Caching Best Practices for Claude Sonnet & Opus"
 description: "Master prompt caching for Anthropic's Claude 3.5 Sonnet and Opus models. Learn how to drastically reduce latency and lower your LLM API costs."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "best-practices"
+category: "Best Practices"
 tags: ["Prompt Caching", "Claude", "Sonnet", "Opus", "Anthropic", "LLM Optimization", "API Costs"]
 heroImage: "/images/prompt-caching-claude-hero.webp"
 heroAlt: "Collage art showing prompt caching concepts with memory chips and data reuse"

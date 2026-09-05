@@ -3,7 +3,7 @@ title: "The Complete Gemini API Developer Guide (2026)"
 description: "Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Gemini", "API", "Google", "LLM", "Generative AI"]
 heroImage: "/images/gemini-javascript-examples-hero.webp"
 heroAlt: "Retro-futuristic infographic showing a developer interacting with the Gemini API through glowing nodes"

@@ -2,7 +2,7 @@
 title: "How to Use Google Flow Storyboard Studio: Script Uploads, Custom Characters & Scenes"
 description: "A step-by-step tutorial on importing scripts, uploading custom character reference images, inserting scenes, and locking visual consistency in Google Flow."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Tutorials
 tags: ["google-flow", "tutorials", "storyboard", "custom-characters", "google-labs"]
 heroImage: "/images/storyboard-tutorial-hero.webp"
@@ -105,5 +105,5 @@ Updated Timeline:  [ Scene 1: Frame A ] -> [ NEW SCENE ] -> [ Scene 2: Frame B ]
 ## Related Production Guides
 
 * For an overview of pre-production workflow optimization, explore [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
-* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).
+* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tutorials/google-flow-storyboard-studio-guide/).
 

@@ -2,7 +2,7 @@
 title: "The Producer's Guide to AI-Assisted Pre-Production Workflows"
 description: "Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Guides
 tags: ["pre-production", "guides", "workflows", "film-tech", "google-labs"]
 heroImage: "/images/pre-prod-guide.webp"
@@ -69,4 +69,4 @@ A major challenge for creative directors using generative tools is avoiding char
 ## Step-by-Step Storyboard Guides
 
 * Learn the exact panel creation steps in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
-* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tools/google-flow-storyboard-studio-overview).
+* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tutorials/google-flow-storyboard-studio-guide/).

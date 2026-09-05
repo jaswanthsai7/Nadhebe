@@ -3,7 +3,7 @@ title: "RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure
 description: "Compare RunPod's raw GPU instance pods against Modal's serverless Python cloud infrastructure for AI model fine-tuning and inference."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["RunPod", "Modal", "GPU Cloud", "Serverless AI", "PyTorch", "vLLM", "Infrastructure"]
 heroImage: "/images/runpod-vs-modal-hero.webp"
 heroAlt: "Retro-tech editorial graphic illustrating serverless cloud nodes and bare-metal GPU server racks on a soft olive green background"

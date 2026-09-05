@@ -31,6 +31,22 @@ function verifyLinks() {
   let linksCheckedCount = 0;
   let brokenLinksCount = 0;
 
+  // Build an in-memory index of all existing paths for instant lookups
+  const existingFiles = new Set<string>();
+  function indexDir(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name);
+      const rel = path.relative(DIST_DIR, full).replace(/\\/g, '/').toLowerCase();
+      existingFiles.add(rel);
+      if (entry.isDirectory()) {
+        if (entry.name !== 'pagefind') indexDir(full);
+      }
+    }
+  }
+  indexDir(DIST_DIR);
+
   htmlFiles.forEach((file) => {
     let content = '';
     try {
@@ -65,32 +81,22 @@ function verifyLinks() {
       if (!cleanUrl) continue;
 
       let targetPath = '';
-
       if (cleanUrl.startsWith('/')) {
-        // Absolute internal URL
-        targetPath = path.join(DIST_DIR, cleanUrl.replace(/^\/+/, ''));
+        targetPath = cleanUrl.replace(/^\/+/, '');
       } else {
-        // Relative internal URL
-        targetPath = path.join(path.dirname(file), cleanUrl);
+        const fileRelDir = path.relative(DIST_DIR, path.dirname(file)).replace(/\\/g, '/');
+        targetPath = fileRelDir ? `${fileRelDir}/${cleanUrl}` : cleanUrl;
       }
+      targetPath = targetPath.replace(/\/+$/, '').toLowerCase();
 
-      let exists = false;
-
-      if (fs.existsSync(targetPath)) {
-        try {
-          const stat = fs.statSync(targetPath);
-          if (stat.isDirectory()) {
-            exists = fs.existsSync(path.join(targetPath, 'index.html'));
-          } else {
-            exists = true;
-          }
-        } catch (_) {}
-      } else {
-        exists = fs.existsSync(path.join(targetPath, 'index.html')) || fs.existsSync(targetPath + '.html');
-      }
+      const exists =
+        targetPath === '' ||
+        existingFiles.has(targetPath) ||
+        existingFiles.has(`${targetPath}/index.html`) ||
+        existingFiles.has(`${targetPath}.html`);
 
       if (!exists) {
-        console.error(`\x1b[31mBroken Link:\x1b[0m in ${relativeSrc} -> points to: "${url}" (Resolved: ${path.relative(DIST_DIR, targetPath)})`);
+        console.error(`\x1b[31mBroken Link:\x1b[0m in ${relativeSrc} -> points to: "${url}" (Resolved: ${targetPath})`);
         hasErrors = true;
         brokenLinksCount++;
       }

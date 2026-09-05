@@ -2,8 +2,8 @@
 title: "Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)"
 description: "Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "guides"
+author: nadhebe-team
+category: "Guides"
 tags: ["gemini-api", "pricing", "rate-limits", "google-ai", "llm-costs"]
 heroImage: "/images/gemini-api-pricing-hero.webp"
 heroAlt: "Clean minimalist technical meter gauge illustration of Gemini API pricing"

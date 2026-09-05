@@ -2,7 +2,7 @@
 title: "Maximizing Kimi K3: Best Practices for 1M Token Context Windows"
 description: "Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3."
 pubDate: 2026-07-19
-author: bob-smith
+author: nadhebe-team
 category: "Best Practices"
 tags: ["kimi-k3", "context-window", "developer-practices", "codebase-management", "optimization"]
 heroImage: "/images/best-practices-hero.webp"

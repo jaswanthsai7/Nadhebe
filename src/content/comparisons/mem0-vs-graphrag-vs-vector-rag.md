@@ -2,7 +2,7 @@
 title: "Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents"
 description: "Compare Mem0, Microsoft GraphRAG, and traditional Vector RAG for AI agent memory. Benchmark multi-hop reasoning, latency, update costs, and state persistence."
 pubDate: 2026-08-29
-author: alice-chen
+author: nadhebe-team
 category: Comparisons
 tags: ["mem0", "graphrag", "vector-rag", "agentic-ai", "rag", "long-term-memory", "comparisons"]
 heroImage: "/images/mem0-vs-graphrag-vs-vector-rag-hero.webp"

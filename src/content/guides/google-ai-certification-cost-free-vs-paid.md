@@ -2,7 +2,7 @@
 title: "Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained"
 description: "A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams."
 pubDate: 2026-07-25
-author: alice-chen
+author: nadhebe-team
 category: Guides
 tags: ["google", "ai-certification", "google-cloud", "skills-boost", "machine-learning", "ai-education"]
 heroImage: "/images/google-ai-cert-hero.webp"
@@ -206,5 +206,5 @@ Google Cloud Certifications remain valid for 2 years from the date of passing, r
 ## Related Guides & Workflows
 
 * For Anthropic credentials breakdown, read [Anthropic Claude Certification Guide: Exams & Credentials](/guides/anthropic-claude-certification-developer-guide).
-* For enterprise AI tools, explore [Google Flow & Storyboard Studio Overview](/tools/google-flow-storyboard-studio-overview).
+* For enterprise AI tools, explore [Google Flow & Storyboard Studio Overview](/tutorials/google-flow-storyboard-studio-guide/).
 * For terminal coding agent mechanics, see [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).

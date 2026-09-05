@@ -197,7 +197,7 @@ fi`;
         .replace(/\$(?:\w+|\{.*?\})/g, match => `<span class="text-[#9cdcfe]">${match}</span>`)
         .replace(/#.*?$/gm, match => `<span class="text-[#6a9955]">${match}</span>`);
         
-      output.innerHTML = highlighted;
+      if (output) output.innerHTML = highlighted;
     }
 
     [typeSelect, objSelect, customPrompt, strictCheckbox].forEach(el => {

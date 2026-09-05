@@ -356,7 +356,7 @@ export const SAFE_ZONE_SPECS: Record<string, SafeZoneSpec> = {
     guidanceText: 'Avoid top 12% (channel/search UI) and bottom 20% (title & sound link). Keep key text centered.',
     sourceMeta: {
       source: 'YouTube Creator Help Documentation',
-      sourceUrl: 'https://support.google.com/youtube/answer/10059070',
+      sourceUrl: 'https://support.google.com/tutorials/answer/10059070',
       lastVerified: '2026-07-28',
       type: 'official',
     },

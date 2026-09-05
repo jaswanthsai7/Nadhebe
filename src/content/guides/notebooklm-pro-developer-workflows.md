@@ -3,7 +3,7 @@ title: "Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols
 description: "Developer workflows guide for Google NotebookLM Pro. Learn source document ingestion limits, multi-file context indexing, Audio Overview podcast pipelines, and API integrations."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["NotebookLM Pro", "Google AI", "Knowledge Management", "Audio Overview", "Developer Workflows", "AI Research", "Gemini 2.0"]
 heroImage: "/images/notebooklm-pro-developer-workflows-hero.png"
 heroAlt: "Vintage editorial collage illustration showing an acoustic vintage microphone and soundwave curves on a pastel mint background"

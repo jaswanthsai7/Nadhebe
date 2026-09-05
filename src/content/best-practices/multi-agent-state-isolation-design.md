@@ -2,7 +2,7 @@
 title: "Multi-Agent System Design: State Isolation and Coordination"
 description: "Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Best Practices
 tags: ["multi-agent", "best-practices", "software-architecture", "system-design"]
 heroImage: "/images/state-isolation.webp"
@@ -56,5 +56,5 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 ## Multi-Agent Architecture Resources
 
-* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
 * Manage autonomous execution costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

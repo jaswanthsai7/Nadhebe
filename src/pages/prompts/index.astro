@@ -1,9 +1,0 @@
----
-import { getAllArticles } from '../../utils/content';
-import CategoryLayout from '../../layouts/CategoryLayout.astro';
-
-const allArticles = await getAllArticles();
-const posts = allArticles.filter(p => p.collection === 'prompts' || p.data.category?.toLowerCase() === 'prompts');
----
-
-<CategoryLayout categoryName="Prompts" posts={posts} allPosts={allArticles} />

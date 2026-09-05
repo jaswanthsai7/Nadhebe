@@ -3,7 +3,7 @@ title: "Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Termi
 description: "Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Gemini CLI", "Google Gemini", "CLI Tools", "Multi-Repo", "Developer Tools", "Terminal AI"]
 heroImage: "/images/google-gemini-cli-multi-repo-hero.webp"
 heroAlt: "Minimalist vintage editorial collage showing multi-repository file trees and terminal commands in Google Gemini CLI on soft olive"

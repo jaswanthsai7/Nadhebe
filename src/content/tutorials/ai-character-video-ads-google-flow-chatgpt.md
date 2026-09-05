@@ -37,7 +37,7 @@ sources:
 ### Skipped Folders
 - `src/content/comparisons/`: Skipped because the article focuses on execution architecture rather than benchmarking two competing video models.
 - `src/content/news/`: Skipped because this is a practical workflow guide rather than a breaking release announcement.
-- `src/content/tool-reviews/`: Skipped because priority is on prompt structure and continuity rules rather than scoring software products.
+- `src/content/reviews/`: Skipped because priority is on prompt structure and continuity rules rather than scoring software products.
 
 ---
 

@@ -3,7 +3,7 @@ title: "How to Deploy DeepSeek R1 on AWS using vLLM"
 description: "A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["DeepSeek", "DeepSeek R1", "AWS", "vLLM", "Inference", "Deployment", "LLM Ops"]
 heroImage: "/images/deepseek-r1-aws-vllm-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing cloud infrastructure interacting with an AI data node"

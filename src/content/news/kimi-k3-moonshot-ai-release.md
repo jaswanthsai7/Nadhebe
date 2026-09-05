@@ -2,7 +2,7 @@
 title: "Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer"
 description: "Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs."
 pubDate: 2026-07-19
-author: bob-smith
+author: nadhebe-team
 category: "News"
 tags: ["kimi-k3", "moonshot-ai", "open-weight", "moe-models", "release"]
 heroImage: "/images/news-hero.webp"

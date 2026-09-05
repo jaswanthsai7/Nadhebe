@@ -23,7 +23,22 @@ function getAllIndexableHtmlUrls(dir: string, baseDir: string): string[] {
       urls.push(...getAllIndexableHtmlUrls(fullPath, baseDir));
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       const relPath = path.relative(baseDir, fullPath).replace(/\\/g, '/');
-      if (relPath === '404.html' || relPath.endsWith('/404/index.html')) {
+      // Explicitly exclude non-indexable taxonomy and utility paths
+      if (
+        relPath.startsWith('404') ||
+        relPath.includes('404') ||
+        relPath.startsWith('offline') ||
+        relPath.startsWith('500') ||
+        relPath.startsWith('tag/') ||
+        relPath.startsWith('partners/') ||
+        relPath.startsWith('downloads/') ||
+        relPath.includes('.md/') ||
+        relPath.startsWith('tools/reference/') ||
+        relPath.startsWith('tools/aspect-ratio/') ||
+        relPath.startsWith('tools/compare/') ||
+        relPath.startsWith('tools/guides/') ||
+        relPath.startsWith('tools/http-status/')
+      ) {
         continue;
       }
 

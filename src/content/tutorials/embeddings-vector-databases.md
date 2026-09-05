@@ -3,7 +3,7 @@ title: "Embeddings & Vector Databases Explained"
 description: "A complete developer guide to AI embeddings, vector search, and choosing the right vector database. Learn how chunking, cosine similarity, and ANN search power modern RAG applications."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Vector Databases", "Embeddings", "RAG", "AI Search", "Cosine Similarity"]
 heroImage: "/images/vector-database-chunking-hero.webp"
 heroAlt: "Stylized infographic showing text data being converted into high-dimensional floating point vectors inside a neon database"
@@ -151,5 +151,5 @@ Yes! The `pgvector` extension adds native vector storage and HNSW indexing to st
 
 ## 11. Further Reading
 
-*   [State of Vector Databases 2026](/category/tutorials) *(Coming Soon)*
+*   [Agentic RAG Workflows with LangGraph](/tutorials/agentic-rag-workflows-langgraph)
 *   [Deploying DeepSeek R1 and vLLM on AWS](/tutorials/deploy-deepseek-r1-aws-vllm)

@@ -2,7 +2,7 @@
 title: "Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning"
 description: "A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments."
 pubDate: 2026-07-24
-author: bob-smith
+author: nadhebe-team
 category: "Tutorials"
 tags: ["vllm", "cuda-oom", "gpu-optimization", "llm-ops", "troubleshooting"]
 heroImage: "/images/tutorials-hero.webp"

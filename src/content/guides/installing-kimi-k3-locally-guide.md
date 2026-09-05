@@ -3,7 +3,7 @@ title: "Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide"
 description: "Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: guides
+category: "Guides"
 tags: ["kimi k3", "local llm", "cuda", "vllm"]
 heroImage: "/images/kimi-k3-setup-hero.webp"
 heroAlt: "Developer layout schematic explaining Kimi K3 mixture of experts CUDA runtime local setup steps"

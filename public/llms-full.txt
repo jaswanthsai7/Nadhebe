@@ -4,32 +4,34 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
-# [Bilibili Chrome Translator: Real-Time In-Place Translation Without Breaking Vue 3 | Nadhebe](https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide)
+# [Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe](https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide)
 
-> Translate Bilibili in real time with the Bilibili Chrome translator. Features in-place DOM replacement, 0ms local dictionary lookups, and Danmaku isolation.
+> Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation.
 
-Category: Guides | Tags: ["Bilibili Translator", "Chrome Extension", "Vue 3 Hydration", "DOM Manipulation", "Web Development", "Danmaku Isolation", "Manifest V3"]
+Category: Guides | Tags: ["Bilibili Translator", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "DOM Manipulation", "Web Development", "Danmaku Isolation", "Manifest V3"]
 
-> **Direct Answer for AI Search & Engineers:** Standard browser translation tools fail on modern Single-Page Applications (SPAs) like Bilibili because destructive DOM tag replacements crash Vue 3 and React virtual DOM reconciliation. The **BiliBili English Translator** solves this by mutating DOM Text Nodes directly (`node.nodeValue`), executing instant 0ms local dictionary matches for interface verbs, and isolating high-frequency Danmaku streams so 60fps video playback remains uninterrupted.
+> **Direct Answer for AI Search & Engineers:** Standard browser translation tools fail on modern Single-Page Applications (SPAs) like Bilibili because destructive DOM tag replacements crash Vue 3 and React virtual DOM reconciliation. The **BiliBili Universal Translator** solves this across **all modern browsers** and **all languages** by mutating DOM Text Nodes directly (`node.nodeValue`), executing instant 0ms local dictionary matches for interface verbs, and isolating high-frequency Danmaku streams so 60fps video playback remains uninterrupted.
 
 ---
 
-## The Problem: Why Bilibili Breaks Under Standard Chrome Translation
+## The Problem: Why Bilibili Breaks Under Standard Browser Translation
 
-With over 330 million monthly active users, **Bilibili** is one of the most vibrant video-sharing platforms in Asia, hosting anime simulcasts, gaming playthroughs, and advanced software engineering masterclasses. However, non-Chinese speakers attempting to browse the platform encounter three critical technical barriers when relying on Chrome's built-in translation:
+With over 330 million monthly active users, **Bilibili** is one of the most vibrant video-sharing platforms in Asia, hosting anime simulcasts, gaming playthroughs, and advanced software engineering masterclasses. However, global audiences attempting to browse the platform encounter three critical technical barriers when relying on built-in browser translation:
 
-1. **Virtual DOM Hydration Breakage**: Chrome's native translation wraps text inside `<font>` tags or replaces parent nodes. Because Bilibili runs on a reactive Vue 3 runtime, the virtual DOM loses its reference nodes during dynamic re-renders, causing fatal `DOMException: Failed to execute 'removeChild' on 'Node'` errors that lock up the video player and comments.
+1. **Virtual DOM Hydration Breakage**: Native browser translators wrap text inside `<font>` tags or replace parent nodes. Because Bilibili runs on a reactive Vue 3 runtime, the virtual DOM loses its reference nodes during dynamic re-renders, causing fatal `DOMException: Failed to execute 'removeChild' on 'Node'` errors that lock up video player speed controls, resolution pickers, and comments.
 2. **Danmaku API Flooding**: Bilibili's signature *Danmaku* (bullet comments scrolling across the video canvas) produce dozens of new DOM elements per second. Conventional translators attempt to batch and send these flying comments to cloud APIs, hitting HTTP 429 rate limits within 30 seconds and inducing heavy browser frame drops.
 3. **The "Floating Drift" Glitch**: Third-party overlay extensions render absolute CSS rectangles over text coordinates. When users scroll infinite video feeds or open modal drawers, the translated overlays decouple from their source containers and drift across blank space.
 
-To overcome these architectural limitations, **BiliBili English Translator** implements an in-place mutation pattern engineered specifically for reactive SPAs.
+To overcome these architectural limitations, **BiliBili Universal Translator** implements a cross-browser in-place mutation pattern engineered specifically for reactive SPAs in all languages.
 
 ---
 
 ## Architectural Comparison: Translation Strategies for Dynamic SPAs
 
-| Metric & Strategy | Standard Chrome / Google Translate | Floating CSS Overlays | Native In-Place `node.nodeValue` |
+| Metric & Strategy | Standard Browser / Google Translate | Floating CSS Overlays | Universal In-Place `node.nodeValue` |
 | :--- | :--- | :--- | :--- |
+| **Browser Compatibility** | Single vendor lock-in | Inconsistent coordinate rendering | **✅ All Browsers (Chrome, Edge, Brave, Arc, Opera)** |
+| **Language Support** | Fixed pair or limited locale | Manual selection | **🌐 All Languages (Auto-detect + 100+ locales)** |
 | **DOM Hierarchy Integrity** | ❌ Broken (Injects foreign `<font>` tags) | ⚠️ Fragile (Separate floating layer) | **✅ 100% Intact (Mutates existing text nodes)** |
 | **Vue 3 / React Hydration** | 💥 Fatal (`NotFoundError` on state change) | ✅ Intact (Virtual DOM untouched) | **🚀 100% Stable (Node pointers remain valid)** |
 | **Performance (1,000 Nodes)** | 🐌 Latent (Full layout recalculation) | 🐢 Sluggish ($O(N)$ `getBoundingClientRect`) | **⚡ Ultra-fast (<4ms single-pass TreeWalker)** |
@@ -38,10 +40,10 @@ To overcome these architectural limitations, **BiliBili English Translator** imp
 
 ---
 
-## Key Technical Breakthroughs of BiliBili English Translator
+## Key Technical Breakthroughs of BiliBili Universal Translator
 
-![Bilibili English Translator Application Interface](/images/bilibili-translator-banner.png)
-*Figure 1: The BiliBili English Translator architecture preserves native video player controls and typography while translating interface text in real time.*
+![Bilibili Universal Translator Application Interface](/images/bilibili-translator-banner.png)
+*Figure 1: The BiliBili Universal Translator architecture translates interface text and community commentary into any language in real time without breaking video controls.*
 
 ### 1. In-Place Text Node Mutation (`node.nodeValue`)
 
@@ -60,18 +62,18 @@ export function applyInPlaceTranslation(textNode: Text, translatedText: string):
 
 Because the parent element's identity and tag type never change, Vue's virtual DOM reconciliation algorithm operates seamlessly without discarding reactive event listeners.
 
-### 2. 0ms Offline Local Dictionary (2,000+ Pre-compiled Terms)
+### 2. Multi-Language Engine with 0ms Offline Local Dictionaries
 
-Frequent UI controls never trigger network requests. The extension ships with a pre-indexed dictionary tailored to Bilibili's design system:
+Frequent UI controls never trigger network requests. The extension ships with pre-indexed dictionaries and auto-detection across all major languages:
 
-* **Player Controls**: `倍速` ➔ `Playback Speed`, `高清 1080P` ➔ `HD 1080P`, `弹幕设置` ➔ `Danmaku Settings`
-* **Social Actions**: `+ 关注 56` ➔ `+ Follow 56`, `已关注` ➔ `Following`, `点赞` ➔ `Like`, `投币` ➔ `Coin`
-* **Navigation Menus**: `推荐` ➔ `Recommended`, `动态` ➔ `Feed`, `排行榜` ➔ `Rankings`
-* **Accessibility Attributes**: Automatically synchronizes `aria-label` and `title` tooltips to prevent browser hover bubbles from reverting to Chinese.
+* **Player Controls**: `倍速` ➔ `Playback Speed` (EN) / `Velocidad de reproducción` (ES) / `Vitesse de lecture` (FR) / `再生速度` (JA)
+* **Social Actions**: `+ 关注 56` ➔ `+ Follow 56` (EN) / `+ Seguir 56` (ES) / `+ S'abonner 56` (FR) / `+ フォロー 56` (JA)
+* **Navigation Menus**: `推荐` ➔ `Recommended` / `Recomendados` / `Recommandé`, `动态` ➔ `Feed` / `Flux`, `排行榜` ➔ `Rankings` / `Classement`
+* **Accessibility Attributes**: Automatically synchronizes `aria-label` and `title` tooltips in the target language to prevent browser hover bubbles from reverting to Chinese.
 
 ### 3. Intelligent Danmaku Stream Isolation
 
-The extension identifies flying comment rows using dedicated selector matching (`.bpx-player-row-dm` and `.bili-danmaku-x`). These streaming canvas elements are bypassed during translation extraction, allowing the video stream to maintain native 60fps hardware acceleration while static controls and comment cards are translated instantly.
+The extension identifies flying comment rows using dedicated selector matching (`.bpx-player-row-dm` and `.bili-danmaku-x`). These streaming canvas elements are bypassed during translation extraction, allowing the video stream to maintain native 60fps hardware acceleration while static controls, descriptions, and comment cards are translated instantly.
 
 ---
 
@@ -91,7 +93,7 @@ flowchart TD
     G -->|Cache Miss| I[Background Service Worker API Dispatcher]
     
     I --> J{Multi-Tier Engine Failover}
-    J -->|Primary: Google Extension RPC| K[Translate Batch]
+    J -->|Primary: Google Web RPC| K[Translate Batch to Target Language]
     J -->|Fallback 1: LibreTranslate| K
     J -->|Fallback 2: MyMemory API| K
     J -->|Custom AI: OpenAI / Ollama| K
@@ -101,9 +103,9 @@ flowchart TD
     H --> M[MutationObserver Anti-Reversion Guard]
 ```
 
-### High-Performance DOM Scanning with `TreeWalker`
+### Universal TreeWalker Traversal Across All Browsers
 
-Traditional extensions invoke `document.querySelectorAll('*')`, which triggers $O(N^2)$ layout recalculations on pages with deep component nesting. BiliBili English Translator uses a single-pass `TreeWalker` with filtering rules that executes in ~3.2 milliseconds across 1,200 nodes:
+Traditional extensions invoke `document.querySelectorAll('*')`, which triggers $O(N^2)$ layout recalculations on pages with deep component nesting. BiliBili Universal Translator uses a single-pass `TreeWalker` with filtering rules that executes in ~3.2 milliseconds across 1,200 nodes:
 
 ```typescript
 export function extractTranslatableNodes(root: Node = document.body): Text[] {
@@ -140,30 +142,26 @@ export function extractTranslatableNodes(root: Node = document.body): Text[] {
 }
 ```
 
-### Recursive Shadow DOM & Ephemeral Menu Handling
-
-Bilibili dynamically injects playback speed menus (`.bpx-player-ctrl-playbackrate-menu`) and video quality selectors (`.bpx-player-ctrl-quality-menu`) into the DOM only upon user hover or click. A debounced `MutationObserver` monitors dynamic insertions and recurses into open `shadowRoot` trees without entering recursive update loops.
-
 ---
 
-## Download & Install BiliBili English Translator
+## Download & Install BiliBili Universal Translator
 
-Install and run the extension immediately across Chromium browsers (Google Chrome, Brave, Microsoft Edge, Arc, and Opera):
+Install and run the extension immediately across **all browsers** (Google Chrome, Microsoft Edge, Brave, Arc, Opera, and Vivaldi):
 
 <div class="glass-panel p-24 sm:p-32 rounded-24 border border-border dark:border-border-dark bg-surface/80 dark:bg-surface-dark/80 shadow-medium my-32">
   <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16 pb-20 border-b border-border dark:border-border-dark">
     <div class="flex items-center gap-16">
       <img 
         src="/images/bilibili-translator-icon-128.png" 
-        alt="Bilibili English Translator Extension Icon" 
+        alt="Bilibili Universal Translator Extension Icon" 
         class="w-48 h-48 rounded-12 shadow-sm" 
         width="48" 
         height="48" 
         loading="lazy"
       />
       <div>
-        <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0">BiliBili English Translator</h3>
-        <p class="text-body-sm text-muted dark:text-muted-dark m-0">Manifest V3 • Real-Time In-Place DOM Translation • 100% Free & Open Source</p>
+        <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0">BiliBili Universal Translator</h3>
+        <p class="text-body-sm text-muted dark:text-muted-dark m-0">Manifest V3 • All Browsers • All Languages • Real-Time In-Place DOM Translation</p>
       </div>
     </div>
     <span class="inline-flex items-center gap-6 px-12 py-5 rounded-full text-caption font-mono font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
@@ -174,7 +172,7 @@ Install and run the extension immediately across Chromium browsers (Google Chrom
 
   <div class="py-20 space-y-16">
     <p class="text-body text-ink dark:text-ink-dark">
-      Download the production-ready Manifest V3 ZIP package below to install it locally in Developer Mode, or visit the WebExtensions store directory while our official Chrome Web Store listing completes public review:
+      Download the production-ready WebExtensions ZIP package below to install it locally in Developer Mode, or visit the WebExtensions store directory while our official store listings complete public review:
     </p>
     
     <div class="flex flex-wrap gap-12 pt-8">
@@ -183,7 +181,7 @@ Install and run the extension immediately across Chromium browsers (Google Chrom
         name="bilibili-translator-zip-download"
         href="/downloads/bilibili-english-translator.zip" 
         download="bilibili-english-translator.zip" 
-        aria-label="Download Bilibili English Translator Manifest V3 ZIP package"
+        aria-label="Download Bilibili Universal Translator WebExtensions ZIP package"
         class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-white bg-accent hover:bg-accent/90 shadow-sm transition-transform active:scale-95 text-decoration-none"
       >
         <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -209,7 +207,7 @@ Install and run the extension immediately across Chromium browsers (Google Chrom
         href="https://github.com/jaswanthsai7/universal-web-translator" 
         target="_blank" 
         rel="noopener noreferrer" 
-        aria-label="View Bilibili English Translator source code on GitHub"
+        aria-label="View Bilibili Universal Translator source code on GitHub"
         class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark hover:bg-surface3 dark:hover:bg-surface3-dark border border-border dark:border-border-dark transition-colors text-decoration-none"
       >
         <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
@@ -219,32 +217,39 @@ Install and run the extension immediately across Chromium browsers (Google Chrom
   </div>
 
   <div class="mt-16 p-16 rounded-12 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark text-body-sm">
-    <strong class="text-ink dark:text-ink-dark">Installation Walkthrough (30 Seconds):</strong>
+    <strong class="text-ink dark:text-ink-dark">Installation Walkthrough for Any Browser (30 Seconds):</strong>
     <ol class="list-decimal pl-20 mt-8 space-y-4 text-muted dark:text-muted-dark">
-      <li>Download and extract <code class="text-accent font-mono">bilibili-english-translator.zip</code> to a local folder.</li>
-      <li>Open your browser and navigate to <code class="text-accent font-mono">chrome://extensions</code> (or <code class="text-accent font-mono">edge://extensions</code>).</li>
+      <li>Download and extract <code class="text-accent font-mono">bilibili-english-translator.zip</code> to your computer.</li>
+      <li>Open your browser's extension manager:
+        <ul class="list-disc pl-16 mt-4 space-y-2">
+          <li><strong>Chrome / Brave / Arc / Opera:</strong> Navigate to <code class="text-accent font-mono">chrome://extensions</code></li>
+          <li><strong>Microsoft Edge:</strong> Navigate to <code class="text-accent font-mono">edge://extensions</code></li>
+        </ul>
+      </li>
       <li>Toggle on <strong>Developer mode</strong> in the top-right corner.</li>
-      <li>Click <strong>Load unpacked</strong> and select the unzipped directory.</li>
-      <li>Open <a href="https://www.bilibili.com" target="_blank" rel="noopener" class="text-accent underline font-medium">bilibili.com</a> and experience seamless real-time translation with fully functional video controls!</li>
+      <li>Click <strong>Load unpacked</strong> and choose the unzipped extension directory.</li>
+      <li>Open <a href="https://www.bilibili.com" target="_blank" rel="noopener" class="text-accent underline font-medium">bilibili.com</a>, pick your target language in the extension popup, and explore Bilibili smoothly with fully functional video controls!</li>
     </ol>
   </div>
 </div>
 
 ---
 
-## Best Practices for Building Non-Destructive Extension Translators
+## Best Practices for Building Universal Extension Translators
 
-When building browser extensions that manipulate complex Single-Page Applications, follow these production rules:
+When building browser extensions that manipulate complex Single-Page Applications across multiple browsers and languages, follow these production rules:
 
 1. **Avoid Node Wrapping**: Never replace `Text` nodes with wrapper elements (like `<span>` or `<font>`). Doing so severs references stored by framework virtual DOM reconcilers.
-2. **Batch Dynamic Mutations**: Combine `requestAnimationFrame` with a debounced `MutationObserver` (50–80ms) to bundle dynamic comment loads and prevent UI thread starvation.
-3. **Filter Ephemeral Elements**: Danmaku, canvas streams, code blocks, and audio visualizations should be strictly rejected in the `TreeWalker` filter to prevent rate-limiting and memory leaks.
-4. **Implement Memory-Backed LRU Caching**: Store repetitive UI phrases in an in-memory hash map (`O(1)` access) backed by `chrome.storage.local` to deliver instantaneous translations across page navigations.
+2. **Support Bidirectional Language Scripts**: Ensure CSS containers respect RTL languages (like Arabic or Hebrew) dynamically via `dir="auto"` attributes when swapping text values.
+3. **Batch Dynamic Mutations**: Combine `requestAnimationFrame` with a debounced `MutationObserver` (50–80ms) to bundle dynamic comment loads and prevent UI thread starvation.
+4. **Filter Ephemeral Elements**: Danmaku, canvas streams, code blocks, and audio visualizations should be strictly rejected in the `TreeWalker` filter to prevent rate-limiting and memory leaks.
+5. **Implement Memory-Backed LRU Caching**: Store repetitive UI phrases in an in-memory hash map (`O(1)` access) backed by `chrome.storage.local` to deliver instantaneous translations across page navigations.
 
 ---
 
 ## Key Takeaways
 
+* **Universal Browser & Language Support**: The extension works across Chrome, Edge, Brave, Arc, Opera, and Vivaldi, translating Chinese into all major global languages.
 * **Virtual DOM Compatibility**: Direct `node.nodeValue` mutations preserve Vue 3 and React internal fiber/component trees, preventing fatal hydration crashes.
 * **Viewport Prioritization**: Single-pass TreeWalker parsing combined with viewport sorting delivers readable translations in less than 4 milliseconds.
 * **Danmaku Stream Filtering**: Isolating flying bullet comments keeps video playback locked at 60fps and conserves API quota.
@@ -1395,18 +1400,6 @@ graph TD
 
 ---
 
-# [ChatGPT Ad Blocker - Chrome Extension & Rule Generator | Nadhebe](https://nadhebe.com/tools/chatgpt-ad-blocker)
-
-> Block ChatGPT upgrade banners, upsell promo cards, and partner app ads with a lightweight, privacy-first Manifest V3 Chrome extension and rule generator.
-
-Category: Tools | Tags: ["ChatGPT Ad Blocker", "Chrome Extension", "AI Tools", "Privacy", "Manifest V3"]
-
-## ChatGPT Ad Blocker
-
-Download the free, privacy-first [ChatGPT Ad Blocker](/tools/chatgpt-ad-blocker/) browser extension to remove ChatGPT Plus/Pro upgrade banners, partner ads, and promotional popups with zero latency.
-
----
-
 # [How to Create AI Influencer Video Ads with ChatGPT & Google Flow: 3-Scene Visual Continuity Guide](https://nadhebe.com/tutorials/ai-character-video-ads-google-flow-chatgpt)
 
 > Master step-by-step workflow for generating photorealistic AI characters in ChatGPT and directing 30-second multi-scene video ads in Google Flow with zero drift.
@@ -1422,7 +1415,7 @@ Category: Tutorials | Tags: ["google-flow", "ai-video", "chatgpt", "prompts", "v
 ### Skipped Folders
 - `src/content/comparisons/`: Skipped because the article focuses on execution architecture rather than benchmarking two competing video models.
 - `src/content/news/`: Skipped because this is a practical workflow guide rather than a breaking release announcement.
-- `src/content/tool-reviews/`: Skipped because priority is on prompt structure and continuity rules rather than scoring software products.
+- `src/content/reviews/`: Skipped because priority is on prompt structure and continuity rules rather than scoring software products.
 
 ---
 
@@ -4124,1206 +4117,6 @@ print(f"B200 FP4 Energy Cost: {b200_fp4_joules} Joules / 1k Tokens")
 
 1. **Deploy NVIDIA H200** for existing enterprise datacenters operating standard FP8 inference workloads where 141 GB VRAM per GPU eliminates multi-GPU tensor splitting for 70B models.
 2. **Deploy NVIDIA Blackwell B200** for high-volume enterprise clusters running next-generation NVFP4 quantized models, cutting energy consumption per token by 57% and tripling decode throughput.
-
----
-
-# [16 9 Dimensions Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/16-9-dimensions-calculator)
-
-> Interactive online 16 9 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["16 9 Dimensions Calculator", "Developer Tools", "Web Utility"]
-
-## 16 9 Dimensions Calculator
-
-Use our free interactive [16 9 Dimensions Calculator](/tools/16-9-dimensions-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [9 16 Dimensions Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/9-16-dimensions-calculator)
-
-> Interactive online 9 16 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["9 16 Dimensions Calculator", "Developer Tools", "Web Utility"]
-
-## 9 16 Dimensions Calculator
-
-Use our free interactive [9 16 Dimensions Calculator](/tools/9-16-dimensions-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Ai Api Pricing Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/ai-api-pricing-calculator)
-
-> Interactive online Ai Api Pricing Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Ai Api Pricing Calculator", "Developer Tools", "Web Utility"]
-
-## Ai Api Pricing Calculator
-
-Use our free interactive [Ai Api Pricing Calculator](/tools/ai-api-pricing-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Ai Persona Prompt Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/ai-persona-prompt-generator)
-
-> Interactive online Ai Persona Prompt Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Ai Persona Prompt Generator", "Developer Tools", "Web Utility"]
-
-## Ai Persona Prompt Generator
-
-Use our free interactive [Ai Persona Prompt Generator](/tools/ai-persona-prompt-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Api Payload Builder | Nadhebe Developer Tools](https://nadhebe.com/tools/api-payload-builder)
-
-> Interactive online Api Payload Builder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Api Payload Builder", "Developer Tools", "Web Utility"]
-
-## Api Payload Builder
-
-Use our free interactive [Api Payload Builder](/tools/api-payload-builder/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Aspect Ratio Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/aspect-ratio-calculator)
-
-> Interactive online Aspect Ratio Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Aspect Ratio Calculator", "Developer Tools", "Web Utility"]
-
-## Aspect Ratio Calculator
-
-Use our free interactive [Aspect Ratio Calculator](/tools/aspect-ratio-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Average Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/average-calculator)
-
-> Interactive online Average Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Average Calculator", "Developer Tools", "Web Utility"]
-
-## Average Calculator
-
-Use our free interactive [Average Calculator](/tools/average-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Base64 Encoder | Nadhebe Developer Tools](https://nadhebe.com/tools/base64-encoder)
-
-> Interactive online Base64 Encoder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Base64 Encoder", "Developer Tools", "Web Utility"]
-
-## Base64 Encoder
-
-Use our free interactive [Base64 Encoder](/tools/base64-encoder/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Batch Inference Cost Estimator | Nadhebe Developer Tools](https://nadhebe.com/tools/batch-inference-cost-estimator)
-
-> Interactive online Batch Inference Cost Estimator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Batch Inference Cost Estimator", "Developer Tools", "Web Utility"]
-
-## Batch Inference Cost Estimator
-
-Use our free interactive [Batch Inference Cost Estimator](/tools/batch-inference-cost-estimator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Developer Profile & Author Bio Formatter | Nadhebe](https://nadhebe.com/tools/bio-formatter)
-
-> Format short social bios, GitHub profile README intros, and author descriptions with word and character count limits.
-
-Category: Tools | Tags: ["Bio Generator","GitHub Profile","Social Media","Formatting"]
-
-## Author & Profile Bio Formatter
-
-Use our interactive [Author & Profile Bio Formatter](/tools/bio-formatter/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [SaaS CAC Payback Period & LTV:CAC Calculator](https://nadhebe.com/tools/cac-payback-calculator)
-
-> Interactive calculator tool for SaaS CAC payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.
-
-Category: Tools | Tags: ["CAC Payback", "SaaS Metrics", "Unit Economics", "LTV:CAC", "Business Calculator"]
-
-## SaaS CAC Payback Period & LTV:CAC Calculator
-
-Use our interactive [CAC Payback Period Calculator](/tools/cac-payback-calculator/) to analyze SaaS unit economics, gross-margin adjusted payback months, customer lifetime value (LTV), and LTV:CAC ratios.
-
----
-
-# [Cac Payback | Nadhebe Developer Tools](https://nadhebe.com/tools/cac-payback)
-
-> Interactive online Cac Payback tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Cac Payback", "Developer Tools", "Web Utility"]
-
-## Cac Payback
-
-Use our free interactive [Cac Payback](/tools/cac-payback/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Case Converter | Nadhebe Developer Tools](https://nadhebe.com/tools/case-converter)
-
-> Interactive online Case Converter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Case Converter", "Developer Tools", "Web Utility"]
-
-## Case Converter
-
-Use our free interactive [Case Converter](/tools/case-converter/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Keep a Changelog Markdown Generator | Nadhebe](https://nadhebe.com/tools/changelog-formatter)
-
-> Generate clean Keep a Changelog markdown files with Added, Changed, Fixed, Security, and Deprecated sections.
-
-Category: Tools | Tags: ["Changelog","Markdown","Release Notes","Open Source"]
-
-## Changelog Markdown Formatter
-
-Use our interactive [Changelog Markdown Formatter](/tools/changelog-formatter/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [YouTube & Podcast Chapter Timestamp Formatter | Nadhebe](https://nadhebe.com/tools/chapter-formatter)
-
-> Format chapter timestamps for YouTube videos, podcasts, and audio courses with automatic time validation.
-
-Category: Tools | Tags: ["YouTube","Timestamps","Podcast","Video Editing"]
-
-## Video & Chapter Timestamp Formatter
-
-Use our interactive [Video & Chapter Timestamp Formatter](/tools/chapter-formatter/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Interactive Task & Deployment Checklist Builder | Nadhebe](https://nadhebe.com/tools/checklist-builder)
-
-> Build interactive pre-flight deployment checklists, QA test plans, and release procedures with export options.
-
-Category: Tools | Tags: ["Checklist","Deployment","QA Testing","DevOps"]
-
-## Interactive Checklist Builder
-
-Use our interactive [Interactive Checklist Builder](/tools/checklist-builder/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [RAG Text Chunking & Overlap Size Planner | Nadhebe](https://nadhebe.com/tools/chunk-size-planner)
-
-> Calculate token counts, chunk overlap percentages, and vector embedding storage sizes for LLM RAG pipelines.
-
-Category: Tools | Tags: ["RAG","Chunking","Vector Database","Embeddings"]
-
-## RAG Chunk Size & Overlap Planner
-
-Use our interactive [RAG Chunk Size & Overlap Planner](/tools/chunk-size-planner/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [APA, MLA & BibTeX Technical Citation Generator | Nadhebe](https://nadhebe.com/tools/citation-formatter)
-
-> Format technical citations in APA, MLA, Chicago, IEEE, and BibTeX styles for research papers and developer blogs.
-
-Category: Tools | Tags: ["Citations","APA","BibTeX","IEEE","Research"]
-
-## Technical Citation Formatter
-
-Use our interactive [Technical Citation Formatter](/tools/citation-formatter/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Claude Desktop Mcp Config Maker | Nadhebe Developer Tools](https://nadhebe.com/tools/claude-desktop-mcp-config-maker)
-
-> Interactive online Claude Desktop Mcp Config Maker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Claude Desktop Mcp Config Maker", "Developer Tools", "Web Utility"]
-
-## Claude Desktop Mcp Config Maker
-
-Use our free interactive [Claude Desktop Mcp Config Maker](/tools/claude-desktop-mcp-config-maker/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Claude Hook Template Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/claude-hook-template-generator)
-
-> Interactive online Claude Hook Template Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Claude Hook Template Generator", "Developer Tools", "Web Utility"]
-
-## Claude Hook Template Generator
-
-Use our free interactive [Claude Hook Template Generator](/tools/claude-hook-template-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Cumulative Layout Shift (CLS) Optimization Checklist | Nadhebe](https://nadhebe.com/tools/cls-checklist)
-
-> Audit and optimize Cumulative Layout Shift (CLS) issues, web font loading, image aspect ratios, and dynamic DOM shifts.
-
-Category: Tools | Tags: ["Core Web Vitals","CLS","Page Speed","Performance"]
-
-## CLS Web Vitals Optimization Checklist
-
-Use our interactive [CLS Web Vitals Optimization Checklist](/tools/cls-checklist/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Color Contrast Checker | Nadhebe Developer Tools](https://nadhebe.com/tools/color-contrast-checker)
-
-> Interactive online Color Contrast Checker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Color Contrast Checker", "Developer Tools", "Web Utility"]
-
-## Color Contrast Checker
-
-Use our free interactive [Color Contrast Checker](/tools/color-contrast-checker/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [CSV Column Extractor | Nadhebe](https://nadhebe.com/tools/column-extractor)
-
-> Extract specific columns from raw CSV data by header selection.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Column Extractor | Nadhebe
-
-Extract specific columns from raw CSV data by header selection.
-
----
-
-# [CSV Column Statistics Profiler | Nadhebe](https://nadhebe.com/tools/column-profiler)
-
-> Compute column-level statistics, min/max values, and unique counts.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Column Statistics Profiler | Nadhebe
-
-Compute column-level statistics, min/max values, and unique counts.
-
----
-
-# [Compound Interest | Nadhebe Developer Tools](https://nadhebe.com/tools/compound-interest)
-
-> Interactive online Compound Interest tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Compound Interest", "Developer Tools", "Web Utility"]
-
-## Compound Interest
-
-Use our free interactive [Compound Interest](/tools/compound-interest/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [LLM Context Window Budget Planner | Nadhebe](https://nadhebe.com/tools/context-budget-planner)
-
-> Calculate prompt context budget allocation across system instructions, user history, RAG chunks, and output headroom.
-
-Category: Tools | Tags: ["Context Window","LLM Budget","Tokens","Prompt Engineering"]
-
-## LLM Context Window Budget Planner
-
-Use our interactive [LLM Context Window Budget Planner](/tools/context-budget-planner/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Cosine Similarity Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/cosine-similarity-calculator)
-
-> Interactive online Cosine Similarity Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Cosine Similarity Calculator", "Developer Tools", "Web Utility"]
-
-## Cosine Similarity Calculator
-
-Use our free interactive [Cosine Similarity Calculator](/tools/cosine-similarity-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Cron Explainer | Nadhebe Developer Tools](https://nadhebe.com/tools/cron-explainer)
-
-> Interactive online Cron Explainer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Cron Explainer", "Developer Tools", "Web Utility"]
-
-## Cron Explainer
-
-Use our free interactive [Cron Explainer](/tools/cron-explainer/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Cron Next Run Viewer | Nadhebe Developer Tools](https://nadhebe.com/tools/cron-next-run-viewer)
-
-> Interactive online Cron Next Run Viewer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Cron Next Run Viewer", "Developer Tools", "Web Utility"]
-
-## Cron Next Run Viewer
-
-Use our free interactive [Cron Next Run Viewer](/tools/cron-next-run-viewer/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Css Clamp Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/css-clamp-calculator)
-
-> Interactive online Css Clamp Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Css Clamp Calculator", "Developer Tools", "Web Utility"]
-
-## Css Clamp Calculator
-
-Use our free interactive [Css Clamp Calculator](/tools/css-clamp-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Visual CSV Grid Table Builder | Nadhebe](https://nadhebe.com/tools/csv-builder)
-
-> Build and edit CSV files visually in your browser with table controls.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# Visual CSV Grid Table Builder | Nadhebe
-
-Build and edit CSV files visually in your browser with table controls.
-
----
-
-# [CSV Delimiter & Column Balance Checker | Nadhebe](https://nadhebe.com/tools/csv-checker)
-
-> Audit CSV files line-by-line for mismatched column counts.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Delimiter & Column Balance Checker | Nadhebe
-
-Audit CSV files line-by-line for mismatched column counts.
-
----
-
-# [CSV Sanitizer & Blank Line Cleaner | Nadhebe](https://nadhebe.com/tools/csv-cleaner)
-
-> Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Sanitizer & Blank Line Cleaner | Nadhebe
-
-Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.
-
----
-
-# [Csv Deduper | Nadhebe Developer Tools](https://nadhebe.com/tools/csv-deduper)
-
-> Interactive online Csv Deduper tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Csv Deduper", "Developer Tools", "Web Utility"]
-
-## Csv Deduper
-
-Use our free interactive [Csv Deduper](/tools/csv-deduper/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [CSV Row Count & Parse Speed Estimator | Nadhebe](https://nadhebe.com/tools/csv-estimator)
-
-> Estimate total row counts, uncompressed byte sizes, and web parsing throughput for raw CSV payloads.
-
-Category: Tools | Tags: ["CSV Estimator","Performance","Row Counter","File Size"]
-
-## CSV Size & Row Estimator
-
-Use our interactive [CSV Size & Row Estimator](/tools/csv-estimator/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CSV Encoding & Line Ending Inspector | Nadhebe](https://nadhebe.com/tools/csv-inspector)
-
-> Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Encoding & Line Ending Inspector | Nadhebe
-
-Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.
-
----
-
-# [Multi-File CSV Table Merger | Nadhebe](https://nadhebe.com/tools/csv-merger)
-
-> Merge multiple CSV datasets into a single consolidated table.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# Multi-File CSV Table Merger | Nadhebe
-
-Merge multiple CSV datasets into a single consolidated table.
-
----
-
-# [CSV Data Pipeline Schema Planner | Nadhebe](https://nadhebe.com/tools/csv-planner)
-
-> Plan CSV data pipeline schemas and generate SQL DDL tables.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Data Pipeline Schema Planner | Nadhebe
-
-Plan CSV data pipeline schemas and generate SQL DDL tables.
-
----
-
-# [CSV Table Preview & Viewer | Nadhebe](https://nadhebe.com/tools/csv-preview)
-
-> Preview raw CSV data as an interactive, searchable HTML table.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Table Preview & Viewer | Nadhebe
-
-Preview raw CSV data as an interactive, searchable HTML table.
-
----
-
-# [CSV Schema & Type Constraint Validator | Nadhebe](https://nadhebe.com/tools/csv-validator)
-
-> Validate CSV data against custom column data type constraints.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV Schema & Type Constraint Validator | Nadhebe
-
-Validate CSV data against custom column data type constraints.
-
----
-
-# [Data Analysis Query & Filter Builder | Nadhebe](https://nadhebe.com/tools/data-analysis-builder)
-
-> Build structured filter conditions, group-by aggregates, and statistical summary queries for raw data tables.
-
-Category: Tools | Tags: ["Data Analysis","Query Builder","Aggregations","Filtering"]
-
-## Data Analysis Query Builder
-
-Use our interactive [Data Analysis Query Builder](/tools/data-analysis-builder/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Data Analysis Anomaly & Outlier Checker | Nadhebe](https://nadhebe.com/tools/data-analysis-checker)
-
-> Scan tabular data for statistical outliers, z-score anomalies, duplicate keys, and missing data gaps.
-
-Category: Tools | Tags: ["Anomaly Detection","Outliers","Data Quality","Z-Score"]
-
-## Data Analysis Anomaly Checker
-
-Use our interactive [Data Analysis Anomaly Checker](/tools/data-analysis-checker/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Data Processing Memory & File Size Estimator | Nadhebe](https://nadhebe.com/tools/data-analysis-estimator)
-
-> Estimate RAM and disk memory requirements for loading large datasets into Pandas, Polars, or SQL tables.
-
-Category: Tools | Tags: ["Memory Estimator","Pandas","Polars","Big Data"]
-
-## Data Processing Memory Estimator
-
-Use our interactive [Data Processing Memory Estimator](/tools/data-analysis-estimator/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Dataset Correlation & Metric Inspector | Nadhebe](https://nadhebe.com/tools/data-analysis-inspector)
-
-> Inspect numerical variances, standard deviations, summary quantiles, and data distributions.
-
-Category: Tools | Tags: ["Dataset Inspector","Variance","Quantiles","Statistics"]
-
-## Dataset Metric Inspector
-
-Use our interactive [Dataset Metric Inspector](/tools/data-analysis-inspector/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Data Science & Metrics Planner | Nadhebe](https://nadhebe.com/tools/data-analysis-planner)
-
-> Plan key performance indicators (KPIs), sample sizes, target metrics, and exploratory analysis steps.
-
-Category: Tools | Tags: ["KPI Planner","Data Science","Metrics","Statistics"]
-
-## Data Science Metrics Planner
-
-Use our interactive [Data Science Metrics Planner](/tools/data-analysis-planner/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [Data Analysis Report Template Maker | Nadhebe](https://nadhebe.com/tools/data-analysis-template-maker)
-
-> Create structured markdown templates for data science reports, exploratory analysis, and business metrics.
-
-Category: Tools | Tags: ["Data Science","Report Template","Markdown","Analytics"]
-
-## Data Analysis Report Template Maker
-
-Use our interactive [Data Analysis Report Template Maker](/tools/data-analysis-template-maker/) to process datasets, format CSV structures, and inspect data payloads.
-
----
-
-# [CRON & Scheduled Date Builder | Nadhebe](https://nadhebe.com/tools/date-and-time-builder)
-
-> Build schedule timestamps, recurrent event series, and cron execution intervals with timezone offsets.
-
-Category: Tools | Tags: ["Cron","Scheduling","Timestamps","Events"]
-
-## Scheduled Date & Time Builder
-
-Use our interactive [Scheduled Date & Time Builder](/tools/date-and-time-builder/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Date & Time Zone & Format Inspector | Nadhebe](https://nadhebe.com/tools/date-and-time-inspector)
-
-> Inspect timezone offsets, daylight savings transitions, and international date formatting patterns across locales.
-
-Category: Tools | Tags: ["Timezones","Date Inspector","Intl.DateTimeFormat","UTC"]
-
-## Date & Time Inspector
-
-Use our interactive [Date & Time Inspector](/tools/date-and-time-inspector/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Date & Time Format Pattern Generator | Nadhebe](https://nadhebe.com/tools/date-and-time-template-maker)
-
-> Generate custom date and time formatting strings for Moment.js, date-fns, Luxon, and Python strftime.
-
-Category: Tools | Tags: ["Date Formatter","strftime","date-fns","Moment.js"]
-
-## Date Format Pattern Generator
-
-Use our interactive [Date Format Pattern Generator](/tools/date-and-time-template-maker/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Date Difference | Nadhebe Developer Tools](https://nadhebe.com/tools/date-difference)
-
-> Interactive online Date Difference tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Date Difference", "Developer Tools", "Web Utility"]
-
-## Date Difference
-
-Use our free interactive [Date Difference](/tools/date-difference/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [CSV & Delimiter Converter | Nadhebe](https://nadhebe.com/tools/delimiter-converter)
-
-> Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# CSV & Delimiter Converter | Nadhebe
-
-Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.
-
----
-
-# [SEO Meta Description & OpenGraph Template Generator | Nadhebe](https://nadhebe.com/tools/description-template)
-
-> Generate SEO meta descriptions, Twitter card summaries, and social media post descriptions with character counters.
-
-Category: Tools | Tags: ["SEO","Meta Description","OpenGraph","Social Media"]
-
-## SEO Description Template Maker
-
-Use our interactive [SEO Description Template Maker](/tools/description-template/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Code & Console Log Stripper | Nadhebe](https://nadhebe.com/tools/developer-cleaner)
-
-> Strip console.log calls, debugger statements, and comments from code.
-
-Category: Tools | Tags: ["CSV", "Data", "Tools"]
-
-# Code & Console Log Stripper | Nadhebe
-
-Strip console.log calls, debugger statements, and comments from code.
-
----
-
-# [Dockerfile Linter | Nadhebe Developer Tools](https://nadhebe.com/tools/dockerfile-linter)
-
-> Interactive online Dockerfile Linter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Dockerfile Linter", "Developer Tools", "Web Utility"]
-
-## Dockerfile Linter
-
-Use our free interactive [Dockerfile Linter](/tools/dockerfile-linter/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Dpi Print Size Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/dpi-print-size-calculator)
-
-> Interactive online Dpi Print Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Dpi Print Size Calculator", "Developer Tools", "Web Utility"]
-
-## Dpi Print Size Calculator
-
-Use our free interactive [Dpi Print Size Calculator](/tools/dpi-print-size-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Embedding Inspector | Nadhebe Developer Tools](https://nadhebe.com/tools/embedding-inspector)
-
-> Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Embedding Inspector", "Developer Tools", "Web Utility"]
-
-## Embedding Inspector
-
-Use our free interactive [Embedding Inspector](/tools/embedding-inspector/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Env Diff | Nadhebe Developer Tools](https://nadhebe.com/tools/env-diff)
-
-> Interactive online Env Diff tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Env Diff", "Developer Tools", "Web Utility"]
-
-## Env Diff
-
-Use our free interactive [Env Diff](/tools/env-diff/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [LLM Evaluation Rubric Generator | Nadhebe](https://nadhebe.com/tools/eval-rubric-generator)
-
-> Create structured scoring rubrics for evaluating AI model outputs, prompt response quality, and RAG accuracy.
-
-Category: Tools | Tags: ["LLM Evals","AI Testing","Rubric","Prompt Engineering"]
-
-## LLM Eval Rubric Generator
-
-Use our interactive [LLM Eval Rubric Generator](/tools/eval-rubric-generator/) to process data, format snippets, and analyze metrics directly in your browser.
-
----
-
-# [Few Shot Prompt Formatter | Nadhebe Developer Tools](https://nadhebe.com/tools/few-shot-prompt-formatter)
-
-> Interactive online Few Shot Prompt Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Few Shot Prompt Formatter", "Developer Tools", "Web Utility"]
-
-## Few Shot Prompt Formatter
-
-Use our free interactive [Few Shot Prompt Formatter](/tools/few-shot-prompt-formatter/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Gpu Vram Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/gpu-vram-calculator)
-
-> Interactive online Gpu Vram Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Gpu Vram Calculator", "Developer Tools", "Web Utility"]
-
-## Gpu Vram Calculator
-
-Use our free interactive [Gpu Vram Calculator](/tools/gpu-vram-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Http Status Codes Cheat Sheet | Nadhebe Developer Tools](https://nadhebe.com/tools/http-status-codes-cheat-sheet)
-
-> Interactive online Http Status Codes Cheat Sheet tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Http Status Codes Cheat Sheet", "Developer Tools", "Web Utility"]
-
-## Http Status Codes Cheat Sheet
-
-Use our free interactive [Http Status Codes Cheat Sheet](/tools/http-status-codes-cheat-sheet/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json Formatter | Nadhebe Developer Tools](https://nadhebe.com/tools/json-formatter)
-
-> Interactive online Json Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json Formatter", "Developer Tools", "Web Utility"]
-
-## Json Formatter
-
-Use our free interactive [Json Formatter](/tools/json-formatter/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json Minifier | Nadhebe Developer Tools](https://nadhebe.com/tools/json-minifier)
-
-> Interactive online Json Minifier tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json Minifier", "Developer Tools", "Web Utility"]
-
-## Json Minifier
-
-Use our free interactive [Json Minifier](/tools/json-minifier/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json Path Finder | Nadhebe Developer Tools](https://nadhebe.com/tools/json-path-finder)
-
-> Interactive online Json Path Finder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json Path Finder", "Developer Tools", "Web Utility"]
-
-## Json Path Finder
-
-Use our free interactive [Json Path Finder](/tools/json-path-finder/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json Repair | Nadhebe Developer Tools](https://nadhebe.com/tools/json-repair)
-
-> Interactive online Json Repair tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json Repair", "Developer Tools", "Web Utility"]
-
-## Json Repair
-
-Use our free interactive [Json Repair](/tools/json-repair/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json To Typescript | Nadhebe Developer Tools](https://nadhebe.com/tools/json-to-typescript)
-
-> Interactive online Json To Typescript tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json To Typescript", "Developer Tools", "Web Utility"]
-
-## Json To Typescript
-
-Use our free interactive [Json To Typescript](/tools/json-to-typescript/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json To Xml | Nadhebe Developer Tools](https://nadhebe.com/tools/json-to-xml)
-
-> Interactive online Json To Xml tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json To Xml", "Developer Tools", "Web Utility"]
-
-## Json To Xml
-
-Use our free interactive [Json To Xml](/tools/json-to-xml/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Json Validator | Nadhebe Developer Tools](https://nadhebe.com/tools/json-validator)
-
-> Interactive online Json Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Json Validator", "Developer Tools", "Web Utility"]
-
-## Json Validator
-
-Use our free interactive [Json Validator](/tools/json-validator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Llm Model Comparison Matrix | Nadhebe Developer Tools](https://nadhebe.com/tools/llm-model-comparison-matrix)
-
-> Interactive online Llm Model Comparison Matrix tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Llm Model Comparison Matrix", "Developer Tools", "Web Utility"]
-
-## Llm Model Comparison Matrix
-
-Use our free interactive [Llm Model Comparison Matrix](/tools/llm-model-comparison-matrix/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Llm Rate Limit Backoff Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/llm-rate-limit-backoff-generator)
-
-> Interactive online Llm Rate Limit Backoff Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Llm Rate Limit Backoff Generator", "Developer Tools", "Web Utility"]
-
-## Llm Rate Limit Backoff Generator
-
-Use our free interactive [Llm Rate Limit Backoff Generator](/tools/llm-rate-limit-backoff-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Llm Token Counter Multi Model | Nadhebe Developer Tools](https://nadhebe.com/tools/llm-token-counter-multi-model)
-
-> Interactive online Llm Token Counter Multi Model tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Llm Token Counter Multi Model", "Developer Tools", "Web Utility"]
-
-## Llm Token Counter Multi Model
-
-Use our free interactive [Llm Token Counter Multi Model](/tools/llm-token-counter-multi-model/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Mcp Json Rpc Payload Tester | Nadhebe Developer Tools](https://nadhebe.com/tools/mcp-json-rpc-payload-tester)
-
-> Interactive online Mcp Json Rpc Payload Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Mcp Json Rpc Payload Tester", "Developer Tools", "Web Utility"]
-
-## Mcp Json Rpc Payload Tester
-
-Use our free interactive [Mcp Json Rpc Payload Tester](/tools/mcp-json-rpc-payload-tester/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Mcp Server Config Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/mcp-server-config-generator)
-
-> Interactive online Mcp Server Config Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Mcp Server Config Generator", "Developer Tools", "Web Utility"]
-
-## Mcp Server Config Generator
-
-Use our free interactive [Mcp Server Config Generator](/tools/mcp-server-config-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Mcp Server Manifest Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/mcp-server-manifest-generator)
-
-> Interactive online Mcp Server Manifest Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Mcp Server Manifest Generator", "Developer Tools", "Web Utility"]
-
-## Mcp Server Manifest Generator
-
-Use our free interactive [Mcp Server Manifest Generator](/tools/mcp-server-manifest-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Megapixels To Resolution Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/megapixels-to-resolution-calculator)
-
-> Interactive online Megapixels To Resolution Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Megapixels To Resolution Calculator", "Developer Tools", "Web Utility"]
-
-## Megapixels To Resolution Calculator
-
-Use our free interactive [Megapixels To Resolution Calculator](/tools/megapixels-to-resolution-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Meta Tag Analyzer | Nadhebe Developer Tools](https://nadhebe.com/tools/meta-tag-analyzer)
-
-> Interactive online Meta Tag Analyzer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Meta Tag Analyzer", "Developer Tools", "Web Utility"]
-
-## Meta Tag Analyzer
-
-Use our free interactive [Meta Tag Analyzer](/tools/meta-tag-analyzer/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Openapi 3 Yaml Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/openapi-3-yaml-generator)
-
-> Interactive online Openapi 3 Yaml Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Openapi 3 Yaml Generator", "Developer Tools", "Web Utility"]
-
-## Openapi 3 Yaml Generator
-
-Use our free interactive [Openapi 3 Yaml Generator](/tools/openapi-3-yaml-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Openapi To Mcp Tool Schema | Nadhebe Developer Tools](https://nadhebe.com/tools/openapi-to-mcp-tool-schema)
-
-> Interactive online Openapi To Mcp Tool Schema tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Openapi To Mcp Tool Schema", "Developer Tools", "Web Utility"]
-
-## Openapi To Mcp Tool Schema
-
-Use our free interactive [Openapi To Mcp Tool Schema](/tools/openapi-to-mcp-tool-schema/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Opportunity Radar | Nadhebe Developer Tools](https://nadhebe.com/tools/opportunity-radar)
-
-> Interactive online Opportunity Radar tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Opportunity Radar", "Developer Tools", "Web Utility"]
-
-## Opportunity Radar
-
-Use our free interactive [Opportunity Radar](/tools/opportunity-radar/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Percentage Difference Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/percentage-difference-calculator)
-
-> Interactive online Percentage Difference Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Percentage Difference Calculator", "Developer Tools", "Web Utility"]
-
-## Percentage Difference Calculator
-
-Use our free interactive [Percentage Difference Calculator](/tools/percentage-difference-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Pixels To Megapixels Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/pixels-to-megapixels-calculator)
-
-> Interactive online Pixels To Megapixels Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Pixels To Megapixels Calculator", "Developer Tools", "Web Utility"]
-
-## Pixels To Megapixels Calculator
-
-Use our free interactive [Pixels To Megapixels Calculator](/tools/pixels-to-megapixels-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Ppi Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/ppi-calculator)
-
-> Interactive online Ppi Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Ppi Calculator", "Developer Tools", "Web Utility"]
-
-## Ppi Calculator
-
-Use our free interactive [Ppi Calculator](/tools/ppi-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Profit Margin Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/profit-margin-calculator)
-
-> Interactive online Profit Margin Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Profit Margin Calculator", "Developer Tools", "Web Utility"]
-
-## Profit Margin Calculator
-
-Use our free interactive [Profit Margin Calculator](/tools/profit-margin-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Prompt Template Variable Tester | Nadhebe Developer Tools](https://nadhebe.com/tools/prompt-template-variable-tester)
-
-> Interactive online Prompt Template Variable Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Prompt Template Variable Tester", "Developer Tools", "Web Utility"]
-
-## Prompt Template Variable Tester
-
-Use our free interactive [Prompt Template Variable Tester](/tools/prompt-template-variable-tester/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Px To Rem | Nadhebe Developer Tools](https://nadhebe.com/tools/px-to-rem)
-
-> Interactive online Px To Rem tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Px To Rem", "Developer Tools", "Web Utility"]
-
-## Px To Rem
-
-Use our free interactive [Px To Rem](/tools/px-to-rem/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Rag Chunk Size Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/rag-chunk-size-calculator)
-
-> Interactive online Rag Chunk Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Rag Chunk Size Calculator", "Developer Tools", "Web Utility"]
-
-## Rag Chunk Size Calculator
-
-Use our free interactive [Rag Chunk Size Calculator](/tools/rag-chunk-size-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Rag Context Window Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/rag-context-window-calculator)
-
-> Interactive online Rag Context Window Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Rag Context Window Calculator", "Developer Tools", "Web Utility"]
-
-## Rag Context Window Calculator
-
-Use our free interactive [Rag Context Window Calculator](/tools/rag-context-window-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Resize Dimensions Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/resize-dimensions-calculator)
-
-> Interactive online Resize Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Resize Dimensions Calculator", "Developer Tools", "Web Utility"]
-
-## Resize Dimensions Calculator
-
-Use our free interactive [Resize Dimensions Calculator](/tools/resize-dimensions-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Rfc 7807 Error Json Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/rfc-7807-error-json-generator)
-
-> Interactive online Rfc 7807 Error Json Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Rfc 7807 Error Json Generator", "Developer Tools", "Web Utility"]
-
-## Rfc 7807 Error Json Generator
-
-Use our free interactive [Rfc 7807 Error Json Generator](/tools/rfc-7807-error-json-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Schema Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/schema-generator)
-
-> Interactive online Schema Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Schema Generator", "Developer Tools", "Web Utility"]
-
-## Schema Generator
-
-Use our free interactive [Schema Generator](/tools/schema-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Sitemap Validator | Nadhebe Developer Tools](https://nadhebe.com/tools/sitemap-validator)
-
-> Interactive online Sitemap Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Sitemap Validator", "Developer Tools", "Web Utility"]
-
-## Sitemap Validator
-
-Use our free interactive [Sitemap Validator](/tools/sitemap-validator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Slug Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/slug-generator)
-
-> Interactive online Slug Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Slug Generator", "Developer Tools", "Web Utility"]
-
-## Slug Generator
-
-Use our free interactive [Slug Generator](/tools/slug-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Social Media Image Sizes | Nadhebe Developer Tools](https://nadhebe.com/tools/social-media-image-sizes)
-
-> Interactive online Social Media Image Sizes tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Social Media Image Sizes", "Developer Tools", "Web Utility"]
-
-## Social Media Image Sizes
-
-Use our free interactive [Social Media Image Sizes](/tools/social-media-image-sizes/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Svg To Jsx | Nadhebe Developer Tools](https://nadhebe.com/tools/svg-to-jsx)
-
-> Interactive online Svg To Jsx tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Svg To Jsx", "Developer Tools", "Web Utility"]
-
-## Svg To Jsx
-
-Use our free interactive [Svg To Jsx](/tools/svg-to-jsx/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [System Prompt Linter Best Practices | Nadhebe Developer Tools](https://nadhebe.com/tools/system-prompt-linter-best-practices)
-
-> Interactive online System Prompt Linter Best Practices tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["System Prompt Linter Best Practices", "Developer Tools", "Web Utility"]
-
-## System Prompt Linter Best Practices
-
-Use our free interactive [System Prompt Linter Best Practices](/tools/system-prompt-linter-best-practices/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Webhook Payload Signature Generator | Nadhebe Developer Tools](https://nadhebe.com/tools/webhook-payload-signature-generator)
-
-> Interactive online Webhook Payload Signature Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Webhook Payload Signature Generator", "Developer Tools", "Web Utility"]
-
-## Webhook Payload Signature Generator
-
-Use our free interactive [Webhook Payload Signature Generator](/tools/webhook-payload-signature-generator/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Xml Formatter | Nadhebe Developer Tools](https://nadhebe.com/tools/xml-formatter)
-
-> Interactive online Xml Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Xml Formatter", "Developer Tools", "Web Utility"]
-
-## Xml Formatter
-
-Use our free interactive [Xml Formatter](/tools/xml-formatter/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Xpath Tester | Nadhebe Developer Tools](https://nadhebe.com/tools/xpath-tester)
-
-> Interactive online Xpath Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Xpath Tester", "Developer Tools", "Web Utility"]
-
-## Xpath Tester
-
-Use our free interactive [Xpath Tester](/tools/xpath-tester/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Yaml To Json | Nadhebe Developer Tools](https://nadhebe.com/tools/yaml-to-json)
-
-> Interactive online Yaml To Json tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Yaml To Json", "Developer Tools", "Web Utility"]
-
-## Yaml To Json
-
-Use our free interactive [Yaml To Json](/tools/yaml-to-json/) tool online. Fast, secure, and privacy-first client-side web utility.
-
----
-
-# [Youtube Video Size Calculator | Nadhebe Developer Tools](https://nadhebe.com/tools/youtube-video-size-calculator)
-
-> Interactive online Youtube Video Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.
-
-Category: Tools | Tags: ["Youtube Video Size Calculator", "Developer Tools", "Web Utility"]
-
-## Youtube Video Size Calculator
-
-Use our free interactive [Youtube Video Size Calculator](/tools/youtube-video-size-calculator/) tool online. Fast, secure, and privacy-first client-side web utility.
 
 ---
 
@@ -8451,9 +7244,9 @@ Yes. You can set the `command` to `docker` and use `run -i --rm` in your args to
 ## 11. Further Reading
 
 Continue building your AI engineering expertise with these related topics:
-*   [State of MCP 2026: The Model Context Protocol Ecosystem](/category/tutorials) *(Coming Soon)*
 *   [Deploying Custom MCP Servers for Enterprise Teams](/tutorials/build-custom-mcp-server-typescript)
-*   [Claude Code Hooks and Automations](/category/tutorials) *(Coming Soon)*
+*   [Building Custom Skills and MCP Tools for Claude Code](/tutorials/how-to-build-custom-claude-code-skills)
+*   [Claude Code Hooks and Automations Guide](/tutorials/claude-code-hooks-guide)
 
 ---
 
@@ -8583,7 +7376,7 @@ Yes. You can load multiple distinct LoRA adapters dynamically at runtime without
 ## 11. Further Reading
 
 *   [Troubleshooting vLLM Out Of Memory (OOM) Errors](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
-*   [State of Open Source AI Inference 2026](/category/tutorials) *(Coming Soon)*
+*   [Optimizing vLLM KV Cache and PagedAttention](/tutorials/vllm-kv-cache-optimization-guide)
 
 ---
 
@@ -8696,7 +7489,7 @@ Category: Comparisons | Tags: ["ai coding", "claude code", "cursor", "windsurf"]
 | Risk | Over-broad agent autonomy | Hidden context selection | Agent plan may need manual steering |
 | Best practice | Use `CLAUDE.md` and plan mode | Keep prompts scoped to files | Review each Cascade step |
 
-For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/llm-token-counter-multi-model/) once the tool is available, or track prompt length manually for repeated agent loops.
+For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/llm-tokenizer/) once the tool is available, or track prompt length manually for repeated agent loops.
 
 ## Multi-file Edits
 
@@ -10332,7 +9125,7 @@ To maintain character consistency across shots:
 
 - Use Veo model integration for high-definition video output.
 - Anchor keyframes to maintain visual consistency across scenes.
-- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/youtube/google-flow-storyboard-studio-guide).
+- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/tutorials/google-flow-storyboard-studio-guide).
 - Export timeline sequences directly to MP4 or Premiere Pro XML files.
 
 ---
@@ -12912,9 +11705,9 @@ Share your notebook with collaborators:
 | Basic notebook creation | ✅ | ✅ | ✅ |
 | Source upload (up to 50) | ✅ | ✅ | ✅ |
 | Audio Overviews | ✅ | ✅ | ✅ |
-| Cloud code execution | ❌ | Coming soon | ✅ |
-| PPTX/XLSX/DOCX export | ❌ | Coming soon | ✅ |
-| Gemini ecosystem sync | ❌ | Coming soon | ✅ |
+| Cloud code execution | ❌ | Beta | ✅ |
+| PPTX/XLSX/DOCX export | ❌ | Beta | ✅ |
+| Gemini ecosystem sync | ❌ | Beta | ✅ |
 | Web source discovery | ❌ | ✅ | ✅ |
 
 Advanced features are rolling out first to **Google AI Ultra** subscribers and eligible **Workspace enterprise** users, with broader availability to **Google AI Pro** users expected in the coming weeks.
@@ -13922,98 +12715,6 @@ Benefits of Worktree Isolation:
 * For complete command cheat sheets, explore [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
 * For complete beginner to power user walkthroughs, read [Claude Code Complete Guide](/guides/claude-code-complete-guide-beginner-to-power-user).
 * For custom skill authoring, see [How to Build Custom Claude Code Skills](/tutorials/how-to-build-custom-claude-code-skills).
-
----
-
-# [The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins](https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp)
-
-> The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.
-
-Category: Tools | Tags: ["claude", "cli", "mcp-servers", "skills", "subagents", "developer-tools", "awesome-list"]
-
-The ecosystem surrounding Anthropic's **Claude Code** CLI is expanding rapidly. Through the **Model Context Protocol (MCP)**, custom skills, subagent personas, and terminal extensions, developers can turn Claude Code into a customized agentic workstation integrated with databases, issue trackers, CI/CD pipelines, and cloud APIs.
-
-This curated resource directory indexes the top verified **MCP Servers**, **Custom Skills**, **Subagent Personas**, and **IDE Integrations** available for Claude Code.
-
----
-
-## 🔌 1. Top Verified Model Context Protocol (MCP) Servers
-
-MCP servers provide standardized protocols for Claude Code to execute tools and read context from external infrastructure.
-
-```mermaid
-flowchart LR
-    Claude[Claude Code CLI] <--> MCPBridge[Model Context Protocol]
-    MCPBridge <--> GitHub[GitHub MCP]
-    MCPBridge <--> Postgres[PostgreSQL MCP]
-    MCPBridge <--> Sentry[Sentry Error MCP]
-    MCPBridge <--> Redis[Redis Cache MCP]
-```
-
-### Developer Infrastructure & Version Control
-
-| MCP Server Name | Transport | Installation Command | Core Functionality |
-| :--- | :--- | :--- | :--- |
-| **GitHub MCP** | `stdio` | `claude mcp add github -- npx -y @modelcontextprotocol/server-github` | Inspect issues, pull requests, commit histories, and review comments. |
-| **GitLab MCP** | `stdio` | `claude mcp add gitlab -- npx -y @modelcontextprotocol/server-gitlab` | Query GitLab merge requests, pipeline logs, and repository files. |
-| **Docker MCP** | `stdio` | `claude mcp add docker -- npx -y @modelcontextprotocol/server-docker` | Inspect running containers, tail container logs, and analyze Dockerfiles. |
-
-### Database & Storage Systems
-
-| MCP Server Name | Transport | Installation Command | Core Functionality |
-| :--- | :--- | :--- | :--- |
-| **PostgreSQL MCP** | `stdio` | `claude mcp add postgres -- npx -y @modelcontextprotocol/server-postgres` | Inspect database schemas, execute parameterized SQL queries, and analyze query performance. |
-| **SQLite MCP** | `stdio` | `claude mcp add sqlite -- npx -y @modelcontextprotocol/server-sqlite` | Query local SQLite database files (`.db`/`.sqlite`) directly inside your repository. |
-| **Redis MCP** | `stdio` | `claude mcp add redis -- npx -y @modelcontextprotocol/server-redis` | Inspect Redis cache keys, TTL expiration, and data structures. |
-
-### Observability & API Tools
-
-| MCP Server Name | Transport | Installation Command | Core Functionality |
-| :--- | :--- | :--- | :--- |
-| **Sentry MCP** | `http` | `claude mcp add --transport http sentry https://mcp.sentry.io/query` | Fetch recent exception stack traces, error frequencies, and affected user sessions. |
-| **Puppeteer MCP** | `stdio` | `claude mcp add puppeteer -- npx -y @modelcontextprotocol/server-puppeteer` | Headless browser automation: capture screenshots, scrape SPA rendered DOMs, and audit UI flows. |
-| **Fetch/Web MCP** | `stdio` | `claude mcp add fetch -- npx -y @modelcontextprotocol/server-fetch` | Fetch and convert web pages into clean markdown context for Claude analysis. |
-
----
-
-## 🛠️ 2. Essential Custom Skills (`.claude/skills/`)
-
-Custom skills add reusable slash commands to interactive Claude Code sessions.
-
-| Slash Command | File Location | Operational Blueprint Summary |
-| :--- | :--- | :--- |
-| **`/deploy`** | `.claude/skills/deploy/SKILL.md` | Runs tests, builds bundle, executes deployment script, and verifies health check endpoints. |
-| **`/security-audit`** | `.claude/skills/security-audit/SKILL.md` | Audits uncommitted git diff for OWASP Top 10 vulnerabilities and hardcoded secrets. |
-| **`/db-migrate`** | `.claude/skills/db-migrate/SKILL.md` | Generates non-breaking database migration scripts and updates ORM schema definitions. |
-| **`/generate-docs`** | `.claude/skills/generate-docs/SKILL.md` | Scans exported functions and generates standard TSDoc/JSDoc block comments. |
-
----
-
-## 🤖 3. Dedicated Custom Subagents (`.claude/agents/`)
-
-Subagents define specialized AI worker personas with restricted toolsets.
-
-| Subagent Name | Invocation Syntax | Specialized Persona Scope |
-| :--- | :--- | :--- |
-| **`code-reviewer`** | `@code-reviewer` | Senior code reviewer enforcing TypeScript strict mode, error handling, and test coverage. |
-| **`qa-engineer`** | `@qa-engineer` | QA automation specialist generating comprehensive unit, integration, and E2E test suites. |
-| **`docs-architect`** | `@docs-architect` | Documentation technical writer maintaining `CLAUDE.md`, API specs, and README references. |
-
----
-
-## 💻 4. IDE Extensions & Shell Integrations
-
-* **VS Code Extension:** Official *Claude Code* extension available on the VS Code Marketplace. Features side-by-side terminal integration, interactive diff previews, and `@editor` context sharing.
-* **JetBrains Plugin:** Official plugin for IntelliJ IDEA, PyCharm, WebStorm, and GoLand.
-* **Flicker-Free Terminal Config (`CLAUDE_CODE_NO_FLICKER=1`):** Adds smooth streaming line-by-line rendering and mouse scrolling to Zsh and Bash terminals.
-
----
-
-## Related Guides & Workflows
-
-* For complete command cheat sheets, explore [Claude Code Cheat Sheet](/tutorials/claude-code-cheat-sheet-commands-shortcuts).
-* For custom skill authoring walkthroughs, read [How to Build Custom Claude Code Skills](/tutorials/how-to-build-custom-claude-code-skills).
-* For desktop app configuration, see [Claude Desktop Download & Setup Guide](/tutorials/claude-desktop-download-installation-guide).
 
 ---
 
@@ -15495,7 +14196,7 @@ Google Cloud Certifications remain valid for 2 years from the date of passing, r
 ## Related Guides & Workflows
 
 * For Anthropic credentials breakdown, read [Anthropic Claude Certification Guide: Exams & Credentials](/guides/anthropic-claude-certification-developer-guide).
-* For enterprise AI tools, explore [Google Flow & Storyboard Studio Overview](/tools/google-flow-storyboard-studio-overview).
+* For enterprise AI tools, explore [Google Flow & Storyboard Studio Overview](/tutorials/google-flow-storyboard-studio-guide/).
 * For terminal coding agent mechanics, see [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
 
 ---
@@ -15717,7 +14418,7 @@ flowchart TD
 * **Select vLLM if:** You are building cloud APIs handling concurrent requests, utilizing multi-GPU tensor parallelism, or optimizing VRAM utilization via PagedAttention.
 
 For high-concurrency production deployments requiring advanced prefix caching or Rust web routers, explore our comparison of [vLLM vs SGLang vs TGI Inference Engines](/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison).
-For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
 
 ---
 
@@ -15933,118 +14634,7 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
 ## Kimi K3 Developer Resources
 
 * Master large prompt context structures with [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
-* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/use-cases/kimi-k3-game-development-use-cases).
-
----
-
-# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.com/prompts/kimi-k3-structured-prompt-engineering-framework)
-
-> Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
-
-Category: Prompts | Tags: ["kimi-k3", "prompt-engineering", "app-development", "game-dev", "structured-prompts"]
-
-When working with frontier-scale LLMs like Moonshot AI's **Kimi K3**, it is tempting to credit high-quality application output purely to the model's 2.8 trillion parameter count. However, evaluation shows that output quality depends just as heavily on the structure of the prompt. 
-
-A vague, single-line instruction will result in boilerplate or half-baked code. To generate complex, production-ready outputs—such as playable 3D games, browser utilities, or visual mockups—you must adopt a structured scripting method: **The 4-Pillar Prompt Engineering Framework**.
-
-```mermaid
-graph TD
-    Pillar1[1. Setting & Atmosphere] --> Spec[Structured Prompt Spec]
-    Pillar2[2. Core Mechanics] --> Spec
-    Pillar3[3. Technical Constraints] --> Spec
-    Pillar4[4. Logical Feasibility] --> Spec
-    Spec --> LLM[Kimi K3 Engine]
-    LLM --> Output[Playable Web App / 3D Game]
-```
-
----
-
-## Breakdown of the 4 Pillars
-
-### 1. Setting and Atmosphere
-Describe the environment, context, and aesthetic before anything else. Instead of asking for a generic "shooter game," specify the exact thematic elements:
-* **Generic**: "A retro room."
-* **Structured**: "A late 1990s desktop computer setup inside a dimly lit bedroom, CRT glass curvature, flickering power indicator, dust particles visible under a desk lamp."
-
-Providing specific sensory details gives the model a concrete visual anchor, translating directly into precise styling variables and customized CSS layouts.
-
-### 2. Core Mechanics
-Define the precise functional specifications, rules, inputs, and states. Treat this as a game design document:
-* Define controls (e.g., WASD for movement, Mouse to aim).
-* Outline scoring parameters and state progression (how points are scored, levels increment, and win/lose states trigger).
-* Specify dynamic micro-interactions (e.g., screen shake on hit, active UI button scaling on hover).
-
-### 3. Technical Constraints
-This is the most critical pillar for getting code that actually compiles and runs on the first try. You must force the model to solve problems from first principles rather than relying on heavy frameworks:
-* **Deliverable Format**: Restrict output to a single, self-contained `index.html` file.
-* **Dependencies**: Enforce "no external packages, no CDN script imports, use vanilla JavaScript and inline canvas APIs."
-* **Scope**: Require all CSS, logic, and assets to be embedded directly inside the single file.
-
-### 4. Logical and Physical Feasibility
-Ensure the generated object respects physical or structural constraints. For software, this means logic path safety; for physical designs (like 3D printing specs), this means physical tolerances:
-* Require support-free geometry and specify moving-part tolerances (e.g., "leave 0.4mm gap between gears").
-* Mandate proper aspect ratios, container nesting rules, and screen resolution safety margins.
-
----
-
-## The Master Game Developer Prompt Template
-
-Use the following template to prompt Kimi K3 when generating browser-based apps or mini-games:
-
-```markdown
-Role: Senior Creative Technologist & Game Architect
-
-Act as an expert frontend game developer. Construct a fully playable game based on the following spec:
-
-1. SETTING & ATMOSPHERE:
-   - Visual style: [Describe aesthetic, e.g., neon synthwave, monochrome wireframe]
-   - Colors: [List exact hex or color family]
-   - Sound/Visual Feedback: [Describe screen shake, particles, color flashes]
-
-2. CORE MECHANICS:
-   - Primary Control Scheme: [e.g., mouse click, arrow keys]
-   - Mechanics: [Describe how to play, target spawning, scoring, and life counts]
-   - State Handling: [Start screen, gameplay loop, game over screen with restart button]
-
-3. TECHNICAL CONSTRAINTS:
-   - Output: Return ONLY one valid, clean, self-contained HTML file.
-   - Code Style: Vanilla JS inside script tags, Vanilla CSS inside style tags. Zero external asset URLs or CDNs.
-
-4. LOGICAL FEASIBILITY:
-   - Maintain a stable 60 FPS requestAnimationFrame game loop.
-   - Ensure boundary collisions are resolved cleanly without clipping.
-```
-
-By structuring your prompts using these four pillars, Kimi K3 can compile, organize, and output highly functional applications without getting lost in open-ended logic paths.
-
----
-
-## Image Asset Specifications
-
-* **Hero Image**:
-  - **Prompt**: "Isometric high-end editorial graphic showing glowing translucent prompt blocks aligning into a clean pillar architecture, pastel blue and violet lights."
-  - **Filename**: "structured-prompts-hero.png"
-  - **Alt text**: "4-Pillar prompt engineering model schema"
-  - **Caption**: "The 4-Pillar framework transforms loose ideas into rigorous specs for Kimi K3."
-  - **Placement**: Top of page
-  - **Purpose**: Title hero asset
-  - **Aspect ratio**: 16:9
-* **Supporting Visual 1**:
-  - **Prompt**: "Minimalist workflow infographic, showing steps 1 to 4 with clean circular nodes and lines, soft pastel colors, clean vector design."
-  - **Filename**: "prompt-workflow-diagram.png"
-  - **Alt text**: "Prompting workflow sequence diagram"
-  - **Caption**: "Sequence flowchart demonstrating the prompt ingestion and code compilation pipeline."
-  - **Placement**: Under 'Breakdown of the 4 Pillars' section
-  - **Purpose**: Visual step guide
-  - **Aspect ratio**: 4:3
-* **Supporting Visual 2**:
-  - **Prompt**: "Modern clean user interface mockup of a 3D retro arcade game dashboard, neon cyan grid elements, high-tech pastel style."
-  - **Filename**: "fps-game-screen.png"
-  - **Alt text**: "UI mockup of generated browser arcade game"
-  - **Caption**: "A playable retro arcade simulation built entirely with Kimi K3 using structured scripting."
-  - **Placement**: Under 'The Master Game Developer Prompt Template' section
-  - **Purpose**: Illustrate output feasibility
-  - **Aspect ratio**: 4:3
+* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/guides/kimi-k3-game-development-use-cases).
 
 ---
 
@@ -16236,11 +14826,11 @@ Following these practices ensures your agentic development workflows remain high
 
 ---
 
-# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.com/use-cases/kimi-k3-game-development-use-cases)
+# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.com/guides/kimi-k3-game-development-use-cases)
 
 > Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.
 
-Category: Use Cases | Tags: ["kimi-k3", "use-cases", "game-dev", "procedural-generation", "rapid-prototyping"]
+Category: Guides | Tags: ["kimi-k3", "use-cases", "game-dev", "procedural-generation", "rapid-prototyping"]
 
 The release of Moonshot AI's **Kimi K3** has introduced a powerful engine for creative developers and technical designers. Thanks to its **2.8 trillion parameter** Mixture of Experts scale and native vision capabilities, Kimi K3 excel at one of the most challenging areas for generative AI: **procedural prototyping and game asset generation**.
 
@@ -16316,6 +14906,117 @@ This accelerates the transition from early concepts to actual clickable layouts,
 
 * Learn 3D model generation steps in [Generating Support-Free 3D Models with Kimi K3](/tutorials/kimi-k3-3d-modeling-tutorial).
 * Master 1M context windows in [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
+
+---
+
+# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.com/guides/kimi-k3-structured-prompt-engineering-framework)
+
+> Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
+
+Category: Guides | Tags: ["kimi-k3", "prompt-engineering", "app-development", "game-dev", "structured-prompts"]
+
+When working with frontier-scale LLMs like Moonshot AI's **Kimi K3**, it is tempting to credit high-quality application output purely to the model's 2.8 trillion parameter count. However, evaluation shows that output quality depends just as heavily on the structure of the prompt. 
+
+A vague, single-line instruction will result in boilerplate or half-baked code. To generate complex, production-ready outputs—such as playable 3D games, browser utilities, or visual mockups—you must adopt a structured scripting method: **The 4-Pillar Prompt Engineering Framework**.
+
+```mermaid
+graph TD
+    Pillar1[1. Setting & Atmosphere] --> Spec[Structured Prompt Spec]
+    Pillar2[2. Core Mechanics] --> Spec
+    Pillar3[3. Technical Constraints] --> Spec
+    Pillar4[4. Logical Feasibility] --> Spec
+    Spec --> LLM[Kimi K3 Engine]
+    LLM --> Output[Playable Web App / 3D Game]
+```
+
+---
+
+## Breakdown of the 4 Pillars
+
+### 1. Setting and Atmosphere
+Describe the environment, context, and aesthetic before anything else. Instead of asking for a generic "shooter game," specify the exact thematic elements:
+* **Generic**: "A retro room."
+* **Structured**: "A late 1990s desktop computer setup inside a dimly lit bedroom, CRT glass curvature, flickering power indicator, dust particles visible under a desk lamp."
+
+Providing specific sensory details gives the model a concrete visual anchor, translating directly into precise styling variables and customized CSS layouts.
+
+### 2. Core Mechanics
+Define the precise functional specifications, rules, inputs, and states. Treat this as a game design document:
+* Define controls (e.g., WASD for movement, Mouse to aim).
+* Outline scoring parameters and state progression (how points are scored, levels increment, and win/lose states trigger).
+* Specify dynamic micro-interactions (e.g., screen shake on hit, active UI button scaling on hover).
+
+### 3. Technical Constraints
+This is the most critical pillar for getting code that actually compiles and runs on the first try. You must force the model to solve problems from first principles rather than relying on heavy frameworks:
+* **Deliverable Format**: Restrict output to a single, self-contained `index.html` file.
+* **Dependencies**: Enforce "no external packages, no CDN script imports, use vanilla JavaScript and inline canvas APIs."
+* **Scope**: Require all CSS, logic, and assets to be embedded directly inside the single file.
+
+### 4. Logical and Physical Feasibility
+Ensure the generated object respects physical or structural constraints. For software, this means logic path safety; for physical designs (like 3D printing specs), this means physical tolerances:
+* Require support-free geometry and specify moving-part tolerances (e.g., "leave 0.4mm gap between gears").
+* Mandate proper aspect ratios, container nesting rules, and screen resolution safety margins.
+
+---
+
+## The Master Game Developer Prompt Template
+
+Use the following template to prompt Kimi K3 when generating browser-based apps or mini-games:
+
+```markdown
+Role: Senior Creative Technologist & Game Architect
+
+Act as an expert frontend game developer. Construct a fully playable game based on the following spec:
+
+1. SETTING & ATMOSPHERE:
+   - Visual style: [Describe aesthetic, e.g., neon synthwave, monochrome wireframe]
+   - Colors: [List exact hex or color family]
+   - Sound/Visual Feedback: [Describe screen shake, particles, color flashes]
+
+2. CORE MECHANICS:
+   - Primary Control Scheme: [e.g., mouse click, arrow keys]
+   - Mechanics: [Describe how to play, target spawning, scoring, and life counts]
+   - State Handling: [Start screen, gameplay loop, game over screen with restart button]
+
+3. TECHNICAL CONSTRAINTS:
+   - Output: Return ONLY one valid, clean, self-contained HTML file.
+   - Code Style: Vanilla JS inside script tags, Vanilla CSS inside style tags. Zero external asset URLs or CDNs.
+
+4. LOGICAL FEASIBILITY:
+   - Maintain a stable 60 FPS requestAnimationFrame game loop.
+   - Ensure boundary collisions are resolved cleanly without clipping.
+```
+
+By structuring your prompts using these four pillars, Kimi K3 can compile, organize, and output highly functional applications without getting lost in open-ended logic paths.
+
+---
+
+## Image Asset Specifications
+
+* **Hero Image**:
+  - **Prompt**: "Isometric high-end editorial graphic showing glowing translucent prompt blocks aligning into a clean pillar architecture, pastel blue and violet lights."
+  - **Filename**: "structured-prompts-hero.png"
+  - **Alt text**: "4-Pillar prompt engineering model schema"
+  - **Caption**: "The 4-Pillar framework transforms loose ideas into rigorous specs for Kimi K3."
+  - **Placement**: Top of page
+  - **Purpose**: Title hero asset
+  - **Aspect ratio**: 16:9
+* **Supporting Visual 1**:
+  - **Prompt**: "Minimalist workflow infographic, showing steps 1 to 4 with clean circular nodes and lines, soft pastel colors, clean vector design."
+  - **Filename**: "prompt-workflow-diagram.png"
+  - **Alt text**: "Prompting workflow sequence diagram"
+  - **Caption**: "Sequence flowchart demonstrating the prompt ingestion and code compilation pipeline."
+  - **Placement**: Under 'Breakdown of the 4 Pillars' section
+  - **Purpose**: Visual step guide
+  - **Aspect ratio**: 4:3
+* **Supporting Visual 2**:
+  - **Prompt**: "Modern clean user interface mockup of a 3D retro arcade game dashboard, neon cyan grid elements, high-tech pastel style."
+  - **Filename**: "fps-game-screen.png"
+  - **Alt text**: "UI mockup of generated browser arcade game"
+  - **Caption**: "A playable retro arcade simulation built entirely with Kimi K3 using structured scripting."
+  - **Placement**: Under 'The Master Game Developer Prompt Template' section
+  - **Purpose**: Illustrate output feasibility
+  - **Aspect ratio**: 4:3
 
 ---
 
@@ -16446,141 +15147,15 @@ Updated Timeline:  [ Scene 1: Frame A ] -> [ NEW SCENE ] -> [ Scene 2: Frame B ]
 ## Related Production Guides
 
 * For an overview of pre-production workflow optimization, explore [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
-* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).
+* Compare Storyboard Studio tools in our overview [Google Flow Storyboard Studio: Product Overview](/tutorials/google-flow-storyboard-studio-guide/).
 
 ---
 
-# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent)
-
-> A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
-
-Category: Tutorials | Tags: ["tutorials", "setup", "youtube-automation", "python"]
-
-## Tutorial: Setting Up the YouTube Automation Agent
-
-This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine. The system uses a loosely coupled multi-agent workflow coordinated by a central SQLite database.
-
-## Setup Requirements
-
-* Python 3.10 or higher.
-* SQLite3 database package.
-* API keys for OpenAI (for scriptwriting and SEO tasks) and YouTube Data API v3.
-
-## Installation Steps
-
-### Step 1: Clone the Repository and Install Dependencies
-```bash
-git clone https://github.com/developer/youtube-automation-agent.git
-cd youtube-automation-agent
-pip install -r requirements.txt
-```
-
-### Step 2: Configure Environment Variables
-Create a `.env` file in the root directory:
-```env
-OPENAI_API_KEY=your_openai_key
-YOUTUBE_API_KEY=your_youtube_key
-DB_PATH=data/state.db
-```
-
-### Step 3: Initialize SQLite Database
-Running the initialization script creates the SQLite database tables needed to coordinate the **seven specialized agents** (Content Strategy, Scriptwriter, Thumbnail Designer, SEO Optimizer, Quality Controller, Voiceover Coordinator, Publisher Agent):
-```bash
-python scripts/init_db.py
-```
-This builds the `state.db` file locally, including task tables with status fields to enforce dependency constraints.
-
-### Step 4: Run the Multi-Agent Pipeline
-To start the content strategy query and launch the agentic task loop, run:
-```bash
-python main.py --run-strategy
-```
-The strategy agent will write a content job to SQLite, which triggers the subsequent agents in the pipeline. SQLite's transaction locks prevent race conditions during parallel execution.
-
-### Image Metadata
-* **Hero Image**:
-  - **Prompt**: "Mockup of a clean white code terminal window displaying setup instructions, floating over a light-cyan grid, soft daylight"
-  - **Filename**: "yt-setup-hero.jpg"
-  - **Alt**: "Code terminal window mockup"
-* **Supporting Visual 1**:
-  - **Prompt**: "Sleek user interface panel with settings checkboxes and toggle elements, minimal flat design on a white canvas"
-  - **Filename**: "config-settings-ui.jpg"
-  - **Alt**: "Configuration settings panel UI"
-* **Supporting Visual 2**:
-  - **Prompt**: "Close-up of a designer metal coffee mug and sleek white notebook resting on a clean desk surface"
-  - **Filename**: "workspace-mug-notebook.jpg"
-  - **Alt**: "Workplace morning coffee mockup"
-
-
-## Architecture & State Sharing
-
-* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
-* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).
-
----
-
-# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.com/youtube/fable-5-vs-gpt-5-5-comparison)
-
-> Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.
-
-Category: YouTube Articles | Tags: ["fable-5", "gpt-5.5", "comparisons", "models", "anthropic"]
-
-## Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance
-
-Anthropic's June 2026 release of **Claude Fable 5** has set off a direct confrontation with OpenAI's **GPT-5.5** in the race for model supremacy. Optimized for long-horizon agentic reasoning, code synthesis, and deep logic operations, Fable 5 represents a major leap in cognitive automation.
-
-## The Context and Pricing Landscape
-
-To understand Claude Fable 5, it is essential to look at its underlying specs and target audience. Anthropic has structured Fable 5 as a high-capacity model designed for production workflows that demand comprehensive codebase ingestion:
-
-* **1 Million Token Context Window**: Enables loading entire directories or massive multi-page documents without needing vector retrieval approximations.
-* **128k Output Tokens**: Supports generating extensive scripts or long-form documentation blocks in a single execution step.
-* **API Pricing Model**: Positioned as a premium reasoning tool at **$10.00 per million input tokens** and **$50.00 per million output tokens**.
-
-By comparison, GPT-5.5 operates with faster processing rates and lower baseline compute requirements, making it the preferred model for quick chat actions, while Fable 5 is reserved for heavy multi-stage operations.
-
-## Claude Fable 5 vs. Claude Mythos 5
-
-A key point of confusion in the developer community concerns the relationship between Fable 5 and **Claude Mythos 5**:
-
-* **Claude Fable 5**: The widely available production model. It contains Anthropic's full suite of safety classifiers, which prevent execution of requests related to cybersecurity exploits or biological hazards.
-* **Claude Mythos 5**: Shares the exact same raw reasoning engine as Fable 5 but operates without the safety filter layers. Mythos 5 is highly restricted, accessible only to selected research partners through the **Project Glasswing** program.
-
-### Regulatory and Access Timeline
-Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government export controls regarding foreign access. Access was officially restored on **July 1, 2026**, following compliance upgrades.
-
-## Performance Profiles
-
-* **GPT-5.5**: Retains a slight advantage in raw generation speeds and basic logic tests (e.g. GSM8k), returning standard API responses in milliseconds.
-* **Claude Fable 5**: Excels in multi-file dependency mapping, code reviews, and complex system-design architecture. Developers often combine the two, using GPT-5.5 for routine UI tasks and Fable 5 for structural backend analysis.
-
-### Image Metadata
-* **Hero Image**:
-  - **Prompt**: "Minimal premium editorial visual of two interlocking smooth ceramic rings, one pastel mint and one light cyan, bright white studio setting with soft shadows"
-  - **Filename**: "fable-vs-gpt.jpg"
-  - **Alt**: "Interlocking mint and cyan ceramic rings"
-* **Supporting Visual 1**:
-  - **Prompt**: "A visual graph with two line curves comparing capabilities, clean corporate styling, white background card"
-  - **Filename**: "fable-gpt-chart.jpg"
-  - **Alt**: "Comparison chart lines"
-* **Supporting Visual 2**:
-  - **Prompt**: "Close-up of a designer notebook and sleek silver pen sitting on a white desk with warm morning sun rays"
-  - **Filename**: "designer-desk-detail.jpg"
-  - **Alt**: "Workspace notebook mockup"
-
-
-## Model Benchmarks & Reviews
-
-* Read detailed benchmark metrics in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
-* Read our complete review of Anthropic's model in [Claude Fable 5 AI Model Review](/reviews/fable-5-ai-model-review).
-
----
-
-# [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)](https://nadhebe.com/youtube/google-flow-storyboard-studio-guide)
+# [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)](https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide)
 
 > A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.
 
-Category: YouTube Articles | Tags: ["google-flow", "storyboard-studio", "pre-production", "troubleshooting", "google-labs"]
+Category: Tutorials | Tags: ["google-flow", "storyboard-studio", "pre-production", "troubleshooting", "google-labs"]
 
 ## First Look: Google Flow's New Storyboard Studio Addition
 
@@ -16679,15 +15254,140 @@ While highly capable, maintaining perfect character consistency across many shot
 ## Storyboard Studio Resources
 
 * Follow the complete hands-on guide in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
-* Explore tool features in [Google Flow Storyboard Studio: Product Overview](/tools/google-flow-storyboard-studio-overview).
+* Explore tool features in [Google Flow Storyboard Studio: Product Overview](/tutorials/google-flow-storyboard-studio-guide/).
 
 ---
 
-# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.com/youtube/gpt-5-6-autonomous-engine)
+# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent)
+
+> A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
+
+Category: Tutorials | Tags: ["tutorials", "setup", "youtube-automation", "python"]
+
+## Tutorial: Setting Up the YouTube Automation Agent
+
+This tutorial covers cloning, configuring, and running the open-source **YouTube Automation Agent** on a local development machine. The system uses a loosely coupled multi-agent workflow coordinated by a central SQLite database.
+
+## Setup Requirements
+
+* Python 3.10 or higher.
+* SQLite3 database package.
+* API keys for OpenAI (for scriptwriting and SEO tasks) and YouTube Data API v3.
+
+## Installation Steps
+
+### Step 1: Clone the Repository and Install Dependencies
+```bash
+git clone https://github.com/developer/youtube-automation-agent.git
+cd youtube-automation-agent
+pip install -r requirements.txt
+```
+
+### Step 2: Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+OPENAI_API_KEY=your_openai_key
+YOUTUBE_API_KEY=your_youtube_key
+DB_PATH=data/state.db
+```
+
+### Step 3: Initialize SQLite Database
+Running the initialization script creates the SQLite database tables needed to coordinate the **seven specialized agents** (Content Strategy, Scriptwriter, Thumbnail Designer, SEO Optimizer, Quality Controller, Voiceover Coordinator, Publisher Agent):
+```bash
+python scripts/init_db.py
+```
+This builds the `state.db` file locally, including task tables with status fields to enforce dependency constraints.
+
+### Step 4: Run the Multi-Agent Pipeline
+To start the content strategy query and launch the agentic task loop, run:
+```bash
+python main.py --run-strategy
+```
+The strategy agent will write a content job to SQLite, which triggers the subsequent agents in the pipeline. SQLite's transaction locks prevent race conditions during parallel execution.
+
+### Image Metadata
+* **Hero Image**:
+  - **Prompt**: "Mockup of a clean white code terminal window displaying setup instructions, floating over a light-cyan grid, soft daylight"
+  - **Filename**: "yt-setup-hero.jpg"
+  - **Alt**: "Code terminal window mockup"
+* **Supporting Visual 1**:
+  - **Prompt**: "Sleek user interface panel with settings checkboxes and toggle elements, minimal flat design on a white canvas"
+  - **Filename**: "config-settings-ui.jpg"
+  - **Alt**: "Configuration settings panel UI"
+* **Supporting Visual 2**:
+  - **Prompt**: "Close-up of a designer metal coffee mug and sleek white notebook resting on a clean desk surface"
+  - **Filename**: "workspace-mug-notebook.jpg"
+  - **Alt**: "Workplace morning coffee mockup"
+
+
+## Architecture & State Sharing
+
+* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
+* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/reviews/open-source-youtube-automation-agent/).
+
+---
+
+# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review)
+
+> An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+
+Category: Tool Reviews | Tags: ["fable-5", "reviews", "llm", "anthropic"]
+
+## Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
+
+Anthropic's release of **Claude Fable 5** has introduced a powerful alternative to standard enterprise models. Designed for complex reasoning and large-scale document parsing, this review examines the capabilities, deployment viability, and safety architecture of Claude Fable 5.
+
+## Context Capacity and Performance
+
+Fable 5 represents a major milestone in high-context LLMs. With a native **1 million token context window**, developers can feed entire code repositories directly to the prompt context. Additionally, it supports up to **128k output tokens** in a single execution step, enabling it to write extensive codebase refactoring scripts without needing separate chunking workflows.
+
+## Pros & Cons
+
+### Pros
+* **Context Retention**: Fable 5 maintains high recall rates even at the limits of its 1 million token context window.
+* **Architecture Design**: The model excels at identifying design flaws and generating comprehensive, multi-file refactoring scripts.
+* **Deep Output Token Bounds**: Up to 128k output tokens per request enables large file generations.
+
+### Cons
+* **Premium Pricing**: At **$10.00/1M Input** and **$50.00/1M Output**, it is a premium tool and can generate high bills during recurrent loops.
+* **Speed**: Latency is higher than GPT-5.5, making it less suitable for quick chat operations.
+* **Classifiers**: Safety layers can decline cybersecurity analysis or biology research tasks.
+
+## The Claude Mythos 5 Connection
+
+Claude Fable 5 is closely related to **Claude Mythos 5**, which shares the same underlying capabilities but operates without the safety classifiers. Mythos 5 is limited to a select group of partners through programs like **Project Glasswing**, while Fable 5 is widely available. 
+
+Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. government export controls regarding foreign access. Access was restored on **July 1, 2026**, following compliance upgrades.
+
+### Image Metadata
+* **Hero Image**:
+  - **Prompt**: "Elegant glass emblem featuring a subtle 'F' logo, floating in a clean white studio room with soft daylight and shadow patterns"
+  - **Filename**: "fable-5-review.jpg"
+  - **Alt**: "Glassmorphic logo emblem review"
+* **Supporting Visual 1**:
+  - **Prompt**: "Pros and cons list styled as elegant typography on a minimalist white poster layout, soft grey background"
+  - **Filename**: "pros-cons-list.jpg"
+  - **Alt**: "Pros and cons listing poster"
+* **Supporting Visual 2**:
+  - **Prompt**: "Close-up of a high-end metal mechanical pencil and sketchpad resting on a sleek white workspace desk"
+  - **Filename**: "workspace-sketchpad.jpg"
+  - **Alt**: "Drawing workstation mockup"
+
+
+## Frontier LLM Benchmark & Developer Guides
+
+* Explore Anthropic's autonomous terminal execution loop in [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
+* For official Anthropic credentials and Pearson VUE exams, read [Anthropic Claude Certification Guide: Exams & Credentials](/guides/anthropic-claude-certification-developer-guide).
+* Compare Claude Fable 5 against OpenAI flagships in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Compare open weights vs proprietary models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+
+---
+
+# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.com/reviews/gpt-5-6-autonomous-engine)
 
 > Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.
 
-Category: YouTube Articles | Tags: ["gpt-5.6", "openai", "agentic-ai", "soul-model", "models"]
+Category: Tool Reviews | Tags: ["gpt-5.6", "openai", "agentic-ai", "soul-model", "models"]
 
 ## Unpacking GPT-5.6's Autonomous Engine
 
@@ -16749,11 +15449,11 @@ graph TD
 
 ---
 
-# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/youtube/open-source-youtube-automation-agent)
+# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/reviews/open-source-youtube-automation-agent)
 
 > Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.
 
-Category: YouTube Articles | Tags: ["multi-agent", "sqlite", "youtube-automation", "open-source"]
+Category: Tool Reviews | Tags: ["multi-agent", "sqlite", "youtube-automation", "open-source"]
 
 ## Inside the Multi-Agent YouTube Automation System
 
@@ -16805,63 +15505,64 @@ Unlike message-passing multi-agent architectures that can break during individua
 ## YouTube Agent Installation & Features
 
 * Follow the repository installation tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
-* Review multi-agent architecture details in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).
+* Review multi-agent architecture details in [The YouTube Automation Agent: Multi-Agent Feature Guide](/reviews/open-source-youtube-automation-agent/).
 
 ---
 
-# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review)
+# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison)
 
-> An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
+> Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.
 
-Category: Tool Reviews | Tags: ["fable-5", "reviews", "llm", "anthropic"]
+Category: Comparisons | Tags: ["fable-5", "gpt-5.5", "comparisons", "models", "anthropic"]
 
-## Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding
+## Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance
 
-Anthropic's release of **Claude Fable 5** has introduced a powerful alternative to standard enterprise models. Designed for complex reasoning and large-scale document parsing, this review examines the capabilities, deployment viability, and safety architecture of Claude Fable 5.
+Anthropic's June 2026 release of **Claude Fable 5** has set off a direct confrontation with OpenAI's **GPT-5.5** in the race for model supremacy. Optimized for long-horizon agentic reasoning, code synthesis, and deep logic operations, Fable 5 represents a major leap in cognitive automation.
 
-## Context Capacity and Performance
+## The Context and Pricing Landscape
 
-Fable 5 represents a major milestone in high-context LLMs. With a native **1 million token context window**, developers can feed entire code repositories directly to the prompt context. Additionally, it supports up to **128k output tokens** in a single execution step, enabling it to write extensive codebase refactoring scripts without needing separate chunking workflows.
+To understand Claude Fable 5, it is essential to look at its underlying specs and target audience. Anthropic has structured Fable 5 as a high-capacity model designed for production workflows that demand comprehensive codebase ingestion:
 
-## Pros & Cons
+* **1 Million Token Context Window**: Enables loading entire directories or massive multi-page documents without needing vector retrieval approximations.
+* **128k Output Tokens**: Supports generating extensive scripts or long-form documentation blocks in a single execution step.
+* **API Pricing Model**: Positioned as a premium reasoning tool at **$10.00 per million input tokens** and **$50.00 per million output tokens**.
 
-### Pros
-* **Context Retention**: Fable 5 maintains high recall rates even at the limits of its 1 million token context window.
-* **Architecture Design**: The model excels at identifying design flaws and generating comprehensive, multi-file refactoring scripts.
-* **Deep Output Token Bounds**: Up to 128k output tokens per request enables large file generations.
+By comparison, GPT-5.5 operates with faster processing rates and lower baseline compute requirements, making it the preferred model for quick chat actions, while Fable 5 is reserved for heavy multi-stage operations.
 
-### Cons
-* **Premium Pricing**: At **$10.00/1M Input** and **$50.00/1M Output**, it is a premium tool and can generate high bills during recurrent loops.
-* **Speed**: Latency is higher than GPT-5.5, making it less suitable for quick chat operations.
-* **Classifiers**: Safety layers can decline cybersecurity analysis or biology research tasks.
+## Claude Fable 5 vs. Claude Mythos 5
 
-## The Claude Mythos 5 Connection
+A key point of confusion in the developer community concerns the relationship between Fable 5 and **Claude Mythos 5**:
 
-Claude Fable 5 is closely related to **Claude Mythos 5**, which shares the same underlying capabilities but operates without the safety classifiers. Mythos 5 is limited to a select group of partners through programs like **Project Glasswing**, while Fable 5 is widely available. 
+* **Claude Fable 5**: The widely available production model. It contains Anthropic's full suite of safety classifiers, which prevent execution of requests related to cybersecurity exploits or biological hazards.
+* **Claude Mythos 5**: Shares the exact same raw reasoning engine as Fable 5 but operates without the safety filter layers. Mythos 5 is highly restricted, accessible only to selected research partners through the **Project Glasswing** program.
 
-Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. government export controls regarding foreign access. Access was restored on **July 1, 2026**, following compliance upgrades.
+### Regulatory and Access Timeline
+Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government export controls regarding foreign access. Access was officially restored on **July 1, 2026**, following compliance upgrades.
+
+## Performance Profiles
+
+* **GPT-5.5**: Retains a slight advantage in raw generation speeds and basic logic tests (e.g. GSM8k), returning standard API responses in milliseconds.
+* **Claude Fable 5**: Excels in multi-file dependency mapping, code reviews, and complex system-design architecture. Developers often combine the two, using GPT-5.5 for routine UI tasks and Fable 5 for structural backend analysis.
 
 ### Image Metadata
 * **Hero Image**:
-  - **Prompt**: "Elegant glass emblem featuring a subtle 'F' logo, floating in a clean white studio room with soft daylight and shadow patterns"
-  - **Filename**: "fable-5-review.jpg"
-  - **Alt**: "Glassmorphic logo emblem review"
+  - **Prompt**: "Minimal premium editorial visual of two interlocking smooth ceramic rings, one pastel mint and one light cyan, bright white studio setting with soft shadows"
+  - **Filename**: "fable-vs-gpt.jpg"
+  - **Alt**: "Interlocking mint and cyan ceramic rings"
 * **Supporting Visual 1**:
-  - **Prompt**: "Pros and cons list styled as elegant typography on a minimalist white poster layout, soft grey background"
-  - **Filename**: "pros-cons-list.jpg"
-  - **Alt**: "Pros and cons listing poster"
+  - **Prompt**: "A visual graph with two line curves comparing capabilities, clean corporate styling, white background card"
+  - **Filename**: "fable-gpt-chart.jpg"
+  - **Alt**: "Comparison chart lines"
 * **Supporting Visual 2**:
-  - **Prompt**: "Close-up of a high-end metal mechanical pencil and sketchpad resting on a sleek white workspace desk"
-  - **Filename**: "workspace-sketchpad.jpg"
-  - **Alt**: "Drawing workstation mockup"
+  - **Prompt**: "Close-up of a designer notebook and sleek silver pen sitting on a white desk with warm morning sun rays"
+  - **Filename**: "designer-desk-detail.jpg"
+  - **Alt**: "Workspace notebook mockup"
 
 
-## Frontier LLM Benchmark & Developer Guides
+## Model Benchmarks & Reviews
 
-* Explore Anthropic's autonomous terminal execution loop in [Inside Claude Code Agent: Terminal Loop Architecture](/guides/claude-code-agent-loop-architecture).
-* For official Anthropic credentials and Pearson VUE exams, read [Anthropic Claude Certification Guide: Exams & Credentials](/guides/anthropic-claude-certification-developer-guide).
-* Compare Claude Fable 5 against OpenAI flagships in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
-* Compare open weights vs proprietary models in [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul](/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul).
+* Read detailed benchmark metrics in [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks](/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks).
+* Read our complete review of Anthropic's model in [Claude Fable 5 AI Model Review](/reviews/fable-5-ai-model-review).
 
 ---
 
@@ -17036,121 +15737,8 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 ## Multi-Agent Architecture Resources
 
-* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Implement SQLite transaction boundaries using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
 * Manage autonomous execution costs in [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
-
----
-
-# [Google Flow vs Storyboard Studio: Features, 3D Animation & Pre-Production Overview](https://nadhebe.com/tools/google-flow-storyboard-studio-overview)
-
-> An in-depth review comparing regular Google Flow with Storyboard Studio, exploring 3D stylized animation capabilities, asset profiles, and export specs.
-
-Category: Tools | Tags: ["google-flow", "tools", "pre-production", "3d-animation", "google-labs"]
-
-## Google Flow Storyboard Studio: Product Overview and Toolset
-
-Google Flow's **Storyboard Studio** is an experimental feature in **Google Labs** designed to accelerate creative pre-production. This article reviews the core features, visualization capabilities, and style choices available in this toolset.
-
-## Why Creators Use Storyboard Studio Over Regular Google Flow
-
-While regular **Google Flow** excels at fast, single-clip text-to-video rendering, filmmakers and animators rely on **Storyboard Studio** for structured narrative projects. Storyboard Studio bridges the gap between scriptwriting and video production by providing asset continuity tools and multi-shot camera orchestration.
-
-### Feature Comparison Matrix
-
-| Capability | Regular Google Flow | Storyboard Studio |
-| --- | --- | --- |
-| **Primary Goal** | Single video clip generation | Multi-shot pre-production & storyboarding |
-| **Input Format** | Single text prompt | Full script (.txt, .md, PDF) upload |
-| **Asset Continuity** | Single-shot keyframe lock | Global Asset Catalog (characters, props, sets) |
-| **Shot Composition** | Prompt-defined camera angles | Camera dropdowns (Wide, Medium, Dutch Angle) |
-| **Timeline Planning** | Individual video files | Interactive scene break & multi-panel timeline |
-| **Export Formats** | MP4 video clips | MP4, PDF pitch deck, Premiere XML |
-
-## 3D Stylized & Cartoon Animation Capabilities (Digital Circus Style)
-
-One of the most popular applications of Storyboard Studio is producing stylized 3D animated series—such as surreal, high-energy animations reminiscent of *The Amazing Digital Circus*.
-
-```text
-Prompt Preset: [3D Animation Style] + High Saturation Toy render + Stylized Geometry + Octane Lighting
-Asset Tag: @JesterCharacter (Vibrant purple jumpsuit, oversized glossy eyes, plastic hat)
-```
-
-### How to Build a 3D Stylized Animated Sequence:
-1. **Set Visual Style Preset**: Select **3D Stylized Animation** in the project setup menu to force a glossy, surreal 3D render engine baseline.
-2. **Anchor Character Profiles**: Upload 3D concept renders or character models into the **Assets** tab. Lock facial geometry and color palettes to prevent style degradation.
-3. **Draft Dynamic Action Prompts**: Structure scene action with energetic motion tags (e.g. `expressive exaggerated squash-and-stretch, fast camera zoom, candy-colored circus background`).
-4. **Animate Panels via Veo**: Convert static 3D panels into fluid, animated clips using the Google Veo render pipeline.
-
-## Core Features
-
-1. **AI Script Segmenter**: Automatically parses and divides text into structured scenes, isolating action notes and dialogues.
-2. **Visual Style Presets**: Allows creators to apply distinct visual presets, such as 3D animation styles, hand-drawn sketch lines, or cinematic photography models.
-3. **Asset Consistency Manager**: Catalogs characters, locations, and props. Users can write detailed descriptions for each asset to preserve visual continuity across frames.
-4. **Cinematic Presets**: Choose camera positions (wide, medium, close-up) and camera angles (high, low, Dutch angle) for each panel.
-5. **Veo Animation Pipeline**: Connects static panels to Google's video model, **Veo**, to generate high-quality pre-visualization clips.
-
-### Known Limitations
-Although the tool speeds up scene creation, character drift remains a challenge. For complex action layouts, creators must use manual tagging of character references to keep faces and props consistent.
-
-### Image Metadata
-* **Hero Image**:
-  - **Prompt**: "Frosted glass blocks casting soft cyan shadows on a clean white surface, abstract camera logo emblem in center, premium editorial style"
-  - **Filename**: "storyboard-tool-hero.jpg"
-  - **Alt**: "Glass camera icon abstract emblem"
-* **Supporting Visual 1**:
-  - **Prompt**: "Sleek user interface panel displaying character profiles with pastel avatars, minimalist card style"
-  - **Filename**: "character-profiles-ui.jpg"
-  - **Alt**: "Character manager UI panels"
-* **Supporting Visual 2**:
-  - **Prompt**: "Close-up of a modern silver digital pen resting on a crisp white table with natural side lighting"
-  - **Filename**: "digital-pen-workstation.jpg"
-  - **Alt**: "Digital drawing setup detail"
-
-## Pre-Production Tutorials & Guides
-
-* Walk through step-by-step panel creation in [Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
-* Read producer workflows in [The Producer's Guide to AI-Assisted Pre-Production Workflows](/guides/ai-storyboarding-pre-production-workflows).
-* Resolve missing script and render errors in [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting](/youtube/google-flow-storyboard-studio-guide).
-
----
-
-# [The YouTube Automation Agent: Multi-Agent Feature Guide](https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system)
-
-> Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.
-
-Category: Tools | Tags: ["tools", "youtube-automation", "open-source", "features"]
-
-## The YouTube Automation Agent: Feature Guide
-
-This guide examines the core features of the **YouTube Automation Agent** and how its multi-agent system manages video production from strategic planning to final metadata generation, using a central **SQLite database** to coordinate tasks.
-
-## Feature Overview
-
-* **Strategic Content Queries**: Automatically analyzes channel metrics and queries YouTube search trends using the Content Strategy Agent.
-* **Retention-Optimized Scripting**: Uses prompt templates designed to structure scripts with hooks and calls to action, managed by the Scriptwriter Agent.
-* **Metadata Packager**: Creates SEO-optimized titles, descriptions, and tags via the SEO Optimizer Agent.
-* **A/B Thumbnail Variations**: Renders visual concept variations to optimize click-through rates using the Thumbnail Designer Agent.
-* **Shared State Coordination**: SQLite shared database coordinates execution states between the seven agents (Strategy, Script, Thumbnail, SEO, Quality Control, Voiceover, Publisher), preventing cascading errors when specific API modules encounter timeouts.
-
-### Image Metadata
-* **Hero Image**:
-  - **Prompt**: "Floating glass cards showing minimal graphs and checkboxes on a light blue background, bright natural daylight, crisp shadow lines"
-  - **Filename**: "yt-features-hero.jpg"
-  - **Alt**: "Automation dashboard floating cards"
-* **Supporting Visual 1**:
-  - **Prompt**: "Clean card layout detailing script templates on a white dashboard backdrop"
-  - **Filename**: "script-templates-ui.jpg"
-  - **Alt**: "Script editor user interface"
-* **Supporting Visual 2**:
-  - **Prompt**: "Overhead shot of a sleek modern laptop resting open on a light wood desk, soft background blur"
-  - **Filename**: "wooden-desk-laptop.jpg"
-  - **Alt**: "Workstation wood desk mockup"
-
-
-## System Setup & Database Patterns
-
-* Follow the step-by-step setup tutorial in [Setting Up the YouTube Automation Agent](/tutorials/setting-up-youtube-automation-agent).
-* Learn about SQLite state coordination in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
 
 ---
 
@@ -17207,7 +15795,7 @@ A major challenge for creative directors using generative tools is avoiding char
 ## Step-by-Step Storyboard Guides
 
 * Learn the exact panel creation steps in [Step-by-Step Tutorial: Building Pre-Production Storyboards in Google Flow](/tutorials/building-pre-production-storyboards-google-flow).
-* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tools/google-flow-storyboard-studio-overview).
+* Review tool features in [Google Flow Storyboard Studio: Product Overview and Toolset](/tutorials/google-flow-storyboard-studio-guide/).
 
 ---
 
@@ -17276,16 +15864,16 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
 
 ## Agent Design & Database Patterns
 
-* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
 * Prevent runaway execution loops with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).
 
 ---
 
-# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.com/frameworks/sqlite-state-sharing-multi-agent-architecture)
+# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.com/guides/sqlite-state-sharing-multi-agent-architecture)
 
 > A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.
 
-Category: Frameworks | Tags: ["sqlite", "architecture", "multi-agent", "frameworks"]
+Category: Guides | Tags: ["sqlite", "architecture", "multi-agent", "frameworks"]
 
 ## The SQLite State-Sharing Pattern for Multi-Agent Architectures
 
@@ -17599,11 +16187,11 @@ Open your web browser and navigate to the address shown in the terminal (usually
 
 ---
 
-# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/youtube/instatic-local-setup-importer)
+# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/tutorials/instatic-local-setup-importer)
 
 > Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.
 
-Category: YouTube Articles | Tags: [instatic, youtube, setup, importer]
+Category: Tutorials | Tags: [instatic, youtube, setup, importer]
 
 In this video review, we walk through the installation process for **Instatic CMS**, the open-source self-hosted visual page builder. We demonstrate how to run it locally on Windows using PowerShell, configure the local database schema, and import existing static templates.
 
@@ -17657,11 +16245,11 @@ The HTML importer wizard lets developers import visual page layouts by drag-and-
 
 ---
 
-# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/youtube/instatic-visual-cms-walkthrough)
+# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/tutorials/instatic-visual-cms-walkthrough)
 
 > Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.
 
-Category: YouTube Articles | Tags: [instatic, youtube, walkthrough, video]
+Category: Tutorials | Tags: [instatic, youtube, walkthrough, video]
 
 In this video review, we explore **Instatic**, the open-source visual page builder and CMS built on Bun and TypeScript. We analyze how it challenges proprietary systems like Webflow and Framer by exporting clean, semantic static HTML and CSS under the MIT license.
 
@@ -17763,77 +16351,8 @@ Watch the complete design canvas interface review and feature walkthrough below:
 
 ## Instatic Case Studies & Benchmarks
 
-* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/guides/webflow-to-instatic-migration-savings).
 * Compare visual engine specs in [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).
-
----
-
-# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.com/prompts/instatic-ai-assisted-design-prompts)
-
-> Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
-
-Category: Prompts | Tags: [instatic, ai, prompts, system-prompts]
-
-Writing layouts, fixing alignment issues, and writing placeholder copy are some of the most time-consuming parts of web design. **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this work by integrating an AI co-pilot directly into the editor canvas.
-
-Rather than restricting you to a single provider, Instatic's **Bun-powered server** lets you connect your own API keys to utilize models from **OpenAI, Anthropic, Open Router**, or even run **local LLMs**. The resulting layout parameters and copywriting choices are written directly to the database backend (SQLite/PostgreSQL) and compiled into raw static markup. 
-
-This guide shares system prompts and workflow techniques to help you get the most out of Instatic's AI assistant.
-
----
-
-## The AI Canvas Prompt Workflow
-
-Using AI to build layouts works best with a structured, step-by-step approach:
-
-```mermaid
-graph LR
-    SystemPrompt[1. Set Role Prompt] --> SelectElement[2. Select Canvas Element]
-    SelectElement --> Instruction[3. Provide Instruction]
-    Instruction --> AIOutput[4. AI Updates CSS & Text]
-```
-
-By selecting a specific element before prompting, you give the AI context about the layout container it is modifying.
-
----
-
-## Recommended System Prompts
-
-### 1. The Layout Architect Prompt
-Copy and paste this system prompt into the AI configuration dashboard to guide the model when creating grid and flex layouts:
-
-```
-You are a Staff Frontend Engineer specializing in responsive Tailwind-style CSS grids.
-When asked to build a layout, output semantic HTML and class properties using system design tokens.
-Enforce mobile-first responsiveness: use flex-col on mobile and flex-row on desktop.
-```
-
-### 2. The Micro-Copy Editor Prompt
-Use this prompt to refine marketing copy directly on the page canvas:
-
-```
-You are an expert Copywriter specializing in SaaS landing pages.
-When instructed to rewrite selected text, provide concise, high-conversion copy.
-Ensure the text does not exceed 120 characters to maintain structural balance.
-```
-
----
-
-## Editor Video Walkthrough
-
-Watch the AI assistant execute layouts, write copy, and adjust spacing in real time:
-
-<div class="video-wrapper aspect-video">
-  <iframe src="https://www.youtube.com/embed/O88lL2v3JkA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-</div>
-
----
-
-## Key Takeaways & Alpha Warnings
-- **Flexible AI Integration**: Connect to any model via custom API keys or run local LLMs.
-- **Context-Aware Styling**: Select a canvas element first to guide the AI's changes.
-- **Code Generation**: Instruct the assistant to write custom styles and components.
-- **Alpha Warnings**: Given the **early alpha status** of Instatic, AI-generated styles should be regularly audited in the Selector Manager to prune redundant utility classes.
 
 ---
 
@@ -17999,46 +16518,60 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 
 ---
 
-# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/use-cases/instatic-enterprise-editorial-governance)
+# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.com/guides/instatic-ai-assisted-design-prompts)
 
-> How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
+> Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
 
-Category: Use Cases | Tags: [instatic, enterprise, user-management, permissions]
+Category: Guides | Tags: [instatic, ai, prompts, system-prompts]
 
-Delivering a visual website design to a client is often a nerve-wracking process. Without strict boundaries, content editors can accidentally modify layout alignments, break typography consistency, or delete page components.
+Writing layouts, fixing alignment issues, and writing placeholder copy are some of the most time-consuming parts of web design. **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this work by integrating an AI co-pilot directly into the editor canvas.
 
-**Instatic CMS**—the MIT licensed open-source visual page builder—addresses this issue with a built-in **user and role management system**. Running on a high-performance **Bun and TypeScript** backend, Instatic saves these security rules to the local database (SQLite by default, or PostgreSQL for teams) and compiles pages into static HTML with **zero builder or hydration bloat**.
+Rather than restricting you to a single provider, Instatic's **Bun-powered server** lets you connect your own API keys to utilize models from **OpenAI, Anthropic, Open Router**, or even run **local LLMs**. The resulting layout parameters and copywriting choices are written directly to the database backend (SQLite/PostgreSQL) and compiled into raw static markup. 
 
-This guide explains how agencies use Instatic to lock down page layouts while allowing clients to easily publish content.
+This guide shares system prompts and workflow techniques to help you get the most out of Instatic's AI assistant.
 
 ---
 
-## The Role Permission Hierarchy
+## The AI Canvas Prompt Workflow
 
-Instatic allows you to create custom roles with specific feature access. Agencies generally use a three-tier permission model:
+Using AI to build layouts works best with a structured, step-by-step approach:
 
 ```mermaid
-graph TD
-    SuperAdmin[Super Admin: Agency Developer] -->|Full Access| DesignSystem[Layout, Tokens, Code & Plugins]
-    Editor[Editor: Client Content Lead] -->|Content Access| TextMedia[Add/Edit Pages, Assets & Text]
-    Writer[Writer: Contributor] -->|Draft Access| SaveDrafts[Write Articles, Cannot Publish]
+graph LR
+    SystemPrompt[1. Set Role Prompt] --> SelectElement[2. Select Canvas Element]
+    SelectElement --> Instruction[3. Provide Instruction]
+    Instruction --> AIOutput[4. AI Updates CSS & Text]
+```
+
+By selecting a specific element before prompting, you give the AI context about the layout container it is modifying.
+
+---
+
+## Recommended System Prompts
+
+### 1. The Layout Architect Prompt
+Copy and paste this system prompt into the AI configuration dashboard to guide the model when creating grid and flex layouts:
+
+```
+You are a Staff Frontend Engineer specializing in responsive Tailwind-style CSS grids.
+When asked to build a layout, output semantic HTML and class properties using system design tokens.
+Enforce mobile-first responsiveness: use flex-col on mobile and flex-row on desktop.
+```
+
+### 2. The Micro-Copy Editor Prompt
+Use this prompt to refine marketing copy directly on the page canvas:
+
+```
+You are an expert Copywriter specializing in SaaS landing pages.
+When instructed to rewrite selected text, provide concise, high-conversion copy.
+Ensure the text does not exceed 120 characters to maintain structural balance.
 ```
 
 ---
 
-## Structuring the Client Hand-off
+## Editor Video Walkthrough
 
-To ensure a smooth, worry-free website delivery, follow this setup:
-
-1. **Restrict Canvas Editing**: Remove permissions to edit CSS classes or design system variables for client roles. This prevents editors from changing colors or spacing.
-2. **Lock Structural Layouts**: Allow clients to update placeholder fields (such as headings, body copy, and images) while locking the wrapping container elements.
-3. **Configure Audit Logs**: Keep the Audit Log enabled to trace issues back to specific updates if layout inconsistencies arise.
-
----
-
-## Editor Team Workflows
-
-Watch how team permissions and visual canvas settings are managed inside the editor:
+Watch the AI assistant execute layouts, write copy, and adjust spacing in real time:
 
 <div class="video-wrapper aspect-video">
   <iframe src="https://www.youtube.com/embed/O88lL2v3JkA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
@@ -18047,128 +16580,63 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 ---
 
 ## Key Takeaways & Alpha Warnings
-- **Safe Hand-offs**: Protect website designs by blocking editor access to style attributes.
-- **Traceable Changes**: Use audit logging to see who modified content and when.
-- **Independent Roles**: Set custom permissions for external contributors, review teams, and developers.
-- **Alpha Warnings**: Given the project's **early alpha status**, test user authentication credentials on a local SQLite instance before deploying container nodes for active client edits.
-
-
-## Instatic Deployment & Migration Resources
-
-* See agency migration cost breakdowns in [Case Study: Migrating 25 Client Sites from Webflow to Instatic](/case-studies/webflow-to-instatic-migration-savings).
-* Learn self-hosted VPS installation steps in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
+- **Flexible AI Integration**: Connect to any model via custom API keys or run local LLMs.
+- **Context-Aware Styling**: Select a canvas element first to guide the AI's changes.
+- **Code Generation**: Instruct the assistant to write custom styles and components.
+- **Alpha Warnings**: Given the **early alpha status** of Instatic, AI-generated styles should be regularly audited in the Selector Manager to prune redundant utility classes.
 
 ---
 
-# [Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting](https://nadhebe.com/tools/instatic-html-importer-guide)
+# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.com/guides/instatic-astro-islands-frameworks-integration)
 
-> An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.
+> An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
 
-Category: Tools | Tags: [instatic, site-migration, tools, troubleshoot]
+Category: Guides | Tags: [instatic, astro, hydration, frontend-frameworks]
 
-Migrating existing static sites into a visual page builder often requires manual copy-pasting of HTML blocks and CSS classes. **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this with an HTML importer tool that parses folders and converts elements into editable nodes.
+Visual page builders are great for designing structural grids, but they often struggle when you need to embed complex dynamic modules like interactive checkout widgets or dashboards.
 
-In this guide, we analyze how the Instatic import engine parses templates and how to resolve common layout conflicts.
-
----
-
-## The Importer Pipeline
-
-When you drag and drop your project folder, the import engine processes files through a three-stage parser:
-
-![Importer Data Flow](/images/importer-step1.webp)
-*Figure 1: Pipeline diagram showing HTML parsing, style asset mapping, and conflict override resolution.*
-
-### 1. Element Mapping
-The engine reads raw HTML markup, identifies structure sections, and builds corresponding editable elements within the CMS grid system.
-
-### 2. Stylesheets and Script Linking
-Referenced assets are moved to localized workspace directories, and link tags are updated to resolve relative paths.
-
-### 3. Conflict Audits
-If matching templates already exist, the interface prompts you to confirm file overrides. Instatic uses its local database (SQLite file by default, or configured PostgreSQL server) to track database relations and site configurations.
+By pairing **Instatic**—the MIT licensed open-source visual page builder—with **Astro**, you get the best of both worlds: a self-hosted visual editor for marketing copy (running on a lightweight **Bun and TypeScript** server) and the raw power of **Astro Islands** to inject highly interactive React, Vue, or Svelte components directly into static page wrappers with **zero hydration overhead** in the non-interactive areas.
 
 ---
 
-## Troubleshooting Common Import Issues
+## The Hydration Workflow
 
-### Visual Styles Not Loading
-If layouts load without styling, check the relative resource links. If stylesheets fail to compile:
+### 1. Structure Export
+Export your page skeleton layout as static HTML from the Instatic canvas.
 
-1. Click on the administrator profile icon in the top left menu.
-2. Select **Run Site Scripts** to trigger layout recompilation.
+### 2. Layout Mapping
+Load the static HTML files into Astro's file system or fetch them directly from your Instatic local SQLite/PostgreSQL database backend using Astro's dynamic routing.
 
-![Troubleshooting Dashboard Controls](/images/importer-step2.webp)
-*Figure 2: Custom control dialogue location for running local site build scripts.*
-
-### Conflict Resolution during Repetitive Imports
-If you re-import a template to apply updates, choose the **Override All** option when prompted. This replaces older layouts with the updated static layout files.
-
+### 3. Astro Islands Hydration
+Replace the static layout elements with Astro framework islands:
+```astro
 ---
-
-## Key Takeaways & Alpha Warnings
-- **Directory Preservation**: The import tool maintains your original folder structures for pages, styles, and scripts.
-- **Troubleshooting Scripts**: Running site scripts from the dashboard resolves path linking issues.
-- **Asset Protection**: Sandbox controls prevent client overrides from breaking base layout settings.
-- **Alpha Status**: Instatic is currently in **early alpha status**, so always backup your SQLite database before running complex site imports.
-
+import InteractiveWidget from '../components/InteractiveWidget.jsx';
 ---
-
-# [Importing HTML Websites into Instatic CMS: Importer Mechanics](https://nadhebe.com/tools/instatic-html-site-import-migration)
-
-> A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.
-
-Category: Tools | Tags: [instatic, HTML-import, site-migration, tools]
-
-Migrating an existing website into a new content management system often requires rebuilding the layout from scratch. However, **Instatic CMS**—the MIT licensed open-source visual page builder—simplifies this transition with its built-in website and HTML importing engines.
-
-Rather than just copying raw code into an iframe, Instatic converts incoming markup directly into editable canvas elements, class selectors, and design tokens, saving them directly to the database backend (SQLite by default, or PostgreSQL for teams). This guide explains the mechanics behind the importer and how to manage site migrations.
-
----
-
-## The Importer AST Pipeline
-
-The importer parses incoming markup through a multi-step pipeline to make the elements visually editable:
-
-```mermaid
-graph TD
-    RawHTML[Raw HTML Input] -->|Parse DOM| ASTParser[AST Node Parser]
-    ASTParser -->|Extract Classes| ClassCompiler[Class Selector Engine]
-    ASTParser -->|Extract Assets| AssetDownloader[Media & Font Downloader]
-    ClassCompiler -->|Bind Styles| CanvasElements[Editable Canvas Nodes]
-    AssetDownloader -->|Register Assets| MediaGallery[Instatic Media Gallery]
+<div id="instatic-cta-section">
+  <!-- Dynamic React Island -->
+  <InteractiveWidget client:visible />
+</div>
 ```
 
-This translation layer processes standard CSS rules and assets, making the imported page fully compatible with the visual styling panel.
-
 ---
 
-## Step-by-Step HTML Section Migration
-
-If you only need to migrate a single section (like a pricing grid or card layout), follow these steps:
-
-1. **Copy the Source Code**: Inspect the source site and copy the wrapper container's outer HTML.
-2. **Paste into the Importer**: Open the Instatic canvas, select the target parent node, and open the HTML block importer. Paste your snippet.
-3. **Resolve Design Tokens**: Open the **Selector Manager** to merge any imported styling rules with your project's design system tokens.
-4. **Optimize Assets**: Replace absolute image URLs with files uploaded to the Instatic media manager for faster loading.
-
----
-
-## Platform Video Overview
-
-Watch the importer process and convert external layouts into clean, editable visual elements:
-
-<div class="video-wrapper aspect-video">
-  <iframe src="https://www.youtube.com/embed/O88lL2v3JkA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
-</div>
+## Performance Audits
+* **Reduced JS Bundles**: Astro only ships JavaScript for the specific dynamic interactive widgets (islands), keeping page weight extremely low.
+* **Instant Interaction**: Non-interactive HTML elements remain static, allowing search engines to index them without waiting for hydration.
 
 ---
 
 ## Key Takeaways & Alpha Warnings
-- **No Rebuilding Required**: Convert raw HTML and CSS into editable canvas elements.
-- **Unified Style Rules**: Use the Selector Manager to map imported classes to your design system.
-- **Fast Block Imports**: Paste code snippets directly into the canvas to populate layouts instantly.
-- **Alpha Warnings**: Since Instatic is in **early alpha status**, verify all imported layouts on mobile breakpoints to ensure that no styling attributes are dropped.
+- **Best-in-class DX**: Combines visual layouts and custom frontend frameworks seamlessly.
+- **Zero Hydration Bloat**: Astro islands ensure standard sections remain raw HTML, enhancing SEO.
+- **Alpha Warnings**: Because Instatic is in an **early alpha stage**, ensure that all custom component slots are checked for layout shifting (CLS) during viewport resizing.
+
+
+## Instatic CMS System Guides
+
+* Understand the Bun compiler and database architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
+* Learn how agencies handle client hand-offs in [Enterprise Editorial Governance with Instatic CMS](/guides/instatic-enterprise-editorial-governance).
 
 ---
 
@@ -18265,69 +16733,77 @@ Watch the complete design system configuration and database architecture setup i
 
 ## Integration & Scaling Resources
 
-* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/frameworks/instatic-astro-islands-frameworks-integration).
+* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/guides/instatic-astro-islands-frameworks-integration).
 * Structure your CSS system cleanly with [Best Practices for Scaling Design Tokens in Instatic CMS](/best-practices/instatic-design-tokens-scaling).
 
 ---
 
-# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.com/frameworks/instatic-astro-islands-frameworks-integration)
+# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/guides/instatic-enterprise-editorial-governance)
 
-> An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
+> How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 
-Category: Frameworks | Tags: [instatic, astro, hydration, frontend-frameworks]
+Category: Guides | Tags: [instatic, enterprise, user-management, permissions]
 
-Visual page builders are great for designing structural grids, but they often struggle when you need to embed complex dynamic modules like interactive checkout widgets or dashboards.
+Delivering a visual website design to a client is often a nerve-wracking process. Without strict boundaries, content editors can accidentally modify layout alignments, break typography consistency, or delete page components.
 
-By pairing **Instatic**—the MIT licensed open-source visual page builder—with **Astro**, you get the best of both worlds: a self-hosted visual editor for marketing copy (running on a lightweight **Bun and TypeScript** server) and the raw power of **Astro Islands** to inject highly interactive React, Vue, or Svelte components directly into static page wrappers with **zero hydration overhead** in the non-interactive areas.
+**Instatic CMS**—the MIT licensed open-source visual page builder—addresses this issue with a built-in **user and role management system**. Running on a high-performance **Bun and TypeScript** backend, Instatic saves these security rules to the local database (SQLite by default, or PostgreSQL for teams) and compiles pages into static HTML with **zero builder or hydration bloat**.
+
+This guide explains how agencies use Instatic to lock down page layouts while allowing clients to easily publish content.
 
 ---
 
-## The Hydration Workflow
+## The Role Permission Hierarchy
 
-### 1. Structure Export
-Export your page skeleton layout as static HTML from the Instatic canvas.
+Instatic allows you to create custom roles with specific feature access. Agencies generally use a three-tier permission model:
 
-### 2. Layout Mapping
-Load the static HTML files into Astro's file system or fetch them directly from your Instatic local SQLite/PostgreSQL database backend using Astro's dynamic routing.
-
-### 3. Astro Islands Hydration
-Replace the static layout elements with Astro framework islands:
-```astro
----
-import InteractiveWidget from '../components/InteractiveWidget.jsx';
----
-<div id="instatic-cta-section">
-  <!-- Dynamic React Island -->
-  <InteractiveWidget client:visible />
-</div>
+```mermaid
+graph TD
+    SuperAdmin[Super Admin: Agency Developer] -->|Full Access| DesignSystem[Layout, Tokens, Code & Plugins]
+    Editor[Editor: Client Content Lead] -->|Content Access| TextMedia[Add/Edit Pages, Assets & Text]
+    Writer[Writer: Contributor] -->|Draft Access| SaveDrafts[Write Articles, Cannot Publish]
 ```
 
 ---
 
-## Performance Audits
-* **Reduced JS Bundles**: Astro only ships JavaScript for the specific dynamic interactive widgets (islands), keeping page weight extremely low.
-* **Instant Interaction**: Non-interactive HTML elements remain static, allowing search engines to index them without waiting for hydration.
+## Structuring the Client Hand-off
+
+To ensure a smooth, worry-free website delivery, follow this setup:
+
+1. **Restrict Canvas Editing**: Remove permissions to edit CSS classes or design system variables for client roles. This prevents editors from changing colors or spacing.
+2. **Lock Structural Layouts**: Allow clients to update placeholder fields (such as headings, body copy, and images) while locking the wrapping container elements.
+3. **Configure Audit Logs**: Keep the Audit Log enabled to trace issues back to specific updates if layout inconsistencies arise.
+
+---
+
+## Editor Team Workflows
+
+Watch how team permissions and visual canvas settings are managed inside the editor:
+
+<div class="video-wrapper aspect-video">
+  <iframe src="https://www.youtube.com/embed/O88lL2v3JkA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-full"></iframe>
+</div>
 
 ---
 
 ## Key Takeaways & Alpha Warnings
-- **Best-in-class DX**: Combines visual layouts and custom frontend frameworks seamlessly.
-- **Zero Hydration Bloat**: Astro islands ensure standard sections remain raw HTML, enhancing SEO.
-- **Alpha Warnings**: Because Instatic is in an **early alpha stage**, ensure that all custom component slots are checked for layout shifting (CLS) during viewport resizing.
+- **Safe Hand-offs**: Protect website designs by blocking editor access to style attributes.
+- **Traceable Changes**: Use audit logging to see who modified content and when.
+- **Independent Roles**: Set custom permissions for external contributors, review teams, and developers.
+- **Alpha Warnings**: Given the project's **early alpha status**, test user authentication credentials on a local SQLite instance before deploying container nodes for active client edits.
 
 
-## Instatic CMS System Guides
+## Instatic Deployment & Migration Resources
 
-* Understand the Bun compiler and database architecture in [The Ultimate Architectural Guide to Instatic CMS](/guides/instatic-cms-architecture-ultimate-guide).
-* Learn how agencies handle client hand-offs in [Enterprise Editorial Governance with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).
+* See agency migration cost breakdowns in [Case Study: Migrating 25 Client Sites from Webflow to Instatic](/guides/webflow-to-instatic-migration-savings).
+* Learn self-hosted VPS installation steps in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
 
 ---
 
-# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/case-studies/webflow-to-instatic-migration-savings)
+# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/guides/webflow-to-instatic-migration-savings)
 
 > How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.
 
-Category: Case Studies | Tags: [instatic, webflow, migration, hosting-costs]
+Category: Guides | Tags: [instatic, webflow, migration, hosting-costs]
 
 Managing client websites on proprietary SaaS platforms can quickly become expensive. Agency teams often face rising subscription fees, paid add-on costs for simple features, and strict limits on database items.
 
@@ -18394,7 +16870,7 @@ Watch the visual layout importer convert pages during the migration process:
 ## Self-Hosted CMS Deployment Guides
 
 * Deploy self-hosted instances using Docker in [How to Deploy Instatic CMS on a VPS Using Docker Compose](/tutorials/deploying-instatic-docker-vps).
-* Set up team permissions and client locks in [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](/use-cases/instatic-enterprise-editorial-governance).
+* Set up team permissions and client locks in [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](/guides/instatic-enterprise-editorial-governance).
 
 ---
 

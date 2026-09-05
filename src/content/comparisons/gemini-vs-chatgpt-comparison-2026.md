@@ -2,8 +2,8 @@
 title: "Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison"
 description: "Comprehensive evaluation of Google Gemini 2.0/3.x vs OpenAI ChatGPT (GPT-4o/5) on coding, 2M context windows, vision, and API costs."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "comparisons"
+author: nadhebe-team
+category: "Comparisons"
 tags: ["gemini-vs-chatgpt", "gemini-ai", "chatgpt", "llm-comparison", "ai-tools"]
 heroImage: "/images/gemini-vs-chatgpt-hero.webp"
 heroAlt: "Geometric isometric comparison illustration of Gemini vs ChatGPT"

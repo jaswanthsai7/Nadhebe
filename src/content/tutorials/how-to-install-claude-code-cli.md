@@ -2,7 +2,7 @@
 title: "How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)"
 description: "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Tutorials
 tags: ["claude", "cli", "installation", "anthropic", "developer-tools"]
 heroImage: "/images/claude-cli-hero.webp"

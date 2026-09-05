@@ -2,7 +2,7 @@
 title: "LLM Autonomous Loops: Best Practices for Token and Cost Management"
 description: "Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Best Practices
 tags: ["cost-management", "llm-ops", "best-practices", "agents", "models"]
 heroImage: "/images/llm-costs.webp"

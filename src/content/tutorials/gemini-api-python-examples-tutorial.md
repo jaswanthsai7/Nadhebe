@@ -2,8 +2,8 @@
 title: "Gemini API Examples for Python: Complete Developer Guide (2026)"
 description: "Hands-on Python code samples for text generation, structured JSON outputs, image vision parsing, and streaming responses with the Google Gen AI SDK."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gemini-api", "python", "developer-guide", "code-examples", "sdk"]
 heroImage: "/images/gemini-python-examples-hero.webp"
 heroAlt: "Python SDK code blueprint illustration of Gemini API"

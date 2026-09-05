@@ -3,7 +3,7 @@ title: "Running Flux.1 Local Image Generation on Consumer GPUs"
 description: "Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Flux.1", "ComfyUI", "Local AI", "Consumer GPU", "Image Generation", "NF4 Quantization", "Diffusion Models"]
 heroImage: "/images/run-flux-1-locally-consumer-gpu-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing open diffusion generation nodes and graphics pipelines"

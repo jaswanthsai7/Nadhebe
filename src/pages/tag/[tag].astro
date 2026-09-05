@@ -37,7 +37,7 @@ export async function getStaticPaths() {
 const { tagName, posts } = Astro.props;
 
 // Keep noindex if the tag has fewer than 3 articles (thin content archive)
-const shouldNoindex = !posts || posts.length < 3;
+const shouldNoindex = true;
 ---
 
 <BaseLayout
@@ -52,7 +52,7 @@ const shouldNoindex = !posts || posts.length < 3;
       <p class="text-meta font-sans font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Tag Hub</p>
       <h1 class="font-display text-h1 sm:text-display font-bold text-ink dark:text-ink-dark leading-tight">Topic: {tagName}</h1>
       <p class="text-body text-ink2 dark:text-ink2-dark mt-16 max-w-md">
-        Explore all our posts matching the keyword or topic cluster: <code class="bg-code dark:bg-code-dark px-8 py-2 rounded font-mono text-meta text-ink dark:text-ink-dark">{tagName}</code>.
+        Explore our technical articles and implementation guides tagged with <code class="bg-code dark:bg-code-dark px-8 py-2 rounded font-mono text-meta text-ink dark:text-ink-dark">{tagName}</code>.
       </p>
     </div>
 

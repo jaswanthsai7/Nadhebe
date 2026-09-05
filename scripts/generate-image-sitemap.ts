@@ -37,6 +37,16 @@ function run() {
     if (!filePath.endsWith('.html')) return;
 
     const html = fs.readFileSync(filePath, 'utf-8');
+    if (
+      html.includes('content="noindex') ||
+      filePath.includes('404') ||
+      filePath.includes('offline') ||
+      filePath.includes('tag') ||
+      filePath.includes('partners') ||
+      filePath.includes('downloads')
+    ) {
+      return;
+    }
     
     // Determine the page URL
     const relativePath = filePath

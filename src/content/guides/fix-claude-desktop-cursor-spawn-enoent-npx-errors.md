@@ -3,7 +3,7 @@ title: "Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors"
 description: "How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: guides
+category: "Guides"
 tags: ["node", "enoent", "mcp", "claude desktop", "cursor"]
 heroImage: "/images/enoent-fix-hero.webp"
 heroAlt: "Error resolution flow diagram for spawn ENOENT and path errors in Cursor and Claude"

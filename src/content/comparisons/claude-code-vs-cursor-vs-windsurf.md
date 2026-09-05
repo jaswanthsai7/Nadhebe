@@ -3,7 +3,7 @@ title: "Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison"
 description: "An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: comparisons
+category: "Comparisons"
 tags: ["ai coding", "claude code", "cursor", "windsurf"]
 heroImage: "/images/ide-comparison-hero.webp"
 heroAlt: "Sleek bright comparison diagram comparing Claude Code, Cursor, and Windsurf Cascade"
@@ -33,7 +33,7 @@ estimatedReadingTime: 12
 | Risk | Over-broad agent autonomy | Hidden context selection | Agent plan may need manual steering |
 | Best practice | Use `CLAUDE.md` and plan mode | Keep prompts scoped to files | Review each Cascade step |
 
-For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/llm-token-counter-multi-model/) once the tool is available, or track prompt length manually for repeated agent loops.
+For long-running sessions, token growth becomes a real cost. Use the [LLM token estimator](/tools/llm-tokenizer/) once the tool is available, or track prompt length manually for repeated agent loops.
 
 ## Multi-file Edits
 

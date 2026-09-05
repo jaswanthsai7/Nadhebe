@@ -1,6 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
-import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import fs from 'fs';
+import path from 'path';
 import ToolLayout from '@/components/tools/ToolLayout.astro';
 import PlatformWorkbench from '@/components/tools/PlatformWorkbench.astro';
 import { UNIFIED_TOOLS_REGISTRY, type UnifiedTool } from '@/config/tools-registry';
@@ -9,130 +9,17 @@ import type { PlatformTool } from '@/config/platform-tools';
 import type { ToolMetadata } from '@/config/tools';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('tools');
-  const standaloneAstroSlugs = new Set([
-    '16-9-dimensions-calculator',
-    '9-16-dimensions-calculator',
-    'ai-api-pricing-calculator',
-    'ai-detection-checker',
-    'ai-persona-prompt-generator',
-    'ai-prompt-generator',
-    'aspect-ratio-calculator',
-    'base64-encoder',
-    'base64-image-converter',
-    'batch-inference-cost-estimator',
-    'canonical-checker',
-    'cac-payback',
-    'case-converter',
-    'chatgpt-ad-blocker',
-    'claude-cost-estimator',
-    'claude-desktop-mcp-config-maker',
-    'cls-checklist',
-    'color-contrast-checker',
-    'column-extractor',
-    'compound-interest',
-    'cors-header-generator',
-    'cosine-similarity-calculator',
-    'cron-explainer',
-    'csp-header-generator',
-    'css-clamp-calculator',
-    'css-flexbox-generator',
-    'css-grid-generator',
-    'csv-to-excel',
-    'csv-to-json',
-    'date-difference',
-    'delimiter-converter',
-    'dpi-print-size-calculator',
-    'excel-to-csv',
-    'evtx-to-csv',
-    'few-shot-prompt-formatter',
-    'gemini-cost-estimator',
-    'gpu-vram-calculator',
-    'hsts-header-generator',
-    'http-header-inspector',
-    'http-status-codes-cheat-sheet',
-    'html-to-markdown',
-    'json-formatter',
-    'json-minifier',
-    'json-path-finder',
-    'json-repair',
-    'json-schema-validator',
-    'json-to-csv',
-    'json-to-typescript',
-    'json-to-xml',
-    'json-to-yaml',
-    'json-validator',
-    'jwt-encoder',
-    'llm-model-comparison-matrix',
-    'llm-rate-limit-backoff-generator',
-    'llm-token-counter-multi-model',
-    'llm-tokenizer',
-    'markdown-table-generator',
-    'markdown-to-html',
-    'mcp-json-rpc-payload-tester',
-    'mcp-server-manifest-generator',
-    'megapixels-to-resolution-calculator',
-    'meta-tag-analyzer',
-    'openapi-3-yaml-generator',
-    'openapi-to-mcp-tool-schema',
-    'openai-cost-estimator',
-    'opportunity-radar',
-    'percentage-difference-calculator',
-    'pixels-to-megapixels-calculator',
-    'png-to-webp',
-    'ppi-calculator',
-    'profit-margin-calculator',
-    'prompt-improver',
-    'prompt-optimizer',
-    'prompt-template-variable-tester',
-    'px-to-rem',
-    'qr-code-generator',
-    'rag-chunk-size-calculator',
-    'rag-context-window-calculator',
-    'rag-evaluator',
-    'redirect-chain-checker',
-    'regex-tester',
-    'resize-dimensions-calculator',
-    'rfc-7807-error-json-generator',
-    'robots-tester',
-    'schema-generator',
-    'schema-validator',
-    'seo-builder',
-    'seo-checker',
-    'seo-estimator',
-    'seo-inspector',
-    'seo-planner',
-    'serp-preview',
-    'sitemap-validator',
-    'slug-generator',
-    'social-media-image-sizes',
-    'sql-formatter',
-    'svg-to-jsx',
-    'svg-to-png',
-    'uuid-v7-generator',
-    'webp-to-png',
-    'x-frame-options-generator',
-    'xml-to-json',
-    'yaml-validator',
-    'system-prompt-linter-best-practices',
-    'webhook-payload-signature-generator',
-    'xml-formatter',
-    'yaml-to-json',
-    'youtube-video-size-calculator'
-  ]);
+  // Dynamically inspect tools directory to find all standalone pages and routers
+  const toolsDir = path.resolve('src/pages/tools');
+  const existingFiles = fs.readdirSync(toolsDir);
+  const reservedSlugs = new Set(
+    existingFiles
+      .filter((name) => name !== '[slug].astro' && name !== 'index.astro')
+      .map((name) => name.replace(/\.astro$/, ''))
+  );
 
-  const reservedSlugs = new Set([
-    ...entries.map((entry) => entry.slug),
-    ...standaloneAstroSlugs,
-  ]);
-
-  const articlePaths = entries.map(entry => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
-
-  const platformPaths = UNIFIED_TOOLS_REGISTRY
-    .filter((tool) => !reservedSlugs.has(tool.slug))
+  return UNIFIED_TOOLS_REGISTRY
+    .filter((tool) => tool.status === 'implemented' && !reservedSlugs.has(tool.slug))
     .map((platformTool) => ({
       params: { slug: platformTool.slug },
       props: {
@@ -143,133 +30,123 @@ export async function getStaticPaths() {
           href: platformTool.href,
           description: platformTool.description,
           seoDescription: platformTool.seo?.description || platformTool.description,
-          seoTitle: platformTool.seo?.title || `${platformTool.name || platformTool.title} - Free Browser Tool | Nadhebe`,
+          seoTitle: platformTool.seo?.title || `${platformTool.name || platformTool.title} — Free Online Tool | Nadhebe`,
           category: platformTool.category,
           categorySlug: platformTool.categorySlug || platformTool.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
           mode: platformTool.mode || 'transform',
           badge: platformTool.badge,
           tags: platformTool.tags || [],
-          // Pass status so PlatformWorkbench uses registry as single source of truth
-          isImplemented: platformTool.status === 'implemented',
-          // Pass corrected relatedTools from registry (not category-matching)
+          isImplemented: true,
           relatedToolSlugs: platformTool.relatedTools || [],
         } as PlatformTool & { isImplemented: boolean; relatedToolSlugs: string[]; seoDescription: string; seoTitle: string },
       },
     }));
-
-  return [...articlePaths, ...platformPaths];
 }
 
-const { entry, platformTool } = Astro.props as {
-  entry?: Awaited<ReturnType<typeof getCollection>>[number];
-  platformTool?: PlatformTool & { isImplemented: boolean; relatedToolSlugs: string[]; seoDescription: string; seoTitle: string };
+const { platformTool } = Astro.props as {
+  platformTool: PlatformTool & { isImplemented: boolean; relatedToolSlugs: string[]; seoDescription: string; seoTitle: string };
 };
 
-// Build related tools from the registry's corrected relatedTools list (not naive category filter)
-const platformRelatedTools = platformTool
-  ? UNIFIED_TOOLS_REGISTRY
-      .filter((tool) => (platformTool.relatedToolSlugs ?? []).includes(tool.slug))
-      .map((tool) => ({
-        id: tool.id,
-        name: tool.name || tool.title,
-        slug: tool.slug,
-        href: tool.href,
-        description: tool.description,
-        category: tool.category,
-        icon: tool.icon || 'code',
-        badge: tool.badge,
-        tags: tool.tags,
-        noApi: true,
-      })) as ToolMetadata[]
-  : undefined;
+// Build related tools from the registry
+const platformRelatedTools = UNIFIED_TOOLS_REGISTRY
+  .filter((tool) => (platformTool.relatedToolSlugs ?? []).includes(tool.slug))
+  .slice(0, 4)
+  .map((tool) => ({
+    id: tool.id,
+    name: tool.name || tool.title,
+    slug: tool.slug,
+    href: tool.href,
+    description: tool.description,
+    category: tool.category,
+    icon: tool.icon || 'code',
+    badge: tool.badge,
+    tags: tool.tags,
+    noApi: true,
+  })) as ToolMetadata[];
 
-// Rich per-tool content (intro, use cases, how it works, example, faq)
-const richContent = platformTool ? TOOL_RICH_CONTENT[platformTool.slug] : undefined;
+// Rich per-tool content
+const richContent = TOOL_RICH_CONTENT[platformTool.slug];
 
-// Build FAQ: use tool-specific items if available, always append 2 universal items
+// Build FAQ
 const genericFaq = [
   {
-    question: `Is ${platformTool?.name} free to use?`,
-    answer: `Yes. ${platformTool?.name} is completely free and runs locally in your browser — no account required.`,
+    question: `Is ${platformTool.name} free to use?`,
+    answer: `Yes. ${platformTool.name} is completely free and executes locally inside your web browser. No registration, API token, or software installation is required.`,
   },
   {
-    question: 'Does Nadhebe upload my data?',
-    answer: 'No. All processing happens in your browser. Your input data never leaves your device or gets sent to any server.',
+    question: 'Is my input data uploaded to any server?',
+    answer: 'No. Nadhebe utilities execute 100% client-side in your web browser. Your text, payloads, or files never leave your device.',
+  },
+  {
+    question: 'Can I use this tool offline?',
+    answer: `Yes. Once the page is loaded in your browser, the JavaScript execution environment runs locally without needing an active internet connection.`,
   },
 ];
 const toolFaq = richContent ? [...richContent.faq, ...genericFaq] : genericFaq;
-
-// Verb for the generic fallback paragraph
-const modeVerb = platformTool?.mode === 'calculator' ? 'calculate'
-  : platformTool?.mode === 'generator' ? 'generate'
-  : platformTool?.mode === 'analyzer' ? 'analyze'
-  : 'transform';
 ---
 
-{entry ? (
-  <ArticleLayout post={entry} />
-) : platformTool ? (
-  <ToolLayout
-    toolId={platformTool.slug}
-    title={platformTool.seoTitle || `${platformTool.name} - Free Browser Tool | Nadhebe`}
-    h1={platformTool.name}
-    description={platformTool.seoDescription || platformTool.description}
-    hideHeader={true}
-    relatedCategory={platformTool.category}
-    relatedTools={platformRelatedTools}
-    faq={toolFaq}
-  >
-    <div slot="calculator"><PlatformWorkbench tool={platformTool} isImplemented={platformTool.isImplemented} /></div>
+<ToolLayout
+  toolId={platformTool.slug}
+  title={platformTool.seoTitle || `${platformTool.name} — Free Browser Tool | Nadhebe`}
+  h1={platformTool.name}
+  description={platformTool.seoDescription || platformTool.description}
+  hideHeader={true}
+  relatedCategory={platformTool.category}
+  relatedTools={platformRelatedTools}
+  faq={toolFaq}
+>
+  <div slot="calculator"><PlatformWorkbench tool={platformTool} isImplemented={true} /></div>
 
-    <div slot="content">
-      {richContent ? (
-        <>
-          {/* Intro */}
-          <h2>About {platformTool.name}</h2>
-          <p>{richContent.intro}</p>
+  <div slot="content">
+    {richContent ? (
+      <>
+        <h2>About {platformTool.name}</h2>
+        <p>{richContent.intro}</p>
 
-          {/* Use cases */}
-          <h3>When to use {platformTool.name}</h3>
-          <ul>
-            {richContent.useCases.map((uc) => (
-              <li>{uc}</li>
-            ))}
-          </ul>
+        <h3>When to use {platformTool.name}</h3>
+        <ul>
+          {richContent.useCases.map((uc) => (
+            <li>{uc}</li>
+          ))}
+        </ul>
 
-          {/* How it works */}
-          <h3>How it works</h3>
-          <p>{richContent.howItWorks}</p>
+        <h3>How it works</h3>
+        <p>{richContent.howItWorks}</p>
 
-          {/* Worked example */}
-          {richContent.example && (
-            <>
-              <h3>Example</h3>
-              {richContent.example.label && <p><strong>{richContent.example.label}</strong></p>}
-              <p><strong>Input:</strong></p>
-              <pre><code>{richContent.example.input}</code></pre>
-              <p><strong>Output:</strong></p>
-              <pre><code>{richContent.example.output}</code></pre>
-            </>
-          )}
+        {richContent.example && (
+          <>
+            <h3>Example</h3>
+            {richContent.example.label && <p><strong>{richContent.example.label}</strong></p>}
+            <p><strong>Input:</strong></p>
+            <pre><code>{richContent.example.input}</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>{richContent.example.output}</code></pre>
+          </>
+        )}
 
-          {/* Privacy note */}
-          <h3>Privacy & security</h3>
-          <p>
-            {platformTool.name} runs entirely in your browser. No input data is uploaded to any server, stored in
-            a database, or shared with third parties. You can use it offline once the page has loaded.
-          </p>
-        </>
-      ) : (
-        <>
-          <h2>About {platformTool.name}</h2>
-          <p>{platformTool.seoDescription || platformTool.description}</p>
-          <p>
-            Use the workspace above to {modeVerb} your input — entirely in your browser with no data uploaded
-            to any server.
-          </p>
-        </>
-      )}
-    </div>
-  </ToolLayout>
-) : null}
+        <h3>Privacy & Security Guarantee</h3>
+        <p>
+          {platformTool.name} processes all data locally inside your web browser. No input text, files, credentials, or outputs are ever transmitted to remote servers, logged to analytics databases, or retained across sessions.
+        </p>
+      </>
+    ) : (
+      <>
+        <h2>About {platformTool.name}</h2>
+        <p>{platformTool.seoDescription || platformTool.description}</p>
 
+        <h3>Key Features & Capabilities</h3>
+        <ul>
+          <li>Fast client-side execution with zero latency or network round-trips.</li>
+          <li>Real-time input validation, formatting, and syntax verification.</li>
+          <li>One-click clipboard copying and clean output export.</li>
+          <li>Mobile-friendly, responsive layout designed for desktop and mobile workflows.</li>
+        </ul>
+
+        <h3>Privacy & Security Guarantee</h3>
+        <p>
+          {platformTool.name} operates entirely within your browser session. Your data never leaves your device and is not saved to any external database or analytics service.
+        </p>
+      </>
+    )}
+  </div>
+</ToolLayout>

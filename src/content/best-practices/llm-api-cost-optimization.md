@@ -3,7 +3,7 @@ title: "LLM API Cost Optimization Best Practices"
 description: "Discover actionable strategies to drastically reduce your Large Language Model API costs without sacrificing output quality. Learn about token optimization, caching, and model routing."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "best-practices"
+category: "Best Practices"
 tags: ["LLM", "API Costs", "Cost Optimization", "Token Management", "Prompt Engineering", "OpenAI", "Anthropic"]
 heroImage: "/images/llm-cost-optimization-hero.webp"
 heroAlt: "Verge-style editorial graphic showing a decreasing cost graph and a computer chip"

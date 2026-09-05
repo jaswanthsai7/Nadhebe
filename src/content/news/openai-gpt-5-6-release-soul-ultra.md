@@ -2,8 +2,8 @@
 title: "OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI"
 description: "OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety."
 pubDate: 2026-07-17
-author: alice-chen
-category: AI
+author: nadhebe-team
+category: "Reviews"
 tags: ["gpt-5.6", "openai", "release", "news", "models"]
 heroImage: "/images/gpt-5-6-news.webp"
 heroAlt: "Premium clean presentation slide showing a stylized abstract chrome logo against a pastel blue gradient background"

@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+
+const title = 'Editorial Standards & Methodology — Nadhebe';
+const description = 'Our principles of technical accuracy, code verification, independent analysis, affiliate disclosures, and corrections policy.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={`${SITE.url}/editorial-standards/`}
+>
+  <div class="mx-auto max-w-4xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-48 shadow-medium dark:border-border-dark dark:bg-surface-dark/90 space-y-32">
+      
+      <div>
+        <div class="inline-flex items-center gap-8 px-12 py-6 rounded-full bg-accent/10 border border-accent/20 text-caption font-mono font-bold text-accent dark:text-accent-dark mb-16 uppercase tracking-wider">
+          <span>Editorial Transparency</span>
+        </div>
+        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark">
+          Editorial Standards & Methodology
+        </h1>
+        <p class="mt-12 text-h3 text-ink2 dark:text-ink2-dark font-sans leading-relaxed">
+          How Nadhebe creates, verifies, updates, and maintains technical guides, tool comparisons, and interactive utilities.
+        </p>
+      </div>
+
+      <div class="border-t border-border/60 dark:border-border-dark/60 pt-24 prose-article">
+        
+        <h2>1. Principles of Technical Accuracy</h2>
+        <p>
+          Nadhebe publishes practical software engineering tutorials, architectural breakdowns, and developer tools. To ensure our content remains genuinely useful to developers, we uphold the following technical guidelines:
+        </p>
+        <ul>
+          <li><strong>Direct Code Verification:</strong> When writing technical walkthroughs, our team runs the commands and scripts locally before publishing. We test against standard environments (Node.js LTS, Python 3.10+, and standard terminal shells).</li>
+          <li><strong>Reproducibility First:</strong> Guides must include complete prerequisites, explicit configuration examples, and realistic error handling rather than theoretical or incomplete snippets.</li>
+          <li><strong>Primary Documentation:</strong> We cite and link directly to official documentation, release notes, RFC specifications, and canonical source repositories.</li>
+        </ul>
+
+        <h2>2. Editorial Independence</h2>
+        <p>
+          Our editorial coverage is independent of any software vendor, cloud provider, or AI lab:
+        </p>
+        <ul>
+          <li>We do not publish sponsored reviews disguised as independent editorial analysis.</li>
+          <li>We do not accept financial compensation in exchange for positive product ratings or altered comparison conclusions.</li>
+          <li>Editorial decisions regarding which topics, tools, or models to cover are determined solely by developer interest, technical merit, and practical utility.</li>
+        </ul>
+
+        <h2>3. Commercial Relationships & Affiliate Disclosure</h2>
+        <p>
+          Nadhebe participates in select affiliate programs for developer infrastructure (such as cloud GPU hosting and developer tooling). When readers click an affiliate link and make a purchase, we may earn a referral commission at no additional cost to the reader.
+        </p>
+        <ul>
+          <li>Affiliate relationships never influence our editorial assessments, pros and cons, or technical evaluations.</li>
+          <li>We evaluate tools based on actual utility, reliability, pricing clarity, and documentation quality.</li>
+          <li>All affiliate links and commercial relationships are clearly disclosed in accordance with FTC guidelines and webmaster transparency standards.</li>
+        </ul>
+
+        <h2>4. Corrections & Errata Policy</h2>
+        <p>
+          In fast-moving technical fields like artificial intelligence and cloud infrastructure, software libraries and APIs release breaking changes frequently. When an error, broken command, or outdated instruction is identified:
+        </p>
+        <ul>
+          <li><strong>Rapid Correction:</strong> We review reported technical errors and update the article text promptly.</li>
+          <li><strong>Revision Notes:</strong> For substantial updates or breaking syntax changes, we include update notices detailing what changed and why.</li>
+          <li><strong>Community Reporting:</strong> Readers are encouraged to report inaccuracies or broken steps by emailing <a href="mailto:contact@nadhebe.com" class="text-accent underline">contact@nadhebe.com</a> with the URL and relevant details.</li>
+        </ul>
+
+        <h2>5. Client-Side Tool Privacy Guarantee</h2>
+        <p>
+          Every interactive utility hosted on Nadhebe is designed to process data client-side in your browser session:
+        </p>
+        <ul>
+          <li>No user input, file data, or query strings are sent to our backend servers or third-party storage services.</li>
+          <li>We do not retain, store, or train models on any content pasted into our calculators, formatters, or diff tools.</li>
+        </ul>
+
+        <h2>6. Contact the Editorial Desk</h2>
+        <p>
+          Questions, suggestions, or technical correction requests can be directed to:
+        </p>
+        <p>
+          <strong>Email:</strong> <a href="mailto:contact@nadhebe.com" class="text-accent underline font-semibold">contact@nadhebe.com</a><br />
+          <strong>Website:</strong> <a href="/contact/" class="text-accent underline font-semibold">Nadhebe Contact Form</a>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

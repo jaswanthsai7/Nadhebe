@@ -3,7 +3,7 @@ title: "The Ultimate vLLM Deployment Guide (2026)"
 description: "Learn how to deploy and scale open-source LLMs using vLLM. Master PagedAttention, continuous batching, and GPU VRAM optimization for production AI inference."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["vLLM", "Inference", "GPU", "LLM", "Deployment"]
 heroImage: "/images/vllm_guide_hero.webp"
 heroAlt: "A highly stylized blueprint showing a GPU processing continuous data streams using PagedAttention"
@@ -141,4 +141,4 @@ Yes. You can load multiple distinct LoRA adapters dynamically at runtime without
 ## 11. Further Reading
 
 *   [Troubleshooting vLLM Out Of Memory (OOM) Errors](/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
-*   [State of Open Source AI Inference 2026](/category/tutorials) *(Coming Soon)*
+*   [Optimizing vLLM KV Cache and PagedAttention](/tutorials/vllm-kv-cache-optimization-guide)

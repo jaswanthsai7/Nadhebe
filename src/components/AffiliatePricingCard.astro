@@ -25,10 +25,10 @@ const matched = toolId ? getAffiliateById(toolId) : null;
 const name = Astro.props.name || matched?.name || 'Partner Tier';
 const price = Astro.props.price || matched?.pricingSummary.split('·')[1]?.trim() || '$19';
 const billingCycle = Astro.props.billingCycle || 'per month';
-const description = Astro.props.description || matched?.pitch || 'Access advanced AI capabilities and team collaboration features.';
-const features = Astro.props.features || matched?.features || [];
-const rawUrl = Astro.props.affiliateUrl || matched?.url || '#';
-const buttonLabel = Astro.props.buttonLabel || matched?.buttonLabel || `Get Started with ${name}`;
+const description = Astro.props.description || matched?.whyRecommend || 'Access advanced AI capabilities and team collaboration features.';
+const features = Astro.props.features || matched?.pros || [];
+const rawUrl = Astro.props.affiliateUrl || matched?.affiliateUrl || '#';
+const buttonLabel = Astro.props.buttonLabel || `Get Started with ${name}`;
 
 const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
 const utmUrl = buildUtmUrl(rawUrl, slug);
@@ -48,9 +48,9 @@ const utmUrl = buildUtmUrl(rawUrl, slug);
   <div>
     <div class="flex items-center justify-between gap-12">
       <h4 class="font-display text-h4 font-bold text-ink dark:text-ink-dark">{name}</h4>
-      {matched?.badge && (
+      {matched?.qualitativeBadge && (
         <span class="rounded-pill bg-surface2 px-8 py-4 text-[0.68rem] font-semibold text-muted dark:bg-surface2-dark dark:text-muted-dark border border-border/40 dark:border-border-dark/40">
-          {matched.badge}
+          {matched.qualitativeBadge}
         </span>
       )}
     </div>
@@ -67,7 +67,7 @@ const utmUrl = buildUtmUrl(rawUrl, slug);
     <div class="my-20 h-px w-full bg-border/60 dark:bg-border-dark/60"></div>
 
     <ul class="space-y-12">
-      {features.map((feat) => (
+      {features.map((feat: string) => (
         <li class="flex items-start gap-8 text-xs font-sans text-ink2 dark:text-ink2-dark">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mt-2 h-16 w-16 shrink-0 text-success dark:text-success-dark">
             <polyline points="20 6 9 17 4 12" />

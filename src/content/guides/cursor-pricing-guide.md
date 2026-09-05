@@ -3,7 +3,7 @@ title: "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage"
 description: "A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["Cursor", "Pricing", "AI IDE", "Developer Tools", "LLM Costs", "Cursor Pro"]
 heroImage: "/images/cursor-pricing-hero.webp"
 heroAlt: "Retro editorial illustration comparing Cursor Hobby, Pro, and Business subscription tiers on a warm sand background"

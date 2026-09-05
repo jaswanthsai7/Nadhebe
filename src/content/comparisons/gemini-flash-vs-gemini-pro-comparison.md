@@ -2,8 +2,8 @@
 title: "Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)"
 description: "Architectural comparison evaluating speed, context window depth, reasoning accuracy, and pricing between Gemini Flash and Gemini Pro."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "comparisons"
+author: nadhebe-team
+category: "Comparisons"
 tags: ["gemini-flash", "gemini-pro", "google-ai", "comparison", "benchmarks"]
 heroImage: "/images/gemini-flash-vs-pro-hero.webp"
 heroAlt: "Architectural comparison illustration of Gemini Flash vs Gemini Pro"

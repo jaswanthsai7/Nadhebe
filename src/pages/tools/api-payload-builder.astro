@@ -146,7 +146,7 @@ const faq = [
         .replace(/:\s*".*?"/g, match => `: <span class="text-[#ce9178]">${match.substring(1).trim()}</span>`)
         .replace(/:\s*([0-9.]+)/g, match => `: <span class="text-[#b5cea8]">${match.substring(1).trim()}</span>`);
         
-      output.innerHTML = highlighted;
+      if (output) output.innerHTML = highlighted;
     }
 
     [sysInput, promptInput, tempInput, tokensInput].forEach(el => {

@@ -3,7 +3,7 @@ title: "Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and
 description: "A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Claude Code", "Troubleshooting", "Anthropic", "CLI Errors", "OAuth", "Hooks"]
 heroImage: "/images/claude-code-troubleshooting-hero.webp"
 heroAlt: "Vintage editorial illustration of terminal error logs, red alert badges, and fix checklists on a soft terracotta background"

@@ -10,7 +10,6 @@ import YouTubeEmbed from '../components/content/YouTubeEmbed.astro';
 import ArticleSchema from '../components/seo/ArticleSchema.astro';
 import FAQSchema from '../components/seo/FAQSchema.astro';
 import VideoSchema from '../components/seo/VideoSchema.astro';
-import ReviewSchema from '../components/seo/ReviewSchema.astro';
 import ReadingProgress from '@/components/ReadingProgress.astro';
 import ScrollToTop from '@/components/ScrollToTop.astro';
 import MobileToc from '@/components/MobileToc.astro';
@@ -29,11 +28,11 @@ import { getRelatedArticles } from '../utils/relatedArticles';
 import { getBreadcrumbs } from '../utils/breadcrumbs';
 import { getAllArticles, getArticleUrl } from '../utils/content';
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: any };
 const { Content, headings } = await post.render();
 
 const authorEntry = await getEntry(post.data.author);
-const author = authorEntry?.data;
+const author = (authorEntry as any)?.data;
 
 const slug = getArticleUrl(post);
 const readingTime = getReadingTime(post.body);
@@ -69,7 +68,7 @@ const nextProps = nextArticle ? { title: nextArticle.data.title, url: getArticle
 
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-const references = post.data.sources?.map((s) => ({
+const references = post.data.sources?.map((s: any) => ({
   title: s.label,
   url: s.url,
 })) || [];
@@ -79,16 +78,10 @@ let collectionHref = '';
 switch (post.collection) {
   case 'news':         collectionLabel = 'News';        collectionHref = '/news';        break;
   case 'tutorials':    collectionLabel = 'Tutorials';   collectionHref = '/tutorials';   break;
-  case 'youtube-articles': collectionLabel = 'Videos';  collectionHref = '/youtube';     break;
   case 'tool-reviews': collectionLabel = 'Reviews';     collectionHref = '/reviews';     break;
-  case 'prompts':      collectionLabel = 'Prompts';     collectionHref = '/prompts';     break;
   case 'comparisons':  collectionLabel = 'Comparisons'; collectionHref = '/comparisons'; break;
   case 'best-practices': collectionLabel = 'Best Practices'; collectionHref = '/best-practices'; break;
-  case 'use-cases':    collectionLabel = 'Use Cases';     collectionHref = '/use-cases';    break;
-  case 'tools':        collectionLabel = 'Tools';         collectionHref = '/tools';        break;
   case 'guides':       collectionLabel = 'Guides';        collectionHref = '/guides';       break;
-  case 'frameworks':   collectionLabel = 'Frameworks';    collectionHref = '/frameworks';   break;
-  case 'case-studies': collectionLabel = 'Case Studies';  collectionHref = '/case-studies'; break;
   default:             collectionLabel = 'Articles';    collectionHref = '/';
 }
 
@@ -131,18 +124,6 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
     />
   )}
 
-  {post.collection === 'tool-reviews' && post.data.rating !== undefined && (
-    <ReviewSchema
-      productName={post.data.topic || post.data.title}
-      description={post.data.description}
-      heroImage={post.data.heroImage}
-      ratingValue={post.data.rating}
-      authorName={author?.name || 'Staff Writer'}
-      price={post.data.pricing}
-      canonicalUrl={pageUrl}
-    />
-  )}
-
   <ReadingProgress />
   <ScrollToTop />
 
@@ -178,14 +159,14 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
           <!-- Author meta -->
           <div class="mt-32 pt-20 border-t border-border dark:border-border-dark flex flex-wrap items-center justify-between gap-x-16 gap-y-8 text-caption text-muted dark:text-muted-dark font-sans">
             <div class="flex flex-wrap items-center gap-x-12 gap-y-6">
-              <div class="flex items-center gap-8 font-medium text-ink2 dark:text-ink2-dark">
+              <a href="/author/nadhebe-team/" class="flex items-center gap-8 font-medium text-ink2 hover:text-accent dark:text-ink2-dark dark:hover:text-accent-dark transition-colors">
                 {author?.avatar && (
-                  <img src={author.avatar} alt={author?.name} width="28" height="28"
+                  <img src={author.avatar} alt={author?.name || 'Nadhebe Editorial'} width="28" height="28"
                   loading="lazy" decoding="async"
                   class="h-24 w-24 rounded-pill object-cover ring-1 ring-border dark:ring-border-dark" />
                 )}
-                <span>{author?.name || 'Nadhebe Editorial'}</span>
-              </div>
+                <span>{author?.name || 'Nadhebe Editorial Team'}</span>
+              </a>
               <span class="text-border dark:text-border-dark">·</span>
               <time datetime={post.data.pubDate.toISOString()} class="font-mono text-meta">{fmt(post.data.pubDate)}</time>
               {post.data.updatedDate && (
@@ -198,12 +179,12 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
               <span class="font-mono text-meta">{readingTime}</span>
             </div>
 
-            <!-- E-E-A-T Lab Verification Badge -->
+            <!-- E-E-A-T Editorial Verification Badge -->
             <div class="inline-flex items-center gap-6 px-10 py-4 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-xs font-mono font-semibold">
               <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
-              <span>GPU Lab Verified</span>
+              <span>Editorial Verified</span>
             </div>
           </div>
         </header>
@@ -282,7 +263,7 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
               <div class="bg-success/5 border border-success/15 rounded-12 p-16">
                 <p class="text-xs font-sans font-semibold text-success dark:text-success-dark uppercase tracking-wider mb-8">Pros</p>
                 <ul class="space-y-6 text-caption font-sans text-ink2 dark:text-ink2-dark list-none pl-0">
-                  {post.data.pros?.map(pro => (
+                  {post.data.pros?.map((pro: any) => (
                     <li class="flex items-start gap-8">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 text-success dark:text-success-dark shrink-0 mt-1"><path d="M20 6 9 17l-5-5"/></svg>
                       {pro}
@@ -293,7 +274,7 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
               <div class="bg-danger/5 border border-danger/15 rounded-12 p-16">
                 <p class="text-xs font-sans font-semibold text-danger dark:text-danger-dark uppercase tracking-wider mb-8">Cons</p>
                 <ul class="space-y-6 text-caption font-sans text-ink2 dark:text-ink2-dark list-none pl-0">
-                  {post.data.cons?.map(con => (
+                  {post.data.cons?.map((con: any) => (
                     <li class="flex items-start gap-8">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16 text-danger dark:text-danger-dark shrink-0 mt-1"><path d="M18 6 6 18M6 6l12 12"/></svg>
                       {con}
@@ -311,7 +292,7 @@ const selectedAffiliate = explicitAffiliateId ? getAffiliateById(explicitAffilia
             <div>
               <p class="text-xs font-sans font-semibold text-muted dark:text-muted-dark uppercase tracking-wider mb-8">Comparing</p>
               <div class="flex flex-wrap gap-8">
-                {post.data.itemsCompared.map(item => <span class="badge">{item}</span>)}
+                {post.data.itemsCompared.map((item: any) => <span class="badge">{item}</span>)}
               </div>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-24 w-24 shrink-0 text-muted dark:text-muted-dark">

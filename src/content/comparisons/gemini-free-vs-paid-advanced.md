@@ -2,8 +2,8 @@
 title: "Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?"
 description: "Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "comparisons"
+author: nadhebe-team
+category: "Comparisons"
 tags: ["gemini-free-vs-paid", "gemini-advanced", "pricing", "google-one", "comparison"]
 heroImage: "/images/gemini-free-vs-paid-hero.webp"
 heroAlt: "Clean minimalist star badge illustration of Gemini Free vs Paid"

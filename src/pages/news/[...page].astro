@@ -9,7 +9,7 @@ export async function getStaticPaths({ paginate }: any) {
   return paginate(sorted, { pageSize: 12 });
 }
 
-const { page } = Astro.props;
+const { page } = Astro.props as { page: any };
 const authors = await getCollection('authors');
 const allArticles = await getAllArticles();
 
@@ -79,7 +79,7 @@ const mostReadList = allArticles.filter(a => a.data.isPillar || a.data.rating).s
           <a href={getArticleUrl(featuredNews)} class="group relative w-full overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium flex flex-col justify-end min-h-[380px] sm:min-h-[440px]">
             <img
               src={featuredNews.data.heroImage}
-              alt={featuredNews.data.heroAlt || featuredNews.data.title}
+              alt={(featuredNews.data as any).heroAlt || featuredNews.data.title}
               width="800"
               height="500"
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -179,8 +179,8 @@ const mostReadList = allArticles.filter(a => a.data.isPillar || a.data.rating).s
         </div>
 
         <div class="divide-y divide-border dark:divide-border-dark space-y-24">
-          {moreNewsList.map((post, idx) => {
-            const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+          {moreNewsList.map((post: any, idx: number) => {
+            const author = post.data.author ? authors.find((a: any) => a.id === post.data.author.id) : null;
             return (
               <a href={getArticleUrl(post)} class={`group flex flex-col sm:flex-row gap-20 items-start ${idx > 0 ? 'pt-24' : ''}`}>
                 <div class="flex-1 min-w-0">

@@ -12,10 +12,11 @@ import ToolSearchModal from '@/components/tools/ToolSearchModal.astro';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
 
-const articlePosts = await getCollection('tools');
-const sortedArticles = articlePosts
+const allGuides = await getCollection('guides');
+const sortedArticles = allGuides
   .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 4);
 
 const seo = buildSeo({
   title: 'Free Web Utilities & Developer Tools',
@@ -170,7 +171,7 @@ const toolsDirectorySchema = {
           href={tool.href}
           data-tool-card
           data-category={tool.category}
-          data-search-text={`${tool.name} ${tool.description} ${tool.category} ${tool.tags.join(' ')}`.toLowerCase()}
+          data-search-text={`${tool.name} ${tool.description} ${tool.category} ${(tool.tags || []).join(' ')}`.toLowerCase()}
           class="tool-directory-card group relative flex min-h-[218px] flex-col overflow-hidden rounded-16 border border-border/90 p-20 no-underline transition-all duration-200 dark:border-border-dark/90"
         >
           <div class="relative z-10">

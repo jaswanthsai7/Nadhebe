@@ -146,7 +146,7 @@ export function jsonToCsv(code: string): { success: boolean; result: string; err
     const csvRows = [headers.join(',')];
 
     for (const row of parsed as Record<string, any>[]) {
-      const values = headers.map((header: string) => {
+      const values = headers.map((header: any) => {
         const val = row ? row[header] : undefined;
         if (val === undefined || val === null) return '""';
         const str = typeof val === 'object' ? JSON.stringify(val) : String(val);

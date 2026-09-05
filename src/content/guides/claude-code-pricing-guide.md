@@ -3,7 +3,7 @@ title: "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plan
 description: "A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["Claude Code", "Pricing", "Anthropic", "LLM Costs", "Token Limits", "API Billing"]
 heroImage: "/images/claude-code-pricing-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration of Claude Code pricing tiers and API token calculators on a soft olive background"

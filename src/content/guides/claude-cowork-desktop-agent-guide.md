@@ -2,7 +2,7 @@
 title: "What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide"
 description: "A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Guides
 tags: ["claude", "claude-cowork", "desktop-agent", "productivity", "anthropic", "ai-agents"]
 heroImage: "/images/claude-cowork-hero.webp"

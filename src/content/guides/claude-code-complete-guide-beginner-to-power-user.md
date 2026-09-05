@@ -2,7 +2,7 @@
 title: "Claude Code Complete Guide 2026: From Beginner to Power User"
 description: "The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Guides
 tags: ["claude", "cli", "guide", "developer-tools", "productivity", "anthropic"]
 heroImage: "/images/claude-complete-guide-hero.webp"

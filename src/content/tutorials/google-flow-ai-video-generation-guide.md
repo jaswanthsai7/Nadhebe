@@ -2,8 +2,8 @@
 title: "Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)"
 description: "Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["google-flow", "veo-video", "ai-video", "storyboard", "filmmaking"]
 heroImage: "/images/google-flow-hero.webp"
 heroAlt: "Clean minimalist film strip illustration of Google Flow AI video generation"
@@ -60,6 +60,6 @@ To maintain character consistency across shots:
 
 - Use Veo model integration for high-definition video output.
 - Anchor keyframes to maintain visual consistency across scenes.
-- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/youtube/google-flow-storyboard-studio-guide).
+- For complete script uploads, custom character anchoring, and troubleshooting, read [How to Use Google Flow Storyboard Studio](/tutorials/building-pre-production-storyboards-google-flow) and our [Missing Script & Render Fix Guide](/tutorials/google-flow-storyboard-studio-guide).
 - Export timeline sequences directly to MP4 or Premiere Pro XML files.
 

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+
+const title = 'Disclaimer & Disclosures — Nadhebe';
+const description = 'Technical code guidance disclaimer, affiliate compensation disclosure, and AI research notice for Nadhebe visitors.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={`${SITE.url}/disclaimer/`}
+>
+  <div class="mx-auto max-w-4xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-48 shadow-medium dark:border-border-dark dark:bg-surface-dark/90 space-y-32">
+      
+      <div>
+        <div class="inline-flex items-center gap-8 px-12 py-6 rounded-full bg-accent/10 border border-accent/20 text-caption font-mono font-bold text-accent dark:text-accent-dark mb-16 uppercase tracking-wider">
+          <span>Legal Disclosures</span>
+        </div>
+        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark">
+          Disclaimer & Disclosures
+        </h1>
+        <p class="mt-12 text-h3 text-ink2 dark:text-ink2-dark font-sans leading-relaxed">
+          Please review the following technical, affiliate, and legal disclaimers regarding the use of Nadhebe.
+        </p>
+      </div>
+
+      <div class="border-t border-border/60 dark:border-border-dark/60 pt-24 prose-article">
+        
+        <h2>1. Technical Code & Implementation Guidance</h2>
+        <p>
+          All tutorials, code snippets, configuration templates, and architectural diagrams provided on Nadhebe are published for educational and informational purposes only. While our editorial team makes every effort to verify code in practical testing environments, software libraries, dependencies, and cloud APIs are updated frequently.
+        </p>
+        <p>
+          You are solely responsible for testing, auditing, and validating all code examples, commands, and security configurations in a safe development or staging environment before deploying them to production systems. Nadhebe is not liable for data loss, server downtime, security breaches, or cloud infrastructure billing incurred through the implementation of code examples published on this website.
+        </p>
+
+        <h2>2. Affiliate Compensation Disclosure</h2>
+        <p>
+          In accordance with Federal Trade Commission (FTC) guidelines, please note that some of the external links on Nadhebe (such as links to cloud GPU hosts, developer tools, and software services) are affiliate links.
+        </p>
+        <ul>
+          <li>If you click an affiliate link and subscribe to or purchase a service, Nadhebe may receive a referral commission.</li>
+          <li>This commission comes at <strong>no additional cost to you</strong>. In some cases, affiliate links may provide promotional credits or discounted pricing.</li>
+          <li>We only recommend tools and infrastructure that we have tested or consider relevant to modern software development workflows.</li>
+          <li>Our editorial analysis, pros and cons, and technical benchmarks are independent and are never dictated by affiliate partnerships.</li>
+        </ul>
+
+        <h2>3. Rapidly Evolving AI & Model Specifications</h2>
+        <p>
+          Artificial intelligence models, context window limits, pricing tiers, and API capabilities change rapidly. Information published in our guides and benchmarks reflects the state of the technology at the time of writing. Always consult the official documentation of model providers (such as Anthropic, OpenAI, Google Cloud, and Hugging Face) for current pricing and terms of service.
+        </p>
+
+        <h2>4. Free Interactive Utilities</h2>
+        <p>
+          All interactive browser tools (such as JSON formatters, diff tools, aspect ratio calculators, and encoders) hosted on Nadhebe are provided free of charge on an "as is" and "as available" basis without warranties of any kind. All processing occurs locally within your browser. You are responsible for verifying the accuracy of all calculations and outputs.
+        </p>
+
+        <h2>5. Questions and Inquiries</h2>
+        <p>
+          If you have questions regarding these disclosures or need clarification on any content, please contact us at <a href="mailto:contact@nadhebe.com" class="text-accent underline font-semibold">contact@nadhebe.com</a>.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

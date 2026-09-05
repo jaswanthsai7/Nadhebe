@@ -243,9 +243,9 @@ Share your notebook with collaborators:
 | Basic notebook creation | ✅ | ✅ | ✅ |
 | Source upload (up to 50) | ✅ | ✅ | ✅ |
 | Audio Overviews | ✅ | ✅ | ✅ |
-| Cloud code execution | ❌ | Coming soon | ✅ |
-| PPTX/XLSX/DOCX export | ❌ | Coming soon | ✅ |
-| Gemini ecosystem sync | ❌ | Coming soon | ✅ |
+| Cloud code execution | ❌ | Beta | ✅ |
+| PPTX/XLSX/DOCX export | ❌ | Beta | ✅ |
+| Gemini ecosystem sync | ❌ | Beta | ✅ |
 | Web source discovery | ❌ | ✅ | ✅ |
 
 Advanced features are rolling out first to **Google AI Ultra** subscribers and eligible **Workspace enterprise** users, with broader availability to **Google AI Pro** users expected in the coming weeks.

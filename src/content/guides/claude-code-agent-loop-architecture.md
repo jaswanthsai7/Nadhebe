@@ -2,7 +2,7 @@
 title: "Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls"
 description: "An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Guides
 tags: ["claude", "agent", "architecture", "cli", "anthropic", "software-design"]
 heroImage: "/images/claude-agent-loop-hero.webp"

@@ -89,28 +89,15 @@ const tutorials = defineCollection({
   schema: withYoutubeImage(sharedSchema),
 });
 
-const youtubeArticles = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema.extend({
-    videoId: z.string(),
-    videoDuration: z.string(),
-    videoUploadDate: z.coerce.date(),
-  })),
-});
 
 const toolReviews = defineCollection({
   type: 'content',
   schema: withYoutubeImage(sharedSchema.extend({
-    rating: z.number().min(0).max(10),
-    pricing: z.string(),
-    pros: z.array(z.string()),
-    cons: z.array(z.string()),
+    rating: z.number().min(0).max(10).optional(),
+    pricing: z.string().optional(),
+    pros: z.array(z.string()).optional(),
+    cons: z.array(z.string()).optional(),
   })),
-});
-
-const prompts = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema),
 });
 
 const comparisons = defineCollection({
@@ -125,27 +112,7 @@ const bestPractices = defineCollection({
   schema: withYoutubeImage(sharedSchema),
 });
 
-const useCases = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema),
-});
-
-const tools = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema),
-});
-
 const guides = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema),
-});
-
-const frameworks = defineCollection({
-  type: 'content',
-  schema: withYoutubeImage(sharedSchema),
-});
-
-const caseStudies = defineCollection({
   type: 'content',
   schema: withYoutubeImage(sharedSchema),
 });
@@ -154,14 +121,8 @@ export const collections = {
   authors,
   news,
   tutorials,
-  'youtube-articles': youtubeArticles,
   'tool-reviews': toolReviews,
-  prompts,
   comparisons,
   'best-practices': bestPractices,
-  'use-cases': useCases,
-  tools,
   guides,
-  frameworks,
-  'case-studies': caseStudies,
 };

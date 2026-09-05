@@ -2,7 +2,7 @@
 title: "Google AI Studio System Prompts & Structured Outputs Architecture Guide"
 description: "A comprehensive guide on configuring system instructions, JSON Schema structured outputs, function calling, and temperature parameters in Google AI Studio for production AI applications."
 pubDate: 2026-08-08
-author: alice-chen
+author: nadhebe-team
 category: "Guides"
 tags: ["google-ai-studio", "gemini-api", "structured-outputs", "system-prompts", "pydantic", "json-schema"]
 heroImage: "/images/google-ai-studio-system-prompts-hero.png"

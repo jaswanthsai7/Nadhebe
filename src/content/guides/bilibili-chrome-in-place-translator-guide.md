@@ -3,7 +3,7 @@ title: "Bilibili Translator: Real-Time Universal In-Place Translation in All Lan
 description: "Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation."
 pubDate: 2026-08-31
 author: nadhebe-team
-category: guides
+category: "Guides"
 tags: ["Bilibili Translator", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "DOM Manipulation", "Web Development", "Danmaku Isolation", "Manifest V3"]
 heroImage: "/images/bilibili-in-place-translator-chrome-extension-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration of a universal browser translator translating Bilibili video controls in all languages with an orange retro robot icon on a warm cream background"

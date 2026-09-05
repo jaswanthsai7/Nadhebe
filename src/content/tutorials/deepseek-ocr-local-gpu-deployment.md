@@ -3,7 +3,7 @@ title: "Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines"
 description: "Step-by-step tutorial to deploy DeepSeek-OCR locally on GPUs for document extraction. Includes context compression math, PyTorch pipelines, layout parsing, and Docker configs."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["DeepSeek-OCR", "Vision AI", "PyTorch", "Local GPU", "Document Processing", "Docker", "Data Pipelines"]
 heroImage: "/images/deepseek-ocr-local-gpu-deployment-hero.png"
 heroAlt: "Vintage editorial collage illustration showing structured document scanner rays and OCR frames on a soft terracotta background"

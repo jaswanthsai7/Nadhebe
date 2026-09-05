@@ -3,7 +3,7 @@ title: "Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Com
 description: "Compare Cursor's Composer and Tab autocompletion against Codeium's Windsurf editor and its Cascade collaborative AI flow."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["Cursor", "Windsurf", "Codeium", "AI IDE", "Developer Tools", "Cascade"]
 heroImage: "/images/cursor-vs-windsurf-hero.webp"
 heroAlt: "Abstract editorial collage representing two AI IDE workflow windows with geometric waves and halftones on a soft lavender background"

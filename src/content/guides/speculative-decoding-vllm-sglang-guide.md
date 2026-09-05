@@ -2,7 +2,7 @@
 title: "Speculative Decoding in vLLM & SGLang: 3x LLM Inference Speedup Guide"
 description: "Accelerate LLM inference throughput and reduce latency by up to 3x using speculative decoding, draft models, and Medusa heads in vLLM and SGLang."
 pubDate: 2026-08-29
-author: bob-smith
+author: nadhebe-team
 category: Guides
 tags: ["speculative-decoding", "vllm", "sglang", "llm-inference", "performance", "gpu-optimization", "guides"]
 heroImage: "/images/speculative-decoding-vllm-sglang-hero.webp"

@@ -3,7 +3,7 @@ title: "DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark"
 description: "Head-to-head benchmark comparison of frontier AI reasoning models: DeepSeek V4, OpenAI o3-mini, and Claude 3.7 Sonnet. Evaluates coding pass rates, math accuracy, and API pricing."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["DeepSeek V4", "OpenAI o3-mini", "Claude 3.7 Sonnet", "AI Benchmarks", "Reasoning Models", "Code Generation", "Model Comparison"]
 heroImage: "/images/deepseek-v4-vs-o3-mini-vs-claude-hero.png"
 heroAlt: "Vintage editorial collage illustration showing floating code diff windows and benchmark comparison metrics on a terracotta background"

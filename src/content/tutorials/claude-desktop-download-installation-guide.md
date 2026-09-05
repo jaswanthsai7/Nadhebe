@@ -2,7 +2,7 @@
 title: "Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions"
 description: "A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration."
 pubDate: 2026-07-25
-author: alice-chen
+author: nadhebe-team
 category: Tutorials
 tags: ["claude", "claude-desktop", "installation", "mcp", "anthropic", "desktop-app"]
 heroImage: "/images/claude-desktop-guide-hero.webp"

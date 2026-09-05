@@ -2,7 +2,7 @@
 title: "Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative"
 description: "CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license."
 pubDate: 2026-07-10
-author: alice-chen
+author: nadhebe-team
 category: "News"
 tags: [instatic, release, open-source, webflow-alternative]
 heroImage: "/images/news-hero.webp"

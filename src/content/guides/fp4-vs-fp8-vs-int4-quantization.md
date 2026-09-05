@@ -3,7 +3,7 @@ title: "FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy"
 description: "Technical comparison guide analyzing FP4, FP8, and INT4 quantization formats. Evaluates micro-scaling formats, hardware acceleration across NVIDIA Hopper & Blackwell, and accuracy."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["FP4", "FP8", "INT4", "Quantization", "NVIDIA Blackwell", "TensorRT-LLM", "vLLM", "GPU Architecture"]
 heroImage: "/images/fp4-vs-fp8-vs-int4-quantization-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing micro-scaling floating point formats and hardware acceleration metrics"

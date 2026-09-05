@@ -3,7 +3,7 @@ title: "Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature
 description: "A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider."
 pubDate: 2026-08-04
 author: nadhebe-team
-category: "reviews"
+category: "Reviews"
 tags: ["AI Coding", "Claude Code", "Cursor", "Windsurf", "GitHub Copilot", "Supermaven", "Aider", "Developer Tools"]
 heroImage: "/images/best-ai-coding-tools-hero.webp"
 heroAlt: "Vintage editorial halftone collage featuring AI code editors and terminal tools on a warm sand background"

@@ -2,7 +2,7 @@
 title: "OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison"
 description: "A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents."
 pubDate: 2026-07-25
-author: alice-chen
+author: nadhebe-team
 category: Comparisons
 tags: ["claude", "codex", "opencode", "cli", "ai-agents", "benchmarks", "comparison"]
 heroImage: "/images/claude-cli-hero.webp"

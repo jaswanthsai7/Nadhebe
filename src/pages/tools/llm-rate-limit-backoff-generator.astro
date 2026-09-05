@@ -24,14 +24,18 @@ if (!platformTool) throw new Error('Tool not found');
 </ToolLayout>
 <script>
   function gen() {
-    const rpm = parseInt(document.getElementById('rl-rpm').value) || 500;
-    const lang = document.getElementById('rl-lang').value;
+    const rpmInput = document.getElementById('rl-rpm') as HTMLInputElement | null;
+    const langSelect = document.getElementById('rl-lang') as HTMLSelectElement | null;
     const out = document.getElementById('rl-out');
+    if (!out) return;
+    
+    const rpm = parseInt(rpmInput?.value || '500') || 500;
+    const lang = langSelect?.value || 'python';
     
     if (lang === 'python') {
-      out.textContent = `import time\nimport random\n\nMAX_RETRIES = 5\n\ndef call_api_with_backoff():\n    for i in range(MAX_RETRIES):\n        try:\n            # Make API Call\n            return api.create_completion()\n        except RateLimitError:\n            wait = (2 ** i) + random.uniform(0, 1)\n            print(f"Rate limited. Waiting {wait:.2f}s")\n            time.sleep(wait)\n    raise Exception("Max retries exceeded")`;
+      out.textContent = `import time\nimport random\n\nMAX_RETRIES = 5\nRPM_LIMIT = ${rpm}\n\ndef call_api_with_backoff():\n    for i in range(MAX_RETRIES):\n        try:\n            # Make API Call\n            return api.create_completion()\n        except RateLimitError:\n            wait = (2 ** i) + random.uniform(0, 1)\n            print(f"Rate limited. Waiting {wait:.2f}s")\n            time.sleep(wait)\n    raise Exception("Max retries exceeded")`;
     } else {
-      out.textContent = `const MAX_RETRIES = 5;\n\nasync function callApiWithBackoff() {\n  for (let i = 0; i < MAX_RETRIES; i++) {\n    try {\n      return await api.createCompletion();\n    } catch (error) {\n      if (error.status === 429) {\n        const wait = (Math.pow(2, i) + Math.random()) * 1000;\n        console.log(\`Rate limited. Waiting ${wait}ms\`);\n        await new Promise(r => setTimeout(r, wait));\n      } else throw error;\n    }\n  }\n  throw new Error("Max retries exceeded");\n}`;
+      out.textContent = `const MAX_RETRIES = 5;\nconst RPM_LIMIT = ${rpm};\n\nasync function callApiWithBackoff() {\n  for (let i = 0; i < MAX_RETRIES; i++) {\n    try {\n      return await api.createCompletion();\n    } catch (error: any) {\n      if (error?.status === 429) {\n        const wait = (Math.pow(2, i) + Math.random()) * 1000;\n        console.log(\`Rate limited. Waiting \${wait}ms\`);\n        await new Promise(r => setTimeout(r, wait));\n      } else throw error;\n    }\n  }\n  throw new Error("Max retries exceeded");\n}`;
     }
   }
   document.querySelectorAll('input, select').forEach(e => e.addEventListener('input', gen));

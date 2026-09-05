@@ -3,7 +3,7 @@ title: "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Co
 description: "A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["RunPod", "GPU Pricing", "Cloud Compute", "RTX 4090", "H100", "vLLM", "Cost Optimization"]
 heroImage: "/images/runpod-pricing-explained-hero.webp"
 heroAlt: "Vintage editorial halftone graphic depicting GPU compute pricing matrices and storage volumes on a soft cream background"

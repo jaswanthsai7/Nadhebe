@@ -25,7 +25,7 @@ const {
   toolIds = [],
   customTools = [],
   title = 'Side-by-Side Comparison',
-  subtitle = 'Compare verified specifications, pricing, and ratings.',
+  subtitle = 'Compare verified specifications, pricing, and key features.',
   articleSlug,
 } = Astro.props;
 
@@ -40,12 +40,12 @@ const resolvedTools: ToolComparisonItem[] = [
       id: p.id,
       name: p.name,
       category: p.category,
-      rating: p.rating,
+      rating: undefined,
       pricingSummary: p.pricingSummary,
-      badge: p.badge,
-      topFeature: p.features[0] || p.pitch,
-      affiliateUrl: p.url,
-      buttonLabel: p.buttonLabel || `Try ${p.name}`,
+      badge: p.qualitativeBadge,
+      topFeature: p.pros[0] || p.whyRecommend,
+      affiliateUrl: p.affiliateUrl,
+      buttonLabel: `Try ${p.name}`,
     })),
   ...customTools,
 ];

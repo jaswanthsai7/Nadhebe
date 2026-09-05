@@ -2,7 +2,7 @@
 title: "vLLM vs Ollama: Architectural & Memory Management Comparison"
 description: "An evidence-based architectural comparison of vLLM and Ollama for serving open-weight LLMs, memory management, and API concurrency."
 pubDate: 2026-07-24
-author: alice-chen
+author: nadhebe-team
 category: "Comparisons"
 tags: ["vllm", "ollama", "llm-inference", "open-source-ai", "architecture"]
 heroImage: "/images/comparisons-hero.webp"
@@ -135,4 +135,4 @@ flowchart TD
 * **Select vLLM if:** You are building cloud APIs handling concurrent requests, utilizing multi-GPU tensor parallelism, or optimizing VRAM utilization via PagedAttention.
 
 For high-concurrency production deployments requiring advanced prefix caching or Rust web routers, explore our comparison of [vLLM vs SGLang vs TGI Inference Engines](/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison).
-For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+For multi-agent state architectures, see [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).

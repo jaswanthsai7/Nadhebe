@@ -2,8 +2,8 @@
 title: "Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)"
 description: "Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "comparisons"
+author: nadhebe-team
+category: "Comparisons"
 tags: ["gemini-cli", "claude-code", "cli-tools", "terminal", "comparison"]
 heroImage: "/images/gemini-cli-vs-claude-code-hero.webp"
 heroAlt: "Terminal HUD comparison illustration between Gemini CLI and Claude Code"

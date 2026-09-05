@@ -12,7 +12,7 @@ const authors = await getCollection('authors');
 
 const allPillars = allArticles.filter(p => p.data.isPillar === true);
 const latestPillars = allPillars.length >= 3 ? allPillars.slice(0, 3) : allArticles.slice(0, 3);
-const latestVideos = allArticles.filter(p => p.collection === 'youtube-articles').slice(0, 4);
+const latestVideos = allArticles.filter(p => p.data.youtubeVideoId || p.data.youtubeVideoUrl).slice(0, 4);
 const latestArticles = allArticles.slice(0, 6);
 
 const categoryCounts: Record<string, number> = {};
@@ -24,64 +24,50 @@ allArticles.forEach(art => {
 
 const trendingTopics = [...new Set(allArticles.map(a => a.data.topic).filter(Boolean))].slice(0, 8);
 
-const categoryMeta: Record<string, { description: string; iconPath: string }> = {
-  'News': {
-    description: 'Releases, announcements, and product roadmaps.',
-    iconPath: 'M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2'
-  },
+const categoryMeta: Record<string, { description: string; iconPath: string; href: string }> = {
   'Tutorials': {
-    description: 'Step-by-step technical guides and walkthroughs.',
-    iconPath: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z'
-  },
-  'YouTube Articles': {
-    description: 'Video reviews, walkthroughs, and demos.',
-    iconPath: 'M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17M10 15l5-3-5-3z'
-  },
-  'Tool Reviews': {
-    description: 'Performance reviews and cost evaluations.',
-    iconPath: 'M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a.53.53 0 0 0 .4.29l5.16.753a.53.53 0 0 1 .294.904l-3.733 3.64a.53.53 0 0 0-.152.469l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a.53.53 0 0 0-.494 0L6.18 18.73a.53.53 0 0 1-.771-.56l.882-5.14a.53.53 0 0 0-.152-.47L2.406 8.922a.53.53 0 0 1 .294-.906l5.16-.752a.53.53 0 0 0 .4-.29z'
-  },
-  'Prompts': {
-    description: 'System prompt templates and AI workflows.',
-    iconPath: 'M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83'
-  },
-  'Comparisons': {
-    description: 'Head-to-head benchmarks and feature analysis.',
-    iconPath: 'M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5'
-  },
-  'Best Practices': {
-    description: 'Design token standards and scaling patterns.',
-    iconPath: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M9 12l2 2 4-4'
-  },
-  'Use Cases': {
-    description: 'Agency operations and editorial governance.',
-    iconPath: 'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'
-  },
-  'Tools': {
-    description: 'Importers, compilers, and utility scripts.',
-    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'
+    description: 'Step-by-step technical guides and deployment walkthroughs.',
+    iconPath: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+    href: '/tutorials/'
   },
   'Guides': {
-    description: 'Architecture breakdowns and deployment charts.',
-    iconPath: 'M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8'
+    description: 'Architecture breakdowns, prompt frameworks, and specifications.',
+    iconPath: 'M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8',
+    href: '/guides/'
   },
-  'Frameworks': {
-    description: 'Astro, React, and component island integrations.',
-    iconPath: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'
+  'Comparisons': {
+    description: 'Head-to-head model benchmarks and developer tool evaluations.',
+    iconPath: 'M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5',
+    href: '/comparisons/'
   },
-  'Case Studies': {
-    description: 'Real migrations and performance improvements.',
-    iconPath: 'M3 3v18h18 M18.7 8l-5.1 5.2-2.8-2.7L7 14.3'
+  'Reviews': {
+    description: 'Technical reviews, developer workflows, and tool assessments.',
+    iconPath: 'M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a.53.53 0 0 0 .4.29l5.16.753a.53.53 0 0 1 .294.904l-3.733 3.64a.53.53 0 0 0-.152.469l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a.53.53 0 0 0-.494 0L6.18 18.73a.53.53 0 0 1-.771-.56l.882-5.14a.53.53 0 0 0-.152-.47L2.406 8.922a.53.53 0 0 1 .294-.906l5.16-.752a.53.53 0 0 0 .4-.29z',
+    href: '/reviews/'
+  },
+  'Best Practices': {
+    description: 'Production patterns, state management, and prompt engineering.',
+    iconPath: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M9 12l2 2 4-4',
+    href: '/best-practices/'
+  },
+  'News': {
+    description: 'AI model releases, announcements, and developer ecosystem roadmaps.',
+    iconPath: 'M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2',
+    href: '/news/'
+  },
+  'Developer Tools': {
+    description: 'Client-side calculators, encoders, formatters, and linters.',
+    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+    href: '/tools/'
   }
 };
 
 const heroPost = latestPillars[0] || allArticles[0];
-const heroAuthor = heroPost.data.author ? authors.find(a => a.id === heroPost.data.author.id) : null;
 const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 ---
 
 <BaseLayout
-  title="Nadhebe — AI Engineering Publication"
+  title="Nadhebe — AI Engineering Publication & Developer Tools"
   description="Expert tutorials, in-depth reviews, system prompts, and technical comparisons for AI engineers and developers."
 >
   <!-- Hero Section Slider -->
@@ -91,7 +77,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
       <!-- Slides Container -->
       <div id="hero-slider" class="relative w-full">
         {latestPillars.slice(0, 3).map((post, index) => {
-          const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+          const author = post.data.author ? authors.find(a => a.id === (post.data.author.id || post.data.author)) : null;
           return (
             <div 
               class={`hero-slide flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 transition-all duration-500 absolute inset-0 opacity-0 pointer-events-none min-h-[380px] ${index === 0 ? 'relative !opacity-100 !pointer-events-auto' : ''}`}
@@ -100,7 +86,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
               
               <!-- Left Side: Rotated Label + Meta -->
               <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0 self-stretch">
-                <!-- Rotated Vertical "Featured" Label (Hidden on small screens) -->
+                <!-- Rotated Vertical "FEATURED" Label (Hidden on small screens) -->
                 <div class="hidden md:flex select-none items-center justify-center self-stretch w-56 relative">
                   <span class="font-display font-black uppercase tracking-widest text-ink dark:text-ink-dark absolute whitespace-nowrap" style="font-size: 4.8rem; font-weight: 900; -webkit-text-stroke: 1.5px currentColor; letter-spacing: 0.18em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
                     FEATURED
@@ -126,7 +112,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
                     {author?.data?.avatar && (
                       <img src={author.data.avatar} alt={author.data.name} width="24" height="24" loading="lazy" decoding="async" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
                     )}
-                    <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Team'}</span>
+                    <a href="/author/nadhebe-team/" class="font-semibold text-ink2 hover:text-accent dark:text-ink2-dark dark:hover:text-accent-dark transition-colors">{author?.data?.name || 'Nadhebe Editorial Team'}</a>
                     <span class="text-border dark:text-border-dark">·</span>
                     <time datetime={post.data.pubDate.toISOString()}>
                       {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -141,7 +127,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
                       Read Tutorial
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-16 w-16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="/tutorials" class="text-caption font-sans font-semibold text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors inline-flex items-center gap-4">
+                    <a href="/tutorials/" class="text-caption font-sans font-semibold text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors inline-flex items-center gap-4">
                       View all tutorials
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
@@ -152,12 +138,12 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
               <!-- Right Side: Big Image or Diagram -->
               <div class="w-full lg:w-[55%] shrink-0">
                 <a href={getArticleUrl(post)} class="block overflow-hidden rounded-24 border border-border dark:border-border-dark bg-surface2 dark:bg-surface2-dark shadow-medium group">
-                  {post.data.diagramType ? (
-                    <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                  {(post.data as any).diagramType ? (
+                    <ArticleHeroDiagram type={(post.data as any).diagramType} title={post.data.title} compact={true} />
                   ) : (
                     <img
                       src={post.data.heroImage}
-                      alt={post.data.heroAlt || post.data.title}
+                      alt={(post.data as any).heroAlt || post.data.title}
                       width="800"
                       height="500"
                       fetchpriority={index === 0 ? "high" : "low"}
@@ -256,7 +242,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
       <section class="glass-panel border border-border dark:border-border-dark rounded-24 p-24 sm:p-32 md:p-40 shadow-medium">
         <div class="flex items-center justify-between mb-32 border-b border-border dark:border-border-dark pb-16">
           <h2 class="section-title text-h2 font-bold text-ink dark:text-ink-dark">Top Stories</h2>
-          <a href="/tutorials" class="text-caption font-sans font-medium text-accent hover:text-accent-dark transition-colors duration-150 flex items-center gap-4">
+          <a href="/tutorials/" class="text-caption font-sans font-medium text-accent hover:text-accent-dark transition-colors duration-150 flex items-center gap-4">
             View all articles
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -267,18 +253,18 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
           <!-- Left side: Big Main Story (occupies 7 cols on large screens) -->
           {topStories[0] && (() => {
             const post = topStories[0];
-            const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+            const author = post.data.author ? authors.find(a => a.id === (post.data.author.id || post.data.author)) : null;
             return (
               <a href={getArticleUrl(post)} class="lg:col-span-7 group flex flex-col gap-16">
                 <div class="relative w-full aspect-[16/10] overflow-hidden rounded-16 bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
-                  {post.data.diagramType ? (
-                    <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                  {(post.data as any).diagramType ? (
+                    <ArticleHeroDiagram type={(post.data as any).diagramType} title={post.data.title} compact={true} />
                   ) : (
-                    <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="640" height="400" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.015]" loading="lazy" decoding="async" />
+                    <img src={post.data.heroImage} alt={(post.data as any).heroAlt || post.data.title} width="640" height="400" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.015]" loading="lazy" decoding="async" />
                   )}
-                  {post.data.rating !== undefined && (
+                  {(post.data as any).rating !== undefined && (
                     <div class="absolute bottom-12 right-12 bg-surface dark:bg-surface-dark p-2 rounded-8 border border-border dark:border-border-dark shadow-medium">
-                      <VerdictGauge score={post.data.rating} size={40} />
+                      <VerdictGauge score={(post.data as any).rating} size={40} />
                     </div>
                   )}
                 </div>
@@ -295,7 +281,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
                     {author?.data?.avatar && (
                       <img src={author.data.avatar} alt={author.data.name} width="24" height="24" loading="lazy" decoding="async" class="h-20 w-20 rounded-full object-cover ring-1 ring-border dark:ring-border-dark" />
                     )}
-                    <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe'}</span>
+                    <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Editorial Team'}</span>
                     <span class="text-border dark:text-border-dark">·</span>
                     <time datetime={post.data.pubDate.toISOString()}>
                       {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -311,7 +297,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
           <!-- Right side: Stack of 3 List Stories (occupies 5 cols on large screens) -->
           <div class="lg:col-span-5 flex flex-col gap-24 divide-y divide-border dark:divide-border-dark">
             {topStories.slice(1, 4).map((post, idx) => {
-              const author = post.data.author ? authors.find(a => a.id === post.data.author.id) : null;
+              const author = post.data.author ? authors.find(a => a.id === (post.data.author.id || post.data.author)) : null;
               return (
                 <a href={getArticleUrl(post)} class={`group flex gap-20 items-start ${idx > 0 ? 'pt-24' : ''}`}>
                   <div class="flex-1 min-w-0">
@@ -324,7 +310,7 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
                     </p>
                     
                     <div class="mt-12 flex items-center gap-8 text-meta text-muted dark:text-muted-dark font-sans">
-                      <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe'}</span>
+                      <span class="font-semibold text-ink2 dark:text-ink2-dark">{author?.data?.name || 'Nadhebe Editorial Team'}</span>
                       <span class="text-border dark:text-border-dark">·</span>
                       <time datetime={post.data.pubDate.toISOString()}>
                         {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -336,10 +322,10 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 
                   <!-- Small Thumbnail image or diagram -->
                   <div class="shrink-0 w-128 aspect-video rounded-8 overflow-hidden bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark">
-                    {post.data.diagramType ? (
-                      <ArticleHeroDiagram type={post.data.diagramType} title={post.data.title} compact={true} />
+                    {(post.data as any).diagramType ? (
+                      <ArticleHeroDiagram type={(post.data as any).diagramType} title={post.data.title} compact={true} />
                     ) : (
-                      <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="128" height="80" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" decoding="async" />
+                      <img src={post.data.heroImage} alt={(post.data as any).heroAlt || post.data.title} width="128" height="80" class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]" loading="lazy" decoding="async" />
                     )}
                   </div>
                 </a>
@@ -351,38 +337,19 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
       </section>
     )}
 
-    <!-- Topics -->
-    <section data-reveal>
-      <p class="section-label mb-16">Topics</p>
-      <div class="flex flex-wrap gap-8">
-        {trendingTopics.map(topic => (
-          <a
-            href={`/tag/${topic!.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`}
-            class="inline-flex items-center gap-6 rounded-8 border border-border dark:border-border-dark glass-panel px-12 py-8 text-caption font-sans font-medium text-ink2 hover:text-ink hover:border-ink2/30 dark:text-ink2-dark dark:hover:text-ink-dark transition-all duration-150"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 opacity-40">
-              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><circle cx="7" cy="7" r="1" />
-            </svg>
-            {topic}
-          </a>
-        ))}
-      </div>
-    </section>
-    
-     <!-- Category Explorer -->
+    <!-- Category Explorer -->
     <section data-reveal>
       <div class="mb-32">
         <h2 class="section-title">Explore by Category</h2>
-        <p class="mt-8 section-desc">Specialized knowledge bases, benchmarks, and prompt libraries.</p>
+        <p class="mt-8 section-desc">Specialized technical documentation, architectures, comparisons, and tools.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16" data-reveal-stagger>
         {Object.entries(categoryMeta).map(([catName, meta]) => {
-          const count = categoryCounts[catName] || 0;
-          const href = catName === 'Tools' ? '/tools' : `/category/${catName.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-')}`;
+          const count = catName === 'Developer Tools' ? 109 : (categoryCounts[catName] || 0);
           return (
             <a
-              href={href}
+              href={meta.href}
               class="group flex items-start gap-16 rounded-12 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-20 hover:border-ink2/20 dark:hover:border-border-dark hover:shadow-medium transition-all duration-200"
               data-reveal
             >
@@ -406,14 +373,12 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
       </div>
     </section>
 
-    
-
     <!-- Video Guides -->
     {latestVideos.length > 0 && (
       <section>
         <div class="flex items-center justify-between mb-32">
           <h2 class="section-title">Video Guides</h2>
-          <a href="/youtube" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
+          <a href="/tutorials/" class="text-caption font-sans font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150 flex items-center gap-4">
             View all
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -422,10 +387,10 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
           {latestVideos.map(post => (
             <a href={getArticleUrl(post)} class="card group flex gap-16 p-16 items-start" data-reveal>
               <div class="relative shrink-0 w-[160px] aspect-video rounded-8 overflow-hidden bg-surface2 dark:bg-surface2-dark">
-                <img src={post.data.heroImage} alt={post.data.heroAlt || post.data.title} width="160" height="90" class="w-full h-full object-cover" loading="lazy" decoding="async" />
-                {post.data.videoDuration && (
+                <img src={post.data.heroImage} alt={(post.data as any).heroAlt || post.data.title} width="160" height="90" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+                {(post.data as any).videoDuration && (
                   <span class="absolute bottom-4 right-4 bg-ink/80 px-6 py-2 rounded-4 font-mono text-xs text-white">
-                    {post.data.videoDuration.replace('PT', '').replace('M', ':').replace('S', '')}
+                    {(post.data as any).videoDuration.replace('PT', '').replace('M', ':').replace('S', '')}
                   </span>
                 )}
               </div>
@@ -451,8 +416,6 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
       </div>
       <FeedList posts={latestArticles} />
     </section>
-    
-   
 
     <!-- Newsletter -->
     <section data-reveal>

@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '@/config';
 
-const title = 'About Nadhebe — Technical AI Engineering & Research Platform';
-const description = 'Learn about Nadhebe editorial mission, hardware testing laboratory, benchmark methodology, and AI engineering research team.';
+const title = 'About Nadhebe — Independent AI Engineering & Developer Tools';
+const description = 'Learn about Nadhebe, our mission to provide practical AI engineering tutorials, client-side developer utilities, and transparent documentation.';
 ---
 
 <BaseLayout
@@ -17,92 +17,61 @@ const description = 'Learn about Nadhebe editorial mission, hardware testing lab
       <!-- HERO -->
       <div>
         <div class="inline-flex items-center gap-8 px-12 py-6 rounded-full bg-accent/10 border border-accent/20 text-caption font-mono font-bold text-accent dark:text-accent-dark mb-16 uppercase tracking-wider">
-          <span>Editorial Standards & Engineering Lab</span>
+          <span>Independent Technical Publication</span>
         </div>
         <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark">
           About Nadhebe
         </h1>
         <p class="mt-12 text-h3 text-ink2 dark:text-ink2-dark font-sans leading-relaxed">
-          An independent technical publication and research laboratory dedicated to production AI engineering, open-weights model deployment, and autonomous developer workflows.
+          Nadhebe is an independent technical resource focused on artificial intelligence engineering, open-source models, developer workflows, and privacy-respecting browser tools.
         </p>
       </div>
 
       <div class="border-t border-border/60 dark:border-border-dark/60 pt-24 prose-article">
         
-        <h2>Our Core Mission</h2>
+        <h2>Our Mission</h2>
         <p>
-          As artificial intelligence transitions from conversational demos to production software infrastructure, software engineers need verifiable, reproducible, and mathematically rigorous documentation. <strong>Nadhebe</strong> was established to bridge the gap between academic AI research papers and production-grade software engineering.
+          Software engineering is changing rapidly with the rise of artificial intelligence, open-weights foundation models, and agentic protocols. However, finding clear, reproducible technical documentation can be challenging amidst marketing buzz and superficial summaries.
         </p>
         <p>
-          We reject superficial, AI-generated summary spam and unverified social media claims. Every guide, performance benchmark, and system architecture pattern published on Nadhebe is developed from direct, hands-on implementation and reproducible hardware benchmarks.
+          <strong>Nadhebe</strong> was created to provide developers, researchers, and technical builders with practical, step-by-step guides, realistic architectural comparisons, and dependable utility tools that solve everyday workflow problems.
         </p>
 
-        <h2>Our Physical Hardware & Testing Lab</h2>
-        <p>
-          Unlike theoretical tech blogs, our editorial team maintains a dedicated physical hardware testbed and cloud cluster to validate models, inference engines, and developer tools prior to publication:
-        </p>
+        <h2>What You Will Find on Nadhebe</h2>
         <ul>
-          <li><strong>Local GPU Workstations</strong>: Workstations equipped with dual NVIDIA GeForce RTX 4090 GPUs (48GB VRAM total) and high-speed PCIe Gen 5 NVMe storage for testing local quantizations (GGUF, EXL2, AWQ), Ollama setups, and consumer inference limits.</li>
-          <li><strong>Cloud Inference Clusters</strong>: Multi-GPU A100/H100 instances running <code>vLLM</code>, <code>SGLang</code>, and TensorRT-LLM to benchmark high-concurrency throughput, KV cache optimization, and prefix caching mechanisms.</li>
-          <li><strong>Agentic Execution Rigs</strong>: Sandbox Linux environments for validating Model Context Protocol (MCP) servers, Claude Code CLI commands, and multi-agent coordination frameworks (LangGraph, AutoGen, CrewAI).</li>
+          <li><strong>Technical Guides & Walkthroughs:</strong> In-depth articles covering modern AI engineering—including the Model Context Protocol (MCP), Claude Code CLI, local LLM execution with Ollama and vLLM, and API integration patterns.</li>
+          <li><strong>Architectural Comparisons:</strong> Objective, feature-by-feature comparisons of AI developer tools, frameworks, and APIs to help engineers make informed infrastructure decisions.</li>
+          <li><strong>100% Client-Side Developer Utilities:</strong> A suite of interactive browser tools—including code formatters, difference viewers, aspect ratio calculators, token counters, and encoders—that run entirely on your local machine with zero server uploads.</li>
         </ul>
 
-        <h2>Editorial Governance & Verification Standards</h2>
+        <h2>Privacy-First Tool Architecture</h2>
         <p>
-          Every article published on Nadhebe adheres to a strict four-stage editorial review lifecycle:
+          We believe developer tools should respect your data. Every interactive utility in the Nadhebe toolkit is engineered using client-side JavaScript, WebAssembly, and modern HTML5 APIs:
         </p>
-        <ol>
-          <li><strong>Primary Source Verification</strong>: We cross-reference official model weights, documentation, commit histories, and academic research papers.</li>
-          <li><strong>Reproducible Code Validation</strong>: All code examples are executed against active runtime environments (Node.js 20+, Python 3.11+, CUDA 12.4+) with exact dependency locks.</li>
-          <li><strong>Zero-Hallucination Technical Review</strong>: Architecture diagrams and API parameters are reviewed for technical accuracy and current schema compatibility.</li>
-          <li><strong>Continuous Maintenance Cycle</strong>: Articles undergo scheduled quarterly reviews to deprecate outdated syntax and reflect new model iterations (e.g. Gemini 1.5/2.0, Claude 3.5/3.7, DeepSeek-R1).</li>
-        </ol>
+        <ul>
+          <li><strong>Zero Remote Uploads:</strong> Your input data, configuration files, credentials, and code snippets are never sent to remote servers or third-party APIs.</li>
+          <li><strong>Offline Capable:</strong> Once loaded, our tools process data entirely within your local browser sandbox.</li>
+          <li><strong>No Mandatory Accounts:</strong> All tools are completely free to use without requiring registration, email sign-ups, or access keys.</li>
+        </ul>
 
-        <h2>Editorial Leadership & Contributors</h2>
+        <h2>Our Editorial Process</h2>
         <p>
-          Nadhebe articles are authored and reviewed by software engineers, distributed systems architects, and machine learning practitioners:
+          We take technical accuracy seriously. Our content is developed through practical, hands-on experimentation:
         </p>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 not-prose my-24">
-          <div class="p-20 rounded-16 border border-border dark:border-border-dark bg-surface2/60 dark:bg-surface2-dark/60 space-y-12">
-            <div class="flex items-center gap-12">
-              <div class="w-48 h-48 rounded-full bg-accent/20 text-accent font-display font-bold text-h4 flex items-center justify-center">
-                AC
-              </div>
-              <div>
-                <p class="font-sans font-bold text-body text-ink dark:text-ink-dark">Alice Chen</p>
-                <p class="text-caption text-muted dark:text-muted-dark font-mono">Lead LLM Systems Architect</p>
-              </div>
-            </div>
-            <p class="text-caption text-ink2 dark:text-ink2-dark leading-relaxed">
-              Specializes in vLLM serving, KV-cache memory optimization, CUDA out-of-memory mitigation, and multi-node GPU deployment strategies.
-            </p>
-          </div>
+        <ul>
+          <li><strong>Direct Verification:</strong> Code snippets, CLI commands, and configuration files are written and tested against standard runtime environments (such as Node.js, Python, and modern Linux/macOS/Windows terminals).</li>
+          <li><strong>Grounded Sources:</strong> Technical concepts are cross-referenced with official documentation, published specifications (RFCs, W3C recommendations), and open-source project repositories.</li>
+          <li><strong>Regular Maintenance:</strong> When frameworks or API specifications change, we actively update our guides to ensure instructions remain accurate and helpful.</li>
+        </ul>
 
-          <div class="p-20 rounded-16 border border-border dark:border-border-dark bg-surface2/60 dark:bg-surface2-dark/60 space-y-12">
-            <div class="flex items-center gap-12">
-              <div class="w-48 h-48 rounded-full bg-emerald-500/20 text-emerald-600 font-display font-bold text-h4 flex items-center justify-center">
-                BS
-              </div>
-              <div>
-                <p class="font-sans font-bold text-body text-ink dark:text-ink-dark">Bob Smith</p>
-                <p class="text-caption text-muted dark:text-muted-dark font-mono">Senior Agentic AI & Tools Engineer</p>
-              </div>
-            </div>
-            <p class="text-caption text-ink2 dark:text-ink2-dark leading-relaxed">
-              Focuses on Model Context Protocol (MCP) server development, Claude Code CLI tooling, structured prompt optimization, and developer productivity agents.
-            </p>
-          </div>
-        </div>
-
-        <h2>Open Access & Free Developer Utilities</h2>
+        <h2>Who Operates Nadhebe</h2>
         <p>
-          We believe high-quality engineering knowledge and privacy-preserving developer tools should be freely accessible to builders worldwide. All interactive calculators, formatters, and watermark utilities on Nadhebe are 100% free, requiring zero sign-up and zero remote data uploads.
+          Nadhebe is managed and written by the <strong>Nadhebe Editorial Team</strong>—an independent group of software engineers and technical content creators. We are not backed by any single AI vendor or cloud provider, allowing us to maintain an objective perspective on the developer ecosystem.
         </p>
 
-        <h2>Contact & Editorial Collaboration</h2>
+        <h2>Corrections & Community Feedback</h2>
         <p>
-          For corrections, technical feedback, benchmark dataset submissions, or editorial inquiries, please visit our <a href="/contact/" class="text-accent underline font-semibold">Contact Page</a> or email our desk directly at <a href="mailto:hello@nadhebe.com" class="text-accent underline font-semibold">hello@nadhebe.com</a>.
+          We welcome feedback, corrections, and suggestions from readers. If you spot an outdated command, broken example, or have ideas for new utilities, please get in touch through our <a href="/contact/" class="text-accent underline font-semibold">Contact Page</a> or email us directly at <a href="mailto:contact@nadhebe.com" class="text-accent underline font-semibold">contact@nadhebe.com</a>.
         </p>
 
       </div>

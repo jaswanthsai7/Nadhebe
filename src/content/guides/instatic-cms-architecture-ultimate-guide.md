@@ -2,7 +2,7 @@
 title: "The Ultimate Architectural Guide to Instatic CMS"
 description: "A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models."
 pubDate: 2026-07-10
-author: bob-smith
+author: nadhebe-team
 category: "Guides"
 tags: [instatic, guide, architecture, backend]
 heroImage: "/images/guides-hero.webp"
@@ -109,5 +109,5 @@ Watch the complete design system configuration and database architecture setup i
 
 ## Integration & Scaling Resources
 
-* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/frameworks/instatic-astro-islands-frameworks-integration).
+* Learn how to connect Astro components in [Integrating Instatic CMS with Astro Islands and Modern Frameworks](/guides/instatic-astro-islands-frameworks-integration).
 * Structure your CSS system cleanly with [Best Practices for Scaling Design Tokens in Instatic CMS](/best-practices/instatic-design-tokens-scaling).

@@ -2,7 +2,7 @@
 title: "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements"
 description: "A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges."
 pubDate: 2026-07-25
-author: alice-chen
+author: nadhebe-team
 category: Guides
 tags: ["anthropic", "claude", "certification", "pearson-vue", "credly", "ai-education"]
 heroImage: "/images/anthropic-cert-hero.webp"

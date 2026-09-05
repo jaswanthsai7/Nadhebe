@@ -399,7 +399,7 @@ export function createZip(files: { name: string; data: Uint8Array }[]): Blob {
   eocdView.setUint32(16, cdOffset, true);
   eocdView.setUint16(20, 0, true);
 
-  return new Blob([...fileHeaders, ...centralDirs, eocd], { type: 'application/zip' });
+  return new Blob([...fileHeaders, ...centralDirs, eocd] as unknown as BlobPart[], { type: 'application/zip' });
 }
 
 export function initChatgptAdBlockerPage() {

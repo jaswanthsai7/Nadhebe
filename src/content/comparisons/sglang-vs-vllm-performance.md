@@ -3,7 +3,7 @@ title: "SGLang vs vLLM: Performance Benchmark for LLM Inference"
 description: "An in-depth performance benchmark comparing SGLang and vLLM for deploying large language models. Analyze throughput, memory usage, and latency trade-offs."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["vLLM", "SGLang", "Inference", "Benchmarks", "LLM Ops", "RadixAttention"]
 heroImage: "/images/sglang-vs-vllm-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing a performance chart comparing two server nodes"

@@ -1,11 +1,11 @@
 [
   {
-    "title": "Bilibili Chrome Translator: Real-Time In-Place Translation Without Breaking Vue 3 | Nadhebe",
-    "description": "Translate Bilibili in real time with the Bilibili Chrome translator. Features in-place DOM replacement, 0ms local dictionary lookups, and Danmaku isolation.",
+    "title": "Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe",
+    "description": "Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation.",
     "url": "https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide",
     "category": "Guides",
     "tags": [
-      "[\"Bilibili Translator\", \"Chrome Extension\", \"Vue 3 Hydration\", \"DOM Manipulation\", \"Web Development\", \"Danmaku Isolation\", \"Manifest V3\"]"
+      "[\"Bilibili Translator\", \"Browser Extension\", \"Multi-Language Translation\", \"Vue 3 Hydration\", \"DOM Manipulation\", \"Web Development\", \"Danmaku Isolation\", \"Manifest V3\"]"
     ],
     "pubDate": "2026-08-31T00:00:00.000Z"
   },
@@ -58,16 +58,6 @@
       "[\"speculative-decoding\", \"vllm\", \"sglang\", \"llm-inference\", \"performance\", \"gpu-optimization\", \"guides\"]"
     ],
     "pubDate": "2026-08-29T00:00:00.000Z"
-  },
-  {
-    "title": "ChatGPT Ad Blocker - Chrome Extension & Rule Generator | Nadhebe",
-    "description": "Block ChatGPT upgrade banners, upsell promo cards, and partner app ads with a lightweight, privacy-first Manifest V3 Chrome extension and rule generator.",
-    "url": "https://nadhebe.com/tools/chatgpt-ad-blocker",
-    "category": "Tools",
-    "tags": [
-      "[\"ChatGPT Ad Blocker\", \"Chrome Extension\", \"AI Tools\", \"Privacy\", \"Manifest V3\"]"
-    ],
-    "pubDate": "2026-08-22T00:00:00.000Z"
   },
   {
     "title": "How to Create AI Influencer Video Ads with ChatGPT & Google Flow: 3-Scene Visual Continuity Guide",
@@ -216,1006 +206,6 @@
     "category": "Comparisons",
     "tags": [
       "[\"NVIDIA B200\", \"NVIDIA H200\", \"Blackwell\", \"Hopper\", \"GPU Benchmarks\", \"LLM Inference\", \"HBM3e\", \"AI Hardware\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "16 9 Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online 16 9 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/16-9-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"16 9 Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "9 16 Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online 9 16 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/9-16-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"9 16 Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ai Api Pricing Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Ai Api Pricing Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ai-api-pricing-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ai Api Pricing Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ai Persona Prompt Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Ai Persona Prompt Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ai-persona-prompt-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ai Persona Prompt Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Api Payload Builder | Nadhebe Developer Tools",
-    "description": "Interactive online Api Payload Builder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/api-payload-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Api Payload Builder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Aspect Ratio Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Aspect Ratio Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/aspect-ratio-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Aspect Ratio Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Average Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Average Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/average-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Average Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Base64 Encoder | Nadhebe Developer Tools",
-    "description": "Interactive online Base64 Encoder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/base64-encoder",
-    "category": "Tools",
-    "tags": [
-      "[\"Base64 Encoder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Batch Inference Cost Estimator | Nadhebe Developer Tools",
-    "description": "Interactive online Batch Inference Cost Estimator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/batch-inference-cost-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Batch Inference Cost Estimator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Profile & Author Bio Formatter | Nadhebe",
-    "description": "Format short social bios, GitHub profile README intros, and author descriptions with word and character count limits.",
-    "url": "https://nadhebe.com/tools/bio-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Bio Generator\",\"GitHub Profile\",\"Social Media\",\"Formatting\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "SaaS CAC Payback Period & LTV:CAC Calculator",
-    "description": "Interactive calculator tool for SaaS CAC payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.",
-    "url": "https://nadhebe.com/tools/cac-payback-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"CAC Payback\", \"SaaS Metrics\", \"Unit Economics\", \"LTV:CAC\", \"Business Calculator\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cac Payback | Nadhebe Developer Tools",
-    "description": "Interactive online Cac Payback tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cac-payback",
-    "category": "Tools",
-    "tags": [
-      "[\"Cac Payback\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Case Converter | Nadhebe Developer Tools",
-    "description": "Interactive online Case Converter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/case-converter",
-    "category": "Tools",
-    "tags": [
-      "[\"Case Converter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Keep a Changelog Markdown Generator | Nadhebe",
-    "description": "Generate clean Keep a Changelog markdown files with Added, Changed, Fixed, Security, and Deprecated sections.",
-    "url": "https://nadhebe.com/tools/changelog-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Changelog\",\"Markdown\",\"Release Notes\",\"Open Source\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "YouTube & Podcast Chapter Timestamp Formatter | Nadhebe",
-    "description": "Format chapter timestamps for YouTube videos, podcasts, and audio courses with automatic time validation.",
-    "url": "https://nadhebe.com/tools/chapter-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"YouTube\",\"Timestamps\",\"Podcast\",\"Video Editing\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Interactive Task & Deployment Checklist Builder | Nadhebe",
-    "description": "Build interactive pre-flight deployment checklists, QA test plans, and release procedures with export options.",
-    "url": "https://nadhebe.com/tools/checklist-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Checklist\",\"Deployment\",\"QA Testing\",\"DevOps\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "RAG Text Chunking & Overlap Size Planner | Nadhebe",
-    "description": "Calculate token counts, chunk overlap percentages, and vector embedding storage sizes for LLM RAG pipelines.",
-    "url": "https://nadhebe.com/tools/chunk-size-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"RAG\",\"Chunking\",\"Vector Database\",\"Embeddings\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "APA, MLA & BibTeX Technical Citation Generator | Nadhebe",
-    "description": "Format technical citations in APA, MLA, Chicago, IEEE, and BibTeX styles for research papers and developer blogs.",
-    "url": "https://nadhebe.com/tools/citation-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Citations\",\"APA\",\"BibTeX\",\"IEEE\",\"Research\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Claude Desktop Mcp Config Maker | Nadhebe Developer Tools",
-    "description": "Interactive online Claude Desktop Mcp Config Maker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/claude-desktop-mcp-config-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Claude Desktop Mcp Config Maker\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Claude Hook Template Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Claude Hook Template Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/claude-hook-template-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Claude Hook Template Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cumulative Layout Shift (CLS) Optimization Checklist | Nadhebe",
-    "description": "Audit and optimize Cumulative Layout Shift (CLS) issues, web font loading, image aspect ratios, and dynamic DOM shifts.",
-    "url": "https://nadhebe.com/tools/cls-checklist",
-    "category": "Tools",
-    "tags": [
-      "[\"Core Web Vitals\",\"CLS\",\"Page Speed\",\"Performance\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Color Contrast Checker | Nadhebe Developer Tools",
-    "description": "Interactive online Color Contrast Checker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/color-contrast-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Color Contrast Checker\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Column Extractor | Nadhebe",
-    "description": "Extract specific columns from raw CSV data by header selection.",
-    "url": "https://nadhebe.com/tools/column-extractor",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Column Statistics Profiler | Nadhebe",
-    "description": "Compute column-level statistics, min/max values, and unique counts.",
-    "url": "https://nadhebe.com/tools/column-profiler",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Compound Interest | Nadhebe Developer Tools",
-    "description": "Interactive online Compound Interest tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/compound-interest",
-    "category": "Tools",
-    "tags": [
-      "[\"Compound Interest\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "LLM Context Window Budget Planner | Nadhebe",
-    "description": "Calculate prompt context budget allocation across system instructions, user history, RAG chunks, and output headroom.",
-    "url": "https://nadhebe.com/tools/context-budget-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"Context Window\",\"LLM Budget\",\"Tokens\",\"Prompt Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cosine Similarity Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Cosine Similarity Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cosine-similarity-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Cosine Similarity Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cron Explainer | Nadhebe Developer Tools",
-    "description": "Interactive online Cron Explainer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cron-explainer",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron Explainer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cron Next Run Viewer | Nadhebe Developer Tools",
-    "description": "Interactive online Cron Next Run Viewer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cron-next-run-viewer",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron Next Run Viewer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Css Clamp Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Css Clamp Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/css-clamp-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Css Clamp Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Visual CSV Grid Table Builder | Nadhebe",
-    "description": "Build and edit CSV files visually in your browser with table controls.",
-    "url": "https://nadhebe.com/tools/csv-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Delimiter & Column Balance Checker | Nadhebe",
-    "description": "Audit CSV files line-by-line for mismatched column counts.",
-    "url": "https://nadhebe.com/tools/csv-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Sanitizer & Blank Line Cleaner | Nadhebe",
-    "description": "Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.",
-    "url": "https://nadhebe.com/tools/csv-cleaner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Csv Deduper | Nadhebe Developer Tools",
-    "description": "Interactive online Csv Deduper tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/csv-deduper",
-    "category": "Tools",
-    "tags": [
-      "[\"Csv Deduper\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Row Count & Parse Speed Estimator | Nadhebe",
-    "description": "Estimate total row counts, uncompressed byte sizes, and web parsing throughput for raw CSV payloads.",
-    "url": "https://nadhebe.com/tools/csv-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV Estimator\",\"Performance\",\"Row Counter\",\"File Size\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Encoding & Line Ending Inspector | Nadhebe",
-    "description": "Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.",
-    "url": "https://nadhebe.com/tools/csv-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Multi-File CSV Table Merger | Nadhebe",
-    "description": "Merge multiple CSV datasets into a single consolidated table.",
-    "url": "https://nadhebe.com/tools/csv-merger",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Data Pipeline Schema Planner | Nadhebe",
-    "description": "Plan CSV data pipeline schemas and generate SQL DDL tables.",
-    "url": "https://nadhebe.com/tools/csv-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Table Preview & Viewer | Nadhebe",
-    "description": "Preview raw CSV data as an interactive, searchable HTML table.",
-    "url": "https://nadhebe.com/tools/csv-preview",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Schema & Type Constraint Validator | Nadhebe",
-    "description": "Validate CSV data against custom column data type constraints.",
-    "url": "https://nadhebe.com/tools/csv-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Query & Filter Builder | Nadhebe",
-    "description": "Build structured filter conditions, group-by aggregates, and statistical summary queries for raw data tables.",
-    "url": "https://nadhebe.com/tools/data-analysis-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Analysis\",\"Query Builder\",\"Aggregations\",\"Filtering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Anomaly & Outlier Checker | Nadhebe",
-    "description": "Scan tabular data for statistical outliers, z-score anomalies, duplicate keys, and missing data gaps.",
-    "url": "https://nadhebe.com/tools/data-analysis-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Anomaly Detection\",\"Outliers\",\"Data Quality\",\"Z-Score\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Processing Memory & File Size Estimator | Nadhebe",
-    "description": "Estimate RAM and disk memory requirements for loading large datasets into Pandas, Polars, or SQL tables.",
-    "url": "https://nadhebe.com/tools/data-analysis-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Memory Estimator\",\"Pandas\",\"Polars\",\"Big Data\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dataset Correlation & Metric Inspector | Nadhebe",
-    "description": "Inspect numerical variances, standard deviations, summary quantiles, and data distributions.",
-    "url": "https://nadhebe.com/tools/data-analysis-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Dataset Inspector\",\"Variance\",\"Quantiles\",\"Statistics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Science & Metrics Planner | Nadhebe",
-    "description": "Plan key performance indicators (KPIs), sample sizes, target metrics, and exploratory analysis steps.",
-    "url": "https://nadhebe.com/tools/data-analysis-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"KPI Planner\",\"Data Science\",\"Metrics\",\"Statistics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Report Template Maker | Nadhebe",
-    "description": "Create structured markdown templates for data science reports, exploratory analysis, and business metrics.",
-    "url": "https://nadhebe.com/tools/data-analysis-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Science\",\"Report Template\",\"Markdown\",\"Analytics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CRON & Scheduled Date Builder | Nadhebe",
-    "description": "Build schedule timestamps, recurrent event series, and cron execution intervals with timezone offsets.",
-    "url": "https://nadhebe.com/tools/date-and-time-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron\",\"Scheduling\",\"Timestamps\",\"Events\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Zone & Format Inspector | Nadhebe",
-    "description": "Inspect timezone offsets, daylight savings transitions, and international date formatting patterns across locales.",
-    "url": "https://nadhebe.com/tools/date-and-time-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Timezones\",\"Date Inspector\",\"Intl.DateTimeFormat\",\"UTC\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Format Pattern Generator | Nadhebe",
-    "description": "Generate custom date and time formatting strings for Moment.js, date-fns, Luxon, and Python strftime.",
-    "url": "https://nadhebe.com/tools/date-and-time-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Formatter\",\"strftime\",\"date-fns\",\"Moment.js\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date Difference | Nadhebe Developer Tools",
-    "description": "Interactive online Date Difference tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/date-difference",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Difference\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV & Delimiter Converter | Nadhebe",
-    "description": "Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.",
-    "url": "https://nadhebe.com/tools/delimiter-converter",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "SEO Meta Description & OpenGraph Template Generator | Nadhebe",
-    "description": "Generate SEO meta descriptions, Twitter card summaries, and social media post descriptions with character counters.",
-    "url": "https://nadhebe.com/tools/description-template",
-    "category": "Tools",
-    "tags": [
-      "[\"SEO\",\"Meta Description\",\"OpenGraph\",\"Social Media\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Code & Console Log Stripper | Nadhebe",
-    "description": "Strip console.log calls, debugger statements, and comments from code.",
-    "url": "https://nadhebe.com/tools/developer-cleaner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dockerfile Linter | Nadhebe Developer Tools",
-    "description": "Interactive online Dockerfile Linter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/dockerfile-linter",
-    "category": "Tools",
-    "tags": [
-      "[\"Dockerfile Linter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dpi Print Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Dpi Print Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/dpi-print-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Dpi Print Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Embedding Inspector | Nadhebe Developer Tools",
-    "description": "Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/embedding-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Embedding Inspector\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Env Diff | Nadhebe Developer Tools",
-    "description": "Interactive online Env Diff tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/env-diff",
-    "category": "Tools",
-    "tags": [
-      "[\"Env Diff\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "LLM Evaluation Rubric Generator | Nadhebe",
-    "description": "Create structured scoring rubrics for evaluating AI model outputs, prompt response quality, and RAG accuracy.",
-    "url": "https://nadhebe.com/tools/eval-rubric-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"LLM Evals\",\"AI Testing\",\"Rubric\",\"Prompt Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Few Shot Prompt Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Few Shot Prompt Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/few-shot-prompt-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Few Shot Prompt Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Gpu Vram Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Gpu Vram Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/gpu-vram-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Gpu Vram Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Http Status Codes Cheat Sheet | Nadhebe Developer Tools",
-    "description": "Interactive online Http Status Codes Cheat Sheet tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/http-status-codes-cheat-sheet",
-    "category": "Tools",
-    "tags": [
-      "[\"Http Status Codes Cheat Sheet\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Json Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Minifier | Nadhebe Developer Tools",
-    "description": "Interactive online Json Minifier tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-minifier",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Minifier\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Path Finder | Nadhebe Developer Tools",
-    "description": "Interactive online Json Path Finder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-path-finder",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Path Finder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Repair | Nadhebe Developer Tools",
-    "description": "Interactive online Json Repair tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-repair",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Repair\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json To Typescript | Nadhebe Developer Tools",
-    "description": "Interactive online Json To Typescript tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-to-typescript",
-    "category": "Tools",
-    "tags": [
-      "[\"Json To Typescript\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json To Xml | Nadhebe Developer Tools",
-    "description": "Interactive online Json To Xml tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-to-xml",
-    "category": "Tools",
-    "tags": [
-      "[\"Json To Xml\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Validator | Nadhebe Developer Tools",
-    "description": "Interactive online Json Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Validator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Model Comparison Matrix | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Model Comparison Matrix tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-model-comparison-matrix",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Model Comparison Matrix\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Rate Limit Backoff Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Rate Limit Backoff Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-rate-limit-backoff-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Rate Limit Backoff Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Token Counter Multi Model | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Token Counter Multi Model tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-token-counter-multi-model",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Token Counter Multi Model\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Json Rpc Payload Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Json Rpc Payload Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-json-rpc-payload-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Json Rpc Payload Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Server Config Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Server Config Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-server-config-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Server Config Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Server Manifest Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Server Manifest Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-server-manifest-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Server Manifest Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Megapixels To Resolution Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Megapixels To Resolution Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/megapixels-to-resolution-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Megapixels To Resolution Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Meta Tag Analyzer | Nadhebe Developer Tools",
-    "description": "Interactive online Meta Tag Analyzer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/meta-tag-analyzer",
-    "category": "Tools",
-    "tags": [
-      "[\"Meta Tag Analyzer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Openapi 3 Yaml Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Openapi 3 Yaml Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/openapi-3-yaml-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Openapi 3 Yaml Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Openapi To Mcp Tool Schema | Nadhebe Developer Tools",
-    "description": "Interactive online Openapi To Mcp Tool Schema tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/openapi-to-mcp-tool-schema",
-    "category": "Tools",
-    "tags": [
-      "[\"Openapi To Mcp Tool Schema\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Opportunity Radar | Nadhebe Developer Tools",
-    "description": "Interactive online Opportunity Radar tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/opportunity-radar",
-    "category": "Tools",
-    "tags": [
-      "[\"Opportunity Radar\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Percentage Difference Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Percentage Difference Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/percentage-difference-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Percentage Difference Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Pixels To Megapixels Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Pixels To Megapixels Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/pixels-to-megapixels-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Pixels To Megapixels Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ppi Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Ppi Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ppi-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ppi Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Profit Margin Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Profit Margin Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/profit-margin-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Profit Margin Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Prompt Template Variable Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Prompt Template Variable Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/prompt-template-variable-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Prompt Template Variable Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Px To Rem | Nadhebe Developer Tools",
-    "description": "Interactive online Px To Rem tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/px-to-rem",
-    "category": "Tools",
-    "tags": [
-      "[\"Px To Rem\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rag Chunk Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Rag Chunk Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rag-chunk-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rag Chunk Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rag Context Window Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Rag Context Window Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rag-context-window-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rag Context Window Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Resize Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Resize Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/resize-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Resize Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rfc 7807 Error Json Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Rfc 7807 Error Json Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rfc-7807-error-json-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rfc 7807 Error Json Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Schema Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Schema Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/schema-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Schema Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Sitemap Validator | Nadhebe Developer Tools",
-    "description": "Interactive online Sitemap Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/sitemap-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"Sitemap Validator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Slug Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Slug Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/slug-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Slug Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Social Media Image Sizes | Nadhebe Developer Tools",
-    "description": "Interactive online Social Media Image Sizes tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/social-media-image-sizes",
-    "category": "Tools",
-    "tags": [
-      "[\"Social Media Image Sizes\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Svg To Jsx | Nadhebe Developer Tools",
-    "description": "Interactive online Svg To Jsx tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/svg-to-jsx",
-    "category": "Tools",
-    "tags": [
-      "[\"Svg To Jsx\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "System Prompt Linter Best Practices | Nadhebe Developer Tools",
-    "description": "Interactive online System Prompt Linter Best Practices tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/system-prompt-linter-best-practices",
-    "category": "Tools",
-    "tags": [
-      "[\"System Prompt Linter Best Practices\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Webhook Payload Signature Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Webhook Payload Signature Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/webhook-payload-signature-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Webhook Payload Signature Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Xml Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Xml Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/xml-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Xml Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Xpath Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Xpath Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/xpath-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Xpath Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Yaml To Json | Nadhebe Developer Tools",
-    "description": "Interactive online Yaml To Json tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/yaml-to-json",
-    "category": "Tools",
-    "tags": [
-      "[\"Yaml To Json\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Youtube Video Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Youtube Video Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/youtube-video-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Youtube Video Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
     ],
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
@@ -2040,16 +1030,6 @@
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
-    "title": "The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins",
-    "description": "The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.",
-    "url": "https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp",
-    "category": "Tools",
-    "tags": [
-      "[\"claude\", \"cli\", \"mcp-servers\", \"skills\", \"subagents\", \"developer-tools\", \"awesome-list\"]"
-    ],
-    "pubDate": "2026-07-25T00:00:00.000Z"
-  },
-  {
     "title": "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements",
     "description": "A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.",
     "url": "https://nadhebe.com/guides/anthropic-claude-certification-developer-guide",
@@ -2160,16 +1140,6 @@
     "pubDate": "2026-07-19T00:00:00.000Z"
   },
   {
-    "title": "The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development",
-    "description": "Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.",
-    "url": "https://nadhebe.com/prompts/kimi-k3-structured-prompt-engineering-framework",
-    "category": "Prompts",
-    "tags": [
-      "[\"kimi-k3\", \"prompt-engineering\", \"app-development\", \"game-dev\", \"structured-prompts\"]"
-    ],
-    "pubDate": "2026-07-19T00:00:00.000Z"
-  },
-  {
     "title": "Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle",
     "description": "An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.",
     "url": "https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul",
@@ -2192,10 +1162,20 @@
   {
     "title": "Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design",
     "description": "Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.",
-    "url": "https://nadhebe.com/use-cases/kimi-k3-game-development-use-cases",
-    "category": "Use Cases",
+    "url": "https://nadhebe.com/guides/kimi-k3-game-development-use-cases",
+    "category": "Guides",
     "tags": [
       "[\"kimi-k3\", \"use-cases\", \"game-dev\", \"procedural-generation\", \"rapid-prototyping\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
+    "title": "The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development",
+    "description": "Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.",
+    "url": "https://nadhebe.com/guides/kimi-k3-structured-prompt-engineering-framework",
+    "category": "Guides",
+    "tags": [
+      "[\"kimi-k3\", \"prompt-engineering\", \"app-development\", \"game-dev\", \"structured-prompts\"]"
     ],
     "pubDate": "2026-07-19T00:00:00.000Z"
   },
@@ -2220,6 +1200,16 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
+    "title": "Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)",
+    "description": "A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.",
+    "url": "https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide",
+    "category": "Tutorials",
+    "tags": [
+      "[\"google-flow\", \"storyboard-studio\", \"pre-production\", \"troubleshooting\", \"google-labs\"]"
+    ],
+    "pubDate": "2026-07-17T00:00:00.000Z"
+  },
+  {
     "title": "Step-by-Step Tutorial: Setting Up the YouTube Automation Agent",
     "description": "A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.",
     "url": "https://nadhebe.com/tutorials/setting-up-youtube-automation-agent",
@@ -2230,30 +1220,20 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance",
-    "description": "Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.",
-    "url": "https://nadhebe.com/youtube/fable-5-vs-gpt-5-5-comparison",
-    "category": "YouTube Articles",
+    "title": "Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding",
+    "description": "An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.",
+    "url": "https://nadhebe.com/reviews/fable-5-ai-model-review",
+    "category": "Tool Reviews",
     "tags": [
-      "[\"fable-5\", \"gpt-5.5\", \"comparisons\", \"models\", \"anthropic\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
-    "title": "Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)",
-    "description": "A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.",
-    "url": "https://nadhebe.com/youtube/google-flow-storyboard-studio-guide",
-    "category": "YouTube Articles",
-    "tags": [
-      "[\"google-flow\", \"storyboard-studio\", \"pre-production\", \"troubleshooting\", \"google-labs\"]"
+      "[\"fable-5\", \"reviews\", \"llm\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
     "title": "Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model",
     "description": "Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.",
-    "url": "https://nadhebe.com/youtube/gpt-5-6-autonomous-engine",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/reviews/gpt-5-6-autonomous-engine",
+    "category": "Tool Reviews",
     "tags": [
       "[\"gpt-5.6\", \"openai\", \"agentic-ai\", \"soul-model\", \"models\"]"
     ],
@@ -2262,20 +1242,20 @@
   {
     "title": "Inside the Multi-Agent YouTube Automation System",
     "description": "Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.",
-    "url": "https://nadhebe.com/youtube/open-source-youtube-automation-agent",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/reviews/open-source-youtube-automation-agent",
+    "category": "Tool Reviews",
     "tags": [
       "[\"multi-agent\", \"sqlite\", \"youtube-automation\", \"open-source\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding",
-    "description": "An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.",
-    "url": "https://nadhebe.com/reviews/fable-5-ai-model-review",
-    "category": "Tool Reviews",
+    "title": "Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance",
+    "description": "Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.",
+    "url": "https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison",
+    "category": "Comparisons",
     "tags": [
-      "[\"fable-5\", \"reviews\", \"llm\", \"anthropic\"]"
+      "[\"fable-5\", \"gpt-5.5\", \"comparisons\", \"models\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
@@ -2320,26 +1300,6 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Google Flow vs Storyboard Studio: Features, 3D Animation & Pre-Production Overview",
-    "description": "An in-depth review comparing regular Google Flow with Storyboard Studio, exploring 3D stylized animation capabilities, asset profiles, and export specs.",
-    "url": "https://nadhebe.com/tools/google-flow-storyboard-studio-overview",
-    "category": "Tools",
-    "tags": [
-      "[\"google-flow\", \"tools\", \"pre-production\", \"3d-animation\", \"google-labs\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
-    "title": "The YouTube Automation Agent: Multi-Agent Feature Guide",
-    "description": "Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.",
-    "url": "https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system",
-    "category": "Tools",
-    "tags": [
-      "[\"tools\", \"youtube-automation\", \"open-source\", \"features\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
     "title": "The Producer's Guide to AI-Assisted Pre-Production Workflows",
     "description": "Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.",
     "url": "https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows",
@@ -2362,8 +1322,8 @@
   {
     "title": "The SQLite State-Sharing Pattern for Multi-Agent Architectures",
     "description": "A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.",
-    "url": "https://nadhebe.com/frameworks/sqlite-state-sharing-multi-agent-architecture",
-    "category": "Frameworks",
+    "url": "https://nadhebe.com/guides/sqlite-state-sharing-multi-agent-architecture",
+    "category": "Guides",
     "tags": [
       "[\"sqlite\", \"architecture\", \"multi-agent\", \"frameworks\"]"
     ],
@@ -2402,8 +1362,8 @@
   {
     "title": "Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic",
     "description": "Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.",
-    "url": "https://nadhebe.com/youtube/instatic-local-setup-importer",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/tutorials/instatic-local-setup-importer",
+    "category": "Tutorials",
     "tags": [
       "[instatic, youtube, setup, importer]"
     ],
@@ -2412,8 +1372,8 @@
   {
     "title": "Instatic Visual CMS: Video Walkthrough and Overview",
     "description": "Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.",
-    "url": "https://nadhebe.com/youtube/instatic-visual-cms-walkthrough",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/tutorials/instatic-visual-cms-walkthrough",
+    "category": "Tutorials",
     "tags": [
       "[instatic, youtube, walkthrough, video]"
     ],
@@ -2426,16 +1386,6 @@
     "category": "Tool Reviews",
     "tags": [
       "[instatic, reviews, cms, visual-builder]"
-    ],
-    "pubDate": "2026-07-10T00:00:00.000Z"
-  },
-  {
-    "title": "AI Assisted Design: System Prompts and Workflows for Instatic CMS",
-    "description": "Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.",
-    "url": "https://nadhebe.com/prompts/instatic-ai-assisted-design-prompts",
-    "category": "Prompts",
-    "tags": [
-      "[instatic, ai, prompts, system-prompts]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
@@ -2460,32 +1410,22 @@
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Enterprise Editorial Governance and Client Hand-offs with Instatic CMS",
-    "description": "How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.",
-    "url": "https://nadhebe.com/use-cases/instatic-enterprise-editorial-governance",
-    "category": "Use Cases",
+    "title": "AI Assisted Design: System Prompts and Workflows for Instatic CMS",
+    "description": "Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.",
+    "url": "https://nadhebe.com/guides/instatic-ai-assisted-design-prompts",
+    "category": "Guides",
     "tags": [
-      "[instatic, enterprise, user-management, permissions]"
+      "[instatic, ai, prompts, system-prompts]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting",
-    "description": "An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.",
-    "url": "https://nadhebe.com/tools/instatic-html-importer-guide",
-    "category": "Tools",
+    "title": "Integrating Instatic CMS with Astro Islands and Modern Frameworks",
+    "description": "An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.",
+    "url": "https://nadhebe.com/guides/instatic-astro-islands-frameworks-integration",
+    "category": "Guides",
     "tags": [
-      "[instatic, site-migration, tools, troubleshoot]"
-    ],
-    "pubDate": "2026-07-10T00:00:00.000Z"
-  },
-  {
-    "title": "Importing HTML Websites into Instatic CMS: Importer Mechanics",
-    "description": "A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.",
-    "url": "https://nadhebe.com/tools/instatic-html-site-import-migration",
-    "category": "Tools",
-    "tags": [
-      "[instatic, HTML-import, site-migration, tools]"
+      "[instatic, astro, hydration, frontend-frameworks]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
@@ -2500,20 +1440,20 @@
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Integrating Instatic CMS with Astro Islands and Modern Frameworks",
-    "description": "An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.",
-    "url": "https://nadhebe.com/frameworks/instatic-astro-islands-frameworks-integration",
-    "category": "Frameworks",
+    "title": "Enterprise Editorial Governance and Client Hand-offs with Instatic CMS",
+    "description": "How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.",
+    "url": "https://nadhebe.com/guides/instatic-enterprise-editorial-governance",
+    "category": "Guides",
     "tags": [
-      "[instatic, astro, hydration, frontend-frameworks]"
+      "[instatic, enterprise, user-management, permissions]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
     "title": "Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic",
     "description": "How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.",
-    "url": "https://nadhebe.com/case-studies/webflow-to-instatic-migration-savings",
-    "category": "Case Studies",
+    "url": "https://nadhebe.com/guides/webflow-to-instatic-migration-savings",
+    "category": "Guides",
     "tags": [
       "[instatic, webflow, migration, hosting-costs]"
     ],

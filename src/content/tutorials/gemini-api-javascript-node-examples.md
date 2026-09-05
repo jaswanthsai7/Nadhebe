@@ -2,8 +2,8 @@
 title: "Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)"
 description: "TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gemini-api", "javascript", "typescript", "nodejs", "developer-guide"]
 heroImage: "/images/gemini-javascript-examples-hero.webp"
 heroAlt: "Node.js JavaScript SDK code blueprint illustration of Gemini API"

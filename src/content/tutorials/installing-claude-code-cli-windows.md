@@ -2,7 +2,7 @@
 title: "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)"
 description: "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2."
 pubDate: 2026-07-25
-author: alice-chen
+author: nadhebe-team
 category: Tutorials
 tags: ["claude", "cli", "windows", "wsl2", "powershell", "anthropic"]
 heroImage: "/images/claude-windows-hero.webp"

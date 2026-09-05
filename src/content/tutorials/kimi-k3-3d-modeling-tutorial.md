@@ -2,7 +2,7 @@
 title: "Step-by-Step: Generating Support-Free 3D Models with Kimi K3"
 description: "A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities."
 pubDate: 2026-07-19
-author: bob-smith
+author: nadhebe-team
 category: "Tutorials"
 tags: ["kimi-k3", "3d-modeling", "3d-printing", "openscad", "tutorials"]
 heroImage: "/images/tutorials-hero.webp"
@@ -149,4 +149,4 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
 ## Kimi K3 Developer Resources
 
 * Master large prompt context structures with [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](/best-practices/kimi-k3-context-window-best-practices).
-* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/use-cases/kimi-k3-game-development-use-cases).
+* Explore game design and procedural generation in [Kimi K3 Use Cases in Modern Game Design](/guides/kimi-k3-game-development-use-cases).

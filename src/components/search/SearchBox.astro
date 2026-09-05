@@ -22,7 +22,7 @@
 </div>
 
 <script>
-  let pagefind = null;
+  let pagefind: any = null;
 
   async function initPagefind() {
     const input = document.getElementById('search-input');
@@ -46,7 +46,8 @@
     }
 
     input.addEventListener('input', async (event) => {
-      const query = event.target.value.trim();
+      const target = event.target as HTMLInputElement | null;
+      const query = target?.value?.trim() || '';
       resultsContainer.innerHTML = '';
       
       if (!query) {

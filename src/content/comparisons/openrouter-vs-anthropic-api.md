@@ -3,7 +3,7 @@ title: "OpenRouter vs Anthropic API: Multi-Model Gateway Routing vs Direct Model
 description: "Analyze the architectural differences, pricing, fallbacks, prompt caching, and latency between using OpenRouter's unified gateway and direct Anthropic API integration."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["OpenRouter", "Anthropic API", "LLM Routing", "AI Gateway", "Claude 3.7", "API Architecture"]
 heroImage: "/images/openrouter-vs-anthropic-api-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration of unified network router nodes connecting to direct model server endpoints on a muted mint background"

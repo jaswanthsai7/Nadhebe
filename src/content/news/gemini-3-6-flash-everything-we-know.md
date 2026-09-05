@@ -2,8 +2,8 @@
 title: "Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)"
 description: "Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "news"
+author: nadhebe-team
+category: "News"
 tags: ["gemini-3-6", "gemini-flash", "google-ai", "llm-benchmarks", "news"]
 heroImage: "/images/gemini-3-6-flash-hero.webp"
 heroAlt: "Futuristic vector illustration of Gemini 3.6 Flash"

@@ -2,8 +2,8 @@
 title: "Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)"
 description: "Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gemini-photo", "imagen-3", "ai-image-generation", "prompt-engineering", "google-ai"]
 heroImage: "/images/gemini-photo-hero.webp"
 heroAlt: "Clean minimalist aperture illustration of Gemini AI Photo Generator"

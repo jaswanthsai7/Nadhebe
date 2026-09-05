@@ -2,7 +2,7 @@
 title: "How to Deploy Instatic CMS on a VPS Using Docker Compose"
 description: "Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite."
 pubDate: 2026-07-10
-author: bob-smith
+author: nadhebe-team
 category: "Tutorials"
 tags: [instatic, docker, vps, deployment]
 heroImage: "/images/tutorials-hero.webp"

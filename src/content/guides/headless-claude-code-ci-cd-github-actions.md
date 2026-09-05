@@ -3,7 +3,7 @@ title: "Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHu
 description: "A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["Claude Code", "GitHub Actions", "CI/CD", "Automated Code Review", "DevOps", "Anthropic"]
 heroImage: "/images/headless-claude-code-ci-cd-hero.webp"
 heroAlt: "Vintage editorial collage illustration of continuous integration pipelines and pull request code branches on a soft olive background"

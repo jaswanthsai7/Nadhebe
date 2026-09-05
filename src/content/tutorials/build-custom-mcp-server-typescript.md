@@ -3,7 +3,7 @@ title: "How to Build a Custom MCP Server in TypeScript"
 description: "A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "TypeScript", "Node.js", "AI Integration", "Server", "API"]
 heroImage: "/images/custom-mcp-server-ts-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing a server stack and TypeScript logo"

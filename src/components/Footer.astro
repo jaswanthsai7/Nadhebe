@@ -3,24 +3,27 @@ import { SITE } from '@/config';
 const year = new Date().getFullYear();
 
 const readLinks = [
-  { label: 'Tutorials', href: '/tutorials' },
-  { label: 'Newsletter', href: '/newsletter' },
-  { label: 'Videos', href: '/youtube' },
   { label: 'Guides', href: '/guides' },
+  { label: 'Tutorials', href: '/tutorials' },
   { label: 'Comparisons', href: '/comparisons' },
+  { label: 'Best Practices', href: '/best-practices' },
+  { label: 'Journal Feed', href: '/journal' },
 ];
 
-const resourceLinks = [
-  { label: 'Resources Hub', href: '/resources' },
-  { label: 'Tools', href: '/tools' },
-  { label: 'Prompts', href: '/prompts' },
-  { label: 'Reviews', href: '/reviews' },
-  { label: 'Frameworks', href: '/frameworks' },
+const toolLinks = [
+  { label: 'All Utilities', href: '/tools' },
+  { label: 'JSON Formatter & Diff', href: '/tools/json-formatter/' },
+  { label: 'LLM BPE Tokenizer', href: '/tools/llm-tokenizer/' },
+  { label: 'Aspect Ratio Calculator', href: '/tools/aspect-ratio-calculator/' },
+  { label: 'CSV to JSON Converter', href: '/tools/csv-to-json/' },
 ];
 
 const companyLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About Nadhebe', href: '/about' },
+  { label: 'Editorial Standards', href: '/editorial-standards' },
+  { label: 'Write for Us', href: '/contribute' },
+  { label: 'Contact Desk', href: '/contact' },
+  { label: 'Disclaimer & Disclosures', href: '/disclaimer' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms of Service', href: '/terms' },
 ];
@@ -95,9 +98,9 @@ const companyLinks = [
       </div>
 
       <div>
-        <p class="text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Resources</p>
+        <p class="text-meta font-mono font-medium uppercase tracking-wider text-muted dark:text-muted-dark">Developer Tools</p>
         <ul class="mt-16 space-y-8">
-          {resourceLinks.map(link => (
+          {toolLinks.map(link => (
             <li><a href={link.href} class="inline-block py-4 text-caption font-sans text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors duration-150">{link.label}</a></li>
           ))}
         </ul>
@@ -146,7 +149,7 @@ const companyLinks = [
     status.className = 'text-xs font-sans text-muted dark:text-muted-dark';
 
     try {
-      const apiBase = import.meta.env.PUBLIC_API_URL || 'http://localhost:8787/api/v1';
+      const apiBase = import.meta.env.PUBLIC_API_URL || '/api/v1';
       const res = await fetch(`${apiBase}/subscribe`, {
         method: 'POST',
         headers: {
