@@ -1,0 +1,115 @@
+---
+// AnnouncementBar.astro - Chrome Web Store Launch Header
+const chatgptStoreUrl = "https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb";
+const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb";
+---
+
+<div
+  id="cws-launch-announcement"
+  class="relative z-40 w-full border-b border-border/80 bg-surface/95 dark:border-border-dark/80 dark:bg-surface-dark/95 backdrop-blur-md transition-all duration-300"
+  role="region"
+  aria-label="New Chrome Extensions Announcement"
+>
+  <div class="mx-auto flex max-w-content items-center justify-between px-12 py-6 sm:px-24 text-xs font-sans gap-8">
+    
+    <!-- Left: Badge -->
+    <div class="flex items-center gap-6 shrink-0">
+      <span class="inline-flex items-center gap-5 rounded-full bg-accent/15 px-8 py-2 text-[11px] font-semibold text-accent dark:text-accent-dark tracking-wide uppercase">
+        <span class="h-6 w-6 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
+        <span class="hidden sm:inline">Chrome Store</span>
+        <span class="sm:hidden">Store</span>
+      </span>
+    </div>
+
+    <!-- Center: Both Extensions Direct Store Links -->
+    <div class="flex items-center gap-8 sm:gap-14 overflow-x-auto no-scrollbar py-2 flex-1 justify-center">
+      
+      <!-- Extension 1: ChatGPT Ad Blocker -> Direct to Chrome Web Store -->
+      <a
+        href={chatgptStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-6 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-10 py-4 transition-all shadow-xs shrink-0"
+        title="Install ChatGPT Ad & Promo Blocker directly from Chrome Web Store"
+        aria-label="Install ChatGPT Ad & Promo Blocker on Chrome Web Store (opens in new tab)"
+      >
+        <!-- Chrome Logo -->
+        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors">ChatGPT Blocker</span>
+        <span class="rounded-full bg-amber-500/15 px-5 py-1 text-[10px] font-bold text-amber-600 dark:text-amber-400">5.0 ★</span>
+        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium">Add to Chrome ↗</span>
+      </a>
+
+      <!-- Extension 2: BiliBili Translator -> Direct to Chrome Web Store -->
+      <a
+        href={bilibiliStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-6 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-10 py-4 transition-all shadow-xs shrink-0"
+        title="Install BiliBili English Translator directly from Chrome Web Store"
+        aria-label="Install BiliBili English Translator on Chrome Web Store (opens in new tab)"
+      >
+        <!-- Chrome Logo -->
+        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors">BiliBili Translator</span>
+        <span class="rounded-full bg-accent/15 px-5 py-1 text-[10px] font-mono font-bold text-accent dark:text-accent-dark">v1.0.2</span>
+        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium">Add to Chrome ↗</span>
+      </a>
+
+    </div>
+
+    <!-- Right: Dismiss Button -->
+    <button
+      type="button"
+      id="dismiss-cws-banner"
+      aria-label="Dismiss launch announcement"
+      onclick="try{var b=document.getElementById('cws-launch-announcement');if(b)b.style.display='none';localStorage.setItem('nadhebe_cws_launch_dismissed_v1','true');}catch(e){}"
+      class="p-4 rounded-4 text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark transition-colors shrink-0 cursor-pointer"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 pointer-events-none">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  // Immediate synchronous dismissal check & handler to avoid layout shift (CLS = 0)
+  (function() {
+    function checkDismissed() {
+      try {
+        if (localStorage.getItem('nadhebe_cws_launch_dismissed_v1') === 'true') {
+          var el = document.getElementById('cws-launch-announcement');
+          if (el) el.style.display = 'none';
+        }
+      } catch(e) {}
+    }
+    checkDismissed();
+
+    function bindDismissBtn() {
+      var btn = document.getElementById('dismiss-cws-banner');
+      var banner = document.getElementById('cws-launch-announcement');
+      if (btn && banner) {
+        btn.onclick = function(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          banner.style.display = 'none';
+          try {
+            localStorage.setItem('nadhebe_cws_launch_dismissed_v1', 'true');
+          } catch(err) {}
+        };
+      }
+    }
+
+    bindDismissBtn();
+    document.addEventListener('DOMContentLoaded', bindDismissBtn);
+    document.addEventListener('astro:page-load', bindDismissBtn);
+  })();
+</script>

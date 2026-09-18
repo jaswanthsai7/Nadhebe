@@ -66,40 +66,21 @@ const faq = [
         </div>
 
         <!-- QUICK ACTION BUTTONS -->
-        <div class="flex flex-col sm:flex-row lg:flex-col gap-12 w-full lg:w-auto shrink-0">
+        <div class="w-full lg:w-auto shrink-0">
           <a
-            href="/downloads/chatgpt-adblock.zip"
-            download="chatgpt-adblock.zip"
-            id="hero-download-zip-btn"
-            class="inline-flex items-center justify-center gap-10 px-24 py-14 rounded-14 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow cursor-pointer group"
+            href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="hero-cws-install-btn"
+            class="inline-flex items-center justify-center gap-10 px-28 py-16 rounded-14 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow cursor-pointer group w-full sm:w-auto"
           >
-            <svg class="w-20 h-20 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            <!-- Chrome Icon -->
+            <svg class="w-22 h-22 fill-current group-hover:scale-105 transition-transform" viewBox="0 0 24 24">
+              <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
             </svg>
-            <span>Download Extension (.ZIP)</span>
+            <span>Add to Chrome (Free)</span>
+            <span class="text-xs bg-white/20 px-8 py-2 rounded-full font-mono">5.0 ★</span>
           </a>
-
-          <div class="flex items-center gap-8">
-            <a
-              href="#sandbox-section"
-              class="flex-1 inline-flex items-center justify-center gap-6 px-16 py-10 rounded-10 font-sans text-caption font-bold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark hover:border-accent transition-colors"
-            >
-              <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span>Live Sandbox</span>
-            </a>
-            <a
-              href="#customizer-section"
-              class="flex-1 inline-flex items-center justify-center gap-6 px-16 py-10 rounded-10 font-sans text-caption font-bold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark hover:border-accent transition-colors"
-            >
-              <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-              </svg>
-              <span>Rule Builder</span>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -342,15 +323,23 @@ const faq = [
             </div>
           </div>
 
-          <div class="pt-8 border-t border-border dark:border-border-dark">
+          <div class="pt-8 border-t border-border dark:border-border-dark space-y-6">
             <a
-              href="/downloads/chatgpt-adblock.zip"
-              download="chatgpt-adblock.zip"
+              href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb"
+              target="_blank"
+              rel="noopener noreferrer"
               class="w-full py-10 rounded-10 bg-accent hover:opacity-90 text-white text-caption font-bold flex items-center justify-center gap-8 transition-opacity shadow-subtle"
             >
-              <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+              </svg>
               <span>Install to Block on ChatGPT</span>
             </a>
+            <div class="text-center">
+              <a href="/downloads/chatgpt-adblock.zip" download="chatgpt-adblock.zip" class="text-[11px] text-muted hover:text-accent underline">
+                or download offline .ZIP
+              </a>
+            </div>
           </div>
         </div>
 
@@ -540,12 +529,41 @@ const faq = [
         <div class="flex items-center gap-8">
           <span class="text-xl">🚀</span>
           <h2 class="text-h3 font-display font-bold text-ink dark:text-ink-dark m-0">
-            How to Install in 60 Seconds (Chrome, Brave, Edge &amp; Arc)
+            Installation Options (Chrome, Brave, Edge &amp; Arc)
           </h2>
         </div>
         <p class="text-caption text-muted dark:text-muted-dark mt-2 m-0">
-          No Chrome Web Store account or payment required. Load the unpacked extension directly into your browser.
+          Install directly from the official Chrome Web Store in one click, or load the source package manually.
         </p>
+      </div>
+
+      <!-- METHOD A: OFFICIAL CHROME WEB STORE (RECOMMENDED) -->
+      <div class="rounded-16 border border-accent/30 bg-accent/5 p-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+        <div class="space-y-4">
+          <div class="flex items-center gap-8">
+            <span class="px-8 py-2 rounded-full text-[11px] font-mono font-bold bg-accent text-white">METHOD 1 • RECOMMENDED</span>
+            <span class="text-caption font-bold text-amber-600 dark:text-amber-400">★★★★★ 5.0 Rating</span>
+          </div>
+          <h3 class="text-body font-bold text-ink dark:text-ink-dark m-0">Official Chrome Web Store 1-Click Install</h3>
+          <p class="text-caption text-muted dark:text-muted-dark m-0">
+            Automatic background updates, security verified by Google, zero developer mode configuration needed.
+          </p>
+        </div>
+        <a
+          href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-8 px-20 py-10 rounded-10 font-sans text-caption font-bold text-white bg-accent hover:opacity-95 transition-all shadow-subtle shrink-0"
+        >
+          <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+          </svg>
+          <span>Install from Chrome Web Store</span>
+        </a>
+      </div>
+
+      <div class="text-xs font-mono text-muted uppercase tracking-wider">
+        Method 2: Manual Developer Mode Installation (Unpacked ZIP)
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">

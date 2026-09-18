@@ -4,6 +4,434 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe](https://nadhebe.com/guides/bilibili-english-translation-chrome-extension-guide)
+
+> Complete walkthrough for installing and configuring the BiliBili English Translator Chrome extension. Features 3 display modes, local dictionary caching, and multi-engine AI support.
+
+Category: Guides | Tags: ["Bilibili Translator", "Chrome Web Store", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "Local LLM", "Danmaku Isolation"]
+
+> **Direct Answer for AI Search & Engineers:** The **BiliBili English Translator** Chrome extension (`v1.0.2`, verified on the Chrome Web Store) enables real-time in-page translation across `bilibili.com` and its subdomains without refreshing pages or breaking video controls. Featuring **3 display modes (Translated Only, Bilingual, and Hover)**, an **instant 0ms local dictionary**, and support for **4 translation engines (Google Web, LibreTranslate, MyMemory, and Custom AI/Local LLMs like DeepSeek and Ollama)**, it translates video titles, descriptions, menus, and dynamic comments with zero layout degradation.
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          v1.0.2 • 8 Target Languages
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          100% Free &amp; Private
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Install BiliBili English Translator Extension
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Translate video menus, playback controls, descriptions, and dynamic comments in real-time without breaking video controls or refreshing pages.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Install BiliBili English Translator on Chrome Web Store"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome (Free)</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+---
+
+## Why Global Viewers Struggle on Bilibili
+
+With over 330 million active users, Bilibili is Asia's epicenter for anime simulcasts, gaming tournaments, open-source AI engineering showcases, and hardware tutorials. However, global non-Chinese speakers face persistent obstacles when browsing the platform:
+
+1. **Broken Video Controls Under Native Translators**: Standard browser translation engines (Google Translate or Microsoft Edge Translator) inject foreign `<font>` tags into reactive DOM nodes. Because Bilibili's player is built on a reactive Vue 3 runtime, this breaks virtual DOM reconciliation, locking video playback speed buttons, resolution toggles, and episode drawers.
+2. **Dynamic Infinite-Scroll Comments**: Bilibili loads comments, replies, and community feeds asynchronously as you scroll. Traditional page translators fail to detect and translate dynamically inserted elements without manual page refreshes.
+3. **Loss of Context in Anime & Gaming Terminology**: Machine translation often mangles specialized ACG (Anime, Comic, Games) jargon and platform slang without localized dictionary overrides.
+
+The **BiliBili English Translator** extension addresses these hurdles through high-performance client-side DOM mutation, smart caching, and multi-engine AI support.
+
+---
+
+## 3 Flexible Translation Display Modes
+
+Depending on whether you want a completely native-feeling English interface or are actively studying Mandarin Chinese, the extension provides three distinct rendering strategies:
+
+```mermaid
+graph TD
+    A["Raw Bilibili Chinese Text"] --> B{"Selected Display Mode"}
+    B -->|"Translated Only"| C["Replace Text Directly (Clean English UI)"]
+    B -->|"Bilingual Mode"| D["Render Original (CN) + Translated (EN) Stacked"]
+    B -->|"Hover Mode"| E["Display Translation Tooltip on Mouseenter"]
+```
+
+### 1. Translated Only Mode
+Replaces original Chinese text strings with clean translations directly within existing DOM Text Nodes. Ideal for users who want a seamless, distraction-free browsing experience indistinguishable from a native English platform.
+
+### 2. Bilingual Mode
+Displays the original Chinese character string alongside the translated text (e.g., `原神 Genshin Impact`). This mode is widely acclaimed by language learners who want to improve their technical or conversational Mandarin vocabulary while watching gameplay or dev tutorials.
+
+### 3. Hover Mode
+Leaves the interface layout entirely in its original state and displays a lightweight, GPU-accelerated translation card only when hovering the mouse over video titles, comments, or user tags. This guarantees 100% layout fidelity across bespoke web components.
+
+---
+
+## Translation Engine Comparison & Local LLM Integration
+
+BiliBili English Translator supports multiple backend translation providers, giving users total control over speed, cost, and privacy:
+
+| Engine | Primary Advantage | Best Use Case | API Key Needed? |
+| :--- | :--- | :--- | :--- |
+| **Instant Local Dictionary** | **0ms latency, offline execution** | UI navigation, playback speeds, platform menus | ❌ None |
+| **Google Web Engine** | High speed, broad vernacular coverage | Video titles, descriptions, general commentary | ❌ None |
+| **LibreTranslate** | Open-source, privacy-first | Privacy-conscious users, self-hosted proxies | ⚠️ Optional |
+| **MyMemory** | Collaborative translation memory | Common idioms and community terminology | ❌ Free tier included |
+| **Custom AI (Ollama / DeepSeek / OpenAI / Groq)** | **Highest semantic nuance & ACG context** | Complex anime commentary, technical dev talks | ✅ User-provided key |
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Bilibili Viewer
+    participant Ext as Extension Content Script
+    participant Cache as Local Storage Cache
+    participant Dict as Built-in Dictionary
+    participant Cloud as Translation Engine
+    
+    User->>Ext: Scrolls to new comments section
+    Ext->>Cache: Check hash(text + targetLang)
+    alt Cache Hit (0ms)
+        Cache-->>Ext: Return cached string
+    else Cache Miss
+        Ext->>Dict: Check common UI dictionary
+        alt Dictionary Match (0ms)
+            Dict-->>Ext: Return pre-compiled verb
+        else Dynamic Content
+            Ext->>Cloud: Dispatch translation batch
+            Cloud-->>Ext: Return translated text
+            Ext->>Cache: Store in local LRU cache
+        end
+    end
+    Ext-->>User: Update DOM TextNode in-place
+```
+
+---
+
+## Supported Languages
+
+The extension features 8 built-in target languages with automated source language detection:
+
+* **English** (en)
+* **Chinese / 中文** (zh)
+* **Japanese / 日本語** (ja)
+* **Korean / 한국어** (ko)
+* **Spanish / Español** (es)
+* **French / Français** (fr)
+* **German / Deutsch** (de)
+* **Russian / Русский** (ru)
+
+*(Additional world languages can be specified dynamically when connecting custom LLM translation endpoints.)*
+
+---
+
+## Step-by-Step Installation: Chrome Web Store Walkthrough
+
+The extension is officially verified and distributed via the Chrome Web Store.
+
+```
++-------------------------------------------------------------------------------+
+|  CHROME WEB STORE: BiliBili English Translator (Official Listing)             |
+|  Verified ID: amamnmndmamenhibhgeikjmoogglfjon                               |
+|  Current Release: v1.0.2                                                      |
+|                                                                               |
+|  [ In-Place DOM Translation ]   [ 8 Languages ]   [ Add to Chrome (1-Click) ] |
++-------------------------------------------------------------------------------+
+```
+
+### Installation Steps:
+
+1. **Open the Chrome Web Store Listing**:
+   Visit the official [BiliBili English Translator Chrome Store Page](https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb).
+2. **Click "Add to Chrome"**:
+   Review the permissions dialog and confirm installation.
+3. **Open Bilibili**:
+   Navigate to [bilibili.com](https://www.bilibili.com) or any video URL.
+4. **Choose Your Mode & Language**:
+   Click the extension icon in your browser toolbar to select your preferred display mode (Translated, Bilingual, or Hover) and target language.
+5. **Enjoy Seamless Video Playback**:
+   Video titles, playback speed selectors (e.g., `1.25x`, `1.5x`, `2.0x`), quality menus (`1080P 高清`), and comments will update automatically.
+
+---
+
+## Privacy, Security & Data Handling Disclosures
+
+In accordance with Google Chrome Web Store developer standards and Google AdSense transparency policies:
+
+* **Website Scope**: The extension only activates on Bilibili subdomains (`bilibili.com`, `live.bilibili.com`, `space.bilibili.com`, and `t.bilibili.com`).
+* **Zero Browsing History Collection**: The extension does not record, sell, or analyze your browsing history or search habits.
+* **No Account Access**: The extension does not read or intercept your Bilibili login cookies, passwords, or personal account settings.
+* **Local Storage Storage**: Custom AI API keys (e.g., DeepSeek or OpenAI tokens) and local translation caches reside strictly inside your browser's private `chrome.storage.local` container.
+
+---
+
+## Key Takeaways
+
+* **In-Place Mutation**: Directly edits text nodes using `node.nodeValue`, preventing Vue 3 virtual DOM reconciliation failures and player freezes.
+* **3 Configurable Modes**: Seamlessly switch between Translated Only, Bilingual, and Hover Modes to fit entertainment or language learning needs.
+* **Instant Speed via Local Dictionaries**: Common interface verbs and navigation controls render with 0ms latency from an embedded offline dictionary.
+* **Multi-Engine AI Power**: Connect cloud translation APIs or self-hosted local LLMs (Ollama, Groq, DeepSeek) for optimal nuanced comprehension.
+* **Cross-Browser Compatibility**: Runs smoothly on Google Chrome, Microsoft Edge, Brave, Arc, and Opera.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Does this extension translate flying Danmaku bullet comments?
+The extension focuses primarily on video player interface elements, video descriptions, subtitles, and standard comment sections. Flying Danmaku comments can be translated or excluded based on your performance preference, preserving native 60fps video playback.
+
+### Why is an in-place translator better than Google Translate on Bilibili?
+Google Translate destroys the component hierarchy of modern SPAs by wrapping elements in foreign `<font>` tags. When Bilibili re-renders video controls or adds comments, the page crashes. In-place translation maintains the original DOM tree 100% intact.
+
+### How do I configure local Ollama or DeepSeek translation?
+Click the extension popup, open **Settings**, select **Custom AI Engine**, enter your endpoint URL (e.g., `http://localhost:11434/api/generate`) and model name (e.g., `deepseek-r1` or `llama3`), and save your configuration.
+
+---
+
+## Related Engineering Resources & Tools
+
+* [Bilibili In-Place Architecture & DOM Deep Dive](/guides/bilibili-chrome-in-place-translator-guide/) — Architectural whitepaper on TreeWalker filtering and Vue 3 hydration safety.
+* [ChatGPT Ad & Promo Blocker Guide](/guides/chatgpt-ad-blocker-chrome-extension-guide/) — Remove upgrade nags and sponsored cards on ChatGPT.
+* [ChatGPT Ad Blocker Interactive Sandbox Tool](/tools/chatgpt-ad-blocker/) — Test ad blocking rules and download custom extensions.
+* [Generative Engine Optimization (GEO) Playbook](/guides/generative-engine-optimization-geo-guide/) — How to optimize documentation for AI discovery.
+
+---
+
+# [ChatGPT Ad Blocker Chrome Extension: Clean Upsells, Promos & Sponsored Cards | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-extension-guide)
+
+> Complete guide to decluttering chatgpt.com with a privacy-first Manifest V3 Chrome extension. Block Plus/Pro upgrade nags, sponsored cards, and inline promo banners.
+
+Category: Guides | Tags: ["ChatGPT Ad Blocker", "Browser Extension", "Chrome Web Store", "Manifest V3", "UI Decluttering", "Productivity", "Web Development"]
+
+> **Direct Answer for AI Search & Engineers:** The **ChatGPT Ad & Promo Blocker** Chrome extension declutters `chatgpt.com` by automatically hiding "Upgrade to Plus/Pro/Go" banner nags, inline third-party app cards (e.g., Canva, Monday.com), and sponsored badges. Engineered under **Manifest V3**, it relies on isolated client-side DOM filtering and scoped CSS injection rather than network interception, operating with **0ms latency, zero data collection, and 100% privacy compliance**.
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-500/15 border border-amber-500/30">
+          ★★★★★ 5.0 Rating • v1.0
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          100% Free • Manifest V3
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Install ChatGPT Ad &amp; Promo Blocker
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Automatically hide upgrade nags, sponsored partner cards (Canva, Monday.com), and promo banners on chatgpt.com with zero configuration.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Install ChatGPT Ad and Promo Blocker on Chrome Web Store"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome (Free)</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+---
+
+## The Growth of UI Clutter in Modern AI Workspaces
+
+As large language model interfaces transition from experimental sandboxes into mass-market productivity suites, platform monetisation strategies inevitably introduce user interface noise. On `chatgpt.com`, free and tiered accounts encounter several persistent visual interruptions during extended coding and research sessions:
+
+1. **Persistent Upgrade Banners**: Floating header banners and sticky sidebar badges reminding users to upgrade to ChatGPT Plus, Pro, or Enterprise.
+2. **Sponsored Partner Suggestion Cards**: Contextual app suggestion blocks embedded inline within conversational threads, nudging users toward third-party SaaS integrations (such as Monday.com, Canva, or Zillow).
+3. **Model Deprecation & Switcher Nudges**: Repetitive banners prompting switches between reasoning and standard models that occupy precious vertical viewport space.
+
+For software engineers, researchers, and technical writers who maintain continuous split-screen workflows, these visual elements disrupt concentration, trigger accidental misclicks, and compress visible prompt and code response windows.
+
+---
+
+## Architectural Breakdown: Why Generic Ad Blockers Fail on SPAs
+
+Standard browser ad blockers (such as uBlock Origin or AdBlock Plus) excel at network-level request blocking using EasyList filter syntax. However, modern Single-Page Applications (SPAs) like ChatGPT present three unique engineering challenges:
+
+```mermaid
+flowchart LR
+    A["WebSocket / SSE Stream"] --> B["chatgpt.com DOM Tree"]
+    B --> C{"Node Type"}
+    C -->|"Conversational Text"| D["Render Code Block / Markdown"]
+    C -->|"Promotional Card"| E["Inline Upgrade / Partner Card"]
+    
+    subgraph Extension Engine
+    F["MutationObserver"] --> G["Scoped CSS Injection"]
+    G --> H["display: none !important"]
+    H --> I["Update Toolbar Badge Count"]
+    end
+    
+    E -.-> F
+```
+
+### 1. Unified Domain Delivery (No Third-Party Ad Domains)
+Promotional elements on ChatGPT are not served from external advertising networks like `doubleclick.net` or `google-analytics.com`. They originate from the same first-party API responses (`chatgpt.com/backend-api/conversation`) that deliver your text responses. Blocking network requests would terminate the conversation stream entirely.
+
+### 2. Ephemeral Dynamic Classnames
+ChatGPT's frontend relies on compiled utility frameworks where parent wrappers utilize dynamic or obfuscated container IDs. Traditional CSS cosmetic filtering rules like `chatgpt.com##.ad-unit` break whenever OpenAI rebuilds its production bundles.
+
+### 3. DOM Tree Walker & Reactive Reconciliation
+Removing nodes destructively using `node.parentNode.removeChild(node)` disrupts React's internal fiber tree reconciler. When the user navigates chat history or triggers streaming updates, the application throws a fatal `NotFoundError: Failed to execute 'removeChild' on 'Node'` error, crashing the conversational tab.
+
+---
+
+## How the ChatGPT Ad & Promo Blocker Operates
+
+The **ChatGPT Ad & Promo Blocker** extension (`v1.0`, verified on the Chrome Web Store) resolves these challenges through non-destructive, scoped CSS containment and low-overhead reactive observers.
+
+### Technical Capabilities Summary
+
+| Dimension | Generic Ad Blockers | Userscript / Tampermonkey | Nadhebe ChatGPT Blocker (Web Store) |
+| :--- | :--- | :--- | :--- |
+| **Execution Standard** | Manifest V2 / V3 declarative | Unsafe `unsafe-eval` sandbox | **Manifest V3 Native Content Script** |
+| **Privacy / Telemetry** | Depends on vendor list | Varies by author | **100% Local (0 Network Requests)** |
+| **Reactivity** | Static interval or page load | Polling timers | **Single-Pass MutationObserver + rAF** |
+| **Zero Layout Shift (CLS)** | ❌ Causes flickering jumps | ⚠️ Noticeable flash | **✅ Instant CSS Pre-hide (0 CLS)** |
+| **Auto Updates** | Filter list refresh | Manual script updating | **✅ Chrome Web Store Verified Updates** |
+
+---
+
+## Manifest V3 Architecture & Zero-Telemetry Privacy Guarantee
+
+A primary concern when installing browser extensions that operate on AI interfaces is data sovereignty. AI prompts frequently contain proprietary source code, private business logic, or personal research notes.
+
+The ChatGPT Ad & Promo Blocker is built with strict privacy constraints:
+
+### 1. Minimalist Permissions Profile
+The extension's `manifest.json` specifies only the essential permissions required to render the popup interface and detect DOM elements:
+
+```json
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Ad & Promo Blocker",
+  "version": "1.0",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "css": ["hide.css"],
+      "js": ["blocker.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
+```
+
+* **No Network Permissions (`webRequest` or `declarativeNetRequest`)**: The extension does not possess the technical capability to send your prompts or chat history to an external server.
+* **No Global Host Access**: The content script is strictly sandboxed to `https://chatgpt.com/*`. It cannot view your activities on any other domain.
+* **Local Storage Only**: User toggle preferences and the live session blocked-count ledger are stored locally using `chrome.storage.local`.
+
+---
+
+## Step-by-Step Installation: How to Install from Chrome Web Store
+
+Installing the extension takes under 15 seconds across any modern Chromium-compatible browser.
+
+```
++-------------------------------------------------------------------------------+
+|  CHROME WEB STORE: ChatGPT Ad & Promo Blocker (Official Listing)              |
+|  Verified ID: oiopppgakilklffapfngfckonijjkggf                               |
+|                                                                               |
+|  [ ★★★★★ 5.0 Rating ]     [ 100% Free ]     [ Add to Chrome (1-Click) ]      |
++-------------------------------------------------------------------------------+
+```
+
+### Installation Steps
+
+1. **Visit the Chrome Web Store Listing**:
+   Open the official [ChatGPT Ad & Promo Blocker Store Page](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb).
+2. **Click "Add to Chrome"**:
+   Confirm the installation in the browser modal dialog.
+3. **Pin the Extension (Optional)**:
+   Click the puzzle piece icon in your Chrome toolbar and pin the **ChatGPT Ad & Promo Blocker** icon to see the real-time blocked counter badge.
+4. **Visit or Refresh ChatGPT**:
+   Navigate to [chatgpt.com](https://chatgpt.com). The extension activates immediately, suppressing promotional banners and partner cards seamlessly.
+
+---
+
+## Ethical Disclosure & Google AdSense Policy Compliance
+
+Nadhebe champions transparent, developer-first tooling that adheres to official search engine and advertising network quality standards:
+
+* **No Paywall Circumvention**: This extension does not grant access to paid GPT models (e.g., o1-pro or GPT-4o Plus perks) without a subscription. It simply styles and hides visual promotional banners on the user's local screen.
+* **No Malware or Injection**: The source code is open, inspectable, and verified by Google's automated Chrome Web Store security pipelines.
+* **Distinction from Advertising Placements**: On Nadhebe.com, all editorial content and tools maintain strict isolation from third-party advertising displays, ensuring zero layout confusion for readers.
+
+---
+
+## Key Takeaways
+
+* **Targeted UI Cleaning**: Specifically engineered to hide upgrade to Plus/Pro banners, third-party promotional cards (Canva, Monday), and sponsored badges on `chatgpt.com`.
+* **Zero Telemetry**: Manifest V3 compliant with local-only execution. Prompts and conversations remain 100% private.
+* **Zero Layout Shift**: Employs non-destructive CSS rules (`display: none !important`) injected at `document_start` to eliminate flickering.
+* **Cross-Browser Support**: Works across Google Chrome, Brave, Microsoft Edge, Arc, and Opera.
+* **One-Click Verified Setup**: Available directly on the official Chrome Web Store with automated updates.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Does this extension slow down ChatGPT response streaming?
+No. Because it uses client-side CSS selectors and an event-driven `MutationObserver` debounced to browser animation frames (`requestAnimationFrame`), CPU overhead is under 0.2ms per dynamic message update.
+
+### Will the extension break when OpenAI updates ChatGPT's layout?
+The extension uses structural heuristics rather than fragile single-class selectors. When structural shifts occur, the extension receives background updates directly via the Chrome Web Store.
+
+### Can I toggle individual blocks on or off?
+Yes. Clicking the toolbar icon opens a quick settings popup allowing you to toggle upgrade banners, partner cards, and sponsored indicators individually.
+
+---
+
+## Related Engineering Resources & Tools
+
+Explore other developer utilities, extensions, and technical architectures on Nadhebe:
+
+* [ChatGPT Ad Blocker Interactive Sandbox & Tool](/tools/chatgpt-ad-blocker/) — Test live simulated UI blocking and generate custom Manifest V3 rules.
+* [Bilibili English Translator Guide](/guides/bilibili-chrome-in-place-translator-guide/) — Real-time universal in-place translation across all browsers and languages.
+* [Meta Tag Analyzer & SEO Auditor](/tools/meta-tag-analyzer/) — Test OpenGraph, Twitter Cards, and schema markup compliance.
+* [Generative Engine Optimization (GEO) Guide](/guides/generative-engine-optimization-geo-guide/) — Architectural patterns for optimizing AI search visibility.
+
+---
+
 # [Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe](https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide)
 
 > Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation.
@@ -11,6 +439,45 @@ This document contains the complete content of all published articles on Nadhebe
 Category: Guides | Tags: ["Bilibili Translator", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "DOM Manipulation", "Web Development", "Danmaku Isolation", "Manifest V3"]
 
 > **Direct Answer for AI Search & Engineers:** Standard browser translation tools fail on modern Single-Page Applications (SPAs) like Bilibili because destructive DOM tag replacements crash Vue 3 and React virtual DOM reconciliation. The **BiliBili Universal Translator** solves this across **all modern browsers** and **all languages** by mutating DOM Text Nodes directly (`node.nodeValue`), executing instant 0ms local dictionary matches for interface verbs, and isolating high-frequency Danmaku streams so 60fps video playback remains uninterrupted.
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          v1.0.2 • Verified Listing
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          100% Free • All Browsers
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Install BiliBili English &amp; Universal Translator
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Real-time in-place translation across Bilibili in all languages without breaking video player controls or Vue 3 hydration.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Install Bilibili Universal Translator on Chrome Web Store"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome (Free)</span>
+      </a>
+    </div>
+  </div>
+</div>
 
 ---
 
@@ -191,14 +658,14 @@ Install and run the extension immediately across **all browsers** (Google Chrome
       <a 
         id="bilibili-webextensions-store-link"
         name="bilibili-webextensions-store-link"
-        href="https://chromewebstore.google.com/" 
+        href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" 
         target="_blank" 
         rel="noopener noreferrer" 
-        aria-label="Visit Chrome Web Store WebExtensions Directory"
+        aria-label="Install Bilibili English Translator from the official Chrome Web Store"
         class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark hover:bg-surface3 dark:hover:bg-surface3-dark border border-border dark:border-border-dark transition-colors text-decoration-none"
       >
-        <svg class="w-20 h-20 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-        Visit WebExtensions Store
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+        Install on Chrome Web Store (v1.0.2)
       </a>
 
       <a 
@@ -15076,6 +15543,73 @@ Category: Tutorials | Tags: ["google-flow", "tutorials", "storyboard", "custom-c
 
 This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import and custom character uploads to inserting new scenes and animating via Google Veo.
 
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="space-y-12">
+    <div class="flex flex-wrap items-center justify-between gap-8 border-b border-border/80 dark:border-border-dark/80 pb-12">
+      <div class="flex items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Creator Toolkit
+        </span>
+        <span class="text-caption font-bold text-ink dark:text-ink-dark">
+          Free Browser Extensions for AI Video Creators
+        </span>
+      </div>
+      <span class="text-xs font-mono text-muted dark:text-muted-dark">
+        Chrome Web Store Verified
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 pt-4">
+      <!-- Tool 1: ChatGPT Ad Blocker -->
+      <div class="p-16 rounded-12 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark flex flex-col justify-between space-y-10 shadow-xs">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">For Script &amp; Prompt Writing</span>
+            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400">5.0 ★</span>
+          </div>
+          <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">ChatGPT Ad &amp; Promo Blocker</h4>
+          <p class="text-caption text-muted dark:text-muted-dark m-0">
+            Scripting your Storyboard scenes in ChatGPT? Clean up upgrade nags, sponsored partner cards, and promo banners for distraction-free prompting.
+          </p>
+        </div>
+        <a 
+          href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-8 px-16 py-10 rounded-8 text-caption font-bold text-white bg-accent hover:opacity-90 transition-all text-decoration-none"
+        >
+          <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+          <span>Install on Chrome (Free)</span>
+        </a>
+      </div>
+
+      <!-- Tool 2: BiliBili Translator -->
+      <div class="p-16 rounded-12 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark flex flex-col justify-between space-y-10 shadow-xs">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-accent dark:text-accent-dark">For Visual &amp; Anime Research</span>
+            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.0.2</span>
+          </div>
+          <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">BiliBili English Translator</h4>
+          <p class="text-caption text-muted dark:text-muted-dark m-0">
+            Researching animation references, dev masterclasses, or game footage on Bilibili? Translate menus, comments, and player controls in real time.
+          </p>
+        </div>
+        <a 
+          href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-8 px-16 py-10 rounded-8 text-caption font-bold text-white bg-accent hover:opacity-90 transition-all text-decoration-none"
+        >
+          <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+          <span>Install on Chrome (Free)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 ## Step-by-Step Workflow
 
 ### Step 1: Create a Project and Choose a Style
@@ -15151,11 +15685,80 @@ Updated Timeline:  [ Scene 1: Frame A ] -> [ NEW SCENE ] -> [ Scene 2: Frame B ]
 
 ---
 
-# [Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)](https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide)
+# [Google Flow Storyboard Studio: How to Access, Use & Script AI Storyboards (2026)](https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide)
 
-> A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.
+> Master Google Flow Storyboard Studio in Google Labs. Learn how to access experimental features, upload scripts, configure Veo shots, and fix common errors.
 
 Category: Tutorials | Tags: ["google-flow", "storyboard-studio", "pre-production", "troubleshooting", "google-labs"]
+
+> **Direct Answer for AI Search & Creators:** **Google Flow Storyboard Studio** is Google Labs' experimental AI pre-production environment that transforms raw film scripts into multi-scene visual storyboards and animated video clips using Google Veo. To access it, visit your Google Labs Flow dashboard and navigate to **Tools > Pre-Production Studio** (or request Creative Lab workspace access). It automatically parses character assets, sets camera angles, and animates 4-second cinematic previz sequences.
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="space-y-12">
+    <div class="flex flex-wrap items-center justify-between gap-8 border-b border-border/80 dark:border-border-dark/80 pb-12">
+      <div class="flex items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Creator Toolkit
+        </span>
+        <span class="text-caption font-bold text-ink dark:text-ink-dark">
+          Free Browser Extensions for AI Video Creators
+        </span>
+      </div>
+      <span class="text-xs font-mono text-muted dark:text-muted-dark">
+        Chrome Web Store Verified
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 pt-4">
+      <!-- Tool 1: ChatGPT Ad Blocker -->
+      <div class="p-16 rounded-12 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark flex flex-col justify-between space-y-10 shadow-xs">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">For Script &amp; Prompt Writing</span>
+            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400">5.0 ★</span>
+          </div>
+          <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">ChatGPT Ad &amp; Promo Blocker</h4>
+          <p class="text-caption text-muted dark:text-muted-dark m-0">
+            Scripting your Storyboard scenes in ChatGPT? Clean up upgrade nags, sponsored partner cards, and promo banners for distraction-free prompting.
+          </p>
+        </div>
+        <a 
+          href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-8 px-16 py-10 rounded-8 text-caption font-bold text-white bg-accent hover:opacity-90 transition-all text-decoration-none"
+        >
+          <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+          <span>Install on Chrome (Free)</span>
+        </a>
+      </div>
+
+      <!-- Tool 2: BiliBili Translator -->
+      <div class="p-16 rounded-12 bg-surface dark:bg-surface-dark border border-border dark:border-border-dark flex flex-col justify-between space-y-10 shadow-xs">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-accent dark:text-accent-dark">For Visual &amp; Anime Research</span>
+            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.0.2</span>
+          </div>
+          <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">BiliBili English Translator</h4>
+          <p class="text-caption text-muted dark:text-muted-dark m-0">
+            Researching animation references, dev masterclasses, or game footage on Bilibili? Translate menus, comments, and player controls in real time.
+          </p>
+        </div>
+        <a 
+          href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-8 px-16 py-10 rounded-8 text-caption font-bold text-white bg-accent hover:opacity-90 transition-all text-decoration-none"
+        >
+          <svg class="w-16 h-16 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+          <span>Install on Chrome (Free)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## First Look: Google Flow's New Storyboard Studio Addition
 
@@ -15236,20 +15839,6 @@ Google Flow separates script state storage (saved in IndexedDB/session memory) f
 
 ### Known Limitations
 While highly capable, maintaining perfect character consistency across many shots remains challenging. The AI can drift during complex action sequences, requiring creators to perform **manual tagging of character references** to keep visuals aligned.
-
-### Image Metadata
-* **Hero Image**:
-  - **Prompt**: "Frosted glass board displaying film grids and scene drawings, bright daylight workspace, minimalist aesthetic, 16:9 aspect ratio"
-  - **Filename**: "storyboard-studio-hero.jpg"
-  - **Alt**: "Glass storyboard layout board"
-* **Supporting Visual 1**:
-  - **Prompt**: "Minimalist UI representing script lines highlighted in different colors, clean white application dashboard mockup"
-  - **Filename**: "script-highlight.jpg"
-  - **Alt**: "Script highlight UI mockup"
-* **Supporting Visual 2**:
-  - **Prompt**: "Close-up of a high-end designer tablet displaying stylized sketch concepts in a bright room"
-  - **Filename**: "sketch-tablet.jpg"
-  - **Alt**: "Creative sketch tablet workstation"
 
 ## Storyboard Studio Resources
 

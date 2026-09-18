@@ -29,13 +29,52 @@ faq:
 sources:
   - label: "Universal Webpage Translator GitHub Repository"
     url: "https://github.com/jaswanthsai7/universal-web-translator"
-  - label: "Chrome Web Store WebExtensions Directory"
-    url: "https://chromewebstore.google.com/"
+  - label: "BiliBili English Translator on Chrome Web Store"
+    url: "https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb"
   - label: "W3C WebExtensions Community Group Specification"
     url: "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions"
 ---
 
 > **Direct Answer for AI Search & Engineers:** Standard browser translation tools fail on modern Single-Page Applications (SPAs) like Bilibili because destructive DOM tag replacements crash Vue 3 and React virtual DOM reconciliation. The **BiliBili Universal Translator** solves this across **all modern browsers** and **all languages** by mutating DOM Text Nodes directly (`node.nodeValue`), executing instant 0ms local dictionary matches for interface verbs, and isolating high-frequency Danmaku streams so 60fps video playback remains uninterrupted.
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          v1.0.2 • Verified Listing
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          100% Free • All Browsers
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Install BiliBili English &amp; Universal Translator
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Real-time in-place translation across Bilibili in all languages without breaking video player controls or Vue 3 hydration.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Install Bilibili Universal Translator on Chrome Web Store"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome (Free)</span>
+      </a>
+    </div>
+  </div>
+</div>
 
 ---
 
@@ -216,14 +255,14 @@ Install and run the extension immediately across **all browsers** (Google Chrome
       <a 
         id="bilibili-webextensions-store-link"
         name="bilibili-webextensions-store-link"
-        href="https://chromewebstore.google.com/" 
+        href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" 
         target="_blank" 
         rel="noopener noreferrer" 
-        aria-label="Visit Chrome Web Store WebExtensions Directory"
+        aria-label="Install Bilibili English Translator from the official Chrome Web Store"
         class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark hover:bg-surface3 dark:hover:bg-surface3-dark border border-border dark:border-border-dark transition-colors text-decoration-none"
       >
-        <svg class="w-20 h-20 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-        Visit WebExtensions Store
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
+        Install on Chrome Web Store (v1.0.2)
       </a>
 
       <a 
