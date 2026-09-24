@@ -2,6 +2,7 @@
 // AnnouncementBar.astro - Chrome Web Store Launch Header
 const chatgptStoreUrl = "https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb";
 const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb";
+const kofiSupportUrl = "https://ko-fi.com/itsjassu";
 ---
 
 <div
@@ -13,33 +14,34 @@ const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamen
   <div class="mx-auto flex max-w-content items-center justify-between px-12 py-6 sm:px-24 text-xs font-sans gap-8">
     
     <!-- Left: Badge -->
-    <div class="flex items-center gap-6 shrink-0">
-      <span class="inline-flex items-center gap-5 rounded-full bg-accent/15 px-8 py-2 text-[11px] font-semibold text-accent dark:text-accent-dark tracking-wide uppercase">
-        <span class="h-6 w-6 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
+    <div class="flex items-center shrink-0">
+      <span class="inline-flex items-center gap-8 rounded-full bg-accent/15 px-10 py-3 text-[11px] font-semibold text-accent dark:text-accent-dark tracking-wide uppercase">
+        <span class="h-6 w-6 rounded-full bg-accent animate-pulse shrink-0" aria-hidden="true"></span>
         <span class="hidden sm:inline">Chrome Store</span>
         <span class="sm:hidden">Store</span>
       </span>
     </div>
 
     <!-- Center: Both Extensions Direct Store Links -->
-    <div class="flex items-center gap-8 sm:gap-14 overflow-x-auto no-scrollbar py-2 flex-1 justify-center">
+    <div class="flex items-center gap-10 sm:gap-14 overflow-x-auto no-scrollbar py-2 flex-1 justify-center">
       
       <!-- Extension 1: ChatGPT Ad Blocker -> Direct to Chrome Web Store -->
       <a
         href={chatgptStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex items-center gap-6 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-10 py-4 transition-all shadow-xs shrink-0"
+        class="group inline-flex items-center gap-8 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-12 py-4 transition-all shadow-xs shrink-0 whitespace-nowrap"
         title="Install ChatGPT Ad & Promo Blocker directly from Chrome Web Store"
         aria-label="Install ChatGPT Ad & Promo Blocker on Chrome Web Store (opens in new tab)"
       >
         <!-- Chrome Logo -->
-        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" width="14" height="14" viewBox="0 0 24 24">
           <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
         </svg>
-        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors">ChatGPT Blocker</span>
-        <span class="rounded-full bg-amber-500/15 px-5 py-1 text-[10px] font-bold text-amber-600 dark:text-amber-400">5.0 ★</span>
-        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium">Add to Chrome ↗</span>
+        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors whitespace-nowrap">ChatGPT Blocker</span>
+        <span class="rounded-full bg-accent/15 px-6 py-1 text-[10px] font-mono font-bold text-accent dark:text-accent-dark shrink-0">v1.1.0</span>
+        <span class="rounded-full bg-amber-500/15 px-6 py-1 text-[10px] font-bold text-amber-600 dark:text-amber-400 shrink-0">5.0 ★</span>
+        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium whitespace-nowrap">Add to Chrome ↗</span>
       </a>
 
       <!-- Extension 2: BiliBili Translator -> Direct to Chrome Web Store -->
@@ -47,17 +49,32 @@ const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamen
         href={bilibiliStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex items-center gap-6 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-10 py-4 transition-all shadow-xs shrink-0"
+        class="group inline-flex items-center gap-8 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-12 py-4 transition-all shadow-xs shrink-0 whitespace-nowrap"
         title="Install BiliBili English Translator directly from Chrome Web Store"
         aria-label="Install BiliBili English Translator on Chrome Web Store (opens in new tab)"
       >
         <!-- Chrome Logo -->
-        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+        <svg class="h-14 w-14 fill-current text-accent shrink-0 group-hover:scale-110 transition-transform" width="14" height="14" viewBox="0 0 24 24">
           <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
         </svg>
-        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors">BiliBili Translator</span>
-        <span class="rounded-full bg-accent/15 px-5 py-1 text-[10px] font-mono font-bold text-accent dark:text-accent-dark">v1.0.2</span>
-        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium">Add to Chrome ↗</span>
+        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors whitespace-nowrap">BiliBili Translator</span>
+        <span class="rounded-full bg-accent/15 px-6 py-1 text-[10px] font-mono font-bold text-accent dark:text-accent-dark shrink-0">v1.0.4</span>
+        <span class="hidden md:inline text-[11px] text-muted dark:text-muted-dark group-hover:text-ink dark:group-hover:text-ink-dark font-medium whitespace-nowrap">Add to Chrome ↗</span>
+      </a>
+
+      <!-- Support Us: Ko-fi -->
+      <a
+        href={kofiSupportUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-8 rounded-8 bg-surface2/80 hover:bg-surface2 dark:bg-surface2-dark/80 dark:hover:bg-surface2-dark border border-border/80 hover:border-accent/50 dark:border-border-dark/80 px-12 py-4 transition-all shadow-xs shrink-0 whitespace-nowrap"
+        title="Support us on Ko-fi"
+        aria-label="Support us on Ko-fi (opens in new tab)"
+      >
+        <svg class="h-14 w-14 fill-current text-accent dark:text-accent-dark shrink-0 group-hover:scale-110 transition-transform" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <span class="font-semibold text-ink dark:text-ink-dark group-hover:text-accent transition-colors whitespace-nowrap">Support Us ↗</span>
       </a>
 
     </div>
@@ -67,7 +84,7 @@ const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamen
       type="button"
       id="dismiss-cws-banner"
       aria-label="Dismiss launch announcement"
-      onclick="try{var b=document.getElementById('cws-launch-announcement');if(b)b.style.display='none';localStorage.setItem('nadhebe_cws_launch_dismissed_v1','true');}catch(e){}"
+      onclick="try{var b=document.getElementById('cws-launch-announcement');if(b)b.style.display='none';localStorage.setItem('nadhebe_cws_launch_dismissed_v2','true');}catch(e){}"
       class="p-4 rounded-4 text-muted hover:text-ink dark:text-muted-dark dark:hover:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark transition-colors shrink-0 cursor-pointer"
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 pointer-events-none">
@@ -83,7 +100,7 @@ const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamen
   (function() {
     function checkDismissed() {
       try {
-        if (localStorage.getItem('nadhebe_cws_launch_dismissed_v1') === 'true') {
+        if (localStorage.getItem('nadhebe_cws_launch_dismissed_v2') === 'true') {
           var el = document.getElementById('cws-launch-announcement');
           if (el) el.style.display = 'none';
         }
@@ -102,7 +119,7 @@ const bilibiliStoreUrl = "https://chromewebstore.google.com/detail/amamnmndmamen
           }
           banner.style.display = 'none';
           try {
-            localStorage.setItem('nadhebe_cws_launch_dismissed_v1', 'true');
+            localStorage.setItem('nadhebe_cws_launch_dismissed_v2', 'true');
           } catch(err) {}
         };
       }

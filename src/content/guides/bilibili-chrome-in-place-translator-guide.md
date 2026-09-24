@@ -2,6 +2,7 @@
 title: "Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe"
 description: "Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation."
 pubDate: 2026-08-31
+updatedDate: 2026-09-25
 author: nadhebe-team
 category: "Guides"
 tags: ["Bilibili Translator", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "DOM Manipulation", "Web Development", "Danmaku Isolation", "Manifest V3"]
@@ -46,7 +47,7 @@ sources:
           Chrome Web Store
         </span>
         <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
-          v1.0.2 • Verified Listing
+          v1.0.4 • Verified Listing
         </span>
         <span class="text-xs font-mono text-muted dark:text-muted-dark">
           100% Free • All Browsers
@@ -230,28 +231,16 @@ Install and run the extension immediately across **all browsers** (Google Chrome
     </div>
     <span class="inline-flex items-center gap-6 px-12 py-5 rounded-full text-caption font-mono font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
       <span class="w-8 h-8 rounded-full bg-emerald-500 animate-pulse"></span>
-      v1.0.0 Ready
+      v1.0.4 Ready
     </span>
   </div>
 
   <div class="py-20 space-y-16">
     <p class="text-body text-ink dark:text-ink-dark">
-      Download the production-ready WebExtensions ZIP package below to install it locally in Developer Mode, or visit the WebExtensions store directory while our official store listings complete public review:
+      Install the official, verified WebExtensions build directly from the Chrome Web Store for automated updates and security verification, or inspect the open-source implementation on GitHub:
     </p>
     
     <div class="flex flex-wrap gap-12 pt-8">
-      <a 
-        id="bilibili-translator-zip-download"
-        name="bilibili-translator-zip-download"
-        href="/downloads/bilibili-english-translator.zip" 
-        download="bilibili-english-translator.zip" 
-        aria-label="Download Bilibili Universal Translator WebExtensions ZIP package"
-        class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-white bg-accent hover:bg-accent/90 shadow-sm transition-transform active:scale-95 text-decoration-none"
-      >
-        <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-        Download Extension (ZIP)
-      </a>
-
       <a 
         id="bilibili-webextensions-store-link"
         name="bilibili-webextensions-store-link"
@@ -259,10 +248,10 @@ Install and run the extension immediately across **all browsers** (Google Chrome
         target="_blank" 
         rel="noopener noreferrer" 
         aria-label="Install Bilibili English Translator from the official Chrome Web Store"
-        class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark hover:bg-surface3 dark:hover:bg-surface3-dark border border-border dark:border-border-dark transition-colors text-decoration-none"
+        class="inline-flex items-center gap-8 px-20 py-12 rounded-12 font-semibold text-white bg-accent hover:bg-accent/90 shadow-sm transition-transform active:scale-95 text-decoration-none"
       >
         <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/></svg>
-        Install on Chrome Web Store (v1.0.2)
+        Install on Chrome Web Store (v1.0.4)
       </a>
 
       <a 
@@ -283,15 +272,9 @@ Install and run the extension immediately across **all browsers** (Google Chrome
   <div class="mt-16 p-16 rounded-12 bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark text-body-sm">
     <strong class="text-ink dark:text-ink-dark">Installation Walkthrough for Any Browser (30 Seconds):</strong>
     <ol class="list-decimal pl-20 mt-8 space-y-4 text-muted dark:text-muted-dark">
-      <li>Download and extract <code class="text-accent font-mono">bilibili-english-translator.zip</code> to your computer.</li>
-      <li>Open your browser's extension manager:
-        <ul class="list-disc pl-16 mt-4 space-y-2">
-          <li><strong>Chrome / Brave / Arc / Opera:</strong> Navigate to <code class="text-accent font-mono">chrome://extensions</code></li>
-          <li><strong>Microsoft Edge:</strong> Navigate to <code class="text-accent font-mono">edge://extensions</code></li>
-        </ul>
-      </li>
-      <li>Toggle on <strong>Developer mode</strong> in the top-right corner.</li>
-      <li>Click <strong>Load unpacked</strong> and choose the unzipped extension directory.</li>
+      <li>Visit the official <a href="https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer" class="text-accent underline font-medium">BiliBili English Translator Chrome Store Page</a>.</li>
+      <li>Click <strong>Add to Chrome</strong> (also works in Brave, Arc, Opera, and Microsoft Edge).</li>
+      <li>Confirm permissions in the browser prompt.</li>
       <li>Open <a href="https://www.bilibili.com" target="_blank" rel="noopener" class="text-accent underline font-medium">bilibili.com</a>, pick your target language in the extension popup, and explore Bilibili smoothly with fully functional video controls!</li>
     </ol>
   </div>

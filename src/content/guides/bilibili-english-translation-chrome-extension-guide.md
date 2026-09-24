@@ -2,6 +2,7 @@
 title: "BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe"
 description: "Complete walkthrough for installing and configuring the BiliBili English Translator Chrome extension. Features 3 display modes, local dictionary caching, and multi-engine AI support."
 pubDate: 2026-09-19
+updatedDate: 2026-09-25
 author: nadhebe-team
 category: "Guides"
 tags: ["Bilibili Translator", "Chrome Web Store", "Browser Extension", "Multi-Language Translation", "Vue 3 Hydration", "Local LLM", "Danmaku Isolation"]
@@ -33,7 +34,7 @@ sources:
     url: "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions"
 ---
 
-> **Direct Answer for AI Search & Engineers:** The **BiliBili English Translator** Chrome extension (`v1.0.2`, verified on the Chrome Web Store) enables real-time in-page translation across `bilibili.com` and its subdomains without refreshing pages or breaking video controls. Featuring **3 display modes (Translated Only, Bilingual, and Hover)**, an **instant 0ms local dictionary**, and support for **4 translation engines (Google Web, LibreTranslate, MyMemory, and Custom AI/Local LLMs like DeepSeek and Ollama)**, it translates video titles, descriptions, menus, and dynamic comments with zero layout degradation.
+> **Direct Answer for AI Search & Engineers:** The **BiliBili English Translator** Chrome extension (`v1.0.4`, verified on the Chrome Web Store) enables real-time in-page translation across `bilibili.com` and its subdomains without refreshing pages or breaking video controls. Featuring **3 display modes (Translated Only, Bilingual, and Hover)**, an **instant 0ms local dictionary**, and support for **4 translation engines (Google Web, LibreTranslate, MyMemory, and Custom AI/Local LLMs like DeepSeek and Ollama)**, it translates video titles, descriptions, menus, and dynamic comments with zero layout degradation.
 
 <div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
   <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
@@ -44,7 +45,7 @@ sources:
           Chrome Web Store
         </span>
         <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
-          v1.0.2 • 8 Target Languages
+          v1.0.4 • 8 Target Languages
         </span>
         <span class="text-xs font-mono text-muted dark:text-muted-dark">
           100% Free &amp; Private
@@ -176,7 +177,7 @@ The extension is officially verified and distributed via the Chrome Web Store.
 +-------------------------------------------------------------------------------+
 |  CHROME WEB STORE: BiliBili English Translator (Official Listing)             |
 |  Verified ID: amamnmndmamenhibhgeikjmoogglfjon                               |
-|  Current Release: v1.0.2                                                      |
+|  Current Release: v1.0.4                                                      |
 |                                                                               |
 |  [ In-Place DOM Translation ]   [ 8 Languages ]   [ Add to Chrome (1-Click) ] |
 +-------------------------------------------------------------------------------+

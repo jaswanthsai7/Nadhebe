@@ -4,7 +4,7 @@ export const EXTENSION_FILES: Record<string, string> = {
   'manifest.json': JSON.stringify({
     manifest_version: 3,
     name: "ChatGPT Ad & Promo Blocker",
-    version: "1.0",
+    version: "1.1.0",
     description: "Hides upgrade banners, promo cards, and ad-like elements on chatgpt.com",
     permissions: ["storage"],
     host_permissions: ["https://chatgpt.com/*", "https://chat.openai.com/*"],

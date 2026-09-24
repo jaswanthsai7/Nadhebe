@@ -60,7 +60,7 @@ sources:
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">For Script &amp; Prompt Writing</span>
-            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400">5.0 ★</span>
+            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.1.0 • 5.0 ★</span>
           </div>
           <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">ChatGPT Ad &amp; Promo Blocker</h4>
           <p class="text-caption text-muted dark:text-muted-dark m-0">
@@ -83,7 +83,7 @@ sources:
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-accent dark:text-accent-dark">For Visual &amp; Anime Research</span>
-            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.0.2</span>
+            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.0.4</span>
           </div>
           <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">BiliBili English Translator</h4>
           <p class="text-caption text-muted dark:text-muted-dark m-0">
