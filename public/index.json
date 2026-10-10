@@ -1,5 +1,75 @@
 [
   {
+    "title": "DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)",
+    "description": "Complete guide to DeepSeek API pricing. Detailed breakdown of DeepSeek-V3, DeepSeek-R1 token rates, prompt caching discounts, and costs vs OpenAI.",
+    "url": "https://nadhebe.com/guides/deepseek-api-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"DeepSeek\", \"DeepSeek R1\", \"DeepSeek V3\", \"Pricing\", \"API Billing\", \"LLM Costs\", \"Open Source AI\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "GitHub Copilot Pricing Guide: Free, Individual, Business, and Enterprise Plans (2026)",
+    "description": "A complete guide to GitHub Copilot pricing tiers. Breakdown of Copilot Free, Individual $10/mo, Business $19/mo, and Enterprise $39/mo model features.",
+    "url": "https://nadhebe.com/guides/github-copilot-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"GitHub Copilot\", \"Pricing\", \"AI Coding\", \"Developer Tools\", \"Claude 3.7 Sonnet\", \"GPT-4o\", \"Copilot Enterprise\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "xAI Grok Pricing Guide: X Subscriptions, SuperGrok, and Grok API Rates (2026)",
+    "description": "A complete guide to xAI Grok pricing. Compare X Premium $8/mo, X Premium+ $16/mo, SuperGrok, and xAI Developer API token costs for Grok 2 and Grok 3.",
+    "url": "https://nadhebe.com/guides/grok-xai-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"xAI\", \"Grok\", \"Pricing\", \"Grok 2\", \"Grok API\", \"SuperGrok\", \"AI Tool Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Mistral AI Pricing Guide: Le Chat Pro, API Token Rates, and Open Weights (2026)",
+    "description": "A complete guide to Mistral AI pricing. Compare Le Chat Pro $9.99/mo, La Plateforme API token costs for Mistral Large 2, Codestral, and open-weight models.",
+    "url": "https://nadhebe.com/guides/mistral-ai-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Mistral AI\", \"Pricing\", \"Codestral\", \"Mistral Large\", \"Le Chat Pro\", \"API Billing\", \"Open Weights\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "OpenAI API & ChatGPT Pricing Guide: Models, Tiers, and Cost Management (2026)",
+    "description": "A complete guide to OpenAI API token costs and ChatGPT subscription tiers. Breakdown of GPT-4o, o1, o3-mini pricing, prompt caching, and Batch API savings.",
+    "url": "https://nadhebe.com/guides/openai-chatgpt-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"OpenAI\", \"ChatGPT\", \"Pricing\", \"GPT-4o\", \"o1\", \"o3-mini\", \"API Billing\", \"LLM Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Perplexity AI Pricing Guide: Free vs Pro, Enterprise, and Sonar API Costs (2026)",
+    "description": "A complete guide to Perplexity AI pricing. Compare Perplexity Free, Pro $20/mo, Enterprise Pro, and Sonar API search token costs with live web grounding.",
+    "url": "https://nadhebe.com/guides/perplexity-ai-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Perplexity AI\", \"Pricing\", \"Perplexity Pro\", \"Sonar API\", \"Search LLMs\", \"AI Tool Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Windsurf Pricing Guide: Free vs Pro, Cascade Flows, and Team Billing (2026)",
+    "description": "A complete guide to Windsurf IDE pricing by Codeium. Compare Free, Pro $15/mo, Teams, and Enterprise plans, Cascade flow credits, and AI models.",
+    "url": "https://nadhebe.com/guides/windsurf-codeium-pricing-guide",
+    "category": "Guides",
+    "tags": [
+      "[\"Windsurf\", \"Codeium\", \"Pricing\", \"AI IDE\", \"Cascade\", \"Developer Tools\", \"Claude 3.7 Sonnet\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
     "title": "BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe",
     "description": "Complete walkthrough for installing and configuring the BiliBili English Translator Chrome extension. Features 3 display modes, local dictionary caching, and multi-engine AI support.",
     "url": "https://nadhebe.com/guides/bilibili-english-translation-chrome-extension-guide",
@@ -490,22 +560,22 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans",
-    "description": "A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies.",
+    "title": "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans (2026)",
+    "description": "Complete breakdown of Anthropic Claude Code CLI pricing, Console API token rates for Claude 3.7 Sonnet, subscription tiers, and prompt caching discounts.",
     "url": "https://nadhebe.com/guides/claude-code-pricing-guide",
     "category": "Guides",
     "tags": [
-      "[\"Claude Code\", \"Pricing\", \"Anthropic\", \"LLM Costs\", \"Token Limits\", \"API Billing\"]"
+      "[\"Claude Code\", \"Pricing\", \"Anthropic\", \"Claude 3.7 Sonnet\", \"LLM Costs\", \"Token Limits\", \"API Billing\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage",
+    "title": "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage (2026)",
     "description": "A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.",
     "url": "https://nadhebe.com/guides/cursor-pricing-guide",
     "category": "Guides",
     "tags": [
-      "[\"Cursor\", \"Pricing\", \"AI IDE\", \"Developer Tools\", \"LLM Costs\", \"Cursor Pro\"]"
+      "[\"Cursor\", \"Pricing\", \"AI IDE\", \"Developer Tools\", \"LLM Costs\", \"Cursor Pro\", \"Claude 3.7 Sonnet\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
@@ -530,7 +600,7 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs",
+    "title": "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)",
     "description": "A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs.",
     "url": "https://nadhebe.com/guides/runpod-pricing-explained",
     "category": "Guides",
@@ -891,11 +961,11 @@
   },
   {
     "title": "Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)",
-    "description": "Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing.",
+    "description": "Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, Gemini 2.0 Flash costs, and pay-as-you-go billing architecture.",
     "url": "https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits",
     "category": "Guides",
     "tags": [
-      "[\"gemini-api\", \"pricing\", \"rate-limits\", \"google-ai\", \"llm-costs\"]"
+      "[\"gemini-api\", \"pricing\", \"rate-limits\", \"google-ai\", \"llm-costs\", \"gemini-2.0-flash\"]"
     ],
     "pubDate": "2026-07-26T00:00:00.000Z"
   },

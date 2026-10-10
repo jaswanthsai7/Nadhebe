@@ -1,7 +1,8 @@
 ---
-title: "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs"
+title: "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)"
 description: "A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs."
 pubDate: 2026-08-03
+updatedDate: 2026-10-10
 author: nadhebe-team
 category: "Guides"
 tags: ["RunPod", "GPU Pricing", "Cloud Compute", "RTX 4090", "H100", "vLLM", "Cost Optimization"]
@@ -19,14 +20,18 @@ faq:
     answer: "Spot instances offer up to 60% savings but can be interrupted when on-demand demand spikes. Use persistent network storage or checkpoint saving to S3/Cloudflare R2 every epoch."
   - question: "How are RunPod Network Volumes billed?"
     answer: "Network Volumes are billed at a flat rate of $0.07 to $0.10 per GB per month regardless of whether your GPU pod is active or stopped."
+  - question: "How does RunPod Serverless pricing work for vLLM?"
+    answer: "RunPod Serverless charges per millisecond of GPU execution time, starting around $0.0002/sec for an RTX 4090 with zero idle compute costs."
 sources:
   - label: "RunPod Official Pricing Calculator"
     url: "https://www.runpod.io/gpu-instance"
+  - label: "RunPod Serverless Documentation"
+    url: "https://docs.runpod.io/serverless/overview"
 ---
 
-# RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs
+# RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)
 
-**RunPod** has become the premier cloud GPU provider for AI developers training models, hosting **vLLM** inference endpoints, or running media workflows with **ComfyUI**.
+**RunPod** has become the premier cloud GPU provider for AI developers training open models, hosting **vLLM** inference endpoints, or running media workflows with **ComfyUI**.
 
 However, understanding RunPod's billing structure across **Secure Cloud vs. Community Cloud**, **On-Demand vs. Spot Instances**, and **Network Volume Storage** is essential to prevent unexpected monthly bills.
 
@@ -73,3 +78,13 @@ Unlike compute, **storage is billed continuously** as long as your volume exists
 
 1. **Stop Unused Pods**: Stopped pods stop accruing GPU compute charges immediately, incurring only minor volume storage fees.
 2. **Use Spot for Fine-Tuning**: Save **40% to 60%** by launching spot pods for training jobs that automatically save checkpoints to Cloudflare R2 or AWS S3.
+3. **Deploy via Serverless vLLM**: For sparse traffic APIs, RunPod Serverless spins down containers when idle, saving 80%+ compared to dedicated 24/7 GPU pods.
+
+---
+
+## Related Pricing Guides
+
+- [DeepSeek API Pricing Guide](/guides/deepseek-api-pricing-guide)
+- [OpenAI API & ChatGPT Pricing Guide](/guides/openai-chatgpt-pricing-guide)
+- [Gemini API Pricing & Rate Limits](/guides/gemini-api-pricing-free-tier-rate-limits)
+- [Claude Code Pricing Guide](/guides/claude-code-pricing-guide)
