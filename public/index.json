@@ -1,5 +1,15 @@
 [
   {
+    "title": "How to Build a Custom MCP Server in TypeScript: Complete Production Guide | Nadhebe",
+    "description": "Build and test a custom Model Context Protocol (MCP) server in TypeScript from scratch. Includes verified ESM configuration, Zod validation, STDIO debugging, and Claude Desktop integration.",
+    "url": "https://nadhebe.com/tutorials/build-custom-mcp-server-typescript",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"TypeScript\", \"Node.js\", \"Claude Desktop\", \"AI Engineering\", \"JSON-RPC\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
     "title": "How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe",
     "description": "Step-by-step walkthrough to block ChatGPT Plus upsell banners and partner promo cards in Google Chrome and Brave Browser using a private Manifest V3 extension.",
     "url": "https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave",
@@ -638,16 +648,6 @@
       "[\"RunPod\", \"GPU Pricing\", \"Cloud Compute\", \"RTX 4090\", \"H100\", \"vLLM\", \"Cost Optimization\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
-  },
-  {
-    "title": "How to Build a Custom MCP Server in TypeScript",
-    "description": "A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.",
-    "url": "https://nadhebe.com/tutorials/build-custom-mcp-server-typescript",
-    "category": "Tutorials",
-    "tags": [
-      "[\"MCP\", \"TypeScript\", \"Node.js\", \"AI Integration\", \"Server\", \"API\"]"
-    ],
-    "pubDate": "2026-08-01T00:00:00.000Z"
   },
   {
     "title": "How to Deploy DeepSeek R1 on AWS using vLLM",
