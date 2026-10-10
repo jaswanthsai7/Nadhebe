@@ -1,0 +1,216 @@
+---
+// Professional animated orbital studio graphic with revolving satellites for Nadhebe Lab
+---
+
+<div class="relative w-full max-w-[420px] h-[210px] sm:h-[230px] flex items-center justify-end select-none overflow-visible">
+  <svg
+    viewBox="0 0 470 240"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-full h-full overflow-visible"
+    aria-label="Nadhebe Lab Experimental Lens and Orbit Illustration"
+    role="img"
+  >
+    <defs>
+      <!-- Glass Lens Radial Glow Gradient -->
+      <radialGradient id="labLensRadial" cx="38%" cy="32%" r="68%">
+        <stop offset="0%" stop-color="#EEF2FF" stop-opacity="0.95" />
+        <stop offset="25%" stop-color="#C7D2FE" stop-opacity="0.85" />
+        <stop offset="60%" stop-color="#818CF8" stop-opacity="0.65" />
+        <stop offset="90%" stop-color="#6366F1" stop-opacity="0.85" />
+        <stop offset="100%" stop-color="#4F46E5" stop-opacity="0.95" />
+      </radialGradient>
+
+      <!-- Specular Highlight Arc Gradient -->
+      <linearGradient id="labSpecularRim" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
+        <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.30" />
+        <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.0" />
+      </linearGradient>
+
+      <!-- Internal Refraction Depth Gradient -->
+      <linearGradient id="labInnerCore" x1="10%" y1="90%" x2="90%" y2="10%">
+        <stop offset="0%" stop-color="#312E81" stop-opacity="0.35" />
+        <stop offset="55%" stop-color="#A5B4FC" stop-opacity="0.10" />
+        <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.75" />
+      </linearGradient>
+
+      <!-- Soft Cast Shadow Blur Filter -->
+      <filter id="labSoftShadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+      </filter>
+
+      <!-- Reusable Orbit Paths for Smooth Satellites (Centered at 180, 120) -->
+      <!-- Orbit 1: Tilted Ellipse (-24 deg) -->
+      <path
+        id="labOrbitPath1"
+        d="M 60,120 a 120,50 0 1,0 240,0 a 120,50 0 1,0 -240,0"
+      />
+
+      <!-- Orbit 2: Crossing Diagonal Ellipse (+48 deg) -->
+      <path
+        id="labOrbitPath2"
+        d="M 68,120 a 112,54 0 1,0 224,0 a 112,54 0 1,0 -224,0"
+      />
+
+      <!-- Orbit 3: Equator Ring (+6 deg) -->
+      <path
+        id="labOrbitPath3"
+        d="M 75,120 a 105,36 0 1,0 210,0 a 105,36 0 1,0 -210,0"
+      />
+    </defs>
+
+    <!-- Soft Base Shadow Under Lens -->
+    <ellipse
+      cx="180"
+      cy="172"
+      rx="72"
+      ry="14"
+      fill="#4338CA"
+      opacity="0.20"
+      filter="url(#labSoftShadow)"
+      class="dark:opacity-35"
+    />
+
+    <!-- ================= ORBIT 1 (Tilted -24 deg) ================= -->
+    <g transform="rotate(-24 180 120)">
+      <!-- Orbital Wireframe Ring -->
+      <ellipse
+        cx="180"
+        cy="120"
+        rx="120"
+        ry="50"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        class="text-ink/40 dark:text-ink-dark/40"
+      />
+      <!-- Revolving Satellite 1A -->
+      <circle r="3.2" fill="currentColor" class="text-ink dark:text-ink-dark shadow-sm">
+        <animateMotion dur="14s" repeatCount="indefinite">
+          <mpath href="#labOrbitPath1" />
+        </animateMotion>
+      </circle>
+      <!-- Revolving Satellite 1B (Opposite side offset) -->
+      <circle r="2.4" fill="currentColor" class="text-ink/80 dark:text-ink-dark/80">
+        <animateMotion dur="14s" begin="-7s" repeatCount="indefinite">
+          <mpath href="#labOrbitPath1" />
+        </animateMotion>
+      </circle>
+    </g>
+
+    <!-- ================= ORBIT 2 (Crossing +48 deg) ================= -->
+    <g transform="rotate(48 180 120)">
+      <!-- Orbital Wireframe Ring (Subtle Dashed) -->
+      <ellipse
+        cx="180"
+        cy="120"
+        rx="112"
+        ry="54"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="0.9"
+        stroke-dasharray="4 2"
+        class="text-ink/35 dark:text-ink-dark/35"
+      />
+      <!-- Revolving Satellite 2A (Revolving in opposite direction) -->
+      <circle r="3" fill="currentColor" class="text-ink dark:text-ink-dark shadow-sm">
+        <animateMotion dur="18s" keyPoints="1;0" keyTimes="0;1" repeatCount="indefinite">
+          <mpath href="#labOrbitPath2" />
+        </animateMotion>
+      </circle>
+      <!-- Revolving Satellite 2B (Accent colored) -->
+      <circle r="2.2" fill="currentColor" class="text-accent dark:text-accent-dark">
+        <animateMotion dur="18s" begin="-9s" keyPoints="1;0" keyTimes="0;1" repeatCount="indefinite">
+          <mpath href="#labOrbitPath2" />
+        </animateMotion>
+      </circle>
+    </g>
+
+    <!-- ================= ORBIT 3 (Equator +6 deg) ================= -->
+    <g transform="rotate(6 180 120)">
+      <!-- Orbital Wireframe Ring -->
+      <ellipse
+        cx="180"
+        cy="120"
+        rx="105"
+        ry="36"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="0.8"
+        class="text-ink/25 dark:text-ink-dark/25"
+      />
+      <!-- Revolving Satellite 3 -->
+      <circle r="2.6" fill="currentColor" class="text-ink/90 dark:text-ink-dark/90">
+        <animateMotion dur="22s" repeatCount="indefinite">
+          <mpath href="#labOrbitPath3" />
+        </animateMotion>
+      </circle>
+    </g>
+
+    <!-- ================= CENTRAL 3D GLASS LENS ================= -->
+    <g class="animate-[labFloat_6s_ease-in-out_infinite]" transform-origin="180 120">
+      <!-- Lens Base Body (Organic Smooth Curved Optical Pebble) -->
+      <path
+        d="M 142,94 C 150,56, 212,60, 226,90 C 240,120, 222,160, 188,170 C 154,178, 132,148, 142,94 Z"
+        fill="url(#labLensRadial)"
+        class="opacity-95"
+      />
+
+      <!-- Internal Depth Core -->
+      <path
+        d="M 152,100 C 158,72, 204,74, 215,96 C 226,118, 212,150, 185,158 C 158,166, 144,142, 152,100 Z"
+        fill="url(#labInnerCore)"
+        opacity="0.75"
+      />
+
+      <!-- Specular Highlight Sheen (Crisp Curved Crescent on Top-Left Edge) -->
+      <path
+        d="M 150,94 C 162,68, 198,66, 218,84 C 198,76, 168,78, 154,98 C 151,102, 148,98, 150,94 Z"
+        fill="url(#labSpecularRim)"
+        opacity="0.9"
+      />
+
+      <!-- Soft Rim Light on Lower Edge -->
+      <path
+        d="M 166,162 C 182,166, 198,160, 210,148 C 200,156, 184,158, 166,162 Z"
+        fill="#FFFFFF"
+        opacity="0.5"
+      />
+    </g>
+
+    <!-- ================= RIGHT SIDE HUD TYPOGRAPHY ================= -->
+    <!-- Positioned safely at x=375, completely outside the orbit boundaries (max orbit x is ~305) -->
+    <g class="font-mono text-[9px] tracking-[0.24em] uppercase font-semibold text-ink2/75 dark:text-ink2-dark/80 select-none">
+      <text x="375" y="86" fill="currentColor">IDEAS</text>
+      <text x="375" y="103" fill="currentColor">TOOLS</text>
+      <text x="375" y="120" fill="currentColor">APPS</text>
+      <text x="375" y="137" fill="currentColor">EXTENSIONS</text>
+      <text x="375" y="154" fill="currentColor">EXPERIMENTS</text>
+    </g>
+
+    <!-- ================= BOTTOM TECHNICAL NOTATIONS ================= -->
+    <!-- Bottom Left: "01 —" -->
+    <g class="font-mono text-[10px] tracking-widest text-muted dark:text-muted-dark select-none">
+      <text x="80" y="214" fill="currentColor">01</text>
+      <line x1="98" y1="211" x2="136" y2="211" stroke="currentColor" stroke-width="0.8" opacity="0.4" />
+    </g>
+
+    <!-- Bottom Right: "— NADHEBE LAB" -->
+    <g class="font-mono text-[9px] tracking-[0.22em] text-muted dark:text-muted-dark uppercase select-none">
+      <line x1="285" y1="211" x2="315" y2="211" stroke="currentColor" stroke-width="0.8" opacity="0.4" />
+      <text x="323" y="214" fill="currentColor">NADHEBE LAB</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  @keyframes labFloat {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-4px) rotate(0.6deg);
+    }
+  }
+</style>

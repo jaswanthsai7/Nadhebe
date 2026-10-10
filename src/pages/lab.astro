@@ -1,0 +1,1048 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+import { buildSeo } from '@/utils/seo';
+
+const canonicalUrl = `${SITE.url}/lab/`;
+
+const seo = buildSeo({
+  title: 'Nadhebe Lab: Live Web Apps, Chrome Extensions & iOS Builds',
+  description: 'Discover production browser extensions, iOS applications, financial intelligence engines, and web apps built by the Nadhebe engineering team.',
+  slug: '/lab/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  keywords: [
+    'Nadhebe Lab',
+    'WorkPeek iOS app',
+    'ChatGPT Ads Blocker',
+    'Bilibili Translator extension',
+    'WiseInsure',
+    'MyOneOpinion',
+    'Chrome extensions',
+    'Chrome Web Store tools',
+    'web apps'
+  ],
+});
+
+interface LabProject {
+  id: string;
+  num: string;
+  name: string;
+  type: 'APP' | 'IOS APP' | 'EXTENSION';
+  category: 'apps' | 'extensions';
+  description: string;
+  status: 'LIVE' | 'IN PROGRESS' | 'EXPLORATION' | 'IN DEVELOPMENT';
+  statusType: 'live' | 'progress' | 'exploration' | 'dev';
+  url: string;
+  isExternal: boolean;
+  featured?: boolean;
+  tagline: string;
+  overview: string;
+  previewImg: string;
+  previewAlt: string;
+  previewBadge: string;
+  aspect: 'portrait' | 'landscape';
+  previewWidth: number;
+  previewHeight: number;
+  techStack: string[];
+  features: string[];
+}
+
+const projects: LabProject[] = [
+  {
+    id: 'openup',
+    num: '01',
+    name: 'OpenUp',
+    type: 'APP',
+    category: 'apps',
+    description: 'Map-first spontaneous event & local popup discovery.',
+    status: 'IN DEVELOPMENT',
+    statusType: 'dev',
+    url: '#openup',
+    isExternal: false,
+    tagline: 'Physical world discovery through an interactive spatial canvas.',
+    overview: 'A map-centric event discovery platform helping people find spontaneous local popups, tech meetups, creative showcases, and community gatherings happening around them in real time.',
+    previewImg: '/images/lab/openup.jpg',
+    previewAlt: 'OpenUp interactive spatial map event discovery',
+    previewBadge: 'Web App • In Dev',
+    aspect: 'landscape',
+    previewWidth: 480,
+    previewHeight: 280,
+    techStack: ['Mapbox GL', 'GeoJSON', 'TypeScript', 'Edge Geocoding'],
+    features: [
+      'Interactive radius filter and real-time geographic clustering',
+      'Low-friction community event submissions without account gating',
+      'Local-first offline tile caching for reliable on-the-go exploration',
+      'Instant calendar exports (ICS, Google Calendar, Apple Calendar)'
+    ]
+  },
+  {
+    id: 'workpeek',
+    num: '02',
+    name: 'WorkPeek',
+    type: 'IOS APP',
+    category: 'apps',
+    description: 'See what\'s coming before it starts. Lock Screen calendar.',
+    status: 'IN PROGRESS',
+    statusType: 'progress',
+    url: '#workpeek',
+    isExternal: false,
+    featured: true,
+    tagline: 'Focused daily agenda, time blocking, and minimal calendar intelligence on iOS.',
+    overview: 'WorkPeek is a minimal, privacy-first iOS application that puts your upcoming meetings and work schedule directly onto your iPhone Lock Screen. Powered by native Apple Calendar integration, your data stays 100% on your device with zero tracking.',
+    previewImg: '/images/lab/workpeek.png',
+    previewAlt: 'WorkPeek iOS lock screen calendar and agenda application',
+    previewBadge: 'iOS App • In Progress',
+    aspect: 'portrait',
+    previewWidth: 320,
+    previewHeight: 480,
+    techStack: ['iOS', 'React Native', 'Expo', 'Swift', 'Local SQLite'],
+    features: [
+      'Glanceable Lock Screen focus widget showing upcoming agenda blocks',
+      'Direct Apple Calendar integration with zero cloud account required',
+      'Private by design: 100% of calendar data stays securely on your device',
+      'Quick meeting join links for Microsoft Teams, Google Meet, and Zoom'
+    ]
+  },
+  {
+    id: 'chatgpt-ad-blocker',
+    num: '03',
+    name: 'ChatGPT Ads Blocker',
+    type: 'EXTENSION',
+    category: 'extensions',
+    description: 'Clean ads, promo cards & upgrade nags on ChatGPT.',
+    status: 'LIVE',
+    statusType: 'live',
+    url: 'https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb',
+    isExternal: true,
+    tagline: 'Privacy-first Manifest V3 extension verified on Google Chrome Web Store.',
+    overview: 'A high-performance browser extension engineered by Nadhebe to eliminate subscription upgrade banners, sticky promotional tooltips, and sponsored partner cards without impacting OpenAI React DOM reconciliation.',
+    previewImg: '/images/lab/chatgpt-adblock.png',
+    previewAlt: 'ChatGPT Ads Blocker Chrome extension on Chrome Web Store',
+    previewBadge: 'Chrome Web Store • Live',
+    aspect: 'portrait',
+    previewWidth: 320,
+    previewHeight: 460,
+    techStack: ['Manifest V3', 'TypeScript', 'MutationObserver', 'Shadow DOM Filter'],
+    features: [
+      '0ms DOM mutation shielding prevents UI layout shifts and annoying pop-ins',
+      'Pure declarative CSS rules with 0 external tracking or network overhead',
+      'Built-in interactive rule sandbox and custom selector generator',
+      'Fully verified on Chrome Web Store for Chrome, Brave, Arc, and Edge'
+    ]
+  },
+  {
+    id: 'bilibili-translator',
+    num: '04',
+    name: 'Bilibili Translator',
+    type: 'EXTENSION',
+    category: 'extensions',
+    description: 'Real-time in-place bilingual Chinese-to-English translation.',
+    status: 'LIVE',
+    statusType: 'live',
+    url: 'https://chromewebstore.google.com/detail/amamnmndmamenhibhgeikjmoogglfjon?utm_source=item-share-cb',
+    isExternal: true,
+    tagline: 'Universal real-time Chinese-to-English translation extension verified on Chrome Web Store.',
+    overview: 'Engineered specifically to solve the Vue 3 hydration crashes caused by generic Google Translate on Bilibili. Mutates text nodes directly in-place, isolates live Danmaku floating comments, and includes offline local dictionary caching for 0ms UI translation.',
+    previewImg: '/images/lab/bilibili-translator.png',
+    previewAlt: 'BiliBili English Translator extension on Chrome Web Store',
+    previewBadge: 'Chrome Web Store • Live',
+    aspect: 'portrait',
+    previewWidth: 320,
+    previewHeight: 460,
+    techStack: ['Chrome Web Store', 'WebExtensions', 'TreeWalker API', 'Local Caching', 'LLM API'],
+    features: [
+      '3 Display Modes: Translated Only, Bilingual, and Interactive Hover',
+      'Instant 0ms local dictionary for common UI buttons, menus, and badges',
+      'Preserves video quality selectors, playback rates, and player controls',
+      'Official verified listing on Google Chrome Web Store'
+    ]
+  },
+  {
+    id: 'wiseinsure',
+    num: '05',
+    name: 'WiseInsure',
+    type: 'APP',
+    category: 'apps',
+    description: 'Smart insurance comparison & policy calculator.',
+    status: 'LIVE',
+    statusType: 'live',
+    url: 'https://wiseinsure.in',
+    isExternal: true,
+    tagline: 'Intelligent, unbiased insurance planning and comparison engine at wiseinsure.in.',
+    overview: 'A production financial technology web application designed to help consumers demystify insurance policies, compare quotes transparently, calculate true life cover requirements, and avoid predatory agent commissions.',
+    previewImg: '/images/lab/wiseinsure.png',
+    previewAlt: 'WiseInsure AI financial protection and policy calculator',
+    previewBadge: 'Production Web App • Live',
+    aspect: 'landscape',
+    previewWidth: 480,
+    previewHeight: 280,
+    techStack: ['Next.js', 'Cloudflare', 'TypeScript', 'Tailwind CSS', 'Financial Models'],
+    features: [
+      'Real-time term life insurance human life value (HLV) calculation',
+      'Side-by-side policy feature comparisons with zero sponsored bias',
+      'Premium estimation across leading certified national insurers',
+      'Clean, accessible mobile-first responsive architecture'
+    ]
+  },
+  {
+    id: 'myoneopinion',
+    num: '06',
+    name: 'MyOneOpinion',
+    type: 'APP',
+    category: 'apps',
+    description: 'Structured consumer sentiment & verified opinions.',
+    status: 'IN PROGRESS',
+    statusType: 'progress',
+    url: 'https://myoneopinion.com',
+    isExternal: true,
+    tagline: 'Decentralized consensus and authentic opinion synthesis at myoneopinion.com.',
+    overview: 'An upcoming web platform engineered to eliminate astroturfing, fake product reviews, and bot sentiment. Aggregates verified perspectives into structured, high-signal decision matrices.',
+    previewImg: '/images/lab/myoneopinion.png',
+    previewAlt: 'MyOneOpinion authentic consumer sentiment platform',
+    previewBadge: 'Web Platform • In Progress',
+    aspect: 'landscape',
+    previewWidth: 480,
+    previewHeight: 280,
+    techStack: ['Full-Stack TypeScript', 'Sentiment Analysis LLMs', 'Edge API', 'Tailwind CSS'],
+    features: [
+      'Weighted verification algorithm to filter out paid bot reviews',
+      'AI-generated consensus synthesis highlighting key pros and cons',
+      'Public topic voting and structured perspective debates',
+      'Real-time trending opinion graphs and signal clarity metrics'
+    ]
+  }
+];
+
+const labSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Nadhebe Lab: Live Web Apps, Chrome Extensions & iOS Builds',
+  description: 'Directory of production web apps, Chrome extensions, and iOS applications built by Nadhebe.',
+  url: canonicalUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: projects.map((p, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: p.name,
+      description: p.description,
+      url: p.isExternal ? p.url : `${SITE.url}${p.url.replace(/^\/?/, '/')}`,
+    }))
+  }
+};
+---
+
+<BaseLayout seo={seo} jsonLd={[labSchema]}>
+  <div class="mx-auto max-w-content px-12 sm:px-20 pt-16 sm:pt-20 pb-40">
+    <!-- Main Studio Card Container -->
+    <div class="rounded-20 sm:rounded-24 border border-[#E7E5E0] dark:border-[#2C2C2E] bg-[#FCFAF6]/95 dark:bg-[#121214]/95 backdrop-blur-xl p-16 sm:p-24 md:p-28 shadow-card relative overflow-hidden">
+      
+      <!-- Studio Header Bar -->
+      <div class="flex items-center justify-between pb-14 mb-16 border-b border-border/60 dark:border-border-dark/60">
+        <!-- Studio Logo & Wordmark -->
+        <div class="flex items-center gap-10">
+          <div class="w-24 h-24 flex items-center justify-center text-ink dark:text-ink-dark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-20 h-20">
+              <circle cx="8" cy="8" r="4" stroke-dasharray="24" class="opacity-80"></circle>
+              <circle cx="16" cy="8" r="4" stroke-dasharray="24" class="opacity-80"></circle>
+              <circle cx="12" cy="15" r="4" stroke-dasharray="24" class="opacity-80"></circle>
+            </svg>
+          </div>
+          <div>
+            <span class="block font-mono text-[10px] font-bold tracking-[0.2em] uppercase text-ink dark:text-ink-dark leading-none">
+              NADHEBE LAB
+            </span>
+            <span class="block font-mono text-[9px] tracking-[0.2em] uppercase text-muted dark:text-muted-dark mt-2 leading-none">
+              INDEPENDENT DIGITAL STUDIO
+            </span>
+          </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="font-mono text-xs text-muted dark:text-muted-dark flex items-center gap-6">
+          <a href="/" class="hover:text-ink dark:hover:text-ink-dark transition-colors">Projects</a>
+          <span class="opacity-40">/</span>
+          <span class="text-ink dark:text-ink-dark font-semibold">Lab</span>
+        </nav>
+      </div>
+
+      <!-- Hero Section: Featured Build & Visual -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24 items-center pb-18 pt-4">
+        <!-- Left Column: Featured Build Copy -->
+        <div class="md:col-span-7 lg:col-span-8 flex flex-col justify-center">
+          <div>
+            <div class="flex items-center gap-8 mb-8">
+              <span class="inline-flex items-center gap-4 rounded-full bg-accent/10 px-8 py-2 font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-accent dark:text-accent-dark">
+                FEATURED BUILD
+              </span>
+              <span class="font-mono text-[10px] text-muted dark:text-muted-dark tracking-wider">
+                iOS APP • IN PROGRESS
+              </span>
+            </div>
+            
+            <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-ink dark:text-ink-dark tracking-tight mb-8">
+              WorkPeek
+            </h1>
+            
+            <p class="text-ink2 dark:text-ink2-dark text-caption sm:text-body max-w-xl leading-relaxed mb-12">
+              See what's coming before it starts. Your work calendar and meetings, directly on your Lock Screen. Connects Apple Calendar with 100% on-device privacy and zero tracking.
+            </p>
+            
+            <div class="flex items-center gap-14 flex-wrap">
+              <button
+                type="button"
+                id="featured-explore-btn"
+                data-project-id="workpeek"
+                class="btn-primary inline-flex items-center gap-6 cursor-pointer text-xs py-7 px-16"
+                aria-label="Explore WorkPeek iOS app project details"
+              >
+                <span>Explore WorkPeek</span>
+                <span class="font-sans">→</span>
+              </button>
+              
+              <div class="flex items-center gap-6 text-muted dark:text-muted-dark font-mono text-[11px]">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-14 h-14 text-emerald-500">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Private by design • Local-first</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: WorkPeek Clean Showcase Card (Compact Height, Top Half Image with Bottom Blur) -->
+        <div class="md:col-span-5 lg:col-span-4 flex items-center justify-center md:justify-end">
+          <div
+            id="hero-workpeek-card"
+            data-project-id="workpeek"
+            class="group relative w-full max-w-[240px] sm:max-w-[250px] rounded-20 border border-[#E7E5E0] dark:border-[#2C2C2E] bg-white dark:bg-[#18181B] p-8 shadow-card hover:shadow-large transition-all duration-300 cursor-pointer overflow-hidden"
+            role="button"
+            tabindex="0"
+            aria-label="Open WorkPeek iOS preview"
+          >
+            <!-- Half-Image Frame with Smooth Bottom Blur & Fade -->
+            <div class="relative w-full h-[205px] overflow-hidden rounded-14 bg-white dark:bg-[#141417]">
+              <img
+                src="/images/lab/workpeek.png"
+                alt="WorkPeek iOS app lock screen agenda preview"
+                class="w-full h-auto object-cover object-top block transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                loading="eager"
+              />
+              <!-- Smooth Bottom Blur & Gradient Fade -->
+              <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white via-white/85 to-transparent dark:from-[#18181B] dark:via-[#18181B]/85 dark:to-transparent pointer-events-none backdrop-blur-[3px]"></div>
+            </div>
+            
+            <!-- Clean Footer Caption Bar Below Image -->
+            <div class="pt-8 px-2 flex items-center justify-between">
+              <span class="font-display text-xs font-bold text-ink dark:text-ink-dark">WorkPeek for iOS</span>
+              <span class="text-accent dark:text-accent-dark text-caption font-semibold group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform">↗</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter & Search Toolbar -->
+      <div class="pt-14 pb-12 border-t border-border/60 dark:border-border-dark/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-10">
+        <!-- Filter Tabs / Pills -->
+        <div class="flex items-center gap-6 overflow-x-auto pb-4 sm:pb-0 scrollbar-none" role="tablist" aria-label="Filter projects by category">
+          <button
+            type="button"
+            id="filter-all"
+            data-filter="all"
+            role="tab"
+            aria-selected="true"
+            aria-label="Show all projects"
+            class="lab-filter-btn px-14 py-4 rounded-pill text-xs font-sans font-medium transition-all duration-150 bg-ink text-bg dark:bg-ink-dark dark:text-bg-dark shadow-subtle cursor-pointer shrink-0"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            id="filter-apps"
+            data-filter="apps"
+            role="tab"
+            aria-selected="false"
+            aria-label="Filter by applications"
+            class="lab-filter-btn px-14 py-4 rounded-pill text-xs font-sans font-medium transition-all duration-150 bg-surface2/80 dark:bg-surface2-dark/80 text-ink2 hover:text-ink hover:bg-hover dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer shrink-0"
+          >
+            Apps
+          </button>
+          <button
+            type="button"
+            id="filter-extensions"
+            data-filter="extensions"
+            role="tab"
+            aria-selected="false"
+            aria-label="Filter by browser extensions"
+            class="lab-filter-btn px-14 py-4 rounded-pill text-xs font-sans font-medium transition-all duration-150 bg-surface2/80 dark:bg-surface2-dark/80 text-ink2 hover:text-ink hover:bg-hover dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer shrink-0"
+          >
+            Extensions
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full sm:w-[220px] shrink-0">
+          <label for="lab-search-input" class="sr-only">Search projects</label>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="absolute left-10 top-1/2 -translate-y-1/2 h-14 w-14 text-muted dark:text-muted-dark pointer-events-none"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input
+            id="lab-search-input"
+            name="search"
+            type="search"
+            placeholder="Search projects..."
+            autocomplete="off"
+            class="w-full bg-surface2/60 dark:bg-surface2-dark/60 border border-border dark:border-border-dark rounded-8 py-6 pl-32 pr-40 text-xs font-sans text-ink dark:text-ink-dark focus:border-accent dark:focus:border-accent-dark focus:bg-surface dark:focus:bg-surface-dark focus:outline-none transition-all placeholder:text-muted"
+          />
+          <kbd
+            class="absolute right-8 top-1/2 -translate-y-1/2 hidden sm:inline-block rounded-4 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-4 py-0.5 text-[10px] font-mono text-muted dark:text-muted-dark pointer-events-none"
+          >
+            ⌘ K
+          </kbd>
+        </div>
+      </div>
+
+      <!-- Directory Table -->
+      <div class="overflow-x-auto -mx-16 sm:-mx-24 md:-mx-28 px-16 sm:px-24 md:px-28">
+        <table class="w-full text-left border-collapse table-fixed min-w-[680px]">
+          <thead>
+            <tr class="border-b border-border/80 dark:border-border-dark/80">
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase w-[44px]">#</th>
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase w-[190px] sm:w-[210px]">PROJECT</th>
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase w-[110px]">TYPE</th>
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase">DESCRIPTION</th>
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase w-[160px] text-right pr-20">STATUS</th>
+              <th scope="col" class="pb-12 font-mono text-[10px] font-bold tracking-widest text-muted dark:text-muted-dark uppercase w-[36px] text-right"><span class="sr-only">Action</span></th>
+            </tr>
+          </thead>
+          <tbody id="projects-table-body" class="divide-y divide-border/50 dark:divide-border-dark/50">
+            {projects.map((item) => (
+              <tr
+                class="lab-project-row group hover:bg-hover/40 dark:hover:bg-hover-dark/40 transition-colors duration-150 cursor-pointer h-[54px]"
+                data-id={item.id}
+                data-category={item.category}
+                data-name={item.name}
+                data-type={item.type}
+                data-desc={item.description}
+                data-status={item.status}
+                data-url={item.url}
+                data-external={item.isExternal ? 'true' : 'false'}
+                data-preview-img={item.previewImg}
+                data-preview-alt={item.previewAlt}
+                data-preview-badge={item.previewBadge}
+                data-aspect={item.aspect}
+                data-width={item.previewWidth}
+                data-height={item.previewHeight}
+              >
+                <!-- Number -->
+                <td class="py-14 font-mono text-xs text-muted dark:text-muted-dark font-medium align-middle">
+                  {item.num}
+                </td>
+
+                <!-- Project Name -->
+                <td class="py-14 font-display font-bold text-ink dark:text-ink-dark text-sm sm:text-base align-middle pr-12 truncate">
+                  <div class="flex items-center gap-6 truncate">
+                    <span class="truncate">{item.name}</span>
+                    {item.featured && (
+                      <span class="shrink-0 inline-flex rounded-4 bg-accent/10 px-4 py-0.5 font-mono text-[9px] font-semibold uppercase text-accent dark:text-accent-dark">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                </td>
+
+                <!-- Type -->
+                <td class="py-14 font-mono text-[10px] tracking-wider text-muted dark:text-muted-dark font-medium uppercase align-middle">
+                  {item.type}
+                </td>
+
+                <!-- Description (Single line with ellipsis truncation) -->
+                <td class="py-14 text-ink2 dark:text-ink2-dark text-caption sm:text-body leading-normal align-middle pr-16">
+                  <p class="truncate m-0 max-w-full text-ellipsis overflow-hidden whitespace-nowrap" title={item.description}>
+                    {item.description}
+                  </p>
+                </td>
+
+                <!-- Status Badge -->
+                <td class="py-14 text-right pr-20 align-middle whitespace-nowrap">
+                  {item.statusType === 'live' && (
+                    <span class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider bg-[#E6F8EF] text-[#16A34A] dark:bg-[#123324] dark:text-[#4ADE80] border border-[#C2EED7] dark:border-[#1E5239]">
+                      <span class="h-6 w-6 rounded-full bg-emerald-500 animate-pulse"></span>
+                      {item.status}
+                    </span>
+                  )}
+                  {item.statusType === 'progress' && (
+                    <span class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider bg-[#FDF0DF] text-[#B85C00] dark:bg-[#382613] dark:text-[#FBBF24] border border-[#F5D8B4] dark:border-[#523518]">
+                      <span class="h-6 w-6 rounded-full bg-orange-500"></span>
+                      {item.status}
+                    </span>
+                  )}
+                  {item.statusType === 'exploration' && (
+                    <span class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider bg-[#EFEFFD] text-[#4F46E5] dark:bg-[#202042] dark:text-[#818CF8] border border-[#D5D5FA] dark:border-[#35356E]">
+                      <span class="h-6 w-6 rounded-full bg-indigo-500"></span>
+                      {item.status}
+                    </span>
+                  )}
+                  {item.statusType === 'dev' && (
+                    <span class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider bg-[#FDF0DF] text-[#B85C00] dark:bg-[#382613] dark:text-[#FBBF24] border border-[#F5D8B4] dark:border-[#523518]">
+                      <span class="h-6 w-6 rounded-full bg-amber-500"></span>
+                      {item.status}
+                    </span>
+                  )}
+                </td>
+
+                <!-- Arrow Action Link -->
+                <td class="py-14 text-right align-middle">
+                  <span class="text-ink2 dark:text-ink2-dark font-sans text-caption transition-transform duration-150 inline-block group-hover:translate-x-1 group-hover:text-ink dark:group-hover:text-ink-dark">
+                    {item.isExternal ? '↗' : '→'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <!-- No Results Fallback -->
+        <div id="no-projects-found" class="hidden py-48 text-center">
+          <p class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">No builds match your search</p>
+          <p class="mt-8 text-caption text-ink2 dark:text-ink2-dark">Try adjusting your filters or clearing your query.</p>
+          <button
+            type="button"
+            id="reset-search-btn"
+            class="mt-16 inline-flex items-center rounded-8 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark px-16 py-8 text-caption font-sans font-medium text-ink hover:bg-hover dark:text-ink-dark dark:hover:bg-hover-dark cursor-pointer transition-colors"
+          >
+            Reset Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Cursor Preview (Obsidian UI hover-img pattern with 4K Sharp Clarity) -->
+  <div
+    id="lab-hover-preview"
+    aria-hidden="true"
+    class="pointer-events-none fixed top-0 left-0 z-50 transition-opacity duration-200 ease-out opacity-0 scale-95"
+    style="will-change: transform; transform: translate3d(-9999px, -9999px, 0);"
+  >
+    <div
+      id="lab-hover-card"
+      class="relative overflow-hidden rounded-20 border border-[#E2DFD8] dark:border-[#2C2C32] bg-white dark:bg-[#16161A] shadow-[0_20px_50px_rgba(0,0,0,0.25)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] p-8 transition-all duration-300"
+      style="width: 440px;"
+    >
+      <div
+        id="lab-hover-img-container"
+        class="relative w-full overflow-hidden rounded-14 bg-[#F5F3EF] dark:bg-[#0E0E10] flex items-center justify-center border border-[#ECE9E2] dark:border-[#222226]"
+        style="height: 250px;"
+      >
+        <img
+          id="lab-hover-img"
+          src=""
+          alt=""
+          class="w-full h-full object-contain transition-transform duration-300 ease-out"
+          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; transform: translateZ(0); backface-visibility: hidden;"
+          loading="eager"
+        />
+      </div>
+      <div class="pt-8 px-4 flex items-center justify-between gap-8">
+        <span id="lab-hover-title" class="font-display text-xs font-bold text-ink dark:text-ink-dark truncate"></span>
+        <span id="lab-hover-badge" class="font-mono text-[9px] font-semibold uppercase tracking-wider text-muted dark:text-muted-dark shrink-0"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Project Preview Modal / Drawer -->
+  <div
+    id="project-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-project-title"
+    class="fixed inset-0 z-50 flex items-center justify-center p-16 sm:p-24 bg-ink/50 dark:bg-ink-dark/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200"
+  >
+    <div
+      id="project-modal-card"
+      class="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-24 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-24 sm:p-32 shadow-large scale-95 transition-transform duration-200 relative"
+    >
+      <!-- Modal Close Button -->
+      <button
+        type="button"
+        id="modal-close-btn"
+        aria-label="Close project preview"
+        class="absolute right-20 top-20 flex h-32 w-32 items-center justify-center rounded-8 border border-border dark:border-border-dark text-muted hover:text-ink dark:hover:text-ink-dark hover:bg-hover dark:hover:bg-hover-dark transition-colors cursor-pointer z-10"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-16 w-16">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Modal Image Banner with 4K clarity and proper containment -->
+      <div id="modal-img-container" class="relative w-full max-h-[300px] rounded-16 overflow-hidden mb-20 bg-[#F5F3EF] dark:bg-[#121214] border border-border/80 dark:border-border-dark/80 flex items-center justify-center p-4">
+        <img
+          id="modal-project-img"
+          src=""
+          alt=""
+          class="max-h-[290px] w-auto max-w-full object-contain mx-auto"
+          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Modal Content Header -->
+      <div class="flex items-center gap-12 mb-12">
+        <span id="modal-project-type" class="font-mono text-xs tracking-wider uppercase text-muted dark:text-muted-dark font-semibold">
+          APP
+        </span>
+        <span id="modal-project-status" class="inline-flex items-center gap-6 rounded-pill px-8 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          LIVE
+        </span>
+      </div>
+
+      <h2 id="modal-project-title" class="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-ink-dark tracking-tight mb-6">
+        Project Name
+      </h2>
+      <p id="modal-project-tagline" class="text-caption font-sans font-medium text-accent dark:text-accent-dark mb-14">
+        Tagline description
+      </p>
+      <p id="modal-project-overview" class="text-caption sm:text-body text-ink2 dark:text-ink2-dark leading-relaxed mb-20">
+        Project overview text goes here.
+      </p>
+
+      <!-- Key Features -->
+      <div class="mb-20">
+        <h4 class="font-mono text-xs font-bold tracking-widest text-muted dark:text-muted-dark uppercase mb-10">
+          KEY FEATURES & ARCHITECTURE
+        </h4>
+        <ul id="modal-project-features" class="space-y-8 text-caption text-ink2 dark:text-ink2-dark">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+
+      <!-- Tech Stack Badges -->
+      <div class="mb-24">
+        <h4 class="font-mono text-xs font-bold tracking-widest text-muted dark:text-muted-dark uppercase mb-8">
+          TECH STACK
+        </h4>
+        <div id="modal-project-stack" class="flex flex-wrap gap-6">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="pt-16 border-t border-border/80 dark:border-border-dark/80 flex items-center justify-between gap-12">
+        <button
+          type="button"
+          id="modal-dismiss-btn"
+          class="px-16 py-8 rounded-8 text-caption font-medium text-ink2 hover:text-ink dark:text-ink2-dark dark:hover:text-ink-dark transition-colors cursor-pointer"
+        >
+          Close
+        </button>
+        <a
+          id="modal-action-link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary inline-flex items-center gap-6 cursor-pointer"
+        >
+          <span id="modal-action-text">Explore Project</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline define:vars={{ projectsData: projects }}>
+  function initLabPage() {
+    var activeCategory = 'all';
+    var searchQuery = '';
+
+    var rows = Array.from(document.querySelectorAll('.lab-project-row'));
+    var filterButtons = Array.from(document.querySelectorAll('.lab-filter-btn'));
+    var searchInput = document.getElementById('lab-search-input');
+    var noFoundState = document.getElementById('no-projects-found');
+    var resetBtn = document.getElementById('reset-search-btn');
+
+    // Floating Cursor Preview (Obsidian UI hover-img pattern)
+    var hoverPreview = document.getElementById('lab-hover-preview');
+    var hoverCard = document.getElementById('lab-hover-card');
+    var hoverImgContainer = document.getElementById('lab-hover-img-container');
+    var hoverImg = document.getElementById('lab-hover-img');
+    var hoverTitle = document.getElementById('lab-hover-title');
+    var hoverBadge = document.getElementById('lab-hover-badge');
+
+    var currentCardWidth = 440;
+    var currentCardHeight = 280;
+    var mouseX = -9999;
+    var mouseY = -9999;
+    var currentX = -9999;
+    var currentY = -9999;
+    var isPreviewActive = false;
+    var animFrameId = null;
+
+    function renderHoverLoop() {
+      if (isPreviewActive && hoverPreview) {
+        // Silky magnetic lerp easing
+        currentX += (mouseX - currentX) * 0.18;
+        currentY += (mouseY - currentY) * 0.18;
+        hoverPreview.style.transform = 'translate3d(' + Math.round(currentX) + 'px, ' + Math.round(currentY) + 'px, 0)';
+      }
+      animFrameId = requestAnimationFrame(renderHoverLoop);
+    }
+
+    var supportsFineHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (supportsFineHover && hoverPreview) {
+      if (!animFrameId) {
+        animFrameId = requestAnimationFrame(renderHoverLoop);
+      }
+
+      function updatePreviewPosition(e) {
+        var cardWidth = currentCardWidth;
+        var cardHeight = currentCardHeight;
+        var offsetX = 24;
+        var offsetY = -30;
+
+        var posX = e.clientX + offsetX;
+        var posY = e.clientY + offsetY;
+
+        // Flip to left if exceeding viewport width
+        if (posX + cardWidth > window.innerWidth - 16) {
+          posX = e.clientX - cardWidth - offsetX;
+        }
+
+        // Clamp vertically
+        if (posY + cardHeight > window.innerHeight - 16) {
+          posY = window.innerHeight - cardHeight - 16;
+        }
+        if (posY < 16) {
+          posY = 16;
+        }
+
+        mouseX = posX;
+        mouseY = posY;
+
+        if (currentX === -9999 || Math.abs(currentX - mouseX) > 600) {
+          currentX = mouseX;
+          currentY = mouseY;
+        }
+      }
+
+      rows.forEach(function(row) {
+        row.addEventListener('mouseenter', function(e) {
+          var imgUrl = row.getAttribute('data-preview-img');
+          var pName = row.getAttribute('data-name');
+          var pBadge = row.getAttribute('data-preview-badge');
+          var aspect = row.getAttribute('data-aspect') || 'landscape';
+          var w = parseInt(row.getAttribute('data-width'), 10) || 440;
+          var h = parseInt(row.getAttribute('data-height'), 10) || 280;
+
+          if (!imgUrl) return;
+
+          currentCardWidth = w;
+          currentCardHeight = h;
+
+          if (hoverCard) {
+            hoverCard.style.width = w + 'px';
+          }
+          if (hoverImgContainer) {
+            hoverImgContainer.style.height = (h - 45) + 'px';
+          }
+          if (hoverImg) {
+            hoverImg.src = imgUrl;
+            hoverImg.alt = pName || 'Project Preview';
+            hoverImg.className = 'w-full h-full ' + (aspect === 'portrait' ? 'object-contain' : 'object-cover object-top') + ' transition-transform duration-300 ease-out';
+          }
+          if (hoverTitle) hoverTitle.textContent = pName || '';
+          if (hoverBadge) hoverBadge.textContent = pBadge || '';
+
+          updatePreviewPosition(e);
+          currentX = mouseX;
+          currentY = mouseY;
+
+          isPreviewActive = true;
+          hoverPreview.classList.remove('opacity-0', 'scale-95');
+          hoverPreview.classList.add('opacity-100', 'scale-100');
+        });
+
+        row.addEventListener('mousemove', function(e) {
+          updatePreviewPosition(e);
+        });
+
+        row.addEventListener('mouseleave', function() {
+          isPreviewActive = false;
+          if (hoverPreview) {
+            hoverPreview.classList.remove('opacity-100', 'scale-100');
+            hoverPreview.classList.add('opacity-0', 'scale-95');
+          }
+        });
+      });
+
+      window.addEventListener('mouseleave', function() {
+        isPreviewActive = false;
+        if (hoverPreview) {
+          hoverPreview.classList.remove('opacity-100', 'scale-100');
+          hoverPreview.classList.add('opacity-0', 'scale-95');
+        }
+      });
+    }
+
+    // Modal elements
+    var modal = document.getElementById('project-modal');
+    var modalCard = document.getElementById('project-modal-card');
+    var modalCloseBtn = document.getElementById('modal-close-btn');
+    var modalDismissBtn = document.getElementById('modal-dismiss-btn');
+    var modalTitle = document.getElementById('modal-project-title');
+    var modalType = document.getElementById('modal-project-type');
+    var modalStatus = document.getElementById('modal-project-status');
+    var modalTagline = document.getElementById('modal-project-tagline');
+    var modalOverview = document.getElementById('modal-project-overview');
+    var modalFeatures = document.getElementById('modal-project-features');
+    var modalStack = document.getElementById('modal-project-stack');
+    var modalActionLink = document.getElementById('modal-action-link');
+    var modalActionText = document.getElementById('modal-action-text');
+    var modalProjectImg = document.getElementById('modal-project-img');
+
+    function applyFilters() {
+      var visibleCount = 0;
+      var q = searchQuery.toLowerCase().trim();
+
+      rows.forEach(function(row) {
+        var category = row.getAttribute('data-category');
+        var name = (row.getAttribute('data-name') || '').toLowerCase();
+        var type = (row.getAttribute('data-type') || '').toLowerCase();
+        var desc = (row.getAttribute('data-desc') || '').toLowerCase();
+        var status = (row.getAttribute('data-status') || '').toLowerCase();
+
+        var matchesCategory = (activeCategory === 'all') || (category === activeCategory);
+        var matchesSearch = !q || (
+          name.indexOf(q) !== -1 ||
+          type.indexOf(q) !== -1 ||
+          desc.indexOf(q) !== -1 ||
+          status.indexOf(q) !== -1
+        );
+
+        if (matchesCategory && matchesSearch) {
+          row.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+
+      if (noFoundState) {
+        if (visibleCount === 0) {
+          noFoundState.classList.remove('hidden');
+        } else {
+          noFoundState.classList.add('hidden');
+        }
+      }
+    }
+
+    // Category click handler
+    filterButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var cat = btn.getAttribute('data-filter');
+        activeCategory = cat || 'all';
+
+        filterButtons.forEach(function(b) {
+          var isCurrent = b === btn;
+          b.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+          if (isCurrent) {
+            b.className = 'lab-filter-btn px-14 py-4 rounded-pill text-xs font-sans font-medium transition-all duration-150 bg-ink text-bg dark:bg-ink-dark dark:text-bg-dark shadow-subtle cursor-pointer shrink-0';
+          } else {
+            b.className = 'lab-filter-btn px-14 py-4 rounded-pill text-xs font-sans font-medium transition-all duration-150 bg-surface2/80 dark:bg-surface2-dark/80 text-ink2 hover:text-ink hover:bg-hover dark:text-ink2-dark dark:hover:text-ink-dark cursor-pointer shrink-0';
+          }
+        });
+
+        applyFilters();
+      });
+    });
+
+    // Search input handler
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        searchQuery = (e.target && e.target.value) || '';
+        applyFilters();
+      });
+    }
+
+    // Keyboard shortcut ⌘K / Ctrl+K focus search
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        var input = document.getElementById('lab-search-input');
+        if (input && document.activeElement !== input) {
+          e.preventDefault();
+          input.focus();
+        }
+      }
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        activeCategory = 'all';
+        searchQuery = '';
+        if (searchInput) searchInput.value = '';
+        var allBtn = document.getElementById('filter-all');
+        if (allBtn) allBtn.click();
+      });
+    }
+
+    // Open Project Detail Modal
+    function openProjectModal(projectId) {
+      var proj = projectsData.find(function(p) { return p.id === projectId; });
+      if (!proj || !modal) return;
+
+      if (modalProjectImg) {
+        modalProjectImg.src = proj.previewImg;
+        modalProjectImg.alt = proj.previewAlt;
+      }
+      if (modalTitle) modalTitle.textContent = proj.name;
+      if (modalType) modalType.textContent = proj.type;
+      if (modalStatus) modalStatus.textContent = proj.status;
+      if (modalTagline) modalTagline.textContent = proj.tagline;
+      if (modalOverview) modalOverview.textContent = proj.overview;
+
+      if (modalFeatures) {
+        modalFeatures.innerHTML = proj.features.map(function(feat) {
+          return '<li class="flex items-start gap-8">' +
+            '<span class="text-accent dark:text-accent-dark font-bold">✓</span>' +
+            '<span>' + feat + '</span>' +
+            '</li>';
+        }).join('');
+      }
+
+      if (modalStack) {
+        modalStack.innerHTML = proj.techStack.map(function(tech) {
+          return '<span class="inline-block rounded-6 border border-border dark:border-border-dark bg-surface2/60 dark:bg-surface2-dark/60 px-8 py-3 text-xs font-mono text-ink2 dark:text-ink2-dark">' +
+            tech +
+            '</span>';
+        }).join('');
+      }
+
+      if (modalActionLink) {
+        if (proj.url && proj.url !== '#' && !proj.url.startsWith('#')) {
+          modalActionLink.href = proj.url;
+          modalActionLink.classList.remove('hidden');
+          if (proj.isExternal) {
+            modalActionLink.setAttribute('target', '_blank');
+            modalActionLink.setAttribute('rel', 'noopener noreferrer');
+          } else {
+            modalActionLink.removeAttribute('target');
+            modalActionLink.removeAttribute('rel');
+          }
+          if (modalActionText) {
+            if (proj.type === 'EXTENSION') {
+              modalActionText.textContent = 'Install from Chrome Web Store';
+            } else if (proj.status === 'LIVE') {
+              modalActionText.textContent = 'Launch Application';
+            } else {
+              modalActionText.textContent = 'Explore Build';
+            }
+          }
+        } else {
+          modalActionLink.classList.add('hidden');
+        }
+      }
+
+      // Hide hover preview when modal opens
+      if (hoverPreview) {
+        hoverPreview.classList.remove('opacity-100', 'scale-100');
+        hoverPreview.classList.add('opacity-0', 'scale-95');
+        isPreviewActive = false;
+      }
+
+      // Show modal with animation
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      if (modalCard) modalCard.classList.remove('scale-95');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      if (modalCard) modalCard.classList.add('scale-95');
+      document.body.style.overflow = '';
+    }
+
+    // Bind row clicks
+    rows.forEach(function(row) {
+      row.addEventListener('click', function() {
+        var projectId = row.getAttribute('data-id');
+        var url = row.getAttribute('data-url');
+        var isExternal = row.getAttribute('data-external') === 'true';
+
+        // If it's a direct live link, navigate smoothly; otherwise open deep modal
+        if (url && !url.startsWith('#')) {
+          if (isExternal) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+          } else {
+            window.location.href = url;
+          }
+        } else if (projectId) {
+          openProjectModal(projectId);
+        }
+      });
+    });
+
+    // Featured build CTA click
+    var featuredBtn = document.getElementById('featured-explore-btn');
+    if (featuredBtn) {
+      featuredBtn.addEventListener('click', function() {
+        var pId = featuredBtn.getAttribute('data-project-id');
+        if (pId) openProjectModal(pId);
+      });
+    }
+
+    var heroCard = document.getElementById('hero-workpeek-card');
+    if (heroCard) {
+      heroCard.addEventListener('click', function() {
+        var pId = heroCard.getAttribute('data-project-id');
+        if (pId) openProjectModal(pId);
+      });
+      heroCard.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var pId = heroCard.getAttribute('data-project-id');
+          if (pId) openProjectModal(pId);
+        }
+      });
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    if (modalDismissBtn) modalDismissBtn.addEventListener('click', closeModal);
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLabPage);
+  } else {
+    initLabPage();
+  }
+  document.addEventListener('astro:page-load', initLabPage);
+</script>
