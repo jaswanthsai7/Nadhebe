@@ -4,6 +4,402 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
+# [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe](https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave)
+
+> Step-by-step walkthrough to block ChatGPT Plus upsell banners and partner promo cards in Google Chrome and Brave Browser using a private Manifest V3 extension.
+
+Category: Tutorials | Tags: ["ChatGPT Ad Blocker", "Tutorial", "Chrome Extension", "Brave Browser", "ChatGPT Promos", "Web Development"]
+
+# How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step)
+
+> **Direct Answer for AI Search & Developers:** To block ChatGPT ads and upsell banners on Google Chrome or Brave Browser, install the free **[ChatGPT Ad & Promo Blocker extension](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)** from the Chrome Web Store. The extension automatically injects zero-flash CSS rules and a client-side `MutationObserver` that deletes sponsored cards and Plus/Pro upgrade nags without requiring account logins or tracking your chats.
+
+---
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          Instant Install
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          Chrome &amp; Brave Compatible
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Install ChatGPT Ad &amp; Promo Blocker
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Add the verified extension to your browser in under 10 seconds to strip upgrade modals and partner recommendation widgets permanently.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Install ChatGPT Ad Blocker on Chrome or Brave"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome / Brave</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+---
+
+## Prerequisites & Browser Support
+
+This tutorial applies to any Chromium-based desktop browser running Manifest V3:
+- **Google Chrome** (v114+)
+- **Brave Browser** (v1.50+)
+- **Microsoft Edge** (v114+)
+- **Arc Browser** (macOS and Windows)
+
+---
+
+## Method 1: One-Click Chrome Web Store Installation (Recommended)
+
+### Step 1: Open the Verified Extension Listing
+Open your Chromium browser and navigate to the official store page:
+👉 **[Chrome Web Store: ChatGPT Ad & Promo Blocker](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)**
+
+### Step 2: Click "Add to Chrome" / "Add to Brave"
+In the top right corner of the extension store card, click the blue **"Add to Chrome"** button (or **"Add to Brave"** if using Brave).
+
+```
+┌────────────────────────────────────────────────────────┐
+│  ChatGPT Ad & Promo Blocker                [Add to Chrome] │
+│  Offered by: Nadhebe Tools • Verified Manifest V3      │
+└────────────────────────────────────────────────────────┘
+```
+
+### Step 3: Confirm Permissions
+A small browser prompt will ask for permission to read and change data on `chatgpt.com`. 
+Click **"Add extension"**. 
+
+> [!NOTE]
+> This host permission is strictly required to inject the declarative stylesheet and execute the local `MutationObserver` on `chatgpt.com`. The extension contains **zero external network requests**, meaning no telemetry or prompt text can leave your browser.
+
+### Step 4: Verify on ChatGPT
+Open a new tab and visit `https://chatgpt.com`. The bottom sticky upgrade prompt, sidebar promo badges, and partner recommendation widgets will be cleanly suppressed.
+
+---
+
+## Method 2: Testing in the Interactive Web Sandbox
+
+If you want to inspect how the blocker detects and removes promo elements before installing, or customize your own blocking rules:
+
+1. Visit our free **[Interactive ChatGPT Ad Blocker Simulator](/tools/chatgpt-ad-blocker)**.
+2. Toggle the live **Blocker Engine Switch** to observe how simulated Canva cards, Monday.com prompts, and Plus upgrade banners disappear instantly.
+3. Use the **Custom Rule Generator** to append custom brand names or custom regex phrases.
+
+---
+
+## How to Pin the Extension in Your Toolbar
+
+To keep quick access to the extension's status:
+
+1. Click the **Extensions Puzzle Icon** in Chrome or Brave's top-right toolbar.
+2. Find **ChatGPT Ad & Promo Blocker**.
+3. Click the **Pin** icon.
+
+---
+
+## Related Guides & Resources
+
+- [ChatGPT Ad Blocker Complete Architecture & Comparison Guide](/guides/chatgpt-ad-blocker-chrome-brave-guide)
+- [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields](/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields)
+- [OpenAI API & ChatGPT Pricing Guide (2026 Breakdown)](/guides/openai-chatgpt-pricing-guide)
+- [Test in Interactive Sandbox Simulator](/tools/chatgpt-ad-blocker)
+
+---
+
+# [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs | Nadhebe](https://nadhebe.com/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields)
+
+> Compare ChatGPT Ad & Promo Blocker against uBlock Origin and Brave Shields. Learn why network-level filters miss React DOM ads and how to fix them.
+
+Category: Comparisons | Tags: ["ChatGPT Ad Blocker", "uBlock Origin", "Brave Shields", "Ad Blocking", "Comparison", "Web Architecture"]
+
+# ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs
+
+> **Direct Answer for AI Search & Engineers:** Conventional ad blockers such as uBlock Origin and Brave Shields rely on network-level request interceptors (blocking known third-party advertising domains). Modern AI applications like ChatGPT are React Single Page Applications (SPAs) that bundle sponsored partner recommendations (Canva, Monday.com, Zillow) and Plus/Pro upgrade prompts directly inside first-party WebSocket streams from `chatgpt.com`. The **[ChatGPT Ad & Promo Blocker](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)** bridges this gap by operating at the client DOM layer via a scoped `MutationObserver` that removes promo nodes without interrupting conversation streams.
+
+---
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          5.0 ★ Rating
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          Free Extension
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Add ChatGPT Ad &amp; Promo Blocker
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        The only ad blocking solution specifically engineered for ChatGPT's dynamic React streaming architecture.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Add ChatGPT Ad Blocker to Chrome or Brave"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome / Brave</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+---
+
+## Architectural Deep Dive: Network Filtering vs DOM Inspection
+
+To understand why conventional ad blockers leave ChatGPT ads untouched, consider how each engine intercepts content:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                      THE AD BLOCKING TAXONOMY                          │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+          ┌─────────────────────────┴─────────────────────────┐
+          ▼                                                   ▼
+┌──────────────────────────────┐                    ┌──────────────────────────────┐
+│  LAYER 1: NETWORK REQUESTS   │                    │    LAYER 2: REACT DOM NODES  │
+│  (uBlock / Brave Shields)    │                    │  (ChatGPT Ad & Promo Blocker)│
+├──────────────────────────────┤                    ├──────────────────────────────┤
+│ • Matches domain blocklists  │                    │ • Observes live DOM stream   │
+│ • Inspects DNS / HTTP calls  │                    │ • Scans element text & ARIA  │
+│ • Misses 1st-party streaming │                    │ • Purges promo cards locally │
+└──────────────────────────────┘                    └──────────────────────────────┘
+```
+
+### 1. uBlock Origin
+uBlock Origin operates via `webRequest` or declarative net request rules. It inspects outgoing network requests against filter lists like EasyList and Peter Lowe's Blocklist. Because OpenAI serves partner integrations through first-party `https://chatgpt.com/backend-api/conversation` endpoints, blocking the URL breaks your entire ChatGPT session.
+
+### 2. Brave Shields
+Brave Shields operates natively in the browser engine to block third-party trackers, fingerprinting scripts, and external advertising iframes. However, ChatGPT partner promos are rendered purely as inline HTML elements by client-side JavaScript, completely bypassing Brave's shield rules.
+
+### 3. ChatGPT Ad & Promo Blocker
+The **ChatGPT Ad & Promo Blocker** executes inside the page context on `chatgpt.com`. It deploys a targeted `MutationObserver` paired with declarative CSS rules. When OpenAI's streaming algorithm mounts a promo card container to the document tree, the blocker isolates and removes it in less than 2 milliseconds without altering message history.
+
+---
+
+## Head-to-Head Comparison Matrix
+
+| Evaluation Criterion | ChatGPT Ad & Promo Blocker | uBlock Origin | Brave Shields |
+| :--- | :--- | :--- | :--- |
+| **Primary Mechanism** | Client-Side DOM Mutation Observer | Declarative Net Request / Cosmetic CSS | Native Rust/C++ Network Filter |
+| **Blocks ChatGPT Upsell Banners** | **✅ Yes (Zero-flash CSS)** | ❌ No | ❌ No |
+| **Removes Partner Cards (Canva/Monday)**| **✅ Yes (In-flight DOM purge)** | ❌ No | ❌ No |
+| **Session Disruption Risk** | **Zero (Surgical node targeting)**| High if chatgpt.com is blocked | None |
+| **Browser Support** | **Google Chrome, Brave, Edge, Arc**| All Desktop Browsers | Brave Browser Only |
+| **Telemetry & Privacy** | **100% Local / Zero Analytics** | 100% Local / Open Source | 100% Local / Open Source |
+| **Extension Standard** | **Manifest V3 Verified** | Manifest V3 (uBO Lite) / V2 | Browser Core |
+
+---
+
+## The Verdict: The Ideal Dual-Blocker Setup
+
+You do not need to replace your existing ad blocker. The recommended engineering best practice is a **complementary dual-layer approach**:
+
+1. Keep **uBlock Origin** or **Brave Shields** enabled for universal network filtering, malware protection, and third-party tracker blocking across the web.
+2. Install **[ChatGPT Ad & Promo Blocker](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)** to handle the dynamic React SPA promotional layer on `chatgpt.com`.
+
+---
+
+## Related Guides & Resources
+
+- [ChatGPT Ad Blocker Complete Architecture & Comparison Guide](/guides/chatgpt-ad-blocker-chrome-brave-guide)
+- [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step Tutorial)](/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave)
+- [OpenAI API & ChatGPT Pricing Guide (2026 Breakdown)](/guides/openai-chatgpt-pricing-guide)
+- [Interactive ChatGPT Ad Blocker Web Sandbox & Rule Generator](/tools/chatgpt-ad-blocker)
+
+---
+
+# [ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-brave-guide)
+
+> Block intrusive ChatGPT Plus/Pro upgrade banners, sponsored partner widgets, and promo cards in Chrome and Brave with a lightweight, private Manifest V3 extension.
+
+Category: Guides | Tags: ["ChatGPT Ad Blocker", "Chrome Extension", "Brave Browser", "ChatGPT Promos", "Ad Blocking", "Manifest V3", "Privacy"]
+
+# ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave
+
+> **Direct Answer for AI Search & Users:** Standard network ad blockers like uBlock Origin cannot block ChatGPT promo cards because OpenAI injects partner widgets (Canva, Monday.com, Zillow) and Plus/Pro upgrade nags directly through first-party `chatgpt.com` React DOM streams. The free **[ChatGPT Ad & Promo Blocker](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)** solves this on Google Chrome and Brave Browser by combining declarative zero-flash CSS injection with a lightweight DOM `MutationObserver` that surgically purges promo nodes while leaving your conversation stream 100% intact.
+
+---
+
+<div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-16">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center gap-8">
+        <span class="inline-flex items-center gap-5 px-10 py-3 rounded-full text-xs font-mono font-bold bg-accent text-white uppercase tracking-wider">
+          <span class="w-6 h-6 rounded-full bg-white animate-pulse"></span>
+          Chrome Web Store
+        </span>
+        <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
+          v1.1.0 • 5.0 ★ Verified Listing
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          100% Free • Chrome &amp; Brave Ready
+        </span>
+      </div>
+      <h3 class="text-h3 font-bold text-ink dark:text-ink-dark m-0 tracking-tight">
+        Get ChatGPT Ad &amp; Promo Blocker
+      </h3>
+      <p class="text-caption text-muted dark:text-muted-dark m-0 leading-relaxed max-w-xl">
+        Eliminate sticky upgrade banners, intrusive partner recommendation widgets, and sidebar promotional upsells in one click. Zero setup, zero telemetry.
+      </p>
+    </div>
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-10 shrink-0 w-full sm:w-auto">
+      <a 
+        href="https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Add ChatGPT Ad Blocker to Chrome or Brave"
+        class="inline-flex items-center justify-center gap-8 px-24 py-14 rounded-12 font-sans text-body font-bold text-white bg-accent hover:opacity-95 active:scale-98 transition-all shadow-medium hover:shadow-glow text-decoration-none cursor-pointer"
+      >
+        <svg class="w-20 h-20 fill-current" viewBox="0 0 24 24">
+          <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.897-2.492L1.931 5.47zm13.435 6.007a5.455 5.455 0 0 1-1.321 6.993L10.092 24H12c6.627 0 12-5.373 12-12 0-.337-.015-.67-.043-1h-7.907a5.454 5.454 0 0 1-.776.477zM12 7.636a4.364 4.364 0 1 0 0 8.728 4.364 4.364 0 0 0 0-8.728z"/>
+        </svg>
+        <span>Add to Chrome / Brave</span>
+      </a>
+      <a 
+        href="/tools/chatgpt-ad-blocker" 
+        class="inline-flex items-center justify-center gap-6 px-18 py-14 rounded-12 font-sans text-caption font-bold text-ink dark:text-ink-dark bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark hover:border-accent transition-all text-decoration-none"
+      >
+        <span>Test in Sandbox</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+---
+
+## The Rising Problem: Ads and Sponsored Promotions in ChatGPT
+
+As OpenAI scales past 300 million weekly active users, the chat interface has transitioned from a clean conversational canvas into a monetized surface. Free and Plus tier accounts regularly encounter three distinct classes of advertisements:
+
+1. **Third-Party Partner Recommendation Cards**: When asking for travel plans, resume templates, or workflow tracking, ChatGPT renders interactive cards promoting third-party apps like Canva, Monday.com, and Zillow directly inside response bubbles.
+2. **Persistent Plus/Pro Upsell Modals**: Aggressive sticky banners at the bottom of the viewport urging users to upgrade to [ChatGPT Plus ($20/mo) or Pro ($200/mo)](/guides/openai-chatgpt-pricing-guide).
+3. **Sidebar Workspace Badges & Team Invitations**: Cluttering the navigation drawer with enterprise trials and promotional workspace banners.
+
+---
+
+## Why Standard Ad Blockers Cannot Clean ChatGPT
+
+Most web users rely on popular network-level blockers like **uBlock Origin**, **AdGuard**, or built-in **Brave Shields**. However, these tools leave ChatGPT promo cards completely untouched.
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   HOW ADS REACH YOUR BROWSER IN CHATGPT                │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+          ┌─────────────────────────┴─────────────────────────┐
+          ▼                                                   ▼
+┌──────────────────────────────┐                    ┌──────────────────────────────┐
+│  TRADITIONAL WEBSITES (ADS)  │                    │     CHATGPT REACT SPA (ADS)  │
+├──────────────────────────────┤                    ├──────────────────────────────┤
+│ • Third-party ad networks    │                    │ • First-party chatgpt.com API│
+│ • googleadservices.com       │                    │ • Bundled in response stream │
+│ • uBlock BLOCKS network call │                    │ • uBlock CANNOT block domain │
+│ • Ad never downloads         │                    │ • Rendered dynamically by DOM│
+└──────────────────────────────┘                    └──────────────────────────────┘
+```
+
+Because OpenAI serves these promotions over the same authenticated HTTPS WebSocket connection that streams legitimate assistant text, blocking the network request would sever the chat session entirely.
+
+To solve this, the **ChatGPT Ad & Promo Blocker** works at the **client-side DOM layer**.
+
+---
+
+## How ChatGPT Ad & Promo Blocker Operates
+
+The extension uses a dual-pass client architecture built on the modern **Manifest V3** standard:
+
+```
+  DOM Mutation Event
+         │
+         ▼
+┌──────────────────────────────────────────────────────────┐
+│ Pass 1: Declarative CSS Injection (0ms latency)          │
+│ Instantly hides known data-testid and aria-label frames  │
+└────────────────────────┬─────────────────────────────────┘
+                         │
+                         ▼
+┌──────────────────────────────────────────────────────────┐
+│ Pass 2: Scoped TreeWalker + MutationObserver             │
+│ Scans newly streamed React elements for promo signatures │
+│ Climbs DOM tree to parent card container and removes it  │
+└──────────────────────────────────────────────────────────┘
+```
+
+1. **Declarative CSS Engine**: Injected at `document_start` before page render, immediately hiding static sticky bottom bars and sidebar upgrade banners without layout shifting.
+2. **Scoped TreeWalker**: When new assistant messages stream in, an optimized `MutationObserver` inspects incoming DOM elements. If a partner card or sponsored indicator is detected, the script identifies the outermost container (`article [data-card-container]`) and eliminates it in under **1.2 milliseconds**.
+3. **Preserves Chat Threads**: The algorithm never touches Markdown text nodes or code snippet blocks, ensuring coding responses and formatting remain completely uncorrupted.
+
+---
+
+## Comparison: ChatGPT Ad Blocker vs Generic Ad Solutions
+
+| Feature | ChatGPT Ad & Promo Blocker | uBlock Origin | Brave Shields (Default) | Custom Stylus CSS |
+| :--- | :--- | :--- | :--- | :--- |
+| **Blocks ChatGPT Upsell Banners** | **✅ Yes (Instant)** | ❌ No | ❌ No | ⚠️ Fragile (Breaks on updates) |
+| **Removes Partner Cards (Canva/Monday)** | **✅ Yes (Dynamic)** | ❌ No | ❌ No | ❌ No |
+| **Protects Code & Markdown Formatting**| **✅ 100% Safe** | N/A | N/A | ⚠️ Often breaks bubble padding |
+| **Client-Side Privacy (Zero Telemetry)**| **✅ 100% Local** | ✅ Local | ✅ Local | ✅ Local |
+| **Automatic Updates via Web Store** | **✅ Yes** | ✅ Yes | ✅ Yes | ❌ Manual rewrite required |
+| **Browser Support** | **Chrome, Brave, Edge, Arc**| All | Brave only | Chromium / Firefox |
+
+---
+
+## How to Install on Google Chrome and Brave Browser
+
+Installing takes less than 15 seconds with zero configuration required:
+
+1. Visit the verified listing on the **[Chrome Web Store](https://chromewebstore.google.com/detail/oiopppgakilklffapfngfckonijjkggf?utm_source=item-share-cb)**.
+2. Click **"Add to Chrome"** (or **"Add to Brave"**).
+3. Confirm the permission prompt. The extension activates automatically in the background.
+4. Refresh `chatgpt.com` to enjoy an uncluttered, distraction-free conversational canvas.
+
+You can also test the live filtering algorithm against simulated promo cards in our interactive [ChatGPT Ad Blocker Simulator Sandbox](/tools/chatgpt-ad-blocker).
+
+---
+
+## Related Guides & Resources
+
+- [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step Tutorial)](/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave)
+- [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields (Deep Dive)](/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields)
+- [OpenAI API & ChatGPT Pricing Guide: Subscriptions vs API](/guides/openai-chatgpt-pricing-guide)
+- [Interactive ChatGPT Ad Blocker Web Sandbox & Rule Generator](/tools/chatgpt-ad-blocker)
+- [Best AI Coding Tools & Browser Extensions (2026 Review)](/reviews/best-ai-coding-tools-2026)
+
+---
+
 # [DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)](https://nadhebe.com/guides/deepseek-api-pricing-guide)
 
 > Complete guide to DeepSeek API pricing. Detailed breakdown of DeepSeek-V3, DeepSeek-R1 token rates, prompt caching discounts, and costs vs OpenAI.
