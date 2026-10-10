@@ -283,6 +283,14 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
+    // Canonical Host Enforcement: 301 Permanent Redirect www.nadhebe.com -> nadhebe.com
+    if (url.hostname.toLowerCase() === 'www.nadhebe.com') {
+      const targetUrl = new URL(request.url);
+      targetUrl.hostname = 'nadhebe.com';
+      targetUrl.protocol = 'https:';
+      return Response.redirect(targetUrl.toString(), 301);
+    }
+
     // Route: /api/analyze-site (CONSUMES ZERO AI NEURONS - purely deterministic)
     if (url.pathname === '/api/analyze-site') {
       if (request.method !== 'POST') {

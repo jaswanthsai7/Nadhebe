@@ -1,16 +1,17 @@
 ---
-title: "How to Use Google Flow Storyboard Studio: Script Uploads, Custom Characters & Scenes"
-description: "A step-by-step tutorial on importing scripts, uploading custom character reference images, inserting scenes, and locking visual consistency in Google Flow."
+title: "Google Flow Storyboard Studio: Complete Guide to Scripts, Custom Characters & Scenes | Nadhebe"
+description: "Master Google Flow Storyboard Studio in Google Labs. Learn step-by-step how to import scripts, anchor custom character consistency, insert scenes, and render with Veo."
 pubDate: 2026-07-17
+updatedDate: 2026-10-10
 author: nadhebe-team
 category: Tutorials
 tags: ["google-flow", "tutorials", "storyboard", "custom-characters", "google-labs"]
 heroImage: "/images/storyboard-tutorial-hero.webp"
 heroAlt: "Minimalist mockup displaying a sequence of three frames on a clean white user interface screen"
 estimatedReadingTime: 8
-isPillar: false
-topic: "Google Flow Storyboard Tutorial"
-searchIntent: "How to use Google Flow Storyboard Studio script upload custom character scene addition"
+isPillar: true
+topic: "Google Flow"
+searchIntent: "google flow storyboard studio tutorial script upload custom character"
 difficulty: "intermediate"
 faq:
   - question: "How do I upload custom character images into Google Flow Storyboard Studio?"
@@ -32,7 +33,8 @@ sources:
 
 ## Tutorial: Building Pre-Production Storyboards in Google Flow
 
-This tutorial walks through creating a storyboard using Google Flow's **Storyboard Studio** (available in **Google Labs**), from script import and custom character uploads to inserting new scenes and animating via Google Veo.
+Google Flow Storyboard Studio (available in Google Labs) is an AI pre-production suite for video directors and creators. It automates scene breakdown from raw text scripts, maintains facial continuity across custom character profiles, and exports structured storyboard panels directly into Google Veo for cinematic rendering.
+
 
 <div class="my-28 p-24 rounded-16 border-2 border-accent/40 bg-accent/5 dark:bg-accent/10 shadow-medium not-prose">
   <div class="space-y-12">
