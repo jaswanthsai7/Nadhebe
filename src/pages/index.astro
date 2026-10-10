@@ -72,23 +72,23 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
 >
   <!-- Hero Section Slider -->
   <section class="mx-auto max-w-content px-16 sm:px-24 pt-32 pb-48 sm:pt-48 sm:pb-48">
-    <div class="relative overflow-hidden glass-panel border border-border dark:border-border-dark rounded-24 shadow-medium" style="isolation: isolate;">
+    <div id="hero-featured-card" class="group relative overflow-hidden glass-panel border border-border dark:border-border-dark rounded-24 shadow-medium" style="isolation: isolate;">
       
-      <!-- Slides Container -->
-      <div id="hero-slider" class="relative w-full">
+      <!-- Horizontal Slides Track -->
+      <div id="hero-slider-track" class="flex w-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform" style="transform: translateX(0%);">
         {latestPillars.slice(0, 3).map((post, index) => {
           const author = post.data.author ? authors.find(a => a.id === (post.data.author.id || post.data.author)) : null;
           return (
             <div 
-              class={`hero-slide flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 transition-all duration-500 absolute inset-0 opacity-0 pointer-events-none min-h-[380px] ${index === 0 ? 'relative !opacity-100 !pointer-events-auto' : ''}`}
+              class="hero-slide w-full shrink-0 flex flex-col lg:flex-row gap-32 items-center justify-between p-24 sm:p-32 md:p-40 min-h-[380px]"
               data-slide-index={index}
             >
               
               <!-- Left Side: Rotated Label + Meta -->
               <div class="flex flex-1 items-start gap-16 sm:gap-24 min-w-0 self-stretch">
                 <!-- Rotated Vertical "FEATURED" Label (Hidden on small screens) -->
-                <div class="hidden md:flex select-none items-center justify-center self-stretch w-56 relative">
-                  <span class="font-display font-black uppercase tracking-widest text-ink dark:text-ink-dark absolute whitespace-nowrap" style="font-size: 4.8rem; font-weight: 900; -webkit-text-stroke: 1.5px currentColor; letter-spacing: 0.18em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
+                <div class="hidden md:flex select-none items-center justify-center self-stretch w-48 relative shrink-0">
+                  <span class="font-display font-black uppercase tracking-widest text-ink dark:text-ink-dark absolute whitespace-nowrap" style="font-size: 3.2rem; font-weight: 900; -webkit-text-stroke: 1.2px currentColor; letter-spacing: 0.16em; transform-origin: center; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);">
                     FEATURED
                   </span>
                 </div>
@@ -160,11 +160,35 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
         })}
       </div>
 
+      <!-- Left Prev Navigation Button -->
+      <button
+        id="hero-prev-btn"
+        type="button"
+        class="hidden sm:flex absolute left-12 top-1/2 -translate-y-1/2 w-40 h-40 rounded-full border border-border/80 dark:border-border-dark/80 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md text-ink dark:text-ink-dark items-center justify-center hover:bg-ink hover:text-white dark:hover:bg-white dark:hover:text-ink transition-all z-20 shadow-subtle opacity-0 group-hover:opacity-100 focus:opacity-100 cursor-pointer"
+        aria-label="Previous featured story"
+      >
+        <svg class="w-16 h-16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Right Next Navigation Button -->
+      <button
+        id="hero-next-btn"
+        type="button"
+        class="hidden sm:flex absolute right-12 top-1/2 -translate-y-1/2 w-40 h-40 rounded-full border border-border/80 dark:border-border-dark/80 bg-surface/90 dark:bg-surface-dark/90 backdrop-blur-md text-ink dark:text-ink-dark items-center justify-center hover:bg-ink hover:text-white dark:hover:bg-white dark:hover:text-ink transition-all z-20 shadow-subtle opacity-0 group-hover:opacity-100 focus:opacity-100 cursor-pointer"
+        aria-label="Next featured story"
+      >
+        <svg class="w-16 h-16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
       <!-- Navigation Dots — min 48×48px tap area per Google/WCAG 2.5.5 -->
       <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center z-10">
         {latestPillars.slice(0, 3).map((_, index) => (
           <button
-            class="flex items-center justify-center min-w-[48px] min-h-[48px] hero-dot-btn focus:outline-none"
+            class="flex items-center justify-center min-w-[48px] min-h-[48px] hero-dot-btn focus:outline-none cursor-pointer"
             data-dot-index={index}
             aria-label={`Go to slide ${index + 1}`}
           >
@@ -179,28 +203,29 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
   <!-- Slider Client-Side JS -->
   <script>
     function initSlider() {
-      const slides = document.querySelectorAll('.hero-slide');
-      const dotBtns = document.querySelectorAll('.hero-dot-btn');
-      const dotSpans = document.querySelectorAll('.hero-dot');
-      if (slides.length <= 1) return;
+      const track = document.getElementById('hero-slider-track') as HTMLElement | null;
+      const slides = document.querySelectorAll<HTMLElement>('.hero-slide');
+      const dotBtns = document.querySelectorAll<HTMLButtonElement>('.hero-dot-btn');
+      const dotSpans = document.querySelectorAll<HTMLElement>('.hero-dot');
+      const prevBtn = document.getElementById('hero-prev-btn');
+      const nextBtn = document.getElementById('hero-next-btn');
+      const card = document.getElementById('hero-featured-card');
+
+      if (!track || slides.length <= 1) return;
 
       let currentSlide = 0;
-      let timer: any;
+      let timer: any = null;
 
-      function showSlide(index: number) {
-        slides.forEach((slide, i) => {
-          if (i === index) {
-            slide.classList.remove('absolute', 'opacity-0', 'pointer-events-none');
-            slide.classList.add('relative', '!opacity-100', '!pointer-events-auto');
-          } else {
-            slide.classList.remove('relative', '!opacity-100', '!pointer-events-auto');
-            slide.classList.add('absolute', 'opacity-0', 'pointer-events-none');
-          }
-        });
+      function updateSlide(index: number) {
+        if (!track) return;
+        currentSlide = (index + slides.length) % slides.length;
+
+        // Slide horizontally from left to right / right to left
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
 
         // Update visual dot spans
         dotSpans.forEach((dot, i) => {
-          if (i === index) {
+          if (i === currentSlide) {
             dot.classList.remove('bg-ink/20', 'dark:bg-ink-dark/20', 'w-8');
             dot.classList.add('bg-accent', 'dark:bg-accent-dark', 'w-20');
           } else {
@@ -208,30 +233,76 @@ const topStories = allArticles.filter(a => a.id !== heroPost.id).slice(0, 4);
             dot.classList.add('bg-ink/20', 'dark:bg-ink-dark/20', 'w-8');
           }
         });
-
-        currentSlide = index;
       }
 
       function startTimer() {
         clearInterval(timer);
         timer = setInterval(() => {
-          const next = (currentSlide + 1) % slides.length;
-          showSlide(next);
-        }, 45000);
+          updateSlide(currentSlide + 1);
+        }, 10000);
       }
 
+      function stopTimer() {
+        clearInterval(timer);
+      }
+
+      // Prev / Next button clicks
+      prevBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateSlide(currentSlide - 1);
+        startTimer();
+      });
+
+      nextBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        updateSlide(currentSlide + 1);
+        startTimer();
+      });
+
+      // Pagination dots
       dotBtns.forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-          showSlide(i);
-          startTimer(); // reset auto-play timer on click
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          updateSlide(i);
+          startTimer();
         });
       });
 
+      // Pause on hover
+      card?.addEventListener('mouseenter', stopTimer);
+      card?.addEventListener('mouseleave', startTimer);
+
+      // Touch swipe support (left / right swipe on mobile)
+      let touchStartX = 0;
+      card?.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopTimer();
+      }, { passive: true });
+
+      card?.addEventListener('touchend', (e: TouchEvent) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 40) {
+          if (diffX < 0) {
+            updateSlide(currentSlide + 1);
+          } else {
+            updateSlide(currentSlide - 1);
+          }
+        }
+        startTimer();
+      }, { passive: true });
+
+      // Initial state
+      updateSlide(0);
       startTimer();
     }
 
     // Run on init and page changes
-    initSlider();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlider);
+    } else {
+      initSlider();
+    }
     document.addEventListener('astro:page-load', initSlider);
   </script>
 

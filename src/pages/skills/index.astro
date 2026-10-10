@@ -1,0 +1,503 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { buildSeo } from '@/utils/seo';
+import { SITE } from '@/config';
+
+const allSkills = await getCollection('skills');
+
+// Define display mapping and icons for the visual direction
+interface SkillPreview {
+  file: string;
+  runtime: string;
+  command: string;
+  checks: string[];
+  badge: string;
+  metric: string;
+}
+
+interface SkillDisplay {
+  slug: string;
+  title: string;
+  description: string;
+  categoryFilter: 'seo' | 'development' | 'content';
+  tagsLine: string;
+  featured?: boolean;
+  iconType: 'search' | 'code' | 'doc';
+  downloadUrl: string;
+  detailUrl: string;
+  preview: SkillPreview;
+}
+
+const displaySkills: SkillDisplay[] = [
+  {
+    slug: 'ai-seo',
+    title: 'SEO & GEO Content Engine',
+    description: 'Research, structure and optimize content for search engines and generative search citations.',
+    categoryFilter: 'seo',
+    tagsLine: 'SEO · GEO · CONTENT STRATEGY',
+    featured: true,
+    iconType: 'search',
+    downloadUrl: '/skills/ai-seo.zip',
+    detailUrl: '/skills/ai-seo/',
+    preview: {
+      file: 'ai-seo/SKILL.md',
+      runtime: 'Claude Code · Cursor · AGY',
+      command: 'agy run ai-seo --target "GEO & Citations"',
+      checks: [
+        '2-3 sentence answer blocks extracted',
+        'Google AI Overviews & Perplexity ready',
+        'Structured JSON-LD schema validated',
+      ],
+      badge: '98.4% Citation Extractability',
+      metric: '0 Hallucinations · Fact-Checked',
+    },
+  },
+  {
+    slug: 'keyword-research',
+    title: 'Technical Keyword Research & Intent',
+    description: 'Developer query discovery, command error mapping, and AEO natural question extraction.',
+    categoryFilter: 'seo',
+    tagsLine: 'KEYWORD RESEARCH · SEARCH INTENT · AEO',
+    iconType: 'search',
+    downloadUrl: '/skills/keyword-research.zip',
+    detailUrl: '/skills/keyword-research/',
+    preview: {
+      file: 'keyword-research/SKILL.md',
+      runtime: 'Python · AGY · Node',
+      command: 'agy run keyword-research --domain "Dev Tools"',
+      checks: [
+        '48 Error-code & stack-trace queries mapped',
+        'Zero keyword cannibalization verified',
+        'Direct AEO natural questions cataloged',
+      ],
+      badge: 'Zero Cannibalization',
+      metric: 'Developer Pain-Point Targeting',
+    },
+  },
+  {
+    slug: 'blog-generator',
+    title: 'Technical Blog Writer',
+    description: 'Turn technical research into structured, useful articles with strong editorial standards.',
+    categoryFilter: 'content',
+    tagsLine: 'WRITING · MARKDOWN · RESEARCH',
+    iconType: 'doc',
+    downloadUrl: '/skills/blog-generator.zip',
+    detailUrl: '/skills/blog-generator/',
+    preview: {
+      file: 'blog-generator/SKILL.md',
+      runtime: 'Astro · Markdown · Mermaid',
+      command: 'agy run blog-generator --source transcript.json',
+      checks: [
+        '70% original synthesis & GitHub research',
+        'Complete Mermaid architecture diagram',
+        '0 broken internal links compiled',
+      ],
+      badge: 'Helpful Content Compliant',
+      metric: 'Production-Ready Markdown',
+    },
+  },
+  {
+    slug: 'content-quality-auditor',
+    title: 'Content Quality & E-E-A-T Auditor',
+    description: 'Audit articles against Google Helpful Content criteria, factual accuracy, and readability.',
+    categoryFilter: 'content',
+    tagsLine: 'E-E-A-T · QUALITY AUDIT · COMPLIANCE',
+    iconType: 'doc',
+    downloadUrl: '/skills/content-quality-auditor.zip',
+    detailUrl: '/skills/content-quality-auditor/',
+    preview: {
+      file: 'content-quality-auditor/SKILL.md',
+      runtime: 'Google HCS 2026 · E-E-A-T',
+      command: 'agy audit --guidelines google-hcs-2026',
+      checks: [
+        'First-hand testing proofs detected',
+        'Unsubstantiated claims: 0 detected',
+        'Direct GEO answer extractability: PASS',
+      ],
+      badge: 'E-E-A-T Score: 98/100',
+      metric: 'Pre-Commit Gate Passed',
+    },
+  },
+  {
+    slug: 'content-cluster',
+    title: 'Topic Authority & Cluster Planner',
+    description: 'Architect pillar-cluster hierarchies to build topical dominance without keyword cannibalization.',
+    categoryFilter: 'content',
+    tagsLine: 'CLUSTER ARCHITECTURE · PILLARS · TAXONOMY',
+    iconType: 'code',
+    downloadUrl: '/skills/content-cluster.zip',
+    detailUrl: '/skills/content-cluster/',
+    preview: {
+      file: 'content-cluster/SKILL.md',
+      runtime: 'Information Architecture',
+      command: 'agy cluster --pillar "Agent Architecture"',
+      checks: [
+        '1 Core Pillar + 6 Supporting Spoke Pages',
+        'Hierarchical anchor-equity distributed',
+        'No competing target keywords found',
+      ],
+      badge: 'Topical Authority Graph',
+      metric: 'Pillar-Cluster Mapped',
+    },
+  },
+  {
+    slug: 'internal-linking',
+    title: 'Anchor Distribution & Graph Linker',
+    description: 'Audit internal linking structures, eliminate orphan pages, and balance topic cluster equity.',
+    categoryFilter: 'development',
+    tagsLine: 'INTERNAL LINKING · GRAPH · AST PARSING',
+    iconType: 'code',
+    downloadUrl: '/skills/internal-linking.zip',
+    detailUrl: '/skills/internal-linking/',
+    preview: {
+      file: 'internal-linking/SKILL.md',
+      runtime: 'TypeScript AST · Pagefind',
+      command: 'linker --audit --bidirectional-equity',
+      checks: [
+        '853 Static Pages parsed in AST',
+        '46,422 Internal links verified (0 404s)',
+        'Orphan pages: 0 · Equity balanced',
+      ],
+      badge: '0 Orphan Pages',
+      metric: 'Bidirectional Equity Graph',
+    },
+  },
+  {
+    slug: 'schema-generator',
+    title: 'Schema.org Rich Structured Data Engine',
+    categoryFilter: 'development',
+    description: 'Generate and validate JSON-LD structured data for Google rich snippets and AI search crawlers.',
+    tagsLine: 'JSON-LD · SCHEMA.ORG · RICH RESULTS',
+    iconType: 'code',
+    downloadUrl: '/skills/schema-generator.zip',
+    detailUrl: '/skills/schema-generator/',
+    preview: {
+      file: 'schema-generator/SKILL.md',
+      runtime: 'Schema.org · Google Rich Results',
+      command: 'schema-gen --validate --type SoftwareApp',
+      checks: [
+        'SoftwareApplication JSON-LD markup built',
+        'Google Rich Results compliance: 100%',
+        'AI Crawler llms.txt discovery injected',
+      ],
+      badge: 'Google Rich Results Valid',
+      metric: '100% Type-Safe JSON-LD',
+    },
+  },
+];
+
+const seo = buildSeo({
+  title: 'AI Agent Skills & MCP Tools Directory — Nadhebe',
+  description: 'Curated agent skills, workflows and tools for Claude Code, Cursor, and AI agents. Hand-vetted, safe to run, with direct ZIP downloads.',
+  slug: '/skills/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  keywords: [
+    'ai agent skills',
+    'the skill library',
+    'claude code skills',
+    'cursor agent skills',
+    'seo agent skills',
+    'free mcp tools',
+    'nadhebe skills library'
+  ],
+});
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Nadhebe Skill Library',
+  description: 'Curated agent skills, workflows and tools. Find the right capability and install it in your workflow.',
+  url: `${SITE.url}/skills/`,
+  numberOfItems: displaySkills.length,
+};
+---
+
+<BaseLayout seo={seo} jsonLd={[collectionSchema]}>
+  <div class="mx-auto max-w-screen-xl px-12 sm:px-24 py-24 sm:py-40">
+
+    <!-- Card Wrapper in Editorial Beige Aesthetic -->
+    <div class="rounded-24 border border-[#EBE6DF] dark:border-border-dark bg-[#FBF9F5] dark:bg-[#121212] p-24 sm:p-40 shadow-card transition-colors w-full">
+      
+      <!-- Top Branding Row -->
+      <div class="flex items-center justify-between pb-20 border-b border-[#EBE6DF] dark:border-border-dark/60">
+        <div class="flex items-center gap-12">
+          <!-- Geometric Command Hub Icon -->
+          <div class="w-36 h-36 rounded-8 bg-[#18181B] dark:bg-[#27272A] text-white flex items-center justify-center shadow-xs">
+            <svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="block font-sans font-bold text-ink dark:text-ink-dark text-[15px] leading-tight">nadhebe</span>
+            <span class="block text-[10px] font-mono tracking-widest text-muted dark:text-muted-dark uppercase font-semibold">OPEN SOURCE TOOLKIT</span>
+          </div>
+        </div>
+
+        <div class="text-caption font-mono text-muted dark:text-muted-dark">
+          <a href="/" class="hover:text-ink dark:hover:text-ink-dark transition-colors">Library</a> / <span class="text-ink dark:text-ink-dark font-semibold">Skills</span>
+        </div>
+      </div>
+
+      <!-- Main Header Section -->
+      <div class="pt-24 pb-8">
+        <p class="text-[12px] font-mono font-bold uppercase tracking-widest text-[#B45309] dark:text-[#F59E0B]">
+          THE SKILL LIBRARY — 001
+        </p>
+        <h1 class="mt-8 font-sans font-extrabold text-[32px] sm:text-[40px] tracking-tight text-ink dark:text-ink-dark leading-[1.15]">
+          Give your AI better skills.
+        </h1>
+        <p class="mt-8 text-[15px] sm:text-[16px] text-ink2 dark:text-ink2-dark leading-relaxed">
+          Curated agent skills, workflows and tools. Find the right capability and install it in your workflow.
+        </p>
+      </div>
+
+      <!-- Search Input Container -->
+      <div class="relative mt-20">
+        <label for="skill-search" class="sr-only">Search skills</label>
+        <input
+          id="skill-search"
+          type="search"
+          placeholder="Search skills, frameworks, SEO..."
+          class="w-full rounded-12 border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] pl-48 pr-64 py-14 text-[15px] text-ink dark:text-ink-dark placeholder:text-muted dark:placeholder:text-muted-dark focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent shadow-subtle transition-all"
+        />
+        <svg class="absolute left-14 top-1/2 -translate-y-1/2 w-18 h-18 text-muted dark:text-muted-dark pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <kbd class="absolute right-14 top-1/2 -translate-y-1/2 rounded-4 border border-[#E5E0D8] dark:border-border-dark bg-[#F5F5F3] dark:bg-[#262626] px-6 py-2 text-[11px] font-mono text-muted dark:text-muted-dark pointer-events-none">⌘ K</kbd>
+      </div>
+
+      <!-- Browse Collection & Filters -->
+      <div class="mt-28 flex items-center justify-between">
+        <span class="text-[13px] font-bold text-ink dark:text-ink-dark">Browse collection</span>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="mt-12 flex flex-wrap gap-8 items-center" id="category-filters">
+        <button
+          type="button"
+          data-category="all"
+          class="cat-filter-btn px-16 py-6 rounded-full text-xs font-semibold bg-[#18181B] text-white dark:bg-white dark:text-[#18181B] shadow-xs cursor-pointer transition-all"
+        >
+          All skills
+        </button>
+        <button
+          type="button"
+          data-category="seo"
+          class="cat-filter-btn px-16 py-6 rounded-full text-xs font-medium border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] text-ink2 dark:text-ink2-dark hover:border-ink cursor-pointer transition-all"
+        >
+          SEO & GEO
+        </button>
+        <button
+          type="button"
+          data-category="development"
+          class="cat-filter-btn px-16 py-6 rounded-full text-xs font-medium border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] text-ink2 dark:text-ink2-dark hover:border-ink cursor-pointer transition-all"
+        >
+          Development
+        </button>
+        <button
+          type="button"
+          data-category="content"
+          class="cat-filter-btn px-16 py-6 rounded-full text-xs font-medium border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] text-ink2 dark:text-ink2-dark hover:border-ink cursor-pointer transition-all"
+        >
+          Content
+        </button>
+      </div>
+
+      <!-- Skills List Rows -->
+      <div class="mt-24" id="skills-list" role="list">
+        {displaySkills.map((skill) => (
+          <article
+            class="skill-item group border-t border-[#EBE6DF] dark:border-border-dark/60 py-20 px-12 -mx-12 rounded-12 flex items-center justify-between gap-16 transition-all duration-200 hover:bg-[#F4EFE6]/70 dark:hover:bg-[#1A1A1E]/70"
+            data-title={skill.title.toLowerCase()}
+            data-desc={skill.description.toLowerCase()}
+            data-tags={skill.tagsLine.toLowerCase()}
+            data-category={skill.categoryFilter}
+            data-preview={JSON.stringify(skill.preview)}
+            role="listitem"
+          >
+            <!-- Left: Icon Box + Info -->
+            <div class="flex items-start gap-16 flex-1 min-w-0">
+              <!-- Rounded Square Icon Box -->
+              <div class="w-44 h-44 rounded-10 bg-[#EFECE6] dark:bg-[#222222] flex items-center justify-center shrink-0 text-[#2B2B2B] dark:text-[#E5E5E5] mt-2 transition-transform duration-200 group-hover:scale-105">
+                {skill.iconType === 'search' && (
+                  <svg class="w-20 h-20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m20 20-4.35-4.35"></path>
+                  </svg>
+                )}
+                {skill.iconType === 'code' && (
+                  <svg class="w-20 h-20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m16 18 6-6-6-6M8 6l-6 6 6 6"></path>
+                  </svg>
+                )}
+                {skill.iconType === 'doc' && (
+                  <svg class="w-20 h-20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                  </svg>
+                )}
+              </div>
+
+              <!-- Content Column -->
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-8">
+                  <h2 class="text-[16px] sm:text-[17px] font-bold font-sans text-ink dark:text-ink-dark leading-snug">
+                    <a href={skill.detailUrl} class="hover:text-accent hover:underline transition-colors">
+                      {skill.title}
+                    </a>
+                  </h2>
+                  {skill.featured && (
+                    <span class="inline-flex items-center px-8 py-2 rounded-full text-[10px] font-mono font-bold bg-[#FDF3E5] dark:bg-[#3D2808] border border-[#F6D8A8] dark:border-[#7C4A03] text-[#B45309] dark:text-[#FBBF24] uppercase tracking-wider">
+                      FEATURED
+                    </span>
+                  )}
+                </div>
+
+                <p class="text-[13px] sm:text-[14px] text-ink2 dark:text-ink2-dark mt-4 leading-normal">
+                  {skill.description}
+                </p>
+
+                <p class="text-[11px] font-mono text-[#888] dark:text-[#777] uppercase tracking-wider mt-4">
+                  {skill.tagsLine}
+                </p>
+              </div>
+            </div>
+
+            <!-- Right: Download Button -->
+            <div class="shrink-0 pl-8">
+              <a
+                href={skill.downloadUrl}
+                download
+                class={skill.featured
+                  ? "w-40 h-40 rounded-8 bg-[#18181B] dark:bg-[#27272A] text-white flex items-center justify-center hover:opacity-85 shadow-xs transition-all cursor-pointer"
+                  : "w-40 h-40 rounded-8 border border-[#DCD6CC] dark:border-border-dark bg-white dark:bg-[#1A1A1A] text-ink dark:text-ink-dark flex items-center justify-center hover:bg-[#18181B] hover:text-white dark:hover:bg-white dark:hover:text-[#18181B] transition-all cursor-pointer"}
+                title={`Download ${skill.title} (.zip)`}
+                aria-label={`Download ${skill.title} package`}
+              >
+                <svg class="w-18 h-18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div id="skills-empty" class="hidden text-center py-48 border-t border-[#EBE6DF] dark:border-border-dark/60 mt-16">
+        <p class="text-body font-sans font-semibold text-ink dark:text-ink-dark">No skills matched your search.</p>
+        <p class="text-caption text-muted dark:text-muted-dark mt-4">Try clearing your search query or selecting "All skills".</p>
+      </div>
+
+      <!-- Subtle Centered Downward Indicator -->
+      <div class="flex justify-center pt-24 pb-8">
+        <div class="w-28 h-28 rounded-full border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] flex items-center justify-center text-muted">
+          <svg class="w-14 h-14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Bottom Card Footer Bar -->
+      <div class="pt-16 border-t border-[#EBE6DF] dark:border-border-dark/60 flex items-center justify-between text-[11px] font-mono tracking-widest text-[#999] dark:text-[#666] uppercase font-semibold">
+        <span>BUILT FOR DEVELOPERS & AI AGENTS</span>
+        <span>NADHEBE © 2026</span>
+      </div>
+
+    </div>
+
+    <!-- Footnote below the card -->
+    <p class="text-center text-[12px] text-muted dark:text-muted-dark mt-16 font-sans">
+      Curated, tested, and vetted skills ready to drop into Claude Code, Cursor, or your local agent workspace.
+    </p>
+
+  </div>
+</BaseLayout>
+
+<script>
+  function initSkillsDirectory() {
+    const searchInput = document.getElementById('skill-search') as HTMLInputElement | null;
+    const categoryButtons = document.querySelectorAll<HTMLButtonElement>('.cat-filter-btn');
+    const items = document.querySelectorAll<HTMLElement>('.skill-item');
+    const emptyState = document.getElementById('skills-empty');
+
+    if (!items.length) return;
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function filterSkills() {
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const title = (item.dataset.title || '').toLowerCase();
+        const desc = (item.dataset.desc || '').toLowerCase();
+        const tags = (item.dataset.tags || '').toLowerCase();
+        const category = (item.dataset.category || '').toLowerCase();
+
+        const matchesCat = activeCategory === 'all' || category === activeCategory;
+        const matchesQuery = !searchQuery ||
+          title.includes(searchQuery) ||
+          desc.includes(searchQuery) ||
+          tags.includes(searchQuery);
+
+        if (matchesCat && matchesQuery) {
+          item.style.setProperty('display', 'flex', 'important');
+          visibleCount++;
+        } else {
+          item.style.setProperty('display', 'none', 'important');
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.setProperty('display', visibleCount > 0 ? 'none' : 'block', 'important');
+      }
+    }
+
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+      filterSkills();
+    });
+
+    categoryButtons.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cat = (btn.dataset.category || 'all').toLowerCase();
+        activeCategory = cat;
+
+        categoryButtons.forEach((b) => {
+          b.className = 'cat-filter-btn px-16 py-6 rounded-full text-xs font-medium border border-[#E5E0D8] dark:border-border-dark bg-white dark:bg-[#1A1A1A] text-ink2 dark:text-ink2-dark hover:border-ink cursor-pointer transition-all';
+        });
+
+        btn.className = 'cat-filter-btn px-16 py-6 rounded-full text-xs font-semibold bg-[#18181B] text-white dark:bg-white dark:text-[#18181B] shadow-xs cursor-pointer transition-all';
+
+        filterSkills();
+      });
+    });
+
+    // Support Cmd+K / Ctrl+K keyboard shortcut to focus search input
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput?.focus();
+        searchInput?.select();
+      }
+    });
+
+    // Initial filter run
+    filterSkills();
+  }
+
+  // Robust initialization across direct load, DOMContentLoaded, and Astro View Transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSkillsDirectory);
+  } else {
+    initSkillsDirectory();
+  }
+  document.addEventListener('astro:page-load', initSkillsDirectory);
+</script>

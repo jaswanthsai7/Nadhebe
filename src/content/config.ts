@@ -117,6 +117,24 @@ const guides = defineCollection({
   schema: withYoutubeImage(sharedSchema),
 });
 
+const skills = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    category: z.string(),
+    author: z.string().default('Nadhebe Engineering'),
+    license: z.string().default('MIT'),
+    source_url: z.string().url().optional(),
+    download: z.string(),
+    tested_on: z.string(),
+    reviewed_on: z.coerce.date(),
+    version: z.string().default('1.0.0'),
+    tags: z.array(z.string()).default([]),
+    compatibility: z.array(z.string()).default(['Claude Code', 'Cursor', 'Antigravity']),
+  }),
+});
+
 export const collections = {
   authors,
   news,
@@ -125,4 +143,5 @@ export const collections = {
   comparisons,
   'best-practices': bestPractices,
   guides,
+  skills,
 };

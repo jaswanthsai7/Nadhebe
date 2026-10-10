@@ -4,7 +4,893 @@ This document contains the complete content of all published articles on Nadhebe
 
 ---
 
-# [How to Build a Custom MCP Server in TypeScript: Complete Production Guide | Nadhebe](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript)
+# [Generative Engine Optimization (GEO)](https://nadhebe.com/skills/ai-seo/)
+
+> Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.
+
+Category: Agent Skills | Tags: ["ai-seo", "agent-skills", "claude-code", "mcp", "ai search"]
+
+## Overview
+
+Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Perplexity Pro, ChatGPT Search, Gemini 3.8**.
+> 
+> Extracts concise 2-3 sentence answer blocks. Tested for high LLM citation probability and machine-readable data tables.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Generative Engine Optimization (GEO) (ai-seo.zip)**](/skills/ai-seo.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/ai-seo/`
+   * **Claude Code**: `~/.claude/skills/ai-seo/` or `.agents/skills/ai-seo/`
+   * **Cursor**: `.cursor/rules/ai-seo/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/ai-seo
+curl -sL https://nadhebe.com/skills/ai-seo.zip -o /tmp/ai-seo.zip
+unzip /tmp/ai-seo.zip -d .agents/skills/ai-seo/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### AI SEO & Generative Engine Optimization (GEO/AEO)
+
+You are an expert in AI Search Optimization (GEO/AEO) — the practice of making technical content discoverable, extractable, and citable by AI systems including Google AI Overviews, ChatGPT Search, Perplexity, Claude, and Gemini.
+
+---
+
+## 1. When to Activate This Skill
+
+- When designing or reviewing content to be cited as an authoritative source in AI responses.
+- When structuring definition blocks, comparisons, FAQs, and data tables for LLM information extraction.
+- When auditing robots.txt and server headers for AI crawlers (`GPTBot`, `PerplexityBot`, `ClaudeBot`, `Google-Extended`).
+- When optimizing content for answer engine queries ("What is X", "X vs Y", "How much does X cost").
+
+---
+
+## 2. Core Differences: Traditional SEO vs AI Search (GEO)
+
+| Dimension | Traditional SEO | Generative Engine Optimization (GEO/AEO) |
+| :--- | :--- | :--- |
+| **Primary Goal** | Rank on Google SERP Page 1 | Be cited as an authoritative source in AI answers |
+| **User Flow** | Click on link in search results | Read synthesized answer directly, with optional citation click |
+| **Ranking Position** | Top 3 positions take 60%+ clicks | Pages ranking on page 2 or 3 can be cited if extractable |
+| **Content Structure**| Keyword density, long dwell time | Self-contained answer blocks, clear entity definitions |
+| **Data Anchors** | Generic body text | Structured tables, benchmarks, exact numbers, code blocks |
+
+---
+
+## 3. High-Citation Content Patterns (GEO Rules)
+
+To maximize citation frequency in Google AI Overviews and Perplexity:
+
+### Rule 1: The Direct-Answer Block (Under H2/H3)
+Directly beneath every core heading, provide a **2–3 sentence direct answer block**. This block must be self-contained so an LLM can quote it without needing surrounding context.
+
+```markdown
+## What is Prompt Caching in Anthropic Claude?
+
+Prompt caching is an optimization feature in the Anthropic Claude API that stores repeated prompt prefixes—such as codebase context, system instructions, or long documents—in memory. On subsequent API calls matching the cached prefix within a 5-minute time-to-live window, input token costs are reduced by 90% ($0.30/1M vs $3.00/1M on Claude 3.7 Sonnet).
+```
+
+### Rule 2: Structured Comparison Matrices
+AI engines favor markdown and HTML tables for multi-entity comparison queries ("X vs Y"). Include explicit columns for Pricing, Token Limits, Architecture, and Key Tradeoffs.
+
+### Rule 3: Exact Entity Definitions
+Avoid vague pronouns ("it works well"). Always use the full entity name ("Claude Code CLI executes shell tests...") in the topic sentence of every section to assist NLP entity extraction.
+
+### Rule 4: Data Point Sourcing
+LLMs prioritize verifiable claims. Whenever citing costs, benchmarks, or throughput, include exact values and link to the primary official documentation.
+
+---
+
+## 4. AI Crawler Configuration (`robots.txt`)
+
+Ensure your domain permits AI search engines while managing training scrapers:
+
+```text
+# Allow AI Search & Citation Engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Block aggressive non-search training scrapers if desired
+User-agent: CCBot
+Disallow: /
+```
+
+---
+
+## 5. Verification Checklist
+
+Before publishing, verify:
+- [ ] Every H2 has a direct 2-3 sentence summary or definition block immediately underneath.
+- [ ] Key numerical claims cite official documentation or verified benchmarks.
+- [ ] Comparison sections use structured markdown tables.
+- [ ] The page includes an FAQ section with direct, authoritative answers.
+- [ ] Full entity names are used in topic sentences rather than ambiguous pronouns.
+
+---
+
+# [Technical Blog Engine & Verification Pipeline](https://nadhebe.com/skills/blog-generator/)
+
+> Generate production-ready, expert-level technical AI engineering articles with GEO/AEO direct answer blocks, factual checks, and build verification.
+
+Category: Agent Skills | Tags: ["blog-generator", "agent-skills", "claude-code", "mcp", "ai publishing"]
+
+## Overview
+
+Generate production-ready, expert-level technical AI engineering articles with GEO/AEO direct answer blocks, factual checks, and build verification.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Claude Code 2.x, Node.js 22, Astro 5**.
+> 
+> Produces valid frontmatter, strict heading hierarchy, and zero hallucinated commands. All generated code blocks pass syntax validation.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Technical Blog Engine & Verification Pipeline (blog-generator.zip)**](/skills/blog-generator.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/blog-generator/`
+   * **Claude Code**: `~/.claude/skills/blog-generator/` or `.agents/skills/blog-generator/`
+   * **Cursor**: `.cursor/rules/blog-generator/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/blog-generator
+curl -sL https://nadhebe.com/skills/blog-generator.zip -o /tmp/blog-generator.zip
+unzip /tmp/blog-generator.zip -d .agents/skills/blog-generator/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Nadhebe Master Technical Blog Generation & Publishing Engine
+
+Use this skill whenever a user provides a topic, article idea, video transcript, or raw notes to generate production-ready, expert-level technical articles for Nadhebe.
+
+---
+
+## 1. End-to-End Blog Writing Workflow
+
+Every article generated for Nadhebe must execute this sequential workflow:
+
+```
+┌─────────────────────────┐
+│ 1. RESEARCH & INTENT    │ → Identify primary keyword, search intent, AEO queries,
+│                         │   and analyze competing SERP pages (via `keyword-research` & `ai-seo`)
+└───────────┬─────────────┘
+            ▼
+┌─────────────────────────┐
+│ 2. FACT VERIFICATION    │ → Verify technical claims against official vendor docs.
+│                         │   Strict zero-fabrication: NO fake stats, fake quotes, or anecdotes.
+└───────────┬─────────────┘
+            ▼
+┌─────────────────────────┐
+│ 3. COLLECTION SELECTION │ → Assign to most relevant collection: `guides`, `tutorials`,
+│                         │   `comparisons`, `news`, `tool-reviews`, or `best-practices`.
+└───────────┬─────────────┘
+            ▼
+┌─────────────────────────┐
+│ 4. DRAFTING & GEO/AEO   │ → Write with single H1, 2-3 sentence direct answer blocks under H2s,
+│                         │   structured comparison tables, code blocks, and Mermaid diagrams.
+└───────────┬─────────────┘
+            ▼
+┌─────────────────────────┐
+│ 5. HERO ART GENERATION  │ → Generate 16:9 Vintage Editorial Collage artwork via `generate_image`,
+│                         │   convert to WebP and save to `public/images/<slug>-hero.webp`.
+└───────────┬─────────────┘
+            ▼
+┌─────────────────────────┐
+│ 6. PRE-PUBLISH AUDIT    │ → Run `content-quality-auditor` checklist, verify internal links,
+│                         │   and ensure `npm run build` passes with 0 broken links.
+└─────────────────────────┘
+```
+
+---
+
+## 2. Content Collection Routing
+
+Assign the article to the exact matching directory under `src/content/`:
+- `src/content/tutorials/`: Hands-on step-by-step developer code walkthroughs, CLI setup guides, MCP tools, serverless deployments.
+- `src/content/guides/`: Enterprise architecture breakdowns, pricing matrices, CI/CD pipeline automation, context engineering playbooks.
+- `src/content/comparisons/`: Head-to-head model/tool benchmark reports (e.g. `vLLM vs Ollama`, `Claude Code vs Cursor`).
+- `src/content/news/`: Major model releases, breaking benchmark announcements.
+- `src/content/tool-reviews/`: In-depth single product/model evaluation reviews.
+- `src/content/best-practices/`: Production engineering patterns, security audits, and latency optimization.
+
+*Do not force articles into irrelevant collections.*
+
+---
+
+## 3. Article Markdown Frontmatter Schema
+
+Every generated Markdown file must strictly conform to Nadhebe's Astro content schema (`src/content/config.ts`):
+
+```markdown
+---
+title: "Primary Keyword First: Action / Benefit Target | Nadhebe"
+description: "Comprehensive 150-160 character meta description containing primary keyword."
+pubDate: 2026-10-10
+updatedDate: 2026-10-10
+author: nadhebe-team
+category: "Guides" | "Tutorials" | "Comparisons" | "News" | "Reviews"
+tags: ["Keyword1", "Keyword2", "Keyword3"]
+heroImage: "/images/<slug>-hero.webp"
+heroAlt: "Minimalist vintage editorial illustration representing <topic> on a <color> background"
+estimatedReadingTime: 12
+isPillar: true | false
+topic: "Topic Cluster Name" # e.g. "AI Tool Costs", "Model Serving"
+searchIntent: "informational" | "commercial" | "tutorial" | "comparison"
+parentPillar: "<parent-slug>" # Optional (only if isPillar is false)
+draft: false
+itemsCompared: ["Item A", "Item B"] # Optional (only for comparisons)
+faq:
+  - question: "Direct user query?"
+    answer: "Clear, factual, authoritative answer block."
+  - question: "Another frequent question?"
+    answer: "Concise answer without marketing fluff."
+sources:
+  - label: "Official Documentation"
+    url: "https://example.com/docs"
+  - label: "GitHub Repository / Benchmarks"
+    url: "https://github.com/..."
+---
+```
+
+---
+
+## 4. Technical Depth, GEO/AEO & Editorial Standards
+
+- **Strict Factual Accuracy**: Never fabricate statistics, token pricing, benchmarks, or citations. If a number is unknown or estimated, state it explicitly as directional.
+- **Zero AI Clichés**: Prohibit empty filler words (*"In today's fast-paced digital world"*, *"delve into"*, *"game changer"*, *"seamlessly"*).
+- **Direct Answer Blocks (GEO/AEO)**: Under every H2, write a self-contained 2–3 sentence direct answer block that can be cited in Google AI Overviews or Perplexity.
+- **Structured Data Tables**: Format complex pricing, feature matrices, or benchmark results into clean Markdown tables.
+- **Originality Threshold**: Minimum 70% original synthesis, code examples, Mermaid diagrams, performance tables, and decision trees.
+
+---
+
+## 5. Hero Artwork Specification (Vintage Editorial Collage)
+
+All hero images generated for Nadhebe blogs must follow the **Vintage Editorial Mixed-Media Collage** style:
+
+### Aesthetic Principles:
+- **Canvas / Background**: Flat pastel or muted neutral tones (Sage Green `#87A987`, Soft Olive `#A3B18A`, Warm Sand `#F4F1DE`, Soft Terracotta `#E07A5F`, Muted Mint `#B7E4C7`, Soft Lavender `#D8B4F8`).
+- **Visual Subject Cutouts**: High-contrast black-and-white or duotone cutouts of tech subjects (terminals, server racks, network graph nodes, calculators, keyboards) paired with subtle botanical leaves.
+- **Geometric Elements**: Concentric circles, solid yellow/orange accent suns (`#F4A261`), and vintage halftone textures.
+- **Anti-Patterns**: ❌ ZERO neon 3D glowing spheres, ❌ ZERO muddy black backgrounds, ❌ ZERO artificial text watermarks.
+
+### Image Prompt Template for `generate_image`:
+```text
+Vintage editorial collage illustration on a [COLOR PALETTE] background. A black and white cutout of [SUBJECT A] and [SUBJECT B], surrounded by warm yellow geometric circles, vintage magazine halftone textures, and subtle green plant leaves. Clean minimal tech art style, 16:9 ratio
+```
+
+---
+
+## 6. Post-Generation Execution & Build Verification
+
+After creating or updating blog posts:
+1. Convert the generated artifact image to WebP and save to `public/images/<slug>-hero.webp`.
+2. Run `npm run build` to compile static HTML pages and trigger Pagefind search indexing.
+3. Verify that `scripts/verify-links.ts` passes with **0 broken links**.
+4. Run `git add .`, `git commit -m "..."`, and `git push` to deploy to GitHub.
+
+---
+
+# [Topical Authority & Content Clustering](https://nadhebe.com/skills/content-cluster/)
+
+> Map topical authority architectures, pillar articles, and supporting cluster pages to build search dominance without keyword cannibalization.
+
+Category: Agent Skills | Tags: ["content-cluster", "agent-skills", "claude-code", "mcp", "content strategy"]
+
+## Overview
+
+Map topical authority architectures, pillar articles, and supporting cluster pages to build search dominance without keyword cannibalization.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Claude Code 2.x, Python 3.11, Astro 5**.
+> 
+> Tested across 15+ pillar topics. Enforces parent-child hierarchy and prevents keyword overlap across sub-guides.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Topical Authority & Content Clustering (content-cluster.zip)**](/skills/content-cluster.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/content-cluster/`
+   * **Claude Code**: `~/.claude/skills/content-cluster/` or `.agents/skills/content-cluster/`
+   * **Cursor**: `.cursor/rules/content-cluster/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/content-cluster
+curl -sL https://nadhebe.com/skills/content-cluster.zip -o /tmp/content-cluster.zip
+unzip /tmp/content-cluster.zip -d .agents/skills/content-cluster/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Content Clustering & Topical Authority Architecture
+
+Activate this skill when planning a topical cluster to establish domain authority across a technical niche (e.g., "AI Tool Costs", "Local LLM Serving", "Model Context Protocol").
+
+---
+
+## 1. When to Activate This Skill
+
+- When planning multiple related articles around a core technical discipline.
+- When organizing existing content into structured hub-and-spoke hierarchies.
+- When preventing keyword cannibalization across similar articles.
+- When configuring Nadhebe's topic cluster schema fields (`isPillar`, `topic`, `parentPillar`).
+
+---
+
+## 2. Topic Cluster Architecture in Nadhebe
+
+Nadhebe's content collections use frontmatter fields to link cluster articles automatically in `src/layouts/ArticleLayout.astro`:
+
+```
+                       ┌──────────────────────────────┐
+                       │         PILLAR GUIDE         │
+                       │    (isPillar: true)          │
+                       │ topic: "AI Tool Costs"       │
+                       └──────────────┬───────────────┘
+                                      │
+         ┌────────────────────────────┼────────────────────────────┐
+         ▼                            ▼                            ▼
+┌──────────────────┐         ┌──────────────────┐         ┌──────────────────┐
+│  CLUSTER POST 1  │         │  CLUSTER POST 2  │         │  CLUSTER POST 3  │
+│ parentPillar:    │         │ parentPillar:    │         │ parentPillar:    │
+│  "claude-code..."│         │  "claude-code..."│         │  "claude-code..."│
+└──────────────────┘         └──────────────────┘         └──────────────────┘
+```
+
+### 1. The Pillar Page (`isPillar: true`)
+- **Role**: Comprehensive, overarching resource covering the whole topic at a broad architectural level.
+- **Example**: `claude-code-pricing-guide.md` or `openai-chatgpt-pricing-guide.md`.
+- **Word Count**: 2,500 – 4,000 words.
+- **Linking Rule**: Links out to all child cluster posts via contextual recommendation cards.
+
+### 2. Supporting Cluster Articles (`parentPillar: "<slug>"`)
+- **Role**: Deep-dive focused guides targeting specific sub-queries, setup workflows, or specific model comparisons.
+- **Example**: `runpod-pricing-explained.md`, `deepseek-api-pricing-guide.md`.
+- **Word Count**: 1,200 – 2,500 words.
+- **Linking Rule**: Must include a prominent link back to the parent pillar within the first 300 words.
+
+---
+
+## 3. Step-by-Step Cluster Planning Workflow
+
+1. **Define Core Topic**: Choose an umbrella category (e.g. `GPU Cloud Infrastructure`).
+2. **Assign Pillar Post**: Identify or create the authoritative cornerstone piece with `isPillar: true` and `topic: "..."`.
+3. **Map 4–8 Supporting Cluster Topics**: Each supporting post must target a distinct search intent:
+   - *Cluster Post A*: Implementation / setup guide
+   - *Cluster Post B*: Cost optimization / pricing breakdown
+   - *Cluster Post C*: Direct head-to-head comparison
+   - *Cluster Post D*: Troubleshooting / common failures
+4. **Enforce Distinct URL Slugs & Keywords**: Verify that no two pages in the cluster target identical primary search phrases.
+
+---
+
+## 4. Cluster Specification Output Template
+
+```markdown
+### Content Cluster Blueprint: [Topic Cluster Name]
+
+- **Topic Cluster**: [Name, e.g. "AI Tool Costs"]
+- **Pillar Article**: `src/content/guides/[pillar-slug].md`
+  - **Title**: [Comprehensive Pillar Title]
+  - **Target Keyword**: [Broad Primary Keyword]
+  - **Frontmatter Config**: `isPillar: true`, `topic: "[Cluster Name]"`
+
+#### Supporting Cluster Posts
+
+1. **Article 1**: `src/content/guides/[sub-slug-1].md`
+   - **Title**: [Focused Sub-topic Title]
+   - **Target Keyword**: [Specific Long-tail Keyword]
+   - **Frontmatter Config**: `isPillar: false`, `topic: "[Cluster Name]"`, `parentPillar: "[pillar-slug]"`
+   - **Link to Pillar**: [Anchor text and placement]
+
+2. **Article 2**: `src/content/guides/[sub-slug-2].md`
+   - **Title**: [Focused Sub-topic Title]
+   - **Target Keyword**: [Specific Long-tail Keyword]
+   - **Frontmatter Config**: `isPillar: false`, `topic: "[Cluster Name]"`, `parentPillar: "[pillar-slug]"`
+```
+
+---
+
+# [Helpful Content & E-E-A-T Quality Auditor](https://nadhebe.com/skills/content-quality-auditor/)
+
+> Audit technical articles for Google Helpful Content guidelines, technical SEO, GEO/AEO answer extractability, factual accuracy, and publishing readiness.
+
+Category: Agent Skills | Tags: ["content-quality-auditor", "agent-skills", "claude-code", "mcp", "qa & compliance"]
+
+## Overview
+
+Audit technical articles for Google Helpful Content guidelines, technical SEO, GEO/AEO answer extractability, factual accuracy, and publishing readiness.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Google HCS Guidelines, Markdown AST**.
+> 
+> Runs comprehensive pre-publish audits. Catches passive voice, thin generic claims, missing benchmarks, and heading gaps.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Helpful Content & E-E-A-T Quality Auditor (content-quality-auditor.zip)**](/skills/content-quality-auditor.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/content-quality-auditor/`
+   * **Claude Code**: `~/.claude/skills/content-quality-auditor/` or `.agents/skills/content-quality-auditor/`
+   * **Cursor**: `.cursor/rules/content-quality-auditor/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/content-quality-auditor
+curl -sL https://nadhebe.com/skills/content-quality-auditor.zip -o /tmp/content-quality-auditor.zip
+unzip /tmp/content-quality-auditor.zip -d .agents/skills/content-quality-auditor/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Content Quality & SEO/AEO Auditor
+
+Activate this skill to audit, score, and verify technical articles prior to publishing.
+
+---
+
+## 1. When to Activate This Skill
+
+- Before publishing a newly drafted article or guide.
+- When evaluating existing content for Google Helpful Content and EEAT compliance.
+- When auditing markdown files for formatting errors, broken links, or frontmatter schema violations.
+- When checking answer extractability for Google AI Overviews, Perplexity, and ChatGPT.
+
+---
+
+## 2. Five Audit Pillars
+
+### Pillar 1: Factual Integrity & Zero Fabrication (Strict)
+- **Zero Hallucinated Citations**: Every URL cited in `sources` must be live and official.
+- **No Fabricated Benchmarks**: Model numbers, token limits, and prices must reflect official documentation.
+- **No Fake Quotes / Experiences**: Avoid fabricated anecdotes ("In my 10 years using Claude Code..."). Frame advice through objective engineering principles.
+- **Zero AI Clichés**: Ban filler words like *"In today's fast-paced digital landscape"*, *"delve into"*, *"testament to"*, *"game changer"*, *"seamlessly"*.
+
+### Pillar 2: Technical SEO & Heading Hierarchy
+- **Single H1**: Exactly one `# Title` per article.
+- **Strict Hierarchy**: H1 → H2 → H3. Never skip levels (no H1 → H3).
+- **Title Formula**: Primary Keyword First + Benefit + ` | Nadhebe`.
+- **Meta Description**: 150–160 characters, containing the primary keyword.
+
+### Pillar 3: GEO / AEO Answer Extractability
+- **Direct Answer Blocks**: 2–3 sentence direct answer immediately below each H2 heading.
+- **Data Tables**: Comparisons must use structured markdown tables, not bulleted paragraphs.
+- **Self-Contained Definitions**: Sections must be extractable by an LLM without reading the entire page.
+
+### Pillar 4: Astro Schema & Frontmatter Validation
+Verify all required frontmatter fields for `src/content/config.ts`:
+- `title`, `description`, `pubDate`, `author: nadhebe-team`, `category`, `tags`
+- `heroImage` (must exist in `/public/images/<slug>-hero.webp`)
+- `topic`, `isPillar`, `searchIntent`
+- `faq`: minimum 3-4 structured Q&A pairs
+- `sources`: minimum 2 authoritative links
+
+### Pillar 5: Link Integrity & Build Safety
+- All internal markdown links must point to valid routes (e.g. `[Text](/guides/slug)`).
+- Must verify that `npm run build` compiles with 0 broken links.
+
+---
+
+## 3. Audit Scoring Template
+
+```markdown
+# Content Quality Audit Report: [Article Title]
+
+| Dimension | Score (1-100) | Status | Key Findings |
+| :--- | :--- | :--- | :--- |
+| **Factual Integrity & EEAT** | [Score] | ✅ Pass / ❌ Fail | [Details] |
+| **Technical SEO & Structure**| [Score] | ✅ Pass / ❌ Fail | [Details] |
+| **GEO / AEO Extractability** | [Score] | ✅ Pass / ⚠️ Warn | [Details] |
+| **Frontmatter & Schema** | [Score] | ✅ Pass / ❌ Fail | [Details] |
+| **Link Integrity & Assets** | [Score] | ✅ Pass / ❌ Fail | [Details] |
+
+### Summary & Verdict
+- **Overall Quality Score**: [Score] / 100
+- **Publish Readiness**: [Ready to Publish / Revisions Needed]
+
+### Actionable Fixes (if any)
+1. **[Fix 1]**: [Exact modification required]
+2. **[Fix 2]**: [Exact modification required]
+```
+
+---
+
+# [Anchor Distribution & Graph Linker](https://nadhebe.com/skills/internal-linking/)
+
+> Design, audit, and optimize internal linking hierarchies, anchor text distribution, and topic cluster equity.
+
+Category: Agent Skills | Tags: ["internal-linking", "agent-skills", "claude-code", "mcp", "technical seo"]
+
+## Overview
+
+Design, audit, and optimize internal linking hierarchies, anchor text distribution, and topic cluster equity.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **TypeScript 5, Astro View Transitions**.
+> 
+> Audited across 44,000+ internal links. Eliminates orphan pages and ensures bidirectional pillar-cluster authority flow.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Anchor Distribution & Graph Linker (internal-linking.zip)**](/skills/internal-linking.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/internal-linking/`
+   * **Claude Code**: `~/.claude/skills/internal-linking/` or `.agents/skills/internal-linking/`
+   * **Cursor**: `.cursor/rules/internal-linking/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/internal-linking
+curl -sL https://nadhebe.com/skills/internal-linking.zip -o /tmp/internal-linking.zip
+unzip /tmp/internal-linking.zip -d .agents/skills/internal-linking/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Strategic Internal Linking & Link Equity Architecture
+
+Activate this skill when planning, auditing, or optimizing internal link structures across Nadhebe's technical content.
+
+---
+
+## 1. When to Activate This Skill
+
+- When linking a newly written article to existing pillar and cluster guides.
+- When selecting natural, descriptive anchor text that prevents keyword stuffing.
+- When preventing orphan pages and optimizing search crawler pageRank distribution.
+- When troubleshooting or configuring `scripts/run-internal-linker.ts` and `scripts/verify-links.ts`.
+
+---
+
+## 2. Link Hierarchy Rules in Nadhebe
+
+Nadhebe follows a strict 4-way internal linking topology:
+
+```
+ ┌────────────────────────────────────────────────────────────────────────┐
+ │                      INTERNAL LINKING TOPOLOGY                         │
+ └───────────────────────────────────┬────────────────────────────────────┘
+                                     │
+           ┌─────────────────────────┼─────────────────────────┐
+           ▼                         ▼                         ▼
+┌──────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
+│  PILLAR → CLUSTER    │  │  CLUSTER → PILLAR    │  │  CLUSTER ↔ CLUSTER   │
+├──────────────────────┤  ├──────────────────────┤  ├──────────────────────┤
+│ • Authority push     │  │ • Equity consolidation│ • Semantic depth      │
+│ • "Related Guides"   │  │ • Link in first 300w │  │ • Contextual mention │
+│ • Broad to specific  │  │ • Mandatory link back│  │ • Complementary tech │
+└──────────────────────┘  └──────────────────────┘  └──────────────────────┘
+```
+
+### 1. Pillar → Cluster (Downward Equity)
+Pillar articles must link out to their child cluster posts within the body text or dedicated "Related Pricing Guides" / "Related Architectures" sections.
+
+### 2. Cluster → Pillar (Upward Consolidation — Mandatory)
+Every supporting cluster post **MUST link back to its parent pillar guide** within the opening 300 words. For example, in `deepseek-api-pricing-guide.md`:
+> *"For high-volume developers, comparing token rates against our [OpenAI API & ChatGPT Pricing Guide](/guides/openai-chatgpt-pricing-guide) highlights key cost differences..."*
+
+### 3. Cluster ↔ Cluster (Cross-Cluster Semantic Links)
+Articles sharing technical dependencies should link horizontally:
+- A guide deploying vLLM links to `RunPod GPU Pricing Explained`
+- A guide configuring Claude Code links to `Cursor Pricing Guide`
+
+---
+
+## 3. Anchor Text Best Practices
+
+| Anchor Text Style | Example | Status | Reason |
+| :--- | :--- | :--- | :--- |
+| **Descriptive Phrase** | `[OpenAI API & ChatGPT Pricing Guide](/guides/openai-chatgpt-pricing-guide)` | ✅ Recommended | Clear context for both readers and search crawlers |
+| **Natural Sentence Flow** | `review our [deep-dive on prompt caching token rates](/guides/claude-code-pricing-guide)` | ✅ Recommended | Reads organically without feeling forced |
+| **Generic Link** | `Read more [here](/guides/...)` | ❌ Prohibited | Provides zero semantic context to search engines |
+| **Over-Optimized Exact Match**| `best ai pricing best ai pricing best ai pricing` | ❌ Prohibited | Triggers Google spam and over-optimization penalties |
+
+---
+
+## 4. Automated Build Integration
+
+Nadhebe utilizes an automated build-time pipeline:
+- `scripts/run-internal-linker.ts`: Automatically injects contextual links for existing articles across compiled HTML files based on title keyword matching.
+- `scripts/verify-links.ts`: Automatically tests every internal link during `npm run build` to ensure **0 broken links**.
+
+Always format markdown links with absolute project paths:
+`[Link Text](/guides/slug-name)` or `[Link Text](/tutorials/slug-name)`
+Never use relative paths like `../guides/slug.md` in markdown content.
+
+---
+
+# [Technical Keyword Research & Intent Mapping](https://nadhebe.com/skills/keyword-research/)
+
+> Perform developer-focused keyword research, search intent mapping, and conversational AEO query discovery.
+
+Category: Agent Skills | Tags: ["keyword-research", "agent-skills", "claude-code", "mcp", "seo"]
+
+## Overview
+
+Perform developer-focused keyword research, search intent mapping, and conversational AEO query discovery.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Claude Code 2.x, Cursor, Perplexity API**.
+> 
+> Verified against technical developer queries. Accurately maps head-terms, long-tail CLI error phrases, and natural language questions. Prompt latency under 1.2s on Claude 3.5 Sonnet.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Technical Keyword Research & Intent Mapping (keyword-research.zip)**](/skills/keyword-research.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/keyword-research/`
+   * **Claude Code**: `~/.claude/skills/keyword-research/` or `.agents/skills/keyword-research/`
+   * **Cursor**: `.cursor/rules/keyword-research/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/keyword-research
+curl -sL https://nadhebe.com/skills/keyword-research.zip -o /tmp/keyword-research.zip
+unzip /tmp/keyword-research.zip -d .agents/skills/keyword-research/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Technical Keyword Research & Search Intent Mapping
+
+Activate this skill when researching, identifying, or prioritizing keywords for technical AI guides, tutorials, tool reviews, and comparisons.
+
+---
+
+## 1. When to Activate This Skill
+
+- When planning a new technical article or comparing tools.
+- When determining the primary target keyword vs secondary LSI keywords.
+- When evaluating search intent (informational, commercial investigation, tutorial/code, navigational).
+- When discovering natural-language conversational queries asked in Perplexity, ChatGPT, and Google.
+
+---
+
+## 2. Research Workflow
+
+### Step 1: Query Discovery & Intent Classification
+Classify the dominant search intent for the target topic:
+
+| Intent Category | Query Patterns | Expected Page Format in Nadhebe |
+| :--- | :--- | :--- |
+| **Tutorial / Code** | "How to deploy vLLM on AWS", "Setup MCP server" | `src/content/tutorials/` (hands-on code walkthrough) |
+| **Commercial / Costs**| "Claude Code pricing", "Cursor vs Windsurf costs" | `src/content/guides/` (cost matrices, ROI analysis) |
+| **Comparison** | "vLLM vs Ollama", "DeepSeek R1 vs OpenAI o1" | `src/content/comparisons/` (head-to-head benchmarks) |
+| **Review / Evaluation**| "Instatic CMS review", "Best cloud GPU 2026" | `src/content/tool-reviews/` (in-depth hands-on review) |
+| **News / Release** | "Kimi K3 release", "Gemini 3.6 Flash announcement"| `src/content/news/` (architectural analysis) |
+
+### Step 2: Semantic Variation & AEO Query Expansion
+For every primary topic, extract:
+1. **Primary Seed Keyword**: Highest relevance developer search query (e.g., `claude code pricing`).
+2. **Secondary LSI Keywords**: Exact technical terms and commands (e.g., `claude token limits`, `anthropic console api rate limits`, `prompt caching discounts`).
+3. **Conversational AEO Queries**: Natural questions asked to AI search engines (e.g., `how much does a 1 hour claude code session cost`).
+
+### Step 3: Competitive SERP Analysis
+Analyze existing ranking pages to identify:
+- **Content Gaps**: Missing code examples, outdated 2024/2025 pricing, omitted prompt caching details, or lack of architecture diagrams.
+- **Format Requirements**: Do the top results feature tables, bash commands, or mermaid flowcharts?
+- **Domain Authority Expectations**: Differentiate achievable niche technical keywords from broad uncompetitive terms.
+
+---
+
+## 3. Output Format
+
+When generating keyword research output, present results in this clean markdown matrix:
+
+```markdown
+### Keyword Research Summary
+
+- **Topic**: [Subject Area]
+- **Primary Keyword**: [Target Keyword]
+- **Search Intent**: informational | commercial | tutorial | comparison
+- **Target Audience**: AI Engineers | DevOps | Technical Leads | Solopreneurs
+- **Recommended Nadhebe Collection**: `guides` | `tutorials` | `comparisons` | `tool-reviews` | `news`
+
+| Keyword Variant | Search Intent | Est. Competition | Recommended Section / Heading |
+| :--- | :--- | :--- | :--- |
+| [Primary Keyword] | [Intent] | Low / Med / High | H1 / Title Tag / First 100 words |
+| [Secondary Keyword 1] | [Intent] | Low / Med | H2: Overview & Rates |
+| [Secondary Keyword 2] | [Intent] | Low / Med | H2: Cost Optimization |
+
+#### Conversational AEO Queries (FAQ Targets)
+1. "Question 1?" -> Direct answer targeting FAQ schema
+2. "Question 2?" -> Direct answer targeting FAQ schema
+```
+
+---
+
+# [Schema.org Rich Structured Data Engine](https://nadhebe.com/skills/schema-generator/)
+
+> Generate and validate Schema.org JSON-LD structured data (Article, TechArticle, FAQPage, BreadcrumbList, WebApplication) for Google rich results.
+
+Category: Agent Skills | Tags: ["schema-generator", "agent-skills", "claude-code", "mcp", "technical seo"]
+
+## Overview
+
+Generate and validate Schema.org JSON-LD structured data (Article, TechArticle, FAQPage, BreadcrumbList, WebApplication) for Google rich results.
+
+### Verification & Test Notes
+> [!NOTE]
+> **Tested & Reviewed on 2026-10-10** for runtime environment **Google Rich Results Test API, Node.js 20+**.
+> 
+> Validates against Schema.org 2026 specs. Tested on Google Rich Results Validator with 0 warnings and 0 errors.
+
+---
+
+## Installation & Setup
+
+### Option 1: Direct Skill Download
+1. Download [**Schema.org Rich Structured Data Engine (schema-generator.zip)**](/skills/schema-generator.zip).
+2. Unpack the zip file into your workspace agent directory:
+   * **Antigravity IDE**: `.agents/skills/schema-generator/`
+   * **Claude Code**: `~/.claude/skills/schema-generator/` or `.agents/skills/schema-generator/`
+   * **Cursor**: `.cursor/rules/schema-generator/` or your project prompt definitions.
+
+### Option 2: CLI Activation
+If using Antigravity or compatible agent runners:
+```bash
+# Load into active workspace
+mkdir -p .agents/skills/schema-generator
+curl -sL https://nadhebe.com/skills/schema-generator.zip -o /tmp/schema-generator.zip
+unzip /tmp/schema-generator.zip -d .agents/skills/schema-generator/
+```
+
+---
+
+## Skill Instructions & Reference
+
+### Schema Generator & Structured Data Validator
+
+Activate this skill when generating, auditing, or validating JSON-LD structured data markup for Nadhebe pages.
+
+---
+
+## 1. When to Activate This Skill
+
+- When defining structured data schemas for blog posts, tutorials, and comparison pages.
+- When formatting FAQ sections in Markdown frontmatter to trigger Google FAQ rich results.
+- When creating structured schemas for interactive tools in `src/pages/tools/`.
+- When validating rich snippet eligibility against Google Search Central standards.
+
+---
+
+## 2. Nadhebe Structured Data Architecture
+
+In Nadhebe, structured data is rendered through automated Astro layout components:
+
+### 1. Articles & Guides (`ArticleSchema.astro`)
+Automatically rendered in `<head>` using frontmatter:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "[title]",
+  "description": "[description]",
+  "image": "https://nadhebe.com[heroImage]",
+  "datePublished": "[pubDate ISO]",
+  "dateModified": "[updatedDate ISO]",
+  "author": {
+    "@type": "Organization",
+    "name": "Nadhebe Editorial Team",
+    "url": "https://nadhebe.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nadhebe",
+    "url": "https://nadhebe.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nadhebe.com/logo.webp"
+    }
+  }
+}
+```
+
+### 2. FAQ Rich Results (`FAQSchema.astro`)
+Rendered automatically whenever the frontmatter contains an `faq` array:
+```yaml
+faq:
+  - question: "Is Claude Code included in Claude Pro?"
+    answer: "Yes, Claude Pro includes Claude Code within standard daily token allowances."
+  - question: "Does Claude Code support Prompt Caching?"
+    answer: "Yes, Anthropic prompt caching is automatically applied, cutting input token fees by 90%."
+```
+
+### 3. Web Applications (`src/pages/tools/`)
+For interactive tools, inject standard `WebApplication` JSON-LD into the page `<head>`:
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI API Pricing Calculator",
+  "url": "https://nadhebe.com/tools/ai-api-pricing-calculator",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5."
+}
+</script>
+```
+
+---
+
+## 3. Google Eligibility & Rules of Thumb
+
+- **No Promotional / Misleading FAQs**: Answers must be factual, direct, and objectively verifiable.
+- **Visible Content Parity**: Every piece of data in the JSON-LD schema must be clearly visible on the rendered web page. Hidden text violates Google spam policies.
+- **Dates**: Always preserve ISO 8601 strings (`YYYY-MM-DD` or `YYYY-MM-DDTHH:mm:ssZ`).
+
+---
+
+# [How to Build a Custom MCP Server in TypeScript: Complete Production Guide | Nadhebe](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript/)
 
 > Build and test a custom Model Context Protocol (MCP) server in TypeScript from scratch. Includes verified ESM configuration, Zod validation, STDIO debugging, and Claude Desktop integration.
 
@@ -492,7 +1378,7 @@ Before deploying a custom MCP server into everyday workflows, verify your setup 
 
 ---
 
-# [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe](https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave)
+# [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe](https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave/)
 
 > Step-by-step walkthrough to block ChatGPT Plus upsell banners and partner promo cards in Google Chrome and Brave Browser using a private Manifest V3 extension.
 
@@ -612,7 +1498,7 @@ To keep quick access to the extension's status:
 
 ---
 
-# [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs | Nadhebe](https://nadhebe.com/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields)
+# [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs | Nadhebe](https://nadhebe.com/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields/)
 
 > Compare ChatGPT Ad & Promo Blocker against uBlock Origin and Brave Shields. Learn why network-level filters miss React DOM ads and how to fix them.
 
@@ -729,7 +1615,7 @@ You do not need to replace your existing ad blocker. The recommended engineering
 
 ---
 
-# [ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-brave-guide)
+# [ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-brave-guide/)
 
 > Block intrusive ChatGPT Plus/Pro upgrade banners, sponsored partner widgets, and promo cards in Chrome and Brave with a lightweight, private Manifest V3 extension.
 
@@ -888,7 +1774,7 @@ You can also test the live filtering algorithm against simulated promo cards in 
 
 ---
 
-# [DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)](https://nadhebe.com/guides/deepseek-api-pricing-guide)
+# [DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)](https://nadhebe.com/guides/deepseek-api-pricing-guide/)
 
 > Complete guide to DeepSeek API pricing. Detailed breakdown of DeepSeek-V3, DeepSeek-R1 token rates, prompt caching discounts, and costs vs OpenAI.
 
@@ -1002,7 +1888,7 @@ print("Solution:", response.choices[0].message.content)
 
 ---
 
-# [GitHub Copilot Pricing Guide: Free, Individual, Business, and Enterprise Plans (2026)](https://nadhebe.com/guides/github-copilot-pricing-guide)
+# [GitHub Copilot Pricing Guide: Free, Individual, Business, and Enterprise Plans (2026)](https://nadhebe.com/guides/github-copilot-pricing-guide/)
 
 > A complete guide to GitHub Copilot pricing tiers. Breakdown of Copilot Free, Individual $10/mo, Business $19/mo, and Enterprise $39/mo model features.
 
@@ -1089,7 +1975,7 @@ With options ranging from a zero-cost **Copilot Free** tier to full **Copilot En
 
 ---
 
-# [xAI Grok Pricing Guide: X Subscriptions, SuperGrok, and Grok API Rates (2026)](https://nadhebe.com/guides/grok-xai-pricing-guide)
+# [xAI Grok Pricing Guide: X Subscriptions, SuperGrok, and Grok API Rates (2026)](https://nadhebe.com/guides/grok-xai-pricing-guide/)
 
 > A complete guide to xAI Grok pricing. Compare X Premium $8/mo, X Premium+ $16/mo, SuperGrok, and xAI Developer API token costs for Grok 2 and Grok 3.
 
@@ -1181,7 +2067,7 @@ print(response.choices[0].message.content)
 
 ---
 
-# [Mistral AI Pricing Guide: Le Chat Pro, API Token Rates, and Open Weights (2026)](https://nadhebe.com/guides/mistral-ai-pricing-guide)
+# [Mistral AI Pricing Guide: Le Chat Pro, API Token Rates, and Open Weights (2026)](https://nadhebe.com/guides/mistral-ai-pricing-guide/)
 
 > A complete guide to Mistral AI pricing. Compare Le Chat Pro $9.99/mo, La Plateforme API token costs for Mistral Large 2, Codestral, and open-weight models.
 
@@ -1257,7 +2143,7 @@ One of Mistral's greatest strengths is licensing flexibility:
 
 ---
 
-# [OpenAI API & ChatGPT Pricing Guide: Models, Tiers, and Cost Management (2026)](https://nadhebe.com/guides/openai-chatgpt-pricing-guide)
+# [OpenAI API & ChatGPT Pricing Guide: Models, Tiers, and Cost Management (2026)](https://nadhebe.com/guides/openai-chatgpt-pricing-guide/)
 
 > A complete guide to OpenAI API token costs and ChatGPT subscription tiers. Breakdown of GPT-4o, o1, o3-mini pricing, prompt caching, and Batch API savings.
 
@@ -1355,7 +2241,7 @@ Using `gpt-4o-mini` ($0.15/1M input) for preliminary classification and formatti
 
 ---
 
-# [Perplexity AI Pricing Guide: Free vs Pro, Enterprise, and Sonar API Costs (2026)](https://nadhebe.com/guides/perplexity-ai-pricing-guide)
+# [Perplexity AI Pricing Guide: Free vs Pro, Enterprise, and Sonar API Costs (2026)](https://nadhebe.com/guides/perplexity-ai-pricing-guide/)
 
 > A complete guide to Perplexity AI pricing. Compare Perplexity Free, Pro $20/mo, Enterprise Pro, and Sonar API search token costs with live web grounding.
 
@@ -1444,7 +2330,7 @@ curl https://api.perplexity.ai/chat/completions \
 
 ---
 
-# [Windsurf Pricing Guide: Free vs Pro, Cascade Flows, and Team Billing (2026)](https://nadhebe.com/guides/windsurf-codeium-pricing-guide)
+# [Windsurf Pricing Guide: Free vs Pro, Cascade Flows, and Team Billing (2026)](https://nadhebe.com/guides/windsurf-codeium-pricing-guide/)
 
 > A complete guide to Windsurf IDE pricing by Codeium. Compare Free, Pro $15/mo, Teams, and Enterprise plans, Cascade flow credits, and AI models.
 
@@ -1520,7 +2406,7 @@ A single user prompt with multiple follow-up clarifications counts as one contig
 
 ---
 
-# [BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe](https://nadhebe.com/guides/bilibili-english-translation-chrome-extension-guide)
+# [BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe](https://nadhebe.com/guides/bilibili-english-translation-chrome-extension-guide/)
 
 > Complete walkthrough for installing and configuring the BiliBili English Translator Chrome extension. Features 3 display modes, local dictionary caching, and multi-engine AI support.
 
@@ -1733,7 +2619,7 @@ Click the extension popup, open **Settings**, select **Custom AI Engine**, enter
 
 ---
 
-# [ChatGPT Ad Blocker Chrome Extension: Clean Upsells, Promos & Sponsored Cards | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-extension-guide)
+# [ChatGPT Ad Blocker Chrome Extension: Clean Upsells, Promos & Sponsored Cards | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-extension-guide/)
 
 > Complete guide to decluttering chatgpt.com with a privacy-first Manifest V3 Chrome extension. Block Plus/Pro upgrade nags, sponsored cards, and inline promo banners.
 
@@ -1948,7 +2834,7 @@ Explore other developer utilities, extensions, and technical architectures on Na
 
 ---
 
-# [Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe](https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide)
+# [Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe](https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide/)
 
 > Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation.
 
@@ -2234,7 +3120,7 @@ Explore other privacy-focused tools, extension guides, and optimization playbook
 
 ---
 
-# [Fine-Tuning DeepSeek-R1 Distill with Unsloth on Consumer GPUs: Complete Walkthrough](https://nadhebe.com/tutorials/fine-tune-deepseek-r1-unsloth-gpu)
+# [Fine-Tuning DeepSeek-R1 Distill with Unsloth on Consumer GPUs: Complete Walkthrough](https://nadhebe.com/tutorials/fine-tune-deepseek-r1-unsloth-gpu/)
 
 > Step-by-step guide to fine-tuning DeepSeek-R1 Distill reasoning models on a single 16GB or 24GB GPU using Unsloth 2x faster kernels, QLoRA, and GGUF export.
 
@@ -2497,7 +3383,7 @@ If you encounter out-of-memory crashes while serving at high concurrency, review
 
 ---
 
-# [Kokoro TTS vs ElevenLabs: Self-Hosting Ultra-Realistic 82M Voice AI for $0](https://nadhebe.com/comparisons/kokoro-tts-vs-elevenlabs)
+# [Kokoro TTS vs ElevenLabs: Self-Hosting Ultra-Realistic 82M Voice AI for $0](https://nadhebe.com/comparisons/kokoro-tts-vs-elevenlabs/)
 
 > Compare Kokoro TTS 82M open-source speech model with ElevenLabs. Benchmark latency, audio quality, self-hosting Docker setup, and cloud API cost savings.
 
@@ -2719,7 +3605,7 @@ graph TD
 
 ---
 
-# [Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents](https://nadhebe.com/comparisons/mem0-vs-graphrag-vs-vector-rag)
+# [Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents](https://nadhebe.com/comparisons/mem0-vs-graphrag-vs-vector-rag/)
 
 > Compare Mem0, Microsoft GraphRAG, and traditional Vector RAG for AI agent memory. Benchmark multi-hop reasoning, latency, update costs, and state persistence.
 
@@ -2941,7 +3827,7 @@ graph TD
 
 ---
 
-# [Claude 3.7 Sonnet Hybrid Reasoning: When to Use Thinking Tokens vs Standard Fast Mode](https://nadhebe.com/guides/claude-3-7-sonnet-hybrid-reasoning-guide)
+# [Claude 3.7 Sonnet Hybrid Reasoning: When to Use Thinking Tokens vs Standard Fast Mode](https://nadhebe.com/guides/claude-3-7-sonnet-hybrid-reasoning-guide/)
 
 > Master Claude 3.7 Sonnet's hybrid reasoning architecture. Learn how to configure dynamic thinking budgets, benchmark against o3-mini, and optimize API costs.
 
@@ -3168,7 +4054,7 @@ graph TD
 
 ---
 
-# [Speculative Decoding in vLLM & SGLang: 3x LLM Inference Speedup Guide](https://nadhebe.com/guides/speculative-decoding-vllm-sglang-guide)
+# [Speculative Decoding in vLLM & SGLang: 3x LLM Inference Speedup Guide](https://nadhebe.com/guides/speculative-decoding-vllm-sglang-guide/)
 
 > Accelerate LLM inference throughput and reduce latency by up to 3x using speculative decoding, draft models, and Medusa heads in vLLM and SGLang.
 
@@ -3365,7 +4251,7 @@ graph TD
 
 ---
 
-# [How to Create AI Influencer Video Ads with ChatGPT & Google Flow: 3-Scene Visual Continuity Guide](https://nadhebe.com/tutorials/ai-character-video-ads-google-flow-chatgpt)
+# [How to Create AI Influencer Video Ads with ChatGPT & Google Flow: 3-Scene Visual Continuity Guide](https://nadhebe.com/tutorials/ai-character-video-ads-google-flow-chatgpt/)
 
 > Master step-by-step workflow for generating photorealistic AI characters in ChatGPT and directing 30-second multi-scene video ads in Google Flow with zero drift.
 
@@ -3686,7 +4572,7 @@ For instant offline access to this full prompt template, download our step-by-st
 
 ---
 
-# [How to Create AI Influencer Presenters with ChatGPT & Google Flow Omni: Long-Form YouTube Guide](https://nadhebe.com/tutorials/google-flow-omni-ai-influencer-presenter-guide)
+# [How to Create AI Influencer Presenters with ChatGPT & Google Flow Omni: Long-Form YouTube Guide](https://nadhebe.com/tutorials/google-flow-omni-ai-influencer-presenter-guide/)
 
 > Step-by-step tutorial on rendering photorealistic AI character portraits with ChatGPT and generating continuous long-form YouTube presenter videos in Google Flow Omni.
 
@@ -3778,7 +4664,7 @@ SCRIPT:
 
 ---
 
-# [NotebookLM Audio Overviews & Source Grounding Developer Tutorial](https://nadhebe.com/tutorials/notebooklm-audio-overviews-source-grounding-tutorial)
+# [NotebookLM Audio Overviews & Source Grounding Developer Tutorial](https://nadhebe.com/tutorials/notebooklm-audio-overviews-source-grounding-tutorial/)
 
 > Learn how to build, customize, and steer Google NotebookLM Audio Overviews, synthesize multi-document knowledge graphs, and enforce strict source attribution.
 
@@ -3901,7 +4787,7 @@ NotebookLM supports Google Docs, PDFs, Google Slides, web URLs, YouTube video tr
 
 ---
 
-# [Google AI Studio System Prompts & Structured Outputs Architecture Guide](https://nadhebe.com/guides/google-ai-studio-system-prompts-structured-output-guide)
+# [Google AI Studio System Prompts & Structured Outputs Architecture Guide](https://nadhebe.com/guides/google-ai-studio-system-prompts-structured-output-guide/)
 
 > A comprehensive guide on configuring system instructions, JSON Schema structured outputs, function calling, and temperature parameters in Google AI Studio for production AI applications.
 
@@ -4086,7 +4972,7 @@ The schema definition itself is counted as part of the system instruction contex
 
 ---
 
-# [Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols](https://nadhebe.com/guides/generative-engine-optimization-geo-guide)
+# [Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols](https://nadhebe.com/guides/generative-engine-optimization-geo-guide/)
 
 > Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols.
 
@@ -4311,7 +5197,7 @@ If competitor URLs are cited instead of your content, analyze the cited chunks. 
 
 ---
 
-# [Self-Hosting LLMs vs API Costs: Break-Even Math Guide](https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown)
+# [Self-Hosting LLMs vs API Costs: Break-Even Math Guide](https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown/)
 
 > Comprehensive financial math guide for self-hosting LLMs versus using cloud APIs. Includes GPU TCO formulas, break-even token volume curves, and server energy cost analysis.
 
@@ -4450,7 +5336,7 @@ graph LR
 
 ---
 
-# [How to Build Local Agentic RAG Workflows using LangGraph and Ollama](https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph)
+# [How to Build Local Agentic RAG Workflows using LangGraph and Ollama](https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph/)
 
 > Step-by-step developer tutorial to build stateful agentic RAG workflows using LangGraph, Ollama, and ChromaDB locally without cloud API keys.
 
@@ -4699,7 +5585,7 @@ if __name__ == "__main__":
 
 ---
 
-# [Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines](https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment)
+# [Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines](https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment/)
 
 > Step-by-step tutorial to deploy DeepSeek-OCR locally on GPUs for document extraction. Includes context compression math, PyTorch pipelines, layout parsing, and Docker configs.
 
@@ -4912,7 +5798,7 @@ Tested on an **NVIDIA RTX 4090 (24GB VRAM)** processing a 100-page enterprise fi
 
 ---
 
-# [Model Context Protocol (MCP) Architecture and Production API Tutorial](https://nadhebe.com/tutorials/model-context-protocol-mcp-guide)
+# [Model Context Protocol (MCP) Architecture and Production API Tutorial](https://nadhebe.com/tutorials/model-context-protocol-mcp-guide/)
 
 > Comprehensive developer tutorial on Model Context Protocol (MCP) architecture. Learn JSON-RPC schema transport over stdio/SSE, tool definition syntax, and Python implementation.
 
@@ -5142,7 +6028,7 @@ Upon launching Claude Desktop, the application automatically executes `tools/lis
 
 ---
 
-# [Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide](https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup)
+# [Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide](https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup/)
 
 > Hardware setup tutorial to run Qwen 3.5 27B locally on consumer GPUs. Includes INT4 GGUF quantization, FlashAttention-2 compilation, and multi-GPU tensor parallelism.
 
@@ -5301,7 +6187,7 @@ python3 -m vllm.entrypoints.openai.api_server \
 
 ---
 
-# [How to Run DeepSeek R1 Locally with Ollama: Complete Guide](https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama)
+# [How to Run DeepSeek R1 Locally with Ollama: Complete Guide](https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama/)
 
 > Complete developer setup guide to run DeepSeek R1 locally using Ollama. Includes VRAM memory formulas, GGUF quantization comparisons, CLI integration, and ChromaDB Python code.
 
@@ -5550,7 +6436,7 @@ graph LR
 
 ---
 
-# [Running Flux.1 Local Image Generation on Consumer GPUs](https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu)
+# [Running Flux.1 Local Image Generation on Consumer GPUs](https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu/)
 
 > Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup.
 
@@ -5715,7 +6601,7 @@ python main.py --novram --fp16-vae
 
 ---
 
-# [Optimizing KV Cache Utilization in vLLM Production Clusters](https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide)
+# [Optimizing KV Cache Utilization in vLLM Production Clusters](https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide/)
 
 > Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs.
 
@@ -5857,7 +6743,7 @@ Evaluated on **1x NVIDIA A100 80GB** serving Llama 3.1 8B with a 3,000-token sha
 
 ---
 
-# [DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark](https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude)
+# [DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark](https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude/)
 
 > Head-to-head benchmark comparison of frontier AI reasoning models: DeepSeek V4, OpenAI o3-mini, and Claude 3.7 Sonnet. Evaluates coding pass rates, math accuracy, and API pricing.
 
@@ -5975,7 +6861,7 @@ print("Claude 3.7 Sonnet Cost:", calculate_task_cost(50000, 10000, 2000, "claude
 
 ---
 
-# [NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis](https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference)
+# [NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis](https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference/)
 
 > Architectural benchmark comparison of NVIDIA Blackwell B200 vs Hopper H200 for LLM inference. Evaluates HBM3e memory bandwidth, FP4 FLOPS throughput, and TCO.
 
@@ -6085,7 +6971,7 @@ print(f"B200 FP4 Energy Cost: {b200_fp4_joules} Joules / 1k Tokens")
 
 ---
 
-# [Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks](https://nadhebe.com/guides/best-local-llms-8gb-vram)
+# [Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks](https://nadhebe.com/guides/best-local-llms-8gb-vram/)
 
 > Hardware benchmark guide evaluating the best open-weight local LLMs for 8GB VRAM consumer GPUs. Includes token-per-second decoding speeds, context spillover, and quantization metrics.
 
@@ -6204,7 +7090,7 @@ $$\text{KV Cache Size (MB)} = \frac{2 \times L \times H \times D \times C}{10^6}
 
 ---
 
-# [FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy](https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization)
+# [FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy](https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization/)
 
 > Technical comparison guide analyzing FP4, FP8, and INT4 quantization formats. Evaluates micro-scaling formats, hardware acceleration across NVIDIA Hopper & Blackwell, and accuracy.
 
@@ -6314,7 +7200,7 @@ gantt
 
 ---
 
-# [Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols](https://nadhebe.com/guides/notebooklm-pro-developer-workflows)
+# [Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols](https://nadhebe.com/guides/notebooklm-pro-developer-workflows/)
 
 > Developer workflows guide for Google NotebookLM Pro. Learn source document ingestion limits, multi-file context indexing, Audio Overview podcast pipelines, and API integrations.
 
@@ -6485,7 +7371,7 @@ Act as a Principal Technical Writer. Analyze the uploaded audio transcript and g
 
 ---
 
-# [Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs EXL2)](https://nadhebe.com/guides/ollama-quantization-formats-compared)
+# [Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs EXL2)](https://nadhebe.com/guides/ollama-quantization-formats-compared/)
 
 > Technical comparison guide evaluating Ollama GGUF quantization formats. Compares Q4_K_M, Q5_K_M, Q8_0, and EXL2 across perplexity, VRAM savings, and decode speed.
 
@@ -6605,7 +7491,7 @@ gantt
 
 ---
 
-# [Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison](https://nadhebe.com/reviews/best-ai-coding-tools-2026)
+# [Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison](https://nadhebe.com/reviews/best-ai-coding-tools-2026/)
 
 > A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.
 
@@ -6649,7 +7535,7 @@ Selecting the right tool depends on your team's workflow—whether you prefer a 
 
 ---
 
-# [Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026](https://nadhebe.com/reviews/best-cloud-gpu-providers-2026)
+# [Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026](https://nadhebe.com/reviews/best-cloud-gpu-providers-2026/)
 
 > An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.
 
@@ -6693,7 +7579,7 @@ This review benchmarks the **7 best cloud GPU providers** in 2026.
 
 ---
 
-# [Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026](https://nadhebe.com/reviews/best-mcp-servers-2026)
+# [Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026](https://nadhebe.com/reviews/best-mcp-servers-2026/)
 
 > A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.
 
@@ -6751,7 +7637,7 @@ Enables Claude Code and Cursor to create pull requests, read issue threads, and 
 
 ---
 
-# [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles)
+# [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles/)
 
 > A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.
 
@@ -6828,7 +7714,7 @@ Once generated, double-clicking `db-tools.mcpb` opens your desktop AI client and
 
 ---
 
-# [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide)
+# [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide/)
 
 > A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.
 
@@ -6936,7 +7822,7 @@ try {
 
 ---
 
-# [Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits](https://nadhebe.com/tutorials/claude-code-troubleshooting-guide)
+# [Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits](https://nadhebe.com/tutorials/claude-code-troubleshooting-guide/)
 
 > A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.
 
@@ -7009,7 +7895,7 @@ pnpm-lock.yaml
 
 ---
 
-# [Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers](https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp)
+# [Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers](https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp/)
 
 > Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.
 
@@ -7078,7 +7964,7 @@ By removing JSON tool serialization overhead, Cloudflare Code Mode enables edge 
 
 ---
 
-# [Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors](https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting)
+# [Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors](https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting/)
 
 > Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors.
 
@@ -7146,7 +8032,7 @@ When GUI applications like Cursor launch on macOS or Windows, they do not inheri
 
 ---
 
-# [Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth](https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0)
+# [Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth](https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0/)
 
 > Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2.
 
@@ -7258,7 +8144,7 @@ To connect **Cursor**, **Claude Desktop**, or **Windsurf** to your remote Cloudf
 
 ---
 
-# [Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows](https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial)
+# [Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows](https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial/)
 
 > Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows.
 
@@ -7333,7 +8219,7 @@ Gemini processes both codebase trees and the architectural PDF spec simultaneous
 
 ---
 
-# [MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer Tokens, and Auth0 Scopes](https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting)
+# [MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer Tokens, and Auth0 Scopes](https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting/)
 
 > A complete troubleshooting guide for diagnosing and fixing Model Context Protocol (MCP) HTTP authentication errors, 401 Unauthorized responses, and OAuth token expiration.
 
@@ -7391,7 +8277,7 @@ Update `.cursor/mcp.json` or `claude_desktop_config.json` with valid headers:
 
 ---
 
-# [Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler](https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler)
+# [Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler](https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler/)
 
 > A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.
 
@@ -7483,7 +8369,7 @@ export async function validateMcpBearerToken(request: Request, env: Env): Promis
 
 ---
 
-# [vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utilization, and PagedAttention](https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix)
+# [vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utilization, and PagedAttention](https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix/)
 
 > Resolve vLLM CUDA Out of Memory errors when serving DeepSeek R1 and Llama models using VRAM allocation flags, KV cache quantization, and tensor parallelism.
 
@@ -7544,7 +8430,7 @@ Reduce KV cache VRAM footprint by 50% without retraining:
 
 ---
 
-# [Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance](https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli)
+# [Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance](https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli/)
 
 > A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.
 
@@ -7575,7 +8461,7 @@ As AI development shifts directly into developer terminal workflows, Anthropic's
 
 ---
 
-# [Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE](https://nadhebe.com/comparisons/claude-code-vs-cursor)
+# [Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE](https://nadhebe.com/comparisons/claude-code-vs-cursor/)
 
 > An in-depth comparison between Anthropic's terminal-native Claude Code CLI and Cursor's AI-augmented VS Code fork for AI engineering workflows.
 
@@ -7656,7 +8542,7 @@ For maximum efficiency, modern AI engineers use **both in tandem**: Cursor serve
 
 ---
 
-# [Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Compared](https://nadhebe.com/comparisons/cursor-vs-windsurf)
+# [Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Compared](https://nadhebe.com/comparisons/cursor-vs-windsurf/)
 
 > Compare Cursor's Composer and Tab autocompletion against Codeium's Windsurf editor and its Cascade collaborative AI flow.
 
@@ -7698,7 +8584,7 @@ Both editors move beyond basic Copilot autocomplete plugins by integrating deep 
 
 ---
 
-# [Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/](https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules)
+# [Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/](https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules/)
 
 > A comprehensive multi-IDE governance comparison analyzing prompt instructions, frontmatter glob patterns, and unified cross-editor strategies for Cursor, Windsurf, and Claude Code.
 
@@ -7759,7 +8645,7 @@ By standardizing directory-level glob matching, engineering teams preserve clean
 
 ---
 
-# [ElevenLabs vs PlayHT: Voice Cloning, Conversational AI & Streaming Audio APIs](https://nadhebe.com/comparisons/elevenlabs-vs-playht)
+# [ElevenLabs vs PlayHT: Voice Cloning, Conversational AI & Streaming Audio APIs](https://nadhebe.com/comparisons/elevenlabs-vs-playht/)
 
 > Compare ElevenLabs and PlayHT across voice cloning quality, ultra-low latency WebSocket streaming APIs, multi-lingual synthesis, and pricing.
 
@@ -7819,7 +8705,7 @@ const stream = await PlayHT.stream("Welcome to Nadhebe AI Engineering Guide.", {
 
 ---
 
-# [OpenRouter vs Anthropic API: Multi-Model Gateway Routing vs Direct Model Provider](https://nadhebe.com/comparisons/openrouter-vs-anthropic-api)
+# [OpenRouter vs Anthropic API: Multi-Model Gateway Routing vs Direct Model Provider](https://nadhebe.com/comparisons/openrouter-vs-anthropic-api/)
 
 > Analyze the architectural differences, pricing, fallbacks, prompt caching, and latency between using OpenRouter's unified gateway and direct Anthropic API integration.
 
@@ -7850,7 +8736,7 @@ Building production AI applications requires deciding how to access foundation L
 
 ---
 
-# [RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure](https://nadhebe.com/comparisons/runpod-vs-modal)
+# [RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure](https://nadhebe.com/comparisons/runpod-vs-modal/)
 
 > Compare RunPod's raw GPU instance pods against Modal's serverless Python cloud infrastructure for AI model fine-tuning and inference.
 
@@ -7927,7 +8813,7 @@ Choose **Modal** if you are building serverless AI APIs, webhooks, or batch proc
 
 ---
 
-# [RunPod vs Vast.ai: Managed Cloud GPU Pods vs Peer-to-Peer GPU Marketplace](https://nadhebe.com/comparisons/runpod-vs-vastai)
+# [RunPod vs Vast.ai: Managed Cloud GPU Pods vs Peer-to-Peer GPU Marketplace](https://nadhebe.com/comparisons/runpod-vs-vastai/)
 
 > A detailed comparison of RunPod and Vast.ai for low-cost GPU compute, reliability guarantees, security, and PyTorch / LLM workload performance.
 
@@ -7976,7 +8862,7 @@ RunPod offers vetted infrastructure with enterprise SLAs and persistent Network 
 
 ---
 
-# [vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models](https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks)
+# [vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models](https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks/)
 
 > Real-world production benchmarks comparing vLLM's PagedAttention continuous batching against Ollama's local GGUF execution for DeepSeek R1 and Llama 3.
 
@@ -8030,7 +8916,7 @@ While **Ollama** offers an accessible local execution environment reaching ~62 t
 
 ---
 
-# [Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans (2026)](https://nadhebe.com/guides/claude-code-pricing-guide)
+# [Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans (2026)](https://nadhebe.com/guides/claude-code-pricing-guide/)
 
 > Complete breakdown of Anthropic Claude Code CLI pricing, Console API token rates for Claude 3.7 Sonnet, subscription tiers, and prompt caching discounts.
 
@@ -8115,7 +9001,7 @@ For simple refactoring tasks or single-function unit test generation, setting th
 
 ---
 
-# [Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage (2026)](https://nadhebe.com/guides/cursor-pricing-guide)
+# [Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage (2026)](https://nadhebe.com/guides/cursor-pricing-guide/)
 
 > A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.
 
@@ -8174,7 +9060,7 @@ Category: Guides | Tags: ["Cursor", "Pricing", "AI IDE", "Developer Tools", "LLM
 
 ---
 
-# [Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees](https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md)
+# [Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees](https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md/)
 
 > A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.
 
@@ -8264,7 +9150,7 @@ $ claude "Refactor legacy database handlers to use TypeScript async/await."
 
 ---
 
-# [Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions](https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions)
+# [Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions](https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions/)
 
 > A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs.
 
@@ -8381,7 +9267,7 @@ jobs:
 
 ---
 
-# [RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)](https://nadhebe.com/guides/runpod-pricing-explained)
+# [RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)](https://nadhebe.com/guides/runpod-pricing-explained/)
 
 > A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs.
 
@@ -8449,7 +9335,7 @@ Unlike compute, **storage is billed continuously** as long as your volume exists
 
 ---
 
-# [How to Deploy DeepSeek R1 on AWS using vLLM](https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm)
+# [How to Deploy DeepSeek R1 on AWS using vLLM](https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm/)
 
 > A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference.
 
@@ -8562,7 +9448,7 @@ Deploying DeepSeek R1 on AWS gives you an incredibly powerful, private reasoning
 
 ---
 
-# [The Complete Gemini API Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-guide)
+# [The Complete Gemini API Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-guide/)
 
 > Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely.
 
@@ -8699,7 +9585,7 @@ Yes. You can use the `responseMimeType: "application/json"` configuration option
 
 ---
 
-# [How to Analyze Meta Tags for SEO: Step-by-Step Tutorial](https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo)
+# [How to Analyze Meta Tags for SEO: Step-by-Step Tutorial](https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo/)
 
 > Learn how to systematically audit HTML title tags, meta descriptions, canonical URLs, and OpenGraph social cards to maximize search visibility and click-through rates.
 
@@ -8804,7 +9690,7 @@ Yes. Our client-side [Meta Tag Analyzer](/tools/meta-tag-analyzer/) allows you t
 
 ---
 
-# [How to Integrate MCP Server in VS Code & Cursor](https://nadhebe.com/tutorials/mcp-server-vscode-cursor)
+# [How to Integrate MCP Server in VS Code & Cursor](https://nadhebe.com/tutorials/mcp-server-vscode-cursor/)
 
 > A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows.
 
@@ -8950,7 +9836,7 @@ Whether you're using Cursor's native integration or VS Code with Cline, the setu
 
 ---
 
-# [How to Integrate MCP Servers with Claude Desktop](https://nadhebe.com/tutorials/mcp-with-claude-desktop)
+# [How to Integrate MCP Servers with Claude Desktop](https://nadhebe.com/tutorials/mcp-with-claude-desktop/)
 
 > A comprehensive developer guide to configuring and integrating the Model Context Protocol (MCP) with the Claude Desktop app. Learn how to expose local tools, debug connection issues, and build your AI engineering workflows.
 
@@ -9095,7 +9981,7 @@ Continue building your AI engineering expertise with these related topics:
 
 ---
 
-# [The Ultimate vLLM Deployment Guide (2026)](https://nadhebe.com/tutorials/vllm-guide)
+# [The Ultimate vLLM Deployment Guide (2026)](https://nadhebe.com/tutorials/vllm-guide/)
 
 > Learn how to deploy and scale open-source LLMs using vLLM. Master PagedAttention, continuous batching, and GPU VRAM optimization for production AI inference.
 
@@ -9225,7 +10111,7 @@ Yes. You can load multiple distinct LoRA adapters dynamically at runtime without
 
 ---
 
-# [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools)
+# [7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)](https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools/)
 
 > Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.
 
@@ -9310,7 +10196,7 @@ Client-side tools evaluate draft text instantly without needing a live, publishe
 
 ---
 
-# [Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison](https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf)
+# [Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison](https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf/)
 
 > An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows.
 
@@ -9382,7 +10268,7 @@ Cursor remains the easiest drop-in replacement for standard VS Code layouts.
 
 ---
 
-# [DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?](https://nadhebe.com/comparisons/deepseek-v3-vs-r1)
+# [DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?](https://nadhebe.com/comparisons/deepseek-v3-vs-r1/)
 
 > A comprehensive comparison between DeepSeek V3 (the highly efficient dense/MoE hybrid) and DeepSeek R1 (the reasoning-focused powerhouse).
 
@@ -9450,7 +10336,7 @@ By combining the lightning-fast efficiency of V3 with the deep analytical power 
 
 ---
 
-# [Meta Tag Analyzer vs Meta Tag Checker: Key Differences & Comparison](https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker)
+# [Meta Tag Analyzer vs Meta Tag Checker: Key Differences & Comparison](https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker/)
 
 > Understand the subtle differences between meta tag analyzers and meta tag checkers, and learn when to use each for technical SEO auditing.
 
@@ -9527,7 +10413,7 @@ Basic checkers only confirm tag existence. A full analyzer validates image URLs,
 
 ---
 
-# [Open Graph vs Twitter Card Meta Tags: Technical Comparison](https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags)
+# [Open Graph vs Twitter Card Meta Tags: Technical Comparison](https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags/)
 
 > Compare Open Graph (og:) and Twitter Card (twitter:) metadata specifications, property mapping, fallback rules, and social media image optimization.
 
@@ -9613,7 +10499,7 @@ No. Including both `og:` and `twitter:` tags adds less than 500 bytes of plain t
 
 ---
 
-# [OpenRouter vs Direct Provider APIs: Which Should You Choose?](https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis)
+# [OpenRouter vs Direct Provider APIs: Which Should You Choose?](https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis/)
 
 > An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google.
 
@@ -9691,7 +10577,7 @@ However, you should choose **Direct APIs** if:
 
 ---
 
-# [SGLang vs vLLM: Performance Benchmark for LLM Inference](https://nadhebe.com/comparisons/sglang-vs-vllm-performance)
+# [SGLang vs vLLM: Performance Benchmark for LLM Inference](https://nadhebe.com/comparisons/sglang-vs-vllm-performance/)
 
 > An in-depth performance benchmark comparing SGLang and vLLM for deploying large language models. Analyze throughput, memory usage, and latency trade-offs.
 
@@ -9774,7 +10660,7 @@ While SGLang wins in specific performance metrics, vLLM wins heavily in the ecos
 
 ---
 
-# [How to Fix Common Meta Tag Errors: Audit & Resolution Guide](https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors)
+# [How to Fix Common Meta Tag Errors: Audit & Resolution Guide](https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors/)
 
 > Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images.
 
@@ -9859,7 +10745,7 @@ Yes. Copy your updated metadata into our client-side [Meta Tag Analyzer](/tools/
 
 ---
 
-# [LLM API Cost Optimization Best Practices](https://nadhebe.com/best-practices/llm-api-cost-optimization)
+# [LLM API Cost Optimization Best Practices](https://nadhebe.com/best-practices/llm-api-cost-optimization/)
 
 > Discover actionable strategies to drastically reduce your Large Language Model API costs without sacrificing output quality. Learn about token optimization, caching, and model routing.
 
@@ -9931,7 +10817,7 @@ Optimizing LLM costs is a multi-layered engineering problem. By combining Prompt
 
 ---
 
-# [Prompt Caching Best Practices for Claude Sonnet & Opus](https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus)
+# [Prompt Caching Best Practices for Claude Sonnet & Opus](https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus/)
 
 > Master prompt caching for Anthropic's Claude 3.5 Sonnet and Opus models. Learn how to drastically reduce latency and lower your LLM API costs.
 
@@ -10055,7 +10941,7 @@ Prompt caching is not just a nice-to-have feature; it is a mandatory architectur
 
 ---
 
-# [Structured Output Prompting Best Practices](https://nadhebe.com/best-practices/structured-output-prompting)
+# [Structured Output Prompting Best Practices](https://nadhebe.com/best-practices/structured-output-prompting/)
 
 > Learn how to enforce 100% reliable JSON outputs from Large Language Models using Structured Outputs, JSON Schemas, and Tool Calling.
 
@@ -10145,7 +11031,7 @@ Structured Outputs represent a shift from "prompt engineering" to "schema engine
 
 ---
 
-# [Vector Database Chunking Best Practices for RAG](https://nadhebe.com/best-practices/vector-database-chunking)
+# [Vector Database Chunking Best Practices for RAG](https://nadhebe.com/best-practices/vector-database-chunking/)
 
 > Master the art of document chunking for Vector Databases. Learn strategies for semantic chunking, overlap sizing, and hierarchical indexing to improve your RAG accuracy.
 
@@ -10217,7 +11103,7 @@ Effective chunking is an iterative process. You must analyze your user queries a
 
 ---
 
-# [Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors](https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors)
+# [Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors](https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors/)
 
 > How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts.
 
@@ -10288,7 +11174,7 @@ Using `npx` directly can spawn a shell wrapper which makes path resolution fragi
 
 ---
 
-# [How to Fix MCP Server Connection Refused and 404 Proxy Errors](https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors)
+# [How to Fix MCP Server Connection Refused and 404 Proxy Errors](https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors/)
 
 > Step-by-step diagnostic guide to troubleshoot Model Context Protocol (MCP) server socket connection refused and http 404 proxy middleware errors.
 
@@ -10355,7 +11241,7 @@ app.post('/mcp', (req, res) => {
 
 ---
 
-# [Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide](https://nadhebe.com/guides/installing-kimi-k3-locally-guide)
+# [Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide](https://nadhebe.com/guides/installing-kimi-k3-locally-guide/)
 
 > Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware.
 
@@ -10414,7 +11300,7 @@ python3 -m vmm.entrypoints.openai.api_server \
 
 ---
 
-# [What Is a Meta Tag Analyzer? (2026 Guide)](https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide)
+# [What Is a Meta Tag Analyzer? (2026 Guide)](https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide/)
 
 > Discover what a meta tag analyzer is, how search engine crawlers interpret HTML metadata, and why real-time meta tag auditing drives higher SERP click-through rates.
 
@@ -10511,7 +11397,7 @@ Our client-side [Meta Tag Analyzer](/tools/meta-tag-analyzer/) processes all tex
 
 ---
 
-# [Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)](https://nadhebe.com/news/gemini-3-6-flash-everything-we-know)
+# [Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)](https://nadhebe.com/news/gemini-3-6-flash-everything-we-know/)
 
 > Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access.
 
@@ -10571,7 +11457,7 @@ console.log(response.text);
 
 ---
 
-# [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide)
+# [Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)](https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide/)
 
 > Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.
 
@@ -10645,7 +11531,7 @@ Imagen 3 supports `1:1` (square), `16:9` (widescreen), `9:16` (vertical mobile),
 
 ---
 
-# [Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)](https://nadhebe.com/tutorials/gemini-api-javascript-node-examples)
+# [Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)](https://nadhebe.com/tutorials/gemini-api-javascript-node-examples/)
 
 > TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling.
 
@@ -10746,7 +11632,7 @@ if (response.functionCalls) {
 
 ---
 
-# [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting)
+# [Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors](https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting/)
 
 > Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.
 
@@ -10828,7 +11714,7 @@ const MODEL_PRO = 'gemini-1.5-pro';
 
 ---
 
-# [Gemini API Examples for Python: Complete Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial)
+# [Gemini API Examples for Python: Complete Developer Guide (2026)](https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial/)
 
 > Hands-on Python code samples for text generation, structured JSON outputs, image vision parsing, and streaming responses with the Google Gen AI SDK.
 
@@ -10926,7 +11812,7 @@ for chunk in response:
 
 ---
 
-# [Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)](https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide)
+# [Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)](https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide/)
 
 > Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts.
 
@@ -10975,7 +11861,7 @@ To maintain character consistency across shots:
 
 ---
 
-# [Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)](https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli)
+# [Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)](https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli/)
 
 > Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux.
 
@@ -11074,7 +11960,7 @@ Inside chat mode:
 
 ---
 
-# [Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)](https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison)
+# [Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)](https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison/)
 
 > Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost.
 
@@ -11119,7 +12005,7 @@ Claude Code functions as an autonomous coding subagent. Given a task like *"Refa
 
 ---
 
-# [Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)](https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison)
+# [Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)](https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison/)
 
 > Architectural comparison evaluating speed, context window depth, reasoning accuracy, and pricing between Gemini Flash and Gemini Pro.
 
@@ -11165,7 +12051,7 @@ The optimal production pattern is a **hybrid router architecture**:
 
 ---
 
-# [Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?](https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced)
+# [Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?](https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced/)
 
 > Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.
 
@@ -11208,7 +12094,7 @@ Because the subscription includes the **Google One 2TB Cloud Storage** plan (nor
 
 ---
 
-# [Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison](https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026)
+# [Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison](https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026/)
 
 > Comprehensive evaluation of Google Gemini 2.0/3.x vs OpenAI ChatGPT (GPT-4o/5) on coding, 2M context windows, vision, and API costs.
 
@@ -11255,7 +12141,7 @@ Google Gemini and OpenAI ChatGPT remain the top two flagship AI platforms for de
 
 ---
 
-# [NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison](https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison)
+# [NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison](https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison/)
 
 > Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows.
 
@@ -11300,7 +12186,7 @@ Gemini Notebook includes a full cloud Python code runtime, allowing developers t
 
 ---
 
-# [Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)](https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits)
+# [Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)](https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits/)
 
 > Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, Gemini 2.0 Flash costs, and pay-as-you-go billing architecture.
 
@@ -11361,7 +12247,7 @@ For non-API end users, Google offers **Gemini Advanced** through the **Google On
 
 ---
 
-# [How to Get a Gemini API Key (2026 Developer Setup Guide)](https://nadhebe.com/guides/how-to-get-gemini-api-key)
+# [How to Get a Gemini API Key (2026 Developer Setup Guide)](https://nadhebe.com/guides/how-to-get-gemini-api-key/)
 
 > Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications.
 
@@ -11474,7 +12360,7 @@ A 403 error occurs if your key is restricted to specific IP addresses/referrers 
 
 ---
 
-# [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide)
+# [Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing](https://nadhebe.com/news/gemini-omni-video-generation-guide/)
 
 > Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.
 
@@ -11710,7 +12596,7 @@ graph TD
 
 ---
 
-# [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide)
+# [Google Gemini Spark: The AI Assistant That Works While You Sleep](https://nadhebe.com/news/gemini-spark-agentic-assistant-guide/)
 
 > An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.
 
@@ -11914,7 +12800,7 @@ The EEA and UK restrictions are likely related to data processing regulations un
 
 ---
 
-# [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts)
+# [Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills](https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts/)
 
 > The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.
 
@@ -12419,7 +13305,7 @@ Flicker-Free TUI Mode:         export CLAUDE_CODE_NO_FLICKER=1
 
 ---
 
-# [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.com/tutorials/claude-desktop-download-installation-guide)
+# [Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions](https://nadhebe.com/tutorials/claude-desktop-download-installation-guide/)
 
 > A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.
 
@@ -12595,7 +13481,7 @@ Boost daily productivity using native desktop shortcuts:
 
 ---
 
-# [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills)
+# [How to Build Custom Claude Code Skills & Subagents (Developer Guide)](https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills/)
 
 > A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.
 
@@ -12763,7 +13649,7 @@ executeAutomatedReview();
 
 ---
 
-# [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.com/tutorials/how-to-install-claude-code-cli)
+# [How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)](https://nadhebe.com/tutorials/how-to-install-claude-code-cli/)
 
 > The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.
 
@@ -13080,7 +13966,7 @@ You can overwrite the active key by re-exporting `export ANTHROPIC_API_KEY="new-
 
 ---
 
-# [How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding](https://nadhebe.com/tutorials/how-to-use-gemini-canvas)
+# [How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding](https://nadhebe.com/tutorials/how-to-use-gemini-canvas/)
 
 > A hands-on tutorial for using Gemini Canvas — Google's collaborative workspace for real-time document editing, code generation, and interactive prototyping with AI assistance.
 
@@ -13329,7 +14215,7 @@ Canvas documents are cloud-saved, but exporting to Google Docs or downloading co
 
 ---
 
-# [How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial](https://nadhebe.com/tutorials/how-to-use-gemini-notebook)
+# [How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial](https://nadhebe.com/tutorials/how-to-use-gemini-notebook/)
 
 > A step-by-step tutorial for using Google's rebranded Gemini Notebook — from setting up your first notebook to executing code in the secure cloud computer, generating PPTX presentations, and syncing across Google Search.
 
@@ -13578,7 +14464,7 @@ Advanced features are rolling out first to **Google AI Ultra** subscribers and e
 
 ---
 
-# [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.com/tutorials/installing-claude-code-cli-windows)
+# [How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)](https://nadhebe.com/tutorials/installing-claude-code-cli-windows/)
 
 > A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.
 
@@ -13841,7 +14727,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ---
 
-# [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026)
+# [ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison](https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026/)
 
 > An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.
 
@@ -14073,7 +14959,7 @@ Gemini offers granular safety settings through the API, allowing developers to t
 
 ---
 
-# [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison)
+# [Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared](https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison/)
 
 > A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.
 
@@ -14171,7 +15057,7 @@ graph LR
 
 ---
 
-# [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode)
+# [OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison](https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode/)
 
 > A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.
 
@@ -14261,7 +15147,7 @@ Local Models via OpenCode (Ollama):   $0.00 USD (Self-Hosted Hardware)
 
 ---
 
-# [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison)
+# [vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?](https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison/)
 
 > An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.
 
@@ -14399,7 +15285,7 @@ graph TD
 
 ---
 
-# [Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering](https://nadhebe.com/best-practices/claude-code-best-practices-vibe-coding-to-production)
+# [Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering](https://nadhebe.com/best-practices/claude-code-best-practices-vibe-coding-to-production/)
 
 > A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees.
 
@@ -14562,7 +15448,7 @@ Benefits of Worktree Isolation:
 
 ---
 
-# [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide)
+# [Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements](https://nadhebe.com/guides/anthropic-claude-certification-developer-guide/)
 
 > A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.
 
@@ -14814,7 +15700,7 @@ The passing scaled score for CCDV-F is 720 out of 1000 across 60 multiple-choice
 
 ---
 
-# [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture)
+# [Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls](https://nadhebe.com/guides/claude-code-agent-loop-architecture/)
 
 > An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.
 
@@ -15028,7 +15914,7 @@ It uses ephemeral prompt caching and automatic context compaction via the `/comp
 
 ---
 
-# [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user)
+# [Claude Code Complete Guide 2026: From Beginner to Power User](https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user/)
 
 > The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.
 
@@ -15218,7 +16104,7 @@ export CLAUDE_CODE_NO_FLICKER=1
 
 ---
 
-# [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide)
+# [What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide](https://nadhebe.com/guides/claude-cowork-desktop-agent-guide/)
 
 > A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.
 
@@ -15330,7 +16216,7 @@ Anthropic designed Claude Cowork with enterprise-grade security boundaries:
 
 ---
 
-# [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide)
+# [Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model](https://nadhebe.com/guides/gemini-3-6-flash-complete-guide/)
 
 > A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.
 
@@ -15609,7 +16495,7 @@ For developers building agentic applications, Gemini 3.6 Flash represents the cu
 
 ---
 
-# [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide)
+# [How to Generate Music with Google Gemini and Lyria 3: Complete Guide](https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide/)
 
 > A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.
 
@@ -15857,7 +16743,7 @@ As AI-generated music becomes indistinguishable from human-composed tracks, Synt
 
 ---
 
-# [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid)
+# [Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained](https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid/)
 
 > A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.
 
@@ -16045,7 +16931,7 @@ Google Cloud Certifications remain valid for 2 years from the date of passing, r
 
 ---
 
-# [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide)
+# [Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning](https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide/)
 
 > A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.
 
@@ -16151,7 +17037,7 @@ For an architectural comparison between vLLM and Ollama, read our guide on [vLLM
 
 ---
 
-# [vLLM vs Ollama: Architectural & Memory Management Comparison](https://nadhebe.com/comparisons/vllm-vs-ollama-architectural-comparison)
+# [vLLM vs Ollama: Architectural & Memory Management Comparison](https://nadhebe.com/comparisons/vllm-vs-ollama-architectural-comparison/)
 
 > An evidence-based architectural comparison of vLLM and Ollama for serving open-weight LLMs, memory management, and API concurrency.
 
@@ -16266,7 +17152,7 @@ For multi-agent state architectures, see [The SQLite State-Sharing Pattern for M
 
 ---
 
-# [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release)
+# [Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer](https://nadhebe.com/news/kimi-k3-moonshot-ai-release/)
 
 > Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.
 
@@ -16349,7 +17235,7 @@ While Kimi K3 is priced higher than standard developer-focused open-weight model
 
 ---
 
-# [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial)
+# [Step-by-Step: Generating Support-Free 3D Models with Kimi K3](https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial/)
 
 > A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.
 
@@ -16482,7 +17368,7 @@ Once the print finishes, gently twist the hinge plates to break the minor connec
 
 ---
 
-# [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul)
+# [Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle](https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul/)
 
 > An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.
 
@@ -16579,7 +17465,7 @@ On internal reasoning and coding benchmarks, Moonshot AI reports that Kimi K3 ra
 
 ---
 
-# [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.com/best-practices/kimi-k3-context-window-best-practices)
+# [Maximizing Kimi K3: Best Practices for 1M Token Context Windows](https://nadhebe.com/best-practices/kimi-k3-context-window-best-practices/)
 
 > Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.
 
@@ -16670,7 +17556,7 @@ Following these practices ensures your agentic development workflows remain high
 
 ---
 
-# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.com/guides/kimi-k3-game-development-use-cases)
+# [Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design](https://nadhebe.com/guides/kimi-k3-game-development-use-cases/)
 
 > Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.
 
@@ -16753,7 +17639,7 @@ This accelerates the transition from early concepts to actual clickable layouts,
 
 ---
 
-# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.com/guides/kimi-k3-structured-prompt-engineering-framework)
+# [The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development](https://nadhebe.com/guides/kimi-k3-structured-prompt-engineering-framework/)
 
 > Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.
 
@@ -16864,7 +17750,7 @@ By structuring your prompts using these four pillars, Kimi K3 can compile, organ
 
 ---
 
-# [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra)
+# [OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI](https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra/)
 
 > OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.
 
@@ -16910,9 +17796,9 @@ The evaluation confirmed that while the flagship Soul model is highly capable of
 
 ---
 
-# [Google Flow Storyboard Studio: Complete Guide to Scripts, Custom Characters & Scenes | Nadhebe](https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow)
+# [Google Flow Storyboard Studio: Step-by-Step Tutorial (2026)](https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow/)
 
-> Master Google Flow Storyboard Studio in Google Labs. Learn step-by-step how to import scripts, anchor custom character consistency, insert scenes, and render with Veo.
+> Learn Google Flow Storyboard Studio step by step: import a script, keep characters consistent, add scenes, and render shots with Veo.
 
 Category: Tutorials | Tags: ["google-flow", "tutorials", "storyboard", "custom-characters", "google-labs"]
 
@@ -17063,7 +17949,7 @@ Updated Timeline:  [ Scene 1: Frame A ] -> [ NEW SCENE ] -> [ Scene 2: Frame B ]
 
 ---
 
-# [Google Flow Storyboard Studio: How to Access, Use & Script AI Storyboards (2026)](https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide)
+# [Google Flow Storyboard Studio: How to Access, Use & Script AI Storyboards (2026)](https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide/)
 
 > Master Google Flow Storyboard Studio in Google Labs. Learn how to access experimental features, upload scripts, configure Veo shots, and fix common errors.
 
@@ -17225,7 +18111,7 @@ While highly capable, maintaining perfect character consistency across many shot
 
 ---
 
-# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent)
+# [Step-by-Step Tutorial: Setting Up the YouTube Automation Agent](https://nadhebe.com/tutorials/setting-up-youtube-automation-agent/)
 
 > A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.
 
@@ -17294,7 +18180,7 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
 
 ---
 
-# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review)
+# [Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding](https://nadhebe.com/reviews/fable-5-ai-model-review/)
 
 > An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.
 
@@ -17350,7 +18236,7 @@ Additionally, Fable 5 was briefly suspended in mid-June 2026 due to U.S. governm
 
 ---
 
-# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.com/reviews/gpt-5-6-autonomous-engine)
+# [Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model](https://nadhebe.com/reviews/gpt-5-6-autonomous-engine/)
 
 > Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.
 
@@ -17416,7 +18302,7 @@ graph TD
 
 ---
 
-# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/reviews/open-source-youtube-automation-agent)
+# [Inside the Multi-Agent YouTube Automation System](https://nadhebe.com/reviews/open-source-youtube-automation-agent/)
 
 > Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.
 
@@ -17476,7 +18362,7 @@ Unlike message-passing multi-agent architectures that can break during individua
 
 ---
 
-# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison)
+# [Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison/)
 
 > Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.
 
@@ -17533,7 +18419,7 @@ Fable 5 experienced a brief suspension in mid-June 2026 due to U.S. government e
 
 ---
 
-# [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks)
+# [Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests](https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks/)
 
 > A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.
 
@@ -17573,7 +18459,7 @@ While OpenAI's GPT-5.5 remains the standard for pure code generation speed and l
 
 ---
 
-# [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance)
+# [GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison](https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance/)
 
 > A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.
 
@@ -17613,7 +18499,7 @@ GPT-4o excels at prompt-response and conversational reasoning but struggles when
 
 ---
 
-# [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.com/best-practices/llm-autonomous-loop-cost-management)
+# [LLM Autonomous Loops: Best Practices for Token and Cost Management](https://nadhebe.com/best-practices/llm-autonomous-loop-cost-management/)
 
 > Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.
 
@@ -17664,7 +18550,7 @@ If running open-weight models in-house instead of paying per-token commercial AP
 
 ---
 
-# [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.com/best-practices/multi-agent-state-isolation-design)
+# [Multi-Agent System Design: State Isolation and Coordination](https://nadhebe.com/best-practices/multi-agent-state-isolation-design/)
 
 > Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.
 
@@ -17709,7 +18595,7 @@ Using these patterns helps build reliable, scale-tolerant agent networks suitabl
 
 ---
 
-# [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows)
+# [The Producer's Guide to AI-Assisted Pre-Production Workflows](https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows/)
 
 > Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.
 
@@ -17766,7 +18652,7 @@ A major challenge for creative directors using generative tools is avoiding char
 
 ---
 
-# [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration)
+# [The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration](https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration/)
 
 > Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.
 
@@ -17836,7 +18722,7 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
 
 ---
 
-# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.com/guides/sqlite-state-sharing-multi-agent-architecture)
+# [The SQLite State-Sharing Pattern for Multi-Agent Architectures](https://nadhebe.com/guides/sqlite-state-sharing-multi-agent-architecture/)
 
 > A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.
 
@@ -17889,7 +18775,7 @@ If a worker agent crashes or encounters a network API timeout, the orchestrator 
 
 ---
 
-# [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release)
+# [Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative](https://nadhebe.com/news/instatic-open-source-release/)
 
 > CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.
 
@@ -17962,7 +18848,7 @@ Watch the release walkthrough detailing the editor features:
 
 ---
 
-# [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.com/tutorials/deploying-instatic-docker-vps)
+# [How to Deploy Instatic CMS on a VPS Using Docker Compose](https://nadhebe.com/tutorials/deploying-instatic-docker-vps/)
 
 > Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.
 
@@ -18074,7 +18960,7 @@ For a visual demonstration of the editor's responsive canvas, CSS variables toke
 
 ---
 
-# [How to Install and Set Up Instatic CMS Locally](https://nadhebe.com/tutorials/installing-instatic-cms-locally)
+# [How to Install and Set Up Instatic CMS Locally](https://nadhebe.com/tutorials/installing-instatic-cms-locally/)
 
 > A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.
 
@@ -18154,7 +19040,7 @@ Open your web browser and navigate to the address shown in the terminal (usually
 
 ---
 
-# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/tutorials/instatic-local-setup-importer)
+# [Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic](https://nadhebe.com/tutorials/instatic-local-setup-importer/)
 
 > Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.
 
@@ -18212,7 +19098,7 @@ The HTML importer wizard lets developers import visual page layouts by drag-and-
 
 ---
 
-# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/tutorials/instatic-visual-cms-walkthrough)
+# [Instatic Visual CMS: Video Walkthrough and Overview](https://nadhebe.com/tutorials/instatic-visual-cms-walkthrough/)
 
 > Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.
 
@@ -18263,7 +19149,7 @@ The editor supports bringing your own API keys (OpenAI, Anthropic, or OpenRouter
 
 ---
 
-# [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review)
+# [Instatic Visual CMS Review: The Open Source Webflow Challenger?](https://nadhebe.com/reviews/instatic-visual-cms-review/)
 
 > A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.
 
@@ -18323,7 +19209,7 @@ Watch the complete design canvas interface review and feature walkthrough below:
 
 ---
 
-# [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer)
+# [Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?](https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer/)
 
 > A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.
 
@@ -18411,7 +19297,7 @@ Watch the editor workflow in action to compare interfaces:
 
 ---
 
-# [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.com/best-practices/instatic-design-tokens-scaling)
+# [Best Practices for Scaling Design Tokens in Instatic CMS](https://nadhebe.com/best-practices/instatic-design-tokens-scaling/)
 
 > Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.
 
@@ -18485,7 +19371,7 @@ Watch how class-based styling rules are managed inside the Instatic editor:
 
 ---
 
-# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.com/guides/instatic-ai-assisted-design-prompts)
+# [AI Assisted Design: System Prompts and Workflows for Instatic CMS](https://nadhebe.com/guides/instatic-ai-assisted-design-prompts/)
 
 > Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.
 
@@ -18554,7 +19440,7 @@ Watch the AI assistant execute layouts, write copy, and adjust spacing in real t
 
 ---
 
-# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.com/guides/instatic-astro-islands-frameworks-integration)
+# [Integrating Instatic CMS with Astro Islands and Modern Frameworks](https://nadhebe.com/guides/instatic-astro-islands-frameworks-integration/)
 
 > An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.
 
@@ -18607,7 +19493,7 @@ import InteractiveWidget from '../components/InteractiveWidget.jsx';
 
 ---
 
-# [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide)
+# [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide/)
 
 > A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 
@@ -18705,7 +19591,7 @@ Watch the complete design system configuration and database architecture setup i
 
 ---
 
-# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/guides/instatic-enterprise-editorial-governance)
+# [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/guides/instatic-enterprise-editorial-governance/)
 
 > How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 
@@ -18766,7 +19652,7 @@ Watch how team permissions and visual canvas settings are managed inside the edi
 
 ---
 
-# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/guides/webflow-to-instatic-migration-savings)
+# [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/guides/webflow-to-instatic-migration-savings/)
 
 > How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.
 

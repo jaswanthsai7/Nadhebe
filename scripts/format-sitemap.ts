@@ -100,7 +100,7 @@ function run() {
     if (url === 'https://nadhebe.com/') {
       priority = '1.0';
       changefreq = 'daily';
-    } else if (url.includes('/tutorials/') || url.includes('/guides/') || url.includes('/news/')) {
+    } else if (url.includes('/skills/') || url.includes('/tutorials/') || url.includes('/guides/') || url.includes('/news/')) {
       priority = '0.9';
     } else if (url.includes('/tools/')) {
       priority = '0.8';

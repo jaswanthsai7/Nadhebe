@@ -69,6 +69,7 @@ function getArticles(): ArticleData[] {
   const contentDir = path.join(process.cwd(), 'src/content');
 
   const folders = [
+    { dir: 'skills', urlPrefix: '/skills' },
     { dir: 'news', urlPrefix: '/news' },
     { dir: 'tutorials', urlPrefix: '/tutorials' },
     { dir: 'youtube-articles', urlPrefix: '/youtube' },
@@ -90,9 +91,9 @@ function getArticles(): ArticleData[] {
         const fm = parseFrontmatter(filePath);
         const fileName = path.basename(filePath, path.extname(filePath));
         const slug = fm.slug || fileName;
-        const url = `${urlPrefix}/${slug}`;
+        const url = `${urlPrefix}/${slug}/`;
         articles.push({
-          title: fm.title || slug,
+          title: fm.title || fm.name || slug,
           slug,
           url,
           topic: fm.topic,

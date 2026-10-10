@@ -288,7 +288,33 @@ export default {
       const targetUrl = new URL(request.url);
       targetUrl.hostname = 'nadhebe.com';
       targetUrl.protocol = 'https:';
+      if (
+        targetUrl.pathname !== '/' &&
+        !targetUrl.pathname.endsWith('/') &&
+        !targetUrl.pathname.split('/').pop()!.includes('.') &&
+        !targetUrl.pathname.startsWith('/api/')
+      ) {
+        targetUrl.pathname += '/';
+      }
       return Response.redirect(targetUrl.toString(), 301);
+    }
+
+    // 301: /path -> /path/ (skip root, files, and API routes)
+    const p = url.pathname;
+    if (
+      (request.method === 'GET' || request.method === 'HEAD') &&
+      p !== '/' &&
+      !p.endsWith('/') &&
+      !p.split('/').pop()!.includes('.') &&
+      !p.startsWith('/api/')
+    ) {
+      url.pathname = p + '/';
+      return Response.redirect(url.toString(), 301);
+    }
+
+    // 301 Legacy Route: /tools/google-flow-storyboard-studio-overview -> /tutorials/google-flow-storyboard-studio-guide/
+    if (url.pathname === '/tools/google-flow-storyboard-studio-overview' || url.pathname === '/tools/google-flow-storyboard-studio-overview/') {
+      return Response.redirect('https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide/', 301);
     }
 
     // Route: /api/analyze-site (CONSUMES ZERO AI NEURONS - purely deterministic)

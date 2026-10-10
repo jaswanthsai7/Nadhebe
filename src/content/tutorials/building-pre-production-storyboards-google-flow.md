@@ -1,6 +1,6 @@
 ---
-title: "Google Flow Storyboard Studio: Complete Guide to Scripts, Custom Characters & Scenes | Nadhebe"
-description: "Master Google Flow Storyboard Studio in Google Labs. Learn step-by-step how to import scripts, anchor custom character consistency, insert scenes, and render with Veo."
+title: "Google Flow Storyboard Studio: Step-by-Step Tutorial (2026)"
+description: "Learn Google Flow Storyboard Studio step by step: import a script, keep characters consistent, add scenes, and render shots with Veo."
 pubDate: 2026-07-17
 updatedDate: 2026-10-10
 author: nadhebe-team
