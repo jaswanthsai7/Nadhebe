@@ -73,7 +73,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
   noindex={noindex}
   jsonLd={jsonLdBlocks}
 >
-  <div class={sidebarLayout ? "w-full px-16 sm:px-28 py-24 sm:py-32" : "mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48"}>
+  <div class={sidebarLayout ? "w-full max-w-[1536px] mx-auto px-16 sm:px-28 lg:px-36 py-24 sm:py-32" : "mx-auto w-full max-w-[1536px] px-16 sm:px-24 lg:px-36 py-24 sm:py-36"}>
     <Breadcrumb
       items={[
         { name: 'Home', href: '/' },

@@ -94,8 +94,8 @@ const projects: LabProject[] = [
     previewAlt: 'WorkPeek iOS lock screen calendar and agenda application',
     previewBadge: 'iOS App • In Progress',
     aspect: 'portrait',
-    previewWidth: 320,
-    previewHeight: 480,
+    previewWidth: 360,
+    previewHeight: 520,
     techStack: ['iOS', 'React Native', 'Expo', 'Swift', 'Local SQLite'],
     features: [
       'Glanceable Lock Screen focus widget showing upcoming agenda blocks',
@@ -121,8 +121,8 @@ const projects: LabProject[] = [
     previewAlt: 'ChatGPT Ads Blocker Chrome extension on Chrome Web Store',
     previewBadge: 'Chrome Web Store • Live',
     aspect: 'portrait',
-    previewWidth: 320,
-    previewHeight: 460,
+    previewWidth: 360,
+    previewHeight: 540,
     techStack: ['Manifest V3', 'TypeScript', 'MutationObserver', 'Shadow DOM Filter'],
     features: [
       '0ms DOM mutation shielding prevents UI layout shifts and annoying pop-ins',
@@ -148,8 +148,8 @@ const projects: LabProject[] = [
     previewAlt: 'BiliBili English Translator extension on Chrome Web Store',
     previewBadge: 'Chrome Web Store • Live',
     aspect: 'portrait',
-    previewWidth: 320,
-    previewHeight: 460,
+    previewWidth: 360,
+    previewHeight: 540,
     techStack: ['Chrome Web Store', 'WebExtensions', 'TreeWalker API', 'Local Caching', 'LLM API'],
     features: [
       '3 Display Modes: Translated Only, Bilingual, and Interactive Hover',
@@ -332,7 +332,6 @@ const labSchema = {
                 src="/images/lab/workpeek.png"
                 alt="WorkPeek iOS app lock screen agenda preview"
                 class="w-full h-auto object-cover object-top block transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
                 loading="eager"
               />
               <!-- Smooth Bottom Blur & Gradient Fade -->
@@ -557,7 +556,7 @@ const labSchema = {
           src=""
           alt=""
           class="w-full h-full object-contain transition-transform duration-300 ease-out"
-          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; transform: translateZ(0); backface-visibility: hidden;"
+          style="transform: translateZ(0); backface-visibility: hidden;"
           loading="eager"
         />
       </div>
@@ -592,14 +591,13 @@ const labSchema = {
         </svg>
       </button>
 
-      <!-- Modal Image Banner with 4K clarity and proper containment -->
-      <div id="modal-img-container" class="relative w-full max-h-[300px] rounded-16 overflow-hidden mb-20 bg-[#F5F3EF] dark:bg-[#121214] border border-border/80 dark:border-border-dark/80 flex items-center justify-center p-4">
+      <!-- Modal Image Banner with high clarity and proper containment -->
+      <div id="modal-img-container" class="relative w-full max-h-[440px] sm:max-h-[500px] rounded-16 overflow-hidden mb-20 bg-[#F5F3EF] dark:bg-[#121214] border border-border/80 dark:border-border-dark/80 flex items-center justify-center p-8">
         <img
           id="modal-project-img"
           src=""
           alt=""
-          class="max-h-[290px] w-auto max-w-full object-contain mx-auto"
-          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+          class="max-h-[420px] sm:max-h-[480px] w-auto max-w-full object-contain mx-auto transition-all"
           loading="lazy"
         />
       </div>
