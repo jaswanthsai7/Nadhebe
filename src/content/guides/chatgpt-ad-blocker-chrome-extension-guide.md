@@ -45,7 +45,7 @@ sources:
           Chrome Web Store
         </span>
         <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-500/15 border border-amber-500/30">
-          ★★★★★ 5.0 Rating • v1.1.0
+          ★★★★★ 5.0 Rating • v1.1.1
         </span>
         <span class="text-xs font-mono text-muted dark:text-muted-dark">
           100% Free • Manifest V3
@@ -122,7 +122,7 @@ Removing nodes destructively using `node.parentNode.removeChild(node)` disrupts 
 
 ## How the ChatGPT Ad & Promo Blocker Operates
 
-The **ChatGPT Ad & Promo Blocker** extension (`v1.1.0`, verified on the Chrome Web Store) resolves these challenges through non-destructive, scoped CSS containment and low-overhead reactive observers.
+The **ChatGPT Ad & Promo Blocker** extension (`v1.1.1`, verified on the Chrome Web Store) resolves these challenges through non-destructive, scoped CSS containment and low-overhead reactive observers.
 
 ### Technical Capabilities Summary
 
@@ -149,7 +149,7 @@ The extension's `manifest.json` specifies only the essential permissions require
 {
   "manifest_version": 3,
   "name": "ChatGPT Ad & Promo Blocker",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "permissions": [
     "storage"
   ],
@@ -182,7 +182,7 @@ Installing the extension takes under 15 seconds across any modern Chromium-compa
 |  CHROME WEB STORE: ChatGPT Ad & Promo Blocker (Official Listing)              |
 |  Verified ID: oiopppgakilklffapfngfckonijjkggf                               |
 |                                                                               |
-|  [ ★★★★★ 5.0 Rating • v1.1.0 ]     [ 100% Free ]     [ Add to Chrome (1-Click) ] |
+|  [ ★★★★★ 5.0 Rating • v1.1.1 ]     [ 100% Free ]     [ Add to Chrome (1-Click) ] |
 +-------------------------------------------------------------------------------+
 ```
 

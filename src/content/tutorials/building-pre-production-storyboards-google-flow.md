@@ -59,7 +59,7 @@ Google Flow Storyboard Studio (available in Google Labs) is an AI pre-production
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">For Script &amp; Prompt Writing</span>
-            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.1.0 • 5.0 ★</span>
+            <span class="text-[11px] font-mono text-muted dark:text-muted-dark">v1.1.1 • 5.0 ★</span>
           </div>
           <h4 class="text-body font-bold text-ink dark:text-ink-dark m-0">ChatGPT Ad &amp; Promo Blocker</h4>
           <p class="text-caption text-muted dark:text-muted-dark m-0">

@@ -47,7 +47,7 @@ sources:
           Chrome Web Store
         </span>
         <span class="px-8 py-2 rounded-full text-xs font-mono font-bold text-accent dark:text-accent-dark bg-accent/15 border border-accent/30">
-          v1.1.0 • 5.0 ★ Verified Listing
+          v1.1.1 • 5.0 ★ Verified Listing
         </span>
         <span class="text-xs font-mono text-muted dark:text-muted-dark">
           100% Free • Chrome &amp; Brave Ready
