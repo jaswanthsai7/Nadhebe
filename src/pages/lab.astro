@@ -13,6 +13,9 @@ const seo = buildSeo({
   siteName: SITE.name,
   keywords: [
     'Nadhebe Lab',
+    'Perchboard',
+    'Perchboard Windows app',
+    'clipboard manager',
     'WorkPeek iOS app',
     'ChatGPT Ads Blocker',
     'Bilibili Translator extension',
@@ -50,8 +53,36 @@ interface LabProject {
 
 const projects: LabProject[] = [
   {
-    id: 'openup',
+    id: 'perchboard',
     num: '01',
+    name: 'Perchboard',
+    type: 'APP',
+    category: 'apps',
+    description: 'Floating Windows clipboard panel. Always within reach at the screen edge.',
+    status: 'IN DEVELOPMENT',
+    statusType: 'dev',
+    url: '/perch',
+    isExternal: false,
+    featured: true,
+    tagline: 'Your clipboard, always within reach at the edge of your screen.',
+    overview: 'A compact Windows desktop utility that keeps your copied text, links, images, and files instantly accessible from a floating panel along your screen edge. 100% local-first memory with zero cloud telemetry.',
+    previewImg: '/perch/perch-desktop-hero.png',
+    previewAlt: 'Perchboard floating Windows clipboard panel on desktop',
+    previewBadge: 'Windows App • Coming Soon',
+    aspect: 'landscape',
+    previewWidth: 480,
+    previewHeight: 280,
+    techStack: ['Windows App', 'Electron', 'React', 'TypeScript', 'Native Clipboard'],
+    features: [
+      'Compact floating clipboard panel anchored to the desktop screen edge',
+      'Instant content filtering across All, Text, Links, Images, and Files',
+      'Rich visual previews for images and media with zero layout disruption',
+      'Local-first privacy architecture with 0 cloud sync and 0 tracking'
+    ]
+  },
+  {
+    id: 'openup',
+    num: '02',
     name: 'OpenUp',
     type: 'APP',
     category: 'apps',
@@ -78,7 +109,7 @@ const projects: LabProject[] = [
   },
   {
     id: 'workpeek',
-    num: '02',
+    num: '03',
     name: 'WorkPeek',
     type: 'IOS APP',
     category: 'apps',
@@ -106,7 +137,7 @@ const projects: LabProject[] = [
   },
   {
     id: 'chatgpt-ad-blocker',
-    num: '03',
+    num: '04',
     name: 'ChatGPT Ads Blocker',
     type: 'EXTENSION',
     category: 'extensions',
@@ -133,7 +164,7 @@ const projects: LabProject[] = [
   },
   {
     id: 'bilibili-translator',
-    num: '04',
+    num: '05',
     name: 'Bilibili Translator',
     type: 'EXTENSION',
     category: 'extensions',
@@ -160,7 +191,7 @@ const projects: LabProject[] = [
   },
   {
     id: 'wiseinsure',
-    num: '05',
+    num: '06',
     name: 'WiseInsure',
     type: 'APP',
     category: 'apps',
@@ -187,7 +218,7 @@ const projects: LabProject[] = [
   },
   {
     id: 'myoneopinion',
-    num: '06',
+    num: '07',
     name: 'MyOneOpinion',
     type: 'APP',
     category: 'apps',

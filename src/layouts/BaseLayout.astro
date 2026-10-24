@@ -18,9 +18,23 @@ interface Props {
   canonicalUrl?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
+  hideHeader?: boolean;
+  hideFooter?: boolean;
+  hideNatureBg?: boolean;
 }
 
-const { seo: propSeo, title, description, heroImage, canonicalUrl, noindex, jsonLd = [] } = Astro.props;
+const {
+  seo: propSeo,
+  title,
+  description,
+  heroImage,
+  canonicalUrl,
+  noindex,
+  jsonLd = [],
+  hideHeader = false,
+  hideFooter = false,
+  hideNatureBg = false,
+} = Astro.props;
 
 const seo = propSeo || buildSeo({
   title: title || SITE.name,
@@ -275,15 +289,17 @@ if (canonicalUrl) {
   <body class="flex min-h-screen flex-col text-ink dark:text-ink-dark" style="background: transparent;">
     <PageLoader />
     <!-- Full-screen Dynamic Nature Background -->
-    <div id="nature-bg" role="presentation" aria-hidden="true"></div>
-    <div id="nature-overlay" aria-hidden="true"></div>
+    {!hideNatureBg && (
+      <div id="nature-bg" role="presentation" aria-hidden="true" />
+      <div id="nature-overlay" aria-hidden="true" />
+    )}
 
     <a href="#main" class="skip-link">Skip to content</a>
-    <Header />
+    {!hideHeader && <Header />}
     <main id="main" class="w-full flex-grow pb-64">
       <slot />
     </main>
-    <Footer />
+    {!hideFooter && <Footer />}
     <SearchDialog />
 
     <!-- Scroll-reveal animations with immediate fold check & fallback -->

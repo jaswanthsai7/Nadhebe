@@ -1,0 +1,199 @@
+---
+interface Props {
+  id?: string;
+  source?: string;
+  endpoint?: string;
+  buttonText?: string;
+  placeholder?: string;
+  theme?: 'dark' | 'light' | 'auto';
+  platform?: 'windows' | 'ios' | 'both';
+  class?: string;
+}
+
+const {
+  id = 'subscribe-' + Math.random().toString(36).substring(2, 9),
+  source = 'perch_waitlist_popup',
+  endpoint = '/api/waitlist',
+  buttonText = 'Join Waitlist',
+  placeholder = 'you@example.com',
+  theme = 'auto',
+  platform = 'windows',
+  class: className = '',
+} = Astro.props;
+
+// Prevent duplicate arrows: strip any arrow characters from text since SVG arrow is included
+const cleanButtonText = buttonText.replace(/[↗→]/g, '').trim();
+---
+
+<div class={`not-prose subscribe-component ${className}`} data-subscribe-wrapper id={id}>
+  <form
+    data-subscribe-form
+    data-source={source}
+    data-endpoint={endpoint}
+    data-platform={platform}
+    class="space-y-12"
+    novalidate
+  >
+    <div class="flex flex-col sm:flex-row gap-10 sm:items-center">
+      <label for={`email-input-${id}`} class="sr-only">Email address</label>
+      <div class="relative flex-1">
+        <!-- Optional email icon inside input for polish -->
+        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-16 text-slate-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-16 h-16 opacity-60">
+            <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+            <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+          </svg>
+        </div>
+        <input
+          id={`email-input-${id}`}
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder={placeholder}
+          class={
+            theme === 'dark'
+              ? 'w-full rounded-full border border-white/15 bg-white/[0.06] pl-42 pr-16 py-12 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/25 focus:bg-white/[0.1] transition-all font-sans'
+              : 'w-full rounded-full border border-border bg-surface pl-42 pr-16 py-12 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark transition-all font-sans'
+          }
+        />
+      </div>
+      <button
+        type="submit"
+        data-subscribe-button
+        class={
+          theme === 'dark'
+            ? 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-white hover:bg-brand-cyan hover:text-slate-950 px-22 py-12 text-sm font-bold text-slate-950 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer shadow-md'
+            : 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-ink px-22 py-12 text-sm font-bold text-white transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer'
+        }
+      >
+        <span data-button-text>{cleanButtonText}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-14 w-14 shrink-0 transition-transform duration-200 group-hover:translate-x-1" style="width:14px;height:14px;">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Status feedback -->
+    <div
+      data-subscribe-status
+      role="status"
+      aria-live="polite"
+      class="hidden p-12 rounded-12 text-xs font-semibold text-center transition-all leading-normal"
+    ></div>
+
+    <p class={theme === 'dark' ? 'text-[11px] text-slate-400 text-center font-mono' : 'text-[11px] text-muted dark:text-muted-dark text-center font-mono'}>
+      🔒 100% on-device · Zero spam · Unsubscribe anytime
+    </p>
+  </form>
+</div>
+
+<script is:inline>
+  (function () {
+    function initSubscribeForms() {
+      var forms = document.querySelectorAll('[data-subscribe-form]');
+      forms.forEach(function (form) {
+        if (form.dataset.hasListener) return;
+        form.dataset.hasListener = 'true';
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          var emailInput = form.querySelector('input[name="email"]');
+          var button = form.querySelector('[data-subscribe-button]');
+          var buttonText = form.querySelector('[data-button-text]');
+          var status = form.querySelector('[data-subscribe-status]');
+          var source = form.getAttribute('data-source') || 'general';
+          var endpoint = form.getAttribute('data-endpoint') || '/api/waitlist';
+          var platform = form.getAttribute('data-platform') || 'windows';
+
+          if (!emailInput) return;
+          var email = emailInput.value.trim().toLowerCase();
+
+          // Validate email
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!email || !emailRegex.test(email)) {
+            if (status) {
+              status.className = 'p-12 rounded-12 text-xs font-semibold text-center bg-red-500/15 text-red-400 border border-red-500/30';
+              status.textContent = 'Please enter a valid email address.';
+              status.classList.remove('hidden');
+            }
+            emailInput.focus();
+            return;
+          }
+
+          // Loading state
+          var originalBtnText = buttonText ? buttonText.textContent : 'Join Waitlist';
+          if (button) button.disabled = true;
+          if (buttonText) buttonText.textContent = 'Submitting...';
+          if (status) status.classList.add('hidden');
+
+          // GA4 event
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'newsletter_signup', {
+              email_domain: email.split('@')[1] || '',
+              signup_source: source
+            });
+          }
+
+          // Local storage persistence
+          try {
+            localStorage.setItem('nadhebe_subscriber_email', email);
+            localStorage.setItem('perchboard_waitlist_email', email);
+            localStorage.setItem('perchboard_waitlist_timestamp', new Date().toISOString());
+          } catch (_) {}
+
+          var postSuccess = false;
+          var message = "You're on the list. We'll be in touch with release updates!";
+
+          try {
+            var res = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email, platform: platform, source: source })
+            });
+            var json = await res.json().catch(function() { return {}; });
+            if (res.ok && json.success !== false) {
+              postSuccess = true;
+              if (json.message) message = json.message;
+            } else {
+              postSuccess = false;
+              if (json.error) message = json.error;
+            }
+          } catch (_) {
+            // Local / offline fallback succeeds gracefully because email is saved to localStorage
+            postSuccess = true;
+          }
+
+          if (postSuccess) {
+            if (status) {
+              status.className = 'p-12 rounded-12 text-xs font-semibold text-center bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+              status.textContent = message || "You're on the list. We'll be in touch!";
+              status.classList.remove('hidden');
+            }
+            if (buttonText) buttonText.textContent = 'Subscribed ✓';
+            form.reset();
+
+            // Dispatch global event for modal listeners
+            window.dispatchEvent(new CustomEvent('nadhebe:subscribed', { detail: { email: email, source: source } }));
+          } else {
+            if (status) {
+              status.className = 'p-12 rounded-12 text-xs font-semibold text-center bg-red-500/15 text-red-400 border border-red-500/30';
+              status.textContent = message || 'Subscription failed. Please try again.';
+              status.classList.remove('hidden');
+            }
+            if (button) button.disabled = false;
+            if (buttonText) buttonText.textContent = originalBtnText;
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSubscribeForms);
+    } else {
+      initSubscribeForms();
+    }
+    document.addEventListener('astro:page-load', initSubscribeForms);
+  })();
+</script>

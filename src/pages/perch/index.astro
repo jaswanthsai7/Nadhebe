@@ -1,0 +1,1378 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Subscribe from '@/components/Subscribe.astro';
+import { SITE } from '@/config';
+import { buildSeo } from '@/utils/seo';
+
+const canonicalUrl = `${SITE.url}/perch/`;
+
+const seo = buildSeo({
+  title: 'Perchboard: Floating Windows Clipboard Panel & Shelf | Nadhebe',
+  description: 'Perchboard is a compact Windows desktop utility with a floating clipboard panel along the screen edge for instant access to copied text, links, images, and files.',
+  slug: '/perch/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  image: '/perch/perch-desktop-hero.png',
+  keywords: [
+    'Perchboard',
+    'Windows clipboard manager',
+    'floating clipboard shelf',
+    'screen edge clipboard',
+    'desktop clipboard utility',
+    'local first clipboard',
+    'Windows 11 clipboard app',
+    'clipboard history search',
+    'Nadhebe Lab'
+  ],
+});
+
+// JSON-LD Structured Data: WebApplication, WebPage, FAQPage, BreadcrumbList, VideoObject
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Perchboard',
+  operatingSystem: 'Windows 10, Windows 11',
+  applicationCategory: 'UtilitiesApplication',
+  offers: {
+    '@type': 'Offer',
+    price: '0.00',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/PreOrder'
+  },
+  author: {
+    '@type': 'Organization',
+    name: 'Nadhebe',
+    url: SITE.url
+  },
+  description: 'Compact Windows desktop utility that keeps your clipboard content close at hand, featuring a floating screen-edge panel for revisiting text, links, images, and files.',
+  screenshot: `${SITE.url}/perch/perch-desktop-hero.png`
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE.url
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Lab',
+      item: `${SITE.url}/lab/`
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Perchboard',
+      item: canonicalUrl
+    }
+  ]
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is Perchboard?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Perchboard is a compact Windows desktop utility created by Nadhebe. It keeps your clipboard history accessible from a floating panel anchored to the edge of your desktop screen, avoiding full-screen window clutter while preserving fast access to copied content.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How does the floating clipboard panel work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Perchboard anchors a slim, unobtrusive clipboard shelf directly against your chosen screen edge (right edge, left edge, or top). It remains readily accessible while you work across other applications, allowing you to quickly inspect, copy, and reuse recently captured items.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'What types of content does it show?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Perchboard captures and organizes multiple clipboard formats into dedicated filter tabs: All, Text snippets, Links and URLs, Images with high-resolution visual previews, and Files.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'When will the Windows version launch?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Windows build is currently in active development and early testing. Sign up for the waitlist to receive private beta invitations and launch notification emails as soon as the initial release is ready.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Is an iOS version planned?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. While Windows is the initial launch platform, an iOS companion is in planning. You can select iOS or Both when submitting the waitlist form to be notified when iOS testing begins.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I join the waitlist?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Enter your email address in the waitlist section on this page, choose your preferred platform (Windows, iOS, or Both), and click "Get early access". You will receive an immediate confirmation and priority access upon launch.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'What will Perchboard cost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Pricing details and licensing tiers will be formally confirmed prior to public launch. Early waitlist subscribers will receive complimentary access to the introductory releases and community beta builds.'
+      }
+    }
+  ]
+};
+
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Perchboard in Action: Live Windows Desktop Screen Recording',
+  description: 'Authentic 17-second live Windows 11 desktop screen recording demonstrating the Perchboard floating clipboard panel sliding out from the right screen edge.',
+  thumbnailUrl: [`${SITE.url}/perch/perch-desktop-hero.png`],
+  uploadDate: '2026-10-23T00:00:00Z',
+  contentUrl: `${SITE.url}/perch/perch-highlight.mp4`
+};
+
+const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
+---
+
+<BaseLayout
+  seo={seo}
+  jsonLd={jsonLd}
+  hideHeader={true}
+  hideFooter={true}
+  hideNatureBg={true}
+>
+  <!-- Google Fonts: Caveat for authentic handwritten stationery notes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --paper-cream: #FBF9F4;
+      --paper-warm: #F4EFE6;
+      --paper-border: #E8E2D5;
+      --paper-card: #FFFFFF;
+      --ink-graphite: #18191B;
+      --ink-subtle: #565961;
+      --ink-muted: #848792;
+      --brand-cyan: #0284C7;
+      --brand-cyan-light: #38BDF8;
+      --brand-cyan-glow: rgba(2, 132, 199, 0.15);
+      --font-hand: 'Caveat', cursive, sans-serif;
+      --font-serif-editorial: 'Newsreader', Georgia, serif;
+    }
+
+    .dark {
+      --paper-cream: #121316;
+      --paper-warm: #18191E;
+      --paper-border: #262830;
+      --paper-card: #1D1F25;
+      --ink-graphite: #F4F4F6;
+      --ink-subtle: #A3A6B2;
+      --ink-muted: #6C707E;
+      --brand-cyan-glow: rgba(56, 189, 248, 0.2);
+    }
+
+    /* Tactile Paper Texture Pattern */
+    .perch-page-wrapper {
+      background-color: var(--paper-cream);
+      background-image: radial-gradient(rgba(0, 0, 0, 0.038) 1px, transparent 0);
+      background-size: 24px 24px;
+      color: var(--ink-graphite);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .dark .perch-page-wrapper {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
+    }
+
+    .font-handwriting {
+      font-family: var(--font-hand);
+    }
+
+    .font-editorial {
+      font-family: var(--font-serif-editorial);
+    }
+
+    /* Tactile Paper Card & Shadow tokens */
+    .paper-sheet {
+      background: var(--paper-card);
+      border: 1px solid var(--paper-border);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 8px 24px -4px rgba(0, 0, 0, 0.05),
+        0 20px 48px -8px rgba(0, 0, 0, 0.04);
+    }
+
+    .paper-sheet-subtle {
+      background: var(--paper-card);
+      border: 1px solid var(--paper-border);
+      box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+    }
+
+    .paper-stamp {
+      border: 1px dashed var(--brand-cyan);
+      background: rgba(2, 132, 199, 0.04);
+    }
+
+    /* Hand-drawn SVG thread path styling */
+    .journey-thread {
+      stroke: #0284C7;
+      stroke-opacity: 0.35;
+      stroke-dasharray: 6 6;
+      fill: none;
+      pointer-events: none;
+    }
+
+    /* Smooth focus & interactive styles */
+    .btn-perch-primary {
+      background: #0284C7;
+      color: #FFFFFF;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+    }
+    .btn-perch-primary:hover {
+      background: #0369A1;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+    }
+
+    /* Desktop Showcase Frame */
+    .desktop-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow:
+        0 25px 60px -15px rgba(0, 0, 0, 0.22),
+        0 10px 24px -8px rgba(0, 0, 0, 0.12);
+    }
+    .dark .desktop-frame {
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 30px 70px -15px rgba(0, 0, 0, 0.6),
+        0 12px 28px -8px rgba(0, 0, 0, 0.35);
+    }
+  </style>
+
+  <!-- Official Stackedlol / Framer ASCII Ocean Engine -->
+  <script is:inline src="/perch/ascii-ocean-engine.js?v=3"></script>
+
+  <div class="perch-page-wrapper">
+    <!-- FULL-SCREEN TRANSPARENT ASCII SHARKS ON MAIN SCREEN (ZERO BLACK BACKGROUND) -->
+    <canvas
+      id="main-screen-ascii-ocean"
+      class="fixed inset-0 w-full h-full pointer-events-none select-none z-0"
+      style="display: block; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0;"
+      aria-hidden="true"
+    ></canvas>
+
+    <!-- SVG Background Journey Thread Path -->
+    <svg
+      class="journey-thread absolute inset-0 w-full h-full z-0 hidden lg:block"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      preserveAspectRatio="none"
+      viewBox="0 0 1440 6800"
+    >
+      <path
+        d="M 720,100
+           C 720,380 950,550 1150,700
+           C 1300,800 1320,1100 1240,1400
+           C 1180,1650 400,1850 320,2150
+           C 250,2450 1150,2650 1200,2950
+           C 1250,3250 350,3450 300,3750
+           C 250,4050 1100,4250 1150,4550
+           C 1200,4850 720,5100 720,5350
+           L 720,6600"
+        stroke-width="2"
+      />
+    </svg>
+
+    <!-- 3. HEADER: Floating Product Navigation Pill -->
+    <header class="fixed top-16 sm:top-24 inset-x-0 z-50 flex justify-center px-12 sm:px-20 pointer-events-none">
+      <nav
+        aria-label="Perchboard Navigation"
+        class="pointer-events-auto flex items-center justify-between gap-12 sm:gap-20 px-14 py-8 sm:py-10 rounded-full paper-sheet-subtle bg-white/90 dark:bg-[#18191D]/90 backdrop-blur-md max-w-4xl w-full border border-paper-border"
+      >
+        <!-- Left: Bird Icon & Wordmark -->
+        <a
+          href="/perch"
+          aria-label="Perchboard Home"
+          class="flex items-center gap-10 group shrink-0"
+        >
+          <img
+            src="/perch/app-icon.png"
+            alt="Perchboard Logo Icon"
+            width="30"
+            height="30"
+            class="w-30 h-30 rounded-8 shadow-sm transition-transform duration-200 group-hover:scale-105"
+            loading="eager"
+          />
+          <div class="flex items-baseline gap-6">
+            <span class="font-display font-extrabold text-sm sm:text-base tracking-tight text-ink-graphite">
+              Perchboard
+            </span>
+            <span class="hidden sm:inline-block font-mono text-[9px] uppercase tracking-widest text-brand-cyan font-bold">
+              v1.0
+            </span>
+          </div>
+        </a>
+
+        <!-- Center: Editorial Navigation Links -->
+        <div class="hidden md:flex items-center gap-20 text-xs font-medium text-ink-subtle">
+          <a href="#features" class="hover:text-ink-graphite transition-colors py-4">Features</a>
+          <a href="#how-it-works" class="hover:text-ink-graphite transition-colors py-4">How it works</a>
+          <a href="#platforms" class="hover:text-ink-graphite transition-colors py-4">Platforms</a>
+          <a href="#faq" class="hover:text-ink-graphite transition-colors py-4">FAQ</a>
+        </div>
+
+        <!-- Right: Studio Tag & Waitlist CTA -->
+        <div class="flex items-center gap-8 sm:gap-14 shrink-0">
+          <a
+            href="/lab"
+            class="hidden sm:inline-flex items-center gap-4 font-mono text-[10px] text-ink-muted hover:text-ink-subtle transition-colors uppercase tracking-wider"
+            title="Explore other builds from Nadhebe Lab"
+          >
+            <span>by Nadhebe</span>
+            <span>↗</span>
+          </a>
+          <button
+            type="button"
+            id="nav-waitlist-btn"
+            class="btn-perch-primary rounded-full px-14 py-6 sm:py-7 text-xs font-semibold whitespace-nowrap inline-flex items-center gap-4 cursor-pointer open-waitlist-modal"
+          >
+            <span>Join waitlist</span>
+            <span class="font-sans">↗</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Spacer for floating header -->
+    <div class="h-80 sm:h-96"></div>
+
+    <!-- 4. HERO SECTION: Make the real product the visual centerpiece -->
+    <section class="relative z-10 pt-16 sm:pt-28 pb-40 px-16 sm:px-24 max-w-6xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-32 sm:mb-48" data-reveal>
+        <!-- Platform Status Stamp Badge -->
+        <div class="inline-flex items-center gap-8 px-12 py-4 rounded-full paper-stamp mb-20 text-brand-cyan">
+          <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
+          <span class="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
+            WINDOWS FIRST · iOS COMING SOON
+          </span>
+        </div>
+
+        <!-- Primary H1 Headline: Single Line -->
+        <h1 class="font-display text-[clamp(1.75rem,5.2vw,4.5rem)] font-extrabold tracking-tight text-ink-graphite leading-tight mb-16 whitespace-nowrap">
+          Copy it. Keep it. Find it.
+        </h1>
+
+        <!-- Supporting Statement & Copy -->
+        <p class="font-editorial text-xl sm:text-2xl text-ink-subtle italic mb-12">
+          Your clipboard, always within reach.
+        </p>
+
+        <p class="text-sm sm:text-base text-ink-subtle leading-relaxed max-w-2xl mx-auto mb-28">
+          Perchboard keeps your copied content close at hand, with a floating desktop panel for revisiting text, links, images, and files without the friction of window switching.
+        </p>
+
+        <!-- CTA Row -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">
+          <button
+            type="button"
+            id="hero-waitlist-btn"
+            class="btn-perch-primary px-24 py-12 rounded-full font-bold text-sm inline-flex items-center gap-8 shadow-md cursor-pointer open-waitlist-modal"
+          >
+            <span>Join the waitlist</span>
+            <span>↗</span>
+          </button>
+          <a
+            href="#how-it-works"
+            class="px-20 py-11 rounded-full font-medium text-xs sm:text-sm text-ink-subtle hover:text-ink-graphite hover:bg-black/5 dark:hover:bg-white/5 transition-all inline-flex items-center gap-6"
+          >
+            <span>Explore how it works</span>
+            <span>↓</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Real Windows Desktop Scene with Floating Perchboard Panel & Live Video -->
+      <div class="relative max-w-5xl mx-auto pt-8 pb-16" data-reveal>
+        <!-- Handwritten Sticky Annotation (Top Left) -->
+        <div class="absolute -top-14 left-4 sm:left-12 z-20 hidden md:block">
+          <div class="bg-[#FFFCE8] text-[#785E16] dark:bg-[#2A291A] dark:text-[#E8DC96] px-14 py-8 rounded-8 shadow-sm border border-[#F2E59E] dark:border-[#4A472E] -rotate-3">
+            <span class="font-handwriting text-xl font-bold tracking-wide">
+              Right where you need it ↗
+            </span>
+          </div>
+        </div>
+
+        <!-- Handwritten Sticky Annotation (Right Side near Floating Shelf) -->
+        <div class="absolute -bottom-8 right-6 sm:right-16 z-20 hidden sm:block">
+          <div class="bg-[#FFFCE8] text-[#785E16] dark:bg-[#2A291A] dark:text-[#E8DC96] px-14 py-8 rounded-8 shadow-sm border border-[#F2E59E] dark:border-[#4A472E] rotate-2">
+            <span class="font-handwriting text-xl font-bold tracking-wide">
+              Your clipboard, at the edge ↖
+            </span>
+          </div>
+        </div>
+
+        <!-- Authentic Windows Desktop Video Showcase Container with Control Buttons -->
+        <div class="desktop-frame paper-sheet relative bg-[#0F172A] group">
+          <div class="relative overflow-hidden aspect-[16/9] sm:aspect-[1822/1013]">
+            <video
+              id="perch-highlight-video"
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+              poster="/perch/perch-desktop-hero.png"
+              class="w-full h-full object-cover object-top block"
+            >
+              <source src="/perch/perch-highlight.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Video Playback & Mute Buttons on Top Video Frame -->
+            <div class="absolute bottom-12 right-12 sm:bottom-16 sm:right-16 z-20 flex items-center gap-8">
+              <button
+                type="button"
+                id="perch-video-play-btn"
+                aria-label="Pause or play highlight demonstration video"
+                class="px-14 py-6 rounded-full paper-sheet-subtle bg-white/95 dark:bg-[#18191D]/95 backdrop-blur-md text-xs font-mono font-semibold text-ink-graphite hover:bg-white dark:hover:bg-[#22242B] transition-all inline-flex items-center gap-6 cursor-pointer shadow-md"
+              >
+                <span id="play-btn-icon">⏸</span>
+                <span id="play-btn-text">Pause</span>
+              </button>
+              <button
+                type="button"
+                id="perch-video-mute-btn"
+                aria-label="Mute or unmute highlight demonstration video"
+                class="px-14 py-6 rounded-full paper-sheet-subtle bg-white/95 dark:bg-[#18191D]/95 backdrop-blur-md text-xs font-mono font-semibold text-ink-graphite hover:bg-white dark:hover:bg-[#22242B] transition-all inline-flex items-center gap-6 cursor-pointer shadow-md"
+              >
+                <span id="mute-btn-icon">🔇</span>
+                <span id="mute-btn-text">Unmute</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-14 text-center">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-ink-muted">
+            AUTHENTIC WINDOWS 11 DESKTOP CAPTURE · FLOATING EDGE PANEL POSITIONING
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHT SECTION: Live Product Screen Recording Showcase -->
+    <section class="relative z-10 py-32 px-16 sm:px-24 bg-white/60 dark:bg-black/20 border-y border-paper-border">
+      <div class="max-w-5xl mx-auto" data-reveal>
+        <div class="mb-24">
+          <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-brand-cyan/10 text-brand-cyan font-mono text-[10px] font-bold tracking-wider uppercase mb-8">
+            <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
+            HIGH-RESOLUTION ARCHITECTURE
+          </div>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-ink-graphite">
+            Precision Desktop Ergonomics
+          </h2>
+          <p class="font-editorial text-lg text-ink-subtle italic mt-4">
+            Full Windows 11 capture showing Perchboard floating alongside active workspaces.
+          </p>
+        </div>
+
+        <!-- Desktop Showcase Frame (without duplicate buttons) -->
+        <div class="desktop-frame paper-sheet relative bg-[#0F172A] overflow-hidden shadow-2xl">
+          <img
+            src="/perch/perch-desktop-hero.png"
+            alt="Perchboard floating clipboard panel positioned along the right edge of a Windows desktop"
+            class="w-full h-auto block rounded-16"
+            loading="lazy"
+            width="1822"
+            height="1013"
+          />
+        </div>
+
+        <div class="mt-16 flex items-center justify-between text-caption font-mono text-ink-muted text-[11px] flex-wrap gap-8">
+          <div class="flex items-center gap-6">
+            <svg class="w-12 h-12 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span>Continuous background clipboard listener</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <svg class="w-12 h-12 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span>Instant slide-out shelf at the desktop perimeter</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <svg class="w-12 h-12 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span>100% on-device memory</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. THE SCROLL NARRATIVE: Show the product in action -->
+    <div id="how-it-works" class="relative z-10 pt-28 pb-48">
+      
+      <!-- SECTION 01 — Always within reach -->
+      <section id="features" class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+          <!-- Left: Narrative Text Block -->
+          <div class="lg:col-span-5 space-y-16">
+            <div class="flex items-center gap-8">
+              <span class="font-mono text-xs font-bold px-8 py-2 rounded-6 bg-brand-cyan/10 text-brand-cyan">
+                01
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+                EDGE ARCHITECTURE
+              </span>
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite tracking-tight leading-tight">
+              Not another window. Just within reach.
+            </h2>
+
+            <!-- Direct 2-3 sentence answer block for AI extractability -->
+            <p class="text-sm sm:text-base text-ink-subtle leading-relaxed">
+              Perchboard is designed as an anchored, floating clipboard panel that resides directly on your Windows desktop edge. Rather than burying copied snippets in a full-screen dashboard or separate browser tab, Perchboard slides in smoothly when needed and stays out of your way while you work.
+            </p>
+
+            <div class="pt-12 border-t border-paper-border space-y-8">
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Configurable screen edge placement: right, left, or top perimeter.</span>
+              </div>
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Adjustable vertical alignment percentage along your display.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Authentic Desktop Landscape Visual -->
+          <div class="lg:col-span-7 relative">
+            <div class="desktop-frame paper-sheet relative bg-[#0F172A]">
+              <img
+                src="/perch/perch-desktop-hero.png"
+                alt="Perchboard floating panel shown anchored along the screen edge"
+                class="w-full h-auto block"
+                loading="lazy"
+                width="1822"
+                height="1013"
+              />
+            </div>
+            <!-- Editorial annotation note -->
+            <p class="mt-8 text-right font-handwriting text-lg text-ink-muted">
+              Floats alongside your active applications ~
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 02 — Everything you copied -->
+      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+          <!-- Left: Authentic Cropped Interface Assets -->
+          <div class="lg:col-span-7 order-2 lg:order-1 relative">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-16 items-start">
+              <!-- Close-up of Filter Bar & Search -->
+              <div class="sm:col-span-12 paper-sheet p-10 rounded-14 overflow-hidden">
+                <img
+                  src="/perch/perch-filters-crop.png"
+                  alt="Perchboard filter tabs showing All, Text, Links, Images, and Files with search input"
+                  class="w-full h-auto block rounded-8"
+                  loading="lazy"
+                  width="684"
+                  height="246"
+                />
+              </div>
+
+              <!-- Full panel vertical close-up -->
+              <div class="sm:col-span-8 paper-sheet rounded-18 overflow-hidden mx-auto">
+                <img
+                  src="/perch/perch-panel-hero-crop.png"
+                  alt="Perchboard floating panel screenshot with recent copied content and metadata"
+                  class="w-full h-auto block"
+                  loading="lazy"
+                  width="382"
+                  height="700"
+                />
+              </div>
+
+              <!-- Sticky Note Annotation -->
+              <div class="sm:col-span-4 self-center hidden sm:block">
+                <div class="bg-[#FFFCE8] text-[#785E16] dark:bg-[#2A291A] dark:text-[#E8DC96] p-16 rounded-12 shadow-sm border border-[#F2E59E] dark:border-[#4A472E] rotate-1">
+                  <p class="font-handwriting text-xl leading-snug">
+                    Type filters keep text, links, and design assets instantly sorted.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Narrative Text Block -->
+          <div class="lg:col-span-5 order-1 lg:order-2 space-y-16">
+            <div class="flex items-center gap-8">
+              <span class="font-mono text-xs font-bold px-8 py-2 rounded-6 bg-brand-cyan/10 text-brand-cyan">
+                02
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+                FILTERING & SEARCH
+              </span>
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite tracking-tight leading-tight">
+              A little less searching. A lot more finding.
+            </h2>
+
+            <!-- Direct 2-3 sentence answer block for AI extractability -->
+            <p class="text-sm sm:text-base text-ink-subtle leading-relaxed">
+              Perchboard automatically segregates your clipboard history into dedicated filters: All, Text, Links, Images, and Files. With a built-in search bar directly at the top of the shelf, locating past URLs, code snippets, or reference visuals takes only milliseconds.
+            </p>
+
+            <div class="pt-12 border-t border-paper-border space-y-8">
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Type filtering isolates precisely the content you want to paste.</span>
+              </div>
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Instant clipboard history search across your recent session.</span>
+              </div>
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>One-click Clear action to scrub your history anytime.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 03 — See it before you need it -->
+      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+          <!-- Left: Narrative Text Block -->
+          <div class="lg:col-span-5 space-y-16">
+            <div class="flex items-center gap-8">
+              <span class="font-mono text-xs font-bold px-8 py-2 rounded-6 bg-brand-cyan/10 text-brand-cyan">
+                03
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+                VISUAL RECOGNITION
+              </span>
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite tracking-tight leading-tight">
+              Your copied content, at a glance.
+            </h2>
+
+            <!-- Direct 2-3 sentence answer block for AI extractability -->
+            <p class="text-sm sm:text-base text-ink-subtle leading-relaxed">
+              Visual history eliminates the guesswork of raw filenames and ambiguous clipboard text. Perchboard renders clean high-resolution image previews and clear content metadata tags showing item dimensions, file sizes, and elapsed timestamps.
+            </p>
+
+            <div class="pt-12 border-t border-paper-border space-y-8">
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Rich image cards display exact pixel dimensions and file sizes.</span>
+              </div>
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Relative elapsed timestamps ("just now", "5m ago") keep your work ordered.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Visual Cards of Copied Images and Metadata -->
+          <div class="lg:col-span-7 relative">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 items-center">
+              <!-- Copied Image Preview Card -->
+              <div class="paper-sheet p-12 rounded-16">
+                <div class="rounded-10 overflow-hidden mb-10 bg-slate-900">
+                  <img
+                    src="/perch/perch-copied-image.png"
+                    alt="Authentic copied boat image preview from Perchboard"
+                    class="w-full h-auto block"
+                    loading="lazy"
+                    width="600"
+                    height="427"
+                  />
+                </div>
+                <div class="flex items-center justify-between text-caption font-mono text-xs text-ink-muted">
+                  <span class="px-6 py-2 rounded-4 bg-brand-cyan/10 text-brand-cyan font-bold uppercase text-[9px]">IMAGE</span>
+                  <span>962×507 · 473.0 KB</span>
+                </div>
+              </div>
+
+              <!-- Multi-clip panel crop -->
+              <div class="paper-sheet rounded-18 overflow-hidden">
+                <img
+                  src="/perch/perch-panel-multiclip-crop.png"
+                  alt="Perchboard multi-item clipboard history panel with image cards"
+                  class="w-full h-auto block"
+                  loading="lazy"
+                  width="387"
+                  height="740"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 04 — Less friction, back to work -->
+      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+          <!-- Left: Settings Position Desktop Scene -->
+          <div class="lg:col-span-7 order-2 lg:order-1 relative">
+            <div class="desktop-frame paper-sheet relative bg-[#0F172A]">
+              <img
+                src="/perch/perch-desktop-settings.png"
+                alt="Perchboard settings showing screen edge placement options on Windows"
+                class="w-full h-auto block"
+                loading="lazy"
+                width="1917"
+                height="1017"
+              />
+            </div>
+            <p class="mt-8 text-left font-handwriting text-lg text-ink-muted">
+              Configure Left, Top, or Right edge docking to suit your monitor setup.
+            </p>
+          </div>
+
+          <!-- Right: Narrative Text Block -->
+          <div class="lg:col-span-5 order-1 lg:order-2 space-y-16">
+            <div class="flex items-center gap-8">
+              <span class="font-mono text-xs font-bold px-8 py-2 rounded-6 bg-brand-cyan/10 text-brand-cyan">
+                04
+              </span>
+              <span class="font-mono text-xs uppercase tracking-widest text-ink-muted">
+                ERGONOMIC FOCUS
+              </span>
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite tracking-tight leading-tight">
+              Pick up where you left off.
+            </h2>
+
+            <!-- Direct 2-3 sentence answer block for AI extractability -->
+            <p class="text-sm sm:text-base text-ink-subtle leading-relaxed">
+              Perchboard gives your desktop clipboard a persistent spatial memory without introducing background bloat or complex accounts. Everything is retained securely on your local PC, allowing you to quickly paste assets and get straight back to your creative work.
+            </p>
+
+            <div class="pt-12 border-t border-paper-border space-y-8">
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Unobtrusive floating presence preserves full screen real estate.</span>
+              </div>
+              <div class="flex items-start gap-10 text-xs text-ink-subtle">
+                <span class="font-bold text-brand-cyan font-mono">✦</span>
+                <span>Zero telemetry or background syncing — local data stays on your machine.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 6. PRODUCT-SPECIFIC VISUAL INTERLUDE: Breathing Room -->
+    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#FAF7F0] dark:bg-[#16171B] border-y border-paper-border text-center">
+      <div class="max-w-3xl mx-auto space-y-24" data-reveal>
+        <div class="inline-block relative">
+          <div class="w-96 h-96 sm:w-112 sm:h-112 mx-auto rounded-24 p-8 paper-sheet shadow-xl bg-white dark:bg-[#1F2128]">
+            <img
+              src="/perch/app-icon.png"
+              alt="Perchboard bird app icon"
+              class="w-full h-full object-contain rounded-18"
+              width="112"
+              height="112"
+              loading="lazy"
+            />
+          </div>
+          <!-- Subtle cyan glow behind icon -->
+          <div class="absolute inset-0 rounded-24 bg-brand-cyan blur-2xl opacity-20 -z-10"></div>
+        </div>
+
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-ink-graphite max-w-xl mx-auto leading-tight">
+          Small on your screen. <br class="hidden sm:inline" />Useful all day.
+        </h2>
+
+        <p class="font-editorial text-xl text-ink-subtle italic max-w-lg mx-auto">
+          Crafted for software engineers, writers, and designers who value speed and privacy over noisy bloated utilities.
+        </p>
+      </div>
+    </section>
+
+    <!-- STRUCTURED COMPARISON TABLE: LLM / GEO Extractability -->
+    <section class="py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
+      <div class="text-center mb-24">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
+          FEATURE BREAKDOWN
+        </span>
+        <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-ink-graphite mt-6">
+          How Perchboard Compares to Standard Windows Clipboard
+        </h2>
+        <p class="text-xs sm:text-sm text-ink-subtle mt-4">
+          A side-by-side comparison of ergonomics, filtering capabilities, and privacy architecture.
+        </p>
+      </div>
+
+      <div class="paper-sheet rounded-18 overflow-hidden overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm min-w-[560px]">
+          <thead>
+            <tr class="border-b border-paper-border bg-black/5 dark:bg-white/5 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+              <th scope="col" class="py-12 px-16">Feature / Capability</th>
+              <th scope="col" class="py-12 px-16 text-brand-cyan font-bold">Perchboard</th>
+              <th scope="col" class="py-12 px-16 text-ink-muted">Default Windows History (Win+V)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-paper-border">
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">User Interface</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">Floating Screen-Edge Shelf</td>
+              <td class="py-12 px-16 text-ink-subtle">Center Popup Modal</td>
+            </tr>
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">Supported Formats</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">Text, Links, Images & Files</td>
+              <td class="py-12 px-16 text-ink-subtle">Text, HTML & Images</td>
+            </tr>
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">Category Filter Tabs</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">All, Text, Links, Images, Files</td>
+              <td class="py-12 px-16 text-ink-subtle">None (Unsorted Stream)</td>
+            </tr>
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">Screen Edge Customization</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">Right, Left, or Top Edge + Slider</td>
+              <td class="py-12 px-16 text-ink-subtle">Fixed Position Only</td>
+            </tr>
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">Privacy Architecture</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">100% Local-First, Zero Cloud Sync</td>
+              <td class="py-12 px-16 text-ink-subtle">Microsoft Cloud Sync Optional</td>
+            </tr>
+            <tr>
+              <td class="py-12 px-16 font-semibold text-ink-graphite">History Persistence</td>
+              <td class="py-12 px-16 text-brand-cyan font-medium">Preserved with Manual Clear Option</td>
+              <td class="py-12 px-16 text-ink-subtle">Cleared on Restart (Unless Pinned)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. PLATFORM AVAILABILITY -->
+    <section id="platforms" class="py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
+      <div class="text-center mb-28">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
+          ROADMAP & AVAILABILITY
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite mt-6">
+          One idea. More ways to use it.
+        </h2>
+        <p class="font-editorial text-lg text-ink-subtle italic mt-4 max-w-xl mx-auto">
+          Built natively for your primary desktop workstation, with mobile companion support in the works.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+        
+        <!-- WINDOWS PLATFORM CARD (Primary) -->
+        <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between border-2 border-brand-cyan/40">
+          <div class="absolute top-16 right-16">
+            <span class="inline-flex items-center gap-6 rounded-full bg-brand-cyan/10 px-10 py-3 text-[10px] font-mono font-bold tracking-wider text-brand-cyan uppercase">
+              <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
+              INITIAL PLATFORM
+            </span>
+          </div>
+
+          <div>
+            <div class="w-48 h-48 rounded-12 bg-brand-cyan/10 text-brand-cyan flex items-center justify-center mb-16">
+              <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+              </svg>
+            </div>
+            
+            <h3 class="font-display text-2xl font-bold text-ink-graphite mb-8">
+              Windows
+            </h3>
+            
+            <p class="text-caption font-mono text-brand-cyan font-semibold mb-12">
+              Status: Coming soon
+            </p>
+            
+            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-20">
+              The flagship Perchboard release. Engineered specifically for 64-bit Windows 10 and Windows 11 with native edge docking, smooth slide animations, and local clipboard caching.
+            </p>
+          </div>
+
+          <div class="pt-16 border-t border-paper-border">
+            <button
+              type="button"
+              id="platform-cta-windows"
+              data-platform="windows"
+              class="w-full btn-perch-primary rounded-full py-10 px-18 text-xs font-bold text-center inline-flex items-center justify-center gap-6 cursor-pointer open-waitlist-modal"
+            >
+              <span>Join the Windows waitlist</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- IOS PLATFORM CARD -->
+        <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between">
+          <div class="absolute top-16 right-16">
+            <span class="inline-flex items-center gap-6 rounded-full bg-black/5 dark:bg-white/5 px-10 py-3 text-[10px] font-mono font-semibold tracking-wider text-ink-muted uppercase">
+              PLANNED
+            </span>
+          </div>
+
+          <div>
+            <div class="w-48 h-48 rounded-12 bg-black/5 dark:bg-white/5 text-ink-subtle flex items-center justify-center mb-16">
+              <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.93-.93.04-2.07.62-2.73 1.39-.58.67-1.09 1.76-.95 2.82 1.04.08 2.11-.51 2.74-1.28z"/>
+              </svg>
+            </div>
+            
+            <h3 class="font-display text-2xl font-bold text-ink-graphite mb-8">
+              iOS
+            </h3>
+            
+            <p class="text-caption font-mono text-ink-muted font-semibold mb-12">
+              Status: Planned · Coming soon
+            </p>
+            
+            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-20">
+              An upcoming companion app designed for Apple iPhone users, focusing on glanceable widgets, quick-capture scratchpads, and seamless cross-platform workflow harmony.
+            </p>
+          </div>
+
+          <div class="pt-16 border-t border-paper-border">
+            <button
+              type="button"
+              id="platform-cta-ios"
+              data-platform="ios"
+              class="w-full rounded-full py-10 px-18 text-xs font-bold text-center border border-paper-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors inline-flex items-center justify-center gap-6 cursor-pointer text-ink-graphite open-waitlist-modal"
+            >
+              <span>Notify me about iOS</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. WAITLIST: The Primary Conversion Point -->
+    <section id="waitlist" class="py-36 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
+      <div class="rounded-32 p-28 sm:p-48 bg-[#12141A] text-[#F1F5F9] border border-[#232733] shadow-2xl relative overflow-hidden">
+        
+        <!-- Ambient cyan glow behind card -->
+        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-brand-cyan blur-3xl opacity-15 pointer-events-none"></div>
+
+        <div class="max-w-xl mx-auto text-center mb-28">
+          <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-brand-cyan/20 border border-brand-cyan/30 text-brand-cyan-light font-mono text-[10px] font-bold tracking-wider uppercase mb-12">
+            EARLY ACCESS REGISTRATION
+          </div>
+
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-12">
+            Be there from the beginning.
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Get an update when Perchboard is ready for your platform. We respect your inbox: zero spam, strictly milestone updates.
+          </p>
+        </div>
+
+        <!-- Clean Nadhebe Subscribe Component -->
+        <div class="max-w-md mx-auto pt-8">
+          <Subscribe
+            id="section-perch-subscribe"
+            source="perch_section_waitlist"
+            endpoint="/api/waitlist"
+            buttonText="Get Early Access ↗"
+            placeholder="you@domain.com"
+            theme="dark"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FAQ SECTION: Clean, Understated Editorial Accordion -->
+    <section id="faq" class="py-32 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
+      <div class="text-center mb-28">
+        <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
+          QUESTIONS & ANSWERS
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink-graphite mt-6">
+          Frequently asked questions
+        </h2>
+        <p class="font-editorial text-lg text-ink-subtle italic mt-4">
+          Everything you need to know about the product and release timeline.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {faqSchema.mainEntity.map((item, idx) => (
+          <details
+            class="paper-sheet rounded-16 p-20 sm:p-24 group transition-all duration-200"
+            id={`faq-item-${idx + 1}`}
+          >
+            <summary class="font-display text-base sm:text-lg font-bold text-ink-graphite cursor-pointer list-none flex items-center justify-between gap-16 select-none">
+              <span>{item.name}</span>
+              <span class="text-brand-cyan text-xl font-mono transition-transform duration-200 group-open:rotate-45 shrink-0">
+                +
+              </span>
+            </summary>
+            <div class="pt-12 text-xs sm:text-sm text-ink-subtle leading-relaxed border-t border-paper-border mt-12">
+              <p>{item.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- 10. FOOTER: Memorable, Dramatic Dark Graphite Footer -->
+    <footer class="relative z-10 bg-[#0B0D11] text-[#E2E8F0] pt-48 pb-32 px-16 sm:px-28 border-t border-[#1C2029] overflow-hidden">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Top Row: Brand Signature + Waitlist Callout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-32 pb-36 border-b border-[#1C2029]">
+          
+          <!-- Left: Wordmark & Statement -->
+          <div class="md:col-span-5 space-y-16">
+            <div class="flex items-center gap-10">
+              <img
+                src="/perch/app-icon.png"
+                alt="Perchboard bird app logo"
+                width="34"
+                height="34"
+                class="w-34 h-34 rounded-8 shadow-sm"
+                loading="lazy"
+              />
+              <span class="font-display font-extrabold text-xl text-white tracking-tight">
+                Perchboard
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+              An independent desktop utility by Nadhebe. Engineered for focus, screen ergonomics, and fast clipboard retrieval.
+            </p>
+
+            <div class="pt-8">
+              <button
+                type="button"
+                id="footer-waitlist-btn"
+                class="btn-perch-primary px-18 py-8 rounded-full text-xs font-bold inline-flex items-center gap-6 cursor-pointer open-waitlist-modal"
+              >
+                <span>Join Windows waitlist</span>
+                <span>↗</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Middle & Right: Navigation Columns -->
+          <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-24">
+            
+            <!-- Column 1: Navigation -->
+            <div class="space-y-12">
+              <h4 class="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                Product
+              </h4>
+              <ul class="space-y-8 text-xs text-slate-400">
+                <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#how-it-works" class="hover:text-white transition-colors">How it works</a></li>
+                <li><a href="#platforms" class="hover:text-white transition-colors">Platforms</a></li>
+                <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2: Studio & Lab -->
+            <div class="space-y-12">
+              <h4 class="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                Studio
+              </h4>
+              <ul class="space-y-8 text-xs text-slate-400">
+                <li><a href="/lab" class="hover:text-white transition-colors">Nadhebe Lab</a></li>
+                <li><a href="/about" class="hover:text-white transition-colors">About Nadhebe</a></li>
+                <li><a href="/contact" class="hover:text-white transition-colors">Contact Desk</a></li>
+                <li><a href="/newsletter" class="hover:text-white transition-colors">Newsletter</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Legal & Standards -->
+            <div class="space-y-12">
+              <h4 class="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                Legal
+              </h4>
+              <ul class="space-y-8 text-xs text-slate-400">
+                <li><a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/editorial-standards" class="hover:text-white transition-colors">Editorial Policy</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Dramatic Oversized Perchboard Typography Anchor (Like reference PDF) -->
+        <div class="pt-32 pb-16 text-center select-none overflow-hidden" aria-hidden="true">
+          <span class="block font-display font-black text-[clamp(2.8rem,11vw,8.5rem)] tracking-tighter text-[#161922] leading-none uppercase">
+            perchboard
+          </span>
+        </div>
+
+        <!-- Bottom Copyright Bar -->
+        <div class="pt-16 border-t border-[#161922] flex flex-col sm:flex-row items-center justify-between gap-12 text-caption font-mono text-[11px] text-slate-500">
+          <div>
+            <span>© 2026 Nadhebe. All rights reserved.</span>
+          </div>
+          <div class="flex items-center gap-16">
+            <a href="https://www.youtube.com/@Nadhebe" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">YouTube</a>
+            <a href="https://substack.com/@nadhebeai" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">Substack</a>
+            <a href="https://www.linkedin.com/company/nadhebe/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">LinkedIn</a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+    <!-- WAITLIST POPUP MODAL -->
+    <div
+      id="waitlist-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="waitlist-modal-title"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center p-16 sm:p-24 bg-slate-950/70 backdrop-blur-xl transition-opacity duration-200 overflow-hidden"
+    >
+      <!-- Center Modal Card: Clean, elevated glassmorphism design -->
+      <div
+        id="waitlist-modal-card"
+        class="bg-[#0D111A]/95 text-white border border-white/12 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] rounded-32 max-w-md w-full p-28 sm:p-36 relative overflow-hidden z-10 backdrop-blur-2xl"
+      >
+        <!-- Subtle Top Glow -->
+        <div class="absolute -top-20 -left-20 w-44 h-44 bg-brand-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Sleek Circular Glass Close Button (X) -->
+        <button
+          type="button"
+          id="close-waitlist-modal-btn"
+          aria-label="Close waitlist popup"
+          class="absolute top-18 right-18 w-32 h-32 rounded-full border border-white/12 bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer text-xs font-mono"
+        >
+          ✕
+        </button>
+
+        <!-- Brand Header Bar in Modal -->
+        <div class="flex items-center gap-12 mb-18">
+          <div class="relative">
+            <img
+              src="/perch/app-icon.png"
+              alt="Perchboard icon"
+              width="40"
+              height="40"
+              class="w-40 h-40 rounded-12 shadow-md bg-[#121824] border border-white/10 ring-1 ring-white/5"
+            />
+            <span class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-brand-cyan border-2 border-[#0D111A]"></span>
+          </div>
+          <div>
+            <div class="flex items-center gap-6">
+              <span class="font-display font-extrabold text-base tracking-tight text-white block">Perchboard</span>
+              <span class="font-mono text-[9px] uppercase tracking-wider px-6 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan font-bold border border-brand-cyan/20">
+                Early Access
+              </span>
+            </div>
+            <span class="font-mono text-[10px] tracking-wider text-slate-400 block mt-2">Windows 10 & 11 Desktop Utility</span>
+          </div>
+        </div>
+
+        <h3 id="waitlist-modal-title" class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+          Keep every clip within reach.
+        </h3>
+
+        <p class="font-sans text-xs text-slate-300 mt-8 mb-20 leading-relaxed">
+          A floating clipboard panel anchored directly to your screen edge. Enter your email to reserve your spot and receive direct download access when builds launch.
+        </p>
+
+        <!-- Embedded Nadhebe Subscribe Component (Clean Pill Capsule, Single Arrow) -->
+        <Subscribe
+          id="modal-subscribe-form"
+          source="perch_waitlist_modal"
+          endpoint="/api/waitlist"
+          buttonText="Join Waitlist"
+          placeholder="you@example.com"
+          theme="dark"
+        />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Client Hydration & Interactive Logic -->
+<script is:inline>
+  function initPerchPage() {
+    // 1. Highlight Video Play/Pause & Mute Controls
+    var video = document.getElementById('perch-highlight-video');
+    var playBtn = document.getElementById('perch-video-play-btn');
+    var playIcon = document.getElementById('play-btn-icon');
+    var playText = document.getElementById('play-btn-text');
+    var muteBtn = document.getElementById('perch-video-mute-btn');
+    var muteIcon = document.getElementById('mute-btn-icon');
+    var muteText = document.getElementById('mute-btn-text');
+
+    if (video && playBtn && playIcon && playText && !playBtn.dataset.hasListener) {
+      playBtn.dataset.hasListener = 'true';
+      playBtn.addEventListener('click', function() {
+        if (video.paused) {
+          video.play();
+          playIcon.textContent = '⏸';
+          playText.textContent = 'Pause';
+        } else {
+          video.pause();
+          playIcon.textContent = '▶';
+          playText.textContent = 'Play';
+        }
+      });
+    }
+
+    if (video && muteBtn && muteIcon && muteText && !muteBtn.dataset.hasListener) {
+      muteBtn.dataset.hasListener = 'true';
+      muteBtn.addEventListener('click', function() {
+        video.muted = !video.muted;
+        if (video.muted) {
+          muteIcon.textContent = '🔇';
+          muteText.textContent = 'Unmute';
+        } else {
+          muteIcon.textContent = '🔊';
+          muteText.textContent = 'Mute';
+        }
+      });
+    }
+
+    // 2. Full-Screen Transparent ASCII Sharks on Main Screen (Zero Black Background)
+    var mainOceanCanvas = document.getElementById('main-screen-ascii-ocean');
+    if (mainOceanCanvas && typeof window.OceanEngine === 'function') {
+      if (window.__mainOceanEngine) {
+        window.__mainOceanEngine.destroy();
+      }
+      var cfg = typeof window.defaultConfig === 'function' ? window.defaultConfig() : {};
+      cfg.transparent = true;
+      cfg.background = 'transparent';
+      cfg.showGrid = false;
+      cfg.wakeRGB = [2, 132, 199];      // Perchboard cyan wake ripples
+      cfg.speed = 1.1;
+      cfg.interactive = true;
+
+      // Exactly 2 sharks: 1 Hammerhead, 1 Classic
+      var sharks = [
+        { kind: 'hammerhead', size: 1.2 },
+        { kind: 'classic', size: 1.0 }
+      ];
+
+      // fishCount = 0 (removes all fish dashes completely)
+      window.__mainOceanEngine = new window.OceanEngine(mainOceanCanvas, sharks, 0, cfg);
+    }
+
+    // 3. Waitlist Popup Modal Trigger & Accessible Controls
+    var modal = document.getElementById('waitlist-modal');
+    var modalCloseBtn = document.getElementById('close-waitlist-modal-btn');
+    var modalEmailInput = modal ? modal.querySelector('input[type="email"]') : null;
+
+    function openWaitlistModal(platform) {
+      if (!modal) return;
+      if (platform && modal) {
+        var modalForm = modal.querySelector('form');
+        if (modalForm) modalForm.setAttribute('data-platform', platform);
+      }
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      setTimeout(function() {
+        if (modalEmailInput) modalEmailInput.focus();
+      }, 60);
+    }
+
+    function closeWaitlistModal() {
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Attach click triggers to all buttons with .open-waitlist-modal
+    var openBtns = document.querySelectorAll('.open-waitlist-modal');
+    openBtns.forEach(function(btn) {
+      if (btn.dataset.hasModalListener) return;
+      btn.dataset.hasModalListener = 'true';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var platform = btn.getAttribute('data-platform') || 'windows';
+        openWaitlistModal(platform);
+      });
+    });
+
+    if (modalCloseBtn && !modalCloseBtn.dataset.hasCloseListener) {
+      modalCloseBtn.dataset.hasCloseListener = 'true';
+      modalCloseBtn.addEventListener('click', closeWaitlistModal);
+    }
+
+    if (modal && !modal.dataset.hasBackdropListener) {
+      modal.dataset.hasBackdropListener = 'true';
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeWaitlistModal();
+      });
+    }
+
+    if (!window.__perchKeydownAttached) {
+      window.__perchKeydownAttached = true;
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var curModal = document.getElementById('waitlist-modal');
+          if (curModal && !curModal.classList.contains('hidden')) {
+            closeWaitlistModal();
+          }
+        }
+      });
+    }
+
+    // Auto-dismiss modal after 2.5s on successful submission
+    window.addEventListener('nadhebe:subscribed', function() {
+      setTimeout(function() {
+        closeWaitlistModal();
+      }, 2500);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPerchPage);
+  } else {
+    initPerchPage();
+  }
+  document.addEventListener('astro:page-load', initPerchPage);
+</script>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" width="160" height="48" fill="none">
+  <g transform="translate(0, 0) scale(0.95)">
+    
+  <!-- Glowing Perch Ledge / Shelf -->
+  <rect x="15" y="37" width="27" height="5" rx="2.5" fill="#0284C7" />
+  <line x1="22" y1="37" x2="40" y2="37" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Bird Leg & Foot -->
+  <path d="M 28 32 L 28 38 M 31 32 L 31 38" stroke="#0F172A" stroke-width="1.8" stroke-linecap="round" />
+
+  <!-- Bird Tail -->
+  <path d="M 18 31 C 15 35, 11 39, 8 41 C 7.2 41.5, 6.5 40.5, 7.2 39.5 C 9.5 35.5, 13 30.5, 16 27 Z" fill="#0284C7" />
+
+  <!-- Bird Body, Chest, Head & Beak -->
+  <path d="M 22 14 
+           C 25 8, 31 6.5, 35 9.5 
+           C 36.8 11, 38 12.5, 38.5 14
+           L 43.5 16.5 
+           L 38 19
+           C 37.5 25, 33 34, 27 34
+           C 21.5 34, 17.5 29.5, 16.5 24.5
+           C 15.5 19.5, 18.5 15.5, 22 14 Z" fill="#0F172A" />
+
+  <!-- Eye -->
+  <circle cx="33.5" cy="14" r="1.75" fill="#0F172A" />
+
+  <!-- Swept Aerodynamic Wing -->
+  <path d="M 21 17.5 
+           C 27 17.5, 32 21.5, 30.5 26.5 
+           C 27.5 31.5, 17 32, 10.5 30.5 
+           C 9.2 30, 9.5 28.5, 11 28 
+           C 14.5 26, 18.5 22.5, 21 17.5 Z" 
+        fill="#0284C7" />
+
+  </g>
+  <text x="50" y="32" font-family="Nunito, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.03em" fill="#0F172A">Perch</text>
+</svg>

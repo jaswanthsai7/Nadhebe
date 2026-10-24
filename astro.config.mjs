@@ -10,14 +10,33 @@ const site = rawSite.trim().replace(/\/+$/, '');
 // https://astro.build/config
 export default defineConfig({
   site,
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   output: 'static',
   build: {
+    format: 'directory',    // Outputs clean directory structure with index.html
     assets: '_assets',      // Cloudflare-safe asset directory name
     inlineStylesheets: 'always',
     concurrency: 8,         // Parallelise page builds for faster CI/deploy
   },
   vite: {
+    plugins: [
+      {
+        name: 'auto-trailing-slash-dev',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            const url = req.url || '';
+            const [urlPath, query] = url.split('?');
+            // If request has no extension and doesn't end with slash, redirect to trailing slash in dev
+            if (urlPath && !urlPath.endsWith('/') && !urlPath.split('/').pop()?.includes('.')) {
+              res.writeHead(302, { Location: urlPath + '/' + (query ? '?' + query : '') });
+              res.end();
+              return;
+            }
+            next();
+          });
+        }
+      }
+    ],
     resolve: {
       alias: {
         '@': path.resolve('./src'),
