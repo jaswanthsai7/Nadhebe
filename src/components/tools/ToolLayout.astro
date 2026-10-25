@@ -24,9 +24,10 @@ interface Props {
   relatedCategory?: string;
   relatedTools?: ToolMetadata[];
   sidebarLayout?: boolean;
+  noindex?: boolean;
 }
 
-const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools, sidebarLayout = false } = Astro.props;
+const { toolId, title, h1, description, keywords = [], canonicalUrl, faq = [], hideHeader, relatedCategory, relatedTools, sidebarLayout = false, noindex } = Astro.props;
 
 const toolConfig = getToolBySlug(toolId);
 const isHeaderHidden = hideHeader !== undefined ? hideHeader : true;
@@ -69,9 +70,10 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
   title={title}
   description={description}
   canonicalUrl={currentUrl}
+  noindex={noindex}
   jsonLd={jsonLdBlocks}
 >
-  <div class={sidebarLayout ? "w-full px-16 sm:px-28 py-24 sm:py-32" : "mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48"}>
+  <div class={sidebarLayout ? "w-full max-w-[1536px] mx-auto px-16 sm:px-28 lg:px-36 py-24 sm:py-32" : "mx-auto w-full max-w-[1536px] px-16 sm:px-24 lg:px-36 py-24 sm:py-36"}>
     <Breadcrumb
       items={[
         { name: 'Home', href: '/' },
@@ -159,7 +161,7 @@ const jsonLdBlocks = [webAppSchema, ...(faqSchema ? [faqSchema] : [])];
     <!-- Bottom Educational & FAQ Section wrapped in max-w-content container like blog layout -->
     <div class="mx-auto max-w-content">
       <!-- Ad Placement after Tool Results -->
-      <AdSlot slotId="tools-mid-banner" format="horizontal" label="Advertisement" />
+      <AdSlot type="tool" position="middle" slotId="tools-mid-banner" label="Advertisement" />
 
       <!-- Educational & Explanatory SEO Content Slot -->
       <div class="glass-panel my-48 rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90 prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-headings:font-semibold prose-a:text-accent dark:prose-a:text-accent-dark" data-reveal>

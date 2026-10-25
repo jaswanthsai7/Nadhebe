@@ -26,3 +26,31 @@ persist = true
 head_sampling_rate = 1
 
 
+
+# ── Perchboard sales (see docs/PERCHBOARD_SALES_SETUP.md) ─────────────────────
+# 1. npx wrangler kv namespace create PERCH_KV      → paste the id below, then uncomment
+[[kv_namespaces]]
+binding = "PERCH_KV"
+id = "837beee30fbd43c48f8c19ea762b1070"
+
+# 2. npx wrangler r2 bucket create perchboard-downloads   → uncomment
+#    npx wrangler r2 object put perchboard-downloads/Perchboard-Setup.exe --file=PATH\TO\Perchboard-Setup.exe --remote
+[[r2_buckets]]
+binding = "PERCH_DOWNLOADS"
+bucket_name = "perchboard-downloads"
+
+# 3. Non-secret settings. Switch PADDLE_ENV to "production" when you go live.
+[vars]
+PADDLE_ENV = "sandbox"
+MAIL_FROM = "Perchboard <licenses@nadhebe.com>"
+SUPPORT_EMAIL = "support@nadhebe.com"
+SITE_URL = "https://nadhebe.com"
+PERCH_INSTALLER_KEY = "Perchboard-Setup.exe"
+PERCH_PRICE_IDS = "pri_01m5qskf4e09y85xbrypy6vv2d,pri_01m5qsket9qpyqv0jejzez7h54"
+
+# 4. Secrets (never put these in this file). Run each once:
+#    npx wrangler secret put PADDLE_WEBHOOK_SECRET
+#    npx wrangler secret put PADDLE_API_KEY
+#    npx wrangler secret put RESEND_API_KEY
+#    npx wrangler secret put LICENSE_PRIVATE_KEY      (from: node scripts/perch-license-keys.mjs)
+#    npx wrangler secret put PERCH_ADMIN_TOKEN        (any long random string; lets you look up buyers)

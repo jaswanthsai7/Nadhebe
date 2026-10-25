@@ -14,7 +14,13 @@ interface ArticleData {
 // Simple recursive file walk
 function walkDir(dir: string, callback: (filePath: string) => void) {
   if (!fs.existsSync(dir) || dir.includes('pagefind')) return;
-  fs.readdirSync(dir).forEach((f) => {
+  let entries: string[] = [];
+  try {
+    entries = fs.readdirSync(dir);
+  } catch (_) {
+    return;
+  }
+  entries.forEach((f) => {
     const dirPath = path.join(dir, f);
     if (!fs.existsSync(dirPath) || dirPath.includes('pagefind')) return;
     let isDirectory = false;
@@ -63,6 +69,7 @@ function getArticles(): ArticleData[] {
   const contentDir = path.join(process.cwd(), 'src/content');
 
   const folders = [
+    { dir: 'skills', urlPrefix: '/skills' },
     { dir: 'news', urlPrefix: '/news' },
     { dir: 'tutorials', urlPrefix: '/tutorials' },
     { dir: 'youtube-articles', urlPrefix: '/youtube' },
@@ -84,9 +91,9 @@ function getArticles(): ArticleData[] {
         const fm = parseFrontmatter(filePath);
         const fileName = path.basename(filePath, path.extname(filePath));
         const slug = fm.slug || fileName;
-        const url = `${urlPrefix}/${slug}`;
+        const url = `${urlPrefix}/${slug}/`;
         articles.push({
-          title: fm.title || slug,
+          title: fm.title || fm.name || slug,
           slug,
           url,
           topic: fm.topic,

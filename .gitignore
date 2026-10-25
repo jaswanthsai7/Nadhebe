@@ -27,6 +27,11 @@ npm-debug.log*
 
 # Static Search Index
 public/pagefind/
-node_modules
-.lighthouseci/
+# Temporary & scratch files
+scratch/
+*.backup
 
+
+
+# Wrangler local dev state
+.wrangler/

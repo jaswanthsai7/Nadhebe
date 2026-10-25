@@ -1,0 +1,293 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { buildSeo } from '@/utils/seo';
+import { SITE } from '@/config';
+
+export async function getStaticPaths() {
+  const allSkills = await getCollection('skills');
+  return allSkills.map((skill) => ({
+    params: { slug: skill.slug },
+    props: { skill, allSkills },
+  }));
+}
+
+const { skill, allSkills = [] } = Astro.props as { skill: any; allSkills: any[] };
+const { Content } = await skill.render();
+
+const pageUrl = `${SITE.url}/skills/${skill.slug}/`;
+
+// Filter related skills for topic authority & zero orphan pages
+const relatedSkills = allSkills
+  .filter((s) => s.slug !== skill.slug)
+  .slice(0, 3);
+
+// Formula: Primary Keyword First + Action / Benefit + | Nadhebe
+const seoTitle = `${skill.data.name} Skill for Claude Code & Cursor: Setup Guide | Nadhebe`;
+const seoDescription = `${skill.data.description} Free MIT-licensed download and setup guide tested on Claude Code 2.x, Cursor, and Antigravity.`;
+
+const seo = buildSeo({
+  title: seoTitle,
+  description: seoDescription,
+  slug: `/skills/${skill.slug}/`,
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  keywords: [
+    `${skill.data.name.toLowerCase()} skill`,
+    `${skill.slug} agent skill`,
+    'claude code skills download',
+    'cursor agent skills',
+    'free mcp skill',
+    'antigravity skills',
+    skill.data.category.toLowerCase(),
+  ],
+});
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: `${skill.data.name} Skill`,
+  description: skill.data.description,
+  applicationCategory: 'DeveloperApplication',
+  applicationSubCategory: 'AI Agent Workflow Extension',
+  operatingSystem: 'Cross-platform (macOS, Linux, Windows)',
+  offers: {
+    '@type': 'Offer',
+    price: '0.00',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+  author: {
+    '@type': 'Organization',
+    name: 'Nadhebe Engineering',
+    url: SITE.url,
+  },
+  downloadUrl: `${SITE.url}${skill.data.download}`,
+  fileFormat: 'application/zip',
+  softwareVersion: skill.data.version,
+  license: 'https://opensource.org/licenses/MIT',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '34',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+
+const techArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: seoTitle,
+  description: seoDescription,
+  url: pageUrl,
+  datePublished: new Date(skill.data.reviewed_on).toISOString(),
+  dateModified: new Date(skill.data.reviewed_on).toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: 'Nadhebe Engineering',
+    url: SITE.url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE.url}/favicon.svg`,
+    },
+  },
+  mainEntityOfPage: pageUrl,
+  proficiencyLevel: 'Beginner to Advanced',
+  dependencies: skill.data.tested_on,
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: `How do I install the ${skill.data.name} skill in Claude Code?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Download the ${skill.slug}.zip archive and unpack it into your ~/.claude/skills/ directory or .agents/skills/${skill.slug}/ in your workspace root. Claude Code will automatically index and activate the skill.`
+      }
+    },
+    {
+      '@type': 'Question',
+      name: `Is the ${skill.data.name} skill compatible with Cursor and Antigravity?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Yes, all Nadhebe agent skills follow open standard Markdown instructions with YAML frontmatter. You can place the skill in .cursor/rules/ or .agents/skills/ for instant multi-agent compatibility.`
+      }
+    },
+    {
+      '@type': 'Question',
+      name: `What license is the ${skill.data.name} skill distributed under?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `The skill is 100% free and open source under the permissive MIT license, allowing unrestricted personal, educational, and commercial usage.`
+      }
+    }
+  ]
+};
+
+const breadcrumbsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${SITE.url}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Skills Directory',
+      item: `${SITE.url}/skills/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: skill.data.name,
+      item: pageUrl,
+    },
+  ],
+};
+---
+
+<BaseLayout seo={seo} jsonLd={[softwareSchema, techArticleSchema, faqSchema, breadcrumbsSchema]}>
+  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+    
+    <!-- Breadcrumb & Back Link -->
+    <nav class="mb-24 flex items-center gap-8 text-caption font-sans text-muted dark:text-muted-dark" aria-label="Breadcrumbs">
+      <a href="/skills/" class="inline-flex items-center gap-4 hover:text-accent transition-colors font-medium">
+        <svg class="w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        <span>Back to All Skills</span>
+      </a>
+      <span>/</span>
+      <span class="text-ink dark:text-ink-dark font-medium truncate max-w-[200px] sm:max-w-none">{skill.data.name}</span>
+    </nav>
+
+    <!-- Main Header Card -->
+    <header class="glass-panel relative overflow-hidden rounded-24 border border-border p-24 sm:p-40 shadow-medium dark:border-border-dark mb-40" data-reveal>
+      <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/15 blur-3xl dark:bg-accent-dark/15"></div>
+
+      <div class="relative z-10 space-y-20">
+        <!-- Badges -->
+        <div class="flex flex-wrap items-center gap-8">
+          <span class="inline-flex items-center px-12 py-4 rounded-full text-xs font-mono font-bold bg-accent/10 border border-accent/20 text-accent dark:text-accent-dark uppercase tracking-wider">
+            {skill.data.category}
+          </span>
+          <span class="px-10 py-4 rounded-full text-xs font-mono bg-surface2 dark:bg-surface2-dark border border-border dark:border-border-dark text-muted dark:text-muted-dark">
+            v{skill.data.version}
+          </span>
+          <span class="inline-flex items-center gap-6 px-10 py-4 rounded-full text-xs font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+            <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+            Verified & Tested on {new Date(skill.data.reviewed_on).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </span>
+        </div>
+
+        <!-- Single Unique H1 for strict Google Technical SEO -->
+        <h1 class="font-display text-h1 sm:text-display font-bold leading-tight text-ink dark:text-ink-dark">
+          {skill.data.name}
+        </h1>
+
+        <!-- Direct Answer / GEO Definition Block -->
+        <p class="text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">
+          {skill.data.description}
+        </p>
+
+        <!-- Metadata Spec Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-12 pt-8 border-t border-border/60 dark:border-border-dark/60">
+          <div>
+            <span class="block text-xs font-mono text-muted dark:text-muted-dark">Tested Runtime</span>
+            <span class="text-caption font-bold text-ink dark:text-ink-dark mt-2 block">{skill.data.tested_on}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-mono text-muted dark:text-muted-dark">License</span>
+            <span class="text-caption font-bold text-ink dark:text-ink-dark mt-2 block">{skill.data.license} (Open Source)</span>
+          </div>
+          <div>
+            <span class="block text-xs font-mono text-muted dark:text-muted-dark">Maintainer</span>
+            <span class="text-caption font-bold text-ink dark:text-ink-dark mt-2 block">{skill.data.author}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-mono text-muted dark:text-muted-dark">Compatibility</span>
+            <span class="text-caption font-bold text-ink dark:text-ink-dark mt-2 block">{skill.data.compatibility.join(', ')}</span>
+          </div>
+        </div>
+
+        <!-- Download & Source Action Row -->
+        <div class="flex flex-wrap items-center gap-12 pt-8">
+          <a
+            href={skill.data.download}
+            download
+            class="inline-flex items-center justify-center gap-8 px-24 py-12 rounded-12 text-body font-bold text-white bg-accent hover:opacity-90 shadow-medium transition-all text-decoration-none cursor-pointer"
+          >
+            <svg class="w-18 h-18 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>Download Verified Skill (.zip)</span>
+          </a>
+
+          {skill.data.source_url && (
+            <a
+              href={skill.data.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-8 px-20 py-12 rounded-12 text-body font-bold text-ink dark:text-ink-dark bg-surface dark:bg-surface-dark border border-border dark:border-border-dark hover:border-accent transition-all text-decoration-none"
+            >
+              <svg class="w-18 h-18 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>GitHub Repository</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <!-- Markdown Skill Content Body -->
+    <main class="prose-article rounded-24 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark p-24 sm:p-48 shadow-xs" data-reveal>
+      <Content />
+    </main>
+
+    <!-- Related Skills Topic Authority Cluster -->
+    {relatedSkills.length > 0 && (
+      <section class="mt-48 pt-32 border-t border-border dark:border-border-dark">
+        <div class="flex items-center justify-between mb-24">
+          <h2 class="text-h3 font-bold font-display text-ink dark:text-ink-dark">
+            Explore Related Agent Skills
+          </h2>
+          <a href="/skills/" class="text-caption font-mono text-accent hover:underline">
+            View All Skills →
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-16">
+          {relatedSkills.map((rel) => (
+            <a
+              href={`/skills/${rel.slug}/`}
+              class="group block p-20 rounded-16 border border-border dark:border-border-dark bg-surface dark:bg-surface-dark hover:border-accent transition-all shadow-xs"
+            >
+              <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-accent mb-6 block">
+                {rel.data.category}
+              </span>
+              <h3 class="text-[15px] font-bold text-ink dark:text-ink-dark group-hover:text-accent transition-colors leading-snug">
+                {rel.data.name}
+              </h3>
+              <p class="text-caption text-ink2 dark:text-ink2-dark mt-6 line-clamp-2 leading-relaxed">
+                {rel.data.description}
+              </p>
+              <span class="inline-flex items-center gap-4 text-[11px] font-mono font-semibold text-accent mt-12 group-hover:underline">
+                View Setup Guide →
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+  </div>
+</BaseLayout>

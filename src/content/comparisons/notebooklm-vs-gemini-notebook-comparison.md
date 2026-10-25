@@ -2,8 +2,8 @@
 title: "NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison"
 description: "Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "comparisons"
+author: nadhebe-team
+category: "Comparisons"
 tags: ["notebooklm", "gemini-notebook", "ai-research", "google-ai", "comparison"]
 heroImage: "/images/notebooklm-vs-gemini-hero.webp"
 heroAlt: "Clean minimalist comparison illustration of NotebookLM vs Gemini Notebook"

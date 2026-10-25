@@ -2,8 +2,8 @@
 title: "Instatic Visual CMS Review: The Open Source Webflow Challenger?"
 description: "A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem."
 pubDate: 2026-07-10
-author: bob-smith
-category: "Tool Reviews"
+author: nadhebe-team
+category: "Reviews"
 tags: [instatic, reviews, cms, visual-builder]
 heroImage: "/images/reviews-hero.webp"
 heroAlt: "Minimalist 3D editorial illustration representing review ratings and verdict dashboards"
@@ -84,5 +84,5 @@ Watch the complete design canvas interface review and feature walkthrough below:
 
 ## Instatic Case Studies & Benchmarks
 
-* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/case-studies/webflow-to-instatic-migration-savings).
+* Read about real client migrations in [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](/guides/webflow-to-instatic-migration-savings).
 * Compare visual engine specs in [Instatic vs Webflow vs Framer](/comparisons/instatic-vs-webflow-vs-framer).

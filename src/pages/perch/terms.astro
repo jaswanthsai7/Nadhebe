@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+import { buildSeo } from '@/utils/seo';
+
+// Terms of sale, license and refund policy for Perchboard. Paddle checks for these
+// (including the merchant-of-record wording) when it reviews the domain for live payments.
+const seo = buildSeo({
+  title: 'Perchboard Terms of Sale, License & Refund Policy | Nadhebe',
+  description: 'Terms that apply when you buy Perchboard for Windows: what the lifetime license covers, how delivery works, and our 14-day refund policy.',
+  slug: '/perch/terms/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  image: '/perch/perch-desktop-hero.png',
+});
+
+const updated = 'October 25, 2026';
+---
+
+<BaseLayout seo={seo} hideNatureBg={true}>
+  <div class="mx-auto max-w-3xl px-16 sm:px-24 py-48 sm:py-64">
+    <a href="/perch/" class="inline-flex items-center gap-6 font-mono text-xs text-slate-500 hover:text-[#0284C7] mb-24">← Back to Perchboard</a>
+    <article class="prose-article">
+      <h1 class="font-display text-h1 font-bold tracking-tight mb-8">Perchboard Terms of Sale, License &amp; Refund Policy</h1>
+      <p class="text-caption font-mono text-muted mb-32">Last updated: {updated}</p>
+
+      <h2>1. Who you are buying from</h2>
+      <p>
+        Perchboard is made by Nadhebe. Our order process is conducted by our online reseller
+        <a href="https://www.paddle.com" rel="noopener" target="_blank">Paddle.com</a>. Paddle.com is the Merchant of Record for all our
+        orders. Paddle provides all customer service inquiries related to payment and handles returns. Payment is also subject to
+        <a href="https://www.paddle.com/legal/checkout-buyer-terms" rel="noopener" target="_blank">Paddle's Buyer Terms</a>.
+      </p>
+
+      <h2>2. What you get</h2>
+      <ul>
+        <li>A personal, perpetual (lifetime) license to install and use Perchboard for Windows on computers you own or personally use.</li>
+        <li>All Perchboard 1.x updates at no extra cost.</li>
+        <li>Your license key and a download link, shown on screen right after payment and sent to the email address you gave at checkout.</li>
+      </ul>
+      <p>
+        The price shown at checkout includes any VAT or sales tax that applies in your country. It is a one-time payment, not a subscription.
+      </p>
+
+      <h2>3. License terms</h2>
+      <p>You may not resell, share publicly, or redistribute your license key or the Perchboard installer, and you may not reverse engineer the software except where the law allows it. Perchboard and its trademarks remain the property of Nadhebe. We may deactivate a key that has been refunded, charged back, or shared publicly.</p>
+
+      <h2>4. Refund policy</h2>
+      <p>
+        If Perchboard is not right for you, you can get a full refund within <strong>14 days</strong> of purchase, no questions asked.
+        Reply to your license email, write to <a href="mailto:support@nadhebe.com">support@nadhebe.com</a>, or contact Paddle through the link on
+        your receipt. Once a refund is issued, the license key stops working.
+      </p>
+
+      <h2>5. Privacy</h2>
+      <p>
+        Your clipboard history stays on your computer. When you activate your license, Perchboard sends your license key to our server once to confirm it.
+        Paddle processes your payment details; we receive your email address and order details so we can deliver and support your license.
+        See our <a href="/privacy-policy/">Privacy Policy</a> for more.
+      </p>
+
+      <h2>6. Warranty and liability</h2>
+      <p>
+        Perchboard is provided "as is". To the extent the law allows, we are not liable for indirect or consequential losses arising from its use.
+        Nothing in these terms limits rights you have under the consumer law of your country.
+      </p>
+
+      <h2>7. Contact</h2>
+      <p>Questions about your order or license: <a href="mailto:support@nadhebe.com">support@nadhebe.com</a>. Lost your key? <a href="/welcome/#resend">Have it emailed again</a>.</p>
+    </article>
+  </div>
+</BaseLayout>

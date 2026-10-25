@@ -42,7 +42,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
   <!-- Inline Dropdown Results Menu -->
   <div
     id="inline-search-dropdown"
-    class="absolute left-0 right-0 top-[calc(100%+8px)] z-50 hidden rounded-20 border border-border/90 bg-surface/98 backdrop-blur-2xl shadow-2xl p-8 max-h-[380px] overflow-y-auto [&::-webkit-scrollbar]:hidden dark:border-border-dark/90 dark:bg-surface-dark/98"
+    class="absolute left-0 right-0 top-[calc(100%+8px)] z-50 hidden rounded-20 border border-border bg-white shadow-2xl p-8 max-h-[380px] overflow-y-auto [&::-webkit-scrollbar]:hidden dark:border-border-dark dark:bg-[#141414]"
     style="scrollbar-width: none; -ms-overflow-style: none;"
   >
     <div id="inline-dropdown-results" class="flex flex-col gap-4">
@@ -69,7 +69,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
 
       if (!input || !dropdown || !resultsContainer) return;
 
-      let selectedIndex = -1;
+      let selectedIndex = 0;
       let currentMatches = [];
 
       function renderResults(query) {
@@ -86,7 +86,7 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
           );
         }
 
-        selectedIndex = -1;
+        selectedIndex = currentMatches.length > 0 ? 0 : -1;
         resultsContainer.innerHTML = '';
 
         if (currentMatches.length === 0) {
@@ -99,7 +99,8 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
           currentMatches.forEach((t, idx) => {
             const item = document.createElement('a');
             item.href = t.href;
-            item.className = `inline-search-item flex items-center justify-between p-12 rounded-12 transition-all duration-150 group text-left ${idx === selectedIndex ? 'bg-accent/10 dark:bg-accent-dark/20 text-accent dark:text-accent-dark' : 'hover:bg-surface2/80 dark:hover:bg-surface2-dark/80'}`;
+            const isSelected = idx === selectedIndex;
+            item.className = `inline-search-item flex items-center justify-between p-12 rounded-12 transition-all duration-150 group text-left border ${isSelected ? 'bg-accent/15 dark:bg-accent-dark/25 text-accent dark:text-accent-dark border-accent/40 dark:border-accent-dark/40 font-medium' : 'border-transparent hover:bg-surface2 dark:hover:bg-surface2-dark text-ink dark:text-ink-dark'}`;
             item.setAttribute('data-index', idx);
             
             item.innerHTML = `
@@ -112,6 +113,12 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
               </div>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-muted dark:text-muted-dark group-hover:text-accent group-hover:translate-x-2 transition-all shrink-0" style="width:16px; height:16px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             `;
+
+            item.addEventListener('mouseenter', () => {
+              selectedIndex = idx;
+              updateActiveItem();
+            });
+
             resultsContainer.appendChild(item);
           });
         }
@@ -123,10 +130,12 @@ const toolsData = PLATFORM_TOOLS.map(t => ({
         const items = resultsContainer.querySelectorAll('.inline-search-item');
         items.forEach((el, idx) => {
           if (idx === selectedIndex) {
-            el.classList.add('bg-accent/10', 'dark:bg-accent-dark/20', '!text-accent', 'dark:!text-accent-dark');
+            el.classList.add('bg-accent/15', 'dark:bg-accent-dark/25', '!text-accent', 'dark:!text-accent-dark', 'border-accent/40', 'dark:border-accent-dark/40', 'font-medium');
+            el.classList.remove('border-transparent');
             el.scrollIntoView({ block: 'nearest' });
           } else {
-            el.classList.remove('bg-accent/10', 'dark:bg-accent-dark/20', '!text-accent', 'dark:!text-accent-dark');
+            el.classList.remove('bg-accent/15', 'dark:bg-accent-dark/25', '!text-accent', 'dark:!text-accent-dark', 'border-accent/40', 'dark:border-accent-dark/40', 'font-medium');
+            el.classList.add('border-transparent');
           }
         });
       }

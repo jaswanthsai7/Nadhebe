@@ -31,6 +31,8 @@ export interface ToolDefinition {
     examples: { input: string; output: string; explanation: string }[];
     comparisons?: { feature: string; values: Record<string, string> }[]; // Renders as Comparison Tables
     peopleAlsoAsk: string[];
+    faq?: { question: string; answer: string; example?: string }[];
+    relatedTools?: string[];
   };
 
   // AI Discoverability & Readability

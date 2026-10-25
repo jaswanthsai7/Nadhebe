@@ -3,7 +3,7 @@ title: "MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer To
 description: "A complete troubleshooting guide for diagnosing and fixing Model Context Protocol (MCP) HTTP authentication errors, 401 Unauthorized responses, and OAuth token expiration."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "Authentication", "OAuth2", "Auth0", "Troubleshooting", "Bearer Tokens"]
 heroImage: "/images/mcp-authentication-errors-hero.webp"
 heroAlt: "Minimalist vintage editorial collage showing encrypted locks and 401 error resolution badges on a soft olive background"

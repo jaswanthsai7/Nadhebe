@@ -3,10 +3,8 @@ import { getCollection } from 'astro:content';
 import { getArticleUrl } from '@/utils/content';
 import InlineToolSearch from '@/components/tools/InlineToolSearch.astro';
 
-const toolsPosts = await getCollection('tools');
-const sortedTools = toolsPosts
-  .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const toolsPosts: any[] = [];
+const sortedTools = toolsPosts;
 
 // Categorize tools for pill tabs
 const categories = [
@@ -18,7 +16,7 @@ const categories = [
 
 function getToolCategory(post: typeof sortedTools[0]): string {
   const title = post.data.title.toLowerCase();
-  const tags = (post.data.tags || []).map(t => t.toLowerCase());
+  const tags = (post.data.tags || []).map((t: string) => t.toLowerCase());
   
   if (title.includes('importer') || title.includes('import') || title.includes('cms')) return 'cms';
   if (title.includes('agent') || title.includes('multi-agent') || tags.includes('youtube-automation')) return 'agents';
@@ -157,7 +155,7 @@ function getToolCategory(post: typeof sortedTools[0]): string {
             <!-- Tags & Action Footer -->
             <div class="mt-20 pt-16 border-t border-border/40 dark:border-border-dark/40 flex items-center justify-between">
               <div class="flex flex-wrap gap-6">
-                {(post.data.tags || []).slice(0, 3).map(tag => (
+                {(post.data.tags || []).slice(0, 3).map((tag: string) => (
                   <span class="rounded-4 bg-surface2/60 px-6 py-2 font-mono text-xs text-muted dark:bg-surface2-dark/60 dark:text-muted-dark">
                     #{tag}
                   </span>

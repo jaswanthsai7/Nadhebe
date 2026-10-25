@@ -3,7 +3,7 @@ title: "vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utili
 description: "Resolve vLLM CUDA Out of Memory errors when serving DeepSeek R1 and Llama models using VRAM allocation flags, KV cache quantization, and tensor parallelism."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["vLLM", "CUDA OOM", "Troubleshooting", "GPU VRAM", "DeepSeek R1", "PagedAttention"]
 heroImage: "/images/vllm-cuda-out-of-memory-hero.webp"
 heroAlt: "Vintage editorial illustration comparing VRAM block allocation charts and CUDA memory management on a soft sage green background"

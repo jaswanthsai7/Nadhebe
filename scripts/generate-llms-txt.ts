@@ -42,6 +42,7 @@ function parseFrontmatter(content: string): { data: any; body: string } {
 }
 
 const folders = [
+  { dir: 'skills', urlPrefix: '/skills', category: 'Agent Skills' },
   { dir: 'news', urlPrefix: '/news', category: 'News' },
   { dir: 'tutorials', urlPrefix: '/tutorials', category: 'Tutorials' },
   { dir: 'youtube-articles', urlPrefix: '/youtube', category: 'YouTube Articles' },
@@ -77,14 +78,15 @@ function run() {
 
         if (data.draft === true) return;
 
-        if (data.title) {
+        const title = data.title || data.name;
+        if (title) {
           articles.push({
-            title: data.title,
+            title,
             description: data.description || '',
-            url: `${SITE_URL}${urlPrefix}/${slug}`,
+            url: `${SITE_URL}${urlPrefix}/${slug}/`,
             category: category,
             tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
-            pubDate: data.pubDate ? new Date(data.pubDate).toISOString() : new Date().toISOString(),
+            pubDate: data.pubDate ? new Date(data.pubDate).toISOString() : (data.reviewed_on ? new Date(data.reviewed_on).toISOString() : new Date().toISOString()),
             content: body,
           });
         }

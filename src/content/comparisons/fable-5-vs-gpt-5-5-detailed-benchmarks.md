@@ -2,7 +2,7 @@
 title: "Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests"
 description: "A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations."
 pubDate: 2026-07-17
-author: bob-smith
+author: nadhebe-team
 category: Comparisons
 tags: ["fable-5", "gpt-5.5", "comparisons", "benchmarks", "anthropic"]
 heroImage: "/images/benchmarks-fable-gpt.webp"

@@ -3,7 +3,7 @@ title: "How to Integrate MCP Server in VS Code & Cursor"
 description: "A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "VS Code", "Cursor", "AI Workflow", "Integration", "Model Context Protocol"]
 heroImage: "/images/mcp-server-vscode-hero.webp"
 heroAlt: "Collage art showing MCP integration into VS Code and Cursor"

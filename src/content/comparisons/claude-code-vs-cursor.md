@@ -3,7 +3,7 @@ title: "Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE"
 description: "An in-depth comparison between Anthropic's terminal-native Claude Code CLI and Cursor's AI-augmented VS Code fork for AI engineering workflows."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["Claude Code", "Cursor", "AI IDE", "CLI Tools", "Anthropic", "Developer Tools"]
 heroImage: "/images/claude-code-vs-cursor-hero.webp"
 heroAlt: "Minimalist editorial vintage collage illustrating a terminal command cursor next to an AI code editor window on a sage green background"

@@ -1,0 +1,112 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+import { buildSeo } from '@/utils/seo';
+
+// "Copy key" target for the license email (email clients can't run scripts). The key and
+// the download token arrive in the URL fragment (#PERCH-…&t=…), which never reaches a server.
+const seo = buildSeo({
+  title: 'Your Perchboard License Key | Nadhebe',
+  description: 'Copy your Perchboard license key and download the app.',
+  slug: '/perch/key/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  image: '/perch/perch-desktop-hero.png',
+  noindex: true,
+});
+---
+
+<BaseLayout seo={seo} noindex={true} hideNatureBg={true}>
+  <div class="mx-auto max-w-[560px] px-16 sm:px-24 py-48 sm:py-64">
+    <a href="/perch/" class="inline-flex items-center gap-6 font-mono text-xs text-slate-500 hover:text-[#0284C7] mb-24">← Perchboard</a>
+
+    <div class="rounded-[24px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111318] p-24 sm:p-32 shadow-sm">
+      <p class="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#0284C7] mb-8">Perchboard for Windows</p>
+      <h1 class="font-display text-[28px] leading-tight font-extrabold tracking-tight mb-24">Your lifetime license key</h1>
+
+      <div id="key-ok" class="hidden">
+        <div
+          id="key-text"
+          class="select-all whitespace-nowrap overflow-x-auto text-center rounded-[14px] border border-dashed border-[#0284C7] bg-[#F0F9FF] dark:bg-[#0B1E2B] px-12 py-[18px] font-mono text-[15px] sm:text-[19px] font-bold tracking-[0.03em] text-slate-900 dark:text-slate-50"
+        ></div>
+        <div class="mt-16 flex flex-col sm:flex-row gap-12">
+          <button
+            id="copy-btn"
+            type="button"
+            class="flex-1 rounded-full bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-sm px-24 py-12 transition-colors"
+          >Copy key</button>
+          <a
+            id="download-btn"
+            href="/perch/"
+            class="flex-1 text-center rounded-full border border-slate-300 dark:border-slate-700 font-bold text-sm px-24 py-12 hover:border-[#0284C7] hover:text-[#0284C7] transition-colors"
+          >Download Perchboard</a>
+        </div>
+        <p id="copy-status" class="mt-12 min-h-[20px] text-sm text-[#059669]" role="status"></p>
+        <p class="mt-8 text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          Open Perchboard, click <b>Paste</b>, then <b>Activate</b>.
+        </p>
+        <p class="mt-8 text-[13px] text-slate-500">Works on one computer. Reinstalling on the same computer is always free.</p>
+      </div>
+
+      <div id="key-missing" class="hidden">
+        <p class="text-[15px] leading-relaxed text-slate-600 dark:text-slate-400">
+          This link doesn't contain a valid license key. Open the <b>Copy key</b> button from your Perchboard email again, or
+          <a href="/welcome/" class="text-[#0284C7] underline">have your key emailed again</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var KEY_RE = /^PERCH(-[0-9A-Z]{5}){4}$/;
+    var params = location.hash.replace(/^#/, '').split('&');
+    var key = decodeURIComponent(params[0] || '').toUpperCase().replace(/\s+/g, '');
+    var token = '';
+    for (var i = 1; i < params.length; i++) {
+      if (params[i].indexOf('t=') === 0) token = decodeURIComponent(params[i].slice(2));
+    }
+    if (!KEY_RE.test(key)) {
+      document.getElementById('key-missing').classList.remove('hidden');
+      return;
+    }
+    // Keep the key out of browser history / referrers once it's on screen.
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+    var keyEl = document.getElementById('key-text');
+    keyEl.textContent = key;
+    document.getElementById('key-ok').classList.remove('hidden');
+    if (/^[A-Za-z0-9_-]+\.[0-9a-f]+$/.test(token)) {
+      document.getElementById('download-btn').href = '/api/perch/download?t=' + encodeURIComponent(token);
+    }
+
+    var btn = document.getElementById('copy-btn');
+    var status = document.getElementById('copy-status');
+    function selectKey() {
+      var range = document.createRange();
+      range.selectNodeContents(keyEl);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    function copied() {
+      btn.textContent = 'Copied!';
+      status.textContent = 'Key copied. Now open Perchboard and click Paste.';
+      setTimeout(function () { btn.textContent = 'Copy key'; }, 2500);
+    }
+    btn.addEventListener('click', function () {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(key).then(copied, fallback);
+      } else {
+        fallback();
+      }
+    });
+    function fallback() {
+      selectKey();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      if (ok) copied();
+      else status.textContent = 'Press Ctrl+C to copy the selected key.';
+    }
+  })();
+</script>

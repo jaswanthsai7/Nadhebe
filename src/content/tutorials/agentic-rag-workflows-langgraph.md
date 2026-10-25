@@ -3,7 +3,7 @@ title: "How to Build Local Agentic RAG Workflows using LangGraph and Ollama"
 description: "Step-by-step developer tutorial to build stateful agentic RAG workflows using LangGraph, Ollama, and ChromaDB locally without cloud API keys."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["LangGraph", "Agentic RAG", "Ollama", "ChromaDB", "Python", "Local AI", "AI Agents"]
 heroImage: "/images/agentic-rag-workflows-langgraph-hero.png"
 heroAlt: "Vintage editorial collage illustration showing an agentic workflow state graph and neural network nodes on a sage green background"

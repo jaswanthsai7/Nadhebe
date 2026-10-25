@@ -33,10 +33,7 @@ export interface AffiliateProgram {
   affiliateUrl: string;
   pros: string[];
   cons: string[];
-  faq: PartnerFaq[];
-  ratingValue?: number;
-  ratingCount?: number;
-}
+  faq: PartnerFaq[];}
 
 export function buildUtmUrl(baseUrl: string, source = 'nadhebe', medium = 'affiliate_card', campaign = 'article'): string {
   if (!baseUrl) return '';
@@ -95,9 +92,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     faq: [
       { question: 'What is the difference between Community Cloud and Secure Cloud on RunPod?', answer: 'Community Cloud features peer-hosted GPUs at lower prices ideal for testing and batch jobs. Secure Cloud uses Tier-3 enterprise datacenters with 99.99% uptime guarantees suitable for production APIs.' },
       { question: 'Can I run vLLM and Ollama on RunPod?', answer: 'Yes! RunPod provides official one-click templates for vLLM, Ollama, ComfyUI, and Text Generation WebUI, allowing instant setup without manual CUDA configuration.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 184
+    ]
   },
   'vast-ai': {
     id: 'vast-ai',
@@ -139,9 +134,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Is my data secure on Vast.ai host machines?', answer: 'Vast.ai supports encrypted disk images and verified host datacenters. For sensitive commercial IP, choose verified host instances or encrypted volumes.' }
-    ],
-    ratingValue: 4.6,
-    ratingCount: 96
+    ]
   },
   lambda: {
     id: 'lambda',
@@ -183,9 +176,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'What is Lambda Stack?', answer: 'Lambda Stack is an open-source software library maintained by Lambda Labs that keeps CUDA, PyTorch, and NVIDIA drivers up-to-date and compatible across Ubuntu instances.' }
-    ],
-    ratingValue: 4.8,
-    ratingCount: 112
+    ]
   },
   modal: {
     id: 'modal',
@@ -227,9 +218,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Do I need Docker to use Modal?', answer: 'No! Modal automatically builds container images from your Python script declarations without requiring Docker installed locally.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 156
+    ]
   },
   replicate: {
     id: 'replicate',
@@ -271,9 +260,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'What is Cog on Replicate?', answer: 'Cog is an open-source tool created by Replicate that packages machine learning models into standard Docker containers with automatic API wrappers.' }
-    ],
-    ratingValue: 4.8,
-    ratingCount: 138
+    ]
   },
   cloudflare: {
     id: 'cloudflare',
@@ -315,9 +302,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'What are Cloudflare Neurons?', answer: 'Neurons are Cloudflare’s billing metric for AI inference, calculated based on the computational complexity and model size of each request.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 210
+    ]
   },
   vercel: {
     id: 'vercel',
@@ -359,9 +344,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Can I deploy Astro sites on Vercel?', answer: 'Yes! Vercel provides native zero-config deployment support for Astro, automatically handling static site generation and serverless SSR routes.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 320
+    ]
   },
   anthropic: {
     id: 'anthropic',
@@ -404,9 +387,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'How does Anthropic Prompt Caching work?', answer: 'Prompt Caching allows you to mark long static context blocks in your API calls. Subsequent calls reusing that exact prefix read from memory cache at a 90% discount.' }
-    ],
-    ratingValue: 5.0,
-    ratingCount: 450
+    ]
   },
   openrouter: {
     id: 'openrouter',
@@ -447,9 +428,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Is OpenRouter compatible with OpenAI SDKs?', answer: 'Yes! OpenRouter provides a 100% OpenAI-compatible endpoint. You can use standard OpenAI Node.js or Python SDKs by changing baseURL to https://openrouter.ai/api/v1.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 280
+    ]
   },
   elevenlabs: {
     id: 'elevenlabs',
@@ -492,9 +471,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Can I clone my own voice on ElevenLabs?', answer: 'Yes! Instant Voice Cloning requires just 1-3 minutes of clear audio recording. Professional Voice Cloning uses 30+ minutes of audio for high-fidelity master clones.' }
-    ],
-    ratingValue: 4.9,
-    ratingCount: 310
+    ]
   },
   semrush: {
     id: 'semrush',
@@ -503,16 +480,16 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     description: 'SEO, competitor analysis, keyword research, and rank tracking suite for content publications.',
     category: 'seo-analytics',
     qualitativeBadge: 'Best Enterprise SEO Suite',
-    trustSignal: '✓ Essential for programmatic topic cluster research',
+    trustSignal: '✓ Essential for technical keyword and architecture research',
     whyRecommend: 'Semrush delivers accurate search volume, intent categorization, and backlink data required to scale developer content hubs.',
     targetAudience: [
-      'SEO specialists and content strategists building topic clusters',
+      'Technical writers and content strategists building structured content hubs',
       'Webmasters conducting backlink audits and competitor research',
       'Marketing teams monitoring search rankings and technical site health'
     ],
     deepDiveText: [
       'Semrush is an all-in-one digital marketing and search engine optimization suite trusted by millions of marketers and enterprise engineering teams. Its database includes over 25 billion keywords and 43 trillion backlinks across global search indexes.',
-      'For technical content strategists, Semrush provides keyword difficulty metrics, search intent breakdowns (informational, commercial, transactional), and topic cluster gap analysis to identify high-converting keyword opportunities.',
+      'For technical content strategists, Semrush provides keyword difficulty metrics, search intent breakdowns (informational, commercial, transactional), and content gap analysis to identify high-value engineering opportunities.',
       'The Semrush Site Audit tool automatically crawls your domain to detect technical SEO issues, broken canonical tags, missing structured data, and slow page speed bottlenecks.'
     ],
     alternatives: [
@@ -535,9 +512,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Is Semrush worth it for small sites?', answer: 'Yes! Semrush helps small sites uncover low-competition long-tail keywords and avoid technical SEO errors that prevent pages from indexing.' }
-    ],
-    ratingValue: 4.8,
-    ratingCount: 195
+    ]
   },
   descript: {
     id: 'descript',
@@ -582,9 +557,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     faq: [
       { question: 'Who should use Descript?', answer: 'Descript is ideal for YouTubers, podcasters, educators, and software engineers who record screen tutorials and want to produce polished videos without spending hours on traditional video editing timelines.' },
       { question: 'How does Descript compare to Adobe Premiere Pro?', answer: 'Premiere Pro is designed for traditional frame-by-frame timeline editing and color grading. Descript is built for text-based narrative editing, fast transcript cuts, and AI voice/audio cleanup.' }
-    ],
-    ratingValue: 4.8,
-    ratingCount: 240
+    ]
   },
   synthesia: {
     id: 'synthesia',
@@ -626,9 +599,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Can I create a custom AI avatar of myself on Synthesia?', answer: 'Yes! Synthesia supports Custom Avatars, allowing you to record a short 5-minute green screen session to create your personal digital twin.' }
-    ],
-    ratingValue: 4.7,
-    ratingCount: 165
+    ]
   },
   cursor: {
     id: 'cursor',
@@ -670,9 +641,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Is my codebase kept private on Cursor?', answer: 'Cursor offers Privacy Mode in settings, ensuring your code snippets and vector index are never stored on external servers or used for model training.' }
-    ],
-    ratingValue: 5.0,
-    ratingCount: 520
+    ]
   },
   digitalocean: {
     id: 'digitalocean',
@@ -714,9 +683,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'What is a DigitalOcean Droplet?', answer: 'A Droplet is a flexible Linux virtual private server (VPS) running on hardware in DigitalOcean datacenters.' }
-    ],
-    ratingValue: 4.8,
-    ratingCount: 280
+    ]
   },
   vultr: {
     id: 'vultr',
@@ -758,9 +725,7 @@ export const AFFILIATE_PROGRAMS: Record<string, AffiliateProgram> = {
     ],
     faq: [
       { question: 'Where are Vultr datacenters located?', answer: 'Vultr operates 32 datacenters across North America, Europe, Asia, Australia, South America, and Africa.' }
-    ],
-    ratingValue: 4.7,
-    ratingCount: 175
+    ]
   }
 };
 

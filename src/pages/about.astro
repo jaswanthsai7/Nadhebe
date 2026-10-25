@@ -1,29 +1,81 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+
+const title = 'About Nadhebe — Independent AI Engineering & Developer Tools';
+const description = 'Learn about Nadhebe, our mission to provide practical AI engineering tutorials, client-side developer utilities, and transparent documentation.';
 ---
 
 <BaseLayout
-  title="About Nadhebe"
-  description="Learn about our technical vision, Static architecture, and editorial process."
+  title={title}
+  description={description}
+  canonicalUrl={`${SITE.url}/about/`}
 >
-  <div class="mx-auto max-w-3xl px-16 sm:px-24 py-64" data-reveal>
-    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium dark:border-border-dark dark:bg-surface-dark/90">
-      <article class="prose-article">
-        <h1>About Our Platform</h1>
-        <p>
-          Nadhebe is a highly optimized, fully static technical resource designed for developers, prompt engineers, and AI builders.
+  <div class="mx-auto max-w-4xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-48 shadow-medium dark:border-border-dark dark:bg-surface-dark/90 space-y-32">
+      
+      <!-- HERO -->
+      <div>
+        <div class="inline-flex items-center gap-8 px-12 py-6 rounded-full bg-accent/10 border border-accent/20 text-caption font-mono font-bold text-accent dark:text-accent-dark mb-16 uppercase tracking-wider">
+          <span>Independent Technical Publication</span>
+        </div>
+        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark">
+          About Nadhebe
+        </h1>
+        <p class="mt-12 text-h3 text-ink2 dark:text-ink2-dark font-sans leading-relaxed">
+          Nadhebe is an independent technical resource focused on artificial intelligence engineering, open-source models, developer workflows, and privacy-respecting browser tools.
         </p>
+      </div>
+
+      <div class="border-t border-border/60 dark:border-border-dark/60 pt-24 prose-article">
         
-        <h2>Our Technology Stack</h2>
+        <h2>Our Mission</h2>
         <p>
-          This site is constructed on the modern <strong>Astro framework</strong> using <strong>Islands Architecture</strong>. We ship zero Client-side JavaScript by default, only hydrating interactive tools like search when needed. Every page maintains a perfect Lighthouse performance rating.
+          Software engineering is changing rapidly with the rise of artificial intelligence, open-weights foundation models, and agentic protocols. However, finding clear, reproducible technical documentation can be challenging amidst marketing buzz and superficial summaries.
+        </p>
+        <p>
+          <strong>Nadhebe</strong> was created to provide developers, researchers, and technical builders with practical, step-by-step guides, realistic architectural comparisons, and dependable utility tools that solve everyday workflow problems.
         </p>
 
-        <h2>Editorial Philosophy</h2>
+        <h2>What You Will Find on Nadhebe</h2>
+        <ul>
+          <li><strong>Technical Guides & Walkthroughs:</strong> In-depth articles covering modern AI engineering—including the Model Context Protocol (MCP), Claude Code CLI, local LLM execution with Ollama and vLLM, and API integration patterns.</li>
+          <li><strong>Architectural Comparisons:</strong> Objective, feature-by-feature comparisons of AI developer tools, frameworks, and APIs to help engineers make informed infrastructure decisions.</li>
+          <li><strong>100% Client-Side Developer Utilities:</strong> A suite of interactive browser tools—including code formatters, difference viewers, aspect ratio calculators, token counters, and encoders—that run entirely on your local machine with zero server uploads.</li>
+        </ul>
+
+        <h2>Privacy-First Tool Architecture</h2>
         <p>
-          We write in-depth tutorials, comparison reviews, and system prompt optimizations directly from developer testing. We reject thin, AI-generated spam content; every article answers specific search intents and undergoes thorough review.
+          We believe developer tools should respect your data. Every interactive utility in the Nadhebe toolkit is engineered using client-side JavaScript, WebAssembly, and modern HTML5 APIs:
         </p>
-      </article>
+        <ul>
+          <li><strong>Zero Remote Uploads:</strong> Your input data, configuration files, credentials, and code snippets are never sent to remote servers or third-party APIs.</li>
+          <li><strong>Offline Capable:</strong> Once loaded, our tools process data entirely within your local browser sandbox.</li>
+          <li><strong>No Mandatory Accounts:</strong> All tools are completely free to use without requiring registration, email sign-ups, or access keys.</li>
+        </ul>
+
+        <h2>Our Editorial Process</h2>
+        <p>
+          We take technical accuracy seriously. Our content is developed through practical, hands-on experimentation:
+        </p>
+        <ul>
+          <li><strong>Direct Verification:</strong> Code snippets, CLI commands, and configuration files are written and tested against standard runtime environments (such as Node.js, Python, and modern Linux/macOS/Windows terminals).</li>
+          <li><strong>Grounded Sources:</strong> Technical concepts are cross-referenced with official documentation, published specifications (RFCs, W3C recommendations), and open-source project repositories.</li>
+          <li><strong>Regular Maintenance:</strong> When frameworks or API specifications change, we actively update our guides to ensure instructions remain accurate and helpful.</li>
+        </ul>
+
+        <h2>Who Operates Nadhebe</h2>
+        <p>
+          Nadhebe is managed and written by the <strong>Nadhebe Editorial & Engineering Desk</strong>—an independent group of software engineers, AI systems architects, and technical contributors. We are not backed by any single AI vendor or cloud provider, allowing us to maintain an objective perspective on the developer ecosystem.
+        </p>
+
+        <h2>Corrections & Community Feedback</h2>
+        <p>
+          We welcome feedback, corrections, and suggestions from readers. If you spot an outdated command, broken example, or have ideas for new utilities, please get in touch through our <a href="/contact/" class="text-accent underline font-semibold">Contact Page</a> or email us directly at <a href="mailto:contact@nadhebe.com" class="text-accent underline font-semibold">contact@nadhebe.com</a>.
+        </p>
+
+      </div>
+
     </div>
   </div>
 </BaseLayout>

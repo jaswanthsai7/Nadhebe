@@ -3,7 +3,7 @@ title: "Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Confi
 description: "Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Cursor", "MCP", "Troubleshooting", "Developer Tools", "Node.js", "AI IDE"]
 heroImage: "/images/cursor-mcp-not-working-hero.webp"
 heroAlt: "Minimalist vintage editorial collage showing Cursor settings red indicator lights and JSON syntax resolution on a warm cream background"

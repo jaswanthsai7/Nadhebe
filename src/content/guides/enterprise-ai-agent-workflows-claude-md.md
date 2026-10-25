@@ -3,7 +3,7 @@ title: "Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subag
 description: "A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["CLAUDE.md", "Claude Code", "Agent Architecture", "Git Worktrees", "Context Engineering", "DevOps"]
 heroImage: "/images/enterprise-ai-agent-workflows-hero.webp"
 heroAlt: "Vintage editorial collage showing a 5-layer hierarchical matrix diagram of project context and Git worktrees on a soft sand background"

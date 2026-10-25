@@ -3,7 +3,7 @@ title: "Optimizing KV Cache Utilization in vLLM Production Clusters"
 description: "Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["vLLM", "KV Cache", "PagedAttention", "GPU Optimization", "Python", "Kubernetes", "AI Infrastructure"]
 heroImage: "/images/vllm-kv-cache-optimization-guide-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing vLLM PagedAttention virtual block memory mapping"

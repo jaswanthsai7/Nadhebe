@@ -2,8 +2,8 @@
 title: "Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)"
 description: "Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gemini-cli", "terminal", "cli-tools", "developer-workflow", "automation"]
 heroImage: "/images/gemini-cli-hero.webp"
 heroAlt: "Clean minimalist terminal illustration of Gemini CLI workflow"

@@ -3,7 +3,7 @@ title: "Building and Deploying Remote MCP Servers on Cloudflare Workers with Aut
 description: "Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "Cloudflare Workers", "Auth0", "OAuth2", "Model Context Protocol", "Serverless"]
 heroImage: "/images/deploy-remote-mcp-server-cloudflare-hero.webp"
 heroAlt: "Minimalist vintage editorial collage illustrating remote MCP server nodes on Cloudflare Workers secured by Auth0 identity badges"

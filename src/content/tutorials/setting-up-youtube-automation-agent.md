@@ -2,7 +2,7 @@
 title: "Step-by-Step Tutorial: Setting Up the YouTube Automation Agent"
 description: "A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Tutorials
 tags: ["tutorials", "setup", "youtube-automation", "python"]
 heroImage: "/images/yt-automation-hero.webp"
@@ -81,5 +81,5 @@ The strategy agent will write a content job to SQLite, which triggers the subseq
 
 ## Architecture & State Sharing
 
-* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
-* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/tools/youtube-automation-agent-multi-agent-system).
+* Understand the backend database mechanics in [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
+* Explore multi-agent system features in [The YouTube Automation Agent: Multi-Agent Feature Guide](/reviews/open-source-youtube-automation-agent/).

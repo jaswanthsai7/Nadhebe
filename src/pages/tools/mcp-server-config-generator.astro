@@ -114,6 +114,7 @@ const faq = [
     if (!container || !output) return;
 
     function generateJSON() {
+      if (!container || !output) return;
       const config: any = { mcpServers: {} };
       const blocks = container.querySelectorAll('.server-block');
       

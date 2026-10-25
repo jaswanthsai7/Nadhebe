@@ -3,7 +3,7 @@ title: "Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE 
 description: "A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "MCP Bundles", "Agent Skills", "SKILL.md", "IDE Integration", "Developer Tools"]
 heroImage: "/images/authoring-custom-agent-skills-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing packaged archive bundles and SKILL.md manifests on a soft mint background"

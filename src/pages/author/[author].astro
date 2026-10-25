@@ -8,13 +8,18 @@ export async function getStaticPaths() {
   const allArticles = await getAllArticles();
 
   return authorEntries.map(author => {
+    const cleanSlug = author.slug || author.id.replace(/\.mdx?$/, '');
     // Filter posts written by this author
-    const authorPosts = allArticles.filter(
-      post => post.data.author && post.data.author.id === author.id
-    );
+    const authorPosts = allArticles.filter(post => {
+      const authorObj = post.data.author as any;
+      const postAuthorId = typeof authorObj === 'string'
+        ? authorObj.replace(/\.mdx?$/, '')
+        : String(authorObj?.id || authorObj?.slug || '').replace(/\.mdx?$/, '');
+      return postAuthorId === cleanSlug || postAuthorId === 'nadhebe-team';
+    });
 
     return {
-      params: { author: author.id },
+      params: { author: cleanSlug },
       props: { author: author.data, posts: authorPosts },
     };
   });

@@ -24,15 +24,15 @@ const {
 const matchedProgram: AffiliateProgram | null = toolId ? getAffiliateById(toolId) : null;
 
 const name = Astro.props.toolName || matchedProgram?.name || 'Featured Tool';
-const rawUrl = Astro.props.affiliateUrl || matchedProgram?.url || '#';
-const pitch = Astro.props.pitch || matchedProgram?.pitch || 'Discover top-rated engineering features and performance benchmarks.';
+const rawUrl = Astro.props.affiliateUrl || matchedProgram?.affiliateUrl || '#';
+const pitch = Astro.props.pitch || matchedProgram?.whyRecommend || 'Discover top-rated engineering features and performance benchmarks.';
 const whyRecommend = Astro.props.whyRecommend || matchedProgram?.whyRecommend;
 const trustSignal = Astro.props.trustSignal || matchedProgram?.trustSignal || '✓ Tested & recommended by Nadhebe';
 const pricingSummary = Astro.props.pricingSummary || matchedProgram?.pricingSummary;
-const features = Astro.props.features || matchedProgram?.features || [];
-const badge = Astro.props.badge || matchedProgram?.badge || "Editor's Pick";
-const buttonLabel = Astro.props.buttonLabel || matchedProgram?.buttonLabel || `Explore ${name}`;
-const disclosure = matchedProgram?.disclosure || 'Nadhebe is reader-supported. We may earn a commission if you sign up via our partner link.';
+const features = Astro.props.features || matchedProgram?.pros || [];
+const badge = Astro.props.badge || matchedProgram?.qualitativeBadge || "Editor's Pick";
+const buttonLabel = Astro.props.buttonLabel || `Explore ${name}`;
+const disclosure = 'Nadhebe is reader-supported. We may earn a commission if you sign up via our partner link.';
 
 const slug = (articleSlug || Astro.url.pathname).replace(/^\/|\/$/g, '') || 'nadhebe';
 const utmUrl = buildUtmUrl(rawUrl, slug);
@@ -99,7 +99,7 @@ const utmUrl = buildUtmUrl(rawUrl, slug);
 
     {features.length > 0 && (
       <ul class="mt-16 grid grid-cols-1 gap-12 sm:grid-cols-2">
-        {features.slice(0, 4).map((feature) => (
+        {features.slice(0, 4).map((feature: string) => (
           <li class="flex items-start gap-8 text-xs font-sans text-ink2 dark:text-ink2-dark">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="mt-2 h-16 w-16 shrink-0 text-success dark:text-success-dark" style="width:16px;height:16px;">
               <polyline points="20 6 9 17 4 12" />

@@ -1,30 +1,69 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+
+const title = 'Terms of Service — Nadhebe';
+const description = 'Nadhebe terms of service, publisher disclosures, editorial copyright guidelines, affiliate notices, and acceptable use policies.';
 ---
 
 <BaseLayout
-  title="Terms of Service"
-  description="Terms of Service and legal disclosures for the Nadhebe platform."
+  title={title}
+  description={description}
+  canonicalUrl={`${SITE.url}/terms/`}
 >
-  <div class="mx-auto max-w-3xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
-    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium dark:border-border-dark dark:bg-surface-dark/90">
+  <div class="mx-auto max-w-4xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-48 shadow-medium dark:border-border-dark dark:bg-surface-dark/90">
       <article class="prose-article">
-        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark mb-24">Terms of Service</h1>
-        <p class="text-meta font-mono text-muted dark:text-muted-dark mb-24">Last updated: July 2026</p>
-        
-        <h2>1. Terms</h2>
-        <p>
-          By accessing this publication, you agree to comply with and be bound by these Terms of Service. All content, code examples, and opinions published on Nadhebe are provided on an "as is" basis for informational and educational purposes.
+        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark mb-16">Terms of Service</h1>
+        <p class="text-caption font-mono text-muted dark:text-muted-dark mb-32 border-b border-border/60 pb-16 dark:border-border-dark/60">
+          Last Updated: August 16, 2026 | Effective Date: August 16, 2026
         </p>
 
-        <h2>2. Intellectual Property</h2>
+        <h2>1. Agreement to Terms</h2>
         <p>
-          All original tutorials, prompt templates, and articles are properties of Nadhebe and their respective authors. Static code snippets are licensed under the MIT license, meaning they can be freely extracted, modified, and integrated into private or commercial repositories.
+          By accessing or using the publication <strong>Nadhebe</strong> (accessible via <code>https://nadhebe.com</code>), you acknowledge that you have read, understood, and agreed to be bound by these Terms of Service, along with our <a href="/privacy-policy/" class="text-accent underline">Privacy Policy</a>. If you do not accept these terms in their entirety, you are strictly prohibited from using or accessing this site.
         </p>
 
-        <h2>3. Limitation of Liability</h2>
+        <h2>2. Editorial Purpose & Educational Nature</h2>
         <p>
-          Under no circumstances shall Nadhebe or its authors be liable for any direct or indirect damages resulting from command execution, API configurations, server configurations, or software architecture failures described in our tutorials.
+          Nadhebe provides in-depth technical analysis, benchmark reports, artificial intelligence research tutorials, prompt engineering specifications, and developer utility tools. All content published on Nadhebe is intended strictly for educational, informational, and software development purposes. While our engineering team rigorously tests code, configurations, and benchmarks on dedicated hardware environments, software updates by third-party model providers (e.g. Anthropic, Google, OpenAI, Meta) may alter API contracts or syntax over time.
+        </p>
+
+        <h2>3. Intellectual Property & Open-Source Code Snippets</h2>
+        <p>
+          Unless otherwise stated:
+        </p>
+        <ul>
+          <li><strong>Original Editorial Articles & Media</strong>: All original prose, diagrams, conceptual frameworks, and editorial graphics are the proprietary intellectual property of Nadhebe and its authors.</li>
+          <li><strong>Executable Code Snippets</strong>: All standalone software code snippets, command-line scripts, and developer configurations published in our tutorials are provided under the permissive <strong>MIT License</strong>, granting you the freedom to incorporate them into your personal, educational, or commercial software applications without attribution requirements.</li>
+        </ul>
+
+        <h2>4. Advertising, Sponsored Content & Affiliate Disclosures</h2>
+        <p>
+          In accordance with the Federal Trade Commission (FTC) guidelines and Google Publisher Policies:
+        </p>
+        <ul>
+          <li>Nadhebe displays contextual advertisements supplied by third-party ad networks, including <strong>Google AdSense</strong>. We do not endorse specific third-party products advertised in dynamic ad units.</li>
+          <li>Certain articles may contain affiliate links to developer tools or cloud infrastructure providers. When you make a purchase or subscribe through these links, Nadhebe may earn a small referral commission at no additional cost to you. Our editorial ratings and technical benchmarks remain 100% independent and unaffected by affiliate relationships.</li>
+        </ul>
+
+        <h2>5. Interactive Tools & Local Processing</h2>
+        <p>
+          Nadhebe provides browser-based utilities (such as image cleaners, encoders, formatters, and mathematical calculators). These utilities execute entirely on your client device using HTML5 Canvas and WebAssembly. We do not capture, log, or store your input data, images, or source code.
+        </p>
+
+        <h2>6. Limitation of Liability & Disclaimers</h2>
+        <p>
+          In no event shall Nadhebe, its founders, editors, or contributors be held liable for any direct, indirect, consequential, or incidental damages resulting from the implementation of configurations, API calls, GPU deployment commands, or server setups described on this platform. Users are solely responsible for verifying configurations in staging environments before applying them to production infrastructure.
+        </p>
+
+        <h2>7. Contact & Legal Inquiries</h2>
+        <p>
+          For formal inquiries regarding copyright, licensing, or terms compliance, please contact our team at:
+        </p>
+        <p>
+          <strong>Email</strong>: <a href="mailto:hello@nadhebe.com" class="text-accent underline font-semibold">hello@nadhebe.com</a><br />
+          <strong>Web</strong>: <a href="https://nadhebe.com" class="text-accent underline">https://nadhebe.com</a>
         </p>
       </article>
     </div>

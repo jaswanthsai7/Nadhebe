@@ -3,7 +3,7 @@ title: "Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performanc
 description: "A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["Claude CLI", "Gemini CLI", "CLI Tools", "Anthropic", "Google Gemini", "Terminal Agent"]
 heroImage: "/images/claude-cli-vs-gemini-cli-hero.webp"
 heroAlt: "Retro-tech editorial graphic comparing two terminal shell prompt windows with vintage halftone patterns on a warm sand background"

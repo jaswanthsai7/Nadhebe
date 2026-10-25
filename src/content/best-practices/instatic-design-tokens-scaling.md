@@ -2,7 +2,7 @@
 title: "Best Practices for Scaling Design Tokens in Instatic CMS"
 description: "Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale."
 pubDate: 2026-07-10
-author: alice-chen
+author: nadhebe-team
 category: "Best Practices"
 tags: [instatic, design-tokens, css, styling]
 heroImage: "/images/best-practices-hero.webp"

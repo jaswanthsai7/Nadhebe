@@ -3,7 +3,7 @@ title: "How to Analyze Meta Tags for SEO: Step-by-Step Tutorial"
 description: "Learn how to systematically audit HTML title tags, meta descriptions, canonical URLs, and OpenGraph social cards to maximize search visibility and click-through rates."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "SEO Tutorials"
+category: "Tutorials"
 tags: ["seo-tutorial", "meta-tags", "search-engine-optimization", "webmaster", "audit"]
 heroImage: "/images/how-to-analyze-meta-tags-hero.webp"
 heroAlt: "Developer running an automated SEO meta tag audit workflow"

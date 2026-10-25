@@ -3,7 +3,7 @@ title: "OpenRouter vs Direct Provider APIs: Which Should You Choose?"
 description: "An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["OpenRouter", "API", "OpenAI", "Anthropic", "LLM Providers", "Architecture"]
 heroImage: "/images/openrouter-vs-direct-hero.webp"
 heroAlt: "Verge-style editorial graphic showing a router node connecting to multiple servers"

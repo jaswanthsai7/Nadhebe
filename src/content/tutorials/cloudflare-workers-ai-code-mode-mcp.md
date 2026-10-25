@@ -3,7 +3,7 @@ title: "Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP
 description: "Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Cloudflare Workers", "Code Mode", "MCP", "Edge AI", "Agents SDK", "TypeScript"]
 heroImage: "/images/cloudflare-workers-ai-code-mode-hero.webp"
 heroAlt: "Vintage editorial halftone collage depicting Cloudflare edge workers executing programmatic Code Mode MCP scripts on a soft terracotta background"

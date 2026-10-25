@@ -3,7 +3,7 @@ title: "Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks"
 description: "Hardware benchmark guide evaluating the best open-weight local LLMs for 8GB VRAM consumer GPUs. Includes token-per-second decoding speeds, context spillover, and quantization metrics."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["8GB VRAM", "Local LLM", "Ollama", "GPU Benchmarks", "Qwen 2.5", "Llama 3.1", "Phi-4 Mini", "AI Hardware"]
 heroImage: "/images/best-local-llms-8gb-vram-hero.png"
 heroAlt: "Vintage editorial collage illustration showing a desktop GPU and benchmarking graph on a soft lavender background"

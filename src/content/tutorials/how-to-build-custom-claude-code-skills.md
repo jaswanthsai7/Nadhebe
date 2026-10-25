@@ -2,7 +2,7 @@
 title: "How to Build Custom Claude Code Skills & Subagents (Developer Guide)"
 description: "A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Tutorials
 tags: ["claude", "cli", "custom-skills", "subagents", "claude-agent-sdk", "anthropic"]
 heroImage: "/images/claude-skills-hero.webp"

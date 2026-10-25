@@ -3,7 +3,7 @@ title: "Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026"
 description: "A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools."
 pubDate: 2026-08-04
 author: nadhebe-team
-category: "reviews"
+category: "Reviews"
 tags: ["MCP", "Model Context Protocol", "AI Tools", "Developer Tools", "PostgreSQL", "GitHub", "Cloudflare"]
 heroImage: "/images/best-mcp-servers-hero.webp"
 heroAlt: "Vintage editorial halftone graphic showing interconnected MCP server nodes and database tools on a soft mint background"

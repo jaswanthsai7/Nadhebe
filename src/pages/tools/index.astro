@@ -5,17 +5,18 @@ import FeedList from '@/components/FeedList.astro';
 import InlineToolSearch from '@/components/tools/InlineToolSearch.astro';
 import { PLATFORM_CATEGORIES } from '@/config/platform-tools';
 import { UNIFIED_TOOLS_REGISTRY } from '@/config/tools-registry';
-
-const PLATFORM_TOOLS = UNIFIED_TOOLS_REGISTRY;
-const PLATFORM_TOOL_TOTAL = PLATFORM_TOOLS.length;
 import ToolSearchModal from '@/components/tools/ToolSearchModal.astro';
 import { buildSeo } from '@/utils/seo';
 import { SITE } from '@/config';
 
-const articlePosts = await getCollection('tools');
-const sortedArticles = articlePosts
+const PLATFORM_TOOLS = UNIFIED_TOOLS_REGISTRY;
+const PLATFORM_TOOL_TOTAL = PLATFORM_TOOLS.length;
+
+const allGuides = await getCollection('guides');
+const sortedArticles = allGuides
   .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 4);
 
 const seo = buildSeo({
   title: 'Free Web Utilities & Developer Tools',
@@ -36,46 +37,28 @@ const toolsDirectorySchema = {
 ---
 
 <BaseLayout seo={seo} jsonLd={[toolsDirectorySchema]}>
-  <div class="mx-auto max-w-content px-16 sm:px-24 py-32 sm:py-48">
+  <div class="mx-auto w-full max-w-[1536px] px-16 sm:px-24 lg:px-36 py-20 sm:py-28">
     
-    <!-- Hero Header -->
-    <header class="glass-panel relative overflow-hidden rounded-24 border border-border p-24 sm:p-40 shadow-medium dark:border-border-dark mb-48" data-reveal>
-      <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/15 blur-3xl dark:bg-accent-dark/15"></div>
-      <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
-
-      <div class="relative z-10">
-        <div class="inline-flex items-center gap-8 rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-12 py-4 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-          <span class="relative flex h-8 w-8">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex h-8 w-8 rounded-full bg-emerald-500"></span>
-          </span>
-          100% Free & Client-Side Utilities
+    <!-- Compact Hero Header -->
+    <header class="glass-panel relative overflow-hidden rounded-20 border border-border p-16 sm:p-24 shadow-soft dark:border-border-dark mb-24" data-reveal>
+      <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-accent/10 blur-2xl dark:bg-accent-dark/10"></div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-12 relative z-10">
+        <div>
+          <div class="inline-flex items-center gap-6 rounded-pill border border-emerald-500/30 bg-emerald-500/10 px-10 py-2 font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 mb-8">
+            <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+            100% Client-Side • Zero Data Logging
+          </div>
+          <h1 class="font-display text-h3 sm:text-h2 font-bold leading-tight text-ink dark:text-ink-dark m-0">
+            Free Developer Utilities & Tools
+          </h1>
+          <p class="mt-4 text-caption sm:text-body text-ink2 dark:text-ink2-dark max-w-2xl leading-relaxed m-0">
+            Fast, browser-based engineering calculators and formatters running 100% locally on your machine.
+          </p>
         </div>
-
-        <h1 class="mt-16 font-display text-h1 sm:text-display font-bold leading-tight text-ink dark:text-ink-dark">
-          Free Utilities & Developer Tools
-        </h1>
-        <p class="mt-12 text-body-large text-ink2 dark:text-ink2-dark max-w-3xl leading-relaxed">
-          Ultra-fast, browser-based calculators and engineering tools built for designers, video editors, frontend developers, and content creators. Privacy-first with zero tracking of your inputs.
-        </p>
-
-        <!-- Metrics bar -->
-        <div class="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-12 pt-20 border-t border-border/60 dark:border-border-dark/60">
-          <div>
-            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Interactive Utilities</span>
-            <p class="font-display text-h3 font-bold text-ink dark:text-ink-dark">{PLATFORM_TOOL_TOTAL}+</p>
-          </div>
-          <div>
-            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Privacy</span>
-            <p class="font-display text-h3 font-bold text-emerald-600 dark:text-emerald-400">100% Local</p>
-          </div>
-          <div>
-            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Speed</span>
-            <p class="font-display text-h3 font-bold text-accent dark:text-accent-dark">Instant (0ms)</p>
-          </div>
-          <div>
-            <span class="text-meta font-mono uppercase text-muted dark:text-muted-dark">Access</span>
-            <p class="font-display text-h3 font-bold text-ink dark:text-ink-dark">No Account</p>
+        <div class="flex items-center gap-12 shrink-0">
+          <div class="rounded-12 border border-border/80 bg-surface2/60 px-16 py-8 text-center dark:border-border-dark/80 dark:bg-surface2-dark/60">
+            <span class="block text-[10px] font-mono uppercase tracking-wider text-muted dark:text-muted-dark font-medium">Available</span>
+            <span class="font-display text-body font-bold text-ink dark:text-ink-dark">{PLATFORM_TOOL_TOTAL}+ Tools</span>
           </div>
         </div>
       </div>
@@ -109,7 +92,7 @@ const toolsDirectorySchema = {
         <div
           id="category-dropdown-menu"
           role="listbox"
-          class="absolute left-0 top-[calc(100%+8px)] z-50 hidden max-h-[320px] w-full sm:w-[320px] overflow-y-auto rounded-16 border border-border bg-surface p-8 shadow-large dark:border-border-dark dark:bg-surface-dark custom-scrollbar"
+          class="absolute left-0 top-[calc(100%+8px)] z-50 hidden max-h-[320px] w-full sm:w-[320px] overflow-y-auto rounded-16 border border-border bg-white p-8 shadow-2xl dark:border-border-dark dark:bg-[#141414] custom-scrollbar"
         >
           <button
             type="button"
@@ -154,233 +137,491 @@ const toolsDirectorySchema = {
 
     </div>
 
-    <!-- Tools Cards Grid -->
-    <section class="mb-64" aria-labelledby="tools-directory-heading">
-      <div class="mb-16 flex items-end justify-between gap-16 px-4">
+    <!-- DYNAMIC MASONRY / BENTO SHOWCASE (Big, Small, Tall Card Layout) -->
+    <section class="mb-64" aria-labelledby="tools-showcase-heading">
+      <div class="mb-20 flex items-end justify-between gap-16 px-4">
         <div>
-          <p class="text-meta font-mono font-semibold uppercase tracking-wider text-accent dark:text-accent-dark">Tool directory</p>
-          <h2 id="tools-directory-heading" class="mt-4 font-display text-h2 font-bold text-ink dark:text-ink-dark">Pick a utility and get started</h2>
+          <p class="text-meta font-mono font-semibold uppercase tracking-wider text-accent dark:text-accent-dark">Workbench Directory</p>
+          <h2 id="tools-showcase-heading" class="mt-4 font-display text-h3 sm:text-h2 font-bold text-ink dark:text-ink-dark">
+            Precision Developer Utilities & Calculators
+          </h2>
         </div>
-        <span class="hidden font-mono text-meta text-muted dark:text-muted-dark sm:block">{PLATFORM_TOOL_TOTAL} browser-based tools</span>
+        <span class="font-mono text-meta text-muted dark:text-muted-dark">
+          Showing <span id="tools-visible-count" class="font-bold text-ink dark:text-ink-dark">{PLATFORM_TOOL_TOTAL}</span> / {PLATFORM_TOOL_TOTAL} verified tools
+        </span>
       </div>
 
-      <div class="grid grid-cols-1 gap-16 md:grid-cols-2 xl:grid-cols-3" id="tools-directory-grid">
-      {PLATFORM_TOOLS.map((tool) => (
-        <a
-          href={tool.href}
-          data-tool-card
-          data-category={tool.category}
-          data-search-text={`${tool.name} ${tool.description} ${tool.category} ${tool.tags.join(' ')}`.toLowerCase()}
-          class="tool-directory-card group relative flex min-h-[218px] flex-col overflow-hidden rounded-16 border border-border/90 p-20 no-underline transition-all duration-200 dark:border-border-dark/90"
-        >
-          <div class="relative z-10">
-            <div class="flex items-start justify-between gap-12">
-              <span class="tool-directory-icon inline-flex h-40 w-40 shrink-0 items-center justify-center rounded-10 border border-border bg-surface2 text-accent dark:border-border-dark dark:bg-surface2-dark dark:text-accent-dark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-20 w-20">
-                  <path d="M8 9l-3 3 3 3"></path>
-                  <path d="M16 9l3 3-3 3"></path>
-                  <path d="M14 5l-4 14"></path>
-                </svg>
-              </span>
-              <div class="flex items-center justify-end gap-6">
-                <span class="rounded-6 bg-surface2/90 px-8 py-3 font-mono text-[12px] font-medium text-ink2 dark:bg-surface2-dark/90 dark:text-ink2-dark">
-                {tool.category}
-                </span>
-                {tool.badge && (
-                  <span class="rounded-pill bg-accent/10 px-8 py-3 font-mono text-[12px] font-semibold text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
-                    {tool.badge}
+      <!-- Multi-Column Dynamic Masonry Container -->
+      <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-18 [column-fill:_balance]" id="tools-masonry-container">
+        
+        {PLATFORM_TOOLS.map((tool) => {
+          const firstTag = tool.tags?.[0] ? tool.tags[0].toUpperCase() : 'CLIENT-SIDE';
+          const isChatGPT = tool.slug === 'chatgpt-ad-blocker';
+          const isTokenizer = tool.slug === 'llm-tokenizer';
+          const isSql = tool.slug === 'sql-formatter';
+          const isJsonRepair = tool.slug === 'json-repair';
+          const isJwt = tool.slug === 'jwt-debugger' || tool.slug === 'jwt-inspector';
+          const isUuid = tool.slug === 'uuid-v7-generator';
+          const isRag = tool.slug === 'rag-evaluator';
+          const isColorContrast = tool.slug === 'color-contrast-checker';
+          const isAspectRatio = tool.slug === 'aspect-ratio-calculator' || tool.slug === 'aspect-ratio';
+          const isCsp = tool.slug === 'csp-header-generator';
+          const isCostEstimator = tool.slug === 'openai-cost-estimator';
+          const isCosine = tool.slug === 'cosine-similarity-calculator';
+          const isVram = tool.slug === 'gpu-vram-calculator';
+          const isDocker = tool.slug === 'dockerfile-linter';
+          const isClamp = tool.slug === 'css-clamp-calculator';
+          const isRegex = tool.slug === 'regex-tester';
+          const isCron = tool.slug === 'cron-explainer';
+          const isBase64 = tool.slug === 'base64-encoder';
+
+          return (
+            <div
+              data-matrix-card
+              data-category={tool.category}
+              data-corpus={`${tool.name} ${tool.description} ${tool.category} ${(tool.tags || []).join(' ')}`.toLowerCase()}
+              class="break-inside-avoid mb-18 inline-block w-full align-top"
+            >
+              <a
+                href={tool.href}
+                class="group relative flex flex-col justify-between rounded-16 border border-border/80 bg-white p-18 shadow-subtle transition-all duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-large dark:border-border-dark/80 dark:bg-[#141414] no-underline block"
+              >
+                <!-- TOP HEADER ROW -->
+                <div>
+                  <div class="flex items-center justify-between text-[10px] font-mono mb-10">
+                    <div class="flex items-center gap-6 truncate max-w-[170px]">
+                      <span class="font-bold text-accent dark:text-accent-dark uppercase tracking-wider truncate">
+                        {tool.category}
+                      </span>
+                      {tool.badge && (
+                        <span class="rounded-full bg-accent/15 px-6 py-1 text-[9px] font-bold text-accent dark:text-accent-dark shrink-0">
+                          {tool.badge}
+                        </span>
+                      )}
+                    </div>
+                    <span class="inline-flex items-center gap-4 text-emerald-600 dark:text-emerald-400 font-semibold shrink-0">
+                      <span class="h-5 w-5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      LOCAL
+                    </span>
+                  </div>
+
+                  <!-- CARD TITLE -->
+                  <h3 class="font-display text-[16px] font-bold text-ink dark:text-ink-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors m-0 leading-snug">
+                    {tool.name}
+                  </h3>
+
+                  <!-- CARD DESCRIPTION -->
+                  <p class="mt-6 text-[12px] leading-relaxed text-ink2 dark:text-ink2-dark m-0">
+                    {tool.description}
+                  </p>
+
+                  <!-- ================= DYNAMIC VISUAL MODULES ================= -->
+
+                  {/* 1. CHATGPT AD BLOCKER (TALL HERO PREVIEW) */}
+                  {isChatGPT && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-10 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818] space-y-6">
+                      <div class="flex items-center justify-between text-[10px] border-b border-border/50 pb-6 dark:border-border-dark/50">
+                        <span class="text-muted uppercase font-bold">ACTIVE FILTER RULES</span>
+                        <span class="text-emerald-500 font-bold">4 Armed</span>
+                      </div>
+                      <div class="space-y-4">
+                        <div class="flex items-center justify-between rounded bg-white px-8 py-3 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="truncate text-ink dark:text-ink-dark">#upgrade-hint</span>
+                          <span class="rounded bg-rose-500/15 px-6 py-1 text-[9px] font-bold text-rose-600 dark:text-rose-400">BLOCK</span>
+                        </div>
+                        <div class="flex items-center justify-between rounded bg-white px-8 py-3 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="truncate text-ink dark:text-ink-dark">telemetry.data-out</span>
+                          <span class="rounded bg-zinc-500/15 px-6 py-1 text-[9px] font-bold text-zinc-600 dark:text-zinc-400">OFF</span>
+                        </div>
+                        <div class="flex items-center justify-between rounded bg-white px-8 py-3 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="truncate text-ink dark:text-ink-dark">sidebar-promos</span>
+                          <span class="rounded bg-emerald-500/15 px-6 py-1 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">ACTIVE</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 2. LLM TOKENIZER (MULTI-MODEL PILL PREVIEW) */}
+                  {isTokenizer && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-10 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="text-[10px] text-muted uppercase font-bold mb-6">Multi-Model BPE Tokens</div>
+                      <div class="grid grid-cols-3 gap-6 text-center">
+                        <div class="rounded bg-white p-6 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="block text-[9px] text-muted">GPT-4o</span>
+                          <span class="font-bold text-ink dark:text-ink-dark">284</span>
+                          <span class="block text-[8px] text-emerald-500">$0.0014</span>
+                        </div>
+                        <div class="rounded bg-white p-6 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="block text-[9px] text-muted">Claude</span>
+                          <span class="font-bold text-ink dark:text-ink-dark">291</span>
+                          <span class="block text-[8px] text-indigo-500">$0.0009</span>
+                        </div>
+                        <div class="rounded bg-white p-6 dark:bg-[#101010] border border-border/30 dark:border-border-dark/30">
+                          <span class="block text-[9px] text-muted">Llama 3</span>
+                          <span class="font-bold text-ink dark:text-ink-dark">312</span>
+                          <span class="block text-[8px] text-muted">Local</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 3. SQL FORMATTER (MINI CODE TERMINAL) */}
+                  {isSql && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-10 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="text-[10px] text-muted uppercase font-bold mb-6 flex justify-between">
+                        <span>AST Syntax Highlight</span>
+                        <span class="text-accent font-semibold">Postgres</span>
+                      </div>
+                      <div class="rounded bg-[#0d1117] p-8 text-[#c9d1d9] text-[10px] leading-relaxed overflow-x-hidden">
+                        <span class="text-[#ff7b72]">SELECT</span> u.id, u.email,<br/>
+                        &nbsp;&nbsp;<span class="text-[#79c0ff]">count</span>(o.id) <span class="text-[#ff7b72]">AS</span> total_orders<br/>
+                        <span class="text-[#ff7b72]">FROM</span> users u<br/>
+                        <span class="text-[#ff7b72]">WHERE</span> u.status = <span class="text-[#a5d6ff]">'active'</span><br/>
+                        <span class="text-[#ff7b72]">LIMIT</span> <span class="text-[#79c0ff]">10</span>;
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 4. JSON REPAIR (SIDE-BY-SIDE DIFF) */}
+                  {isJsonRepair && (
+                    <div class="mt-14 grid grid-cols-2 gap-6 font-mono text-[10px] rounded-10 border border-border/70 bg-surface2/80 p-8 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="rounded bg-rose-500/10 p-6 border border-rose-500/20 text-rose-600 dark:text-rose-400">
+                        <span class="block text-[8px] font-bold uppercase mb-2">Malformed</span>
+                        <span>&#123; "key": 'NaN', &#125;</span>
+                      </div>
+                      <div class="rounded bg-emerald-500/10 p-6 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                        <span class="block text-[8px] font-bold uppercase mb-2">Repaired</span>
+                        <span>&#123; "key": 0 &#125;</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 5. JWT DEBUGGER (DECODED PILLS) */}
+                  {isJwt && (
+                    <div class="mt-14 space-y-4 font-mono text-[10px] rounded-10 border border-border/70 bg-surface2/80 p-8 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="rounded bg-rose-500/10 px-6 py-2 text-rose-600 dark:text-rose-400 truncate">
+                        HEAD: &#123; "alg": "HS256" &#125;
+                      </div>
+                      <div class="rounded bg-indigo-500/10 px-6 py-2 text-indigo-600 dark:text-indigo-400 truncate">
+                        PAYLOAD: &#123; "sub": "usr_48e" &#125;
+                      </div>
+                      <div class="rounded bg-emerald-500/10 px-6 py-2 text-emerald-600 dark:text-emerald-400 font-bold truncate">
+                        SIGNATURE: VALID ✓
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 6. COLOR CONTRAST CHECKER (SWATCH MOCKUP) */}
+                  {isColorContrast && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="flex items-center justify-between rounded bg-[#0A0A0A] text-[#FAFAFA] px-10 py-6 mb-6">
+                        <span class="text-[11px] font-bold">Text Contrast</span>
+                        <span class="rounded bg-emerald-500/20 text-emerald-400 px-6 py-1 text-[9px] font-bold">18.5:1 AAA</span>
+                      </div>
+                      <div class="flex justify-between text-[9px] text-muted px-2">
+                        <span>Background: #0A0A0A</span>
+                        <span>Foreground: #FAFAFA</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 7. ASPECT RATIO CALCULATOR (PROPORTION CANVAS) */}
+                  {isAspectRatio && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-10 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818] text-center">
+                      <div class="mx-auto w-[120px] h-[68px] rounded border border-dashed border-accent/60 bg-accent/10 flex items-center justify-center font-bold text-accent dark:text-accent-dark text-[11px] mb-6">
+                        16 : 9
+                      </div>
+                      <span class="text-[10px] text-muted">1920 × 1080 (YouTube / 1080p FHD)</span>
+                    </div>
+                  )}
+
+                  {/* 8. RAG EVALUATOR (4 METRIC TILES) */}
+                  {isRag && (
+                    <div class="mt-14 grid grid-cols-2 gap-4 font-mono text-[10px] text-center">
+                      <div class="rounded bg-surface2/80 p-4 border border-border/40 dark:bg-[#181818] dark:border-border-dark/40">
+                        <span class="text-muted block text-[8px]">PRECISION</span>
+                        <span class="font-bold text-ink dark:text-ink-dark">0.94</span>
+                      </div>
+                      <div class="rounded bg-surface2/80 p-4 border border-border/40 dark:bg-[#181818] dark:border-border-dark/40">
+                        <span class="text-muted block text-[8px]">RECALL</span>
+                        <span class="font-bold text-ink dark:text-ink-dark">0.88</span>
+                      </div>
+                      <div class="rounded bg-surface2/80 p-4 border border-border/40 dark:bg-[#181818] dark:border-border-dark/40">
+                        <span class="text-muted block text-[8px]">MRR</span>
+                        <span class="font-bold text-ink dark:text-ink-dark">0.91</span>
+                      </div>
+                      <div class="rounded bg-surface2/80 p-4 border border-border/40 dark:bg-[#181818] dark:border-border-dark/40">
+                        <span class="text-rose-500 block text-[8px]">NOISE</span>
+                        <span class="font-bold text-rose-600 dark:text-rose-400">12%</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 9. GPU VRAM CALCULATOR (MEMORY GAUGE) */}
+                  {isVram && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[11px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="flex justify-between text-[10px] font-bold mb-4">
+                        <span>Llama-3-70B 4-bit</span>
+                        <span class="text-accent">46.7 GB</span>
+                      </div>
+                      <div class="w-full bg-border/60 dark:bg-border-dark/60 h-6 rounded-full overflow-hidden mb-4">
+                        <div class="bg-accent h-full w-[82%] rounded-full"></div>
+                      </div>
+                      <span class="text-[9px] text-muted block text-right">Requires 2× 24GB GPUs</span>
+                    </div>
+                  )}
+
+                  {/* 10. UUID V7 GENERATOR (COPY PILL) */}
+                  {isUuid && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[10px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <span class="text-muted block text-[8px] uppercase mb-2">Local Monotonic Sample</span>
+                      <div class="rounded bg-white px-6 py-4 dark:bg-[#101010] border border-border/40 dark:border-border-dark/40 text-accent font-bold truncate">
+                        019183d0-3b02-7711-a53f-b378f4ac2e45
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 11. CSS CLAMP CALCULATOR (FLUID FORMULA) */}
+                  {isClamp && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[10px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <span class="text-muted block text-[8px] uppercase mb-2">Fluid Font Size</span>
+                      <code class="rounded bg-white px-6 py-3 dark:bg-[#101010] border border-border/40 dark:border-border-dark/40 text-emerald-600 dark:text-emerald-400 block truncate">
+                        clamp(1rem, 2.5vw, 2.5rem)
+                      </code>
+                    </div>
+                  )}
+
+                  {/* 12. CSP GENERATOR (RULES PREVIEW) */}
+                  {isCsp && (
+                    <div class="mt-14 space-y-3 font-mono text-[10px] rounded-10 border border-border/70 bg-surface2/80 p-8 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="flex justify-between items-center text-ink dark:text-ink-dark">
+                        <span>default-src 'self'</span>
+                        <span class="rounded bg-emerald-500/15 text-emerald-500 px-4 py-1 text-[8px] font-bold">LOCK</span>
+                      </div>
+                      <div class="flex justify-between items-center text-ink dark:text-ink-dark">
+                        <span>script-src 'strict'</span>
+                        <span class="rounded bg-indigo-500/15 text-indigo-500 px-4 py-1 text-[8px] font-bold">PASS</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 13. API COST ESTIMATOR (TIER PREVIEW) */}
+                  {isCostEstimator && (
+                    <div class="mt-14 space-y-3 font-mono text-[10px] rounded-10 border border-border/70 bg-surface2/80 p-8 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="flex justify-between">
+                        <span class="text-muted">GPT-4o (1.25m tok)</span>
+                        <span class="font-bold text-emerald-500">$12.50</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-muted">DeepSeek V3 (10m)</span>
+                        <span class="font-bold text-accent">$2.80</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 14. VECTOR SIMILARITY (METRICS) */}
+                  {isCosine && (
+                    <div class="mt-14 grid grid-cols-2 gap-4 font-mono text-[10px] text-center rounded-10 border border-border/70 bg-surface2/80 p-6 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div>
+                        <span class="text-[8px] text-muted block">COSINE</span>
+                        <span class="font-bold text-emerald-500">0.8924</span>
+                      </div>
+                      <div>
+                        <span class="text-[8px] text-muted block">EUCLIDEAN</span>
+                        <span class="font-bold text-indigo-500">0.4638</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 15. DOCKERFILE LINTER (CHECKLIST) */}
+                  {isDocker && (
+                    <div class="mt-14 space-y-3 font-mono text-[9px] rounded-10 border border-border/70 bg-surface2/80 p-8 dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="text-emerald-600 dark:text-emerald-400">✓ Non-root USER configured</div>
+                      <div class="text-emerald-600 dark:text-emerald-400">✓ Clean apt-get cache in RUN</div>
+                      <div class="text-muted">✓ Multi-stage build target</div>
+                    </div>
+                  )}
+
+                  {/* 16. REGEX TESTER (MATCH PILL) */}
+                  {isRegex && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[10px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <span class="text-muted block text-[8px] uppercase mb-2">RegExp Match</span>
+                      <code class="rounded bg-white px-6 py-2 dark:bg-[#101010] border border-border/40 dark:border-border-dark/40 text-accent font-bold block truncate">
+                        /^[a-zA-Z0-9_-]+$/
+                      </code>
+                    </div>
+                  )}
+
+                  {/* 17. CRON EXPLAINER (SCHEDULE PILL) */}
+                  {isCron && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[10px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <div class="text-accent font-bold text-[11px] mb-2">0 */6 * * *</div>
+                      <span class="text-muted text-[9px] block">"At minute 0 past every 6th hour"</span>
+                    </div>
+                  )}
+
+                  {/* 18. BASE64 ENCODER (STRING PILL) */}
+                  {isBase64 && (
+                    <div class="mt-14 rounded-10 border border-border/70 bg-surface2/80 p-8 font-mono text-[10px] dark:border-border-dark/70 dark:bg-[#181818]">
+                      <span class="text-muted block text-[8px] uppercase mb-2">Base64 Output</span>
+                      <div class="rounded bg-white px-6 py-2 dark:bg-[#101010] border border-border/40 dark:border-border-dark/40 text-muted truncate">
+                        SGVsbG8gV29ybGQh...
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+
+                <!-- CARD FOOTER ROW -->
+                <div class="mt-16 flex items-center justify-between border-t border-border/40 pt-10 text-[11px] font-mono dark:border-border-dark/40">
+                  <span class="rounded bg-surface2 px-6 py-1 text-[10px] text-muted dark:bg-[#202020] dark:text-muted-dark truncate max-w-[130px]">
+                    {firstTag}
                   </span>
-                )}
-              </div>
+                  <span class="inline-flex items-center gap-4 font-semibold text-accent dark:text-accent-dark transition-transform group-hover:translate-x-1">
+                    Open ↗
+                  </span>
+                </div>
+              </a>
             </div>
+          );
+        })}
 
-            <h3 class="mt-16 font-display text-[20px] font-bold leading-snug text-ink transition-colors duration-150 group-hover:text-accent dark:text-ink-dark dark:group-hover:text-accent-dark">
-              {tool.name}
-            </h3>
-            
-            <p class="tool-directory-description mt-8 text-body-small leading-relaxed text-ink2 dark:text-ink2-dark">
-              {tool.description}
-            </p>
-          </div>
+      </div>
 
-          <div class="relative z-10 mt-auto flex items-center justify-between border-t border-border/60 pt-14 text-caption dark:border-border-dark/60">
-            <span class="inline-flex items-center gap-5 font-mono text-[12px] text-muted dark:text-muted-dark">
-              <span class="h-6 w-6 rounded-full bg-emerald-500"></span>
-              Runs locally
-            </span>
-            <span class="inline-flex items-center gap-4 font-semibold text-accent transition-transform duration-150 group-hover:translate-x-1 dark:text-accent-dark">
-              Open <span aria-hidden="true">→</span>
-            </span>
-          </div>
-        </a>
-      ))}
+      <!-- Empty State -->
+      <div id="tools-no-match" class="hidden rounded-16 border border-dashed border-border p-40 text-center dark:border-border-dark bg-white dark:bg-[#141414] my-24">
+        <h3 class="font-display text-h4 font-bold text-ink dark:text-ink-dark m-0">No matching utilities found</h3>
+        <p class="mt-4 text-caption text-muted dark:text-muted-dark">Try searching for keywords like "json", "uuid", "sql", "aspect", or pick a different category.</p>
+        <button
+          type="button"
+          id="btn-clear-empty-filter"
+          class="mt-16 inline-flex items-center gap-6 rounded-8 bg-accent px-14 py-8 font-sans text-xs font-bold text-white transition-all hover:opacity-95"
+        >
+          Reset Category Filter
+        </button>
       </div>
     </section>
 
-    <!-- Empty Filter Search State -->
-    <div id="tools-no-match" class="hidden rounded-24 border border-dashed border-border p-48 text-center dark:border-border-dark glass-panel mb-64">
-      <h3 class="font-display text-h3 font-semibold text-ink dark:text-ink-dark">No matching tools found</h3>
-      <p class="mt-4 text-body-small text-ink2 dark:text-ink2-dark">Try searching for standard keywords like "16:9", "megapixels", "resize", or "PPI".</p>
-    </div>
-
-    <!-- Tool Guides & Articles Section (Preserving existing Content Collection Articles) -->
+    <!-- Tool Guides & Articles Section -->
     {sortedArticles.length > 0 && (
-      <section class="mt-64 glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-40 shadow-medium backdrop-blur-xl dark:border-border-dark dark:bg-surface-dark/90" data-reveal>
+      <section class="mt-64 rounded-24 border border-border bg-white p-24 sm:p-40 shadow-soft dark:border-border-dark dark:bg-[#141414]" data-reveal>
         <div class="mb-24 pb-16 border-b border-border/60 dark:border-border-dark/60">
           <p class="text-meta font-mono font-semibold text-accent dark:text-accent-dark uppercase tracking-wider mb-8">Engineering & Showcase Articles</p>
-          <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark">Tool Guides & In-Depth Technical Reviews</h2>
+          <h2 class="font-display text-h2 font-bold text-ink dark:text-ink-dark m-0">Tool Guides & In-Depth Technical Reviews</h2>
         </div>
         <FeedList posts={sortedArticles} />
       </section>
     )}
+
   </div>
   <ToolSearchModal />
 </BaseLayout>
 
-<style>
-  .tool-directory-card {
-    background: rgba(255, 255, 255, 0.94);
-    box-shadow: 0 8px 24px rgba(20, 32, 46, 0.10);
-  }
-
-  .tool-directory-card::before {
-    position: absolute;
-    inset: 0;
-    content: '';
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0));
-    opacity: 0;
-    transition: opacity 200ms ease;
-    pointer-events: none;
-  }
-
-  .tool-directory-card:hover {
-    border-color: rgba(229, 126, 0, 0.65);
-    box-shadow: 0 16px 34px rgba(20, 32, 46, 0.16);
-    transform: translateY(-3px);
-  }
-
-  .tool-directory-card:hover::before { opacity: 1; }
-  .tool-directory-card:hover .tool-directory-icon { border-color: rgba(229, 126, 0, 0.45); }
-
-  .tool-directory-description {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  :global(.dark) .tool-directory-card {
-    background: rgba(12, 16, 22, 0.94);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  }
-
-  :global(.dark) .tool-directory-card::before {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    height: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(161, 161, 170, 0.3);
-    border-radius: 20px;
-  }
-  :global(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(161, 161, 170, 0.2);
-  }
-</style>
-
-<!-- Client Filtering & Search JavaScript -->
+<!-- Client Filtering JavaScript for Category Dropdown -->
 <script is:inline>
   (function() {
-    const dropdownItems = document.querySelectorAll('.cat-dropdown-item');
-    const toolCards = document.querySelectorAll('[data-tool-card]');
-    const noMatch = document.getElementById('tools-no-match');
-    
-    const triggerBtn = document.getElementById('category-dropdown-trigger');
-    const dropdownMenu = document.getElementById('category-dropdown-menu');
-    const dropdownIcon = document.getElementById('category-dropdown-icon');
-    const dropdownLabel = document.getElementById('category-dropdown-label');
+    function initToolsFilter() {
+      const dropdownItems = document.querySelectorAll('.cat-dropdown-item');
+      const matrixCards = document.querySelectorAll('[data-matrix-card]');
+      const noMatch = document.getElementById('tools-no-match');
+      const visibleCountEl = document.getElementById('tools-visible-count');
+      const clearEmptyBtn = document.getElementById('btn-clear-empty-filter');
+      
+      const triggerBtn = document.getElementById('category-dropdown-trigger');
+      const dropdownMenu = document.getElementById('category-dropdown-menu');
+      const dropdownIcon = document.getElementById('category-dropdown-icon');
+      const dropdownLabel = document.getElementById('category-dropdown-label');
 
-    let activeFilter = 'all';
-    let dropdownOpen = false;
+      let activeFilter = 'all';
+      let dropdownOpen = false;
 
-    if (triggerBtn && dropdownMenu) {
-      triggerBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdownOpen = !dropdownOpen;
-        dropdownMenu.classList.toggle('hidden', !dropdownOpen);
-        triggerBtn.setAttribute('aria-expanded', dropdownOpen.toString());
-        dropdownIcon.style.transform = dropdownOpen ? 'rotate(180deg)' : '';
-      });
+      if (triggerBtn && dropdownMenu) {
+        triggerBtn.onclick = function(e) {
+          e.stopPropagation();
+          dropdownOpen = !dropdownOpen;
+          dropdownMenu.classList.toggle('hidden', !dropdownOpen);
+          triggerBtn.setAttribute('aria-expanded', dropdownOpen.toString());
+          if (dropdownIcon) dropdownIcon.style.transform = dropdownOpen ? 'rotate(180deg)' : '';
+        };
 
-      // Close when clicking outside
-      document.addEventListener('click', (e) => {
-        if (dropdownOpen && !triggerBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        // Close when clicking outside
+        document.addEventListener('click', function(e) {
+          if (dropdownOpen && !triggerBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownOpen = false;
+            dropdownMenu.classList.add('hidden');
+            triggerBtn.setAttribute('aria-expanded', 'false');
+            if (dropdownIcon) dropdownIcon.style.transform = '';
+          }
+        });
+      }
+
+      function filterDirectory() {
+        let count = 0;
+        matrixCards.forEach(function(card) {
+          const cat = card.getAttribute('data-category') || '';
+          const matchesCat = (activeFilter === 'all' || cat === activeFilter);
+
+          if (matchesCat) {
+            card.style.display = '';
+            count++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCountEl) {
+          visibleCountEl.textContent = String(count);
+        }
+
+        if (noMatch) {
+          noMatch.classList.toggle('hidden', count > 0);
+        }
+      }
+
+      dropdownItems.forEach(function(btn) {
+        btn.onclick = function() {
+          // Reset styles for all items
+          dropdownItems.forEach(function(b) {
+            b.setAttribute('aria-selected', 'false');
+            b.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium text-ink2 transition-colors hover:bg-surface2 hover:text-ink dark:text-ink2-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark';
+            const badge = b.querySelector('span:last-child');
+            if (badge) badge.className = 'rounded-full bg-surface2 px-6 py-2 text-[12px] dark:bg-surface2-dark';
+          });
+
+          // Set active styles
+          btn.setAttribute('aria-selected', 'true');
+          btn.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium transition-colors hover:bg-surface2 dark:hover:bg-surface2-dark bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark';
+          const activeBadge = btn.querySelector('span:last-child');
+          if (activeBadge) activeBadge.className = 'rounded-full bg-surface px-6 py-2 text-[12px] dark:bg-surface-dark';
+          
+          // Update trigger label
+          const catName = btn.getAttribute('data-category-name');
+          const catCount = btn.getAttribute('data-category-count');
+          if (dropdownLabel) dropdownLabel.textContent = `Filter by Category: ${catName} (${catCount})`;
+
+          // Close dropdown
           dropdownOpen = false;
-          dropdownMenu.classList.add('hidden');
-          triggerBtn.setAttribute('aria-expanded', 'false');
-          dropdownIcon.style.transform = '';
-        }
-      });
-    }
+          if (dropdownMenu) dropdownMenu.classList.add('hidden');
+          if (triggerBtn) {
+            triggerBtn.setAttribute('aria-expanded', 'false');
+            if (dropdownIcon) dropdownIcon.style.transform = '';
+          }
 
-    function filterDirectory() {
-      let count = 0;
-      toolCards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-
-        const matchesCat = (activeFilter === 'all' || cat === activeFilter);
-
-        if (matchesCat) {
-          card.style.display = '';
-          count++;
-        } else {
-          card.style.display = 'none';
-        }
+          // Filter cards
+          activeFilter = btn.getAttribute('data-category-filter') || 'all';
+          filterDirectory();
+        };
       });
 
-      if (noMatch) {
-        noMatch.classList.toggle('hidden', count > 0);
+      if (clearEmptyBtn) {
+        clearEmptyBtn.onclick = function() {
+          const allBtn = document.querySelector('[data-category-filter="all"]');
+          if (allBtn) allBtn.click();
+        };
       }
     }
 
-    dropdownItems.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Reset styles for all items
-        dropdownItems.forEach(b => {
-          b.setAttribute('aria-selected', 'false');
-          b.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium text-ink2 transition-colors hover:bg-surface2 hover:text-ink dark:text-ink2-dark dark:hover:bg-surface2-dark dark:hover:text-ink-dark';
-          const badge = b.querySelector('span:last-child');
-          if(badge) badge.className = 'rounded-full bg-surface2 px-6 py-2 text-[12px] dark:bg-surface2-dark';
-        });
-
-        // Set active styles
-        btn.setAttribute('aria-selected', 'true');
-        btn.className = 'cat-dropdown-item flex w-full items-center justify-between rounded-8 px-12 py-10 text-left text-[14px] font-medium transition-colors hover:bg-surface2 dark:hover:bg-surface2-dark bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark';
-        const activeBadge = btn.querySelector('span:last-child');
-        if(activeBadge) activeBadge.className = 'rounded-full bg-surface px-6 py-2 text-[12px] dark:bg-surface-dark';
-        
-        // Update trigger label
-        const catName = btn.getAttribute('data-category-name');
-        const catCount = btn.getAttribute('data-category-count');
-        if (dropdownLabel) dropdownLabel.textContent = `Filter by Category: ${catName} (${catCount})`;
-
-        // Close dropdown
-        dropdownOpen = false;
-        dropdownMenu.classList.add('hidden');
-        if (triggerBtn) {
-          triggerBtn.setAttribute('aria-expanded', 'false');
-          dropdownIcon.style.transform = '';
-        }
-
-        // Filter cards
-        activeFilter = btn.getAttribute('data-category-filter') || 'all';
-        filterDirectory();
-      });
-    });
+    initToolsFilter();
+    document.addEventListener('astro:page-load', initToolsFilter);
   })();
 </script>

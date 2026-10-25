@@ -3,7 +3,7 @@ title: "ElevenLabs vs PlayHT: Voice Cloning, Conversational AI & Streaming Audio
 description: "Compare ElevenLabs and PlayHT across voice cloning quality, ultra-low latency WebSocket streaming APIs, multi-lingual synthesis, and pricing."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["ElevenLabs", "PlayHT", "AI Voice", "Text to Speech", "Conversational AI", "Audio API"]
 heroImage: "/images/elevenlabs-vs-playht-hero.webp"
 heroAlt: "Minimalist editorial collage featuring audio soundwaves and vintage speech microphone graphics on a soft terracotta background"

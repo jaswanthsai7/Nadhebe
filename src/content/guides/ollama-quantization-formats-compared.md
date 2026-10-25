@@ -3,7 +3,7 @@ title: "Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs E
 description: "Technical comparison guide evaluating Ollama GGUF quantization formats. Compares Q4_K_M, Q5_K_M, Q8_0, and EXL2 across perplexity, VRAM savings, and decode speed."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "guides"
+category: "Guides"
 tags: ["Ollama", "Quantization", "GGUF", "Q4_K_M", "Q8_0", "EXL2", "VRAM Optimization", "Local LLM"]
 heroImage: "/images/ollama-quantization-formats-compared-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing quantization block matrices and memory savings charts"

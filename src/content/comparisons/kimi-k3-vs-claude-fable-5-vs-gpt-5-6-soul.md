@@ -2,7 +2,7 @@
 title: "Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle"
 description: "An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning."
 pubDate: 2026-07-19
-author: alice-chen
+author: nadhebe-team
 category: "Comparisons"
 tags: ["kimi-k3", "claude-fable-5", "gpt-5.6", "llm-comparison", "benchmarks"]
 heroImage: "/images/comparisons-hero.webp"

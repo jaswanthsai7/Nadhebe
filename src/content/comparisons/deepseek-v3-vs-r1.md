@@ -3,7 +3,7 @@ title: "DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?"
 description: "A comprehensive comparison between DeepSeek V3 (the highly efficient dense/MoE hybrid) and DeepSeek R1 (the reasoning-focused powerhouse)."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["DeepSeek", "DeepSeek V3", "DeepSeek R1", "MoE", "Reasoning Models", "LLM"]
 heroImage: "/images/deepseek-v3-vs-r1-hero.webp"
 heroAlt: "Retro-tech editorial graphic comparing a fast data node and a reasoning brain node"

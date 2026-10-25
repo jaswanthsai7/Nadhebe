@@ -2,7 +2,7 @@
 title: "How to Install and Set Up Instatic CMS Locally"
 description: "A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux."
 pubDate: 2026-07-10
-author: alice-chen
+author: nadhebe-team
 category: "Tutorials"
 tags: [instatic, setup, local-development, bun]
 heroImage: "/images/install-hero.webp"

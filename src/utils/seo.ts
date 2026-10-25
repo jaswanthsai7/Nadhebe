@@ -118,12 +118,12 @@ export function generateToolJsonLd(tool: ToolDefinition, siteUrl: string): Recor
   const faqSchema = tool.content.faq && tool.content.faq.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: tool.content.faq.map(item => ({
+    mainEntity: tool.content.faq.map((item: any) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.example ? `${item.answer}\\n\\nExample:\\n${item.example}` : item.answer,
+        text: item.example ? `${item.answer}\n\nExample:\n${item.example}` : item.answer,
       },
     })),
   } : null;
@@ -158,7 +158,7 @@ export function generateToolJsonLd(tool: ToolDefinition, siteUrl: string): Recor
     '@type': 'HowTo',
     name: `How to use ${tool.name}`,
     description: tool.content.intro,
-    step: tool.content.examples.map((ex, index) => ({
+    step: tool.content.examples.map((ex: any, index: number) => ({
       '@type': 'HowToStep',
       position: index + 1,
       name: `Example: ${ex.explanation.slice(0, 30)}...`,
@@ -176,7 +176,7 @@ export function generateToolJsonLd(tool: ToolDefinition, siteUrl: string): Recor
     }))
   } : null;
 
-  const schemas = [webAppSchema, softwareSchema, breadcrumbSchema];
+  const schemas: Record<string, any>[] = [webAppSchema, softwareSchema, breadcrumbSchema];
   if (faqSchema) schemas.push(faqSchema);
   if (howToSchema) schemas.push(howToSchema);
 

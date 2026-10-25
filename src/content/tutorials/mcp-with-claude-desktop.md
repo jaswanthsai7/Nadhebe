@@ -3,7 +3,7 @@ title: "How to Integrate MCP Servers with Claude Desktop"
 description: "A comprehensive developer guide to configuring and integrating the Model Context Protocol (MCP) with the Claude Desktop app. Learn how to expose local tools, debug connection issues, and build your AI engineering workflows."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP", "Claude Desktop", "Anthropic", "AI Agents", "Local Tools"]
 heroImage: "/images/claude-desktop-guide-hero.webp"
 heroAlt: "Retro-futuristic editorial infographic showing Claude Desktop connecting to a local MCP Server"
@@ -154,6 +154,6 @@ Yes. You can set the `command` to `docker` and use `run -i --rm` in your args to
 ## 11. Further Reading
 
 Continue building your AI engineering expertise with these related topics:
-*   [State of MCP 2026: The Model Context Protocol Ecosystem](/category/tutorials) *(Coming Soon)*
 *   [Deploying Custom MCP Servers for Enterprise Teams](/tutorials/build-custom-mcp-server-typescript)
-*   [Claude Code Hooks and Automations](/category/tutorials) *(Coming Soon)*
+*   [Building Custom Skills and MCP Tools for Claude Code](/tutorials/how-to-build-custom-claude-code-skills)
+*   [Claude Code Hooks and Automations Guide](/tutorials/claude-code-hooks-guide)

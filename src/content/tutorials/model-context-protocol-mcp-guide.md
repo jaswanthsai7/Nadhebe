@@ -3,7 +3,7 @@ title: "Model Context Protocol (MCP) Architecture and Production API Tutorial"
 description: "Comprehensive developer tutorial on Model Context Protocol (MCP) architecture. Learn JSON-RPC schema transport over stdio/SSE, tool definition syntax, and Python implementation."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Model Context Protocol", "MCP", "AI Infrastructure", "Claude Code", "Python", "JSON-RPC", "API Architecture"]
 heroImage: "/images/model-context-protocol-mcp-guide-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing computer connectors and microprocessors on a warm sand background"

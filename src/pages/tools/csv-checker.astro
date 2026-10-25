@@ -126,9 +126,9 @@ const faq = [
     const btnSampleInvalid = document.getElementById('cc-btn-sample-invalid');
     const btnClear = document.getElementById('cc-btn-clear');
 
-    const validCsv = `id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Developer,Active\n3,Carol Danvers,carol@example.com,Designer,Active`;
+    const validCsv = `id,name,email,role,status\n1,Alex Taylor,alex@example.com,Admin,Active\n2,Jordan Smith,jordan@example.com,Developer,Active\n3,Carol Danvers,carol@example.com,Designer,Active`;
 
-    const invalidCsv = `id,name,email,role,status\n1,Alice Chen,alice@example.com,Admin,Active\n2,Bob Smith,bob@example.com,Developer\n3,Carol Danvers,"carol@example.com,Designer,Active,ExtraCol\n4,David Lee,david@example.com,Manager,Active`;
+    const invalidCsv = `id,name,email,role,status\n1,Alex Taylor,alex@example.com,Admin,Active\n2,Jordan Smith,jordan@example.com,Developer\n3,Carol Danvers,"carol@example.com,Designer,Active,ExtraCol\n4,David Lee,david@example.com,Manager,Active`;
 
     function auditCsv() {
       if (!inputCsv) return;

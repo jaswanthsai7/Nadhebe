@@ -2,7 +2,7 @@
 title: "NotebookLM Audio Overviews & Source Grounding Developer Tutorial"
 description: "Learn how to build, customize, and steer Google NotebookLM Audio Overviews, synthesize multi-document knowledge graphs, and enforce strict source attribution."
 pubDate: 2026-08-08
-author: bob-smith
+author: nadhebe-team
 category: "Tutorials"
 tags: ["notebooklm", "google-ai", "rag", "audio-overviews", "source-grounding", "knowledge-synthesis"]
 heroImage: "/images/notebooklm-audio-overviews-hero.png"

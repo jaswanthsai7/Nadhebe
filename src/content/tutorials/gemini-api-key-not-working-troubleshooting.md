@@ -2,8 +2,8 @@
 title: "Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors"
 description: "Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "tutorials"
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gemini-api", "troubleshooting", "error-handling", "api-key", "developer-guide"]
 heroImage: "/images/gemini-api-errors-hero.webp"
 heroAlt: "Clean minimalist error shield illustration of Gemini API troubleshooting"

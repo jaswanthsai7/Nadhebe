@@ -3,7 +3,7 @@ title: "NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis"
 description: "Architectural benchmark comparison of NVIDIA Blackwell B200 vs Hopper H200 for LLM inference. Evaluates HBM3e memory bandwidth, FP4 FLOPS throughput, and TCO."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["NVIDIA B200", "NVIDIA H200", "Blackwell", "Hopper", "GPU Benchmarks", "LLM Inference", "HBM3e", "AI Hardware"]
 heroImage: "/images/nvidia-b200-vs-h200-llm-inference-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing NVIDIA B200 vs H200 GPU architecture metrics"

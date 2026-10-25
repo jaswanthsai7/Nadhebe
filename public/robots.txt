@@ -4,8 +4,11 @@
 User-agent: *
 Allow: /
 
-# Search Engine Crawlers
+# Search Engine & Ad Review Crawlers
 User-agent: Googlebot
+Allow: /
+
+User-agent: Mediapartners-Google
 Allow: /
 
 User-agent: Bingbot

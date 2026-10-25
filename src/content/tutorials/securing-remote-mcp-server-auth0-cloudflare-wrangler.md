@@ -3,7 +3,7 @@ title: "Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 
 description: "A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["MCP Security", "Auth0", "Cloudflare Workers", "Wrangler", "OAuth2", "AI Agents"]
 heroImage: "/images/securing-remote-mcp-server-auth0-hero.webp"
 heroAlt: "Vintage editorial halftone graphic showing encrypted locks and OAuth tokens securing Cloudflare Wrangler Worker endpoints on a warm sand background"

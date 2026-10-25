@@ -3,7 +3,7 @@ title: "Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecy
 description: "A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Claude Code", "Hooks", "PreToolUse", "Guardrails", "settings.json", "Anthropic"]
 heroImage: "/images/claude-code-hooks-mastery-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration showing synchronous shell hooks intercepting dangerous tool calls on soft sage green"

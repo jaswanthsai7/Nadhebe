@@ -2,8 +2,8 @@
 title: "The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration"
 description: "Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes."
 pubDate: 2026-07-17
-author: alice-chen
-category: Programming
+author: nadhebe-team
+category: "Tutorials"
 tags: ["gpt-5.6", "agentic-ai", "guides", "orchestration", "models"]
 heroImage: "/images/gpt-5-6-guide.webp"
 heroAlt: "Minimalist rendering of interlocking frosted glass shapes floating above a clean light grey workspace"
@@ -81,5 +81,5 @@ Because GPT-5.6 can execute tasks rapidly in parallel, implementing safety and b
 
 ## Agent Design & Database Patterns
 
-* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/frameworks/sqlite-state-sharing-multi-agent-architecture).
+* Implement reliable state coordination using [The SQLite State-Sharing Pattern for Multi-Agent Architectures](/guides/sqlite-state-sharing-multi-agent-architecture).
 * Prevent runaway execution loops with [LLM Autonomous Loops: Best Practices for Token and Cost Management](/best-practices/llm-autonomous-loop-cost-management).

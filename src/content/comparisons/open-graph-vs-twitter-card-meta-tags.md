@@ -3,7 +3,7 @@ title: "Open Graph vs Twitter Card Meta Tags: Technical Comparison"
 description: "Compare Open Graph (og:) and Twitter Card (twitter:) metadata specifications, property mapping, fallback rules, and social media image optimization."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "Social Media SEO"
+category: "News"
 tags: ["open-graph", "twitter-cards", "social-seo", "meta-tags-comparison"]
 heroImage: "/images/open-graph-vs-twitter-card-hero.webp"
 heroAlt: "Technical diagram comparing OpenGraph and Twitter Card meta tag properties"

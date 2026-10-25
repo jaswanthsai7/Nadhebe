@@ -1376,6 +1376,84 @@ export const TOOL_RICH_CONTENT: Record<string, ToolRichContent> = {
     ],
   },
 
+  'escape-helper': {
+    intro: 'Escape Helper sanitizes and encodes raw strings for safe insertion into HTML, JavaScript, SQL, URL query strings, and regular expressions. Protect your frontend and backend applications from injection vulnerabilities by verifying string escaping locally in your browser.',
+    useCases: [
+      'Escape user input before rendering inside HTML templates to prevent Cross-Site Scripting (XSS)',
+      'Prepare JSON and JavaScript strings with escaped quotes, backslashes, and control characters',
+      'Format URL query parameters with RFC 3986 percent-encoding',
+      'Sanitize string literals before constructing database queries or regex patterns',
+    ],
+    howItWorks: 'Paste your raw text into the editor. The tool applies standard entity and character replacement tables (e.g. & to &amp;, < to &lt;, " to &quot;, and regex metacharacter prefixing) and outputs the escaped representation instantly without server transmission.',
+    example: {
+      input: '<script>alert("Nadhebe & security");</script>',
+      output: '&lt;script&gt;alert(&quot;Nadhebe &amp; security&quot;);&lt;/script&gt;',
+      label: 'HTML Entity Escaping',
+    },
+    faq: [
+      {
+        question: 'Which characters are escaped by default?',
+        answer: 'HTML escaping converts ampersands (&), less-than (<), greater-than (>), double quotes ("), and single quotes (\') to their respective HTML entities.',
+      },
+      {
+        question: 'Does this tool send my text to any server?',
+        answer: 'No. All escaping transformations run 100% locally in your browser via client-side JavaScript.',
+      },
+    ],
+  },
+
+  'color-scale-generator': {
+    intro: 'Color Scale Generator creates harmonious, accessible multi-step color shades and tints from any base hex, RGB, or HSL color code. Generate Tailwind CSS color palettes, UI design token ramps, and data visualization gradients with calculated contrast ratios.',
+    useCases: [
+      'Build 50 to 950 color shade ramps for Tailwind CSS theme configurations',
+      'Design accessible button states (hover, active, focus, disabled) from a brand hex code',
+      'Generate sequential color gradients for charts, heatmaps, and dashboard visualizations',
+      'Verify WCAG contrast compliance across light and dark mode surfaces',
+    ],
+    howItWorks: 'Enter a hex color code (e.g. #D97706). The tool converts the color to HSL space, modulates lightness and saturation across 10 calibrated tiers (50 through 900), and outputs clean hex values with copyable Tailwind and CSS variable snippets.',
+    example: {
+      input: '#D97706',
+      output: '50: #FFFBEB\n100: #FEF3C7\n200: #FDE68A\n500: #D97706 (Base)\n700: #B45309\n900: #78350F',
+      label: 'Generated Amber Scale',
+    },
+    faq: [
+      {
+        question: 'Can I export the generated scale to Tailwind CSS?',
+        answer: 'Yes. You can copy the generated color scale formatted directly as a Tailwind config object or as standard CSS custom properties.',
+      },
+      {
+        question: 'How are the tints and shades calculated?',
+        answer: 'The tool calculates perceptual lightness curves in HSL space, preserving the hue while adjusting lightness and chroma to maintain consistent visual balance across steps.',
+      },
+    ],
+  },
+
+  'curl-builder': {
+    intro: 'cURL Builder transforms API endpoints, HTTP methods, headers, and request bodies into clean, executable terminal cURL commands. Test and document RESTful API requests with copyable multi-line commands for macOS, Linux, and Windows PowerShell.',
+    useCases: [
+      'Convert API documentation payloads into copy-paste cURL terminal commands',
+      'Add Authorization Bearer tokens and custom headers to API test requests',
+      'Construct POST, PUT, PATCH, and DELETE requests with formatted JSON payloads',
+      'Troubleshoot API integrations by testing requests directly from the terminal',
+    ],
+    howItWorks: 'Input the HTTP method, endpoint URL, header key-values, and request body. The builder formats the command using standard cURL flags (-X for method, -H for headers, -d for data payload) and provides shell-safe escaping.',
+    example: {
+      input: 'POST https://api.example.com/v1/data\nHeader: Authorization: Bearer token_xyz\nBody: {"status":"active"}',
+      output: 'curl -X POST "https://api.example.com/v1/data" \\\n  -H "Authorization: Bearer token_xyz" \\\n  -d \'{"status":"active"}\'',
+      label: 'Generated cURL Command',
+    },
+    faq: [
+      {
+        question: 'Does this cURL command work in Windows PowerShell?',
+        answer: 'Yes. In PowerShell, use curl.exe or standard single-quote string formatting to prevent variable expansion.',
+      },
+      {
+        question: 'Are my API keys or tokens recorded?',
+        answer: 'No. The builder operates strictly client-side in your browser. No tokens, URLs, or headers are ever stored or transmitted to external servers.',
+      },
+    ],
+  },
+
 };
 
 

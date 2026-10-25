@@ -3,7 +3,7 @@ title: "Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide"
 description: "Hardware setup tutorial to run Qwen 3.5 27B locally on consumer GPUs. Includes INT4 GGUF quantization, FlashAttention-2 compilation, and multi-GPU tensor parallelism."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["Qwen 3.5", "Local LLM", "Consumer GPU", "FlashAttention-2", "Ollama", "VRAM Optimization", "vLLM"]
 heroImage: "/images/qwen-3-5-27b-consumer-gpu-setup-hero.webp"
 heroAlt: "Vintage editorial collage illustration showing GPU hardware benchmarks and inference performance metrics"

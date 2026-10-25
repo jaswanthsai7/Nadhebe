@@ -94,6 +94,18 @@ function buildCategoryTools(category: ToolRoadmapCategory): PlatformTool[] {
 
 export const PLATFORM_TOOLS: PlatformTool[] = [
   {
+    id: "chatgpt-ad-blocker",
+    name: "ChatGPT Ad Blocker",
+    slug: "chatgpt-ad-blocker",
+    description: "Lightweight Manifest V3 Chrome extension and rule customizer to remove upgrade banners, partner ads, and promo cards on chatgpt.com.",
+    href: "/tools/chatgpt-ad-blocker/",
+    category: "AI",
+    categorySlug: "ai",
+    mode: "generator",
+    badge: "New",
+    tags: ["chatgpt", "adblocker", "extension", "privacy", "chrome"],
+  },
+  {
     id: "mcp-server-config-generator",
     name: "MCP Server Config Generator",
     slug: "mcp-server-config-generator",

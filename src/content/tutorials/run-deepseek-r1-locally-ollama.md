@@ -3,7 +3,7 @@ title: "How to Run DeepSeek R1 Locally with Ollama: Complete Guide"
 description: "Complete developer setup guide to run DeepSeek R1 locally using Ollama. Includes VRAM memory formulas, GGUF quantization comparisons, CLI integration, and ChromaDB Python code."
 pubDate: 2026-08-06
 author: nadhebe-team
-category: "tutorials"
+category: "Tutorials"
 tags: ["DeepSeek R1", "Ollama", "Local LLM", "AI Engineering", "VRAM Optimization", "ChromaDB"]
 heroImage: "/images/run-deepseek-r1-locally-ollama-hero.png"
 heroAlt: "Vintage editorial collage illustration showing a terminal prompt and LLM chip on a sage green background"

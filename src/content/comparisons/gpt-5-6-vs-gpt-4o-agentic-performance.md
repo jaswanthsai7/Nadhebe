@@ -2,7 +2,7 @@
 title: "GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison"
 description: "A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety."
 pubDate: 2026-07-17
-author: alice-chen
+author: nadhebe-team
 category: Comparisons
 tags: ["gpt-5.6", "gpt-4o", "comparisons", "benchmarks", "models"]
 heroImage: "/images/gpt-comparison.webp"

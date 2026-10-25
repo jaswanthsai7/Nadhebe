@@ -42,6 +42,9 @@ const seo = {
   twitterDescription: 'AI insights, architectural breakdowns, and prompt engineering.',
   twitterImage: `${SITE.url}/og-default.png`,
   robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+  keywords: 'ai engineering, developer tools, prompt engineering, machine learning guides',
+  ogImageAlt: 'Nadhebe Journal',
+  locale: 'en_US',
 };
 
 const breadcrumbLd = {
@@ -202,7 +205,7 @@ const collectionLd = {
                     <a href={url} tabindex="-1" aria-hidden="true" class="shrink-0 self-start mt-4">
                       <img
                         src={article.data.heroImage}
-                        alt={article.data.heroAlt ?? article.data.title}
+                        alt={(article.data as any).heroAlt ?? article.data.title}
                         width="160" height="107"
                         class="w-[84px] h-[84px] sm:w-[150px] sm:h-[100px] object-cover rounded-4 shadow-subtle block border border-border/40 dark:border-border-dark/40"
                         loading={idx < 4 ? 'eager' : 'lazy'}
@@ -249,9 +252,9 @@ const collectionLd = {
               <a href="/guides" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Guides</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
               <a href="/tutorials" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Tutorials</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
               <a href="/comparisons" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Comparisons</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-              <a href="/case-studies" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Case Studies</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/guides" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Case Studies</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
               <a href="/best-practices" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Best Practices</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-              <a href="/frameworks" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Frameworks</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+              <a href="/guides" class="text-ink2 dark:text-ink2-dark hover:text-ink dark:hover:text-ink-dark transition-colors flex items-center justify-between"><span>Frameworks</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
             </div>
           </div>
 

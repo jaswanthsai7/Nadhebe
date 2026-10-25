@@ -3,7 +3,7 @@ title: "How to Fix Common Meta Tag Errors: Audit & Resolution Guide"
 description: "Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "SEO Best Practices"
+category: "Best Practices"
 tags: ["seo-errors", "meta-tag-fixes", "troubleshooting", "opengraph-fix", "canonical-tags"]
 heroImage: "/images/fix-common-meta-tag-errors-hero.webp"
 heroAlt: "Developer debugging HTML metadata errors using an audit checklist"

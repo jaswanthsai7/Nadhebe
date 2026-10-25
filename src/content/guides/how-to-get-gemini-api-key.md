@@ -2,8 +2,8 @@
 title: "How to Get a Gemini API Key (2026 Developer Setup Guide)"
 description: "Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications."
 pubDate: 2026-07-26
-author: "nadhebe-team"
-category: "guides"
+author: nadhebe-team
+category: "Guides"
 tags: ["gemini-api", "google-ai", "api-key", "developer-tools", "python", "javascript"]
 heroImage: "/images/gemini-api-key-hero.webp"
 heroAlt: "Clean minimalist technical diagram of Gemini API Key authorization"

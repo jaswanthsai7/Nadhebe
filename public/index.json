@@ -1,8 +1,288 @@
 [
   {
+    "title": "Generative Engine Optimization (GEO)",
+    "description": "Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.",
+    "url": "https://nadhebe.com/skills/ai-seo/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"ai-seo\", \"agent-skills\", \"claude-code\", \"mcp\", \"ai search\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Technical Blog Engine & Verification Pipeline",
+    "description": "Generate production-ready, expert-level technical AI engineering articles with GEO/AEO direct answer blocks, factual checks, and build verification.",
+    "url": "https://nadhebe.com/skills/blog-generator/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"blog-generator\", \"agent-skills\", \"claude-code\", \"mcp\", \"ai publishing\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Topical Authority & Content Clustering",
+    "description": "Map topical authority architectures, pillar articles, and supporting cluster pages to build search dominance without keyword cannibalization.",
+    "url": "https://nadhebe.com/skills/content-cluster/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"content-cluster\", \"agent-skills\", \"claude-code\", \"mcp\", \"content strategy\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Helpful Content & E-E-A-T Quality Auditor",
+    "description": "Audit technical articles for Google Helpful Content guidelines, technical SEO, GEO/AEO answer extractability, factual accuracy, and publishing readiness.",
+    "url": "https://nadhebe.com/skills/content-quality-auditor/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"content-quality-auditor\", \"agent-skills\", \"claude-code\", \"mcp\", \"qa & compliance\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Anchor Distribution & Graph Linker",
+    "description": "Design, audit, and optimize internal linking hierarchies, anchor text distribution, and topic cluster equity.",
+    "url": "https://nadhebe.com/skills/internal-linking/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"internal-linking\", \"agent-skills\", \"claude-code\", \"mcp\", \"technical seo\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Technical Keyword Research & Intent Mapping",
+    "description": "Perform developer-focused keyword research, search intent mapping, and conversational AEO query discovery.",
+    "url": "https://nadhebe.com/skills/keyword-research/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"keyword-research\", \"agent-skills\", \"claude-code\", \"mcp\", \"seo\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Schema.org Rich Structured Data Engine",
+    "description": "Generate and validate Schema.org JSON-LD structured data (Article, TechArticle, FAQPage, BreadcrumbList, WebApplication) for Google rich results.",
+    "url": "https://nadhebe.com/skills/schema-generator/",
+    "category": "Agent Skills",
+    "tags": [
+      "[\"schema-generator\", \"agent-skills\", \"claude-code\", \"mcp\", \"technical seo\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "How to Build a Custom MCP Server in TypeScript: Complete Production Guide | Nadhebe",
+    "description": "Build and test a custom Model Context Protocol (MCP) server in TypeScript from scratch. Includes verified ESM configuration, Zod validation, STDIO debugging, and Claude Desktop integration.",
+    "url": "https://nadhebe.com/tutorials/build-custom-mcp-server-typescript/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"MCP\", \"TypeScript\", \"Node.js\", \"Claude Desktop\", \"AI Engineering\", \"JSON-RPC\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe",
+    "description": "Step-by-step walkthrough to block ChatGPT Plus upsell banners and partner promo cards in Google Chrome and Brave Browser using a private Manifest V3 extension.",
+    "url": "https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"ChatGPT Ad Blocker\", \"Tutorial\", \"Chrome Extension\", \"Brave Browser\", \"ChatGPT Promos\", \"Web Development\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs | Nadhebe",
+    "description": "Compare ChatGPT Ad & Promo Blocker against uBlock Origin and Brave Shields. Learn why network-level filters miss React DOM ads and how to fix them.",
+    "url": "https://nadhebe.com/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields/",
+    "category": "Comparisons",
+    "tags": [
+      "[\"ChatGPT Ad Blocker\", \"uBlock Origin\", \"Brave Shields\", \"Ad Blocking\", \"Comparison\", \"Web Architecture\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave | Nadhebe",
+    "description": "Block intrusive ChatGPT Plus/Pro upgrade banners, sponsored partner widgets, and promo cards in Chrome and Brave with a lightweight, private Manifest V3 extension.",
+    "url": "https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-brave-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"ChatGPT Ad Blocker\", \"Chrome Extension\", \"Brave Browser\", \"ChatGPT Promos\", \"Ad Blocking\", \"Manifest V3\", \"Privacy\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)",
+    "description": "Complete guide to DeepSeek API pricing. Detailed breakdown of DeepSeek-V3, DeepSeek-R1 token rates, prompt caching discounts, and costs vs OpenAI.",
+    "url": "https://nadhebe.com/guides/deepseek-api-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"DeepSeek\", \"DeepSeek R1\", \"DeepSeek V3\", \"Pricing\", \"API Billing\", \"LLM Costs\", \"Open Source AI\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "GitHub Copilot Pricing Guide: Free, Individual, Business, and Enterprise Plans (2026)",
+    "description": "A complete guide to GitHub Copilot pricing tiers. Breakdown of Copilot Free, Individual $10/mo, Business $19/mo, and Enterprise $39/mo model features.",
+    "url": "https://nadhebe.com/guides/github-copilot-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"GitHub Copilot\", \"Pricing\", \"AI Coding\", \"Developer Tools\", \"Claude 3.7 Sonnet\", \"GPT-4o\", \"Copilot Enterprise\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "xAI Grok Pricing Guide: X Subscriptions, SuperGrok, and Grok API Rates (2026)",
+    "description": "A complete guide to xAI Grok pricing. Compare X Premium $8/mo, X Premium+ $16/mo, SuperGrok, and xAI Developer API token costs for Grok 2 and Grok 3.",
+    "url": "https://nadhebe.com/guides/grok-xai-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"xAI\", \"Grok\", \"Pricing\", \"Grok 2\", \"Grok API\", \"SuperGrok\", \"AI Tool Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Mistral AI Pricing Guide: Le Chat Pro, API Token Rates, and Open Weights (2026)",
+    "description": "A complete guide to Mistral AI pricing. Compare Le Chat Pro $9.99/mo, La Plateforme API token costs for Mistral Large 2, Codestral, and open-weight models.",
+    "url": "https://nadhebe.com/guides/mistral-ai-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"Mistral AI\", \"Pricing\", \"Codestral\", \"Mistral Large\", \"Le Chat Pro\", \"API Billing\", \"Open Weights\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "OpenAI API & ChatGPT Pricing Guide: Models, Tiers, and Cost Management (2026)",
+    "description": "A complete guide to OpenAI API token costs and ChatGPT subscription tiers. Breakdown of GPT-4o, o1, o3-mini pricing, prompt caching, and Batch API savings.",
+    "url": "https://nadhebe.com/guides/openai-chatgpt-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"OpenAI\", \"ChatGPT\", \"Pricing\", \"GPT-4o\", \"o1\", \"o3-mini\", \"API Billing\", \"LLM Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Perplexity AI Pricing Guide: Free vs Pro, Enterprise, and Sonar API Costs (2026)",
+    "description": "A complete guide to Perplexity AI pricing. Compare Perplexity Free, Pro $20/mo, Enterprise Pro, and Sonar API search token costs with live web grounding.",
+    "url": "https://nadhebe.com/guides/perplexity-ai-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"Perplexity AI\", \"Pricing\", \"Perplexity Pro\", \"Sonar API\", \"Search LLMs\", \"AI Tool Costs\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "Windsurf Pricing Guide: Free vs Pro, Cascade Flows, and Team Billing (2026)",
+    "description": "A complete guide to Windsurf IDE pricing by Codeium. Compare Free, Pro $15/mo, Teams, and Enterprise plans, Cascade flow credits, and AI models.",
+    "url": "https://nadhebe.com/guides/windsurf-codeium-pricing-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"Windsurf\", \"Codeium\", \"Pricing\", \"AI IDE\", \"Cascade\", \"Developer Tools\", \"Claude 3.7 Sonnet\"]"
+    ],
+    "pubDate": "2026-10-10T00:00:00.000Z"
+  },
+  {
+    "title": "BiliBili English Translation Chrome Extension: Real-Time In-Page Translation Guide | Nadhebe",
+    "description": "Complete walkthrough for installing and configuring the BiliBili English Translator Chrome extension. Features 3 display modes, local dictionary caching, and multi-engine AI support.",
+    "url": "https://nadhebe.com/guides/bilibili-english-translation-chrome-extension-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"Bilibili Translator\", \"Chrome Web Store\", \"Browser Extension\", \"Multi-Language Translation\", \"Vue 3 Hydration\", \"Local LLM\", \"Danmaku Isolation\"]"
+    ],
+    "pubDate": "2026-09-19T00:00:00.000Z"
+  },
+  {
+    "title": "ChatGPT Ad Blocker Chrome Extension: Clean Upsells, Promos & Sponsored Cards | Nadhebe",
+    "description": "Complete guide to decluttering chatgpt.com with a privacy-first Manifest V3 Chrome extension. Block Plus/Pro upgrade nags, sponsored cards, and inline promo banners.",
+    "url": "https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-extension-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"ChatGPT Ad Blocker\", \"Browser Extension\", \"Chrome Web Store\", \"Manifest V3\", \"UI Decluttering\", \"Productivity\", \"Web Development\"]"
+    ],
+    "pubDate": "2026-09-19T00:00:00.000Z"
+  },
+  {
+    "title": "Bilibili Translator: Real-Time Universal In-Place Translation in All Languages | Nadhebe",
+    "description": "Translate Bilibili into any language in real time across all browsers. Features in-place DOM replacement, 0ms local dictionaries, and Danmaku isolation.",
+    "url": "https://nadhebe.com/guides/bilibili-chrome-in-place-translator-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"Bilibili Translator\", \"Browser Extension\", \"Multi-Language Translation\", \"Vue 3 Hydration\", \"DOM Manipulation\", \"Web Development\", \"Danmaku Isolation\", \"Manifest V3\"]"
+    ],
+    "pubDate": "2026-08-31T00:00:00.000Z"
+  },
+  {
+    "title": "Fine-Tuning DeepSeek-R1 Distill with Unsloth on Consumer GPUs: Complete Walkthrough",
+    "description": "Step-by-step guide to fine-tuning DeepSeek-R1 Distill reasoning models on a single 16GB or 24GB GPU using Unsloth 2x faster kernels, QLoRA, and GGUF export.",
+    "url": "https://nadhebe.com/tutorials/fine-tune-deepseek-r1-unsloth-gpu/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"deepseek-r1\", \"unsloth\", \"fine-tuning\", \"qlora\", \"gpu\", \"ollama\", \"tutorials\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Kokoro TTS vs ElevenLabs: Self-Hosting Ultra-Realistic 82M Voice AI for $0",
+    "description": "Compare Kokoro TTS 82M open-source speech model with ElevenLabs. Benchmark latency, audio quality, self-hosting Docker setup, and cloud API cost savings.",
+    "url": "https://nadhebe.com/comparisons/kokoro-tts-vs-elevenlabs/",
+    "category": "Comparisons",
+    "tags": [
+      "[\"kokoro-tts\", \"elevenlabs\", \"text-to-speech\", \"voice-ai\", \"self-hosting\", \"docker\", \"comparisons\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents",
+    "description": "Compare Mem0, Microsoft GraphRAG, and traditional Vector RAG for AI agent memory. Benchmark multi-hop reasoning, latency, update costs, and state persistence.",
+    "url": "https://nadhebe.com/comparisons/mem0-vs-graphrag-vs-vector-rag/",
+    "category": "Comparisons",
+    "tags": [
+      "[\"mem0\", \"graphrag\", \"vector-rag\", \"agentic-ai\", \"rag\", \"long-term-memory\", \"comparisons\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Claude 3.7 Sonnet Hybrid Reasoning: When to Use Thinking Tokens vs Standard Fast Mode",
+    "description": "Master Claude 3.7 Sonnet's hybrid reasoning architecture. Learn how to configure dynamic thinking budgets, benchmark against o3-mini, and optimize API costs.",
+    "url": "https://nadhebe.com/guides/claude-3-7-sonnet-hybrid-reasoning-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"claude-3-7\", \"anthropic\", \"hybrid-reasoning\", \"extended-thinking\", \"llm-benchmarks\", \"prompt-engineering\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "Speculative Decoding in vLLM & SGLang: 3x LLM Inference Speedup Guide",
+    "description": "Accelerate LLM inference throughput and reduce latency by up to 3x using speculative decoding, draft models, and Medusa heads in vLLM and SGLang.",
+    "url": "https://nadhebe.com/guides/speculative-decoding-vllm-sglang-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"speculative-decoding\", \"vllm\", \"sglang\", \"llm-inference\", \"performance\", \"gpu-optimization\", \"guides\"]"
+    ],
+    "pubDate": "2026-08-29T00:00:00.000Z"
+  },
+  {
+    "title": "How to Create AI Influencer Video Ads with ChatGPT & Google Flow: 3-Scene Visual Continuity Guide",
+    "description": "Master step-by-step workflow for generating photorealistic AI characters in ChatGPT and directing 30-second multi-scene video ads in Google Flow with zero drift.",
+    "url": "https://nadhebe.com/tutorials/ai-character-video-ads-google-flow-chatgpt/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"google-flow\", \"ai-video\", \"chatgpt\", \"prompts\", \"video-ads\", \"tutorials\"]"
+    ],
+    "pubDate": "2026-08-09T00:00:00.000Z"
+  },
+  {
+    "title": "How to Create AI Influencer Presenters with ChatGPT & Google Flow Omni: Long-Form YouTube Guide",
+    "description": "Step-by-step tutorial on rendering photorealistic AI character portraits with ChatGPT and generating continuous long-form YouTube presenter videos in Google Flow Omni.",
+    "url": "https://nadhebe.com/tutorials/google-flow-omni-ai-influencer-presenter-guide/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"google-flow\", \"ai-video\", \"chatgpt\", \"prompts\", \"youtube-automation\", \"tutorials\"]"
+    ],
+    "pubDate": "2026-08-09T00:00:00.000Z"
+  },
+  {
     "title": "NotebookLM Audio Overviews & Source Grounding Developer Tutorial",
     "description": "Learn how to build, customize, and steer Google NotebookLM Audio Overviews, synthesize multi-document knowledge graphs, and enforce strict source attribution.",
-    "url": "https://nadhebe.com/tutorials/notebooklm-audio-overviews-source-grounding-tutorial",
+    "url": "https://nadhebe.com/tutorials/notebooklm-audio-overviews-source-grounding-tutorial/",
     "category": "Tutorials",
     "tags": [
       "[\"notebooklm\", \"google-ai\", \"rag\", \"audio-overviews\", \"source-grounding\", \"knowledge-synthesis\"]"
@@ -12,7 +292,7 @@
   {
     "title": "Google AI Studio System Prompts & Structured Outputs Architecture Guide",
     "description": "A comprehensive guide on configuring system instructions, JSON Schema structured outputs, function calling, and temperature parameters in Google AI Studio for production AI applications.",
-    "url": "https://nadhebe.com/guides/google-ai-studio-system-prompts-structured-output-guide",
+    "url": "https://nadhebe.com/guides/google-ai-studio-system-prompts-structured-output-guide/",
     "category": "Guides",
     "tags": [
       "[\"google-ai-studio\", \"gemini-api\", \"structured-outputs\", \"system-prompts\", \"pydantic\", \"json-schema\"]"
@@ -22,7 +302,7 @@
   {
     "title": "Generative Engine Optimization (GEO): Technical Architecture and Ranking Protocols",
     "description": "Definitive technical guide to Generative Engine Optimization (GEO). Learn RAG grounding mechanics, query fan-out deconstruction, JSON-LD schema engineering, and AI overview audit protocols.",
-    "url": "https://nadhebe.com/guides/generative-engine-optimization-geo-guide",
+    "url": "https://nadhebe.com/guides/generative-engine-optimization-geo-guide/",
     "category": "Guides",
     "tags": [
       "[\"Generative Engine Optimization\", \"GEO\", \"SEO Strategy\", \"RAG Grounding\", \"JSON-LD Schema\", \"AI Overviews\", \"Search Architecture\"]"
@@ -32,7 +312,7 @@
   {
     "title": "Self-Hosting LLMs vs API Costs: Break-Even Math Guide",
     "description": "Comprehensive financial math guide for self-hosting LLMs versus using cloud APIs. Includes GPU TCO formulas, break-even token volume curves, and server energy cost analysis.",
-    "url": "https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown",
+    "url": "https://nadhebe.com/guides/self-hosting-llms-vs-api-cost-breakdown/",
     "category": "Guides",
     "tags": [
       "[\"LLM Self-Hosting\", \"Cloud API Costs\", \"GPU Infrastructure\", \"vLLM\", \"Cost Optimization\", \"FinOps\", \"Enterprise AI\"]"
@@ -42,7 +322,7 @@
   {
     "title": "How to Build Local Agentic RAG Workflows using LangGraph and Ollama",
     "description": "Step-by-step developer tutorial to build stateful agentic RAG workflows using LangGraph, Ollama, and ChromaDB locally without cloud API keys.",
-    "url": "https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph",
+    "url": "https://nadhebe.com/tutorials/agentic-rag-workflows-langgraph/",
     "category": "Tutorials",
     "tags": [
       "[\"LangGraph\", \"Agentic RAG\", \"Ollama\", \"ChromaDB\", \"Python\", \"Local AI\", \"AI Agents\"]"
@@ -52,7 +332,7 @@
   {
     "title": "Deploying DeepSeek-OCR on Local GPUs for High-Volume Data Pipelines",
     "description": "Step-by-step tutorial to deploy DeepSeek-OCR locally on GPUs for document extraction. Includes context compression math, PyTorch pipelines, layout parsing, and Docker configs.",
-    "url": "https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment",
+    "url": "https://nadhebe.com/tutorials/deepseek-ocr-local-gpu-deployment/",
     "category": "Tutorials",
     "tags": [
       "[\"DeepSeek-OCR\", \"Vision AI\", \"PyTorch\", \"Local GPU\", \"Document Processing\", \"Docker\", \"Data Pipelines\"]"
@@ -62,7 +342,7 @@
   {
     "title": "Model Context Protocol (MCP) Architecture and Production API Tutorial",
     "description": "Comprehensive developer tutorial on Model Context Protocol (MCP) architecture. Learn JSON-RPC schema transport over stdio/SSE, tool definition syntax, and Python implementation.",
-    "url": "https://nadhebe.com/tutorials/model-context-protocol-mcp-guide",
+    "url": "https://nadhebe.com/tutorials/model-context-protocol-mcp-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"Model Context Protocol\", \"MCP\", \"AI Infrastructure\", \"Claude Code\", \"Python\", \"JSON-RPC\", \"API Architecture\"]"
@@ -72,7 +352,7 @@
   {
     "title": "Running Qwen 3.5 27B on Consumer GPUs: VRAM Setup Guide",
     "description": "Hardware setup tutorial to run Qwen 3.5 27B locally on consumer GPUs. Includes INT4 GGUF quantization, FlashAttention-2 compilation, and multi-GPU tensor parallelism.",
-    "url": "https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup",
+    "url": "https://nadhebe.com/tutorials/qwen-3-5-27b-consumer-gpu-setup/",
     "category": "Tutorials",
     "tags": [
       "[\"Qwen 3.5\", \"Local LLM\", \"Consumer GPU\", \"FlashAttention-2\", \"Ollama\", \"VRAM Optimization\", \"vLLM\"]"
@@ -82,7 +362,7 @@
   {
     "title": "How to Run DeepSeek R1 Locally with Ollama: Complete Guide",
     "description": "Complete developer setup guide to run DeepSeek R1 locally using Ollama. Includes VRAM memory formulas, GGUF quantization comparisons, CLI integration, and ChromaDB Python code.",
-    "url": "https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama",
+    "url": "https://nadhebe.com/tutorials/run-deepseek-r1-locally-ollama/",
     "category": "Tutorials",
     "tags": [
       "[\"DeepSeek R1\", \"Ollama\", \"Local LLM\", \"AI Engineering\", \"VRAM Optimization\", \"ChromaDB\"]"
@@ -92,7 +372,7 @@
   {
     "title": "Running Flux.1 Local Image Generation on Consumer GPUs",
     "description": "Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup.",
-    "url": "https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu",
+    "url": "https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu/",
     "category": "Tutorials",
     "tags": [
       "[\"Flux.1\", \"ComfyUI\", \"Local AI\", \"Consumer GPU\", \"Image Generation\", \"NF4 Quantization\", \"Diffusion Models\"]"
@@ -102,7 +382,7 @@
   {
     "title": "Optimizing KV Cache Utilization in vLLM Production Clusters",
     "description": "Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs.",
-    "url": "https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide",
+    "url": "https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"vLLM\", \"KV Cache\", \"PagedAttention\", \"GPU Optimization\", \"Python\", \"Kubernetes\", \"AI Infrastructure\"]"
@@ -112,7 +392,7 @@
   {
     "title": "DeepSeek V4 vs OpenAI o3-mini vs Claude 3.7 Sonnet Benchmark",
     "description": "Head-to-head benchmark comparison of frontier AI reasoning models: DeepSeek V4, OpenAI o3-mini, and Claude 3.7 Sonnet. Evaluates coding pass rates, math accuracy, and API pricing.",
-    "url": "https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude",
+    "url": "https://nadhebe.com/comparisons/deepseek-v4-vs-o3-mini-vs-claude/",
     "category": "Comparisons",
     "tags": [
       "[\"DeepSeek V4\", \"OpenAI o3-mini\", \"Claude 3.7 Sonnet\", \"AI Benchmarks\", \"Reasoning Models\", \"Code Generation\", \"Model Comparison\"]"
@@ -122,7 +402,7 @@
   {
     "title": "NVIDIA Blackwell B200 vs Hopper H200 LLM Inference Analysis",
     "description": "Architectural benchmark comparison of NVIDIA Blackwell B200 vs Hopper H200 for LLM inference. Evaluates HBM3e memory bandwidth, FP4 FLOPS throughput, and TCO.",
-    "url": "https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference",
+    "url": "https://nadhebe.com/comparisons/nvidia-b200-vs-h200-llm-inference/",
     "category": "Comparisons",
     "tags": [
       "[\"NVIDIA B200\", \"NVIDIA H200\", \"Blackwell\", \"Hopper\", \"GPU Benchmarks\", \"LLM Inference\", \"HBM3e\", \"AI Hardware\"]"
@@ -130,1009 +410,9 @@
     "pubDate": "2026-08-06T00:00:00.000Z"
   },
   {
-    "title": "16 9 Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online 16 9 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/16-9-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"16 9 Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "9 16 Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online 9 16 Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/9-16-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"9 16 Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ai Api Pricing Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Ai Api Pricing Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ai-api-pricing-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ai Api Pricing Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ai Persona Prompt Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Ai Persona Prompt Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ai-persona-prompt-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ai Persona Prompt Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Api Payload Builder | Nadhebe Developer Tools",
-    "description": "Interactive online Api Payload Builder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/api-payload-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Api Payload Builder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Aspect Ratio Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Aspect Ratio Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/aspect-ratio-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Aspect Ratio Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Average Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Average Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/average-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Average Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Base64 Encoder | Nadhebe Developer Tools",
-    "description": "Interactive online Base64 Encoder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/base64-encoder",
-    "category": "Tools",
-    "tags": [
-      "[\"Base64 Encoder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Batch Inference Cost Estimator | Nadhebe Developer Tools",
-    "description": "Interactive online Batch Inference Cost Estimator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/batch-inference-cost-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Batch Inference Cost Estimator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Developer Profile & Author Bio Formatter | Nadhebe",
-    "description": "Format short social bios, GitHub profile README intros, and author descriptions with word and character count limits.",
-    "url": "https://nadhebe.com/tools/bio-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Bio Generator\",\"GitHub Profile\",\"Social Media\",\"Formatting\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "SaaS CAC Payback Period & LTV:CAC Calculator",
-    "description": "Interactive calculator tool for SaaS CAC payback period in months, gross-margin adjusted payback, customer lifetime value (LTV), and LTV:CAC ratio.",
-    "url": "https://nadhebe.com/tools/cac-payback-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"CAC Payback\", \"SaaS Metrics\", \"Unit Economics\", \"LTV:CAC\", \"Business Calculator\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cac Payback | Nadhebe Developer Tools",
-    "description": "Interactive online Cac Payback tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cac-payback",
-    "category": "Tools",
-    "tags": [
-      "[\"Cac Payback\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Case Converter | Nadhebe Developer Tools",
-    "description": "Interactive online Case Converter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/case-converter",
-    "category": "Tools",
-    "tags": [
-      "[\"Case Converter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Keep a Changelog Markdown Generator | Nadhebe",
-    "description": "Generate clean Keep a Changelog markdown files with Added, Changed, Fixed, Security, and Deprecated sections.",
-    "url": "https://nadhebe.com/tools/changelog-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Changelog\",\"Markdown\",\"Release Notes\",\"Open Source\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "YouTube & Podcast Chapter Timestamp Formatter | Nadhebe",
-    "description": "Format chapter timestamps for YouTube videos, podcasts, and audio courses with automatic time validation.",
-    "url": "https://nadhebe.com/tools/chapter-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"YouTube\",\"Timestamps\",\"Podcast\",\"Video Editing\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Interactive Task & Deployment Checklist Builder | Nadhebe",
-    "description": "Build interactive pre-flight deployment checklists, QA test plans, and release procedures with export options.",
-    "url": "https://nadhebe.com/tools/checklist-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Checklist\",\"Deployment\",\"QA Testing\",\"DevOps\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "RAG Text Chunking & Overlap Size Planner | Nadhebe",
-    "description": "Calculate token counts, chunk overlap percentages, and vector embedding storage sizes for LLM RAG pipelines.",
-    "url": "https://nadhebe.com/tools/chunk-size-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"RAG\",\"Chunking\",\"Vector Database\",\"Embeddings\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "APA, MLA & BibTeX Technical Citation Generator | Nadhebe",
-    "description": "Format technical citations in APA, MLA, Chicago, IEEE, and BibTeX styles for research papers and developer blogs.",
-    "url": "https://nadhebe.com/tools/citation-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Citations\",\"APA\",\"BibTeX\",\"IEEE\",\"Research\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Claude Desktop Mcp Config Maker | Nadhebe Developer Tools",
-    "description": "Interactive online Claude Desktop Mcp Config Maker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/claude-desktop-mcp-config-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Claude Desktop Mcp Config Maker\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Claude Hook Template Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Claude Hook Template Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/claude-hook-template-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Claude Hook Template Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cumulative Layout Shift (CLS) Optimization Checklist | Nadhebe",
-    "description": "Audit and optimize Cumulative Layout Shift (CLS) issues, web font loading, image aspect ratios, and dynamic DOM shifts.",
-    "url": "https://nadhebe.com/tools/cls-checklist",
-    "category": "Tools",
-    "tags": [
-      "[\"Core Web Vitals\",\"CLS\",\"Page Speed\",\"Performance\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Color Contrast Checker | Nadhebe Developer Tools",
-    "description": "Interactive online Color Contrast Checker tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/color-contrast-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Color Contrast Checker\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Column Extractor | Nadhebe",
-    "description": "Extract specific columns from raw CSV data by header selection.",
-    "url": "https://nadhebe.com/tools/column-extractor",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Column Statistics Profiler | Nadhebe",
-    "description": "Compute column-level statistics, min/max values, and unique counts.",
-    "url": "https://nadhebe.com/tools/column-profiler",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Compound Interest | Nadhebe Developer Tools",
-    "description": "Interactive online Compound Interest tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/compound-interest",
-    "category": "Tools",
-    "tags": [
-      "[\"Compound Interest\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "LLM Context Window Budget Planner | Nadhebe",
-    "description": "Calculate prompt context budget allocation across system instructions, user history, RAG chunks, and output headroom.",
-    "url": "https://nadhebe.com/tools/context-budget-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"Context Window\",\"LLM Budget\",\"Tokens\",\"Prompt Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cosine Similarity Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Cosine Similarity Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cosine-similarity-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Cosine Similarity Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cron Explainer | Nadhebe Developer Tools",
-    "description": "Interactive online Cron Explainer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cron-explainer",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron Explainer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Cron Next Run Viewer | Nadhebe Developer Tools",
-    "description": "Interactive online Cron Next Run Viewer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/cron-next-run-viewer",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron Next Run Viewer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Css Clamp Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Css Clamp Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/css-clamp-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Css Clamp Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Visual CSV Grid Table Builder | Nadhebe",
-    "description": "Build and edit CSV files visually in your browser with table controls.",
-    "url": "https://nadhebe.com/tools/csv-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Delimiter & Column Balance Checker | Nadhebe",
-    "description": "Audit CSV files line-by-line for mismatched column counts.",
-    "url": "https://nadhebe.com/tools/csv-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Sanitizer & Blank Line Cleaner | Nadhebe",
-    "description": "Strip blank lines, trim cell whitespace, and normalize quotes in CSV data.",
-    "url": "https://nadhebe.com/tools/csv-cleaner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Csv Deduper | Nadhebe Developer Tools",
-    "description": "Interactive online Csv Deduper tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/csv-deduper",
-    "category": "Tools",
-    "tags": [
-      "[\"Csv Deduper\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Row Count & Parse Speed Estimator | Nadhebe",
-    "description": "Estimate total row counts, uncompressed byte sizes, and web parsing throughput for raw CSV payloads.",
-    "url": "https://nadhebe.com/tools/csv-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV Estimator\",\"Performance\",\"Row Counter\",\"File Size\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Encoding & Line Ending Inspector | Nadhebe",
-    "description": "Inspect CSV text encoding, line breaks (CRLF vs LF), and quote syntax.",
-    "url": "https://nadhebe.com/tools/csv-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Multi-File CSV Table Merger | Nadhebe",
-    "description": "Merge multiple CSV datasets into a single consolidated table.",
-    "url": "https://nadhebe.com/tools/csv-merger",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Data Pipeline Schema Planner | Nadhebe",
-    "description": "Plan CSV data pipeline schemas and generate SQL DDL tables.",
-    "url": "https://nadhebe.com/tools/csv-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Table Preview & Viewer | Nadhebe",
-    "description": "Preview raw CSV data as an interactive, searchable HTML table.",
-    "url": "https://nadhebe.com/tools/csv-preview",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV Schema & Type Constraint Validator | Nadhebe",
-    "description": "Validate CSV data against custom column data type constraints.",
-    "url": "https://nadhebe.com/tools/csv-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Query & Filter Builder | Nadhebe",
-    "description": "Build structured filter conditions, group-by aggregates, and statistical summary queries for raw data tables.",
-    "url": "https://nadhebe.com/tools/data-analysis-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Analysis\",\"Query Builder\",\"Aggregations\",\"Filtering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Anomaly & Outlier Checker | Nadhebe",
-    "description": "Scan tabular data for statistical outliers, z-score anomalies, duplicate keys, and missing data gaps.",
-    "url": "https://nadhebe.com/tools/data-analysis-checker",
-    "category": "Tools",
-    "tags": [
-      "[\"Anomaly Detection\",\"Outliers\",\"Data Quality\",\"Z-Score\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Processing Memory & File Size Estimator | Nadhebe",
-    "description": "Estimate RAM and disk memory requirements for loading large datasets into Pandas, Polars, or SQL tables.",
-    "url": "https://nadhebe.com/tools/data-analysis-estimator",
-    "category": "Tools",
-    "tags": [
-      "[\"Memory Estimator\",\"Pandas\",\"Polars\",\"Big Data\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dataset Correlation & Metric Inspector | Nadhebe",
-    "description": "Inspect numerical variances, standard deviations, summary quantiles, and data distributions.",
-    "url": "https://nadhebe.com/tools/data-analysis-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Dataset Inspector\",\"Variance\",\"Quantiles\",\"Statistics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Science & Metrics Planner | Nadhebe",
-    "description": "Plan key performance indicators (KPIs), sample sizes, target metrics, and exploratory analysis steps.",
-    "url": "https://nadhebe.com/tools/data-analysis-planner",
-    "category": "Tools",
-    "tags": [
-      "[\"KPI Planner\",\"Data Science\",\"Metrics\",\"Statistics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Data Analysis Report Template Maker | Nadhebe",
-    "description": "Create structured markdown templates for data science reports, exploratory analysis, and business metrics.",
-    "url": "https://nadhebe.com/tools/data-analysis-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Data Science\",\"Report Template\",\"Markdown\",\"Analytics\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CRON & Scheduled Date Builder | Nadhebe",
-    "description": "Build schedule timestamps, recurrent event series, and cron execution intervals with timezone offsets.",
-    "url": "https://nadhebe.com/tools/date-and-time-builder",
-    "category": "Tools",
-    "tags": [
-      "[\"Cron\",\"Scheduling\",\"Timestamps\",\"Events\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Zone & Format Inspector | Nadhebe",
-    "description": "Inspect timezone offsets, daylight savings transitions, and international date formatting patterns across locales.",
-    "url": "https://nadhebe.com/tools/date-and-time-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Timezones\",\"Date Inspector\",\"Intl.DateTimeFormat\",\"UTC\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date & Time Format Pattern Generator | Nadhebe",
-    "description": "Generate custom date and time formatting strings for Moment.js, date-fns, Luxon, and Python strftime.",
-    "url": "https://nadhebe.com/tools/date-and-time-template-maker",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Formatter\",\"strftime\",\"date-fns\",\"Moment.js\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Date Difference | Nadhebe Developer Tools",
-    "description": "Interactive online Date Difference tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/date-difference",
-    "category": "Tools",
-    "tags": [
-      "[\"Date Difference\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "CSV & Delimiter Converter | Nadhebe",
-    "description": "Convert text delimiters between Comma, Tab, Pipe, and Semicolon format.",
-    "url": "https://nadhebe.com/tools/delimiter-converter",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "SEO Meta Description & OpenGraph Template Generator | Nadhebe",
-    "description": "Generate SEO meta descriptions, Twitter card summaries, and social media post descriptions with character counters.",
-    "url": "https://nadhebe.com/tools/description-template",
-    "category": "Tools",
-    "tags": [
-      "[\"SEO\",\"Meta Description\",\"OpenGraph\",\"Social Media\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Code & Console Log Stripper | Nadhebe",
-    "description": "Strip console.log calls, debugger statements, and comments from code.",
-    "url": "https://nadhebe.com/tools/developer-cleaner",
-    "category": "Tools",
-    "tags": [
-      "[\"CSV\", \"Data\", \"Tools\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dockerfile Linter | Nadhebe Developer Tools",
-    "description": "Interactive online Dockerfile Linter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/dockerfile-linter",
-    "category": "Tools",
-    "tags": [
-      "[\"Dockerfile Linter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Dpi Print Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Dpi Print Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/dpi-print-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Dpi Print Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Embedding Inspector | Nadhebe Developer Tools",
-    "description": "Interactive online Embedding Inspector tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/embedding-inspector",
-    "category": "Tools",
-    "tags": [
-      "[\"Embedding Inspector\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Env Diff | Nadhebe Developer Tools",
-    "description": "Interactive online Env Diff tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/env-diff",
-    "category": "Tools",
-    "tags": [
-      "[\"Env Diff\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "LLM Evaluation Rubric Generator | Nadhebe",
-    "description": "Create structured scoring rubrics for evaluating AI model outputs, prompt response quality, and RAG accuracy.",
-    "url": "https://nadhebe.com/tools/eval-rubric-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"LLM Evals\",\"AI Testing\",\"Rubric\",\"Prompt Engineering\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Few Shot Prompt Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Few Shot Prompt Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/few-shot-prompt-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Few Shot Prompt Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Gpu Vram Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Gpu Vram Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/gpu-vram-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Gpu Vram Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Http Status Codes Cheat Sheet | Nadhebe Developer Tools",
-    "description": "Interactive online Http Status Codes Cheat Sheet tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/http-status-codes-cheat-sheet",
-    "category": "Tools",
-    "tags": [
-      "[\"Http Status Codes Cheat Sheet\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Json Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Minifier | Nadhebe Developer Tools",
-    "description": "Interactive online Json Minifier tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-minifier",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Minifier\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Path Finder | Nadhebe Developer Tools",
-    "description": "Interactive online Json Path Finder tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-path-finder",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Path Finder\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Repair | Nadhebe Developer Tools",
-    "description": "Interactive online Json Repair tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-repair",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Repair\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json To Typescript | Nadhebe Developer Tools",
-    "description": "Interactive online Json To Typescript tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-to-typescript",
-    "category": "Tools",
-    "tags": [
-      "[\"Json To Typescript\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json To Xml | Nadhebe Developer Tools",
-    "description": "Interactive online Json To Xml tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-to-xml",
-    "category": "Tools",
-    "tags": [
-      "[\"Json To Xml\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Json Validator | Nadhebe Developer Tools",
-    "description": "Interactive online Json Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/json-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"Json Validator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Model Comparison Matrix | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Model Comparison Matrix tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-model-comparison-matrix",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Model Comparison Matrix\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Rate Limit Backoff Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Rate Limit Backoff Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-rate-limit-backoff-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Rate Limit Backoff Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Llm Token Counter Multi Model | Nadhebe Developer Tools",
-    "description": "Interactive online Llm Token Counter Multi Model tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/llm-token-counter-multi-model",
-    "category": "Tools",
-    "tags": [
-      "[\"Llm Token Counter Multi Model\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Json Rpc Payload Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Json Rpc Payload Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-json-rpc-payload-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Json Rpc Payload Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Server Config Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Server Config Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-server-config-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Server Config Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Mcp Server Manifest Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Mcp Server Manifest Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/mcp-server-manifest-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Mcp Server Manifest Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Megapixels To Resolution Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Megapixels To Resolution Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/megapixels-to-resolution-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Megapixels To Resolution Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Meta Tag Analyzer | Nadhebe Developer Tools",
-    "description": "Interactive online Meta Tag Analyzer tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/meta-tag-analyzer",
-    "category": "Tools",
-    "tags": [
-      "[\"Meta Tag Analyzer\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Openapi 3 Yaml Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Openapi 3 Yaml Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/openapi-3-yaml-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Openapi 3 Yaml Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Openapi To Mcp Tool Schema | Nadhebe Developer Tools",
-    "description": "Interactive online Openapi To Mcp Tool Schema tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/openapi-to-mcp-tool-schema",
-    "category": "Tools",
-    "tags": [
-      "[\"Openapi To Mcp Tool Schema\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Opportunity Radar | Nadhebe Developer Tools",
-    "description": "Interactive online Opportunity Radar tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/opportunity-radar",
-    "category": "Tools",
-    "tags": [
-      "[\"Opportunity Radar\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Percentage Difference Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Percentage Difference Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/percentage-difference-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Percentage Difference Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Pixels To Megapixels Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Pixels To Megapixels Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/pixels-to-megapixels-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Pixels To Megapixels Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Ppi Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Ppi Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/ppi-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Ppi Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Profit Margin Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Profit Margin Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/profit-margin-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Profit Margin Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Prompt Template Variable Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Prompt Template Variable Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/prompt-template-variable-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Prompt Template Variable Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Px To Rem | Nadhebe Developer Tools",
-    "description": "Interactive online Px To Rem tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/px-to-rem",
-    "category": "Tools",
-    "tags": [
-      "[\"Px To Rem\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rag Chunk Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Rag Chunk Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rag-chunk-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rag Chunk Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rag Context Window Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Rag Context Window Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rag-context-window-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rag Context Window Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Resize Dimensions Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Resize Dimensions Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/resize-dimensions-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Resize Dimensions Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Rfc 7807 Error Json Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Rfc 7807 Error Json Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/rfc-7807-error-json-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Rfc 7807 Error Json Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Schema Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Schema Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/schema-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Schema Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Sitemap Validator | Nadhebe Developer Tools",
-    "description": "Interactive online Sitemap Validator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/sitemap-validator",
-    "category": "Tools",
-    "tags": [
-      "[\"Sitemap Validator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Slug Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Slug Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/slug-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Slug Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Social Media Image Sizes | Nadhebe Developer Tools",
-    "description": "Interactive online Social Media Image Sizes tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/social-media-image-sizes",
-    "category": "Tools",
-    "tags": [
-      "[\"Social Media Image Sizes\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Svg To Jsx | Nadhebe Developer Tools",
-    "description": "Interactive online Svg To Jsx tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/svg-to-jsx",
-    "category": "Tools",
-    "tags": [
-      "[\"Svg To Jsx\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "System Prompt Linter Best Practices | Nadhebe Developer Tools",
-    "description": "Interactive online System Prompt Linter Best Practices tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/system-prompt-linter-best-practices",
-    "category": "Tools",
-    "tags": [
-      "[\"System Prompt Linter Best Practices\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Webhook Payload Signature Generator | Nadhebe Developer Tools",
-    "description": "Interactive online Webhook Payload Signature Generator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/webhook-payload-signature-generator",
-    "category": "Tools",
-    "tags": [
-      "[\"Webhook Payload Signature Generator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Xml Formatter | Nadhebe Developer Tools",
-    "description": "Interactive online Xml Formatter tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/xml-formatter",
-    "category": "Tools",
-    "tags": [
-      "[\"Xml Formatter\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Xpath Tester | Nadhebe Developer Tools",
-    "description": "Interactive online Xpath Tester tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/xpath-tester",
-    "category": "Tools",
-    "tags": [
-      "[\"Xpath Tester\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Yaml To Json | Nadhebe Developer Tools",
-    "description": "Interactive online Yaml To Json tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/yaml-to-json",
-    "category": "Tools",
-    "tags": [
-      "[\"Yaml To Json\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
-    "title": "Youtube Video Size Calculator | Nadhebe Developer Tools",
-    "description": "Interactive online Youtube Video Size Calculator tool for developers, data engineers, and web architects. Free client-side processing with zero server uploads.",
-    "url": "https://nadhebe.com/tools/youtube-video-size-calculator",
-    "category": "Tools",
-    "tags": [
-      "[\"Youtube Video Size Calculator\", \"Developer Tools\", \"Web Utility\"]"
-    ],
-    "pubDate": "2026-08-06T00:00:00.000Z"
-  },
-  {
     "title": "Best Local LLMs for 8GB VRAM Consumer GPUs: Hardware Benchmarks",
     "description": "Hardware benchmark guide evaluating the best open-weight local LLMs for 8GB VRAM consumer GPUs. Includes token-per-second decoding speeds, context spillover, and quantization metrics.",
-    "url": "https://nadhebe.com/guides/best-local-llms-8gb-vram",
+    "url": "https://nadhebe.com/guides/best-local-llms-8gb-vram/",
     "category": "Guides",
     "tags": [
       "[\"8GB VRAM\", \"Local LLM\", \"Ollama\", \"GPU Benchmarks\", \"Qwen 2.5\", \"Llama 3.1\", \"Phi-4 Mini\", \"AI Hardware\"]"
@@ -1142,7 +422,7 @@
   {
     "title": "FP4 vs FP8 vs INT4 Quantization: Performance & Accuracy",
     "description": "Technical comparison guide analyzing FP4, FP8, and INT4 quantization formats. Evaluates micro-scaling formats, hardware acceleration across NVIDIA Hopper & Blackwell, and accuracy.",
-    "url": "https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization",
+    "url": "https://nadhebe.com/guides/fp4-vs-fp8-vs-int4-quantization/",
     "category": "Guides",
     "tags": [
       "[\"FP4\", \"FP8\", \"INT4\", \"Quantization\", \"NVIDIA Blackwell\", \"TensorRT-LLM\", \"vLLM\", \"GPU Architecture\"]"
@@ -1152,7 +432,7 @@
   {
     "title": "Google NotebookLM Pro 2026 Developer Workflows and Integration Protocols",
     "description": "Developer workflows guide for Google NotebookLM Pro. Learn source document ingestion limits, multi-file context indexing, Audio Overview podcast pipelines, and API integrations.",
-    "url": "https://nadhebe.com/guides/notebooklm-pro-developer-workflows",
+    "url": "https://nadhebe.com/guides/notebooklm-pro-developer-workflows/",
     "category": "Guides",
     "tags": [
       "[\"NotebookLM Pro\", \"Google AI\", \"Knowledge Management\", \"Audio Overview\", \"Developer Workflows\", \"AI Research\", \"Gemini 2.0\"]"
@@ -1162,7 +442,7 @@
   {
     "title": "Complete Guide to Ollama Model Quantization Formats (Q4_K_M vs Q8_0 vs EXL2)",
     "description": "Technical comparison guide evaluating Ollama GGUF quantization formats. Compares Q4_K_M, Q5_K_M, Q8_0, and EXL2 across perplexity, VRAM savings, and decode speed.",
-    "url": "https://nadhebe.com/guides/ollama-quantization-formats-compared",
+    "url": "https://nadhebe.com/guides/ollama-quantization-formats-compared/",
     "category": "Guides",
     "tags": [
       "[\"Ollama\", \"Quantization\", \"GGUF\", \"Q4_K_M\", \"Q8_0\", \"EXL2\", \"VRAM Optimization\", \"Local LLM\"]"
@@ -1172,7 +452,7 @@
   {
     "title": "Top 8 Best AI Coding Tools for Developers in 2026: Benchmark and Feature Comparison",
     "description": "A comprehensive roundup review comparing the best AI coding tools in 2026—Claude Code, Cursor, Windsurf, GitHub Copilot, Supermaven, Cody, and Aider.",
-    "url": "https://nadhebe.com/reviews/best-ai-coding-tools-2026",
+    "url": "https://nadhebe.com/reviews/best-ai-coding-tools-2026/",
     "category": "Tool Reviews",
     "tags": [
       "[\"AI Coding\", \"Claude Code\", \"Cursor\", \"Windsurf\", \"GitHub Copilot\", \"Supermaven\", \"Aider\", \"Developer Tools\"]"
@@ -1182,7 +462,7 @@
   {
     "title": "Top 7 Best Cloud GPU Providers for AI Training and vLLM Inference in 2026",
     "description": "An in-depth comparative evaluation of the best cloud GPU providers—RunPod, Modal, Lambda Labs, Vast.ai, Together AI, Replicate, and CoreWeave.",
-    "url": "https://nadhebe.com/reviews/best-cloud-gpu-providers-2026",
+    "url": "https://nadhebe.com/reviews/best-cloud-gpu-providers-2026/",
     "category": "Tool Reviews",
     "tags": [
       "[\"GPU Cloud\", \"RunPod\", \"Modal\", \"Lambda Labs\", \"Vast.ai\", \"vLLM\", \"H100\", \"Cloud Compute\"]"
@@ -1192,7 +472,7 @@
   {
     "title": "Top 10 Model Context Protocol (MCP) Servers for AI Developers in 2026",
     "description": "A comprehensive roundup review of the best Model Context Protocol (MCP) servers for database management, web search, GitHub workflows, and cloud edge tools.",
-    "url": "https://nadhebe.com/reviews/best-mcp-servers-2026",
+    "url": "https://nadhebe.com/reviews/best-mcp-servers-2026/",
     "category": "Tool Reviews",
     "tags": [
       "[\"MCP\", \"Model Context Protocol\", \"AI Tools\", \"Developer Tools\", \"PostgreSQL\", \"GitHub\", \"Cloudflare\"]"
@@ -1202,7 +482,7 @@
   {
     "title": "Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration",
     "description": "A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.",
-    "url": "https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles",
+    "url": "https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"MCP Bundles\", \"Agent Skills\", \"SKILL.md\", \"IDE Integration\", \"Developer Tools\"]"
@@ -1212,7 +492,7 @@
   {
     "title": "Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events",
     "description": "A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.",
-    "url": "https://nadhebe.com/tutorials/claude-code-hooks-guide",
+    "url": "https://nadhebe.com/tutorials/claude-code-hooks-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"Claude Code\", \"Hooks\", \"PreToolUse\", \"Guardrails\", \"settings.json\", \"Anthropic\"]"
@@ -1222,7 +502,7 @@
   {
     "title": "Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits",
     "description": "A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.",
-    "url": "https://nadhebe.com/tutorials/claude-code-troubleshooting-guide",
+    "url": "https://nadhebe.com/tutorials/claude-code-troubleshooting-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"Claude Code\", \"Troubleshooting\", \"Anthropic\", \"CLI Errors\", \"OAuth\", \"Hooks\"]"
@@ -1232,7 +512,7 @@
   {
     "title": "Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers",
     "description": "Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.",
-    "url": "https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp",
+    "url": "https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp/",
     "category": "Tutorials",
     "tags": [
       "[\"Cloudflare Workers\", \"Code Mode\", \"MCP\", \"Edge AI\", \"Agents SDK\", \"TypeScript\"]"
@@ -1242,7 +522,7 @@
   {
     "title": "Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors",
     "description": "Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors.",
-    "url": "https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting",
+    "url": "https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting/",
     "category": "Tutorials",
     "tags": [
       "[\"Cursor\", \"MCP\", \"Troubleshooting\", \"Developer Tools\", \"Node.js\", \"AI IDE\"]"
@@ -1252,7 +532,7 @@
   {
     "title": "Building and Deploying Remote MCP Servers on Cloudflare Workers with Auth0 OAuth",
     "description": "Learn how to build, authenticate, and deploy stateless remote Model Context Protocol (MCP) servers on Cloudflare Workers using SDK v2 Streamable HTTP handlers and Auth0 OAuth2.",
-    "url": "https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0",
+    "url": "https://nadhebe.com/tutorials/deploy-remote-mcp-server-cloudflare-workers-auth0/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"Cloudflare Workers\", \"Auth0\", \"OAuth2\", \"Model Context Protocol\", \"Serverless\"]"
@@ -1262,7 +542,7 @@
   {
     "title": "Google Gemini CLI Tutorial: Ingesting Multi-Repository Context and Terminal Workflows",
     "description": "Master Google Gemini CLI (@google/gemini-cli) for multi-repository codebase ingestion, PDF system architecture parsing, and terminal developer workflows.",
-    "url": "https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial",
+    "url": "https://nadhebe.com/tutorials/google-gemini-cli-multi-repo-tutorial/",
     "category": "Tutorials",
     "tags": [
       "[\"Gemini CLI\", \"Google Gemini\", \"CLI Tools\", \"Multi-Repo\", \"Developer Tools\", \"Terminal AI\"]"
@@ -1272,7 +552,7 @@
   {
     "title": "MCP Authentication Errors: Resolving 401 Unauthorized, Expired Bearer Tokens, and Auth0 Scopes",
     "description": "A complete troubleshooting guide for diagnosing and fixing Model Context Protocol (MCP) HTTP authentication errors, 401 Unauthorized responses, and OAuth token expiration.",
-    "url": "https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting",
+    "url": "https://nadhebe.com/tutorials/mcp-authentication-errors-troubleshooting/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"Authentication\", \"OAuth2\", \"Auth0\", \"Troubleshooting\", \"Bearer Tokens\"]"
@@ -1282,7 +562,7 @@
   {
     "title": "Securing Remote Model Context Protocol (MCP) Infrastructures with Auth0 and Cloudflare Wrangler",
     "description": "A comprehensive security blueprint for securing remote HTTP MCP server endpoints using Auth0 OAuth2 access token verification and Cloudflare Wrangler encrypted secrets.",
-    "url": "https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler",
+    "url": "https://nadhebe.com/tutorials/securing-remote-mcp-server-auth0-cloudflare-wrangler/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP Security\", \"Auth0\", \"Cloudflare Workers\", \"Wrangler\", \"OAuth2\", \"AI Agents\"]"
@@ -1292,7 +572,7 @@
   {
     "title": "vLLM CUDA Out of Memory (OOM): Fixes for max_model_len, gpu_memory_utilization, and PagedAttention",
     "description": "Resolve vLLM CUDA Out of Memory errors when serving DeepSeek R1 and Llama models using VRAM allocation flags, KV cache quantization, and tensor parallelism.",
-    "url": "https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix",
+    "url": "https://nadhebe.com/tutorials/vllm-cuda-out-of-memory-fix/",
     "category": "Tutorials",
     "tags": [
       "[\"vLLM\", \"CUDA OOM\", \"Troubleshooting\", \"GPU VRAM\", \"DeepSeek R1\", \"PagedAttention\"]"
@@ -1302,7 +582,7 @@
   {
     "title": "Claude CLI vs Gemini CLI: Terminal AI Tools & Developer Agent Performance",
     "description": "A head-to-head comparison of Anthropic's Claude Code CLI and Google's Gemini CLI tools for terminal-driven development, code generation, and shell automation.",
-    "url": "https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli",
+    "url": "https://nadhebe.com/comparisons/claude-cli-vs-gemini-cli/",
     "category": "Comparisons",
     "tags": [
       "[\"Claude CLI\", \"Gemini CLI\", \"CLI Tools\", \"Anthropic\", \"Google Gemini\", \"Terminal Agent\"]"
@@ -1312,7 +592,7 @@
   {
     "title": "Claude Code vs Cursor: CLI Terminal Agent vs AI-Native IDE",
     "description": "An in-depth comparison between Anthropic's terminal-native Claude Code CLI and Cursor's AI-augmented VS Code fork for AI engineering workflows.",
-    "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor",
+    "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor/",
     "category": "Comparisons",
     "tags": [
       "[\"Claude Code\", \"Cursor\", \"AI IDE\", \"CLI Tools\", \"Anthropic\", \"Developer Tools\"]"
@@ -1322,7 +602,7 @@
   {
     "title": "Cursor vs Windsurf: AI-Native Code Editors & Cascade Agent Workflows Compared",
     "description": "Compare Cursor's Composer and Tab autocompletion against Codeium's Windsurf editor and its Cascade collaborative AI flow.",
-    "url": "https://nadhebe.com/comparisons/cursor-vs-windsurf",
+    "url": "https://nadhebe.com/comparisons/cursor-vs-windsurf/",
     "category": "Comparisons",
     "tags": [
       "[\"Cursor\", \"Windsurf\", \"Codeium\", \"AI IDE\", \"Developer Tools\", \"Cascade\"]"
@@ -1332,7 +612,7 @@
   {
     "title": "Managing AI Coding Standards Across IDEs: .cursorrules vs .windsurfrules vs .claude/rules/",
     "description": "A comprehensive multi-IDE governance comparison analyzing prompt instructions, frontmatter glob patterns, and unified cross-editor strategies for Cursor, Windsurf, and Claude Code.",
-    "url": "https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules",
+    "url": "https://nadhebe.com/comparisons/cursorrules-vs-windsurfrules-vs-claude-rules/",
     "category": "Comparisons",
     "tags": [
       "[\"Cursor\", \"Windsurf\", \"Claude Code\", \"AI IDE\", \"Developer Tools\", \"Governance\"]"
@@ -1342,7 +622,7 @@
   {
     "title": "ElevenLabs vs PlayHT: Voice Cloning, Conversational AI & Streaming Audio APIs",
     "description": "Compare ElevenLabs and PlayHT across voice cloning quality, ultra-low latency WebSocket streaming APIs, multi-lingual synthesis, and pricing.",
-    "url": "https://nadhebe.com/comparisons/elevenlabs-vs-playht",
+    "url": "https://nadhebe.com/comparisons/elevenlabs-vs-playht/",
     "category": "Comparisons",
     "tags": [
       "[\"ElevenLabs\", \"PlayHT\", \"AI Voice\", \"Text to Speech\", \"Conversational AI\", \"Audio API\"]"
@@ -1352,7 +632,7 @@
   {
     "title": "OpenRouter vs Anthropic API: Multi-Model Gateway Routing vs Direct Model Provider",
     "description": "Analyze the architectural differences, pricing, fallbacks, prompt caching, and latency between using OpenRouter's unified gateway and direct Anthropic API integration.",
-    "url": "https://nadhebe.com/comparisons/openrouter-vs-anthropic-api",
+    "url": "https://nadhebe.com/comparisons/openrouter-vs-anthropic-api/",
     "category": "Comparisons",
     "tags": [
       "[\"OpenRouter\", \"Anthropic API\", \"LLM Routing\", \"AI Gateway\", \"Claude 3.7\", \"API Architecture\"]"
@@ -1362,7 +642,7 @@
   {
     "title": "RunPod vs Modal: Bare-Metal GPU Pods vs Serverless Python Infrastructure",
     "description": "Compare RunPod's raw GPU instance pods against Modal's serverless Python cloud infrastructure for AI model fine-tuning and inference.",
-    "url": "https://nadhebe.com/comparisons/runpod-vs-modal",
+    "url": "https://nadhebe.com/comparisons/runpod-vs-modal/",
     "category": "Comparisons",
     "tags": [
       "[\"RunPod\", \"Modal\", \"GPU Cloud\", \"Serverless AI\", \"PyTorch\", \"vLLM\", \"Infrastructure\"]"
@@ -1372,7 +652,7 @@
   {
     "title": "RunPod vs Vast.ai: Managed Cloud GPU Pods vs Peer-to-Peer GPU Marketplace",
     "description": "A detailed comparison of RunPod and Vast.ai for low-cost GPU compute, reliability guarantees, security, and PyTorch / LLM workload performance.",
-    "url": "https://nadhebe.com/comparisons/runpod-vs-vastai",
+    "url": "https://nadhebe.com/comparisons/runpod-vs-vastai/",
     "category": "Comparisons",
     "tags": [
       "[\"RunPod\", \"Vast.ai\", \"GPU Cloud\", \"Machine Learning\", \"PyTorch\", \"Cost Optimization\"]"
@@ -1382,7 +662,7 @@
   {
     "title": "vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Models",
     "description": "Real-world production benchmarks comparing vLLM's PagedAttention continuous batching against Ollama's local GGUF execution for DeepSeek R1 and Llama 3.",
-    "url": "https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks",
+    "url": "https://nadhebe.com/comparisons/vllm-vs-ollama-production-benchmarks/",
     "category": "Comparisons",
     "tags": [
       "[\"vLLM\", \"Ollama\", \"DeepSeek R1\", \"PagedAttention\", \"LLM Benchmarks\", \"GPU Hosting\"]"
@@ -1390,29 +670,29 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans",
-    "description": "A complete breakdown of Anthropic's Claude Code CLI pricing, console API token costs, subscription tiers (Pro vs Team vs Enterprise), and cost optimization strategies.",
-    "url": "https://nadhebe.com/guides/claude-code-pricing-guide",
+    "title": "Claude Code Pricing Guide: Token Costs, API Tiers, and Subscription Plans (2026)",
+    "description": "Complete breakdown of Anthropic Claude Code CLI pricing, Console API token rates for Claude 3.7 Sonnet, subscription tiers, and prompt caching discounts.",
+    "url": "https://nadhebe.com/guides/claude-code-pricing-guide/",
     "category": "Guides",
     "tags": [
-      "[\"Claude Code\", \"Pricing\", \"Anthropic\", \"LLM Costs\", \"Token Limits\", \"API Billing\"]"
+      "[\"Claude Code\", \"Pricing\", \"Anthropic\", \"Claude 3.7 Sonnet\", \"LLM Costs\", \"Token Limits\", \"API Billing\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage",
+    "title": "Cursor Pricing Guide: Hobby, Pro, Business, and Custom API Key Usage (2026)",
     "description": "A complete guide to Cursor IDE pricing, comparing Hobby free tiers, Pro $20/month subscriptions, Business SSO features, and custom Anthropic/OpenAI API key options.",
-    "url": "https://nadhebe.com/guides/cursor-pricing-guide",
+    "url": "https://nadhebe.com/guides/cursor-pricing-guide/",
     "category": "Guides",
     "tags": [
-      "[\"Cursor\", \"Pricing\", \"AI IDE\", \"Developer Tools\", \"LLM Costs\", \"Cursor Pro\"]"
+      "[\"Cursor\", \"Pricing\", \"AI IDE\", \"Developer Tools\", \"LLM Costs\", \"Cursor Pro\", \"Claude 3.7 Sonnet\"]"
     ],
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
     "title": "Designing Enterprise AI Agent Workflows: CLAUDE.md, Rules, Skills, Subagents, and Worktrees",
     "description": "A comprehensive architectural guide to structuring enterprise AI engineering repositories using CLAUDE.md guidelines, path-scoped rules, packaged skills, and Git worktrees.",
-    "url": "https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md",
+    "url": "https://nadhebe.com/guides/enterprise-ai-agent-workflows-claude-md/",
     "category": "Guides",
     "tags": [
       "[\"CLAUDE.md\", \"Claude Code\", \"Agent Architecture\", \"Git Worktrees\", \"Context Engineering\", \"DevOps\"]"
@@ -1422,7 +702,7 @@
   {
     "title": "Headless Claude Code in CI/CD: Automated Pull Request Reviews with GitHub Actions",
     "description": "A complete guide to deploying headless Claude Code CLI in continuous integration pipelines using non-interactive mode, bare environment flags, and schema-constrained JSON outputs.",
-    "url": "https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions",
+    "url": "https://nadhebe.com/guides/headless-claude-code-ci-cd-github-actions/",
     "category": "Guides",
     "tags": [
       "[\"Claude Code\", \"GitHub Actions\", \"CI/CD\", \"Automated Code Review\", \"DevOps\", \"Anthropic\"]"
@@ -1430,9 +710,9 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs",
+    "title": "RunPod Pricing Explained: On-Demand Pods, Spot Instances, and Storage Costs (2026)",
     "description": "A comprehensive guide to RunPod GPU pricing, contrasting Secure Cloud vs Community Cloud rates, spot preemption discounts, and persistent network storage costs.",
-    "url": "https://nadhebe.com/guides/runpod-pricing-explained",
+    "url": "https://nadhebe.com/guides/runpod-pricing-explained/",
     "category": "Guides",
     "tags": [
       "[\"RunPod\", \"GPU Pricing\", \"Cloud Compute\", \"RTX 4090\", \"H100\", \"vLLM\", \"Cost Optimization\"]"
@@ -1440,19 +720,9 @@
     "pubDate": "2026-08-03T00:00:00.000Z"
   },
   {
-    "title": "How to Build a Custom MCP Server in TypeScript",
-    "description": "A complete, step-by-step developer tutorial on how to build, test, and deploy a custom Model Context Protocol (MCP) server from scratch using TypeScript.",
-    "url": "https://nadhebe.com/tutorials/build-custom-mcp-server-typescript",
-    "category": "Tutorials",
-    "tags": [
-      "[\"MCP\", \"TypeScript\", \"Node.js\", \"AI Integration\", \"Server\", \"API\"]"
-    ],
-    "pubDate": "2026-08-01T00:00:00.000Z"
-  },
-  {
     "title": "How to Deploy DeepSeek R1 on AWS using vLLM",
     "description": "A comprehensive infrastructure guide on deploying the DeepSeek R1 open-weight model on AWS using EC2, vLLM, and Docker for high-throughput enterprise inference.",
-    "url": "https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm",
+    "url": "https://nadhebe.com/tutorials/deploy-deepseek-r1-aws-vllm/",
     "category": "Tutorials",
     "tags": [
       "[\"DeepSeek\", \"DeepSeek R1\", \"AWS\", \"vLLM\", \"Inference\", \"Deployment\", \"LLM Ops\"]"
@@ -1462,7 +732,7 @@
   {
     "title": "The Complete Gemini API Developer Guide (2026)",
     "description": "Master the Google Gemini API with this comprehensive tutorial. Learn how to structure API payloads, handle multimodal inputs, implement function calling, and manage API keys securely.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-guide",
+    "url": "https://nadhebe.com/tutorials/gemini-api-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"Gemini\", \"API\", \"Google\", \"LLM\", \"Generative AI\"]"
@@ -1472,7 +742,7 @@
   {
     "title": "How to Analyze Meta Tags for SEO: Step-by-Step Tutorial",
     "description": "Learn how to systematically audit HTML title tags, meta descriptions, canonical URLs, and OpenGraph social cards to maximize search visibility and click-through rates.",
-    "url": "https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo",
+    "url": "https://nadhebe.com/tutorials/how-to-analyze-meta-tags-for-seo/",
     "category": "Tutorials",
     "tags": [
       "[\"seo-tutorial\", \"meta-tags\", \"search-engine-optimization\", \"webmaster\", \"audit\"]"
@@ -1482,7 +752,7 @@
   {
     "title": "How to Integrate MCP Server in VS Code & Cursor",
     "description": "A comprehensive guide on integrating the Model Context Protocol (MCP) server into your VS Code and Cursor environments to supercharge your AI workflows.",
-    "url": "https://nadhebe.com/tutorials/mcp-server-vscode-cursor",
+    "url": "https://nadhebe.com/tutorials/mcp-server-vscode-cursor/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"VS Code\", \"Cursor\", \"AI Workflow\", \"Integration\", \"Model Context Protocol\"]"
@@ -1492,7 +762,7 @@
   {
     "title": "How to Integrate MCP Servers with Claude Desktop",
     "description": "A comprehensive developer guide to configuring and integrating the Model Context Protocol (MCP) with the Claude Desktop app. Learn how to expose local tools, debug connection issues, and build your AI engineering workflows.",
-    "url": "https://nadhebe.com/tutorials/mcp-with-claude-desktop",
+    "url": "https://nadhebe.com/tutorials/mcp-with-claude-desktop/",
     "category": "Tutorials",
     "tags": [
       "[\"MCP\", \"Claude Desktop\", \"Anthropic\", \"AI Agents\", \"Local Tools\"]"
@@ -1502,7 +772,7 @@
   {
     "title": "The Ultimate vLLM Deployment Guide (2026)",
     "description": "Learn how to deploy and scale open-source LLMs using vLLM. Master PagedAttention, continuous batching, and GPU VRAM optimization for production AI inference.",
-    "url": "https://nadhebe.com/tutorials/vllm-guide",
+    "url": "https://nadhebe.com/tutorials/vllm-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"vLLM\", \"Inference\", \"GPU\", \"LLM\", \"Deployment\"]"
@@ -1512,7 +782,7 @@
   {
     "title": "7 Best Free Meta Tag Analyzer Tools in 2026 (Tested & Ranked)",
     "description": "Review and comparison of the 7 top free meta tag analyzer utilities for web developers and SEO specialists, featuring privacy, real-time SERP simulation, and client-side processing.",
-    "url": "https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools",
+    "url": "https://nadhebe.com/reviews/best-free-meta-tag-analyzer-tools/",
     "category": "Tool Reviews",
     "tags": [
       "[\"seo-tools\", \"meta-tag-analyzer\", \"developer-utilities\", \"free-tools-roundup\"]"
@@ -1522,7 +792,7 @@
   {
     "title": "Claude Code vs Cursor vs Windsurf: The Ultimate 2026 AI IDE Comparison",
     "description": "An in-depth, hands-on comparison of Claude Code CLI, Cursor, and Windsurf Cascade inference models, context handling, multi-file edits, and agentic workflows.",
-    "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf",
+    "url": "https://nadhebe.com/comparisons/claude-code-vs-cursor-vs-windsurf/",
     "category": "Comparisons",
     "tags": [
       "[\"ai coding\", \"claude code\", \"cursor\", \"windsurf\"]"
@@ -1532,7 +802,7 @@
   {
     "title": "DeepSeek V3 vs DeepSeek R1: Which Model Should You Use?",
     "description": "A comprehensive comparison between DeepSeek V3 (the highly efficient dense/MoE hybrid) and DeepSeek R1 (the reasoning-focused powerhouse).",
-    "url": "https://nadhebe.com/comparisons/deepseek-v3-vs-r1",
+    "url": "https://nadhebe.com/comparisons/deepseek-v3-vs-r1/",
     "category": "Comparisons",
     "tags": [
       "[\"DeepSeek\", \"DeepSeek V3\", \"DeepSeek R1\", \"MoE\", \"Reasoning Models\", \"LLM\"]"
@@ -1542,7 +812,7 @@
   {
     "title": "Meta Tag Analyzer vs Meta Tag Checker: Key Differences & Comparison",
     "description": "Understand the subtle differences between meta tag analyzers and meta tag checkers, and learn when to use each for technical SEO auditing.",
-    "url": "https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker",
+    "url": "https://nadhebe.com/comparisons/meta-tag-analyzer-vs-meta-tag-checker/",
     "category": "Comparisons",
     "tags": [
       "[\"meta-tag-analyzer\", \"meta-tag-checker\", \"seo-tools\", \"technical-seo\"]"
@@ -1552,7 +822,7 @@
   {
     "title": "Open Graph vs Twitter Card Meta Tags: Technical Comparison",
     "description": "Compare Open Graph (og:) and Twitter Card (twitter:) metadata specifications, property mapping, fallback rules, and social media image optimization.",
-    "url": "https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags",
+    "url": "https://nadhebe.com/comparisons/open-graph-vs-twitter-card-meta-tags/",
     "category": "Comparisons",
     "tags": [
       "[\"open-graph\", \"twitter-cards\", \"social-seo\", \"meta-tags-comparison\"]"
@@ -1562,7 +832,7 @@
   {
     "title": "OpenRouter vs Direct Provider APIs: Which Should You Choose?",
     "description": "An in-depth technical and commercial comparison between using OpenRouter and integrating directly with provider APIs like OpenAI, Anthropic, and Google.",
-    "url": "https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis",
+    "url": "https://nadhebe.com/comparisons/openrouter-vs-direct-provider-apis/",
     "category": "Comparisons",
     "tags": [
       "[\"OpenRouter\", \"API\", \"OpenAI\", \"Anthropic\", \"LLM Providers\", \"Architecture\"]"
@@ -1572,7 +842,7 @@
   {
     "title": "SGLang vs vLLM: Performance Benchmark for LLM Inference",
     "description": "An in-depth performance benchmark comparing SGLang and vLLM for deploying large language models. Analyze throughput, memory usage, and latency trade-offs.",
-    "url": "https://nadhebe.com/comparisons/sglang-vs-vllm-performance",
+    "url": "https://nadhebe.com/comparisons/sglang-vs-vllm-performance/",
     "category": "Comparisons",
     "tags": [
       "[\"vLLM\", \"SGLang\", \"Inference\", \"Benchmarks\", \"LLM Ops\", \"RadixAttention\"]"
@@ -1582,7 +852,7 @@
   {
     "title": "How to Fix Common Meta Tag Errors: Audit & Resolution Guide",
     "description": "Learn how to diagnose and resolve missing title tags, truncated meta descriptions, incorrect canonical paths, and broken OpenGraph images.",
-    "url": "https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors",
+    "url": "https://nadhebe.com/best-practices/how-to-fix-common-meta-tag-errors/",
     "category": "Best Practices",
     "tags": [
       "[\"seo-errors\", \"meta-tag-fixes\", \"troubleshooting\", \"opengraph-fix\", \"canonical-tags\"]"
@@ -1592,7 +862,7 @@
   {
     "title": "LLM API Cost Optimization Best Practices",
     "description": "Discover actionable strategies to drastically reduce your Large Language Model API costs without sacrificing output quality. Learn about token optimization, caching, and model routing.",
-    "url": "https://nadhebe.com/best-practices/llm-api-cost-optimization",
+    "url": "https://nadhebe.com/best-practices/llm-api-cost-optimization/",
     "category": "Best Practices",
     "tags": [
       "[\"LLM\", \"API Costs\", \"Cost Optimization\", \"Token Management\", \"Prompt Engineering\", \"OpenAI\", \"Anthropic\"]"
@@ -1602,7 +872,7 @@
   {
     "title": "Prompt Caching Best Practices for Claude Sonnet & Opus",
     "description": "Master prompt caching for Anthropic's Claude 3.5 Sonnet and Opus models. Learn how to drastically reduce latency and lower your LLM API costs.",
-    "url": "https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus",
+    "url": "https://nadhebe.com/best-practices/prompt-caching-claude-sonnet-opus/",
     "category": "Best Practices",
     "tags": [
       "[\"Prompt Caching\", \"Claude\", \"Sonnet\", \"Opus\", \"Anthropic\", \"LLM Optimization\", \"API Costs\"]"
@@ -1612,7 +882,7 @@
   {
     "title": "Structured Output Prompting Best Practices",
     "description": "Learn how to enforce 100% reliable JSON outputs from Large Language Models using Structured Outputs, JSON Schemas, and Tool Calling.",
-    "url": "https://nadhebe.com/best-practices/structured-output-prompting",
+    "url": "https://nadhebe.com/best-practices/structured-output-prompting/",
     "category": "Best Practices",
     "tags": [
       "[\"Prompt Engineering\", \"Structured Output\", \"JSON\", \"LLM\", \"OpenAI\", \"Anthropic\"]"
@@ -1622,7 +892,7 @@
   {
     "title": "Vector Database Chunking Best Practices for RAG",
     "description": "Master the art of document chunking for Vector Databases. Learn strategies for semantic chunking, overlap sizing, and hierarchical indexing to improve your RAG accuracy.",
-    "url": "https://nadhebe.com/best-practices/vector-database-chunking",
+    "url": "https://nadhebe.com/best-practices/vector-database-chunking/",
     "category": "Best Practices",
     "tags": [
       "[\"Vector Database\", \"RAG\", \"Chunking\", \"Embeddings\", \"Search\", \"AI\"]"
@@ -1632,7 +902,7 @@
   {
     "title": "Fix Claude Desktop and Cursor spawn ENOENT npx Path Errors",
     "description": "How to resolve the spawn ENOENT error when launching Claude Desktop or Cursor MCP servers using npx, node, or python shell scripts.",
-    "url": "https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors",
+    "url": "https://nadhebe.com/guides/fix-claude-desktop-cursor-spawn-enoent-npx-errors/",
     "category": "Guides",
     "tags": [
       "[\"node\", \"enoent\", \"mcp\", \"claude desktop\", \"cursor\"]"
@@ -1642,7 +912,7 @@
   {
     "title": "How to Fix MCP Server Connection Refused and 404 Proxy Errors",
     "description": "Step-by-step diagnostic guide to troubleshoot Model Context Protocol (MCP) server socket connection refused and http 404 proxy middleware errors.",
-    "url": "https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors",
+    "url": "https://nadhebe.com/guides/fix-mcp-server-connection-refused-404-errors/",
     "category": "Guides",
     "tags": [
       "[\"mcp\", \"claude desktop\", \"cursor\", \"node.js\"]"
@@ -1652,7 +922,7 @@
   {
     "title": "Installing Kimi K3 Locally: A Comprehensive Step-by-Step Guide",
     "description": "Learn how to download weights, configure quantization settings, compile CUDA kernels, and run the Kimi K3 Mixture of Experts (MoE) model locally on consumer hardware.",
-    "url": "https://nadhebe.com/guides/installing-kimi-k3-locally-guide",
+    "url": "https://nadhebe.com/guides/installing-kimi-k3-locally-guide/",
     "category": "Guides",
     "tags": [
       "[\"kimi k3\", \"local llm\", \"cuda\", \"vllm\"]"
@@ -1662,7 +932,7 @@
   {
     "title": "What Is a Meta Tag Analyzer? (2026 Guide)",
     "description": "Discover what a meta tag analyzer is, how search engine crawlers interpret HTML metadata, and why real-time meta tag auditing drives higher SERP click-through rates.",
-    "url": "https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide",
+    "url": "https://nadhebe.com/guides/what-is-a-meta-tag-analyzer-guide/",
     "category": "Guides",
     "tags": [
       "[\"seo\", \"meta-tags\", \"opengraph\", \"serp-optimization\", \"web-development\"]"
@@ -1672,7 +942,7 @@
   {
     "title": "Gemini 3.6 & Gemini 3.6 Flash: Everything We Know (2026 Model Overview)",
     "description": "Comprehensive breakdown of Google Gemini 3.6 Flash features, benchmark improvements, speed optimizations, and API access.",
-    "url": "https://nadhebe.com/news/gemini-3-6-flash-everything-we-know",
+    "url": "https://nadhebe.com/news/gemini-3-6-flash-everything-we-know/",
     "category": "News",
     "tags": [
       "[\"gemini-3-6\", \"gemini-flash\", \"google-ai\", \"llm-benchmarks\", \"news\"]"
@@ -1682,7 +952,7 @@
   {
     "title": "Gemini AI Photo Generator: How to Generate Images with Gemini (2026 Guide)",
     "description": "Master prompt engineering, style parameters, aspect ratios, and Imagen 3 integration for generating high-resolution photos with Google Gemini.",
-    "url": "https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide",
+    "url": "https://nadhebe.com/tutorials/gemini-ai-photo-generator-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-photo\", \"imagen-3\", \"ai-image-generation\", \"prompt-engineering\", \"google-ai\"]"
@@ -1692,7 +962,7 @@
   {
     "title": "Gemini API Examples for JavaScript & Node.js (2026 Developer Guide)",
     "description": "TypeScript and Node.js code examples using @google/genai for streaming chat sessions, structured Zod JSON outputs, and function calling.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-javascript-node-examples",
+    "url": "https://nadhebe.com/tutorials/gemini-api-javascript-node-examples/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-api\", \"javascript\", \"typescript\", \"nodejs\", \"developer-guide\"]"
@@ -1702,7 +972,7 @@
   {
     "title": "Gemini API Key Not Working? How to Fix 403, 429 & Quota Errors",
     "description": "Troubleshooting guide for fixing common Google Gemini API errors including API Key Not Found, 403 Forbidden, 429 Rate Limit, and INVALID_ARGUMENT.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting",
+    "url": "https://nadhebe.com/tutorials/gemini-api-key-not-working-troubleshooting/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-api\", \"troubleshooting\", \"error-handling\", \"api-key\", \"developer-guide\"]"
@@ -1712,7 +982,7 @@
   {
     "title": "Gemini API Examples for Python: Complete Developer Guide (2026)",
     "description": "Hands-on Python code samples for text generation, structured JSON outputs, image vision parsing, and streaming responses with the Google Gen AI SDK.",
-    "url": "https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial",
+    "url": "https://nadhebe.com/tutorials/gemini-api-python-examples-tutorial/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-api\", \"python\", \"developer-guide\", \"code-examples\", \"sdk\"]"
@@ -1722,7 +992,7 @@
   {
     "title": "Google Flow AI Video Generation Guide (2026 Tutorial & Workflow)",
     "description": "Learn how to use Google Flow for AI video generation, pre-production storyboarding, Veo model integration, and cinematic camera prompts.",
-    "url": "https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide",
+    "url": "https://nadhebe.com/tutorials/google-flow-ai-video-generation-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"google-flow\", \"veo-video\", \"ai-video\", \"storyboard\", \"filmmaking\"]"
@@ -1732,7 +1002,7 @@
   {
     "title": "Gemini CLI Complete Setup & Command Guide (2026 Developer Tutorial)",
     "description": "Learn how to install, configure, and automate your terminal workflows with Gemini CLI on Windows, macOS, and Linux.",
-    "url": "https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli",
+    "url": "https://nadhebe.com/tutorials/how-to-install-and-use-gemini-cli/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-cli\", \"terminal\", \"cli-tools\", \"developer-workflow\", \"automation\"]"
@@ -1742,7 +1012,7 @@
   {
     "title": "Gemini CLI vs Claude Code: Terminal AI Coding Tools Compared (2026)",
     "description": "Head-to-head architectural breakdown comparing Google Gemini CLI and Anthropic Claude Code CLI on repo editing, terminal execution, and token cost.",
-    "url": "https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison",
+    "url": "https://nadhebe.com/comparisons/gemini-cli-vs-claude-code-comparison/",
     "category": "Comparisons",
     "tags": [
       "[\"gemini-cli\", \"claude-code\", \"cli-tools\", \"terminal\", \"comparison\"]"
@@ -1752,7 +1022,7 @@
   {
     "title": "Gemini Flash vs Gemini Pro: Benchmark & Cost Comparison (2026 Guide)",
     "description": "Architectural comparison evaluating speed, context window depth, reasoning accuracy, and pricing between Gemini Flash and Gemini Pro.",
-    "url": "https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison",
+    "url": "https://nadhebe.com/comparisons/gemini-flash-vs-gemini-pro-comparison/",
     "category": "Comparisons",
     "tags": [
       "[\"gemini-flash\", \"gemini-pro\", \"google-ai\", \"comparison\", \"benchmarks\"]"
@@ -1762,7 +1032,7 @@
   {
     "title": "Gemini Free vs Paid (Gemini Advanced Review): Is It Worth $20/Month?",
     "description": "Comprehensive comparison between Google Gemini Free and Gemini Advanced ($19.99/mo) covering model performance, context window, and Google Workspace integration.",
-    "url": "https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced",
+    "url": "https://nadhebe.com/comparisons/gemini-free-vs-paid-advanced/",
     "category": "Comparisons",
     "tags": [
       "[\"gemini-free-vs-paid\", \"gemini-advanced\", \"pricing\", \"google-one\", \"comparison\"]"
@@ -1772,7 +1042,7 @@
   {
     "title": "Gemini vs ChatGPT: 2026 Head-to-Head Developer Comparison",
     "description": "Comprehensive evaluation of Google Gemini 2.0/3.x vs OpenAI ChatGPT (GPT-4o/5) on coding, 2M context windows, vision, and API costs.",
-    "url": "https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026",
+    "url": "https://nadhebe.com/comparisons/gemini-vs-chatgpt-comparison-2026/",
     "category": "Comparisons",
     "tags": [
       "[\"gemini-vs-chatgpt\", \"gemini-ai\", \"chatgpt\", \"llm-comparison\", \"ai-tools\"]"
@@ -1782,7 +1052,7 @@
   {
     "title": "NotebookLM vs Gemini Notebook: Complete 2026 Architectural Comparison",
     "description": "Compare Google NotebookLM and Gemini Notebook on source grounding, audio overviews, multi-modal synthesis, and developer API workflows.",
-    "url": "https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison",
+    "url": "https://nadhebe.com/comparisons/notebooklm-vs-gemini-notebook-comparison/",
     "category": "Comparisons",
     "tags": [
       "[\"notebooklm\", \"gemini-notebook\", \"ai-research\", \"google-ai\", \"comparison\"]"
@@ -1791,18 +1061,18 @@
   },
   {
     "title": "Gemini API Pricing, Free Tier & Rate Limits (2026 Developer Breakdown)",
-    "description": "Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, model token costs, and pay-as-you-go billing.",
-    "url": "https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits",
+    "description": "Detailed breakdown of Google Gemini API pricing rates, free tier RPM/TPM limits, Gemini 2.0 Flash costs, and pay-as-you-go billing architecture.",
+    "url": "https://nadhebe.com/guides/gemini-api-pricing-free-tier-rate-limits/",
     "category": "Guides",
     "tags": [
-      "[\"gemini-api\", \"pricing\", \"rate-limits\", \"google-ai\", \"llm-costs\"]"
+      "[\"gemini-api\", \"pricing\", \"rate-limits\", \"google-ai\", \"llm-costs\", \"gemini-2.0-flash\"]"
     ],
     "pubDate": "2026-07-26T00:00:00.000Z"
   },
   {
     "title": "How to Get a Gemini API Key (2026 Developer Setup Guide)",
     "description": "Step-by-step tutorial on generating, securing, and configuring your Google Gemini API key for Python, Node.js, and CLI applications.",
-    "url": "https://nadhebe.com/guides/how-to-get-gemini-api-key",
+    "url": "https://nadhebe.com/guides/how-to-get-gemini-api-key/",
     "category": "Guides",
     "tags": [
       "[\"gemini-api\", \"google-ai\", \"api-key\", \"developer-tools\", \"python\", \"javascript\"]"
@@ -1812,7 +1082,7 @@
   {
     "title": "Google Gemini Omni Video Generation: The Complete Guide to AI-Powered Video Editing",
     "description": "Everything you need to know about Google's Gemini Omni and Omni Flash video generation models — from conversational video editing and avatar creation to developer API access and content transparency watermarks.",
-    "url": "https://nadhebe.com/news/gemini-omni-video-generation-guide",
+    "url": "https://nadhebe.com/news/gemini-omni-video-generation-guide/",
     "category": "News",
     "tags": [
       "[\"gemini-omni\", \"video-generation\", \"google-ai\", \"veo\", \"google-vids\", \"ai-video\", \"content-creation\"]"
@@ -1822,7 +1092,7 @@
   {
     "title": "Google Gemini Spark: The AI Assistant That Works While You Sleep",
     "description": "An in-depth look at Gemini Spark — Google's proactive agentic assistant that manages your inbox, organizes workflows, and runs tasks autonomously in the background across Gmail, Calendar, and Drive.",
-    "url": "https://nadhebe.com/news/gemini-spark-agentic-assistant-guide",
+    "url": "https://nadhebe.com/news/gemini-spark-agentic-assistant-guide/",
     "category": "News",
     "tags": [
       "[\"gemini-spark\", \"google-ai\", \"agentic-ai\", \"productivity\", \"gmail\", \"google-workspace\", \"automation\"]"
@@ -1832,7 +1102,7 @@
   {
     "title": "Claude Code Cheat Sheet 2026: Commands, Keyboard Shortcuts, CLI Flags & Custom Skills",
     "description": "The definitive 2026 Claude Code CLI cheat sheet. Includes every keyboard shortcut, slash command, CLI automation flag, CLAUDE.md config, MCP server setup, and background agent workflow.",
-    "url": "https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts",
+    "url": "https://nadhebe.com/tutorials/claude-code-cheat-sheet-commands-shortcuts/",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"cli\", \"cheat-sheet\", \"developer-tools\", \"productivity\", \"anthropic\"]"
@@ -1842,7 +1112,7 @@
   {
     "title": "Claude Desktop Download & Setup Guide: Installation, MCP Tools & Permissions",
     "description": "A complete guide to downloading, installing, and configuring Anthropic's Claude Desktop application on macOS and Windows, including local file permissions and MCP integration.",
-    "url": "https://nadhebe.com/tutorials/claude-desktop-download-installation-guide",
+    "url": "https://nadhebe.com/tutorials/claude-desktop-download-installation-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"claude-desktop\", \"installation\", \"mcp\", \"anthropic\", \"desktop-app\"]"
@@ -1852,7 +1122,7 @@
   {
     "title": "How to Build Custom Claude Code Skills & Subagents (Developer Guide)",
     "description": "A step-by-step tutorial on authoring custom skills, slash commands, and subagents for Claude Code CLI using SKILL.md, AGENT.md, and the Claude Agent SDK.",
-    "url": "https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills",
+    "url": "https://nadhebe.com/tutorials/how-to-build-custom-claude-code-skills/",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"cli\", \"custom-skills\", \"subagents\", \"claude-agent-sdk\", \"anthropic\"]"
@@ -1862,7 +1132,7 @@
   {
     "title": "How to Install and Set Up Claude Code CLI (Step-by-Step Developer Guide)",
     "description": "The definitive cross-platform guide to installing, configuring, and authenticating Anthropic's Claude Code CLI tool across macOS, Linux, and WSL.",
-    "url": "https://nadhebe.com/tutorials/how-to-install-claude-code-cli",
+    "url": "https://nadhebe.com/tutorials/how-to-install-claude-code-cli/",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"cli\", \"installation\", \"anthropic\", \"developer-tools\"]"
@@ -1872,7 +1142,7 @@
   {
     "title": "How to Use Gemini Canvas: Google's AI Workspace for Writing and Coding",
     "description": "A hands-on tutorial for using Gemini Canvas — Google's collaborative workspace for real-time document editing, code generation, and interactive prototyping with AI assistance.",
-    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-canvas",
+    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-canvas/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-canvas\", \"google-ai\", \"coding\", \"writing\", \"collaborative-workspace\", \"prototyping\", \"productivity\"]"
@@ -1882,7 +1152,7 @@
   {
     "title": "How to Use Gemini Notebook (Formerly NotebookLM): Complete 2026 Tutorial",
     "description": "A step-by-step tutorial for using Google's rebranded Gemini Notebook — from setting up your first notebook to executing code in the secure cloud computer, generating PPTX presentations, and syncing across Google Search.",
-    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-notebook",
+    "url": "https://nadhebe.com/tutorials/how-to-use-gemini-notebook/",
     "category": "Tutorials",
     "tags": [
       "[\"gemini-notebook\", \"notebooklm\", \"google-ai\", \"research\", \"cloud-computing\", \"data-analysis\", \"productivity\"]"
@@ -1892,7 +1162,7 @@
   {
     "title": "How to Install and Run Claude Code CLI on Windows (PowerShell & WSL2 Guide)",
     "description": "A complete step-by-step tutorial for developers to install, configure, and troubleshoot Anthropic's Claude Code CLI tool natively on Windows PowerShell and inside WSL2.",
-    "url": "https://nadhebe.com/tutorials/installing-claude-code-cli-windows",
+    "url": "https://nadhebe.com/tutorials/installing-claude-code-cli-windows/",
     "category": "Tutorials",
     "tags": [
       "[\"claude\", \"cli\", \"windows\", \"wsl2\", \"powershell\", \"anthropic\"]"
@@ -1902,7 +1172,7 @@
   {
     "title": "ChatGPT vs Gemini vs Claude in 2026: The Definitive AI Comparison",
     "description": "An unbiased, benchmark-backed comparison of ChatGPT (GPT-5.x), Google Gemini (3.6 Flash), and Anthropic Claude (Sonnet 4) across coding, reasoning, multimodal tasks, pricing, and real-world performance.",
-    "url": "https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026",
+    "url": "https://nadhebe.com/comparisons/chatgpt-vs-gemini-vs-claude-2026/",
     "category": "Comparisons",
     "tags": [
       "[\"chatgpt\", \"gemini\", \"claude\", \"ai-comparison\", \"llm\", \"gpt-5\", \"anthropic\", \"google-ai\"]"
@@ -1912,7 +1182,7 @@
   {
     "title": "Kimi K3 vs DeepSeek R1: Architecture, Context, Coding and Deployment Compared",
     "description": "A technical comparison of Moonshot AI's Kimi K3 (2.8T MoE) and DeepSeek R1 (671B MoE), evaluating attention mechanics, context scaling, reasoning loops, API pricing, and deployment requirements.",
-    "url": "https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison",
+    "url": "https://nadhebe.com/comparisons/kimi-k3-vs-deepseek-r1-comparison/",
     "category": "Comparisons",
     "tags": [
       "[kimi-k3, deepseek-r1, open-weight, moe-models, llm-benchmarks]"
@@ -1922,7 +1192,7 @@
   {
     "title": "OpenAI Codex vs Claude Code CLI vs OpenCode: Terminal AI Agent Comparison",
     "description": "A head-to-head architectural and benchmark comparison of OpenAI Codex, Anthropic's Claude Code CLI, and open-source OpenCode terminal agents.",
-    "url": "https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode",
+    "url": "https://nadhebe.com/comparisons/openaicodex-vs-claude-code-vs-opencode/",
     "category": "Comparisons",
     "tags": [
       "[\"claude\", \"codex\", \"opencode\", \"cli\", \"ai-agents\", \"benchmarks\", \"comparison\"]"
@@ -1932,7 +1202,7 @@
   {
     "title": "vLLM vs SGLang vs TGI: Which LLM Inference Engine Should You Use?",
     "description": "An architectural and engineering comparison of vLLM, SGLang, and Hugging Face TGI, covering memory allocation, prefix caching, continuous batching, and deployment trade-offs.",
-    "url": "https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison",
+    "url": "https://nadhebe.com/comparisons/vllm-vs-sglang-vs-tgi-inference-engine-comparison/",
     "category": "Comparisons",
     "tags": [
       "[vllm, sglang, tgi, llmops, inference, architecture]"
@@ -1942,7 +1212,7 @@
   {
     "title": "Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering",
     "description": "A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees.",
-    "url": "https://nadhebe.com/best-practices/claude-code-best-practices-vibe-coding-to-production",
+    "url": "https://nadhebe.com/best-practices/claude-code-best-practices-vibe-coding-to-production/",
     "category": "Best Practices",
     "tags": [
       "[\"claude\", \"cli\", \"best-practices\", \"vibe-coding\", \"devops\", \"enterprise\", \"anthropic\"]"
@@ -1950,19 +1220,9 @@
     "pubDate": "2026-07-25T00:00:00.000Z"
   },
   {
-    "title": "The Ultimate Claude Code Resource List 2026: Top MCP Servers, Skills, Subagents & Plugins",
-    "description": "The definitive curated directory of Claude Code ecosystem resources. Includes top verified MCP servers, custom skills, subagents, VS Code extensions, and CLI tools.",
-    "url": "https://nadhebe.com/tools/ultimate-claude-code-resource-list-agents-skills-mcp",
-    "category": "Tools",
-    "tags": [
-      "[\"claude\", \"cli\", \"mcp-servers\", \"skills\", \"subagents\", \"developer-tools\", \"awesome-list\"]"
-    ],
-    "pubDate": "2026-07-25T00:00:00.000Z"
-  },
-  {
     "title": "Anthropic Claude Certification Guide: Exams, Credentials & Partner Academy Requirements",
     "description": "A comprehensive developer and architect guide to Anthropic's official Claude Certification Program, covering exam tracks, domain weightings, Pearson VUE proctoring, and Credly badges.",
-    "url": "https://nadhebe.com/guides/anthropic-claude-certification-developer-guide",
+    "url": "https://nadhebe.com/guides/anthropic-claude-certification-developer-guide/",
     "category": "Guides",
     "tags": [
       "[\"anthropic\", \"claude\", \"certification\", \"pearson-vue\", \"credly\", \"ai-education\"]"
@@ -1972,7 +1232,7 @@
   {
     "title": "Inside Claude Code Agent: Terminal Loop Architecture, Tool Calling & Permission Controls",
     "description": "An architectural deep dive into how Anthropic's Claude Code operates as an autonomous agent in your terminal, handling file edits, git workflows, AST indexing, and security prompts.",
-    "url": "https://nadhebe.com/guides/claude-code-agent-loop-architecture",
+    "url": "https://nadhebe.com/guides/claude-code-agent-loop-architecture/",
     "category": "Guides",
     "tags": [
       "[\"claude\", \"agent\", \"architecture\", \"cli\", \"anthropic\", \"software-design\"]"
@@ -1982,7 +1242,7 @@
   {
     "title": "Claude Code Complete Guide 2026: From Beginner to Power User",
     "description": "The definitive guide to Anthropic's Claude Code CLI. Master installation, permission modes, CLAUDE.md configuration, multi-file refactoring, MCP tools, and CI/CD automation.",
-    "url": "https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user",
+    "url": "https://nadhebe.com/guides/claude-code-complete-guide-beginner-to-power-user/",
     "category": "Guides",
     "tags": [
       "[\"claude\", \"cli\", \"guide\", \"developer-tools\", \"productivity\", \"anthropic\"]"
@@ -1992,7 +1252,7 @@
   {
     "title": "What is Claude Cowork? Desktop Agent Setup, Local Permissions & Workflow Guide",
     "description": "A deep dive into Anthropic's Claude Cowork feature—explaining local desktop workspace operations, security sandboxing, permission controls, and real-world workflows.",
-    "url": "https://nadhebe.com/guides/claude-cowork-desktop-agent-guide",
+    "url": "https://nadhebe.com/guides/claude-cowork-desktop-agent-guide/",
     "category": "Guides",
     "tags": [
       "[\"claude\", \"claude-cowork\", \"desktop-agent\", \"productivity\", \"anthropic\", \"ai-agents\"]"
@@ -2002,7 +1262,7 @@
   {
     "title": "Gemini 3.6 Flash: Complete Developer Guide to Google's Fastest AI Model",
     "description": "A comprehensive guide to Gemini 3.6 Flash — Google's latest workhorse AI model optimized for coding, reasoning, and agentic workflows. Covers benchmarks, pricing, API setup, and GitHub Copilot integration.",
-    "url": "https://nadhebe.com/guides/gemini-3-6-flash-complete-guide",
+    "url": "https://nadhebe.com/guides/gemini-3-6-flash-complete-guide/",
     "category": "Guides",
     "tags": [
       "[\"gemini\", \"gemini-3.6-flash\", \"google-ai\", \"api\", \"coding\", \"github-copilot\", \"developer-tools\"]"
@@ -2012,7 +1272,7 @@
   {
     "title": "How to Generate Music with Google Gemini and Lyria 3: Complete Guide",
     "description": "A deep dive into Google Gemini's music generation capabilities powered by Lyria 3 — create custom songs from text prompts, photos, and video clips with full stereo audio and SynthID watermarking.",
-    "url": "https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide",
+    "url": "https://nadhebe.com/guides/gemini-music-generation-lyria-3-guide/",
     "category": "Guides",
     "tags": [
       "[\"gemini-music\", \"lyria-3\", \"google-ai\", \"music-generation\", \"ai-audio\", \"synthid\", \"creative-ai\"]"
@@ -2022,7 +1282,7 @@
   {
     "title": "Google AI Certification Costs: Free Skill Badges vs $200 Exam Credentials Explained",
     "description": "A transparent breakdown of Google Cloud AI certification costs, distinguishing free Google Cloud Skills Boost courses and completion badges from paid $125-$200 proctored exams.",
-    "url": "https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid",
+    "url": "https://nadhebe.com/guides/google-ai-certification-cost-free-vs-paid/",
     "category": "Guides",
     "tags": [
       "[\"google\", \"ai-certification\", \"google-cloud\", \"skills-boost\", \"machine-learning\", \"ai-education\"]"
@@ -2032,7 +1292,7 @@
   {
     "title": "Fixing vLLM Out Of Memory (OOM) Errors: KV Cache & Memory Tuning",
     "description": "A developer troubleshooting guide to resolving torch.cuda.OutOfMemoryError and tuning gpu_memory_utilization in vLLM deployments.",
-    "url": "https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide",
+    "url": "https://nadhebe.com/tutorials/vllm-gpu-out-of-memory-oom-troubleshooting-guide/",
     "category": "Tutorials",
     "tags": [
       "[\"vllm\", \"cuda-oom\", \"gpu-optimization\", \"llm-ops\", \"troubleshooting\"]"
@@ -2042,7 +1302,7 @@
   {
     "title": "vLLM vs Ollama: Architectural & Memory Management Comparison",
     "description": "An evidence-based architectural comparison of vLLM and Ollama for serving open-weight LLMs, memory management, and API concurrency.",
-    "url": "https://nadhebe.com/comparisons/vllm-vs-ollama-architectural-comparison",
+    "url": "https://nadhebe.com/comparisons/vllm-vs-ollama-architectural-comparison/",
     "category": "Comparisons",
     "tags": [
       "[\"vllm\", \"ollama\", \"llm-inference\", \"open-source-ai\", \"architecture\"]"
@@ -2052,7 +1312,7 @@
   {
     "title": "Moonshot AI Releases Kimi K3: The 2.8 Trillion Parameter Open-Weight Pioneer",
     "description": "Moonshot AI has officially launched Kimi K3, a 2.8T parameter Mixture of Experts flagship open-weight model with a 1 million token context window and native vision inputs.",
-    "url": "https://nadhebe.com/news/kimi-k3-moonshot-ai-release",
+    "url": "https://nadhebe.com/news/kimi-k3-moonshot-ai-release/",
     "category": "News",
     "tags": [
       "[\"kimi-k3\", \"moonshot-ai\", \"open-weight\", \"moe-models\", \"release\"]"
@@ -2062,7 +1322,7 @@
   {
     "title": "Step-by-Step: Generating Support-Free 3D Models with Kimi K3",
     "description": "A developer tutorial on generating support-free physical 3D models and mechanical assemblies using Kimi K3's scripting capabilities.",
-    "url": "https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial",
+    "url": "https://nadhebe.com/tutorials/kimi-k3-3d-modeling-tutorial/",
     "category": "Tutorials",
     "tags": [
       "[\"kimi-k3\", \"3d-modeling\", \"3d-printing\", \"openscad\", \"tutorials\"]"
@@ -2070,19 +1330,9 @@
     "pubDate": "2026-07-19T00:00:00.000Z"
   },
   {
-    "title": "The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development",
-    "description": "Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.",
-    "url": "https://nadhebe.com/prompts/kimi-k3-structured-prompt-engineering-framework",
-    "category": "Prompts",
-    "tags": [
-      "[\"kimi-k3\", \"prompt-engineering\", \"app-development\", \"game-dev\", \"structured-prompts\"]"
-    ],
-    "pubDate": "2026-07-19T00:00:00.000Z"
-  },
-  {
     "title": "Kimi K3 vs Claude Fable 5 vs GPT-5.6 Soul: The Ultimate Frontier LLM Battle",
     "description": "An in-depth technical comparison of Moonshot AI's open-weight Kimi K3 against closed flagships GPT-5.6 Soul and Claude Fable 5 on pricing, architecture, and reasoning.",
-    "url": "https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul",
+    "url": "https://nadhebe.com/comparisons/kimi-k3-vs-claude-fable-5-vs-gpt-5-6-soul/",
     "category": "Comparisons",
     "tags": [
       "[\"kimi-k3\", \"claude-fable-5\", \"gpt-5.6\", \"llm-comparison\", \"benchmarks\"]"
@@ -2092,7 +1342,7 @@
   {
     "title": "Maximizing Kimi K3: Best Practices for 1M Token Context Windows",
     "description": "Discover developer best practices for managing context window scaling, code injection, and prompt alignment in Moonshot AI's Kimi K3.",
-    "url": "https://nadhebe.com/best-practices/kimi-k3-context-window-best-practices",
+    "url": "https://nadhebe.com/best-practices/kimi-k3-context-window-best-practices/",
     "category": "Best Practices",
     "tags": [
       "[\"kimi-k3\", \"context-window\", \"developer-practices\", \"codebase-management\", \"optimization\"]"
@@ -2102,17 +1352,27 @@
   {
     "title": "Procedural Prototyping: Kimi K3 Use Cases in Modern Game Design",
     "description": "Explore the core use cases of Moonshot AI's Kimi K3 in procedural game creation, rapid layout testing, and generating self-contained browser simulations.",
-    "url": "https://nadhebe.com/use-cases/kimi-k3-game-development-use-cases",
-    "category": "Use Cases",
+    "url": "https://nadhebe.com/guides/kimi-k3-game-development-use-cases/",
+    "category": "Guides",
     "tags": [
       "[\"kimi-k3\", \"use-cases\", \"game-dev\", \"procedural-generation\", \"rapid-prototyping\"]"
     ],
     "pubDate": "2026-07-19T00:00:00.000Z"
   },
   {
+    "title": "The 4-Pillar Prompt Engineering Framework for Kimi K3 App Development",
+    "description": "Discover the 4-pillar structured prompt engineering framework (Setting, Mechanics, Constraints, Feasibility) optimized for building games and apps with Kimi K3.",
+    "url": "https://nadhebe.com/guides/kimi-k3-structured-prompt-engineering-framework/",
+    "category": "Guides",
+    "tags": [
+      "[\"kimi-k3\", \"prompt-engineering\", \"app-development\", \"game-dev\", \"structured-prompts\"]"
+    ],
+    "pubDate": "2026-07-19T00:00:00.000Z"
+  },
+  {
     "title": "OpenAI Launches GPT-5.6: Soul Tiers Redefine Autonomous AI",
     "description": "OpenAI has officially released GPT-5.6 featuring the Soul flagship model alongside Terra and Luna, introducing a 1 million token context window and Salt safety.",
-    "url": "https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra",
+    "url": "https://nadhebe.com/news/openai-gpt-5-6-release-soul-ultra/",
     "category": "News",
     "tags": [
       "[\"gpt-5.6\", \"openai\", \"release\", \"news\", \"models\"]"
@@ -2120,9 +1380,9 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "How to Use Google Flow Storyboard Studio: Script Uploads, Custom Characters & Scenes",
-    "description": "A step-by-step tutorial on importing scripts, uploading custom character reference images, inserting scenes, and locking visual consistency in Google Flow.",
-    "url": "https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow",
+    "title": "Google Flow Storyboard Studio: Step-by-Step Tutorial (2026)",
+    "description": "Learn Google Flow Storyboard Studio step by step: import a script, keep characters consistent, add scenes, and render shots with Veo.",
+    "url": "https://nadhebe.com/tutorials/building-pre-production-storyboards-google-flow/",
     "category": "Tutorials",
     "tags": [
       "[\"google-flow\", \"tutorials\", \"storyboard\", \"custom-characters\", \"google-labs\"]"
@@ -2130,9 +1390,19 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
+    "title": "Google Flow Storyboard Studio: How to Access, Use & Script AI Storyboards (2026)",
+    "description": "Master Google Flow Storyboard Studio in Google Labs. Learn how to access experimental features, upload scripts, configure Veo shots, and fix common errors.",
+    "url": "https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide/",
+    "category": "Tutorials",
+    "tags": [
+      "[\"google-flow\", \"storyboard-studio\", \"pre-production\", \"troubleshooting\", \"google-labs\"]"
+    ],
+    "pubDate": "2026-07-17T00:00:00.000Z"
+  },
+  {
     "title": "Step-by-Step Tutorial: Setting Up the YouTube Automation Agent",
     "description": "A tutorial outlining how to clone, configure, and run the multi-agent YouTube Automation Agent using SQLite and Python.",
-    "url": "https://nadhebe.com/tutorials/setting-up-youtube-automation-agent",
+    "url": "https://nadhebe.com/tutorials/setting-up-youtube-automation-agent/",
     "category": "Tutorials",
     "tags": [
       "[\"tutorials\", \"setup\", \"youtube-automation\", \"python\"]"
@@ -2140,30 +1410,20 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance",
-    "description": "Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.",
-    "url": "https://nadhebe.com/youtube/fable-5-vs-gpt-5-5-comparison",
-    "category": "YouTube Articles",
+    "title": "Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding",
+    "description": "An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.",
+    "url": "https://nadhebe.com/reviews/fable-5-ai-model-review/",
+    "category": "Tool Reviews",
     "tags": [
-      "[\"fable-5\", \"gpt-5.5\", \"comparisons\", \"models\", \"anthropic\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
-    "title": "Google Flow Storyboard Studio Guide: Missing Script Fix & Troubleshooting (2026)",
-    "description": "A complete guide to Google Flow Storyboard Studio in Google Labs, featuring solutions for missing scripts, blank panels, WebGL render bugs, and tool navigation.",
-    "url": "https://nadhebe.com/youtube/google-flow-storyboard-studio-guide",
-    "category": "YouTube Articles",
-    "tags": [
-      "[\"google-flow\", \"storyboard-studio\", \"pre-production\", \"troubleshooting\", \"google-labs\"]"
+      "[\"fable-5\", \"reviews\", \"llm\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
     "title": "Unpacking GPT-5.6's Autonomous Engine: Inside OpenAI's Soul Model",
     "description": "Discover how OpenAI's July 2026 release of GPT-5.6 introduces the Soul model, a massive shift in agentic capabilities with a 1 million token context window.",
-    "url": "https://nadhebe.com/youtube/gpt-5-6-autonomous-engine",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/reviews/gpt-5-6-autonomous-engine/",
+    "category": "Tool Reviews",
     "tags": [
       "[\"gpt-5.6\", \"openai\", \"agentic-ai\", \"soul-model\", \"models\"]"
     ],
@@ -2172,27 +1432,27 @@
   {
     "title": "Inside the Multi-Agent YouTube Automation System",
     "description": "Analyze the architecture of the open-source YouTube Automation Agent, featuring a seven-agent workflow coordinated by an SQLite database.",
-    "url": "https://nadhebe.com/youtube/open-source-youtube-automation-agent",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/reviews/open-source-youtube-automation-agent/",
+    "category": "Tool Reviews",
     "tags": [
       "[\"multi-agent\", \"sqlite\", \"youtube-automation\", \"open-source\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Claude Fable 5 AI Model Review: A New Challenger in Reasoning and Coding",
-    "description": "An in-depth review of Anthropic's Claude Fable 5 LLM, exploring its pros, cons, pricing, context window capabilities, and safety architecture.",
-    "url": "https://nadhebe.com/reviews/fable-5-ai-model-review",
-    "category": "Tool Reviews",
+    "title": "Claude Fable 5 vs GPT-5.5: The Battle for AI Model Dominance",
+    "description": "Explore the head-to-head battle between Anthropic's Claude Fable 5 and OpenAI's GPT-5.5, analyzing performance, context windows, and pricing.",
+    "url": "https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison/",
+    "category": "Comparisons",
     "tags": [
-      "[\"fable-5\", \"reviews\", \"llm\", \"anthropic\"]"
+      "[\"fable-5\", \"gpt-5.5\", \"comparisons\", \"models\", \"anthropic\"]"
     ],
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
     "title": "Claude Fable 5 vs GPT-5.5: Detailed Benchmarks and Coding Tests",
     "description": "A comprehensive benchmarking study of Anthropic's Claude Fable 5 and OpenAI's GPT-5.5 on logical reasoning, API integration, and codebase migrations.",
-    "url": "https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks",
+    "url": "https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-detailed-benchmarks/",
     "category": "Comparisons",
     "tags": [
       "[\"fable-5\", \"gpt-5.5\", \"comparisons\", \"benchmarks\", \"anthropic\"]"
@@ -2202,7 +1462,7 @@
   {
     "title": "GPT-5.6 Soul vs GPT-4o: Autonomous Performance Comparison",
     "description": "A head-to-head performance comparison between OpenAI's GPT-5.6 Soul model and GPT-4o on multi-step reasoning, coding sandboxes, and safety.",
-    "url": "https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance",
+    "url": "https://nadhebe.com/comparisons/gpt-5-6-vs-gpt-4o-agentic-performance/",
     "category": "Comparisons",
     "tags": [
       "[\"gpt-5.6\", \"gpt-4o\", \"comparisons\", \"benchmarks\", \"models\"]"
@@ -2212,7 +1472,7 @@
   {
     "title": "LLM Autonomous Loops: Best Practices for Token and Cost Management",
     "description": "Mitigate compute consumption and prevent bill shock in agentic architectures like GPT-5.6 Soul using rate limits, caching, and loop breakers.",
-    "url": "https://nadhebe.com/best-practices/llm-autonomous-loop-cost-management",
+    "url": "https://nadhebe.com/best-practices/llm-autonomous-loop-cost-management/",
     "category": "Best Practices",
     "tags": [
       "[\"cost-management\", \"llm-ops\", \"best-practices\", \"agents\", \"models\"]"
@@ -2222,7 +1482,7 @@
   {
     "title": "Multi-Agent System Design: State Isolation and Coordination",
     "description": "Analyze best practices for implementing state isolation and coordination layers in complex multi-agent networks.",
-    "url": "https://nadhebe.com/best-practices/multi-agent-state-isolation-design",
+    "url": "https://nadhebe.com/best-practices/multi-agent-state-isolation-design/",
     "category": "Best Practices",
     "tags": [
       "[\"multi-agent\", \"best-practices\", \"software-architecture\", \"system-design\"]"
@@ -2230,29 +1490,9 @@
     "pubDate": "2026-07-17T00:00:00.000Z"
   },
   {
-    "title": "Google Flow vs Storyboard Studio: Features, 3D Animation & Pre-Production Overview",
-    "description": "An in-depth review comparing regular Google Flow with Storyboard Studio, exploring 3D stylized animation capabilities, asset profiles, and export specs.",
-    "url": "https://nadhebe.com/tools/google-flow-storyboard-studio-overview",
-    "category": "Tools",
-    "tags": [
-      "[\"google-flow\", \"tools\", \"pre-production\", \"3d-animation\", \"google-labs\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
-    "title": "The YouTube Automation Agent: Multi-Agent Feature Guide",
-    "description": "Explore the features of the YouTube Automation Agent, including automatic video drafting, metadata generation, and thumbnail variants creation.",
-    "url": "https://nadhebe.com/tools/youtube-automation-agent-multi-agent-system",
-    "category": "Tools",
-    "tags": [
-      "[\"tools\", \"youtube-automation\", \"open-source\", \"features\"]"
-    ],
-    "pubDate": "2026-07-17T00:00:00.000Z"
-  },
-  {
     "title": "The Producer's Guide to AI-Assisted Pre-Production Workflows",
     "description": "Analyze how integrating tools like Google Flow Storyboard Studio changes timeline optimization, budgeting, and asset planning in filmmaking.",
-    "url": "https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows",
+    "url": "https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows/",
     "category": "Guides",
     "tags": [
       "[\"pre-production\", \"guides\", \"workflows\", \"film-tech\", \"google-labs\"]"
@@ -2262,7 +1502,7 @@
   {
     "title": "The Developer's Guide to GPT-5.6 Autonomous Agent Orchestration",
     "description": "Learn how to build, deploy, and monitor agent loops using GPT-5.6's Soul flagship capabilities, model tiers, and tool-calling sandboxes.",
-    "url": "https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration",
+    "url": "https://nadhebe.com/guides/gpt-5-6-autonomous-agent-orchestration/",
     "category": "Guides",
     "tags": [
       "[\"gpt-5.6\", \"agentic-ai\", \"guides\", \"orchestration\", \"models\"]"
@@ -2272,8 +1512,8 @@
   {
     "title": "The SQLite State-Sharing Pattern for Multi-Agent Architectures",
     "description": "A deep dive into using SQLite as a shared state manager to isolate errors and coordinate parallel tasks in multi-agent networks.",
-    "url": "https://nadhebe.com/frameworks/sqlite-state-sharing-multi-agent-architecture",
-    "category": "Frameworks",
+    "url": "https://nadhebe.com/guides/sqlite-state-sharing-multi-agent-architecture/",
+    "category": "Guides",
     "tags": [
       "[\"sqlite\", \"architecture\", \"multi-agent\", \"frameworks\"]"
     ],
@@ -2282,7 +1522,7 @@
   {
     "title": "Instatic Static CMS Debuts as MIT Licensed Open-Source Alternative",
     "description": "CoreBunch releases Instatic, a self-hosted visual CMS built on Bun, designed to challenge Webflow and Framer by publishing clean semantic code under the MIT license.",
-    "url": "https://nadhebe.com/news/instatic-open-source-release",
+    "url": "https://nadhebe.com/news/instatic-open-source-release/",
     "category": "News",
     "tags": [
       "[instatic, release, open-source, webflow-alternative]"
@@ -2292,7 +1532,7 @@
   {
     "title": "How to Deploy Instatic CMS on a VPS Using Docker Compose",
     "description": "Learn step-by-step how to deploy the open-source self-hosted Instatic CMS on a Virtual Private Server (VPS) using Docker Compose and SQLite.",
-    "url": "https://nadhebe.com/tutorials/deploying-instatic-docker-vps",
+    "url": "https://nadhebe.com/tutorials/deploying-instatic-docker-vps/",
     "category": "Tutorials",
     "tags": [
       "[instatic, docker, vps, deployment]"
@@ -2302,7 +1542,7 @@
   {
     "title": "How to Install and Set Up Instatic CMS Locally",
     "description": "A complete step-by-step developer's guide to cloning, installing Bun, and running Instatic CMS locally on Windows, macOS, or Linux.",
-    "url": "https://nadhebe.com/tutorials/installing-instatic-cms-locally",
+    "url": "https://nadhebe.com/tutorials/installing-instatic-cms-locally/",
     "category": "Tutorials",
     "tags": [
       "[instatic, setup, local-development, bun]"
@@ -2312,8 +1552,8 @@
   {
     "title": "Video Walkthrough: Local Setup and HTML Importer Mechanics in Instatic",
     "description": "Watch a video setup guide for Instatic CMS, walking through powershell commands, Bun installation, SQLite backend configuration, and importing layout files.",
-    "url": "https://nadhebe.com/youtube/instatic-local-setup-importer",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/tutorials/instatic-local-setup-importer/",
+    "category": "Tutorials",
     "tags": [
       "[instatic, youtube, setup, importer]"
     ],
@@ -2322,8 +1562,8 @@
   {
     "title": "Instatic Visual CMS: Video Walkthrough and Overview",
     "description": "Watch a comprehensive video walkthrough of Instatic CMS, exploring its multi-breakpoint canvas, CSS token compiler, and SQLite database engine.",
-    "url": "https://nadhebe.com/youtube/instatic-visual-cms-walkthrough",
-    "category": "YouTube Articles",
+    "url": "https://nadhebe.com/tutorials/instatic-visual-cms-walkthrough/",
+    "category": "Tutorials",
     "tags": [
       "[instatic, youtube, walkthrough, video]"
     ],
@@ -2332,7 +1572,7 @@
   {
     "title": "Instatic Visual CMS Review: The Open Source Webflow Challenger?",
     "description": "A comprehensive developer review of Instatic CMS, evaluating its visual editor interface, Bun-powered runtime speed, and secure plugin ecosystem.",
-    "url": "https://nadhebe.com/reviews/instatic-visual-cms-review",
+    "url": "https://nadhebe.com/reviews/instatic-visual-cms-review/",
     "category": "Tool Reviews",
     "tags": [
       "[instatic, reviews, cms, visual-builder]"
@@ -2340,19 +1580,9 @@
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "AI Assisted Design: System Prompts and Workflows for Instatic CMS",
-    "description": "Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.",
-    "url": "https://nadhebe.com/prompts/instatic-ai-assisted-design-prompts",
-    "category": "Prompts",
-    "tags": [
-      "[instatic, ai, prompts, system-prompts]"
-    ],
-    "pubDate": "2026-07-10T00:00:00.000Z"
-  },
-  {
     "title": "Instatic vs Webflow vs Framer: Which Visual Builder Should You Choose?",
     "description": "A head-to-head performance and developer experience benchmark contrasting Instatic CMS, Webflow, and Framer on code cleanliness, hosting, and costs.",
-    "url": "https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer",
+    "url": "https://nadhebe.com/comparisons/instatic-vs-webflow-vs-framer/",
     "category": "Comparisons",
     "tags": [
       "[instatic, webflow, framer, comparison]"
@@ -2362,7 +1592,7 @@
   {
     "title": "Best Practices for Scaling Design Tokens in Instatic CMS",
     "description": "Master the configuration of class-based style selectors and CSS variable design tokens inside Instatic CMS for clean, maintainable web design at scale.",
-    "url": "https://nadhebe.com/best-practices/instatic-design-tokens-scaling",
+    "url": "https://nadhebe.com/best-practices/instatic-design-tokens-scaling/",
     "category": "Best Practices",
     "tags": [
       "[instatic, design-tokens, css, styling]"
@@ -2370,39 +1600,29 @@
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Enterprise Editorial Governance and Client Hand-offs with Instatic CMS",
-    "description": "How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.",
-    "url": "https://nadhebe.com/use-cases/instatic-enterprise-editorial-governance",
-    "category": "Use Cases",
+    "title": "AI Assisted Design: System Prompts and Workflows for Instatic CMS",
+    "description": "Discover a collection of optimized system prompts and workflows to guide Instatic's built-in AI copilot for styling and layouts.",
+    "url": "https://nadhebe.com/guides/instatic-ai-assisted-design-prompts/",
+    "category": "Guides",
     "tags": [
-      "[instatic, enterprise, user-management, permissions]"
+      "[instatic, ai, prompts, system-prompts]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Understanding Instatic CMS HTML Importer Mechanics and Troubleshooting",
-    "description": "An engineering deep dive into Instatic CMS's HTML importer engine, exploring drag-and-drop template processing, file overrides, and site scripts.",
-    "url": "https://nadhebe.com/tools/instatic-html-importer-guide",
-    "category": "Tools",
+    "title": "Integrating Instatic CMS with Astro Islands and Modern Frameworks",
+    "description": "An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.",
+    "url": "https://nadhebe.com/guides/instatic-astro-islands-frameworks-integration/",
+    "category": "Guides",
     "tags": [
-      "[instatic, site-migration, tools, troubleshoot]"
-    ],
-    "pubDate": "2026-07-10T00:00:00.000Z"
-  },
-  {
-    "title": "Importing HTML Websites into Instatic CMS: Importer Mechanics",
-    "description": "A deep dive into Instatic's HTML and site importing engine, showing how raw markup is converted into editable selectors and components.",
-    "url": "https://nadhebe.com/tools/instatic-html-site-import-migration",
-    "category": "Tools",
-    "tags": [
-      "[instatic, HTML-import, site-migration, tools]"
+      "[instatic, astro, hydration, frontend-frameworks]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
     "title": "The Ultimate Architectural Guide to Instatic CMS",
     "description": "A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.",
-    "url": "https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide",
+    "url": "https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide/",
     "category": "Guides",
     "tags": [
       "[instatic, guide, architecture, backend]"
@@ -2410,20 +1630,20 @@
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
-    "title": "Integrating Instatic CMS with Astro Islands and Modern Frameworks",
-    "description": "An in-depth guide on importing Instatic static HTML blocks and using Astro Islands to add interactive React, Vue, or Svelte components.",
-    "url": "https://nadhebe.com/frameworks/instatic-astro-islands-frameworks-integration",
-    "category": "Frameworks",
+    "title": "Enterprise Editorial Governance and Client Hand-offs with Instatic CMS",
+    "description": "How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.",
+    "url": "https://nadhebe.com/guides/instatic-enterprise-editorial-governance/",
+    "category": "Guides",
     "tags": [
-      "[instatic, astro, hydration, frontend-frameworks]"
+      "[instatic, enterprise, user-management, permissions]"
     ],
     "pubDate": "2026-07-10T00:00:00.000Z"
   },
   {
     "title": "Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic",
     "description": "How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.",
-    "url": "https://nadhebe.com/case-studies/webflow-to-instatic-migration-savings",
-    "category": "Case Studies",
+    "url": "https://nadhebe.com/guides/webflow-to-instatic-migration-savings/",
+    "category": "Guides",
     "tags": [
       "[instatic, webflow, migration, hosting-costs]"
     ],

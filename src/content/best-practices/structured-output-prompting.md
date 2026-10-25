@@ -3,7 +3,7 @@ title: "Structured Output Prompting Best Practices"
 description: "Learn how to enforce 100% reliable JSON outputs from Large Language Models using Structured Outputs, JSON Schemas, and Tool Calling."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "best-practices"
+category: "Best Practices"
 tags: ["Prompt Engineering", "Structured Output", "JSON", "LLM", "OpenAI", "Anthropic"]
 heroImage: "/images/structured-output-prompting-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing chaotic data flowing into a structured rigid grid"

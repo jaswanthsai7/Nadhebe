@@ -3,7 +3,7 @@ title: "vLLM vs Ollama Production Benchmarks: Serving DeepSeek R1 and Llama Mode
 description: "Real-world production benchmarks comparing vLLM's PagedAttention continuous batching against Ollama's local GGUF execution for DeepSeek R1 and Llama 3."
 pubDate: 2026-08-03
 author: nadhebe-team
-category: "comparisons"
+category: "Comparisons"
 tags: ["vLLM", "Ollama", "DeepSeek R1", "PagedAttention", "LLM Benchmarks", "GPU Hosting"]
 heroImage: "/images/vllm-vs-ollama-benchmarks-hero.webp"
 heroAlt: "Minimalist vintage editorial illustration comparing vLLM throughput charts against Ollama local execution graphics on a soft terracotta background"

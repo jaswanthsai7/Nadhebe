@@ -12,8 +12,11 @@ export default {
       4: '4px',
       6: '6px',
       8: '8px',
+      10: '10px',
       12: '12px',
+      14: '14px',
       16: '16px',
+      18: '18px',
       20: '20px',
       24: '24px',
       28: '28px',
@@ -35,6 +38,13 @@ export default {
         sidebar: '240px',
       },
       colors: {
+        // Perchboard landing page (/perch) tokens. The ink/paper values are CSS variables
+        // defined on that page so they follow its light/dark theme.
+        'brand-cyan': '#0284C7',
+        'ink-graphite': 'var(--ink-graphite)',
+        'ink-subtle': 'var(--ink-subtle)',
+        'ink-muted': 'var(--ink-muted)',
+        'paper-border': 'var(--paper-border)',
         bg: {
           DEFAULT: '#FAFAFA',
           dark: '#0A0A0A',

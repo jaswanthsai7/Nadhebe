@@ -3,30 +3,34 @@ import ToolLayout from '@/components/tools/ToolLayout.astro';
 import CalculatorCard from '@/components/tools/CalculatorCard.astro';
 import ResultCard from '@/components/tools/ResultCard.astro';
 
-const title = 'SQL Query Formatter & Prettifier | Nadhebe';
+const title = 'SQL Formatter & Prettifier – Format Queries Client-Side | Nadhebe';
 const h1 = 'SQL Query Formatter & Prettifier';
-const description = 'Format and prettify SQL queries for PostgreSQL, MySQL, SQLite, and BigQuery. Uppercase keywords, align JOINs and WHERE clauses client-side.';
+const description = 'Format, prettify, and minify SQL queries client-side with multi-dialect support for PostgreSQL, MySQL, SQLite, T-SQL, BigQuery, and Snowflake. 100% private in-browser tool.';
 
 const faq = [
   {
-    question: 'What does the SQL Formatter do?',
-    answer: 'The SQL Formatter takes raw, unformatted, or minified SQL queries and formats them with consistent indentation, capitalized SQL keywords (SELECT, FROM, WHERE, JOIN), and structured clauses.',
+    question: 'What does the SQL Query Formatter do?',
+    answer: 'The SQL Formatter transforms raw, unformatted, or minified SQL queries into cleanly indented, human-readable code. It automatically capitalizes SQL keywords (SELECT, FROM, WHERE, JOIN), aligns clauses, indents nested subqueries and CTEs, and formats database functions according to dialect standards.',
   },
   {
     question: 'Which SQL dialects are supported?',
-    answer: 'Supports Standard ANSI SQL, PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server (T-SQL), and Google BigQuery.',
+    answer: 'The formatter supports 12+ dialects including PostgreSQL, MySQL, Standard ANSI SQL, SQLite, Microsoft SQL Server (T-SQL), Google BigQuery, Snowflake, MariaDB, DuckDB, Amazon Redshift, ClickHouse, and Apache Spark SQL.',
   },
   {
-    question: 'Why should SQL keywords be capitalized?',
-    answer: 'Capitalizing SQL keywords (e.g. `SELECT`, `GROUP BY`, `ORDER BY`) visually distinguishes structural command logic from table names and column identifiers.',
+    question: 'Why should SQL keywords be capitalized in queries?',
+    answer: 'Capitalizing SQL keywords (e.g., SELECT, FROM, WHERE, GROUP BY) provides instant visual separation between structural syntax commands and custom database identifiers such as table names, column names, and aliases. This improves code review speed and prevents syntax ambiguities.',
   },
   {
-    question: 'Does this tool format complex nested subqueries?',
-    answer: 'Yes! Subqueries enclosed in parentheses are recursively indented to maintain readability across deep joins.',
+    question: 'Does this SQL formatter handle subqueries, CTEs, and JOINs?',
+    answer: 'Yes. Subqueries enclosed in parentheses and Common Table Expressions (WITH clauses) are recursively indented. Complex multi-table JOINs (INNER, LEFT, RIGHT, FULL OUTER) and logical conditions (AND, OR) are cleanly structured with customizable indentation.',
   },
   {
-    question: 'Is my SQL query data kept private?',
-    answer: '100% private. Formatting is executed locally in your browser without sending database schemas or query strings to any external server.',
+    question: 'Can I minify or compact SQL queries with this tool?',
+    answer: 'Yes! Click "Minify / Flatten" to strip line comments and block comments, condense multiple whitespace gaps into single spaces, and produce a compact single-line query ideal for application environment variables, command-line interfaces, or embedded code strings.',
+  },
+  {
+    question: 'Is my SQL query or schema data stored or sent to a server?',
+    answer: 'No, 100% private. All parsing, beautification, and minification run entirely client-side in your web browser. Zero SQL text, schema information, table names, or database credentials ever leave your local computer.',
   },
 ];
 ---
@@ -44,38 +48,193 @@ const faq = [
       <!-- INPUT CARD -->
       <CalculatorCard title="RAW SQL QUERY INPUT">
         <div class="space-y-16">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <label for="sql-input-raw" class="block text-caption font-semibold text-ink dark:text-ink-dark">Raw / Minified SQL Query</label>
-              <button type="button" id="btn-load-sample-sql" class="text-xs text-accent dark:text-accent-dark hover:underline cursor-pointer">Load Sample Query</button>
+          
+          <!-- Dialect & Formatting Options Toolbar -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
+            <div>
+              <label for="sql-dialect" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">SQL Dialect</label>
+              <select
+                id="sql-dialect"
+                name="sql-dialect"
+                aria-label="Select SQL Dialect"
+                class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-sans"
+              >
+                <option value="postgresql" selected>PostgreSQL</option>
+                <option value="mysql">MySQL</option>
+                <option value="sql">Standard ANSI SQL</option>
+                <option value="sqlite">SQLite</option>
+                <option value="transactsql">SQL Server (T-SQL)</option>
+                <option value="bigquery">Google BigQuery</option>
+                <option value="snowflake">Snowflake</option>
+                <option value="mariadb">MariaDB</option>
+                <option value="duckdb">DuckDB</option>
+                <option value="redshift">Amazon Redshift</option>
+                <option value="clickhouse">ClickHouse</option>
+                <option value="spark">Apache Spark SQL</option>
+              </select>
             </div>
+
+            <div>
+              <label for="sql-indent" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Indentation</label>
+              <select
+                id="sql-indent"
+                name="sql-indent"
+                aria-label="Select Indentation Width"
+                class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-sans"
+              >
+                <option value="2" selected>2 Spaces</option>
+                <option value="4">4 Spaces</option>
+                <option value="tab">1 Tab</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="sql-keyword-case" class="block text-xs font-semibold text-ink dark:text-ink-dark mb-4">Keyword Case</label>
+              <select
+                id="sql-keyword-case"
+                name="sql-keyword-case"
+                aria-label="Select Keyword Casing"
+                class="w-full rounded-8 border border-border bg-surface2 px-10 py-6 text-caption font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer font-sans"
+              >
+                <option value="upper" selected>UPPERCASE</option>
+                <option value="lower">lowercase</option>
+                <option value="preserve">Preserve</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Sample Query Selection & Clear -->
+          <div class="flex flex-wrap items-center justify-between gap-8 pt-4">
+            <div class="flex items-center gap-8">
+              <label for="sql-sample-select" class="text-xs font-semibold text-muted dark:text-muted-dark whitespace-nowrap">Load Preset:</label>
+              <select
+                id="sql-sample-select"
+                name="sql-sample-select"
+                aria-label="Load Sample Query Preset"
+                class="rounded-6 border border-border bg-surface2 px-8 py-4 text-xs font-medium text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer"
+              >
+                <option value="" disabled selected>Choose a sample...</option>
+                <option value="cte">CTE & Window Function (Analytics)</option>
+                <option value="join">Multi-Table JOIN & Aggregates</option>
+                <option value="subquery">Nested Subquery & Filtering</option>
+                <option value="ddl">CREATE TABLE & Indexes (DDL)</option>
+              </select>
+            </div>
+
+            <button
+              type="button"
+              id="btn-clear-sql"
+              aria-label="Clear Raw SQL Input"
+              class="text-xs text-muted dark:text-muted-dark hover:text-red-500 dark:hover:text-red-400 cursor-pointer transition-colors"
+            >
+              Clear Editor
+            </button>
+          </div>
+
+          <!-- Raw Input Textarea -->
+          <div>
             <textarea
               id="sql-input-raw"
-              rows="12"
+              name="sql-input-raw"
+              rows="13"
+              aria-label="Raw SQL Query Input Text"
+              placeholder="Paste raw, unformatted, or minified SQL query here..."
               class="w-full rounded-12 border border-border bg-code p-12 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark leading-relaxed"
             ></textarea>
           </div>
 
-          <button
-            type="button"
-            id="btn-format-sql"
-            class="w-full rounded-8 bg-accent px-20 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
-          >
-            Prettify & Format SQL
-          </button>
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-2 gap-12">
+            <button
+              type="button"
+              id="btn-format-sql"
+              aria-label="Format and Prettify SQL Query"
+              class="inline-flex items-center justify-center gap-6 rounded-8 bg-accent px-16 py-10 text-caption font-sans font-semibold text-white hover:opacity-90 active:scale-[0.98] cursor-pointer shadow-soft transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-14 h-14 shrink-0"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              <span>Prettify & Format</span>
+            </button>
+
+            <button
+              type="button"
+              id="btn-minify-sql"
+              aria-label="Minify and Compact SQL Query"
+              class="inline-flex items-center justify-center gap-6 rounded-8 border border-border bg-surface2 px-16 py-10 text-caption font-sans font-semibold text-ink hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer shadow-subtle transition-all active:scale-[0.98]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-14 h-14 shrink-0"><path d="M4 14h6m-6 4h16M4 6h16M4 10h10"/></svg>
+              <span>Minify / 1-Line</span>
+            </button>
+          </div>
         </div>
       </CalculatorCard>
 
       <!-- OUTPUT CARD -->
       <ResultCard title="FORMATTED SQL OUTPUT">
-        <div class="space-y-20">
+        <div class="space-y-16">
           
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold uppercase text-muted dark:text-muted-dark">Prettified SQL Query</span>
-            <button type="button" id="btn-copy-sql" class="rounded-6 bg-accent px-12 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer">Copy SQL</button>
+          <!-- Status Banner & Query Metrics -->
+          <div class="flex flex-wrap items-center justify-between gap-8 pb-4">
+            <div id="sql-status-badge" class="inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-10 py-4 font-mono text-xs font-semibold text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+              <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="sql-status-text">Ready</span>
+            </div>
+
+            <div class="flex items-center gap-8 font-mono text-xs text-muted dark:text-muted-dark" id="sql-metrics-bar">
+              <span id="sql-lines-count">0 lines</span>
+              <span>•</span>
+              <span id="sql-chars-count">0 chars</span>
+            </div>
           </div>
 
-          <pre id="sql-output-text" class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-caption text-emerald-600 dark:border-border-dark dark:bg-code-dark dark:text-emerald-400 min-h-[300px] leading-relaxed whitespace-pre-wrap"></pre>
+          <!-- Error Alert Banner (Hidden by default) -->
+          <div id="sql-error-alert" class="hidden rounded-8 border border-red-500/30 bg-red-500/10 p-12 text-xs text-red-600 dark:text-red-400 font-mono leading-relaxed">
+            <div class="font-bold flex items-center gap-6 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-14 h-14 shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>Formatting Warning</span>
+            </div>
+            <div id="sql-error-message"></div>
+          </div>
+
+          <!-- Output Display Container -->
+          <div class="relative group">
+            <pre
+              id="sql-output-pre"
+              tabindex="0"
+              aria-label="Formatted SQL Result Output"
+              class="w-full overflow-x-auto rounded-12 border border-border bg-code p-16 font-mono text-xs text-ink focus:border-accent focus:outline-none dark:border-border-dark dark:bg-code-dark dark:text-ink-dark min-h-[300px] max-h-[500px] leading-relaxed whitespace-pre-wrap select-all transition-colors"
+            ><code id="sql-output-code" class="text-ink dark:text-ink-dark"></code></pre>
+          </div>
+
+          <!-- Secondary Toolbar: Download & Copy -->
+          <div class="flex items-center justify-end gap-10 pt-4">
+            <button
+              type="button"
+              id="btn-download-sql"
+              aria-label="Download Formatted SQL File"
+              class="inline-flex items-center gap-6 rounded-8 border border-border bg-surface2 px-14 py-6 font-sans text-xs font-semibold text-ink hover:border-accent hover:bg-surface dark:border-border-dark dark:bg-surface2-dark dark:text-ink-dark cursor-pointer shadow-subtle transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-12 h-12 shrink-0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download .sql</span>
+            </button>
+
+            <button
+              type="button"
+              id="btn-copy-sql-output"
+              aria-label="Copy Formatted SQL to Clipboard"
+              class="inline-flex items-center gap-6 rounded-8 bg-accent px-14 py-6 font-sans text-xs font-semibold text-white hover:opacity-90 cursor-pointer shadow-soft transition-all"
+            >
+              <span class="relative flex items-center justify-center w-12 h-12 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 copy-icon absolute transition-all duration-200 ease-out transform scale-100 opacity-100">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-12 w-12 check-icon absolute text-emerald-500 transition-all duration-200 ease-out transform scale-0 opacity-0">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span class="copy-label">Copy SQL</span>
+            </button>
+          </div>
 
         </div>
       </ResultCard>
@@ -84,75 +243,461 @@ const faq = [
   </div>
 
   <div slot="content">
-    <h2>SQL Query Formatting & Readability Guide</h2>
+    <h2>SQL Query Formatting, Beautification & Dialect Standards</h2>
     <p>
-      Clean SQL query formatting is essential for database administration, code reviews, and performance debugging. Properly indented SQL queries make complex JOIN operations and filter conditions immediately obvious.
+      Writing structured, human-readable SQL queries is crucial for database reliability, peer code reviews, and query performance debugging. Unformatted or minified SQL queries obscure database table relationships, join conditions, and subquery filters, drastically increasing the likelihood of unindexed full-table scans or logical filter errors in production environments.
     </p>
 
-    <h3>Key Formatting Conventions</h3>
+    <h3>Supported Database Dialects & Syntax Specifications</h3>
+    <p>
+      Different database management systems implement specialized SQL language standards with distinct quoting semantics, window function syntax, and clause conventions. Nadhebe SQL Formatter provides precise dialect formatting across 12+ engines:
+    </p>
+
+    <div class="overflow-x-auto my-16">
+      <table class="w-full text-left border-collapse border border-border dark:border-border-dark text-caption">
+        <thead>
+          <tr class="bg-surface2 dark:bg-surface2-dark border-b border-border dark:border-border-dark">
+            <th class="p-10 font-bold text-ink dark:text-ink-dark">Dialect</th>
+            <th class="p-10 font-bold text-ink dark:text-ink-dark">Primary Quoting</th>
+            <th class="p-10 font-bold text-ink dark:text-ink-dark">Window Functions</th>
+            <th class="p-10 font-bold text-ink dark:text-ink-dark">Best Use Case</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border dark:divide-border-dark font-sans">
+          <tr>
+            <td class="p-10 font-semibold font-mono">PostgreSQL</td>
+            <td class="p-10">Double quotes (<code>"column"</code>)</td>
+            <td class="p-10">Full ANSI SQL:2016 support</td>
+            <td class="p-10">Enterprise relational databases, Supabase, Neon</td>
+          </tr>
+          <tr>
+            <td class="p-10 font-semibold font-mono">MySQL / MariaDB</td>
+            <td class="p-10">Backticks (<code>`column`</code>)</td>
+            <td class="p-10">MySQL 8.0+ supported</td>
+            <td class="p-10">Web apps, WordPress, PlanetScale</td>
+          </tr>
+          <tr>
+            <td class="p-10 font-semibold font-mono">SQL Server (T-SQL)</td>
+            <td class="p-10">Square brackets (<code>[column]</code>)</td>
+            <td class="p-10">Native T-SQL functions</td>
+            <td class="p-10">Microsoft Azure SQL, enterprise .NET backends</td>
+          </tr>
+          <tr>
+            <td class="p-10 font-semibold font-mono">Google BigQuery</td>
+            <td class="p-10">Backticks (<code>`project.dataset`</code>)</td>
+            <td class="p-10">Standard SQL analytic functions</td>
+            <td class="p-10">Data warehousing, massive analytics datasets</td>
+          </tr>
+          <tr>
+            <td class="p-10 font-semibold font-mono">Snowflake</td>
+            <td class="p-10">Double quotes (case-sensitive)</td>
+            <td class="p-10">Rich analytics window functions</td>
+            <td class="p-10">Cloud enterprise analytics, dbt data pipelines</td>
+          </tr>
+          <tr>
+            <td class="p-10 font-semibold font-mono">SQLite</td>
+            <td class="p-10">Double quotes / Backticks</td>
+            <td class="p-10">SQLite 3.25+ support</td>
+            <td class="p-10">Embedded databases, Turso, mobile apps</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Best Practices for Production SQL Styling</h3>
     <ul>
-      <li><strong>Uppercase Keywords</strong>: Capitalize <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>LEFT JOIN</code>, <code>GROUP BY</code>, <code>ORDER BY</code>.</li>
-      <li><strong>Newlines per Clause</strong>: Place top-level clauses on dedicated new lines.</li>
-      <li><strong>Nested Subquery Indentation</strong>: Indent subqueries by 2 spaces.</li>
+      <li><strong>Consistent Keyword Capitalization:</strong> Capitalize commands (<code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>ORDER BY</code>) to instantly distinguish commands from table and column names.</li>
+      <li><strong>Dedicated Lines for Top-Level Clauses:</strong> Place each major clause on its own line to facilitate line-by-line git diffs during pull request reviews.</li>
+      <li><strong>Indent Nested Subqueries:</strong> Indent subqueries by 2 or 4 spaces to preserve visual query scoping and avoid misinterpreting join levels.</li>
+      <li><strong>Align Conjunctions:</strong> Align <code>AND</code> and <code>OR</code> conditions under the <code>WHERE</code> clause to make complex Boolean filtering immediately readable.</li>
+      <li><strong>Use Common Table Expressions (CTEs):</strong> Break complex nested queries into readable <code>WITH</code> blocks to enhance query maintainability and query planner readability.</li>
     </ul>
+
+    <h3>SQL Beautification vs Minification Trade-offs</h3>
+    <p>
+      While beautified SQL is essential for developer authoring and debugging, minified SQL (with comments stripped and redundant spaces collapsed) is ideal for passing inline query parameters into shell commands, Docker environment variables, or reducing byte payload overhead in distributed query engines.
+    </p>
 
     <h3>Related Developer Tools</h3>
     <p>
-      Generate UUID v7 primary keys with the <a href="/tools/uuid-v7-generator/">UUID v7 Generator</a>, format JSON payloads with the <a href="/tools/json-formatter/">JSON Formatter</a>, or validate schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>.
+      Generate time-ordered primary keys with the <a href="/tools/uuid-v7-generator/">UUID v7 Generator</a>, beautify JSON responses with the <a href="/tools/json-formatter/">JSON Formatter</a>, validate data schemas with the <a href="/tools/json-schema-validator/">JSON Schema Validator</a>, convert delimited data with the <a href="/tools/delimiter-converter/">Delimiter Converter</a>, or encode data payloads with the <a href="/tools/base64-encoder/">Base64 Encoder</a>.
     </p>
   </div>
 </ToolLayout>
 
-<script is:inline>
-  (function() {
-    const inputRaw = document.getElementById('sql-input-raw');
-    const btnFormat = document.getElementById('btn-format-sql');
-    const btnSample = document.getElementById('btn-load-sample-sql');
+<script>
+  import { format, type SqlLanguage } from 'sql-formatter';
 
-    const outputText = document.getElementById('sql-output-text');
-    const btnCopy = document.getElementById('btn-copy-sql');
+  function setupSqlFormatter() {
+    const inputRaw = document.getElementById('sql-input-raw') as HTMLTextAreaElement | null;
+    const selectDialect = document.getElementById('sql-dialect') as HTMLSelectElement | null;
+    const selectIndent = document.getElementById('sql-indent') as HTMLSelectElement | null;
+    const selectKeywordCase = document.getElementById('sql-keyword-case') as HTMLSelectElement | null;
+    const selectSample = document.getElementById('sql-sample-select') as HTMLSelectElement | null;
 
-    const defaultQuery = `select u.id, u.email, count(o.id) as total_orders, sum(o.amount) as total_spent from users u left join orders o on u.id = o.user_id where u.created_at >= '2026-01-01' and u.status = 'active' group by u.id, u.email having count(o.id) > 2 order by total_spent desc limit 50;`;
+    const btnFormat = document.getElementById('btn-format-sql') as HTMLButtonElement | null;
+    const btnMinify = document.getElementById('btn-minify-sql') as HTMLButtonElement | null;
+    const btnClear = document.getElementById('btn-clear-sql') as HTMLButtonElement | null;
+    const btnDownload = document.getElementById('btn-download-sql') as HTMLButtonElement | null;
+    const btnCopy = document.getElementById('btn-copy-sql-output') as HTMLButtonElement | null;
 
-    function formatSQL(sql) {
-      const keywords = [
-        'SELECT', 'FROM', 'WHERE', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'JOIN',
-        'GROUP BY', 'HAVING', 'ORDER BY', 'LIMIT', 'OFFSET', 'UNION', 'VALUES',
-        'INSERT INTO', 'UPDATE', 'DELETE FROM', 'SET', 'ON', 'AND', 'OR'
-      ];
+    const outputPre = document.getElementById('sql-output-pre') as HTMLPreElement | null;
+    const outputCode = document.getElementById('sql-output-code') as HTMLElement | null;
+    const statusText = document.getElementById('sql-status-text') as HTMLElement | null;
+    const statusBadge = document.getElementById('sql-status-badge') as HTMLElement | null;
+    const linesCount = document.getElementById('sql-lines-count') as HTMLElement | null;
+    const charsCount = document.getElementById('sql-chars-count') as HTMLElement | null;
+    const errorAlert = document.getElementById('sql-error-alert') as HTMLElement | null;
+    const errorMessage = document.getElementById('sql-error-message') as HTMLElement | null;
 
-      let result = sql.trim();
+    if (!inputRaw || !outputCode || !outputPre) return;
 
-      keywords.forEach(kw => {
-        const regex = new RegExp(`\\b${kw}\\b`, 'gi');
-        result = result.replace(regex, `\n${kw}`);
-      });
+    // Preset sample queries
+    const SAMPLES: Record<string, { dialect: string; query: string }> = {
+      cte: {
+        dialect: 'postgresql',
+        query: `WITH monthly_revenue AS (
+  SELECT
+    r.region_name,
+    p.category,
+    DATE_TRUNC('month', o.order_date) AS sales_month,
+    SUM(oi.quantity * oi.unit_price) AS total_revenue,
+    COUNT(DISTINCT o.id) AS total_orders,
+    ROW_NUMBER() OVER (
+      PARTITION BY r.region_name
+      ORDER BY SUM(oi.quantity * oi.unit_price) DESC
+    ) AS rank_in_region
+  FROM regions r
+  INNER JOIN stores s ON r.id = s.region_id
+  INNER JOIN orders o ON s.id = o.store_id
+  INNER JOIN order_items oi ON o.id = oi.order_id
+  INNER JOIN products p ON oi.product_id = p.id
+  WHERE o.status = 'completed'
+    AND o.order_date >= '2026-01-01'
+  GROUP BY r.region_name, p.category, DATE_TRUNC('month', o.order_date)
+)
+SELECT
+  region_name,
+  category,
+  sales_month,
+  total_revenue,
+  rank_in_region
+FROM monthly_revenue
+WHERE rank_in_region <= 5
+ORDER BY region_name ASC, rank_in_region ASC;`,
+      },
+      join: {
+        dialect: 'mysql',
+        query: `SELECT u.id AS user_id, u.email, u.country_code, COUNT(o.id) AS completed_orders, COALESCE(SUM(o.total_amount), 0.00) AS lifetime_spend, MAX(o.created_at) AS last_order_date FROM users u LEFT JOIN orders o ON u.id = o.user_id AND o.status = 'paid' WHERE u.is_active = 1 AND u.created_at >= '2025-01-01' AND u.id NOT IN (SELECT user_id FROM fraud_flags WHERE severity = 'high') GROUP BY u.id, u.email, u.country_code HAVING COUNT(o.id) >= 2 ORDER BY lifetime_spend DESC LIMIT 50;`,
+      },
+      subquery: {
+        dialect: 'sql',
+        query: `SELECT e.employee_id, e.first_name, e.last_name, e.salary, d.department_name FROM employees e INNER JOIN departments d ON e.department_id = d.department_id WHERE e.salary > (SELECT AVG(sub_e.salary) FROM employees sub_e WHERE sub_e.department_id = e.department_id) AND EXISTS (SELECT 1 FROM project_assignments pa WHERE pa.employee_id = e.employee_id AND pa.is_active = 1) ORDER BY e.salary DESC;`,
+      },
+      ddl: {
+        dialect: 'postgresql',
+        query: `CREATE TABLE IF NOT EXISTS customer_subscriptions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  customer_id UUID NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  plan_tier VARCHAR(50) NOT NULL DEFAULT 'standard',
+  monthly_price NUMERIC(10, 2) NOT NULL CHECK (monthly_price >= 0),
+  status VARCHAR(20) NOT NULL DEFAULT 'active',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  canceled_at TIMESTAMPTZ NULL
+);
 
-      // Capitalize core keywords
-      keywords.forEach(kw => {
-        const regex = new RegExp(`\\b${kw}\\b`, 'gi');
-        result = result.replace(regex, kw);
-      });
+CREATE INDEX idx_subscriptions_customer_status ON customer_subscriptions(customer_id, status);`,
+      },
+    };
 
-      return result.split('\n').map(line => line.trim()).filter(Boolean).join('\n');
+    let rawFormattedResult = '';
+
+    // HTML escape utility
+    function escapeHtml(str: string): string {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    function format() {
-      const raw = inputRaw?.value || defaultQuery;
-      const formatted = formatSQL(raw);
-      if (outputText) outputText.textContent = formatted;
+    // Syntax highlighter using single-pass token scanning to prevent HTML attribute collisions
+    function highlightSQL(sql: string): string {
+      const tokenRegex = /(--[^\n]*|\/\*[\s\S]*?\*\/)|('(?:''|\\'|[^'])*')|(\b\d+(?:\.\d+)?\b)|(\b(?:SELECT|FROM|WHERE|LEFT JOIN|RIGHT JOIN|INNER JOIN|FULL JOIN|CROSS JOIN|JOIN|GROUP BY|ORDER BY|HAVING|LIMIT|OFFSET|UNION ALL|UNION|VALUES|INSERT INTO|INSERT|UPDATE|DELETE FROM|DELETE|SET|ON|AS|DISTINCT|CASE|WHEN|THEN|ELSE|END|AND|OR|NOT|IN|EXISTS|IS NULL|IS NOT NULL|IS|LIKE|ILIKE|BETWEEN|CREATE TABLE|CREATE INDEX|ALTER TABLE|DROP TABLE|TRUNCATE|PRIMARY KEY|FOREIGN KEY|REFERENCES|DEFAULT|CASCADE|CHECK|WITH|PARTITION BY|OVER)\b)|(\b(?:COUNT|SUM|AVG|MIN|MAX|COALESCE|CONCAT|NOW|DATE_TRUNC|ROUND|CAST|ROW_NUMBER|DENSE_RANK|RANK|LAG|LEAD|CURRENT_TIMESTAMP|gen_random_uuid)\b(?=\s*\())/gi;
+
+      let lastIndex = 0;
+      let html = '';
+      let match: RegExpExecArray | null;
+
+      while ((match = tokenRegex.exec(sql)) !== null) {
+        if (match.index > lastIndex) {
+          html += escapeHtml(sql.substring(lastIndex, match.index));
+        }
+
+        const [full, comment, str, num, kw, fn] = match;
+        if (comment) {
+          html += `<span class="text-neutral-400 dark:text-neutral-500 italic">${escapeHtml(comment)}</span>`;
+        } else if (str) {
+          html += `<span class="text-amber-600 dark:text-amber-400 font-medium">${escapeHtml(str)}</span>`;
+        } else if (num) {
+          html += `<span class="text-purple-600 dark:text-purple-400 font-mono">${escapeHtml(num)}</span>`;
+        } else if (kw) {
+          html += `<span class="text-blue-600 dark:text-sky-400 font-semibold">${escapeHtml(kw)}</span>`;
+        } else if (fn) {
+          html += `<span class="text-emerald-600 dark:text-emerald-400 font-medium">${escapeHtml(fn)}</span>`;
+        } else {
+          html += escapeHtml(full);
+        }
+
+        lastIndex = match.index + full.length;
+      }
+
+      if (lastIndex < sql.length) {
+        html += escapeHtml(sql.substring(lastIndex));
+      }
+
+      return html;
     }
 
-    btnFormat?.addEventListener('click', format);
-    inputRaw?.addEventListener('input', format);
+    // Minify / Compact SQL utility: strips comments and trims excess whitespace
+    function minifySQL(sql: string): string {
+      let inSingleQuote = false;
+      let inDoubleQuote = false;
+      let inBacktick = false;
+      let clean = '';
+      let i = 0;
 
-    btnSample?.addEventListener('click', () => {
-      if (inputRaw) inputRaw.value = defaultQuery;
-      format();
+      while (i < sql.length) {
+        const char = sql[i];
+        const nextChar = sql[i + 1];
+
+        // Handle string quotes
+        if (!inDoubleQuote && !inBacktick && char === "'") {
+          if (i === 0 || sql[i - 1] !== '\\') inSingleQuote = !inSingleQuote;
+          clean += char;
+          i++;
+          continue;
+        }
+        if (!inSingleQuote && !inBacktick && char === '"') {
+          if (i === 0 || sql[i - 1] !== '\\') inDoubleQuote = !inDoubleQuote;
+          clean += char;
+          i++;
+          continue;
+        }
+        if (!inSingleQuote && !inDoubleQuote && char === '`') {
+          inBacktick = !inBacktick;
+          clean += char;
+          i++;
+          continue;
+        }
+
+        // Handle comments outside quotes
+        if (!inSingleQuote && !inDoubleQuote && !inBacktick) {
+          if (char === '-' && nextChar === '-') {
+            while (i < sql.length && sql[i] !== '\n') i++;
+            continue;
+          }
+          if (char === '/' && nextChar === '*') {
+            i += 2;
+            while (i < sql.length && !(sql[i] === '*' && sql[i + 1] === '/')) i++;
+            i += 2;
+            continue;
+          }
+        }
+
+        clean += char;
+        i++;
+      }
+
+      return clean
+        .replace(/\s+/g, ' ')
+        .replace(/\s*([,;()=])\s*/g, (_, op) => {
+          if (op === '(' || op === ')') return op;
+          if (op === ',') return ', ';
+          if (op === ';') return '; ';
+          return ` ${op} `;
+        })
+        .trim();
+    }
+
+    // Update query metrics
+    function updateMetrics(text: string) {
+      const lines = text ? text.split('\n').length : 0;
+      const chars = text ? text.length : 0;
+      if (linesCount) linesCount.textContent = `${lines} ${lines === 1 ? 'line' : 'lines'}`;
+      if (charsCount) charsCount.textContent = `${chars} chars`;
+    }
+
+    // Format SQL using sql-formatter
+    function formatQuery() {
+      const raw = inputRaw?.value.trim() || '';
+
+      if (!raw) {
+        rawFormattedResult = '';
+        if (outputCode) outputCode.innerHTML = '<span class="text-muted dark:text-muted-dark italic">Output will appear here...</span>';
+        if (errorAlert) errorAlert.classList.add('hidden');
+        if (statusText) statusText.textContent = 'Awaiting input';
+        if (statusBadge) {
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill bg-surface2 px-10 py-4 font-mono text-xs font-semibold text-muted dark:bg-surface2-dark dark:text-muted-dark';
+        }
+        updateMetrics('');
+        return;
+      }
+
+      const dialect = (selectDialect?.value || 'postgresql') as SqlLanguage;
+      const indentVal = selectIndent?.value || '2';
+      const keywordCase = (selectKeywordCase?.value || 'upper') as 'upper' | 'lower' | 'preserve';
+
+      const tabWidth = indentVal === '4' ? 4 : 2;
+      const useTabs = indentVal === 'tab';
+
+      try {
+        const formatted = format(raw, {
+          language: dialect,
+          tabWidth: tabWidth,
+          useTabs: useTabs,
+          keywordCase: keywordCase,
+          dataTypeCase: keywordCase,
+          functionCase: keywordCase,
+          logicalOperatorNewline: 'before',
+          linesBetweenQueries: 2,
+        });
+
+        rawFormattedResult = formatted;
+        if (outputCode) outputCode.innerHTML = highlightSQL(formatted);
+        if (errorAlert) errorAlert.classList.add('hidden');
+
+        if (statusText) statusText.textContent = 'Formatted';
+        if (statusBadge) {
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill bg-emerald-500/10 px-10 py-4 font-mono text-xs font-semibold text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400';
+        }
+        updateMetrics(formatted);
+      } catch (err: any) {
+        // Fallback: If custom/invalid syntax throws, show friendly message & keep minified/raw version
+        rawFormattedResult = raw;
+        if (outputCode) outputCode.innerHTML = highlightSQL(raw);
+        if (errorAlert && errorMessage) {
+          errorAlert.classList.remove('hidden');
+          errorMessage.textContent = err?.message || 'Syntax parse issue. Ensure quotes and parenthesis match.';
+        }
+        if (statusText) statusText.textContent = 'Syntax Warning';
+        if (statusBadge) {
+          statusBadge.className = 'inline-flex items-center gap-6 rounded-pill bg-amber-500/10 px-10 py-4 font-mono text-xs font-semibold text-amber-600 dark:bg-amber-500/20 dark:text-amber-400';
+        }
+        updateMetrics(raw);
+      }
+    }
+
+    // Minify Action
+    function minifyQuery() {
+      const raw = inputRaw?.value.trim() || '';
+      if (!raw) return;
+
+      const minified = minifySQL(raw);
+      rawFormattedResult = minified;
+      if (outputCode) outputCode.innerHTML = highlightSQL(minified);
+      if (errorAlert) errorAlert.classList.add('hidden');
+
+      if (statusText) statusText.textContent = 'Minified';
+      if (statusBadge) {
+        statusBadge.className = 'inline-flex items-center gap-6 rounded-pill bg-blue-500/10 px-10 py-4 font-mono text-xs font-semibold text-blue-600 dark:bg-blue-500/20 dark:text-blue-400';
+      }
+      updateMetrics(minified);
+    }
+
+    // Download .sql file
+    function downloadSQL() {
+      const content = rawFormattedResult || inputRaw?.value || '';
+      if (!content.trim()) return;
+
+      const dialect = selectDialect?.value || 'query';
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `formatted-${dialect}-${Date.now()}.sql`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Copy to clipboard with animation
+    function copyFormattedSQL() {
+      const content = rawFormattedResult || outputPre?.textContent || '';
+      if (!content.trim() || !btnCopy) return;
+
+      const copyIcon = btnCopy.querySelector('.copy-icon') as HTMLElement | null;
+      const checkIcon = btnCopy.querySelector('.check-icon') as HTMLElement | null;
+      const copyLabel = btnCopy.querySelector('.copy-label') as HTMLElement | null;
+
+      navigator.clipboard.writeText(content.trim()).then(() => {
+        btnCopy.classList.add('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+        if (copyIcon && checkIcon) {
+          copyIcon.style.transform = 'scale(0)';
+          copyIcon.style.opacity = '0';
+          checkIcon.style.transform = 'scale(1)';
+          checkIcon.style.opacity = '1';
+        }
+        if (copyLabel) copyLabel.textContent = 'Copied!';
+
+        setTimeout(() => {
+          btnCopy.classList.remove('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border-emerald-500/40');
+          if (copyIcon && checkIcon) {
+            copyIcon.style.transform = 'scale(1)';
+            copyIcon.style.opacity = '1';
+            checkIcon.style.transform = 'scale(0)';
+            checkIcon.style.opacity = '0';
+          }
+          if (copyLabel) copyLabel.textContent = 'Copy SQL';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy SQL:', err);
+      });
+    }
+
+    // Event listeners
+    btnFormat?.addEventListener('click', formatQuery);
+    btnMinify?.addEventListener('click', minifyQuery);
+    btnDownload?.addEventListener('click', downloadSQL);
+    btnCopy?.addEventListener('click', copyFormattedSQL);
+
+    [selectDialect, selectIndent, selectKeywordCase].forEach(el => {
+      el?.addEventListener('change', formatQuery);
     });
 
-    if (inputRaw && !inputRaw.value) inputRaw.value = defaultQuery;
+    inputRaw?.addEventListener('input', () => {
+      formatQuery();
+    });
 
-    format();
-  })();
+    btnClear?.addEventListener('click', () => {
+      if (inputRaw) inputRaw.value = '';
+      if (selectSample) selectSample.value = '';
+      formatQuery();
+      inputRaw?.focus();
+    });
+
+    selectSample?.addEventListener('change', (e) => {
+      const target = e.target as HTMLSelectElement;
+      const key = target.value;
+      if (key && SAMPLES[key]) {
+        const item = SAMPLES[key];
+        if (selectDialect) selectDialect.value = item.dialect;
+        if (inputRaw) inputRaw.value = item.query;
+        formatQuery();
+      }
+    });
+
+    // Default initial query
+    if (inputRaw && !inputRaw.value) {
+      inputRaw.value = SAMPLES.cte.query;
+    }
+
+    formatQuery();
+  }
+
+  // Hydration lifecycle for Astro View Transitions
+  setupSqlFormatter();
+  document.addEventListener('astro:page-load', setupSqlFormatter);
 </script>

@@ -3,7 +3,7 @@ title: "Vector Database Chunking Best Practices for RAG"
 description: "Master the art of document chunking for Vector Databases. Learn strategies for semantic chunking, overlap sizing, and hierarchical indexing to improve your RAG accuracy."
 pubDate: 2026-08-01
 author: nadhebe-team
-category: "best-practices"
+category: "Best Practices"
 tags: ["Vector Database", "RAG", "Chunking", "Embeddings", "Search", "AI"]
 heroImage: "/images/vector-database-chunking-hero.webp"
 heroAlt: "Retro-tech editorial graphic showing a large document being sliced into organized blocks"

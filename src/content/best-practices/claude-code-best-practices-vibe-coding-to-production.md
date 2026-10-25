@@ -2,7 +2,7 @@
 title: "Claude Code Best Practices 2026: From Vibe Coding to Enterprise Engineering"
 description: "A production engineering guide to Claude Code. Learn CLAUDE.md hardening, path-specific rules, safety hooks, token budget optimization, and git worktrees."
 pubDate: 2026-07-25
-author: bob-smith
+author: nadhebe-team
 category: Best Practices
 tags: ["claude", "cli", "best-practices", "vibe-coding", "devops", "enterprise", "anthropic"]
 heroImage: "/images/claude-cli-hero.webp"
