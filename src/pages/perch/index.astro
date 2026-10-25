@@ -229,6 +229,11 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       --brand-cyan-glow: rgba(56, 189, 248, 0.2);
     }
 
+    :global(html),
+    :global(body) {
+      overflow-x: clip;
+    }
+
     /* Pristine Modern White Canvas with Subtle Faint Texture */
     .perch-page-wrapper {
       background-color: #FFFFFF;
@@ -238,7 +243,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       min-height: 100vh;
       position: relative;
-      overflow-x: hidden;
+      overflow-x: clip;
+      overflow-y: visible;
     }
 
     .dark .perch-page-wrapper {
@@ -381,15 +387,22 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     color: #fff;
     box-shadow: 0 10px 24px -10px rgba(2, 132, 199, .65);
   }
+  /* Stylish hand-drawn pen stroke underline (like written with an ink pen) */
   .hero-mark {
     color: var(--ink-graphite, #0F172A);
     font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #0284C7;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
+    text-decoration: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M2,9 C28,4 58,11 82,5 C91,3 96,7 99,5.5' stroke='%230284C7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 100% 8px;
+    padding-bottom: 4px;
+    display: inline;
   }
-  :global(.dark) .hero-mark { color: #F1F5F9; text-decoration-color: #38BDF8; }
+  :global(.dark) .hero-mark {
+    color: #F1F5F9;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M2,9 C28,4 58,11 82,5 C91,3 96,7 99,5.5' stroke='%2338BDF8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  }
 </style>
 
   <!-- High-Priority Preconnect & Preload for Instant Paddle Checkout -->
@@ -452,7 +465,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
             alt="Perchboard Logo Icon"
             width="30"
             height="30"
-            class="w-30 h-30 rounded-8 shadow-sm transition-transform duration-200 group-hover:scale-105"
+            class="w-[30px] h-[30px] rounded-8 shadow-sm transition-transform duration-200 group-hover:scale-105"
             loading="eager"
           />
           <div class="flex items-baseline gap-6">
@@ -626,7 +639,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     <section class="relative z-10 py-32 px-16 sm:px-24 bg-white/60 dark:bg-black/20 border-y border-paper-border">
       <div class="max-w-5xl mx-auto" data-reveal>
         <div class="mb-24">
-          <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-brand-cyan/10 text-brand-cyan font-mono text-[10px] font-bold tracking-wider uppercase mb-8">
+          <div class="inline-flex items-center gap-6 px-10 py-[3px] rounded-full bg-brand-cyan/10 text-brand-cyan font-mono text-[10px] font-bold tracking-wider uppercase mb-8">
             <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
             HIGH-RESOLUTION ARCHITECTURE
           </div>
@@ -677,8 +690,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     <div id="how-it-works" class="relative z-10 pt-28 pb-48 bg-[#F8F9FA]/75 dark:bg-[#0E1015]/80 border-y border-[#E5E7EB] dark:border-[#1E222B]">
       
       <!-- SECTION 01 — Always within reach -->
-      <section id="features" class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.94">
+      <section id="features" class="py-24 sm:py-[36px] px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-[36px] items-center" data-reveal data-thread="0.94">
           <!-- Left: Narrative Text Block -->
           <div class="lg:col-span-5 space-y-16">
             <div class="flex items-center gap-8">
@@ -732,13 +745,13 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       </section>
 
       <!-- SECTION 02 — Everything you copied -->
-      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.06">
+      <section class="py-24 sm:py-[36px] px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-[36px] items-center" data-reveal data-thread="0.06">
           <!-- Left: Authentic Cropped Interface Assets -->
           <div class="lg:col-span-7 order-2 lg:order-1 relative">
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-16 items-start">
               <!-- Close-up of Filter Bar & Search -->
-              <div class="sm:col-span-12 paper-sheet p-10 rounded-14 overflow-hidden">
+              <div class="sm:col-span-12 paper-sheet p-10 rounded-[14px] overflow-hidden">
                 <img
                   src="/perch/perch-filters-crop.png"
                   alt="Perchboard filter tabs showing All, Text, Links, Images, and Files with search input"
@@ -750,7 +763,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
               </div>
 
               <!-- Full panel vertical close-up -->
-              <div class="sm:col-span-8 paper-sheet rounded-18 overflow-hidden mx-auto">
+              <div class="sm:col-span-8 paper-sheet rounded-[18px] overflow-hidden mx-auto">
                 <img
                   src="/perch/perch-panel-hero-crop.png"
                   alt="Perchboard floating panel screenshot with recent copied content and metadata"
@@ -811,8 +824,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       </section>
 
       <!-- SECTION 03 — See it before you need it -->
-      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.94">
+      <section class="py-24 sm:py-[36px] px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-[36px] items-center" data-reveal data-thread="0.94">
           <!-- Left: Narrative Text Block -->
           <div class="lg:col-span-5 space-y-16">
             <div class="flex items-center gap-8">
@@ -850,7 +863,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 items-center">
               <!-- Copied Image Preview Card -->
               <div class="paper-sheet p-12 rounded-16">
-                <div class="rounded-10 overflow-hidden mb-10 bg-slate-900">
+                <div class="rounded-[10px] overflow-hidden mb-10 bg-slate-900">
                   <img
                     src="/perch/perch-copied-image.png"
                     alt="Authentic copied boat image preview from Perchboard"
@@ -867,7 +880,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
               </div>
 
               <!-- Multi-clip panel crop -->
-              <div class="paper-sheet rounded-18 overflow-hidden">
+              <div class="paper-sheet rounded-[18px] overflow-hidden">
                 <img
                   src="/perch/perch-panel-multiclip-crop.png"
                   alt="Perchboard multi-item clipboard history panel with image cards"
@@ -883,8 +896,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       </section>
 
       <!-- SECTION 04 — Less friction, back to work -->
-      <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.06">
+      <section class="py-24 sm:py-[36px] px-16 sm:px-24 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-[36px] items-center" data-reveal data-thread="0.06">
           <!-- Left: Settings Position Desktop Scene -->
           <div class="lg:col-span-7 order-2 lg:order-1 relative">
             <div class="desktop-frame paper-sheet relative bg-[#0F172A]">
@@ -939,21 +952,21 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     </div>
 
     <!-- 6. PRODUCT-SPECIFIC VISUAL INTERLUDE: Breathing Room -->
-    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#F8F9FA]/75 dark:bg-[#11141B]/80 border-y border-[#E5E7EB] dark:border-[#1E222B] text-center">
+    <section class="relative z-10 py-[36px] sm:py-48 px-16 sm:px-24 bg-[#F8F9FA]/75 dark:bg-[#11141B]/80 border-y border-[#E5E7EB] dark:border-[#1E222B] text-center">
       <div class="max-w-3xl mx-auto space-y-24" data-reveal>
         <div class="inline-block relative">
-          <div class="w-96 h-96 sm:w-112 sm:h-112 mx-auto rounded-24 p-8 paper-sheet shadow-xl bg-white dark:bg-[#1F2128]">
+          <div class="w-96 h-96 sm:w-[112px] sm:h-[112px] mx-auto rounded-[24px] p-8 paper-sheet shadow-xl bg-white dark:bg-[#1F2128]">
             <img
               src="/perch/app-icon.png"
               alt="Perchboard bird app icon"
-              class="w-full h-full object-contain rounded-18"
+              class="w-full h-full object-contain rounded-[18px]"
               width="112"
               height="112"
               loading="lazy"
             />
           </div>
           <!-- Subtle cyan glow behind icon -->
-          <div class="absolute inset-0 rounded-24 bg-brand-cyan blur-2xl opacity-20 -z-10"></div>
+          <div class="absolute inset-0 rounded-[24px] bg-brand-cyan blur-2xl opacity-20 -z-10"></div>
         </div>
 
         <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-ink-graphite max-w-xl mx-auto leading-tight">
@@ -980,7 +993,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         </p>
       </div>
 
-      <div class="paper-sheet rounded-18 overflow-hidden overflow-x-auto" data-thread="0.94" data-thread-y="0.5">
+      <div class="paper-sheet rounded-[18px] overflow-hidden overflow-x-auto" data-thread="0.94" data-thread-y="0.5">
         <table class="w-full text-left border-collapse text-xs sm:text-sm min-w-[560px]">
           <thead>
             <tr class="border-b border-paper-border bg-black/5 dark:bg-white/5 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
@@ -1042,9 +1055,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       <div class="grid grid-cols-1 md:grid-cols-2 gap-20" data-thread="0.5" data-thread-y="0.55">
         
         <!-- WINDOWS PLATFORM CARD (Primary) -->
-        <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between border-2 border-brand-cyan/40">
+        <div class="paper-sheet rounded-[24px] p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between border-2 border-brand-cyan/40">
           <div class="absolute top-16 right-16">
-            <span class="inline-flex items-center gap-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-10 py-3 text-[10px] font-mono font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
+            <span class="inline-flex items-center gap-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-10 py-[3px] text-[10px] font-mono font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
               <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
               AVAILABLE NOW • $9.99
             </span>
@@ -1080,7 +1093,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
                 <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
               </svg>
               <span>Buy Perchboard</span>
-              <span class="inline-flex items-center gap-8 px-10 py-3 rounded-full bg-black/25 border border-white/20 shadow-inner">
+              <span class="inline-flex items-center gap-8 px-10 py-[3px] rounded-full bg-black/25 border border-white/20 shadow-inner">
                 <span class="font-mono text-[11px] font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
                 <span class="font-mono text-[11px] font-black text-white">$9.99</span>
               </span>
@@ -1090,9 +1103,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         </div>
 
         <!-- MACOS PLATFORM CARD -->
-        <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between">
+        <div class="paper-sheet rounded-[24px] p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between">
           <div class="absolute top-16 right-16">
-            <span class="inline-flex items-center gap-6 rounded-full bg-amber-500/10 border border-amber-500/20 px-10 py-3 text-[10px] font-mono font-semibold tracking-wider text-amber-600 dark:text-amber-400 uppercase">
+            <span class="inline-flex items-center gap-6 rounded-full bg-amber-500/10 border border-amber-500/20 px-10 py-[3px] text-[10px] font-mono font-semibold tracking-wider text-amber-600 dark:text-amber-400 uppercase">
               WAITLIST OPEN
             </span>
           </div>
@@ -1138,7 +1151,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
 
     <!-- 8.5. WAITLIST: FOR MACOS & FUTURE PLATFORMS -->
     <section id="waitlist" class="relative z-30 py-32 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
-      <div class="paper-sheet rounded-32 p-28 sm:p-44 relative overflow-hidden border border-paper-border shadow-md text-center">
+      <div class="paper-sheet rounded-[32px] p-28 sm:p-[44px] relative overflow-hidden border border-paper-border shadow-md text-center">
         
         <!-- Apple Logo & Mac Platform Pill -->
         <div class="w-48 h-48 rounded-16 bg-black/5 dark:bg-white/5 text-ink-graphite flex items-center justify-center mx-auto mb-14 shadow-xs">
@@ -1147,7 +1160,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
           </svg>
         </div>
 
-        <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold tracking-wider uppercase mb-12">
+        <div class="inline-flex items-center gap-6 px-10 py-[3px] rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold tracking-wider uppercase mb-12">
           WAITLIST OPEN · macOS EDITION
         </div>
 
@@ -1272,7 +1285,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       <div class="max-w-6xl mx-auto">
         
         <!-- Top Row: Brand Signature + Waitlist Callout -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-32 pb-36 border-b border-[#1C2029]">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-32 pb-[36px] border-b border-[#1C2029]">
           
           <!-- Left: Wordmark & Statement -->
           <div class="md:col-span-5 space-y-16">
@@ -1688,11 +1701,28 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       });
     });
 
-    // 4. Header "Download" scrolls to pricing; the Buy buttons open checkout (PricingSection)
+    // 4. Header "Download" triggers the Paddle checkout payment portal directly
     var navBuyBtn = document.getElementById('nav-buy-pro-btn');
     if (navBuyBtn && !navBuyBtn.dataset.hasDirectBuyListener) {
       navBuyBtn.dataset.hasDirectBuyListener = 'true';
       navBuyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (typeof window.openPerchCheckout === 'function') {
+          window.openPerchCheckout(navBuyBtn);
+        } else {
+          var pricingSec = document.getElementById('pricing');
+          if (pricingSec) {
+            pricingSec.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    }
+
+    // Nav center "Pricing" link scrolls to pricing section
+    var navPricingLink = document.querySelector('nav a[href="#pricing"]:not(#nav-buy-pro-btn)');
+    if (navPricingLink && !navPricingLink.dataset.hasScrollListener) {
+      navPricingLink.dataset.hasScrollListener = 'true';
+      navPricingLink.addEventListener('click', function(e) {
         e.preventDefault();
         var pricingSec = document.getElementById('pricing');
         if (pricingSec) {

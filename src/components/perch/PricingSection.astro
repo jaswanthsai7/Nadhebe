@@ -6,11 +6,29 @@
  * Premium 2-Column Wide Layout with Custom Segmented Currency Switcher
  * Completely Opaque & Above ASCII Ocean Fishes
  */
-const paddleEnv = import.meta.env.PUBLIC_PADDLE_ENV || 'sandbox';
+// Everything Paddle needs comes from env vars, with no silent defaults: a wrong or missing value
+// disables checkout and shows the config notice rather than charging against the wrong account.
+const paddleEnv = import.meta.env.PUBLIC_PADDLE_ENV || '';
 const paddleClientToken = import.meta.env.PUBLIC_PADDLE_CLIENT_TOKEN || '';
-const regularPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_REGULAR || 'pri_01m5qsket9qpyqv0jejzez7h54';
-const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5qskf4e09y85xbrypy6vv2d';
-const isSandbox = paddleEnv !== 'production';
+const regularPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_REGULAR || '';
+const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || '';
+const isSandbox = paddleEnv === 'sandbox';
+
+const paddleConfigProblems: string[] = [];
+if (paddleEnv !== 'sandbox' && paddleEnv !== 'production') {
+  paddleConfigProblems.push(`PUBLIC_PADDLE_ENV must be "sandbox" or "production" (got "${paddleEnv}")`);
+}
+if (!paddleClientToken) paddleConfigProblems.push('PUBLIC_PADDLE_CLIENT_TOKEN is missing');
+else if (paddleEnv === 'sandbox' && !paddleClientToken.startsWith('test_')) {
+  paddleConfigProblems.push('PUBLIC_PADDLE_ENV is "sandbox" but the client token is not a test_ token');
+} else if (paddleEnv === 'production' && !paddleClientToken.startsWith('live_')) {
+  paddleConfigProblems.push('PUBLIC_PADDLE_ENV is "production" but the client token is not a live_ token');
+}
+if (!launchPriceId) paddleConfigProblems.push('PUBLIC_PADDLE_PRICE_ID_LAUNCH is missing');
+if (!regularPriceId) paddleConfigProblems.push('PUBLIC_PADDLE_PRICE_ID_REGULAR is missing');
+if (paddleConfigProblems.length) {
+  console.error('\n[Perchboard] Paddle checkout is DISABLED:\n  - ' + paddleConfigProblems.join('\n  - ') + '\n');
+}
 ---
 
 <section
@@ -21,7 +39,7 @@ const isSandbox = paddleEnv !== 'production';
 >
   <!-- Wide Solid Showcase Card (100% opaque background to block background ASCII fishes) -->
   <div
-    class="pricing-solid-card rounded-32 p-28 sm:p-40 lg:p-48 border border-paper-border shadow-[0_20px_60px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.65)] relative overflow-hidden"
+    class="pricing-solid-card rounded-[32px] p-28 sm:p-40 lg:p-48 border border-paper-border shadow-[0_20px_60px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.65)] relative overflow-hidden"
     style="position: relative; z-index: 30; isolation: isolate;"
   >
     <!-- Background Ambient Glow inside card -->
@@ -29,7 +47,7 @@ const isSandbox = paddleEnv !== 'production';
 
     <!-- Section Heading INSIDE Solid Card (Guarantees fishes NEVER overlap headings) -->
     <div class="text-center max-w-3xl mx-auto mb-32 sm:mb-40">
-      <div class="inline-flex items-center gap-8 px-14 py-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 mb-16 shadow-sm">
+      <div class="inline-flex items-center gap-8 px-14 py-[5px] rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 mb-16 shadow-sm">
         <span class="w-8 h-8 rounded-full bg-emerald-500 animate-pulse"></span>
         <span class="font-mono text-xs font-bold uppercase tracking-wider">
           WINDOWS LAUNCH SPECIAL • 33% OFF
@@ -45,7 +63,7 @@ const isSandbox = paddleEnv !== 'production';
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-32 lg:gap-44 items-stretch border-t border-paper-border pt-32 sm:pt-40">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-32 lg:gap-[44px] items-stretch border-t border-paper-border pt-32 sm:pt-40">
       
       <!-- LEFT COLUMN: Product Overview & Feature Checklist (7 cols) -->
       <div class="lg:col-span-7 flex flex-col justify-between space-y-24">
@@ -58,7 +76,7 @@ const isSandbox = paddleEnv !== 'production';
                 alt="Perchboard app icon"
                 width="52"
                 height="52"
-                class="w-52 h-52 rounded-16 shadow-md bg-[#121824] border border-paper-border"
+                class="w-[52px] h-[52px] rounded-16 shadow-md bg-[#121824] border border-paper-border"
                 loading="eager"
               />
               <span class="absolute -bottom-2 -right-2 w-14 h-14 rounded-full bg-emerald-500 border-2 border-white dark:border-[#151821]"></span>
@@ -164,7 +182,7 @@ const isSandbox = paddleEnv !== 'production';
       </div>
 
       <!-- RIGHT COLUMN: Interactive Checkout Box & Modern Segmented Currency Switcher (5 cols) -->
-      <div class="pricing-action-box lg:col-span-5 border border-paper-border rounded-28 p-24 sm:p-32 flex flex-col justify-between shadow-sm">
+      <div class="pricing-action-box lg:col-span-5 border border-paper-border rounded-[28px] p-24 sm:p-32 flex flex-col justify-between shadow-sm">
         
         <!-- Top Price Header -->
         <div class="mb-20">
@@ -172,7 +190,7 @@ const isSandbox = paddleEnv !== 'production';
             <span class="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
               Launch Pricing
             </span>
-            <span class="px-10 py-3 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold">
+            <span class="px-10 py-[3px] rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold">
               Save 33%
             </span>
           </div>
@@ -217,7 +235,7 @@ const isSandbox = paddleEnv !== 'production';
           <div class="currency-pills-container grid grid-cols-2 sm:grid-cols-4 gap-6 p-4 rounded-16 border shadow-inner">
             <button
               type="button"
-              class="currency-pill active py-8 px-6 rounded-12 text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
+              class="currency-pill py-8 px-6 rounded-12 text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
               data-country="US"
               aria-label="Select United States Dollar"
             >
@@ -292,7 +310,8 @@ const isSandbox = paddleEnv !== 'production';
           class="hidden mb-16 p-12 rounded-12 bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs font-mono"
           role="alert"
         >
-          <strong>Paddle Configuration Missing:</strong> Please check your environment variables (<code class="bg-black/10 px-4 py-1 rounded">PUBLIC_PADDLE_CLIENT_TOKEN</code>).
+          <strong>Checkout is not configured:</strong>
+          {paddleConfigProblems.length ? paddleConfigProblems.join('; ') : 'Paddle could not be loaded.'}
         </div>
 
         <!-- Checkout Button with Instant Loading State -->
@@ -359,14 +378,16 @@ const isSandbox = paddleEnv !== 'production';
     regularPriceId,
     launchPriceId,
     isSandbox,
+    paddleConfigOk: paddleConfigProblems.length === 0,
   }}
 >
   (function () {
     let paddleInstance = null;
-    let selectedCountry = 'US';
+    // null = let Paddle detect the visitor's country from their IP. A pill click sets a real
+    // ISO code, which is then used for both the price preview and the checkout.
+    let selectedCountry = null;
     let pendingTriggerBtn = null;
     let paddleUnavailable = false;
-    const countryCurrencies = { US: 'USD', GB: 'GBP', IE: 'EUR', AU: 'AUD' };
 
     async function loadPaddleSdk() {
       if (window.Paddle) return window.Paddle;
@@ -388,8 +409,20 @@ const isSandbox = paddleEnv !== 'production';
       });
     }
 
+    // Safety net: if Paddle never reports checkout.loaded, don't leave buttons spinning.
+    let checkoutTimeout = null;
+    function armCheckoutTimeout() {
+      clearTimeout(checkoutTimeout);
+      checkoutTimeout = setTimeout(() => {
+        console.error('[Paddle] Checkout did not open within 15s');
+        pendingTriggerBtn = null;
+        resetAllButtons();
+      }, 15000);
+    }
+
     // Reset button states when checkout is closed or completed
     function resetAllButtons() {
+      clearTimeout(checkoutTimeout);
       const activeBtns = document.querySelectorAll('[data-checkout-active="true"]');
       activeBtns.forEach((btn) => {
         btn.disabled = false;
@@ -433,6 +466,7 @@ const isSandbox = paddleEnv !== 'production';
           return;
         }
         pendingTriggerBtn = triggerEl;
+        armCheckoutTimeout();
         return;
       }
 
@@ -442,7 +476,13 @@ const isSandbox = paddleEnv !== 'production';
       try {
         paddleInstance.Checkout.open({
           items: [{ priceId: launchPriceId, quantity: 1 }],
-          customer: userEmail ? { email: userEmail } : undefined,
+          customer:
+            userEmail || selectedCountry
+              ? {
+                  ...(userEmail ? { email: userEmail } : {}),
+                  ...(selectedCountry ? { address: { countryCode: selectedCountry } } : {}),
+                }
+              : undefined,
           settings: {
             displayMode: 'overlay',
             theme: 'light',
@@ -451,6 +491,7 @@ const isSandbox = paddleEnv !== 'production';
             showAddDiscounts: false,
           },
         });
+        armCheckoutTimeout();
       } catch (openErr) {
         console.error('[Paddle Checkout Open Error]', openErr);
         resetAllButtons();
@@ -466,11 +507,11 @@ const isSandbox = paddleEnv !== 'production';
       const currencyPills = document.querySelectorAll('.currency-pill');
       const currencyBadge = document.getElementById('perch-currency-badge');
 
-      if (!paddleClientToken) {
+      if (!paddleConfigOk) {
         paddleUnavailable = true;
         resetAllButtons();
         if (configError) configError.classList.remove('hidden');
-        console.warn('[Paddle] Missing PUBLIC_PADDLE_CLIENT_TOKEN environment variable.');
+        console.error('[Paddle] Checkout disabled: Paddle env vars are missing or inconsistent (see the notice in the pricing card).');
         return;
       }
 
@@ -497,6 +538,10 @@ const isSandbox = paddleEnv !== 'production';
           eventCallback: function (data) {
             if (isSandbox) console.log('[Paddle Event]', data.name, data);
             if (data.name === 'checkout.loaded' || data.name === 'checkout.closed') {
+              resetAllButtons();
+            }
+            if (data.name === 'checkout.error') {
+              console.error('[Paddle checkout.error]', data);
               resetAllButtons();
             }
             if (data.name === 'checkout.completed') {
@@ -530,6 +575,9 @@ const isSandbox = paddleEnv !== 'production';
               previewParams.address = { countryCode: countryCode };
             }
             const preview = await paddleInstance.PricePreview(previewParams);
+            if (preview && preview.data && preview.data.currencyCode && currencyBadge) {
+              currencyBadge.textContent = preview.data.currencyCode;
+            }
             if (preview && preview.data && preview.data.details && preview.data.details.lineItems) {
               const lineItems = preview.data.details.lineItems;
               lineItems.forEach((item) => {
@@ -556,10 +604,7 @@ const isSandbox = paddleEnv !== 'production';
             currencyPills.forEach((p) => p.classList.remove('active'));
             this.classList.add('active');
 
-            selectedCountry = this.getAttribute('data-country') || 'US';
-            if (currencyBadge) {
-              currencyBadge.textContent = countryCurrencies[selectedCountry] || 'USD';
-            }
+            selectedCountry = this.getAttribute('data-country') || null;
             fetchPricePreview(selectedCountry);
           });
         });
@@ -585,6 +630,7 @@ const isSandbox = paddleEnv !== 'production';
       } catch (err) {
         console.error('[Paddle Init Error]', err);
         paddleUnavailable = true;
+        pendingTriggerBtn = null;
         if (configError) {
           configError.textContent = 'Checkout could not load. Please disable any ad blocker for this page or try again in a moment.';
           configError.classList.remove('hidden');

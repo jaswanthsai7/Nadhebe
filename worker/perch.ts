@@ -12,6 +12,12 @@
  *   5. The app activates with POST /api/perch/activate, which returns an Ed25519-signed
  *      license the app can verify offline from then on.
  *   6. Refunds (adjustment approved) revoke the key.
+ *   7. One key = one computer. The first activation binds the key to the app's device id;
+ *      the same device can reinstall and re-activate freely, another device is refused.
+ *      Moving to a new computer: POST /api/perch/move emails the buyer a one-hour link that
+ *      frees the key (at most once a week, so a shared key can't hop between machines).
+ *   8. GET/POST /api/perch/admin (Bearer PERCH_ADMIN_TOKEN) looks up who bought and which
+ *      computer a key is on, and can free a key for a support case.
  *
  * Every binding and secret is optional at boot; routes answer 503 with a clear message
  * until the piece they need is configured (see docs/PERCHBOARD_SALES_SETUP.md).
@@ -47,6 +53,7 @@ export interface PerchEnv {
   PERCH_INSTALLER_KEY?: string; // R2 object key, default Perchboard-Setup.exe
   PERCH_DOWNLOAD_URL?: string; // fallback when the installer is hosted elsewhere
   SITE_URL?: string;
+  PERCH_ADMIN_TOKEN?: string; // secret for /api/perch/admin
 }
 
 interface License {
@@ -58,6 +65,11 @@ interface License {
   createdAt: string;
   revoked: boolean;
   revokedAt?: string;
+  device?: string; // device id of the one computer this key is active on
+  deviceName?: string;
+  activatedAt?: string;
+  movedAt?: string; // last time the key was freed for a new computer
+  moves?: number;
 }
 
 const SITE = 'https://nadhebe.com';
@@ -156,8 +168,12 @@ async function readDownloadToken(env: PerchEnv, token: string): Promise<string |
 
 // ── Paddle ────────────────────────────────────────────────────────────────
 
-const paddleApi = (env: PerchEnv) =>
-  (env.PADDLE_ENV || 'sandbox') === 'production' ? 'https://api.paddle.com' : 'https://sandbox-api.paddle.com';
+// PADDLE_ENV has no default: an unset or misspelled value must never send calls to the wrong account.
+function paddleApi(env: PerchEnv): string {
+  if (env.PADDLE_ENV === 'production') return 'https://api.paddle.com';
+  if (env.PADDLE_ENV === 'sandbox') return 'https://sandbox-api.paddle.com';
+  throw new Error(`PADDLE_ENV must be "sandbox" or "production" (got "${env.PADDLE_ENV ?? ''}")`);
+}
 
 async function paddleGet(env: PerchEnv, path: string): Promise<any | null> {
   if (!env.PADDLE_API_KEY) return null;
@@ -251,24 +267,52 @@ async function sendLicenseEmail(env: PerchEnv, lic: License): Promise<boolean> {
   }
   const link = await downloadUrl(env, lic.txn);
   const support = env.SUPPORT_EMAIL || 'support@nadhebe.com';
-  const html = `<!doctype html><html><body style="margin:0;background:#f8fafc;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#0f172a">
-<table width="100%" cellpadding="0" cellspacing="0" style="padding:32px 12px"><tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:32px">
-<tr><td>
-<p style="margin:0 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#0284c7;font-weight:700">Perchboard for Windows</p>
-<h1 style="margin:0 0 16px;font-size:24px">Thanks for buying Perchboard!</h1>
-<p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#475569">Here is your lifetime license key and download. Keep this email: you can download Perchboard again from the same link any time.</p>
-<p style="margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700">Your license key</p>
-<p style="margin:0 0 24px;padding:14px 16px;background:#f1f5f9;border:1px dashed #0284c7;border-radius:10px;font-family:Consolas,Menlo,monospace;font-size:18px;font-weight:700;letter-spacing:.04em">${escapeHtml(lic.key)}</p>
-<p style="margin:0 0 28px"><a href="${link}" style="display:inline-block;background:#0284c7;color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:999px">Download Perchboard (.exe)</a></p>
-<ol style="margin:0 0 24px;padding-left:20px;font-size:14px;line-height:1.7;color:#475569">
-<li>Run the installer (Windows 10 or 11, 64-bit).</li>
-<li>Open Perchboard → Settings → License.</li>
-<li>Paste your key and click Activate.</li>
-</ol>
-<p style="margin:0;font-size:13px;color:#64748b">Order ${escapeHtml(lic.txn)} · Your receipt and invoice come separately from Paddle, our reseller. Questions or a refund within 14 days? Reply to this email or write to <a href="mailto:${support}" style="color:#0284c7">${support}</a>.</p>
-</td></tr></table></td></tr></table></body></html>`;
-  const text = `Thanks for buying Perchboard!\n\nYour license key: ${lic.key}\n\nDownload: ${link}\n\n1. Run the installer (Windows 10 or 11, 64-bit).\n2. Open Perchboard > Settings > License.\n3. Paste your key and click Activate.\n\nOrder ${lic.txn}. Questions? ${support}`;
+  const site = env.SITE_URL || SITE;
+  // Email clients block scripts, so "Copy key" opens a tiny page that copies it. The key
+  // (and the download token) ride in the URL fragment, which browsers never send to a server.
+  const copyLink = `${site}/perch/key/#${encodeURIComponent(lic.key)}&t=${encodeURIComponent(link.split('?t=')[1] || '')}`;
+  const key = escapeHtml(lic.key);
+  const muted = 'color:#475569';
+  const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#0f172a">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f1f5f9"><tr><td align="center" style="padding:32px 12px">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;background:#ffffff;border:1px solid #e2e8f0;border-radius:18px">
+<tr><td style="padding:36px 32px 8px">
+<p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#0284c7;font-weight:700">Perchboard for Windows</p>
+<h1 style="margin:0 0 14px;font-size:28px;line-height:1.2;font-weight:800">Welcome to Perchboard.</h1>
+<p style="margin:0;font-size:16px;line-height:1.65;${muted}">Thank you for choosing Perchboard. From today, nothing you copy gets lost. Your text, links, images and files stay one glance away, right at the edge of your screen.</p>
+</td></tr>
+<tr><td style="padding:24px 32px 0">
+<p style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700">Your lifetime license key</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="padding:18px 16px;background:#f0f9ff;border:1px dashed #0284c7;border-radius:12px;font-family:Consolas,'SFMono-Regular',Menlo,monospace;font-size:20px;line-height:1.3;font-weight:700;letter-spacing:.06em;white-space:nowrap;text-align:center;color:#0f172a">${key}</td>
+</tr></table>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px"><tr>
+<td style="border:1px solid #0284c7;border-radius:999px;white-space:nowrap"><a href="${copyLink}" style="display:inline-block;padding:8px 18px;font-size:14px;font-weight:700;color:#0284c7;text-decoration:none;white-space:nowrap">Copy key</a></td>
+<td style="padding-left:12px;font-size:13px;line-height:1.5;color:#64748b">Works on one computer. Reinstalling on the same computer is always free.</td>
+</tr></table>
+</td></tr>
+<tr><td style="padding:28px 32px 0">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#0284c7;border-radius:999px">
+<a href="${link}" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:700;color:#ffffff;text-decoration:none">Download Perchboard</a>
+</td></tr></table>
+</td></tr>
+<tr><td style="padding:28px 32px 0">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:15px;line-height:1.6;${muted}">
+<tr><td valign="top" style="width:28px;padding:0 0 10px;font-weight:800;color:#0284c7">1.</td><td style="padding:0 0 10px">Run the installer (Windows 10 or 11).</td></tr>
+<tr><td valign="top" style="width:28px;padding:0 0 10px;font-weight:800;color:#0284c7">2.</td><td style="padding:0 0 10px">Perchboard opens and asks for your key. Click <b>Paste</b>, then <b>Activate</b>.</td></tr>
+<tr><td valign="top" style="width:28px;padding:0 0 10px;font-weight:800;color:#0284c7">3.</td><td style="padding:0 0 10px">Press the shortcut or move your mouse to the screen edge, and your clipboard is there.</td></tr>
+</table>
+</td></tr>
+<tr><td style="padding:20px 32px 32px">
+<p style="margin:0 0 14px;font-size:16px;line-height:1.65;color:#0f172a">Every great idea starts with something you copied. Now you will never lose one again. Enjoy Perchboard.</p>
+<p style="margin:0;font-size:15px;color:#0f172a;font-weight:600">The Perchboard team at Nadhebe</p>
+</td></tr>
+<tr><td style="padding:18px 32px;border-top:1px solid #e2e8f0;font-size:12px;line-height:1.6;color:#64748b">
+Order ${escapeHtml(lic.txn)} · Your receipt and invoice come separately from Paddle, our reseller. Questions or a refund within 14 days? Reply to this email or write to <a href="mailto:${support}" style="color:#0284c7">${support}</a>. · <a href="${site}/perch/" style="color:#0284c7">nadhebe.com/perch</a>
+</td></tr>
+</table></td></tr></table></body></html>`;
+  const text = `Welcome to Perchboard.\n\nThank you for choosing Perchboard. From today, nothing you copy gets lost. Your text, links, images and files stay one glance away, right at the edge of your screen.\n\nYour lifetime license key:\n${lic.key}\n(Works on one computer. Reinstalling on the same computer is always free.)\n\nDownload Perchboard: ${link}\n\n1. Run the installer (Windows 10 or 11).\n2. Perchboard opens and asks for your key. Click Paste, then Activate.\n3. Press the shortcut or move your mouse to the screen edge, and your clipboard is there.\n\nEvery great idea starts with something you copied. Now you will never lose one again. Enjoy Perchboard.\n\nThe Perchboard team at Nadhebe\n\nOrder ${lic.txn}. Questions? ${support} · ${site}/perch/`;
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -276,7 +320,7 @@ async function sendLicenseEmail(env: PerchEnv, lic: License): Promise<boolean> {
       from: env.MAIL_FROM,
       to: [lic.email],
       reply_to: support,
-      subject: 'Your Perchboard license key and download',
+      subject: 'Welcome to Perchboard. Your license key is inside',
       html,
       text,
     }),
@@ -380,17 +424,157 @@ async function resend(request: Request, env: PerchEnv): Promise<Response> {
   return generic;
 }
 
+const MOVE_COOLDOWN_MS = 7 * 24 * 3600 * 1000;
+const DEVICE_RE = /^[A-Za-z0-9_-]{16,128}$/;
+
+async function findLicense(env: PerchEnv, key: string): Promise<License | null> {
+  const txnId = await env.PERCH_KV!.get(`key:${key}`);
+  const raw = txnId ? await env.PERCH_KV!.get(`lic:${txnId}`) : null;
+  return raw ? (JSON.parse(raw) as License) : null;
+}
+
+const saveLicense = (env: PerchEnv, lic: License) => env.PERCH_KV!.put(`lic:${lic.txn}`, JSON.stringify(lic));
+
 async function activate(request: Request, env: PerchEnv): Promise<Response> {
   if (!env.PERCH_KV) return notReady('License storage');
-  const { key, device } = (await request.json().catch(() => ({}))) as { key?: string; device?: string };
+  const { key, device, deviceName } = (await request.json().catch(() => ({}))) as { key?: string; device?: string; deviceName?: string };
   const k = normalizeKey(key || '');
   if (!/^PERCH(-[0-9A-Z]{5}){4}$/.test(k)) return json({ success: false, valid: false, error: 'That does not look like a Perchboard key.' }, 400);
-  const txnId = await env.PERCH_KV.get(`key:${k}`);
-  const raw = txnId ? await env.PERCH_KV.get(`lic:${txnId}`) : null;
-  if (!raw) return json({ success: false, valid: false, error: 'License key not found.' }, 404);
-  const lic: License = JSON.parse(raw);
+  if (!device || !DEVICE_RE.test(device)) return json({ success: false, valid: false, error: 'Missing device id. Please update Perchboard.' }, 400);
+  const lic = await findLicense(env, k);
+  if (!lic) return json({ success: false, valid: false, error: 'License key not found.' }, 404);
   if (lic.revoked) return json({ success: false, valid: false, error: 'This license was refunded.' }, 403);
+  if (lic.device && lic.device !== device) {
+    return json(
+      {
+        success: false,
+        valid: false,
+        code: 'other_device',
+        error: `This key is already active on another computer${lic.deviceName ? ` (${lic.deviceName})` : ''}. To move it here, use "Move license to this computer" and confirm from your email.`,
+      },
+      409,
+    );
+  }
+  if (!lic.device) {
+    // First activation, or the first one after a move: bind the key to this computer.
+    lic.device = device;
+    lic.deviceName = (deviceName || '').replace(/[^\w .()-]/g, '').slice(0, 60) || undefined;
+    lic.activatedAt = new Date().toISOString();
+    await saveLicense(env, lic);
+  }
   return json({ success: true, valid: true, email: maskEmail(lic.email), license: await signLicense(env, lic, device) });
+}
+
+// ── moving a license to a new computer ────────────────────────────────────
+
+async function moveLink(env: PerchEnv, key: string): Promise<string> {
+  const body = b64url(enc.encode(JSON.stringify({ key, move: 1, exp: Date.now() + 3600 * 1000 })));
+  return `${env.SITE_URL || SITE}/api/perch/move?t=${body}.${await hmacHex(downloadSecret(env), body)}`;
+}
+
+async function readMoveToken(env: PerchEnv, token: string): Promise<string | null> {
+  const [body, sig] = token.split('.');
+  if (!body || !sig || !downloadSecret(env)) return null;
+  if (!safeEqual(await hmacHex(downloadSecret(env), body), sig)) return null;
+  try {
+    const { key, move, exp } = JSON.parse(new TextDecoder().decode(fromB64url(body)));
+    return move === 1 && typeof key === 'string' && exp > Date.now() ? key : null;
+  } catch {
+    return null;
+  }
+}
+
+const page = (title: string, msg: string, status = 200) =>
+  new Response(
+    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title>
+<body style="margin:0;min-height:100vh;display:grid;place-items:center;background:#f8fafc;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#0f172a">
+<main style="max-width:440px;margin:24px;padding:32px;background:#fff;border:1px solid #e2e8f0;border-radius:16px">
+<h1 style="margin:0 0 12px;font-size:22px">${escapeHtml(title)}</h1><p style="margin:0;font-size:15px;line-height:1.6;color:#475569">${escapeHtml(msg)}</p>
+<p style="margin:20px 0 0"><a href="/perch/" style="color:#0284c7">Back to Perchboard</a></p></main></body>`,
+    { status, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } },
+  );
+
+async function sendMoveEmail(env: PerchEnv, lic: License): Promise<void> {
+  if (!env.RESEND_API_KEY || !env.MAIL_FROM) return;
+  const link = await moveLink(env, lic.key);
+  const where = lic.deviceName ? ` from ${escapeHtml(lic.deviceName)}` : '';
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: env.MAIL_FROM,
+      to: [lic.email],
+      reply_to: env.SUPPORT_EMAIL || 'support@nadhebe.com',
+      subject: 'Move your Perchboard license to a new computer',
+      html: `<p>Someone asked to move your Perchboard license${where} to a new computer.</p><p><a href="${link}">Yes, free my license</a> (link works for 1 hour).</p><p>After that, open Perchboard on the new computer and click Activate. Perchboard will stop working on the old one. If this wasn't you, ignore this email.</p>`,
+      text: `Someone asked to move your Perchboard license${where} to a new computer.\n\nConfirm (link works for 1 hour): ${link}\n\nThen open Perchboard on the new computer and click Activate. If this wasn't you, ignore this email.`,
+    }),
+  });
+  if (!res.ok) console.error('[perch] Resend error (move)', res.status, await res.text());
+}
+
+async function move(request: Request, url: URL, env: PerchEnv): Promise<Response> {
+  if (!env.PERCH_KV) return notReady('License storage');
+  if (request.method === 'GET') {
+    const key = await readMoveToken(env, url.searchParams.get('t') || '');
+    if (!key) return page('Link expired', 'This link is invalid or older than 1 hour. Ask for a new one from the Perchboard app.', 400);
+    const lic = await findLicense(env, key);
+    if (!lic || lic.revoked) return page('License not active', 'This license was refunded or does not exist.', 404);
+    if (lic.device) {
+      lic.device = undefined;
+      lic.deviceName = undefined;
+      lic.movedAt = new Date().toISOString();
+      lic.moves = (lic.moves || 0) + 1;
+      await saveLicense(env, lic);
+    }
+    return page('License freed', 'Open Perchboard on your new computer and click Activate. It will stop working on the old one.');
+  }
+  // POST {key}: the app asks to move. Always the same answer, so it can't be used to probe keys.
+  const { key } = (await request.json().catch(() => ({}))) as { key?: string };
+  const generic = json({ success: true, message: 'Check the email you bought with and confirm the move. The link works for 1 hour.' });
+  const k = normalizeKey(key || '');
+  if (!/^PERCH(-[0-9A-Z]{5}){4}$/.test(k)) return generic;
+  const lic = await findLicense(env, k);
+  if (!lic || lic.revoked || !lic.device) return generic;
+  if (lic.movedAt && Date.now() - Date.parse(lic.movedAt) < MOVE_COOLDOWN_MS) {
+    return json({ success: false, error: 'This license was moved in the last 7 days. Contact support if you need help.' }, 429);
+  }
+  if (await env.PERCH_KV.get(`rl:move:${k}`)) return generic;
+  await env.PERCH_KV.put(`rl:move:${k}`, '1', { expirationTtl: 600 });
+  await sendMoveEmail(env, lic);
+  return generic;
+}
+
+// ── admin: who bought, which computer, free a key ─────────────────────────
+
+async function admin(request: Request, url: URL, env: PerchEnv): Promise<Response> {
+  if (!env.PERCH_KV || !env.PERCH_ADMIN_TOKEN) return notReady('Admin');
+  const auth = request.headers.get('Authorization') || '';
+  if (!safeEqual(auth, `Bearer ${env.PERCH_ADMIN_TOKEN}`)) return json({ success: false, error: 'Unauthorized' }, 401);
+  if (request.method === 'POST') {
+    const { key, action } = (await request.json().catch(() => ({}))) as { key?: string; action?: string };
+    const lic = await findLicense(env, normalizeKey(key || ''));
+    if (!lic) return json({ success: false, error: 'Key not found' }, 404);
+    if (action !== 'free') return json({ success: false, error: 'Unknown action' }, 400);
+    lic.device = undefined;
+    lic.deviceName = undefined;
+    lic.movedAt = undefined; // support override: no cooldown
+    await saveLicense(env, lic);
+    return json({ success: true, license: lic });
+  }
+  const email = (url.searchParams.get('email') || '').trim().toLowerCase();
+  const key = normalizeKey(url.searchParams.get('key') || '');
+  const txn = url.searchParams.get('txn') || '';
+  let txns: string[] = [];
+  if (email) txns = JSON.parse((await env.PERCH_KV.get(`cust:${email}`)) || '[]');
+  else if (key) txns = [(await env.PERCH_KV.get(`key:${key}`)) || ''];
+  else if (txn) txns = [txn];
+  const licenses = [];
+  for (const t of txns.filter(Boolean)) {
+    const raw = await env.PERCH_KV.get(`lic:${t}`);
+    if (raw) licenses.push(JSON.parse(raw));
+  }
+  return json({ success: true, licenses });
 }
 
 async function waitlist(request: Request, env: PerchEnv): Promise<Response> {
@@ -417,12 +601,18 @@ async function waitlist(request: Request, env: PerchEnv): Promise<Response> {
 export async function handlePerch(request: Request, env: PerchEnv, url: URL): Promise<Response | null> {
   const p = url.pathname.replace(/\/+$/, '');
   const m = request.method;
+  if ((p === '/api/paddle/webhook' || p === '/api/perch/order') && env.PADDLE_ENV !== 'sandbox' && env.PADDLE_ENV !== 'production') {
+    console.error('[perch] PADDLE_ENV must be "sandbox" or "production"; refusing to talk to Paddle.');
+    return notReady('PADDLE_ENV');
+  }
   try {
     if (p === '/api/paddle/webhook' && m === 'POST') return await webhook(request, env);
     if (p === '/api/perch/order' && m === 'GET') return await order(url, env);
     if (p === '/api/perch/download' && m === 'GET') return await download(url, env);
     if (p === '/api/perch/resend' && m === 'POST') return await resend(request, env);
     if (p === '/api/perch/activate' && m === 'POST') return await activate(request, env);
+    if (p === '/api/perch/move' && (m === 'POST' || m === 'GET')) return await move(request, url, env);
+    if (p === '/api/perch/admin' && (m === 'GET' || m === 'POST')) return await admin(request, url, env);
     if (p === '/api/waitlist' && m === 'POST') return await waitlist(request, env);
   } catch (err: any) {
     console.error('[perch] route error', p, err?.stack || err);
