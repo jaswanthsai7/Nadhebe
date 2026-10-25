@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Subscribe from '@/components/Subscribe.astro';
+import PricingSection from '@/components/perch/PricingSection.astro';
 import { SITE } from '@/config';
 import { buildSeo } from '@/utils/seo';
 
@@ -35,9 +36,10 @@ const softwareSchema = {
   applicationCategory: 'UtilitiesApplication',
   offers: {
     '@type': 'Offer',
-    price: '0.00',
+    price: '9.99',
     priceCurrency: 'USD',
-    availability: 'https://schema.org/PreOrder'
+    availability: 'https://schema.org/InStock',
+    url: `${SITE.url}/perch/#pricing`
   },
   author: {
     '@type': 'Organization',
@@ -111,10 +113,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'Is an iOS version planned?',
+      name: 'Is a macOS version planned?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. While Windows is the initial launch platform, an iOS companion is in planning. You can select iOS or Both when submitting the waitlist form to be notified when iOS testing begins.'
+        text: 'Yes. While Windows is the initial launch platform, a macOS version is in planning. You can submit your email on the waitlist to be notified when macOS testing begins.'
       }
     },
     {
@@ -122,7 +124,7 @@ const faqSchema = {
       name: 'How do I join the waitlist?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Enter your email address in the waitlist section on this page, choose your preferred platform (Windows, iOS, or Both), and click "Get early access". You will receive an immediate confirmation and priority access upon launch.'
+        text: 'Enter your email address in the waitlist section on this page, choose your preferred platform (Windows, macOS, or Both), and click "Get early access". You will receive an immediate confirmation and priority access upon launch.'
       }
     },
     {
@@ -146,7 +148,27 @@ const videoSchema = {
   contentUrl: `${SITE.url}/perch/perch-highlight.mp4`
 };
 
-const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
+const trailerVideoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Perchboard Official 16:9 Commercial & Feature Trailer',
+  description: 'Official 22-second product trailer highlighting Perchboard edge docking, instant keyboard triggers, and clean distraction-free clipboard retrieval.',
+  thumbnailUrl: [`${SITE.url}/perch/perchboard-premium-poster.jpg`],
+  uploadDate: '2026-10-25T00:00:00Z',
+  contentUrl: `${SITE.url}/perch/perchboard-premium-16x9.mp4`
+};
+
+const walkthroughVideoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'Perchboard In-Depth Feature Tour & Workflow Walkthrough',
+  description: 'Comprehensive 42-second deep dive demonstrating multi-format clip capture, categorization filters, and instant keyboard retrieval.',
+  thumbnailUrl: [`${SITE.url}/perch/perchboard-ad-showcase-poster.jpg`],
+  uploadDate: '2026-10-25T00:00:00Z',
+  contentUrl: `${SITE.url}/perch/perchboard-ad-showcase.mp4`
+};
+
+const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, trailerVideoSchema, walkthroughVideoSchema];
 ---
 
 <BaseLayout
@@ -166,35 +188,35 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
 
   <style>
     :root {
-      --paper-cream: #FBF9F4;
-      --paper-warm: #F4EFE6;
-      --paper-border: #E8E2D5;
+      --paper-cream: #FFFFFF;
+      --paper-warm: #F8F9FA;
+      --paper-border: #E5E7EB;
       --paper-card: #FFFFFF;
-      --ink-graphite: #18191B;
-      --ink-subtle: #565961;
-      --ink-muted: #848792;
+      --ink-graphite: #0F172A;
+      --ink-subtle: #475569;
+      --ink-muted: #94A3B8;
       --brand-cyan: #0284C7;
       --brand-cyan-light: #38BDF8;
-      --brand-cyan-glow: rgba(2, 132, 199, 0.15);
+      --brand-cyan-glow: rgba(2, 132, 199, 0.12);
       --font-hand: 'Caveat', cursive, sans-serif;
       --font-serif-editorial: 'Newsreader', Georgia, serif;
     }
 
     .dark {
-      --paper-cream: #121316;
-      --paper-warm: #18191E;
-      --paper-border: #262830;
-      --paper-card: #1D1F25;
-      --ink-graphite: #F4F4F6;
-      --ink-subtle: #A3A6B2;
-      --ink-muted: #6C707E;
+      --paper-cream: #0B0D11;
+      --paper-warm: #11141B;
+      --paper-border: #1E232E;
+      --paper-card: #151821;
+      --ink-graphite: #F8FAFC;
+      --ink-subtle: #94A3B8;
+      --ink-muted: #64748B;
       --brand-cyan-glow: rgba(56, 189, 248, 0.2);
     }
 
-    /* Tactile Paper Texture Pattern */
+    /* Pristine Modern White Canvas with Subtle Faint Texture */
     .perch-page-wrapper {
-      background-color: var(--paper-cream);
-      background-image: radial-gradient(rgba(0, 0, 0, 0.038) 1px, transparent 0);
+      background-color: #FFFFFF;
+      background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.25px, transparent 0);
       background-size: 24px 24px;
       color: var(--ink-graphite);
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -204,7 +226,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
     }
 
     .dark .perch-page-wrapper {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 0);
+      background-color: var(--paper-cream);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1.25px, transparent 0);
     }
 
     .font-handwriting {
@@ -215,20 +238,20 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       font-family: var(--font-serif-editorial);
     }
 
-    /* Tactile Paper Card & Shadow tokens */
+    /* Tactile Paper Card & Modern Clean Shadows */
     .paper-sheet {
       background: var(--paper-card);
       border: 1px solid var(--paper-border);
       box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.03),
-        0 8px 24px -4px rgba(0, 0, 0, 0.05),
-        0 20px 48px -8px rgba(0, 0, 0, 0.04);
+        0 1px 3px rgba(0, 0, 0, 0.03),
+        0 8px 24px -4px rgba(0, 0, 0, 0.04),
+        0 20px 48px -8px rgba(0, 0, 0, 0.03);
     }
 
     .paper-sheet-subtle {
-      background: var(--paper-card);
+      background: var(--paper-warm);
       border: 1px solid var(--paper-border);
-      box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     .paper-stamp {
@@ -239,7 +262,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
     /* Hand-drawn SVG thread path styling */
     .journey-thread {
       stroke: #0284C7;
-      stroke-opacity: 0.35;
+      stroke-opacity: 0.16;
       stroke-dasharray: 6 6;
       fill: none;
       pointer-events: none;
@@ -258,14 +281,15 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
     }
 
-    /* Desktop Showcase Frame */
+    /* Desktop Showcase Frame with Homy-style soft diffuse shadow & warm ambient glow */
     .desktop-frame {
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow:
-        0 25px 60px -15px rgba(0, 0, 0, 0.22),
-        0 10px 24px -8px rgba(0, 0, 0, 0.12);
+        0 20px 50px -10px rgba(15, 23, 42, 0.12),
+        0 40px 90px -15px rgba(234, 140, 85, 0.18),
+        0 12px 28px -6px rgba(0, 0, 0, 0.06);
     }
     .dark .desktop-frame {
       border-color: rgba(255, 255, 255, 0.1);
@@ -274,6 +298,14 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
         0 12px 28px -8px rgba(0, 0, 0, 0.35);
     }
   </style>
+
+  <!-- High-Priority Preconnect & Preload for Instant Paddle Checkout -->
+  <link rel="preconnect" href="https://cdn.paddle.com" crossorigin />
+  <link rel="preconnect" href="https://sandbox-checkout.paddle.com" crossorigin />
+  <link rel="preconnect" href="https://checkout.paddle.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.paddle.com" />
+  <link rel="dns-prefetch" href="https://sandbox-checkout.paddle.com" />
+  <script is:inline id="paddle-js-sdk" src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 
   <!-- Official Stackedlol / Framer ASCII Ocean Engine -->
   <script is:inline src="/perch/ascii-ocean-engine.js?v=3"></script>
@@ -287,7 +319,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       aria-hidden="true"
     ></canvas>
 
-    <!-- SVG Background Journey Thread Path -->
+    <!-- SVG Background Journey Thread Path: Begins below the Hero section -->
     <svg
       class="journey-thread absolute inset-0 w-full h-full z-0 hidden lg:block"
       xmlns="http://www.w3.org/2000/svg"
@@ -296,9 +328,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       viewBox="0 0 1440 6800"
     >
       <path
-        d="M 720,100
-           C 720,380 950,550 1150,700
-           C 1300,800 1320,1100 1240,1400
+        d="M 1240,1400
            C 1180,1650 400,1850 320,2150
            C 250,2450 1150,2650 1200,2950
            C 1250,3250 350,3450 300,3750
@@ -344,6 +374,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
           <a href="#features" class="hover:text-ink-graphite transition-colors py-4">Features</a>
           <a href="#how-it-works" class="hover:text-ink-graphite transition-colors py-4">How it works</a>
           <a href="#platforms" class="hover:text-ink-graphite transition-colors py-4">Platforms</a>
+          <a href="#pricing" class="hover:text-ink-graphite transition-colors py-4 font-semibold text-brand-cyan">Pricing</a>
           <a href="#faq" class="hover:text-ink-graphite transition-colors py-4">FAQ</a>
         </div>
 
@@ -357,14 +388,14 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
             <span>by Nadhebe</span>
             <span>↗</span>
           </a>
-          <button
-            type="button"
-            id="nav-waitlist-btn"
-            class="btn-perch-primary rounded-full px-14 py-6 sm:py-7 text-xs font-semibold whitespace-nowrap inline-flex items-center gap-4 cursor-pointer open-waitlist-modal"
+          <a
+            href="#pricing"
+            id="nav-buy-pro-btn"
+            class="btn-perch-primary rounded-full px-16 py-6 sm:py-8 text-xs font-semibold whitespace-nowrap inline-flex items-center gap-6 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
-            <span>Join waitlist</span>
-            <span class="font-sans">↗</span>
-          </button>
+            <span>Download</span>
+            <span class="font-sans">→</span>
+          </a>
         </div>
       </nav>
     </header>
@@ -377,9 +408,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       <div class="text-center max-w-3xl mx-auto mb-32 sm:mb-48" data-reveal>
         <!-- Platform Status Stamp Badge -->
         <div class="inline-flex items-center gap-8 px-12 py-4 rounded-full paper-stamp mb-20 text-brand-cyan">
-          <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
-          <span class="font-mono text-[11px] font-bold tracking-[0.18em] uppercase">
-            WINDOWS FIRST · iOS COMING SOON
+          <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-mono text-[11px] font-bold tracking-[0.14em] uppercase">
+            WINDOWS: AVAILABLE NOW · macOS: JOIN WAITLIST
           </span>
         </div>
 
@@ -397,28 +428,52 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
           Perchboard keeps your copied content close at hand, with a floating desktop panel for revisiting text, links, images, and files without the friction of window switching.
         </p>
 
-        <!-- CTA Row -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">
-          <button
-            type="button"
-            id="hero-waitlist-btn"
-            class="btn-perch-primary px-24 py-12 rounded-full font-bold text-sm inline-flex items-center gap-8 shadow-md cursor-pointer open-waitlist-modal"
-          >
-            <span>Join the waitlist</span>
-            <span>↗</span>
-          </button>
+        <!-- Hero Action Buttons: Clean, Sleek, Direct CTA -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16 pt-12">
+          <div class="relative inline-flex items-center">
+            <!-- Orange/Gold ONLY text (no card, no button design, zero wasted space) -->
+            <span class="absolute -top-16 right-10 sm:right-14 text-[11px] font-mono font-bold tracking-wider text-amber-500 dark:text-amber-400 uppercase pointer-events-none select-none whitespace-nowrap">
+              ✦ Launch Offer
+            </span>
+
+            <a
+              href="#pricing"
+              id="hero-buy-btn"
+              class="btn-perch-primary px-24 py-14 rounded-full font-display font-bold text-sm sm:text-base inline-flex items-center justify-center gap-10 shadow-xl cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all group whitespace-nowrap"
+            >
+              <svg class="w-16 h-16 sm:w-18 sm:h-18 fill-current shrink-0" width="18" height="18" style="width: 18px; height: 18px; min-width: 18px;" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+              </svg>
+              <span>Buy Perchboard</span>
+              <span class="inline-flex items-center gap-8 px-10 py-4 rounded-full bg-black/25 border border-white/20 shadow-inner">
+                <span class="font-mono text-xs font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
+                <span class="font-mono text-xs font-black text-white">$9.99</span>
+              </span>
+              <span class="transition-transform duration-200 group-hover:translate-x-2">→</span>
+            </a>
+          </div>
+
           <a
-            href="#how-it-works"
-            class="px-20 py-11 rounded-full font-medium text-xs sm:text-sm text-ink-subtle hover:text-ink-graphite hover:bg-black/5 dark:hover:bg-white/5 transition-all inline-flex items-center gap-6"
+            href="#waitlist"
+            id="hero-waitlist-btn"
+            data-platform="macos"
+            class="px-20 py-14 rounded-full font-display font-semibold text-xs sm:text-sm text-ink-subtle hover:text-ink-graphite hover:bg-black/5 dark:hover:bg-white/5 transition-all inline-flex items-center gap-6 cursor-pointer whitespace-nowrap"
           >
-            <span>Explore how it works</span>
-            <span>↓</span>
+            <span>Join macOS Waitlist</span>
+            <span class="text-xs">↓</span>
           </a>
         </div>
+
+        <p class="font-mono text-[11px] text-ink-muted text-center mt-14 mb-0">
+          One-time $9.99 launch pricing (Save 33% off $14.99) · Lifetime license · Zero subscription
+        </p>
       </div>
 
       <!-- Real Windows Desktop Scene with Floating Perchboard Panel & Live Video -->
       <div class="relative max-w-5xl mx-auto pt-8 pb-16" data-reveal>
+        <!-- Soft diffuse peach/warm ambient glow behind showcase frame (Homy style) -->
+        <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[92%] h-56 bg-gradient-to-r from-orange-400/15 via-amber-400/20 to-sky-400/12 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+
         <!-- Handwritten Sticky Annotation (Top Left) -->
         <div class="absolute -top-14 left-4 sm:left-12 z-20 hidden md:block">
           <div class="bg-[#FFFCE8] text-[#785E16] dark:bg-[#2A291A] dark:text-[#E8DC96] px-14 py-8 rounded-8 shadow-sm border border-[#F2E59E] dark:border-[#4A472E] -rotate-3">
@@ -538,7 +593,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
     </section>
 
     <!-- 5. THE SCROLL NARRATIVE: Show the product in action -->
-    <div id="how-it-works" class="relative z-10 pt-28 pb-48">
+    <div id="how-it-works" class="relative z-10 pt-28 pb-48 bg-[#F8F9FA] dark:bg-[#0E1015] border-y border-[#E5E7EB] dark:border-[#1E222B]">
       
       <!-- SECTION 01 — Always within reach -->
       <section id="features" class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
@@ -803,7 +858,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
     </div>
 
     <!-- 6. PRODUCT-SPECIFIC VISUAL INTERLUDE: Breathing Room -->
-    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#FAF7F0] dark:bg-[#16171B] border-y border-paper-border text-center">
+    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#F8F9FA] dark:bg-[#11141B] border-y border-[#E5E7EB] dark:border-[#1E222B] text-center">
       <div class="max-w-3xl mx-auto space-y-24" data-reveal>
         <div class="inline-block relative">
           <div class="w-96 h-96 sm:w-112 sm:h-112 mx-auto rounded-24 p-8 paper-sheet shadow-xl bg-white dark:bg-[#1F2128]">
@@ -908,9 +963,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
         <!-- WINDOWS PLATFORM CARD (Primary) -->
         <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between border-2 border-brand-cyan/40">
           <div class="absolute top-16 right-16">
-            <span class="inline-flex items-center gap-6 rounded-full bg-brand-cyan/10 px-10 py-3 text-[10px] font-mono font-bold tracking-wider text-brand-cyan uppercase">
-              <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
-              INITIAL PLATFORM
+            <span class="inline-flex items-center gap-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-10 py-3 text-[10px] font-mono font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">
+              <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+              AVAILABLE NOW • $9.99
             </span>
           </div>
 
@@ -922,11 +977,11 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
             </div>
             
             <h3 class="font-display text-2xl font-bold text-ink-graphite mb-8">
-              Windows
+              Windows 10 & 11
             </h3>
             
-            <p class="text-caption font-mono text-brand-cyan font-semibold mb-12">
-              Status: Coming soon
+            <p class="text-caption font-mono text-emerald-600 dark:text-emerald-400 font-semibold mb-12">
+              Status: Available Now — Instant Download
             </p>
             
             <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-20">
@@ -935,23 +990,29 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
           </div>
 
           <div class="pt-16 border-t border-paper-border">
-            <button
-              type="button"
+            <a
+              href="#pricing"
               id="platform-cta-windows"
-              data-platform="windows"
-              class="w-full btn-perch-primary rounded-full py-10 px-18 text-xs font-bold text-center inline-flex items-center justify-center gap-6 cursor-pointer open-waitlist-modal"
+              class="w-full btn-perch-primary rounded-full py-14 px-20 font-display font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-8 shadow-md cursor-pointer hover:scale-[1.01] active:scale-[0.99] transition-all group whitespace-nowrap"
             >
-              <span>Join the Windows waitlist</span>
-              <span>→</span>
-            </button>
+              <svg class="w-16 h-16 fill-current shrink-0" width="16" height="16" style="width: 16px; height: 16px; min-width: 16px;" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+              </svg>
+              <span>Buy Perchboard</span>
+              <span class="inline-flex items-center gap-8 px-10 py-3 rounded-full bg-black/25 border border-white/20 shadow-inner">
+                <span class="font-mono text-[11px] font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
+                <span class="font-mono text-[11px] font-black text-white">$9.99</span>
+              </span>
+              <span class="transition-transform duration-200 group-hover:translate-x-2">→</span>
+            </a>
           </div>
         </div>
 
-        <!-- IOS PLATFORM CARD -->
+        <!-- MACOS PLATFORM CARD -->
         <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between">
           <div class="absolute top-16 right-16">
-            <span class="inline-flex items-center gap-6 rounded-full bg-black/5 dark:bg-white/5 px-10 py-3 text-[10px] font-mono font-semibold tracking-wider text-ink-muted uppercase">
-              PLANNED
+            <span class="inline-flex items-center gap-6 rounded-full bg-amber-500/10 border border-amber-500/20 px-10 py-3 text-[10px] font-mono font-semibold tracking-wider text-amber-600 dark:text-amber-400 uppercase">
+              WAITLIST OPEN
             </span>
           </div>
 
@@ -963,66 +1024,185 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
             </div>
             
             <h3 class="font-display text-2xl font-bold text-ink-graphite mb-8">
-              iOS
+              macOS Desktop
             </h3>
             
             <p class="text-caption font-mono text-ink-muted font-semibold mb-12">
-              Status: Planned · Coming soon
+              Status: In Development · Apple Silicon & Intel Mac
             </p>
             
             <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-20">
-              An upcoming companion app designed for Apple iPhone users, focusing on glanceable widgets, quick-capture scratchpads, and seamless cross-platform workflow harmony.
+              An upcoming desktop release tailored for Mac power users, featuring native Menu Bar docking, keyboard-driven clip search, and frictionless screen-edge clipboard management.
             </p>
           </div>
 
           <div class="pt-16 border-t border-paper-border">
-            <button
-              type="button"
-              id="platform-cta-ios"
-              data-platform="ios"
-              class="w-full rounded-full py-10 px-18 text-xs font-bold text-center border border-paper-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors inline-flex items-center justify-center gap-6 cursor-pointer text-ink-graphite open-waitlist-modal"
+            <a
+              href="#waitlist"
+              id="platform-cta-macos"
+              data-platform="macos"
+              class="w-full rounded-full py-10 px-18 text-xs font-bold text-center border border-paper-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors inline-flex items-center justify-center gap-6 cursor-pointer text-ink-graphite"
             >
-              <span>Notify me about iOS</span>
-              <span>→</span>
-            </button>
+              <span>Join the macOS Waitlist</span>
+              <span>↓</span>
+            </a>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 8. WAITLIST: The Primary Conversion Point -->
-    <section id="waitlist" class="py-36 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
-      <div class="rounded-32 p-28 sm:p-48 bg-[#12141A] text-[#F1F5F9] border border-[#232733] shadow-2xl relative overflow-hidden">
+    <!-- 8. PRICING & PADDLE CHECKOUT SECTION (WINDOWS INSTANT ACCESS) -->
+    <PricingSection />
+
+    <!-- 8.5. WAITLIST: FOR MACOS & FUTURE PLATFORMS -->
+    <section id="waitlist" class="relative z-30 py-32 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
+      <div class="paper-sheet rounded-32 p-28 sm:p-44 relative overflow-hidden border border-paper-border shadow-md text-center">
         
-        <!-- Ambient cyan glow behind card -->
-        <div class="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-brand-cyan blur-3xl opacity-15 pointer-events-none"></div>
-
-        <div class="max-w-xl mx-auto text-center mb-28">
-          <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-brand-cyan/20 border border-brand-cyan/30 text-brand-cyan-light font-mono text-[10px] font-bold tracking-wider uppercase mb-12">
-            EARLY ACCESS REGISTRATION
-          </div>
-
-          <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-12">
-            Be there from the beginning.
-          </h2>
-
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            Get an update when Perchboard is ready for your platform. We respect your inbox: zero spam, strictly milestone updates.
-          </p>
+        <!-- Apple Logo & Mac Platform Pill -->
+        <div class="w-48 h-48 rounded-16 bg-black/5 dark:bg-white/5 text-ink-graphite flex items-center justify-center mx-auto mb-14 shadow-xs">
+          <svg class="w-24 h-24" width="24" height="24" style="width: 24px; height: 24px; min-width: 24px;" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.93-.93.04-2.07.62-2.73 1.39-.58.67-1.09 1.76-.95 2.82 1.04.08 2.11-.51 2.74-1.28z"/>
+          </svg>
         </div>
 
-        <!-- Clean Nadhebe Subscribe Component -->
-        <div class="max-w-md mx-auto pt-8">
+        <div class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold tracking-wider uppercase mb-12">
+          WAITLIST OPEN · macOS EDITION
+        </div>
+
+        <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-ink-graphite leading-tight mb-12">
+          Waiting for macOS? Join the list.
+        </h2>
+
+        <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed max-w-lg mx-auto mb-24">
+          Windows desktop is available today above. If you're using a Mac, enter your email below to reserve early access and get notified the moment our macOS edition is ready.
+        </p>
+
+        <!-- Clean Nadhebe Subscribe Component (Light / Auto Theme) -->
+        <div class="max-w-md mx-auto">
           <Subscribe
             id="section-perch-subscribe"
-            source="perch_section_waitlist"
+            source="perch_macos_waitlist"
+            platform="macos"
             endpoint="/api/waitlist"
-            buttonText="Get Early Access ↗"
+            buttonText="Join macOS Waitlist"
             placeholder="you@domain.com"
-            theme="dark"
+            theme="auto"
           />
         </div>
+      </div>
+    </section>
+
+    <!-- 8.8. PRODUCT VIDEO SPOTLIGHT / APP ADVERTISEMENTS -->
+    <section id="demo-walkthrough" class="relative z-20 py-32 px-16 sm:px-24 max-w-6xl mx-auto" data-reveal>
+      <div class="text-center mb-28">
+        <span class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-sky-500/10 border border-sky-500/20 text-brand-cyan font-mono text-[11px] font-bold tracking-wider uppercase mb-10">
+          <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
+          Official Ad Spotlights & Walkthroughs
+        </span>
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-ink-graphite tracking-tight mt-4">
+          See Perchboard in Action
+        </h2>
+        <p class="font-editorial text-lg sm:text-xl text-ink-subtle italic mt-6 max-w-2xl mx-auto">
+          Watch our official 16:9 feature trailer and in-depth workflow tour to experience how floating edge docking transforms desktop clipboard management.
+        </p>
+      </div>
+
+      <!-- Dual 16:9 Video Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 sm:gap-32 items-stretch">
+        
+        <!-- Video 1: 16:9 Official Trailer -->
+        <div class="paper-sheet rounded-28 p-16 sm:p-24 relative overflow-hidden flex flex-col justify-between shadow-md group">
+          <div>
+            <!-- Window Bar -->
+            <div class="flex items-center justify-between pb-14 border-b border-paper-border mb-16">
+              <div class="flex items-center gap-6">
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="font-mono text-[10px] text-ink-muted ml-6 font-semibold uppercase tracking-wider">Trailer · 1080p</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-8 py-2 rounded-full uppercase tracking-wider">
+                16:9 Feature Ad
+              </span>
+            </div>
+
+            <!-- Video Player -->
+            <div class="relative rounded-16 overflow-hidden bg-slate-900 border border-paper-border shadow-inner aspect-video mb-18">
+              <video
+                src="/perch/perchboard-premium-16x9.mp4"
+                poster="/perch/perchboard-premium-poster.jpg"
+                controls
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover"
+                aria-label="Perchboard official 16:9 promotional trailer video"
+              ></video>
+            </div>
+
+            <h3 class="font-display text-xl sm:text-2xl font-bold text-ink-graphite mb-8">
+              The Desktop Experience
+            </h3>
+            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-16">
+              A cinematic 22-second commercial showcasing how Perchboard anchors unobtrusively to your Windows screen edge, slide-toggles with zero lag, and preserves full desktop focus.
+            </p>
+          </div>
+
+          <div class="pt-14 border-t border-paper-border flex items-center justify-between text-[11px] font-mono text-ink-muted">
+            <span class="flex items-center gap-6">
+              <span class="w-6 h-6 rounded-full bg-emerald-500"></span>
+              22 Seconds · 60 FPS
+            </span>
+            <span>Sound Available ♫</span>
+          </div>
+        </div>
+
+        <!-- Video 2: Comprehensive Feature Walkthrough -->
+        <div class="paper-sheet rounded-28 p-16 sm:p-24 relative overflow-hidden flex flex-col justify-between shadow-md group">
+          <div>
+            <!-- Window Bar -->
+            <div class="flex items-center justify-between pb-14 border-b border-paper-border mb-16">
+              <div class="flex items-center gap-6">
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                <span class="font-mono text-[10px] text-ink-muted ml-6 font-semibold uppercase tracking-wider">Walkthrough · 1080p</span>
+              </div>
+              <span class="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-8 py-2 rounded-full uppercase tracking-wider">
+                Full Workflow Ad
+              </span>
+            </div>
+
+            <!-- Video Player -->
+            <div class="relative rounded-16 overflow-hidden bg-slate-900 border border-paper-border shadow-inner aspect-video mb-18">
+              <video
+                src="/perch/perchboard-ad-showcase.mp4"
+                poster="/perch/perchboard-ad-showcase-poster.jpg"
+                controls
+                playsinline
+                preload="metadata"
+                class="w-full h-full object-cover"
+                aria-label="Perchboard deep-dive feature walkthrough advertisement video"
+              ></video>
+            </div>
+
+            <h3 class="font-display text-xl sm:text-2xl font-bold text-ink-graphite mb-8">
+              Feature Tour & Multi-Clip Retrieval
+            </h3>
+            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-16">
+              A comprehensive 42-second deep dive demonstrating multi-format capture (text snippets, URLs, high-res images, and files), category filtering, and instant keyboard search.
+            </p>
+          </div>
+
+          <div class="pt-14 border-t border-paper-border flex items-center justify-between text-[11px] font-mono text-ink-muted">
+            <span class="flex items-center gap-6">
+              <span class="w-6 h-6 rounded-full bg-amber-500"></span>
+              42 Seconds · 1080p Full HD
+            </span>
+            <span>All Features Demonstrated</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1073,9 +1253,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
               <img
                 src="/perch/app-icon.png"
                 alt="Perchboard bird app logo"
-                width="34"
-                height="34"
-                class="w-34 h-34 rounded-8 shadow-sm"
+                width="32"
+                height="32"
+                class="w-32 h-32 rounded-8 shadow-sm"
                 loading="lazy"
               />
               <span class="font-display font-extrabold text-xl text-white tracking-tight">
@@ -1087,15 +1267,31 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
               An independent desktop utility by Nadhebe. Engineered for focus, screen ergonomics, and fast clipboard retrieval.
             </p>
 
-            <div class="pt-8">
-              <button
-                type="button"
-                id="footer-waitlist-btn"
-                class="btn-perch-primary px-18 py-8 rounded-full text-xs font-bold inline-flex items-center gap-6 cursor-pointer open-waitlist-modal"
+            <div class="pt-8 flex items-center gap-12 flex-wrap">
+              <a
+                href="#pricing"
+                id="footer-buy-pro-btn"
+                class="btn-perch-primary px-16 py-10 rounded-full text-xs font-bold inline-flex items-center gap-8 cursor-pointer whitespace-nowrap shrink-0 hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
-                <span>Join Windows waitlist</span>
-                <span>↗</span>
-              </button>
+                <svg class="w-14 h-14 fill-current shrink-0" width="14" height="14" style="width: 14px; height: 14px; min-width: 14px; max-width: 14px;" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+                </svg>
+                <span>Buy Perchboard</span>
+                <span class="inline-flex items-center gap-6 px-8 py-2 rounded-full bg-black/25 border border-white/20 text-[10px]">
+                  <span class="line-through text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 1.5px;">$14.99</span>
+                  <span class="text-white font-bold">$9.99</span>
+                </span>
+                <span>→</span>
+              </a>
+              <a
+                href="#waitlist"
+                id="footer-waitlist-btn"
+                data-platform="macos"
+                class="border border-white/20 hover:bg-white/10 text-white px-16 py-10 rounded-full text-xs font-medium inline-flex items-center gap-6 cursor-pointer transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>Join macOS Waitlist</span>
+                <span>↑</span>
+              </a>
             </div>
           </div>
 
@@ -1164,74 +1360,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
 
       </div>
     </footer>
-    <!-- WAITLIST POPUP MODAL -->
-    <div
-      id="waitlist-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="waitlist-modal-title"
-      class="fixed inset-0 z-50 hidden flex items-center justify-center p-16 sm:p-24 bg-slate-950/70 backdrop-blur-xl transition-opacity duration-200 overflow-hidden"
-    >
-      <!-- Center Modal Card: Clean, elevated glassmorphism design -->
-      <div
-        id="waitlist-modal-card"
-        class="bg-[#0D111A]/95 text-white border border-white/12 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] rounded-32 max-w-md w-full p-28 sm:p-36 relative overflow-hidden z-10 backdrop-blur-2xl"
-      >
-        <!-- Subtle Top Glow -->
-        <div class="absolute -top-20 -left-20 w-44 h-44 bg-brand-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- Sleek Circular Glass Close Button (X) -->
-        <button
-          type="button"
-          id="close-waitlist-modal-btn"
-          aria-label="Close waitlist popup"
-          class="absolute top-18 right-18 w-32 h-32 rounded-full border border-white/12 bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer text-xs font-mono"
-        >
-          ✕
-        </button>
-
-        <!-- Brand Header Bar in Modal -->
-        <div class="flex items-center gap-12 mb-18">
-          <div class="relative">
-            <img
-              src="/perch/app-icon.png"
-              alt="Perchboard icon"
-              width="40"
-              height="40"
-              class="w-40 h-40 rounded-12 shadow-md bg-[#121824] border border-white/10 ring-1 ring-white/5"
-            />
-            <span class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-brand-cyan border-2 border-[#0D111A]"></span>
-          </div>
-          <div>
-            <div class="flex items-center gap-6">
-              <span class="font-display font-extrabold text-base tracking-tight text-white block">Perchboard</span>
-              <span class="font-mono text-[9px] uppercase tracking-wider px-6 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan font-bold border border-brand-cyan/20">
-                Early Access
-              </span>
-            </div>
-            <span class="font-mono text-[10px] tracking-wider text-slate-400 block mt-2">Windows 10 & 11 Desktop Utility</span>
-          </div>
-        </div>
-
-        <h3 id="waitlist-modal-title" class="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-          Keep every clip within reach.
-        </h3>
-
-        <p class="font-sans text-xs text-slate-300 mt-8 mb-20 leading-relaxed">
-          A floating clipboard panel anchored directly to your screen edge. Enter your email to reserve your spot and receive direct download access when builds launch.
-        </p>
-
-        <!-- Embedded Nadhebe Subscribe Component (Clean Pill Capsule, Single Arrow) -->
-        <Subscribe
-          id="modal-subscribe-form"
-          source="perch_waitlist_modal"
-          endpoint="/api/waitlist"
-          buttonText="Join Waitlist"
-          placeholder="you@example.com"
-          theme="dark"
-        />
-      </div>
-    </div>
   </div>
 </BaseLayout>
 
@@ -1300,72 +1429,59 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema];
       window.__mainOceanEngine = new window.OceanEngine(mainOceanCanvas, sharks, 0, cfg);
     }
 
-    // 3. Waitlist Popup Modal Trigger & Accessible Controls
-    var modal = document.getElementById('waitlist-modal');
-    var modalCloseBtn = document.getElementById('close-waitlist-modal-btn');
-    var modalEmailInput = modal ? modal.querySelector('input[type="email"]') : null;
-
-    function openWaitlistModal(platform) {
-      if (!modal) return;
-      if (platform && modal) {
-        var modalForm = modal.querySelector('form');
-        if (modalForm) modalForm.setAttribute('data-platform', platform);
+    // 3. Smooth scroll to macOS Waitlist Section
+    function scrollToWaitlist() {
+      var waitlistSec = document.getElementById('waitlist');
+      if (waitlistSec) {
+        waitlistSec.scrollIntoView({ behavior: 'smooth' });
+        var emailInput = waitlistSec.querySelector('input[type="email"]');
+        if (emailInput) {
+          setTimeout(function() {
+            emailInput.focus({ preventScroll: true });
+          }, 450);
+        }
       }
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-
-      setTimeout(function() {
-        if (modalEmailInput) modalEmailInput.focus();
-      }, 60);
     }
 
-    function closeWaitlistModal() {
-      if (!modal) return;
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    // Attach click triggers to all buttons with .open-waitlist-modal
-    var openBtns = document.querySelectorAll('.open-waitlist-modal');
-    openBtns.forEach(function(btn) {
-      if (btn.dataset.hasModalListener) return;
-      btn.dataset.hasModalListener = 'true';
+    var waitlistBtns = document.querySelectorAll('#hero-waitlist-btn, #platform-cta-macos, #footer-waitlist-btn, a[href="#waitlist"]');
+    waitlistBtns.forEach(function(btn) {
+      if (btn.dataset.hasWaitlistListener) return;
+      btn.dataset.hasWaitlistListener = 'true';
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        var platform = btn.getAttribute('data-platform') || 'windows';
-        openWaitlistModal(platform);
+        scrollToWaitlist();
       });
     });
 
-    if (modalCloseBtn && !modalCloseBtn.dataset.hasCloseListener) {
-      modalCloseBtn.dataset.hasCloseListener = 'true';
-      modalCloseBtn.addEventListener('click', closeWaitlistModal);
-    }
-
-    if (modal && !modal.dataset.hasBackdropListener) {
-      modal.dataset.hasBackdropListener = 'true';
-      modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeWaitlistModal();
-      });
-    }
-
-    if (!window.__perchKeydownAttached) {
-      window.__perchKeydownAttached = true;
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          var curModal = document.getElementById('waitlist-modal');
-          if (curModal && !curModal.classList.contains('hidden')) {
-            closeWaitlistModal();
-          }
+    // 4. Header "Get Pro" & Hero Buy Button direct payment checkout triggers
+    // 4. Header "Download" & Hero Buy Button go to payment section (#pricing)
+    var navBuyBtn = document.getElementById('nav-buy-pro-btn');
+    if (navBuyBtn && !navBuyBtn.dataset.hasDirectBuyListener) {
+      navBuyBtn.dataset.hasDirectBuyListener = 'true';
+      navBuyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var pricingSec = document.getElementById('pricing');
+        if (pricingSec) {
+          pricingSec.scrollIntoView({ behavior: 'smooth' });
         }
       });
     }
 
-    // Auto-dismiss modal after 2.5s on successful submission
+    var heroBuyBtn = document.getElementById('hero-buy-btn');
+    if (heroBuyBtn && !heroBuyBtn.dataset.hasDirectBuyListener) {
+      heroBuyBtn.dataset.hasDirectBuyListener = 'true';
+      heroBuyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var pricingSec = document.getElementById('pricing');
+        if (pricingSec) {
+          pricingSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Handle successful subscription
     window.addEventListener('nadhebe:subscribed', function() {
-      setTimeout(function() {
-        closeWaitlistModal();
-      }, 2500);
+      console.log('[Nadhebe] Waitlist subscription confirmed');
     });
   }
 

@@ -1,0 +1,678 @@
+---
+/**
+ * Perch Pro Pricing Section
+ * Integrated with Paddle Sandbox Checkout Overlay & Localized PricePreview
+ * Premium 2-Column Wide Layout with Custom Segmented Currency Switcher
+ * Completely Opaque & Above ASCII Ocean Fishes
+ */
+const paddleEnv = import.meta.env.PUBLIC_PADDLE_ENV || 'sandbox';
+const paddleClientToken = import.meta.env.PUBLIC_PADDLE_CLIENT_TOKEN || '';
+const regularPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_REGULAR || 'pri_01m5qsket9qpyqv0jejzez7h54';
+const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5qskf4e09y85xbrypy6vv2d';
+---
+
+<section
+  id="pricing"
+  class="relative z-30 py-32 sm:py-48 px-16 sm:px-24 max-w-6xl mx-auto"
+  style="position: relative; z-index: 30; isolation: isolate;"
+  data-reveal
+>
+  <!-- Wide Solid Showcase Card (100% opaque background to block background ASCII fishes) -->
+  <div
+    class="pricing-solid-card rounded-32 p-28 sm:p-40 lg:p-48 border border-paper-border shadow-[0_20px_60px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.04)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.65)] relative overflow-hidden"
+    style="position: relative; z-index: 30; isolation: isolate;"
+  >
+    <!-- Background Ambient Glow inside card -->
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Section Heading INSIDE Solid Card (Guarantees fishes NEVER overlap headings) -->
+    <div class="text-center max-w-3xl mx-auto mb-32 sm:mb-40">
+      <div class="inline-flex items-center gap-8 px-14 py-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 mb-16 shadow-sm">
+        <span class="w-8 h-8 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="font-mono text-xs font-bold uppercase tracking-wider">
+          WINDOWS LAUNCH SPECIAL • 33% OFF
+        </span>
+      </div>
+
+      <h2 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-ink-graphite leading-tight">
+        Buy once. Own it forever.
+      </h2>
+
+      <p class="font-editorial text-lg sm:text-xl text-ink-subtle italic mt-8 max-w-xl mx-auto">
+        No subscriptions, no annual renewal fees, no seat costs. Get instant access to Perch Pro for Windows with all features and future updates included.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-32 lg:gap-44 items-stretch border-t border-paper-border pt-32 sm:pt-40">
+      
+      <!-- LEFT COLUMN: Product Overview & Feature Checklist (7 cols) -->
+      <div class="lg:col-span-7 flex flex-col justify-between space-y-24">
+        <div>
+          <!-- Header Identity -->
+          <div class="flex items-center gap-14 mb-20">
+            <div class="relative">
+              <img
+                src="/perch/app-icon.png"
+                alt="Perch Pro bird logo icon"
+                width="52"
+                height="52"
+                class="w-52 h-52 rounded-16 shadow-md bg-[#121824] border border-paper-border"
+                loading="eager"
+              />
+              <span class="absolute -bottom-2 -right-2 w-14 h-14 rounded-full bg-emerald-500 border-2 border-white dark:border-[#151821]"></span>
+            </div>
+            <div>
+              <div class="flex items-center gap-8">
+                <span class="font-display font-extrabold text-2xl sm:text-3xl text-ink-graphite tracking-tight leading-tight">
+                  Perch Pro
+                </span>
+                <span class="px-8 py-2 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan font-mono text-[10px] font-bold uppercase tracking-wider">
+                  Windows 10 & 11
+                </span>
+              </div>
+              <span class="font-mono text-xs text-ink-muted block mt-2">
+                Desktop Screen-Edge Docked Clipboard Panel & Shelf
+              </span>
+            </div>
+          </div>
+
+          <p class="text-sm text-ink-subtle leading-relaxed mb-24">
+            The complete desktop utility for power users, developers, and writers. Anchor your clipboard history directly against your screen edge and retrieve any copied text, snippet, image, or file without window switching.
+          </p>
+
+          <!-- Core Feature Checklist -->
+          <div class="space-y-14">
+            <div class="flex items-start gap-12">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-2">
+                ✓
+              </div>
+              <div>
+                <strong class="font-display font-bold text-sm text-ink-graphite block">
+                  Perpetual Lifetime License
+                </strong>
+                <span class="text-xs text-ink-subtle leading-relaxed">
+                  Single one-time payment. Install and use forever on your Windows 10 and 11 machines. No renewals ever.
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-12">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-2">
+                ✓
+              </div>
+              <div>
+                <strong class="font-display font-bold text-sm text-ink-graphite block">
+                  Floating Screen-Edge Panel
+                </strong>
+                <span class="text-xs text-ink-subtle leading-relaxed">
+                  Dock to right, left, or top screen border with custom width, auto-hide, and keyboard shortcut toggles.
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-12">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-2">
+                ✓
+              </div>
+              <div>
+                <strong class="font-display font-bold text-sm text-ink-graphite block">
+                  All Pro Media Formats
+                </strong>
+                <span class="text-xs text-ink-subtle leading-relaxed">
+                  Seamless capture of rich text, code snippets, hyperlinks, high-res images, and multi-file paths.
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-12">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-2">
+                ✓
+              </div>
+              <div>
+                <strong class="font-display font-bold text-sm text-ink-graphite block">
+                  100% Free Future Updates
+                </strong>
+                <span class="text-xs text-ink-subtle leading-relaxed">
+                  All upcoming v1.x feature releases and major milestone upgrades included with zero additional fees.
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-12">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 mt-2">
+                ✓
+              </div>
+              <div>
+                <strong class="font-display font-bold text-sm text-ink-graphite block">
+                  Local-First & Private Architecture
+                </strong>
+                <span class="text-xs text-ink-subtle leading-relaxed">
+                  Zero cloud telemetry, zero remote servers. Your sensitive clipboard history never leaves your device.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guarantee Note -->
+        <div class="pt-18 border-t border-paper-border flex items-center gap-12 text-xs font-mono text-ink-muted">
+          <span class="w-8 h-8 rounded-full bg-emerald-500"></span>
+          <span>14-day money-back guarantee • Instant license key delivery</span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Interactive Checkout Box & Modern Segmented Currency Switcher (5 cols) -->
+      <div class="pricing-action-box lg:col-span-5 border border-paper-border rounded-28 p-24 sm:p-32 flex flex-col justify-between shadow-sm">
+        
+        <!-- Top Price Header -->
+        <div class="mb-20">
+          <div class="flex items-center justify-between gap-8 mb-12">
+            <span class="font-mono text-xs font-bold uppercase tracking-wider text-ink-muted">
+              Launch Pricing
+            </span>
+            <span class="px-10 py-3 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold">
+              Save 33%
+            </span>
+          </div>
+
+          <div class="flex items-baseline gap-12 flex-wrap mb-4">
+            <!-- Strike-through Regular Price -->
+            <div class="flex items-center gap-4">
+              <span class="font-mono text-xs text-ink-muted">REGULAR:</span>
+              <span id="perch-regular-price" class="font-mono text-xl sm:text-2xl text-slate-400 line-through decoration-red-500 decoration-2 font-semibold" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">
+                $14.99
+              </span>
+            </div>
+
+            <!-- Big Glowing Launch Price -->
+            <div class="flex items-baseline gap-6">
+              <span id="perch-launch-price" class="font-display font-black text-4xl sm:text-5xl text-ink-graphite tracking-tight">
+                $9.99
+              </span>
+              <span id="perch-currency-badge" class="font-mono text-xs font-bold text-brand-cyan uppercase tracking-wider">
+                USD
+              </span>
+            </div>
+          </div>
+
+          <p class="font-mono text-[11px] text-ink-muted">
+            Lifetime perpetual license • Zero recurring fees
+          </p>
+        </div>
+
+        <!-- MODERN SEGMENTED CURRENCY SWITCHER (Replaces old dropdown UI) -->
+        <div class="mb-20">
+          <div class="flex items-center justify-between mb-8">
+            <label class="block font-mono text-[11px] font-bold text-ink-subtle uppercase tracking-wider">
+              Select Market & Currency
+            </label>
+            <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-4">
+              <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
+              Paddle Live Rates
+            </span>
+          </div>
+
+          <div class="currency-pills-container grid grid-cols-2 sm:grid-cols-4 gap-6 p-4 rounded-16 border shadow-inner">
+            <button
+              type="button"
+              class="currency-pill active py-8 px-6 rounded-12 text-xs font-mono font-bold transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
+              data-country="US"
+              aria-label="Select United States Dollar"
+            >
+              <span class="text-sm">🇺🇸</span>
+              <span>USD</span>
+            </button>
+
+            <button
+              type="button"
+              class="currency-pill py-8 px-6 rounded-12 text-xs font-mono font-medium transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
+              data-country="GB"
+              aria-label="Select British Pound Sterling"
+            >
+              <span class="text-sm">🇬🇧</span>
+              <span>GBP</span>
+            </button>
+
+            <button
+              type="button"
+              class="currency-pill py-8 px-6 rounded-12 text-xs font-mono font-medium transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
+              data-country="IE"
+              aria-label="Select Euro (Ireland)"
+            >
+              <span class="text-sm">🇮🇪</span>
+              <span>EUR</span>
+            </button>
+
+            <button
+              type="button"
+              class="currency-pill py-8 px-6 rounded-12 text-xs font-mono font-medium transition-all text-center flex items-center justify-center gap-6 cursor-pointer"
+              data-country="AU"
+              aria-label="Select Australian Dollar"
+            >
+              <span class="text-sm">🇦🇺</span>
+              <span>AUD</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Email Pre-Fill Input -->
+        <div class="mb-24">
+          <label
+            for="perch-checkout-email"
+            class="block font-mono text-[11px] font-bold uppercase tracking-wider text-ink-subtle mb-6"
+          >
+            License Delivery Email <span class="text-ink-muted font-normal lowercase">(optional pre-fill)</span>
+          </label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-16 text-slate-400">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-18 h-18 opacity-70" style="width:18px;height:18px;">
+                <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+                <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+              </svg>
+            </div>
+            <input
+              type="email"
+              id="perch-checkout-email"
+              name="checkout_email"
+              placeholder="you@domain.com"
+              aria-label="Email address for Perch Pro license receipt"
+              class="w-full pl-48 pr-16 py-12 rounded-12 bg-white dark:bg-[#15171C] border border-[#E2E8F0] dark:border-[#2D313F] text-ink-graphite text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition-all shadow-sm font-sans"
+            />
+          </div>
+          <p class="font-mono text-[10px] text-ink-muted mt-4">
+            Your receipt, download instructions, and lifetime license key will be sent here.
+          </p>
+        </div>
+
+        <!-- Missing Config Developer Alert (Hidden by default) -->
+        <div
+          id="paddle-config-error"
+          class="hidden mb-16 p-12 rounded-12 bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs font-mono"
+          role="alert"
+        >
+          <strong>Paddle Configuration Missing:</strong> Please check your environment variables (<code class="bg-black/10 px-4 py-1 rounded">PUBLIC_PADDLE_CLIENT_TOKEN</code>).
+        </div>
+
+        <!-- Checkout Button with Instant Loading State -->
+        <div class="space-y-12">
+          <button
+            type="button"
+            id="perch-checkout-btn"
+            aria-label="Purchase Perchboard Lifetime License"
+            class="w-full btn-perch-primary py-14 sm:py-16 px-20 sm:px-24 rounded-full font-display font-bold text-sm sm:text-base flex items-center justify-between gap-12 shadow-xl cursor-pointer group"
+          >
+            <span class="btn-text-content flex items-center gap-8 font-bold text-white tracking-wide whitespace-nowrap">
+              <svg class="w-16 h-16 sm:w-18 sm:h-18 fill-current shrink-0" width="18" height="18" style="width: 18px; height: 18px; min-width: 18px;" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+              </svg>
+              <span>Buy Perchboard</span>
+            </span>
+            <span class="btn-price-wrapper flex items-center gap-8 shrink-0">
+              <span class="inline-flex items-center gap-8 px-10 py-4 rounded-full bg-black/20 border border-white/20 shadow-sm">
+                <span class="font-mono text-xs sm:text-sm font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
+                <span id="perch-btn-price-tag" class="font-mono text-xs sm:text-sm font-bold text-white">
+                  $9.99
+                </span>
+              </span>
+              <span class="transition-transform duration-200 group-hover:translate-x-2 text-white font-bold">→</span>
+            </span>
+          </button>
+
+          <!-- Trust Badges -->
+          <div class="flex items-center justify-between text-ink-muted font-mono text-[10px] pt-4 px-4 flex-wrap gap-6">
+            <span class="flex items-center gap-4">
+              <svg class="w-12 h-12 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Paddle Sandbox Verified
+            </span>
+            <span class="flex items-center gap-4">
+              <svg class="w-12 h-12 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+              </svg>
+              One-Page Overlay Checkout
+            </span>
+            <span class="flex items-center gap-4">
+              <svg class="w-12 h-12 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z" clip-rule="evenodd"></path>
+              </svg>
+              Sandbox Mode (No real charges)
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Paddle.js Client Integration Script with PricePreview, Country Binding, and Fast Overlay Loading -->
+<script
+  is:inline
+  define:vars={{
+    paddleEnv,
+    paddleClientToken,
+    regularPriceId,
+    launchPriceId,
+  }}
+>
+  (function () {
+    let paddleInstance = null;
+    let selectedCountry = 'US';
+    let pendingTriggerBtn = null;
+    const countryCurrencies = { US: 'USD', GB: 'GBP', IE: 'EUR', AU: 'AUD' };
+
+    async function loadPaddleSdk() {
+      if (window.Paddle) return window.Paddle;
+      return new Promise((resolve, reject) => {
+        const existingScript = document.getElementById('paddle-js-sdk');
+        if (existingScript) {
+          if (window.Paddle) return resolve(window.Paddle);
+          existingScript.addEventListener('load', () => resolve(window.Paddle));
+          existingScript.addEventListener('error', (err) => reject(new Error('Failed to load Paddle SDK')));
+          return;
+        }
+        const script = document.createElement('script');
+        script.id = 'paddle-js-sdk';
+        script.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+        script.async = true;
+        script.onload = () => resolve(window.Paddle);
+        script.onerror = (err) => reject(new Error('Failed to load Paddle SDK'));
+        document.head.appendChild(script);
+      });
+    }
+
+    // Reset button states when checkout is closed or completed
+    function resetAllButtons() {
+      const activeBtns = document.querySelectorAll('[data-checkout-active="true"]');
+      activeBtns.forEach((btn) => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = '';
+        btn.removeAttribute('data-checkout-active');
+        if (btn.dataset.origHtml) {
+          btn.innerHTML = btn.dataset.origHtml;
+        }
+      });
+    }
+
+    function openFastCheckout(triggerEl) {
+      if (triggerEl) {
+        triggerEl.dataset.checkoutActive = 'true';
+        if (!triggerEl.dataset.origHtml) {
+          triggerEl.dataset.origHtml = triggerEl.innerHTML;
+        }
+        triggerEl.disabled = true;
+        triggerEl.style.opacity = '0.9';
+        triggerEl.style.pointerEvents = 'none';
+
+        const isSmall = triggerEl.id === 'nav-buy-pro-btn' || triggerEl.id === 'footer-buy-pro-btn';
+        triggerEl.innerHTML = `
+          <span class="inline-flex items-center justify-center gap-8 text-white font-bold ${isSmall ? 'text-xs' : 'text-sm'}">
+            <svg class="animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="width: ${isSmall ? '14px' : '18px'}; height: ${isSmall ? '14px' : '18px'};">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>Opening Checkout...</span>
+          </span>
+        `;
+      }
+
+      if (!paddleInstance) {
+        pendingTriggerBtn = triggerEl;
+        return;
+      }
+
+      const emailInput = document.getElementById('perch-checkout-email');
+      const userEmail = emailInput && emailInput.value ? emailInput.value.trim() : undefined;
+
+      try {
+        paddleInstance.Checkout.open({
+          items: [{ priceId: launchPriceId, quantity: 1 }],
+          customer: userEmail ? { email: userEmail } : undefined,
+          settings: {
+            displayMode: 'overlay',
+            theme: 'light',
+            variant: 'one-page',
+            allowLogout: false,
+            showAddDiscounts: false,
+            successUrl: `${window.location.origin}/welcome`,
+          },
+        });
+      } catch (openErr) {
+        console.error('[Paddle Checkout Open Error]', openErr);
+        resetAllButtons();
+      }
+    }
+
+    async function initPaddle() {
+      const configError = document.getElementById('paddle-config-error');
+      const regularPriceEl = document.getElementById('perch-regular-price');
+      const launchPriceEl = document.getElementById('perch-launch-price');
+      const checkoutBtn = document.getElementById('perch-checkout-btn');
+      const emailInput = document.getElementById('perch-checkout-email');
+      const currencyPills = document.querySelectorAll('.currency-pill');
+      const currencyBadge = document.getElementById('perch-currency-badge');
+
+      if (!paddleClientToken) {
+        if (configError) configError.classList.remove('hidden');
+        console.warn('[Paddle] Missing PUBLIC_PADDLE_CLIENT_TOKEN environment variable.');
+        return;
+      }
+
+      try {
+        const PaddleSdk = await loadPaddleSdk();
+        if (!PaddleSdk) throw new Error('Paddle SDK not loaded');
+
+        if (paddleEnv === 'sandbox') {
+          PaddleSdk.Environment.set('sandbox');
+        }
+
+        // Initialize Paddle with pre-warmed overlay checkout settings
+        PaddleSdk.Initialize({
+          token: paddleClientToken,
+          checkout: {
+            settings: {
+              displayMode: 'overlay',
+              theme: 'light',
+              variant: 'one-page',
+              allowLogout: false,
+              showAddDiscounts: false,
+              successUrl: `${window.location.origin}/welcome`,
+            },
+          },
+          eventCallback: function (data) {
+            console.log('[Paddle Event]', data.name, data);
+            if (data.name === 'checkout.loaded' || data.name === 'checkout.closed') {
+              resetAllButtons();
+            }
+            if (data.name === 'checkout.completed') {
+              const txnId = data.data && data.data.id ? data.data.id : '';
+              window.location.href = `/welcome?_ptxn=${encodeURIComponent(txnId)}`;
+            }
+          },
+        });
+
+        paddleInstance = PaddleSdk;
+
+        // If user clicked any buy button while initializing, open immediately
+        if (pendingTriggerBtn) {
+          const btn = pendingTriggerBtn;
+          pendingTriggerBtn = null;
+          openFastCheckout(btn);
+        }
+
+        // Non-blocking background price preview
+        async function fetchPricePreview(countryCode) {
+          if (!paddleInstance) return;
+          try {
+            const previewParams = {
+              items: [
+                { priceId: regularPriceId, quantity: 1 },
+                { priceId: launchPriceId, quantity: 1 },
+              ],
+            };
+            if (countryCode) {
+              previewParams.address = { countryCode: countryCode };
+            }
+            const preview = await paddleInstance.PricePreview(previewParams);
+            if (preview && preview.data && preview.data.details && preview.data.details.lineItems) {
+              const lineItems = preview.data.details.lineItems;
+              lineItems.forEach((item) => {
+                const formatted = item.formattedTotals && item.formattedTotals.total;
+                if (!formatted) return;
+                if (item.price.id === regularPriceId && regularPriceEl) {
+                  regularPriceEl.textContent = formatted;
+                }
+                if (item.price.id === launchPriceId) {
+                  if (launchPriceEl) launchPriceEl.textContent = formatted;
+                  const currentBtnTag = document.getElementById('perch-btn-price-tag');
+                  if (currentBtnTag) currentBtnTag.textContent = formatted;
+                }
+              });
+            }
+          } catch (err) {
+            console.error('[Paddle PricePreview Error]', err);
+          }
+        }
+
+        // Setup Segmented Currency Pills Click Handler
+        currencyPills.forEach((pill) => {
+          pill.addEventListener('click', function () {
+            currencyPills.forEach((p) => p.classList.remove('active'));
+            this.classList.add('active');
+
+            selectedCountry = this.getAttribute('data-country') || 'US';
+            if (currencyBadge) {
+              currencyBadge.textContent = countryCurrencies[selectedCountry] || 'USD';
+            }
+            fetchPricePreview(selectedCountry);
+          });
+        });
+
+        // Run initial preview in background
+        setTimeout(() => fetchPricePreview(selectedCountry), 100);
+
+        // Prefill email from query parameter if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailFromUrl = urlParams.get('email');
+        if (emailFromUrl && emailInput) {
+          emailInput.value = emailFromUrl;
+        }
+
+        // Connect main checkout button in Pricing Card
+        if (checkoutBtn && !checkoutBtn.dataset.hasPaddleListener) {
+          checkoutBtn.dataset.hasPaddleListener = 'true';
+          checkoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openFastCheckout(checkoutBtn);
+          });
+        }
+      } catch (err) {
+        console.error('[Paddle Init Error]', err);
+        if (configError) {
+          configError.textContent = 'Paddle checkout error: ' + err.message;
+          configError.classList.remove('hidden');
+        }
+        resetAllButtons();
+      }
+    }
+
+    // Global helper
+    window.openPerchCheckout = function(triggerEl) {
+      openFastCheckout(triggerEl || document.getElementById('perch-checkout-btn'));
+    };
+
+    // Global click listener for ANY Buy Pro buttons (Header, Hero, Pricing, Platform Card, Footer)
+    document.addEventListener('click', function(e) {
+      const buyBtn = e.target.closest('#nav-buy-pro-btn, #hero-buy-btn, #footer-buy-pro-btn, #platform-cta-windows');
+      if (buyBtn) {
+        e.preventDefault();
+        openFastCheckout(buyBtn);
+      }
+    });
+
+    // Start loading immediately!
+    initPaddle();
+    document.addEventListener('astro:page-load', initPaddle);
+  })();
+</script>
+
+<style>
+  .pricing-solid-card {
+    background-color: #FFFFFF !important;
+  }
+  :global(.dark) .pricing-solid-card {
+    background-color: #151821 !important;
+  }
+  .pricing-action-box {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+  }
+  :global(.dark) .pricing-action-box {
+    background-color: #0E1015 !important;
+  }
+
+  /* Currency Switcher Container & Pills */
+  .currency-pills-container {
+    background-color: #F1F5F9 !important;
+    border-color: #E2E8F0 !important;
+  }
+  :global(.dark) .currency-pills-container {
+    background-color: #1A1D26 !important;
+    border-color: #262A36 !important;
+  }
+
+  .currency-pill {
+    background-color: #FFFFFF !important;
+    color: #475569 !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.15s ease-in-out !important;
+  }
+  :global(.dark) .currency-pill {
+    background-color: #12141A !important;
+    color: #94A3B8 !important;
+    border-color: #2A2F3D !important;
+  }
+  .currency-pill span {
+    color: inherit !important;
+  }
+  .currency-pill:hover {
+    background-color: #F1F5F9 !important;
+    color: #0F172A !important;
+    border-color: #0284C7 !important;
+  }
+  :global(.dark) .currency-pill:hover {
+    background-color: #1D212B !important;
+    color: #FFFFFF !important;
+  }
+  .currency-pill.active {
+    background-color: #0284C7 !important;
+    color: #FFFFFF !important;
+    border-color: #0284C7 !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+    font-weight: 700 !important;
+  }
+  .currency-pill.active span {
+    color: #FFFFFF !important;
+  }
+
+  /* Radiant Primary Button */
+  .btn-perch-primary {
+    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 8px 24px -4px rgba(2, 132, 199, 0.45) !important;
+    border: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .btn-perch-primary:hover {
+    background: linear-gradient(135deg, #0369A1 0%, #075985 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 14px 32px -4px rgba(2, 132, 199, 0.6) !important;
+  }
+  .btn-perch-primary:active {
+    transform: translateY(0) scale(0.99) !important;
+  }
+</style>

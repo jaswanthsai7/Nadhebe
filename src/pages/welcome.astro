@@ -1,0 +1,202 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+import { buildSeo } from '@/utils/seo';
+
+const canonicalUrl = `${SITE.url}/welcome/`;
+
+const seo = buildSeo({
+  title: 'Perch Pro Order Received | Next Steps & Download | Nadhebe',
+  description: 'Thank you for your Perch Pro order. Review your checkout submission status, installation guide, and software download instructions.',
+  slug: '/welcome/',
+  siteUrl: SITE.url,
+  siteName: SITE.name,
+  image: '/perch/perch-desktop-hero.png',
+  noindex: true, // Transaction success pages should typically be noindex
+});
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: SITE.url,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Perchboard',
+      item: `${SITE.url}/perch/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Welcome',
+      item: canonicalUrl,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  seo={seo}
+  jsonLd={[breadcrumbSchema]}
+  hideNatureBg={true}
+>
+  <div class="min-h-screen bg-[#FBF9F4] dark:bg-[#0B0D11] text-[#18191B] dark:text-[#F4F4F6] py-32 sm:py-48 px-16 sm:px-24">
+    <div class="max-w-2xl mx-auto">
+      
+      <!-- Back link -->
+      <div class="mb-24">
+        <a
+          href="/perch"
+          class="inline-flex items-center gap-6 font-mono text-xs text-slate-500 hover:text-brand-cyan transition-colors"
+          aria-label="Return to Perchboard overview"
+        >
+          <span>← Back to Perchboard</span>
+        </a>
+      </div>
+
+      <!-- Main Receipt & Onboarding Card -->
+      <div class="bg-white dark:bg-[#15171C] border border-[#E8E2D5] dark:border-[#22252E] rounded-32 p-28 sm:p-40 shadow-xl relative overflow-hidden">
+        
+        <!-- Glow accent -->
+        <div class="absolute -top-32 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Header Status -->
+        <div class="flex items-center gap-12 mb-24">
+          <div class="w-48 h-48 rounded-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl font-bold">
+            ✓
+          </div>
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold block">
+              Paddle Sandbox Checkout Submitted
+            </span>
+            <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-ink-graphite">
+              Thank you for ordering Perch Pro!
+            </h1>
+          </div>
+        </div>
+
+        <!-- Important Status Disclaimer (No false verification claim) -->
+        <div class="bg-amber-500/10 border border-amber-500/20 rounded-16 p-16 sm:p-20 mb-24 text-xs font-mono text-amber-800 dark:text-amber-200">
+          <div class="flex items-center gap-6 font-bold mb-4">
+            <span>ℹ️ Sandbox Transaction Received</span>
+          </div>
+          <p class="leading-relaxed">
+            Your checkout submission has been received by Paddle Sandbox. Because this site operates client-side without a licensing verification backend, payment settlement and permanent license key issuance occur asynchronously. Your official VAT invoice and receipt will be dispatched to your billing email once processed by Paddle.
+          </p>
+          <div class="mt-8 pt-8 border-t border-amber-500/20 text-[11px] flex items-center gap-8 flex-wrap" id="txn-display-container">
+            <span>Transaction Reference:</span>
+            <code id="txn-reference-code" class="bg-black/10 dark:bg-white/10 px-6 py-2 rounded font-bold">
+              Processing...
+            </code>
+          </div>
+        </div>
+
+        <!-- Next Steps & Download Instructions -->
+        <div class="space-y-20 border-t border-b border-[#E8E2D5] dark:border-[#22252E] py-24 mb-28">
+          <h2 class="font-display text-lg font-bold text-ink-graphite">
+            Getting Started with Perch Pro
+          </h2>
+
+          <div class="space-y-16">
+            <!-- Step 1 -->
+            <div class="flex items-start gap-12">
+              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
+                1
+              </span>
+              <div>
+                <h3 class="font-sans text-sm font-bold text-ink-graphite">
+                  Download Perch for Windows
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                  Download the latest Windows installer (.exe) compatible with Windows 10 & 11 (64-bit architecture).
+                </p>
+                <div class="mt-8">
+                  <a
+                    href="/perch/app-icon.png"
+                    download
+                    id="download-installer-btn"
+                    aria-label="Download Perch for Windows"
+                    class="btn-perch-primary px-14 py-6 rounded-full text-xs font-bold inline-flex items-center gap-6 cursor-pointer"
+                  >
+                    <span>Download Installer (.exe)</span>
+                    <span>↓</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex items-start gap-12">
+              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
+                2
+              </span>
+              <div>
+                <h3 class="font-sans text-sm font-bold text-ink-graphite">
+                  Run the Setup Wizard
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                  Launch the setup executable, anchor your floating clipboard panel to your preferred screen edge, and pin your primary workspace apps.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex items-start gap-12">
+              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
+                3
+              </span>
+              <div>
+                <h3 class="font-sans text-sm font-bold text-ink-graphite">
+                  Activate Lifetime Access
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                  Enter your email address in the Perch settings panel to link your desktop client to your lifetime launch license.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Help & Support -->
+        <div class="flex items-center justify-between gap-12 flex-wrap text-xs text-slate-500 dark:text-slate-400 font-mono">
+          <span>Need assistance? Reach out to support@nadhebe.com</span>
+          <a href="/perch" class="text-brand-cyan hover:underline font-bold" aria-label="Return to product home">
+            Return to Perchboard →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<!-- Extract Transaction Reference from Query Parameters -->
+<script is:inline>
+  function initWelcomePage() {
+    const params = new URLSearchParams(window.location.search);
+    const txnId = params.get('_ptxn') || params.get('transaction_id') || params.get('checkout_id');
+    const txnEl = document.getElementById('txn-reference-code');
+
+    if (txnEl) {
+      if (txnId) {
+        txnEl.textContent = txnId;
+      } else {
+        txnEl.textContent = 'Sandbox Demo Submission';
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWelcomePage);
+  } else {
+    initWelcomePage();
+  }
+  document.addEventListener('astro:page-load', initWelcomePage);
+</script>

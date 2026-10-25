@@ -6,7 +6,7 @@ interface Props {
   buttonText?: string;
   placeholder?: string;
   theme?: 'dark' | 'light' | 'auto';
-  platform?: 'windows' | 'ios' | 'both';
+  platform?: 'windows' | 'macos' | 'both';
   class?: string;
 }
 
@@ -53,8 +53,8 @@ const cleanButtonText = buttonText.replace(/[↗→]/g, '').trim();
           placeholder={placeholder}
           class={
             theme === 'dark'
-              ? 'w-full rounded-full border border-white/15 bg-white/[0.06] pl-42 pr-16 py-12 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/25 focus:bg-white/[0.1] transition-all font-sans'
-              : 'w-full rounded-full border border-border bg-surface pl-42 pr-16 py-12 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark transition-all font-sans'
+              ? 'w-full rounded-full border border-white/15 bg-white/[0.06] pl-48 pr-16 py-12 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/25 focus:bg-white/[0.1] transition-all font-sans'
+              : 'w-full rounded-full border border-border bg-surface pl-48 pr-16 py-12 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 dark:border-border-dark dark:bg-surface-dark dark:text-ink-dark dark:placeholder:text-muted-dark transition-all font-sans'
           }
         />
       </div>
@@ -63,8 +63,8 @@ const cleanButtonText = buttonText.replace(/[↗→]/g, '').trim();
         data-subscribe-button
         class={
           theme === 'dark'
-            ? 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-white hover:bg-brand-cyan hover:text-slate-950 px-22 py-12 text-sm font-bold text-slate-950 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer shadow-md'
-            : 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-ink px-22 py-12 text-sm font-bold text-white transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer'
+            ? 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-white hover:bg-brand-cyan hover:text-slate-950 px-24 py-12 text-sm font-bold text-slate-950 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer shadow-md'
+            : 'group shrink-0 inline-flex items-center justify-center gap-6 rounded-full bg-ink px-24 py-12 text-sm font-bold text-white transition-all duration-200 hover:bg-ink2 dark:bg-ink-dark dark:text-surface-dark dark:hover:bg-ink2-dark active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer'
         }
       >
         <span data-button-text>{cleanButtonText}</span>
