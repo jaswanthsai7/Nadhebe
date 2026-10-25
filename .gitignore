@@ -32,3 +32,6 @@ scratch/
 *.backup
 
 
+
+# Wrangler local dev state
+.wrangler/
