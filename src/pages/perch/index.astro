@@ -105,10 +105,26 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'When will the Windows version launch?',
+      name: 'How much does Perchboard cost?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The Windows build is currently in active development and early testing. Sign up for the waitlist to receive private beta invitations and launch notification emails as soon as the initial release is ready.'
+        text: 'Perchboard for Windows is a one-time purchase: $9.99 at launch (regular price $14.99). There is no subscription. Your lifetime license includes all future 1.x updates.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I get my license key and download after paying?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Right after checkout you are taken to a page showing your license key and a download button, and the same key and download link are emailed to you. Install Perchboard, open Settings → License, paste the key and click Activate. If the email does not arrive, check spam or use "Resend my license" on the order page.'
+      }
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I get a refund?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. If Perchboard is not right for you, ask for a refund within 14 days of purchase and you will get your money back. Payments and refunds are handled by Paddle, our reseller and merchant of record.'
       }
     },
     {
@@ -121,18 +137,18 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: 'How do I join the waitlist?',
+      name: 'How do I join the macOS waitlist?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Enter your email address in the waitlist section on this page, choose your preferred platform (Windows, macOS, or Both), and click "Get early access". You will receive an immediate confirmation and priority access upon launch.'
+        text: 'Windows users can buy Perchboard today. If you are on a Mac, enter your email in the macOS waitlist section on this page and click "Join macOS Waitlist". We will email you once when the macOS edition is ready.'
       }
     },
     {
       '@type': 'Question',
-      name: 'What will Perchboard cost?',
+      name: 'Does Perchboard send my clipboard anywhere?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Pricing details and licensing tiers will be formally confirmed prior to public launch. Early waitlist subscribers will receive complimentary access to the introductory releases and community beta builds.'
+        text: 'No. Your clipboard history is stored only on your PC. Perchboard contacts our server once, when you activate your license key; after that it works fully offline.'
       }
     }
   ]
@@ -259,14 +275,20 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       background: rgba(2, 132, 199, 0.04);
     }
 
-    /* Hand-drawn SVG thread path styling */
-    .journey-thread {
-      stroke: #0284C7;
-      stroke-opacity: 0.16;
-      stroke-dasharray: 6 6;
-      fill: none;
-      pointer-events: none;
-    }
+    /* Scroll-drawn journey line: a faint full track plus a bright line that draws as you scroll */
+    .perch-thread path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .perch-thread-track { stroke: #0284C7; stroke-opacity: 0.14; stroke-width: 2; }
+    .dark .perch-thread-track { stroke: #38BDF8; stroke-opacity: 0.16; }
+    .perch-thread-glow { stroke: #38BDF8; stroke-opacity: 0.22; stroke-width: 9; filter: blur(4px); }
+    .perch-thread-draw { stroke-width: 2.75; }
+    /* Nodes are created by script, so they need global selectors (no Astro scope attribute) */
+    :global(.perch-thread-node) { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 2; transition: fill .4s ease, stroke .4s ease, r .4s ease; }
+    :global(.dark .perch-thread-node) { fill: #0B0D11; stroke: #334155; }
+    :global(.perch-thread-node.is-lit) { fill: #0284C7; stroke: #BAE6FD; r: 6; }
+    .perch-thread-head { fill: #0284C7; }
+    .perch-thread-halo { fill: #38BDF8; opacity: .35; transform-box: fill-box; transform-origin: center; animation: perch-halo 1.8s ease-out infinite; }
+    @keyframes perch-halo { from { transform: scale(.6); opacity: .45; } to { transform: scale(2.4); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .perch-thread-halo { animation: none; } }
 
     /* Smooth focus & interactive styles */
     .btn-perch-primary {
@@ -297,7 +319,78 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         0 30px 70px -15px rgba(0, 0, 0, 0.6),
         0 12px 28px -8px rgba(0, 0, 0, 0.35);
     }
-  </style>
+  
+  /* Demo carousel */
+  .demo-track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 8px calc((100% - min(960px, 84vw)) / 2) 24px;
+    scrollbar-width: none;
+    outline: none;
+  }
+  .demo-track::-webkit-scrollbar { display: none; }
+  .demo-slide {
+    flex: 0 0 min(960px, 84vw);
+    margin: 0;
+    scroll-snap-align: center;
+    opacity: .45;
+    transform: scale(.94);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .demo-slide.is-active { opacity: 1; transform: none; }
+  .demo-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0F172A;
+    box-shadow: 0 30px 60px -20px rgba(15, 23, 42, .45), 0 0 0 1px rgba(15, 23, 42, .08);
+  }
+  .demo-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .demo-cover { position: absolute; inset: 0; background: transparent; border: 0; cursor: pointer; }
+  .demo-slide.is-active .demo-cover { display: none; }
+  .demo-caption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 16px 4px 0; }
+  .demo-title { font-weight: 700; font-size: 1.05rem; color: var(--ink-graphite, #111827); }
+  .demo-meta { font-family: ui-monospace, monospace; font-size: 12px; color: #64748B; }
+  .demo-desc { flex-basis: 100%; font-size: .9rem; color: #64748B; }
+  .demo-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 8px; }
+  .demo-arrow {
+    width: 44px; height: 44px; border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, .12); background: rgba(255, 255, 255, .85);
+    color: #0F172A; font-size: 18px; cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .demo-arrow:hover { border-color: #0284C7; color: #0284C7; }
+  .demo-dots { display: flex; gap: 8px; }
+  .demo-dot { width: 8px; height: 8px; border-radius: 999px; border: 0; background: rgba(15, 23, 42, .2); cursor: pointer; transition: width .25s, background .25s; padding: 0; }
+  .demo-dot.is-active { width: 24px; background: #0284C7; }
+  :global(.dark) .demo-title { color: #F1F5F9; }
+  :global(.dark) .demo-arrow { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .15); color: #F1F5F9; }
+  :global(.dark) .demo-dot { background: rgba(255, 255, 255, .25); }
+  @media (prefers-reduced-motion: reduce) { .demo-track { scroll-behavior: auto; } .demo-slide { transition: none; } }
+
+  /* Hero highlights (Homy style) */
+  .hero-hl {
+    display: inline-block;
+    padding: 0 .14em .04em;
+    margin-left: .04em;
+    border-radius: .16em;
+    background: linear-gradient(180deg, #0EA5E9, #0284C7);
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgba(2, 132, 199, .65);
+  }
+  .hero-mark {
+    color: var(--ink-graphite, #0F172A);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #0284C7;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  :global(.dark) .hero-mark { color: #F1F5F9; text-decoration-color: #38BDF8; }
+</style>
 
   <!-- High-Priority Preconnect & Preload for Instant Paddle Checkout -->
   <link rel="preconnect" href="https://cdn.paddle.com" crossorigin />
@@ -305,38 +398,41 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
   <link rel="preconnect" href="https://checkout.paddle.com" crossorigin />
   <link rel="dns-prefetch" href="https://cdn.paddle.com" />
   <link rel="dns-prefetch" href="https://sandbox-checkout.paddle.com" />
-  <script is:inline id="paddle-js-sdk" src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script is:inline id="paddle-js-sdk" src="https://cdn.paddle.com/paddle/v2/paddle.js" async></script>
 
   <!-- Official Stackedlol / Framer ASCII Ocean Engine -->
-  <script is:inline src="/perch/ascii-ocean-engine.js?v=3"></script>
+  <script is:inline src="/perch/ascii-ocean-engine.js?v=7"></script>
 
   <div class="perch-page-wrapper">
     <!-- FULL-SCREEN TRANSPARENT ASCII SHARKS ON MAIN SCREEN (ZERO BLACK BACKGROUND) -->
     <canvas
       id="main-screen-ascii-ocean"
       class="fixed inset-0 w-full h-full pointer-events-none select-none z-0"
-      style="display: block; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0;"
+      style="display: block; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0; font-family: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;"
       aria-hidden="true"
     ></canvas>
 
-    <!-- SVG Background Journey Thread Path: Begins below the Hero section -->
+    <!-- Journey line: starts at "Precision Desktop Ergonomics", weaves past each feature and ends at
+         the pricing card. Built from the real section positions ([data-thread]) and drawn on scroll. -->
     <svg
-      class="journey-thread absolute inset-0 w-full h-full z-0 hidden lg:block"
+      id="perch-thread"
+      class="perch-thread absolute left-0 top-0 w-full z-[1] hidden lg:block pointer-events-none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      preserveAspectRatio="none"
-      viewBox="0 0 1440 6800"
     >
-      <path
-        d="M 1240,1400
-           C 1180,1650 400,1850 320,2150
-           C 250,2450 1150,2650 1200,2950
-           C 1250,3250 350,3450 300,3750
-           C 250,4050 1100,4250 1150,4550
-           C 1200,4850 720,5100 720,5350
-           L 720,6600"
-        stroke-width="2"
-      />
+      <defs>
+        <linearGradient id="perch-thread-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#38BDF8" />
+          <stop offset="0.55" stop-color="#0284C7" />
+          <stop offset="1" stop-color="#F59E0B" />
+        </linearGradient>
+      </defs>
+      <path class="perch-thread-track" />
+      <path class="perch-thread-glow" />
+      <path class="perch-thread-draw" stroke="url(#perch-thread-gradient)" />
+      <g class="perch-thread-nodes"></g>
+      <circle class="perch-thread-halo" r="7" cx="-50" cy="-50" />
+      <circle class="perch-thread-head" r="5" cx="-50" cy="-50" />
     </svg>
 
     <!-- 3. HEADER: Floating Product Navigation Pill -->
@@ -393,8 +489,10 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
             id="nav-buy-pro-btn"
             class="btn-perch-primary rounded-full px-16 py-6 sm:py-8 text-xs font-semibold whitespace-nowrap inline-flex items-center gap-6 cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
+            <svg class="fill-current shrink-0" width="13" height="13" style="width: 13px; height: 13px; min-width: 13px;" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+            </svg>
             <span>Download</span>
-            <span class="font-sans">→</span>
           </a>
         </div>
       </nav>
@@ -406,17 +504,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     <!-- 4. HERO SECTION: Make the real product the visual centerpiece -->
     <section class="relative z-10 pt-16 sm:pt-28 pb-40 px-16 sm:px-24 max-w-6xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-32 sm:mb-48" data-reveal>
-        <!-- Platform Status Stamp Badge -->
-        <div class="inline-flex items-center gap-8 px-12 py-4 rounded-full paper-stamp mb-20 text-brand-cyan">
-          <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-mono text-[11px] font-bold tracking-[0.14em] uppercase">
-            WINDOWS: AVAILABLE NOW · macOS: JOIN WAITLIST
-          </span>
-        </div>
-
         <!-- Primary H1 Headline: Single Line -->
         <h1 class="font-display text-[clamp(1.75rem,5.2vw,4.5rem)] font-extrabold tracking-tight text-ink-graphite leading-tight mb-16 whitespace-nowrap">
-          Copy it. Keep it. Find it.
+          Copy it. Keep it. <span class="hero-hl">Find it.</span>
         </h1>
 
         <!-- Supporting Statement & Copy -->
@@ -425,47 +515,38 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         </p>
 
         <p class="text-sm sm:text-base text-ink-subtle leading-relaxed max-w-2xl mx-auto mb-28">
-          Perchboard keeps your copied content close at hand, with a floating desktop panel for revisiting text, links, images, and files without the friction of window switching.
+          Perchboard keeps your copied content close at hand, with a <span class="hero-mark">floating desktop panel</span> for revisiting <span class="hero-mark">text, links, images, and files</span> without the friction of window switching.
         </p>
 
-        <!-- Hero Action Buttons: Clean, Sleek, Direct CTA -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16 pt-12">
-          <div class="relative inline-flex items-center">
-            <!-- Orange/Gold ONLY text (no card, no button design, zero wasted space) -->
-            <span class="absolute -top-16 right-10 sm:right-14 text-[11px] font-mono font-bold tracking-wider text-amber-500 dark:text-amber-400 uppercase pointer-events-none select-none whitespace-nowrap">
-              ✦ Launch Offer
-            </span>
-
-            <a
-              href="#pricing"
-              id="hero-buy-btn"
-              class="btn-perch-primary px-24 py-14 rounded-full font-display font-bold text-sm sm:text-base inline-flex items-center justify-center gap-10 shadow-xl cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all group whitespace-nowrap"
-            >
-              <svg class="w-16 h-16 sm:w-18 sm:h-18 fill-current shrink-0" width="18" height="18" style="width: 18px; height: 18px; min-width: 18px;" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
-              </svg>
-              <span>Buy Perchboard</span>
-              <span class="inline-flex items-center gap-8 px-10 py-4 rounded-full bg-black/25 border border-white/20 shadow-inner">
-                <span class="font-mono text-xs font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
-                <span class="font-mono text-xs font-black text-white">$9.99</span>
-              </span>
-              <span class="transition-transform duration-200 group-hover:translate-x-2">→</span>
-            </a>
-          </div>
+        <!-- Hero Action Buttons (Homy style): demo first, buy second. Launch discount lives in the pricing card. -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-14 pt-12">
+          <a
+            href="#demo-walkthrough"
+            id="hero-demo-btn"
+            class="px-24 py-14 rounded-full font-display font-bold text-sm sm:text-base inline-flex items-center justify-center gap-10 bg-[#111827] text-white shadow-xl hover:bg-black hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap"
+          >
+            <svg width="18" height="18" style="width: 18px; height: 18px; min-width: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+              <path d="M10 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"></path>
+            </svg>
+            <span>Watch Demo</span>
+          </a>
 
           <a
-            href="#waitlist"
-            id="hero-waitlist-btn"
-            data-platform="macos"
-            class="px-20 py-14 rounded-full font-display font-semibold text-xs sm:text-sm text-ink-subtle hover:text-ink-graphite hover:bg-black/5 dark:hover:bg-white/5 transition-all inline-flex items-center gap-6 cursor-pointer whitespace-nowrap"
+            href="#pricing"
+            id="hero-buy-btn"
+            class="px-24 py-14 rounded-full font-display font-bold text-sm sm:text-base inline-flex items-center justify-center gap-10 bg-white/80 dark:bg-white/5 text-ink-graphite border border-black/10 dark:border-white/15 hover:border-[#0284C7] hover:text-[#0284C7] hover:scale-[1.02] active:scale-[0.98] transition-all whitespace-nowrap"
           >
-            <span>Join macOS Waitlist</span>
-            <span class="text-xs">↓</span>
+            <svg class="fill-current shrink-0" width="16" height="16" style="width: 16px; height: 16px; min-width: 16px;" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.949-1.801"/>
+            </svg>
+            <span>Buy Perchboard</span>
           </a>
         </div>
 
         <p class="font-mono text-[11px] text-ink-muted text-center mt-14 mb-0">
-          One-time $9.99 launch pricing (Save 33% off $14.99) · Lifetime license · Zero subscription
+          One-time purchase · Windows 10 &amp; 11 · Lifetime license ·
+          <a href="#waitlist" id="hero-waitlist-btn" data-platform="macos" class="underline underline-offset-2 hover:text-[#0284C7]">On a Mac? Join the waitlist</a>
         </p>
       </div>
 
@@ -549,7 +630,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
             <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
             HIGH-RESOLUTION ARCHITECTURE
           </div>
-          <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-ink-graphite">
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-ink-graphite" data-thread="0.07" data-thread-y="0.5">
             Precision Desktop Ergonomics
           </h2>
           <p class="font-editorial text-lg text-ink-subtle italic mt-4">
@@ -593,11 +674,11 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     </section>
 
     <!-- 5. THE SCROLL NARRATIVE: Show the product in action -->
-    <div id="how-it-works" class="relative z-10 pt-28 pb-48 bg-[#F8F9FA] dark:bg-[#0E1015] border-y border-[#E5E7EB] dark:border-[#1E222B]">
+    <div id="how-it-works" class="relative z-10 pt-28 pb-48 bg-[#F8F9FA]/75 dark:bg-[#0E1015]/80 border-y border-[#E5E7EB] dark:border-[#1E222B]">
       
       <!-- SECTION 01 — Always within reach -->
       <section id="features" class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.94">
           <!-- Left: Narrative Text Block -->
           <div class="lg:col-span-5 space-y-16">
             <div class="flex items-center gap-8">
@@ -652,7 +733,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
 
       <!-- SECTION 02 — Everything you copied -->
       <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.06">
           <!-- Left: Authentic Cropped Interface Assets -->
           <div class="lg:col-span-7 order-2 lg:order-1 relative">
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-16 items-start">
@@ -731,7 +812,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
 
       <!-- SECTION 03 — See it before you need it -->
       <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.94">
           <!-- Left: Narrative Text Block -->
           <div class="lg:col-span-5 space-y-16">
             <div class="flex items-center gap-8">
@@ -803,7 +884,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
 
       <!-- SECTION 04 — Less friction, back to work -->
       <section class="py-24 sm:py-36 px-16 sm:px-24 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 sm:gap-36 items-center" data-reveal data-thread="0.06">
           <!-- Left: Settings Position Desktop Scene -->
           <div class="lg:col-span-7 order-2 lg:order-1 relative">
             <div class="desktop-frame paper-sheet relative bg-[#0F172A]">
@@ -858,7 +939,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     </div>
 
     <!-- 6. PRODUCT-SPECIFIC VISUAL INTERLUDE: Breathing Room -->
-    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#F8F9FA] dark:bg-[#11141B] border-y border-[#E5E7EB] dark:border-[#1E222B] text-center">
+    <section class="relative z-10 py-36 sm:py-48 px-16 sm:px-24 bg-[#F8F9FA]/75 dark:bg-[#11141B]/80 border-y border-[#E5E7EB] dark:border-[#1E222B] text-center">
       <div class="max-w-3xl mx-auto space-y-24" data-reveal>
         <div class="inline-block relative">
           <div class="w-96 h-96 sm:w-112 sm:h-112 mx-auto rounded-24 p-8 paper-sheet shadow-xl bg-white dark:bg-[#1F2128]">
@@ -886,7 +967,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     </section>
 
     <!-- STRUCTURED COMPARISON TABLE: LLM / GEO Extractability -->
-    <section class="py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
+    <section class="relative z-10 py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
       <div class="text-center mb-24">
         <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
           FEATURE BREAKDOWN
@@ -899,7 +980,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         </p>
       </div>
 
-      <div class="paper-sheet rounded-18 overflow-hidden overflow-x-auto">
+      <div class="paper-sheet rounded-18 overflow-hidden overflow-x-auto" data-thread="0.94" data-thread-y="0.5">
         <table class="w-full text-left border-collapse text-xs sm:text-sm min-w-[560px]">
           <thead>
             <tr class="border-b border-paper-border bg-black/5 dark:bg-white/5 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
@@ -945,7 +1026,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
     </section>
 
     <!-- 7. PLATFORM AVAILABILITY -->
-    <section id="platforms" class="py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
+    <section id="platforms" class="relative z-10 py-32 px-16 sm:px-24 max-w-5xl mx-auto" data-reveal>
       <div class="text-center mb-28">
         <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
           ROADMAP & AVAILABILITY
@@ -958,7 +1039,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-20" data-thread="0.5" data-thread-y="0.55">
         
         <!-- WINDOWS PLATFORM CARD (Primary) -->
         <div class="paper-sheet rounded-24 p-24 sm:p-32 relative overflow-hidden flex flex-col justify-between border-2 border-brand-cyan/40">
@@ -1093,121 +1174,67 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       </div>
     </section>
 
-    <!-- 8.8. PRODUCT VIDEO SPOTLIGHT / APP ADVERTISEMENTS -->
-    <section id="demo-walkthrough" class="relative z-20 py-32 px-16 sm:px-24 max-w-6xl mx-auto" data-reveal>
-      <div class="text-center mb-28">
-        <span class="inline-flex items-center gap-6 px-10 py-3 rounded-full bg-sky-500/10 border border-sky-500/20 text-brand-cyan font-mono text-[11px] font-bold tracking-wider uppercase mb-10">
-          <span class="w-6 h-6 rounded-full bg-brand-cyan animate-pulse"></span>
-          Official Ad Spotlights & Walkthroughs
-        </span>
-        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-ink-graphite tracking-tight mt-4">
-          See Perchboard in Action
+    <!-- 8.8. DEMO CAROUSEL (Homy style): big videos side by side, featured one centred, swipe or arrows to switch -->
+    <section id="demo-walkthrough" class="relative z-20 py-48 sm:py-64" data-reveal>
+      <div class="text-center px-16 mb-32">
+        <p class="text-sm text-ink-muted mb-8">Perchboard for Windows</p>
+        <h2 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-extrabold text-ink-graphite tracking-tight leading-tight">
+          See Perchboard in action.
         </h2>
-        <p class="font-editorial text-lg sm:text-xl text-ink-subtle italic mt-6 max-w-2xl mx-auto">
-          Watch our official 16:9 feature trailer and in-depth workflow tour to experience how floating edge docking transforms desktop clipboard management.
+        <p class="text-base sm:text-lg text-ink-subtle mt-12 max-w-xl mx-auto leading-relaxed">
+          Everything you copy, one keystroke away. Pick a demo and watch it work.
         </p>
       </div>
 
-      <!-- Dual 16:9 Video Cards Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 sm:gap-32 items-stretch">
-        
-        <!-- Video 1: 16:9 Official Trailer -->
-        <div class="paper-sheet rounded-28 p-16 sm:p-24 relative overflow-hidden flex flex-col justify-between shadow-md group">
-          <div>
-            <!-- Window Bar -->
-            <div class="flex items-center justify-between pb-14 border-b border-paper-border mb-16">
-              <div class="flex items-center gap-6">
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="font-mono text-[10px] text-ink-muted ml-6 font-semibold uppercase tracking-wider">Trailer · 1080p</span>
-              </div>
-              <span class="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-8 py-2 rounded-full uppercase tracking-wider">
-                16:9 Feature Ad
-              </span>
-            </div>
-
-            <!-- Video Player -->
-            <div class="relative rounded-16 overflow-hidden bg-slate-900 border border-paper-border shadow-inner aspect-video mb-18">
-              <video
-                src="/perch/perchboard-premium-16x9.mp4"
-                poster="/perch/perchboard-premium-poster.jpg"
-                controls
-                playsinline
-                preload="metadata"
-                class="w-full h-full object-cover"
-                aria-label="Perchboard official 16:9 promotional trailer video"
-              ></video>
-            </div>
-
-            <h3 class="font-display text-xl sm:text-2xl font-bold text-ink-graphite mb-8">
-              The Desktop Experience
-            </h3>
-            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-16">
-              A cinematic 22-second commercial showcasing how Perchboard anchors unobtrusively to your Windows screen edge, slide-toggles with zero lag, and preserves full desktop focus.
-            </p>
+      <div class="demo-carousel" data-demo-carousel data-featured="1">
+        <div class="demo-track" data-demo-track tabindex="0" aria-label="Perchboard demo videos">
+        <figure class="demo-slide" data-demo-slide="0">
+          <div class="demo-frame">
+            <video src="/perch/perch-highlight.mp4" poster="/perch/perch-desktop-hero.png" playsinline muted loop preload="metadata" aria-label="Perchboard demo: Slide out from the edge"></video>
+            <button type="button" class="demo-cover" aria-label="Show Slide out from the edge"></button>
           </div>
-
-          <div class="pt-14 border-t border-paper-border flex items-center justify-between text-[11px] font-mono text-ink-muted">
-            <span class="flex items-center gap-6">
-              <span class="w-6 h-6 rounded-full bg-emerald-500"></span>
-              22 Seconds · 60 FPS
-            </span>
-            <span>Sound Available ♫</span>
+          <figcaption class="demo-caption">
+            <span class="demo-title">Slide out from the edge</span>
+            <span class="demo-meta">17 sec</span>
+            <span class="demo-desc">Perchboard slides in from the screen edge, then gets out of the way.</span>
+          </figcaption>
+        </figure>
+        <figure class="demo-slide" data-demo-slide="1">
+          <div class="demo-frame">
+            <video src="/perch/perchboard-premium-16x9.mp4" poster="/perch/perchboard-premium-poster.jpg" playsinline muted loop preload="metadata" aria-label="Perchboard demo: The desktop experience"></video>
+            <button type="button" class="demo-cover" aria-label="Show The desktop experience"></button>
           </div>
+          <figcaption class="demo-caption">
+            <span class="demo-title">The desktop experience</span>
+            <span class="demo-meta">22 sec</span>
+            <span class="demo-desc">A quick look at how Perchboard sits on your Windows desktop without stealing focus.</span>
+          </figcaption>
+        </figure>
+        <figure class="demo-slide" data-demo-slide="2">
+          <div class="demo-frame">
+            <video src="/perch/perchboard-ad-showcase.mp4" poster="/perch/perchboard-ad-showcase-poster.jpg" playsinline muted loop preload="metadata" aria-label="Perchboard demo: Full feature tour"></video>
+            <button type="button" class="demo-cover" aria-label="Show Full feature tour"></button>
+          </div>
+          <figcaption class="demo-caption">
+            <span class="demo-title">Full feature tour</span>
+            <span class="demo-meta">42 sec</span>
+            <span class="demo-desc">Text, links, images and files, filters, and instant keyboard search.</span>
+          </figcaption>
+        </figure>
         </div>
 
-        <!-- Video 2: Comprehensive Feature Walkthrough -->
-        <div class="paper-sheet rounded-28 p-16 sm:p-24 relative overflow-hidden flex flex-col justify-between shadow-md group">
-          <div>
-            <!-- Window Bar -->
-            <div class="flex items-center justify-between pb-14 border-b border-paper-border mb-16">
-              <div class="flex items-center gap-6">
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="w-8 h-8 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                <span class="font-mono text-[10px] text-ink-muted ml-6 font-semibold uppercase tracking-wider">Walkthrough · 1080p</span>
-              </div>
-              <span class="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-8 py-2 rounded-full uppercase tracking-wider">
-                Full Workflow Ad
-              </span>
-            </div>
-
-            <!-- Video Player -->
-            <div class="relative rounded-16 overflow-hidden bg-slate-900 border border-paper-border shadow-inner aspect-video mb-18">
-              <video
-                src="/perch/perchboard-ad-showcase.mp4"
-                poster="/perch/perchboard-ad-showcase-poster.jpg"
-                controls
-                playsinline
-                preload="metadata"
-                class="w-full h-full object-cover"
-                aria-label="Perchboard deep-dive feature walkthrough advertisement video"
-              ></video>
-            </div>
-
-            <h3 class="font-display text-xl sm:text-2xl font-bold text-ink-graphite mb-8">
-              Feature Tour & Multi-Clip Retrieval
-            </h3>
-            <p class="text-xs sm:text-sm text-ink-subtle leading-relaxed mb-16">
-              A comprehensive 42-second deep dive demonstrating multi-format capture (text snippets, URLs, high-res images, and files), category filtering, and instant keyboard search.
-            </p>
+        <div class="demo-controls">
+          <button type="button" class="demo-arrow" data-demo-prev aria-label="Previous demo">←</button>
+          <div class="demo-dots" role="tablist">
+            {[0, 1, 2].map((i) => <button type="button" class="demo-dot" data-demo-dot={i} aria-label={`Demo ${i + 1}`}></button>)}
           </div>
-
-          <div class="pt-14 border-t border-paper-border flex items-center justify-between text-[11px] font-mono text-ink-muted">
-            <span class="flex items-center gap-6">
-              <span class="w-6 h-6 rounded-full bg-amber-500"></span>
-              42 Seconds · 1080p Full HD
-            </span>
-            <span>All Features Demonstrated</span>
-          </div>
+          <button type="button" class="demo-arrow" data-demo-next aria-label="Next demo">→</button>
         </div>
-
       </div>
     </section>
 
     <!-- 9. FAQ SECTION: Clean, Understated Editorial Accordion -->
-    <section id="faq" class="py-32 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
+    <section id="faq" class="relative z-10 py-32 px-16 sm:px-24 max-w-4xl mx-auto" data-reveal>
       <div class="text-center mb-28">
         <span class="font-mono text-xs uppercase tracking-widest text-brand-cyan font-bold">
           QUESTIONS & ANSWERS
@@ -1216,7 +1243,7 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
           Frequently asked questions
         </h2>
         <p class="font-editorial text-lg text-ink-subtle italic mt-4">
-          Everything you need to know about the product and release timeline.
+          Everything you need to know about buying, installing and using Perchboard.
         </p>
       </div>
 
@@ -1331,7 +1358,9 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
               </h4>
               <ul class="space-y-8 text-xs text-slate-400">
                 <li><a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="/terms" class="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/perch/terms/" class="hover:text-white transition-colors">Terms of Sale & Refunds</a></li>
+                <li><a href="/welcome/#resend" class="hover:text-white transition-colors">Lost your license key?</a></li>
+                <li><a href="/terms" class="hover:text-white transition-colors">Site Terms</a></li>
                 <li><a href="/editorial-standards" class="hover:text-white transition-colors">Editorial Policy</a></li>
               </ul>
             </div>
@@ -1366,6 +1395,206 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
 
 <!-- Client Hydration & Interactive Logic -->
 <script is:inline>
+  // Journey line: a smooth path through the [data-thread] anchors (x = fraction of page width,
+  // y = point inside the element), ending at the top of the pricing card. A faint track shows
+  // the whole route; the gradient line draws itself as you scroll and lights each stop.
+  function initPerchThread() {
+    var wrap = document.querySelector('.perch-page-wrapper');
+    var svg = document.getElementById('perch-thread');
+    if (!wrap || !svg || svg.dataset.ready) return;
+    svg.dataset.ready = 'true';
+    var NS = 'http://www.w3.org/2000/svg';
+    var track = svg.querySelector('.perch-thread-track');
+    var glow = svg.querySelector('.perch-thread-glow');
+    var draw = svg.querySelector('.perch-thread-draw');
+    var head = svg.querySelector('.perch-thread-head');
+    var halo = svg.querySelector('.perch-thread-halo');
+    var nodesGroup = svg.querySelector('.perch-thread-nodes');
+    var grad = document.getElementById('perch-thread-gradient');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var total = 0, samples = [], nodes = [], ticking = false;
+
+    function layout() {
+      if (getComputedStyle(svg).display === 'none') return;
+      var wr = wrap.getBoundingClientRect();
+      var W = wrap.clientWidth;
+      var H = wrap.scrollHeight;
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.style.height = H + 'px';
+
+      var pts = Array.prototype.map.call(wrap.querySelectorAll('[data-thread]'), function (el) {
+        var r = el.getBoundingClientRect();
+        var fy = parseFloat(el.getAttribute('data-thread-y'));
+        return [W * parseFloat(el.getAttribute('data-thread')), r.top - wr.top + r.height * (isNaN(fy) ? 0.5 : fy)];
+      });
+      var pricing = document.getElementById('pricing');
+      if (pricing) {
+        var pr = pricing.getBoundingClientRect();
+        pts.push([W / 2, pr.top - wr.top + 40]);
+      }
+      if (pts.length < 2) return;
+
+      // Vertical tangents at every stop give soft S-curves that never double back.
+      var d = 'M ' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i], dy = (b[1] - a[1]) * 0.5;
+        d += ' C ' + a[0].toFixed(1) + ' ' + (a[1] + dy).toFixed(1) + ', ' + b[0].toFixed(1) + ' ' + (b[1] - dy).toFixed(1) + ', ' + b[0].toFixed(1) + ' ' + b[1].toFixed(1);
+      }
+      track.setAttribute('d', d);
+      glow.setAttribute('d', d);
+      draw.setAttribute('d', d);
+      grad.setAttribute('y1', pts[0][1]);
+      grad.setAttribute('y2', pts[pts.length - 1][1]);
+
+      total = draw.getTotalLength();
+      draw.style.strokeDasharray = total + ' ' + total;
+      glow.style.strokeDasharray = total + ' ' + total;
+      samples = [];
+      for (var k = 0; k <= 240; k++) {
+        var len = (total * k) / 240;
+        samples.push([len, draw.getPointAtLength(len).y]);
+      }
+
+      nodesGroup.innerHTML = '';
+      nodes = pts.map(function (p) {
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('class', 'perch-thread-node');
+        c.setAttribute('cx', p[0]);
+        c.setAttribute('cy', p[1]);
+        c.setAttribute('r', 4.5);
+        nodesGroup.appendChild(c);
+        return { el: c, y: p[1] };
+      });
+      update();
+    }
+
+    // Length along the path whose point sits at page-y (the path only moves downward).
+    function lengthAtY(y) {
+      if (!samples.length || y <= samples[0][1]) return 0;
+      for (var i = 1; i < samples.length; i++) {
+        if (samples[i][1] >= y) {
+          var a = samples[i - 1], b = samples[i];
+          var t = (y - a[1]) / Math.max(0.001, b[1] - a[1]);
+          return a[0] + (b[0] - a[0]) * t;
+        }
+      }
+      return total;
+    }
+
+    function update() {
+      ticking = false;
+      if (!total) return;
+      var wr = wrap.getBoundingClientRect();
+      var targetY = reduce ? Infinity : -wr.top + window.innerHeight * 0.62;
+      var len = lengthAtY(targetY);
+      draw.style.strokeDashoffset = total - len;
+      glow.style.strokeDashoffset = total - len;
+      var showHead = len > 0 && len < total - 1;
+      var p = draw.getPointAtLength(len);
+      head.setAttribute('cx', showHead ? p.x : -50);
+      head.setAttribute('cy', showHead ? p.y : -50);
+      halo.setAttribute('cx', showHead ? p.x : -50);
+      halo.setAttribute('cy', showHead ? p.y : -50);
+      for (var i = 0; i < nodes.length; i++) nodes[i].el.classList.toggle('is-lit', nodes[i].y <= p.y + 1);
+    }
+
+    function requestUpdate() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    var relayout = (function () {
+      var t;
+      return function () {
+        clearTimeout(t);
+        t = setTimeout(layout, 120);
+      };
+    })();
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', relayout);
+    if ('ResizeObserver' in window) new ResizeObserver(relayout).observe(wrap);
+    window.addEventListener('load', layout);
+    layout();
+  }
+
+
+  function initDemoCarousel() {
+    var root = document.querySelector('[data-demo-carousel]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = '1';
+    var track = root.querySelector('[data-demo-track]');
+    var slides = Array.prototype.slice.call(root.querySelectorAll('[data-demo-slide]'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('[data-demo-dot]'));
+    var active = -1;
+    var inView = false;
+
+    function go(i, smooth) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      var s = slides[i];
+      var left = s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2;
+      track.scrollTo({ left: left, behavior: smooth === false ? 'auto' : 'smooth' });
+    }
+
+    function setActive(i) {
+      if (i === active) return;
+      active = i;
+      slides.forEach(function (s, j) {
+        var v = s.querySelector('video');
+        s.classList.toggle('is-active', j === i);
+        if (j === i) {
+          v.controls = true;
+          if (inView) v.play().catch(function () {});
+        } else {
+          v.controls = false;
+          v.pause();
+        }
+      });
+      dots.forEach(function (d, j) { d.classList.toggle('is-active', j === i); d.setAttribute('aria-selected', String(j === i)); });
+    }
+
+    function nearest() {
+      var mid = track.scrollLeft + track.clientWidth / 2;
+      var best = 0, bestD = Infinity;
+      slides.forEach(function (s, j) {
+        var d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid);
+        if (d < bestD) { bestD = d; best = j; }
+      });
+      return best;
+    }
+
+    var raf = 0;
+    track.addEventListener('scroll', function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () { setActive(nearest()); });
+    }, { passive: true });
+    slides.forEach(function (s, j) { s.querySelector('.demo-cover').addEventListener('click', function () { go(j); }); });
+    dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); }); });
+    root.querySelector('[data-demo-prev]').addEventListener('click', function () { go(active - 1); });
+    root.querySelector('[data-demo-next]').addEventListener('click', function () { go(active + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
+    });
+
+    // Play the featured demo only while the section is on screen.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        var v = slides[active] && slides[active].querySelector('video');
+        if (!v) return;
+        if (inView) v.play().catch(function () {}); else v.pause();
+      }, { threshold: 0.35 }).observe(track);
+    }
+
+    var featured = +root.dataset.featured || 0;
+    go(featured, false);
+    setActive(featured);
+    window.addEventListener('resize', function () { go(active, false); });
+  }
+
   function initPerchPage() {
     // 1. Highlight Video Play/Pause & Mute Controls
     var video = document.getElementById('perch-highlight-video');
@@ -1418,6 +1647,8 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       cfg.wakeRGB = [2, 132, 199];      // Perchboard cyan wake ripples
       cfg.speed = 1.1;
       cfg.interactive = true;
+      cfg.cellSize = 7;                 // finer grid so the silhouette, fins and tail read clearly
+      cfg.ramp = '.:-=+*#%@';           // clean light→dense symbols instead of letters
 
       // Exactly 2 sharks: 1 Hammerhead, 1 Classic
       var sharks = [
@@ -1428,6 +1659,10 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       // fishCount = 0 (removes all fish dashes completely)
       window.__mainOceanEngine = new window.OceanEngine(mainOceanCanvas, sharks, 0, cfg);
     }
+
+    // 2b. Journey line
+    initPerchThread();
+    initDemoCarousel();
 
     // 3. Smooth scroll to macOS Waitlist Section
     function scrollToWaitlist() {
@@ -1453,24 +1688,11 @@ const jsonLd = [softwareSchema, breadcrumbSchema, faqSchema, videoSchema, traile
       });
     });
 
-    // 4. Header "Get Pro" & Hero Buy Button direct payment checkout triggers
-    // 4. Header "Download" & Hero Buy Button go to payment section (#pricing)
+    // 4. Header "Download" scrolls to pricing; the Buy buttons open checkout (PricingSection)
     var navBuyBtn = document.getElementById('nav-buy-pro-btn');
     if (navBuyBtn && !navBuyBtn.dataset.hasDirectBuyListener) {
       navBuyBtn.dataset.hasDirectBuyListener = 'true';
       navBuyBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        var pricingSec = document.getElementById('pricing');
-        if (pricingSec) {
-          pricingSec.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    }
-
-    var heroBuyBtn = document.getElementById('hero-buy-btn');
-    if (heroBuyBtn && !heroBuyBtn.dataset.hasDirectBuyListener) {
-      heroBuyBtn.dataset.hasDirectBuyListener = 'true';
-      heroBuyBtn.addEventListener('click', function(e) {
         e.preventDefault();
         var pricingSec = document.getElementById('pricing');
         if (pricingSec) {

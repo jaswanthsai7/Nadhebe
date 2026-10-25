@@ -1,7 +1,8 @@
 ---
 /**
  * Perch Pro Pricing Section
- * Integrated with Paddle Sandbox Checkout Overlay & Localized PricePreview
+ * Paddle overlay checkout with localized PricePreview. After payment the buyer is sent to
+ * /welcome/?_ptxn=… and the Worker (worker/perch.ts) issues and emails the license.
  * Premium 2-Column Wide Layout with Custom Segmented Currency Switcher
  * Completely Opaque & Above ASCII Ocean Fishes
  */
@@ -9,6 +10,7 @@ const paddleEnv = import.meta.env.PUBLIC_PADDLE_ENV || 'sandbox';
 const paddleClientToken = import.meta.env.PUBLIC_PADDLE_CLIENT_TOKEN || '';
 const regularPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_REGULAR || 'pri_01m5qsket9qpyqv0jejzez7h54';
 const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5qskf4e09y85xbrypy6vv2d';
+const isSandbox = paddleEnv !== 'production';
 ---
 
 <section
@@ -39,7 +41,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
       </h2>
 
       <p class="font-editorial text-lg sm:text-xl text-ink-subtle italic mt-8 max-w-xl mx-auto">
-        No subscriptions, no annual renewal fees, no seat costs. Get instant access to Perch Pro for Windows with all features and future updates included.
+        No subscriptions, no annual renewal fees, no seat costs. Get instant access to Perchboard for Windows with every feature and all future 1.x updates included.
       </p>
     </div>
 
@@ -53,7 +55,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
             <div class="relative">
               <img
                 src="/perch/app-icon.png"
-                alt="Perch Pro bird logo icon"
+                alt="Perchboard app icon"
                 width="52"
                 height="52"
                 class="w-52 h-52 rounded-16 shadow-md bg-[#121824] border border-paper-border"
@@ -64,7 +66,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
             <div>
               <div class="flex items-center gap-8">
                 <span class="font-display font-extrabold text-2xl sm:text-3xl text-ink-graphite tracking-tight leading-tight">
-                  Perch Pro
+                  Perchboard
                 </span>
                 <span class="px-8 py-2 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan font-mono text-[10px] font-bold uppercase tracking-wider">
                   Windows 10 & 11
@@ -90,7 +92,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
                 <strong class="font-display font-bold text-sm text-ink-graphite block">
                   Perpetual Lifetime License
                 </strong>
-                <span class="text-xs text-ink-subtle leading-relaxed">
+                <span class="block text-xs text-ink-subtle leading-relaxed mt-2">
                   Single one-time payment. Install and use forever on your Windows 10 and 11 machines. No renewals ever.
                 </span>
               </div>
@@ -104,7 +106,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
                 <strong class="font-display font-bold text-sm text-ink-graphite block">
                   Floating Screen-Edge Panel
                 </strong>
-                <span class="text-xs text-ink-subtle leading-relaxed">
+                <span class="block text-xs text-ink-subtle leading-relaxed mt-2">
                   Dock to right, left, or top screen border with custom width, auto-hide, and keyboard shortcut toggles.
                 </span>
               </div>
@@ -118,7 +120,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
                 <strong class="font-display font-bold text-sm text-ink-graphite block">
                   All Pro Media Formats
                 </strong>
-                <span class="text-xs text-ink-subtle leading-relaxed">
+                <span class="block text-xs text-ink-subtle leading-relaxed mt-2">
                   Seamless capture of rich text, code snippets, hyperlinks, high-res images, and multi-file paths.
                 </span>
               </div>
@@ -132,7 +134,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
                 <strong class="font-display font-bold text-sm text-ink-graphite block">
                   100% Free Future Updates
                 </strong>
-                <span class="text-xs text-ink-subtle leading-relaxed">
+                <span class="block text-xs text-ink-subtle leading-relaxed mt-2">
                   All upcoming v1.x feature releases and major milestone upgrades included with zero additional fees.
                 </span>
               </div>
@@ -146,7 +148,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
                 <strong class="font-display font-bold text-sm text-ink-graphite block">
                   Local-First & Private Architecture
                 </strong>
-                <span class="text-xs text-ink-subtle leading-relaxed">
+                <span class="block text-xs text-ink-subtle leading-relaxed mt-2">
                   Zero cloud telemetry, zero remote servers. Your sensitive clipboard history never leaves your device.
                 </span>
               </div>
@@ -208,7 +210,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
             </label>
             <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-4">
               <span class="w-6 h-6 rounded-full bg-emerald-500 animate-pulse"></span>
-              Paddle Live Rates
+              Local prices incl. tax
             </span>
           </div>
 
@@ -275,7 +277,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
               id="perch-checkout-email"
               name="checkout_email"
               placeholder="you@domain.com"
-              aria-label="Email address for Perch Pro license receipt"
+              aria-label="Email address for your Perchboard license"
               class="w-full pl-48 pr-16 py-12 rounded-12 bg-white dark:bg-[#15171C] border border-[#E2E8F0] dark:border-[#2D313F] text-ink-graphite text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition-all shadow-sm font-sans"
             />
           </div>
@@ -309,7 +311,6 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
             </span>
             <span class="btn-price-wrapper flex items-center gap-8 shrink-0">
               <span class="inline-flex items-center gap-8 px-10 py-4 rounded-full bg-black/20 border border-white/20 shadow-sm">
-                <span class="font-mono text-xs sm:text-sm font-semibold text-white/70" style="text-decoration: line-through; text-decoration-color: #EF4444; text-decoration-thickness: 2px;">$14.99</span>
                 <span id="perch-btn-price-tag" class="font-mono text-xs sm:text-sm font-bold text-white">
                   $9.99
                 </span>
@@ -321,23 +322,25 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
           <!-- Trust Badges -->
           <div class="flex items-center justify-between text-ink-muted font-mono text-[10px] pt-4 px-4 flex-wrap gap-6">
             <span class="flex items-center gap-4">
-              <svg class="w-12 h-12 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              Paddle Sandbox Verified
-            </span>
-            <span class="flex items-center gap-4">
               <svg class="w-12 h-12 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
               </svg>
-              One-Page Overlay Checkout
+              Secure checkout by Paddle
             </span>
             <span class="flex items-center gap-4">
-              <svg class="w-12 h-12 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z" clip-rule="evenodd"></path>
+              <svg class="w-12 h-12 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              Sandbox Mode (No real charges)
+              Key + download emailed instantly
             </span>
+            {isSandbox && (
+              <span class="flex items-center gap-4">
+                <svg class="w-12 h-12 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z" clip-rule="evenodd"></path>
+                </svg>
+                Test mode: no real charges
+              </span>
+            )}
           </div>
         </div>
 
@@ -355,12 +358,14 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
     paddleClientToken,
     regularPriceId,
     launchPriceId,
+    isSandbox,
   }}
 >
   (function () {
     let paddleInstance = null;
     let selectedCountry = 'US';
     let pendingTriggerBtn = null;
+    let paddleUnavailable = false;
     const countryCurrencies = { US: 'USD', GB: 'GBP', IE: 'EUR', AU: 'AUD' };
 
     async function loadPaddleSdk() {
@@ -407,7 +412,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
         triggerEl.style.opacity = '0.9';
         triggerEl.style.pointerEvents = 'none';
 
-        const isSmall = triggerEl.id === 'nav-buy-pro-btn' || triggerEl.id === 'footer-buy-pro-btn';
+        const isSmall = triggerEl.id === 'footer-buy-pro-btn';
         triggerEl.innerHTML = `
           <span class="inline-flex items-center justify-center gap-8 text-white font-bold ${isSmall ? 'text-xs' : 'text-sm'}">
             <svg class="animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="width: ${isSmall ? '14px' : '18px'}; height: ${isSmall ? '14px' : '18px'};">
@@ -420,6 +425,13 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
       }
 
       if (!paddleInstance) {
+        if (paddleUnavailable) {
+          // Checkout cannot open (missing config or Paddle blocked): show the pricing card and its notice.
+          resetAllButtons();
+          const pricing = document.getElementById('pricing');
+          if (pricing) pricing.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
         pendingTriggerBtn = triggerEl;
         return;
       }
@@ -437,7 +449,6 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
             variant: 'one-page',
             allowLogout: false,
             showAddDiscounts: false,
-            successUrl: `${window.location.origin}/welcome`,
           },
         });
       } catch (openErr) {
@@ -456,6 +467,8 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
       const currencyBadge = document.getElementById('perch-currency-badge');
 
       if (!paddleClientToken) {
+        paddleUnavailable = true;
+        resetAllButtons();
         if (configError) configError.classList.remove('hidden');
         console.warn('[Paddle] Missing PUBLIC_PADDLE_CLIENT_TOKEN environment variable.');
         return;
@@ -479,17 +492,17 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
               variant: 'one-page',
               allowLogout: false,
               showAddDiscounts: false,
-              successUrl: `${window.location.origin}/welcome`,
             },
           },
           eventCallback: function (data) {
-            console.log('[Paddle Event]', data.name, data);
+            if (isSandbox) console.log('[Paddle Event]', data.name, data);
             if (data.name === 'checkout.loaded' || data.name === 'checkout.closed') {
               resetAllButtons();
             }
             if (data.name === 'checkout.completed') {
               const txnId = data.data && data.data.id ? data.data.id : '';
-              window.location.href = `/welcome?_ptxn=${encodeURIComponent(txnId)}`;
+              // /welcome/ shows the license key and download as soon as the payment is confirmed.
+              window.location.href = `/welcome/?_ptxn=${encodeURIComponent(txnId)}`;
             }
           },
         });
@@ -571,8 +584,9 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
         }
       } catch (err) {
         console.error('[Paddle Init Error]', err);
+        paddleUnavailable = true;
         if (configError) {
-          configError.textContent = 'Paddle checkout error: ' + err.message;
+          configError.textContent = 'Checkout could not load. Please disable any ad blocker for this page or try again in a moment.';
           configError.classList.remove('hidden');
         }
         resetAllButtons();
@@ -586,7 +600,7 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
 
     // Global click listener for ANY Buy Pro buttons (Header, Hero, Pricing, Platform Card, Footer)
     document.addEventListener('click', function(e) {
-      const buyBtn = e.target.closest('#nav-buy-pro-btn, #hero-buy-btn, #footer-buy-pro-btn, #platform-cta-windows');
+      const buyBtn = e.target.closest('#hero-buy-btn, #footer-buy-pro-btn, #platform-cta-windows');
       if (buyBtn) {
         e.preventDefault();
         openFastCheckout(buyBtn);
@@ -595,7 +609,6 @@ const launchPriceId = import.meta.env.PUBLIC_PADDLE_PRICE_ID_LAUNCH || 'pri_01m5
 
     // Start loading immediately!
     initPaddle();
-    document.addEventListener('astro:page-load', initPaddle);
   })();
 </script>
 

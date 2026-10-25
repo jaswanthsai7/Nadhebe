@@ -26,8 +26,12 @@ export default defineConfig({
           server.middlewares.use((req, res, next) => {
             const url = req.url || '';
             const [urlPath, query] = url.split('?');
+            // Skip Vite / Astro internal module requests
+            if (!urlPath || urlPath.startsWith('/@') || urlPath.startsWith('/__')) {
+              return next();
+            }
             // If request has no extension and doesn't end with slash, redirect to trailing slash in dev
-            if (urlPath && !urlPath.endsWith('/') && !urlPath.split('/').pop()?.includes('.')) {
+            if (!urlPath.endsWith('/') && !urlPath.split('/').pop()?.includes('.')) {
               res.writeHead(302, { Location: urlPath + '/' + (query ? '?' + query : '') });
               res.end();
               return;

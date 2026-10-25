@@ -4,10 +4,11 @@ import { SITE } from '@/config';
 import { buildSeo } from '@/utils/seo';
 
 const canonicalUrl = `${SITE.url}/welcome/`;
+const isSandbox = (import.meta.env.PUBLIC_PADDLE_ENV || 'sandbox') !== 'production';
 
 const seo = buildSeo({
-  title: 'Perch Pro Order Received | Next Steps & Download | Nadhebe',
-  description: 'Thank you for your Perch Pro order. Review your checkout submission status, installation guide, and software download instructions.',
+  title: 'Your Perchboard License & Download | Nadhebe',
+  description: 'Get your Perchboard license key and Windows download, or have your license emailed to you again.',
   slug: '/welcome/',
   siteUrl: SITE.url,
   siteName: SITE.name,
@@ -48,155 +49,189 @@ const breadcrumbSchema = {
 >
   <div class="min-h-screen bg-[#FBF9F4] dark:bg-[#0B0D11] text-[#18191B] dark:text-[#F4F4F6] py-32 sm:py-48 px-16 sm:px-24">
     <div class="max-w-2xl mx-auto">
-      
-      <!-- Back link -->
+
       <div class="mb-24">
-        <a
-          href="/perch"
-          class="inline-flex items-center gap-6 font-mono text-xs text-slate-500 hover:text-brand-cyan transition-colors"
-          aria-label="Return to Perchboard overview"
-        >
+        <a href="/perch/" class="inline-flex items-center gap-6 font-mono text-xs text-slate-500 hover:text-brand-cyan transition-colors">
           <span>← Back to Perchboard</span>
         </a>
       </div>
 
-      <!-- Main Receipt & Onboarding Card -->
       <div class="bg-white dark:bg-[#15171C] border border-[#E8E2D5] dark:border-[#22252E] rounded-32 p-28 sm:p-40 shadow-xl relative overflow-hidden">
-        
-        <!-- Glow accent -->
         <div class="absolute -top-32 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- Header Status -->
-        <div class="flex items-center gap-12 mb-24">
-          <div class="w-48 h-48 rounded-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl font-bold">
-            ✓
+        <!-- ORDER STATE (shown when arriving from checkout with ?_ptxn=) -->
+        <div id="order-block" class="hidden">
+          <div class="flex items-center gap-12 mb-24">
+            <div id="order-icon" class="w-48 h-48 rounded-16 bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan flex items-center justify-center text-2xl font-bold shrink-0">
+              <svg class="animate-spin" style="width:22px;height:22px" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            </div>
+            <div>
+              <span id="order-eyebrow" class="font-mono text-[10px] uppercase tracking-wider text-brand-cyan font-bold block">
+                {isSandbox ? 'Test purchase · ' : ''}Confirming your payment
+              </span>
+              <h1 id="order-title" class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-ink-graphite">
+                Thank you for buying Perchboard!
+              </h1>
+            </div>
           </div>
-          <div>
-            <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold block">
-              Paddle Sandbox Checkout Submitted
-            </span>
-            <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-ink-graphite">
-              Thank you for ordering Perch Pro!
-            </h1>
-          </div>
-        </div>
 
-        <!-- Important Status Disclaimer (No false verification claim) -->
-        <div class="bg-amber-500/10 border border-amber-500/20 rounded-16 p-16 sm:p-20 mb-24 text-xs font-mono text-amber-800 dark:text-amber-200">
-          <div class="flex items-center gap-6 font-bold mb-4">
-            <span>ℹ️ Sandbox Transaction Received</span>
-          </div>
-          <p class="leading-relaxed">
-            Your checkout submission has been received by Paddle Sandbox. Because this site operates client-side without a licensing verification backend, payment settlement and permanent license key issuance occur asynchronously. Your official VAT invoice and receipt will be dispatched to your billing email once processed by Paddle.
+          <p id="order-message" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-24" aria-live="polite">
+            We are confirming your payment with Paddle. Your license key will appear here in a few seconds.
           </p>
-          <div class="mt-8 pt-8 border-t border-amber-500/20 text-[11px] flex items-center gap-8 flex-wrap" id="txn-display-container">
-            <span>Transaction Reference:</span>
-            <code id="txn-reference-code" class="bg-black/10 dark:bg-white/10 px-6 py-2 rounded font-bold">
-              Processing...
-            </code>
+
+          <div id="license-ready" class="hidden mb-28">
+            <label for="license-key" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-6">Your license key</label>
+            <div class="flex items-stretch gap-8 mb-16">
+              <input id="license-key" readonly class="flex-1 min-w-0 px-14 py-12 rounded-12 bg-[#F1F5F9] dark:bg-[#0E1015] border border-dashed border-[#0284C7] font-mono text-sm sm:text-base font-bold tracking-wide text-ink-graphite" />
+              <button type="button" id="copy-key-btn" class="px-14 rounded-12 border border-[#E2E8F0] dark:border-[#2D313F] font-mono text-xs font-bold hover:border-[#0284C7] transition-colors cursor-pointer">Copy</button>
+            </div>
+            <a id="download-installer-btn" href="#" class="btn-perch-primary px-20 py-12 rounded-full text-sm font-bold inline-flex items-center gap-8 cursor-pointer">
+              <span>Download Perchboard for Windows (.exe)</span>
+              <span>↓</span>
+            </a>
+            <p id="email-note" class="font-mono text-[11px] text-slate-500 mt-12"></p>
+          </div>
+
+          <div class="text-[11px] font-mono text-slate-500 flex items-center gap-8 flex-wrap mb-24">
+            <span>Order reference:</span>
+            <code id="txn-reference-code" class="bg-black/5 dark:bg-white/10 px-6 py-2 rounded font-bold"></code>
           </div>
         </div>
 
-        <!-- Next Steps & Download Instructions -->
-        <div class="space-y-20 border-t border-b border-[#E8E2D5] dark:border-[#22252E] py-24 mb-28">
-          <h2 class="font-display text-lg font-bold text-ink-graphite">
-            Getting Started with Perch Pro
-          </h2>
+        <!-- NO ORDER (visited directly, e.g. from "Lost your license key?") -->
+        <div id="lookup-intro" class="hidden mb-8">
+          <h1 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-ink-graphite mb-8">Get your Perchboard license again</h1>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Enter the email you used at checkout and we will resend your license key and download link.</p>
+        </div>
 
-          <div class="space-y-16">
-            <!-- Step 1 -->
-            <div class="flex items-start gap-12">
-              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
-                1
-              </span>
-              <div>
-                <h3 class="font-sans text-sm font-bold text-ink-graphite">
-                  Download Perch for Windows
-                </h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-                  Download the latest Windows installer (.exe) compatible with Windows 10 & 11 (64-bit architecture).
-                </p>
-                <div class="mt-8">
-                  <a
-                    href="/perch/app-icon.png"
-                    download
-                    id="download-installer-btn"
-                    aria-label="Download Perch for Windows"
-                    class="btn-perch-primary px-14 py-6 rounded-full text-xs font-bold inline-flex items-center gap-6 cursor-pointer"
-                  >
-                    <span>Download Installer (.exe)</span>
-                    <span>↓</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+        <!-- Install steps -->
+        <div id="install-steps" class="hidden space-y-16 border-t border-b border-[#E8E2D5] dark:border-[#22252E] py-24 mb-28">
+          <h2 class="font-display text-lg font-bold text-ink-graphite">Getting started</h2>
+          <ol class="space-y-14 text-sm text-slate-600 dark:text-slate-300 leading-relaxed list-decimal pl-20">
+            <li><strong class="text-ink-graphite">Run the installer</strong> on Windows 10 or 11 (64-bit). If SmartScreen asks, choose “More info → Run anyway”.</li>
+            <li><strong class="text-ink-graphite">Open Perchboard → Settings → License</strong>, paste your key and click Activate.</li>
+            <li><strong class="text-ink-graphite">Pick your screen edge</strong> and start copying. Perchboard keeps your history on your PC only.</li>
+          </ol>
+        </div>
 
-            <!-- Step 2 -->
-            <div class="flex items-start gap-12">
-              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
-                2
-              </span>
-              <div>
-                <h3 class="font-sans text-sm font-bold text-ink-graphite">
-                  Run the Setup Wizard
-                </h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-                  Launch the setup executable, anchor your floating clipboard panel to your preferred screen edge, and pin your primary workspace apps.
-                </p>
-              </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="flex items-start gap-12">
-              <span class="w-24 h-24 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-2">
-                3
-              </span>
-              <div>
-                <h3 class="font-sans text-sm font-bold text-ink-graphite">
-                  Activate Lifetime Access
-                </h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
-                  Enter your email address in the Perch settings panel to link your desktop client to your lifetime launch license.
-                </p>
-              </div>
-            </div>
+        <!-- Resend -->
+        <form id="resend" class="scroll-mt-32" novalidate>
+          <label for="resend-email" class="block font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-6">Didn't get the email? Resend my license</label>
+          <div class="flex items-stretch gap-8 flex-wrap sm:flex-nowrap">
+            <input id="resend-email" type="email" required placeholder="you@domain.com" autocomplete="email" class="flex-1 min-w-0 px-14 py-10 rounded-12 bg-white dark:bg-[#0E1015] border border-[#E2E8F0] dark:border-[#2D313F] text-sm focus:outline-none focus:ring-2 focus:ring-[#0284C7]" />
+            <button type="submit" class="btn-perch-primary px-18 py-10 rounded-full text-xs font-bold cursor-pointer whitespace-nowrap">Resend license</button>
           </div>
-        </div>
+          <p id="resend-status" class="font-mono text-[11px] text-slate-500 mt-8" aria-live="polite"></p>
+        </form>
 
-        <!-- Help & Support -->
-        <div class="flex items-center justify-between gap-12 flex-wrap text-xs text-slate-500 dark:text-slate-400 font-mono">
-          <span>Need assistance? Reach out to support@nadhebe.com</span>
-          <a href="/perch" class="text-brand-cyan hover:underline font-bold" aria-label="Return to product home">
-            Return to Perchboard →
-          </a>
+        <div class="mt-24 pt-16 border-t border-[#E8E2D5] dark:border-[#22252E] flex items-center justify-between gap-12 flex-wrap text-xs text-slate-500 dark:text-slate-400 font-mono">
+          <span>Need help? <a href="mailto:support@nadhebe.com" class="text-brand-cyan hover:underline">support@nadhebe.com</a></span>
+          <a href="/perch/terms/" class="hover:underline">Terms of sale & refunds</a>
         </div>
-
       </div>
-
     </div>
   </div>
 </BaseLayout>
 
-<!-- Extract Transaction Reference from Query Parameters -->
 <script is:inline>
-  function initWelcomePage() {
-    const params = new URLSearchParams(window.location.search);
-    const txnId = params.get('_ptxn') || params.get('transaction_id') || params.get('checkout_id');
-    const txnEl = document.getElementById('txn-reference-code');
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    var params = new URLSearchParams(window.location.search);
+    var txnId = params.get('_ptxn') || params.get('transaction_id') || '';
+    var tries = 0;
 
-    if (txnEl) {
-      if (txnId) {
-        txnEl.textContent = txnId;
-      } else {
-        txnEl.textContent = 'Sandbox Demo Submission';
+    function setIcon(kind) {
+      var icon = $('order-icon');
+      if (kind === 'ok') {
+        icon.className = 'w-48 h-48 rounded-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl font-bold shrink-0';
+        icon.textContent = '✓';
+      } else if (kind === 'mail') {
+        icon.className = 'w-48 h-48 rounded-16 bg-amber-500/10 border border-amber-500/20 text-amber-600 flex items-center justify-center text-2xl font-bold shrink-0';
+        icon.textContent = '✉';
       }
     }
-  }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWelcomePage);
-  } else {
-    initWelcomePage();
-  }
-  document.addEventListener('astro:page-load', initWelcomePage);
+    function show(id) { $(id).classList.remove('hidden'); }
+
+    function poll() {
+      fetch('/api/perch/order?txn=' + encodeURIComponent(txnId), { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.status === 'ready') {
+            setIcon('ok');
+            $('order-eyebrow').textContent = 'Payment confirmed';
+            $('order-message').textContent = 'Your lifetime license is ready. Download Perchboard and paste this key in Settings → License.';
+            $('license-key').value = data.licenseKey;
+            $('download-installer-btn').href = data.downloadUrl;
+            $('email-note').textContent = data.email ? 'We also emailed your key and download link to ' + data.email + '.' : '';
+            show('license-ready');
+            show('install-steps');
+          } else if (data.status === 'pending' && tries++ < 30) {
+            setTimeout(poll, tries < 10 ? 2000 : 4000);
+          } else if (data.status === 'refunded') {
+            setIcon('mail');
+            $('order-eyebrow').textContent = 'Order refunded';
+            $('order-message').textContent = 'This order was refunded, so its license is no longer active. Questions? Write to support@nadhebe.com.';
+          } else {
+            // Taking longer than usual, or this page link has expired: the email is on its way.
+            setIcon('mail');
+            $('order-eyebrow').textContent = 'Check your inbox';
+            $('order-message').textContent = data.status === 'expired'
+              ? 'For your security, keys are only shown here for 30 days. Use the form below and we will email your license again.'
+              : 'Your payment went through and your license key and download link are being emailed to you. If nothing arrives within 10 minutes, check spam or resend below.';
+            show('install-steps');
+          }
+        })
+        .catch(function () {
+          if (tries++ < 30) setTimeout(poll, 4000);
+        });
+    }
+
+    if (txnId) {
+      $('txn-reference-code').textContent = txnId;
+      show('order-block');
+      poll();
+    } else {
+      show('lookup-intro');
+    }
+
+    $('copy-key-btn').addEventListener('click', function () {
+      var input = $('license-key');
+      input.select();
+      (navigator.clipboard ? navigator.clipboard.writeText(input.value) : Promise.reject())
+        .catch(function () { document.execCommand('copy'); })
+        .finally(function () {
+          $('copy-key-btn').textContent = 'Copied';
+          setTimeout(function () { $('copy-key-btn').textContent = 'Copy'; }, 1800);
+        });
+    });
+
+    $('resend').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = $('resend-email').value.trim();
+      var status = $('resend-status');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        status.textContent = 'Please enter the email you used at checkout.';
+        return;
+      }
+      status.textContent = 'Sending…';
+      fetch('/api/perch/resend', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { status.textContent = d.message || 'If that email bought Perchboard, the license is on its way.'; })
+        .catch(function () { status.textContent = 'Could not send right now. Please try again or email support@nadhebe.com.'; });
+    });
+  })();
 </script>
+
+<style>
+  .btn-perch-primary {
+    background: #0284C7;
+    color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn-perch-primary:hover {
+    background: #0369A1;
+    transform: translateY(-1px);
+  }
+</style>

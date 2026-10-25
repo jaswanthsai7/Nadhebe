@@ -1,4 +1,6 @@
-export interface Env {
+import { handlePerch, type PerchEnv } from './worker/perch';
+
+export interface Env extends PerchEnv {
   ASSETS: Fetcher;
   AI: {
     run: (model: string, input: any) => Promise<any>;
@@ -315,6 +317,12 @@ export default {
     // 301 Legacy Route: /tools/google-flow-storyboard-studio-overview -> /tutorials/google-flow-storyboard-studio-guide/
     if (url.pathname === '/tools/google-flow-storyboard-studio-overview' || url.pathname === '/tools/google-flow-storyboard-studio-overview/') {
       return Response.redirect('https://nadhebe.com/tutorials/google-flow-storyboard-studio-guide/', 301);
+    }
+
+    // Perchboard sales: Paddle webhook, order lookup, licensed download, activation, waitlist
+    if (url.pathname.startsWith('/api/')) {
+      const perchResponse = await handlePerch(request, env, url);
+      if (perchResponse) return perchResponse;
     }
 
     // Route: /api/analyze-site (CONSUMES ZERO AI NEURONS - purely deterministic)
