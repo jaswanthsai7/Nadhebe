@@ -23,3 +23,22 @@ Webhook URL: `https://nadhebe.com/api/paddle/webhook`, events `transaction.compl
 
 Go live: `PUBLIC_PADDLE_ENV=production` in `.env`, `PADDLE_ENV = "production"` in `wrangler.toml`, live secrets, rebuild, deploy.
 Debug: `npx wrangler tail` (lines start with `[perch]`).
+
+## Shipping a new version (installer + in-app updates)
+The app checks `https://nadhebe.com/api/perch/update/latest.yml` (electron-updater generic feed, set in the app's
+`package.json` `build.publish`). `latest.yml` is public; the installer it names is only served when the request
+carries a key that is active on that computer (`X-Perch-Key` / `X-Perch-Device`, same rule as `/activate`).
+Downloads are full files only (the app sets `disableDifferentialDownload`), so no blockmap upload is needed.
+
+1. In the app repo bump `version` in `package.json` (e.g. 1.0.1), then `npm run package:win`.
+   It writes `release/Perchboard-Setup-1.0.1.exe` and `release/latest.yml`.
+2. Upload, from the app repo (installer first, `latest.yml` last so no one is pointed at a missing file):
+   ```
+   npx wrangler r2 object put perchboard-downloads/updates/Perchboard-Setup-1.0.1.exe --file=release/Perchboard-Setup-1.0.1.exe --remote
+   npx wrangler r2 object put perchboard-downloads/Perchboard-Setup.exe --file=release/Perchboard-Setup-1.0.1.exe --remote
+   npx wrangler r2 object put perchboard-downloads/updates/latest.yml --file=release/latest.yml --content-type=text/yaml --remote
+   ```
+   (`wrangler` must run with this repo's `wrangler.toml` account; run the commands from the Nadhebe folder with full paths if needed.)
+3. Check: `curl -s https://nadhebe.com/api/perch/update/latest.yml` shows the new version.
+4. Every new build has a new hash, so antivirus reputation starts from zero for it: sign it before upload once a code
+   signing certificate is set up, and resubmit unsigned builds to Microsoft/McAfee as false positives.

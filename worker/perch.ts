@@ -390,20 +390,58 @@ async function download(url: URL, env: PerchEnv): Promise<Response> {
   const name = env.PERCH_INSTALLER_KEY || 'Perchboard-Setup.exe';
   if (env.PERCH_DOWNLOADS) {
     const obj = await env.PERCH_DOWNLOADS.get(name);
-    if (obj) {
-      return new Response(obj.body, {
-        headers: {
-          'Content-Type': 'application/vnd.microsoft.portable-executable',
-          'Content-Disposition': `attachment; filename="${name.split('/').pop()}"`,
-          'Content-Length': String(obj.size),
-          ETag: obj.httpEtag,
-          'Cache-Control': 'private, no-store',
-        },
-      });
-    }
+    if (obj) return fileResponse(obj, 'Perchboard-Setup.exe');
   }
   if (env.PERCH_DOWNLOAD_URL) return Response.redirect(env.PERCH_DOWNLOAD_URL, 302);
   return notReady('Installer download');
+}
+
+/**
+ * Streams an R2 object as a plain download. octet-stream + no-transform keeps
+ * Cloudflare from compressing it (which would drop Content-Length, so browsers
+ * could not tell when the file had fully arrived).
+ */
+function fileResponse(obj: R2Object, filename: string): Response {
+  return new Response(obj.body, {
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      'Content-Disposition': `attachment; filename="${filename}"`,
+      'Content-Length': String(obj.size),
+      ETag: obj.httpEtag,
+      'Cache-Control': 'private, no-store, no-transform',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  });
+}
+
+// ── app updates (electron-updater generic feed) ───────────────────────────
+// R2 layout: updates/latest.yml and updates/Perchboard-Setup-<version>.exe, both written
+// by `npm run package:win` in the app repo (see docs/PERCHBOARD_SALES_SETUP.md).
+// latest.yml is public (it only names the version); the installer is only served to a
+// key that is active on the requesting computer, the same rule as /activate.
+
+const UPDATE_FILE_RE = /^Perchboard-Setup-\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?\.exe$/;
+
+async function update(request: Request, env: PerchEnv, file: string): Promise<Response> {
+  if (!env.PERCH_DOWNLOADS) return notReady('Updates');
+  if (file === 'latest.yml') {
+    const obj = await env.PERCH_DOWNLOADS.get('updates/latest.yml');
+    if (!obj) return new Response('No update published.', { status: 404 });
+    return new Response(obj.body, {
+      headers: { 'Content-Type': 'text/yaml; charset=utf-8', 'Cache-Control': 'no-store' },
+    });
+  }
+  if (!UPDATE_FILE_RE.test(file)) return new Response('Not found.', { status: 404 });
+  if (!env.PERCH_KV) return notReady('License storage');
+  const key = normalizeKey(request.headers.get('X-Perch-Key') || '');
+  const device = request.headers.get('X-Perch-Device') || '';
+  const lic = /^PERCH(-[0-9A-Z]{5}){4}$/.test(key) && DEVICE_RE.test(device) ? await findLicense(env, key) : null;
+  if (!lic || lic.revoked || lic.device !== device) {
+    return new Response('Updates need an active Perchboard license on this computer.', { status: 403 });
+  }
+  const obj = await env.PERCH_DOWNLOADS.get(`updates/${file}`);
+  if (!obj) return new Response('Not found.', { status: 404 });
+  return fileResponse(obj, file);
 }
 
 async function resend(request: Request, env: PerchEnv): Promise<Response> {
@@ -609,6 +647,7 @@ export async function handlePerch(request: Request, env: PerchEnv, url: URL): Pr
     if (p === '/api/paddle/webhook' && m === 'POST') return await webhook(request, env);
     if (p === '/api/perch/order' && m === 'GET') return await order(url, env);
     if (p === '/api/perch/download' && m === 'GET') return await download(url, env);
+    if (p.startsWith('/api/perch/update/') && m === 'GET') return await update(request, env, decodeURIComponent(p.slice('/api/perch/update/'.length)));
     if (p === '/api/perch/resend' && m === 'POST') return await resend(request, env);
     if (p === '/api/perch/activate' && m === 'POST') return await activate(request, env);
     if (p === '/api/perch/move' && (m === 'POST' || m === 'GET')) return await move(request, url, env);
