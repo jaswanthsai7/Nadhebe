@@ -100,7 +100,7 @@ For command hooks, Claude Code interprets the process exit code together with an
 | **Other nonzero exit codes** | Plain text or no output | **Non-blocking error:** the call continues unless the hook sets `onFailure: "block"`. |
 | **Other nonzero exit codes** | Valid JSON | The exit code is ignored and the JSON fields decide, unless the hook sets `onFailure: "block"`, in which case the run counts as a failure and blocks. |
 
-Exit code `1`, the conventional Unix failure code, is a **non-blocking** error. If a hook is meant to enforce a policy, use `exit 2` or a JSON denial.
+By default, exit code `1`, the conventional Unix failure code, is a **non-blocking** error (with `onFailure: "block"` it counts as a failure and blocks). If a hook is meant to enforce a policy, use `exit 2` or a JSON denial.
 
 The effect of exit code `2` depends on the hook event. On `PostToolUse` it can't block anything, because the tool has already run; it only shows stderr to Claude. The blocking examples in this article concern `PreToolUse`.
 
@@ -333,7 +333,7 @@ Older examples sometimes return a top-level `"decision": "approve"` or `"block"`
 
 1. **Distinguish pass-through from approval.** Exit code `0` with no decision output does not approve a tool call; it leaves the decision to Claude Code's normal permission flow.
 2. **Know what `"allow"` can't do.** A hook's allow only skips the prompt. Deny and ask rules in settings are still evaluated.
-3. **Use a documented blocking mechanism.** For `PreToolUse`, exit code `2` or a structured JSON denial blocks a tool call. Exit code `1` and other nonzero codes do not.
+3. **Use a documented blocking mechanism.** For `PreToolUse`, exit code `2` or a structured JSON denial blocks a tool call. By default, exit code `1` and other nonzero codes do not; they block only when the hook sets `"onFailure": "block"`.
 4. **Fail closed when a guardrail can't run.** Handle unreadable input inside the script, and set `"onFailure": "block"` (v2.1.295+) so a missing, crashing, or timed-out guardrail blocks instead of passing through.
 5. **Treat sample blacklists as examples, not complete protection.** Command-string matching is bypassable. For hard allow/deny rules, use the permission system; for enforcement that doesn't depend on command text, use sandboxing. Test dangerous edge cases.
 6. **Verify the current reference before publishing.** Hook fields and behaviors evolve quickly. Consult the [Claude Code Hooks Reference](https://code.claude.com/docs/en/hooks) and [permissions documentation](https://code.claude.com/docs/en/permissions).
