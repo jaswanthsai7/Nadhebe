@@ -180,14 +180,32 @@ html.dark {
   }
   .prose-article th {
     @apply bg-surface2 px-16 py-12 text-left font-semibold text-ink whitespace-nowrap dark:bg-surface2-dark dark:text-ink-dark;
+    vertical-align: top;
   }
 
   .prose-article td {
     @apply border-t border-border px-16 py-12 text-ink2 dark:border-border-dark dark:text-ink2-dark;
+    vertical-align: top;
   }
-  .prose-article td:nth-child(2) {
-    white-space: normal;
-    min-width: 180px;
+  .prose-article table th:first-child,
+  .prose-article table td:first-child {
+    white-space: nowrap !important;
+    min-width: 105px;
+    width: 105px;
+  }
+  .prose-article table th:nth-child(2),
+  .prose-article table td:nth-child(2) {
+    white-space: nowrap !important;
+    min-width: 135px;
+    width: 135px;
+  }
+  .prose-article table td:first-child code,
+  .prose-article table td:nth-child(2) code {
+    white-space: nowrap !important;
+    display: inline-block;
+  }
+  .prose-article table code {
+    word-break: break-word !important;
   }
   .prose-article code {
     white-space: nowrap !important;
