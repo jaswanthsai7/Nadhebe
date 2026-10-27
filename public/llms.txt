@@ -4,18 +4,10 @@
 
 ## Content Directory
 
-### Agent Skills
-
-- [Generative Engine Optimization (GEO)](https://nadhebe.com/skills/ai-seo/): Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.
-- [Technical Blog Engine & Verification Pipeline](https://nadhebe.com/skills/blog-generator/): Generate production-ready, expert-level technical AI engineering articles with GEO/AEO direct answer blocks, factual checks, and build verification.
-- [Topical Authority & Content Clustering](https://nadhebe.com/skills/content-cluster/): Map topical authority architectures, pillar articles, and supporting cluster pages to build search dominance without keyword cannibalization.
-- [Helpful Content & E-E-A-T Quality Auditor](https://nadhebe.com/skills/content-quality-auditor/): Audit technical articles for Google Helpful Content guidelines, technical SEO, GEO/AEO answer extractability, factual accuracy, and publishing readiness.
-- [Anchor Distribution & Graph Linker](https://nadhebe.com/skills/internal-linking/): Design, audit, and optimize internal linking hierarchies, anchor text distribution, and topic cluster equity.
-- [Technical Keyword Research & Intent Mapping](https://nadhebe.com/skills/keyword-research/): Perform developer-focused keyword research, search intent mapping, and conversational AEO query discovery.
-- [Schema.org Rich Structured Data Engine](https://nadhebe.com/skills/schema-generator/): Generate and validate Schema.org JSON-LD structured data (Article, TechArticle, FAQPage, BreadcrumbList, WebApplication) for Google rich results.
-
 ### Tutorials
 
+- [Troubleshooting Cloudflare Workers Error 1102: 'Worker CPU Time Limit Exceeded' Root Causes & Fixes](https://nadhebe.com/tutorials/cloudflare-workers-error-1102-cpu-limit-troubleshooting/): Resolve Cloudflare Workers Error 1102 (Worker CPU Time Limit Exceeded). Understand V8 isolate CPU time vs wall-clock latency, debug with wrangler tail, and eliminate ReDoS and crypto bottlenecks.
+- [Product Quantization (PQ) for Vector Databases: Compress 1,536-D Embeddings by 95% with Asymmetric Distance Computation](https://nadhebe.com/tutorials/vector-embeddings-product-quantization-interactive-guide/): Master Product Quantization (PQ) for high-dimensional vector search. Learn sub-space decomposition, Voronoi codebook training, and Asymmetric Distance Computation (ADC) with an interactive visualizer.
 - [How to Build a Custom MCP Server in TypeScript: Complete Production Guide | Nadhebe](https://nadhebe.com/tutorials/build-custom-mcp-server-typescript/): Build and test a custom Model Context Protocol (MCP) server in TypeScript from scratch. Includes verified ESM configuration, Zod validation, STDIO debugging, and Claude Desktop integration.
 - [How to Block ChatGPT Ads and Promos in Chrome and Brave (Step-by-Step) | Nadhebe](https://nadhebe.com/tutorials/how-to-block-chatgpt-ads-promos-chrome-brave/): Step-by-step walkthrough to block ChatGPT Plus upsell banners and partner promo cards in Google Chrome and Brave Browser using a private Manifest V3 extension.
 - [Fine-Tuning DeepSeek-R1 Distill with Unsloth on Consumer GPUs: Complete Walkthrough](https://nadhebe.com/tutorials/fine-tune-deepseek-r1-unsloth-gpu/): Step-by-step guide to fine-tuning DeepSeek-R1 Distill reasoning models on a single 16GB or 24GB GPU using Unsloth 2x faster kernels, QLoRA, and GGUF export.
@@ -30,7 +22,7 @@
 - [Running Flux.1 Local Image Generation on Consumer GPUs](https://nadhebe.com/tutorials/run-flux-1-locally-consumer-gpu/): Developer tutorial to run Flux.1 open diffusion models locally on consumer GPUs using ComfyUI. Covers Schnell vs Dev, NF4 quantization, 8GB VRAM offloading, and LoRA setup.
 - [Optimizing KV Cache Utilization in vLLM Production Clusters](https://nadhebe.com/tutorials/vllm-kv-cache-optimization-guide/): Production tutorial to optimize KV cache utilization in vLLM. Covers PagedAttention virtual memory mapping, memory fragmentation fixes, and prefix caching CLI configs.
 - [Authoring Custom Agent Skills and Packaging MCP Bundles (.mcpb) for IDE Integration](https://nadhebe.com/tutorials/authoring-custom-agent-skills-mcp-bundles/): A step-by-step tutorial on building custom SKILL.md playbooks and packaging zero-dependency Model Context Protocol Bundles (.mcpb) for AI IDEs.
-- [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide/): A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.
+- [Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events](https://nadhebe.com/tutorials/claude-code-hooks-guide/): A practical guide to Claude Code hooks, permission decisions, exit-code semantics, and safer PreToolUse guardrails.
 - [Claude Code Troubleshooting Guide: Fixing OAuth Errors, Exit Code 2, and Rate Limits](https://nadhebe.com/tutorials/claude-code-troubleshooting-guide/): A comprehensive troubleshooting guide resolving Claude Code CLI errors, including OAuth token refresh loops, exit code 2 script failures, and API rate limit freezes.
 - [Cloudflare Workers AI Code Mode: Building Edge Agents with Stateless MCP Handlers](https://nadhebe.com/tutorials/cloudflare-workers-ai-code-mode-mcp/): Discover Cloudflare Workers AI Code Mode, replacing verbose JSON tool calling with programmatic executable code blocks for stateless MCP handlers.
 - [Cursor MCP Not Working: Troubleshooting Connection, Path, and JSON Configuration Errors](https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting/): Fix Cursor Model Context Protocol (MCP) server issues, including failed connection statuses, missing node environment paths, and JSON syntax errors.
@@ -70,6 +62,7 @@
 
 ### Comparisons
 
+- [Embedded Vector Search Compared: SQLite-vec vs USearch vs LanceDB vs HNSWLib](https://nadhebe.com/comparisons/embedded-vector-search-sqlite-vec-usearch-lancedb-hnswlib/): A technical comparison of embedded vector search engines. Compare HNSW memory overhead, disk-native Apache Arrow columnar storage, and SIMD brute-force query latency.
 - [ChatGPT Ad Blocker vs uBlock Origin vs Brave Shields: Why Standard Blockers Fail on AI SPAs | Nadhebe](https://nadhebe.com/comparisons/chatgpt-ad-blocker-vs-ublock-origin-brave-shields/): Compare ChatGPT Ad & Promo Blocker against uBlock Origin and Brave Shields. Learn why network-level filters miss React DOM ads and how to fix them.
 - [Kokoro TTS vs ElevenLabs: Self-Hosting Ultra-Realistic 82M Voice AI for $0](https://nadhebe.com/comparisons/kokoro-tts-vs-elevenlabs/): Compare Kokoro TTS 82M open-source speech model with ElevenLabs. Benchmark latency, audio quality, self-hosting Docker setup, and cloud API cost savings.
 - [Mem0 vs GraphRAG vs Vector RAG: Building Production Long-Term Memory for AI Agents](https://nadhebe.com/comparisons/mem0-vs-graphrag-vs-vector-rag/): Compare Mem0, Microsoft GraphRAG, and traditional Vector RAG for AI agent memory. Benchmark multi-hop reasoning, latency, update costs, and state persistence.
@@ -108,6 +101,8 @@
 
 ### Guides
 
+- [Inside Pollen Robotics' Microduck: 15-Servo Biped Architecture, 50 Hz RL Policies, and Sim2Real Transfer](https://nadhebe.com/guides/pollen-robotics-microduck-robot-anatomy/): An exhaustive technical deep dive into Pollen Robotics' Microduck biped robot. Explore its 15-servo physical anatomy, 7-daemon Rust architecture, 61-dimensional PPO policy loop, and MuJoCo sim2real pipeline.
+- [Inside SQLite's Write-Ahead Log: Frame Headers, Checkpointing, and Concurrency Anatomy](https://nadhebe.com/guides/sqlite-write-ahead-log-wal-architecture/): A binary-level engineering anatomy of SQLite's Write-Ahead Log (WAL). Explore the 32-byte WAL header, 24-byte frame serialization, the shared-memory wal-index (-shm), and checkpoint starvation prevention.
 - [ChatGPT Ad Blocker: How to Remove Ads, Upsells, and Promo Cards in Chrome & Brave | Nadhebe](https://nadhebe.com/guides/chatgpt-ad-blocker-chrome-brave-guide/): Block intrusive ChatGPT Plus/Pro upgrade banners, sponsored partner widgets, and promo cards in Chrome and Brave with a lightweight, private Manifest V3 extension.
 - [DeepSeek API Pricing Guide: V3, R1 Token Rates, and Cost Comparison (2026)](https://nadhebe.com/guides/deepseek-api-pricing-guide/): Complete guide to DeepSeek API pricing. Detailed breakdown of DeepSeek-V3, DeepSeek-R1 token rates, prompt caching discounts, and costs vs OpenAI.
 - [GitHub Copilot Pricing Guide: Free, Individual, Business, and Enterprise Plans (2026)](https://nadhebe.com/guides/github-copilot-pricing-guide/): A complete guide to GitHub Copilot pricing tiers. Breakdown of Copilot Free, Individual $10/mo, Business $19/mo, and Enterprise $39/mo model features.
@@ -156,6 +151,16 @@
 - [The Ultimate Architectural Guide to Instatic CMS](https://nadhebe.com/guides/instatic-cms-architecture-ultimate-guide/): A comprehensive developer guide exploring Instatic's Bun backend runtime, SQLite database engines, class compilation, and static site generation models.
 - [Enterprise Editorial Governance and Client Hand-offs with Instatic CMS](https://nadhebe.com/guides/instatic-enterprise-editorial-governance/): How agency teams use Instatic CMS's built-in role management, audit logging, and layout locking to safely deliver editable websites to clients.
 - [Case Study: Migrating 25 Client Sites from Webflow to Self-Hosted Instatic](https://nadhebe.com/guides/webflow-to-instatic-migration-savings/): How a digital agency migrated 25 marketing websites from Webflow to self-hosted Instatic CMS, reducing hosting costs by 90% and increasing site speeds.
+
+### Agent Skills
+
+- [Generative Engine Optimization (GEO)](https://nadhebe.com/skills/ai-seo/): Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.
+- [Technical Blog Engine & Verification Pipeline](https://nadhebe.com/skills/blog-generator/): Generate production-ready, expert-level technical AI engineering articles with GEO/AEO direct answer blocks, factual checks, and build verification.
+- [Topical Authority & Content Clustering](https://nadhebe.com/skills/content-cluster/): Map topical authority architectures, pillar articles, and supporting cluster pages to build search dominance without keyword cannibalization.
+- [Helpful Content & E-E-A-T Quality Auditor](https://nadhebe.com/skills/content-quality-auditor/): Audit technical articles for Google Helpful Content guidelines, technical SEO, GEO/AEO answer extractability, factual accuracy, and publishing readiness.
+- [Anchor Distribution & Graph Linker](https://nadhebe.com/skills/internal-linking/): Design, audit, and optimize internal linking hierarchies, anchor text distribution, and topic cluster equity.
+- [Technical Keyword Research & Intent Mapping](https://nadhebe.com/skills/keyword-research/): Perform developer-focused keyword research, search intent mapping, and conversational AEO query discovery.
+- [Schema.org Rich Structured Data Engine](https://nadhebe.com/skills/schema-generator/): Generate and validate Schema.org JSON-LD structured data (Article, TechArticle, FAQPage, BreadcrumbList, WebApplication) for Google rich results.
 
 ### Tool Reviews
 

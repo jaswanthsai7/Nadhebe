@@ -1,5 +1,45 @@
 [
   {
+    "title": "Troubleshooting Cloudflare Workers Error 1102: 'Worker CPU Time Limit Exceeded' Root Causes & Fixes",
+    "description": "Resolve Cloudflare Workers Error 1102 (Worker CPU Time Limit Exceeded). Understand V8 isolate CPU time vs wall-clock latency, debug with wrangler tail, and eliminate ReDoS and crypto bottlenecks.",
+    "url": "https://nadhebe.com/tutorials/cloudflare-workers-error-1102-cpu-limit-troubleshooting/",
+    "category": "Tutorials",
+    "tags": [],
+    "pubDate": "2026-10-28T00:00:00.000Z"
+  },
+  {
+    "title": "Product Quantization (PQ) for Vector Databases: Compress 1,536-D Embeddings by 95% with Asymmetric Distance Computation",
+    "description": "Master Product Quantization (PQ) for high-dimensional vector search. Learn sub-space decomposition, Voronoi codebook training, and Asymmetric Distance Computation (ADC) with an interactive visualizer.",
+    "url": "https://nadhebe.com/tutorials/vector-embeddings-product-quantization-interactive-guide/",
+    "category": "Tutorials",
+    "tags": [],
+    "pubDate": "2026-10-28T00:00:00.000Z"
+  },
+  {
+    "title": "Embedded Vector Search Compared: SQLite-vec vs USearch vs LanceDB vs HNSWLib",
+    "description": "A technical comparison of embedded vector search engines. Compare HNSW memory overhead, disk-native Apache Arrow columnar storage, and SIMD brute-force query latency.",
+    "url": "https://nadhebe.com/comparisons/embedded-vector-search-sqlite-vec-usearch-lancedb-hnswlib/",
+    "category": "Comparisons",
+    "tags": [],
+    "pubDate": "2026-10-28T00:00:00.000Z"
+  },
+  {
+    "title": "Inside Pollen Robotics' Microduck: 15-Servo Biped Architecture, 50 Hz RL Policies, and Sim2Real Transfer",
+    "description": "An exhaustive technical deep dive into Pollen Robotics' Microduck biped robot. Explore its 15-servo physical anatomy, 7-daemon Rust architecture, 61-dimensional PPO policy loop, and MuJoCo sim2real pipeline.",
+    "url": "https://nadhebe.com/guides/pollen-robotics-microduck-robot-anatomy/",
+    "category": "Guides",
+    "tags": [],
+    "pubDate": "2026-10-28T00:00:00.000Z"
+  },
+  {
+    "title": "Inside SQLite's Write-Ahead Log: Frame Headers, Checkpointing, and Concurrency Anatomy",
+    "description": "A binary-level engineering anatomy of SQLite's Write-Ahead Log (WAL). Explore the 32-byte WAL header, 24-byte frame serialization, the shared-memory wal-index (-shm), and checkpoint starvation prevention.",
+    "url": "https://nadhebe.com/guides/sqlite-write-ahead-log-wal-architecture/",
+    "category": "Guides",
+    "tags": [],
+    "pubDate": "2026-10-28T00:00:00.000Z"
+  },
+  {
     "title": "Generative Engine Optimization (GEO)",
     "description": "Optimize technical content for AI search engines, GEO, and LLM citations across Google AI Overviews, Perplexity, ChatGPT Search, Claude, and Gemini.",
     "url": "https://nadhebe.com/skills/ai-seo/",
@@ -491,7 +531,7 @@
   },
   {
     "title": "Claude Code Hooks Mastery: Automating PreToolUse, Guardrails, and Lifecycle Events",
-    "description": "A complete guide to configuring synchronous shell hooks in settings.json, enforcing exit code 2 guardrails, and intercepting dangerous tool calls in Claude Code.",
+    "description": "A practical guide to Claude Code hooks, permission decisions, exit-code semantics, and safer PreToolUse guardrails.",
     "url": "https://nadhebe.com/tutorials/claude-code-hooks-guide/",
     "category": "Tutorials",
     "tags": [

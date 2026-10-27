@@ -14,6 +14,21 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -1287,6 +1302,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/comparisons/embedded-vector-search-sqlite-vec-usearch-lancedb-hnswlib</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/comparisons/fable-5-vs-gpt-5-5-comparison</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -1422,6 +1455,9 @@
     <loc>https://nadhebe.com/comparisons</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-vs-ublock-hero.webp</image:loc>
@@ -2336,6 +2372,12 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -2685,6 +2727,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/pollen-robotics-microduck-robot-anatomy</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/runpod-pricing-explained</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2757,6 +2817,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/sqlite-write-ahead-log-wal-architecture</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/webflow-to-instatic-migration-savings</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2795,19 +2873,19 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/deepseek-api-pricing-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/how-to-block-chatgpt-ads-promos-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-vs-ublock-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/news-hero.webp</image:loc>
@@ -2822,13 +2900,28 @@
       <image:loc>https://nadhebe.com/images/best-practices-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/github-copilot-pricing-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/journal</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
@@ -3350,16 +3443,16 @@
       <image:loc>https://nadhebe.com/images/gpt-5-6-news.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/deepseek-api-pricing-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/github-copilot-pricing-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4037,16 +4130,16 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/deepseek-api-pricing-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/github-copilot-pricing-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/grok-xai-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4575,6 +4668,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/tutorials/cloudflare-workers-error-1102-cpu-limit-troubleshooting</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/tutorials/cursor-mcp-not-working-troubleshooting</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -4971,6 +5082,12 @@
     <loc>https://nadhebe.com/tutorials</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
@@ -5391,6 +5508,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/tutorials-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/tutorials/vector-embeddings-product-quantization-interactive-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
