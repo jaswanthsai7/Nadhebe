@@ -24,7 +24,7 @@ Built for people who copy and paste all day: writers, developers, designers, stu
 • Feels at home on Windows 11: light, dark and system themes, smooth motion and a tiny memory footprint.
 • Starts with Windows if you want it to, quietly in the tray.
 
-Perchboard is free to download. To unlock it, buy a one-time license key at https://nadhebe.com/perch and enter it in the app; one key activates one PC. No subscription, no account, no ads.
+Perchboard is a one-time purchase. No subscription, no license keys, no ads. Buy it once and use it on up to 10 Windows PCs signed in with your Microsoft account.
 
 ## Features (Store "Product features" list, up to 20, ≤ 200 characters each)
 1. Floating clipboard shelf on the right, left or top edge of your screen
@@ -48,10 +48,12 @@ screen edge
 ## Category
 Productivity (subcategory: none required). Secondary category, if offered: Utilities & tools.
 
-## Pricing
-**Free** (Partner Center → Pricing and availability → Base price: Free). The app is unlocked with a license key bought on nadhebe.com (Paddle, $9.99 one-time, one PC per key), exactly like the website download. Do not turn on a Store free trial.
-
-Store policy note: desktop (Win32/MSIX) apps that are not games may sell their own licenses with a third-party payment system, so a free Store download unlocked by a nadhebe.com key is allowed. Say so plainly in the description (done above) so buyers are not surprised.
+## Pricing (Partner Center → Pricing and availability)
+- Base price: **USD 14.99** (one-time). Partner Center converts it for other markets.
+- Launch sale: Pricing and availability → **Sales → Add a sale**: price **USD 9.99**, all markets, with a start and an **end date** (for example 30 days). When it ends, add a new sale to renew it.
+- Free trial: **No free trial.**
+- Microsoft bills and licenses the app. Buyers can install it on up to 10 PCs with their Microsoft account. The Store version has no license key, no Buy button and no self-updater; the Store delivers updates.
+- The website version (nadhebe.com, Paddle, one key per PC) is separate and unchanged.
 
 ## URLs and contact
 - Privacy policy: https://nadhebe.com/privacy-policy/ (checked: page exists). Required because the app has internet access (runFullTrust).
@@ -60,7 +62,7 @@ Store policy note: desktop (Win32/MSIX) apps that are not games may sell their o
 - Copyright: © 2026 Perchboard
 
 ## Age rating questionnaire (Partner Center → Age ratings)
-Answer "No" to violence, sexual content, gambling, drugs, language and user-to-user communication. The app does not share location, has no user-generated content shared with others. If asked about purchases, answer Yes: the app links to nadhebe.com to buy a license key (the questionnaire calls this digital purchases). Expected result: rated for everyone (IARC 3+ / E).
+Answer "No" to violence, sexual content, gambling, drugs, language and user-to-user communication. The app does not share location, has no user-generated content shared with others. There are no in-app purchases (the Store sells the app itself). Expected result: rated for everyone (IARC 3+ / E).
 
 ## Screenshots (at least 1, up to 10; PNG, 1366×768 or larger, 16:9 recommended, e.g. 1920×1080)
 Take them on a clean Windows 11 desktop with a calm wallpaper, display scaling 100 %, and real-looking but non-personal clipboard items.
@@ -73,6 +75,4 @@ Take them on a clean Windows 11 desktop with a calm wallpaper, display scaling 1
 Optional: a 1920×1080 "Store hero" image (Partner Center → Store logos / Promotional art); the website's perchboard-premium-poster.jpg is a good source.
 
 ## Notes for the "Notes for certification" field
-Paste this, with a fresh test key filled in. Create the key at submission time and put it ONLY in Partner Center, never in a file in git. It must be a key that has not been activated on any PC yet, because one key works on one PC.
-
-> Perchboard is a packaged Win32 (Electron) desktop app using runFullTrust, which is needed to read the clipboard and paste into other apps. It is unlocked with a license key bought on our website (https://nadhebe.com/perch); this is a free download with external licensing for a non-game desktop app. On first launch an activation window appears. Test license key: PERCH-XXXXX-XXXXX-XXXXX-XXXXX. Paste it and click Activate (needs internet once). After that the app lives in the system tray and on the screen edge: move the mouse to the right edge of the screen, or press Alt+C, to open the clipboard shelf. Updates come from the Store; the app does not update itself.
+> Perchboard is a packaged Win32 (Electron) desktop app using runFullTrust, which is needed to read the clipboard and paste into other apps. No account, sign-in or license key is needed. After launch it lives in the system tray and on the screen edge: move the mouse to the right edge of the screen, or press Alt+C, to open the clipboard shelf. Updates come from the Store; the app does not update itself.
