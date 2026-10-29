@@ -1,5 +1,55 @@
 [
   {
+    "title": "KV Cache Optimization: Production Inference Cost Engineering & Memory Scaling | Nadhebe",
+    "description": "A deep systems engineering guide to KV cache optimization. Master PagedAttention, RadixAttention prefix caching, FP8 quantization, and inference cost reduction.",
+    "url": "https://nadhebe.com/best-practices/kv-cache-optimization-llm-inference-cost-engineering/",
+    "category": "Best Practices",
+    "tags": [
+      "[\"kv-cache\", \"inference-optimization\", \"pagedattention\", \"vllm\", \"sglang\", \"gpu-memory\", \"llm-cost-reduction\", \"quantization\"]"
+    ],
+    "pubDate": "2026-10-30T00:00:00.000Z"
+  },
+  {
+    "title": "AI Semantic Firewalls: Production LLM Guardrails & Runtime Validation | Nadhebe",
+    "description": "A complete production engineering guide to AI guardrails and semantic firewalls. Implement multi-layered prompt injection defense and schema validation.",
+    "url": "https://nadhebe.com/best-practices/llm-guardrails-semantic-firewalls-production-guide/",
+    "category": "Best Practices",
+    "tags": [
+      "[\"guardrails\", \"semantic-firewall\", \"llm-safety\", \"prompt-injection\", \"nemo-guardrails\", \"llama-guard\", \"production-ai\", \"ai-security\"]"
+    ],
+    "pubDate": "2026-10-30T00:00:00.000Z"
+  },
+  {
+    "title": "AgentOps: Multi-Agent Observability, Distributed Tracing & Production Debugging | Nadhebe",
+    "description": "A complete guide to AgentOps for multi-agent systems. Master OpenTelemetry tracing, causal step debugging, failure loop interception, and cost attribution.",
+    "url": "https://nadhebe.com/guides/agentops-multi-agent-observability-debugging-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"agentops\", \"multi-agent\", \"observability\", \"debugging\", \"opentelemetry\", \"llm-monitoring\", \"production-ai\"]"
+    ],
+    "pubDate": "2026-10-30T00:00:00.000Z"
+  },
+  {
+    "title": "GraphRAG Implementation Guide: Hybrid Vector and Knowledge Graph Retrieval | Nadhebe",
+    "description": "A complete technical implementation guide for GraphRAG. Learn entity extraction, Leiden community detection, Cypher traversals, and hybrid vector fusion.",
+    "url": "https://nadhebe.com/guides/graphrag-implementation-vector-knowledge-graph-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"graphrag\", \"knowledge-graph\", \"vector-search\", \"rag\", \"neo4j\", \"retrieval-augmented-generation\", \"llm-pipelines\"]"
+    ],
+    "pubDate": "2026-10-30T00:00:00.000Z"
+  },
+  {
+    "title": "Pydantic AI Agent Framework: Production Architecture, Type Safety & Tool Orchestration | Nadhebe",
+    "description": "A comprehensive engineering guide to building production-ready, type-safe AI agents with Pydantic AI. Learn schema validation, dependency injection, and tool calling.",
+    "url": "https://nadhebe.com/guides/pydantic-ai-agent-framework-production-guide/",
+    "category": "Guides",
+    "tags": [
+      "[\"pydantic-ai\", \"agent-framework\", \"python\", \"type-safety\", \"structured-output\", \"llm-tools\"]"
+    ],
+    "pubDate": "2026-10-30T00:00:00.000Z"
+  },
+  {
     "title": "Troubleshooting Cloudflare Workers Error 1102: 'Worker CPU Time Limit Exceeded' Root Causes & Fixes",
     "description": "Resolve Cloudflare Workers Error 1102 (Worker CPU Time Limit Exceeded). Understand V8 isolate CPU time vs wall-clock latency, debug with wrangler tail, and eliminate ReDoS and crypto bottlenecks.",
     "url": "https://nadhebe.com/tutorials/cloudflare-workers-error-1102-cpu-limit-troubleshooting/",

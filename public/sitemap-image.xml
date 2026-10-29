@@ -14,6 +14,21 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
     </image:image>
     <image:image>
@@ -505,6 +520,12 @@
     <image:image>
       <image:loc>https://nadhebe.com/images/claude-cli-hero.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/best-practices/instatic-design-tokens-scaling</loc>
@@ -543,6 +564,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/best-practices/kv-cache-optimization-llm-inference-cost-engineering</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/speculative-decoding-vllm-sglang-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/best-practices/llm-api-cost-optimization</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -576,6 +615,24 @@
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/best-practices-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nadhebe.com/best-practices/llm-guardrails-semantic-firewalls-production-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -644,16 +701,22 @@
       <image:loc>https://nadhebe.com/images/structured-output-prompting-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/deepseek-r1-aws-vllm-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/mcp-server-vscode-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/category/best-practices</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/vector-database-chunking-hero.webp</image:loc>
@@ -783,6 +846,15 @@
     <loc>https://nadhebe.com/category/guides</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
@@ -1860,6 +1932,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/agentops-multi-agent-observability-debugging-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/ai-storyboarding-pre-production-workflows</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2313,6 +2403,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/graphrag-implementation-vector-knowledge-graph-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/generative-engine-optimization-geo-guide-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/grok-xai-pricing-guide</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2370,6 +2478,15 @@
     <loc>https://nadhebe.com/guides</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
@@ -2745,6 +2862,24 @@
     </image:image>
   </url>
   <url>
+    <loc>https://nadhebe.com/guides/pydantic-ai-agent-framework-production-guide</loc>
+    <image:image>
+      <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/generative-engine-optimization-geo-guide-hero.png</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://nadhebe.com/guides/runpod-pricing-explained</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
@@ -2789,13 +2924,13 @@
       <image:loc>https://nadhebe.com/images/speculative-decoding-vllm-sglang-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/self-hosting-llms-vs-api-cost-breakdown-hero.png</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/fp4-vs-fp8-vs-int4-quantization-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/runpod-pricing-explained-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -2873,19 +3008,19 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/news-hero.webp</image:loc>
@@ -2900,13 +3035,28 @@
       <image:loc>https://nadhebe.com/images/best-practices-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/custom-mcp-server-ts-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://nadhebe.com/journal</loc>
     <image:image>
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
@@ -3443,16 +3593,16 @@
       <image:loc>https://nadhebe.com/images/gpt-5-6-news.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/llm-guardrails-semantic-firewalls-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/kv-cache-optimization-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4130,16 +4280,16 @@
       <image:loc>https://nadhebe.com/logo.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/graphrag-implementation-hero.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://nadhebe.com/images/pydantic-ai-agent-framework-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/microduck-anatomy-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/sqlite-wal-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/chatgpt-ad-blocker-chrome-brave-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/deepseek-api-pricing-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
@@ -4676,13 +4826,13 @@
       <image:loc>https://nadhebe.com/images/cloudflare-worker-1102-hero.webp</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://nadhebe.com/images/agentops-multi-agent-observability-hero.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://nadhebe.com/images/deploy-remote-mcp-server-cloudflare-hero.webp</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://nadhebe.com/images/product-quantization-hero.webp</image:loc>
-    </image:image>
-    <image:image>
-      <image:loc>https://nadhebe.com/images/embedded-vector-comparison-hero.webp</image:loc>
     </image:image>
   </url>
   <url>
