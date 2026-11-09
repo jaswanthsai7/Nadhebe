@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '@/config';
+
+const title = 'Refund & Cancellation Policy — Nadhebe';
+const description = 'Nadhebe and Perchboard 14-day refund and cancellation policy, return terms, and Paddle Merchant of Record processing.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={`${SITE.url}/refund-policy/`}
+>
+  <div class="mx-auto max-w-4xl px-16 sm:px-24 py-48 sm:py-64" data-reveal>
+    <div class="glass-panel rounded-24 border border-border bg-surface/90 p-24 sm:p-48 shadow-medium dark:border-border-dark dark:bg-surface-dark/90">
+      <article class="prose-article">
+        <h1 class="font-display text-h1 font-bold tracking-tight text-ink dark:text-ink-dark mb-16">Refund &amp; Cancellation Policy</h1>
+        <p class="text-caption font-mono text-muted dark:text-muted-dark mb-32 border-b border-border/60 pb-16 dark:border-border-dark/60">
+          Last Updated: November 9, 2026 | Effective Date: August 16, 2026
+        </p>
+
+        <p class="lead text-body font-sans text-ink dark:text-ink-dark">
+          At <strong>Nadhebe</strong> (accessible via <code>https://nadhebe.com</code>), customer satisfaction is our top priority. We stand firmly behind the quality of our desktop utilities and software products, including <strong>Perchboard for Windows</strong>. This Refund &amp; Cancellation Policy outlines your rights and how refunds are issued.
+        </p>
+
+        <h2>1. 14-Day Money-Back Guarantee</h2>
+        <p>
+          We offer a straightforward, no-questions-asked <strong>14-day money-back guarantee</strong> on software license purchases (such as Perchboard lifetime licenses). If the software does not meet your expectations, encounters compatibility issues with your Windows system, or is simply not right for your workflow, you are eligible for a full 100% refund within 14 calendar days from the date of purchase.
+        </p>
+
+        <h2>2. Merchant of Record (Paddle.com)</h2>
+        <p>
+          Our order and payment process is conducted by our online reseller and Merchant of Record, <strong><a href="https://www.paddle.com" target="_blank" rel="noopener noreferrer" class="text-accent underline font-semibold">Paddle.com</a></strong>.
+        </p>
+        <ul>
+          <li>Paddle handles all billing, checkout security, sales tax/VAT compliance, payment inquiries, and refund disbursements.</li>
+          <li>Purchases made through our website are subject to <a href="https://www.paddle.com/legal/checkout-buyer-terms" target="_blank" rel="noopener noreferrer" class="text-accent underline">Paddle's Buyer Terms and Conditions</a>.</li>
+        </ul>
+
+        <h2>3. How to Request a Refund</h2>
+        <p>
+          You can request a refund at any time within the 14-day window using either of the following methods:
+        </p>
+        <ol>
+          <li>
+            <strong>Email Support</strong>: Send an email to <a href="mailto:support@nadhebe.com" class="text-accent underline font-semibold">support@nadhebe.com</a> or <a href="mailto:hello@nadhebe.com" class="text-accent underline">hello@nadhebe.com</a> with your order number or the email address used at checkout. We typically process requests within 24 hours.
+          </li>
+          <li>
+            <strong>Directly via Paddle Receipt</strong>: Click the support/help link included in your official Paddle email receipt received immediately after purchase. Paddle's automated support can issue returns directly.
+          </li>
+        </ol>
+
+        <h2>4. Refund Processing & Timeline</h2>
+        <p>
+          Once your refund is approved:
+        </p>
+        <ul>
+          <li>Paddle will immediately disburse the refund back to your original payment method (Credit/Debit Card, PayPal, or Apple Pay / Google Pay).</li>
+          <li>Depending on your card issuer or banking institution, funds usually reflect in your account within <strong>3 to 5 business days</strong>.</li>
+          <li>Upon issuance of a refund, the associated software license key will be automatically deactivated and will cease to unlock premium features.</li>
+        </ul>
+
+        <h2>5. Free Tools & Subscriptions</h2>
+        <p>
+          The vast majority of Nadhebe's web calculators, developer utilities, and research articles are <strong>100% free of charge</strong> and do not require any payment or subscription. If we introduce recurring subscription tiers in the future, you may cancel at any time prior to the next billing cycle without penalty.
+        </p>
+
+        <h2>6. Contact Us</h2>
+        <p>
+          If you have any questions regarding our refund policy, license activation, or billing, please reach out to us:
+        </p>
+        <ul>
+          <li><strong>Email</strong>: <a href="mailto:support@nadhebe.com" class="text-accent underline font-semibold">support@nadhebe.com</a> / <a href="mailto:hello@nadhebe.com" class="text-accent underline">hello@nadhebe.com</a></li>
+          <li><strong>Product Terms</strong>: <a href="/perch/terms/" class="text-accent underline">Perchboard Terms of Sale &amp; License</a></li>
+          <li><strong>General Terms</strong>: <a href="/terms/" class="text-accent underline">Nadhebe Terms of Service</a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
