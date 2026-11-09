@@ -90,6 +90,9 @@ export default defineConfig({
     '/tools/grid-calculator': '/tools/',
     '/tools/data-type-detector': '/tools/',
     '/tools/git-checker': '/tools/',
+    '/refunds': '/refund-policy/',
+    '/refund': '/refund-policy/',
+    '/pricing': '/perch/#pricing',
   },
   integrations: [
     mdx(),

@@ -1,3 +1,6 @@
 # www-to-apex redirect is configured at Cloudflare dashboard level (Bulk Redirects)
 # Cloudflare Pages _redirects only supports relative destination URLs
 /perch /perch/ 301
+/refunds /refund-policy/ 301
+/refund /refund-policy/ 301
+/pricing /perch/#pricing 302
